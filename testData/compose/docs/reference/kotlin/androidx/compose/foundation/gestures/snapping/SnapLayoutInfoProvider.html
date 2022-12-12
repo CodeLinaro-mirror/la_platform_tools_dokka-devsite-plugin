@@ -1,0 +1,106 @@
+<html devsite="true">
+  <head>
+    <title>SnapLayoutInfoProvider</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.kt+class:androidx.compose.foundation.gestures.snapping.SnapLayoutInfoProvider&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>SnapLayoutInfoProvider</h1>
+    <p>
+      <pre>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>interface <a href="/reference/kotlin/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html">SnapLayoutInfoProvider</a></pre>
+    </p>
+    <hr>
+    <p>Provides information about the layout that is using a SnapFlingBehavior. The provider should give the following information:</p>
+    <ol>
+      <li>
+        <p>Snapping bounds, the previous and the next snap position offset.</p>
+      </li>
+      <li>
+        <p>Snap Step Size, the minimum size that the SnapFlingBehavior can animate.</p>
+      </li>
+      <li>
+        <p>Approach offset calculation, an offset to be consumed before snapping to a defined bound.</p>
+      </li>
+    </ol>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>.<a href="/reference/kotlin/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html#(androidx.compose.ui.unit.Density).calculateApproachOffset(kotlin.Float)">calculateApproachOffset</a>(initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+              <p>Calculate the distance to navigate before settling into the next snapping bound.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>.<a href="/reference/kotlin/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html#(androidx.compose.ui.unit.Density).calculateSnapStepSize()">calculateSnapStepSize</a>()</code></div>
+              <p>The minimum offset that snapping will use to animate.(e.g. an item size)</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-closed-floating-point-range/index.html">ClosedFloatingPointRange</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>.<a href="/reference/kotlin/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html#(androidx.compose.ui.unit.Density).calculateSnappingOffsetBounds()">calculateSnappingOffsetBounds</a>()</code></div>
+              <p>Given a target placement in a layout, the snapping bounds should be the closest offset we could snap to BEFORE and AFTER that placement.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.unit.Density-.calculateApproachOffset-kotlin.Float-"></a><a name="calculateapproachoffset"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.unit.Density).calculateApproachOffset(kotlin.Float)">calculateApproachOffset</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>.<a href="/reference/kotlin/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html#(androidx.compose.ui.unit.Density).calculateApproachOffset(kotlin.Float)">calculateApproachOffset</a>(initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>Calculate the distance to navigate before settling into the next snapping bound.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>The current fling movement velocity. You can use this tho calculate a velocity based offset.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.unit.Density-.calculateSnapStepSize--"></a><a name="calculatesnapstepsize"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.unit.Density).calculateSnapStepSize()">calculateSnapStepSize</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>.<a href="/reference/kotlin/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html#(androidx.compose.ui.unit.Density).calculateSnapStepSize()">calculateSnapStepSize</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>The minimum offset that snapping will use to animate.(e.g. an item size)</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.unit.Density-.calculateSnappingOffsetBounds--"></a><a name="calculatesnappingoffsetbounds"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.unit.Density).calculateSnappingOffsetBounds()">calculateSnappingOffsetBounds</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>.<a href="/reference/kotlin/androidx/compose/foundation/gestures/snapping/SnapLayoutInfoProvider.html#(androidx.compose.ui.unit.Density).calculateSnappingOffsetBounds()">calculateSnappingOffsetBounds</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-closed-floating-point-range/index.html">ClosedFloatingPointRange</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>&gt;</pre>
+        <p>Given a target placement in a layout, the snapping bounds should be the closest offset we could snap to BEFORE and AFTER that placement. (e.g if the placement is the center of the viewport and we're snapping in a list this could be the distance to the center of the item before and after the center of the viewport)</p>
+        <p>Bounds are <em>always</em> a negative (lower bound) and a positive (upper bound) value.</p>
+      </div>
+    </div>
+  </body>
+</html>

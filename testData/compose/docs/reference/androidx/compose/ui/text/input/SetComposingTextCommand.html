@@ -1,0 +1,195 @@
+<html devsite="true">
+  <head>
+    <title>SetComposingTextCommand</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-text/androidx/compose/ui/text/input/EditCommand.kt+class:androidx.compose.ui.text.input.SetComposingTextCommand&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>SetComposingTextCommand</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/text/input/SetComposingTextCommand.html">SetComposingTextCommand</a> implements <a href="/reference/androidx/compose/ui/text/input/EditCommand.html">EditCommand</a></pre>
+    </p>
+    <hr>
+    <p>Replace the currently composing text with the given text, and set the new cursor position. Any composing text set previously will be removed automatically.</p>
+    <p>See <a href="https://developer.android.com/reference/android/view/inputmethod/InputConnection.html#setComposingText(java.lang.CharSequence,%2520int)"><code>setComposingText</code></a>.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/input/SetComposingTextCommand.html#annotatedString()">annotatedString</a></code></div>
+              <p>The composing text.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/input/SetComposingTextCommand.html#newCursorPosition()">newCursorPosition</a></code></div>
+              <p>The cursor position after setting composing text.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/input/SetComposingTextCommand.html#text()">text</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/input/SetComposingTextCommand.html#SetComposingTextCommand(androidx.compose.ui.text.AnnotatedString,kotlin.Int)">SetComposingTextCommand</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&nbsp;annotatedString,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;newCursorPosition<br>)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/input/SetComposingTextCommand.html#SetComposingTextCommand(kotlin.String,kotlin.Int)">SetComposingTextCommand</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;text,&nbsp;int&nbsp;newCursorPosition)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/input/SetComposingTextCommand.html#applyTo(androidx.compose.ui.text.input.EditingBuffer)">applyTo</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/EditingBuffer.html">EditingBuffer</a>&nbsp;buffer)</code></div>
+              <p>Apply the command on the editing buffer.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/input/SetComposingTextCommand.html#equals(kotlin.Any)">equals</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;other)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/input/SetComposingTextCommand.html#hashCode()">hashCode</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/input/SetComposingTextCommand.html#toString()">toString</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getAnnotatedString()"></a><a name="setAnnotatedString()"></a><a name="getAnnotatedString--"></a><a name="setAnnotatedString--"></a>
+        <h3 class="api-name" id="annotatedString()">annotatedString</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&nbsp;<a href="/reference/androidx/compose/ui/text/input/SetComposingTextCommand.html#annotatedString()">annotatedString</a></pre>
+        <p>The composing text.</p>
+      </div>
+      <div class="api-item"><a name="getNewCursorPosition()"></a><a name="setNewCursorPosition()"></a><a name="getNewCursorPosition--"></a><a name="setNewCursorPosition--"></a>
+        <h3 class="api-name" id="newCursorPosition()">newCursorPosition</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/text/input/SetComposingTextCommand.html#newCursorPosition()">newCursorPosition</a></pre>
+        <p>The cursor position after setting composing text.</p>
+      </div>
+      <div class="api-item"><a name="getText()"></a><a name="setText()"></a><a name="getText--"></a><a name="setText--"></a>
+        <h3 class="api-name" id="text()">text</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/text/input/SetComposingTextCommand.html#text()">text</a></pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="SetComposingTextCommand(androidx.compose.ui.text.AnnotatedString, kotlin.Int)"></a><a name="SetComposingTextCommand-androidx.compose.ui.text.AnnotatedString-kotlin.Int-"></a><a name="setcomposingtextcommand"></a>
+        <h3 class="api-name" id="SetComposingTextCommand(androidx.compose.ui.text.AnnotatedString,kotlin.Int)">SetComposingTextCommand</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/text/input/SetComposingTextCommand.html#SetComposingTextCommand(androidx.compose.ui.text.AnnotatedString,kotlin.Int)">SetComposingTextCommand</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&nbsp;annotatedString,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;newCursorPosition<br>)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&nbsp;annotatedString</code></td>
+                <td>
+                  <p>The composing text.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>int&nbsp;newCursorPosition</code></td>
+                <td>
+                  <p>The cursor position after setting composing text.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="SetComposingTextCommand(kotlin.String, kotlin.Int)"></a><a name="SetComposingTextCommand-kotlin.String-kotlin.Int-"></a><a name="setcomposingtextcommand"></a>
+        <h3 class="api-name" id="SetComposingTextCommand(kotlin.String,kotlin.Int)">SetComposingTextCommand</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/text/input/SetComposingTextCommand.html#SetComposingTextCommand(kotlin.String,kotlin.Int)">SetComposingTextCommand</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;text,&nbsp;int&nbsp;newCursorPosition)</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="applyTo-androidx.compose.ui.text.input.EditingBuffer-"></a><a name="applyto"></a>
+        <h3 class="api-name" id="applyTo(androidx.compose.ui.text.input.EditingBuffer)">applyTo</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/text/input/SetComposingTextCommand.html#applyTo(androidx.compose.ui.text.input.EditingBuffer)">applyTo</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/EditingBuffer.html">EditingBuffer</a>&nbsp;buffer)</pre>
+        <p>Apply the command on the editing buffer.</p>
+      </div>
+      <div class="api-item"><a name="equals-kotlin.Any-"></a><a name="equals"></a>
+        <h3 class="api-name" id="equals(kotlin.Any)">equals</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/text/input/SetComposingTextCommand.html#equals(kotlin.Any)">equals</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;other)</pre>
+      </div>
+      <div class="api-item"><a name="hashCode--"></a><a name="hashcode"></a>
+        <h3 class="api-name" id="hashCode()">hashCode</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/text/input/SetComposingTextCommand.html#hashCode()">hashCode</a>()</pre>
+      </div>
+      <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+        <h3 class="api-name" id="toString()">toString</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/text/input/SetComposingTextCommand.html#toString()">toString</a>()</pre>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,187 @@
+<html devsite="true">
+  <head>
+    <title>AlignmentLine</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/layout/AlignmentLine.kt+class:androidx.compose.ui.layout.AlignmentLine&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>AlignmentLine</h1>
+    <p>
+      <pre>public class <a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a></pre>
+    </p>
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
+        <div class="showalways" id="subclasses-direct"><a href="/reference/androidx/compose/ui/layout/HorizontalAlignmentLine.html">HorizontalAlignmentLine</a>, <a href="/reference/androidx/compose/ui/layout/VerticalAlignmentLine.html">VerticalAlignmentLine</a></div>
+      </span>
+      <div id="subclasses-direct-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/layout/HorizontalAlignmentLine.html">HorizontalAlignmentLine</a></code></td>
+                <td>
+                  <p>A horizontal <code><a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/layout/VerticalAlignmentLine.html">VerticalAlignmentLine</a></code></td>
+                <td>
+                  <p>A vertical <code><a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
+    <hr>
+    <p>Defines an offset line that can be used by parent layouts to align and position their children. Text baselines are representative examples of <code><a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a></code>s. For example, they can be used by <code>Row</code>, to align its children by baseline, or by <code>paddingFrom</code> to achieve a layout with a specific distance from the top to the baseline of the text content. <code><a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a></code>s can be understood as an abstraction over text baselines.</p>
+    <p>When a layout provides a value for a particular <code><a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a></code>, this can be read by the parents of the layout after measuring, using the <code><a href="/reference/androidx/compose/ui/layout/Placeable.html#get(androidx.compose.ui.layout.AlignmentLine)">Placeable.get</a></code> operator on the corresponding <code><a href="/reference/androidx/compose/ui/layout/Placeable.html">Placeable</a></code> instance. Based on the position of the <code><a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a></code>, the parents can then decide the positioning of the children.</p>
+    <p>Note that when a layout provides a value for an <code><a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a></code>, this will be automatically inherited by the layout's parent, which will offset the value by the position of the child within itself. This way, nested layout hierarchies are able to preserve the <code><a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a></code>s defined for deeply nested children, making it possible for non-direct parents to use these for positioning and alignment. When a layout inherits multiple values for the same <code><a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a></code> from different children, the position of the line within the layout will be computed by merging the children values using the provided <code><a href="/reference/androidx/compose/ui/layout/AlignmentLine.html#merger()">merger</a></code>. If a layout provides a value for an <code><a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a></code>, this will always be the position of the line, regardless of the values provided by children for the same line.</p>
+    <p><code><a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a></code>s cannot be created directly, please create <code><a href="/reference/androidx/compose/ui/layout/VerticalAlignmentLine.html">VerticalAlignmentLine</a></code> or <code><a href="/reference/androidx/compose/ui/layout/HorizontalAlignmentLine.html">HorizontalAlignmentLine</a></code> instances instead.</p>
+    <pre class="prettyprint">
+import androidx.compose.runtime.remember
+import androidx.compose.ui.layout.HorizontalAlignmentLine
+import androidx.compose.ui.layout.Layout
+
+// Create a horizontal alignment line. Note it is not common for alignment lines to be created
+// in the scope of one composable, since they are usually used across more than one function.
+// We use ::min as merging strategy, which means that the parent will have the minimum of
+// the values of the alignment line, when this is inherited from more than one child.
+val exampleLine = remember { HorizontalAlignmentLine(::min) }
+
+// A layout with a fixed size, and a given position for the exampleLine alignment line.
+@Composable
+fun LineProviderLayout(exampleLinePosition: Int) {
+    val size: Int = 20
+    Layout({}) { _, _ -&gt;
+        layout(size, size, mapOf(exampleLine to exampleLinePosition)) {}
+    }
+}
+
+Layout({
+    LineProviderLayout(exampleLinePosition = 5)
+    LineProviderLayout(exampleLinePosition = 10)
+}) { measurables, constraints -&gt;
+    val placeables = measurables.map { it.measure(constraints) }
+    // placeables[0][line] will be 5
+    // placeables[1][line] will be 10
+    layout(constraints.maxWidth, constraints.maxHeight) {
+        placeables[0].place(0, 3)
+        placeables[1].place(constraints.maxWidth / 2, 0)
+    }
+}
+// Note that if the parent of this Layout (the parent of AlignmentLineSample) was able to
+// query its position of exampleLine (assuming this was in a shared scope), its position would
+// be 8. This is because the Layout positioned its first child at 3 from the top,
+// and because of the ::min merging strategy the position of exampleLine will be
+// min(5 + 3, 10 + 0).</pre>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">See also</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/layout/VerticalAlignmentLine.html">VerticalAlignmentLine</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/layout/HorizontalAlignmentLine.html">HorizontalAlignmentLine</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>public static class <a href="/reference/androidx/compose/ui/layout/AlignmentLine.Companion.html">AlignmentLine.Companion</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Constants</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static&nbsp;final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/layout/AlignmentLine.Companion.html#Unspecified()">Unspecified</a></code></div>
+              <p>Constant representing that an <code><a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a></code> has not been provided.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Protected constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/layout/AlignmentLine.html#AlignmentLine(kotlin.Function2)">AlignmentLine</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>&gt;&nbsp;merger<br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Constants</h2>
+      <div class="api-item"><a name="getUnspecified()"></a><a name="setUnspecified()"></a><a name="getUnspecified--"></a><a name="setUnspecified--"></a>
+        <h3 class="api-name" id="Unspecified()">Unspecified</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/layout/AlignmentLine.Companion.html#Unspecified()">Unspecified</a></pre>
+        <p>Constant representing that an <code><a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a></code> has not been provided.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Protected constructors</h2>
+      <div class="api-item"><a name="AlignmentLine-kotlin.Function2-"></a><a name="alignmentline"></a>
+        <h3 class="api-name" id="AlignmentLine(kotlin.Function2)">AlignmentLine</h3>
+        <pre class="api-signature no-pretty-print">protected&nbsp;<a href="/reference/androidx/compose/ui/layout/AlignmentLine.html#AlignmentLine(kotlin.Function2)">AlignmentLine</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>&gt;&nbsp;merger<br>)</pre>
+      </div>
+    </div>
+  </body>
+</html>

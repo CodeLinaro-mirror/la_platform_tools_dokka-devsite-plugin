@@ -1,0 +1,390 @@
+<html devsite="true">
+  <head>
+    <title>FocusRequester</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/focus/FocusRequester.kt+class:androidx.compose.ui.focus.FocusRequester&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>FocusRequester</h1>
+    <p>
+      <pre>class <a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></pre>
+    </p>
+    <hr>
+    <p>The <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code> is used in conjunction with <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusRequester(androidx.compose.ui.focus.FocusRequester)">Modifier.focusRequester</a></code> to send requests to change focus.</p>
+    <pre class="prettyprint">
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
+
+val focusRequester = remember { FocusRequester() }
+var color by remember { mutableStateOf(Black) }
+Box(
+    Modifier
+        .clickable { focusRequester.requestFocus() }
+        .border(2.dp, color)
+        // The focusRequester should be added BEFORE the focusable.
+        .focusRequester(focusRequester)
+        // The onFocusChanged should be added BEFORE the focusable that is being observed.
+        .onFocusChanged { color = if (it.isFocused) Green else Black }
+        .focusable()
+)</pre>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">See also</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusRequester(androidx.compose.ui.focus.FocusRequester)">focusRequester</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>object <a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.Companion.html">FocusRequester.Companion</a></code></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>object <a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.Companion.FocusRequesterFactory.html">FocusRequester.Companion.FocusRequesterFactory</a></code></div>
+              <p>Convenient way to create multiple <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code> instances.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public companion functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.Companion.FocusRequesterFactory.html">FocusRequester.Companion.FocusRequesterFactory</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.Companion.html#createRefs()">createRefs</a>()</code></div>
+              <p>Convenient way to create multiple <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code>s, which can to be used to request focus, or to specify a focus traversal order.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public companion properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.Companion.html#Cancel()">Cancel</a></code></div>
+              <p>Cancelled <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusRequester(androidx.compose.ui.focus.FocusRequester)">focusRequester</a></code>, which when used in <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusProperties(kotlin.Function1)">Modifier.focusProperties</a></code> implies that we want to block focus search from proceeding in the specified <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.html">direction</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.Companion.html#Default()">Default</a></code></div>
+              <p>Default <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusRequester(androidx.compose.ui.focus.FocusRequester)">focusRequester</a></code>, which when used in <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusProperties(kotlin.Function1)">Modifier.focusProperties</a></code> implies that we want to use the default system focus order, that is based on the position of the items on the screen.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html#FocusRequester()">FocusRequester</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html#captureFocus()">captureFocus</a>()</code></div>
+              <p>Deny requests to clear focus.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html#freeFocus()">freeFocus</a>()</code></div>
+              <p>Use this function to send a request to free focus when one of the components associated with this <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code> is in a Captured state.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html#requestFocus()">requestFocus</a>()</code></div>
+              <p>Use this function to request focus.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public companion functions</h2>
+      <div class="api-item"><a name="createRefs--"></a><a name="createrefs"></a>
+        <h3 class="api-name" id="createRefs()">createRefs</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.Companion.html#createRefs()">createRefs</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.Companion.FocusRequesterFactory.html">FocusRequester.Companion.FocusRequesterFactory</a></pre>
+        <p>Convenient way to create multiple <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code>s, which can to be used to request focus, or to specify a focus traversal order.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.runtime.remember
+import androidx.compose.ui.focus.focusRequester
+
+val (item1, item2, item3, item4) = remember { FocusRequester.createRefs() }
+Column {
+    Box(Modifier.focusRequester(item1).focusable())
+    Box(Modifier.focusRequester(item2).focusable())
+    Box(Modifier.focusRequester(item3).focusable())
+    Box(Modifier.focusRequester(item4).focusable())
+}</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public companion properties</h2>
+      <div class="api-item"><a name="getCancel()"></a><a name="setCancel()"></a><a name="getCancel--"></a><a name="setCancel--"></a>
+        <h3 class="api-name" id="Cancel()">Cancel</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.Companion.html#Cancel()">Cancel</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></pre>
+        <p>Cancelled <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusRequester(androidx.compose.ui.focus.FocusRequester)">focusRequester</a></code>, which when used in <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusProperties(kotlin.Function1)">Modifier.focusProperties</a></code> implies that we want to block focus search from proceeding in the specified <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.html">direction</a></code>.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.ui.focus.focusProperties
+import androidx.compose.ui.focus.focusTarget
+
+// If Box 2 is focused, pressing Up will not take focus to Box 1,
+// But pressing Down will move focus to Box 3.
+Column {
+    // Box 1.
+    Box(Modifier.focusTarget())
+    // Box 2.
+    Box(modifier = Modifier
+        .focusProperties { up = FocusRequester.Cancel }
+        .focusTarget()
+    )
+    // Box 3.
+    Box(Modifier.focusTarget())
+}</pre>
+        <p>()</p>
+      </div>
+      <div class="api-item"><a name="getDefault()"></a><a name="setDefault()"></a><a name="getDefault--"></a><a name="setDefault--"></a>
+        <h3 class="api-name" id="Default()">Default</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.Companion.html#Default()">Default</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></pre>
+        <p>Default <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusRequester(androidx.compose.ui.focus.FocusRequester)">focusRequester</a></code>, which when used in <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusProperties(kotlin.Function1)">Modifier.focusProperties</a></code> implies that we want to use the default system focus order, that is based on the position of the items on the screen.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="FocusRequester--"></a><a name="focusrequester"></a>
+        <h3 class="api-name" id="FocusRequester()">FocusRequester</h3>
+        <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html#FocusRequester()">FocusRequester</a>()</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="captureFocus--"></a><a name="capturefocus"></a>
+        <h3 class="api-name" id="captureFocus()">captureFocus</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html#captureFocus()">captureFocus</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <p>Deny requests to clear focus.</p>
+        <p>Use this function to send a request to capture focus. If a component captures focus, it will send a <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusState.html">FocusState</a></code> object to its associated <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).onFocusChanged(kotlin.Function1)">onFocusChanged</a></code> modifiers where <a href="">FocusState.isCaptured</a> == true.</p>
+        <p>When a component is in a Captured state, all focus requests from other components are declined.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.border
+import androidx.compose.material.TextField
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
+
+val focusRequester = remember { FocusRequester() }
+var value by remember { mutableStateOf(&quot;apple&quot;) }
+var borderColor by remember { mutableStateOf(Transparent) }
+TextField(
+    value = value,
+    onValueChange = {
+        value = it.apply {
+            if (length &gt; 5) focusRequester.captureFocus() else focusRequester.freeFocus()
+        }
+    },
+    modifier = Modifier
+        .border(2.dp, borderColor)
+        .focusRequester(focusRequester)
+        .onFocusChanged { borderColor = if (it.isCaptured) Red else Transparent }
+)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                <td>
+                  <p>true if the focus was successfully captured by one of the <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusTarget()">focus</a></code> modifiers associated with this <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code>. False otherwise.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="freeFocus--"></a><a name="freefocus"></a>
+        <h3 class="api-name" id="freeFocus()">freeFocus</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html#freeFocus()">freeFocus</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <p>Use this function to send a request to free focus when one of the components associated with this <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code> is in a Captured state. If a component frees focus, it will send a <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusState.html">FocusState</a></code> object to its associated <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).onFocusChanged(kotlin.Function1)">onFocusChanged</a></code> modifiers where <a href="">FocusState.isCaptured</a> == false.</p>
+        <p>When a component is in a Captured state, all focus requests from other components are declined. .</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.border
+import androidx.compose.material.TextField
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
+
+val focusRequester = remember { FocusRequester() }
+var value by remember { mutableStateOf(&quot;apple&quot;) }
+var borderColor by remember { mutableStateOf(Transparent) }
+TextField(
+    value = value,
+    onValueChange = {
+        value = it.apply {
+            if (length &gt; 5) focusRequester.captureFocus() else focusRequester.freeFocus()
+        }
+    },
+    modifier = Modifier
+        .border(2.dp, borderColor)
+        .focusRequester(focusRequester)
+        .onFocusChanged { borderColor = if (it.isCaptured) Red else Transparent }
+)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                <td>
+                  <p>true if the captured focus was successfully released. i.e. At the end of this operation, one of the components associated with this <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusRequester(androidx.compose.ui.focus.FocusRequester)">focusRequester</a></code> freed focus.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="requestFocus--"></a><a name="requestfocus"></a>
+        <h3 class="api-name" id="requestFocus()">requestFocus</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html#requestFocus()">requestFocus</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Use this function to request focus. If the system grants focus to a component associated with this <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code>, its <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).onFocusChanged(kotlin.Function1)">onFocusChanged</a></code> modifiers will receive a <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusState.html">FocusState</a></code> object where <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusState.html#isFocused()">FocusState.isFocused</a></code> is true.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
+
+val focusRequester = remember { FocusRequester() }
+var color by remember { mutableStateOf(Black) }
+Box(
+    Modifier
+        .clickable { focusRequester.requestFocus() }
+        .border(2.dp, color)
+        // The focusRequester should be added BEFORE the focusable.
+        .focusRequester(focusRequester)
+        // The onFocusChanged should be added BEFORE the focusable that is being observed.
+        .onFocusChanged { color = if (it.isFocused) Green else Black }
+        .focusable()
+)</pre>
+      </div>
+    </div>
+  </body>
+</html>

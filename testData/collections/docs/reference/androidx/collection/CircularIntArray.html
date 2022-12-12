@@ -1,0 +1,648 @@
+<html devsite="true">
+  <head>
+    <title>CircularIntArray</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/collection/CircularIntArray.kt+class:androidx.collection.CircularIntArray&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>CircularIntArray</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></pre>
+    </p>
+    <hr>
+    <p><code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code> is a circular integer array data structure that provides O(1) random read, O(1) prepend and O(1) append. The CircularIntArray automatically grows its capacity when number of added integers is over its capacity.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/CircularIntArray.html#first()">first</a></code></div>
+              <p>Get first integer of the <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/CircularIntArray.html#last()">last</a></code></div>
+              <p>Get last integer of the <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/collection/CircularIntArray.html#CircularIntArray(kotlin.Int)">CircularIntArray</a>(int&nbsp;minCapacity)</code></div>
+              <p>Creates a circular array with capacity for at least <code><a href="/reference/androidx/collection/CircularIntArray.html#&lt;init&gt;(kotlin.Int)">minCapacity</a></code> elements.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/CircularIntArray.html#addFirst(kotlin.Int)">addFirst</a>(int&nbsp;element)</code></div>
+              <p>Add an integer in front of the <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/CircularIntArray.html#addLast(kotlin.Int)">addLast</a>(int&nbsp;element)</code></div>
+              <p>Add an integer at end of the <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/CircularIntArray.html#clear()">clear</a>()</code></div>
+              <p>Remove all integers from the <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/CircularIntArray.html#get(kotlin.Int)">get</a>(int&nbsp;index)</code></div>
+              <p>Get nth (0 <= n <= size()-1) integer of the <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/CircularIntArray.html#isEmpty()">isEmpty</a>()</code></div>
+              <p>Return <code>true</code> if <code><a href="/reference/androidx/collection/CircularIntArray.html#size()">size</a></code> is 0.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/CircularIntArray.html#popFirst()">popFirst</a>()</code></div>
+              <p>Remove first integer from front of the <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code> and return it.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/CircularIntArray.html#popLast()">popLast</a>()</code></div>
+              <p>Remove last integer from end of the <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code> and return it.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/CircularIntArray.html#removeFromEnd(kotlin.Int)">removeFromEnd</a>(int&nbsp;count)</code></div>
+              <p>Remove multiple elements from end of the <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code>, ignore when <code><a href="/reference/androidx/collection/CircularIntArray.html#removeFromEnd(kotlin.Int)">count</a></code> is less than or equals to 0.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/CircularIntArray.html#removeFromStart(kotlin.Int)">removeFromStart</a>(int&nbsp;count)</code></div>
+              <p>Remove multiple integers from front of the <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code>, ignore when <code><a href="/reference/androidx/collection/CircularIntArray.html#removeFromStart(kotlin.Int)">count</a></code> is less than or equals to 0.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/CircularIntArray.html#size()">size</a>()</code></div>
+              <p>Get number of integers in the <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getFirst()"></a><a name="setFirst()"></a><a name="getFirst--"></a><a name="setFirst--"></a>
+        <h3 class="api-name" id="first()">first</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/collection/CircularIntArray.html#first()">first</a></pre>
+        <p>Get first integer of the <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int</code></td>
+                <td>
+                  <p>The first integer.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-index-out-of-bounds-exception/index.html">kotlin.IndexOutOfBoundsException</a>&nbsp;kotlin.IndexOutOfBoundsException</code></td>
+                <td>
+                  <p>if <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code> is empty.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getLast()"></a><a name="setLast()"></a><a name="getLast--"></a><a name="setLast--"></a>
+        <h3 class="api-name" id="last()">last</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/collection/CircularIntArray.html#last()">last</a></pre>
+        <p>Get last integer of the <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int</code></td>
+                <td>
+                  <p>The last integer.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-index-out-of-bounds-exception/index.html">kotlin.IndexOutOfBoundsException</a>&nbsp;kotlin.IndexOutOfBoundsException</code></td>
+                <td>
+                  <p>if <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code> is empty.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="CircularIntArray-kotlin.Int-"></a><a name="circularintarray"></a>
+        <h3 class="api-name" id="CircularIntArray(kotlin.Int)">CircularIntArray</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/collection/CircularIntArray.html#CircularIntArray(kotlin.Int)">CircularIntArray</a>(int&nbsp;minCapacity)</pre>
+        <p>Creates a circular array with capacity for at least <code><a href="/reference/androidx/collection/CircularIntArray.html#&lt;init&gt;(kotlin.Int)">minCapacity</a></code> elements.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int&nbsp;minCapacity</code></td>
+                <td>
+                  <p>the minimum capacity, between 1 and 2^30 inclusive</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="addFirst-kotlin.Int-"></a><a name="addfirst"></a>
+        <h3 class="api-name" id="addFirst(kotlin.Int)">addFirst</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/collection/CircularIntArray.html#addFirst(kotlin.Int)">addFirst</a>(int&nbsp;element)</pre>
+        <p>Add an integer in front of the <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int&nbsp;element</code></td>
+                <td>
+                  <p><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code> to add.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="addLast-kotlin.Int-"></a><a name="addlast"></a>
+        <h3 class="api-name" id="addLast(kotlin.Int)">addLast</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/collection/CircularIntArray.html#addLast(kotlin.Int)">addLast</a>(int&nbsp;element)</pre>
+        <p>Add an integer at end of the <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int&nbsp;element</code></td>
+                <td>
+                  <p><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code> to add.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="clear--"></a><a name="clear"></a>
+        <h3 class="api-name" id="clear()">clear</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/collection/CircularIntArray.html#clear()">clear</a>()</pre>
+        <p>Remove all integers from the <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="get-kotlin.Int-"></a><a name="get"></a>
+        <h3 class="api-name" id="get(kotlin.Int)">get</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/collection/CircularIntArray.html#get(kotlin.Int)">get</a>(int&nbsp;index)</pre>
+        <p>Get nth (0 <= n <= size()-1) integer of the <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int&nbsp;index</code></td>
+                <td>
+                  <p>The zero based element index in the <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int</code></td>
+                <td>
+                  <p>The nth integer.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-index-out-of-bounds-exception/index.html">kotlin.IndexOutOfBoundsException</a>&nbsp;kotlin.IndexOutOfBoundsException</code></td>
+                <td>
+                  <p>if n < 0 or n >= size().</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="isEmpty--"></a><a name="isempty"></a>
+        <h3 class="api-name" id="isEmpty()">isEmpty</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/collection/CircularIntArray.html#isEmpty()">isEmpty</a>()</pre>
+        <p>Return <code>true</code> if <code><a href="/reference/androidx/collection/CircularIntArray.html#size()">size</a></code> is 0.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>boolean</code></td>
+                <td>
+                  <p><code>true</code> if <code><a href="/reference/androidx/collection/CircularIntArray.html#size()">size</a></code> is 0.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="popFirst--"></a><a name="popfirst"></a>
+        <h3 class="api-name" id="popFirst()">popFirst</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/collection/CircularIntArray.html#popFirst()">popFirst</a>()</pre>
+        <p>Remove first integer from front of the <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code> and return it.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int</code></td>
+                <td>
+                  <p>The integer removed.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-index-out-of-bounds-exception/index.html">kotlin.IndexOutOfBoundsException</a>&nbsp;kotlin.IndexOutOfBoundsException</code></td>
+                <td>
+                  <p>if <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code> is empty.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="popLast--"></a><a name="poplast"></a>
+        <h3 class="api-name" id="popLast()">popLast</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/collection/CircularIntArray.html#popLast()">popLast</a>()</pre>
+        <p>Remove last integer from end of the <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code> and return it.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int</code></td>
+                <td>
+                  <p>The integer removed.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-index-out-of-bounds-exception/index.html">kotlin.IndexOutOfBoundsException</a>&nbsp;kotlin.IndexOutOfBoundsException</code></td>
+                <td>
+                  <p>if <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code> is empty.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="removeFromEnd-kotlin.Int-"></a><a name="removefromend"></a>
+        <h3 class="api-name" id="removeFromEnd(kotlin.Int)">removeFromEnd</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/collection/CircularIntArray.html#removeFromEnd(kotlin.Int)">removeFromEnd</a>(int&nbsp;count)</pre>
+        <p>Remove multiple elements from end of the <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code>, ignore when <code><a href="/reference/androidx/collection/CircularIntArray.html#removeFromEnd(kotlin.Int)">count</a></code> is less than or equals to 0.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int&nbsp;count</code></td>
+                <td>
+                  <p>Number of integers to remove.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-index-out-of-bounds-exception/index.html">kotlin.IndexOutOfBoundsException</a>&nbsp;kotlin.IndexOutOfBoundsException</code></td>
+                <td>
+                  <p>if <code><a href="/reference/androidx/collection/CircularIntArray.html#removeFromEnd(kotlin.Int)">count</a></code> is larger than <code><a href="/reference/androidx/collection/CircularIntArray.html#size()">size</a></code></p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="removeFromStart-kotlin.Int-"></a><a name="removefromstart"></a>
+        <h3 class="api-name" id="removeFromStart(kotlin.Int)">removeFromStart</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/collection/CircularIntArray.html#removeFromStart(kotlin.Int)">removeFromStart</a>(int&nbsp;count)</pre>
+        <p>Remove multiple integers from front of the <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code>, ignore when <code><a href="/reference/androidx/collection/CircularIntArray.html#removeFromStart(kotlin.Int)">count</a></code> is less than or equals to 0.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int&nbsp;count</code></td>
+                <td>
+                  <p>Number of integers to remove.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-index-out-of-bounds-exception/index.html">kotlin.IndexOutOfBoundsException</a>&nbsp;kotlin.IndexOutOfBoundsException</code></td>
+                <td>
+                  <p>if numOfElements is larger than <code><a href="/reference/androidx/collection/CircularIntArray.html#size()">size</a></code></p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="size--"></a><a name="size"></a>
+        <h3 class="api-name" id="size()">size</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/collection/CircularIntArray.html#size()">size</a>()</pre>
+        <p>Get number of integers in the <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int</code></td>
+                <td>
+                  <p>Number of integers in the <code><a href="/reference/androidx/collection/CircularIntArray.html">CircularIntArray</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

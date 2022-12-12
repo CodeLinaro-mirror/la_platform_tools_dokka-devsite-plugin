@@ -1,0 +1,86 @@
+<html devsite="true">
+  <head>
+    <title>LayoutModifierKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>LayoutModifierKt</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/layout/LayoutModifierKt.html">LayoutModifierKt</a></pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/layout/LayoutModifierKt.html">LayoutModifierKt</a>.<a href="/reference/androidx/compose/ui/layout/LayoutModifierKt.html#(androidx.compose.ui.Modifier).layout(kotlin.Function3)">layout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function3&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/MeasureScope.html">MeasureScope</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/Measurable.html">Measurable</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a>&gt;&nbsp;measure<br>)</code></div>
+              <p>Creates a <code><a href="/reference/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> that allows changing how the wrapped element is measured and laid out.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.Modifier-.layout-kotlin.Function3-"></a><a name="layout"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.Modifier).layout(kotlin.Function3)">LayoutModifierKt.layout</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/ui/layout/LayoutModifierKt.html">LayoutModifierKt</a>.<a href="/reference/androidx/compose/ui/layout/LayoutModifierKt.html#(androidx.compose.ui.Modifier).layout(kotlin.Function3)">layout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function3&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/MeasureScope.html">MeasureScope</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/Measurable.html">Measurable</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a>&gt;&nbsp;measure<br>)</pre>
+        <p>Creates a <code><a href="/reference/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> that allows changing how the wrapped element is measured and laid out.</p>
+        <p>This is a convenience API of creating a custom <code><a href="/reference/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> modifier, without having to create a class or an object that implements the <code><a href="/reference/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> interface. The intrinsic measurements follow the default logic provided by the <code><a href="/reference/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code>.</p>
+        <p>Example usage:</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.layout.layout
+import androidx.compose.ui.unit.offset
+
+Box(
+    Modifier.background(Color.Gray)
+        .layout { measurable, constraints -&gt;
+            // an example modifier that adds 50 pixels of vertical padding.
+            val padding = 50
+            val placeable = measurable.measure(constraints.offset(vertical = -padding))
+            layout(placeable.width, placeable.height + padding) {
+                placeable.placeRelative(0, padding)
+            }
+        }
+) {
+    Box(Modifier.fillMaxSize().background(Color.DarkGray))
+}</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

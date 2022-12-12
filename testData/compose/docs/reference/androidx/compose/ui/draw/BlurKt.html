@@ -1,0 +1,217 @@
+<html devsite="true">
+  <head>
+    <title>BlurKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>BlurKt</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/draw/BlurKt.html">BlurKt</a></pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/draw/BlurKt.html">BlurKt</a>.<a href="/reference/androidx/compose/ui/draw/BlurKt.html#(androidx.compose.ui.Modifier).blur(androidx.compose.ui.unit.Dp,androidx.compose.ui.draw.BlurredEdgeTreatment)">blur</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;radius,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/draw/BlurredEdgeTreatment.html">BlurredEdgeTreatment</a>&nbsp;edgeTreatment<br>)</code></div>
+              <p>Draw content blurred with the specified radii.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/draw/BlurKt.html">BlurKt</a>.<a href="/reference/androidx/compose/ui/draw/BlurKt.html#(androidx.compose.ui.Modifier).blur(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp,androidx.compose.ui.draw.BlurredEdgeTreatment)">blur</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;radiusX,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;radiusY,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/draw/BlurredEdgeTreatment.html">BlurredEdgeTreatment</a>&nbsp;edgeTreatment<br>)</code></div>
+              <p>Draw content blurred with the specified radii.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="(androidx.compose.ui.Modifier).blur(androidx.compose.ui.unit.Dp, androidx.compose.ui.draw.BlurredEdgeTreatment)"></a><a name="-androidx.compose.ui.Modifier-.blur-androidx.compose.ui.unit.Dp-androidx.compose.ui.draw.BlurredEdgeTreatment-"></a><a name="blur"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.Modifier).blur(androidx.compose.ui.unit.Dp,androidx.compose.ui.draw.BlurredEdgeTreatment)">BlurKt.blur</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/ui/draw/BlurKt.html">BlurKt</a>.<a href="/reference/androidx/compose/ui/draw/BlurKt.html#(androidx.compose.ui.Modifier).blur(androidx.compose.ui.unit.Dp,androidx.compose.ui.draw.BlurredEdgeTreatment)">blur</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;radius,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/draw/BlurredEdgeTreatment.html">BlurredEdgeTreatment</a>&nbsp;edgeTreatment<br>)</pre>
+        <p>Draw content blurred with the specified radii. Note this effect is only supported on Android 12 and above. Attempts to use this Modifier on older Android versions will be ignored.</p>
+        <p>Usage of this API renders the corresponding composable into a separate graphics layer. Because the blurred content renders a larger area by the blur radius, this layer is explicitly clipped to the content bounds. It is recommended introduce additional space around the drawn content by the specified blur radius to remain within the content bounds.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.draw.blur
+
+Box(
+    Modifier.size(300.dp)
+        // Blur content allowing the result to extend beyond the bounds of the original content
+        .blur(
+            30.dp,
+            edgeTreatment = BlurredEdgeTreatment.Unbounded
+        )
+        .background(Color.Red, CircleShape)
+)</pre>
+        <pre class="prettyprint">
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.draw.BlurredEdgeTreatment
+import androidx.compose.ui.draw.blur
+import androidx.compose.ui.res.painterResource
+
+Image(
+    painter = painterResource(R.drawable.circus),
+    contentDescription = &quot;sample blurred image&quot;,
+    // Blur content within the original bounds, clipping the result to a rounded rectangle
+    modifier = Modifier.blur(30.dp, BlurredEdgeTreatment(RoundedCornerShape(5.dp)))
+)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;radius</code></td>
+                <td>
+                  <p>Radius of the blur along both the x and y axis</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/draw/BlurredEdgeTreatment.html">BlurredEdgeTreatment</a>&nbsp;edgeTreatment</code></td>
+                <td>
+                  <p>Strategy used to render pixels outside of bounds of the original input</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.Modifier).graphicsLayer(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.TransformOrigin,androidx.compose.ui.graphics.Shape,kotlin.Boolean)">graphicsLayer</a></code></td>
+                <td>
+                  <p>Example usage:</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.Modifier).blur(androidx.compose.ui.unit.Dp, androidx.compose.ui.unit.Dp, androidx.compose.ui.draw.BlurredEdgeTreatment)"></a><a name="-androidx.compose.ui.Modifier-.blur-androidx.compose.ui.unit.Dp-androidx.compose.ui.unit.Dp-androidx.compose.ui.draw.BlurredEdgeTreatment-"></a><a name="blur"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.Modifier).blur(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp,androidx.compose.ui.draw.BlurredEdgeTreatment)">BlurKt.blur</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/ui/draw/BlurKt.html">BlurKt</a>.<a href="/reference/androidx/compose/ui/draw/BlurKt.html#(androidx.compose.ui.Modifier).blur(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp,androidx.compose.ui.draw.BlurredEdgeTreatment)">blur</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;radiusX,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;radiusY,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/draw/BlurredEdgeTreatment.html">BlurredEdgeTreatment</a>&nbsp;edgeTreatment<br>)</pre>
+        <p>Draw content blurred with the specified radii. Note this effect is only supported on Android 12 and above. Attempts to use this Modifier on older Android versions will be ignored.</p>
+        <p>Usage of this API renders the corresponding composable into a separate graphics layer. Because the blurred content renders a larger area by the blur radius, this layer is explicitly clipped to the content bounds. It is recommended introduce additional space around the drawn content by the specified blur radius to remain within the content bounds.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.draw.blur
+
+Box(
+    Modifier.size(300.dp)
+        // Blur content allowing the result to extend beyond the bounds of the original content
+        .blur(
+            30.dp,
+            edgeTreatment = BlurredEdgeTreatment.Unbounded
+        )
+        .background(Color.Red, CircleShape)
+)</pre>
+        <pre class="prettyprint">
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.draw.BlurredEdgeTreatment
+import androidx.compose.ui.draw.blur
+import androidx.compose.ui.res.painterResource
+
+Image(
+    painter = painterResource(R.drawable.circus),
+    contentDescription = &quot;sample blurred image&quot;,
+    // Blur content within the original bounds, clipping the result to a rounded rectangle
+    modifier = Modifier.blur(30.dp, BlurredEdgeTreatment(RoundedCornerShape(5.dp)))
+)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;radiusX</code></td>
+                <td>
+                  <p>Radius of the blur along the x axis</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;radiusY</code></td>
+                <td>
+                  <p>Radius of the blur along the y axis</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/draw/BlurredEdgeTreatment.html">BlurredEdgeTreatment</a>&nbsp;edgeTreatment</code></td>
+                <td>
+                  <p>Strategy used to render pixels outside of bounds of the original input</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.Modifier).graphicsLayer(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.TransformOrigin,androidx.compose.ui.graphics.Shape,kotlin.Boolean)">graphicsLayer</a></code></td>
+                <td>
+                  <p>Example usage:</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

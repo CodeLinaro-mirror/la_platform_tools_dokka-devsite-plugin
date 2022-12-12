@@ -1,0 +1,69 @@
+<html devsite="true">
+  <head>
+    <title>WindowRecomposerFactory</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/platform/WindowRecomposer.android.kt+class:androidx.compose.ui.platform.WindowRecomposerFactory&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>WindowRecomposerFactory</h1>
+    <p>
+      <pre>@<a href="/reference/androidx/compose/ui/InternalComposeUiApi.html">InternalComposeUiApi</a><br>public fun interface <a href="/reference/androidx/compose/ui/platform/WindowRecomposerFactory.html">WindowRecomposerFactory</a></pre>
+    </p>
+    <hr>
+    <p>A factory for creating an Android window-scoped <code><a href="/reference/androidx/compose/runtime/Recomposer.html">Recomposer</a></code>. See <code><a href="/reference/androidx/compose/ui/platform/WindowRecomposerFactory.html#createRecomposer(android.view.View)">createRecomposer</a></code>.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>public static class <a href="/reference/androidx/compose/ui/platform/WindowRecomposerFactory.Companion.html">WindowRecomposerFactory.Companion</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Recomposer.html">Recomposer</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/platform/WindowRecomposerFactory.html#createRecomposer(android.view.View)">createRecomposer</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/View.html">View</a>&nbsp;windowRootView)</code></div>
+              <p>Get a <code><a href="/reference/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> for the window where <code><a href="/reference/androidx/compose/ui/platform/WindowRecomposerFactory.html#createRecomposer(android.view.View)">windowRootView</a></code> is at the root of the window's <code><a href="https://developer.android.com/reference/android/view/View.html">View</a></code> hierarchy.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="createRecomposer-android.view.View-"></a><a name="createrecomposer"></a>
+        <h3 class="api-name" id="createRecomposer(android.view.View)">createRecomposer</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Recomposer.html">Recomposer</a>&nbsp;<a href="/reference/androidx/compose/ui/platform/WindowRecomposerFactory.html#createRecomposer(android.view.View)">createRecomposer</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/View.html">View</a>&nbsp;windowRootView)</pre>
+        <p>Get a <code><a href="/reference/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> for the window where <code><a href="/reference/androidx/compose/ui/platform/WindowRecomposerFactory.html#createRecomposer(android.view.View)">windowRootView</a></code> is at the root of the window's <code><a href="https://developer.android.com/reference/android/view/View.html">View</a></code> hierarchy. The factory is responsible for establishing a policy for <code><a href="/reference/androidx/compose/runtime/Recomposer.html#cancel()">shutting down</a></code> the returned <code><a href="/reference/androidx/compose/runtime/Recomposer.html">Recomposer</a></code>. <code><a href="/reference/androidx/compose/ui/platform/WindowRecomposerFactory.html#createRecomposer(android.view.View)">windowRootView</a></code> will hold a hard reference to the returned <code><a href="/reference/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> until it <code><a href="/reference/androidx/compose/runtime/Recomposer.html#join()">joins</a></code> after shutting down.</p>
+      </div>
+    </div>
+  </body>
+</html>

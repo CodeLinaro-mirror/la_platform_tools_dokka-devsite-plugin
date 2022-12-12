@@ -1,0 +1,137 @@
+<html devsite="true">
+  <head>
+    <title>androidx.compose.ui.viewinterop</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>androidx.compose.ui.viewinterop</h1>
+    <h2>Top-level functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a><br>&lt;T&nbsp;:&nbsp;<a href="https://developer.android.com/reference/android/view/View.html">View</a>&gt; <a href="/reference/kotlin/androidx/compose/ui/viewinterop/package-summary.html#AndroidView(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)">AndroidView</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;factory:&nbsp;(<a href="https://developer.android.com/reference/android/content/Context.html">Context</a>) <span style="white-space: nowrap;">-&gt;</span> T,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;update:&nbsp;(T) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+              <p>Composes an Android <code><a href="https://developer.android.com/reference/android/view/View.html">View</a></code> obtained from <code><a href="/reference/kotlin/androidx/compose/ui/viewinterop/package-summary.html#AndroidView(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)">factory</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Top-level properties summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://developer.android.com/reference/android/view/View.html">View</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/viewinterop/package-summary.html#NoOpUpdate()">NoOpUpdate</a></code></div>
+              <p>An empty update block used by <code><a href="/reference/kotlin/androidx/compose/ui/viewinterop/package-summary.html#AndroidView(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)">AndroidView</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Top-level functions</h2>
+    <div class="api-item"><a name="AndroidView(kotlin.Function1, androidx.compose.ui.Modifier, kotlin.Function1)"></a><a name="AndroidView-kotlin.Function1-androidx.compose.ui.Modifier-kotlin.Function1-"></a><a name="androidview"></a>
+      <h3 class="api-name" id="AndroidView(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)">AndroidView</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://developer.android.com/reference/android/view/View.html">View</a>&gt; <a href="/reference/kotlin/androidx/compose/ui/viewinterop/package-summary.html#AndroidView(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)">AndroidView</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;factory:&nbsp;(<a href="https://developer.android.com/reference/android/content/Context.html">Context</a>) <span style="white-space: nowrap;">-&gt;</span> T,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;update:&nbsp;(T) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> = NoOpUpdate<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Composes an Android <code><a href="https://developer.android.com/reference/android/view/View.html">View</a></code> obtained from <code><a href="/reference/kotlin/androidx/compose/ui/viewinterop/package-summary.html#AndroidView(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)">factory</a></code>. The <code><a href="/reference/kotlin/androidx/compose/ui/viewinterop/package-summary.html#AndroidView(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)">factory</a></code> block will be called exactly once to obtain the <code><a href="https://developer.android.com/reference/android/view/View.html">View</a></code> to be composed, and it is also guaranteed to be invoked on the UI thread. Therefore, in addition to creating the <code><a href="https://developer.android.com/reference/android/view/View.html">View</a></code>, the <code><a href="/reference/kotlin/androidx/compose/ui/viewinterop/package-summary.html#AndroidView(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)">factory</a></code> can also be used to perform one-off initializations and <code><a href="https://developer.android.com/reference/android/view/View.html">View</a></code> constant properties' setting. The <code><a href="/reference/kotlin/androidx/compose/ui/viewinterop/package-summary.html#AndroidView(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)">update</a></code> block can be run multiple times (on the UI thread as well) due to recomposition, and it is the right place to set <code><a href="https://developer.android.com/reference/android/view/View.html">View</a></code> properties depending on state. When state changes, the block will be reexecuted to set the new properties. Note the block will also be ran once right after the <code><a href="/reference/kotlin/androidx/compose/ui/viewinterop/package-summary.html#AndroidView(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)">factory</a></code> block completes.</p>
+      <p><code><a href="/reference/kotlin/androidx/compose/ui/viewinterop/package-summary.html#AndroidView(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)">AndroidView</a></code> is commonly needed for using Views that are infeasible to be reimplemented in Compose and there is no corresponding Compose API. Common examples for the moment are WebView, SurfaceView, AdView, etc.</p>
+      <p><code><a href="/reference/kotlin/androidx/compose/ui/viewinterop/package-summary.html#AndroidView(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)">AndroidView</a></code> will not clip its content to the layout bounds. Use <code><a href="https://developer.android.com/reference/android/view/View.html#setClipToOutline(kotlin.Boolean)">View.setClipToOutline</a></code> on the child View to clip the contents, if desired. Developers will likely want to do this with all subclasses of SurfaceView to keep its contents contained.</p>
+      <p><code><a href="/reference/kotlin/androidx/compose/ui/viewinterop/package-summary.html#AndroidView(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)">AndroidView</a></code> has nested scroll interop capabilities if the containing view has nested scroll enabled. This means this Composable can dispatch scroll deltas if it is placed inside a container that participates in nested scroll. For more information on how to enable nested scroll interop:</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.gestures.rememberScrollableState
+import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.viewinterop.AndroidView
+
+Box(
+    Modifier
+        .fillMaxSize()
+        .scrollable(rememberScrollableState {
+            // view world deltas should be reflected in compose world
+            // components that participate in nested scrolling
+            it
+        }, Orientation.Vertical)
+) {
+    AndroidView(
+        { context -&gt;
+            LayoutInflater.from(context)
+                .inflate(android.R.layout.activity_list_item, null)
+                .apply {
+                    // Nested Scroll Interop will be Enabled when
+                    // nested scroll is enabled for the root view
+                    ViewCompat.setNestedScrollingEnabled(this, true)
+                }
+        }
+    )
+}</pre>
+      <pre class="prettyprint">
+import android.widget.TextView
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.viewinterop.AndroidView
+
+// Compose a TextView.
+AndroidView({ context -&gt; TextView(context).apply { text = &quot;This is a TextView&quot; } })
+// Compose a View and update its size based on state. Note the modifiers.
+var size by remember { mutableStateOf(20) }
+AndroidView(::View, Modifier.clickable { size += 20 }.background(Color.Blue)) { view -&gt;
+    view.layoutParams = ViewGroup.LayoutParams(size, size)
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>factory:&nbsp;(<a href="https://developer.android.com/reference/android/content/Context.html">Context</a>) <span style="white-space: nowrap;">-&gt;</span> T</code></td>
+              <td>
+                <p>The block creating the <code><a href="https://developer.android.com/reference/android/view/View.html">View</a></code> to be composed.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier</code></td>
+              <td>
+                <p>The modifier to be applied to the layout.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>update:&nbsp;(T) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> = NoOpUpdate</code></td>
+              <td>
+                <p>The callback to be invoked after the layout is inflated.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h2>Top-level properties</h2>
+    <div class="api-item"><a name="getNoOpUpdate()"></a><a name="setNoOpUpdate()"></a><a name="getNoOpUpdate--"></a><a name="setNoOpUpdate--"></a>
+      <h3 class="api-name" id="NoOpUpdate()">NoOpUpdate</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/viewinterop/package-summary.html#NoOpUpdate()">NoOpUpdate</a>:&nbsp;<a href="https://developer.android.com/reference/android/view/View.html">View</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>An empty update block used by <code><a href="/reference/kotlin/androidx/compose/ui/viewinterop/package-summary.html#AndroidView(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)">AndroidView</a></code>.</p>
+    </div>
+  </body>
+</html>

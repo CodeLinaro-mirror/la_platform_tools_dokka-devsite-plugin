@@ -1,0 +1,93 @@
+<html devsite="true">
+  <head>
+    <title>Remeasurement</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/layout/RemeasurementModifier.kt+class:androidx.compose.ui.layout.Remeasurement&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>Remeasurement</h1>
+    <p>
+      <pre>public interface <a href="/reference/androidx/compose/ui/layout/Remeasurement.html">Remeasurement</a></pre>
+    </p>
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
+        <div class="showalways" id="subclasses-direct"><a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a></div>
+      </span>
+      <div id="subclasses-direct-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a></code></td>
+                <td>
+                  <p>A <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that changes how its wrapped content is measured and laid out.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known indirect subclasses
+        <div class="showalways" id="subclasses-indirect"><a href="/reference/androidx/compose/ui/node/IntermediateLayoutModifierNode.html">IntermediateLayoutModifierNode</a></div>
+      </span>
+      <div id="subclasses-indirect-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/node/IntermediateLayoutModifierNode.html">IntermediateLayoutModifierNode</a></code></td>
+                <td>
+                  <p>IntermediateLayoutModifier is a <code><a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a></code> that will be skipped when looking ahead.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
+    <hr>
+    <p>This object is associated with a layout node and allows to execute some extra measure/layout actions which are needed for some complex layouts. In most cases you don't need it as measuring and layout should be correctly working automatically for most cases.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/layout/Remeasurement.html#forceRemeasure()">forceRemeasure</a>()</code></div>
+              <p>Performs the node remeasuring synchronously even if the node was not marked as needs remeasure before.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="forceRemeasure--"></a><a name="forceremeasure"></a>
+        <h3 class="api-name" id="forceRemeasure()">forceRemeasure</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/layout/Remeasurement.html#forceRemeasure()">forceRemeasure</a>()</pre>
+        <p>Performs the node remeasuring synchronously even if the node was not marked as needs remeasure before. Useful for cases like when during scrolling you need to re-execute the measure block to consume the scroll offset and remeasure your children in a blocking way.</p>
+      </div>
+    </div>
+  </body>
+</html>

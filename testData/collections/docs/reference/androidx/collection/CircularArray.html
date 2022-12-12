@@ -1,0 +1,648 @@
+<html devsite="true">
+  <head>
+    <title>CircularArray</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/collection/CircularArray.kt+class:androidx.collection.CircularArray&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>CircularArray</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/collection/CircularArray.html">CircularArray</a>&lt;E&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;</pre>
+    </p>
+    <hr>
+    <p>CircularArray is a generic circular array data structure that provides O(1) random read, O(1) prepend and O(1) append. The CircularArray automatically grows its capacity when number of added items is over its capacity.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/CircularArray.html#first()">first</a></code></div>
+              <p>Get first element of the <code><a href="/reference/androidx/collection/CircularArray.html">CircularArray</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/CircularArray.html#last()">last</a></code></div>
+              <p>Get last element of the <code><a href="/reference/androidx/collection/CircularArray.html">CircularArray</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>&lt;E&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/collection/CircularArray.html#CircularArray(kotlin.Int)">CircularArray</a>(int&nbsp;minCapacity)</code></div>
+              <p>Creates a circular array with capacity for at least <code><a href="/reference/androidx/collection/CircularArray.html#&lt;init&gt;(kotlin.Int)">minCapacity</a></code> elements.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/CircularArray.html#addFirst(kotlin.Any)">addFirst</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E&nbsp;element)</code></div>
+              <p>Add an element in front of the <code><a href="/reference/androidx/collection/CircularArray.html">CircularArray</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/CircularArray.html#addLast(kotlin.Any)">addLast</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E&nbsp;element)</code></div>
+              <p>Add an element at end of the CircularArray.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/CircularArray.html#clear()">clear</a>()</code></div>
+              <p>Remove all elements from the <code><a href="/reference/androidx/collection/CircularArray.html">CircularArray</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/CircularArray.html#get(kotlin.Int)">get</a>(int&nbsp;index)</code></div>
+              <p>Get nth (0 <= n <= size()-1) element of the <code><a href="/reference/androidx/collection/CircularArray.html">CircularArray</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/CircularArray.html#isEmpty()">isEmpty</a>()</code></div>
+              <p>Return <code>true</code> if <code><a href="/reference/androidx/collection/CircularArray.html#size()">size</a></code> is 0.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/CircularArray.html#popFirst()">popFirst</a>()</code></div>
+              <p>Remove first element from front of the <code><a href="/reference/androidx/collection/CircularArray.html">CircularArray</a></code> and return it.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/CircularArray.html#popLast()">popLast</a>()</code></div>
+              <p>Remove last element from end of the <code><a href="/reference/androidx/collection/CircularArray.html">CircularArray</a></code> and return it.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/CircularArray.html#removeFromEnd(kotlin.Int)">removeFromEnd</a>(int&nbsp;count)</code></div>
+              <p>Remove multiple elements from end of the <code><a href="/reference/androidx/collection/CircularArray.html">CircularArray</a></code>, ignore when <code><a href="/reference/androidx/collection/CircularArray.html#removeFromEnd(kotlin.Int)">count</a></code> is less than or equals to 0.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/CircularArray.html#removeFromStart(kotlin.Int)">removeFromStart</a>(int&nbsp;count)</code></div>
+              <p>Remove multiple elements from front of the <code><a href="/reference/androidx/collection/CircularArray.html">CircularArray</a></code>, ignore when <code><a href="/reference/androidx/collection/CircularArray.html#removeFromStart(kotlin.Int)">count</a></code> is less than or equal to 0.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/CircularArray.html#size()">size</a>()</code></div>
+              <p>Get number of elements in the <code><a href="/reference/androidx/collection/CircularArray.html">CircularArray</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getFirst()"></a><a name="setFirst()"></a><a name="getFirst--"></a><a name="setFirst--"></a>
+        <h3 class="api-name" id="first()">first</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E&nbsp;<a href="/reference/androidx/collection/CircularArray.html#first()">first</a></pre>
+        <p>Get first element of the <code><a href="/reference/androidx/collection/CircularArray.html">CircularArray</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E</code></td>
+                <td>
+                  <p>The first element.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>ArrayIndexOutOfBoundsException&nbsp;ArrayIndexOutOfBoundsException</code></td>
+                <td>
+                  <p>if <code><a href="/reference/androidx/collection/CircularArray.html">CircularArray</a></code> is empty</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getLast()"></a><a name="setLast()"></a><a name="getLast--"></a><a name="setLast--"></a>
+        <h3 class="api-name" id="last()">last</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E&nbsp;<a href="/reference/androidx/collection/CircularArray.html#last()">last</a></pre>
+        <p>Get last element of the <code><a href="/reference/androidx/collection/CircularArray.html">CircularArray</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E</code></td>
+                <td>
+                  <p>The last element.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>ArrayIndexOutOfBoundsException&nbsp;ArrayIndexOutOfBoundsException</code></td>
+                <td>
+                  <p>if <code><a href="/reference/androidx/collection/CircularArray.html">CircularArray</a></code> is empty</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="CircularArray-kotlin.Int-"></a><a name="circulararray"></a>
+        <h3 class="api-name" id="CircularArray(kotlin.Int)">CircularArray</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;&lt;E&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/collection/CircularArray.html#CircularArray(kotlin.Int)">CircularArray</a>(int&nbsp;minCapacity)</pre>
+        <p>Creates a circular array with capacity for at least <code><a href="/reference/androidx/collection/CircularArray.html#&lt;init&gt;(kotlin.Int)">minCapacity</a></code> elements.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int&nbsp;minCapacity</code></td>
+                <td>
+                  <p>the minimum capacity, between 1 and 2^30 inclusive</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="addFirst-kotlin.Any-"></a><a name="addfirst"></a>
+        <h3 class="api-name" id="addFirst(kotlin.Any)">addFirst</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/collection/CircularArray.html#addFirst(kotlin.Any)">addFirst</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E&nbsp;element)</pre>
+        <p>Add an element in front of the <code><a href="/reference/androidx/collection/CircularArray.html">CircularArray</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E&nbsp;element</code></td>
+                <td>
+                  <p>Element to add.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="addLast-kotlin.Any-"></a><a name="addlast"></a>
+        <h3 class="api-name" id="addLast(kotlin.Any)">addLast</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/collection/CircularArray.html#addLast(kotlin.Any)">addLast</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E&nbsp;element)</pre>
+        <p>Add an element at end of the CircularArray.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E&nbsp;element</code></td>
+                <td>
+                  <p>Element to add.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="clear--"></a><a name="clear"></a>
+        <h3 class="api-name" id="clear()">clear</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/collection/CircularArray.html#clear()">clear</a>()</pre>
+        <p>Remove all elements from the <code><a href="/reference/androidx/collection/CircularArray.html">CircularArray</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="get-kotlin.Int-"></a><a name="get"></a>
+        <h3 class="api-name" id="get(kotlin.Int)">get</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E&nbsp;<a href="/reference/androidx/collection/CircularArray.html#get(kotlin.Int)">get</a>(int&nbsp;index)</pre>
+        <p>Get nth (0 <= n <= size()-1) element of the <code><a href="/reference/androidx/collection/CircularArray.html">CircularArray</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int&nbsp;index</code></td>
+                <td>
+                  <p>The zero based element index in the <code><a href="/reference/androidx/collection/CircularArray.html">CircularArray</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E</code></td>
+                <td>
+                  <p>The nth element.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>ArrayIndexOutOfBoundsException&nbsp;ArrayIndexOutOfBoundsException</code></td>
+                <td>
+                  <p>if n < 0 or n >= size()</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="isEmpty--"></a><a name="isempty"></a>
+        <h3 class="api-name" id="isEmpty()">isEmpty</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/collection/CircularArray.html#isEmpty()">isEmpty</a>()</pre>
+        <p>Return <code>true</code> if <code><a href="/reference/androidx/collection/CircularArray.html#size()">size</a></code> is 0.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>boolean</code></td>
+                <td>
+                  <p><code>true</code> if <code><a href="/reference/androidx/collection/CircularArray.html#size()">size</a></code> is 0.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="popFirst--"></a><a name="popfirst"></a>
+        <h3 class="api-name" id="popFirst()">popFirst</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E&nbsp;<a href="/reference/androidx/collection/CircularArray.html#popFirst()">popFirst</a>()</pre>
+        <p>Remove first element from front of the <code><a href="/reference/androidx/collection/CircularArray.html">CircularArray</a></code> and return it.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E</code></td>
+                <td>
+                  <p>The element removed.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>ArrayIndexOutOfBoundsException&nbsp;ArrayIndexOutOfBoundsException</code></td>
+                <td>
+                  <p>if <code><a href="/reference/androidx/collection/CircularArray.html">CircularArray</a></code> is empty (on jvm)</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="popLast--"></a><a name="poplast"></a>
+        <h3 class="api-name" id="popLast()">popLast</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E&nbsp;<a href="/reference/androidx/collection/CircularArray.html#popLast()">popLast</a>()</pre>
+        <p>Remove last element from end of the <code><a href="/reference/androidx/collection/CircularArray.html">CircularArray</a></code> and return it.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E</code></td>
+                <td>
+                  <p>The element removed.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>ArrayIndexOutOfBoundsException&nbsp;ArrayIndexOutOfBoundsException</code></td>
+                <td>
+                  <p>if <code><a href="/reference/androidx/collection/CircularArray.html">CircularArray</a></code> is empty</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="removeFromEnd-kotlin.Int-"></a><a name="removefromend"></a>
+        <h3 class="api-name" id="removeFromEnd(kotlin.Int)">removeFromEnd</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/collection/CircularArray.html#removeFromEnd(kotlin.Int)">removeFromEnd</a>(int&nbsp;count)</pre>
+        <p>Remove multiple elements from end of the <code><a href="/reference/androidx/collection/CircularArray.html">CircularArray</a></code>, ignore when <code><a href="/reference/androidx/collection/CircularArray.html#removeFromEnd(kotlin.Int)">count</a></code> is less than or equals to 0.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int&nbsp;count</code></td>
+                <td>
+                  <p>Number of elements to remove.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>ArrayIndexOutOfBoundsException&nbsp;ArrayIndexOutOfBoundsException</code></td>
+                <td>
+                  <p>if <code><a href="/reference/androidx/collection/CircularArray.html#removeFromEnd(kotlin.Int)">count</a></code> is larger than <code><a href="/reference/androidx/collection/CircularArray.html#size()">size</a></code></p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="removeFromStart-kotlin.Int-"></a><a name="removefromstart"></a>
+        <h3 class="api-name" id="removeFromStart(kotlin.Int)">removeFromStart</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/collection/CircularArray.html#removeFromStart(kotlin.Int)">removeFromStart</a>(int&nbsp;count)</pre>
+        <p>Remove multiple elements from front of the <code><a href="/reference/androidx/collection/CircularArray.html">CircularArray</a></code>, ignore when <code><a href="/reference/androidx/collection/CircularArray.html#removeFromStart(kotlin.Int)">count</a></code> is less than or equal to 0.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int&nbsp;count</code></td>
+                <td>
+                  <p>Number of elements to remove.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>ArrayIndexOutOfBoundsException&nbsp;ArrayIndexOutOfBoundsException</code></td>
+                <td>
+                  <p>if <code><a href="/reference/androidx/collection/CircularArray.html#removeFromStart(kotlin.Int)">count</a></code> is larger than <code><a href="/reference/androidx/collection/CircularArray.html#size()">size</a></code></p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="size--"></a><a name="size"></a>
+        <h3 class="api-name" id="size()">size</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/collection/CircularArray.html#size()">size</a>()</pre>
+        <p>Get number of elements in the <code><a href="/reference/androidx/collection/CircularArray.html">CircularArray</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int</code></td>
+                <td>
+                  <p>Number of elements in the <code><a href="/reference/androidx/collection/CircularArray.html">CircularArray</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

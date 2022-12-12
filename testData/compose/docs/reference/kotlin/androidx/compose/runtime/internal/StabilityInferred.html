@@ -1,0 +1,97 @@
+<html devsite="true">
+  <head>
+    <title>StabilityInferred</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/runtime/internal/StabilityInferred.kt+class:androidx.compose.runtime.internal.StabilityInferred&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>StabilityInferred</h1>
+    <p>
+      <pre>@<a href="/reference/kotlin/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-target/index.html">Target</a>(allowedTargets&nbsp;=&nbsp;[AnnotationTarget.CLASS])<br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-retention/index.html">Retention</a>(value&nbsp;=&nbsp;AnnotationRetention.BINARY)<br>annotation <a href="/reference/kotlin/androidx/compose/runtime/internal/StabilityInferred.html">StabilityInferred</a></pre>
+    </p>
+    <hr>
+    <p>This annotation is added on classes by the compiler when their stability is inferred. It indicates that there will be a synthetic static final int <code>$stable</code> added to the class which can be used by the compose compiler plugin to generate expressions to determine the stability of a realized type at runtime.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/internal/StabilityInferred.html#StabilityInferred(kotlin.Int)">StabilityInferred</a>(parameters:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/internal/StabilityInferred.html#parameters()">parameters</a></code></div>
+              <p>A bitmask, with one bit per type parameter of the annotated class.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="StabilityInferred-kotlin.Int-"></a><a name="stabilityinferred"></a>
+        <h3 class="api-name" id="StabilityInferred(kotlin.Int)">StabilityInferred</h3>
+        <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/runtime/internal/StabilityInferred.html#StabilityInferred(kotlin.Int)">StabilityInferred</a>(parameters:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>parameters:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                <td>
+                  <p>A bitmask, with one bit per type parameter of the annotated class. A 1 bit indicates that the stability of the annotated class should be calculated as a combination of the stability of the class itself and the stability of that type parameter.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getParameters()"></a><a name="setParameters()"></a><a name="getParameters--"></a><a name="setParameters--"></a>
+        <h3 class="api-name" id="parameters()">parameters</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/internal/StabilityInferred.html#parameters()">parameters</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>A bitmask, with one bit per type parameter of the annotated class. A 1 bit indicates that the stability of the annotated class should be calculated as a combination of the stability of the class itself and the stability of that type parameter.</p>
+      </div>
+    </div>
+  </body>
+</html>

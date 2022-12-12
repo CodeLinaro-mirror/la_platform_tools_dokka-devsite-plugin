@@ -1,0 +1,67 @@
+<html devsite="true">
+  <head>
+    <title>AndroidWindowSizeClassKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>AndroidWindowSizeClassKt</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/material3/windowsizeclass/AndroidWindowSizeClassKt.html">AndroidWindowSizeClassKt</a></pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/windowsizeclass/WindowSizeClass.html">WindowSizeClass</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/material3/windowsizeclass/ExperimentalMaterial3WindowSizeClassApi.html">ExperimentalMaterial3WindowSizeClassApi</a><br>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/androidx/compose/material3/windowsizeclass/AndroidWindowSizeClassKt.html#calculateWindowSizeClass(android.app.Activity)">calculateWindowSizeClass</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/app/Activity.html">Activity</a>&nbsp;activity)</code></div>
+              <p>Calculates the window's <code><a href="/reference/androidx/compose/material3/windowsizeclass/WindowSizeClass.html">WindowSizeClass</a></code> for the provided <code><a href="/reference/androidx/compose/material3/windowsizeclass/package-summary.html#calculateWindowSizeClass(android.app.Activity)">activity</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="calculateWindowSizeClass-android.app.Activity-"></a><a name="calculatewindowsizeclass"></a>
+        <h3 class="api-name" id="calculateWindowSizeClass(android.app.Activity)">calculateWindowSizeClass</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/material3/windowsizeclass/ExperimentalMaterial3WindowSizeClassApi.html">ExperimentalMaterial3WindowSizeClassApi</a><br>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/windowsizeclass/WindowSizeClass.html">WindowSizeClass</a>&nbsp;<a href="/reference/androidx/compose/material3/windowsizeclass/AndroidWindowSizeClassKt.html#calculateWindowSizeClass(android.app.Activity)">calculateWindowSizeClass</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/app/Activity.html">Activity</a>&nbsp;activity)</pre>
+        <p>Calculates the window's <code><a href="/reference/androidx/compose/material3/windowsizeclass/WindowSizeClass.html">WindowSizeClass</a></code> for the provided <code><a href="/reference/androidx/compose/material3/windowsizeclass/package-summary.html#calculateWindowSizeClass(android.app.Activity)">activity</a></code>.</p>
+        <p>A new <code><a href="/reference/androidx/compose/material3/windowsizeclass/WindowSizeClass.html">WindowSizeClass</a></code> will be returned whenever a configuration change causes the width or height of the window to cross a breakpoint, such as when the device is rotated or the window is resized.</p>
+        <pre class="prettyprint">
+import androidx.activity.compose.setContent
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
+
+class MyActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            // Calculate the window size class for the activity's current window. If the window
+            // size changes, for example when the device is rotated, the value returned by
+            // calculateSizeClass will also change.
+            val windowSizeClass = calculateWindowSizeClass(this)
+            // Perform logic on the window size class to decide whether to use a nav rail.
+            val useNavRail = windowSizeClass.widthSizeClass &gt; WindowWidthSizeClass.Compact
+
+            // MyScreen knows nothing about window size classes, and performs logic based on a
+            // Boolean flag.
+            MyScreen(useNavRail = useNavRail)
+        }
+    }
+}</pre>
+      </div>
+    </div>
+  </body>
+</html>

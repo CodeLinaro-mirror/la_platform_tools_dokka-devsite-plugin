@@ -1,0 +1,274 @@
+<html devsite="true">
+  <head>
+    <title>ModifierNodeElement</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/node/ModifierNodeElement.kt+class:androidx.compose.ui.node.ModifierNodeElement&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>ModifierNodeElement</h1>
+    <p>
+      <pre>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public abstract class <a href="/reference/androidx/compose/ui/node/ModifierNodeElement.html">ModifierNodeElement</a>&lt;N&nbsp;extends&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a>&gt; extends <a href="/reference/androidx/compose/ui/platform/InspectorValueInfo.html">InspectorValueInfo</a> implements <a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a></pre>
+    </p>
+    <div class="devsite-table-wrapper">
+      <table class="jd-inheritance-table">
+        <tbody>
+          <tr>
+            <td colspan="3"><a href="https://developer.android.com/reference/java/lang/Object.html">java.lang.Object</a></td>
+          </tr>
+          <tr>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="2"><a href="/reference/androidx/compose/ui/platform/InspectorValueInfo.html">androidx.compose.ui.platform.InspectorValueInfo</a></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="1"><a href="/reference/androidx/compose/ui/node/ModifierNodeElement.html">androidx.compose.ui.node.ModifierNodeElement</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr>
+    <p>A <code><a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a></code> which manages an instance of a particular <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> implementation. A given <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> implementation can only be used when a <code><a href="/reference/androidx/compose/ui/node/ModifierNodeElement.html">ModifierNodeElement</a></code> which creates and updates that implementation is applied to a Layout.</p>
+    <p>A <code><a href="/reference/androidx/compose/ui/node/ModifierNodeElement.html">ModifierNodeElement</a></code> should be very lightweight, and do little more than hold the information necessary to</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">See also</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/node/package-summary.html#modifierElementOf(kotlin.Any,kotlin.Function0,kotlin.Function1,kotlin.Function1)">modifierElementOf</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>&lt;N&nbsp;extends&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a>&gt; <a href="/reference/androidx/compose/ui/node/ModifierNodeElement.html#ModifierNodeElement(kotlin.Any,kotlin.Boolean,kotlin.Function1)">ModifierNodeElement</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;params,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;autoInvalidate,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/platform/InspectorInfo.html">InspectorInfo</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;inspectorInfo<br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> N</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/node/ModifierNodeElement.html#create()">create</a>()</code></div>
+              <p>This will be called the first time the modifier is applied to the Layout and it should construct and return the correspoding <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> instance.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/node/ModifierNodeElement.html#equals(kotlin.Any)">equals</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;other)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/node/ModifierNodeElement.html#hashCode()">hashCode</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> N</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/node/ModifierNodeElement.html#update(androidx.compose.ui.Modifier.Node)">update</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> N&nbsp;node)</code></div>
+              <p>Called when a modifier is applied to a Layout whose <code><a href="/reference/androidx/compose/ui/node/ModifierNodeElement.html#params()">params</a></code> have changed from the previous application.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/ui/platform/InspectorValueInfo.html">androidx.compose.ui.platform.InspectorValueInfo</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.sequences/-sequence/index.html">Sequence</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/platform/ValueElement.html">ValueElement</a>&gt;</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/platform/InspectorValueInfo.html#inspectableElements()">inspectableElements</a></code></div>
+                        <p>The elements of a compose value.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code><a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/platform/InspectorValueInfo.html#nameFallback()">nameFallback</a></code></div>
+                        <p>Use this name as the reference name shown in tools of this value if there is no explicit reference name given to the value.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code><a href="https://developer.android.com/reference/java/lang/Object.html">Object</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/platform/InspectorValueInfo.html#valueOverride()">valueOverride</a></code></div>
+                        <p>Use this value as a readable representation of the value.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/ui/Modifier.html">androidx.compose.ui.Modifier</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>infix @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/Modifier.html#then(androidx.compose.ui.Modifier)">then</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;other)</code></div>
+                        <p>Concatenates this modifier with another.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/ui/Modifier.Element.html">androidx.compose.ui.Modifier.Element</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>boolean</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/Modifier.Element.html#all(kotlin.Function1)">all</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;predicate<br>)</code></div>
+                        <p>Returns <code>true</code> if <code><a href="/reference/androidx/compose/ui/Modifier.Element.html#all(kotlin.Function1)">predicate</a></code> returns true for all <code><a href="/reference/androidx/compose/ui/Modifier.Element.html">Element</a></code>s in this <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code> or if this <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code> contains no <code><a href="/reference/androidx/compose/ui/Modifier.Element.html">Element</a></code>s.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>boolean</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/Modifier.Element.html#any(kotlin.Function1)">any</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;predicate<br>)</code></div>
+                        <p>Returns <code>true</code> if <code><a href="/reference/androidx/compose/ui/Modifier.Element.html#any(kotlin.Function1)">predicate</a></code> returns true for any <code><a href="/reference/androidx/compose/ui/Modifier.Element.html">Element</a></code> in this <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R</code></td>
+                      <td>
+                        <div><code>&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/Modifier.Element.html#foldIn(kotlin.Any,kotlin.Function2)">foldIn</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;initial,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;operation<br>)</code></div>
+                        <p>Accumulates a value starting with <code><a href="/reference/androidx/compose/ui/Modifier.Element.html#foldIn(kotlin.Any,kotlin.Function2)">initial</a></code> and applying <code><a href="/reference/androidx/compose/ui/Modifier.Element.html#foldIn(kotlin.Any,kotlin.Function2)">operation</a></code> to the current value and each element from outside in.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R</code></td>
+                      <td>
+                        <div><code>&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/Modifier.Element.html#foldOut(kotlin.Any,kotlin.Function2)">foldOut</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;initial,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;operation<br>)</code></div>
+                        <p>Accumulates a value starting with <code><a href="/reference/androidx/compose/ui/Modifier.Element.html#foldOut(kotlin.Any,kotlin.Function2)">initial</a></code> and applying <code><a href="/reference/androidx/compose/ui/Modifier.Element.html#foldOut(kotlin.Any,kotlin.Function2)">operation</a></code> to the current value and each element from inside out.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="ModifierNodeElement(kotlin.Any, kotlin.Boolean, kotlin.Function1)"></a><a name="ModifierNodeElement-kotlin.Any-kotlin.Boolean-kotlin.Function1-"></a><a name="modifiernodeelement"></a>
+        <h3 class="api-name" id="ModifierNodeElement(kotlin.Any,kotlin.Boolean,kotlin.Function1)">ModifierNodeElement</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;&lt;N&nbsp;extends&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a>&gt; <a href="/reference/androidx/compose/ui/node/ModifierNodeElement.html#ModifierNodeElement(kotlin.Any,kotlin.Boolean,kotlin.Function1)">ModifierNodeElement</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;params,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;autoInvalidate,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/platform/InspectorInfo.html">InspectorInfo</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;inspectorInfo<br>)</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="create--"></a><a name="create"></a>
+        <h3 class="api-name" id="create()">create</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> N&nbsp;<a href="/reference/androidx/compose/ui/node/ModifierNodeElement.html#create()">create</a>()</pre>
+        <p>This will be called the first time the modifier is applied to the Layout and it should construct and return the correspoding <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> instance.</p>
+      </div>
+      <div class="api-item"><a name="equals-kotlin.Any-"></a><a name="equals"></a>
+        <h3 class="api-name" id="equals(kotlin.Any)">equals</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/node/ModifierNodeElement.html#equals(kotlin.Any)">equals</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;other)</pre>
+      </div>
+      <div class="api-item"><a name="hashCode--"></a><a name="hashcode"></a>
+        <h3 class="api-name" id="hashCode()">hashCode</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/node/ModifierNodeElement.html#hashCode()">hashCode</a>()</pre>
+      </div>
+      <div class="api-item"><a name="update-androidx.compose.ui.Modifier.Node-"></a><a name="update"></a>
+        <h3 class="api-name" id="update(androidx.compose.ui.Modifier.Node)">update</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> N&nbsp;<a href="/reference/androidx/compose/ui/node/ModifierNodeElement.html#update(androidx.compose.ui.Modifier.Node)">update</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> N&nbsp;node)</pre>
+        <p>Called when a modifier is applied to a Layout whose <code><a href="/reference/androidx/compose/ui/node/ModifierNodeElement.html#params()">params</a></code> have changed from the previous application. This lambda will have the current node instance passed in as a parameter, and it is expected that the node will be brought up to date.</p>
+      </div>
+    </div>
+  </body>
+</html>

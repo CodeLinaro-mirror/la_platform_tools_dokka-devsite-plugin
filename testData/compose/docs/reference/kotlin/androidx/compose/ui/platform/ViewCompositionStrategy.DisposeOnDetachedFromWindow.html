@@ -1,0 +1,49 @@
+<html devsite="true">
+  <head>
+    <title>ViewCompositionStrategy.DisposeOnDetachedFromWindow</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/platform/ViewCompositionStrategy.android.kt+class:androidx.compose.ui.platform.ViewCompositionStrategy.DisposeOnDetachedFromWindow&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>ViewCompositionStrategy.DisposeOnDetachedFromWindow</h1>
+    <p>
+      <pre>object <a href="/reference/kotlin/androidx/compose/ui/platform/ViewCompositionStrategy.DisposeOnDetachedFromWindow.html">ViewCompositionStrategy.DisposeOnDetachedFromWindow</a> : <a href="/reference/kotlin/androidx/compose/ui/platform/ViewCompositionStrategy.html">ViewCompositionStrategy</a></pre>
+    </p>
+    <hr>
+    <p><code><a href="/reference/kotlin/androidx/compose/ui/platform/ViewCompositionStrategy.html">ViewCompositionStrategy</a></code> that disposes the composition whenever the view becomes detached from a window. If the user of a Compose UI view never explicitly calls <code><a href="/reference/kotlin/androidx/compose/ui/platform/AbstractComposeView.html#createComposition()">AbstractComposeView.createComposition</a></code>, this strategy is always safe and will always clean up composition resources with no explicit action required - just use the view like any other View and let garbage collection do the rest. (If <code><a href="/reference/kotlin/androidx/compose/ui/platform/AbstractComposeView.html#createComposition()">AbstractComposeView.createComposition</a></code> is called while the view is detached from a window, <code><a href="/reference/kotlin/androidx/compose/ui/platform/AbstractComposeView.html#disposeComposition()">AbstractComposeView.disposeComposition</a></code> must be called manually if the view is not later attached to a window.)</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>open () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/ViewCompositionStrategy.DisposeOnDetachedFromWindow.html#installFor(androidx.compose.ui.platform.AbstractComposeView)">installFor</a>(view:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/AbstractComposeView.html">AbstractComposeView</a>)</code></div>
+              <p>Install this strategy for <code><a href="/reference/kotlin/androidx/compose/ui/platform/ViewCompositionStrategy.DisposeOnDetachedFromWindow.html#installFor(androidx.compose.ui.platform.AbstractComposeView)">view</a></code> and return a function that will uninstall it later.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="installFor-androidx.compose.ui.platform.AbstractComposeView-"></a><a name="installfor"></a>
+        <h3 class="api-name" id="installFor(androidx.compose.ui.platform.AbstractComposeView)">installFor</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/ViewCompositionStrategy.DisposeOnDetachedFromWindow.html#installFor(androidx.compose.ui.platform.AbstractComposeView)">installFor</a>(view:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/AbstractComposeView.html">AbstractComposeView</a>):&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Install this strategy for <code><a href="/reference/kotlin/androidx/compose/ui/platform/ViewCompositionStrategy.DisposeOnDetachedFromWindow.html#installFor(androidx.compose.ui.platform.AbstractComposeView)">view</a></code> and return a function that will uninstall it later. This function should not be called directly; it is called by <code><a href="/reference/kotlin/androidx/compose/ui/platform/AbstractComposeView.html#setViewCompositionStrategy(androidx.compose.ui.platform.ViewCompositionStrategy)">AbstractComposeView.setViewCompositionStrategy</a></code> after uninstalling the previous strategy.</p>
+      </div>
+    </div>
+  </body>
+</html>

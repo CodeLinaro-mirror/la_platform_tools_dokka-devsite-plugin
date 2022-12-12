@@ -1,0 +1,275 @@
+<html devsite="true">
+  <head>
+    <title>SemanticsConfiguration</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/semantics/SemanticsConfiguration.kt+class:androidx.compose.ui.semantics.SemanticsConfiguration&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>SemanticsConfiguration</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html">SemanticsConfiguration</a> implements <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyReceiver.html">SemanticsPropertyReceiver</a>, <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html">Iterable</a></pre>
+    </p>
+    <hr>
+    <p>Describes the semantic information associated with the owning component</p>
+    <p>The information provided in the configuration is used to to generate the semantics tree.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#isClearingSemantics()">isClearingSemantics</a></code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#isMergingSemanticsOfDescendants()">isMergingSemanticsOfDescendants</a></code></div>
+              <p>Whether the semantic information provided by the owning component and all of its descendants should be treated as one logical entity.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#SemanticsConfiguration()">SemanticsConfiguration</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#contains(androidx.compose.ui.semantics.SemanticsPropertyKey)">contains</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;key)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html">SemanticsConfiguration</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#copy()">copy</a>()</code></div>
+              <p>Returns an exact copy of this configuration.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#equals(kotlin.Any)">equals</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;other)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#get(androidx.compose.ui.semantics.SemanticsPropertyKey)">get</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;key)</code></div>
+              <p>Retrieves the value for the given property, if one has been set.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#getOrElse(androidx.compose.ui.semantics.SemanticsPropertyKey,kotlin.Function0)">getOrElse</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;key,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;defaultValue<br>)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#getOrElseNullable(androidx.compose.ui.semantics.SemanticsPropertyKey,kotlin.Function0)">getOrElseNullable</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;key,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;T&gt;&nbsp;defaultValue<br>)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#hashCode()">hashCode</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Iterator.html">Iterator</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Map.Entry.html">Map.Entry</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;,&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#iterator()">iterator</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>void</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#set(androidx.compose.ui.semantics.SemanticsPropertyKey,kotlin.Any)">set</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;value)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#toString()">toString</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/semantics/SemanticsConfigurationKt.html">SemanticsConfigurationKt</a>.<a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#(androidx.compose.ui.semantics.SemanticsConfiguration).getOrNull(androidx.compose.ui.semantics.SemanticsPropertyKey)">getOrNull</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html">SemanticsConfiguration</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;key<br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html">kotlin.collections.Iterable</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>void</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/lang/Iterable.html#forEach(java.util.function.Consumer[kotlin.collections.Map.Entry[androidx.compose.ui.semantics.SemanticsPropertyKey[*],kotlin.Any?]])">forEach</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/function/Consumer.html">Consumer</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Map.Entry.html">Map.Entry</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;,&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&gt;&nbsp;p0<br>)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Spliterator.html">Spliterator</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Map.Entry.html">Map.Entry</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;,&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&gt;</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/lang/Iterable.html#spliterator()">spliterator</a>()</code></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getIsClearingSemantics()"></a><a name="setIsClearingSemantics()"></a><a name="getIsClearingSemantics--"></a><a name="setIsClearingSemantics--"></a>
+        <h3 class="api-name" id="isClearingSemantics()">isClearingSemantics</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#isClearingSemantics()">isClearingSemantics</a></pre>
+      </div>
+      <div class="api-item"><a name="getIsMergingSemanticsOfDescendants()"></a><a name="setIsMergingSemanticsOfDescendants()"></a><a name="getIsMergingSemanticsOfDescendants--"></a><a name="setIsMergingSemanticsOfDescendants--"></a>
+        <h3 class="api-name" id="isMergingSemanticsOfDescendants()">isMergingSemanticsOfDescendants</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#isMergingSemanticsOfDescendants()">isMergingSemanticsOfDescendants</a></pre>
+        <p>Whether the semantic information provided by the owning component and all of its descendants should be treated as one logical entity.</p>
+        <p>If set to true, the descendants of the owning component's <code><a href="/reference/androidx/compose/ui/semantics/SemanticsNode.html">SemanticsNode</a></code> will merge their semantic information into the <code><a href="/reference/androidx/compose/ui/semantics/SemanticsNode.html">SemanticsNode</a></code> representing the owning component.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="SemanticsConfiguration--"></a><a name="semanticsconfiguration"></a>
+        <h3 class="api-name" id="SemanticsConfiguration()">SemanticsConfiguration</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#SemanticsConfiguration()">SemanticsConfiguration</a>()</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="contains-androidx.compose.ui.semantics.SemanticsPropertyKey-"></a><a name="contains"></a>
+        <h3 class="api-name" id="contains(androidx.compose.ui.semantics.SemanticsPropertyKey)">contains</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#contains(androidx.compose.ui.semantics.SemanticsPropertyKey)">contains</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;key)</pre>
+      </div>
+      <div class="api-item"><a name="copy--"></a><a name="copy"></a>
+        <h3 class="api-name" id="copy()">copy</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html">SemanticsConfiguration</a>&nbsp;<a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#copy()">copy</a>()</pre>
+        <p>Returns an exact copy of this configuration.</p>
+      </div>
+      <div class="api-item"><a name="equals-kotlin.Any-"></a><a name="equals"></a>
+        <h3 class="api-name" id="equals(kotlin.Any)">equals</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#equals(kotlin.Any)">equals</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;other)</pre>
+      </div>
+      <div class="api-item"><a name="get-androidx.compose.ui.semantics.SemanticsPropertyKey-"></a><a name="get"></a>
+        <h3 class="api-name" id="get(androidx.compose.ui.semantics.SemanticsPropertyKey)">get</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#get(androidx.compose.ui.semantics.SemanticsPropertyKey)">get</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;key)</pre>
+        <p>Retrieves the value for the given property, if one has been set. If a value has not been set, throws <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code></p>
+      </div>
+      <div class="api-item"><a name="getOrElse(androidx.compose.ui.semantics.SemanticsPropertyKey, kotlin.Function0)"></a><a name="getOrElse-androidx.compose.ui.semantics.SemanticsPropertyKey-kotlin.Function0-"></a><a name="getorelse"></a>
+        <h3 class="api-name" id="getOrElse(androidx.compose.ui.semantics.SemanticsPropertyKey,kotlin.Function0)">getOrElse</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#getOrElse(androidx.compose.ui.semantics.SemanticsPropertyKey,kotlin.Function0)">getOrElse</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;key,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;defaultValue<br>)</pre>
+      </div>
+      <div class="api-item"><a name="getOrElseNullable(androidx.compose.ui.semantics.SemanticsPropertyKey, kotlin.Function0)"></a><a name="getOrElseNullable-androidx.compose.ui.semantics.SemanticsPropertyKey-kotlin.Function0-"></a><a name="getorelsenullable"></a>
+        <h3 class="api-name" id="getOrElseNullable(androidx.compose.ui.semantics.SemanticsPropertyKey,kotlin.Function0)">getOrElseNullable</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#getOrElseNullable(androidx.compose.ui.semantics.SemanticsPropertyKey,kotlin.Function0)">getOrElseNullable</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;key,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;T&gt;&nbsp;defaultValue<br>)</pre>
+      </div>
+      <div class="api-item"><a name="hashCode--"></a><a name="hashcode"></a>
+        <h3 class="api-name" id="hashCode()">hashCode</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#hashCode()">hashCode</a>()</pre>
+      </div>
+      <div class="api-item"><a name="iterator--"></a><a name="iterator"></a>
+        <h3 class="api-name" id="iterator()">iterator</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Iterator.html">Iterator</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Map.Entry.html">Map.Entry</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;,&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&gt;&nbsp;<a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#iterator()">iterator</a>()</pre>
+      </div>
+      <div class="api-item"><a name="set(androidx.compose.ui.semantics.SemanticsPropertyKey, kotlin.Any)"></a><a name="set-androidx.compose.ui.semantics.SemanticsPropertyKey-kotlin.Any-"></a><a name="set"></a>
+        <h3 class="api-name" id="set(androidx.compose.ui.semantics.SemanticsPropertyKey,kotlin.Any)">set</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#set(androidx.compose.ui.semantics.SemanticsPropertyKey,kotlin.Any)">set</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;value)</pre>
+      </div>
+      <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+        <h3 class="api-name" id="toString()">toString</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#toString()">toString</a>()</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.semantics.SemanticsConfiguration-.getOrNull-androidx.compose.ui.semantics.SemanticsPropertyKey-"></a><a name="getornull"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.semantics.SemanticsConfiguration).getOrNull(androidx.compose.ui.semantics.SemanticsPropertyKey)">SemanticsConfigurationKt.getOrNull</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/semantics/SemanticsConfigurationKt.html">SemanticsConfigurationKt</a>.<a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#(androidx.compose.ui.semantics.SemanticsConfiguration).getOrNull(androidx.compose.ui.semantics.SemanticsPropertyKey)">getOrNull</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html">SemanticsConfiguration</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;key<br>)</pre>
+      </div>
+    </div>
+  </body>
+</html>

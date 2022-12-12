@@ -1,0 +1,222 @@
+<html devsite="true">
+  <head>
+    <title>Font</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-text/androidx/compose/ui/text/font/Font.kt+class:androidx.compose.ui.text.font.Font&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>Font</h1>
+    <p>
+      <pre>public interface <a href="/reference/androidx/compose/ui/text/font/Font.html">Font</a></pre>
+    </p>
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
+        <div class="showalways" id="subclasses-direct"><a href="/reference/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a>, <a href="/reference/androidx/compose/ui/text/font/ResourceFont.html">ResourceFont</a></div>
+      </span>
+      <div id="subclasses-direct-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a></code></td>
+                <td>
+                  <p>Font for use on Android.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/font/ResourceFont.html">ResourceFont</a></code></td>
+                <td>
+                  <p>Defines a font to be used while rendering text with resource ID.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
+    <hr>
+    <p>The interface of the font resource.</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">See also</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/text/font/ResourceFont.html">ResourceFont</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>public static class <a href="/reference/androidx/compose/ui/text/font/Font.Companion.html">Font.Companion</a></code></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><code>public interface <a href="/reference/androidx/compose/ui/text/font/Font.ResourceLoader.html">Font.ResourceLoader</a></code></div>
+              <p><strong>This interface is deprecated.</strong> Replaced with FontFamily.Resolver during the introduction of async fonts, all usages should be replaced.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Constants</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>default&nbsp;static&nbsp;final long</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/font/Font.Companion.html#MaximumAsyncTimeout()">MaximumAsyncTimeout</a></code></div>
+              <p>This is the global timeout for fetching an <code><a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.Companion.html#Async()">FontLoadingStrategy.Async</a></code> font.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.html">FontLoadingStrategy</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/font/Font.html#loadingStrategy()">loadingStrategy</a></code></div>
+              <p>Loading strategy for this font.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/font/Font.html#style()">style</a></code></div>
+              <p>The style of the font, normal or italic.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/font/Font.html#weight()">weight</a></code></div>
+              <p>The weight of the font.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/font/FontKt.html">FontKt</a>.<a href="/reference/androidx/compose/ui/text/font/Font.html#(androidx.compose.ui.text.font.Font).toFontFamily()">toFontFamily</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/Font.html">Font</a>&nbsp;receiver)</code></div>
+              <p>Create a <code><a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a></code> from this single <code><a href="/reference/androidx/compose/ui/text/font/Font.html">Font</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Constants</h2>
+      <div class="api-item"><a name="getMaximumAsyncTimeout()"></a><a name="setMaximumAsyncTimeout()"></a><a name="getMaximumAsyncTimeout--"></a><a name="setMaximumAsyncTimeout--"></a>
+        <h3 class="api-name" id="MaximumAsyncTimeout()">MaximumAsyncTimeout</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;static&nbsp;final&nbsp;long&nbsp;<a href="/reference/androidx/compose/ui/text/font/Font.Companion.html#MaximumAsyncTimeout()">MaximumAsyncTimeout</a></pre>
+        <p>This is the global timeout for fetching an <code><a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.Companion.html#Async()">FontLoadingStrategy.Async</a></code> font.</p>
+        <p>This defines the &quot;loading&quot; window for a font. After this timeout, a font load may no longer trigger text reflow and is considered &quot;resolved.&quot;</p>
+        <p>Each async font is given separate loading window and goes through these states:</p>
+        <pre class="prettyprint">(initial) -&gt; (loading with timeout) -&gt; (resolved)</pre>
+        <ul>
+          <li>
+            <p>In the initial state, a fallback typeface is used to display text, which will reflow if the font successfully loads.</p>
+          </li>
+          <li>
+            <p>In the loading state, the font continues to use the fallback typeface and may cause one text reflow by finishing load. After a successful load it is considered resolved and will not cause another text reflow.</p>
+          </li>
+          <li>
+            <p>If the font fails to load by the timeout, the failure is permanent, and the font will never attempt to load again. Failure never causes text reflow.</p>
+          </li>
+        </ul>
+        <p>After a font is in resolved, it will never cause text reflow unless it is evicted from the font cache and re-enters initial.</p>
+        <p>This timeout is not configurable, and timers are maintained globally.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getLoadingStrategy()"></a><a name="setLoadingStrategy()"></a><a name="getLoadingStrategy--"></a><a name="setLoadingStrategy--"></a>
+        <h3 class="api-name" id="loadingStrategy()">loadingStrategy</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.html">FontLoadingStrategy</a>&nbsp;<a href="/reference/androidx/compose/ui/text/font/Font.html#loadingStrategy()">loadingStrategy</a></pre>
+        <p>Loading strategy for this font.</p>
+      </div>
+      <div class="api-item"><a name="getStyle()"></a><a name="setStyle()"></a><a name="getStyle--"></a><a name="setStyle--"></a>
+        <h3 class="api-name" id="style()">style</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>&nbsp;<a href="/reference/androidx/compose/ui/text/font/Font.html#style()">style</a></pre>
+        <p>The style of the font, normal or italic. The system uses this to match a font to a font request that is given in a <code><a href="/reference/androidx/compose/ui/text/SpanStyle.html">androidx.compose.ui.text.SpanStyle</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getWeight()"></a><a name="setWeight()"></a><a name="getWeight--"></a><a name="setWeight--"></a>
+        <h3 class="api-name" id="weight()">weight</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>&nbsp;<a href="/reference/androidx/compose/ui/text/font/Font.html#weight()">weight</a></pre>
+        <p>The weight of the font. The system uses this to match a font to a font request that is given in a <code><a href="/reference/androidx/compose/ui/text/SpanStyle.html">androidx.compose.ui.text.SpanStyle</a></code>.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.text.font.Font-.toFontFamily--"></a><a name="tofontfamily"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.text.font.Font).toFontFamily()">FontKt.toFontFamily</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a>&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontKt.html">FontKt</a>.<a href="/reference/androidx/compose/ui/text/font/Font.html#(androidx.compose.ui.text.font.Font).toFontFamily()">toFontFamily</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/Font.html">Font</a>&nbsp;receiver)</pre>
+        <p>Create a <code><a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a></code> from this single <code><a href="/reference/androidx/compose/ui/text/font/Font.html">Font</a></code>.</p>
+      </div>
+    </div>
+  </body>
+</html>

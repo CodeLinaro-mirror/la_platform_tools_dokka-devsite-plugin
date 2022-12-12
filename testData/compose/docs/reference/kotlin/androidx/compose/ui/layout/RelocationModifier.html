@@ -1,0 +1,204 @@
+<html devsite="true">
+  <head>
+    <title>RelocationModifier</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/layout/RelocationModifier.kt+class:androidx.compose.ui.layout.RelocationModifier&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>RelocationModifier</h1>
+    <p>
+      <pre>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>interface <a href="/reference/kotlin/androidx/compose/ui/layout/RelocationModifier.html">RelocationModifier</a> : <a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a></pre>
+    </p>
+    <hr>
+    <aside class="caution"><strong>This interface is deprecated.</strong><br>Please use BringIntoViewResponder instead.</aside>
+    <p>A <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html">modifier</a></code> that can be used to respond to relocation requests to relocate an item on screen.</p>
+    <p>When a child calls <a href="">RelocationRequester.bringIntoView</a>, the framework calls <code><a href="/reference/kotlin/androidx/compose/ui/layout/RelocationModifier.html#computeDestination(androidx.compose.ui.geometry.Rect,androidx.compose.ui.layout.LayoutCoordinates)">computeDestination</a></code> where you can take the source bounds and compute the destination rectangle for the child. Relocation Modifiers higher up the hierarchy will receive this destination as their source rect. Finally after all relocation modifiers have a chance to compute their destinations, the framework calls <code><a href="/reference/kotlin/androidx/compose/ui/layout/RelocationModifier.html#performRelocation(androidx.compose.ui.geometry.Rect,androidx.compose.ui.geometry.Rect)">performRelocation</a></code>(source, destination) which performs the actual relocation (scrolling).</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">See also</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/RelocationRequester.html">RelocationRequester</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/RelocationModifier.html#computeDestination(androidx.compose.ui.geometry.Rect,androidx.compose.ui.layout.LayoutCoordinates)">computeDestination</a>(source:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>,&nbsp;layoutCoordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>)</code></div>
+              <p>Compute the destination given the source rectangle and current bounds.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>suspend <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/RelocationModifier.html#performRelocation(androidx.compose.ui.geometry.Rect,androidx.compose.ui.geometry.Rect)">performRelocation</a>(source:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>,&nbsp;destination:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>)</code></div>
+              <p>Using the source and destination bounds, perform a relocation operation that moves the source rect to the destination location.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/Modifier.html">androidx.compose.ui.Modifier</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>open&nbsp;infix <a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html#then(androidx.compose.ui.Modifier)">then</a>(other:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>)</code></div>
+                        <p>Concatenates this modifier with another.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html">androidx.compose.ui.Modifier.Element</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html#all(kotlin.Function1)">all</a>(predicate:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>)</code></div>
+                        <p>Returns <code>true</code> if <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html#all(kotlin.Function1)">predicate</a></code> returns true for all <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html">Element</a></code>s in this <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code> or if this <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code> contains no <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html">Element</a></code>s.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html#any(kotlin.Function1)">any</a>(predicate:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>)</code></div>
+                        <p>Returns <code>true</code> if <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html#any(kotlin.Function1)">predicate</a></code> returns true for any <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html">Element</a></code> in this <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open R</code></td>
+                      <td>
+                        <div><code>&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html#foldIn(kotlin.Any,kotlin.Function2)">foldIn</a>(initial:&nbsp;R,&nbsp;operation:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>, R) <span style="white-space: nowrap;">-&gt;</span> R)</code></div>
+                        <p>Accumulates a value starting with <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html#foldIn(kotlin.Any,kotlin.Function2)">initial</a></code> and applying <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html#foldIn(kotlin.Any,kotlin.Function2)">operation</a></code> to the current value and each element from outside in.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open R</code></td>
+                      <td>
+                        <div><code>&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html#foldOut(kotlin.Any,kotlin.Function2)">foldOut</a>(initial:&nbsp;R,&nbsp;operation:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>, R) <span style="white-space: nowrap;">-&gt;</span> R)</code></div>
+                        <p>Accumulates a value starting with <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html#foldOut(kotlin.Any,kotlin.Function2)">initial</a></code> and applying <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html#foldOut(kotlin.Any,kotlin.Function2)">operation</a></code> to the current value and each element from inside out.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="computeDestination(androidx.compose.ui.geometry.Rect, androidx.compose.ui.layout.LayoutCoordinates)"></a><a name="computeDestination-androidx.compose.ui.geometry.Rect-androidx.compose.ui.layout.LayoutCoordinates-"></a><a name="computedestination"></a>
+        <h3 class="api-name" id="computeDestination(androidx.compose.ui.geometry.Rect,androidx.compose.ui.layout.LayoutCoordinates)">computeDestination</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/RelocationModifier.html#computeDestination(androidx.compose.ui.geometry.Rect,androidx.compose.ui.layout.LayoutCoordinates)">computeDestination</a>(source:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>,&nbsp;layoutCoordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></pre>
+        <p>Compute the destination given the source rectangle and current bounds.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>source:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+                <td>
+                  <p>The bounding box of the item that sent the request to be brought into view.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>layoutCoordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code></td>
+                <td>
+                  <p>The layoutCoordinates associated with this modifier.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+                <td>
+                  <p>the destination rectangle.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="performRelocation(androidx.compose.ui.geometry.Rect, androidx.compose.ui.geometry.Rect)"></a><a name="performRelocation-androidx.compose.ui.geometry.Rect-androidx.compose.ui.geometry.Rect-"></a><a name="performrelocation"></a>
+        <h3 class="api-name" id="performRelocation(androidx.compose.ui.geometry.Rect,androidx.compose.ui.geometry.Rect)">performRelocation</h3>
+        <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/RelocationModifier.html#performRelocation(androidx.compose.ui.geometry.Rect,androidx.compose.ui.geometry.Rect)">performRelocation</a>(source:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>,&nbsp;destination:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Using the source and destination bounds, perform a relocation operation that moves the source rect to the destination location. (This is usually achieved by scrolling).</p>
+      </div>
+    </div>
+  </body>
+</html>

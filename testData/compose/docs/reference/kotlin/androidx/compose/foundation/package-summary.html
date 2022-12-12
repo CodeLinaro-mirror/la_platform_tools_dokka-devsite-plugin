@@ -26,6 +26,18 @@
               <p>IndicationInstance is a specific instance of an <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a></code> that draws visual effects on certain interactions, such as press or focus.</p>
             </td>
           </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/foundation/MarqueeSpacing.html">MarqueeSpacing</a></code></td>
+            <td>
+              <p>Defines a <code><a href="/reference/kotlin/androidx/compose/foundation/MarqueeSpacing.html#(androidx.compose.ui.unit.Density).calculateSpacing(kotlin.Int,kotlin.Int)">calculateSpacing</a></code> method that determines the space after the end of <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).basicMarquee(kotlin.Int,androidx.compose.foundation.MarqueeAnimationMode,kotlin.Int,kotlin.Int,androidx.compose.foundation.MarqueeSpacing,androidx.compose.ui.unit.Dp)">basicMarquee</a></code> content before drawing the content again.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/foundation/OverscrollEffect.html">OverscrollEffect</a></code></td>
+            <td>
+              <p>An OverscrollEffect represents a visual effect that displays when the edges of a scrolling container have been reached with a scroll or fling.</p>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -52,9 +64,27 @@
             </td>
           </tr>
           <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/foundation/MagnifierStyle.html">MagnifierStyle</a></code></td>
+            <td>
+              <p>Specifies how a <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).magnifier(kotlin.Function1,kotlin.Function1,kotlin.Float,androidx.compose.foundation.MagnifierStyle,kotlin.Function1)">magnifier</a></code> should create the underlying <code><a href="https://developer.android.com/reference/android/widget/Magnifier.html">Magnifier</a></code> widget.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/foundation/MarqueeAnimationMode.html">MarqueeAnimationMode</a></code></td>
+            <td>
+              <p>Specifies when the <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).basicMarquee(kotlin.Int,androidx.compose.foundation.MarqueeAnimationMode,kotlin.Int,kotlin.Int,androidx.compose.foundation.MarqueeSpacing,androidx.compose.ui.unit.Dp)">basicMarquee</a></code> animation runs.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/foundation/MutatorMutex.html">MutatorMutex</a></code></td>
             <td>
               <p>Mutual exclusion for UI state mutation over time.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/foundation/OverscrollConfiguration.html">OverscrollConfiguration</a></code></td>
+            <td>
+              <p>Metadata for overscroll effects for android platform.</p>
             </td>
           </tr>
           <tr>
@@ -62,10 +92,6 @@
             <td>
               <p>State of the scroll.</p>
             </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/foundation/SomeJavaFile.html">SomeJavaFile</a></code></td>
-            <td></td>
           </tr>
         </tbody>
       </table>
@@ -131,7 +157,14 @@
           <tr>
             <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#Image(androidx.compose.ui.graphics.ImageBitmap,kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,androidx.compose.ui.layout.ContentScale,kotlin.Float,androidx.compose.ui.graphics.ColorFilter)">Image</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;bitmap:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentDescription:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;alignment:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Alignment.html">Alignment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentScale:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;alpha:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;colorFilter:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorFilter.html">ColorFilter</a>?<br>)</code></div>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#Canvas(androidx.compose.ui.Modifier,kotlin.String,kotlin.Function1)">Canvas</a>(modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,&nbsp;contentDescription:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,&nbsp;onDraw:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+              <p>Component that allow you to specify an area on the screen and perform canvas drawing on this area.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/NonRestartableComposable.html">NonRestartableComposable</a><br><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#Image(androidx.compose.ui.graphics.ImageBitmap,kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,androidx.compose.ui.layout.ContentScale,kotlin.Float,androidx.compose.ui.graphics.ColorFilter,androidx.compose.ui.graphics.FilterQuality)">Image</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;bitmap:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentDescription:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;alignment:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Alignment.html">Alignment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentScale:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;alpha:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;colorFilter:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorFilter.html">ColorFilter</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;filterQuality:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/FilterQuality.html">FilterQuality</a><br>)</code></div>
               <p>A composable that lays out and draws a given <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a></code>.</p>
             </td>
           </tr>
@@ -145,8 +178,21 @@
           <tr>
             <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#Image(androidx.compose.ui.graphics.vector.ImageVector,kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,androidx.compose.ui.layout.ContentScale,kotlin.Float,androidx.compose.ui.graphics.ColorFilter)">Image</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;imageVector:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/ImageVector.html">ImageVector</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentDescription:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;alignment:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Alignment.html">Alignment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentScale:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;alpha:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;colorFilter:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorFilter.html">ColorFilter</a>?<br>)</code></div>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/NonRestartableComposable.html">NonRestartableComposable</a><br><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#Image(androidx.compose.ui.graphics.vector.ImageVector,kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,androidx.compose.ui.layout.ContentScale,kotlin.Float,androidx.compose.ui.graphics.ColorFilter)">Image</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;imageVector:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/ImageVector.html">ImageVector</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentDescription:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;alignment:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Alignment.html">Alignment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentScale:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;alpha:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;colorFilter:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorFilter.html">ColorFilter</a>?<br>)</code></div>
               <p>A composable that lays out and draws a given <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/ImageVector.html">ImageVector</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/foundation/MarqueeSpacing.html">MarqueeSpacing</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#MarqueeSpacing(androidx.compose.ui.unit.Dp)">MarqueeSpacing</a>(spacing:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>)</code></div>
+              <p>A <code><a href="/reference/kotlin/androidx/compose/foundation/MarqueeSpacing.html">MarqueeSpacing</a></code> with a fixed size.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#checkScrollableContainerConstraints(androidx.compose.ui.unit.Constraints,androidx.compose.foundation.gestures.Orientation)">checkScrollableContainerConstraints</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;constraints:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;orientation:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/Orientation.html">Orientation</a><br>)</code></div>
             </td>
           </tr>
           <tr>
@@ -191,6 +237,13 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
             <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).basicMarquee(kotlin.Int,androidx.compose.foundation.MarqueeAnimationMode,kotlin.Int,kotlin.Int,androidx.compose.foundation.MarqueeSpacing,androidx.compose.ui.unit.Dp)">basicMarquee</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;iterations:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;animationMode:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MarqueeAnimationMode.html">MarqueeAnimationMode</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;delayMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialDelayMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;spacing:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MarqueeSpacing.html">MarqueeSpacing</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;velocity:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a><br>)</code></div>
+              <p>Applies an animated marquee effect to the modified content if it's too wide to fit in the available space.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
               <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).border(androidx.compose.foundation.BorderStroke,androidx.compose.ui.graphics.Shape)">border</a>(border:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/BorderStroke.html">BorderStroke</a>,&nbsp;shape:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Shape.html">Shape</a>)</code></div>
               <p>Modify element to add border with appearance specified with a <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).border(androidx.compose.foundation.BorderStroke,androidx.compose.ui.graphics.Shape)">border</a></code> and a <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).border(androidx.compose.foundation.BorderStroke,androidx.compose.ui.graphics.Shape)">shape</a></code> and clip it.</p>
             </td>
@@ -226,6 +279,13 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
             <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).clipScrollableContainer(androidx.compose.foundation.gestures.Orientation)">clipScrollableContainer</a>(orientation:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/Orientation.html">Orientation</a>)</code></div>
+              <p>Clips bounds of scrollable container on main axis while leaving space for background effects (like shadows) on cross axis.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
               <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).combinedClickable(androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.foundation.Indication,kotlin.Boolean,kotlin.String,androidx.compose.ui.semantics.Role,kotlin.String,kotlin.Function0,kotlin.Function0,kotlin.Function0)">combinedClickable</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;indication:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onClickLabel:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;role:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/Role.html">Role</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;onLongClickLabel:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;onLongClick:&nbsp;(() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;onDoubleClick:&nbsp;(() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;onClick:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
               <p>Configure component to receive clicks, double clicks and long clicks via input or accessibility &quot;click&quot; event.</p>
             </td>
@@ -235,6 +295,27 @@
             <td>
               <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).combinedClickable(kotlin.Boolean,kotlin.String,androidx.compose.ui.semantics.Role,kotlin.String,kotlin.Function0,kotlin.Function0,kotlin.Function0)">combinedClickable</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onClickLabel:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;role:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/Role.html">Role</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;onLongClickLabel:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;onLongClick:&nbsp;(() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;onDoubleClick:&nbsp;(() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;onClick:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
               <p>Configure component to receive clicks, double clicks and long clicks via input or accessibility &quot;click&quot; event.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<span><del><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).excludeFromSystemGesture()">excludeFromSystemGesture</a></del></span>()</code></div>
+              <p><strong>This function is deprecated.</strong> Use systemGestureExclusion</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<span><del><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).excludeFromSystemGesture(kotlin.Function1)">excludeFromSystemGesture</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;exclusion:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a><br>)</code></div>
+              <p><strong>This function is deprecated.</strong> Use systemGestureExclusion</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).focusGroup()">focusGroup</a>()</code></div>
+              <p>Creates a focus group or marks this component as a focus group.</p>
             </td>
           </tr>
           <tr>
@@ -254,8 +335,36 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
             <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).hoverable(androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Boolean)">hoverable</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><br>)</code></div>
+              <p>Configure component to be hoverable via pointer enter/exit events.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
               <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).indication(androidx.compose.foundation.interaction.InteractionSource,androidx.compose.foundation.Indication)">indication</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;indication:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a>?<br>)</code></div>
               <p>Draws visual effects for this component when interactions occur.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).magnifier(kotlin.Function1,kotlin.Function1,kotlin.Float,androidx.compose.foundation.MagnifierStyle,kotlin.Function1)">magnifier</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;sourceCenter:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;magnifierCenter:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;zoom:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;style:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MagnifierStyle.html">MagnifierStyle</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSizeChanged:&nbsp;((<a href="/reference/kotlin/androidx/compose/ui/unit/DpSize.html">DpSize</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)?<br>)</code></div>
+              <p>Shows a <code><a href="https://developer.android.com/reference/android/widget/Magnifier.html">Magnifier</a></code> widget that shows an enlarged version of the content at <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).magnifier(kotlin.Function1,kotlin.Function1,kotlin.Float,androidx.compose.foundation.MagnifierStyle,kotlin.Function1)">sourceCenter</a></code> relative to the current layout node.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).onFocusedBoundsChanged(kotlin.Function1)">onFocusedBoundsChanged</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onPositioned:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>?) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+              <p>Calls <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).onFocusedBoundsChanged(kotlin.Function1)">onPositioned</a></code> whenever the bounds of the currently-focused area changes.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).overscroll(androidx.compose.foundation.OverscrollEffect)">overscroll</a>(overscrollEffect:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/OverscrollEffect.html">OverscrollEffect</a>)</code></div>
+              <p>Renders overscroll from the provided <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).overscroll(androidx.compose.foundation.OverscrollEffect)">overscrollEffect</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -270,6 +379,20 @@
             <td>
               <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).progressSemantics(kotlin.Float,kotlin.ranges.ClosedFloatingPointRange,kotlin.Int)">progressSemantics</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;valueRange:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-closed-floating-point-range/index.html">ClosedFloatingPointRange</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;steps:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><br>)</code></div>
               <p>Contains the <code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.Modifier).semantics(kotlin.Boolean,kotlin.Function1)">semantics</a></code> required for a determinate progress indicator or the progress part of a slider, that represents progress within <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).progressSemantics(kotlin.Float,kotlin.ranges.ClosedFloatingPointRange,kotlin.Int)">valueRange</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).systemGestureExclusion()">systemGestureExclusion</a>()</code></div>
+              <p>Excludes the layout rectangle from the system gesture.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).systemGestureExclusion(kotlin.Function1)">systemGestureExclusion</a>(exclusion:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>)</code></div>
+              <p>Excludes a rectangle within the local layout coordinates from the system gesture.</p>
             </td>
           </tr>
           <tr>
@@ -291,10 +414,41 @@
         </colgroup>
         <tbody class="list">
           <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#DefaultMarqueeDelayMillis()">DefaultMarqueeDelayMillis</a></code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#DefaultMarqueeIterations()">DefaultMarqueeIterations</a></code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/foundation/MarqueeSpacing.html">MarqueeSpacing</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#DefaultMarqueeSpacing()">DefaultMarqueeSpacing</a></code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#DefaultMarqueeVelocity()">DefaultMarqueeVelocity</a></code></div>
+            </td>
+          </tr>
+          <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a>&lt;<a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a>&gt;</code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#LocalIndication()">LocalIndication</a></code></div>
               <p>CompositionLocal that provides an <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a></code> through the hierarchy.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a>&lt;<a href="/reference/kotlin/androidx/compose/foundation/OverscrollConfiguration.html">OverscrollConfiguration</a>?&gt;</code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#LocalOverscrollConfiguration()">LocalOverscrollConfiguration</a></code></div>
+              <p>Composition local to provide configuration for scrolling containers down the hierarchy.</p>
             </td>
           </tr>
         </tbody>
@@ -382,9 +536,73 @@ Canvas(modifier = Modifier.size(100.dp)) {
         </table>
       </div>
     </div>
-    <div class="api-item"><a name="Image(androidx.compose.ui.graphics.ImageBitmap, kotlin.String, androidx.compose.ui.Modifier, androidx.compose.ui.Alignment, androidx.compose.ui.layout.ContentScale, kotlin.Float, androidx.compose.ui.graphics.ColorFilter)"></a><a name="Image-androidx.compose.ui.graphics.ImageBitmap-kotlin.String-androidx.compose.ui.Modifier-androidx.compose.ui.Alignment-androidx.compose.ui.layout.ContentScale-kotlin.Float-androidx.compose.ui.graphics.ColorFilter-"></a><a name="image"></a>
-      <h3 class="api-name" id="Image(androidx.compose.ui.graphics.ImageBitmap,kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,androidx.compose.ui.layout.ContentScale,kotlin.Float,androidx.compose.ui.graphics.ColorFilter)">Image</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#Image(androidx.compose.ui.graphics.ImageBitmap,kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,androidx.compose.ui.layout.ContentScale,kotlin.Float,androidx.compose.ui.graphics.ColorFilter)">Image</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;bitmap:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentDescription:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;alignment:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Alignment.html">Alignment</a> = Alignment.Center,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentScale:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a> = ContentScale.Fit,<br>&nbsp;&nbsp;&nbsp;&nbsp;alpha:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = DefaultAlpha,<br>&nbsp;&nbsp;&nbsp;&nbsp;colorFilter:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorFilter.html">ColorFilter</a>? = null<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+    <div class="api-item"><a name="Canvas(androidx.compose.ui.Modifier, kotlin.String, kotlin.Function1)"></a><a name="Canvas-androidx.compose.ui.Modifier-kotlin.String-kotlin.Function1-"></a><a name="canvas"></a>
+      <h3 class="api-name" id="Canvas(androidx.compose.ui.Modifier,kotlin.String,kotlin.Function1)">Canvas</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#Canvas(androidx.compose.ui.Modifier,kotlin.String,kotlin.Function1)">Canvas</a>(modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,&nbsp;contentDescription:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,&nbsp;onDraw:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Component that allow you to specify an area on the screen and perform canvas drawing on this area. You MUST specify size with modifier, whether with exact sizes via Modifier.size modifier, or relative to parent, via Modifier.fillMaxSize, <code><a href="/reference/kotlin/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).weight(kotlin.Float,kotlin.Boolean)">ColumnScope.weight</a></code>, etc. If parent wraps this child, only exact sizes must be specified.</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+
+Canvas(
+    contentDescription = &quot;Pie chart: 80% apples, 20% bananas (localized string)&quot;,
+    modifier = Modifier.size(300.dp)
+) {
+    // Apples (80%)
+    drawCircle(
+        color = Color.Red,
+        radius = size.width / 2
+    )
+
+    // Bananas (20%)
+    drawArc(
+        color = Color.Yellow,
+        startAngle = 0f,
+        sweepAngle = 360f * 0.20f,
+        useCenter = true,
+        topLeft = Offset(0f, (size.height - size.width) / 2f),
+        size = Size(size.width, size.width)
+    )
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+              <td>
+                <p>mandatory modifier to specify size strategy for this composable</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>contentDescription:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></code></td>
+              <td>
+                <p>text used by accessibility services to describe what this canvas represents. This should be provided unless the canvas is used for decorative purposes or as part of a larger entity already described in some other way. This text should be localized, such as by using <code><a href="/reference/kotlin/androidx/compose/ui/res/package-summary.html#stringResource(kotlin.Int)">androidx.compose.ui.res.stringResource</a></code></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>onDraw:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <p>lambda that will be called to perform drawing. Note that this lambda will be called during draw stage, you have no access to composition scope, meaning that <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function invocation inside it will result to runtime exception</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="Image(androidx.compose.ui.graphics.ImageBitmap, kotlin.String, androidx.compose.ui.Modifier, androidx.compose.ui.Alignment, androidx.compose.ui.layout.ContentScale, kotlin.Float, androidx.compose.ui.graphics.ColorFilter, androidx.compose.ui.graphics.FilterQuality)"></a><a name="Image-androidx.compose.ui.graphics.ImageBitmap-kotlin.String-androidx.compose.ui.Modifier-androidx.compose.ui.Alignment-androidx.compose.ui.layout.ContentScale-kotlin.Float-androidx.compose.ui.graphics.ColorFilter-androidx.compose.ui.graphics.FilterQuality-"></a><a name="image"></a>
+      <h3 class="api-name" id="Image(androidx.compose.ui.graphics.ImageBitmap,kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,androidx.compose.ui.layout.ContentScale,kotlin.Float,androidx.compose.ui.graphics.ColorFilter,androidx.compose.ui.graphics.FilterQuality)">Image</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/NonRestartableComposable.html">NonRestartableComposable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#Image(androidx.compose.ui.graphics.ImageBitmap,kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,androidx.compose.ui.layout.ContentScale,kotlin.Float,androidx.compose.ui.graphics.ColorFilter,androidx.compose.ui.graphics.FilterQuality)">Image</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;bitmap:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentDescription:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;alignment:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Alignment.html">Alignment</a> = Alignment.Center,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentScale:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a> = ContentScale.Fit,<br>&nbsp;&nbsp;&nbsp;&nbsp;alpha:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = DefaultAlpha,<br>&nbsp;&nbsp;&nbsp;&nbsp;colorFilter:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorFilter.html">ColorFilter</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;filterQuality:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/FilterQuality.html">FilterQuality</a> = DefaultFilterQuality<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>A composable that lays out and draws a given <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a></code>. This will attempt to size the composable according to the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a></code>'s given width and height. However, an optional <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code> parameter can be provided to adjust sizing or draw additional content (ex. background). Any unspecified dimension will leverage the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a></code>'s size as a minimum constraint.</p>
       <p>The following sample shows basic usage of an Image composable to position and draw an <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a></code> on screen</p>
       <pre class="prettyprint">
@@ -462,6 +680,12 @@ Image(
               <td><code>colorFilter:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorFilter.html">ColorFilter</a>? = null</code></td>
               <td>
                 <p>Optional ColorFilter to apply for the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a></code> when it is rendered onscreen</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>filterQuality:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/FilterQuality.html">FilterQuality</a> = DefaultFilterQuality</code></td>
+              <td>
+                <p>Sampling algorithm applied to the <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#Image(androidx.compose.ui.graphics.ImageBitmap,kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,androidx.compose.ui.layout.ContentScale,kotlin.Float,androidx.compose.ui.graphics.ColorFilter,androidx.compose.ui.graphics.FilterQuality)">bitmap</a></code> when it is scaled and drawn into the destination. The default is <code><a href="/reference/kotlin/androidx/compose/ui/graphics/FilterQuality.Companion.html#Low()">FilterQuality.Low</a></code> which scales using a bilinear sampling algorithm</p>
               </td>
             </tr>
           </tbody>
@@ -556,7 +780,7 @@ Image(
     </div>
     <div class="api-item"><a name="Image(androidx.compose.ui.graphics.vector.ImageVector, kotlin.String, androidx.compose.ui.Modifier, androidx.compose.ui.Alignment, androidx.compose.ui.layout.ContentScale, kotlin.Float, androidx.compose.ui.graphics.ColorFilter)"></a><a name="Image-androidx.compose.ui.graphics.vector.ImageVector-kotlin.String-androidx.compose.ui.Modifier-androidx.compose.ui.Alignment-androidx.compose.ui.layout.ContentScale-kotlin.Float-androidx.compose.ui.graphics.ColorFilter-"></a><a name="image"></a>
       <h3 class="api-name" id="Image(androidx.compose.ui.graphics.vector.ImageVector,kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,androidx.compose.ui.layout.ContentScale,kotlin.Float,androidx.compose.ui.graphics.ColorFilter)">Image</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#Image(androidx.compose.ui.graphics.vector.ImageVector,kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,androidx.compose.ui.layout.ContentScale,kotlin.Float,androidx.compose.ui.graphics.ColorFilter)">Image</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;imageVector:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/ImageVector.html">ImageVector</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentDescription:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;alignment:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Alignment.html">Alignment</a> = Alignment.Center,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentScale:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a> = ContentScale.Fit,<br>&nbsp;&nbsp;&nbsp;&nbsp;alpha:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = DefaultAlpha,<br>&nbsp;&nbsp;&nbsp;&nbsp;colorFilter:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorFilter.html">ColorFilter</a>? = null<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/NonRestartableComposable.html">NonRestartableComposable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#Image(androidx.compose.ui.graphics.vector.ImageVector,kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,androidx.compose.ui.layout.ContentScale,kotlin.Float,androidx.compose.ui.graphics.ColorFilter)">Image</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;imageVector:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/vector/ImageVector.html">ImageVector</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentDescription:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;alignment:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Alignment.html">Alignment</a> = Alignment.Center,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentScale:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a> = ContentScale.Fit,<br>&nbsp;&nbsp;&nbsp;&nbsp;alpha:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = DefaultAlpha,<br>&nbsp;&nbsp;&nbsp;&nbsp;colorFilter:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorFilter.html">ColorFilter</a>? = null<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>A composable that lays out and draws a given <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/ImageVector.html">ImageVector</a></code>. This will attempt to size the composable according to the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/ImageVector.html">ImageVector</a></code>'s given width and height. However, an optional <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code> parameter can be provided to adjust sizing or draw additional content (ex. background). Any unspecified dimension will leverage the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/ImageVector.html">ImageVector</a></code>'s size as a minimum constraint.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -610,6 +834,63 @@ Image(
               <td><code>colorFilter:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorFilter.html">ColorFilter</a>? = null</code></td>
               <td>
                 <p>Optional ColorFilter to apply for the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/vector/ImageVector.html">ImageVector</a></code> when it is rendered onscreen</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="MarqueeSpacing-androidx.compose.ui.unit.Dp-"></a><a name="marqueespacing"></a>
+      <h3 class="api-name" id="MarqueeSpacing(androidx.compose.ui.unit.Dp)">MarqueeSpacing</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#MarqueeSpacing(androidx.compose.ui.unit.Dp)">MarqueeSpacing</a>(spacing:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MarqueeSpacing.html">MarqueeSpacing</a></pre>
+      <p>A <code><a href="/reference/kotlin/androidx/compose/foundation/MarqueeSpacing.html">MarqueeSpacing</a></code> with a fixed size.</p>
+    </div>
+    <div class="api-item"><a name="checkScrollableContainerConstraints(androidx.compose.ui.unit.Constraints, androidx.compose.foundation.gestures.Orientation)"></a><a name="checkScrollableContainerConstraints-androidx.compose.ui.unit.Constraints-androidx.compose.foundation.gestures.Orientation-"></a><a name="checkscrollablecontainerconstraints"></a>
+      <h3 class="api-name" id="checkScrollableContainerConstraints(androidx.compose.ui.unit.Constraints,androidx.compose.foundation.gestures.Orientation)">checkScrollableContainerConstraints</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#checkScrollableContainerConstraints(androidx.compose.ui.unit.Constraints,androidx.compose.foundation.gestures.Orientation)">checkScrollableContainerConstraints</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;constraints:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;orientation:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/Orientation.html">Orientation</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>constraints:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></code></td>
+              <td>
+                <p><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></code> used to measure the scrollable container</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>orientation:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/Orientation.html">Orientation</a></code></td>
+              <td>
+                <p>orientation of the scrolling</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Throws</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>kotlin.IllegalStateException:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">kotlin.IllegalStateException</a></code></td>
+              <td>
+                <p>if the container was measured with the infinity constraints in the direction of scrolling. This usually means nesting scrollable in the same direction containers which is a performance issue and is discouraged.</p>
               </td>
             </tr>
           </tbody>
@@ -833,6 +1114,152 @@ Text(
         </table>
       </div>
     </div>
+    <div class="api-item"><a name="(androidx.compose.ui.Modifier).basicMarquee(kotlin.Int, androidx.compose.foundation.MarqueeAnimationMode, kotlin.Int, kotlin.Int, androidx.compose.foundation.MarqueeSpacing, androidx.compose.ui.unit.Dp)"></a><a name="-androidx.compose.ui.Modifier-.basicMarquee-kotlin.Int-androidx.compose.foundation.MarqueeAnimationMode-kotlin.Int-kotlin.Int-androidx.compose.foundation.MarqueeSpacing-androidx.compose.ui.unit.Dp-"></a><a name="basicmarquee"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.Modifier).basicMarquee(kotlin.Int,androidx.compose.foundation.MarqueeAnimationMode,kotlin.Int,kotlin.Int,androidx.compose.foundation.MarqueeSpacing,androidx.compose.ui.unit.Dp)">basicMarquee</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).basicMarquee(kotlin.Int,androidx.compose.foundation.MarqueeAnimationMode,kotlin.Int,kotlin.Int,androidx.compose.foundation.MarqueeSpacing,androidx.compose.ui.unit.Dp)">basicMarquee</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;iterations:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = DefaultMarqueeIterations,<br>&nbsp;&nbsp;&nbsp;&nbsp;animationMode:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MarqueeAnimationMode.html">MarqueeAnimationMode</a> = Immediately,<br>&nbsp;&nbsp;&nbsp;&nbsp;delayMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = DefaultMarqueeDelayMillis,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialDelayMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = if (animationMode == Immediately) delayMillis else 0,<br>&nbsp;&nbsp;&nbsp;&nbsp;spacing:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MarqueeSpacing.html">MarqueeSpacing</a> = DefaultMarqueeSpacing,<br>&nbsp;&nbsp;&nbsp;&nbsp;velocity:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a> = DefaultMarqueeVelocity<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Applies an animated marquee effect to the modified content if it's too wide to fit in the available space. This modifier has no effect if the content fits in the max constraints. The content will be measured with unbounded width.</p>
+      <p>When the animation is running, it will restart from the initial state any time:</p>
+      <ul>
+        <li>
+          <p>any of the parameters to this modifier change, or</p>
+        </li>
+        <li>
+          <p>the content or container size change.</p>
+        </li>
+      </ul>
+      <p>The animation only affects the drawing of the content, not its position. The offset returned by the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> of anything inside the marquee is undefined relative to anything outside the marquee, and may not match its drawn position on screen. This modifier also does not currently support content that accepts position-based input such as pointer events.</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.basicMarquee
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.Text
+
+// Marquee only animates when the content doesn't fit in the max width.
+Column(Modifier.width(30.dp)) {
+    Text(&quot;hello world&quot;, Modifier.basicMarquee())
+}</pre>
+      <p>To only animate when the composable is focused, specify <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).basicMarquee(kotlin.Int,androidx.compose.foundation.MarqueeAnimationMode,kotlin.Int,kotlin.Int,androidx.compose.foundation.MarqueeSpacing,androidx.compose.ui.unit.Dp)">animationMode</a></code> and make the composable focusable.</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.basicMarquee
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.Text
+import androidx.compose.runtime.remember
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+
+val focusRequester = remember { FocusRequester() }
+
+// Marquee only animates when the content doesn't fit in the max width.
+Column(Modifier.width(30.dp)) {
+    Text(&quot;hello world&quot;, Modifier
+        .clickable { focusRequester.requestFocus() }
+        .basicMarquee(animationMode = MarqueeAnimationMode.WhileFocused)
+        .focusRequester(focusRequester)
+        .focusable()
+    )
+}</pre>
+      <p>This modifier does not add any visual effects aside from scrolling, but you can add your own by placing modifiers before this one.</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.MarqueeSpacing
+import androidx.compose.foundation.basicMarquee
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.material.Text
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.graphicsLayer
+
+val edgeWidth = 32.dp
+fun ContentDrawScope.drawFadedEdge(leftEdge: Boolean) {
+    val edgeWidthPx = edgeWidth.toPx()
+    drawRect(
+        topLeft = Offset(if (leftEdge) 0f else size.width - edgeWidthPx, 0f),
+        size = Size(edgeWidthPx, size.height),
+        brush = Brush.horizontalGradient(
+            colors = listOf(Color.Transparent, Color.Black),
+            startX = if (leftEdge) 0f else size.width,
+            endX = if (leftEdge) edgeWidthPx else size.width - edgeWidthPx
+        ),
+        blendMode = BlendMode.DstIn
+    )
+}
+
+Text(
+    &quot;the quick brown fox jumped over the lazy dogs&quot;,
+    Modifier
+        .widthIn(max = edgeWidth * 4)
+        // Rendering to an offscreen buffer is required to get the faded edges' alpha to be
+        // applied only to the text, and not whatever is drawn below this composable (e.g. the
+        // window).
+        .graphicsLayer { compositingStrategy = CompositingStrategy.Offscreen }
+        .drawWithContent {
+            drawContent()
+            drawFadedEdge(leftEdge = true)
+            drawFadedEdge(leftEdge = false)
+        }
+        .basicMarquee(
+            // Animate forever.
+            iterations = Int.MAX_VALUE,
+            spacing = MarqueeSpacing(0.dp)
+        )
+        .padding(start = edgeWidth)
+)</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>iterations:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = DefaultMarqueeIterations</code></td>
+              <td>
+                <p>The number of times to repeat the animation. <code>Int.MAX_VALUE</code> will repeat forever, and 0 will disable animation.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>animationMode:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MarqueeAnimationMode.html">MarqueeAnimationMode</a> = Immediately</code></td>
+              <td>
+                <p>Whether the marquee should start animating <code><a href="/reference/kotlin/androidx/compose/foundation/MarqueeAnimationMode.Companion.html#Immediately()">Immediately</a></code> or only <code><a href="/reference/kotlin/androidx/compose/foundation/MarqueeAnimationMode.Companion.html#WhileFocused()">WhileFocused</a></code>. In <code><a href="/reference/kotlin/androidx/compose/foundation/MarqueeAnimationMode.Companion.html#WhileFocused()">WhileFocused</a></code> mode, the modified node or the content must be made <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).focusable(kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource)">focusable</a></code>. Note that the <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).basicMarquee(kotlin.Int,androidx.compose.foundation.MarqueeAnimationMode,kotlin.Int,kotlin.Int,androidx.compose.foundation.MarqueeSpacing,androidx.compose.ui.unit.Dp)">initialDelayMillis</a></code> is part of the animation, so this parameter determines when that initial delay starts counting down, not when the content starts to actually scroll.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>delayMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = DefaultMarqueeDelayMillis</code></td>
+              <td>
+                <p>The duration to wait before starting each subsequent iteration, in millis.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>initialDelayMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = if (animationMode == Immediately) delayMillis else 0</code></td>
+              <td>
+                <p>The duration to wait before starting the first iteration of the animation, in millis. By default, there will be no initial delay if <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).basicMarquee(kotlin.Int,androidx.compose.foundation.MarqueeAnimationMode,kotlin.Int,kotlin.Int,androidx.compose.foundation.MarqueeSpacing,androidx.compose.ui.unit.Dp)">animationMode</a></code> is <code><a href="/reference/kotlin/androidx/compose/foundation/MarqueeAnimationMode.Companion.html#WhileFocused()">WhileFocused</a></code>, otherwise the initial delay will be <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).basicMarquee(kotlin.Int,androidx.compose.foundation.MarqueeAnimationMode,kotlin.Int,kotlin.Int,androidx.compose.foundation.MarqueeSpacing,androidx.compose.ui.unit.Dp)">delayMillis</a></code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>spacing:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MarqueeSpacing.html">MarqueeSpacing</a> = DefaultMarqueeSpacing</code></td>
+              <td>
+                <p>A <code><a href="/reference/kotlin/androidx/compose/foundation/MarqueeSpacing.html">MarqueeSpacing</a></code> that specifies how much space to leave at the end of the content before showing the beginning again.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>velocity:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a> = DefaultMarqueeVelocity</code></td>
+              <td>
+                <p>The speed of the animation in dps / second.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
     <div class="api-item"><a name="(androidx.compose.ui.Modifier).border(androidx.compose.foundation.BorderStroke, androidx.compose.ui.graphics.Shape)"></a><a name="-androidx.compose.ui.Modifier-.border-androidx.compose.foundation.BorderStroke-androidx.compose.ui.graphics.Shape-"></a><a name="border"></a>
       <h3 class="api-name" id="(androidx.compose.ui.Modifier).border(androidx.compose.foundation.BorderStroke,androidx.compose.ui.graphics.Shape)">border</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).border(androidx.compose.foundation.BorderStroke,androidx.compose.ui.graphics.Shape)">border</a>(border:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/BorderStroke.html">BorderStroke</a>,&nbsp;shape:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Shape.html">Shape</a> = RectangleShape):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
@@ -1019,7 +1446,7 @@ Text(text = count.value.toString(), modifier = Modifier.clickable { count.value 
             <tr>
               <td><code>indication:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a>?</code></td>
               <td>
-                <p>indication to be shown when modified element is pressed. Be default, indication from <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#LocalIndication()">LocalIndication</a></code> will be used. Pass <code>null</code> to show no indication, or current value from <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#LocalIndication()">LocalIndication</a></code> to show theme default</p>
+                <p>indication to be shown when modified element is pressed. By default, indication from <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#LocalIndication()">LocalIndication</a></code> will be used. Pass <code>null</code> to show no indication, or current value from <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#LocalIndication()">LocalIndication</a></code> to show theme default</p>
               </td>
             </tr>
             <tr>
@@ -1106,6 +1533,32 @@ Text(text = count.value.toString(), modifier = Modifier.clickable { count.value 
         </table>
       </div>
     </div>
+    <div class="api-item"><a name="-androidx.compose.ui.Modifier-.clipScrollableContainer-androidx.compose.foundation.gestures.Orientation-"></a><a name="clipscrollablecontainer"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.Modifier).clipScrollableContainer(androidx.compose.foundation.gestures.Orientation)">clipScrollableContainer</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).clipScrollableContainer(androidx.compose.foundation.gestures.Orientation)">clipScrollableContainer</a>(orientation:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/Orientation.html">Orientation</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Clips bounds of scrollable container on main axis while leaving space for background effects (like shadows) on cross axis.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>orientation:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/Orientation.html">Orientation</a></code></td>
+              <td>
+                <p>orientation of the scrolling</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
     <div class="api-item"><a name="(androidx.compose.ui.Modifier).combinedClickable(androidx.compose.foundation.interaction.MutableInteractionSource, androidx.compose.foundation.Indication, kotlin.Boolean, kotlin.String, androidx.compose.ui.semantics.Role, kotlin.String, kotlin.Function0, kotlin.Function0, kotlin.Function0)"></a><a name="-androidx.compose.ui.Modifier-.combinedClickable-androidx.compose.foundation.interaction.MutableInteractionSource-androidx.compose.foundation.Indication-kotlin.Boolean-kotlin.String-androidx.compose.ui.semantics.Role-kotlin.String-kotlin.Function0-kotlin.Function0-kotlin.Function0-"></a><a name="combinedclickable"></a>
       <h3 class="api-name" id="(androidx.compose.ui.Modifier).combinedClickable(androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.foundation.Indication,kotlin.Boolean,kotlin.String,androidx.compose.ui.semantics.Role,kotlin.String,kotlin.Function0,kotlin.Function0,kotlin.Function0)">combinedClickable</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).combinedClickable(androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.foundation.Indication,kotlin.Boolean,kotlin.String,androidx.compose.ui.semantics.Role,kotlin.String,kotlin.Function0,kotlin.Function0,kotlin.Function0)">combinedClickable</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;indication:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = true,<br>&nbsp;&nbsp;&nbsp;&nbsp;onClickLabel:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;role:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/Role.html">Role</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;onLongClickLabel:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;onLongClick:&nbsp;(() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;onDoubleClick:&nbsp;(() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;onClick:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
@@ -1143,7 +1596,7 @@ Text(text = count.value.toString(), modifier = Modifier.clickable { count.value 
             <tr>
               <td><code>indication:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a>?</code></td>
               <td>
-                <p>indication to be shown when modified element is pressed. Be default, indication from <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#LocalIndication()">LocalIndication</a></code> will be used. Pass <code>null</code> to show no indication, or current value from <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#LocalIndication()">LocalIndication</a></code> to show theme default</p>
+                <p>indication to be shown when modified element is pressed. By default, indication from <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#LocalIndication()">LocalIndication</a></code> will be used. Pass <code>null</code> to show no indication, or current value from <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#LocalIndication()">LocalIndication</a></code> to show theme default</p>
               </td>
             </tr>
             <tr>
@@ -1265,6 +1718,105 @@ Text(text = count.value.toString(), modifier = Modifier.clickable { count.value 
           </tbody>
         </table>
       </div>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.Modifier-.excludeFromSystemGesture--"></a><a name="excludefromsystemgesture"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.Modifier).excludeFromSystemGesture()">excludeFromSystemGesture</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<span><del><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).excludeFromSystemGesture()">excludeFromSystemGesture</a></del></span>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <aside class="caution"><strong>This function is deprecated.</strong><br>Use systemGestureExclusion</aside>
+      <p>Excludes the layout rectangle from the system gesture.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://developer.android.com/reference/android/view/View.html#setSystemGestureExclusionRects(kotlin.collections.MutableList[android.graphics.Rect])">setSystemGestureExclusionRects</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.Modifier-.excludeFromSystemGesture-kotlin.Function1-"></a><a name="excludefromsystemgesture"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.Modifier).excludeFromSystemGesture(kotlin.Function1)">excludeFromSystemGesture</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<span><del><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).excludeFromSystemGesture(kotlin.Function1)">excludeFromSystemGesture</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;exclusion:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <aside class="caution"><strong>This function is deprecated.</strong><br>Use systemGestureExclusion</aside>
+      <p>Excludes a rectangle within the local layout coordinates from the system gesture. After layout, <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).excludeFromSystemGesture(kotlin.Function1)">exclusion</a></code> is called to determine the <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code> to exclude from the system gesture area.</p>
+      <p>The <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> of the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code>'s location in the layout is passed as passed as <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).excludeFromSystemGesture(kotlin.Function1)">exclusion</a></code>'s parameter.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://developer.android.com/reference/android/view/View.html#setSystemGestureExclusionRects(kotlin.collections.MutableList[android.graphics.Rect])">setSystemGestureExclusionRects</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.Modifier-.focusGroup--"></a><a name="focusgroup"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.Modifier).focusGroup()">focusGroup</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).focusGroup()">focusGroup</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Creates a focus group or marks this component as a focus group. This means that when we move focus using the keyboard or programmatically using <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusManager.html#moveFocus(androidx.compose.ui.focus.FocusDirection)">FocusManager.moveFocus()</a></code>, the items within the focus group will be given a higher priority before focus moves to items outside the focus group.</p>
+      <p>In the sample below, each column is a focus group, so pressing the tab key will move focus to all the buttons in column 1 before visiting column 2.</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.focusGroup
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+
+Row {
+    Column(Modifier.focusGroup()) {
+        Button({}) { Text(&quot;Row1 Col1&quot;) }
+        Button({}) { Text(&quot;Row2 Col1&quot;) }
+        Button({}) { Text(&quot;Row3 Col1&quot;) }
+    }
+    Column(Modifier.focusGroup()) {
+        Button({}) { Text(&quot;Row1 Col2&quot;) }
+        Button({}) { Text(&quot;Row2 Col2&quot;) }
+        Button({}) { Text(&quot;Row3 Col2&quot;) }
+    }
+}</pre>
+      <p>Note: The focusable children of a focusable parent automatically form a focus group. This modifier is to be used when you want to create a focus group where the parent is not focusable. If you encounter a component that uses a <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).focusGroup()">focusGroup</a></code> internally, you can make it focusable by using a <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).focusable(kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource)">focusable</a></code> modifier. In the second sample here, the <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/package-summary.html#LazyRow(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyRow</a></code> is a focus group that is not itself focusable. But you can make it focusable by adding a <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).focusable(kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource)">focusable</a></code> modifier.</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.border
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.interaction.collectIsFocusedAsState
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.runtime.remember
+
+val interactionSource = remember { MutableInteractionSource() }
+LazyRow(
+    Modifier
+        .focusable(interactionSource = interactionSource)
+        .border(1.dp, if (interactionSource.collectIsFocusedAsState().value) Red else Black)
+) {
+    repeat(10) {
+        item {
+            Button({}) { Text(&quot;Button$it&quot;) }
+        }
+    }
+}</pre>
     </div>
     <div class="api-item"><a name="(androidx.compose.ui.Modifier).focusable(kotlin.Boolean, androidx.compose.foundation.interaction.MutableInteractionSource)"></a><a name="-androidx.compose.ui.Modifier-.focusable-kotlin.Boolean-androidx.compose.foundation.interaction.MutableInteractionSource-"></a><a name="focusable"></a>
       <h3 class="api-name" id="(androidx.compose.ui.Modifier).focusable(kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource)">focusable</h3>
@@ -1416,6 +1968,62 @@ Box(
         </table>
       </div>
     </div>
+    <div class="api-item"><a name="(androidx.compose.ui.Modifier).hoverable(androidx.compose.foundation.interaction.MutableInteractionSource, kotlin.Boolean)"></a><a name="-androidx.compose.ui.Modifier-.hoverable-androidx.compose.foundation.interaction.MutableInteractionSource-kotlin.Boolean-"></a><a name="hoverable"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.Modifier).hoverable(androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Boolean)">hoverable</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).hoverable(androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Boolean)">hoverable</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = true<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Configure component to be hoverable via pointer enter/exit events.</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.hoverable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsHoveredAsState
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.Text
+import androidx.compose.runtime.remember
+
+// MutableInteractionSource to track changes of the component's interactions (like &quot;hovered&quot;)
+val interactionSource = remember { MutableInteractionSource() }
+val isHovered by interactionSource.collectIsHoveredAsState()
+
+// the color will change depending on the presence of a hover
+Box(
+    modifier = Modifier
+        .size(128.dp)
+        .background(if (isHovered) Color.Red else Color.Blue)
+        .hoverable(interactionSource = interactionSource),
+    contentAlignment = Alignment.Center
+) {
+    Text(if (isHovered) &quot;Hovered&quot; else &quot;Unhovered&quot;)
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code></td>
+              <td>
+                <p><code><a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> that will be used to emit <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/HoverInteraction.Enter.html">HoverInteraction.Enter</a></code> when this element is being hovered.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>enabled:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = true</code></td>
+              <td>
+                <p>Controls the enabled state. When <code>false</code>, hover events will be ignored.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
     <div class="api-item"><a name="(androidx.compose.ui.Modifier).indication(androidx.compose.foundation.interaction.InteractionSource, androidx.compose.foundation.Indication)"></a><a name="-androidx.compose.ui.Modifier-.indication-androidx.compose.foundation.interaction.InteractionSource-androidx.compose.foundation.Indication-"></a><a name="indication"></a>
       <h3 class="api-name" id="(androidx.compose.ui.Modifier).indication(androidx.compose.foundation.interaction.InteractionSource,androidx.compose.foundation.Indication)">indication</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).indication(androidx.compose.foundation.interaction.InteractionSource,androidx.compose.foundation.Indication)">indication</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;indication:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a>?<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
@@ -1484,6 +2092,257 @@ Column {
         </table>
       </div>
     </div>
+    <div class="api-item"><a name="(androidx.compose.ui.Modifier).magnifier(kotlin.Function1, kotlin.Function1, kotlin.Float, androidx.compose.foundation.MagnifierStyle, kotlin.Function1)"></a><a name="-androidx.compose.ui.Modifier-.magnifier-kotlin.Function1-kotlin.Function1-kotlin.Float-androidx.compose.foundation.MagnifierStyle-kotlin.Function1-"></a><a name="magnifier"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.Modifier).magnifier(kotlin.Function1,kotlin.Function1,kotlin.Float,androidx.compose.foundation.MagnifierStyle,kotlin.Function1)">magnifier</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).magnifier(kotlin.Function1,kotlin.Function1,kotlin.Float,androidx.compose.foundation.MagnifierStyle,kotlin.Function1)">magnifier</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;sourceCenter:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;magnifierCenter:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a> = { Offset.Unspecified },<br>&nbsp;&nbsp;&nbsp;&nbsp;zoom:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = Float.NaN,<br>&nbsp;&nbsp;&nbsp;&nbsp;style:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MagnifierStyle.html">MagnifierStyle</a> = MagnifierStyle.Default,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSizeChanged:&nbsp;((<a href="/reference/kotlin/androidx/compose/ui/unit/DpSize.html">DpSize</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)? = null<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Shows a <code><a href="https://developer.android.com/reference/android/widget/Magnifier.html">Magnifier</a></code> widget that shows an enlarged version of the content at <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).magnifier(kotlin.Function1,kotlin.Function1,kotlin.Float,androidx.compose.foundation.MagnifierStyle,kotlin.Function1)">sourceCenter</a></code> relative to the current layout node.</p>
+      <p>This function returns a no-op modifier on API levels below P (28), since the framework does not support the <code><a href="https://developer.android.com/reference/android/widget/Magnifier.html">Magnifier</a></code> widget on those levels. However, even on higher API levels, not all magnifier features are supported on all platforms. To check whether a given <code><a href="/reference/kotlin/androidx/compose/foundation/MagnifierStyle.html">MagnifierStyle</a></code> is supported by the current platform, check the <code><a href="/reference/kotlin/androidx/compose/foundation/MagnifierStyle.html#isSupported()">MagnifierStyle.isSupported</a></code> property.</p>
+      <p>This function does not allow configuration of <code><a href="https://developer.android.com/reference/android/widget/Magnifier.Builder.html#setSourceBounds(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Int)">source bounds</a></code> since the magnifier widget does not support constraining to the bounds of composables.</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.magnifier
+import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.input.pointer.pointerInput
+
+// When the magnifier center position is Unspecified, it is hidden.
+// Hide the magnifier until a drag starts.
+var magnifierCenter by remember { mutableStateOf(Offset.Unspecified) }
+
+if (!MagnifierStyle.Default.isSupported) {
+    Text(&quot;Magnifier is not supported on this platform.&quot;)
+} else {
+    Box(
+        Modifier
+            .magnifier(
+                sourceCenter = { magnifierCenter },
+                zoom = 2f
+            )
+            .pointerInput(Unit) {
+                detectDragGestures(
+                    // Show the magnifier at the original pointer position.
+                    onDragStart = { magnifierCenter = it },
+                    // Make the magnifier follow the finger while dragging.
+                    onDrag = { _, delta -&gt; magnifierCenter += delta },
+                    // Hide the magnifier when the finger lifts.
+                    onDragEnd = { magnifierCenter = Offset.Unspecified },
+                    onDragCancel = { magnifierCenter = Offset.Unspecified }
+                )
+            }
+            .drawBehind {
+                // Some concentric circles to zoom in on.
+                for (diameter in 2 until size.maxDimension.toInt() step 10) {
+                    drawCircle(
+                        color = Color.Black,
+                        radius = diameter / 2f,
+                        style = Stroke()
+                    )
+                }
+            }
+    )
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>sourceCenter:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+              <td>
+                <p>The offset of the center of the magnified content. Measured in pixels from the top-left of the layout node this modifier is applied to. This offset is passed to <code><a href="https://developer.android.com/reference/android/widget/Magnifier.html#show(kotlin.Float, kotlin.Float)">Magnifier.show</a></code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>magnifierCenter:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a> = { Offset.Unspecified }</code></td>
+              <td>
+                <p>The offset of the magnifier widget itself, where the magnified content is rendered over the original content. Measured in density-independent pixels from the top-left of the layout node this modifier is applied to. If <code><a href="/reference/kotlin/androidx/compose/ui/unit/DpOffset.Companion.html#Unspecified()">unspecified</a></code>, the magnifier widget will be placed at a default offset relative to <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).magnifier(kotlin.Function1,kotlin.Function1,kotlin.Float,androidx.compose.foundation.MagnifierStyle,kotlin.Function1)">sourceCenter</a></code>. The value of that offset is specified by the system.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>zoom:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = Float.NaN</code></td>
+              <td>
+                <p>See <code><a href="https://developer.android.com/reference/android/widget/Magnifier.html#setZoom(kotlin.Float)">Magnifier.setZoom</a></code>. Not supported on SDK levels < Q.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>style:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MagnifierStyle.html">MagnifierStyle</a> = MagnifierStyle.Default</code></td>
+              <td>
+                <p>The <code><a href="/reference/kotlin/androidx/compose/foundation/MagnifierStyle.html">MagnifierStyle</a></code> to use to configure the magnifier widget.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>onSizeChanged:&nbsp;((<a href="/reference/kotlin/androidx/compose/ui/unit/DpSize.html">DpSize</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)? = null</code></td>
+              <td>
+                <p>An optional callback that will be invoked when the magnifier widget is initialized to report on its actual size. This can be useful if one of the default <code><a href="/reference/kotlin/androidx/compose/foundation/MagnifierStyle.html">MagnifierStyle</a></code>s is used to find out what size the system decided to use for the widget.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.Modifier-.onFocusedBoundsChanged-kotlin.Function1-"></a><a name="onfocusedboundschanged"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.Modifier).onFocusedBoundsChanged(kotlin.Function1)">onFocusedBoundsChanged</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).onFocusedBoundsChanged(kotlin.Function1)">onFocusedBoundsChanged</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onPositioned:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>?) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Calls <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).onFocusedBoundsChanged(kotlin.Function1)">onPositioned</a></code> whenever the bounds of the currently-focused area changes. If a child of this node has focus, <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).onFocusedBoundsChanged(kotlin.Function1)">onPositioned</a></code> will be called immediately with a non-null <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> that can be queried for the focused bounds, and again every time the focused child changes or is repositioned. When a child loses focus, <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).onFocusedBoundsChanged(kotlin.Function1)">onPositioned</a></code> will be passed <code>null</code>.</p>
+      <p>When an event occurs, it is bubbled up from the focusable node, so the nearest parent gets the event first, and then its parent, etc.</p>
+      <p>Note that there may be some cases where the focused bounds change but the callback is <em>not</em> invoked, but the last <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> will always return the most up-to-date bounds.</p>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.Modifier-.overscroll-androidx.compose.foundation.OverscrollEffect-"></a><a name="overscroll"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.Modifier).overscroll(androidx.compose.foundation.OverscrollEffect)">overscroll</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).overscroll(androidx.compose.foundation.OverscrollEffect)">overscroll</a>(overscrollEffect:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/OverscrollEffect.html">OverscrollEffect</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Renders overscroll from the provided <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).overscroll(androidx.compose.foundation.OverscrollEffect)">overscrollEffect</a></code>.</p>
+      <p>This modifier is a convenience method to call <code><a href="/reference/kotlin/androidx/compose/foundation/OverscrollEffect.html#effectModifier()">OverscrollEffect.effectModifier</a></code>, which renders the actual effect. Note that this modifier is only responsible for the visual part of overscroll - on its own it will not handle input events. In addition to using this modifier you also need to propagate events to the <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).overscroll(androidx.compose.foundation.OverscrollEffect)">overscrollEffect</a></code>, most commonly by using a <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).scrollable(androidx.compose.foundation.gestures.ScrollableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,androidx.compose.foundation.interaction.MutableInteractionSource)">androidx.compose.foundation.gestures.scrollable</a></code>.</p>
+      <pre class="prettyprint">
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.spring
+import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.rememberScrollableState
+import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.overscroll
+import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.IntOffset
+
+@OptIn(ExperimentalFoundationApi::class)
+// our custom offset overscroll that offset the element it is applied to when we hit the bound
+// on the scrollable container.
+class OffsetOverscrollEffect(val scope: CoroutineScope) : OverscrollEffect {
+    private val overscrollOffset = Animatable(0f)
+
+    override fun applyToScroll(
+        delta: Offset,
+        source: NestedScrollSource,
+        performScroll: (Offset) -&gt; Offset
+    ): Offset {
+        // in pre scroll we relax the overscroll if needed
+        // relaxation: when we are in progress of the overscroll and user scrolls in the
+        // different direction = substract the overscroll first
+        val sameDirection = sign(delta.y) == sign(overscrollOffset.value)
+        val consumedByPreScroll = if (abs(overscrollOffset.value) &gt; 0.5 &amp;&amp; !sameDirection) {
+            val prevOverscrollValue = overscrollOffset.value
+            val newOverscrollValue = overscrollOffset.value + delta.y
+            if (sign(prevOverscrollValue) != sign(newOverscrollValue)) {
+                // sign changed, coerce to start scrolling and exit
+                scope.launch { overscrollOffset.snapTo(0f) }
+                Offset(x = 0f, y = delta.y + prevOverscrollValue)
+            } else {
+                scope.launch {
+                    overscrollOffset.snapTo(overscrollOffset.value + delta.y)
+                }
+                delta.copy(x = 0f)
+            }
+        } else {
+            Offset.Zero
+        }
+        val leftForScroll = delta - consumedByPreScroll
+        val consumedByScroll = performScroll(leftForScroll)
+        val overscrollDelta = leftForScroll - consumedByScroll
+        // if it is a drag, not a fling, add the delta left to our over scroll value
+        if (abs(overscrollDelta.y) &gt; 0.5 &amp;&amp; source == NestedScrollSource.Drag) {
+            scope.launch {
+                // multiply by 0.1 for the sake of parallax effect
+                overscrollOffset.snapTo(overscrollOffset.value + overscrollDelta.y * 0.1f)
+            }
+        }
+        return consumedByPreScroll + consumedByScroll
+    }
+
+    override suspend fun applyToFling(
+        velocity: Velocity,
+        performFling: suspend (Velocity) -&gt; Velocity
+    ) {
+        val consumed = performFling(velocity)
+        // when the fling happens - we just gradually animate our overscroll to 0
+        val remaining = velocity - consumed
+        overscrollOffset.animateTo(
+            targetValue = 0f,
+            initialVelocity = remaining.y,
+            animationSpec = spring()
+        )
+    }
+
+    override val isInProgress: Boolean
+        get() = overscrollOffset.value != 0f
+
+    // as we're building an offset modifiers, let's offset of our value we calculated
+    override val effectModifier: Modifier = Modifier.offset {
+        IntOffset(x = 0, y = overscrollOffset.value.roundToInt())
+    }
+}
+
+val offset = remember { mutableStateOf(0f) }
+val scope = rememberCoroutineScope()
+// Create the overscroll controller
+val overscroll = remember(scope) { OffsetOverscrollEffect(scope) }
+// let's build a scrollable that scroll until -512 to 512
+val scrollStateRange = (-512f).rangeTo(512f)
+Box(
+    Modifier
+        .size(150.dp)
+        .scrollable(
+            orientation = Orientation.Vertical,
+            state = rememberScrollableState { delta -&gt;
+                // use the scroll data and indicate how much this element consumed.
+                val oldValue = offset.value
+                // coerce to our range
+                offset.value = (offset.value + delta).coerceIn(scrollStateRange)
+
+                offset.value - oldValue // indicate that we consumed what's needed
+            },
+            // pass the overscroll to the scrollable so the data is updated
+            overscrollEffect = overscroll
+        )
+        .background(Color.LightGray),
+    contentAlignment = Alignment.Center
+) {
+    Text(
+        offset.value.roundToInt().toString(),
+        style = TextStyle(fontSize = 32.sp),
+        modifier = Modifier
+            // show the overscroll only on the text, not the containers (just for fun)
+            .overscroll(overscroll)
+    )
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>overscrollEffect:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/OverscrollEffect.html">OverscrollEffect</a></code></td>
+              <td>
+                <p>the <code><a href="/reference/kotlin/androidx/compose/foundation/OverscrollEffect.html">OverscrollEffect</a></code> to render</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
     <div class="api-item"><a name="-androidx.compose.ui.Modifier-.progressSemantics--"></a><a name="progresssemantics"></a>
       <h3 class="api-name" id="(androidx.compose.ui.Modifier).progressSemantics()">progressSemantics</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).progressSemantics()">progressSemantics</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
@@ -1531,7 +2390,7 @@ Box(
             <tr>
               <td><code>value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
               <td>
-                <p>current value of the ProgressIndicator/Slider. If outside of <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).progressSemantics(kotlin.Float,kotlin.ranges.ClosedFloatingPointRange,kotlin.Int)">valueRange</a></code> provided, value will be coerced to this range.</p>
+                <p>current value of the ProgressIndicator/Slider. If outside of <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).progressSemantics(kotlin.Float,kotlin.ranges.ClosedFloatingPointRange,kotlin.Int)">valueRange</a></code> provided, value will be coerced to this range. Must not be NaN.</p>
               </td>
             </tr>
             <tr>
@@ -1545,6 +2404,55 @@ Box(
               <td>
                 <p>if greater than 0, specifies the amounts of discrete values, evenly distributed between across the whole value range. If 0, any value from the range specified is allowed. Must not be negative.</p>
               </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.Modifier-.systemGestureExclusion--"></a><a name="systemgestureexclusion"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.Modifier).systemGestureExclusion()">systemGestureExclusion</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).systemGestureExclusion()">systemGestureExclusion</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Excludes the layout rectangle from the system gesture.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://developer.android.com/reference/android/view/View.html#setSystemGestureExclusionRects(kotlin.collections.MutableList[android.graphics.Rect])">setSystemGestureExclusionRects</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.Modifier-.systemGestureExclusion-kotlin.Function1-"></a><a name="systemgestureexclusion"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.Modifier).systemGestureExclusion(kotlin.Function1)">systemGestureExclusion</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).systemGestureExclusion(kotlin.Function1)">systemGestureExclusion</a>(exclusion:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Excludes a rectangle within the local layout coordinates from the system gesture. After layout, <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).systemGestureExclusion(kotlin.Function1)">exclusion</a></code> is called to determine the <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code> to exclude from the system gesture area.</p>
+      <p>The <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> of the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code>'s location in the layout is passed as passed as <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).systemGestureExclusion(kotlin.Function1)">exclusion</a></code>'s parameter.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://developer.android.com/reference/android/view/View.html#setSystemGestureExclusionRects(kotlin.collections.MutableList[android.graphics.Rect])">setSystemGestureExclusionRects</a></code></td>
+              <td></td>
             </tr>
           </tbody>
         </table>
@@ -1634,11 +2542,32 @@ Box(
       </div>
     </div>
     <h2>Top-level properties</h2>
+    <div class="api-item"><a name="getDefaultMarqueeDelayMillis()"></a><a name="setDefaultMarqueeDelayMillis()"></a><a name="getDefaultMarqueeDelayMillis--"></a><a name="setDefaultMarqueeDelayMillis--"></a>
+      <h3 class="api-name" id="DefaultMarqueeDelayMillis()">DefaultMarqueeDelayMillis</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#DefaultMarqueeDelayMillis()">DefaultMarqueeDelayMillis</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+    </div>
+    <div class="api-item"><a name="getDefaultMarqueeIterations()"></a><a name="setDefaultMarqueeIterations()"></a><a name="getDefaultMarqueeIterations--"></a><a name="setDefaultMarqueeIterations--"></a>
+      <h3 class="api-name" id="DefaultMarqueeIterations()">DefaultMarqueeIterations</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#DefaultMarqueeIterations()">DefaultMarqueeIterations</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+    </div>
+    <div class="api-item"><a name="getDefaultMarqueeSpacing()"></a><a name="setDefaultMarqueeSpacing()"></a><a name="getDefaultMarqueeSpacing--"></a><a name="setDefaultMarqueeSpacing--"></a>
+      <h3 class="api-name" id="DefaultMarqueeSpacing()">DefaultMarqueeSpacing</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#DefaultMarqueeSpacing()">DefaultMarqueeSpacing</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MarqueeSpacing.html">MarqueeSpacing</a></pre>
+    </div>
+    <div class="api-item"><a name="getDefaultMarqueeVelocity()"></a><a name="setDefaultMarqueeVelocity()"></a><a name="getDefaultMarqueeVelocity--"></a><a name="setDefaultMarqueeVelocity--"></a>
+      <h3 class="api-name" id="DefaultMarqueeVelocity()">DefaultMarqueeVelocity</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#DefaultMarqueeVelocity()">DefaultMarqueeVelocity</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></pre>
+    </div>
     <div class="api-item"><a name="getLocalIndication()"></a><a name="setLocalIndication()"></a><a name="getLocalIndication--"></a><a name="setLocalIndication--"></a>
       <h3 class="api-name" id="LocalIndication()">LocalIndication</h3>
       <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#LocalIndication()">LocalIndication</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a>&lt;<a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a>&gt;</pre>
       <p>CompositionLocal that provides an <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a></code> through the hierarchy. This <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a></code> will be used by default to draw visual effects for interactions such as press and drag in components such as <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).clickable(kotlin.Boolean,kotlin.String,androidx.compose.ui.semantics.Role,kotlin.Function0)">clickable</a></code>.</p>
       <p>By default this will provide <code><a href="/reference/kotlin/androidx/compose/foundation/DefaultDebugIndication.html">DefaultDebugIndication</a></code>.</p>
+    </div>
+    <div class="api-item"><a name="getLocalOverscrollConfiguration()"></a><a name="setLocalOverscrollConfiguration()"></a><a name="getLocalOverscrollConfiguration--"></a><a name="setLocalOverscrollConfiguration--"></a>
+      <h3 class="api-name" id="LocalOverscrollConfiguration()">LocalOverscrollConfiguration</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#LocalOverscrollConfiguration()">LocalOverscrollConfiguration</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a>&lt;<a href="/reference/kotlin/androidx/compose/foundation/OverscrollConfiguration.html">OverscrollConfiguration</a>?&gt;</pre>
+      <p>Composition local to provide configuration for scrolling containers down the hierarchy. <code>null</code> means there will be no overscroll at all.</p>
     </div>
   </body>
 </html>

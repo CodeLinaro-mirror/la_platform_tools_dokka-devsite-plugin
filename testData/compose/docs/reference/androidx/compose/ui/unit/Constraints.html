@@ -1,0 +1,401 @@
+<html devsite="true">
+  <head>
+    <title>Constraints</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-unit/androidx/compose/ui/unit/Constraints.kt+class:androidx.compose.ui.unit.Constraints&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>Constraints</h1>
+    <p>
+      <pre>value public final class <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a></pre>
+    </p>
+    <hr>
+    <p>Immutable constraints for measuring layouts, used by <code><a href="/reference/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">layouts</a></code> or <code><a href="/reference/androidx/compose/ui/layout/LayoutModifier.html">layout modifiers</a></code> to measure their layout children. The parent chooses the <code><a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a></code> defining a range, in pixels, within which the measured layout should choose a size:</p>
+    <ul>
+      <li>
+        <p><code>minWidth</code><= <code>chosenWidth</code><= <code>maxWidth</code></p>
+      </li>
+      <li>
+        <p><code>minHeight</code><= <code>chosenHeight</code><= <code>maxHeight</code></p>
+      </li>
+    </ul>
+    <p>For more details about how layout measurement works, see <code><a href="/reference/androidx/compose/ui/layout/MeasurePolicy.html">androidx.compose.ui.layout.MeasurePolicy</a></code> or <code><a href="/reference/androidx/compose/ui/layout/LayoutModifier.html#(androidx.compose.ui.layout.MeasureScope).measure(androidx.compose.ui.layout.Measurable,androidx.compose.ui.unit.Constraints)">androidx.compose.ui.layout.LayoutModifier.measure</a></code>.</p>
+    <p>A set of <code><a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a></code> can have infinite maxWidth and/or maxHeight. This is a trick often used by parents to ask their children for their preferred size: unbounded constraints force children whose default behavior is to fill the available space (always size to maxWidth/maxHeight) to have an opinion about their preferred size. Most commonly, when measured with unbounded <code><a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a></code>, these children will fallback to size themselves to wrap their content, instead of expanding to fill the available space (this is not always true as it depends on the child layout model, but is a common behavior for core layout components).</p>
+    <p><code><a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a></code> uses a <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code> to represent four values, <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#minWidth()">minWidth</a></code>, <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#minHeight()">minHeight</a></code>, <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#maxWidth()">maxWidth</a></code>, and <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#maxHeight()">maxHeight</a></code>. The range of the values varies to allow for at most 256K in one dimension. There are four possible maximum ranges, 13 bits/18 bits, and 15 bits/16 bits for either width or height, depending on the needs. For example, a width could range up to 18 bits and the height up to 13 bits. Alternatively, the width could range up to 16 bits and the height up to 15 bits. The height and width requirements can be reversed, with a height of up to 18 bits and width of 13 bits or height of 16 bits and width of 15 bits. Any constraints exceeding this range will fail.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>public static class <a href="/reference/androidx/compose/ui/unit/Constraints.Companion.html">Constraints.Companion</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Constants</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static&nbsp;final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/Constraints.Companion.html#Infinity()">Infinity</a></code></div>
+              <p>A value that <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#maxWidth()">maxWidth</a></code> or <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#maxHeight()">maxHeight</a></code> will be set to when the constraint should be considered infinite.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/Constraints.html#hasBoundedHeight()">hasBoundedHeight</a></code></div>
+              <p><code>false</code> when <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#maxHeight()">maxHeight</a></code> is <code><a href="/reference/androidx/compose/ui/unit/Constraints.Companion.html#Infinity()">Infinity</a></code> and <code>true</code> if <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#maxHeight()">maxHeight</a></code> is a non-<code><a href="/reference/androidx/compose/ui/unit/Constraints.Companion.html#Infinity()">Infinity</a></code> value.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/Constraints.html#hasBoundedWidth()">hasBoundedWidth</a></code></div>
+              <p><code>false</code> when <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#maxWidth()">maxWidth</a></code> is <code><a href="/reference/androidx/compose/ui/unit/Constraints.Companion.html#Infinity()">Infinity</a></code> and <code>true</code> if <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#maxWidth()">maxWidth</a></code> is a non-<code><a href="/reference/androidx/compose/ui/unit/Constraints.Companion.html#Infinity()">Infinity</a></code> value.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/Constraints.html#hasFixedHeight()">hasFixedHeight</a></code></div>
+              <p>Whether there is exactly one height value that satisfies the constraints.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/Constraints.html#hasFixedWidth()">hasFixedWidth</a></code></div>
+              <p>Whether there is exactly one width value that satisfies the constraints.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/Constraints.html#isZero()">isZero</a></code></div>
+              <p>Whether the area of a component respecting these constraints will definitely be 0.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/Constraints.html#maxHeight()">maxHeight</a></code></div>
+              <p>The maximum height that the measurement can take, in pixels.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/Constraints.html#maxWidth()">maxWidth</a></code></div>
+              <p>The maximum width that the measurement can take, in pixels.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/Constraints.html#minHeight()">minHeight</a></code></div>
+              <p>The minimum height that the measurement can take, in pixels.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/Constraints.html#minWidth()">minWidth</a></code></div>
+              <p>The minimum width that the measurement can take, in pixels.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/Constraints.html#Constraints(kotlin.Long)">Constraints</a>(long&nbsp;value)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">copy</a>(int&nbsp;minWidth,&nbsp;int&nbsp;maxWidth,&nbsp;int&nbsp;minHeight,&nbsp;int&nbsp;maxHeight)</code></div>
+              <p>Copies the existing <code><a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a></code>, replacing some of <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">minWidth</a></code>, <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">minHeight</a></code>, <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">maxWidth</a></code>, or <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">maxHeight</a></code> as desired.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/Constraints.html#toString()">toString</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/ConstraintsKt.html">ConstraintsKt</a>.<a href="/reference/androidx/compose/ui/unit/Constraints.html#(androidx.compose.ui.unit.Constraints).constrain(androidx.compose.ui.unit.Constraints)">constrain</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;otherConstraints<br>)</code></div>
+              <p>Takes <code><a href="/reference/androidx/compose/ui/unit/package-summary.html#(androidx.compose.ui.unit.Constraints).constrain(androidx.compose.ui.unit.Constraints)">otherConstraints</a></code> and returns the result of coercing them in the current constraints.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/ConstraintsKt.html">ConstraintsKt</a>.<a href="/reference/androidx/compose/ui/unit/Constraints.html#(androidx.compose.ui.unit.Constraints).constrain(androidx.compose.ui.unit.IntSize)">constrain</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a>&nbsp;size<br>)</code></div>
+              <p>Takes a size and returns the closest size to it that satisfies the constraints.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/ConstraintsKt.html">ConstraintsKt</a>.<a href="/reference/androidx/compose/ui/unit/Constraints.html#(androidx.compose.ui.unit.Constraints).constrainHeight(kotlin.Int)">constrainHeight</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;receiver,&nbsp;int&nbsp;height)</code></div>
+              <p>Takes a height and returns the closest size to it that satisfies the constraints.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/ConstraintsKt.html">ConstraintsKt</a>.<a href="/reference/androidx/compose/ui/unit/Constraints.html#(androidx.compose.ui.unit.Constraints).constrainWidth(kotlin.Int)">constrainWidth</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;receiver,&nbsp;int&nbsp;width)</code></div>
+              <p>Takes a width and returns the closest size to it that satisfies the constraints.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/ConstraintsKt.html">ConstraintsKt</a>.<a href="/reference/androidx/compose/ui/unit/Constraints.html#(androidx.compose.ui.unit.Constraints).isSatisfiedBy(androidx.compose.ui.unit.IntSize)">isSatisfiedBy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a>&nbsp;size<br>)</code></div>
+              <p>Takes a size and returns whether it satisfies the current constraints.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/ConstraintsKt.html">ConstraintsKt</a>.<a href="/reference/androidx/compose/ui/unit/Constraints.html#(androidx.compose.ui.unit.Constraints).offset(kotlin.Int,kotlin.Int)">offset</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;horizontal,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;vertical<br>)</code></div>
+              <p>Returns the Constraints obtained by offsetting the current instance with the given values.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Constants</h2>
+      <div class="api-item"><a name="getInfinity()"></a><a name="setInfinity()"></a><a name="getInfinity--"></a><a name="setInfinity--"></a>
+        <h3 class="api-name" id="Infinity()">Infinity</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/unit/Constraints.Companion.html#Infinity()">Infinity</a></pre>
+        <p>A value that <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#maxWidth()">maxWidth</a></code> or <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#maxHeight()">maxHeight</a></code> will be set to when the constraint should be considered infinite. <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#hasBoundedWidth()">hasBoundedWidth</a></code> or <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#hasBoundedHeight()">hasBoundedHeight</a></code> will be <code>false</code> when <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#maxWidth()">maxWidth</a></code> or <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#maxHeight()">maxHeight</a></code> is <code><a href="/reference/androidx/compose/ui/unit/Constraints.Companion.html#Infinity()">Infinity</a></code>, respectively.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getHasBoundedHeight()"></a><a name="setHasBoundedHeight()"></a><a name="getHasBoundedHeight--"></a><a name="setHasBoundedHeight--"></a>
+        <h3 class="api-name" id="hasBoundedHeight()">hasBoundedHeight</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/unit/Constraints.html#hasBoundedHeight()">hasBoundedHeight</a></pre>
+        <p><code>false</code> when <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#maxHeight()">maxHeight</a></code> is <code><a href="/reference/androidx/compose/ui/unit/Constraints.Companion.html#Infinity()">Infinity</a></code> and <code>true</code> if <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#maxHeight()">maxHeight</a></code> is a non-<code><a href="/reference/androidx/compose/ui/unit/Constraints.Companion.html#Infinity()">Infinity</a></code> value.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/unit/Constraints.html#hasBoundedWidth()">hasBoundedWidth</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getHasBoundedWidth()"></a><a name="setHasBoundedWidth()"></a><a name="getHasBoundedWidth--"></a><a name="setHasBoundedWidth--"></a>
+        <h3 class="api-name" id="hasBoundedWidth()">hasBoundedWidth</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/unit/Constraints.html#hasBoundedWidth()">hasBoundedWidth</a></pre>
+        <p><code>false</code> when <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#maxWidth()">maxWidth</a></code> is <code><a href="/reference/androidx/compose/ui/unit/Constraints.Companion.html#Infinity()">Infinity</a></code> and <code>true</code> if <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#maxWidth()">maxWidth</a></code> is a non-<code><a href="/reference/androidx/compose/ui/unit/Constraints.Companion.html#Infinity()">Infinity</a></code> value.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/unit/Constraints.html#hasBoundedHeight()">hasBoundedHeight</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getHasFixedHeight()"></a><a name="setHasFixedHeight()"></a><a name="getHasFixedHeight--"></a><a name="setHasFixedHeight--"></a>
+        <h3 class="api-name" id="hasFixedHeight()">hasFixedHeight</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/unit/Constraints.html#hasFixedHeight()">hasFixedHeight</a></pre>
+        <p>Whether there is exactly one height value that satisfies the constraints.</p>
+      </div>
+      <div class="api-item"><a name="getHasFixedWidth()"></a><a name="setHasFixedWidth()"></a><a name="getHasFixedWidth--"></a><a name="setHasFixedWidth--"></a>
+        <h3 class="api-name" id="hasFixedWidth()">hasFixedWidth</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/unit/Constraints.html#hasFixedWidth()">hasFixedWidth</a></pre>
+        <p>Whether there is exactly one width value that satisfies the constraints.</p>
+      </div>
+      <div class="api-item"><a name="getIsZero()"></a><a name="setIsZero()"></a><a name="getIsZero--"></a><a name="setIsZero--"></a>
+        <h3 class="api-name" id="isZero()">isZero</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/unit/Constraints.html#isZero()">isZero</a></pre>
+        <p>Whether the area of a component respecting these constraints will definitely be 0. This is true when at least one of maxWidth and maxHeight are 0.</p>
+      </div>
+      <div class="api-item"><a name="getMaxHeight()"></a><a name="setMaxHeight()"></a><a name="getMaxHeight--"></a><a name="setMaxHeight--"></a>
+        <h3 class="api-name" id="maxHeight()">maxHeight</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/unit/Constraints.html#maxHeight()">maxHeight</a></pre>
+        <p>The maximum height that the measurement can take, in pixels. This will either be a positive value greater than or equal to <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#minHeight()">minHeight</a></code> or <code><a href="/reference/androidx/compose/ui/unit/Constraints.Companion.html#Infinity()">Constraints.Infinity</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getMaxWidth()"></a><a name="setMaxWidth()"></a><a name="getMaxWidth--"></a><a name="setMaxWidth--"></a>
+        <h3 class="api-name" id="maxWidth()">maxWidth</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/unit/Constraints.html#maxWidth()">maxWidth</a></pre>
+        <p>The maximum width that the measurement can take, in pixels. This will either be a positive value greater than or equal to <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#minWidth()">minWidth</a></code> or <code><a href="/reference/androidx/compose/ui/unit/Constraints.Companion.html#Infinity()">Constraints.Infinity</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getMinHeight()"></a><a name="setMinHeight()"></a><a name="getMinHeight--"></a><a name="setMinHeight--"></a>
+        <h3 class="api-name" id="minHeight()">minHeight</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/unit/Constraints.html#minHeight()">minHeight</a></pre>
+        <p>The minimum height that the measurement can take, in pixels.</p>
+      </div>
+      <div class="api-item"><a name="getMinWidth()"></a><a name="setMinWidth()"></a><a name="getMinWidth--"></a><a name="setMinWidth--"></a>
+        <h3 class="api-name" id="minWidth()">minWidth</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/unit/Constraints.html#minWidth()">minWidth</a></pre>
+        <p>The minimum width that the measurement can take, in pixels.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="Constraints-kotlin.Long-"></a><a name="constraints"></a>
+        <h3 class="api-name" id="Constraints(kotlin.Long)">Constraints</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/unit/Constraints.html#Constraints(kotlin.Long)">Constraints</a>(long&nbsp;value)</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="copy(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Int)"></a><a name="copy-kotlin.Int-kotlin.Int-kotlin.Int-kotlin.Int-"></a><a name="copy"></a>
+        <h3 class="api-name" id="copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">copy</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;<a href="/reference/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">copy</a>(int&nbsp;minWidth,&nbsp;int&nbsp;maxWidth,&nbsp;int&nbsp;minHeight,&nbsp;int&nbsp;maxHeight)</pre>
+        <p>Copies the existing <code><a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a></code>, replacing some of <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">minWidth</a></code>, <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">minHeight</a></code>, <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">maxWidth</a></code>, or <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">maxHeight</a></code> as desired. <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">minWidth</a></code> and <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">minHeight</a></code> must be positive and <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">maxWidth</a></code> and <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">maxHeight</a></code> must be greater than or equal to <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">minWidth</a></code> and <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">minHeight</a></code>, respectively, or <code><a href="/reference/androidx/compose/ui/unit/Constraints.Companion.html#Infinity()">Infinity</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+        <h3 class="api-name" id="toString()">toString</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/unit/Constraints.html#toString()">toString</a>()</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.unit.Constraints-.constrain-androidx.compose.ui.unit.Constraints-"></a><a name="constrain"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.unit.Constraints).constrain(androidx.compose.ui.unit.Constraints)">ConstraintsKt.constrain</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;<a href="/reference/androidx/compose/ui/unit/ConstraintsKt.html">ConstraintsKt</a>.<a href="/reference/androidx/compose/ui/unit/Constraints.html#(androidx.compose.ui.unit.Constraints).constrain(androidx.compose.ui.unit.Constraints)">constrain</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;otherConstraints<br>)</pre>
+        <p>Takes <code><a href="/reference/androidx/compose/ui/unit/package-summary.html#(androidx.compose.ui.unit.Constraints).constrain(androidx.compose.ui.unit.Constraints)">otherConstraints</a></code> and returns the result of coercing them in the current constraints. Note this means that any size satisfying the resulting constraints will satisfy the current constraints, but they might not satisfy the <code><a href="/reference/androidx/compose/ui/unit/package-summary.html#(androidx.compose.ui.unit.Constraints).constrain(androidx.compose.ui.unit.Constraints)">otherConstraints</a></code> when the two set of constraints are disjoint. Examples (showing only width, height works the same): (minWidth=2, maxWidth=10).constrain(minWidth=7, maxWidth=12) -> (minWidth = 7, maxWidth = 10) (minWidth=2, maxWidth=10).constrain(minWidth=11, maxWidth=12) -> (minWidth=10, maxWidth=10) (minWidth=2, maxWidth=10).constrain(minWidth=5, maxWidth=7) -> (minWidth=5, maxWidth=7)</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.unit.Constraints-.constrain-androidx.compose.ui.unit.IntSize-"></a><a name="constrain"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.unit.Constraints).constrain(androidx.compose.ui.unit.IntSize)">ConstraintsKt.constrain</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a>&nbsp;<a href="/reference/androidx/compose/ui/unit/ConstraintsKt.html">ConstraintsKt</a>.<a href="/reference/androidx/compose/ui/unit/Constraints.html#(androidx.compose.ui.unit.Constraints).constrain(androidx.compose.ui.unit.IntSize)">constrain</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a>&nbsp;size<br>)</pre>
+        <p>Takes a size and returns the closest size to it that satisfies the constraints.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.unit.Constraints-.constrainHeight-kotlin.Int-"></a><a name="constrainheight"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.unit.Constraints).constrainHeight(kotlin.Int)">ConstraintsKt.constrainHeight</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/unit/ConstraintsKt.html">ConstraintsKt</a>.<a href="/reference/androidx/compose/ui/unit/Constraints.html#(androidx.compose.ui.unit.Constraints).constrainHeight(kotlin.Int)">constrainHeight</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;receiver,&nbsp;int&nbsp;height)</pre>
+        <p>Takes a height and returns the closest size to it that satisfies the constraints.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.unit.Constraints-.constrainWidth-kotlin.Int-"></a><a name="constrainwidth"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.unit.Constraints).constrainWidth(kotlin.Int)">ConstraintsKt.constrainWidth</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/unit/ConstraintsKt.html">ConstraintsKt</a>.<a href="/reference/androidx/compose/ui/unit/Constraints.html#(androidx.compose.ui.unit.Constraints).constrainWidth(kotlin.Int)">constrainWidth</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;receiver,&nbsp;int&nbsp;width)</pre>
+        <p>Takes a width and returns the closest size to it that satisfies the constraints.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.unit.Constraints-.isSatisfiedBy-androidx.compose.ui.unit.IntSize-"></a><a name="issatisfiedby"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.unit.Constraints).isSatisfiedBy(androidx.compose.ui.unit.IntSize)">ConstraintsKt.isSatisfiedBy</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/unit/ConstraintsKt.html">ConstraintsKt</a>.<a href="/reference/androidx/compose/ui/unit/Constraints.html#(androidx.compose.ui.unit.Constraints).isSatisfiedBy(androidx.compose.ui.unit.IntSize)">isSatisfiedBy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a>&nbsp;size<br>)</pre>
+        <p>Takes a size and returns whether it satisfies the current constraints.</p>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.unit.Constraints).offset(kotlin.Int, kotlin.Int)"></a><a name="-androidx.compose.ui.unit.Constraints-.offset-kotlin.Int-kotlin.Int-"></a><a name="offset"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.unit.Constraints).offset(kotlin.Int,kotlin.Int)">ConstraintsKt.offset</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;<a href="/reference/androidx/compose/ui/unit/ConstraintsKt.html">ConstraintsKt</a>.<a href="/reference/androidx/compose/ui/unit/Constraints.html#(androidx.compose.ui.unit.Constraints).offset(kotlin.Int,kotlin.Int)">offset</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;horizontal,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;vertical<br>)</pre>
+        <p>Returns the Constraints obtained by offsetting the current instance with the given values.</p>
+      </div>
+    </div>
+  </body>
+</html>

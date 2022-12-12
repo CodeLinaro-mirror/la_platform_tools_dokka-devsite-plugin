@@ -1,0 +1,137 @@
+<html devsite="true">
+  <head>
+    <title>RootForTest</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/node/RootForTest.kt+class:androidx.compose.ui.node.RootForTest&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>RootForTest</h1>
+    <p>
+      <pre>interface <a href="/reference/kotlin/androidx/compose/ui/node/RootForTest.html">RootForTest</a></pre>
+    </p>
+    <hr>
+    <p>The marker interface to be implemented by the root backing the composition. To be used in tests.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/node/RootForTest.html#measureAndLayoutForTest()">measureAndLayoutForTest</a>()</code></div>
+              <p>Requests another layout (measure + placement) pass be performed for any nodes that need it.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/node/RootForTest.html#sendKeyEvent(androidx.compose.ui.input.key.KeyEvent)">sendKeyEvent</a>(keyEvent:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>)</code></div>
+              <p>Send this <code><a href="/reference/kotlin/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a></code> to the focused component in this <code><a href="/reference/kotlin/androidx/compose/ui/node/Owner.html">Owner</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/node/RootForTest.html#density()">density</a></code></div>
+              <p>Current device density.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsOwner.html">SemanticsOwner</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/node/RootForTest.html#semanticsOwner()">semanticsOwner</a></code></div>
+              <p>Semantics owner for this root.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html">TextInputService</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/node/RootForTest.html#textInputService()">textInputService</a></code></div>
+              <p>The service handling text input.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="measureAndLayoutForTest--"></a><a name="measureandlayoutfortest"></a>
+        <h3 class="api-name" id="measureAndLayoutForTest()">measureAndLayoutForTest</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/RootForTest.html#measureAndLayoutForTest()">measureAndLayoutForTest</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Requests another layout (measure + placement) pass be performed for any nodes that need it. This doesn't force anything to be remeasured that wouldn't be if <code>requestLayout</code> were called. However, unlike <code>requestLayout</code>, it doesn't merely <em>schedule</em> another layout pass to be performed, it actually performs it synchronously.</p>
+        <p>This method is used in UI tests to perform layout in between frames when pumping frames as fast as possible (i.e. without waiting for the choreographer to schedule them) in order to get to idle, e.g. during a <code>waitForIdle</code> call.</p>
+      </div>
+      <div class="api-item"><a name="sendKeyEvent-androidx.compose.ui.input.key.KeyEvent-"></a><a name="sendkeyevent"></a>
+        <h3 class="api-name" id="sendKeyEvent(androidx.compose.ui.input.key.KeyEvent)">sendKeyEvent</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/RootForTest.html#sendKeyEvent(androidx.compose.ui.input.key.KeyEvent)">sendKeyEvent</a>(keyEvent:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <p>Send this <code><a href="/reference/kotlin/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a></code> to the focused component in this <code><a href="/reference/kotlin/androidx/compose/ui/node/Owner.html">Owner</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                <td>
+                  <p>true if the event was consumed. False otherwise.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getDensity()"></a><a name="setDensity()"></a><a name="getDensity--"></a><a name="setDensity--"></a>
+        <h3 class="api-name" id="density()">density</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/RootForTest.html#density()">density</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a></pre>
+        <p>Current device density.</p>
+      </div>
+      <div class="api-item"><a name="getSemanticsOwner()"></a><a name="setSemanticsOwner()"></a><a name="getSemanticsOwner--"></a><a name="setSemanticsOwner--"></a>
+        <h3 class="api-name" id="semanticsOwner()">semanticsOwner</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/RootForTest.html#semanticsOwner()">semanticsOwner</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsOwner.html">SemanticsOwner</a></pre>
+        <p>Semantics owner for this root. Manages all the semantics nodes.</p>
+      </div>
+      <div class="api-item"><a name="getTextInputService()"></a><a name="setTextInputService()"></a><a name="getTextInputService--"></a><a name="setTextInputService--"></a>
+        <h3 class="api-name" id="textInputService()">textInputService</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/RootForTest.html#textInputService()">textInputService</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html">TextInputService</a></pre>
+        <p>The service handling text input.</p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,1678 @@
+<html devsite="true">
+  <head>
+    <title>androidx.compose.ui.layout</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>androidx.compose.ui.layout</h1>
+    <h2>Interfaces</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/BeyondBoundsLayout.html">BeyondBoundsLayout</a></code></td>
+            <td>
+              <p>Layout extra items in the specified direction.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/BeyondBoundsLayout.BeyondBoundsScope.html">BeyondBoundsLayout.BeyondBoundsScope</a></code></td>
+            <td>
+              <p>The scope used in <code><a href="/reference/kotlin/androidx/compose/ui/layout/BeyondBoundsLayout.html#layout(androidx.compose.ui.layout.BeyondBoundsLayout.LayoutDirection,kotlin.Function1)">BeyondBoundsLayout.layout</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a></code></td>
+            <td>
+              <p>Represents a rule to apply to scale a source rectangle to be inscribed into a destination</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/GraphicLayerInfo.html">GraphicLayerInfo</a></code></td>
+            <td>
+              <p>The info about the graphics layers used by tooling.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasurable.html">IntrinsicMeasurable</a></code></td>
+            <td>
+              <p>A part of the composition that can be measured.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasureScope.html">IntrinsicMeasureScope</a></code></td>
+            <td>
+              <p>The receiver scope of a layout's intrinsic measurements lambdas.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code></td>
+            <td>
+              <p>A holder of the measured bounds for the layout (MeasureBox).</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutIdParentData.html">LayoutIdParentData</a></code></td>
+            <td>
+              <p>Can be implemented by values used as parent data to make them usable as tags.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutInfo.html">LayoutInfo</a></code></td>
+            <td>
+              <p>The public information about the layouts used internally as nodes in the Compose UI hierarchy.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code></td>
+            <td>
+              <p>A <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a></code> that changes how its wrapped content is measured and laid out.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code></td>
+            <td>
+              <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code> interface holds layout coordinates from both the lookahead calculation and the post-lookahead layout pass.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutScope.html">LookaheadLayoutScope</a></code></td>
+            <td>
+              <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutScope.html">LookaheadLayoutScope</a></code> provides a receiver scope for all (direct and indirect) child layouts in <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#LookaheadLayout(kotlin.Function1,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">LookaheadLayout</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/Measurable.html">Measurable</a></code></td>
+            <td>
+              <p>A part of the composition that can be measured.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasurePolicy.html">MeasurePolicy</a></code></td>
+            <td>
+              <p>Defines the measure and layout behavior of a <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a></code></td>
+            <td>
+              <p>Interface holding the size and alignment lines of the measured layout, as well as the children positioning logic.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasureScope.html">MeasureScope</a></code></td>
+            <td>
+              <p>The receiver scope of a layout's measure lambda.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/Measured.html">Measured</a></code></td>
+            <td>
+              <p>A <code><a href="/reference/kotlin/androidx/compose/ui/layout/Measured.html">Measured</a></code> corresponds to a layout that has been measured by its parent layout.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/MultiContentMeasurePolicy.html">MultiContentMeasurePolicy</a></code></td>
+            <td>
+              <p>Defines the measure and layout behavior of a <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code> overload which accepts a list of multiple composable content lambdas.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/OnGloballyPositionedModifier.html">OnGloballyPositionedModifier</a></code></td>
+            <td>
+              <p>A modifier whose <code><a href="/reference/kotlin/androidx/compose/ui/layout/OnGloballyPositionedModifier.html#onGloballyPositioned(androidx.compose.ui.layout.LayoutCoordinates)">onGloballyPositioned</a></code> is called with the final LayoutCoordinates of the Layout when the global position of the content may have changed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/OnPlacedModifier.html">OnPlacedModifier</a></code></td>
+            <td>
+              <p>A modifier whose <code><a href="/reference/kotlin/androidx/compose/ui/layout/OnPlacedModifier.html#onPlaced(androidx.compose.ui.layout.LayoutCoordinates)">onPlaced</a></code> is called after the parent <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> and parent layout has been placed and before child <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> is placed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/OnRemeasuredModifier.html">OnRemeasuredModifier</a></code></td>
+            <td>
+              <p>A modifier whose <code><a href="/reference/kotlin/androidx/compose/ui/layout/OnRemeasuredModifier.html#onRemeasured(androidx.compose.ui.unit.IntSize)">onRemeasured</a></code> is called when the layout content is remeasured.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/ParentDataModifier.html">ParentDataModifier</a></code></td>
+            <td>
+              <p>A <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code> that provides data to the parent <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/PinnableContainer.html">PinnableContainer</a></code></td>
+            <td>
+              <p>Represents a container which can be pinned by some of its parents.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/PinnableContainer.PinnedHandle.html">PinnableContainer.PinnedHandle</a></code></td>
+            <td>
+              <p>This is an object returned by <code><a href="/reference/kotlin/androidx/compose/ui/layout/PinnableContainer.html#pin()">pin</a></code> which allows to unpin the content.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/RelocationModifier.html">RelocationModifier</a></code></td>
+            <td>
+              <p><strong>This interface is deprecated.</strong> Please use BringIntoViewResponder instead.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/Remeasurement.html">Remeasurement</a></code></td>
+            <td>
+              <p>This object is associated with a layout node and allows to execute some extra measure/layout actions which are needed for some complex layouts.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/RemeasurementModifier.html">RemeasurementModifier</a></code></td>
+            <td>
+              <p>A <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a></code> that provides a <code><a href="/reference/kotlin/androidx/compose/ui/layout/Remeasurement.html">Remeasurement</a></code> object associated with the layout node the modifier is applied to.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeLayoutState.PrecomposedSlotHandle.html">SubcomposeLayoutState.PrecomposedSlotHandle</a></code></td>
+            <td>
+              <p>Instance of this interface is returned by <code><a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeLayoutState.html#precompose(kotlin.Any,kotlin.Function0)">precompose</a></code> function.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeMeasureScope.html">SubcomposeMeasureScope</a></code></td>
+            <td>
+              <p>The receiver scope of a <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#SubcomposeLayout(androidx.compose.ui.Modifier,kotlin.Function2)">SubcomposeLayout</a></code>'s measure lambda which adds ability to dynamically subcompose a content during the measuring on top of the features provided by <code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasureScope.html">MeasureScope</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.html">SubcomposeSlotReusePolicy</a></code></td>
+            <td>
+              <p>This policy allows <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#SubcomposeLayout(androidx.compose.ui.Modifier,kotlin.Function2)">SubcomposeLayout</a></code> to retain some of slots which we were used but not used anymore instead of disposing them.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Classes</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a></code></td>
+            <td>
+              <p>Defines an offset line that can be used by parent layouts to align and position their children.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/BeyondBoundsLayout.LayoutDirection.html">BeyondBoundsLayout.LayoutDirection</a></code></td>
+            <td>
+              <p>The direction (from the visible bounds) that a <code><a href="/reference/kotlin/androidx/compose/ui/layout/BeyondBoundsLayout.html">BeyondBoundsLayout</a></code> is requesting more items to be laid.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/FixedScale.html">FixedScale</a></code></td>
+            <td>
+              <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a></code> implementation that always scales the dimension by the provided fixed floating point value</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/HorizontalAlignmentLine.html">HorizontalAlignmentLine</a></code></td>
+            <td>
+              <p>A horizontal <code><a href="/reference/kotlin/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/ModifierInfo.html">ModifierInfo</a></code></td>
+            <td>
+              <p>Used by tooling to examine the modifiers on a <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutInfo.html">LayoutInfo</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code></td>
+            <td>
+              <p>A <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code> corresponds to a child layout that can be positioned by its parent layout.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.PlacementScope.html">Placeable.PlacementScope</a></code></td>
+            <td>
+              <p>Receiver scope that permits explicit placement of a <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/RelocationRequester.html">RelocationRequester</a></code></td>
+            <td>
+              <p><strong>This class is deprecated.</strong> Please use BringIntoViewRequester instead.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a></code></td>
+            <td>
+              <p>Holds 2 dimensional scaling factors for horizontal and vertical axes</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeLayoutState.html">SubcomposeLayoutState</a></code></td>
+            <td>
+              <p>State used by <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#SubcomposeLayout(androidx.compose.ui.Modifier,kotlin.Function2)">SubcomposeLayout</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.SlotIdsSet.html">SubcomposeSlotReusePolicy.SlotIdsSet</a></code></td>
+            <td>
+              <p>Set containing slot ids currently available to reuse.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/VerticalAlignmentLine.html">VerticalAlignmentLine</a></code></td>
+            <td>
+              <p>A vertical <code><a href="/reference/kotlin/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Top-level functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code>inline <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a><br><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a>(modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,&nbsp;measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/MeasurePolicy.html">MeasurePolicy</a>)</code></div>
+              <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code> is the main core component for layout for &quot;leaf&quot; nodes.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>inline <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/MeasurePolicy.html">MeasurePolicy</a><br>)</code></div>
+              <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code> is the main core component for layout.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>inline <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.collections.List,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MultiContentMeasurePolicy)">Layout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;contents:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/MultiContentMeasurePolicy.html">MultiContentMeasurePolicy</a><br>)</code></div>
+              <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code> is the main core component for layout.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>@<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#LookaheadLayout(kotlin.Function1,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">LookaheadLayout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a> <a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutScope.html">LookaheadLayoutScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/MeasurePolicy.html">MeasurePolicy</a><br>)</code></div>
+              <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#LookaheadLayout(kotlin.Function1,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">LookaheadLayout</a></code> is a Layout that runs a lookahead measure and placement pass to determine the layout.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a><br><span><del><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#MultiMeasureLayout(androidx.compose.ui.Modifier,kotlin.Function0,androidx.compose.ui.layout.MeasurePolicy)">MultiMeasureLayout</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/MeasurePolicy.html">MeasurePolicy</a><br>)</code></div>
+              <p><strong>This function is deprecated.</strong> This API is unsafe for UI performance at scale - using it incorrectly will lead to exponential performance issues.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#ScaleFactor(kotlin.Float,kotlin.Float)">ScaleFactor</a>(scaleX:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;scaleY:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+              <p>Constructs a <code><a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a></code> from the given x and y scale values</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#SubcomposeLayout(androidx.compose.ui.Modifier,kotlin.Function2)">SubcomposeLayout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeMeasureScope.html">SubcomposeMeasureScope</a>.(<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a><br>)</code></div>
+              <p>Analogue of <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code> which allows to subcompose the actual content during the measuring stage for example to use the values calculated during the measurement as params for the composition of the children.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a><br><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#SubcomposeLayout(androidx.compose.ui.layout.SubcomposeLayoutState,androidx.compose.ui.Modifier,kotlin.Function2)">SubcomposeLayout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeLayoutState.html">SubcomposeLayoutState</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeMeasureScope.html">SubcomposeMeasureScope</a>.(<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a><br>)</code></div>
+              <p>Analogue of <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code> which allows to subcompose the actual content during the measuring stage for example to use the values calculated during the measurement as params for the composition of the children.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.html">SubcomposeSlotReusePolicy</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#SubcomposeSlotReusePolicy(kotlin.Int)">SubcomposeSlotReusePolicy</a>(maxSlotsToRetainForReuse:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Creates <code><a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.html">SubcomposeSlotReusePolicy</a></code> which retains the fixed amount of slots.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#lerp(androidx.compose.ui.layout.ScaleFactor,androidx.compose.ui.layout.ScaleFactor,kotlin.Float)">lerp</a>(start:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a>,&nbsp;stop:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a>,&nbsp;fraction:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+              <p>Linearly interpolate between two <code><a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a></code> parameters</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Extension functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.layout.LayoutCoordinates).boundsInParent()">boundsInParent</a>()</code></div>
+              <p>Returns the bounding box of the child in the parent's content area, including any clipping done with respect to the parent.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.layout.LayoutCoordinates).boundsInRoot()">boundsInRoot</a>()</code></div>
+              <p>The boundaries of this layout inside the root composable.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.layout.LayoutCoordinates).boundsInWindow()">boundsInWindow</a>()</code></div>
+              <p>The boundaries of this layout relative to the window's origin.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>operator <a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.geometry.Size).div(androidx.compose.ui.layout.ScaleFactor)">div</a>(scaleFactor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a>)</code></div>
+              <p>Division operator with <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code></p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.layout.LayoutCoordinates).findRootCoordinates()">findRootCoordinates</a>()</code></div>
+              <p>Walks up the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> hierarchy to find the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> whose <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#parentCoordinates()">LayoutCoordinates.parentCoordinates</a></code> is <code>null</code> and returns it.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).layout(kotlin.Function3)">layout</a>(measure:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/MeasureScope.html">MeasureScope</a>.(<a href="/reference/kotlin/androidx/compose/ui/layout/Measurable.html">Measurable</a>, <a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a>)</code></div>
+              <p>Creates a <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> that allows changing how the wrapped element is measured and laid out.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).layoutId(kotlin.Any)">layoutId</a>(layoutId:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)</code></div>
+              <p>Tag the element with <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).layoutId(kotlin.Any)">layoutId</a></code> to identify the element within its parent.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).onGloballyPositioned(kotlin.Function1)">onGloballyPositioned</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onGloballyPositioned:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+              <p>Invoke <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).onGloballyPositioned(kotlin.Function1)">onGloballyPositioned</a></code> with the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> of the element when the global position of the content may have changed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).onPlaced(kotlin.Function1)">onPlaced</a>(onPlaced:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+              <p>Invoke <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).onPlaced(kotlin.Function1)">onPlaced</a></code> after the parent <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> and parent layout has been placed and before child <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> is placed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<span><del><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).onRelocationRequest(kotlin.Function2,kotlin.coroutines.SuspendFunction2)">onRelocationRequest</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onProvideDestination:&nbsp;(rect:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>, layoutCoordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onPerformRelocation:&nbsp;suspend&nbsp;(sourceRect:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>, destinationRect:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+              <p><strong>This function is deprecated.</strong> Please use BringIntoViewResponder instead.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).onSizeChanged(kotlin.Function1)">onSizeChanged</a>(onSizeChanged:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+              <p>Invoked with the size of the modified Compose UI element when the element is first measured or when the size of the element changes.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.layout.LayoutCoordinates).positionInParent()">positionInParent</a>()</code></div>
+              <p>Returns the position of the top-left in the parent's content area or (0, 0) for the root.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.layout.LayoutCoordinates).positionInRoot()">positionInRoot</a>()</code></div>
+              <p>The position of this layout inside the root composable.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.layout.LayoutCoordinates).positionInWindow()">positionInWindow</a>()</code></div>
+              <p>The position of this layout relative to the window.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<span><del><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).relocationRequester(kotlin.Any)">relocationRequester</a></del></span>(relocationRequester:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)</code></div>
+              <p><strong>This function is deprecated.</strong> Please use bringIntoViewRequester instead.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>inline <a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.layout.ScaleFactor).takeOrElse(kotlin.Function0)">takeOrElse</a>(block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a>)</code></div>
+              <p>If this <code><a href="/reference/kotlin/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).isSpecified()">ScaleFactor</a></code> then this is returned, otherwise <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.layout.ScaleFactor).takeOrElse(kotlin.Function0)">block</a></code> is executed and its result is returned.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>operator <a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.geometry.Size).times(androidx.compose.ui.layout.ScaleFactor)">times</a>(scaleFactor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a>)</code></div>
+              <p>Multiplication operator with <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>operator <a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.layout.ScaleFactor).times(androidx.compose.ui.geometry.Size)">times</a>(size:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a>)</code></div>
+              <p>Multiplication operator with <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code> with reverse parameter types to maintain commutative properties of multiplication</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Top-level properties summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/HorizontalAlignmentLine.html">HorizontalAlignmentLine</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#FirstBaseline()">FirstBaseline</a></code></div>
+              <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a></code> defined by the baseline of a first line of a androidx.foundation.text.CoreText</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/HorizontalAlignmentLine.html">HorizontalAlignmentLine</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#LastBaseline()">LastBaseline</a></code></div>
+              <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a></code> defined by the baseline of the last line of a androidx.foundation.text.CoreText</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/layout/PinnableContainer.html">PinnableContainer</a>?&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#LocalPinnableContainer()">LocalPinnableContainer</a></code></div>
+              <p>Parent layouts with pinning support for the children content will provide the current <code><a href="/reference/kotlin/androidx/compose/ui/layout/PinnableContainer.html">PinnableContainer</a></code> via this composition local.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ProvidableModifierLocal.html">ProvidableModifierLocal</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/layout/BeyondBoundsLayout.html">BeyondBoundsLayout</a>?&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#ModifierLocalBeyondBoundsLayout()">ModifierLocalBeyondBoundsLayout</a></code></div>
+              <p>A modifier local that provides access to a <code><a href="/reference/kotlin/androidx/compose/ui/layout/BeyondBoundsLayout.html">BeyondBoundsLayout</a></code> that a child can use to ask a parent to layout more items that are beyond its visible bounds.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Extension properties summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.layout.ScaleFactor).isSpecified()">isSpecified</a></code></div>
+              <p><code>false</code> when this is <code><a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.Companion.html#Unspecified()">ScaleFactor.Unspecified</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.layout.ScaleFactor).isUnspecified()">isUnspecified</a></code></div>
+              <p><code>true</code> when this is <code><a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.Companion.html#Unspecified()">ScaleFactor.Unspecified</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/Measurable.html">Measurable</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.layout.Measurable).layoutId()">layoutId</a></code></div>
+              <p>Retrieves the tag associated to a composable with the <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).layoutId(kotlin.Any)">Modifier.layoutId</a></code> modifier.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Top-level functions</h2>
+    <div class="api-item"><a name="Layout(androidx.compose.ui.Modifier, androidx.compose.ui.layout.MeasurePolicy)"></a><a name="Layout-androidx.compose.ui.Modifier-androidx.compose.ui.layout.MeasurePolicy-"></a><a name="layout"></a>
+      <h3 class="api-name" id="Layout(androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a><br>inline&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a>(modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,&nbsp;measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/MeasurePolicy.html">MeasurePolicy</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code> is the main core component for layout for &quot;leaf&quot; nodes. It can be used to measure and position zero children.</p>
+      <p>The measurement, layout and intrinsic measurement behaviours of this layout will be defined by the <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">measurePolicy</a></code> instance. See <code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasurePolicy.html">MeasurePolicy</a></code> for more details.</p>
+      <p>For a composable able to define its content according to the incoming constraints, see <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#BoxWithConstraints(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">androidx.compose.foundation.layout.BoxWithConstraints</a></code>.</p>
+      <p>Example usage:</p>
+      <pre class="prettyprint">
+import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.layout
+import androidx.compose.ui.unit.Constraints
+
+// We build a layout that will occupy twice as much space as its children,
+// and will position them to be bottom right aligned.
+Layout(content) { measurables, constraints -&gt;
+    // measurables contains one element corresponding to each of our layout children.
+    // constraints are the constraints that our parent is currently measuring us with.
+    val childConstraints = Constraints(
+        minWidth = constraints.minWidth / 2,
+        minHeight = constraints.minHeight / 2,
+        maxWidth = if (constraints.hasBoundedWidth) {
+            constraints.maxWidth / 2
+        } else {
+            Constraints.Infinity
+        },
+        maxHeight = if (constraints.hasBoundedHeight) {
+            constraints.maxHeight / 2
+        } else {
+            Constraints.Infinity
+        }
+    )
+    // We measure the children with half our constraints, to ensure we can be double
+    // the size of the children.
+    val placeables = measurables.map { it.measure(childConstraints) }
+    val layoutWidth = (placeables.maxByOrNull { it.width }?.width ?: 0) * 2
+    val layoutHeight = (placeables.maxByOrNull { it.height }?.height ?: 0) * 2
+    // We call layout to set the size of the current layout and to provide the positioning
+    // of the children. The children are placed relative to the current layout place.
+    layout(layoutWidth, layoutHeight) {
+        placeables.forEach {
+            it.placeRelative(layoutWidth - it.width, layoutHeight - it.height)
+        }
+    }
+}</pre>
+      <p>Example usage with custom intrinsic measurements:</p>
+      <pre class="prettyprint">
+import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.layout
+import androidx.compose.ui.unit.Constraints
+
+// We build a layout that will occupy twice as much space as its children,
+// and will position them to be bottom right aligned.
+val measurePolicy = object : MeasurePolicy {
+    override fun MeasureScope.measure(
+        measurables: List&lt;Measurable&gt;,
+        constraints: Constraints
+    ): MeasureResult {
+        // measurables contains one element corresponding to each of our layout children.
+        // constraints are the constraints that our parent is currently measuring us with.
+        val childConstraints = Constraints(
+            minWidth = constraints.minWidth / 2,
+            minHeight = constraints.minHeight / 2,
+            maxWidth = if (constraints.hasBoundedWidth) {
+                constraints.maxWidth / 2
+            } else {
+                Constraints.Infinity
+            },
+            maxHeight = if (constraints.hasBoundedHeight) {
+                constraints.maxHeight / 2
+            } else {
+                Constraints.Infinity
+            }
+        )
+        // We measure the children with half our constraints, to ensure we can be double
+        // the size of the children.
+        val placeables = measurables.map { it.measure(childConstraints) }
+        val layoutWidth = (placeables.maxByOrNull { it.width }?.width ?: 0) * 2
+        val layoutHeight = (placeables.maxByOrNull { it.height }?.height ?: 0) * 2
+        // We call layout to set the size of the current layout and to provide the positioning
+        // of the children. The children are placed relative to the current layout place.
+        return layout(layoutWidth, layoutHeight) {
+            placeables.forEach {
+                it.placeRelative(layoutWidth - it.width, layoutHeight - it.height)
+            }
+        }
+    }
+
+    // The min intrinsic width of this layout will be twice the largest min intrinsic
+    // width of a child. Note that we call minIntrinsicWidth with h / 2 for children,
+    // since we should be double the size of the children.
+    override fun IntrinsicMeasureScope.minIntrinsicWidth(
+        measurables: List&lt;IntrinsicMeasurable&gt;,
+        height: Int
+    ) = (measurables.map { it.minIntrinsicWidth(height / 2) }.maxByOrNull { it } ?: 0) * 2
+
+    override fun IntrinsicMeasureScope.minIntrinsicHeight(
+        measurables: List&lt;IntrinsicMeasurable&gt;,
+        width: Int
+    ) = (measurables.map { it.minIntrinsicHeight(width / 2) }.maxByOrNull { it } ?: 0) * 2
+
+    override fun IntrinsicMeasureScope.maxIntrinsicWidth(
+        measurables: List&lt;IntrinsicMeasurable&gt;,
+        height: Int
+    ) = (measurables.map { it.maxIntrinsicHeight(height / 2) }.maxByOrNull { it } ?: 0) * 2
+
+    override fun IntrinsicMeasureScope.maxIntrinsicHeight(
+        measurables: List&lt;IntrinsicMeasurable&gt;,
+        width: Int
+    ) = (measurables.map { it.maxIntrinsicHeight(width / 2) }.maxByOrNull { it } ?: 0) * 2
+}
+
+Layout(content = content, measurePolicy = measurePolicy)</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier</code></td>
+              <td>
+                <p>Modifiers to be applied to the layout.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/MeasurePolicy.html">MeasurePolicy</a></code></td>
+              <td>
+                <p>The policy defining the measurement and positioning of the layout.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasurePolicy.html">MeasurePolicy</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#BoxWithConstraints(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">BoxWithConstraints</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="Layout(kotlin.Function0, androidx.compose.ui.Modifier, androidx.compose.ui.layout.MeasurePolicy)"></a><a name="Layout-kotlin.Function0-androidx.compose.ui.Modifier-androidx.compose.ui.layout.MeasurePolicy-"></a><a name="layout"></a>
+      <h3 class="api-name" id="Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>inline&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/MeasurePolicy.html">MeasurePolicy</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code> is the main core component for layout. It can be used to measure and position zero or more layout children.</p>
+      <p>The measurement, layout and intrinsic measurement behaviours of this layout will be defined by the <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">measurePolicy</a></code> instance. See <code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasurePolicy.html">MeasurePolicy</a></code> for more details.</p>
+      <p>For a composable able to define its content according to the incoming constraints, see <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#BoxWithConstraints(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">androidx.compose.foundation.layout.BoxWithConstraints</a></code>.</p>
+      <p>Example usage:</p>
+      <pre class="prettyprint">
+import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.layout
+import androidx.compose.ui.unit.Constraints
+
+// We build a layout that will occupy twice as much space as its children,
+// and will position them to be bottom right aligned.
+Layout(content) { measurables, constraints -&gt;
+    // measurables contains one element corresponding to each of our layout children.
+    // constraints are the constraints that our parent is currently measuring us with.
+    val childConstraints = Constraints(
+        minWidth = constraints.minWidth / 2,
+        minHeight = constraints.minHeight / 2,
+        maxWidth = if (constraints.hasBoundedWidth) {
+            constraints.maxWidth / 2
+        } else {
+            Constraints.Infinity
+        },
+        maxHeight = if (constraints.hasBoundedHeight) {
+            constraints.maxHeight / 2
+        } else {
+            Constraints.Infinity
+        }
+    )
+    // We measure the children with half our constraints, to ensure we can be double
+    // the size of the children.
+    val placeables = measurables.map { it.measure(childConstraints) }
+    val layoutWidth = (placeables.maxByOrNull { it.width }?.width ?: 0) * 2
+    val layoutHeight = (placeables.maxByOrNull { it.height }?.height ?: 0) * 2
+    // We call layout to set the size of the current layout and to provide the positioning
+    // of the children. The children are placed relative to the current layout place.
+    layout(layoutWidth, layoutHeight) {
+        placeables.forEach {
+            it.placeRelative(layoutWidth - it.width, layoutHeight - it.height)
+        }
+    }
+}</pre>
+      <p>Example usage with custom intrinsic measurements:</p>
+      <pre class="prettyprint">
+import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.layout
+import androidx.compose.ui.unit.Constraints
+
+// We build a layout that will occupy twice as much space as its children,
+// and will position them to be bottom right aligned.
+val measurePolicy = object : MeasurePolicy {
+    override fun MeasureScope.measure(
+        measurables: List&lt;Measurable&gt;,
+        constraints: Constraints
+    ): MeasureResult {
+        // measurables contains one element corresponding to each of our layout children.
+        // constraints are the constraints that our parent is currently measuring us with.
+        val childConstraints = Constraints(
+            minWidth = constraints.minWidth / 2,
+            minHeight = constraints.minHeight / 2,
+            maxWidth = if (constraints.hasBoundedWidth) {
+                constraints.maxWidth / 2
+            } else {
+                Constraints.Infinity
+            },
+            maxHeight = if (constraints.hasBoundedHeight) {
+                constraints.maxHeight / 2
+            } else {
+                Constraints.Infinity
+            }
+        )
+        // We measure the children with half our constraints, to ensure we can be double
+        // the size of the children.
+        val placeables = measurables.map { it.measure(childConstraints) }
+        val layoutWidth = (placeables.maxByOrNull { it.width }?.width ?: 0) * 2
+        val layoutHeight = (placeables.maxByOrNull { it.height }?.height ?: 0) * 2
+        // We call layout to set the size of the current layout and to provide the positioning
+        // of the children. The children are placed relative to the current layout place.
+        return layout(layoutWidth, layoutHeight) {
+            placeables.forEach {
+                it.placeRelative(layoutWidth - it.width, layoutHeight - it.height)
+            }
+        }
+    }
+
+    // The min intrinsic width of this layout will be twice the largest min intrinsic
+    // width of a child. Note that we call minIntrinsicWidth with h / 2 for children,
+    // since we should be double the size of the children.
+    override fun IntrinsicMeasureScope.minIntrinsicWidth(
+        measurables: List&lt;IntrinsicMeasurable&gt;,
+        height: Int
+    ) = (measurables.map { it.minIntrinsicWidth(height / 2) }.maxByOrNull { it } ?: 0) * 2
+
+    override fun IntrinsicMeasureScope.minIntrinsicHeight(
+        measurables: List&lt;IntrinsicMeasurable&gt;,
+        width: Int
+    ) = (measurables.map { it.minIntrinsicHeight(width / 2) }.maxByOrNull { it } ?: 0) * 2
+
+    override fun IntrinsicMeasureScope.maxIntrinsicWidth(
+        measurables: List&lt;IntrinsicMeasurable&gt;,
+        height: Int
+    ) = (measurables.map { it.maxIntrinsicHeight(height / 2) }.maxByOrNull { it } ?: 0) * 2
+
+    override fun IntrinsicMeasureScope.maxIntrinsicHeight(
+        measurables: List&lt;IntrinsicMeasurable&gt;,
+        width: Int
+    ) = (measurables.map { it.maxIntrinsicHeight(width / 2) }.maxByOrNull { it } ?: 0) * 2
+}
+
+Layout(content = content, measurePolicy = measurePolicy)</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <p>The children composable to be laid out.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier</code></td>
+              <td>
+                <p>Modifiers to be applied to the layout.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/MeasurePolicy.html">MeasurePolicy</a></code></td>
+              <td>
+                <p>The policy defining the measurement and positioning of the layout.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasurePolicy.html">MeasurePolicy</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#BoxWithConstraints(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">BoxWithConstraints</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="Layout(kotlin.collections.List, androidx.compose.ui.Modifier, androidx.compose.ui.layout.MultiContentMeasurePolicy)"></a><a name="Layout-kotlin.collections.List-androidx.compose.ui.Modifier-androidx.compose.ui.layout.MultiContentMeasurePolicy-"></a><a name="layout"></a>
+      <h3 class="api-name" id="Layout(kotlin.collections.List,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MultiContentMeasurePolicy)">Layout</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>inline&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.collections.List,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MultiContentMeasurePolicy)">Layout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;contents:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/MultiContentMeasurePolicy.html">MultiContentMeasurePolicy</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code> is the main core component for layout. It can be used to measure and position zero or more layout children.</p>
+      <p>This overload accepts a list of multiple composable content lambdas, which allows treating measurables put into different content lambdas differently - measure policy will provide a list of lists of Measurables, not just a single list. Such list has the same size as the list of contents passed into <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code> and contains the list of measurables of the corresponding content lambda in the same order.</p>
+      <p>Note that layouts emitted as part of all <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.collections.List,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MultiContentMeasurePolicy)">contents</a></code> lambdas will be added as a direct children for this <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code>. This means that if you set a custom z index on some children, the drawing order will be calculated as if they were all provided as part of one lambda.</p>
+      <p>Example usage:</p>
+      <pre class="prettyprint">
+import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.layout
+
+// We can provide pass a list of two composable lambdas in order to be able to treat
+// measureables from each lambda differently.
+Layout(listOf(content1, content2)) { (content1Measurables, content2Measurables), constraints -&gt;
+    val content1Placeables = content1Measurables.map { it.measure(constraints) }
+    val content2Placeables = content2Measurables.map { it.measure(constraints) }
+    layout(constraints.maxWidth, constraints.maxHeight) {
+        var currentX = 0
+        var currentY = 0
+        var currentMaxHeight = 0
+        // we place placeables from content1 as a first line
+        content1Placeables.forEach {
+            it.place(currentX, currentY)
+            currentX += it.width
+            currentMaxHeight = maxOf(currentMaxHeight, it.height)
+        }
+        currentX = 0
+        currentY = currentMaxHeight
+        // and placeables from content2 composable as a second line
+        content2Placeables.forEach {
+            it.place(currentX, currentY)
+            currentX += it.width
+        }
+    }
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>contents:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</code></td>
+              <td>
+                <p>The list of children composable contents to be laid out.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier</code></td>
+              <td>
+                <p>Modifiers to be applied to the layout.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/MultiContentMeasurePolicy.html">MultiContentMeasurePolicy</a></code></td>
+              <td>
+                <p>The policy defining the measurement and positioning of the layout.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code></td>
+              <td>
+                <p>for a simpler use case when you have only one content lambda.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="LookaheadLayout(kotlin.Function1, androidx.compose.ui.Modifier, androidx.compose.ui.layout.MeasurePolicy)"></a><a name="LookaheadLayout-kotlin.Function1-androidx.compose.ui.Modifier-androidx.compose.ui.layout.MeasurePolicy-"></a><a name="lookaheadlayout"></a>
+      <h3 class="api-name" id="LookaheadLayout(kotlin.Function1,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">LookaheadLayout</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>@<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#LookaheadLayout(kotlin.Function1,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">LookaheadLayout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a> <a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutScope.html">LookaheadLayoutScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/MeasurePolicy.html">MeasurePolicy</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#LookaheadLayout(kotlin.Function1,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">LookaheadLayout</a></code> is a Layout that runs a lookahead measure and placement pass to determine the layout. Immediately afterwards, another measure and placement pass will begin, in which the measurement and placement of any layout can be adjusted based on the lookahead results via <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">LookaheadLayoutScope.intermediateLayout</a></code>.</p>
+      <p>During the lookahead pass, the layout adjustment logic defined in <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">LookaheadLayoutScope.intermediateLayout</a></code> will be skipped, so that any transient morphing of the layout is not taken into account when predetermining the target layout.</p>
+      <p>Once the lookahead is finished, another measure & layout pass will begin. <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">LookaheadLayoutScope.intermediateLayout</a></code> can be used to create an intermediate layout based on incoming constraints and the lookahead results. This can result in layouts that gradually change their sizes & positions towards the target layout calculated by the lookahead.</p>
+      <p><em>Caveat:</em> <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#SubcomposeLayout(androidx.compose.ui.Modifier,kotlin.Function2)">SubcomposeLayout</a></code> is not yet supported in <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#LookaheadLayout(kotlin.Function1,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">LookaheadLayout</a></code>. It will be supported in an upcoming release.</p>
+      <pre class="prettyprint">
+import androidx.compose.animation.core.Animatable
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshotFlow
+import androidx.compose.ui.composed
+import androidx.compose.ui.layout.LookaheadLayout
+
+// Creates a custom modifier that animates the constraints and measure child/children with them.
+// It is built on top of `Modifier.intermediateLayout`, which allows access to the target size
+// of the layout. A resize animation will be created to animate to the target size. Fixed
+// constraints created based on the animation value will be used to measure child/children, so
+// that all the children gradually change their size to fit in the animated constraints.
+fun Modifier.animateConstraints(lookaheadScope: LookaheadLayoutScope) = composed {
+    var sizeAnimation: Animatable&lt;IntSize, AnimationVector2D&gt;? by remember {
+        mutableStateOf(null)
+    }
+    var targetSize: IntSize? by remember { mutableStateOf(null) }
+    // Create a `LaunchEffect` to handle target size change. This avoids creating side effects
+    // from measure/layout phase.
+    LaunchedEffect(Unit) {
+        snapshotFlow { targetSize }.collect { target -&gt;
+            if (target != null &amp;&amp; target != sizeAnimation?.targetValue) {
+                sizeAnimation?.run {
+                    launch { animateTo(target) }
+                } ?: Animatable(target, IntSize.VectorConverter).let {
+                    sizeAnimation = it
+                }
+            }
+        }
+    }
+    with(lookaheadScope) {
+        // The measure logic in `intermediateLayout` is skipped in the lookahead pass, as
+        // intermediateLayout is expected to produce intermediate stages of a layout transform.
+        // When the measure block is invoked after lookahead pass, the lookahead size of the
+        // child will be accessible as a parameter to the measure block.
+        this@composed.intermediateLayout { measurable, _, lookaheadSize -&gt;
+            // When layout changes, the lookahead pass will calculate a new final size for the
+            // child modifier. This lookahead size can be used to animate the size
+            // change, such that the animation starts from the current size and gradually
+            // change towards `lookaheadSize`.
+            targetSize = lookaheadSize
+            // Reads the animation size if the animation is set up. Otherwise (i.e. first
+            // frame), use the lookahead size without animation.
+            val (width, height) = sizeAnimation?.value ?: lookaheadSize
+            // Creates a fixed set of constraints using the animated size
+            val animatedConstraints = Constraints.fixed(width, height)
+            // Measure child/children with animated constraints.
+            val placeable = measurable.measure(animatedConstraints)
+            layout(placeable.width, placeable.height) {
+                placeable.place(0, 0)
+            }
+        }
+    }
+}
+
+LookaheadLayout(
+    content = {
+        var fullWidth by remember { mutableStateOf(false) }
+        Row(
+            (if (fullWidth) Modifier.fillMaxWidth() else Modifier.width(100.dp))
+                .height(200.dp)
+                // Use the custom modifier created above to animate the constraints passed
+                // to the child, and therefore resize children in an animation.
+                .animateConstraints(this@LookaheadLayout)
+                .clickable { fullWidth = !fullWidth }) {
+            Box(
+                Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    .background(Color.Red)
+            )
+            Box(
+                Modifier
+                    .weight(2f)
+                    .fillMaxHeight()
+                    .background(Color.Yellow)
+            )
+        }
+    }
+) { measurables, constraints -&gt;
+    val placeables = measurables.map { it.measure(constraints) }
+    val maxWidth: Int = placeables.maxOf { it.width }
+    val maxHeight = placeables.maxOf { it.height }
+    // Position the children.
+    layout(maxWidth, maxHeight) {
+        placeables.forEach {
+            it.place(0, 0)
+        }
+    }
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a> <a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutScope.html">LookaheadLayoutScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <p>The children composable to be laid out.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier</code></td>
+              <td>
+                <p>Modifiers to be applied to the layout.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/MeasurePolicy.html">MeasurePolicy</a></code></td>
+              <td>
+                <p>The policy defining the measurement and positioning of the layout.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="MultiMeasureLayout(androidx.compose.ui.Modifier, kotlin.Function0, androidx.compose.ui.layout.MeasurePolicy)"></a><a name="MultiMeasureLayout-androidx.compose.ui.Modifier-kotlin.Function0-androidx.compose.ui.layout.MeasurePolicy-"></a><a name="multimeasurelayout"></a>
+      <h3 class="api-name" id="MultiMeasureLayout(androidx.compose.ui.Modifier,kotlin.Function0,androidx.compose.ui.layout.MeasurePolicy)">MultiMeasureLayout</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a><br>fun&nbsp;<span><del><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#MultiMeasureLayout(androidx.compose.ui.Modifier,kotlin.Function0,androidx.compose.ui.layout.MeasurePolicy)">MultiMeasureLayout</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/MeasurePolicy.html">MeasurePolicy</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <aside class="caution"><strong>This function is deprecated.</strong><br>This API is unsafe for UI performance at scale - using it incorrectly will lead to exponential performance issues. This API should be avoided whenever possible.</aside>
+    </div>
+    <div class="api-item"><a name="ScaleFactor(kotlin.Float, kotlin.Float)"></a><a name="ScaleFactor-kotlin.Float-kotlin.Float-"></a><a name="scalefactor"></a>
+      <h3 class="api-name" id="ScaleFactor(kotlin.Float,kotlin.Float)">ScaleFactor</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#ScaleFactor(kotlin.Float,kotlin.Float)">ScaleFactor</a>(scaleX:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;scaleY:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a></pre>
+      <p>Constructs a <code><a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a></code> from the given x and y scale values</p>
+    </div>
+    <div class="api-item"><a name="SubcomposeLayout(androidx.compose.ui.Modifier, kotlin.Function2)"></a><a name="SubcomposeLayout-androidx.compose.ui.Modifier-kotlin.Function2-"></a><a name="subcomposelayout"></a>
+      <h3 class="api-name" id="SubcomposeLayout(androidx.compose.ui.Modifier,kotlin.Function2)">SubcomposeLayout</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#SubcomposeLayout(androidx.compose.ui.Modifier,kotlin.Function2)">SubcomposeLayout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeMeasureScope.html">SubcomposeMeasureScope</a>.(<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Analogue of <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code> which allows to subcompose the actual content during the measuring stage for example to use the values calculated during the measurement as params for the composition of the children.</p>
+      <p>Possible use cases:</p>
+      <ul>
+        <li>
+          <p>You need to know the constraints passed by the parent during the composition and can't solve your use case with just custom <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code> or <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code>. See <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#BoxWithConstraints(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">androidx.compose.foundation.layout.BoxWithConstraints</a></code>.</p>
+        </li>
+        <li>
+          <p>You want to use the size of one child during the composition of the second child.</p>
+        </li>
+        <li>
+          <p>You want to compose your items lazily based on the available size. For example you have a list of 100 items and instead of composing all of them you only compose the ones which are currently visible(say 5 of them) and compose next items when the component is scrolled.</p>
+        </li>
+      </ul>
+      <pre class="prettyprint">
+import androidx.compose.ui.layout.SubcomposeLayout
+import androidx.compose.ui.unit.IntSize
+
+// enum class SlotsEnum { Main, Dependent }
+SubcomposeLayout { constraints -&gt;
+    val mainPlaceables = subcompose(SlotsEnum.Main, mainContent).map {
+        it.measure(constraints)
+    }
+    val maxSize = mainPlaceables.fold(IntSize.Zero) { currentMax, placeable -&gt;
+        IntSize(
+            width = maxOf(currentMax.width, placeable.width),
+            height = maxOf(currentMax.height, placeable.height)
+        )
+    }
+    layout(maxSize.width, maxSize.height) {
+        mainPlaceables.forEach { it.placeRelative(0, 0) }
+        subcompose(SlotsEnum.Dependent) {
+            dependentContent(maxSize)
+        }.forEach {
+            it.measure(constraints).placeRelative(0, 0)
+        }
+    }
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier</code></td>
+              <td>
+                <p><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code> to apply for the layout.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeMeasureScope.html">SubcomposeMeasureScope</a>.(<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a></code></td>
+              <td>
+                <p>Measure policy which provides ability to subcompose during the measuring.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="SubcomposeLayout(androidx.compose.ui.layout.SubcomposeLayoutState, androidx.compose.ui.Modifier, kotlin.Function2)"></a><a name="SubcomposeLayout-androidx.compose.ui.layout.SubcomposeLayoutState-androidx.compose.ui.Modifier-kotlin.Function2-"></a><a name="subcomposelayout"></a>
+      <h3 class="api-name" id="SubcomposeLayout(androidx.compose.ui.layout.SubcomposeLayoutState,androidx.compose.ui.Modifier,kotlin.Function2)">SubcomposeLayout</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/kotlin/androidx/compose/ui/UiComposable.html">UiComposable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#SubcomposeLayout(androidx.compose.ui.layout.SubcomposeLayoutState,androidx.compose.ui.Modifier,kotlin.Function2)">SubcomposeLayout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeLayoutState.html">SubcomposeLayoutState</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeMeasureScope.html">SubcomposeMeasureScope</a>.(<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Analogue of <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code> which allows to subcompose the actual content during the measuring stage for example to use the values calculated during the measurement as params for the composition of the children.</p>
+      <p>Possible use cases:</p>
+      <ul>
+        <li>
+          <p>You need to know the constraints passed by the parent during the composition and can't solve your use case with just custom <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code> or <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code>. See <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#BoxWithConstraints(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">androidx.compose.foundation.layout.BoxWithConstraints</a></code>.</p>
+        </li>
+        <li>
+          <p>You want to use the size of one child during the composition of the second child.</p>
+        </li>
+        <li>
+          <p>You want to compose your items lazily based on the available size. For example you have a list of 100 items and instead of composing all of them you only compose the ones which are currently visible(say 5 of them) and compose next items when the component is scrolled.</p>
+        </li>
+      </ul>
+      <pre class="prettyprint">
+import androidx.compose.ui.layout.SubcomposeLayout
+import androidx.compose.ui.unit.IntSize
+
+// enum class SlotsEnum { Main, Dependent }
+SubcomposeLayout { constraints -&gt;
+    val mainPlaceables = subcompose(SlotsEnum.Main, mainContent).map {
+        it.measure(constraints)
+    }
+    val maxSize = mainPlaceables.fold(IntSize.Zero) { currentMax, placeable -&gt;
+        IntSize(
+            width = maxOf(currentMax.width, placeable.width),
+            height = maxOf(currentMax.height, placeable.height)
+        )
+    }
+    layout(maxSize.width, maxSize.height) {
+        mainPlaceables.forEach { it.placeRelative(0, 0) }
+        subcompose(SlotsEnum.Dependent) {
+            dependentContent(maxSize)
+        }.forEach {
+            it.measure(constraints).placeRelative(0, 0)
+        }
+    }
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>state:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeLayoutState.html">SubcomposeLayoutState</a></code></td>
+              <td>
+                <p>the state object to be used by the layout.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier</code></td>
+              <td>
+                <p><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code> to apply for the layout.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>measurePolicy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeMeasureScope.html">SubcomposeMeasureScope</a>.(<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a></code></td>
+              <td>
+                <p>Measure policy which provides ability to subcompose during the measuring.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="SubcomposeSlotReusePolicy-kotlin.Int-"></a><a name="subcomposeslotreusepolicy"></a>
+      <h3 class="api-name" id="SubcomposeSlotReusePolicy(kotlin.Int)">SubcomposeSlotReusePolicy</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#SubcomposeSlotReusePolicy(kotlin.Int)">SubcomposeSlotReusePolicy</a>(maxSlotsToRetainForReuse:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.html">SubcomposeSlotReusePolicy</a></pre>
+      <p>Creates <code><a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.html">SubcomposeSlotReusePolicy</a></code> which retains the fixed amount of slots.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>maxSlotsToRetainForReuse:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <p>the <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#SubcomposeLayout(androidx.compose.ui.Modifier,kotlin.Function2)">SubcomposeLayout</a></code> will retain up to this amount of slots.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="lerp(androidx.compose.ui.layout.ScaleFactor, androidx.compose.ui.layout.ScaleFactor, kotlin.Float)"></a><a name="lerp-androidx.compose.ui.layout.ScaleFactor-androidx.compose.ui.layout.ScaleFactor-kotlin.Float-"></a><a name="lerp"></a>
+      <h3 class="api-name" id="lerp(androidx.compose.ui.layout.ScaleFactor,androidx.compose.ui.layout.ScaleFactor,kotlin.Float)">lerp</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#lerp(androidx.compose.ui.layout.ScaleFactor,androidx.compose.ui.layout.ScaleFactor,kotlin.Float)">lerp</a>(start:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a>,&nbsp;stop:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a>,&nbsp;fraction:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a></pre>
+      <p>Linearly interpolate between two <code><a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a></code> parameters</p>
+      <p>The <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#lerp(androidx.compose.ui.layout.ScaleFactor,androidx.compose.ui.layout.ScaleFactor,kotlin.Float)">fraction</a></code> argument represents position on the timeline, with 0.0 meaning that the interpolation has not started, returning <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#lerp(androidx.compose.ui.layout.ScaleFactor,androidx.compose.ui.layout.ScaleFactor,kotlin.Float)">start</a></code> (or something equivalent to <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#lerp(androidx.compose.ui.layout.ScaleFactor,androidx.compose.ui.layout.ScaleFactor,kotlin.Float)">start</a></code>), 1.0 meaning that the interpolation has finished, returning <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#lerp(androidx.compose.ui.layout.ScaleFactor,androidx.compose.ui.layout.ScaleFactor,kotlin.Float)">stop</a></code> (or something equivalent to <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#lerp(androidx.compose.ui.layout.ScaleFactor,androidx.compose.ui.layout.ScaleFactor,kotlin.Float)">stop</a></code>), and values in between meaning that the interpolation is at the relevant point on the timeline between <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#lerp(androidx.compose.ui.layout.ScaleFactor,androidx.compose.ui.layout.ScaleFactor,kotlin.Float)">start</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#lerp(androidx.compose.ui.layout.ScaleFactor,androidx.compose.ui.layout.ScaleFactor,kotlin.Float)">stop</a></code>. The interpolation can be extrapolated beyond 0.0 and 1.0, so negative values and values greater than 1.0 are valid (and can easily be generated by curves).</p>
+      <p>Values for <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#lerp(androidx.compose.ui.layout.ScaleFactor,androidx.compose.ui.layout.ScaleFactor,kotlin.Float)">fraction</a></code> are usually obtained from an Animation, such as an <code>AnimationController</code>.</p>
+    </div>
+    <h2>Extension functions</h2>
+    <div class="api-item"><a name="-androidx.compose.ui.layout.LayoutCoordinates-.boundsInParent--"></a><a name="boundsinparent"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.layout.LayoutCoordinates).boundsInParent()">boundsInParent</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.layout.LayoutCoordinates).boundsInParent()">boundsInParent</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></pre>
+      <p>Returns the bounding box of the child in the parent's content area, including any clipping done with respect to the parent. For the root, the bounds is positioned at (0, 0) and sized to the size of the root.</p>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.layout.LayoutCoordinates-.boundsInRoot--"></a><a name="boundsinroot"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.layout.LayoutCoordinates).boundsInRoot()">boundsInRoot</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.layout.LayoutCoordinates).boundsInRoot()">boundsInRoot</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></pre>
+      <p>The boundaries of this layout inside the root composable.</p>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.layout.LayoutCoordinates-.boundsInWindow--"></a><a name="boundsinwindow"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.layout.LayoutCoordinates).boundsInWindow()">boundsInWindow</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.layout.LayoutCoordinates).boundsInWindow()">boundsInWindow</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></pre>
+      <p>The boundaries of this layout relative to the window's origin.</p>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.geometry.Size-.div-androidx.compose.ui.layout.ScaleFactor-"></a><a name="div"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.geometry.Size).div(androidx.compose.ui.layout.ScaleFactor)">div</h3>
+      <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.geometry.Size).div(androidx.compose.ui.layout.ScaleFactor)">div</a>(scaleFactor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></pre>
+      <p>Division operator with <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code></p>
+      <p>Return a new <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code> with the width and height divided by <code><a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html#scaleX()">ScaleFactor.scaleX</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html#scaleY()">ScaleFactor.scaleY</a></code> respectively</p>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.layout.LayoutCoordinates-.findRootCoordinates--"></a><a name="findrootcoordinates"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.layout.LayoutCoordinates).findRootCoordinates()">findRootCoordinates</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.layout.LayoutCoordinates).findRootCoordinates()">findRootCoordinates</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></pre>
+      <p>Walks up the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> hierarchy to find the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> whose <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#parentCoordinates()">LayoutCoordinates.parentCoordinates</a></code> is <code>null</code> and returns it. If <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#isAttached()">LayoutCoordinates.isAttached</a></code>, this will have the size of the <code><a href="/reference/kotlin/androidx/compose/ui/platform/ComposeView.html">ComposeView</a></code>.</p>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.Modifier-.layout-kotlin.Function3-"></a><a name="layout"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.Modifier).layout(kotlin.Function3)">layout</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).layout(kotlin.Function3)">layout</a>(measure:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/MeasureScope.html">MeasureScope</a>.(<a href="/reference/kotlin/androidx/compose/ui/layout/Measurable.html">Measurable</a>, <a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Creates a <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> that allows changing how the wrapped element is measured and laid out.</p>
+      <p>This is a convenience API of creating a custom <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> modifier, without having to create a class or an object that implements the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> interface. The intrinsic measurements follow the default logic provided by the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code>.</p>
+      <p>Example usage:</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.layout.layout
+import androidx.compose.ui.unit.offset
+
+Box(
+    Modifier.background(Color.Gray)
+        .layout { measurable, constraints -&gt;
+            // an example modifier that adds 50 pixels of vertical padding.
+            val padding = 50
+            val placeable = measurable.measure(constraints.offset(vertical = -padding))
+            layout(placeable.width, placeable.height + padding) {
+                placeable.placeRelative(0, padding)
+            }
+        }
+) {
+    Box(Modifier.fillMaxSize().background(Color.DarkGray))
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.Modifier-.layoutId-kotlin.Any-"></a><a name="layoutid"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.Modifier).layoutId(kotlin.Any)">layoutId</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).layoutId(kotlin.Any)">layoutId</a>(layoutId:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Tag the element with <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).layoutId(kotlin.Any)">layoutId</a></code> to identify the element within its parent.</p>
+      <p>Example usage:</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.layout
+import androidx.compose.ui.layout.layoutId
+
+Layout({
+    // Here the Containers are only needed to apply the modifiers. You could use the
+    // modifier on header and footer directly if they are composables accepting modifiers.
+    Box(Modifier.layoutId(&quot;header&quot;)) { header() }
+    Box(Modifier.layoutId(&quot;footer&quot;)) { footer() }
+}) { measurables, constraints -&gt;
+    val placeables = measurables.map { measurable -&gt;
+        when (measurable.layoutId) {
+            // You should use appropriate constraints. Here we measure fake constraints.
+            &quot;header&quot; -&gt; measurable.measure(Constraints.fixed(100, 100))
+            &quot;footer&quot; -&gt; measurable.measure(constraints)
+            else -&gt; error(&quot;Unexpected tag&quot;)
+        }
+    }
+    // Size should be derived from children measured sizes on placeables,
+    // but this is simplified for the purposes of the example.
+    layout(100, 100) {
+        placeables.forEach { it.placeRelative(0, 0) }
+    }
+}</pre>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.Modifier-.onGloballyPositioned-kotlin.Function1-"></a><a name="ongloballypositioned"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.Modifier).onGloballyPositioned(kotlin.Function1)">onGloballyPositioned</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).onGloballyPositioned(kotlin.Function1)">onGloballyPositioned</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onGloballyPositioned:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Invoke <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).onGloballyPositioned(kotlin.Function1)">onGloballyPositioned</a></code> with the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> of the element when the global position of the content may have changed. Note that it will be called <b>after</b> a composition when the coordinates are finalized.</p>
+      <p>This callback will be invoked at least once when the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> are available, and every time the element's position changes within the window. However, it is not guaranteed to be invoked every time the position <em>relative to the screen</em> of the modified element changes. For example, the system may move the contents inside a window around without firing a callback. If you are using the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> to calculate position on the screen, and not just inside the window, you may not receive a callback.</p>
+      <p>Usage example:</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.layout.positionInRoot
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.positionInWindow
+
+Column(
+    Modifier.onGloballyPositioned { coordinates -&gt;
+        // This will be the size of the Column.
+        coordinates.size
+        // The position of the Column relative to the application window.
+        coordinates.positionInWindow()
+        // The position of the Column relative to the Compose root.
+        coordinates.positionInRoot()
+        // These will be the alignment lines provided to the layout (empty here for Column).
+        coordinates.providedAlignmentLines
+        // This will be a LayoutCoordinates instance corresponding to the parent of Column.
+        coordinates.parentLayoutCoordinates
+    }
+) {
+    Box(Modifier.size(20.dp).background(Color.Green))
+    Box(Modifier.size(20.dp).background(Color.Blue))
+}</pre>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.Modifier-.onPlaced-kotlin.Function1-"></a><a name="onplaced"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.Modifier).onPlaced(kotlin.Function1)">onPlaced</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).onPlaced(kotlin.Function1)">onPlaced</a>(onPlaced:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Invoke <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).onPlaced(kotlin.Function1)">onPlaced</a></code> after the parent <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> and parent layout has been placed and before child <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> is placed. This allows child <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> to adjust its own placement based on where the parent is.</p>
+      <pre class="prettyprint">
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.spring
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.composed
+import androidx.compose.ui.layout.onPlaced
+import androidx.compose.ui.layout.positionInParent
+import androidx.compose.ui.unit.round
+
+@OptIn(ExperimentalComposeUiApi::class)
+fun Modifier.animatePlacement(): Modifier = composed {
+    val scope = rememberCoroutineScope()
+    var targetOffset by remember { mutableStateOf(IntOffset.Zero) }
+    var animatable by remember {
+        mutableStateOf&lt;Animatable&lt;IntOffset, AnimationVector2D&gt;?&gt;(null)
+    }
+    this.onPlaced {
+        // Calculate the position in the parent layout
+        targetOffset = it.positionInParent().round()
+    }.offset {
+        // Animate to the new target offset when alignment changes.
+        val anim = animatable ?: Animatable(targetOffset, IntOffset.VectorConverter)
+            .also { animatable = it }
+        if (anim.targetValue != targetOffset) {
+            scope.launch {
+                anim.animateTo(targetOffset, spring(stiffness = StiffnessMediumLow))
+            }
+        }
+        // Offset the child in the opposite direction to the targetOffset, and slowly catch
+        // up to zero offset via an animation to achieve an overall animated movement.
+        animatable?.let { it.value - targetOffset } ?: IntOffset.Zero
+    }
+}
+
+@OptIn(ExperimentalComposeUiApi::class)
+@Composable
+fun AnimatedChildAlignment(alignment: Alignment) {
+    Box(
+        Modifier.fillMaxSize().padding(4.dp).border(1.dp, Color.Red)
+    ) {
+        Box(
+            modifier = Modifier.animatePlacement().align(alignment).size(100.dp)
+                .background(Color.Red)
+        )
+    }
+}</pre>
+    </div>
+    <div class="api-item"><a name="(androidx.compose.ui.Modifier).onRelocationRequest(kotlin.Function2, kotlin.coroutines.SuspendFunction2)"></a><a name="-androidx.compose.ui.Modifier-.onRelocationRequest-kotlin.Function2-kotlin.coroutines.SuspendFunction2-"></a><a name="onrelocationrequest"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.Modifier).onRelocationRequest(kotlin.Function2,kotlin.coroutines.SuspendFunction2)">onRelocationRequest</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<span><del><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).onRelocationRequest(kotlin.Function2,kotlin.coroutines.SuspendFunction2)">onRelocationRequest</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onProvideDestination:&nbsp;(rect:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>, layoutCoordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onPerformRelocation:&nbsp;suspend&nbsp;(sourceRect:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>, destinationRect:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <aside class="caution"><strong>This function is deprecated.</strong><br>Please use BringIntoViewResponder instead.</aside>
+      <p>Add this modifier to respond to requests to bring an item into view.</p>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.Modifier-.onSizeChanged-kotlin.Function1-"></a><a name="onsizechanged"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.Modifier).onSizeChanged(kotlin.Function1)">onSizeChanged</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).onSizeChanged(kotlin.Function1)">onSizeChanged</a>(onSizeChanged:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>Invoked with the size of the modified Compose UI element when the element is first measured or when the size of the element changes.</p>
+      <p>There are no guarantees <code>onSizeChanged</code> will not be re-invoked with the same size.</p>
+      <p>Using the <code>onSizeChanged</code> size value in a <code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a></code> to update layout causes the new size value to be read and the layout to be recomposed in the succeeding frame, resulting in a one frame lag.</p>
+      <p>You can use <code>onSizeChanged</code> to affect drawing operations. Use <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code> or <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#SubcomposeLayout(androidx.compose.ui.Modifier,kotlin.Function2)">SubcomposeLayout</a></code> to enable the size of one component to affect the size of another.</p>
+      <p>Example usage:</p>
+      <pre class="prettyprint">
+import androidx.compose.material.Text
+import androidx.compose.ui.layout.onSizeChanged
+
+// Use onSizeChanged() for diagnostics. Use Layout or SubcomposeLayout if you want
+// to use the size of one component to affect the size of another component.
+Text(
+    &quot;Hello $name&quot;,
+    Modifier.onSizeChanged { size -&gt;
+        println(&quot;The size of the Text in pixels is $size&quot;)
+    }
+)</pre>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.layout.LayoutCoordinates-.positionInParent--"></a><a name="positioninparent"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.layout.LayoutCoordinates).positionInParent()">positionInParent</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.layout.LayoutCoordinates).positionInParent()">positionInParent</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+      <p>Returns the position of the top-left in the parent's content area or (0, 0) for the root.</p>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.layout.LayoutCoordinates-.positionInRoot--"></a><a name="positioninroot"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.layout.LayoutCoordinates).positionInRoot()">positionInRoot</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.layout.LayoutCoordinates).positionInRoot()">positionInRoot</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+      <p>The position of this layout inside the root composable.</p>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.layout.LayoutCoordinates-.positionInWindow--"></a><a name="positioninwindow"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.layout.LayoutCoordinates).positionInWindow()">positionInWindow</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.layout.LayoutCoordinates).positionInWindow()">positionInWindow</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+      <p>The position of this layout relative to the window.</p>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.Modifier-.relocationRequester-kotlin.Any-"></a><a name="relocationrequester"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.Modifier).relocationRequester(kotlin.Any)">relocationRequester</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<span><del><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).relocationRequester(kotlin.Any)">relocationRequester</a></del></span>(relocationRequester:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <aside class="caution"><strong>This function is deprecated.</strong><br>Please use bringIntoViewRequester instead.</aside>
+      <p>This is a modifier that can be used to send relocation requests.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>relocationRequester:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a></code></td>
+              <td>
+                <p>an instance of <code><a href="/reference/kotlin/androidx/compose/ui/layout/RelocationRequester.html">RelocationRequester</a></code>. This hoisted object can be used to send relocation requests to parents of the current composable.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.layout.ScaleFactor-.takeOrElse-kotlin.Function0-"></a><a name="takeorelse"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.layout.ScaleFactor).takeOrElse(kotlin.Function0)">takeOrElse</h3>
+      <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.layout.ScaleFactor).takeOrElse(kotlin.Function0)">takeOrElse</a>(block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a></pre>
+      <p>If this <code><a href="/reference/kotlin/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).isSpecified()">ScaleFactor</a></code> then this is returned, otherwise <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.layout.ScaleFactor).takeOrElse(kotlin.Function0)">block</a></code> is executed and its result is returned.</p>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.geometry.Size-.times-androidx.compose.ui.layout.ScaleFactor-"></a><a name="times"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.geometry.Size).times(androidx.compose.ui.layout.ScaleFactor)">times</h3>
+      <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.geometry.Size).times(androidx.compose.ui.layout.ScaleFactor)">times</a>(scaleFactor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></pre>
+      <p>Multiplication operator with <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code>.</p>
+      <p>Return a new <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code> with the width and height multiplied by the <code><a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html#scaleX()">ScaleFactor.scaleX</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html#scaleY()">ScaleFactor.scaleY</a></code> respectively</p>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.layout.ScaleFactor-.times-androidx.compose.ui.geometry.Size-"></a><a name="times"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.layout.ScaleFactor).times(androidx.compose.ui.geometry.Size)">times</h3>
+      <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.layout.ScaleFactor).times(androidx.compose.ui.geometry.Size)">times</a>(size:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></pre>
+      <p>Multiplication operator with <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code> with reverse parameter types to maintain commutative properties of multiplication</p>
+      <p>Return a new <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code> with the width and height multiplied by the <code><a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html#scaleX()">ScaleFactor.scaleX</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html#scaleY()">ScaleFactor.scaleY</a></code> respectively</p>
+    </div>
+    <h2>Top-level properties</h2>
+    <div class="api-item"><a name="getFirstBaseline()"></a><a name="setFirstBaseline()"></a><a name="getFirstBaseline--"></a><a name="setFirstBaseline--"></a>
+      <h3 class="api-name" id="FirstBaseline()">FirstBaseline</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#FirstBaseline()">FirstBaseline</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/HorizontalAlignmentLine.html">HorizontalAlignmentLine</a></pre>
+      <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a></code> defined by the baseline of a first line of a androidx.foundation.text.CoreText</p>
+    </div>
+    <div class="api-item"><a name="getLastBaseline()"></a><a name="setLastBaseline()"></a><a name="getLastBaseline--"></a><a name="setLastBaseline--"></a>
+      <h3 class="api-name" id="LastBaseline()">LastBaseline</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#LastBaseline()">LastBaseline</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/HorizontalAlignmentLine.html">HorizontalAlignmentLine</a></pre>
+      <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a></code> defined by the baseline of the last line of a androidx.foundation.text.CoreText</p>
+    </div>
+    <div class="api-item"><a name="getLocalPinnableContainer()"></a><a name="setLocalPinnableContainer()"></a><a name="getLocalPinnableContainer--"></a><a name="setLocalPinnableContainer--"></a>
+      <h3 class="api-name" id="LocalPinnableContainer()">LocalPinnableContainer</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#LocalPinnableContainer()">LocalPinnableContainer</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/layout/PinnableContainer.html">PinnableContainer</a>?&gt;</pre>
+      <p>Parent layouts with pinning support for the children content will provide the current <code><a href="/reference/kotlin/androidx/compose/ui/layout/PinnableContainer.html">PinnableContainer</a></code> via this composition local.</p>
+    </div>
+    <div class="api-item"><a name="getModifierLocalBeyondBoundsLayout()"></a><a name="setModifierLocalBeyondBoundsLayout()"></a><a name="getModifierLocalBeyondBoundsLayout--"></a><a name="setModifierLocalBeyondBoundsLayout--"></a>
+      <h3 class="api-name" id="ModifierLocalBeyondBoundsLayout()">ModifierLocalBeyondBoundsLayout</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#ModifierLocalBeyondBoundsLayout()">ModifierLocalBeyondBoundsLayout</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/ProvidableModifierLocal.html">ProvidableModifierLocal</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/layout/BeyondBoundsLayout.html">BeyondBoundsLayout</a>?&gt;</pre>
+      <p>A modifier local that provides access to a <code><a href="/reference/kotlin/androidx/compose/ui/layout/BeyondBoundsLayout.html">BeyondBoundsLayout</a></code> that a child can use to ask a parent to layout more items that are beyond its visible bounds.</p>
+    </div>
+    <h2>Extension properties</h2>
+    <div class="api-item"><a name="(androidx.compose.ui.layout.ScaleFactor).getIsSpecified()"></a><a name="(androidx.compose.ui.layout.ScaleFactor).setIsSpecified()"></a><a name="-androidx.compose.ui.layout.ScaleFactor-.getIsSpecified--"></a><a name="-androidx.compose.ui.layout.ScaleFactor-.setIsSpecified--"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.layout.ScaleFactor).isSpecified()">isSpecified</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.layout.ScaleFactor).isSpecified()">isSpecified</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+      <p><code>false</code> when this is <code><a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.Companion.html#Unspecified()">ScaleFactor.Unspecified</a></code>.</p>
+    </div>
+    <div class="api-item"><a name="(androidx.compose.ui.layout.ScaleFactor).getIsUnspecified()"></a><a name="(androidx.compose.ui.layout.ScaleFactor).setIsUnspecified()"></a><a name="-androidx.compose.ui.layout.ScaleFactor-.getIsUnspecified--"></a><a name="-androidx.compose.ui.layout.ScaleFactor-.setIsUnspecified--"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.layout.ScaleFactor).isUnspecified()">isUnspecified</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.layout.ScaleFactor).isUnspecified()">isUnspecified</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+      <p><code>true</code> when this is <code><a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.Companion.html#Unspecified()">ScaleFactor.Unspecified</a></code>.</p>
+    </div>
+    <div class="api-item"><a name="(androidx.compose.ui.layout.Measurable).getLayoutId()"></a><a name="(androidx.compose.ui.layout.Measurable).setLayoutId()"></a><a name="-androidx.compose.ui.layout.Measurable-.getLayoutId--"></a><a name="-androidx.compose.ui.layout.Measurable-.setLayoutId--"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.layout.Measurable).layoutId()">layoutId</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/Measurable.html">Measurable</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.layout.Measurable).layoutId()">layoutId</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?</pre>
+      <p>Retrieves the tag associated to a composable with the <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).layoutId(kotlin.Any)">Modifier.layoutId</a></code> modifier. For a parent data value to be returned by this property when not using the <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).layoutId(kotlin.Any)">Modifier.layoutId</a></code> modifier, the parent data value should implement the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutIdParentData.html">LayoutIdParentData</a></code> interface.</p>
+      <p>Example usage:</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.layout
+import androidx.compose.ui.layout.layoutId
+
+Layout({
+    // Here the Containers are only needed to apply the modifiers. You could use the
+    // modifier on header and footer directly if they are composables accepting modifiers.
+    Box(Modifier.layoutId(&quot;header&quot;)) { header() }
+    Box(Modifier.layoutId(&quot;footer&quot;)) { footer() }
+}) { measurables, constraints -&gt;
+    val placeables = measurables.map { measurable -&gt;
+        when (measurable.layoutId) {
+            // You should use appropriate constraints. Here we measure fake constraints.
+            &quot;header&quot; -&gt; measurable.measure(Constraints.fixed(100, 100))
+            &quot;footer&quot; -&gt; measurable.measure(constraints)
+            else -&gt; error(&quot;Unexpected tag&quot;)
+        }
+    }
+    // Size should be derived from children measured sizes on placeables,
+    // but this is simplified for the purposes of the example.
+    layout(100, 100) {
+        placeables.forEach { it.placeRelative(0, 0) }
+    }
+}</pre>
+    </div>
+  </body>
+</html>

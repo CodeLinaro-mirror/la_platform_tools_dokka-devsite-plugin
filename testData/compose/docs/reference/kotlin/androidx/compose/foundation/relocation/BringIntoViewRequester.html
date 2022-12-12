@@ -1,0 +1,246 @@
+<html devsite="true">
+  <head>
+    <title>BringIntoViewRequester</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/relocation/BringIntoViewRequester.kt+class:androidx.compose.foundation.relocation.BringIntoViewRequester&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>BringIntoViewRequester</h1>
+    <p>
+      <pre>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>interface <a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewRequester.html">BringIntoViewRequester</a></pre>
+    </p>
+    <hr>
+    <p>Can be used to send <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewRequester.html#bringIntoView(androidx.compose.ui.geometry.Rect)">bringIntoView</a></code> requests. Pass it as a parameter to <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/package-summary.html#(androidx.compose.ui.Modifier).bringIntoViewRequester(androidx.compose.foundation.relocation.BringIntoViewRequester)">Modifier.bringIntoViewRequester()</a></code>.</p>
+    <p>For instance, you can call <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewRequester.html#bringIntoView(androidx.compose.ui.geometry.Rect)">bringIntoView()</a></code> to make all the scrollable parents scroll so that the specified item is brought into the parent bounds.</p>
+    <p>Here is a sample where a composable is brought into view:</p>
+    <pre class="prettyprint">
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.focus.focusTarget
+import androidx.compose.ui.focus.onFocusChanged
+
+Row(Modifier.horizontalScroll(rememberScrollState())) {
+    repeat(100) {
+        val bringIntoViewRequester = remember { BringIntoViewRequester() }
+        val coroutineScope = rememberCoroutineScope()
+        Box(
+            Modifier
+                // This associates the RelocationRequester with a Composable that wants to be
+                // brought into view.
+                .bringIntoViewRequester(bringIntoViewRequester)
+                .onFocusChanged {
+                    if (it.isFocused) {
+                        coroutineScope.launch {
+                            // This sends a request to all parents that asks them to scroll so
+                            // that this item is brought into view.
+                            bringIntoViewRequester.bringIntoView()
+                        }
+                    }
+                }
+                .focusTarget()
+        )
+    }
+}</pre>
+    <p>Here is a sample where part of a composable is brought into view:</p>
+    <pre class="prettyprint">
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.border
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
+
+with(LocalDensity.current) {
+    val bringIntoViewRequester = remember { BringIntoViewRequester() }
+    val coroutineScope = rememberCoroutineScope()
+    Column {
+        Box(
+            Modifier
+                .border(2.dp, Color.Black)
+                .size(500f.toDp())
+                .horizontalScroll(rememberScrollState())
+        ) {
+            Canvas(
+                Modifier
+                    .size(1500f.toDp(), 500f.toDp())
+                    // This associates the RelocationRequester with a Composable that wants
+                    // to be brought into view.
+                    .bringIntoViewRequester(bringIntoViewRequester)
+            ) {
+                drawCircle(color = Color.Red, radius = 250f, center = Offset(750f, 250f))
+            }
+        }
+        Button(
+            onClick = {
+                val circleCoordinates = Rect(500f, 0f, 1000f, 500f)
+                coroutineScope.launch {
+                    // This sends a request to all parents that asks them to scroll so that
+                    // the circle is brought into view.
+                    bringIntoViewRequester.bringIntoView(circleCoordinates)
+                }
+            }
+        ) {
+            Text(&quot;Bring circle into View&quot;)
+        }
+    }
+}</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>suspend <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewRequester.html#bringIntoView(androidx.compose.ui.geometry.Rect)">bringIntoView</a>(rect:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>?)</code></div>
+              <p>Bring this item into bounds by making all the scrollable parents scroll appropriately.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="bringIntoView-androidx.compose.ui.geometry.Rect-"></a><a name="bringintoview"></a>
+        <h3 class="api-name" id="bringIntoView(androidx.compose.ui.geometry.Rect)">bringIntoView</h3>
+        <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewRequester.html#bringIntoView(androidx.compose.ui.geometry.Rect)">bringIntoView</a>(rect:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>? = null):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Bring this item into bounds by making all the scrollable parents scroll appropriately.</p>
+        <p>This method will not return until this request is satisfied or a newer request interrupts it. If this call is interrupted by a newer call, this method will throw a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-cancellation-exception/index.html">CancellationException</a></code>.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.focus.focusTarget
+import androidx.compose.ui.focus.onFocusChanged
+
+Row(Modifier.horizontalScroll(rememberScrollState())) {
+    repeat(100) {
+        val bringIntoViewRequester = remember { BringIntoViewRequester() }
+        val coroutineScope = rememberCoroutineScope()
+        Box(
+            Modifier
+                // This associates the RelocationRequester with a Composable that wants to be
+                // brought into view.
+                .bringIntoViewRequester(bringIntoViewRequester)
+                .onFocusChanged {
+                    if (it.isFocused) {
+                        coroutineScope.launch {
+                            // This sends a request to all parents that asks them to scroll so
+                            // that this item is brought into view.
+                            bringIntoViewRequester.bringIntoView()
+                        }
+                    }
+                }
+                .focusTarget()
+        )
+    }
+}</pre>
+        <p>Here is a sample where a part of a composable is brought into view:</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.border
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
+
+with(LocalDensity.current) {
+    val bringIntoViewRequester = remember { BringIntoViewRequester() }
+    val coroutineScope = rememberCoroutineScope()
+    Column {
+        Box(
+            Modifier
+                .border(2.dp, Color.Black)
+                .size(500f.toDp())
+                .horizontalScroll(rememberScrollState())
+        ) {
+            Canvas(
+                Modifier
+                    .size(1500f.toDp(), 500f.toDp())
+                    // This associates the RelocationRequester with a Composable that wants
+                    // to be brought into view.
+                    .bringIntoViewRequester(bringIntoViewRequester)
+            ) {
+                drawCircle(color = Color.Red, radius = 250f, center = Offset(750f, 250f))
+            }
+        }
+        Button(
+            onClick = {
+                val circleCoordinates = Rect(500f, 0f, 1000f, 500f)
+                coroutineScope.launch {
+                    // This sends a request to all parents that asks them to scroll so that
+                    // the circle is brought into view.
+                    bringIntoViewRequester.bringIntoView(circleCoordinates)
+                }
+            }
+        ) {
+            Text(&quot;Bring circle into View&quot;)
+        }
+    }
+}</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>rect:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>? = null</code></td>
+                <td>
+                  <p>The rectangle (In local coordinates) that should be brought into view. If you don't specify the coordinates, the coordinates of the <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/package-summary.html#(androidx.compose.ui.Modifier).bringIntoViewRequester(androidx.compose.foundation.relocation.BringIntoViewRequester)">Modifier.bringIntoViewRequester()</a></code> associated with this <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewRequester.html">BringIntoViewRequester</a></code> will be used.</p>
+                  <p>Here is a sample where a composable is brought into view:</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

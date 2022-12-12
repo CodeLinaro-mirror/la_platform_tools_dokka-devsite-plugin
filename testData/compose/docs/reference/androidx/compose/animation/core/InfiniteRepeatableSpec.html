@@ -5,7 +5,9 @@
 {% include "_shared/_reference-head-tags.html" %}
   </head>
   <body>
-    <div id="metadata-info-block"></div>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-core/androidx/compose/animation/core/AnimationSpec.kt+class:androidx.compose.animation.core.InfiniteRepeatableSpec&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
     <h1>InfiniteRepeatableSpec</h1>
     <p>
       <pre>public final class <a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html">InfiniteRepeatableSpec</a>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; implements <a href="/reference/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a></pre>
@@ -13,6 +15,63 @@
     <hr>
     <p><code><a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html">InfiniteRepeatableSpec</a></code> repeats the provided <code><a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html#animation()">animation</a></code> infinite amount of times. It will never naturally finish. This means the animation will only be stopped via some form of manual cancellation. When used with transition or other animation composables, the infinite animations will stop when the composable is removed from the compose tree.</p>
     <p>For non-infinite repeating animations, consider <code><a href="/reference/androidx/compose/animation/core/RepeatableSpec.html">RepeatableSpec</a></code>.</p>
+    <p><code><a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html#initialStartOffset()">initialStartOffset</a></code> can be used to either delay the start of the animation or to fast forward the animation to a given play time. This start offset will <b>not</b> be repeated, whereas the delay in the <code><a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html#animation()">animation</a></code> (if any) will be repeated. By default, the amount of offset is 0.</p>
+    <pre class="prettyprint">
+import androidx.compose.animation.core.StartOffset
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.graphics.graphicsLayer
+
+// This is an infinite progress indicator with 3 pulsing dots that grow and shrink.
+@Composable
+fun Dot(scale: State&lt;Float&gt;) {
+    Box(
+        Modifier.padding(5.dp).size(20.dp).graphicsLayer {
+            scaleX = scale.value
+            scaleY = scale.value
+        }.background(Color.Gray, shape = CircleShape)
+    )
+}
+
+val infiniteTransition = rememberInfiniteTransition()
+val scale1 = infiniteTransition.animateFloat(
+    0.2f,
+    1f,
+    // No offset for the 1st animation
+    infiniteRepeatable(tween(600), RepeatMode.Reverse)
+)
+val scale2 = infiniteTransition.animateFloat(
+    0.2f,
+    1f,
+    infiniteRepeatable(
+        tween(600), RepeatMode.Reverse,
+        // Offsets the 2nd animation by starting from 150ms of the animation
+        // This offset will not be repeated.
+        initialStartOffset = StartOffset(offsetMillis = 150, StartOffsetType.FastForward)
+    )
+)
+val scale3 = infiniteTransition.animateFloat(
+    0.2f,
+    1f,
+    infiniteRepeatable(
+        tween(600), RepeatMode.Reverse,
+        // Offsets the 3rd animation by starting from 300ms of the animation. This
+        // offset will be not repeated.
+        initialStartOffset = StartOffset(offsetMillis = 300, StartOffsetType.FastForward)
+    )
+)
+Row {
+    Dot(scale1)
+    Dot(scale2)
+    Dot(scale3)
+}</pre>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <colgroup>
@@ -26,7 +85,7 @@
         </thead>
         <tbody class="list">
           <tr>
-            <td><code><a href="/reference/androidx/compose/animation/core/package-summary.html#infiniteRepeatable(androidx.compose.animation.core.DurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode)">infiniteRepeatable</a></code></td>
+            <td><code><a href="/reference/androidx/compose/animation/core/package-summary.html#infiniteRepeatable(androidx.compose.animation.core.DurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode,androidx.compose.animation.core.StartOffset)">infiniteRepeatable</a></code></td>
             <td></td>
           </tr>
         </tbody>
@@ -53,6 +112,13 @@
             </td>
           </tr>
           <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/StartOffset.html">StartOffset</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html#initialStartOffset()">initialStartOffset</a></code></div>
+              <p>offsets the start of the animation</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/RepeatMode.html">RepeatMode</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html#repeatMode()">repeatMode</a></code></div>
@@ -76,7 +142,7 @@
         <tbody class="list">
           <tr>
             <td>
-              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html#InfiniteRepeatableSpec(androidx.compose.animation.core.DurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode)">InfiniteRepeatableSpec</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/DurationBasedAnimationSpec.html">DurationBasedAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;animation,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/RepeatMode.html">RepeatMode</a>&nbsp;repeatMode<br>)</code></div>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html#InfiniteRepeatableSpec(androidx.compose.animation.core.DurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode,androidx.compose.animation.core.StartOffset)">InfiniteRepeatableSpec</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/DurationBasedAnimationSpec.html">DurationBasedAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;animation,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/RepeatMode.html">RepeatMode</a>&nbsp;repeatMode,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/StartOffset.html">StartOffset</a>&nbsp;initialStartOffset<br>)</code></div>
             </td>
           </tr>
         </tbody>
@@ -123,6 +189,11 @@
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/DurationBasedAnimationSpec.html">DurationBasedAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;<a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html#animation()">animation</a></pre>
         <p>the <code><a href="/reference/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a></code> to be repeated</p>
       </div>
+      <div class="api-item"><a name="getInitialStartOffset()"></a><a name="setInitialStartOffset()"></a><a name="getInitialStartOffset--"></a><a name="setInitialStartOffset--"></a>
+        <h3 class="api-name" id="initialStartOffset()">initialStartOffset</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/StartOffset.html">StartOffset</a>&nbsp;<a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html#initialStartOffset()">initialStartOffset</a></pre>
+        <p>offsets the start of the animation</p>
+      </div>
       <div class="api-item"><a name="getRepeatMode()"></a><a name="setRepeatMode()"></a><a name="getRepeatMode--"></a><a name="setRepeatMode--"></a>
         <h3 class="api-name" id="repeatMode()">repeatMode</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/RepeatMode.html">RepeatMode</a>&nbsp;<a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html#repeatMode()">repeatMode</a></pre>
@@ -131,9 +202,9 @@
     </div>
     <div class="list">
       <h2>Public constructors</h2>
-      <div class="api-item"><a name="InfiniteRepeatableSpec(androidx.compose.animation.core.DurationBasedAnimationSpec, androidx.compose.animation.core.RepeatMode)"></a><a name="InfiniteRepeatableSpec-androidx.compose.animation.core.DurationBasedAnimationSpec-androidx.compose.animation.core.RepeatMode-"></a><a name="infiniterepeatablespec"></a>
-        <h3 class="api-name" id="InfiniteRepeatableSpec(androidx.compose.animation.core.DurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode)">InfiniteRepeatableSpec</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html#InfiniteRepeatableSpec(androidx.compose.animation.core.DurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode)">InfiniteRepeatableSpec</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/DurationBasedAnimationSpec.html">DurationBasedAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;animation,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/RepeatMode.html">RepeatMode</a>&nbsp;repeatMode<br>)</pre>
+      <div class="api-item"><a name="InfiniteRepeatableSpec(androidx.compose.animation.core.DurationBasedAnimationSpec, androidx.compose.animation.core.RepeatMode, androidx.compose.animation.core.StartOffset)"></a><a name="InfiniteRepeatableSpec-androidx.compose.animation.core.DurationBasedAnimationSpec-androidx.compose.animation.core.RepeatMode-androidx.compose.animation.core.StartOffset-"></a><a name="infiniterepeatablespec"></a>
+        <h3 class="api-name" id="InfiniteRepeatableSpec(androidx.compose.animation.core.DurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode,androidx.compose.animation.core.StartOffset)">InfiniteRepeatableSpec</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html#InfiniteRepeatableSpec(androidx.compose.animation.core.DurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode,androidx.compose.animation.core.StartOffset)">InfiniteRepeatableSpec</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/DurationBasedAnimationSpec.html">DurationBasedAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;animation,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/RepeatMode.html">RepeatMode</a>&nbsp;repeatMode,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/StartOffset.html">StartOffset</a>&nbsp;initialStartOffset<br>)</pre>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -156,6 +227,12 @@
                 <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/RepeatMode.html">RepeatMode</a>&nbsp;repeatMode</code></td>
                 <td>
                   <p>whether animation should repeat by starting from the beginning (i.e.     <code><a href="/reference/androidx/compose/animation/core/RepeatMode.html#Restart">RepeatMode.Restart</a></code>) or from the end (i.e. <code><a href="/reference/androidx/compose/animation/core/RepeatMode.html#Reverse">RepeatMode.Reverse</a></code>)</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/StartOffset.html">StartOffset</a>&nbsp;initialStartOffset</code></td>
+                <td>
+                  <p>offsets the start of the animation</p>
                 </td>
               </tr>
             </tbody>

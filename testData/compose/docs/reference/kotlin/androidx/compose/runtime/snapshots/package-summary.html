@@ -21,6 +21,12 @@
             </td>
           </tr>
           <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotContextElement.html">SnapshotContextElement</a></code></td>
+            <td>
+              <p>A <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code> element that <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">enters</a></code> an associated snapshot whenever a coroutine associated with this context is resumed.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotMutableState.html">SnapshotMutableState</a></code></td>
             <td>
               <p>A mutable value holder where reads to the <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotMutableState.html#value()">value</a></code> property during the execution of a <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function, the current <code><a href="/reference/kotlin/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> will be subscribed to changes of that value.</p>
@@ -79,7 +85,9 @@
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html">SnapshotStateObserver</a></code></td>
-            <td></td>
+            <td>
+              <p>Helper class to efficiently observe snapshot state reads.</p>
+            </td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a></code></td>
@@ -119,6 +127,10 @@
             <td><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotApplyResult.Success.html">SnapshotApplyResult.Success</a></code></td>
             <td></td>
           </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotContextElement.Key.html">SnapshotContextElement.Key</a></code></td>
+            <td></td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -130,6 +142,13 @@
           <col>
         </colgroup>
         <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotContextElement.html">SnapshotContextElement</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/ExperimentalComposeApi.html">ExperimentalComposeApi</a><br><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>.<a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#(androidx.compose.runtime.snapshots.Snapshot).asContextElement()">asContextElement</a>()</code></div>
+              <p>Return a <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotContextElement.html">SnapshotContextElement</a></code> that will <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">enter</a></code> this <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code> whenever the associated coroutine is resumed and leave this snapshot when it suspends.</p>
+            </td>
+          </tr>
           <tr>
             <td><code>T</code></td>
             <td>
@@ -169,6 +188,28 @@
       </table>
     </div>
     <h2>Extension functions</h2>
+    <div class="api-item"><a name="-androidx.compose.runtime.snapshots.Snapshot-.asContextElement--"></a><a name="ascontextelement"></a>
+      <h3 class="api-name" id="(androidx.compose.runtime.snapshots.Snapshot).asContextElement()">asContextElement</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/ExperimentalComposeApi.html">ExperimentalComposeApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>.<a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#(androidx.compose.runtime.snapshots.Snapshot).asContextElement()">asContextElement</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotContextElement.html">SnapshotContextElement</a></pre>
+      <p>Return a <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotContextElement.html">SnapshotContextElement</a></code> that will <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">enter</a></code> this <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code> whenever the associated coroutine is resumed and leave this snapshot when it suspends. The snapshot still must be <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#dispose()">disposed</a></code> separately when it will no longer be used.</p>
+      <pre class="prettyprint">
+import androidx.compose.runtime.snapshots.asContextElement
+
+runBlocking {
+    val snapshot = Snapshot.takeSnapshot()
+    try {
+        withContext(snapshot.asContextElement()) {
+            // Data observed by separately reading stateA and stateB are consistent with
+            // the snapshot context element across suspensions
+            doSomethingSuspending(someObject.stateA)
+            doSomethingSuspending(someObject.stateB)
+        }
+    } finally {
+        // Snapshot must be disposed after it will not be used again
+        snapshot.dispose()
+    }
+}</pre>
+    </div>
     <div class="api-item"><a name="(androidx.compose.runtime.snapshots.StateRecord).readable(androidx.compose.runtime.snapshots.StateObject, androidx.compose.runtime.snapshots.Snapshot)"></a><a name="-androidx.compose.runtime.snapshots.StateRecord-.readable-androidx.compose.runtime.snapshots.StateObject-androidx.compose.runtime.snapshots.Snapshot-"></a><a name="readable"></a>
       <h3 class="api-name" id="(androidx.compose.runtime.snapshots.StateRecord).readable(androidx.compose.runtime.snapshots.StateObject,androidx.compose.runtime.snapshots.Snapshot)">readable</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>&gt; T.<a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#(androidx.compose.runtime.snapshots.StateRecord).readable(androidx.compose.runtime.snapshots.StateObject,androidx.compose.runtime.snapshots.Snapshot)">readable</a>(state:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html">StateObject</a>,&nbsp;snapshot:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>):&nbsp;T</pre>

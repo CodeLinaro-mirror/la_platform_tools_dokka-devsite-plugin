@@ -1,0 +1,99 @@
+<html devsite="true">
+  <head>
+    <title>AndroidDialogKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>AndroidDialogKt</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/window/AndroidDialogKt.html">AndroidDialogKt</a></pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static&nbsp;final void</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/androidx/compose/ui/window/AndroidDialogKt.html#Dialog(kotlin.Function0,androidx.compose.ui.window.DialogProperties,kotlin.Function0)">Dialog</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDismissRequest,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/window/DialogProperties.html">DialogProperties</a>&nbsp;properties,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content<br>)</code></div>
+              <p>Opens a dialog with the given content.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="Dialog(kotlin.Function0, androidx.compose.ui.window.DialogProperties, kotlin.Function0)"></a><a name="Dialog-kotlin.Function0-androidx.compose.ui.window.DialogProperties-kotlin.Function0-"></a><a name="dialog"></a>
+        <h3 class="api-name" id="Dialog(kotlin.Function0,androidx.compose.ui.window.DialogProperties,kotlin.Function0)">Dialog</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/window/AndroidDialogKt.html#Dialog(kotlin.Function0,androidx.compose.ui.window.DialogProperties,kotlin.Function0)">Dialog</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDismissRequest,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/window/DialogProperties.html">DialogProperties</a>&nbsp;properties,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content<br>)</pre>
+        <p>Opens a dialog with the given content.</p>
+        <p>A dialog is a small window that prompts the user to make a decision or enter additional information. A dialog does not fill the screen and is normally used for modal events that require users to take an action before they can proceed.</p>
+        <p>The dialog is visible as long as it is part of the composition hierarchy. In order to let the user dismiss the Dialog, the implementation of <code><a href="/reference/androidx/compose/ui/window/package-summary.html#Dialog(kotlin.Function0,androidx.compose.ui.window.DialogProperties,kotlin.Function0)">onDismissRequest</a></code> should contain a way to remove the dialog from the composition hierarchy.</p>
+        <p>Example usage:</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.window.Dialog
+
+val openDialog = remember { mutableStateOf(true) }
+val dialogWidth = 200.dp
+val dialogHeight = 50.dp
+
+if (openDialog.value) {
+    Dialog(onDismissRequest = { openDialog.value = false }) {
+        // Draw a rectangle shape with rounded corners inside the dialog
+        Box(Modifier.size(dialogWidth, dialogHeight).background(Color.White))
+    }
+}</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDismissRequest</code></td>
+                <td>
+                  <p>Executes when the user tries to dismiss the dialog.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/window/DialogProperties.html">DialogProperties</a>&nbsp;properties</code></td>
+                <td>
+                  <p><code><a href="/reference/androidx/compose/ui/window/DialogProperties.html">DialogProperties</a></code> for further customization of this dialog's behavior.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content</code></td>
+                <td>
+                  <p>The content to be displayed inside the dialog.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

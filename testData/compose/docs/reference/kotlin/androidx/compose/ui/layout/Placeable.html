@@ -1,0 +1,309 @@
+<html devsite="true">
+  <head>
+    <title>Placeable</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/layout/Placeable.kt+class:androidx.compose.ui.layout.Placeable&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>Placeable</h1>
+    <p>
+      <pre>abstract class <a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a> : <a href="/reference/kotlin/androidx/compose/ui/layout/Measured.html">Measured</a></pre>
+    </p>
+    <hr>
+    <p>A <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code> corresponds to a child layout that can be positioned by its parent layout. Most <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code>s are the result of a <code><a href="/reference/kotlin/androidx/compose/ui/layout/Measurable.html#measure(androidx.compose.ui.unit.Constraints)">Measurable.measure</a></code> call.</p>
+    <p>A <code>Placeable</code> should never be stored between measure calls.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>abstract class <a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.PlacementScope.html">Placeable.PlacementScope</a></code></div>
+              <p>Receiver scope that permits explicit placement of a <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#Placeable()">Placeable</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Protected functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#placeAt(androidx.compose.ui.unit.IntOffset,kotlin.Float,kotlin.Function1)">placeAt</a>(position:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntOffset.html">IntOffset</a>,&nbsp;zIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;layerBlock:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/graphics/GraphicsLayerScope.html">GraphicsLayerScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)?)</code></div>
+              <p>Positions the <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code> at <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#placeAt(androidx.compose.ui.unit.IntOffset,kotlin.Float,kotlin.Function1)">position</a></code> in its parent's coordinate system.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#height()">height</a></code></div>
+              <p>The height, in pixels, of the measured layout, as seen by the parent.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#measuredHeight()">measuredHeight</a></code></div>
+              <p>The measured height of the layout.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#measuredWidth()">measuredWidth</a></code></div>
+              <p>The measured width of the layout.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#width()">width</a></code></div>
+              <p>The width, in pixels, of the measured layout, as seen by the parent.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Protected properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/unit/IntOffset.html">IntOffset</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#apparentToRealOffset()">apparentToRealOffset</a></code></div>
+              <p>The offset to be added to an apparent position assigned to this <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code> to make it real.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#measuredSize()">measuredSize</a></code></div>
+              <p>The measured size of this Placeable.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#measurementConstraints()">measurementConstraints</a></code></div>
+              <p>The constraints used for the measurement made to obtain this <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/layout/Measured.html">androidx.compose.ui.layout.Measured</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>abstract&nbsp;operator <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/Measured.html#get(androidx.compose.ui.layout.AlignmentLine)">get</a>(alignmentLine:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a>)</code></div>
+                        <p>Returns the position of an <code><a href="/reference/kotlin/androidx/compose/ui/layout/AlignmentLine.html">alignment line</a></code>, or <code><a href="/reference/kotlin/androidx/compose/ui/layout/AlignmentLine.Companion.html#Unspecified()">AlignmentLine.Unspecified</a></code> if the line is not provided.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/layout/Measured.html">androidx.compose.ui.layout.Measured</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?</code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/Measured.html#parentData()">parentData</a></code></div>
+                        <p>Data provided by the <code><a href="/reference/kotlin/androidx/compose/ui/layout/ParentDataModifier.html">ParentDataModifier</a></code> applied to the layout.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="Placeable--"></a><a name="placeable"></a>
+        <h3 class="api-name" id="Placeable()">Placeable</h3>
+        <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#Placeable()">Placeable</a>()</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Protected functions</h2>
+      <div class="api-item"><a name="placeAt(androidx.compose.ui.unit.IntOffset, kotlin.Float, kotlin.Function1)"></a><a name="placeAt-androidx.compose.ui.unit.IntOffset-kotlin.Float-kotlin.Function1-"></a><a name="placeat"></a>
+        <h3 class="api-name" id="placeAt(androidx.compose.ui.unit.IntOffset,kotlin.Float,kotlin.Function1)">placeAt</h3>
+        <pre class="api-signature no-pretty-print">protected&nbsp;abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#placeAt(androidx.compose.ui.unit.IntOffset,kotlin.Float,kotlin.Function1)">placeAt</a>(position:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntOffset.html">IntOffset</a>,&nbsp;zIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;layerBlock:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/graphics/GraphicsLayerScope.html">GraphicsLayerScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Positions the <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code> at <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#placeAt(androidx.compose.ui.unit.IntOffset,kotlin.Float,kotlin.Function1)">position</a></code> in its parent's coordinate system.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>zIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>controls the drawing order for the <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code>. A <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code> with larger <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#placeAt(androidx.compose.ui.unit.IntOffset,kotlin.Float,kotlin.Function1)">zIndex</a></code> will be drawn on top of all the children with smaller <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#placeAt(androidx.compose.ui.unit.IntOffset,kotlin.Float,kotlin.Function1)">zIndex</a></code>. When children have the same <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#placeAt(androidx.compose.ui.unit.IntOffset,kotlin.Float,kotlin.Function1)">zIndex</a></code> the order in which the items were placed is used.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>layerBlock:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/graphics/GraphicsLayerScope.html">GraphicsLayerScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)?</code></td>
+                <td>
+                  <p>when non-null this <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code> should be placed with an introduced graphic layer. You can configure any layer property available on <code><a href="/reference/kotlin/androidx/compose/ui/graphics/GraphicsLayerScope.html">GraphicsLayerScope</a></code> via this block. Also if the <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code> will be placed with a new <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#placeAt(androidx.compose.ui.unit.IntOffset,kotlin.Float,kotlin.Function1)">position</a></code> next time only the graphic layer will be moved without requiring to redrawn the <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code> content.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getHeight()"></a><a name="setHeight()"></a><a name="getHeight--"></a><a name="setHeight--"></a>
+        <h3 class="api-name" id="height()">height</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#height()">height</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>The height, in pixels, of the measured layout, as seen by the parent. This will usually coincide with the measured height of the layout (aka the <code>height</code> value passed into <code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasureScope.html#layout(kotlin.Int,kotlin.Int,kotlin.collections.Map,kotlin.Function1)">MeasureScope.layout</a></code>), but can be different if the layout does not respect its incoming constraints: in these cases the height will be coerced inside the min and max height constraints - to access the actual height that the layout measured itself to, use <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#measuredHeight()">measuredHeight</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getMeasuredHeight()"></a><a name="setMeasuredHeight()"></a><a name="getMeasuredHeight--"></a><a name="setMeasuredHeight--"></a>
+        <h3 class="api-name" id="measuredHeight()">measuredHeight</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#measuredHeight()">measuredHeight</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>The measured height of the layout. This might not respect the measurement constraints.</p>
+      </div>
+      <div class="api-item"><a name="getMeasuredWidth()"></a><a name="setMeasuredWidth()"></a><a name="getMeasuredWidth--"></a><a name="setMeasuredWidth--"></a>
+        <h3 class="api-name" id="measuredWidth()">measuredWidth</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#measuredWidth()">measuredWidth</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>The measured width of the layout. This might not respect the measurement constraints.</p>
+      </div>
+      <div class="api-item"><a name="getWidth()"></a><a name="setWidth()"></a><a name="getWidth--"></a><a name="setWidth--"></a>
+        <h3 class="api-name" id="width()">width</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#width()">width</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>The width, in pixels, of the measured layout, as seen by the parent. This will usually coincide with the measured width of the layout (aka the <code>width</code> value passed into <code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasureScope.html#layout(kotlin.Int,kotlin.Int,kotlin.collections.Map,kotlin.Function1)">MeasureScope.layout</a></code>), but can be different if the layout does not respect its incoming constraints: in these cases the width will be coerced inside the min and max width constraints - to access the actual width that the layout measured itself to, use <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#measuredWidth()">measuredWidth</a></code>.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Protected properties</h2>
+      <div class="api-item"><a name="getApparentToRealOffset()"></a><a name="setApparentToRealOffset()"></a><a name="getApparentToRealOffset--"></a><a name="setApparentToRealOffset--"></a>
+        <h3 class="api-name" id="apparentToRealOffset()">apparentToRealOffset</h3>
+        <pre class="api-signature no-pretty-print">protected&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#apparentToRealOffset()">apparentToRealOffset</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntOffset.html">IntOffset</a></pre>
+        <p>The offset to be added to an apparent position assigned to this <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code> to make it real. The real layout will be centered on the space assigned by the parent, which computed the child's position only seeing its apparent size.</p>
+      </div>
+      <div class="api-item"><a name="getMeasuredSize()"></a><a name="setMeasuredSize()"></a><a name="getMeasuredSize--"></a><a name="setMeasuredSize--"></a>
+        <h3 class="api-name" id="measuredSize()">measuredSize</h3>
+        <pre class="api-signature no-pretty-print">protected&nbsp;var&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#measuredSize()">measuredSize</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a></pre>
+        <p>The measured size of this Placeable. This might not respect <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#measurementConstraints()">measurementConstraints</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getMeasurementConstraints()"></a><a name="setMeasurementConstraints()"></a><a name="getMeasurementConstraints--"></a><a name="setMeasurementConstraints--"></a>
+        <h3 class="api-name" id="measurementConstraints()">measurementConstraints</h3>
+        <pre class="api-signature no-pretty-print">protected&nbsp;var&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html#measurementConstraints()">measurementConstraints</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></pre>
+        <p>The constraints used for the measurement made to obtain this <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code>.</p>
+      </div>
+    </div>
+  </body>
+</html>

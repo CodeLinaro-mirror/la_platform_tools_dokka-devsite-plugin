@@ -1,0 +1,324 @@
+<html devsite="true">
+  <head>
+    <title>LayoutCoordinates</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/layout/LayoutCoordinates.kt+class:androidx.compose.ui.layout.LayoutCoordinates&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>LayoutCoordinates</h1>
+    <p>
+      <pre>interface <a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></pre>
+    </p>
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
+        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></div>
+      </span>
+      <div id="subclasses-direct-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code></td>
+                <td>
+                  <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code> interface holds layout coordinates from both the lookahead calculation and the post-lookahead layout pass.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
+    <hr>
+    <p>A holder of the measured bounds for the layout (MeasureBox).</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>operator <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#get(androidx.compose.ui.layout.AlignmentLine)">get</a>(alignmentLine:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a>)</code></div>
+              <p>Returns the position in pixels of an <code><a href="/reference/kotlin/androidx/compose/ui/layout/AlignmentLine.html">alignment line</a></code>, or <code><a href="/reference/kotlin/androidx/compose/ui/layout/AlignmentLine.Companion.html#Unspecified()">AlignmentLine.Unspecified</a></code> if the line is not provided.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localBoundingBoxOf(androidx.compose.ui.layout.LayoutCoordinates,kotlin.Boolean)">localBoundingBoxOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;sourceCoordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;clipBounds:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><br>)</code></div>
+              <p>Returns the bounding box of <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localBoundingBoxOf(androidx.compose.ui.layout.LayoutCoordinates,kotlin.Boolean)">sourceCoordinates</a></code> in the local coordinates.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset)">localPositionOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;sourceCoordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;relativeToSource:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a><br>)</code></div>
+              <p>Converts an <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset)">relativeToSource</a></code> in <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset)">sourceCoordinates</a></code> space into local coordinates.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localToRoot(androidx.compose.ui.geometry.Offset)">localToRoot</a>(relativeToLocal:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>)</code></div>
+              <p>Converts a local position within this layout into an offset from the root composable.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localToWindow(androidx.compose.ui.geometry.Offset)">localToWindow</a>(relativeToLocal:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>)</code></div>
+              <p>Converts <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localToWindow(androidx.compose.ui.geometry.Offset)">relativeToLocal</a></code> position within this layout into an <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code> relative to the window's origin.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#transformFrom(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.graphics.Matrix)">transformFrom</a>(sourceCoordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>,&nbsp;matrix:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Matrix.html">Matrix</a>)</code></div>
+              <p>Modifies <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#transformFrom(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.graphics.Matrix)">matrix</a></code> to be a transform to convert a coordinate in <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#transformFrom(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.graphics.Matrix)">sourceCoordinates</a></code> to a coordinate in <code>this</code> <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#windowToLocal(androidx.compose.ui.geometry.Offset)">windowToLocal</a>(relativeToWindow:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>)</code></div>
+              <p>Converts <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#windowToLocal(androidx.compose.ui.geometry.Offset)">relativeToWindow</a></code> relative to the window's origin into an <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code> relative to this layout.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#isAttached()">isAttached</a></code></div>
+              <p>Returns false if the corresponding layout was detached from the hierarchy.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>?</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#parentCoordinates()">parentCoordinates</a></code></div>
+              <p>The coordinates of the parent layout modifier or parent layout if there is no parent layout modifier, or <code>null</code> if there is no parent.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>?</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#parentLayoutCoordinates()">parentLayoutCoordinates</a></code></div>
+              <p>The coordinates of the parent layout.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#providedAlignmentLines()">providedAlignmentLines</a></code></div>
+              <p>The alignment lines provided for this layout, not including inherited lines.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#size()">size</a></code></div>
+              <p>The size of this layout in the local coordinates space.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#(androidx.compose.ui.layout.LayoutCoordinates).boundsInParent()">boundsInParent</a>()</code></div>
+              <p>Returns the bounding box of the child in the parent's content area, including any clipping done with respect to the parent.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#(androidx.compose.ui.layout.LayoutCoordinates).boundsInRoot()">boundsInRoot</a>()</code></div>
+              <p>The boundaries of this layout inside the root composable.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#(androidx.compose.ui.layout.LayoutCoordinates).boundsInWindow()">boundsInWindow</a>()</code></div>
+              <p>The boundaries of this layout relative to the window's origin.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#(androidx.compose.ui.layout.LayoutCoordinates).findRootCoordinates()">findRootCoordinates</a>()</code></div>
+              <p>Walks up the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> hierarchy to find the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> whose <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#parentCoordinates()">LayoutCoordinates.parentCoordinates</a></code> is <code>null</code> and returns it.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#(androidx.compose.ui.layout.LayoutCoordinates).positionInParent()">positionInParent</a>()</code></div>
+              <p>Returns the position of the top-left in the parent's content area or (0, 0) for the root.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#(androidx.compose.ui.layout.LayoutCoordinates).positionInRoot()">positionInRoot</a>()</code></div>
+              <p>The position of this layout inside the root composable.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#(androidx.compose.ui.layout.LayoutCoordinates).positionInWindow()">positionInWindow</a>()</code></div>
+              <p>The position of this layout relative to the window.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="get-androidx.compose.ui.layout.AlignmentLine-"></a><a name="get"></a>
+        <h3 class="api-name" id="get(androidx.compose.ui.layout.AlignmentLine)">get</h3>
+        <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#get(androidx.compose.ui.layout.AlignmentLine)">get</a>(alignmentLine:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>Returns the position in pixels of an <code><a href="/reference/kotlin/androidx/compose/ui/layout/AlignmentLine.html">alignment line</a></code>, or <code><a href="/reference/kotlin/androidx/compose/ui/layout/AlignmentLine.Companion.html#Unspecified()">AlignmentLine.Unspecified</a></code> if the line is not provided.</p>
+      </div>
+      <div class="api-item"><a name="localBoundingBoxOf(androidx.compose.ui.layout.LayoutCoordinates, kotlin.Boolean)"></a><a name="localBoundingBoxOf-androidx.compose.ui.layout.LayoutCoordinates-kotlin.Boolean-"></a><a name="localboundingboxof"></a>
+        <h3 class="api-name" id="localBoundingBoxOf(androidx.compose.ui.layout.LayoutCoordinates,kotlin.Boolean)">localBoundingBoxOf</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localBoundingBoxOf(androidx.compose.ui.layout.LayoutCoordinates,kotlin.Boolean)">localBoundingBoxOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;sourceCoordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;clipBounds:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = true<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></pre>
+        <p>Returns the bounding box of <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localBoundingBoxOf(androidx.compose.ui.layout.LayoutCoordinates,kotlin.Boolean)">sourceCoordinates</a></code> in the local coordinates. If <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localBoundingBoxOf(androidx.compose.ui.layout.LayoutCoordinates,kotlin.Boolean)">clipBounds</a></code> is <code>true</code>, any clipping that occurs between <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localBoundingBoxOf(androidx.compose.ui.layout.LayoutCoordinates,kotlin.Boolean)">sourceCoordinates</a></code> and this layout will affect the returned bounds, and can even result in an empty rectangle if clipped regions do not overlap. If <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localBoundingBoxOf(androidx.compose.ui.layout.LayoutCoordinates,kotlin.Boolean)">clipBounds</a></code> is false, the bounding box of <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localBoundingBoxOf(androidx.compose.ui.layout.LayoutCoordinates,kotlin.Boolean)">sourceCoordinates</a></code> will be converted to local coordinates irrespective of any clipping applied between the layouts.</p>
+        <p>When rotation or scaling is applied, the bounding box of the rotated or scaled value will be computed in the local coordinates. For example, if a 40 pixels x 20 pixel layout is rotated 90 degrees, the bounding box will be 20 pixels x 40 pixels in its parent's coordinates.</p>
+      </div>
+      <div class="api-item"><a name="localPositionOf(androidx.compose.ui.layout.LayoutCoordinates, androidx.compose.ui.geometry.Offset)"></a><a name="localPositionOf-androidx.compose.ui.layout.LayoutCoordinates-androidx.compose.ui.geometry.Offset-"></a><a name="localpositionof"></a>
+        <h3 class="api-name" id="localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset)">localPositionOf</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset)">localPositionOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;sourceCoordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;relativeToSource:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+        <p>Converts an <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset)">relativeToSource</a></code> in <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset)">sourceCoordinates</a></code> space into local coordinates. <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset)">sourceCoordinates</a></code> may be any <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> that belong to the same compose layout hierarchy.</p>
+      </div>
+      <div class="api-item"><a name="localToRoot-androidx.compose.ui.geometry.Offset-"></a><a name="localtoroot"></a>
+        <h3 class="api-name" id="localToRoot(androidx.compose.ui.geometry.Offset)">localToRoot</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localToRoot(androidx.compose.ui.geometry.Offset)">localToRoot</a>(relativeToLocal:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+        <p>Converts a local position within this layout into an offset from the root composable.</p>
+      </div>
+      <div class="api-item"><a name="localToWindow-androidx.compose.ui.geometry.Offset-"></a><a name="localtowindow"></a>
+        <h3 class="api-name" id="localToWindow(androidx.compose.ui.geometry.Offset)">localToWindow</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localToWindow(androidx.compose.ui.geometry.Offset)">localToWindow</a>(relativeToLocal:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+        <p>Converts <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#localToWindow(androidx.compose.ui.geometry.Offset)">relativeToLocal</a></code> position within this layout into an <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code> relative to the window's origin.</p>
+      </div>
+      <div class="api-item"><a name="transformFrom(androidx.compose.ui.layout.LayoutCoordinates, androidx.compose.ui.graphics.Matrix)"></a><a name="transformFrom-androidx.compose.ui.layout.LayoutCoordinates-androidx.compose.ui.graphics.Matrix-"></a><a name="transformfrom"></a>
+        <h3 class="api-name" id="transformFrom(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.graphics.Matrix)">transformFrom</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#transformFrom(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.graphics.Matrix)">transformFrom</a>(sourceCoordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>,&nbsp;matrix:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Matrix.html">Matrix</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Modifies <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#transformFrom(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.graphics.Matrix)">matrix</a></code> to be a transform to convert a coordinate in <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#transformFrom(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.graphics.Matrix)">sourceCoordinates</a></code> to a coordinate in <code>this</code> <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="windowToLocal-androidx.compose.ui.geometry.Offset-"></a><a name="windowtolocal"></a>
+        <h3 class="api-name" id="windowToLocal(androidx.compose.ui.geometry.Offset)">windowToLocal</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#windowToLocal(androidx.compose.ui.geometry.Offset)">windowToLocal</a>(relativeToWindow:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+        <p>Converts <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#windowToLocal(androidx.compose.ui.geometry.Offset)">relativeToWindow</a></code> relative to the window's origin into an <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code> relative to this layout.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getIsAttached()"></a><a name="setIsAttached()"></a><a name="getIsAttached--"></a><a name="setIsAttached--"></a>
+        <h3 class="api-name" id="isAttached()">isAttached</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#isAttached()">isAttached</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <p>Returns false if the corresponding layout was detached from the hierarchy.</p>
+      </div>
+      <div class="api-item"><a name="getParentCoordinates()"></a><a name="setParentCoordinates()"></a><a name="getParentCoordinates--"></a><a name="setParentCoordinates--"></a>
+        <h3 class="api-name" id="parentCoordinates()">parentCoordinates</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#parentCoordinates()">parentCoordinates</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>?</pre>
+        <p>The coordinates of the parent layout modifier or parent layout if there is no parent layout modifier, or <code>null</code> if there is no parent.</p>
+      </div>
+      <div class="api-item"><a name="getParentLayoutCoordinates()"></a><a name="setParentLayoutCoordinates()"></a><a name="getParentLayoutCoordinates--"></a><a name="setParentLayoutCoordinates--"></a>
+        <h3 class="api-name" id="parentLayoutCoordinates()">parentLayoutCoordinates</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#parentLayoutCoordinates()">parentLayoutCoordinates</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>?</pre>
+        <p>The coordinates of the parent layout. Null if there is no parent.</p>
+      </div>
+      <div class="api-item"><a name="getProvidedAlignmentLines()"></a><a name="setProvidedAlignmentLines()"></a><a name="getProvidedAlignmentLines--"></a><a name="setProvidedAlignmentLines--"></a>
+        <h3 class="api-name" id="providedAlignmentLines()">providedAlignmentLines</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#providedAlignmentLines()">providedAlignmentLines</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a>&gt;</pre>
+        <p>The alignment lines provided for this layout, not including inherited lines.</p>
+      </div>
+      <div class="api-item"><a name="getSize()"></a><a name="setSize()"></a><a name="getSize--"></a><a name="setSize--"></a>
+        <h3 class="api-name" id="size()">size</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#size()">size</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a></pre>
+        <p>The size of this layout in the local coordinates space.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.layout.LayoutCoordinates-.boundsInParent--"></a><a name="boundsinparent"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.layout.LayoutCoordinates).boundsInParent()">boundsInParent</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#(androidx.compose.ui.layout.LayoutCoordinates).boundsInParent()">boundsInParent</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></pre>
+        <p>Returns the bounding box of the child in the parent's content area, including any clipping done with respect to the parent. For the root, the bounds is positioned at (0, 0) and sized to the size of the root.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.layout.LayoutCoordinates-.boundsInRoot--"></a><a name="boundsinroot"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.layout.LayoutCoordinates).boundsInRoot()">boundsInRoot</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#(androidx.compose.ui.layout.LayoutCoordinates).boundsInRoot()">boundsInRoot</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></pre>
+        <p>The boundaries of this layout inside the root composable.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.layout.LayoutCoordinates-.boundsInWindow--"></a><a name="boundsinwindow"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.layout.LayoutCoordinates).boundsInWindow()">boundsInWindow</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#(androidx.compose.ui.layout.LayoutCoordinates).boundsInWindow()">boundsInWindow</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></pre>
+        <p>The boundaries of this layout relative to the window's origin.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.layout.LayoutCoordinates-.findRootCoordinates--"></a><a name="findrootcoordinates"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.layout.LayoutCoordinates).findRootCoordinates()">findRootCoordinates</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#(androidx.compose.ui.layout.LayoutCoordinates).findRootCoordinates()">findRootCoordinates</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></pre>
+        <p>Walks up the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> hierarchy to find the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> whose <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#parentCoordinates()">LayoutCoordinates.parentCoordinates</a></code> is <code>null</code> and returns it. If <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#isAttached()">LayoutCoordinates.isAttached</a></code>, this will have the size of the <code><a href="/reference/kotlin/androidx/compose/ui/platform/ComposeView.html">ComposeView</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.layout.LayoutCoordinates-.positionInParent--"></a><a name="positioninparent"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.layout.LayoutCoordinates).positionInParent()">positionInParent</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#(androidx.compose.ui.layout.LayoutCoordinates).positionInParent()">positionInParent</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+        <p>Returns the position of the top-left in the parent's content area or (0, 0) for the root.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.layout.LayoutCoordinates-.positionInRoot--"></a><a name="positioninroot"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.layout.LayoutCoordinates).positionInRoot()">positionInRoot</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#(androidx.compose.ui.layout.LayoutCoordinates).positionInRoot()">positionInRoot</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+        <p>The position of this layout inside the root composable.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.layout.LayoutCoordinates-.positionInWindow--"></a><a name="positioninwindow"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.layout.LayoutCoordinates).positionInWindow()">positionInWindow</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html#(androidx.compose.ui.layout.LayoutCoordinates).positionInWindow()">positionInWindow</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+        <p>The position of this layout relative to the window.</p>
+      </div>
+    </div>
+  </body>
+</html>

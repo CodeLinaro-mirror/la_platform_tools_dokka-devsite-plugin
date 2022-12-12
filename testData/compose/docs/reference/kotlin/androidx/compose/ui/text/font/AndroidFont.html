@@ -1,0 +1,224 @@
+<html devsite="true">
+  <head>
+    <title>AndroidFont</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-text/androidx/compose/ui/text/font/AndroidFont.kt+class:androidx.compose.ui.text.font.AndroidFont&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>AndroidFont</h1>
+    <p>
+      <pre>abstract class <a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a> : <a href="/reference/kotlin/androidx/compose/ui/text/font/Font.html">Font</a></pre>
+    </p>
+    <hr>
+    <p>Font for use on Android.</p>
+    <p>All <code><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a></code> produce an <code><a href="https://developer.android.com/reference/android/graphics/Typeface.html">android.graphics.Typeface</a></code> which may be used to draw text on Android. This is the main low-level API for introducing a new Font description to Compose on Android for both blocking and async load.</p>
+    <p>You may subclass this to add new types of font descriptions that may be used in <code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontListFontFamily.html">FontListFontFamily</a></code>. For example, you can add a <code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontLoadingStrategy.Companion.html#Blocking()">FontLoadingStrategy.Blocking</a></code> font that returns a Typeface from a local resource not supported by an existing <code><a href="/reference/kotlin/androidx/compose/ui/text/font/Font.html">Font</a></code>. Or, you can create an <code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontLoadingStrategy.Companion.html#Async()">FontLoadingStrategy.Async</a></code> font that loads a font file from your server.</p>
+    <p>When introducing new font descriptors, it is recommended to follow the patterns of providing a public Font constructor and a private implementation class:</p>
+    <ol>
+      <li>
+        <p>Declare an internal or private subclass of AndroidFont</p>
+      </li>
+      <li>
+        <p>Expose a public Font(...) constructor that returns your new type.</p>
+      </li>
+    </ol>
+    <p>Font constructors are</p>
+    <ol>
+      <li>
+        <p>Regular functions named <code>Font</code> that return type <code>Font</code></p>
+      </li>
+      <li>
+        <p>The first argument is the font name, or similar object that describes the font uniquely</p>
+      </li>
+      <li>
+        <p>If the font has a provider, loader, or similar argument, put it after the font name.</p>
+      </li>
+      <li>
+        <p>The last two arguments are FontWeight and FontStyle.</p>
+      </li>
+    </ol>
+    <p>Examples of Font constructors:</p>
+    <pre class="prettyprint">fun Font(&quot;myIdentifier&quot;, MyFontLoader, FontWeight, FontStyle): Font<br>fun Font(CustomFontDescription(...), MyFontLoader, FontWeight, FontStyle): Font<br>fun Font(CustomFontDescription(...), FontWeight, FontStyle): Font</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>interface <a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.TypefaceLoader.html">AndroidFont.TypefaceLoader</a></code></div>
+              <p>Loader for loading an <code><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a></code> and producing an <code><a href="https://developer.android.com/reference/android/graphics/Typeface.html">android.graphics.Typeface</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><span><del><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html#AndroidFont(androidx.compose.ui.text.font.FontLoadingStrategy,androidx.compose.ui.text.font.AndroidFont.TypefaceLoader)">AndroidFont</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;loadingStrategy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontLoadingStrategy.html">FontLoadingStrategy</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;typefaceLoader:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.TypefaceLoader.html">AndroidFont.TypefaceLoader</a><br>)</code></div>
+              <p><strong>This function is deprecated.</strong> Replaced with fontVariation constructor</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html#AndroidFont(androidx.compose.ui.text.font.FontLoadingStrategy,androidx.compose.ui.text.font.AndroidFont.TypefaceLoader,androidx.compose.ui.text.font.FontVariation.Settings)">AndroidFont</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;loadingStrategy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontLoadingStrategy.html">FontLoadingStrategy</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;typefaceLoader:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.TypefaceLoader.html">AndroidFont.TypefaceLoader</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;variationSettings:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontVariation.Settings.html">FontVariation.Settings</a><br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final <a href="/reference/kotlin/androidx/compose/ui/text/font/FontLoadingStrategy.html">FontLoadingStrategy</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html#loadingStrategy()">loadingStrategy</a></code></div>
+              <p>loadingStrategy this font will provide in fallback chains</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.TypefaceLoader.html">AndroidFont.TypefaceLoader</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html#typefaceLoader()">typefaceLoader</a></code></div>
+              <p>a loader that knows how to load this <code><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a></code>, may be shared between several fonts</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontVariation.Settings.html">FontVariation.Settings</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html#variationSettings()">variationSettings</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/text/font/Font.html">androidx.compose.ui.text.font.Font</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>abstract <a href="/reference/kotlin/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/ui/text/font/Font.html#style()">style</a></code></div>
+                        <p>The style of the font, normal or italic.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract <a href="/reference/kotlin/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/ui/text/font/Font.html#weight()">weight</a></code></div>
+                        <p>The weight of the font.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="AndroidFont(androidx.compose.ui.text.font.FontLoadingStrategy, androidx.compose.ui.text.font.AndroidFont.TypefaceLoader)"></a><a name="AndroidFont-androidx.compose.ui.text.font.FontLoadingStrategy-androidx.compose.ui.text.font.AndroidFont.TypefaceLoader-"></a><a name="androidfont"></a>
+        <h3 class="api-name" id="AndroidFont(androidx.compose.ui.text.font.FontLoadingStrategy,androidx.compose.ui.text.font.AndroidFont.TypefaceLoader)">AndroidFont</h3>
+        <pre class="api-signature no-pretty-print"><span><del><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html#AndroidFont(androidx.compose.ui.text.font.FontLoadingStrategy,androidx.compose.ui.text.font.AndroidFont.TypefaceLoader)">AndroidFont</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;loadingStrategy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontLoadingStrategy.html">FontLoadingStrategy</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;typefaceLoader:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.TypefaceLoader.html">AndroidFont.TypefaceLoader</a><br>)</pre>
+        <aside class="caution"><strong>This function is deprecated.</strong><br>Replaced with fontVariation constructor</aside>
+      </div>
+      <div class="api-item"><a name="AndroidFont(androidx.compose.ui.text.font.FontLoadingStrategy, androidx.compose.ui.text.font.AndroidFont.TypefaceLoader, androidx.compose.ui.text.font.FontVariation.Settings)"></a><a name="AndroidFont-androidx.compose.ui.text.font.FontLoadingStrategy-androidx.compose.ui.text.font.AndroidFont.TypefaceLoader-androidx.compose.ui.text.font.FontVariation.Settings-"></a><a name="androidfont"></a>
+        <h3 class="api-name" id="AndroidFont(androidx.compose.ui.text.font.FontLoadingStrategy,androidx.compose.ui.text.font.AndroidFont.TypefaceLoader,androidx.compose.ui.text.font.FontVariation.Settings)">AndroidFont</h3>
+        <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html#AndroidFont(androidx.compose.ui.text.font.FontLoadingStrategy,androidx.compose.ui.text.font.AndroidFont.TypefaceLoader,androidx.compose.ui.text.font.FontVariation.Settings)">AndroidFont</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;loadingStrategy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontLoadingStrategy.html">FontLoadingStrategy</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;typefaceLoader:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.TypefaceLoader.html">AndroidFont.TypefaceLoader</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;variationSettings:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontVariation.Settings.html">FontVariation.Settings</a><br>)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>loadingStrategy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontLoadingStrategy.html">FontLoadingStrategy</a></code></td>
+                <td>
+                  <p>loadingStrategy this font will provide in fallback chains</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>typefaceLoader:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.TypefaceLoader.html">AndroidFont.TypefaceLoader</a></code></td>
+                <td>
+                  <p>a loader that knows how to load this <code><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a></code>, may be shared between several fonts</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getLoadingStrategy()"></a><a name="setLoadingStrategy()"></a><a name="getLoadingStrategy--"></a><a name="setLoadingStrategy--"></a>
+        <h3 class="api-name" id="loadingStrategy()">loadingStrategy</h3>
+        <pre class="api-signature no-pretty-print">final&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html#loadingStrategy()">loadingStrategy</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontLoadingStrategy.html">FontLoadingStrategy</a></pre>
+        <p>loadingStrategy this font will provide in fallback chains</p>
+      </div>
+      <div class="api-item"><a name="getTypefaceLoader()"></a><a name="setTypefaceLoader()"></a><a name="getTypefaceLoader--"></a><a name="setTypefaceLoader--"></a>
+        <h3 class="api-name" id="typefaceLoader()">typefaceLoader</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html#typefaceLoader()">typefaceLoader</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.TypefaceLoader.html">AndroidFont.TypefaceLoader</a></pre>
+        <p>a loader that knows how to load this <code><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a></code>, may be shared between several fonts</p>
+      </div>
+      <div class="api-item"><a name="getVariationSettings()"></a><a name="setVariationSettings()"></a><a name="getVariationSettings--"></a><a name="setVariationSettings--"></a>
+        <h3 class="api-name" id="variationSettings()">variationSettings</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html#variationSettings()">variationSettings</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontVariation.Settings.html">FontVariation.Settings</a></pre>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,403 @@
+<html devsite="true">
+  <head>
+    <title>Connector</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-graphics/androidx/compose/ui/graphics/colorspace/Connector.kt+class:androidx.compose.ui.graphics.colorspace.Connector&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>Connector</h1>
+    <p>
+      <pre>public class <a href="/reference/androidx/compose/ui/graphics/colorspace/Connector.html">Connector</a></pre>
+    </p>
+    <hr>
+    <p>A connector transforms colors from a source color space to a destination color space.</p>
+    <p>A source color space is connected to a destination color space using the color transform <code>C</code> computed from their respective transforms noted <code>Tsrc</code> and <code>Tdst</code> in the following equation:</p>
+    <p><a href="https://developer.android.com/reference/android/graphics/ColorSpace.Connector">See equation</a></p>
+    <p>The transform <code>C</code> shown above is only valid when the source and destination color spaces have the same profile connection space (PCS). We know that instances of <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code> always use CIE XYZ as their PCS but their white points might differ. When they do, we must perform a chromatic adaptation of the color spaces' transforms. To do so, we use the von Kries method described in the documentation of <code><a href="/reference/androidx/compose/ui/graphics/colorspace/Adaptation.html">Adaptation</a></code>, using the CIE standard illuminant <code><a href="/reference/androidx/compose/ui/graphics/colorspace/Illuminant.html#D50()">D50</a></code> as the target white point.</p>
+    <p>Example of conversion from <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#Srgb()">sRGB</a></code> to <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#DciP3()">DCI-P3</a></code>:</p>
+    <pre class="prettyprint">val connector = ColorSpaces.Srgb.connect(ColorSpaces.DciP3);
+val p3 = connector.transform(1.0f, 0.0f, 0.0f);
+// p3 contains { 0.9473, 0.2740, 0.2076 }</pre>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">See also</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Adaptation.html">Adaptation</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/package-summary.html#(androidx.compose.ui.graphics.colorspace.ColorSpace).adapt(androidx.compose.ui.graphics.colorspace.WhitePoint,androidx.compose.ui.graphics.colorspace.Adaptation)">adapt</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/package-summary.html#(androidx.compose.ui.graphics.colorspace.ColorSpace).connect(androidx.compose.ui.graphics.colorspace.ColorSpace,androidx.compose.ui.graphics.colorspace.RenderIntent)">connect</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Connector.html#destination()">destination</a></code></div>
+              <p>Returns the destination color space this connector will convert to.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/colorspace/RenderIntent.html">RenderIntent</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Connector.html#renderIntent()">renderIntent</a></code></div>
+              <p>Returns the render intent this connector will use when mapping the source color space to the destination color space.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Connector.html#source()">source</a></code></div>
+              <p>Returns the source color space this connector will convert from.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> float[]</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Connector.html#transform(kotlin.FloatArray)">transform</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> float[]&nbsp;v)</code></div>
+              <p>Transforms the specified color from the source color space to a color in the destination color space.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> float[]</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Connector.html#transform(kotlin.Float,kotlin.Float,kotlin.Float)">transform</a>(float&nbsp;r,&nbsp;float&nbsp;g,&nbsp;float&nbsp;b)</code></div>
+              <p>Transforms the specified color from the source color space to a color in the destination color space.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getDestination()"></a><a name="setDestination()"></a><a name="getDestination--"></a><a name="setDestination--"></a>
+        <h3 class="api-name" id="destination()">destination</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/colorspace/Connector.html#destination()">destination</a></pre>
+        <p>Returns the destination color space this connector will convert to.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code></td>
+                <td>
+                  <p>A non-null instance of <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code></p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Connector.html#source()">source</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getRenderIntent()"></a><a name="setRenderIntent()"></a><a name="getRenderIntent--"></a><a name="setRenderIntent--"></a>
+        <h3 class="api-name" id="renderIntent()">renderIntent</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/colorspace/RenderIntent.html">RenderIntent</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/colorspace/Connector.html#renderIntent()">renderIntent</a></pre>
+        <p>Returns the render intent this connector will use when mapping the source color space to the destination color space.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/colorspace/RenderIntent.html">RenderIntent</a></code></td>
+                <td>
+                  <p>A non-null <code><a href="/reference/androidx/compose/ui/graphics/colorspace/RenderIntent.html">RenderIntent</a></code></p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/RenderIntent.html">RenderIntent</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getSource()"></a><a name="setSource()"></a><a name="getSource--"></a><a name="setSource--"></a>
+        <h3 class="api-name" id="source()">source</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/colorspace/Connector.html#source()">source</a></pre>
+        <p>Returns the source color space this connector will convert from.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code></td>
+                <td>
+                  <p>A non-null instance of <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code></p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Connector.html#destination()">destination</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="transform-kotlin.FloatArray-"></a><a name="transform"></a>
+        <h3 class="api-name" id="transform(kotlin.FloatArray)">transform</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> float[]&nbsp;<a href="/reference/androidx/compose/ui/graphics/colorspace/Connector.html#transform(kotlin.FloatArray)">transform</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> float[]&nbsp;v)</pre>
+        <p>Transforms the specified color from the source color space to a color in the destination color space.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> float[]&nbsp;v</code></td>
+                <td>
+                  <p>A non-null array of 3 floats containing the value to transform and that will hold the result of the transform</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> float[]</code></td>
+                <td>
+                  <p>The <code><a href="/reference/androidx/compose/ui/graphics/colorspace/Connector.html#transform(kotlin.FloatArray)">v</a></code> array passed as a parameter, containing the specified color transformed from the source space to the destination space</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Connector.html#transform(kotlin.Float,kotlin.Float,kotlin.Float)">transform</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="transform(kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="transform-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="transform"></a>
+        <h3 class="api-name" id="transform(kotlin.Float,kotlin.Float,kotlin.Float)">transform</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> float[]&nbsp;<a href="/reference/androidx/compose/ui/graphics/colorspace/Connector.html#transform(kotlin.Float,kotlin.Float,kotlin.Float)">transform</a>(float&nbsp;r,&nbsp;float&nbsp;g,&nbsp;float&nbsp;b)</pre>
+        <p>Transforms the specified color from the source color space to a color in the destination color space. This convenience method assumes a source color model with 3 components (typically RGB). To transform from color models with more than 3 components, such as <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorModel.Companion.html#Cmyk()">CMYK</a></code>, use <code><a href="/reference/androidx/compose/ui/graphics/colorspace/Connector.html#transform(kotlin.Float,kotlin.Float,kotlin.Float)">transform</a></code> instead.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>float&nbsp;r</code></td>
+                <td>
+                  <p>The red component of the color to transform</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>float&nbsp;g</code></td>
+                <td>
+                  <p>The green component of the color to transform</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>float&nbsp;b</code></td>
+                <td>
+                  <p>The blue component of the color to transform</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> float[]</code></td>
+                <td>
+                  <p>A new array of 3 floats containing the specified color transformed from the source space to the destination space</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Connector.html#transform(kotlin.Float,kotlin.Float,kotlin.Float)">transform</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

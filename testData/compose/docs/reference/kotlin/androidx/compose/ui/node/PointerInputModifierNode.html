@@ -1,0 +1,215 @@
+<html devsite="true">
+  <head>
+    <title>PointerInputModifierNode</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/node/PointerInputModifierNode.kt+class:androidx.compose.ui.node.PointerInputModifierNode&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>PointerInputModifierNode</h1>
+    <p>
+      <pre>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>interface <a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a> : <a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></pre>
+    </p>
+    <hr>
+    <p>A <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">androidx.compose.ui.Modifier.Node</a></code> that receives <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code>s, interprets them, and consumes the aspects of the changes that it is react to such that other <code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a></code>s don't also react to them.</p>
+    <p>This is the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">androidx.compose.ui.Modifier.Node</a></code> equivalent of <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputModifier.html">androidx.compose.ui.input.pointer.PointerInputModifier</a></code></p>
+    <pre class="prettyprint">
+import androidx.compose.ui.node.modifierElementOf
+
+class OnPointerEventNode(var callback: (PointerEvent) -&gt; Unit) :
+    PointerInputModifierNode, Modifier.Node() {
+    override fun onPointerEvent(
+        pointerEvent: PointerEvent,
+        pass: PointerEventPass,
+        bounds: IntSize
+    ) {
+        if (pass == PointerEventPass.Initial) {
+            callback(pointerEvent)
+        }
+    }
+
+    override fun onCancelPointerInput() {
+        // Do nothing
+    }
+}
+
+fun Modifier.onPointerEvent(callback: (PointerEvent) -&gt; Unit) = this then modifierElementOf(
+    key = callback,
+    create = { OnPointerEventNode(callback) },
+    update = { it.callback = callback },
+    definitions = {
+        name = &quot;onPointerEvent&quot;
+        properties[&quot;callback&quot;] = callback
+    }
+)</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html#interceptOutOfBoundsChildEvents()">interceptOutOfBoundsChildEvents</a>()</code></div>
+              <p>Intercept pointer input that children receive even if the pointer is out of bounds.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html#onCancelPointerInput()">onCancelPointerInput</a>()</code></div>
+              <p>Invoked to notify the handler that no more calls to <code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a></code> will be made, until at least new pointers exist.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html#onPointerEvent(androidx.compose.ui.input.pointer.PointerEvent,androidx.compose.ui.input.pointer.PointerEventPass,androidx.compose.ui.unit.IntSize)">onPointerEvent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;pointerEvent:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEvent.html">PointerEvent</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;pass:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html">PointerEventPass</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;bounds:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a><br>)</code></div>
+              <p>Invoked when pointers that previously hit this <code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a></code> have changed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html#sharePointerInputWithSiblings()">sharePointerInputWithSiblings</a>()</code></div>
+              <p>If <code>false</code>, then this <code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a></code> will not allow siblings under it to respond to events.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">androidx.compose.ui.node.DelegatableNode</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html#node()">node</a></code></div>
+                        <p>A reference of the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that holds this node's position in the node hierarchy.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="interceptOutOfBoundsChildEvents--"></a><a name="interceptoutofboundschildevents"></a>
+        <h3 class="api-name" id="interceptOutOfBoundsChildEvents()">interceptOutOfBoundsChildEvents</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html#interceptOutOfBoundsChildEvents()">interceptOutOfBoundsChildEvents</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <p>Intercept pointer input that children receive even if the pointer is out of bounds.</p>
+        <p>If <code>true</code>, and a child has been moved out of this layout and receives an event, this will receive that event. If <code>false</code>, a child receiving pointer input outside of the bounds of this layout will not trigger any events in this.</p>
+      </div>
+      <div class="api-item"><a name="onCancelPointerInput--"></a><a name="oncancelpointerinput"></a>
+        <h3 class="api-name" id="onCancelPointerInput()">onCancelPointerInput</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html#onCancelPointerInput()">onCancelPointerInput</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Invoked to notify the handler that no more calls to <code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a></code> will be made, until at least new pointers exist.  This can occur for a few reasons:</p>
+        <ol>
+          <li>
+            <p>Android dispatches ACTION_CANCEL to Compose.</p>
+          </li>
+          <li>
+            <p>This <code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a></code> is no longer associated with a LayoutNode.</p>
+          </li>
+          <li>
+            <p>This <code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a></code>'s associated LayoutNode is no longer in the composition tree.</p>
+          </li>
+        </ol>
+      </div>
+      <div class="api-item"><a name="onPointerEvent(androidx.compose.ui.input.pointer.PointerEvent, androidx.compose.ui.input.pointer.PointerEventPass, androidx.compose.ui.unit.IntSize)"></a><a name="onPointerEvent-androidx.compose.ui.input.pointer.PointerEvent-androidx.compose.ui.input.pointer.PointerEventPass-androidx.compose.ui.unit.IntSize-"></a><a name="onpointerevent"></a>
+        <h3 class="api-name" id="onPointerEvent(androidx.compose.ui.input.pointer.PointerEvent,androidx.compose.ui.input.pointer.PointerEventPass,androidx.compose.ui.unit.IntSize)">onPointerEvent</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html#onPointerEvent(androidx.compose.ui.input.pointer.PointerEvent,androidx.compose.ui.input.pointer.PointerEventPass,androidx.compose.ui.unit.IntSize)">onPointerEvent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;pointerEvent:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEvent.html">PointerEvent</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;pass:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html">PointerEventPass</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;bounds:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Invoked when pointers that previously hit this <code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a></code> have changed. It is expected that any <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code>s that are used during this event and should not be considered valid to be used in other nodes should be marked as consumed by calling <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html#consume()">PointerInputChange.consume</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>pointerEvent:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEvent.html">PointerEvent</a></code></td>
+                <td>
+                  <p>The list of <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code>s with positions relative to this <code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>pass:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html">PointerEventPass</a></code></td>
+                <td>
+                  <p>The <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html">PointerEventPass</a></code> in which this function is being called.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>bounds:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a></code></td>
+                <td>
+                  <p>The width and height associated with this <code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html">PointerEventPass</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="sharePointerInputWithSiblings--"></a><a name="sharepointerinputwithsiblings"></a>
+        <h3 class="api-name" id="sharePointerInputWithSiblings()">sharePointerInputWithSiblings</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html#sharePointerInputWithSiblings()">sharePointerInputWithSiblings</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <p>If <code>false</code>, then this <code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a></code> will not allow siblings under it to respond to events. If <code>true</code>, this will have the first chance to respond and the next sibling under will then get a chance to respond as well. This trigger acts at the Layout level, so if any <code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a></code>s on a Layout has <code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html#sharePointerInputWithSiblings()">sharePointerInputWithSiblings</a></code> set to <code>true</code> then the Layout will share with siblings.</p>
+      </div>
+    </div>
+  </body>
+</html>

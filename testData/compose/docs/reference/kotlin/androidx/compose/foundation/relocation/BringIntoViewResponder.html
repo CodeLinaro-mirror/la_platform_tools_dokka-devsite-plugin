@@ -1,0 +1,240 @@
+<html devsite="true">
+  <head>
+    <title>BringIntoViewResponder</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/relocation/BringIntoViewResponder.kt+class:androidx.compose.foundation.relocation.BringIntoViewResponder&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>BringIntoViewResponder</h1>
+    <p>
+      <pre>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>interface <a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewResponder.html">BringIntoViewResponder</a></pre>
+    </p>
+    <hr>
+    <p>A parent that can respond to <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewResponder.html#bringChildIntoView(kotlin.Function0)">bringChildIntoView</a></code> requests from its children, and scroll so that the item is visible on screen. To apply a responder to an element, pass it to the <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/package-summary.html#(androidx.compose.ui.Modifier).bringIntoViewResponder(androidx.compose.foundation.relocation.BringIntoViewResponder)">bringIntoViewResponder</a></code> modifier.</p>
+    <p>When a component calls <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewRequester.html#bringIntoView(androidx.compose.ui.geometry.Rect)">BringIntoViewRequester.bringIntoView</a></code>, the <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/package-summary.html#ModifierLocalBringIntoViewParent()">BringIntoView ModifierLocal</a></code> is read to gain access to the <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewResponder.html">BringIntoViewResponder</a></code>, which is responsible for, in order:</p>
+    <ol>
+      <li>
+        <p>Calculating a rectangle that its parent responder should bring into view by returning it from     <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewResponder.html#calculateRectForParent(androidx.compose.ui.geometry.Rect)">calculateRectForParent</a></code>.</p>
+      </li>
+      <li>
+        <p>Performing any scroll or other layout adjustments needed to ensure the requested rectangle is     brought into view in <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewResponder.html#bringChildIntoView(kotlin.Function0)">bringChildIntoView</a></code>.</p>
+      </li>
+    </ol>
+    <p>Here is a sample where a composable is brought into view:</p>
+    <pre class="prettyprint">
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.focus.focusTarget
+import androidx.compose.ui.focus.onFocusChanged
+
+Row(Modifier.horizontalScroll(rememberScrollState())) {
+    repeat(100) {
+        val bringIntoViewRequester = remember { BringIntoViewRequester() }
+        val coroutineScope = rememberCoroutineScope()
+        Box(
+            Modifier
+                // This associates the RelocationRequester with a Composable that wants to be
+                // brought into view.
+                .bringIntoViewRequester(bringIntoViewRequester)
+                .onFocusChanged {
+                    if (it.isFocused) {
+                        coroutineScope.launch {
+                            // This sends a request to all parents that asks them to scroll so
+                            // that this item is brought into view.
+                            bringIntoViewRequester.bringIntoView()
+                        }
+                    }
+                }
+                .focusTarget()
+        )
+    }
+}</pre>
+    <p>Here is a sample where a part of a composable is brought into view:</p>
+    <pre class="prettyprint">
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.border
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
+
+with(LocalDensity.current) {
+    val bringIntoViewRequester = remember { BringIntoViewRequester() }
+    val coroutineScope = rememberCoroutineScope()
+    Column {
+        Box(
+            Modifier
+                .border(2.dp, Color.Black)
+                .size(500f.toDp())
+                .horizontalScroll(rememberScrollState())
+        ) {
+            Canvas(
+                Modifier
+                    .size(1500f.toDp(), 500f.toDp())
+                    // This associates the RelocationRequester with a Composable that wants
+                    // to be brought into view.
+                    .bringIntoViewRequester(bringIntoViewRequester)
+            ) {
+                drawCircle(color = Color.Red, radius = 250f, center = Offset(750f, 250f))
+            }
+        }
+        Button(
+            onClick = {
+                val circleCoordinates = Rect(500f, 0f, 1000f, 500f)
+                coroutineScope.launch {
+                    // This sends a request to all parents that asks them to scroll so that
+                    // the circle is brought into view.
+                    bringIntoViewRequester.bringIntoView(circleCoordinates)
+                }
+            }
+        ) {
+            Text(&quot;Bring circle into View&quot;)
+        }
+    }
+}</pre>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">See also</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewRequester.html">BringIntoViewRequester</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>suspend <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewResponder.html#bringChildIntoView(kotlin.Function0)">bringChildIntoView</a>(localRect:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>)</code></div>
+              <p>Bring this specified rectangle into bounds by making this scrollable parent scroll appropriately.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewResponder.html#calculateRectForParent(androidx.compose.ui.geometry.Rect)">calculateRectForParent</a>(localRect:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>)</code></div>
+              <p>Return the rectangle in this node that should be brought into view by this node's parent, in coordinates relative to this node.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="bringChildIntoView-kotlin.Function0-"></a><a name="bringchildintoview"></a>
+        <h3 class="api-name" id="bringChildIntoView(kotlin.Function0)">bringChildIntoView</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewResponder.html#bringChildIntoView(kotlin.Function0)">bringChildIntoView</a>(localRect:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Bring this specified rectangle into bounds by making this scrollable parent scroll appropriately.</p>
+        <p>This method should ensure that only one call is being handled at a time. If you use Compose's <code>Animatable</code> you get this for free, since it will cancel the previous animation when a new one is started while preserving velocity.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>localRect:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+                <td>
+                  <p>A function returning the rectangle that should be brought into view, relative to this node. This is the same rectangle that will have been passed to <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewResponder.html#calculateRectForParent(androidx.compose.ui.geometry.Rect)">calculateRectForParent</a></code>. The function may return a different value over time, if the bounds of the request change while the request is being processed. If the rectangle cannot be calculated, e.g. because the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> are not attached, return null.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="calculateRectForParent-androidx.compose.ui.geometry.Rect-"></a><a name="calculaterectforparent"></a>
+        <h3 class="api-name" id="calculateRectForParent(androidx.compose.ui.geometry.Rect)">calculateRectForParent</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewResponder.html#calculateRectForParent(androidx.compose.ui.geometry.Rect)">calculateRectForParent</a>(localRect:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></pre>
+        <p>Return the rectangle in this node that should be brought into view by this node's parent, in coordinates relative to this node. If this node needs to adjust itself to bring <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewResponder.html#calculateRectForParent(androidx.compose.ui.geometry.Rect)">localRect</a></code> into view, the returned rectangle should be the destination rectangle that <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewResponder.html#calculateRectForParent(androidx.compose.ui.geometry.Rect)">localRect</a></code> will eventually occupy once this node's content is adjusted.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>localRect:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+                <td>
+                  <p>The rectangle that should be brought into view, relative to this node. This will be the same rectangle passed to <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewResponder.html#bringChildIntoView(kotlin.Function0)">bringChildIntoView</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+                <td>
+                  <p>The rectangle in this node that should be brought into view itself, relative to this node. If this node needs to scroll to bring <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewResponder.html#calculateRectForParent(androidx.compose.ui.geometry.Rect)">localRect</a></code> into view, the returned rectangle should be the destination rectangle that <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewResponder.html#calculateRectForParent(androidx.compose.ui.geometry.Rect)">localRect</a></code> will eventually occupy, once the scrolling animation is finished.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

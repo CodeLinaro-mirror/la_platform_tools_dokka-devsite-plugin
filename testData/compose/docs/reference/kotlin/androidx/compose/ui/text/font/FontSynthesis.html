@@ -1,0 +1,138 @@
+<html devsite="true">
+  <head>
+    <title>FontSynthesis</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-text/androidx/compose/ui/text/font/FontSynthesis.kt+class:androidx.compose.ui.text.font.FontSynthesis&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>FontSynthesis</h1>
+    <p>
+      <pre>value class <a href="/reference/kotlin/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a></pre>
+    </p>
+    <hr>
+    <p>Possible options for font synthesis.</p>
+    <p><code>FontSynthesis</code> is used to specify whether the system should fake bold or slanted glyphs when the <code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a></code> used does not contain bold or oblique <code><a href="/reference/kotlin/androidx/compose/ui/text/font/Font.html">Font</a></code>s.</p>
+    <p>If the font family does not include a requested <code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a></code> or <code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a></code>, the system fakes bold or slanted glyphs when the <code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontSynthesis.Companion.html#Weight()">Weight</a></code> or <code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontSynthesis.Companion.html#Style()">Style</a></code>, respectively, or both when <code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontSynthesis.Companion.html#All()">All</a></code> is set. If this is not desired, use <code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontSynthesis.Companion.html#None()">None</a></code> to disable font synthesis.</p>
+    <p>It is possible to fake an increase of <code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a></code> but not a decrease. It is possible to fake a regular font slanted, but not vice versa.</p>
+    <p><code>FontSynthesis</code> works the same way as the <a href="https://www.w3.org/TR/css-fonts-4/#font-synthesis">CSS font-synthesis</a> property.</p>
+    <pre class="prettyprint">
+import androidx.compose.material.Text
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+
+// The font family contains a single font, with normal weight
+val fontFamily = FontFamily(
+    Font(resId = R.font.myfont, weight = FontWeight.Normal)
+)
+// Configuring the Text composable to be bold
+// Using FontSynthesis.Weight to have the system render the font bold my making the glyphs
+// thicker
+Text(
+    text = &quot;Demo Text&quot;,
+    style = TextStyle(
+        fontFamily = fontFamily,
+        fontWeight = FontWeight.Bold,
+        fontSynthesis = FontSynthesis.Weight
+    )
+)</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public companion properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontSynthesis.Companion.html#All()">All</a></code></div>
+              <p>The system synthesizes both bold and slanted fonts if either of them are not available in the <code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a></code></p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontSynthesis.Companion.html#None()">None</a></code></div>
+              <p>Turns off font synthesis.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontSynthesis.Companion.html#Style()">Style</a></code></div>
+              <p>Only an slanted font is synthesized, if it is not available in the <code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontSynthesis.Companion.html#Weight()">Weight</a></code></div>
+              <p>Only a bold font is synthesized, if it is not available in the <code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontSynthesis.html#toString()">toString</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public companion properties</h2>
+      <div class="api-item"><a name="getAll()"></a><a name="setAll()"></a><a name="getAll--"></a><a name="setAll--"></a>
+        <h3 class="api-name" id="All()">All</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontSynthesis.Companion.html#All()">All</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a></pre>
+        <p>The system synthesizes both bold and slanted fonts if either of them are not available in the <code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a></code></p>
+      </div>
+      <div class="api-item"><a name="getNone()"></a><a name="setNone()"></a><a name="getNone--"></a><a name="setNone--"></a>
+        <h3 class="api-name" id="None()">None</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontSynthesis.Companion.html#None()">None</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a></pre>
+        <p>Turns off font synthesis. Neither bold nor slanted faces are synthesized if they don't exist in the <code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a></code></p>
+      </div>
+      <div class="api-item"><a name="getStyle()"></a><a name="setStyle()"></a><a name="getStyle--"></a><a name="setStyle--"></a>
+        <h3 class="api-name" id="Style()">Style</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontSynthesis.Companion.html#Style()">Style</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a></pre>
+        <p>Only an slanted font is synthesized, if it is not available in the <code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a></code>. Bold fonts will not be synthesized.</p>
+      </div>
+      <div class="api-item"><a name="getWeight()"></a><a name="setWeight()"></a><a name="getWeight--"></a><a name="setWeight--"></a>
+        <h3 class="api-name" id="Weight()">Weight</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontSynthesis.Companion.html#Weight()">Weight</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a></pre>
+        <p>Only a bold font is synthesized, if it is not available in the <code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a></code>. Slanted fonts will not be synthesized.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+        <h3 class="api-name" id="toString()">toString</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontSynthesis.html#toString()">toString</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></pre>
+      </div>
+    </div>
+  </body>
+</html>

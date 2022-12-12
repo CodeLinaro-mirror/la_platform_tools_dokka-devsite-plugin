@@ -1,0 +1,85 @@
+<html devsite="true">
+  <head>
+    <title>ViewCompositionStrategy.DisposeOnLifecycleDestroyed</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/platform/ViewCompositionStrategy.android.kt+class:androidx.compose.ui.platform.ViewCompositionStrategy.DisposeOnLifecycleDestroyed&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>ViewCompositionStrategy.DisposeOnLifecycleDestroyed</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/platform/ViewCompositionStrategy.DisposeOnLifecycleDestroyed.html">ViewCompositionStrategy.DisposeOnLifecycleDestroyed</a> implements <a href="/reference/androidx/compose/ui/platform/ViewCompositionStrategy.html">ViewCompositionStrategy</a></pre>
+    </p>
+    <hr>
+    <p><code><a href="/reference/androidx/compose/ui/platform/ViewCompositionStrategy.html">ViewCompositionStrategy</a></code> that disposes the composition when <code><a href="/reference/androidx/compose/ui/platform/ViewCompositionStrategy.DisposeOnLifecycleDestroyed.html#lifecycle()">lifecycle</a></code> is <code><a href="/reference/androidx/lifecycle/Lifecycle.Event.ON_DESTROY.html">destroyed</a></code>. This strategy is appropriate for Compose UI views that share a 1-1 relationship with a known <code><a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code>.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/platform/ViewCompositionStrategy.DisposeOnLifecycleDestroyed.html#DisposeOnLifecycleDestroyed(androidx.lifecycle.Lifecycle)">DisposeOnLifecycleDestroyed</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.html">Lifecycle</a>&nbsp;lifecycle)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/platform/ViewCompositionStrategy.DisposeOnLifecycleDestroyed.html#DisposeOnLifecycleDestroyed(androidx.lifecycle.LifecycleOwner)">DisposeOnLifecycleDestroyed</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;lifecycleOwner)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/platform/ViewCompositionStrategy.DisposeOnLifecycleDestroyed.html#installFor(androidx.compose.ui.platform.AbstractComposeView)">installFor</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html">AbstractComposeView</a>&nbsp;view)</code></div>
+              <p>Install this strategy for <code><a href="/reference/androidx/compose/ui/platform/ViewCompositionStrategy.DisposeOnLifecycleDestroyed.html#installFor(androidx.compose.ui.platform.AbstractComposeView)">view</a></code> and return a function that will uninstall it later.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="DisposeOnLifecycleDestroyed-androidx.lifecycle.Lifecycle-"></a><a name="disposeonlifecycledestroyed"></a>
+        <h3 class="api-name" id="DisposeOnLifecycleDestroyed(androidx.lifecycle.Lifecycle)">DisposeOnLifecycleDestroyed</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/platform/ViewCompositionStrategy.DisposeOnLifecycleDestroyed.html#DisposeOnLifecycleDestroyed(androidx.lifecycle.Lifecycle)">DisposeOnLifecycleDestroyed</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.html">Lifecycle</a>&nbsp;lifecycle)</pre>
+      </div>
+      <div class="api-item"><a name="DisposeOnLifecycleDestroyed-androidx.lifecycle.LifecycleOwner-"></a><a name="disposeonlifecycledestroyed"></a>
+        <h3 class="api-name" id="DisposeOnLifecycleDestroyed(androidx.lifecycle.LifecycleOwner)">DisposeOnLifecycleDestroyed</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/platform/ViewCompositionStrategy.DisposeOnLifecycleDestroyed.html#DisposeOnLifecycleDestroyed(androidx.lifecycle.LifecycleOwner)">DisposeOnLifecycleDestroyed</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;lifecycleOwner)</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="installFor-androidx.compose.ui.platform.AbstractComposeView-"></a><a name="installfor"></a>
+        <h3 class="api-name" id="installFor(androidx.compose.ui.platform.AbstractComposeView)">installFor</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;<a href="/reference/androidx/compose/ui/platform/ViewCompositionStrategy.DisposeOnLifecycleDestroyed.html#installFor(androidx.compose.ui.platform.AbstractComposeView)">installFor</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html">AbstractComposeView</a>&nbsp;view)</pre>
+        <p>Install this strategy for <code><a href="/reference/androidx/compose/ui/platform/ViewCompositionStrategy.DisposeOnLifecycleDestroyed.html#installFor(androidx.compose.ui.platform.AbstractComposeView)">view</a></code> and return a function that will uninstall it later. This function should not be called directly; it is called by <code><a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#setViewCompositionStrategy(androidx.compose.ui.platform.ViewCompositionStrategy)">AbstractComposeView.setViewCompositionStrategy</a></code> after uninstalling the previous strategy.</p>
+      </div>
+    </div>
+  </body>
+</html>

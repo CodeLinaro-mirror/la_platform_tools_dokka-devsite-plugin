@@ -5,7 +5,9 @@
 {% include "_shared/_reference-head-tags.html" %}
   </head>
   <body>
-    <div id="metadata-info-block"></div>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/animation/AnimatedVisibility.kt+class:androidx.compose.animation.EnterExitState&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
     <h1>EnterExitState</h1>
     <p>
       <pre>@<a href="/reference/kotlin/androidx/compose/animation/ExperimentalAnimationApi.html">ExperimentalAnimationApi</a><br>enum <a href="/reference/kotlin/androidx/compose/animation/EnterExitState.html">EnterExitState</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html">Enum</a></pre>
@@ -29,65 +31,47 @@
       </table>
     </div>
     <hr>
-    <p><code><a href="/reference/kotlin/androidx/compose/animation/EnterExitState.html">EnterExitState</a></code> contains the three states that are involved in the enter and exit transition of <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.Function1)">AnimatedVisibility</a></code>. More specifically, <code><a href="/reference/kotlin/androidx/compose/animation/EnterExitState.html#PreEnter">PreEnter</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/EnterExitState.html#Visible">Visible</a></code> defines the initial and target state of an <em>enter</em> transition, whereas <code><a href="/reference/kotlin/androidx/compose/animation/EnterExitState.html#Visible">Visible</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/EnterExitState.html#PostExit">PostExit</a></code> are the initial and target state of an <em>exit</em> transition.</p>
-    <p>See blow for an example of custom enter/exit animation in <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.Function1)">AnimatedVisibility</a></code> using <code>Transition&lt;EnterExitState&gt;</code> (i.e. <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedVisibilityScope.html#transition()">AnimatedVisibilityScope.transition</a></code>):</p>
+    <p><code><a href="/reference/kotlin/androidx/compose/animation/EnterExitState.html">EnterExitState</a></code> contains the three states that are involved in the enter and exit transition of <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String,kotlin.Function1)">AnimatedVisibility</a></code>. More specifically, <code><a href="/reference/kotlin/androidx/compose/animation/EnterExitState.html#PreEnter">PreEnter</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/EnterExitState.html#Visible">Visible</a></code> defines the initial and target state of an <em>enter</em> transition, whereas <code><a href="/reference/kotlin/androidx/compose/animation/EnterExitState.html#Visible">Visible</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/EnterExitState.html#PostExit">PostExit</a></code> are the initial and target state of an <em>exit</em> transition.</p>
+    <p>See blow for an example of custom enter/exit animation in <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String,kotlin.Function1)">AnimatedVisibility</a></code> using <code>Transition&lt;EnterExitState&gt;</code> (i.e. <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedVisibilityScope.html#transition()">AnimatedVisibilityScope.transition</a></code>):</p>
     <pre class="prettyprint">
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.animateDp
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.shrinkVertically
-import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredHeight
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 
 var visible by remember { mutableStateOf(true) }
 Box(modifier = Modifier.clickable { visible = !visible }) {
     AnimatedVisibility(
         visible = visible,
         modifier = Modifier.align(Alignment.Center),
-        enter = slideInVertically(
-            // Start the slide from 40 (pixels) above where the content is supposed to go, to
-            // produce a parallax effect
-            initialOffsetY = { -40 }
-        ) + expandVertically(
-            expandFrom = Alignment.Top
-        ) + fadeIn(initialAlpha = 0.3f),
-        exit = shrinkVertically() + fadeOut(animationSpec = tween(200))
+        enter = fadeIn(),
+        exit = fadeOut(animationSpec = tween(200)) + scaleOut()
     ) { // Content that needs to appear/disappear goes here:
         // Here we can optionally define a custom enter/exit animation by creating an animation
         // using the Transition&lt;EnterExitState&gt; object from AnimatedVisibilityScope:
-        val scale by transition.animateFloat {
+
+        // As a part of the enter transition, the corner radius will be animated from 0.dp to 50.dp.
+        val cornerRadius by transition.animateDp {
             when (it) {
-                // Scale will be animating from 0.8f to 1.0f during enter transition.
-                EnterExitState.PreEnter -&gt; 0.8f
-                EnterExitState.Visible -&gt; 1f
-                // Scale will be animating from 1.0f to 1.2f during exit animation. If the
-                // targetValue specified for PreEnter is the same as PostExit, the enter and
-                // exit animation for this property will be symmetric.
-                EnterExitState.PostExit -&gt; 1.2f
+                EnterExitState.PreEnter -&gt; 0.dp
+                EnterExitState.Visible -&gt; 50.dp
+                // No corner radius change when exiting.
+                EnterExitState.PostExit -&gt; 50.dp
             }
         }
-        Text(
-            &quot;Content to appear/disappear&quot;,
-            Modifier.fillMaxWidth().requiredHeight(100.dp).background(Color(0xffa1feff))
-                .graphicsLayer {
-                    // Apply our custom enter/exit transition
-                    scaleX = scale
-                    scaleY = scale
-                }.padding(top = 20.dp),
-            textAlign = TextAlign.Center
+        Box(
+            Modifier.background(Color.Red, shape = RoundedCornerShape(cornerRadius))
+                .height(100.dp).fillMaxWidth()
         )
     }
 }</pre>
@@ -104,7 +88,7 @@ Box(modifier = Modifier.clickable { visible = !visible }) {
         </thead>
         <tbody class="list">
           <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.Function1)">AnimatedVisibility</a></code></td>
+            <td><code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String,kotlin.Function1)">AnimatedVisibility</a></code></td>
             <td></td>
           </tr>
         </tbody>
@@ -126,19 +110,19 @@ Box(modifier = Modifier.clickable { visible = !visible }) {
           <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/animation/EnterExitState.html#PostExit">PostExit</a></code></td>
             <td>
-              <p>Target state of a custom <em>exit</em> animation in <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.Function1)">AnimatedVisibility</a></code>.</p>
+              <p>Target state of a custom <em>exit</em> animation in <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String,kotlin.Function1)">AnimatedVisibility</a></code>.</p>
             </td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/animation/EnterExitState.html#PreEnter">PreEnter</a></code></td>
             <td>
-              <p>The initial state of a custom enter animation in <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.Function1)">AnimatedVisibility</a></code>..</p>
+              <p>The initial state of a custom enter animation in <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String,kotlin.Function1)">AnimatedVisibility</a></code>..</p>
             </td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/animation/EnterExitState.html#Visible">Visible</a></code></td>
             <td>
-              <p>The <code>Visible</code> state is the target state of a custom <em>enter</em> animation, also the initial state of a custom <em>exit</em> animation in <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.Function1)">AnimatedVisibility</a></code>.</p>
+              <p>The <code>Visible</code> state is the target state of a custom <em>enter</em> animation, also the initial state of a custom <em>exit</em> animation in <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String,kotlin.Function1)">AnimatedVisibility</a></code>.</p>
             </td>
           </tr>
         </tbody>
@@ -178,17 +162,17 @@ Box(modifier = Modifier.clickable { visible = !visible }) {
       <div class="api-item">
         <h3 class="api-name" id="PostExit">PostExit</h3>
         <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/animation/ExperimentalAnimationApi.html">ExperimentalAnimationApi</a><br>val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/EnterExitState.html#PostExit">EnterExitState.PostExit</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/EnterExitState.html">EnterExitState</a></pre>
-        <p>Target state of a custom <em>exit</em> animation in <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.Function1)">AnimatedVisibility</a></code>.</p>
+        <p>Target state of a custom <em>exit</em> animation in <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String,kotlin.Function1)">AnimatedVisibility</a></code>.</p>
       </div>
       <div class="api-item">
         <h3 class="api-name" id="PreEnter">PreEnter</h3>
         <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/animation/ExperimentalAnimationApi.html">ExperimentalAnimationApi</a><br>val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/EnterExitState.html#PreEnter">EnterExitState.PreEnter</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/EnterExitState.html">EnterExitState</a></pre>
-        <p>The initial state of a custom enter animation in <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.Function1)">AnimatedVisibility</a></code>..</p>
+        <p>The initial state of a custom enter animation in <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String,kotlin.Function1)">AnimatedVisibility</a></code>..</p>
       </div>
       <div class="api-item">
         <h3 class="api-name" id="Visible">Visible</h3>
         <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/animation/ExperimentalAnimationApi.html">ExperimentalAnimationApi</a><br>val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/EnterExitState.html#Visible">EnterExitState.Visible</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/EnterExitState.html">EnterExitState</a></pre>
-        <p>The <code>Visible</code> state is the target state of a custom <em>enter</em> animation, also the initial state of a custom <em>exit</em> animation in <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.Function1)">AnimatedVisibility</a></code>.</p>
+        <p>The <code>Visible</code> state is the target state of a custom <em>enter</em> animation, also the initial state of a custom <em>exit</em> animation in <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String,kotlin.Function1)">AnimatedVisibility</a></code>.</p>
       </div>
     </div>
     <div class="list">

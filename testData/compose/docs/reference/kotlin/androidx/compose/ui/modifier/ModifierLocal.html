@@ -1,0 +1,101 @@
+<html devsite="true">
+  <head>
+    <title>ModifierLocal</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/modifier/ModifierLocal.kt+class:androidx.compose.ui.modifier.ModifierLocal&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>ModifierLocal</h1>
+    <p>
+      <pre>sealed class <a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</pre>
+    </p>
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
+        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/ui/modifier/ProvidableModifierLocal.html">ProvidableModifierLocal</a></div>
+      </span>
+      <div id="subclasses-direct-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ProvidableModifierLocal.html">ProvidableModifierLocal</a></code></td>
+                <td>
+                  <p><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ProvidableModifierLocal.html">ProvidableModifierLocal</a></code>s are <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code>s that can be used to provide values using a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalProvider.html">ModifierLocalProvider</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
+    <hr>
+    <p><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code>s provide a means of inter-modifier communication. When a modifier provides a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code>, it is available to modifiers on the right of the providing modifier for the current layout node. The provided <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code>s are also available to layout nodes that are children of the current layout node.</p>
+    <p>One must create a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code> instance, which can be referenced by consumers statically. <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code> instances themselves hold no data, and can be thought of as a type-safe identifier for the data being passed to other modifiers to the right of the providing modifier or down the tree. <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code> factory functions take a single parameter: a factory to create a default value in cases where a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code> is used without a Provider. If this is a situation you would rather not handle, you can throw an error in this factory.</p>
+    <p>To add a value that can be accessed by other modifiers, create an instance of a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ProvidableModifierLocal.html">ProvidableModifierLocal</a></code> and add it to the tree by using a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#(androidx.compose.ui.Modifier).modifierLocalProvider(androidx.compose.ui.modifier.ProvidableModifierLocal,kotlin.Function0)">modifierLocalProvider</a></code>. Now other modifiers can access the provided value by using a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#(androidx.compose.ui.Modifier).modifierLocalConsumer(kotlin.Function1)">modifierLocalConsumer</a></code>.</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">See also</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ProvidableModifierLocal.html">ProvidableModifierLocal</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#modifierLocalOf(kotlin.Function0)">modifierLocalOf</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#(androidx.compose.ui.Modifier).modifierLocalProvider(androidx.compose.ui.modifier.ProvidableModifierLocal,kotlin.Function0)">modifierLocalProvider</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#(androidx.compose.ui.Modifier).modifierLocalConsumer(kotlin.Function1)">modifierLocalConsumer</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Protected constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html#ModifierLocal(kotlin.Function0)">ModifierLocal</a>(defaultFactory:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Protected constructors</h2>
+      <div class="api-item"><a name="ModifierLocal-kotlin.Function0-"></a><a name="modifierlocal"></a>
+        <h3 class="api-name" id="ModifierLocal(kotlin.Function0)">ModifierLocal</h3>
+        <pre class="api-signature no-pretty-print">protected&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html#ModifierLocal(kotlin.Function0)">ModifierLocal</a>(defaultFactory:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T)</pre>
+      </div>
+    </div>
+  </body>
+</html>

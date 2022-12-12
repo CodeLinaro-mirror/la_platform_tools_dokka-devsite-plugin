@@ -5,7 +5,9 @@
 {% include "_shared/_reference-head-tags.html" %}
   </head>
   <body>
-    <div id="metadata-info-block"></div>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/MutatorMutex.kt+class:androidx.compose.foundation.MutatorMutex&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
     <h1>MutatorMutex</h1>
     <p>
       <pre>class <a href="/reference/kotlin/androidx/compose/foundation/MutatorMutex.html">MutatorMutex</a></pre>
@@ -37,6 +39,9 @@ class ScrollState(position: Int = 0) {
             _range = value.coerceAtLeast(0)
         }
 
+    var isScrolling by mutableStateOf(false)
+        private set
+
     private val mutatorMutex = MutatorMutex()
 
     /**
@@ -44,7 +49,17 @@ class ScrollState(position: Int = 0) {
      */
     suspend fun &lt;R&gt; scroll(
         block: suspend () -&gt; R
-    ): R = mutatorMutex.mutate(block = block)
+    ): R = mutatorMutex.mutate {
+        isScrolling = true
+        try {
+            block()
+        } finally {
+            // MutatorMutex.mutate ensures mutual exclusion between blocks.
+            // By setting back to false in the finally block inside mutate, we ensure that we
+            // reset the state upon cancellation before the next block starts to run (if any).
+            isScrolling = false
+        }
+    }
 }
 
 /**

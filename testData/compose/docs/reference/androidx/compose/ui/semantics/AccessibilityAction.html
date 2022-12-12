@@ -1,0 +1,163 @@
+<html devsite="true">
+  <head>
+    <title>AccessibilityAction</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/semantics/SemanticsProperties.kt+class:androidx.compose.ui.semantics.AccessibilityAction&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>AccessibilityAction</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/semantics/AccessibilityAction.html">AccessibilityAction</a>&lt;T&nbsp;extends&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-function/index.html">Function</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&gt;</pre>
+    </p>
+    <hr>
+    <p>Standard accessibility action.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final T</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/semantics/AccessibilityAction.html#action()">action</a></code></div>
+              <p>The function to invoke when this action is performed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/semantics/AccessibilityAction.html#label()">label</a></code></div>
+              <p>The description of this action</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-function/index.html">Function</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&gt; <a href="/reference/androidx/compose/ui/semantics/AccessibilityAction.html#AccessibilityAction(kotlin.String,kotlin.Function)">AccessibilityAction</a>(<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;label,&nbsp;T&nbsp;action)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/semantics/AccessibilityAction.html#equals(kotlin.Any)">equals</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;other)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/semantics/AccessibilityAction.html#hashCode()">hashCode</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/semantics/AccessibilityAction.html#toString()">toString</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getAction()"></a><a name="setAction()"></a><a name="getAction--"></a><a name="setAction--"></a>
+        <h3 class="api-name" id="action()">action</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;T&nbsp;<a href="/reference/androidx/compose/ui/semantics/AccessibilityAction.html#action()">action</a></pre>
+        <p>The function to invoke when this action is performed. The function should return a boolean result indicating whether the action is successfully handled. For example, a scroll forward action should return false if the widget is not enabled or has reached the end of the list. If multiple semantics blocks with the same AccessibilityAction are provided, the resulting AccessibilityAction's label/action will be the label/action of the outermost modifier with this key and nonnull label/action, or null if no nonnull label/action is found.</p>
+      </div>
+      <div class="api-item"><a name="getLabel()"></a><a name="setLabel()"></a><a name="getLabel--"></a><a name="setLabel--"></a>
+        <h3 class="api-name" id="label()">label</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/semantics/AccessibilityAction.html#label()">label</a></pre>
+        <p>The description of this action</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="AccessibilityAction(kotlin.String, kotlin.Function)"></a><a name="AccessibilityAction-kotlin.String-kotlin.Function-"></a><a name="accessibilityaction"></a>
+        <h3 class="api-name" id="AccessibilityAction(kotlin.String,kotlin.Function)">AccessibilityAction</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-function/index.html">Function</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&gt; <a href="/reference/androidx/compose/ui/semantics/AccessibilityAction.html#AccessibilityAction(kotlin.String,kotlin.Function)">AccessibilityAction</a>(<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;label,&nbsp;T&nbsp;action)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;label</code></td>
+                <td>
+                  <p>The description of this action</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>T&nbsp;action</code></td>
+                <td>
+                  <p>The function to invoke when this action is performed. The function should return a boolean result indicating whether the action is successfully handled. For example, a scroll forward action should return false if the widget is not enabled or has reached the end of the list. If multiple semantics blocks with the same AccessibilityAction are provided, the resulting AccessibilityAction's label/action will be the label/action of the outermost modifier with this key and nonnull label/action, or null if no nonnull label/action is found.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="equals-kotlin.Any-"></a><a name="equals"></a>
+        <h3 class="api-name" id="equals(kotlin.Any)">equals</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/semantics/AccessibilityAction.html#equals(kotlin.Any)">equals</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;other)</pre>
+      </div>
+      <div class="api-item"><a name="hashCode--"></a><a name="hashcode"></a>
+        <h3 class="api-name" id="hashCode()">hashCode</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/semantics/AccessibilityAction.html#hashCode()">hashCode</a>()</pre>
+      </div>
+      <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+        <h3 class="api-name" id="toString()">toString</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/semantics/AccessibilityAction.html#toString()">toString</a>()</pre>
+      </div>
+    </div>
+  </body>
+</html>

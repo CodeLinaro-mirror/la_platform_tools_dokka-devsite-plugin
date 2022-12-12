@@ -5,7 +5,9 @@
 {% include "_shared/_reference-head-tags.html" %}
   </head>
   <body>
-    <div id="metadata-info-block"></div>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/runtime/snapshots/SnapshotStateList.kt+class:androidx.compose.runtime.snapshots.SnapshotStateList&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
     <h1>SnapshotStateList</h1>
     <p>
       <pre>public final class <a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateList.html">SnapshotStateList</a>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; implements <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a>, <a href="/reference/androidx/compose/runtime/snapshots/StateObject.html">StateObject</a></pre>
@@ -224,6 +226,13 @@
             <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateList.html#subList(kotlin.Int,kotlin.Int)">subList</a>(int&nbsp;fromIndex,&nbsp;int&nbsp;toIndex)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateList.html#toList()">toList</a>()</code></div>
+              <p>Return a list containing all the elements of this list.</p>
             </td>
           </tr>
         </tbody>
@@ -489,6 +498,14 @@
       <div class="api-item"><a name="subList(kotlin.Int, kotlin.Int)"></a><a name="subList-kotlin.Int-kotlin.Int-"></a><a name="sublist"></a>
         <h3 class="api-name" id="subList(kotlin.Int,kotlin.Int)">subList</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateList.html#subList(kotlin.Int,kotlin.Int)">subList</a>(int&nbsp;fromIndex,&nbsp;int&nbsp;toIndex)</pre>
+      </div>
+      <div class="api-item"><a name="toList--"></a><a name="tolist"></a>
+        <h3 class="api-name" id="toList()">toList</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateList.html#toList()">toList</a>()</pre>
+        <p>Return a list containing all the elements of this list.</p>
+        <p>The list returned is immutable and returned will not change even if the content of the list is changed in the same snapshot. It also will be the same instance until the content is changed. It is not, however, guaranteed to be the same instance for the same list as adding and removing the same item from the this list might produce a different instance with the same content.</p>
+        <p>This operation is O(1) and does not involve a physically copying the list. It instead returns the underlying immutable list used internally to store the content of the list.</p>
+        <p>It is recommended to use <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateList.html#toList()">toList</a></code> when using returning the value of this list from <code><a href="/reference/androidx/compose/runtime/package-summary.html#snapshotFlow(kotlin.Function0)">androidx.compose.runtime.snapshotFlow</a></code>.</p>
       </div>
     </div>
   </body>

@@ -1,0 +1,185 @@
+<html devsite="true">
+  <head>
+    <title>OverscrollKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>OverscrollKt</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/foundation/OverscrollKt.html">OverscrollKt</a></pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/androidx/compose/foundation/OverscrollKt.html">OverscrollKt</a>.<a href="/reference/androidx/compose/foundation/OverscrollKt.html#(androidx.compose.ui.Modifier).overscroll(androidx.compose.foundation.OverscrollEffect)">overscroll</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/OverscrollEffect.html">OverscrollEffect</a>&nbsp;overscrollEffect<br>)</code></div>
+              <p>Renders overscroll from the provided <code><a href="/reference/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).overscroll(androidx.compose.foundation.OverscrollEffect)">overscrollEffect</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.Modifier-.overscroll-androidx.compose.foundation.OverscrollEffect-"></a><a name="overscroll"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.Modifier).overscroll(androidx.compose.foundation.OverscrollEffect)">OverscrollKt.overscroll</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/foundation/OverscrollKt.html">OverscrollKt</a>.<a href="/reference/androidx/compose/foundation/OverscrollKt.html#(androidx.compose.ui.Modifier).overscroll(androidx.compose.foundation.OverscrollEffect)">overscroll</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/OverscrollEffect.html">OverscrollEffect</a>&nbsp;overscrollEffect<br>)</pre>
+        <p>Renders overscroll from the provided <code><a href="/reference/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).overscroll(androidx.compose.foundation.OverscrollEffect)">overscrollEffect</a></code>.</p>
+        <p>This modifier is a convenience method to call <code><a href="/reference/androidx/compose/foundation/OverscrollEffect.html#effectModifier()">OverscrollEffect.effectModifier</a></code>, which renders the actual effect. Note that this modifier is only responsible for the visual part of overscroll - on its own it will not handle input events. In addition to using this modifier you also need to propagate events to the <code><a href="/reference/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).overscroll(androidx.compose.foundation.OverscrollEffect)">overscrollEffect</a></code>, most commonly by using a <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).scrollable(androidx.compose.foundation.gestures.ScrollableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,androidx.compose.foundation.interaction.MutableInteractionSource)">androidx.compose.foundation.gestures.scrollable</a></code>.</p>
+        <pre class="prettyprint">
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.spring
+import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.rememberScrollableState
+import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.overscroll
+import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.IntOffset
+
+@OptIn(ExperimentalFoundationApi::class)
+// our custom offset overscroll that offset the element it is applied to when we hit the bound
+// on the scrollable container.
+class OffsetOverscrollEffect(val scope: CoroutineScope) : OverscrollEffect {
+    private val overscrollOffset = Animatable(0f)
+
+    override fun applyToScroll(
+        delta: Offset,
+        source: NestedScrollSource,
+        performScroll: (Offset) -&gt; Offset
+    ): Offset {
+        // in pre scroll we relax the overscroll if needed
+        // relaxation: when we are in progress of the overscroll and user scrolls in the
+        // different direction = substract the overscroll first
+        val sameDirection = sign(delta.y) == sign(overscrollOffset.value)
+        val consumedByPreScroll = if (abs(overscrollOffset.value) &gt; 0.5 &amp;&amp; !sameDirection) {
+            val prevOverscrollValue = overscrollOffset.value
+            val newOverscrollValue = overscrollOffset.value + delta.y
+            if (sign(prevOverscrollValue) != sign(newOverscrollValue)) {
+                // sign changed, coerce to start scrolling and exit
+                scope.launch { overscrollOffset.snapTo(0f) }
+                Offset(x = 0f, y = delta.y + prevOverscrollValue)
+            } else {
+                scope.launch {
+                    overscrollOffset.snapTo(overscrollOffset.value + delta.y)
+                }
+                delta.copy(x = 0f)
+            }
+        } else {
+            Offset.Zero
+        }
+        val leftForScroll = delta - consumedByPreScroll
+        val consumedByScroll = performScroll(leftForScroll)
+        val overscrollDelta = leftForScroll - consumedByScroll
+        // if it is a drag, not a fling, add the delta left to our over scroll value
+        if (abs(overscrollDelta.y) &gt; 0.5 &amp;&amp; source == NestedScrollSource.Drag) {
+            scope.launch {
+                // multiply by 0.1 for the sake of parallax effect
+                overscrollOffset.snapTo(overscrollOffset.value + overscrollDelta.y * 0.1f)
+            }
+        }
+        return consumedByPreScroll + consumedByScroll
+    }
+
+    override suspend fun applyToFling(
+        velocity: Velocity,
+        performFling: suspend (Velocity) -&gt; Velocity
+    ) {
+        val consumed = performFling(velocity)
+        // when the fling happens - we just gradually animate our overscroll to 0
+        val remaining = velocity - consumed
+        overscrollOffset.animateTo(
+            targetValue = 0f,
+            initialVelocity = remaining.y,
+            animationSpec = spring()
+        )
+    }
+
+    override val isInProgress: Boolean
+        get() = overscrollOffset.value != 0f
+
+    // as we're building an offset modifiers, let's offset of our value we calculated
+    override val effectModifier: Modifier = Modifier.offset {
+        IntOffset(x = 0, y = overscrollOffset.value.roundToInt())
+    }
+}
+
+val offset = remember { mutableStateOf(0f) }
+val scope = rememberCoroutineScope()
+// Create the overscroll controller
+val overscroll = remember(scope) { OffsetOverscrollEffect(scope) }
+// let's build a scrollable that scroll until -512 to 512
+val scrollStateRange = (-512f).rangeTo(512f)
+Box(
+    Modifier
+        .size(150.dp)
+        .scrollable(
+            orientation = Orientation.Vertical,
+            state = rememberScrollableState { delta -&gt;
+                // use the scroll data and indicate how much this element consumed.
+                val oldValue = offset.value
+                // coerce to our range
+                offset.value = (offset.value + delta).coerceIn(scrollStateRange)
+
+                offset.value - oldValue // indicate that we consumed what's needed
+            },
+            // pass the overscroll to the scrollable so the data is updated
+            overscrollEffect = overscroll
+        )
+        .background(Color.LightGray),
+    contentAlignment = Alignment.Center
+) {
+    Text(
+        offset.value.roundToInt().toString(),
+        style = TextStyle(fontSize = 32.sp),
+        modifier = Modifier
+            // show the overscroll only on the text, not the containers (just for fun)
+            .overscroll(overscroll)
+    )
+}</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/OverscrollEffect.html">OverscrollEffect</a>&nbsp;overscrollEffect</code></td>
+                <td>
+                  <p>the <code><a href="/reference/androidx/compose/foundation/OverscrollEffect.html">OverscrollEffect</a></code> to render</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

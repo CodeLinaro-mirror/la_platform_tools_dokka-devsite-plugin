@@ -1,0 +1,96 @@
+<html devsite="true">
+  <head>
+    <title>NestedScrollInteropConnectionKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>NestedScrollInteropConnectionKt</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/platform/NestedScrollInteropConnectionKt.html">NestedScrollInteropConnectionKt</a></pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/androidx/compose/ui/platform/NestedScrollInteropConnectionKt.html#rememberNestedScrollInteropConnection(android.view.View)">rememberNestedScrollInteropConnection</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/View.html">View</a>&nbsp;hostView)</code></div>
+              <p>Create and <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">remember</a></code> the <code><a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></code> that enables Nested Scroll Interop between a View parent that implements <code><a href="/reference/androidx/core/view/NestedScrollingParent3.html">androidx.core.view.NestedScrollingParent3</a></code> and a Compose child.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="rememberNestedScrollInteropConnection-android.view.View-"></a><a name="remembernestedscrollinteropconnection"></a>
+        <h3 class="api-name" id="rememberNestedScrollInteropConnection(android.view.View)">rememberNestedScrollInteropConnection</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a>&nbsp;<a href="/reference/androidx/compose/ui/platform/NestedScrollInteropConnectionKt.html#rememberNestedScrollInteropConnection(android.view.View)">rememberNestedScrollInteropConnection</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/View.html">View</a>&nbsp;hostView)</pre>
+        <p>Create and <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">remember</a></code> the <code><a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></code> that enables Nested Scroll Interop between a View parent that implements <code><a href="/reference/androidx/core/view/NestedScrollingParent3.html">androidx.core.view.NestedScrollingParent3</a></code> and a Compose child. This should be used in conjunction with a <code><a href="/reference/androidx/compose/ui/input/nestedscroll/package-summary.html#(androidx.compose.ui.Modifier).nestedScroll(androidx.compose.ui.input.nestedscroll.NestedScrollConnection,androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher)">androidx.compose.ui.input.nestedscroll.nestedScroll</a></code> modifier. Nested Scroll is enabled by default on the compose side and you can use this connection to enable both nested scroll on the view side and to add glue logic between View and compose.</p>
+        <p>Note that this only covers the use case where a cooperating parent is used. A cooperating parent is one that implements NestedScrollingParent3, a key layout that does that is <code><a href="/reference/androidx/coordinatorlayout/widget/CoordinatorLayout.html">androidx.coordinatorlayout.widget.CoordinatorLayout</a></code>.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Text
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
+
+val nestedSrollInterop = rememberNestedScrollInteropConnection()
+// Add the nested scroll connection to your top level @Composable element
+// using the nestedScroll modifier.
+LazyColumn(modifier = Modifier.nestedScroll(nestedSrollInterop)) {
+    items(20) { item -&gt;
+        Box(
+            modifier = Modifier
+                .padding(16.dp)
+                .height(56.dp)
+                .fillMaxWidth()
+                .background(Color.Gray),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(item.toString())
+        }
+    }
+}</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/View.html">View</a>&nbsp;hostView</code></td>
+                <td>
+                  <p>The View that hosts the compose scrollable, this is usually a ComposeView.</p>
+                  <p>Learn how to enable nested scroll interop:</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

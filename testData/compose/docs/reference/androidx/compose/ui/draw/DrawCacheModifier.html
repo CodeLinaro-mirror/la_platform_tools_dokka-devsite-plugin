@@ -1,0 +1,164 @@
+<html devsite="true">
+  <head>
+    <title>DrawCacheModifier</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/draw/DrawModifier.kt+class:androidx.compose.ui.draw.DrawCacheModifier&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>DrawCacheModifier</h1>
+    <p>
+      <pre>public interface <a href="/reference/androidx/compose/ui/draw/DrawCacheModifier.html">DrawCacheModifier</a> extends <a href="/reference/androidx/compose/ui/draw/DrawModifier.html">DrawModifier</a></pre>
+    </p>
+    <hr>
+    <p><code><a href="/reference/androidx/compose/ui/draw/DrawModifier.html">DrawModifier</a></code> implementation that supports building a cache of objects to be referenced across draw calls</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/draw/DrawCacheModifier.html#onBuildCache(androidx.compose.ui.draw.BuildDrawCacheParams)">onBuildCache</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/draw/BuildDrawCacheParams.html">BuildDrawCacheParams</a>&nbsp;params)</code></div>
+              <p>Callback invoked to re-build objects to be re-used across draw calls.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/ui/draw/DrawModifier.html">androidx.compose.ui.draw.DrawModifier</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>abstract void</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/draw/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/draw/DrawModifier.html#(androidx.compose.ui.graphics.drawscope.ContentDrawScope).draw()">draw</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/drawscope/ContentDrawScope.html">ContentDrawScope</a>&nbsp;receiver)</code></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/ui/Modifier.html">androidx.compose.ui.Modifier</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>default&nbsp;infix @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/Modifier.html#then(androidx.compose.ui.Modifier)">then</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;other)</code></div>
+                        <p>Concatenates this modifier with another.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/ui/Modifier.Element.html">androidx.compose.ui.Modifier.Element</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>default boolean</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/Modifier.Element.html#all(kotlin.Function1)">all</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;predicate<br>)</code></div>
+                        <p>Returns <code>true</code> if <code><a href="/reference/androidx/compose/ui/Modifier.Element.html#all(kotlin.Function1)">predicate</a></code> returns true for all <code><a href="/reference/androidx/compose/ui/Modifier.Element.html">Element</a></code>s in this <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code> or if this <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code> contains no <code><a href="/reference/androidx/compose/ui/Modifier.Element.html">Element</a></code>s.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default boolean</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/Modifier.Element.html#any(kotlin.Function1)">any</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;predicate<br>)</code></div>
+                        <p>Returns <code>true</code> if <code><a href="/reference/androidx/compose/ui/Modifier.Element.html#any(kotlin.Function1)">predicate</a></code> returns true for any <code><a href="/reference/androidx/compose/ui/Modifier.Element.html">Element</a></code> in this <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R</code></td>
+                      <td>
+                        <div><code>&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/Modifier.Element.html#foldIn(kotlin.Any,kotlin.Function2)">foldIn</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;initial,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;operation<br>)</code></div>
+                        <p>Accumulates a value starting with <code><a href="/reference/androidx/compose/ui/Modifier.Element.html#foldIn(kotlin.Any,kotlin.Function2)">initial</a></code> and applying <code><a href="/reference/androidx/compose/ui/Modifier.Element.html#foldIn(kotlin.Any,kotlin.Function2)">operation</a></code> to the current value and each element from outside in.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R</code></td>
+                      <td>
+                        <div><code>&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/Modifier.Element.html#foldOut(kotlin.Any,kotlin.Function2)">foldOut</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;initial,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;operation<br>)</code></div>
+                        <p>Accumulates a value starting with <code><a href="/reference/androidx/compose/ui/Modifier.Element.html#foldOut(kotlin.Any,kotlin.Function2)">initial</a></code> and applying <code><a href="/reference/androidx/compose/ui/Modifier.Element.html#foldOut(kotlin.Any,kotlin.Function2)">operation</a></code> to the current value and each element from inside out.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="onBuildCache-androidx.compose.ui.draw.BuildDrawCacheParams-"></a><a name="onbuildcache"></a>
+        <h3 class="api-name" id="onBuildCache(androidx.compose.ui.draw.BuildDrawCacheParams)">onBuildCache</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/draw/DrawCacheModifier.html#onBuildCache(androidx.compose.ui.draw.BuildDrawCacheParams)">onBuildCache</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/draw/BuildDrawCacheParams.html">BuildDrawCacheParams</a>&nbsp;params)</pre>
+        <p>Callback invoked to re-build objects to be re-used across draw calls. This is useful to conditionally recreate objects only if the size of the drawing environment changes, or if state parameters that are inputs to objects change. This method is guaranteed to be called before <code><a href="/reference/androidx/compose/ui/draw/DrawModifier.html#(androidx.compose.ui.graphics.drawscope.ContentDrawScope).draw()">DrawModifier.draw</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/draw/BuildDrawCacheParams.html">BuildDrawCacheParams</a>&nbsp;params</code></td>
+                <td>
+                  <p>The params to be used to build the cache.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

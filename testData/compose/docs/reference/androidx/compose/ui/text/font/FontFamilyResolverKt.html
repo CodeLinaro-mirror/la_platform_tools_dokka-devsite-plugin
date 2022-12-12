@@ -1,0 +1,164 @@
+<html devsite="true">
+  <head>
+    <title>FontFamilyResolverKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>FontFamilyResolverKt</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/text/font/FontFamilyResolverKt.html">FontFamilyResolverKt</a></pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontFamily.Resolver.html">FontFamily.Resolver</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/font/FontFamilyResolverKt.html#createFontFamilyResolver(android.content.Context)">createFontFamilyResolver</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/content/Context.html">Context</a>&nbsp;context)</code></div>
+              <p>Create a new fontFamilyResolver for use outside of composition context</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontFamily.Resolver.html">FontFamily.Resolver</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/font/FontFamilyResolverKt.html#createFontFamilyResolver(android.content.Context,kotlin.coroutines.CoroutineContext)">createFontFamilyResolver</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/content/Context.html">Context</a>&nbsp;context,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>&nbsp;coroutineContext<br>)</code></div>
+              <p>Create a new fontFamilyResolver for use outside of composition context with a coroutine context.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/graphics/Typeface.html">Typeface</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/font/FontFamilyResolverKt.html">FontFamilyResolverKt</a>.<a href="/reference/androidx/compose/ui/text/font/FontFamilyResolverKt.html#(androidx.compose.ui.text.font.FontFamily.Resolver).resolveAsTypeface(androidx.compose.ui.text.font.FontFamily,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis)">resolveAsTypeface</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontFamily.Resolver.html">FontFamily.Resolver</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a>&nbsp;fontFamily,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>&nbsp;fontWeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>&nbsp;fontStyle,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a>&nbsp;fontSynthesis<br>)</code></div>
+              <p>Resolve a font to an Android Typeface</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="createFontFamilyResolver-android.content.Context-"></a><a name="createfontfamilyresolver"></a>
+        <h3 class="api-name" id="createFontFamilyResolver(android.content.Context)">createFontFamilyResolver</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontFamily.Resolver.html">FontFamily.Resolver</a>&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontFamilyResolverKt.html#createFontFamilyResolver(android.content.Context)">createFontFamilyResolver</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/content/Context.html">Context</a>&nbsp;context)</pre>
+        <p>Create a new fontFamilyResolver for use outside of composition context</p>
+        <p>Example usages:</p>
+        <ul>
+          <li>
+            <p>Application.onCreate to preload fonts</p>
+          </li>
+          <li>
+            <p>Creating Paragraph objects on background thread</p>
+          </li>
+        </ul>
+        <p>Usages inside of Composition should use LocalFontFamilyResolver.current</p>
+        <p>All instances of FontFamily.Resolver created by <code><a href="/reference/androidx/compose/ui/text/font/package-summary.html#createFontFamilyResolver(androidx.compose.ui.text.font.Font.ResourceLoader,android.content.Context)">createFontFamilyResolver</a></code> share the same typeface caches.</p>
+      </div>
+      <div class="api-item"><a name="createFontFamilyResolver(android.content.Context, kotlin.coroutines.CoroutineContext)"></a><a name="createFontFamilyResolver-android.content.Context-kotlin.coroutines.CoroutineContext-"></a><a name="createfontfamilyresolver"></a>
+        <h3 class="api-name" id="createFontFamilyResolver(android.content.Context,kotlin.coroutines.CoroutineContext)">createFontFamilyResolver</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontFamily.Resolver.html">FontFamily.Resolver</a>&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontFamilyResolverKt.html#createFontFamilyResolver(android.content.Context,kotlin.coroutines.CoroutineContext)">createFontFamilyResolver</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/content/Context.html">Context</a>&nbsp;context,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>&nbsp;coroutineContext<br>)</pre>
+        <p>Create a new fontFamilyResolver for use outside of composition context with a coroutine context.</p>
+        <p>Example usages:</p>
+        <ul>
+          <li>
+            <p>Application.onCreate to preload fonts</p>
+          </li>
+          <li>
+            <p>Creating Paragraph objects on background thread</p>
+          </li>
+          <li>
+            <p>Configuring LocalFontFamilyResolver with a different CoroutineScope</p>
+          </li>
+        </ul>
+        <p>Usages inside of Composition should use LocalFontFamilyResolver.current</p>
+        <p>Any <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-exception-handler/index.html">kotlinx.coroutines.CoroutineExceptionHandler</a></code> provided will be called with exceptions related to fallback font loading. These exceptions are not fatal, and indicate that font fallback continued to the next font load.</p>
+        <p>If no <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-exception-handler/index.html">kotlinx.coroutines.CoroutineExceptionHandler</a></code> is provided, a default implementation will be added that ignores all exceptions.</p>
+        <p>All instances of FontFamily.Resolver created by <code><a href="/reference/androidx/compose/ui/text/font/package-summary.html#createFontFamilyResolver(androidx.compose.ui.text.font.Font.ResourceLoader,android.content.Context)">createFontFamilyResolver</a></code> share the same typeface caches.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/content/Context.html">Context</a>&nbsp;context</code></td>
+                <td>
+                  <p>Android context for resolving fonts</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>&nbsp;coroutineContext</code></td>
+                <td>
+                  <p>context to launch async requests in during resolution.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.text.font.FontFamily.Resolver).resolveAsTypeface(androidx.compose.ui.text.font.FontFamily, androidx.compose.ui.text.font.FontWeight, androidx.compose.ui.text.font.FontStyle, androidx.compose.ui.text.font.FontSynthesis)"></a><a name="-androidx.compose.ui.text.font.FontFamily.Resolver-.resolveAsTypeface-androidx.compose.ui.text.font.FontFamily-androidx.compose.ui.text.font.FontWeight-androidx.compose.ui.text.font.FontStyle-androidx.compose.ui.text.font.FontSynthesis-"></a><a name="resolveastypeface"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.text.font.FontFamily.Resolver).resolveAsTypeface(androidx.compose.ui.text.font.FontFamily,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis)">FontFamilyResolverKt.resolveAsTypeface</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/graphics/Typeface.html">Typeface</a>&gt;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontFamilyResolverKt.html">FontFamilyResolverKt</a>.<a href="/reference/androidx/compose/ui/text/font/FontFamilyResolverKt.html#(androidx.compose.ui.text.font.FontFamily.Resolver).resolveAsTypeface(androidx.compose.ui.text.font.FontFamily,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis)">resolveAsTypeface</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontFamily.Resolver.html">FontFamily.Resolver</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a>&nbsp;fontFamily,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>&nbsp;fontWeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>&nbsp;fontStyle,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a>&nbsp;fontSynthesis<br>)</pre>
+        <p>Resolve a font to an Android Typeface</p>
+        <p>On Android, font resolution always produces an <code><a href="https://developer.android.com/reference/android/graphics/Typeface.html">android.graphics.Typeface</a></code>.</p>
+        <p>This convenience method converts State<Any> to State<Typeface> to avoid casting the result.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a>&nbsp;fontFamily</code></td>
+                <td>
+                  <p>fontFamily to resolve from</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>&nbsp;fontWeight</code></td>
+                <td>
+                  <p>font weight to resolve in <code><a href="/reference/androidx/compose/ui/text/font/package-summary.html#(androidx.compose.ui.text.font.FontFamily.Resolver).resolveAsTypeface(androidx.compose.ui.text.font.FontFamily,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis)">fontFamily</a></code>, will use closest match if not exact</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>&nbsp;fontStyle</code></td>
+                <td>
+                  <p>italic or upright text, to resolve in <code><a href="/reference/androidx/compose/ui/text/font/package-summary.html#(androidx.compose.ui.text.font.FontFamily.Resolver).resolveAsTypeface(androidx.compose.ui.text.font.FontFamily,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis)">fontFamily</a></code></p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a>&nbsp;fontSynthesis</code></td>
+                <td>
+                  <p>allow font synthesis if <code><a href="/reference/androidx/compose/ui/text/font/package-summary.html#(androidx.compose.ui.text.font.FontFamily.Resolver).resolveAsTypeface(androidx.compose.ui.text.font.FontFamily,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis)">fontFamily</a></code> or <code><a href="/reference/androidx/compose/ui/text/font/package-summary.html#(androidx.compose.ui.text.font.FontFamily.Resolver).resolveAsTypeface(androidx.compose.ui.text.font.FontFamily,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis)">fontStyle</a></code> don't have an exact match. This will allow &quot;fake bold&quot; (drawing with too wide a brush) and &quot;fake italic&quot; (drawing then skewing) to be applied when no exact match is present for the weight and style.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

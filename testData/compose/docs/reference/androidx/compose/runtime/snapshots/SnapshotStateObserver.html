@@ -5,12 +5,16 @@
 {% include "_shared/_reference-head-tags.html" %}
   </head>
   <body>
-    <div id="metadata-info-block"></div>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/runtime/snapshots/SnapshotStateObserver.kt+class:androidx.compose.runtime.snapshots.SnapshotStateObserver&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
     <h1>SnapshotStateObserver</h1>
     <p>
       <pre>public final class <a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html">SnapshotStateObserver</a></pre>
     </p>
     <hr>
+    <p>Helper class to efficiently observe snapshot state reads. See <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">observeReads</a></code> for more details.</p>
+    <p>NOTE: This class is not thread-safe, so implementations should not reuse observer between different threads to avoid race conditions.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -55,14 +59,14 @@
             <td><code>final void</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clear(kotlin.Any)">clear</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;scope)</code></div>
-              <p>Clears all model read observations for a given <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clear(kotlin.Any)">scope</a></code>.</p>
+              <p>Clears all state read observations for a given <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clear(kotlin.Any)">scope</a></code>.</p>
             </td>
           </tr>
           <tr>
             <td><code>final void</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clearIf(kotlin.Function1)">clearIf</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;predicate)</code></div>
-              <p>Remove observations using <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clearIf(kotlin.Function1)">predicate</a></code> to identify scope scopes to be removed.</p>
+              <p>Remove observations using <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clearIf(kotlin.Function1)">predicate</a></code> to identify scopes to be removed.</p>
             </td>
           </tr>
           <tr>
@@ -96,8 +100,8 @@
           <tr>
             <td><code>final void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#withNoObservations(kotlin.Function0)">withNoObservations</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block)</code></div>
-              <p>Stops observing state object reads while executing <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#withNoObservations(kotlin.Function0)">block</a></code>.</p>
+              <div><code><span><del><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#withNoObservations(kotlin.Function0)">withNoObservations</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block)</code></div>
+              <p><strong>This method is deprecated.</strong> Replace with Snapshot.withoutReadObservation()</p>
             </td>
           </tr>
         </tbody>
@@ -120,12 +124,12 @@
       <div class="api-item"><a name="clear-kotlin.Any-"></a><a name="clear"></a>
         <h3 class="api-name" id="clear(kotlin.Any)">clear</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clear(kotlin.Any)">clear</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;scope)</pre>
-        <p>Clears all model read observations for a given <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clear(kotlin.Any)">scope</a></code>. This clears values for all <code>onCommit</code> methods passed in <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">observeReads</a></code>.</p>
+        <p>Clears all state read observations for a given <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clear(kotlin.Any)">scope</a></code>. This clears values for all <code>onValueChangedForScope</code> callbacks passed in <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">observeReads</a></code>.</p>
       </div>
       <div class="api-item"><a name="clearIf-kotlin.Function1-"></a><a name="clearif"></a>
         <h3 class="api-name" id="clearIf(kotlin.Function1)">clearIf</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clearIf(kotlin.Function1)">clearIf</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;predicate)</pre>
-        <p>Remove observations using <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clearIf(kotlin.Function1)">predicate</a></code> to identify scope scopes to be removed. This is used when a scope is no longer in the hierarchy and should not receive any callbacks.</p>
+        <p>Remove observations using <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clearIf(kotlin.Function1)">predicate</a></code> to identify scopes to be removed. This is used when a scope is no longer in the hierarchy and should not receive any callbacks.</p>
       </div>
       <div class="api-item"><a name="notifyChanges(kotlin.collections.Set, androidx.compose.runtime.snapshots.Snapshot)"></a><a name="notifyChanges-kotlin.collections.Set-androidx.compose.runtime.snapshots.Snapshot-"></a><a name="notifychanges"></a>
         <h3 class="api-name" id="notifyChanges(kotlin.collections.Set,androidx.compose.runtime.snapshots.Snapshot)">notifyChanges</h3>
@@ -136,9 +140,41 @@
         <h3 class="api-name" id="observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">observeReads</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">observeReads</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;scope,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onValueChangedForScope,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</pre>
         <p>Executes <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">block</a></code>, observing state object reads during its execution.</p>
-        <p>The <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">scope</a></code> and <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">onValueChangedForScope</a></code> are associated with any values that are read so that when those values change, <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">onValueChangedForScope</a></code> can be called with the <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">scope</a></code> parameter.</p>
-        <p>Observation for <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">scope</a></code> will be paused when a new <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">observeReads</a></code> call is made or when <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#withNoObservations(kotlin.Function0)">withNoObservations</a></code> is called.</p>
-        <p>Any previous observation with the given <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">scope</a></code> and <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">onValueChangedForScope</a></code> will be cleared when the <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">onValueChangedForScope</a></code> is called for <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">scope</a></code>. The <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">onValueChangedForScope</a></code> should trigger a new <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">observeReads</a></code> call to resubscribe to changes. They may also be cleared using <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clearIf(kotlin.Function1)">clearIf</a></code> or <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clear(kotlin.Any)">clear</a></code>.</p>
+        <p>The <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">scope</a></code> and <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">onValueChangedForScope</a></code> are associated with any values that are read so that when those values change, <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">onValueChangedForScope</a></code> will be called with the <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">scope</a></code> parameter.</p>
+        <p>Observation can be paused with <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withoutReadObservation(kotlin.Function0)">Snapshot.withoutReadObservation</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;scope</code></td>
+                <td>
+                  <p>value associated with the observed scope.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onValueChangedForScope</code></td>
+                <td>
+                  <p>is called with the <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">scope</a></code> when value read within <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">block</a></code> has been changed. For repeated observations, it is more performant to pass the same instance of the callback, as <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observedScopeMaps()">observedScopeMaps</a></code> grows with each new callback instance.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block</code></td>
+                <td>
+                  <p>to observe reads within.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <div class="api-item"><a name="start--"></a><a name="start"></a>
         <h3 class="api-name" id="start()">start</h3>
@@ -152,7 +188,8 @@
       </div>
       <div class="api-item"><a name="withNoObservations-kotlin.Function0-"></a><a name="withnoobservations"></a>
         <h3 class="api-name" id="withNoObservations(kotlin.Function0)">withNoObservations</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#withNoObservations(kotlin.Function0)">withNoObservations</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<span><del><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#withNoObservations(kotlin.Function0)">withNoObservations</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block)</pre>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>Replace with Snapshot.withoutReadObservation()</aside>
         <p>Stops observing state object reads while executing <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#withNoObservations(kotlin.Function0)">block</a></code>. State object reads may be restarted by calling <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">observeReads</a></code> inside <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#withNoObservations(kotlin.Function0)">block</a></code>.</p>
       </div>
     </div>

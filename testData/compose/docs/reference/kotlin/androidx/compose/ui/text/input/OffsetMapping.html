@@ -1,0 +1,215 @@
+<html devsite="true">
+  <head>
+    <title>OffsetMapping</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-text/androidx/compose/ui/text/input/OffsetMapping.kt+class:androidx.compose.ui.text.input.OffsetMapping&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>OffsetMapping</h1>
+    <p>
+      <pre>interface <a href="/reference/kotlin/androidx/compose/ui/text/input/OffsetMapping.html">OffsetMapping</a></pre>
+    </p>
+    <hr>
+    <p>Provides bidirectional offset mapping between original and transformed text.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public companion properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/text/input/OffsetMapping.html">OffsetMapping</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/input/OffsetMapping.Companion.html#Identity()">Identity</a></code></div>
+              <p>The offset map used for identity mapping.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/input/OffsetMapping.html#originalToTransformed(kotlin.Int)">originalToTransformed</a>(offset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Convert offset in original text into the offset in transformed text.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/input/OffsetMapping.html#transformedToOriginal(kotlin.Int)">transformedToOriginal</a>(offset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Convert offset in transformed text into the offset in original text.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public companion properties</h2>
+      <div class="api-item"><a name="getIdentity()"></a><a name="setIdentity()"></a><a name="getIdentity--"></a><a name="setIdentity--"></a>
+        <h3 class="api-name" id="Identity()">Identity</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/OffsetMapping.Companion.html#Identity()">Identity</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/OffsetMapping.html">OffsetMapping</a></pre>
+        <p>The offset map used for identity mapping.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="originalToTransformed-kotlin.Int-"></a><a name="originaltotransformed"></a>
+        <h3 class="api-name" id="originalToTransformed(kotlin.Int)">originalToTransformed</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/OffsetMapping.html#originalToTransformed(kotlin.Int)">originalToTransformed</a>(offset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>Convert offset in original text into the offset in transformed text.</p>
+        <p>This function must be a monotonically non-decreasing function. In other words, if a cursor advances in the original text, the cursor in the transformed text must advance or stay there.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>offset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                <td>
+                  <p>offset in original text.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                <td>
+                  <p>offset in transformed text</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/text/input/VisualTransformation.html">VisualTransformation</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="transformedToOriginal-kotlin.Int-"></a><a name="transformedtooriginal"></a>
+        <h3 class="api-name" id="transformedToOriginal(kotlin.Int)">transformedToOriginal</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/OffsetMapping.html#transformedToOriginal(kotlin.Int)">transformedToOriginal</a>(offset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>Convert offset in transformed text into the offset in original text.</p>
+        <p>This function must be a monotonically non-decreasing function. In other words, if a cursor advances in the transformed text, the cusrsor in the original text must advance or stay there.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>offset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                <td>
+                  <p>offset in transformed text</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                <td>
+                  <p>offset in original text</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/text/input/VisualTransformation.html">VisualTransformation</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

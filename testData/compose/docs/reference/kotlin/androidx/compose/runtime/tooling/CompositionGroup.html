@@ -5,7 +5,9 @@
 {% include "_shared/_reference-head-tags.html" %}
   </head>
   <body>
-    <div id="metadata-info-block"></div>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/runtime/tooling/CompositionData.kt+class:androidx.compose.runtime.tooling.CompositionGroup&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
     <h1>CompositionGroup</h1>
     <p>
       <pre>interface <a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html">CompositionGroup</a> : <a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionData.html">CompositionData</a></pre>
@@ -34,6 +36,20 @@
             </td>
           </tr>
           <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#groupSize()">groupSize</a></code></div>
+              <p>The total number of groups, including itself, that this group contains.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#identity()">identity</a></code></div>
+              <p>A value that identifies a Group independently of movement caused by recompositions.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a></code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#key()">key</a></code></div>
@@ -48,11 +64,49 @@
             </td>
           </tr>
           <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#slotsSize()">slotsSize</a></code></div>
+            </td>
+          </tr>
+          <tr>
             <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?</code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#sourceInfo()">sourceInfo</a></code></div>
               <p>Information recorded by the compiler to help tooling identify the source that generated the group.</p>
             </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionData.html">androidx.compose.runtime.tooling.CompositionData</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>open <a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html">CompositionGroup</a>?</code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionData.html#find(kotlin.Any)">find</a>(identityToFind:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)</code></div>
+                        <p>Find a sub-group by identity.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
           </tr>
         </tbody>
       </table>
@@ -101,7 +155,17 @@
       <div class="api-item"><a name="getData()"></a><a name="setData()"></a><a name="getData--"></a><a name="setData--"></a>
         <h3 class="api-name" id="data()">data</h3>
         <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#data()">data</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html">Iterable</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</pre>
-        <p>The data stored in the slot table for this group. This information includes the values stored for parameters that are checked for change, any value passed as a parameter for remember and the last value returned by remember, etc.</p>
+        <p>The data stored in the slot table for this group. This information includes the values stored for parameters that are checked for change, any value passed as a parameter for <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">androidx.compose.runtime.remember</a></code> and the last value returned by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">androidx.compose.runtime.remember</a></code>, etc.</p>
+      </div>
+      <div class="api-item"><a name="getGroupSize()"></a><a name="setGroupSize()"></a><a name="getGroupSize--"></a><a name="setGroupSize--"></a>
+        <h3 class="api-name" id="groupSize()">groupSize</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#groupSize()">groupSize</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>The total number of groups, including itself, that this group contains.</p>
+      </div>
+      <div class="api-item"><a name="getIdentity()"></a><a name="setIdentity()"></a><a name="getIdentity--"></a><a name="setIdentity--"></a>
+        <h3 class="api-name" id="identity()">identity</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#identity()">identity</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?</pre>
+        <p>A value that identifies a Group independently of movement caused by recompositions.</p>
       </div>
       <div class="api-item"><a name="getKey()"></a><a name="setKey()"></a><a name="getKey--"></a><a name="setKey--"></a>
         <h3 class="api-name" id="key()">key</h3>
@@ -112,6 +176,10 @@
         <h3 class="api-name" id="node()">node</h3>
         <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#node()">node</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?</pre>
         <p>If the group represents a node this returns a non-null value which is the node that was emitted for the group.</p>
+      </div>
+      <div class="api-item"><a name="getSlotsSize()"></a><a name="setSlotsSize()"></a><a name="getSlotsSize--"></a><a name="setSlotsSize--"></a>
+        <h3 class="api-name" id="slotsSize()">slotsSize</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#slotsSize()">slotsSize</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
       </div>
       <div class="api-item"><a name="getSourceInfo()"></a><a name="setSourceInfo()"></a><a name="getSourceInfo--"></a><a name="setSourceInfo--"></a>
         <h3 class="api-name" id="sourceInfo()">sourceInfo</h3>

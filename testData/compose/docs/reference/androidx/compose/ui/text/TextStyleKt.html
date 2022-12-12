@@ -1,0 +1,108 @@
+<html devsite="true">
+  <head>
+    <title>TextStyleKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>TextStyleKt</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/text/TextStyleKt.html">TextStyleKt</a></pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextStyle.html">TextStyle</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/TextStyleKt.html#lerp(androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.TextStyle,kotlin.Float)">lerp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextStyle.html">TextStyle</a>&nbsp;start,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextStyle.html">TextStyle</a>&nbsp;stop,&nbsp;float&nbsp;fraction)</code></div>
+              <p>Interpolate between two text styles.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextStyle.html">TextStyle</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/TextStyleKt.html#resolveDefaults(androidx.compose.ui.text.TextStyle,androidx.compose.ui.unit.LayoutDirection)">resolveDefaults</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextStyle.html">TextStyle</a>&nbsp;style,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>&nbsp;direction<br>)</code></div>
+              <p>Fills missing values in TextStyle with default values and resolve <code><a href="/reference/androidx/compose/ui/text/style/TextDirection.html">TextDirection</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="lerp(androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, kotlin.Float)"></a><a name="lerp-androidx.compose.ui.text.TextStyle-androidx.compose.ui.text.TextStyle-kotlin.Float-"></a><a name="lerp"></a>
+        <h3 class="api-name" id="lerp(androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.TextStyle,kotlin.Float)">lerp</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextStyle.html">TextStyle</a>&nbsp;<a href="/reference/androidx/compose/ui/text/TextStyleKt.html#lerp(androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.TextStyle,kotlin.Float)">lerp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextStyle.html">TextStyle</a>&nbsp;start,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextStyle.html">TextStyle</a>&nbsp;stop,&nbsp;float&nbsp;fraction)</pre>
+        <p>Interpolate between two text styles.</p>
+        <p>This will not work well if the styles don't set the same fields.</p>
+        <p>The <code><a href="/reference/androidx/compose/ui/text/package-summary.html#lerp(androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.TextStyle,kotlin.Float)">fraction</a></code> argument represents position on the timeline, with 0.0 meaning that the interpolation has not started, returning <code><a href="/reference/androidx/compose/ui/text/package-summary.html#lerp(androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.TextStyle,kotlin.Float)">start</a></code> (or something equivalent to <code><a href="/reference/androidx/compose/ui/text/package-summary.html#lerp(androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.TextStyle,kotlin.Float)">start</a></code>), 1.0 meaning that the interpolation has finished, returning <code><a href="/reference/androidx/compose/ui/text/package-summary.html#lerp(androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.TextStyle,kotlin.Float)">stop</a></code> (or something equivalent to <code><a href="/reference/androidx/compose/ui/text/package-summary.html#lerp(androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.TextStyle,kotlin.Float)">stop</a></code>), and values in between meaning that the interpolation is at the relevant point on the timeline between <code><a href="/reference/androidx/compose/ui/text/package-summary.html#lerp(androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.TextStyle,kotlin.Float)">start</a></code> and <code><a href="/reference/androidx/compose/ui/text/package-summary.html#lerp(androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.TextStyle,kotlin.Float)">stop</a></code>. The interpolation can be extrapolated beyond 0.0 and 1.0, so negative values and values greater than 1.0 are valid.</p>
+      </div>
+      <div class="api-item"><a name="resolveDefaults(androidx.compose.ui.text.TextStyle, androidx.compose.ui.unit.LayoutDirection)"></a><a name="resolveDefaults-androidx.compose.ui.text.TextStyle-androidx.compose.ui.unit.LayoutDirection-"></a><a name="resolvedefaults"></a>
+        <h3 class="api-name" id="resolveDefaults(androidx.compose.ui.text.TextStyle,androidx.compose.ui.unit.LayoutDirection)">resolveDefaults</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextStyle.html">TextStyle</a>&nbsp;<a href="/reference/androidx/compose/ui/text/TextStyleKt.html#resolveDefaults(androidx.compose.ui.text.TextStyle,androidx.compose.ui.unit.LayoutDirection)">resolveDefaults</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextStyle.html">TextStyle</a>&nbsp;style,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>&nbsp;direction<br>)</pre>
+        <p>Fills missing values in TextStyle with default values and resolve <code><a href="/reference/androidx/compose/ui/text/style/TextDirection.html">TextDirection</a></code>.</p>
+        <p>This function will fill all null or <code><a href="/reference/androidx/compose/ui/unit/TextUnit.Companion.html#Unspecified()">TextUnit.Unspecified</a></code> field with actual values.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextStyle.html">TextStyle</a>&nbsp;style</code></td>
+                <td>
+                  <p>a text style to be resolved</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>&nbsp;direction</code></td>
+                <td>
+                  <p>a layout direction to be used for resolving text layout direction algorithm</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextStyle.html">TextStyle</a></code></td>
+                <td>
+                  <p>resolved text style.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

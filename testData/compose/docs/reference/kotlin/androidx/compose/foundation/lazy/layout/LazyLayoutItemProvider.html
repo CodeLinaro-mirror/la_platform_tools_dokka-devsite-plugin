@@ -1,0 +1,136 @@
+<html devsite="true">
+  <head>
+    <title>LazyLayoutItemProvider</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.kt+class:androidx.compose.foundation.lazy.layout.LazyLayoutItemProvider&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>LazyLayoutItemProvider</h1>
+    <p>
+      <pre>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>interface <a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html">LazyLayoutItemProvider</a></pre>
+    </p>
+    <hr>
+    <p>Provides all the needed info about the items which could be later composed and displayed as children or <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/package-summary.html#LazyLayout(androidx.compose.foundation.lazy.layout.LazyLayoutItemProvider,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.layout.LazyLayoutPrefetchState,kotlin.Function2)">LazyLayout</a></code>.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html#Item(kotlin.Int)">Item</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>The item for the given <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html#Item(kotlin.Int)">index</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html#getContentType(kotlin.Int)">getContentType</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Returns the content type for the item on this index.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html#getKey(kotlin.Int)">getKey</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Returns the key for the item on this index.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html#itemCount()">itemCount</a></code></div>
+              <p>The total number of items in the lazy layout (visible or not).</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html#keyToIndexMap()">keyToIndexMap</a></code></div>
+              <p>Contains the mapping between the key and the index.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="Item-kotlin.Int-"></a><a name="item"></a>
+        <h3 class="api-name" id="Item(kotlin.Int)">Item</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html#Item(kotlin.Int)">Item</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>The item for the given <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html#Item(kotlin.Int)">index</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getContentType-kotlin.Int-"></a><a name="getcontenttype"></a>
+        <h3 class="api-name" id="getContentType(kotlin.Int)">getContentType</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html#getContentType(kotlin.Int)">getContentType</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?</pre>
+        <p>Returns the content type for the item on this index. It is used to improve the item compositions reusing efficiency. Note that null is a valid type and items of such type will be considered compatible.</p>
+      </div>
+      <div class="api-item"><a name="getKey-kotlin.Int-"></a><a name="getkey"></a>
+        <h3 class="api-name" id="getKey(kotlin.Int)">getKey</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html#getKey(kotlin.Int)">getKey</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a></pre>
+        <p>Returns the key for the item on this index.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/package-summary.html#getDefaultLazyLayoutKey(kotlin.Int)">getDefaultLazyLayoutKey</a></code></td>
+                <td>
+                  <p>which you can use if the user didn't provide a key.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getItemCount()"></a><a name="setItemCount()"></a><a name="getItemCount--"></a><a name="setItemCount--"></a>
+        <h3 class="api-name" id="itemCount()">itemCount</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html#itemCount()">itemCount</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>The total number of items in the lazy layout (visible or not).</p>
+      </div>
+      <div class="api-item"><a name="getKeyToIndexMap()"></a><a name="setKeyToIndexMap()"></a><a name="getKeyToIndexMap--"></a><a name="setKeyToIndexMap--"></a>
+        <h3 class="api-name" id="keyToIndexMap()">keyToIndexMap</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html#keyToIndexMap()">keyToIndexMap</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>&gt;</pre>
+        <p>Contains the mapping between the key and the index. It could contain not all the items of the list as an optimization or be empty if user didn't provide a custom key-index mapping.</p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,115 @@
+<html devsite="true">
+  <head>
+    <title>ClipboardManager</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/platform/ClipboardManager.kt+class:androidx.compose.ui.platform.ClipboardManager&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>ClipboardManager</h1>
+    <p>
+      <pre>public interface <a href="/reference/androidx/compose/ui/platform/ClipboardManager.html">ClipboardManager</a></pre>
+    </p>
+    <hr>
+    <p>Interface for managing the Clipboard.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/platform/ClipboardManager.html#getText()">getText</a>()</code></div>
+              <p>This method get the text from the Clipboard.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/platform/ClipboardManager.html#hasText()">hasText</a>()</code></div>
+              <p>This method returns true if there is a text in the Clipboard, false otherwise.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/platform/ClipboardManager.html#setText(androidx.compose.ui.text.AnnotatedString)">setText</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&nbsp;annotatedString)</code></div>
+              <p>This method put the text into the Clipboard.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="getText--"></a><a name="gettext"></a>
+        <h3 class="api-name" id="getText()">getText</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;<a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&nbsp;<a href="/reference/androidx/compose/ui/platform/ClipboardManager.html#getText()">getText</a>()</pre>
+        <p>This method get the text from the Clipboard.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code></td>
+                <td>
+                  <p>The text in the Clipboard. It could be null due to 2 reasons: 1. Clipboard is empty; 2. Cannot convert the <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char-sequence/index.html">CharSequence</a></code> text in Clipboard to <code><a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="hasText--"></a><a name="hastext"></a>
+        <h3 class="api-name" id="hasText()">hasText</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/platform/ClipboardManager.html#hasText()">hasText</a>()</pre>
+        <p>This method returns true if there is a text in the Clipboard, false otherwise.</p>
+      </div>
+      <div class="api-item"><a name="setText-androidx.compose.ui.text.AnnotatedString-"></a><a name="settext"></a>
+        <h3 class="api-name" id="setText(androidx.compose.ui.text.AnnotatedString)">setText</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/platform/ClipboardManager.html#setText(androidx.compose.ui.text.AnnotatedString)">setText</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&nbsp;annotatedString)</pre>
+        <p>This method put the text into the Clipboard.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&nbsp;annotatedString</code></td>
+                <td>
+                  <p>The <code><a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code> to be put into Clipboard.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

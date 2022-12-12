@@ -1,0 +1,144 @@
+<html devsite="true">
+  <head>
+    <title>StampedPathEffectStyle</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-graphics/androidx/compose/ui/graphics/PathEffect.kt+class:androidx.compose.ui.graphics.StampedPathEffectStyle&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>StampedPathEffectStyle</h1>
+    <p>
+      <pre>value public final class <a href="/reference/androidx/compose/ui/graphics/StampedPathEffectStyle.html">StampedPathEffectStyle</a></pre>
+    </p>
+    <hr>
+    <p>Strategy for transforming each point of the shape along the drawn path</p>
+    <pre class="prettyprint">
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.drawscope.Stroke
+
+val size = 20f
+val square = Path().apply {
+    lineTo(size, 0f)
+    lineTo(size, size)
+    lineTo(0f, size)
+    close()
+}
+Column(modifier = Modifier.fillMaxHeight().wrapContentSize(Alignment.Center)) {
+    val canvasModifier = Modifier.requiredSize(80.dp).align(Alignment.CenterHorizontally)
+
+    // StampedPathEffectStyle.Morph will modify the lines of the square to be curved to fit
+    // the curvature of the circle itself. Each stamped square will be rendered as an arc
+    // that is fully contained by the bounds of the circle itself
+    Canvas(modifier = canvasModifier) {
+        drawCircle(color = Color.Blue)
+        drawCircle(
+            color = Color.Red,
+            style = Stroke(
+                pathEffect = PathEffect.stampedPathEffect(
+                    shape = square,
+                    style = StampedPathEffectStyle.Morph,
+                    phase = 0f,
+                    advance = 30f
+                )
+            )
+        )
+    }
+
+    Spacer(modifier = Modifier.requiredSize(10.dp))
+
+    // StampedPathEffectStyle.Rotate will draw the square repeatedly around the circle
+    // such that each stamped square is centered on the circumference of the circle and is
+    // rotated along the curvature of the circle itself
+    Canvas(modifier = canvasModifier) {
+        drawCircle(color = Color.Blue)
+        drawCircle(
+            color = Color.Red,
+            style = Stroke(
+                pathEffect = PathEffect.stampedPathEffect(
+                    shape = square,
+                    style = StampedPathEffectStyle.Rotate,
+                    phase = 0f,
+                    advance = 30f
+                )
+            )
+        )
+    }
+
+    Spacer(modifier = Modifier.requiredSize(10.dp))
+
+    // StampedPathEffectStyle.Translate will draw the square repeatedly around the circle
+    // with the top left of each stamped square on the circumference of the circle
+    Canvas(modifier = canvasModifier) {
+        drawCircle(color = Color.Blue)
+        drawCircle(
+            color = Color.Red,
+            style = Stroke(
+                pathEffect = PathEffect.stampedPathEffect(
+                    shape = square,
+                    style = StampedPathEffectStyle.Translate,
+                    phase = 0f,
+                    advance = 30f
+                )
+            )
+        )
+    }
+}</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>public static class <a href="/reference/androidx/compose/ui/graphics/StampedPathEffectStyle.Companion.html">StampedPathEffectStyle.Companion</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/StampedPathEffectStyle.html#toString()">toString</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+        <h3 class="api-name" id="toString()">toString</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/StampedPathEffectStyle.html#toString()">toString</a>()</pre>
+      </div>
+    </div>
+  </body>
+</html>

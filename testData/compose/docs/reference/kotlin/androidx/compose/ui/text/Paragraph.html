@@ -1,0 +1,710 @@
+<html devsite="true">
+  <head>
+    <title>Paragraph</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-text/androidx/compose/ui/text/Paragraph.kt+class:androidx.compose.ui.text.Paragraph&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>Paragraph</h1>
+    <p>
+      <pre>interface <a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html">Paragraph</a></pre>
+    </p>
+    <hr>
+    <p>A paragraph of text that is laid out.</p>
+    <p>Paragraphs can be displayed on a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Canvas.html">Canvas</a></code> using the <code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#paint(androidx.compose.ui.graphics.Canvas,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.style.TextDecoration)">paint</a></code> method.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/text/style/ResolvedTextDirection.html">ResolvedTextDirection</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getBidiRunDirection(kotlin.Int)">getBidiRunDirection</a>(offset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Get the text direction of the character at the given offset.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getBoundingBox(kotlin.Int)">getBoundingBox</a>(offset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Returns the bounding box as Rect of the character for given character offset.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getCursorRect(kotlin.Int)">getCursorRect</a>(offset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Returns rectangle of the cursor area.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getHorizontalPosition(kotlin.Int,kotlin.Boolean)">getHorizontalPosition</a>(offset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;usePrimaryDirection:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>)</code></div>
+              <p>Compute the horizontal position where a newly inserted character at <code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getHorizontalPosition(kotlin.Int,kotlin.Boolean)">offset</a></code> would be.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getLineBottom(kotlin.Int)">getLineBottom</a>(lineIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Returns the bottom y coordinate of the given line.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getLineEnd(kotlin.Int,kotlin.Boolean)">getLineEnd</a>(lineIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;visibleEnd:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>)</code></div>
+              <p>Returns the end offset of the given line</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getLineForOffset(kotlin.Int)">getLineForOffset</a>(offset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Returns the line number on which the specified text offset appears.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getLineForVerticalPosition(kotlin.Float)">getLineForVerticalPosition</a>(vertical:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+              <p>Returns line number closest to the given graphical vertical position.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getLineHeight(kotlin.Int)">getLineHeight</a>(lineIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Returns the height of the given line.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getLineLeft(kotlin.Int)">getLineLeft</a>(lineIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Returns the left x Coordinate of the given line.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getLineRight(kotlin.Int)">getLineRight</a>(lineIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Returns the right x Coordinate of the given line.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getLineStart(kotlin.Int)">getLineStart</a>(lineIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Returns the start offset of the given line, inclusive.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getLineTop(kotlin.Int)">getLineTop</a>(lineIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Returns the bottom y coordinate of the given line.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getLineWidth(kotlin.Int)">getLineWidth</a>(lineIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Returns the width of the given line.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getOffsetForPosition(androidx.compose.ui.geometry.Offset)">getOffsetForPosition</a>(position:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>)</code></div>
+              <p>Returns the character offset closest to the given graphical position.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/text/style/ResolvedTextDirection.html">ResolvedTextDirection</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getParagraphDirection(kotlin.Int)">getParagraphDirection</a>(offset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Get the text direction of the paragraph containing the given offset.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getPathForRange(kotlin.Int,kotlin.Int)">getPathForRange</a>(start:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;end:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Returns path that enclose the given text range.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/text/TextRange.html">TextRange</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getWordBoundary(kotlin.Int)">getWordBoundary</a>(offset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Returns the TextRange of the word at the given character offset.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#isLineEllipsized(kotlin.Int)">isLineEllipsized</a>(lineIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Returns true if the given line is ellipsized, otherwise returns false.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#paint(androidx.compose.ui.graphics.Canvas,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.style.TextDecoration)">paint</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;canvas:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Canvas.html">Canvas</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;color:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;shadow:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Shadow.html">Shadow</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;textDecoration:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>?<br>)</code></div>
+              <p>Draws this paragraph onto given <code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#paint(androidx.compose.ui.graphics.Canvas,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.style.TextDecoration)">canvas</a></code> while modifying supported draw properties.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#paint(androidx.compose.ui.graphics.Canvas,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.drawscope.DrawStyle)">paint</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;canvas:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Canvas.html">Canvas</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;color:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;shadow:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Shadow.html">Shadow</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;textDecoration:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;drawStyle:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawStyle.html">DrawStyle</a>?<br>)</code></div>
+              <p>Draws this paragraph onto given <code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#paint(androidx.compose.ui.graphics.Canvas,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.drawscope.DrawStyle)">canvas</a></code> while modifying supported draw properties.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#paint(androidx.compose.ui.graphics.Canvas,androidx.compose.ui.graphics.Brush,kotlin.Float,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.drawscope.DrawStyle)">paint</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;canvas:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Canvas.html">Canvas</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;brush:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Brush.html">Brush</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;alpha:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;shadow:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Shadow.html">Shadow</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;textDecoration:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;drawStyle:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawStyle.html">DrawStyle</a>?<br>)</code></div>
+              <p>Draws this paragraph onto given <code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#paint(androidx.compose.ui.graphics.Canvas,androidx.compose.ui.graphics.Brush,kotlin.Float,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.drawscope.DrawStyle)">canvas</a></code> while modifying supported draw properties.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#didExceedMaxLines()">didExceedMaxLines</a></code></div>
+              <p>True if there is more vertical content, but the text was truncated, either because we reached <code>maxLines</code> lines of text or because the <code>maxLines</code> was null, <code>ellipsis</code> was not null, and one of the lines exceeded the width constraint.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#firstBaseline()">firstBaseline</a></code></div>
+              <p>The distance from the top of the paragraph to the alphabetic baseline of the first line, in logical pixels.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#height()">height</a></code></div>
+              <p>The amount of vertical space this paragraph occupies.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#lastBaseline()">lastBaseline</a></code></div>
+              <p>The distance from the top of the paragraph to the alphabetic baseline of the last line, in logical pixels.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#lineCount()">lineCount</a></code></div>
+              <p>The total number of lines in the text.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#maxIntrinsicWidth()">maxIntrinsicWidth</a></code></div>
+              <p>Returns the smallest width beyond which increasing the width never decreases the height.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#minIntrinsicWidth()">minIntrinsicWidth</a></code></div>
+              <p>The width for text if all soft wrap opportunities were taken.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>?&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#placeholderRects()">placeholderRects</a></code></div>
+              <p>The bounding boxes reserved for the input placeholders in this Paragraphs.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#width()">width</a></code></div>
+              <p>The amount of horizontal space this paragraph occupies.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="getBidiRunDirection-kotlin.Int-"></a><a name="getbidirundirection"></a>
+        <h3 class="api-name" id="getBidiRunDirection(kotlin.Int)">getBidiRunDirection</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getBidiRunDirection(kotlin.Int)">getBidiRunDirection</a>(offset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/ResolvedTextDirection.html">ResolvedTextDirection</a></pre>
+        <p>Get the text direction of the character at the given offset.</p>
+      </div>
+      <div class="api-item"><a name="getBoundingBox-kotlin.Int-"></a><a name="getboundingbox"></a>
+        <h3 class="api-name" id="getBoundingBox(kotlin.Int)">getBoundingBox</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getBoundingBox(kotlin.Int)">getBoundingBox</a>(offset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></pre>
+        <p>Returns the bounding box as Rect of the character for given character offset. Rect includes the top, bottom, left and right of a character.</p>
+      </div>
+      <div class="api-item"><a name="getCursorRect-kotlin.Int-"></a><a name="getcursorrect"></a>
+        <h3 class="api-name" id="getCursorRect(kotlin.Int)">getCursorRect</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getCursorRect(kotlin.Int)">getCursorRect</a>(offset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></pre>
+        <p>Returns rectangle of the cursor area.</p>
+      </div>
+      <div class="api-item"><a name="getHorizontalPosition(kotlin.Int, kotlin.Boolean)"></a><a name="getHorizontalPosition-kotlin.Int-kotlin.Boolean-"></a><a name="gethorizontalposition"></a>
+        <h3 class="api-name" id="getHorizontalPosition(kotlin.Int,kotlin.Boolean)">getHorizontalPosition</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getHorizontalPosition(kotlin.Int,kotlin.Boolean)">getHorizontalPosition</a>(offset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;usePrimaryDirection:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>Compute the horizontal position where a newly inserted character at <code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getHorizontalPosition(kotlin.Int,kotlin.Boolean)">offset</a></code> would be.</p>
+        <p>If the inserted character at <code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getHorizontalPosition(kotlin.Int,kotlin.Boolean)">offset</a></code> is within a LTR/RTL run, the returned position will be the left(right) edge of the character.</p>
+        <pre class="prettyprint">For example:<br>    Paragraph's direction is LTR.<br>    Text in logic order:               L0 L1 L2 R3 R4 R5<br>    Text in visual order:              L0 L1 L2 R5 R4 R3<br>        position of the offset(2):          |<br>        position of the offset(4):                   |</pre>
+        <p>However, when the <code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getHorizontalPosition(kotlin.Int,kotlin.Boolean)">offset</a></code> is at the BiDi transition offset, there will be two possible visual positions, which depends on the direction of the inserted character.</p>
+        <pre class="prettyprint">For example:<br>    Paragraph's direction is LTR.<br>    Text in logic order:               L0 L1 L2 R3 R4 R5<br>    Text in visual order:              L0 L1 L2 R5 R4 R3<br>        position of the offset(3):             |           (The inserted character is LTR)<br>                                                        |  (The inserted character is RTL)</pre>
+        <p>In this case, <code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getHorizontalPosition(kotlin.Int,kotlin.Boolean)">usePrimaryDirection</a></code> will be used to resolve the ambiguity. If true, the inserted character's direction is assumed to be the same as Paragraph's direction. Otherwise, the inserted character's direction is assumed to be the opposite of the Paragraph's direction.</p>
+        <pre class="prettyprint">For example:<br>    Paragraph's direction is LTR.<br>    Text in logic order:               L0 L1 L2 R3 R4 R5<br>    Text in visual order:              L0 L1 L2 R5 R4 R3<br>        position of the offset(3):             |           (usePrimaryDirection is true)<br>                                                        |  (usePrimaryDirection is false)</pre>
+        <p>This method is useful to compute cursor position.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>offset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                <td>
+                  <p>the offset of the character, in the range of 0, length.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>usePrimaryDirection:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                <td>
+                  <p>whether the paragraph direction is respected when <code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getHorizontalPosition(kotlin.Int,kotlin.Boolean)">offset</a></code> points to a BiDi transition point.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>a float number representing the horizontal position in the unit of pixel.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getLineBottom-kotlin.Int-"></a><a name="getlinebottom"></a>
+        <h3 class="api-name" id="getLineBottom(kotlin.Int)">getLineBottom</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getLineBottom(kotlin.Int)">getLineBottom</a>(lineIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>Returns the bottom y coordinate of the given line.</p>
+      </div>
+      <div class="api-item"><a name="getLineEnd(kotlin.Int, kotlin.Boolean)"></a><a name="getLineEnd-kotlin.Int-kotlin.Boolean-"></a><a name="getlineend"></a>
+        <h3 class="api-name" id="getLineEnd(kotlin.Int,kotlin.Boolean)">getLineEnd</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getLineEnd(kotlin.Int,kotlin.Boolean)">getLineEnd</a>(lineIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;visibleEnd:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>Returns the end offset of the given line</p>
+        <p>Characters being ellipsized are treated as invisible characters. So that if visibleEnd is false, it will return line end including the ellipsized characters and vice verse.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>lineIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                <td>
+                  <p>the line number</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>visibleEnd:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+                <td>
+                  <p>if true, the returned line end will not count trailing whitespaces or linefeed characters. Otherwise, this function will return the logical line end. By default it's false.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                <td>
+                  <p>an exclusive end offset of the line.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getLineForOffset-kotlin.Int-"></a><a name="getlineforoffset"></a>
+        <h3 class="api-name" id="getLineForOffset(kotlin.Int)">getLineForOffset</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getLineForOffset(kotlin.Int)">getLineForOffset</a>(offset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>Returns the line number on which the specified text offset appears. If you ask for a position before 0, you get 0; if you ask for a position beyond the end of the text, you get the last line.</p>
+      </div>
+      <div class="api-item"><a name="getLineForVerticalPosition-kotlin.Float-"></a><a name="getlineforverticalposition"></a>
+        <h3 class="api-name" id="getLineForVerticalPosition(kotlin.Float)">getLineForVerticalPosition</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getLineForVerticalPosition(kotlin.Float)">getLineForVerticalPosition</a>(vertical:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>Returns line number closest to the given graphical vertical position. If you ask for a vertical position before 0, you get 0; if you ask for a vertical position beyond the last line, you get the last line.</p>
+      </div>
+      <div class="api-item"><a name="getLineHeight-kotlin.Int-"></a><a name="getlineheight"></a>
+        <h3 class="api-name" id="getLineHeight(kotlin.Int)">getLineHeight</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getLineHeight(kotlin.Int)">getLineHeight</a>(lineIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>Returns the height of the given line.</p>
+      </div>
+      <div class="api-item"><a name="getLineLeft-kotlin.Int-"></a><a name="getlineleft"></a>
+        <h3 class="api-name" id="getLineLeft(kotlin.Int)">getLineLeft</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getLineLeft(kotlin.Int)">getLineLeft</a>(lineIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>Returns the left x Coordinate of the given line.</p>
+      </div>
+      <div class="api-item"><a name="getLineRight-kotlin.Int-"></a><a name="getlineright"></a>
+        <h3 class="api-name" id="getLineRight(kotlin.Int)">getLineRight</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getLineRight(kotlin.Int)">getLineRight</a>(lineIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>Returns the right x Coordinate of the given line.</p>
+      </div>
+      <div class="api-item"><a name="getLineStart-kotlin.Int-"></a><a name="getlinestart"></a>
+        <h3 class="api-name" id="getLineStart(kotlin.Int)">getLineStart</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getLineStart(kotlin.Int)">getLineStart</a>(lineIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>Returns the start offset of the given line, inclusive.</p>
+      </div>
+      <div class="api-item"><a name="getLineTop-kotlin.Int-"></a><a name="getlinetop"></a>
+        <h3 class="api-name" id="getLineTop(kotlin.Int)">getLineTop</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getLineTop(kotlin.Int)">getLineTop</a>(lineIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>Returns the bottom y coordinate of the given line.</p>
+      </div>
+      <div class="api-item"><a name="getLineWidth-kotlin.Int-"></a><a name="getlinewidth"></a>
+        <h3 class="api-name" id="getLineWidth(kotlin.Int)">getLineWidth</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getLineWidth(kotlin.Int)">getLineWidth</a>(lineIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>Returns the width of the given line.</p>
+      </div>
+      <div class="api-item"><a name="getOffsetForPosition-androidx.compose.ui.geometry.Offset-"></a><a name="getoffsetforposition"></a>
+        <h3 class="api-name" id="getOffsetForPosition(androidx.compose.ui.geometry.Offset)">getOffsetForPosition</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getOffsetForPosition(androidx.compose.ui.geometry.Offset)">getOffsetForPosition</a>(position:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>Returns the character offset closest to the given graphical position.</p>
+      </div>
+      <div class="api-item"><a name="getParagraphDirection-kotlin.Int-"></a><a name="getparagraphdirection"></a>
+        <h3 class="api-name" id="getParagraphDirection(kotlin.Int)">getParagraphDirection</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getParagraphDirection(kotlin.Int)">getParagraphDirection</a>(offset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/ResolvedTextDirection.html">ResolvedTextDirection</a></pre>
+        <p>Get the text direction of the paragraph containing the given offset.</p>
+      </div>
+      <div class="api-item"><a name="getPathForRange(kotlin.Int, kotlin.Int)"></a><a name="getPathForRange-kotlin.Int-kotlin.Int-"></a><a name="getpathforrange"></a>
+        <h3 class="api-name" id="getPathForRange(kotlin.Int,kotlin.Int)">getPathForRange</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getPathForRange(kotlin.Int,kotlin.Int)">getPathForRange</a>(start:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;end:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a></pre>
+        <p>Returns path that enclose the given text range.</p>
+      </div>
+      <div class="api-item"><a name="getWordBoundary-kotlin.Int-"></a><a name="getwordboundary"></a>
+        <h3 class="api-name" id="getWordBoundary(kotlin.Int)">getWordBoundary</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#getWordBoundary(kotlin.Int)">getWordBoundary</a>(offset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/TextRange.html">TextRange</a></pre>
+        <p>Returns the TextRange of the word at the given character offset. Characters not part of a word, such as spaces, symbols, and punctuation, have word breaks on both sides. In such cases, this method will return TextRange(offset, offset). Word boundaries are defined more precisely in Unicode Standard Annex #29 http://www.unicode.org/reports/tr29/#Word_Boundaries</p>
+      </div>
+      <div class="api-item"><a name="isLineEllipsized-kotlin.Int-"></a><a name="islineellipsized"></a>
+        <h3 class="api-name" id="isLineEllipsized(kotlin.Int)">isLineEllipsized</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#isLineEllipsized(kotlin.Int)">isLineEllipsized</a>(lineIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <p>Returns true if the given line is ellipsized, otherwise returns false.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>lineIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                <td>
+                  <p>a 0 based line index</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                <td>
+                  <p>true if the given line is ellipsized, otherwise false</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="paint(androidx.compose.ui.graphics.Canvas, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Shadow, androidx.compose.ui.text.style.TextDecoration)"></a><a name="paint-androidx.compose.ui.graphics.Canvas-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Shadow-androidx.compose.ui.text.style.TextDecoration-"></a><a name="paint"></a>
+        <h3 class="api-name" id="paint(androidx.compose.ui.graphics.Canvas,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.style.TextDecoration)">paint</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#paint(androidx.compose.ui.graphics.Canvas,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.style.TextDecoration)">paint</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;canvas:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Canvas.html">Canvas</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;color:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = Color.Unspecified,<br>&nbsp;&nbsp;&nbsp;&nbsp;shadow:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Shadow.html">Shadow</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;textDecoration:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>? = null<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Draws this paragraph onto given <code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#paint(androidx.compose.ui.graphics.Canvas,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.style.TextDecoration)">canvas</a></code> while modifying supported draw properties. Any change caused by overriding parameters are permanent, meaning that they affect the subsequent paint calls.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>canvas:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Canvas.html">Canvas</a></code></td>
+                <td>
+                  <p>Canvas to draw this paragraph on.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>color:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = Color.Unspecified</code></td>
+                <td>
+                  <p>Applies to the default text paint color that's used by this paragraph. Text color spans are not affected. <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Unspecified()">Color.Unspecified</a></code> is treated as no-op.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>shadow:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Shadow.html">Shadow</a>? = null</code></td>
+                <td>
+                  <p>Applies to the default text paint shadow that's used by this paragraph. Text shadow spans are not affected. <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Shadow.Companion.html#None()">Shadow.None</a></code> removes any existing shadow on this paragraph, <code>null</code> does not change the currently set <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Shadow.html">Shadow</a></code> configuration.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>textDecoration:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>? = null</code></td>
+                <td>
+                  <p>Applies to the default text paint that's used by this paragraph. Spans that specify a TextDecoration are not affected. <code><a href="/reference/kotlin/androidx/compose/ui/text/style/TextDecoration.Companion.html#None()">TextDecoration.None</a></code> removes any existing TextDecoration on this paragraph, <code>null</code> does not change the currently set <code><a href="/reference/kotlin/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a></code> configuration.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="paint(androidx.compose.ui.graphics.Canvas, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Shadow, androidx.compose.ui.text.style.TextDecoration, androidx.compose.ui.graphics.drawscope.DrawStyle)"></a><a name="paint-androidx.compose.ui.graphics.Canvas-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Shadow-androidx.compose.ui.text.style.TextDecoration-androidx.compose.ui.graphics.drawscope.DrawStyle-"></a><a name="paint"></a>
+        <h3 class="api-name" id="paint(androidx.compose.ui.graphics.Canvas,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.drawscope.DrawStyle)">paint</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#paint(androidx.compose.ui.graphics.Canvas,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.drawscope.DrawStyle)">paint</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;canvas:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Canvas.html">Canvas</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;color:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = Color.Unspecified,<br>&nbsp;&nbsp;&nbsp;&nbsp;shadow:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Shadow.html">Shadow</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;textDecoration:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;drawStyle:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawStyle.html">DrawStyle</a>? = null<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Draws this paragraph onto given <code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#paint(androidx.compose.ui.graphics.Canvas,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.drawscope.DrawStyle)">canvas</a></code> while modifying supported draw properties. Any change caused by overriding parameters are permanent, meaning that they affect the subsequent paint calls.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>canvas:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Canvas.html">Canvas</a></code></td>
+                <td>
+                  <p>Canvas to draw this paragraph on.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>color:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = Color.Unspecified</code></td>
+                <td>
+                  <p>Applies to the default text paint color that's used by this paragraph. Text color spans are not affected. <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Unspecified()">Color.Unspecified</a></code> is treated as no-op.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>shadow:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Shadow.html">Shadow</a>? = null</code></td>
+                <td>
+                  <p>Applies to the default text paint shadow that's used by this paragraph. Text shadow spans are not affected. <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Shadow.Companion.html#None()">Shadow.None</a></code> removes any existing shadow on this paragraph, <code>null</code> does not change the currently set <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Shadow.html">Shadow</a></code> configuration.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>textDecoration:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>? = null</code></td>
+                <td>
+                  <p>Applies to the default text paint that's used by this paragraph. Spans that specify a TextDecoration are not affected. <code><a href="/reference/kotlin/androidx/compose/ui/text/style/TextDecoration.Companion.html#None()">TextDecoration.None</a></code> removes any existing TextDecoration on this paragraph, <code>null</code> does not change the currently set <code><a href="/reference/kotlin/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a></code> configuration.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>drawStyle:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawStyle.html">DrawStyle</a>? = null</code></td>
+                <td>
+                  <p>Applies to the default text paint style that's used by this paragraph. Spans that specify a DrawStyle are not affected. Passing this value as <code>null</code> does not change the currently set DrawStyle.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="paint(androidx.compose.ui.graphics.Canvas, androidx.compose.ui.graphics.Brush, kotlin.Float, androidx.compose.ui.graphics.Shadow, androidx.compose.ui.text.style.TextDecoration, androidx.compose.ui.graphics.drawscope.DrawStyle)"></a><a name="paint-androidx.compose.ui.graphics.Canvas-androidx.compose.ui.graphics.Brush-kotlin.Float-androidx.compose.ui.graphics.Shadow-androidx.compose.ui.text.style.TextDecoration-androidx.compose.ui.graphics.drawscope.DrawStyle-"></a><a name="paint"></a>
+        <h3 class="api-name" id="paint(androidx.compose.ui.graphics.Canvas,androidx.compose.ui.graphics.Brush,kotlin.Float,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.drawscope.DrawStyle)">paint</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#paint(androidx.compose.ui.graphics.Canvas,androidx.compose.ui.graphics.Brush,kotlin.Float,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.drawscope.DrawStyle)">paint</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;canvas:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Canvas.html">Canvas</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;brush:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Brush.html">Brush</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;alpha:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = Float.NaN,<br>&nbsp;&nbsp;&nbsp;&nbsp;shadow:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Shadow.html">Shadow</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;textDecoration:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;drawStyle:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawStyle.html">DrawStyle</a>? = null<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Draws this paragraph onto given <code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#paint(androidx.compose.ui.graphics.Canvas,androidx.compose.ui.graphics.Brush,kotlin.Float,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.drawscope.DrawStyle)">canvas</a></code> while modifying supported draw properties. Any change caused by overriding parameters are permanent, meaning that they affect the subsequent paint calls.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>canvas:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Canvas.html">Canvas</a></code></td>
+                <td>
+                  <p>Canvas to draw this paragraph on.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>brush:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Brush.html">Brush</a></code></td>
+                <td>
+                  <p>Applies to the default text paint shader that's used by this paragraph. Text brush spans are not affected. If brush is type of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/SolidColor.html">SolidColor</a></code>, color's alpha value is modulated by <code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#paint(androidx.compose.ui.graphics.Canvas,androidx.compose.ui.graphics.Brush,kotlin.Float,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.drawscope.DrawStyle)">alpha</a></code> parameter and gets applied as a color. If brush is type of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ShaderBrush.html">ShaderBrush</a></code>, its internal shader is created using this paragraph's layout size.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>alpha:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = Float.NaN</code></td>
+                <td>
+                  <p>Applies to the default text paint alpha that's used by this paragraph. Text alpha spans are not affected. <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/-na-n.html">Float.NaN</a></code> is treated as no-op. All other values are coerced into 0f, 1f range.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>shadow:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Shadow.html">Shadow</a>? = null</code></td>
+                <td>
+                  <p>Applies to the default text paint shadow that's used by this paragraph. Text shadow spans are not affected. <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Shadow.Companion.html#None()">Shadow.None</a></code> removes any existing shadow on this paragraph, <code>null</code> does not change the currently set <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Shadow.html">Shadow</a></code> configuration.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>textDecoration:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>? = null</code></td>
+                <td>
+                  <p>Applies to the default text paint that's used by this paragraph. Spans that specify a TextDecoration are not affected. <code><a href="/reference/kotlin/androidx/compose/ui/text/style/TextDecoration.Companion.html#None()">TextDecoration.None</a></code> removes any existing TextDecoration on this paragraph, <code>null</code> does not change the currently set <code><a href="/reference/kotlin/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a></code> configuration.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>drawStyle:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawStyle.html">DrawStyle</a>? = null</code></td>
+                <td>
+                  <p>Applies to the default text paint style that's used by this paragraph. Spans that specify a DrawStyle are not affected. Passing this value as <code>null</code> does not change the currently set DrawStyle.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getDidExceedMaxLines()"></a><a name="setDidExceedMaxLines()"></a><a name="getDidExceedMaxLines--"></a><a name="setDidExceedMaxLines--"></a>
+        <h3 class="api-name" id="didExceedMaxLines()">didExceedMaxLines</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#didExceedMaxLines()">didExceedMaxLines</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <p>True if there is more vertical content, but the text was truncated, either because we reached <code>maxLines</code> lines of text or because the <code>maxLines</code> was null, <code>ellipsis</code> was not null, and one of the lines exceeded the width constraint.</p>
+        <p>See the discussion of the <code>maxLines</code> and <code>ellipsis</code> arguments at <code><a href="/reference/kotlin/androidx/compose/ui/text/ParagraphStyle.html">ParagraphStyle</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getFirstBaseline()"></a><a name="setFirstBaseline()"></a><a name="getFirstBaseline--"></a><a name="setFirstBaseline--"></a>
+        <h3 class="api-name" id="firstBaseline()">firstBaseline</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#firstBaseline()">firstBaseline</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>The distance from the top of the paragraph to the alphabetic baseline of the first line, in logical pixels.</p>
+      </div>
+      <div class="api-item"><a name="getHeight()"></a><a name="setHeight()"></a><a name="getHeight--"></a><a name="setHeight--"></a>
+        <h3 class="api-name" id="height()">height</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#height()">height</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>The amount of vertical space this paragraph occupies.</p>
+      </div>
+      <div class="api-item"><a name="getLastBaseline()"></a><a name="setLastBaseline()"></a><a name="getLastBaseline--"></a><a name="setLastBaseline--"></a>
+        <h3 class="api-name" id="lastBaseline()">lastBaseline</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#lastBaseline()">lastBaseline</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>The distance from the top of the paragraph to the alphabetic baseline of the last line, in logical pixels.</p>
+      </div>
+      <div class="api-item"><a name="getLineCount()"></a><a name="setLineCount()"></a><a name="getLineCount--"></a><a name="setLineCount--"></a>
+        <h3 class="api-name" id="lineCount()">lineCount</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#lineCount()">lineCount</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>The total number of lines in the text.</p>
+      </div>
+      <div class="api-item"><a name="getMaxIntrinsicWidth()"></a><a name="setMaxIntrinsicWidth()"></a><a name="getMaxIntrinsicWidth--"></a><a name="setMaxIntrinsicWidth--"></a>
+        <h3 class="api-name" id="maxIntrinsicWidth()">maxIntrinsicWidth</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#maxIntrinsicWidth()">maxIntrinsicWidth</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>Returns the smallest width beyond which increasing the width never decreases the height.</p>
+      </div>
+      <div class="api-item"><a name="getMinIntrinsicWidth()"></a><a name="setMinIntrinsicWidth()"></a><a name="getMinIntrinsicWidth--"></a><a name="setMinIntrinsicWidth--"></a>
+        <h3 class="api-name" id="minIntrinsicWidth()">minIntrinsicWidth</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#minIntrinsicWidth()">minIntrinsicWidth</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>The width for text if all soft wrap opportunities were taken.</p>
+      </div>
+      <div class="api-item"><a name="getPlaceholderRects()"></a><a name="setPlaceholderRects()"></a><a name="getPlaceholderRects--"></a><a name="setPlaceholderRects--"></a>
+        <h3 class="api-name" id="placeholderRects()">placeholderRects</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#placeholderRects()">placeholderRects</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>?&gt;</pre>
+        <p>The bounding boxes reserved for the input placeholders in this Paragraphs. Their locations are relative to this Paragraph's coordinate. The order of this list corresponds to that of input placeholders. Notice that <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code> in <code><a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#placeholderRects()">placeholderRects</a></code> is nullable. When <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code> is null, it indicates that the corresponding <code><a href="/reference/kotlin/androidx/compose/ui/text/Placeholder.html">Placeholder</a></code> is ellipsized.</p>
+      </div>
+      <div class="api-item"><a name="getWidth()"></a><a name="setWidth()"></a><a name="getWidth--"></a><a name="setWidth--"></a>
+        <h3 class="api-name" id="width()">width</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Paragraph.html#width()">width</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>The amount of horizontal space this paragraph occupies.</p>
+      </div>
+    </div>
+  </body>
+</html>

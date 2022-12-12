@@ -1,0 +1,190 @@
+<html devsite="true">
+  <head>
+    <title>Key</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/input/key/Key.kt+class:androidx.compose.ui.input.key.Key&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>Key</h1>
+    <p>
+      <pre>value public final class <a href="/reference/androidx/compose/ui/input/key/Key.html">Key</a></pre>
+    </p>
+    <hr>
+    <p>Represents keys on a keyboard.</p>
+    <pre class="prettyprint">
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.input.key.onKeyEvent
+
+Box(
+    Modifier
+        .onKeyEvent {
+            if (it.isAltPressed &amp;&amp; it.key == Key.A) {
+                println(&quot;Alt + A is pressed&quot;)
+                true
+            } else {
+                false
+            }
+        }
+        .focusable()
+)</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>public static class <a href="/reference/androidx/compose/ui/input/key/Key.Companion.html">Key.Companion</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final long</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/key/Key.html#keyCode()">keyCode</a></code></div>
+              <p>a Long value representing the key pressed.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/key/Key.html#Key(kotlin.Long)">Key</a>(long&nbsp;keyCode)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/key/Key.html#toString()">toString</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/key/KeyKt.html">KeyKt</a>.<a href="/reference/androidx/compose/ui/input/key/Key.html#(androidx.compose.ui.input.key.Key).getNativeKeyCode()">getNativeKeyCode</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/Key.html">Key</a>&nbsp;receiver)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getKeyCode()"></a><a name="setKeyCode()"></a><a name="getKeyCode--"></a><a name="setKeyCode--"></a>
+        <h3 class="api-name" id="keyCode()">keyCode</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;long&nbsp;<a href="/reference/androidx/compose/ui/input/key/Key.html#keyCode()">keyCode</a></pre>
+        <p>a Long value representing the key pressed. Note: This keycode can be used to uniquely identify a hardware key. It is different from the native keycode.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="Key-kotlin.Long-"></a><a name="key"></a>
+        <h3 class="api-name" id="Key(kotlin.Long)">Key</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/input/key/Key.html#Key(kotlin.Long)">Key</a>(long&nbsp;keyCode)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>long&nbsp;keyCode</code></td>
+                <td>
+                  <p>a Long value representing the key pressed. Note: This keycode can be used to uniquely identify a hardware key. It is different from the native keycode.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+        <h3 class="api-name" id="toString()">toString</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/input/key/Key.html#toString()">toString</a>()</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.input.key.Key-.getNativeKeyCode--"></a><a name="getnativekeycode"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.key.Key).getNativeKeyCode()">KeyKt.getNativeKeyCode</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/input/key/KeyKt.html">KeyKt</a>.<a href="/reference/androidx/compose/ui/input/key/Key.html#(androidx.compose.ui.input.key.Key).getNativeKeyCode()">getNativeKeyCode</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/Key.html">Key</a>&nbsp;receiver)</pre>
+      </div>
+    </div>
+  </body>
+</html>

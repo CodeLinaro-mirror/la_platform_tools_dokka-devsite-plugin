@@ -1,0 +1,650 @@
+<html devsite="true">
+  <head>
+    <title>Color</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-graphics/androidx/compose/ui/graphics/Color.kt+class:androidx.compose.ui.graphics.Color&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>Color</h1>
+    <p>
+      <pre>value public final class <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+    </p>
+    <hr>
+    <p>The <code>Color</code> class contains color information to be used while painting in <code><a href="/reference/androidx/compose/ui/graphics/Canvas.html">Canvas</a></code>. <code>Color</code> supports <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code>s with 3 <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#componentCount()">components</a></code>, plus one for <code><a href="/reference/androidx/compose/ui/graphics/Color.html#alpha()">alpha</a></code>.</p>
+    <h3> Creating</h3>
+    <p><code>Color</code> can be created with one of these methods:</p>
+    <pre class="prettyprint">// from 4 separate [Float] components. Alpha and ColorSpace are optional
+val rgbaWhiteFloat = Color(red = 1f, green = 1f, blue = 1f, alpha = 1f,
+    ColorSpace.get(ColorSpaces.Srgb))
+
+// from a 32-bit SRGB color integer
+val fromIntWhite = Color(android.graphics.Color.WHITE)
+val fromLongBlue = Color(0xFF0000FF)
+
+// from SRGB integer component values. Alpha is optional
+val rgbaWhiteInt = Color(red = 0xFF, green = 0xFF, blue = 0xFF, alpha = 0xFF)</pre>
+    <h3> Representation</h3>
+    <p>A <code>Color</code> always defines a color using 4 components packed in a single 64 bit long value. One of these components is always alpha while the other three components depend on the color space's <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorModel.html">color model</a></code>. The most common color model is the <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorModel.Companion.html#Rgb()">RGB</a></code> model in which the components represent red, green, and blue values.</p>
+    <p><b>Component ranges:</b> the ranges defined in the tables below indicate the ranges that can be encoded in a color long. They do not represent the actual ranges as they may differ per color space. For instance, the RGB components of a color in the <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#DisplayP3()">Display P3</a></code> color space use the <code>[0..1]</code> range. Please refer to the documentation of the various <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpaces.html">color spaces</a></code> to find their respective ranges.</p>
+    <p><b>Alpha range:</b> while alpha is encoded in a color long using a 10 bit integer (thus using a range of <code>[0..1023]</code>), it is converted to and from <code>[0..1]</code> float values when decoding and encoding color longs.</p>
+    <p><b>sRGB color space:</b> for compatibility reasons and ease of use, <code>Color</code> encoded <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#Srgb()">sRGB</a></code> colors do not use the same encoding as other color longs.</p>
+    <pre class="prettyprint">| Component | Name        | Size    | Range                 |<br>|-----------|-------------|---------|-----------------------|<br>| [RGB][ColorSpace.Model.Rgb] color model |<br>| R         | Red         | 16 bits | `[-65504.0, 65504.0]` |<br>| G         | Green       | 16 bits | `[-65504.0, 65504.0]` |<br>| B         | Blue        | 16 bits | `[-65504.0, 65504.0]` |<br>| A         | Alpha       | 10 bits | `[0..1023]`           |<br>|           | Color space | 6 bits  | `[0..63]`             |<br>| [SRGB][ColorSpaces.Srgb] color space |<br>| R         | Red         | 8 bits  | `[0..255]`            |<br>| G         | Green       | 8 bits  | `[0..255]`            |<br>| B         | Blue        | 8 bits  | `[0..255]`            |<br>| A         | Alpha       | 8 bits  | `[0..255]`            |<br>| X         | Unused      | 32 bits | `[0]`                 |<br>| [XYZ][ColorSpace.Model.Xyz] color model |<br>| X         | X           | 16 bits | `[-65504.0, 65504.0]` |<br>| Y         | Y           | 16 bits | `[-65504.0, 65504.0]` |<br>| Z         | Z           | 16 bits | `[-65504.0, 65504.0]` |<br>| A         | Alpha       | 10 bits | `[0..1023]`           |<br>|           | Color space | 6 bits  | `[0..63]`             |<br>| [Lab][ColorSpace.Model.Lab] color model |<br>| L         | L           | 16 bits | `[-65504.0, 65504.0]` |<br>| a         | a           | 16 bits | `[-65504.0, 65504.0]` |<br>| b         | b           | 16 bits | `[-65504.0, 65504.0]` |<br>| A         | Alpha       | 10 bits | `[0..1023]`           |<br>|           | Color space | 6 bits  | `[0..63]`             |</pre>
+    <p>The components in this table are listed in encoding order (see below), which is why color longs in the RGB model are called RGBA colors (even if this doesn't quite hold for the special case of sRGB colors).</p>
+    <p>The color encoding relies on half-precision float values (fp16). If you wish to know more about the limitations of half-precision float values, please refer to the documentation of the <code><a href="/reference/androidx/compose/ui/graphics/Float16.html">Float16</a></code> class.</p>
+    <p>The values returned by these methods depend on the color space encoded in the color long. The values are however typically in the <code>[0..1]</code> range for RGB colors. Please refer to the documentation of the various <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpaces.html">color spaces</a></code> for the exact ranges.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>public static class <a href="/reference/androidx/compose/ui/graphics/Color.Companion.html">Color.Companion</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Color.html#alpha()">alpha</a></code></div>
+              <p>Returns the value of the alpha component in the range <code>[0..1]</code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Color.html#blue()">blue</a></code></div>
+              <p>Returns the value of the blue component in the range defined by this color's color space (see <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMinValue(kotlin.Int)">ColorSpace.getMinValue</a></code> and <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMaxValue(kotlin.Int)">ColorSpace.getMaxValue</a></code>).</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Color.html#colorSpace()">colorSpace</a></code></div>
+              <p>Returns this color's color space.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Color.html#green()">green</a></code></div>
+              <p>Returns the value of the green component in the range defined by this color's color space (see <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMinValue(kotlin.Int)">ColorSpace.getMinValue</a></code> and <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMaxValue(kotlin.Int)">ColorSpace.getMaxValue</a></code>).</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Color.html#red()">red</a></code></div>
+              <p>Returns the value of the red component in the range defined by this color's color space (see <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMinValue(kotlin.Int)">ColorSpace.getMinValue</a></code> and <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMaxValue(kotlin.Int)">ColorSpace.getMaxValue</a></code>).</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-u-long/index.html">ULong</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Color.html#value()">value</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Color.html#Color(kotlin.ULong)">Color</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-u-long/index.html">ULong</a>&nbsp;value)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Color.html#component1()">component1</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Color.html#component2()">component2</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Color.html#component3()">component3</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Color.html#component4()">component4</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Color.html#component5()">component5</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Color.html#convert(androidx.compose.ui.graphics.colorspace.ColorSpace)">convert</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a>&nbsp;colorSpace)</code></div>
+              <p>Converts this color from its color space to the specified color space.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Color.html#copy(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">copy</a>(float&nbsp;alpha,&nbsp;float&nbsp;red,&nbsp;float&nbsp;green,&nbsp;float&nbsp;blue)</code></div>
+              <p>Copies the existing color, changing only the provided values.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Color.html#toString()">toString</a>()</code></div>
+              <p>Returns a string representation of the object.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/ColorKt.html">ColorKt</a>.<a href="/reference/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">compositeOver</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;receiver,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;background)</code></div>
+              <p>Composites <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#&lt;this&gt;()">this</a></code> color on top of <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">background</a></code> using the Porter-Duff 'source over' mode.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/ColorKt.html">ColorKt</a>.<a href="/reference/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).getIsSpecified()">isSpecified</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;receiver)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/ColorKt.html">ColorKt</a>.<a href="/reference/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).getIsUnspecified()">isUnspecified</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;receiver)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/ColorKt.html">ColorKt</a>.<a href="/reference/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).luminance()">luminance</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;receiver)</code></div>
+              <p>Returns the relative luminance of this color.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/ColorKt.html">ColorKt</a>.<a href="/reference/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).takeOrElse(kotlin.Function0)">takeOrElse</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&gt;&nbsp;block<br>)</code></div>
+              <p>If this color <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).isSpecified()">isSpecified</a></code> then this is returned, otherwise <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).takeOrElse(kotlin.Function0)">block</a></code> is executed and its result is returned.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/ColorKt.html">ColorKt</a>.<a href="/reference/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).toArgb()">toArgb</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;receiver)</code></div>
+              <p>Converts this color to an ARGB color int.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getAlpha()"></a><a name="setAlpha()"></a><a name="getAlpha--"></a><a name="setAlpha--"></a>
+        <h3 class="api-name" id="alpha()">alpha</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/graphics/Color.html#alpha()">alpha</a></pre>
+        <p>Returns the value of the alpha component in the range <code>[0..1]</code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/Color.html#red()">red</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/Color.html#green()">green</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/Color.html#blue()">blue</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getBlue()"></a><a name="setBlue()"></a><a name="getBlue--"></a><a name="setBlue--"></a>
+        <h3 class="api-name" id="blue()">blue</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/graphics/Color.html#blue()">blue</a></pre>
+        <p>Returns the value of the blue component in the range defined by this color's color space (see <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMinValue(kotlin.Int)">ColorSpace.getMinValue</a></code> and <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMaxValue(kotlin.Int)">ColorSpace.getMaxValue</a></code>).</p>
+        <p>If this color's color model is not <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorModel.Companion.html#Rgb()">RGB</a></code>, calling this is the third component of the ColorSpace.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/Color.html#alpha()">alpha</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/Color.html#red()">red</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/Color.html#green()">green</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getColorSpace()"></a><a name="setColorSpace()"></a><a name="getColorSpace--"></a><a name="setColorSpace--"></a>
+        <h3 class="api-name" id="colorSpace()">colorSpace</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/Color.html#colorSpace()">colorSpace</a></pre>
+        <p>Returns this color's color space.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code></td>
+                <td>
+                  <p>A non-null instance of <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code></p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getGreen()"></a><a name="setGreen()"></a><a name="getGreen--"></a><a name="setGreen--"></a>
+        <h3 class="api-name" id="green()">green</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/graphics/Color.html#green()">green</a></pre>
+        <p>Returns the value of the green component in the range defined by this color's color space (see <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMinValue(kotlin.Int)">ColorSpace.getMinValue</a></code> and <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMaxValue(kotlin.Int)">ColorSpace.getMaxValue</a></code>).</p>
+        <p>If this color's color model is not <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorModel.Companion.html#Rgb()">RGB</a></code>, calling this is the second component of the ColorSpace.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/Color.html#alpha()">alpha</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/Color.html#red()">red</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/Color.html#blue()">blue</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getRed()"></a><a name="setRed()"></a><a name="getRed--"></a><a name="setRed--"></a>
+        <h3 class="api-name" id="red()">red</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/graphics/Color.html#red()">red</a></pre>
+        <p>Returns the value of the red component in the range defined by this color's color space (see <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMinValue(kotlin.Int)">ColorSpace.getMinValue</a></code> and <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMaxValue(kotlin.Int)">ColorSpace.getMaxValue</a></code>).</p>
+        <p>If this color's color model is not <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorModel.Companion.html#Rgb()">RGB</a></code>, calling this is the first component of the ColorSpace.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/Color.html#alpha()">alpha</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/Color.html#blue()">blue</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/Color.html#green()">green</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getValue()"></a><a name="setValue()"></a><a name="getValue--"></a><a name="setValue--"></a>
+        <h3 class="api-name" id="value()">value</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-u-long/index.html">ULong</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/Color.html#value()">value</a></pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="Color-kotlin.ULong-"></a><a name="color"></a>
+        <h3 class="api-name" id="Color(kotlin.ULong)">Color</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/graphics/Color.html#Color(kotlin.ULong)">Color</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-u-long/index.html">ULong</a>&nbsp;value)</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="component1--"></a><a name="component1"></a>
+        <h3 class="api-name" id="component1()">component1</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/graphics/Color.html#component1()">component1</a>()</pre>
+      </div>
+      <div class="api-item"><a name="component2--"></a><a name="component2"></a>
+        <h3 class="api-name" id="component2()">component2</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/graphics/Color.html#component2()">component2</a>()</pre>
+      </div>
+      <div class="api-item"><a name="component3--"></a><a name="component3"></a>
+        <h3 class="api-name" id="component3()">component3</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/graphics/Color.html#component3()">component3</a>()</pre>
+      </div>
+      <div class="api-item"><a name="component4--"></a><a name="component4"></a>
+        <h3 class="api-name" id="component4()">component4</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/graphics/Color.html#component4()">component4</a>()</pre>
+      </div>
+      <div class="api-item"><a name="component5--"></a><a name="component5"></a>
+        <h3 class="api-name" id="component5()">component5</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/Color.html#component5()">component5</a>()</pre>
+      </div>
+      <div class="api-item"><a name="convert-androidx.compose.ui.graphics.colorspace.ColorSpace-"></a><a name="convert"></a>
+        <h3 class="api-name" id="convert(androidx.compose.ui.graphics.colorspace.ColorSpace)">convert</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/Color.html#convert(androidx.compose.ui.graphics.colorspace.ColorSpace)">convert</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a>&nbsp;colorSpace)</pre>
+        <p>Converts this color from its color space to the specified color space. The conversion is done using the default rendering intent as specified by <code><a href="/reference/androidx/compose/ui/graphics/colorspace/package-summary.html#(androidx.compose.ui.graphics.colorspace.ColorSpace).connect(androidx.compose.ui.graphics.colorspace.ColorSpace,androidx.compose.ui.graphics.colorspace.RenderIntent)">ColorSpace.connect</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a>&nbsp;colorSpace</code></td>
+                <td>
+                  <p>The destination color space, cannot be null</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+                <td>
+                  <p>A non-null color instance in the specified color space</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="copy(kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="copy-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="copy"></a>
+        <h3 class="api-name" id="copy(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">copy</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/Color.html#copy(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">copy</a>(float&nbsp;alpha,&nbsp;float&nbsp;red,&nbsp;float&nbsp;green,&nbsp;float&nbsp;blue)</pre>
+        <p>Copies the existing color, changing only the provided values. The <code><a href="/reference/androidx/compose/ui/graphics/Color.html#colorSpace()">ColorSpace</a></code> of the returned <code><a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a></code> is the same as this <code><a href="/reference/androidx/compose/ui/graphics/Color.html#colorSpace()">colorSpace</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+        <h3 class="api-name" id="toString()">toString</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/Color.html#toString()">toString</a>()</pre>
+        <p>Returns a string representation of the object. This method returns a string equal to the value of:</p>
+        <pre class="prettyprint">&quot;Color($r, $g, $b, $a, ${colorSpace.name})&quot;</pre>
+        <p>For instance, the string representation of opaque black in the sRGB color space is equal to the following value:</p>
+        <pre class="prettyprint">Color(0.0, 0.0, 0.0, 1.0, sRGB IEC61966-2.1)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+                <td>
+                  <p>A non-null string representation of the object</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.Color-.compositeOver-androidx.compose.ui.graphics.Color-"></a><a name="compositeover"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">ColorKt.compositeOver</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/ColorKt.html">ColorKt</a>.<a href="/reference/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">compositeOver</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;receiver,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;background)</pre>
+        <p>Composites <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#&lt;this&gt;()">this</a></code> color on top of <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">background</a></code> using the Porter-Duff 'source over' mode.</p>
+        <p>Both <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#&lt;this&gt;()">this</a></code> and <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">background</a></code> must not be pre-multiplied, and the resulting color will also not be pre-multiplied.</p>
+        <p>The <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code> of the result is always the <code><a href="/reference/androidx/compose/ui/graphics/Color.html#colorSpace()">ColorSpace</a></code> of <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">background</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+                <td>
+                  <p>the <code><a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a></code> representing <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#&lt;this&gt;()">this</a></code> composited on top of <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">background</a></code>, converted to the color space of <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">background</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.Color-.getIsSpecified--"></a><a name="getisspecified"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.graphics.Color).getIsSpecified()">ColorKt.isSpecified</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/ColorKt.html">ColorKt</a>.<a href="/reference/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).getIsSpecified()">isSpecified</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;receiver)</pre>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.Color-.getIsUnspecified--"></a><a name="getisunspecified"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.graphics.Color).getIsUnspecified()">ColorKt.isUnspecified</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/ColorKt.html">ColorKt</a>.<a href="/reference/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).getIsUnspecified()">isUnspecified</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;receiver)</pre>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.Color-.luminance--"></a><a name="luminance"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.graphics.Color).luminance()">ColorKt.luminance</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/graphics/ColorKt.html">ColorKt</a>.<a href="/reference/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).luminance()">luminance</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;receiver)</pre>
+        <p>Returns the relative luminance of this color.</p>
+        <p>Based on the formula for relative luminance defined in WCAG 2.0, W3C Recommendation 11 December 2008.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>float</code></td>
+                <td>
+                  <p>A value between 0 (darkest black) and 1 (lightest white)</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">kotlin.IllegalArgumentException</a>&nbsp;kotlin.IllegalArgumentException</code></td>
+                <td>
+                  <p>If the this color's color space does not use the <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorModel.Companion.html#Rgb()">RGB</a></code> color model</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.Color-.takeOrElse-kotlin.Function0-"></a><a name="takeorelse"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.graphics.Color).takeOrElse(kotlin.Function0)">ColorKt.takeOrElse</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/ColorKt.html">ColorKt</a>.<a href="/reference/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).takeOrElse(kotlin.Function0)">takeOrElse</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&gt;&nbsp;block<br>)</pre>
+        <p>If this color <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).isSpecified()">isSpecified</a></code> then this is returned, otherwise <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).takeOrElse(kotlin.Function0)">block</a></code> is executed and its result is returned.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.Color-.toArgb--"></a><a name="toargb"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.graphics.Color).toArgb()">ColorKt.toArgb</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/graphics/ColorKt.html">ColorKt</a>.<a href="/reference/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).toArgb()">toArgb</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;receiver)</pre>
+        <p>Converts this color to an ARGB color int. A color int is always in the <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#Srgb()">sRGB</a></code> color space. This implies a color space conversion is applied if needed.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int</code></td>
+                <td>
+                  <p>An ARGB color in the sRGB color space</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

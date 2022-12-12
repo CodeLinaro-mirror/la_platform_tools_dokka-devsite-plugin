@@ -38,6 +38,13 @@
             </td>
           </tr>
           <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/CompositionLocalContext.html">CompositionLocalContext</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/package-summary.html#currentCompositionLocalContext()">currentCompositionLocalContext</a></code></div>
+              <p>Returns the current <code><a href="/reference/androidx/compose/runtime/CompositionLocalContext.html">CompositionLocalContext</a></code> which contains all <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code>'s in the current composition and their values provided by <code><a href="/reference/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code>'s.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/runtime/package-summary.html#currentRecomposeScope()">currentRecomposeScope</a></code></div>
@@ -109,6 +116,13 @@
             </td>
           </tr>
           <tr>
+            <td><code>static&nbsp;final void</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/androidx/compose/runtime/ExplicitGroupsComposable.html">ExplicitGroupsComposable</a><br><a href="/reference/androidx/compose/runtime/ComposablesKt.html#ReusableContentHost(kotlin.Boolean,kotlin.Function0)">ReusableContentHost</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;active,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content<br>)</code></div>
+              <p>An optional utility function used when hosting <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableContent(kotlin.Any,kotlin.Function0)">ReusableContent</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
             <td>
               <div><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/ComposablesKt.html#key(kotlin.Array,kotlin.Function0)">key</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;keys,&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;block)</code></div>
@@ -171,7 +185,12 @@
         <h3 class="api-name" id="currentCompositeKeyHash()">currentCompositeKeyHash</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/runtime/package-summary.html#currentCompositeKeyHash()">currentCompositeKeyHash</a></pre>
         <p>This a hash value used to coordinate map externally stored state to the composition. For example, this is used by saved instance state to preserve state across activity lifetime boundaries.</p>
-        <p>This value is not likely to be unique but is not guaranteed unique. There are known cases, such as for loops without a <code><a href="/reference/androidx/compose/runtime/package-summary.html#key(kotlin.Array,kotlin.Function0)">key</a></code>, where the runtime does not have enough information to make the compound key hash unique.</p>
+        <p>This value is likely to be unique but is not guaranteed unique. There are known cases, such as for loops without a <code><a href="/reference/androidx/compose/runtime/package-summary.html#key(kotlin.Array,kotlin.Function0)">key</a></code>, where the runtime does not have enough information to make the compound key hash unique.</p>
+      </div>
+      <div class="api-item"><a name="getCurrentCompositionLocalContext()"></a><a name="setCurrentCompositionLocalContext()"></a><a name="getCurrentCompositionLocalContext--"></a><a name="setCurrentCompositionLocalContext--"></a>
+        <h3 class="api-name" id="currentCompositionLocalContext()">currentCompositionLocalContext</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/CompositionLocalContext.html">CompositionLocalContext</a>&nbsp;<a href="/reference/androidx/compose/runtime/package-summary.html#currentCompositionLocalContext()">currentCompositionLocalContext</a></pre>
+        <p>Returns the current <code><a href="/reference/androidx/compose/runtime/CompositionLocalContext.html">CompositionLocalContext</a></code> which contains all <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code>'s in the current composition and their values provided by <code><a href="/reference/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code>'s. This context can be used to pass locals to another composition via <code><a href="/reference/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code>. That is usually needed if another composition is not a subcomposition of the current one.</p>
       </div>
       <div class="api-item"><a name="getCurrentRecomposeScope()"></a><a name="setCurrentRecomposeScope()"></a><a name="getCurrentRecomposeScope--"></a><a name="setCurrentRecomposeScope--"></a>
         <h3 class="api-name" id="currentRecomposeScope()">currentRecomposeScope</h3>
@@ -1055,6 +1074,38 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
                 <td><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content</code></td>
                 <td>
                   <p>the composable children that are recyclable.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="ReusableContentHost(kotlin.Boolean, kotlin.Function0)"></a><a name="ReusableContentHost-kotlin.Boolean-kotlin.Function0-"></a><a name="reusablecontenthost"></a>
+        <h3 class="api-name" id="ReusableContentHost(kotlin.Boolean,kotlin.Function0)">ReusableContentHost</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/androidx/compose/runtime/ExplicitGroupsComposable.html">ExplicitGroupsComposable</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/ComposablesKt.html#ReusableContentHost(kotlin.Boolean,kotlin.Function0)">ReusableContentHost</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;active,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content<br>)</pre>
+        <p>An optional utility function used when hosting <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableContent(kotlin.Any,kotlin.Function0)">ReusableContent</a></code>. If <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableContentHost(kotlin.Boolean,kotlin.Function0)">active</a></code> is false the content is treated as if it is deleted by removing all remembered objects from the composition but the node produced for the tree are not removed. When the composition later becomes active then the nodes are able to be reused inside <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableContent(kotlin.Any,kotlin.Function0)">ReusableContent</a></code> content without requiring the remembered state of the composition's lifetime being arbitrarily extended.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>boolean&nbsp;active</code></td>
+                <td>
+                  <p>when <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableContentHost(kotlin.Boolean,kotlin.Function0)">active</a></code> is <code>true</code> <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableContentHost(kotlin.Boolean,kotlin.Function0)">content</a></code> is composed normally. When <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableContentHost(kotlin.Boolean,kotlin.Function0)">active</a></code> is <code>false</code> then the content is deactivated and all remembered state is treated as if the content was deleted but the nodes managed by the composition's <code><a href="/reference/androidx/compose/runtime/Applier.html">Applier</a></code> are unaffected. A <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableContentHost(kotlin.Boolean,kotlin.Function0)">active</a></code> becomes <code>true</code> any reusable nodes from the previously active composition are candidates for reuse.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content</code></td>
+                <td>
+                  <p>the composable content that is managed by this composable.</p>
                 </td>
               </tr>
             </tbody>

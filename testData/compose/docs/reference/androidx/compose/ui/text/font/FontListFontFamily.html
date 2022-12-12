@@ -1,0 +1,341 @@
+<html devsite="true">
+  <head>
+    <title>FontListFontFamily</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-text/androidx/compose/ui/text/font/FontFamily.kt+class:androidx.compose.ui.text.font.FontListFontFamily&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>FontListFontFamily</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/text/font/FontListFontFamily.html">FontListFontFamily</a> extends <a href="/reference/androidx/compose/ui/text/font/FileBasedFontFamily.html">FileBasedFontFamily</a> implements <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a></pre>
+    </p>
+    <div class="devsite-table-wrapper">
+      <table class="jd-inheritance-table">
+        <tbody>
+          <tr>
+            <td colspan="4"><a href="https://developer.android.com/reference/java/lang/Object.html">java.lang.Object</a></td>
+          </tr>
+          <tr>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="3"><a href="/reference/androidx/compose/ui/text/font/FontFamily.html">androidx.compose.ui.text.font.FontFamily</a></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="2"><a href="/reference/androidx/compose/ui/text/font/FileBasedFontFamily.html">androidx.compose.ui.text.font.FileBasedFontFamily</a></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="1"><a href="/reference/androidx/compose/ui/text/font/FontListFontFamily.html">androidx.compose.ui.text.font.FontListFontFamily</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr>
+    <p>Defines a font family with list of <code><a href="/reference/androidx/compose/ui/text/font/Font.html">Font</a></code>.</p>
+    <pre class="prettyprint">
+import androidx.compose.material.Text
+
+Text(
+    text = &quot;Demo Text sans-serif&quot;,
+    fontFamily = FontFamily.SansSerif
+)</pre>
+    <pre class="prettyprint">
+import androidx.compose.material.Text
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+
+val fontFamily = FontFamily(
+    Font(
+        resId = R.font.my_font_400_regular,
+        weight = FontWeight.W400,
+        style = FontStyle.Normal
+    ),
+    Font(
+        resId = R.font.my_font_400_italic,
+        weight = FontWeight.W400,
+        style = FontStyle.Italic
+    )
+)
+Text(text = &quot;Demo Text&quot;, fontFamily = fontFamily)</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/Font.html">Font</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/font/FontListFontFamily.html#fonts()">fonts</a></code></div>
+              <p>The fallback list of fonts used for resolving typefaces for this FontFamily.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/font/FontListFontFamily.html#equals(kotlin.Any)">equals</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;other)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/font/FontListFontFamily.html#hashCode()">hashCode</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/font/FontListFontFamily.html#toString()">toString</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/ui/text/font/FontFamily.html">androidx.compose.ui.text.font.FontFamily</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>final boolean</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/text/font/FontFamily.html#canLoadSynchronously()">canLoadSynchronously</a></code></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">kotlin.collections.List</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>int</code></td>
+                      <td>
+                        <div><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/size.html">size</a></code></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">kotlin.collections.Collection</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/stream/Stream.html">Stream</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/Font.html">Font</a>&gt;</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/Collection.html#parallelStream()">parallelStream</a>()</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/stream/Stream.html">Stream</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/Font.html">Font</a>&gt;</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/Collection.html#stream()">stream</a>()</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T[]</code></td>
+                      <td>
+                        <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <span><del><a href="https://developer.android.com/reference/java/util/Collection.html#toArray(java.util.function.IntFunction[kotlin.Array[TypeParam(bounds=[kotlin.Any])]])">toArray</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/function/IntFunction.html">IntFunction</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T[]&gt;&nbsp;p0)</code></div>
+                        <p><strong>This method is deprecated.</strong> This member is not fully supported by Kotlin compiler, so it may be absent or have different signature in next major version</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html">kotlin.collections.Iterable</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>void</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/lang/Iterable.html#forEach(java.util.function.Consumer[androidx.compose.ui.text.font.Font])">forEach</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/function/Consumer.html">Consumer</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/Font.html">Font</a>&gt;&nbsp;p0)</code></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">kotlin.collections.List</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>boolean</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/List.html#contains(androidx.compose.ui.text.font.Font)">contains</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/Font.html">Font</a>&nbsp;element)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>boolean</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/List.html#containsAll(kotlin.collections.Collection[androidx.compose.ui.text.font.Font])">containsAll</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Collection.html">Collection</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/Font.html">Font</a>&gt;&nbsp;elements)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/Font.html">Font</a></code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/List.html#get(kotlin.Int)">get</a>(int&nbsp;index)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>int</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/List.html#indexOf(androidx.compose.ui.text.font.Font)">indexOf</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/Font.html">Font</a>&nbsp;element)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>boolean</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/List.html#isEmpty()">isEmpty</a>()</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Iterator.html">Iterator</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/Font.html">Font</a>&gt;</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/List.html#iterator()">iterator</a>()</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>int</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/List.html#lastIndexOf(androidx.compose.ui.text.font.Font)">lastIndexOf</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/Font.html">Font</a>&nbsp;element)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/ListIterator.html">ListIterator</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/Font.html">Font</a>&gt;</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/List.html#listIterator()">listIterator</a>()</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/ListIterator.html">ListIterator</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/Font.html">Font</a>&gt;</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/List.html#listIterator(kotlin.Int)">listIterator</a>(int&nbsp;index)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Spliterator.html">Spliterator</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/Font.html">Font</a>&gt;</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/List.html#spliterator()">spliterator</a>()</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/Font.html">Font</a>&gt;</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/List.html#subList(kotlin.Int, kotlin.Int)">subList</a>(int&nbsp;fromIndex,&nbsp;int&nbsp;toIndex)</code></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getFonts()"></a><a name="setFonts()"></a><a name="getFonts--"></a><a name="setFonts--"></a>
+        <h3 class="api-name" id="fonts()">fonts</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/Font.html">Font</a>&gt;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontListFontFamily.html#fonts()">fonts</a></pre>
+        <p>The fallback list of fonts used for resolving typefaces for this FontFamily.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="equals-kotlin.Any-"></a><a name="equals"></a>
+        <h3 class="api-name" id="equals(kotlin.Any)">equals</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontListFontFamily.html#equals(kotlin.Any)">equals</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;other)</pre>
+      </div>
+      <div class="api-item"><a name="hashCode--"></a><a name="hashcode"></a>
+        <h3 class="api-name" id="hashCode()">hashCode</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontListFontFamily.html#hashCode()">hashCode</a>()</pre>
+      </div>
+      <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+        <h3 class="api-name" id="toString()">toString</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontListFontFamily.html#toString()">toString</a>()</pre>
+      </div>
+    </div>
+  </body>
+</html>

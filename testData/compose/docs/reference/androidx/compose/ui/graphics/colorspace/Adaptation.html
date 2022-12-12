@@ -1,0 +1,68 @@
+<html devsite="true">
+  <head>
+    <title>Adaptation</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-graphics/androidx/compose/ui/graphics/colorspace/Adaptation.kt+class:androidx.compose.ui.graphics.colorspace.Adaptation&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>Adaptation</h1>
+    <p>
+      <pre>public abstract class <a href="/reference/androidx/compose/ui/graphics/colorspace/Adaptation.html">Adaptation</a></pre>
+    </p>
+    <hr>
+    <p>List of adaptation matrices that can be used for chromatic adaptation using the von Kries transform. These matrices are used to convert values in the CIE XYZ space to values in the LMS space (Long Medium Short).</p>
+    <p>Given an adaptation matrix <code>A</code>, the conversion from XYZ to LMS is straightforward:</p>
+    <p><a href="https://developer.android.com/reference/android/graphics/ColorSpace.Adaptation.html">See equation</a></p>
+    <p>The complete von Kries transform <code>T</code> uses a diagonal matrix noted <code>D</code> to perform the adaptation in LMS space. In addition to <code>A</code> and <code>D</code>, the source white point <code>W1</code> and the destination white point <code>W2</code> must be specified:</p>
+    <p><a href="https://developer.android.com/reference/android/graphics/ColorSpace.Adaptation.html">See equation</a></p>
+    <p>As an example, the resulting matrix <code>T</code> can then be used to perform the chromatic adaptation of sRGB XYZ transform from D65 to D50:</p>
+    <p><a href="https://developer.android.com/reference/android/graphics/ColorSpace.Adaptation.html">See equation</a></p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">See also</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Connector.html">Connector</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/package-summary.html#(androidx.compose.ui.graphics.colorspace.ColorSpace).connect(androidx.compose.ui.graphics.colorspace.ColorSpace,androidx.compose.ui.graphics.colorspace.RenderIntent)">connect</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>public static class <a href="/reference/androidx/compose/ui/graphics/colorspace/Adaptation.Companion.html">Adaptation.Companion</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

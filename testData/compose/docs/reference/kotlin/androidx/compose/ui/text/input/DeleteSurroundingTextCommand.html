@@ -1,0 +1,177 @@
+<html devsite="true">
+  <head>
+    <title>DeleteSurroundingTextCommand</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-text/androidx/compose/ui/text/input/EditCommand.kt+class:androidx.compose.ui.text.input.DeleteSurroundingTextCommand&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>DeleteSurroundingTextCommand</h1>
+    <p>
+      <pre>class <a href="/reference/kotlin/androidx/compose/ui/text/input/DeleteSurroundingTextCommand.html">DeleteSurroundingTextCommand</a> : <a href="/reference/kotlin/androidx/compose/ui/text/input/EditCommand.html">EditCommand</a></pre>
+    </p>
+    <hr>
+    <p>Delete <code><a href="/reference/kotlin/androidx/compose/ui/text/input/DeleteSurroundingTextCommand.html#lengthBeforeCursor()">lengthBeforeCursor</a></code> characters of text before the current cursor position, and delete <code><a href="/reference/kotlin/androidx/compose/ui/text/input/DeleteSurroundingTextCommand.html#lengthAfterCursor()">lengthAfterCursor</a></code> characters of text after the current cursor position, excluding the selection.</p>
+    <p>Before and after refer to the order of the characters in the string, not to their visual representation.</p>
+    <p>See <a href="https://developer.android.com/reference/android/view/inputmethod/InputConnection.html#deleteSurroundingText(int,%2520int)"><code>deleteSurroundingText</code></a>.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/input/DeleteSurroundingTextCommand.html#DeleteSurroundingTextCommand(kotlin.Int,kotlin.Int)">DeleteSurroundingTextCommand</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;lengthBeforeCursor:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;lengthAfterCursor:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/input/DeleteSurroundingTextCommand.html#applyTo(androidx.compose.ui.text.input.EditingBuffer)">applyTo</a>(buffer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/EditingBuffer.html">EditingBuffer</a>)</code></div>
+              <p>Apply the command on the editing buffer.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open&nbsp;operator <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/input/DeleteSurroundingTextCommand.html#equals(kotlin.Any)">equals</a>(other:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/input/DeleteSurroundingTextCommand.html#hashCode()">hashCode</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/input/DeleteSurroundingTextCommand.html#toString()">toString</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/input/DeleteSurroundingTextCommand.html#lengthAfterCursor()">lengthAfterCursor</a></code></div>
+              <p>The number of characters in UTF-16 after the cursor to be deleted.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/input/DeleteSurroundingTextCommand.html#lengthBeforeCursor()">lengthBeforeCursor</a></code></div>
+              <p>The number of characters in UTF-16 before the cursor to be deleted.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="DeleteSurroundingTextCommand(kotlin.Int, kotlin.Int)"></a><a name="DeleteSurroundingTextCommand-kotlin.Int-kotlin.Int-"></a><a name="deletesurroundingtextcommand"></a>
+        <h3 class="api-name" id="DeleteSurroundingTextCommand(kotlin.Int,kotlin.Int)">DeleteSurroundingTextCommand</h3>
+        <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/ui/text/input/DeleteSurroundingTextCommand.html#DeleteSurroundingTextCommand(kotlin.Int,kotlin.Int)">DeleteSurroundingTextCommand</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;lengthBeforeCursor:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;lengthAfterCursor:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><br>)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>lengthBeforeCursor:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                <td>
+                  <p>The number of characters in UTF-16 before the cursor to be deleted. Must be non-negative.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>lengthAfterCursor:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                <td>
+                  <p>The number of characters in UTF-16 after the cursor to be deleted. Must be non-negative.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="applyTo-androidx.compose.ui.text.input.EditingBuffer-"></a><a name="applyto"></a>
+        <h3 class="api-name" id="applyTo(androidx.compose.ui.text.input.EditingBuffer)">applyTo</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/DeleteSurroundingTextCommand.html#applyTo(androidx.compose.ui.text.input.EditingBuffer)">applyTo</a>(buffer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/EditingBuffer.html">EditingBuffer</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Apply the command on the editing buffer.</p>
+      </div>
+      <div class="api-item"><a name="equals-kotlin.Any-"></a><a name="equals"></a>
+        <h3 class="api-name" id="equals(kotlin.Any)">equals</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/DeleteSurroundingTextCommand.html#equals(kotlin.Any)">equals</a>(other:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+      </div>
+      <div class="api-item"><a name="hashCode--"></a><a name="hashcode"></a>
+        <h3 class="api-name" id="hashCode()">hashCode</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/DeleteSurroundingTextCommand.html#hashCode()">hashCode</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+      </div>
+      <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+        <h3 class="api-name" id="toString()">toString</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/DeleteSurroundingTextCommand.html#toString()">toString</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getLengthAfterCursor()"></a><a name="setLengthAfterCursor()"></a><a name="getLengthAfterCursor--"></a><a name="setLengthAfterCursor--"></a>
+        <h3 class="api-name" id="lengthAfterCursor()">lengthAfterCursor</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/DeleteSurroundingTextCommand.html#lengthAfterCursor()">lengthAfterCursor</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>The number of characters in UTF-16 after the cursor to be deleted. Must be non-negative.</p>
+      </div>
+      <div class="api-item"><a name="getLengthBeforeCursor()"></a><a name="setLengthBeforeCursor()"></a><a name="getLengthBeforeCursor--"></a><a name="setLengthBeforeCursor--"></a>
+        <h3 class="api-name" id="lengthBeforeCursor()">lengthBeforeCursor</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/DeleteSurroundingTextCommand.html#lengthBeforeCursor()">lengthBeforeCursor</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>The number of characters in UTF-16 before the cursor to be deleted. Must be non-negative.</p>
+      </div>
+    </div>
+  </body>
+</html>

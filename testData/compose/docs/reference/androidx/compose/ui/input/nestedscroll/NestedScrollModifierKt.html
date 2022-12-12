@@ -1,0 +1,244 @@
+<html devsite="true">
+  <head>
+    <title>NestedScrollModifierKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>NestedScrollModifierKt</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollModifierKt.html">NestedScrollModifierKt</a></pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollModifierKt.html">NestedScrollModifierKt</a>.<a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollModifierKt.html#(androidx.compose.ui.Modifier).nestedScroll(androidx.compose.ui.input.nestedscroll.NestedScrollConnection,androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher)">nestedScroll</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a>&nbsp;connection,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html">NestedScrollDispatcher</a>&nbsp;dispatcher<br>)</code></div>
+              <p>Modify element to make it participate in the nested scrolling hierarchy.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="(androidx.compose.ui.Modifier).nestedScroll(androidx.compose.ui.input.nestedscroll.NestedScrollConnection, androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher)"></a><a name="-androidx.compose.ui.Modifier-.nestedScroll-androidx.compose.ui.input.nestedscroll.NestedScrollConnection-androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher-"></a><a name="nestedscroll"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.Modifier).nestedScroll(androidx.compose.ui.input.nestedscroll.NestedScrollConnection,androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher)">NestedScrollModifierKt.nestedScroll</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollModifierKt.html">NestedScrollModifierKt</a>.<a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollModifierKt.html#(androidx.compose.ui.Modifier).nestedScroll(androidx.compose.ui.input.nestedscroll.NestedScrollConnection,androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher)">nestedScroll</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a>&nbsp;connection,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html">NestedScrollDispatcher</a>&nbsp;dispatcher<br>)</pre>
+        <p>Modify element to make it participate in the nested scrolling hierarchy.</p>
+        <p>There are two ways to participate in the nested scroll: as a scrolling child by dispatching scrolling events via <code><a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html">NestedScrollDispatcher</a></code> to the nested scroll chain; and as a member of nested scroll chain by providing <code><a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></code>, which will be called when another nested scrolling child below dispatches scrolling events.</p>
+        <p>It's a mandatory to participate as a <code><a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></code> in the chain, but scrolling events dispatch is optional since there are cases when element wants to participate in the nested scroll, but not a scrollable thing itself.</p>
+        <p>Here's the collapsing toolbar example that participates in a chain, but doesn't dispatch:</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.unit.IntOffset
+
+// here we use LazyColumn that has build-in nested scroll, but we want to act like a
+// parent for this LazyColumn and participate in its nested scroll.
+// Let's make a collapsing toolbar for LazyColumn
+val toolbarHeight = 48.dp
+val toolbarHeightPx = with(LocalDensity.current) { toolbarHeight.roundToPx().toFloat() }
+// our offset to collapse toolbar
+val toolbarOffsetHeightPx =
+
+    remember { mutableStateOf(0f) }
+// now, let's create connection to the nested scroll system and listen to the scroll
+// happening inside child LazyColumn
+val nestedScrollConnection = remember {
+    object : NestedScrollConnection {
+        override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
+            // try to consume before LazyColumn to collapse toolbar if needed, hence pre-scroll
+            val delta = available.y
+            val newOffset = toolbarOffsetHeightPx.value + delta
+            toolbarOffsetHeightPx.value = newOffset.coerceIn(-toolbarHeightPx, 0f)
+            // here's the catch: let's pretend we consumed 0 in any case, since we want
+            // LazyColumn to scroll anyway for good UX
+            // We're basically watching scroll without taking it
+            return Offset.Zero
+        }
+    }
+}
+Box(
+    Modifier
+        .fillMaxSize()
+        // attach as a parent to the nested scroll system
+        .nestedScroll(nestedScrollConnection)
+) {
+    // our list with build in nested scroll support that will notify us about its scroll
+    LazyColumn(contentPadding = PaddingValues(top = toolbarHeight)) {
+        items(100) { index -&gt;
+            Text(&quot;I'm item $index&quot;, modifier = Modifier.fillMaxWidth().padding(16.dp))
+        }
+    }
+    TopAppBar(
+        modifier = Modifier
+            .height(toolbarHeight)
+            .offset { IntOffset(x = 0, y = toolbarOffsetHeightPx.value.roundToInt()) },
+        title = { Text(&quot;toolbar offset is ${toolbarOffsetHeightPx.value}&quot;) }
+    )
+}</pre>
+        <p>On the other side, dispatch via <code><a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html">NestedScrollDispatcher</a></code> is optional. It's needed if a component is able to receive and react to the drag/fling events and you want this components to be able to notify parents when scroll occurs, resulting in better overall coordination.</p>
+        <p>Here's the example of the component that is draggable and dispatches nested scroll to participate in the nested scroll chain:</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.draggable
+import androidx.compose.foundation.gestures.rememberDraggableState
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+
+// Let's take Modifier.draggable (which doesn't have nested scroll build in, unlike Modifier
+// .scrollable) and add nested scroll support our component that contains draggable
+
+// this will be a generic components that will work inside other nested scroll components.
+// put it inside LazyColumn or / Modifier.verticalScroll to see how they will interact
+
+// first, state and it's bounds
+val basicState = remember { mutableStateOf(0f) }
+val minBound = -100f
+val maxBound = 100f
+// lambda to update state and return amount consumed
+val onNewDelta: (Float) -&gt; Float = { delta -&gt;
+    val oldState = basicState.value
+    val newState = (basicState.value + delta).coerceIn(minBound, maxBound)
+    basicState.value = newState
+    newState - oldState
+}
+// create a dispatcher to dispatch nested scroll events (participate like a nested scroll child)
+val nestedScrollDispatcher = remember { NestedScrollDispatcher() }
+
+// create nested scroll connection to react to nested scroll events (participate like a parent)
+val nestedScrollConnection = remember {
+    object : NestedScrollConnection {
+        override fun onPostScroll(
+            consumed: Offset,
+            available: Offset,
+            source: NestedScrollSource
+        ): Offset {
+            // we have no fling, so we're interested in the regular post scroll cycle
+            // let's try to consume what's left if we need and return the amount consumed
+            val vertical = available.y
+            val weConsumed = onNewDelta(vertical)
+            return Offset(x = 0f, y = weConsumed)
+        }
+    }
+}
+Box(
+    Modifier
+        .size(100.dp)
+        .background(Color.LightGray)
+        // attach ourselves to nested scroll system
+        .nestedScroll(connection = nestedScrollConnection, dispatcher = nestedScrollDispatcher)
+        .draggable(
+            orientation = Orientation.Vertical,
+            state = rememberDraggableState { delta -&gt;
+                // here's regular drag. Let's be good citizens and ask parents first if they
+                // want to pre consume (it's a nested scroll contract)
+                val parentsConsumed = nestedScrollDispatcher.dispatchPreScroll(
+                    available = Offset(x = 0f, y = delta),
+                    source = NestedScrollSource.Drag
+                )
+                // adjust what's available to us since might have consumed smth
+                val adjustedAvailable = delta - parentsConsumed.y
+                // we consume
+                val weConsumed = onNewDelta(adjustedAvailable)
+                // dispatch as a post scroll what's left after pre-scroll and our consumption
+                val totalConsumed = Offset(x = 0f, y = weConsumed) + parentsConsumed
+                val left = adjustedAvailable - weConsumed
+                nestedScrollDispatcher.dispatchPostScroll(
+                    consumed = totalConsumed,
+                    available = Offset(x = 0f, y = left),
+                    source = NestedScrollSource.Drag
+                )
+                // we won't dispatch pre/post fling events as we have no flinging here, but the
+                // idea is very similar:
+                // 1. dispatch pre fling, asking parents to pre consume
+                // 2. fling (while dispatching scroll events like above for any fling tick)
+                // 3. dispatch post fling, allowing parent to react to velocity left
+            }
+        )
+) {
+    Text(
+        &quot;State: ${basicState.value.roundToInt()}&quot;,
+        modifier = Modifier.align(Alignment.Center)
+    )
+}</pre>
+        <p><b>Note:</b> It is recommended to reuse <code><a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></code> and <code><a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html">NestedScrollDispatcher</a></code> objects between recompositions since different object will cause nested scroll graph to be recalculated unnecessary.</p>
+        <p>There are 4 main phases in nested scrolling system:</p>
+        <ol>
+          <li>
+            <p>Pre-scroll. This callback is triggered when the descendant is about to perform a scroll operation and gives parent an opportunity to consume part of child's delta beforehand. This pass should happen every time scrollable components receives delta and dispatches it via <code><a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html">NestedScrollDispatcher</a></code>. Dispatching child should take into account how much all ancestors above the hierarchy consumed and adjust the consumption accordingly.</p>
+          </li>
+          <li>
+            <p>Post-scroll. This callback is triggered when the descendant consumed the delta already (after taking into account what parents pre-consumed in 1.) and wants to notify the ancestors with the amount of delta unconsumed. This pass should happen every time scrollable components receives delta and dispatches it via <code><a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html">NestedScrollDispatcher</a></code>. Any parent that receives <code><a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html#onPostScroll(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,androidx.compose.ui.input.nestedscroll.NestedScrollSource)">NestedScrollConnection.onPostScroll</a></code> should consume no more than <code>left</code> and return the amount consumed.</p>
+          </li>
+          <li>
+            <p>Pre-fling. Pass that happens when the scrolling descendant stopped dragging and about to fling with the some velocity. This callback allows ancestors to consume part of the velocity. This pass should happen before the fling itself happens. Similar to pre-scroll, parent can consume part of the velocity and nodes below (including the dispatching child) should adjust their logic to accommodate only the velocity left.</p>
+          </li>
+          <li>
+            <p>Post-fling. Pass that happens after the scrolling descendant stopped flinging and wants to notify ancestors about that fact, providing velocity left to consume as a part of this. This pass should happen after the fling itself happens on the scrolling child. Ancestors of the dispatching node will have opportunity to fling themselves with the <code>velocityLeft</code> provided. Parent must call <code>notifySelfFinish</code> callback in order to continue the propagation of the velocity that is left to ancestors above.</p>
+          </li>
+        </ol>
+        <p><code><a href="/reference/androidx/compose/foundation/lazy/package-summary.html#LazyColumn(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">androidx.compose.foundation.lazy.LazyColumn</a></code>, <code><a href="/reference/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).verticalScroll(androidx.compose.foundation.ScrollState,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean)">androidx.compose.foundation.verticalScroll</a></code> and <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).scrollable(androidx.compose.foundation.gestures.ScrollableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,androidx.compose.foundation.interaction.MutableInteractionSource)">androidx.compose.foundation.gestures.scrollable</a></code> have build in support for nested scrolling, however, it's desirable to be able to react and influence their scroll via nested scroll system.</p>
+        <p><b>Note:</b> The nested scroll system is orientation independent. This mean it is based off the screen direction (x and y coordinates) rather than being locked to a specific orientation.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a>&nbsp;connection</code></td>
+                <td>
+                  <p>connection to the nested scroll system to participate in the event chaining, receiving events when scrollable descendant is being scrolled.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html">NestedScrollDispatcher</a>&nbsp;dispatcher</code></td>
+                <td>
+                  <p>object to be attached to the nested scroll system on which <code>dispatch*</code> methods can be called to notify ancestors within nested scroll system about scrolling happening</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

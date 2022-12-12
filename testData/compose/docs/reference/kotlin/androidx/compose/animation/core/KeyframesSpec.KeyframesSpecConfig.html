@@ -5,7 +5,9 @@
 {% include "_shared/_reference-head-tags.html" %}
   </head>
   <body>
-    <div id="metadata-info-block"></div>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-core/androidx/compose/animation/core/AnimationSpec.kt+class:androidx.compose.animation.core.KeyframesSpec.KeyframesSpecConfig&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
     <h1>KeyframesSpec.KeyframesSpecConfig</h1>
     <p>
       <pre>class <a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">KeyframesSpec.KeyframesSpecConfig</a>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</pre>
@@ -81,6 +83,13 @@ keyframes&lt;DpOffset&gt; {
             <td>
               <div><code>T.<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#(kotlin.Any).at(kotlin.Int)">at</a>(timeStamp:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
               <p>Adds a keyframe so that animation value will be <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#&lt;this&gt;()">this</a></code> at time: <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#(kotlin.Any).at(kotlin.Int)">timeStamp</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>infix <a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframeEntity.html">KeyframesSpec.KeyframeEntity</a>&lt;T&gt;</code></td>
+            <td>
+              <div><code>T.<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#(kotlin.Any).atFraction(kotlin.Float)">atFraction</a>(fraction:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+              <p>Adds a keyframe so that the animation value will be the value specified at a fraction of the total <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#durationMillis()">durationMillis</a></code> set.</p>
             </td>
           </tr>
           <tr>
@@ -184,6 +193,53 @@ keyframes&lt;DpOffset&gt; {
                 <td><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframeEntity.html">KeyframesSpec.KeyframeEntity</a>&lt;T&gt;</code></td>
                 <td>
                   <p>an <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframeEntity.html">KeyframeEntity</a></code> so a custom <code><a href="/reference/kotlin/androidx/compose/animation/core/Easing.html">Easing</a></code> can be added by <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#(androidx.compose.animation.core.KeyframesSpec.KeyframeEntity).with(androidx.compose.animation.core.Easing)">with</a></code> method.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="-kotlin.Any-.atFraction-kotlin.Float-"></a><a name="atfraction"></a>
+        <h3 class="api-name" id="(kotlin.Any).atFraction(kotlin.Float)">atFraction</h3>
+        <pre class="api-signature no-pretty-print">infix&nbsp;fun&nbsp;T.<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#(kotlin.Any).atFraction(kotlin.Float)">atFraction</a>(fraction:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframeEntity.html">KeyframesSpec.KeyframeEntity</a>&lt;T&gt;</pre>
+        <p>Adds a keyframe so that the animation value will be the value specified at a fraction of the total <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#durationMillis()">durationMillis</a></code> set. For example:     0.8f atFraction 0.50f // half of the overall duration set</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>fraction:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>The fraction when the animation should reach specified value.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframeEntity.html">KeyframesSpec.KeyframeEntity</a>&lt;T&gt;</code></td>
+                <td>
+                  <p>an <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframeEntity.html">KeyframeEntity</a></code> so a custom <code><a href="/reference/kotlin/androidx/compose/animation/core/Easing.html">Easing</a></code> can be added by <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#(androidx.compose.animation.core.KeyframesSpec.KeyframeEntity).with(androidx.compose.animation.core.Easing)">with</a></code> method</p>
                 </td>
               </tr>
             </tbody>

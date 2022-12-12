@@ -1,0 +1,92 @@
+<html devsite="true">
+  <head>
+    <title>WindowRecomposerKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>WindowRecomposerKt</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/platform/WindowRecomposerKt.html">WindowRecomposerKt</a></pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final <a href="/reference/androidx/compose/runtime/CompositionContext.html">CompositionContext</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/platform/package-summary.html#(android.view.View).compositionContext()">compositionContext</a></code></div>
+              <p>The <code><a href="/reference/androidx/compose/runtime/CompositionContext.html">CompositionContext</a></code> that should be used as a parent for compositions at or below this view in the hierarchy.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Recomposer.html">Recomposer</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/platform/WindowRecomposerKt.html">WindowRecomposerKt</a>.<a href="/reference/androidx/compose/ui/platform/WindowRecomposerKt.html#(android.view.View).createLifecycleAwareWindowRecomposer(kotlin.coroutines.CoroutineContext,androidx.lifecycle.Lifecycle)">createLifecycleAwareWindowRecomposer</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/View.html">View</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>&nbsp;coroutineContext,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/lifecycle/Lifecycle.html">Lifecycle</a>&nbsp;lifecycle<br>)</code></div>
+              <p>Create a <code><a href="/reference/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> and <code><a href="https://developer.android.com/reference/android/view/View.html#isAttachedToWindow()">window attachment</a></code>-aware <code><a href="/reference/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> for this <code><a href="https://developer.android.com/reference/android/view/View.html">View</a></code> with the same behavior as <code><a href="/reference/androidx/compose/ui/platform/WindowRecomposerFactory.Companion.html#LifecycleAware()">WindowRecomposerFactory.LifecycleAware</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final <a href="/reference/androidx/compose/runtime/CompositionContext.html">CompositionContext</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/platform/WindowRecomposerKt.html">WindowRecomposerKt</a>.<a href="/reference/androidx/compose/ui/platform/WindowRecomposerKt.html#(android.view.View).findViewTreeCompositionContext()">findViewTreeCompositionContext</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/View.html">View</a>&nbsp;receiver<br>)</code></div>
+              <p>Returns the parent <code><a href="/reference/androidx/compose/runtime/CompositionContext.html">CompositionContext</a></code> for this point in the view hierarchy, or <code>null</code> if none can be found.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="(android.view.View).getCompositionContext()"></a><a name="(android.view.View).setCompositionContext()"></a><a name="-android.view.View-.getCompositionContext--"></a><a name="-android.view.View-.setCompositionContext--"></a>
+        <h3 class="api-name" id="(android.view.View).compositionContext()">compositionContext</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/compose/runtime/CompositionContext.html">CompositionContext</a>&nbsp;<a href="/reference/androidx/compose/ui/platform/package-summary.html#(android.view.View).compositionContext()">compositionContext</a></pre>
+        <p>The <code><a href="/reference/androidx/compose/runtime/CompositionContext.html">CompositionContext</a></code> that should be used as a parent for compositions at or below this view in the hierarchy. Set to non-<code>null</code> to provide a <code><a href="/reference/androidx/compose/runtime/CompositionContext.html">CompositionContext</a></code> for compositions created by child views, or <code>null</code> to fall back to any <code><a href="/reference/androidx/compose/runtime/CompositionContext.html">CompositionContext</a></code> provided by ancestor views.</p>
+        <p>See <code><a href="/reference/androidx/compose/ui/platform/package-summary.html#(android.view.View).findViewTreeCompositionContext()">findViewTreeCompositionContext</a></code>.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="(android.view.View).createLifecycleAwareWindowRecomposer(kotlin.coroutines.CoroutineContext, androidx.lifecycle.Lifecycle)"></a><a name="-android.view.View-.createLifecycleAwareWindowRecomposer-kotlin.coroutines.CoroutineContext-androidx.lifecycle.Lifecycle-"></a><a name="createlifecycleawarewindowrecomposer"></a>
+        <h3 class="api-name" id="(android.view.View).createLifecycleAwareWindowRecomposer(kotlin.coroutines.CoroutineContext,androidx.lifecycle.Lifecycle)">WindowRecomposerKt.createLifecycleAwareWindowRecomposer</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Recomposer.html">Recomposer</a>&nbsp;<a href="/reference/androidx/compose/ui/platform/WindowRecomposerKt.html">WindowRecomposerKt</a>.<a href="/reference/androidx/compose/ui/platform/WindowRecomposerKt.html#(android.view.View).createLifecycleAwareWindowRecomposer(kotlin.coroutines.CoroutineContext,androidx.lifecycle.Lifecycle)">createLifecycleAwareWindowRecomposer</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/View.html">View</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>&nbsp;coroutineContext,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/lifecycle/Lifecycle.html">Lifecycle</a>&nbsp;lifecycle<br>)</pre>
+        <p>Create a <code><a href="/reference/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> and <code><a href="https://developer.android.com/reference/android/view/View.html#isAttachedToWindow()">window attachment</a></code>-aware <code><a href="/reference/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> for this <code><a href="https://developer.android.com/reference/android/view/View.html">View</a></code> with the same behavior as <code><a href="/reference/androidx/compose/ui/platform/WindowRecomposerFactory.Companion.html#LifecycleAware()">WindowRecomposerFactory.LifecycleAware</a></code>.</p>
+        <p><code><a href="/reference/androidx/compose/ui/platform/package-summary.html#(android.view.View).createLifecycleAwareWindowRecomposer(kotlin.coroutines.CoroutineContext,androidx.lifecycle.Lifecycle)">coroutineContext</a></code> will override any <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code> elements from the default configuration normally used for this content view. The default <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code> contains <code><a href="/reference/androidx/compose/ui/platform/AndroidUiDispatcher.Companion.html#CurrentThread()">AndroidUiDispatcher.CurrentThread</a></code>; this function should only be called from the UI thread of this <code><a href="https://developer.android.com/reference/android/view/View.html">View</a></code> or its intended UI thread if it is currently detached.</p>
+        <p>If <code><a href="/reference/androidx/compose/ui/platform/package-summary.html#(android.view.View).createLifecycleAwareWindowRecomposer(kotlin.coroutines.CoroutineContext,androidx.lifecycle.Lifecycle)">lifecycle</a></code> is <code>null</code> or not supplied the <code><a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code> returned by <code><a href="/reference/androidx/lifecycle/package-summary.html#(android.view.View).findViewTreeLifecycleOwner()">findViewTreeLifecycleOwner</a></code> will be used; if a non-null <code><a href="/reference/androidx/compose/ui/platform/package-summary.html#(android.view.View).createLifecycleAwareWindowRecomposer(kotlin.coroutines.CoroutineContext,androidx.lifecycle.Lifecycle)">lifecycle</a></code> is not provided and a ViewTreeLifecycleOwner is not present an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code> will be thrown.</p>
+        <p>The returned <code><a href="/reference/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> will be <code><a href="/reference/androidx/compose/runtime/Recomposer.html#cancel()">cancelled</a></code> when this <code><a href="https://developer.android.com/reference/android/view/View.html">View</a></code> is detached from a window or if its determined <code><a href="/reference/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> is <code><a href="/reference/androidx/lifecycle/Lifecycle.Event.ON_DESTROY.html">destroyed</a></code>. Recomposition and associated <code><a href="/reference/androidx/compose/runtime/MonotonicFrameClock.html">frame-based</a></code> effects may be throttled or paused while the <code><a href="/reference/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> is not at least <code><a href="/reference/androidx/lifecycle/Lifecycle.State.STARTED.html">Lifecycle.State.STARTED</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="-android.view.View-.findViewTreeCompositionContext--"></a><a name="findviewtreecompositioncontext"></a>
+        <h3 class="api-name" id="(android.view.View).findViewTreeCompositionContext()">WindowRecomposerKt.findViewTreeCompositionContext</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;<a href="/reference/androidx/compose/runtime/CompositionContext.html">CompositionContext</a>&nbsp;<a href="/reference/androidx/compose/ui/platform/WindowRecomposerKt.html">WindowRecomposerKt</a>.<a href="/reference/androidx/compose/ui/platform/WindowRecomposerKt.html#(android.view.View).findViewTreeCompositionContext()">findViewTreeCompositionContext</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/View.html">View</a>&nbsp;receiver<br>)</pre>
+        <p>Returns the parent <code><a href="/reference/androidx/compose/runtime/CompositionContext.html">CompositionContext</a></code> for this point in the view hierarchy, or <code>null</code> if none can be found.</p>
+        <p>See <code><a href="/reference/androidx/compose/ui/platform/package-summary.html#(android.view.View).compositionContext()">compositionContext</a></code> to get or set the parent <code><a href="/reference/androidx/compose/runtime/CompositionContext.html">CompositionContext</a></code> for a specific view.</p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,102 @@
+<html devsite="true">
+  <head>
+    <title>ComposableTarget</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/runtime/ComposableTarget.kt+class:androidx.compose.runtime.ComposableTarget&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>ComposableTarget</h1>
+    <p>
+      <pre>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-retention/index.html">Retention</a>(value&nbsp;=&nbsp;AnnotationRetention.BINARY)<br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-target/index.html">Target</a>(allowedTargets&nbsp;=&nbsp;[AnnotationTarget.FILE,&nbsp;AnnotationTarget.CLASS,&nbsp;AnnotationTarget.FUNCTION,&nbsp;AnnotationTarget.PROPERTY_GETTER,&nbsp;AnnotationTarget.TYPE,&nbsp;AnnotationTarget.TYPE_PARAMETER])<br>public annotation <a href="/reference/androidx/compose/runtime/ComposableTarget.html">ComposableTarget</a></pre>
+    </p>
+    <hr>
+    <p>The <code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> function is declared to expect an applier with the name <code><a href="/reference/androidx/compose/runtime/ComposableTarget.html#applier()">applier</a></code>. The <code><a href="/reference/androidx/compose/runtime/ComposableTarget.html#applier()">applier</a></code> name can be an arbitrary string but is expected to be a fully qualified name of a class that is annotated by <code><a href="/reference/androidx/compose/runtime/ComposableTargetMarker.html">ComposableTargetMarker</a></code> containing a descriptive name to be used in diagnostic messages.</p>
+    <p>The <code><a href="/reference/androidx/compose/runtime/ComposableTarget.html#applier()">applier</a></code> name is used in diagnostic messages but, if it refers to a marked annotation, <code><a href="/reference/androidx/compose/runtime/ComposableTargetMarker.html#description()">ComposableTargetMarker.description</a></code> is used instead of the class name.</p>
+    <p>The Compose compiler plugin can, in most cases, infer this or an equivalent <code><a href="/reference/androidx/compose/runtime/ComposableInferredTarget.html">ComposableInferredTarget</a></code>, for composable functions. For example, if a composable function calls another composable function then both must be of the same group of composable functions (that is, have declared or inferred the same <code><a href="/reference/androidx/compose/runtime/ComposableTarget.html#applier()">applier</a></code> value). This means that, if the function called is already determined to be in a group, them the function that calls it must also be in the same group. If two functions are called of different groups then the Compose compiler plugin will generate an diagnostic message describing which group was received and which group was expected.</p>
+    <p>The grouping of composable functions corresponds to the instance of <code><a href="/reference/androidx/compose/runtime/Applier.html">Applier</a></code> that is required to be used by the <code><a href="/reference/androidx/compose/runtime/Composer.html">Composer</a></code> to apply changes to the composition. The <code><a href="/reference/androidx/compose/runtime/Applier.html">Applier</a></code> is checked at runtime to ensure the <code><a href="/reference/androidx/compose/runtime/Applier.html">Applier</a></code> that is expected by a composable function is the one supplied at runtime. This annotation, and the corresponding validation performed by the Compose compiler plugin, can detect mismatches at compile time, and issue a diagnostic message when calling a <code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> function will result in the <code><a href="/reference/androidx/compose/runtime/Applier.html">Applier</a></code> check failing.</p>
+    <p>In most cases this annotation can be inferred. However, this annotation is required for <code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> functions that call <code><a href="/reference/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1)">ComposeNode</a></code> directly, for abstract methods, such as interfaces functions (which do not contain a body from which the plugin can infer the annotation), when using a composable lambda in sub-composition, or when a composable lambda is stored in a class field or global variable.</p>
+    <p>Leaving the annotation off in such cases will result in the compiler ignoring the function and it will not emit the diagnostic when the function is called incorrectly.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/ComposableTarget.html#applier()">applier</a></code></div>
+              <p>The applier name used during composable call checking.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/ComposableTarget.html#ComposableTarget(kotlin.String)">ComposableTarget</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;applier)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getApplier()"></a><a name="setApplier()"></a><a name="getApplier--"></a><a name="setApplier--"></a>
+        <h3 class="api-name" id="applier()">applier</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/runtime/ComposableTarget.html#applier()">applier</a></pre>
+        <p>The applier name used during composable call checking. This is usually inferred by the compiler. This can be an arbitrary string value but is expected to be a fully qualified name of a class that is marked with <code><a href="/reference/androidx/compose/runtime/ComposableTargetMarker.html">ComposableTargetMarker</a></code>.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="ComposableTarget-kotlin.String-"></a><a name="composabletarget"></a>
+        <h3 class="api-name" id="ComposableTarget(kotlin.String)">ComposableTarget</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/runtime/ComposableTarget.html#ComposableTarget(kotlin.String)">ComposableTarget</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;applier)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;applier</code></td>
+                <td>
+                  <p>The applier name used during composable call checking. This is usually inferred by the compiler. This can be an arbitrary string value but is expected to be a fully qualified name of a class that is marked with <code><a href="/reference/androidx/compose/runtime/ComposableTargetMarker.html">ComposableTargetMarker</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

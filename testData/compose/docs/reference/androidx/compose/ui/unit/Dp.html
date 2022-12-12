@@ -1,0 +1,411 @@
+<html devsite="true">
+  <head>
+    <title>Dp</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-unit/androidx/compose/ui/unit/Dp.kt+class:androidx.compose.ui.unit.Dp&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>Dp</h1>
+    <p>
+      <pre>value public final class <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a> implements <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-comparable/index.html">Comparable</a></pre>
+    </p>
+    <hr>
+    <p>Dimension value representing device-independent pixels (dp). Component APIs specify their dimensions such as line thickness in DP with Dp objects. Hairline (1 pixel) thickness may be specified with <code><a href="/reference/androidx/compose/ui/unit/Dp.Companion.html#Hairline()">Hairline</a></code>, a dimension that take up no space. Dp are normally defined using <code><a href="/reference/androidx/compose/ui/unit/package-summary.html#(kotlin.Int).dp()">dp</a></code>, which can be applied to <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code>, <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></code>, and <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code>.</p>
+    <pre class="prettyprint">
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
+
+Box(
+    Modifier.padding(
+        10.dp, // Int
+        10f.dp, // Float
+        20.0.dp, // Double
+        10.dp
+    )
+)</pre>
+    <p>Drawing and Layout are done in pixels. To retrieve the pixel size of a Dp, use <code><a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toPx()">Density.toPx</a></code>:</p>
+    <pre class="prettyprint">
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.inset
+
+val lineThickness = 6.dp
+Canvas(Modifier.fillMaxSize()) {
+    val lineThicknessPx = lineThickness.toPx()
+    inset(lineThicknessPx / 2) {
+        drawRect(Color.Red, style = Stroke(lineThicknessPx))
+    }
+}</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>public static class <a href="/reference/androidx/compose/ui/unit/Dp.Companion.html">Dp.Companion</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/Dp.html#value()">value</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/Dp.html#Dp(kotlin.Float)">Dp</a>(float&nbsp;value)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/Dp.html#compareTo(androidx.compose.ui.unit.Dp)">compareTo</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;other)</code></div>
+              <p>Support comparing Dimensions with comparison operators.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/Dp.html#div(androidx.compose.ui.unit.Dp)">div</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;other)</code></div>
+              <p>Divide by another Dp to get a scalar.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/Dp.html#div(kotlin.Float)">div</a>(float&nbsp;other)</code></div>
+              <p>Divide a Dp by a scalar.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/Dp.html#div(kotlin.Int)">div</a>(int&nbsp;other)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/Dp.html#minus(androidx.compose.ui.unit.Dp)">minus</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;other)</code></div>
+              <p>Subtract a Dp from another one.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/Dp.html#plus(androidx.compose.ui.unit.Dp)">plus</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;other)</code></div>
+              <p>Add two <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code>s together.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/Dp.html#times(kotlin.Float)">times</a>(float&nbsp;other)</code></div>
+              <p>Multiply a Dp by a scalar.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/Dp.html#times(kotlin.Int)">times</a>(int&nbsp;other)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/Dp.html#toString()">toString</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/Dp.html#unaryMinus()">unaryMinus</a>()</code></div>
+              <p>This is the same as multiplying the Dp by -1.0.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/DpKt.html">DpKt</a>.<a href="/reference/androidx/compose/ui/unit/Dp.html#(androidx.compose.ui.unit.Dp).coerceAtLeast(androidx.compose.ui.unit.Dp)">coerceAtLeast</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;minimumValue)</code></div>
+              <p>Ensures that this value is not less than the specified <code><a href="/reference/androidx/compose/ui/unit/package-summary.html#(androidx.compose.ui.unit.Dp).coerceAtLeast(androidx.compose.ui.unit.Dp)">minimumValue</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/DpKt.html">DpKt</a>.<a href="/reference/androidx/compose/ui/unit/Dp.html#(androidx.compose.ui.unit.Dp).coerceAtMost(androidx.compose.ui.unit.Dp)">coerceAtMost</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;maximumValue)</code></div>
+              <p>Ensures that this value is not greater than the specified <code><a href="/reference/androidx/compose/ui/unit/package-summary.html#(androidx.compose.ui.unit.Dp).coerceAtMost(androidx.compose.ui.unit.Dp)">maximumValue</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/DpKt.html">DpKt</a>.<a href="/reference/androidx/compose/ui/unit/Dp.html#(androidx.compose.ui.unit.Dp).coerceIn(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">coerceIn</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;minimumValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;maximumValue<br>)</code></div>
+              <p>Ensures that this value lies in the specified range <code><a href="/reference/androidx/compose/ui/unit/package-summary.html#(androidx.compose.ui.unit.Dp).coerceIn(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">minimumValue</a></code>..</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/DpKt.html">DpKt</a>.<a href="/reference/androidx/compose/ui/unit/Dp.html#(androidx.compose.ui.unit.Dp).getIsFinite()">isFinite</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/DpKt.html">DpKt</a>.<a href="/reference/androidx/compose/ui/unit/Dp.html#(androidx.compose.ui.unit.Dp).getIsSpecified()">isSpecified</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/DpKt.html">DpKt</a>.<a href="/reference/androidx/compose/ui/unit/Dp.html#(androidx.compose.ui.unit.Dp).getIsUnspecified()">isUnspecified</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/unit/DpKt.html">DpKt</a>.<a href="/reference/androidx/compose/ui/unit/Dp.html#(androidx.compose.ui.unit.Dp).takeOrElse(kotlin.Function0)">takeOrElse</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&gt;&nbsp;block)</code></div>
+              <p>If this <code><a href="/reference/androidx/compose/ui/geometry/package-summary.html#(androidx.compose.ui.geometry.Offset).isSpecified()">Dp</a></code> then this is returned, otherwise <code><a href="/reference/androidx/compose/ui/unit/package-summary.html#(androidx.compose.ui.unit.Dp).takeOrElse(kotlin.Function0)">block</a></code> is executed and its result is returned.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getValue()"></a><a name="setValue()"></a><a name="getValue--"></a><a name="setValue--"></a>
+        <h3 class="api-name" id="value()">value</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/unit/Dp.html#value()">value</a></pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="Dp-kotlin.Float-"></a><a name="dp"></a>
+        <h3 class="api-name" id="Dp(kotlin.Float)">Dp</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/unit/Dp.html#Dp(kotlin.Float)">Dp</a>(float&nbsp;value)</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="compareTo-androidx.compose.ui.unit.Dp-"></a><a name="compareto"></a>
+        <h3 class="api-name" id="compareTo(androidx.compose.ui.unit.Dp)">compareTo</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/unit/Dp.html#compareTo(androidx.compose.ui.unit.Dp)">compareTo</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;other)</pre>
+        <p>Support comparing Dimensions with comparison operators.</p>
+      </div>
+      <div class="api-item"><a name="div-androidx.compose.ui.unit.Dp-"></a><a name="div"></a>
+        <h3 class="api-name" id="div(androidx.compose.ui.unit.Dp)">div</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/unit/Dp.html#div(androidx.compose.ui.unit.Dp)">div</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;other)</pre>
+        <p>Divide by another Dp to get a scalar.</p>
+      </div>
+      <div class="api-item"><a name="div-kotlin.Float-"></a><a name="div"></a>
+        <h3 class="api-name" id="div(kotlin.Float)">div</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;<a href="/reference/androidx/compose/ui/unit/Dp.html#div(kotlin.Float)">div</a>(float&nbsp;other)</pre>
+        <p>Divide a Dp by a scalar.</p>
+      </div>
+      <div class="api-item"><a name="div-kotlin.Int-"></a><a name="div"></a>
+        <h3 class="api-name" id="div(kotlin.Int)">div</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;<a href="/reference/androidx/compose/ui/unit/Dp.html#div(kotlin.Int)">div</a>(int&nbsp;other)</pre>
+      </div>
+      <div class="api-item"><a name="minus-androidx.compose.ui.unit.Dp-"></a><a name="minus"></a>
+        <h3 class="api-name" id="minus(androidx.compose.ui.unit.Dp)">minus</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;<a href="/reference/androidx/compose/ui/unit/Dp.html#minus(androidx.compose.ui.unit.Dp)">minus</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;other)</pre>
+        <p>Subtract a Dp from another one.</p>
+      </div>
+      <div class="api-item"><a name="plus-androidx.compose.ui.unit.Dp-"></a><a name="plus"></a>
+        <h3 class="api-name" id="plus(androidx.compose.ui.unit.Dp)">plus</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;<a href="/reference/androidx/compose/ui/unit/Dp.html#plus(androidx.compose.ui.unit.Dp)">plus</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;other)</pre>
+        <p>Add two <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code>s together.</p>
+      </div>
+      <div class="api-item"><a name="times-kotlin.Float-"></a><a name="times"></a>
+        <h3 class="api-name" id="times(kotlin.Float)">times</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;<a href="/reference/androidx/compose/ui/unit/Dp.html#times(kotlin.Float)">times</a>(float&nbsp;other)</pre>
+        <p>Multiply a Dp by a scalar.</p>
+      </div>
+      <div class="api-item"><a name="times-kotlin.Int-"></a><a name="times"></a>
+        <h3 class="api-name" id="times(kotlin.Int)">times</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;<a href="/reference/androidx/compose/ui/unit/Dp.html#times(kotlin.Int)">times</a>(int&nbsp;other)</pre>
+      </div>
+      <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+        <h3 class="api-name" id="toString()">toString</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/unit/Dp.html#toString()">toString</a>()</pre>
+      </div>
+      <div class="api-item"><a name="unaryMinus--"></a><a name="unaryminus"></a>
+        <h3 class="api-name" id="unaryMinus()">unaryMinus</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;<a href="/reference/androidx/compose/ui/unit/Dp.html#unaryMinus()">unaryMinus</a>()</pre>
+        <p>This is the same as multiplying the Dp by -1.0.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.unit.Dp-.coerceAtLeast-androidx.compose.ui.unit.Dp-"></a><a name="coerceatleast"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.unit.Dp).coerceAtLeast(androidx.compose.ui.unit.Dp)">DpKt.coerceAtLeast</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;<a href="/reference/androidx/compose/ui/unit/DpKt.html">DpKt</a>.<a href="/reference/androidx/compose/ui/unit/Dp.html#(androidx.compose.ui.unit.Dp).coerceAtLeast(androidx.compose.ui.unit.Dp)">coerceAtLeast</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;minimumValue)</pre>
+        <p>Ensures that this value is not less than the specified <code><a href="/reference/androidx/compose/ui/unit/package-summary.html#(androidx.compose.ui.unit.Dp).coerceAtLeast(androidx.compose.ui.unit.Dp)">minimumValue</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+                <td>
+                  <p>this value if it's greater than or equal to the <code><a href="/reference/androidx/compose/ui/unit/package-summary.html#(androidx.compose.ui.unit.Dp).coerceAtLeast(androidx.compose.ui.unit.Dp)">minimumValue</a></code> or the <code><a href="/reference/androidx/compose/ui/unit/package-summary.html#(androidx.compose.ui.unit.Dp).coerceAtLeast(androidx.compose.ui.unit.Dp)">minimumValue</a></code> otherwise.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.unit.Dp-.coerceAtMost-androidx.compose.ui.unit.Dp-"></a><a name="coerceatmost"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.unit.Dp).coerceAtMost(androidx.compose.ui.unit.Dp)">DpKt.coerceAtMost</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;<a href="/reference/androidx/compose/ui/unit/DpKt.html">DpKt</a>.<a href="/reference/androidx/compose/ui/unit/Dp.html#(androidx.compose.ui.unit.Dp).coerceAtMost(androidx.compose.ui.unit.Dp)">coerceAtMost</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;maximumValue)</pre>
+        <p>Ensures that this value is not greater than the specified <code><a href="/reference/androidx/compose/ui/unit/package-summary.html#(androidx.compose.ui.unit.Dp).coerceAtMost(androidx.compose.ui.unit.Dp)">maximumValue</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+                <td>
+                  <p>this value if it's less than or equal to the <code><a href="/reference/androidx/compose/ui/unit/package-summary.html#(androidx.compose.ui.unit.Dp).coerceAtMost(androidx.compose.ui.unit.Dp)">maximumValue</a></code> or the <code><a href="/reference/androidx/compose/ui/unit/package-summary.html#(androidx.compose.ui.unit.Dp).coerceAtMost(androidx.compose.ui.unit.Dp)">maximumValue</a></code> otherwise.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.unit.Dp).coerceIn(androidx.compose.ui.unit.Dp, androidx.compose.ui.unit.Dp)"></a><a name="-androidx.compose.ui.unit.Dp-.coerceIn-androidx.compose.ui.unit.Dp-androidx.compose.ui.unit.Dp-"></a><a name="coercein"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.unit.Dp).coerceIn(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">DpKt.coerceIn</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;<a href="/reference/androidx/compose/ui/unit/DpKt.html">DpKt</a>.<a href="/reference/androidx/compose/ui/unit/Dp.html#(androidx.compose.ui.unit.Dp).coerceIn(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">coerceIn</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;minimumValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;maximumValue<br>)</pre>
+        <p>Ensures that this value lies in the specified range <code><a href="/reference/androidx/compose/ui/unit/package-summary.html#(androidx.compose.ui.unit.Dp).coerceIn(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">minimumValue</a></code>..<code><a href="/reference/androidx/compose/ui/unit/package-summary.html#(androidx.compose.ui.unit.Dp).coerceIn(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">maximumValue</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+                <td>
+                  <p>this value if it's in the range, or <code><a href="/reference/androidx/compose/ui/unit/package-summary.html#(androidx.compose.ui.unit.Dp).coerceIn(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">minimumValue</a></code> if this value is less than <code><a href="/reference/androidx/compose/ui/unit/package-summary.html#(androidx.compose.ui.unit.Dp).coerceIn(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">minimumValue</a></code>, or <code><a href="/reference/androidx/compose/ui/unit/package-summary.html#(androidx.compose.ui.unit.Dp).coerceIn(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">maximumValue</a></code> if this value is greater than <code><a href="/reference/androidx/compose/ui/unit/package-summary.html#(androidx.compose.ui.unit.Dp).coerceIn(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">maximumValue</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.unit.Dp-.getIsFinite--"></a><a name="getisfinite"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.unit.Dp).getIsFinite()">DpKt.isFinite</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/unit/DpKt.html">DpKt</a>.<a href="/reference/androidx/compose/ui/unit/Dp.html#(androidx.compose.ui.unit.Dp).getIsFinite()">isFinite</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</pre>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.unit.Dp-.getIsSpecified--"></a><a name="getisspecified"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.unit.Dp).getIsSpecified()">DpKt.isSpecified</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/unit/DpKt.html">DpKt</a>.<a href="/reference/androidx/compose/ui/unit/Dp.html#(androidx.compose.ui.unit.Dp).getIsSpecified()">isSpecified</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</pre>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.unit.Dp-.getIsUnspecified--"></a><a name="getisunspecified"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.unit.Dp).getIsUnspecified()">DpKt.isUnspecified</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/unit/DpKt.html">DpKt</a>.<a href="/reference/androidx/compose/ui/unit/Dp.html#(androidx.compose.ui.unit.Dp).getIsUnspecified()">isUnspecified</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</pre>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.unit.Dp-.takeOrElse-kotlin.Function0-"></a><a name="takeorelse"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.unit.Dp).takeOrElse(kotlin.Function0)">DpKt.takeOrElse</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;<a href="/reference/androidx/compose/ui/unit/DpKt.html">DpKt</a>.<a href="/reference/androidx/compose/ui/unit/Dp.html#(androidx.compose.ui.unit.Dp).takeOrElse(kotlin.Function0)">takeOrElse</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&gt;&nbsp;block)</pre>
+        <p>If this <code><a href="/reference/androidx/compose/ui/geometry/package-summary.html#(androidx.compose.ui.geometry.Offset).isSpecified()">Dp</a></code> then this is returned, otherwise <code><a href="/reference/androidx/compose/ui/unit/package-summary.html#(androidx.compose.ui.unit.Dp).takeOrElse(kotlin.Function0)">block</a></code> is executed and its result is returned.</p>
+      </div>
+    </div>
+  </body>
+</html>

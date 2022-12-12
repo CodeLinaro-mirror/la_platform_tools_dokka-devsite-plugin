@@ -1,0 +1,922 @@
+<html devsite="true">
+  <head>
+    <title>Color</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-graphics/androidx/compose/ui/graphics/Color.kt+class:androidx.compose.ui.graphics.Color&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>Color</h1>
+    <p>
+      <pre>value class <a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+    </p>
+    <hr>
+    <p>The <code>Color</code> class contains color information to be used while painting in <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Canvas.html">Canvas</a></code>. <code>Color</code> supports <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code>s with 3 <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html#componentCount()">components</a></code>, plus one for <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#alpha()">alpha</a></code>.</p>
+    <h3> Creating</h3>
+    <p><code>Color</code> can be created with one of these methods:</p>
+    <pre class="prettyprint">// from 4 separate [Float] components. Alpha and ColorSpace are optional
+val rgbaWhiteFloat = Color(red = 1f, green = 1f, blue = 1f, alpha = 1f,
+    ColorSpace.get(ColorSpaces.Srgb))
+
+// from a 32-bit SRGB color integer
+val fromIntWhite = Color(android.graphics.Color.WHITE)
+val fromLongBlue = Color(0xFF0000FF)
+
+// from SRGB integer component values. Alpha is optional
+val rgbaWhiteInt = Color(red = 0xFF, green = 0xFF, blue = 0xFF, alpha = 0xFF)</pre>
+    <h3> Representation</h3>
+    <p>A <code>Color</code> always defines a color using 4 components packed in a single 64 bit long value. One of these components is always alpha while the other three components depend on the color space's <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorModel.html">color model</a></code>. The most common color model is the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorModel.Companion.html#Rgb()">RGB</a></code> model in which the components represent red, green, and blue values.</p>
+    <p><b>Component ranges:</b> the ranges defined in the tables below indicate the ranges that can be encoded in a color long. They do not represent the actual ranges as they may differ per color space. For instance, the RGB components of a color in the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#DisplayP3()">Display P3</a></code> color space use the <code>[0..1]</code> range. Please refer to the documentation of the various <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpaces.html">color spaces</a></code> to find their respective ranges.</p>
+    <p><b>Alpha range:</b> while alpha is encoded in a color long using a 10 bit integer (thus using a range of <code>[0..1023]</code>), it is converted to and from <code>[0..1]</code> float values when decoding and encoding color longs.</p>
+    <p><b>sRGB color space:</b> for compatibility reasons and ease of use, <code>Color</code> encoded <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#Srgb()">sRGB</a></code> colors do not use the same encoding as other color longs.</p>
+    <pre class="prettyprint">| Component | Name        | Size    | Range                 |<br>|-----------|-------------|---------|-----------------------|<br>| [RGB][ColorSpace.Model.Rgb] color model |<br>| R         | Red         | 16 bits | `[-65504.0, 65504.0]` |<br>| G         | Green       | 16 bits | `[-65504.0, 65504.0]` |<br>| B         | Blue        | 16 bits | `[-65504.0, 65504.0]` |<br>| A         | Alpha       | 10 bits | `[0..1023]`           |<br>|           | Color space | 6 bits  | `[0..63]`             |<br>| [SRGB][ColorSpaces.Srgb] color space |<br>| R         | Red         | 8 bits  | `[0..255]`            |<br>| G         | Green       | 8 bits  | `[0..255]`            |<br>| B         | Blue        | 8 bits  | `[0..255]`            |<br>| A         | Alpha       | 8 bits  | `[0..255]`            |<br>| X         | Unused      | 32 bits | `[0]`                 |<br>| [XYZ][ColorSpace.Model.Xyz] color model |<br>| X         | X           | 16 bits | `[-65504.0, 65504.0]` |<br>| Y         | Y           | 16 bits | `[-65504.0, 65504.0]` |<br>| Z         | Z           | 16 bits | `[-65504.0, 65504.0]` |<br>| A         | Alpha       | 10 bits | `[0..1023]`           |<br>|           | Color space | 6 bits  | `[0..63]`             |<br>| [Lab][ColorSpace.Model.Lab] color model |<br>| L         | L           | 16 bits | `[-65504.0, 65504.0]` |<br>| a         | a           | 16 bits | `[-65504.0, 65504.0]` |<br>| b         | b           | 16 bits | `[-65504.0, 65504.0]` |<br>| A         | Alpha       | 10 bits | `[0..1023]`           |<br>|           | Color space | 6 bits  | `[0..63]`             |</pre>
+    <p>The components in this table are listed in encoding order (see below), which is why color longs in the RGB model are called RGBA colors (even if this doesn't quite hold for the special case of sRGB colors).</p>
+    <p>The color encoding relies on half-precision float values (fp16). If you wish to know more about the limitations of half-precision float values, please refer to the documentation of the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Float16.html">Float16</a></code> class.</p>
+    <p>The values returned by these methods depend on the color space encoded in the color long. The values are however typically in the <code>[0..1]</code> range for RGB colors. Please refer to the documentation of the various <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpaces.html">color spaces</a></code> for the exact ranges.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public companion functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#hsl(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.Rgb)">hsl</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;hue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;saturation:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;lightness:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;alpha:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;colorSpace:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/Rgb.html">Rgb</a><br>)</code></div>
+              <p>Return a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code> from <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#hsl(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.Rgb)">hue</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#hsl(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.Rgb)">saturation</a></code>, and <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#hsl(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.Rgb)">lightness</a></code> (HSL representation).</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#hsv(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.Rgb)">hsv</a>(hue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;saturation:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;alpha:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;colorSpace:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/Rgb.html">Rgb</a>)</code></div>
+              <p>Return a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code> from <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#hsv(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.Rgb)">hue</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#hsv(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.Rgb)">saturation</a></code>, and <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#hsv(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.Rgb)">value</a></code> (HSV representation).</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public companion properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Black()">Black</a></code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Blue()">Blue</a></code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Cyan()">Cyan</a></code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#DarkGray()">DarkGray</a></code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Gray()">Gray</a></code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Green()">Green</a></code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#LightGray()">LightGray</a></code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Magenta()">Magenta</a></code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Red()">Red</a></code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Transparent()">Transparent</a></code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Unspecified()">Unspecified</a></code></div>
+              <p>Because Color is an inline class, this represents an unset value without having to box the Color.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#White()">White</a></code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Yellow()">Yellow</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#Color(kotlin.ULong)">Color</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-u-long/index.html">ULong</a>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>operator <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#component1()">component1</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>operator <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#component2()">component2</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>operator <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#component3()">component3</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>operator <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#component4()">component4</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>operator <a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#component5()">component5</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#convert(androidx.compose.ui.graphics.colorspace.ColorSpace)">convert</a>(colorSpace:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a>)</code></div>
+              <p>Converts this color from its color space to the specified color space.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#copy(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">copy</a>(alpha:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;red:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;green:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;blue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+              <p>Copies the existing color, changing only the provided values.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#toString()">toString</a>()</code></div>
+              <p>Returns a string representation of the object.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#alpha()">alpha</a></code></div>
+              <p>Returns the value of the alpha component in the range <code>[0..1]</code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#blue()">blue</a></code></div>
+              <p>Returns the value of the blue component in the range defined by this color's color space (see <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMinValue(kotlin.Int)">ColorSpace.getMinValue</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMaxValue(kotlin.Int)">ColorSpace.getMaxValue</a></code>).</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#colorSpace()">colorSpace</a></code></div>
+              <p>Returns this color's color space.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#green()">green</a></code></div>
+              <p>Returns the value of the green component in the range defined by this color's color space (see <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMinValue(kotlin.Int)">ColorSpace.getMinValue</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMaxValue(kotlin.Int)">ColorSpace.getMaxValue</a></code>).</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#red()">red</a></code></div>
+              <p>Returns the value of the red component in the range defined by this color's color space (see <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMinValue(kotlin.Int)">ColorSpace.getMinValue</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMaxValue(kotlin.Int)">ColorSpace.getMaxValue</a></code>).</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-u-long/index.html">ULong</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#value()">value</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">compositeOver</a>(background:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>)</code></div>
+              <p>Composites <code><a href="/reference/kotlin/androidx/compose/ui/graphics/package-summary.html#&lt;this&gt;()">this</a></code> color on top of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">background</a></code> using the Porter-Duff 'source over' mode.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).luminance()">luminance</a>()</code></div>
+              <p>Returns the relative luminance of this color.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>inline <a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).takeOrElse(kotlin.Function0)">takeOrElse</a>(block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>)</code></div>
+              <p>If this color <code><a href="/reference/kotlin/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).isSpecified()">isSpecified</a></code> then this is returned, otherwise <code><a href="/reference/kotlin/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).takeOrElse(kotlin.Function0)">block</a></code> is executed and its result is returned.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).toArgb()">toArgb</a>()</code></div>
+              <p>Converts this color to an ARGB color int.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).isSpecified()">isSpecified</a></code></div>
+              <p><code>false</code> when this is <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Unspecified()">Color.Unspecified</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).isUnspecified()">isUnspecified</a></code></div>
+              <p><code>true</code> when this is <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Unspecified()">Color.Unspecified</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public companion functions</h2>
+      <div class="api-item"><a name="hsl(kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float, androidx.compose.ui.graphics.colorspace.Rgb)"></a><a name="hsl-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-androidx.compose.ui.graphics.colorspace.Rgb-"></a><a name="hsl"></a>
+        <h3 class="api-name" id="hsl(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.Rgb)">hsl</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#hsl(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.Rgb)">hsl</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;hue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;saturation:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;lightness:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;alpha:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = 1.0f,<br>&nbsp;&nbsp;&nbsp;&nbsp;colorSpace:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/Rgb.html">Rgb</a> = ColorSpaces.Srgb<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+        <p>Return a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code> from <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#hsl(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.Rgb)">hue</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#hsl(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.Rgb)">saturation</a></code>, and <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#hsl(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.Rgb)">lightness</a></code> (HSL representation).</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>hue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>The color value in the range (0..360), where 0 is red, 120 is green, and 240 is blue</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>saturation:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>The amount of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#hsl(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.Rgb)">hue</a></code> represented in the color in the range (0..1), where 0 has no color and 1 is fully saturated.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>lightness:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>A range of (0..1) where 0 is black, 0.5 is fully colored, and 1 is white.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>colorSpace:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/Rgb.html">Rgb</a> = ColorSpaces.Srgb</code></td>
+                <td>
+                  <p>The RGB color space used to calculate the Color from the HSL values.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="hsv(kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float, androidx.compose.ui.graphics.colorspace.Rgb)"></a><a name="hsv-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-androidx.compose.ui.graphics.colorspace.Rgb-"></a><a name="hsv"></a>
+        <h3 class="api-name" id="hsv(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.Rgb)">hsv</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#hsv(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.Rgb)">hsv</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;hue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;saturation:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;alpha:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = 1.0f,<br>&nbsp;&nbsp;&nbsp;&nbsp;colorSpace:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/Rgb.html">Rgb</a> = ColorSpaces.Srgb<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+        <p>Return a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code> from <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#hsv(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.Rgb)">hue</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#hsv(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.Rgb)">saturation</a></code>, and <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#hsv(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.Rgb)">value</a></code> (HSV representation).</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>hue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>The color value in the range (0..360), where 0 is red, 120 is green, and 240 is blue</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>saturation:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>The amount of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#hsv(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.Rgb)">hue</a></code> represented in the color in the range (0..1), where 0 has no color and 1 is fully saturated.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>The strength of the color, where 0 is black.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>colorSpace:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/Rgb.html">Rgb</a> = ColorSpaces.Srgb</code></td>
+                <td>
+                  <p>The RGB color space used to calculate the Color from the HSV values.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public companion properties</h2>
+      <div class="api-item"><a name="getBlack()"></a><a name="setBlack()"></a><a name="getBlack--"></a><a name="setBlack--"></a>
+        <h3 class="api-name" id="Black()">Black</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Black()">Black</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+      </div>
+      <div class="api-item"><a name="getBlue()"></a><a name="setBlue()"></a><a name="getBlue--"></a><a name="setBlue--"></a>
+        <h3 class="api-name" id="Blue()">Blue</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Blue()">Blue</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+      </div>
+      <div class="api-item"><a name="getCyan()"></a><a name="setCyan()"></a><a name="getCyan--"></a><a name="setCyan--"></a>
+        <h3 class="api-name" id="Cyan()">Cyan</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Cyan()">Cyan</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+      </div>
+      <div class="api-item"><a name="getDarkGray()"></a><a name="setDarkGray()"></a><a name="getDarkGray--"></a><a name="setDarkGray--"></a>
+        <h3 class="api-name" id="DarkGray()">DarkGray</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#DarkGray()">DarkGray</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+      </div>
+      <div class="api-item"><a name="getGray()"></a><a name="setGray()"></a><a name="getGray--"></a><a name="setGray--"></a>
+        <h3 class="api-name" id="Gray()">Gray</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Gray()">Gray</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+      </div>
+      <div class="api-item"><a name="getGreen()"></a><a name="setGreen()"></a><a name="getGreen--"></a><a name="setGreen--"></a>
+        <h3 class="api-name" id="Green()">Green</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Green()">Green</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+      </div>
+      <div class="api-item"><a name="getLightGray()"></a><a name="setLightGray()"></a><a name="getLightGray--"></a><a name="setLightGray--"></a>
+        <h3 class="api-name" id="LightGray()">LightGray</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#LightGray()">LightGray</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+      </div>
+      <div class="api-item"><a name="getMagenta()"></a><a name="setMagenta()"></a><a name="getMagenta--"></a><a name="setMagenta--"></a>
+        <h3 class="api-name" id="Magenta()">Magenta</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Magenta()">Magenta</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+      </div>
+      <div class="api-item"><a name="getRed()"></a><a name="setRed()"></a><a name="getRed--"></a><a name="setRed--"></a>
+        <h3 class="api-name" id="Red()">Red</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Red()">Red</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+      </div>
+      <div class="api-item"><a name="getTransparent()"></a><a name="setTransparent()"></a><a name="getTransparent--"></a><a name="setTransparent--"></a>
+        <h3 class="api-name" id="Transparent()">Transparent</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Transparent()">Transparent</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+      </div>
+      <div class="api-item"><a name="getUnspecified()"></a><a name="setUnspecified()"></a><a name="getUnspecified--"></a><a name="setUnspecified--"></a>
+        <h3 class="api-name" id="Unspecified()">Unspecified</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Unspecified()">Unspecified</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+        <p>Because Color is an inline class, this represents an unset value without having to box the Color. It will be treated as <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Transparent()">Transparent</a></code> when drawn. A Color can compare with <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Unspecified()">Unspecified</a></code> for equality or use <code><a href="/reference/kotlin/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).isUnspecified()">isUnspecified</a></code> to check for the unset value or <code><a href="/reference/kotlin/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).isSpecified()">isSpecified</a></code> for any color that isn't <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Unspecified()">Unspecified</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getWhite()"></a><a name="setWhite()"></a><a name="getWhite--"></a><a name="setWhite--"></a>
+        <h3 class="api-name" id="White()">White</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#White()">White</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+      </div>
+      <div class="api-item"><a name="getYellow()"></a><a name="setYellow()"></a><a name="getYellow--"></a><a name="setYellow--"></a>
+        <h3 class="api-name" id="Yellow()">Yellow</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Yellow()">Yellow</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="Color-kotlin.ULong-"></a><a name="color"></a>
+        <h3 class="api-name" id="Color(kotlin.ULong)">Color</h3>
+        <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#Color(kotlin.ULong)">Color</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-u-long/index.html">ULong</a>)</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="component1--"></a><a name="component1"></a>
+        <h3 class="api-name" id="component1()">component1</h3>
+        <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#component1()">component1</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+      </div>
+      <div class="api-item"><a name="component2--"></a><a name="component2"></a>
+        <h3 class="api-name" id="component2()">component2</h3>
+        <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#component2()">component2</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+      </div>
+      <div class="api-item"><a name="component3--"></a><a name="component3"></a>
+        <h3 class="api-name" id="component3()">component3</h3>
+        <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#component3()">component3</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+      </div>
+      <div class="api-item"><a name="component4--"></a><a name="component4"></a>
+        <h3 class="api-name" id="component4()">component4</h3>
+        <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#component4()">component4</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+      </div>
+      <div class="api-item"><a name="component5--"></a><a name="component5"></a>
+        <h3 class="api-name" id="component5()">component5</h3>
+        <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#component5()">component5</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></pre>
+      </div>
+      <div class="api-item"><a name="convert-androidx.compose.ui.graphics.colorspace.ColorSpace-"></a><a name="convert"></a>
+        <h3 class="api-name" id="convert(androidx.compose.ui.graphics.colorspace.ColorSpace)">convert</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#convert(androidx.compose.ui.graphics.colorspace.ColorSpace)">convert</a>(colorSpace:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+        <p>Converts this color from its color space to the specified color space. The conversion is done using the default rendering intent as specified by <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/package-summary.html#(androidx.compose.ui.graphics.colorspace.ColorSpace).connect(androidx.compose.ui.graphics.colorspace.ColorSpace,androidx.compose.ui.graphics.colorspace.RenderIntent)">ColorSpace.connect</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>colorSpace:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code></td>
+                <td>
+                  <p>The destination color space, cannot be null</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+                <td>
+                  <p>A non-null color instance in the specified color space</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="copy(kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="copy-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="copy"></a>
+        <h3 class="api-name" id="copy(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">copy</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#copy(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;alpha:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = this.alpha,<br>&nbsp;&nbsp;&nbsp;&nbsp;red:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = this.red,<br>&nbsp;&nbsp;&nbsp;&nbsp;green:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = this.green,<br>&nbsp;&nbsp;&nbsp;&nbsp;blue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = this.blue<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+        <p>Copies the existing color, changing only the provided values. The <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#colorSpace()">ColorSpace</a></code> of the returned <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code> is the same as this <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#colorSpace()">colorSpace</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+        <h3 class="api-name" id="toString()">toString</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#toString()">toString</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></pre>
+        <p>Returns a string representation of the object. This method returns a string equal to the value of:</p>
+        <pre class="prettyprint">&quot;Color($r, $g, $b, $a, ${colorSpace.name})&quot;</pre>
+        <p>For instance, the string representation of opaque black in the sRGB color space is equal to the following value:</p>
+        <pre class="prettyprint">Color(0.0, 0.0, 0.0, 1.0, sRGB IEC61966-2.1)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></code></td>
+                <td>
+                  <p>A non-null string representation of the object</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getAlpha()"></a><a name="setAlpha()"></a><a name="getAlpha--"></a><a name="setAlpha--"></a>
+        <h3 class="api-name" id="alpha()">alpha</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#alpha()">alpha</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>Returns the value of the alpha component in the range <code>[0..1]</code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#red()">red</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#green()">green</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#blue()">blue</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getBlue()"></a><a name="setBlue()"></a><a name="getBlue--"></a><a name="setBlue--"></a>
+        <h3 class="api-name" id="blue()">blue</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#blue()">blue</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>Returns the value of the blue component in the range defined by this color's color space (see <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMinValue(kotlin.Int)">ColorSpace.getMinValue</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMaxValue(kotlin.Int)">ColorSpace.getMaxValue</a></code>).</p>
+        <p>If this color's color model is not <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorModel.Companion.html#Rgb()">RGB</a></code>, calling this is the third component of the ColorSpace.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#alpha()">alpha</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#red()">red</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#green()">green</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getColorSpace()"></a><a name="setColorSpace()"></a><a name="getColorSpace--"></a><a name="setColorSpace--"></a>
+        <h3 class="api-name" id="colorSpace()">colorSpace</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#colorSpace()">colorSpace</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></pre>
+        <p>Returns this color's color space.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code></td>
+                <td>
+                  <p>A non-null instance of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code></p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getGreen()"></a><a name="setGreen()"></a><a name="getGreen--"></a><a name="setGreen--"></a>
+        <h3 class="api-name" id="green()">green</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#green()">green</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>Returns the value of the green component in the range defined by this color's color space (see <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMinValue(kotlin.Int)">ColorSpace.getMinValue</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMaxValue(kotlin.Int)">ColorSpace.getMaxValue</a></code>).</p>
+        <p>If this color's color model is not <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorModel.Companion.html#Rgb()">RGB</a></code>, calling this is the second component of the ColorSpace.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#alpha()">alpha</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#red()">red</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#blue()">blue</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getRed()"></a><a name="setRed()"></a><a name="getRed--"></a><a name="setRed--"></a>
+        <h3 class="api-name" id="red()">red</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#red()">red</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>Returns the value of the red component in the range defined by this color's color space (see <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMinValue(kotlin.Int)">ColorSpace.getMinValue</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMaxValue(kotlin.Int)">ColorSpace.getMaxValue</a></code>).</p>
+        <p>If this color's color model is not <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorModel.Companion.html#Rgb()">RGB</a></code>, calling this is the first component of the ColorSpace.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#alpha()">alpha</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#blue()">blue</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#green()">green</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getValue()"></a><a name="setValue()"></a><a name="getValue--"></a><a name="setValue--"></a>
+        <h3 class="api-name" id="value()">value</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#value()">value</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-u-long/index.html">ULong</a></pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.Color-.compositeOver-androidx.compose.ui.graphics.Color-"></a><a name="compositeover"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">compositeOver</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">compositeOver</a>(background:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+        <p>Composites <code><a href="/reference/kotlin/androidx/compose/ui/graphics/package-summary.html#&lt;this&gt;()">this</a></code> color on top of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">background</a></code> using the Porter-Duff 'source over' mode.</p>
+        <p>Both <code><a href="/reference/kotlin/androidx/compose/ui/graphics/package-summary.html#&lt;this&gt;()">this</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">background</a></code> must not be pre-multiplied, and the resulting color will also not be pre-multiplied.</p>
+        <p>The <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code> of the result is always the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#colorSpace()">ColorSpace</a></code> of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">background</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+                <td>
+                  <p>the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code> representing <code><a href="/reference/kotlin/androidx/compose/ui/graphics/package-summary.html#&lt;this&gt;()">this</a></code> composited on top of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">background</a></code>, converted to the color space of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">background</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.Color-.luminance--"></a><a name="luminance"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.graphics.Color).luminance()">luminance</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).luminance()">luminance</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>Returns the relative luminance of this color.</p>
+        <p>Based on the formula for relative luminance defined in WCAG 2.0, W3C Recommendation 11 December 2008.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>A value between 0 (darkest black) and 1 (lightest white)</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>kotlin.IllegalArgumentException:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">kotlin.IllegalArgumentException</a></code></td>
+                <td>
+                  <p>If the this color's color space does not use the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorModel.Companion.html#Rgb()">RGB</a></code> color model</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.Color-.takeOrElse-kotlin.Function0-"></a><a name="takeorelse"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.graphics.Color).takeOrElse(kotlin.Function0)">takeOrElse</h3>
+        <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).takeOrElse(kotlin.Function0)">takeOrElse</a>(block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+        <p>If this color <code><a href="/reference/kotlin/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).isSpecified()">isSpecified</a></code> then this is returned, otherwise <code><a href="/reference/kotlin/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).takeOrElse(kotlin.Function0)">block</a></code> is executed and its result is returned.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.Color-.toArgb--"></a><a name="toargb"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.graphics.Color).toArgb()">toArgb</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).toArgb()">toArgb</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>Converts this color to an ARGB color int. A color int is always in the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#Srgb()">sRGB</a></code> color space. This implies a color space conversion is applied if needed.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                <td>
+                  <p>An ARGB color in the sRGB color space</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Extension properties</h2>
+      <div class="api-item"><a name="(androidx.compose.ui.graphics.Color).getIsSpecified()"></a><a name="(androidx.compose.ui.graphics.Color).setIsSpecified()"></a><a name="-androidx.compose.ui.graphics.Color-.getIsSpecified--"></a><a name="-androidx.compose.ui.graphics.Color-.setIsSpecified--"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.graphics.Color).isSpecified()">isSpecified</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).isSpecified()">isSpecified</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <p><code>false</code> when this is <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Unspecified()">Color.Unspecified</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.graphics.Color).getIsUnspecified()"></a><a name="(androidx.compose.ui.graphics.Color).setIsUnspecified()"></a><a name="-androidx.compose.ui.graphics.Color-.getIsUnspecified--"></a><a name="-androidx.compose.ui.graphics.Color-.setIsUnspecified--"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.graphics.Color).isUnspecified()">isUnspecified</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).isUnspecified()">isUnspecified</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <p><code>true</code> when this is <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.Companion.html#Unspecified()">Color.Unspecified</a></code>.</p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,348 @@
+<html devsite="true">
+  <head>
+    <title>FocusDirection</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/focus/FocusDirection.kt+class:androidx.compose.ui.focus.FocusDirection&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>FocusDirection</h1>
+    <p>
+      <pre>value class <a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.html">FocusDirection</a></pre>
+    </p>
+    <hr>
+    <p>The <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.html">FocusDirection</a></code> is used to specify the direction for a <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusManager.html#moveFocus(androidx.compose.ui.focus.FocusDirection)">FocusManager.moveFocus</a></code> request.</p>
+    <pre class="prettyprint">
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+
+val focusManager = LocalFocusManager.current
+Column {
+    Row {
+        Box(Modifier.focusable())
+        Box(Modifier.focusable())
+    }
+    Row {
+        Box(Modifier.focusable())
+        Box(Modifier.focusable())
+    }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Right) }) { Text(&quot;Right&quot;) }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Left) }) { Text(&quot;Left&quot;) }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Up) }) { Text(&quot;Up&quot;) }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Down) }) { Text(&quot;Down&quot;) }
+}</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public companion properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.html">FocusDirection</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.Companion.html#Down()">Down</a></code></div>
+              <p>Direction used in <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusManager.html#moveFocus(androidx.compose.ui.focus.FocusDirection)">FocusManager.moveFocus</a></code> to indicate that you are searching for the next focusable item that is below the currently focused item.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.html">FocusDirection</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.Companion.html#Enter()">Enter</a></code></div>
+              <p>Direction used in <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusManager.html#moveFocus(androidx.compose.ui.focus.FocusDirection)">FocusManager.moveFocus</a></code> to indicate that you are searching for the next focusable item that is a child of the currently focused item.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.html">FocusDirection</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.Companion.html#Exit()">Exit</a></code></div>
+              <p>Direction used in <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusManager.html#moveFocus(androidx.compose.ui.focus.FocusDirection)">FocusManager.moveFocus</a></code> to indicate that you want to move focus to the parent of the currently focused item.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.html">FocusDirection</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.Companion.html#In()">In</a></code></div>
+              <p><strong>This property is deprecated.</strong> Use FocusDirection.Enter instead.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.html">FocusDirection</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.Companion.html#Left()">Left</a></code></div>
+              <p>Direction used in <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusManager.html#moveFocus(androidx.compose.ui.focus.FocusDirection)">FocusManager.moveFocus</a></code> to indicate that you are searching for the next focusable item to the left of the currently focused item.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.html">FocusDirection</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.Companion.html#Next()">Next</a></code></div>
+              <p>Direction used in <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusManager.html#moveFocus(androidx.compose.ui.focus.FocusDirection)">FocusManager.moveFocus</a></code> to indicate that you are searching for the next focusable item.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.html">FocusDirection</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.Companion.html#Out()">Out</a></code></div>
+              <p><strong>This property is deprecated.</strong> Use FocusDirection.Exit instead.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.html">FocusDirection</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.Companion.html#Previous()">Previous</a></code></div>
+              <p>Direction used in <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusManager.html#moveFocus(androidx.compose.ui.focus.FocusDirection)">FocusManager.moveFocus</a></code> to indicate that you are searching for the previous focusable item.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.html">FocusDirection</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.Companion.html#Right()">Right</a></code></div>
+              <p>Direction used in <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusManager.html#moveFocus(androidx.compose.ui.focus.FocusDirection)">FocusManager.moveFocus</a></code> to indicate that you are searching for the next focusable item to the right of the currently focused item.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.html">FocusDirection</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.Companion.html#Up()">Up</a></code></div>
+              <p>Direction used in <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusManager.html#moveFocus(androidx.compose.ui.focus.FocusDirection)">FocusManager.moveFocus</a></code> to indicate that you are searching for the next focusable item that is above the currently focused item.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.html#toString()">toString</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public companion properties</h2>
+      <div class="api-item"><a name="getDown()"></a><a name="setDown()"></a><a name="getDown--"></a><a name="setDown--"></a>
+        <h3 class="api-name" id="Down()">Down</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.Companion.html#Down()">Down</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.html">FocusDirection</a></pre>
+        <p>Direction used in <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusManager.html#moveFocus(androidx.compose.ui.focus.FocusDirection)">FocusManager.moveFocus</a></code> to indicate that you are searching for the next focusable item that is below the currently focused item.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+
+val focusManager = LocalFocusManager.current
+Column {
+    Row {
+        Box(Modifier.focusable())
+        Box(Modifier.focusable())
+    }
+    Row {
+        Box(Modifier.focusable())
+        Box(Modifier.focusable())
+    }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Right) }) { Text(&quot;Right&quot;) }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Left) }) { Text(&quot;Left&quot;) }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Up) }) { Text(&quot;Up&quot;) }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Down) }) { Text(&quot;Down&quot;) }
+}</pre>
+      </div>
+      <div class="api-item"><a name="getEnter()"></a><a name="setEnter()"></a><a name="getEnter--"></a><a name="setEnter--"></a>
+        <h3 class="api-name" id="Enter()">Enter</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.Companion.html#Enter()">Enter</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.html">FocusDirection</a></pre>
+        <p>Direction used in <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusManager.html#moveFocus(androidx.compose.ui.focus.FocusDirection)">FocusManager.moveFocus</a></code> to indicate that you are searching for the next focusable item that is a child of the currently focused item.</p>
+      </div>
+      <div class="api-item"><a name="getExit()"></a><a name="setExit()"></a><a name="getExit--"></a><a name="setExit--"></a>
+        <h3 class="api-name" id="Exit()">Exit</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.Companion.html#Exit()">Exit</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.html">FocusDirection</a></pre>
+        <p>Direction used in <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusManager.html#moveFocus(androidx.compose.ui.focus.FocusDirection)">FocusManager.moveFocus</a></code> to indicate that you want to move focus to the parent of the currently focused item.</p>
+      </div>
+      <div class="api-item"><a name="getIn()"></a><a name="setIn()"></a><a name="getIn--"></a><a name="setIn--"></a>
+        <h3 class="api-name" id="In()">In</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.Companion.html#In()">In</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.html">FocusDirection</a></pre>
+        <aside class="caution"><strong>This property is deprecated.</strong><br>Use FocusDirection.Enter instead.</aside>
+        <p>Direction used in <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusManager.html#moveFocus(androidx.compose.ui.focus.FocusDirection)">FocusManager.moveFocus</a></code> to indicate that you are searching for the next focusable item that is a child of the currently focused item.</p>
+      </div>
+      <div class="api-item"><a name="getLeft()"></a><a name="setLeft()"></a><a name="getLeft--"></a><a name="setLeft--"></a>
+        <h3 class="api-name" id="Left()">Left</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.Companion.html#Left()">Left</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.html">FocusDirection</a></pre>
+        <p>Direction used in <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusManager.html#moveFocus(androidx.compose.ui.focus.FocusDirection)">FocusManager.moveFocus</a></code> to indicate that you are searching for the next focusable item to the left of the currently focused item.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+
+val focusManager = LocalFocusManager.current
+Column {
+    Row {
+        Box(Modifier.focusable())
+        Box(Modifier.focusable())
+    }
+    Row {
+        Box(Modifier.focusable())
+        Box(Modifier.focusable())
+    }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Right) }) { Text(&quot;Right&quot;) }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Left) }) { Text(&quot;Left&quot;) }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Up) }) { Text(&quot;Up&quot;) }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Down) }) { Text(&quot;Down&quot;) }
+}</pre>
+      </div>
+      <div class="api-item"><a name="getNext()"></a><a name="setNext()"></a><a name="getNext--"></a><a name="setNext--"></a>
+        <h3 class="api-name" id="Next()">Next</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.Companion.html#Next()">Next</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.html">FocusDirection</a></pre>
+        <p>Direction used in <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusManager.html#moveFocus(androidx.compose.ui.focus.FocusDirection)">FocusManager.moveFocus</a></code> to indicate that you are searching for the next focusable item.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+
+val focusManager = LocalFocusManager.current
+Column {
+    Row {
+        Box(Modifier.focusable())
+        Box(Modifier.focusable())
+    }
+    Row {
+        Box(Modifier.focusable())
+        Box(Modifier.focusable())
+    }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Right) }) { Text(&quot;Right&quot;) }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Left) }) { Text(&quot;Left&quot;) }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Up) }) { Text(&quot;Up&quot;) }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Down) }) { Text(&quot;Down&quot;) }
+}</pre>
+      </div>
+      <div class="api-item"><a name="getOut()"></a><a name="setOut()"></a><a name="getOut--"></a><a name="setOut--"></a>
+        <h3 class="api-name" id="Out()">Out</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.Companion.html#Out()">Out</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.html">FocusDirection</a></pre>
+        <aside class="caution"><strong>This property is deprecated.</strong><br>Use FocusDirection.Exit instead.</aside>
+        <p>Direction used in <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusManager.html#moveFocus(androidx.compose.ui.focus.FocusDirection)">FocusManager.moveFocus</a></code> to indicate that you want to move focus to the parent of the currently focused item.</p>
+      </div>
+      <div class="api-item"><a name="getPrevious()"></a><a name="setPrevious()"></a><a name="getPrevious--"></a><a name="setPrevious--"></a>
+        <h3 class="api-name" id="Previous()">Previous</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.Companion.html#Previous()">Previous</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.html">FocusDirection</a></pre>
+        <p>Direction used in <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusManager.html#moveFocus(androidx.compose.ui.focus.FocusDirection)">FocusManager.moveFocus</a></code> to indicate that you are searching for the previous focusable item.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+
+val focusManager = LocalFocusManager.current
+Column {
+    Row {
+        Box(Modifier.focusable())
+        Box(Modifier.focusable())
+    }
+    Row {
+        Box(Modifier.focusable())
+        Box(Modifier.focusable())
+    }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Right) }) { Text(&quot;Right&quot;) }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Left) }) { Text(&quot;Left&quot;) }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Up) }) { Text(&quot;Up&quot;) }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Down) }) { Text(&quot;Down&quot;) }
+}</pre>
+      </div>
+      <div class="api-item"><a name="getRight()"></a><a name="setRight()"></a><a name="getRight--"></a><a name="setRight--"></a>
+        <h3 class="api-name" id="Right()">Right</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.Companion.html#Right()">Right</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.html">FocusDirection</a></pre>
+        <p>Direction used in <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusManager.html#moveFocus(androidx.compose.ui.focus.FocusDirection)">FocusManager.moveFocus</a></code> to indicate that you are searching for the next focusable item to the right of the currently focused item.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+
+val focusManager = LocalFocusManager.current
+Column {
+    Row {
+        Box(Modifier.focusable())
+        Box(Modifier.focusable())
+    }
+    Row {
+        Box(Modifier.focusable())
+        Box(Modifier.focusable())
+    }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Right) }) { Text(&quot;Right&quot;) }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Left) }) { Text(&quot;Left&quot;) }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Up) }) { Text(&quot;Up&quot;) }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Down) }) { Text(&quot;Down&quot;) }
+}</pre>
+      </div>
+      <div class="api-item"><a name="getUp()"></a><a name="setUp()"></a><a name="getUp--"></a><a name="setUp--"></a>
+        <h3 class="api-name" id="Up()">Up</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.Companion.html#Up()">Up</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.html">FocusDirection</a></pre>
+        <p>Direction used in <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusManager.html#moveFocus(androidx.compose.ui.focus.FocusDirection)">FocusManager.moveFocus</a></code> to indicate that you are searching for the next focusable item that is above the currently focused item.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+
+val focusManager = LocalFocusManager.current
+Column {
+    Row {
+        Box(Modifier.focusable())
+        Box(Modifier.focusable())
+    }
+    Row {
+        Box(Modifier.focusable())
+        Box(Modifier.focusable())
+    }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Right) }) { Text(&quot;Right&quot;) }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Left) }) { Text(&quot;Left&quot;) }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Up) }) { Text(&quot;Up&quot;) }
+    Button(onClick = { focusManager.moveFocus(FocusDirection.Down) }) { Text(&quot;Down&quot;) }
+}</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+        <h3 class="api-name" id="toString()">toString</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.html#toString()">toString</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></pre>
+      </div>
+    </div>
+  </body>
+</html>

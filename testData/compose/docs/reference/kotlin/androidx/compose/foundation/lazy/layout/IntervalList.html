@@ -1,0 +1,227 @@
+<html devsite="true">
+  <head>
+    <title>IntervalList</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/lazy/layout/IntervalList.kt+class:androidx.compose.foundation.lazy.layout.IntervalList&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>IntervalList</h1>
+    <p>
+      <pre>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>interface <a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/IntervalList.html">IntervalList</a>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</pre>
+    </p>
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
+        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/MutableIntervalList.html">MutableIntervalList</a></div>
+      </span>
+      <div id="subclasses-direct-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/MutableIntervalList.html">MutableIntervalList</a></code></td>
+                <td>
+                  <p>Mutable version of <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/IntervalList.html">IntervalList</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
+    <hr>
+    <p>The list consisting of multiple intervals.</p>
+    <p>It is useful when you want to define your own dsl similar to the one used by LazyColumn where list items can be defined via multiple item/items calls.</p>
+    <p>This interface is read only, in order to create a list you need to use <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/MutableIntervalList.html">MutableIntervalList</a></code>.</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">Parameters</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</code></td>
+            <td>
+              <p>type of values each interval contains in <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/IntervalList.Interval.html#value()">Interval.value</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>class <a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/IntervalList.Interval.html">IntervalList.Interval</a>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</code></div>
+              <p>The interval holder.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/IntervalList.html#forEach(kotlin.Int,kotlin.Int,kotlin.Function1)">forEach</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;fromIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;toIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;(<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/IntervalList.Interval.html">IntervalList.Interval</a>&lt;T&gt;) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+              <p>Allows to iterate through all the intervals starting from the one containing <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/IntervalList.html#forEach(kotlin.Int,kotlin.Int,kotlin.Function1)">fromIndex</a></code> until the one containing <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/IntervalList.html#forEach(kotlin.Int,kotlin.Int,kotlin.Function1)">toIndex</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>operator <a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/IntervalList.Interval.html">IntervalList.Interval</a>&lt;T&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/IntervalList.html#get(kotlin.Int)">get</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Returns the interval containing the given <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/IntervalList.html#get(kotlin.Int)">index</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/IntervalList.html#size()">size</a></code></div>
+              <p>The total amount of items in all the intervals.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="forEach(kotlin.Int, kotlin.Int, kotlin.Function1)"></a><a name="forEach-kotlin.Int-kotlin.Int-kotlin.Function1-"></a><a name="foreach"></a>
+        <h3 class="api-name" id="forEach(kotlin.Int,kotlin.Int,kotlin.Function1)">forEach</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/IntervalList.html#forEach(kotlin.Int,kotlin.Int,kotlin.Function1)">forEach</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;fromIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 0,<br>&nbsp;&nbsp;&nbsp;&nbsp;toIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = size - 1,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;(<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/IntervalList.Interval.html">IntervalList.Interval</a>&lt;T&gt;) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Allows to iterate through all the intervals starting from the one containing <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/IntervalList.html#forEach(kotlin.Int,kotlin.Int,kotlin.Function1)">fromIndex</a></code> until the one containing <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/IntervalList.html#forEach(kotlin.Int,kotlin.Int,kotlin.Function1)">toIndex</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>fromIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 0</code></td>
+                <td>
+                  <p>we will start iterating from the interval containing this index.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>toIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = size - 1</code></td>
+                <td>
+                  <p>the last interval we iterate through will contain this index. This index should be not smaller than <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/IntervalList.html#forEach(kotlin.Int,kotlin.Int,kotlin.Function1)">fromIndex</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>kotlin.IndexOutOfBoundsException:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-index-out-of-bounds-exception/index.html">kotlin.IndexOutOfBoundsException</a></code></td>
+                <td>
+                  <p>if the indexes are not within 0..<code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/IntervalList.html#size()">size</a></code> - 1 range.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="get-kotlin.Int-"></a><a name="get"></a>
+        <h3 class="api-name" id="get(kotlin.Int)">get</h3>
+        <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/IntervalList.html#get(kotlin.Int)">get</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/IntervalList.Interval.html">IntervalList.Interval</a>&lt;T&gt;</pre>
+        <p>Returns the interval containing the given <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/IntervalList.html#get(kotlin.Int)">index</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>kotlin.IndexOutOfBoundsException:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-index-out-of-bounds-exception/index.html">kotlin.IndexOutOfBoundsException</a></code></td>
+                <td>
+                  <p>if the index is not within 0..<code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/IntervalList.html#size()">size</a></code> - 1 range.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getSize()"></a><a name="setSize()"></a><a name="getSize--"></a><a name="setSize--"></a>
+        <h3 class="api-name" id="size()">size</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/IntervalList.html#size()">size</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>The total amount of items in all the intervals.</p>
+        <p>Note that it is not the amount of intervals, but the sum of <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/layout/IntervalList.Interval.html#size()">Interval.size</a></code> for all the intervals added into this list.</p>
+      </div>
+    </div>
+  </body>
+</html>

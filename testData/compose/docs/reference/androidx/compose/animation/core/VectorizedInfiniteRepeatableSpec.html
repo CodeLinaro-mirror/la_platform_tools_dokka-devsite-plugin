@@ -5,13 +5,16 @@
 {% include "_shared/_reference-head-tags.html" %}
   </head>
   <body>
-    <div id="metadata-info-block"></div>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-core/androidx/compose/animation/core/VectorizedAnimationSpec.kt+class:androidx.compose.animation.core.VectorizedInfiniteRepeatableSpec&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
     <h1>VectorizedInfiniteRepeatableSpec</h1>
     <p>
       <pre>public final class <a href="/reference/androidx/compose/animation/core/VectorizedInfiniteRepeatableSpec.html">VectorizedInfiniteRepeatableSpec</a>&lt;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; implements <a href="/reference/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></pre>
     </p>
     <hr>
     <p>This animation takes another <code><a href="/reference/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html">VectorizedDurationBasedAnimationSpec</a></code> and plays it <b>infinite</b> times.</p>
+    <p>initialStartOffset can be used to either delay the start of the animation or to fast forward the animation to a given play time. This start offset will <b>not</b> be repeated, whereas the delay in the <code><a href="/reference/androidx/compose/animation/core/VectorizedInfiniteRepeatableSpec.html#animation()">animation</a></code> (if any) will be repeated. By default, the amount of offset is 0.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -49,7 +52,7 @@
         <tbody class="list">
           <tr>
             <td>
-              <div><code>&lt;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/androidx/compose/animation/core/VectorizedInfiniteRepeatableSpec.html#VectorizedInfiniteRepeatableSpec(androidx.compose.animation.core.VectorizedDurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode)">VectorizedInfiniteRepeatableSpec</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html">VectorizedDurationBasedAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;animation,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/RepeatMode.html">RepeatMode</a>&nbsp;repeatMode<br>)</code></div>
+              <div><code>&lt;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/androidx/compose/animation/core/VectorizedInfiniteRepeatableSpec.html#VectorizedInfiniteRepeatableSpec(androidx.compose.animation.core.VectorizedDurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode,androidx.compose.animation.core.StartOffset)">VectorizedInfiniteRepeatableSpec</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html">VectorizedDurationBasedAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;animation,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/RepeatMode.html">RepeatMode</a>&nbsp;repeatMode,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/StartOffset.html">StartOffset</a>&nbsp;initialStartOffset<br>)</code></div>
             </td>
           </tr>
         </tbody>
@@ -133,9 +136,9 @@
     </div>
     <div class="list">
       <h2>Public constructors</h2>
-      <div class="api-item"><a name="VectorizedInfiniteRepeatableSpec(androidx.compose.animation.core.VectorizedDurationBasedAnimationSpec, androidx.compose.animation.core.RepeatMode)"></a><a name="VectorizedInfiniteRepeatableSpec-androidx.compose.animation.core.VectorizedDurationBasedAnimationSpec-androidx.compose.animation.core.RepeatMode-"></a><a name="vectorizedinfiniterepeatablespec"></a>
-        <h3 class="api-name" id="VectorizedInfiniteRepeatableSpec(androidx.compose.animation.core.VectorizedDurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode)">VectorizedInfiniteRepeatableSpec</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;&lt;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/androidx/compose/animation/core/VectorizedInfiniteRepeatableSpec.html#VectorizedInfiniteRepeatableSpec(androidx.compose.animation.core.VectorizedDurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode)">VectorizedInfiniteRepeatableSpec</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html">VectorizedDurationBasedAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;animation,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/RepeatMode.html">RepeatMode</a>&nbsp;repeatMode<br>)</pre>
+      <div class="api-item"><a name="VectorizedInfiniteRepeatableSpec(androidx.compose.animation.core.VectorizedDurationBasedAnimationSpec, androidx.compose.animation.core.RepeatMode, androidx.compose.animation.core.StartOffset)"></a><a name="VectorizedInfiniteRepeatableSpec-androidx.compose.animation.core.VectorizedDurationBasedAnimationSpec-androidx.compose.animation.core.RepeatMode-androidx.compose.animation.core.StartOffset-"></a><a name="vectorizedinfiniterepeatablespec"></a>
+        <h3 class="api-name" id="VectorizedInfiniteRepeatableSpec(androidx.compose.animation.core.VectorizedDurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode,androidx.compose.animation.core.StartOffset)">VectorizedInfiniteRepeatableSpec</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;&lt;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/androidx/compose/animation/core/VectorizedInfiniteRepeatableSpec.html#VectorizedInfiniteRepeatableSpec(androidx.compose.animation.core.VectorizedDurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode,androidx.compose.animation.core.StartOffset)">VectorizedInfiniteRepeatableSpec</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html">VectorizedDurationBasedAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;animation,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/RepeatMode.html">RepeatMode</a>&nbsp;repeatMode,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/StartOffset.html">StartOffset</a>&nbsp;initialStartOffset<br>)</pre>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -158,6 +161,12 @@
                 <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/RepeatMode.html">RepeatMode</a>&nbsp;repeatMode</code></td>
                 <td>
                   <p>whether animation should repeat by starting from the beginning (i.e.     <code><a href="/reference/androidx/compose/animation/core/RepeatMode.html#Restart">RepeatMode.Restart</a></code>) or from the end (i.e. <code><a href="/reference/androidx/compose/animation/core/RepeatMode.html#Reverse">RepeatMode.Reverse</a></code>)</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/StartOffset.html">StartOffset</a>&nbsp;initialStartOffset</code></td>
+                <td>
+                  <p>offsets the start of the animation</p>
                 </td>
               </tr>
             </tbody>

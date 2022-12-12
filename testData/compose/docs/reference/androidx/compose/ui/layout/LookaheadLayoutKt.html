@@ -1,0 +1,181 @@
+<html devsite="true">
+  <head>
+    <title>LookaheadLayoutKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>LookaheadLayoutKt</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/layout/LookaheadLayoutKt.html">LookaheadLayoutKt</a></pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static&nbsp;final void</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>@<a href="/reference/androidx/compose/ui/UiComposable.html">UiComposable</a><br>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/androidx/compose/ui/layout/LookaheadLayoutKt.html#LookaheadLayout(kotlin.Function1,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">LookaheadLayout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/compose/ui/UiComposable.html">UiComposable</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/LookaheadLayoutScope.html">LookaheadLayoutScope</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/MeasurePolicy.html">MeasurePolicy</a>&nbsp;measurePolicy<br>)</code></div>
+              <p><code><a href="/reference/androidx/compose/ui/layout/package-summary.html#LookaheadLayout(kotlin.Function1,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">LookaheadLayout</a></code> is a Layout that runs a lookahead measure and placement pass to determine the layout.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="LookaheadLayout(kotlin.Function1, androidx.compose.ui.Modifier, androidx.compose.ui.layout.MeasurePolicy)"></a><a name="LookaheadLayout-kotlin.Function1-androidx.compose.ui.Modifier-androidx.compose.ui.layout.MeasurePolicy-"></a><a name="lookaheadlayout"></a>
+        <h3 class="api-name" id="LookaheadLayout(kotlin.Function1,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">LookaheadLayout</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>@<a href="/reference/androidx/compose/ui/UiComposable.html">UiComposable</a><br>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/layout/LookaheadLayoutKt.html#LookaheadLayout(kotlin.Function1,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">LookaheadLayout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/compose/ui/UiComposable.html">UiComposable</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/LookaheadLayoutScope.html">LookaheadLayoutScope</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/MeasurePolicy.html">MeasurePolicy</a>&nbsp;measurePolicy<br>)</pre>
+        <p><code><a href="/reference/androidx/compose/ui/layout/package-summary.html#LookaheadLayout(kotlin.Function1,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">LookaheadLayout</a></code> is a Layout that runs a lookahead measure and placement pass to determine the layout. Immediately afterwards, another measure and placement pass will begin, in which the measurement and placement of any layout can be adjusted based on the lookahead results via <code><a href="/reference/androidx/compose/ui/layout/LookaheadLayoutScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">LookaheadLayoutScope.intermediateLayout</a></code>.</p>
+        <p>During the lookahead pass, the layout adjustment logic defined in <code><a href="/reference/androidx/compose/ui/layout/LookaheadLayoutScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">LookaheadLayoutScope.intermediateLayout</a></code> will be skipped, so that any transient morphing of the layout is not taken into account when predetermining the target layout.</p>
+        <p>Once the lookahead is finished, another measure & layout pass will begin. <code><a href="/reference/androidx/compose/ui/layout/LookaheadLayoutScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">LookaheadLayoutScope.intermediateLayout</a></code> can be used to create an intermediate layout based on incoming constraints and the lookahead results. This can result in layouts that gradually change their sizes & positions towards the target layout calculated by the lookahead.</p>
+        <p><em>Caveat:</em> <code><a href="/reference/androidx/compose/ui/layout/package-summary.html#SubcomposeLayout(androidx.compose.ui.Modifier,kotlin.Function2)">SubcomposeLayout</a></code> is not yet supported in <code><a href="/reference/androidx/compose/ui/layout/package-summary.html#LookaheadLayout(kotlin.Function1,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">LookaheadLayout</a></code>. It will be supported in an upcoming release.</p>
+        <pre class="prettyprint">
+import androidx.compose.animation.core.Animatable
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshotFlow
+import androidx.compose.ui.composed
+import androidx.compose.ui.layout.LookaheadLayout
+
+// Creates a custom modifier that animates the constraints and measure child/children with them.
+// It is built on top of `Modifier.intermediateLayout`, which allows access to the target size
+// of the layout. A resize animation will be created to animate to the target size. Fixed
+// constraints created based on the animation value will be used to measure child/children, so
+// that all the children gradually change their size to fit in the animated constraints.
+fun Modifier.animateConstraints(lookaheadScope: LookaheadLayoutScope) = composed {
+    var sizeAnimation: Animatable&lt;IntSize, AnimationVector2D&gt;? by remember {
+        mutableStateOf(null)
+    }
+    var targetSize: IntSize? by remember { mutableStateOf(null) }
+    // Create a `LaunchEffect` to handle target size change. This avoids creating side effects
+    // from measure/layout phase.
+    LaunchedEffect(Unit) {
+        snapshotFlow { targetSize }.collect { target -&gt;
+            if (target != null &amp;&amp; target != sizeAnimation?.targetValue) {
+                sizeAnimation?.run {
+                    launch { animateTo(target) }
+                } ?: Animatable(target, IntSize.VectorConverter).let {
+                    sizeAnimation = it
+                }
+            }
+        }
+    }
+    with(lookaheadScope) {
+        // The measure logic in `intermediateLayout` is skipped in the lookahead pass, as
+        // intermediateLayout is expected to produce intermediate stages of a layout transform.
+        // When the measure block is invoked after lookahead pass, the lookahead size of the
+        // child will be accessible as a parameter to the measure block.
+        this@composed.intermediateLayout { measurable, _, lookaheadSize -&gt;
+            // When layout changes, the lookahead pass will calculate a new final size for the
+            // child modifier. This lookahead size can be used to animate the size
+            // change, such that the animation starts from the current size and gradually
+            // change towards `lookaheadSize`.
+            targetSize = lookaheadSize
+            // Reads the animation size if the animation is set up. Otherwise (i.e. first
+            // frame), use the lookahead size without animation.
+            val (width, height) = sizeAnimation?.value ?: lookaheadSize
+            // Creates a fixed set of constraints using the animated size
+            val animatedConstraints = Constraints.fixed(width, height)
+            // Measure child/children with animated constraints.
+            val placeable = measurable.measure(animatedConstraints)
+            layout(placeable.width, placeable.height) {
+                placeable.place(0, 0)
+            }
+        }
+    }
+}
+
+LookaheadLayout(
+    content = {
+        var fullWidth by remember { mutableStateOf(false) }
+        Row(
+            (if (fullWidth) Modifier.fillMaxWidth() else Modifier.width(100.dp))
+                .height(200.dp)
+                // Use the custom modifier created above to animate the constraints passed
+                // to the child, and therefore resize children in an animation.
+                .animateConstraints(this@LookaheadLayout)
+                .clickable { fullWidth = !fullWidth }) {
+            Box(
+                Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    .background(Color.Red)
+            )
+            Box(
+                Modifier
+                    .weight(2f)
+                    .fillMaxHeight()
+                    .background(Color.Yellow)
+            )
+        }
+    }
+) { measurables, constraints -&gt;
+    val placeables = measurables.map { it.measure(constraints) }
+    val maxWidth: Int = placeables.maxOf { it.width }
+    val maxHeight = placeables.maxOf { it.height }
+    // Position the children.
+    layout(maxWidth, maxHeight) {
+        placeables.forEach {
+            it.place(0, 0)
+        }
+    }
+}</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/compose/ui/UiComposable.html">UiComposable</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/LookaheadLayoutScope.html">LookaheadLayoutScope</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content</code></td>
+                <td>
+                  <p>The children composable to be laid out.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier</code></td>
+                <td>
+                  <p>Modifiers to be applied to the layout.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/MeasurePolicy.html">MeasurePolicy</a>&nbsp;measurePolicy</code></td>
+                <td>
+                  <p>The policy defining the measurement and positioning of the layout.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

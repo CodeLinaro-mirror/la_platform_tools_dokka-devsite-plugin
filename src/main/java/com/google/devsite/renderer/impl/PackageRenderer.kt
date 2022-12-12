@@ -76,7 +76,7 @@ internal class PackageRenderer(
     }
 
     suspend fun writePackageSummary(dPackage: DPackage) {
-        val converter = if (dPackage.isKMP()) {
+        val converter = if (dPackage.isKotlinAndKMP()) {
             KmpPackageConverter(
                 displayLanguage,
                 dPackage,
@@ -113,17 +113,22 @@ internal class PackageRenderer(
 
     suspend fun writeClasslike(
         dPackage: DPackage,
-        classlikeDoc: DClasslike,
+        dClasslike: DClasslike,
         classExtensionFunctions: List<DFunction>,
         classExtensionProperties: List<DProperty>
     ) {
-        if (classlikeDoc.isSynthetic && displayLanguage == Language.KOTLIN) {
+        // Compose is "not kmp" but has expect/actuals; we need to deterministically use the expect
+        // Because source jars are not KMP, we can't check `"common" in it.path`, so ban .***.kt
+        if (dClasslike.isExpectActual && !dPackage.isKMP() &&
+            dClasslike.sources.values.single().path.removeSuffix(".kt").contains(".")
+        ) { return }
+        if (dClasslike.isSynthetic && displayLanguage == Language.KOTLIN) {
             return
         }
-        val converter = if (dPackage.isKMP()) {
+        val converter = if (dPackage.isKotlinAndKMP()) {
             KmpClasslikeConverter(
                 displayLanguage,
-                classlikeDoc,
+                dClasslike,
                 pathProvider,
                 docsHolder,
                 functionConverter,
@@ -140,7 +145,7 @@ internal class PackageRenderer(
         } else
             NonKmpClasslikeConverter(
                 displayLanguage,
-                classlikeDoc,
+                dClasslike,
                 pathProvider,
                 docsHolder,
                 functionConverter,
@@ -159,14 +164,15 @@ internal class PackageRenderer(
         }
 
         outputWriter.write(
-            pathProvider.forType(classlikeDoc.packageName(), classlikeDoc.name()),
+            pathProvider.forType(dClasslike.packageName(), dClasslike.name()),
             classlike,
             ""
         )
     }
     // Note: this cannot distinguish java-only, android-only, and non-KMP libraries.
-    private fun DPackage.isKMP() = displayLanguage == Language.KOTLIN &&
-        (sourceSets.size > 1 || sourceSets.single().analysisPlatform != jvm)
+    private fun DPackage.isKotlinAndKMP() = displayLanguage == Language.KOTLIN && isKMP()
+    private fun DPackage.isKMP() =
+        sourceSets.size > 1 || sourceSets.single().analysisPlatform != jvm
 }
 private fun DPackage.getPlatforms() =
     sourceSets.map { Platform.from(it.analysisPlatform) }.toSet().sorted()

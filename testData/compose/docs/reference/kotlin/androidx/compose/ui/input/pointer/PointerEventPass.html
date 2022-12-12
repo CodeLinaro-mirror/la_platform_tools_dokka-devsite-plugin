@@ -1,0 +1,167 @@
+<html devsite="true">
+  <head>
+    <title>PointerEventPass</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/input/pointer/PointerEvent.kt+class:androidx.compose.ui.input.pointer.PointerEventPass&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>PointerEventPass</h1>
+    <p>
+      <pre>enum <a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html">PointerEventPass</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html">Enum</a></pre>
+    </p>
+    <div class="devsite-table-wrapper">
+      <table class="jd-inheritance-table">
+        <tbody>
+          <tr>
+            <td colspan="3"><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">kotlin.Any</a></td>
+          </tr>
+          <tr>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="2"><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html">kotlin.Enum</a></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="1"><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html">androidx.compose.ui.input.pointer.PointerEventPass</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr>
+    <p>The enumeration of passes where <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code> traverses up and down the UI tree.</p>
+    <p>PointerInputChanges traverse throw the hierarchy in the following passes:</p>
+    <ol>
+      <li>
+        <p><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html#Initial">Initial</a></code>: Down the tree from ancestor to descendant.</p>
+      </li>
+      <li>
+        <p><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html#Main">Main</a></code>: Up the tree from descendant to ancestor.</p>
+      </li>
+      <li>
+        <p><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html#Final">Final</a></code>: Down the tree from ancestor to descendant.</p>
+      </li>
+    </ol>
+    <p>These passes serve the following purposes:</p>
+    <ol>
+      <li>
+        <p>Initial: Allows ancestors to consume aspects of <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code> before descendants. This is where, for example, a scroller may block buttons from getting tapped by other fingers once scrolling has started.</p>
+      </li>
+      <li>
+        <p>Main: The primary pass where gesture filters should react to and consume aspects of <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code>s. This is the primary path where descendants will interact with <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code>s before parents. This allows for buttons to respond to a tap before a container of the bottom to respond to a tap.</p>
+      </li>
+      <li>
+        <p>Final: This pass is where children can learn what aspects of <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code>s were consumed by parents during the <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html#Main">Main</a></code> pass. For example, this is how a button determines that it should no longer respond to fingers lifting off of it because a parent scroller has consumed movement in a <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code>.</p>
+      </li>
+    </ol>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Enum Values</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html#Final">Final</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html#Initial">Initial</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html#Main">Main</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html">PointerEventPass</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html#valueOf(kotlin.String)">valueOf</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>)</code></div>
+              <p>Returns the enum constant of this type with the specified name.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html">PointerEventPass</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html#values()">values</a>()</code></div>
+              <p>Returns an array containing the constants of this enum type, in the order they're declared.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Enum Values</h2>
+      <div class="api-item">
+        <h3 class="api-name" id="Final">Final</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html#Final">PointerEventPass.Final</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html">PointerEventPass</a></pre>
+      </div>
+      <div class="api-item">
+        <h3 class="api-name" id="Initial">Initial</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html#Initial">PointerEventPass.Initial</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html">PointerEventPass</a></pre>
+      </div>
+      <div class="api-item">
+        <h3 class="api-name" id="Main">Main</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html#Main">PointerEventPass.Main</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html">PointerEventPass</a></pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="valueOf-kotlin.String-"></a><a name="valueof"></a>
+        <h3 class="api-name" id="valueOf(kotlin.String)">valueOf</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html#valueOf(kotlin.String)">valueOf</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html">PointerEventPass</a></pre>
+        <p>Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>kotlin.IllegalArgumentException:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">kotlin.IllegalArgumentException</a></code></td>
+                <td>
+                  <p>if this enum type has no constant with the specified name</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="values--"></a><a name="values"></a>
+        <h3 class="api-name" id="values()">values</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html#values()">values</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html">PointerEventPass</a>&gt;</pre>
+        <p>Returns an array containing the constants of this enum type, in the order they're declared.</p>
+        <p>This method may be used to iterate over the constants.</p>
+      </div>
+    </div>
+  </body>
+</html>

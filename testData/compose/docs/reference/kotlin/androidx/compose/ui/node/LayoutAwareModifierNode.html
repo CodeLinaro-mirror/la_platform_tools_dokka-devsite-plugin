@@ -1,0 +1,192 @@
+<html devsite="true">
+  <head>
+    <title>LayoutAwareModifierNode</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/node/LayoutAwareModifierNode.kt+class:androidx.compose.ui.node.LayoutAwareModifierNode&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>LayoutAwareModifierNode</h1>
+    <p>
+      <pre>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>interface <a href="/reference/kotlin/androidx/compose/ui/node/LayoutAwareModifierNode.html">LayoutAwareModifierNode</a> : <a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></pre>
+    </p>
+    <hr>
+    <p>A <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">androidx.compose.ui.Modifier.Node</a></code> which receives various callbacks in response to local changes in layout.</p>
+    <p>This is the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">androidx.compose.ui.Modifier.Node</a></code> equivalent of <code><a href="/reference/kotlin/androidx/compose/ui/layout/OnRemeasuredModifier.html">androidx.compose.ui.layout.OnRemeasuredModifier</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/layout/OnPlacedModifier.html">androidx.compose.ui.layout.OnPlacedModifier</a></code></p>
+    <p>Example usage:</p>
+    <pre class="prettyprint">
+import androidx.compose.material.Text
+import androidx.compose.ui.layout.onSizeChanged
+
+// Use onSizeChanged() for diagnostics. Use Layout or SubcomposeLayout if you want
+// to use the size of one component to affect the size of another component.
+Text(
+    &quot;Hello $name&quot;,
+    Modifier.onSizeChanged { size -&gt;
+        println(&quot;The size of the Text in pixels is $size&quot;)
+    }
+)</pre>
+    <pre class="prettyprint">
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.spring
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.composed
+import androidx.compose.ui.layout.onPlaced
+import androidx.compose.ui.layout.positionInParent
+import androidx.compose.ui.unit.round
+
+@OptIn(ExperimentalComposeUiApi::class)
+fun Modifier.animatePlacement(): Modifier = composed {
+    val scope = rememberCoroutineScope()
+    var targetOffset by remember { mutableStateOf(IntOffset.Zero) }
+    var animatable by remember {
+        mutableStateOf&lt;Animatable&lt;IntOffset, AnimationVector2D&gt;?&gt;(null)
+    }
+    this.onPlaced {
+        // Calculate the position in the parent layout
+        targetOffset = it.positionInParent().round()
+    }.offset {
+        // Animate to the new target offset when alignment changes.
+        val anim = animatable ?: Animatable(targetOffset, IntOffset.VectorConverter)
+            .also { animatable = it }
+        if (anim.targetValue != targetOffset) {
+            scope.launch {
+                anim.animateTo(targetOffset, spring(stiffness = StiffnessMediumLow))
+            }
+        }
+        // Offset the child in the opposite direction to the targetOffset, and slowly catch
+        // up to zero offset via an animation to achieve an overall animated movement.
+        animatable?.let { it.value - targetOffset } ?: IntOffset.Zero
+    }
+}
+
+@OptIn(ExperimentalComposeUiApi::class)
+@Composable
+fun AnimatedChildAlignment(alignment: Alignment) {
+    Box(
+        Modifier.fillMaxSize().padding(4.dp).border(1.dp, Color.Red)
+    ) {
+        Box(
+            modifier = Modifier.animatePlacement().align(alignment).size(100.dp)
+                .background(Color.Red)
+        )
+    }
+}</pre>
+    <pre class="prettyprint">
+import androidx.compose.ui.node.modifierElementOf
+
+class SizeLoggerNode(var id: String) : LayoutAwareModifierNode, Modifier.Node() {
+    override fun onRemeasured(size: IntSize) {
+        println(&quot;The size of $id was $size&quot;)
+    }
+}
+
+fun Modifier.logSize(id: String) = this then modifierElementOf(
+    key = id,
+    create = { SizeLoggerNode(id) },
+    update = { it.id = id },
+    definitions = {
+        name = &quot;logSize&quot;
+        properties[&quot;id&quot;] = id
+    }
+)</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/node/LayoutAwareModifierNode.html#onLookaheadPlaced(androidx.compose.ui.layout.LookaheadLayoutCoordinates)">onLookaheadPlaced</a>(coordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a>)</code></div>
+              <p><code><a href="/reference/kotlin/androidx/compose/ui/node/LayoutAwareModifierNode.html#onLookaheadPlaced(androidx.compose.ui.layout.LookaheadLayoutCoordinates)">onLookaheadPlaced</a></code> callback will be invoked with the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code> of the LayoutNode emitted by <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#LookaheadLayout(kotlin.Function1,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">LookaheadLayout</a></code> as the first parameter, and the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code> of this modifier as the second parameter.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/node/LayoutAwareModifierNode.html#onPlaced(androidx.compose.ui.layout.LayoutCoordinates)">onPlaced</a>(coordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>)</code></div>
+              <p><code><a href="/reference/kotlin/androidx/compose/ui/node/LayoutAwareModifierNode.html#onPlaced(androidx.compose.ui.layout.LayoutCoordinates)">onPlaced</a></code> is called after the parent <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> and parent layout has been placed and before child <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> is placed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/node/LayoutAwareModifierNode.html#onRemeasured(androidx.compose.ui.unit.IntSize)">onRemeasured</a>(size:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a>)</code></div>
+              <p>This method is called when the layout content is remeasured.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">androidx.compose.ui.node.DelegatableNode</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html#node()">node</a></code></div>
+                        <p>A reference of the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that holds this node's position in the node hierarchy.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="onLookaheadPlaced-androidx.compose.ui.layout.LookaheadLayoutCoordinates-"></a><a name="onlookaheadplaced"></a>
+        <h3 class="api-name" id="onLookaheadPlaced(androidx.compose.ui.layout.LookaheadLayoutCoordinates)">onLookaheadPlaced</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/LayoutAwareModifierNode.html#onLookaheadPlaced(androidx.compose.ui.layout.LookaheadLayoutCoordinates)">onLookaheadPlaced</a>(coordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p><code><a href="/reference/kotlin/androidx/compose/ui/node/LayoutAwareModifierNode.html#onLookaheadPlaced(androidx.compose.ui.layout.LookaheadLayoutCoordinates)">onLookaheadPlaced</a></code> callback will be invoked with the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code> of the LayoutNode emitted by <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#LookaheadLayout(kotlin.Function1,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">LookaheadLayout</a></code> as the first parameter, and the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code> of this modifier as the second parameter. Given the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code>s, both lookahead position and current position of this modifier in the <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#LookaheadLayout(kotlin.Function1,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">LookaheadLayout</a></code>'s coordinates system can be calculated using <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html#localLookaheadPositionOf(androidx.compose.ui.layout.LookaheadLayoutCoordinates,androidx.compose.ui.geometry.Offset)">LookaheadLayoutCoordinates.localLookaheadPositionOf</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset)">LookaheadLayoutCoordinates.localPositionOf</a></code>, respectively.</p>
+      </div>
+      <div class="api-item"><a name="onPlaced-androidx.compose.ui.layout.LayoutCoordinates-"></a><a name="onplaced"></a>
+        <h3 class="api-name" id="onPlaced(androidx.compose.ui.layout.LayoutCoordinates)">onPlaced</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/LayoutAwareModifierNode.html#onPlaced(androidx.compose.ui.layout.LayoutCoordinates)">onPlaced</a>(coordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p><code><a href="/reference/kotlin/androidx/compose/ui/node/LayoutAwareModifierNode.html#onPlaced(androidx.compose.ui.layout.LayoutCoordinates)">onPlaced</a></code> is called after the parent <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> and parent layout has been placed and before child <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> is placed. This allows child <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> to adjust its own placement based on where the parent is.</p>
+      </div>
+      <div class="api-item"><a name="onRemeasured-androidx.compose.ui.unit.IntSize-"></a><a name="onremeasured"></a>
+        <h3 class="api-name" id="onRemeasured(androidx.compose.ui.unit.IntSize)">onRemeasured</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/LayoutAwareModifierNode.html#onRemeasured(androidx.compose.ui.unit.IntSize)">onRemeasured</a>(size:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>This method is called when the layout content is remeasured. The most common usage is <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).onSizeChanged(kotlin.Function1)">onSizeChanged</a></code>.</p>
+      </div>
+    </div>
+  </body>
+</html>

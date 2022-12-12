@@ -5,7 +5,9 @@
 {% include "_shared/_reference-head-tags.html" %}
   </head>
   <body>
-    <div id="metadata-info-block"></div>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/runtime/Composition.kt+class:androidx.compose.runtime.ControlledComposition&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
     <h1>ControlledComposition</h1>
     <p>
       <pre>interface <a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html">ControlledComposition</a> : <a href="/reference/kotlin/androidx/compose/runtime/Composition.html">Composition</a></pre>
@@ -56,8 +58,43 @@
           <tr>
             <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyLateChanges()">applyLateChanges</a>()</code></div>
+              <p>Apply change that must occur after the main bulk of changes have been applied.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#changesApplied()">changesApplied</a>()</code></div>
+              <p>Call when all changes, including late changes, have been applied.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
               <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a>(content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
               <p>Called by the parent composition in response to calling <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#setContent(kotlin.Function0)">setContent</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>R</code></td>
+            <td>
+              <div><code>&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#delegateInvalidations(androidx.compose.runtime.ControlledComposition,kotlin.Int,kotlin.Function0)">delegateInvalidations</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;to:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html">ControlledComposition</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;groupIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> R<br>)</code></div>
+              <p>Temporarily delegate all invalidations sent to this composition to the <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#delegateInvalidations(androidx.compose.runtime.ControlledComposition,kotlin.Int,kotlin.Function0)">to</a></code> composition.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#disposeUnusedMovableContent(androidx.compose.runtime.MovableContentState)">disposeUnusedMovableContent</a>(state:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MovableContentState.html">MovableContentState</a>)</code></div>
+              <p>Dispose the value state that is no longer needed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#insertMovableContent(kotlin.collections.List)">insertMovableContent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;references:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a>&lt;<a href="/reference/kotlin/androidx/compose/runtime/MovableContentStateReference.html">MovableContentStateReference</a>,&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MovableContentStateReference.html">MovableContentStateReference</a>?&gt;&gt;<br>)</code></div>
+              <p>Insert the given list of movable content with their paired state in potentially a different composition.</p>
             </td>
           </tr>
           <tr>
@@ -255,6 +292,16 @@
         <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
         <p>Apply the changes calculated during <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#setContent(kotlin.Function0)">setContent</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code>. If an exception is thrown by <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a></code> the composition is irreparably damaged and should be <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#dispose()">dispose</a></code>d.</p>
       </div>
+      <div class="api-item"><a name="applyLateChanges--"></a><a name="applylatechanges"></a>
+        <h3 class="api-name" id="applyLateChanges()">applyLateChanges</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyLateChanges()">applyLateChanges</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Apply change that must occur after the main bulk of changes have been applied. Late changes are the result of inserting movable content and it must be performed after <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a></code> because, for content that have moved must be inserted only after it has been removed from the previous location. All deletes must be executed before inserts. To ensure this, all deletes are performed in <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a></code> and all inserts are performed in <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyLateChanges()">applyLateChanges</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="changesApplied--"></a><a name="changesapplied"></a>
+        <h3 class="api-name" id="changesApplied()">changesApplied</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#changesApplied()">changesApplied</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Call when all changes, including late changes, have been applied. This signals to the composition that any transitory composition state can now be discarded. This is advisory only and a controlled composition will execute correctly when this is not called.</p>
+      </div>
       <div class="api-item"><a name="composeContent-kotlin.Function0-"></a><a name="composecontent"></a>
         <h3 class="api-name" id="composeContent(kotlin.Function0)">composeContent</h3>
         <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a>(content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
@@ -280,6 +327,21 @@
             </tbody>
           </table>
         </div>
+      </div>
+      <div class="api-item"><a name="delegateInvalidations(androidx.compose.runtime.ControlledComposition, kotlin.Int, kotlin.Function0)"></a><a name="delegateInvalidations-androidx.compose.runtime.ControlledComposition-kotlin.Int-kotlin.Function0-"></a><a name="delegateinvalidations"></a>
+        <h3 class="api-name" id="delegateInvalidations(androidx.compose.runtime.ControlledComposition,kotlin.Int,kotlin.Function0)">delegateInvalidations</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#delegateInvalidations(androidx.compose.runtime.ControlledComposition,kotlin.Int,kotlin.Function0)">delegateInvalidations</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;to:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html">ControlledComposition</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;groupIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> R<br>):&nbsp;R</pre>
+        <p>Temporarily delegate all invalidations sent to this composition to the <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#delegateInvalidations(androidx.compose.runtime.ControlledComposition,kotlin.Int,kotlin.Function0)">to</a></code> composition. This is used when movable content moves between compositions. The recompose scopes are not redirected until after the move occurs during <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyLateChanges()">applyLateChanges</a></code>. This is used to compose as if the scopes have already been changed.</p>
+      </div>
+      <div class="api-item"><a name="disposeUnusedMovableContent-androidx.compose.runtime.MovableContentState-"></a><a name="disposeunusedmovablecontent"></a>
+        <h3 class="api-name" id="disposeUnusedMovableContent(androidx.compose.runtime.MovableContentState)">disposeUnusedMovableContent</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#disposeUnusedMovableContent(androidx.compose.runtime.MovableContentState)">disposeUnusedMovableContent</a>(state:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MovableContentState.html">MovableContentState</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Dispose the value state that is no longer needed.</p>
+      </div>
+      <div class="api-item"><a name="insertMovableContent-kotlin.collections.List-"></a><a name="insertmovablecontent"></a>
+        <h3 class="api-name" id="insertMovableContent(kotlin.collections.List)">insertMovableContent</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#insertMovableContent(kotlin.collections.List)">insertMovableContent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;references:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a>&lt;<a href="/reference/kotlin/androidx/compose/runtime/MovableContentStateReference.html">MovableContentStateReference</a>,&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MovableContentStateReference.html">MovableContentStateReference</a>?&gt;&gt;<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Insert the given list of movable content with their paired state in potentially a different composition. If the second part of the pair is null then the movable content should be inserted as new. If second part of the pair has a value then the state should be moved into the referenced location and then recomposed there.</p>
       </div>
       <div class="api-item"><a name="invalidateAll--"></a><a name="invalidateall"></a>
         <h3 class="api-name" id="invalidateAll()">invalidateAll</h3>

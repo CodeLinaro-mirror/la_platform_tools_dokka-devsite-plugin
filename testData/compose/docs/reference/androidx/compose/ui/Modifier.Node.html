@@ -1,0 +1,264 @@
+<html devsite="true">
+  <head>
+    <title>Modifier.Node</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/Modifier.kt+class:androidx.compose.ui.Modifier.Node&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>Modifier.Node</h1>
+    <p>
+      <pre>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public abstract class <a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a> implements <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></pre>
+    </p>
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
+        <div class="showalways" id="subclasses-direct"><a href="/reference/androidx/compose/ui/node/DelegatingNode.html">DelegatingNode</a>, <a href="/reference/androidx/compose/ui/focus/FocusTargetModifierNode.html">FocusTargetModifierNode</a></div>
+      </span>
+      <div id="subclasses-direct-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/node/DelegatingNode.html">DelegatingNode</a></code></td>
+                <td>
+                  <p>A <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> which is able to delegate work to other <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> instances.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/focus/FocusTargetModifierNode.html">FocusTargetModifierNode</a></code></td>
+                <td>
+                  <p>This modifier node can be used to create a modifier that makes a component focusable.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
+    <hr>
+    <p>The longer-lived object that is created for each <code><a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a></code> applied to a <code><a href="/reference/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">androidx.compose.ui.layout.Layout</a></code>. Most <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> implementations will have a corresponding &quot;Modifier Factory&quot; extension method on Modifier that will allow them to be used indirectly, without ever implementing a <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> subclass directly. In some cases it may be useful to define a custom <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> subclass in order to efficiently implement some collection of behaviors that requires maintaining state over time and over many recompositions where the various provided Modifier factories are not sufficient.</p>
+    <p>When a <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code> is set on a <code><a href="/reference/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">androidx.compose.ui.layout.Layout</a></code>, each <code><a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a></code> contained in that linked list will result in a corresponding <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> instance in a matching linked list of <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code>s that the <code><a href="/reference/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">androidx.compose.ui.layout.Layout</a></code> will hold on to. As subsequent <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code> chains get set on the <code><a href="/reference/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">androidx.compose.ui.layout.Layout</a></code>, the linked list of <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code>s will be diffed and updated as appropriate, even though the <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code> instance might be completely new. As a result, the lifetime of a <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> is the intersection of the lifetime of the <code><a href="/reference/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">androidx.compose.ui.layout.Layout</a></code> that it lives on and a corresponding <code><a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a></code> being present in the <code><a href="/reference/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">androidx.compose.ui.layout.Layout</a></code>'s <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code>.</p>
+    <p>If one creates a subclass of <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code>, it is expected that it will implement one or more interfaces that interact with the various Compose UI subsystems. To use the <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> subclass, it is expected that it will be instantiated by adding a <code><a href="/reference/androidx/compose/ui/node/ModifierNodeElement.html">androidx.compose.ui.node.ModifierNodeElement</a></code> to a <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code> chain.</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">See also</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/node/package-summary.html#modifierElementOf(kotlin.Any,kotlin.Function0,kotlin.Function1,kotlin.Function1)">modifierElementOf</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/node/ModifierNodeElement.html">ModifierNodeElement</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/node/DelegatingNode.html">DelegatingNode</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/node/DrawModifierNode.html">DrawModifierNode</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html">SemanticsModifierNode</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/modifier/ModifierLocalNode.html">ModifierLocalNode</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/node/ParentDataModifierNode.html">ParentDataModifierNode</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/node/LayoutAwareModifierNode.html">LayoutAwareModifierNode</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/node/GlobalPositionAwareModifierNode.html">GlobalPositionAwareModifierNode</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/node/IntermediateLayoutModifierNode.html">IntermediateLayoutModifierNode</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/Modifier.Node.html#isAttached()">isAttached</a></code></div>
+              <p>Indicates that the node is attached and part of the tree.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/Modifier.Node.html#node()">node</a></code></div>
+              <p>A reference of the <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that holds this node's position in the node hierarchy.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/Modifier.Node.html#Node()">Node</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/Modifier.Node.html#onAttach()">onAttach</a>()</code></div>
+              <p>When called, <code>node</code> is guaranteed to be non-null.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/Modifier.Node.html#onDetach()">onDetach</a>()</code></div>
+              <p>This should be called right before the node gets removed from the list, so you should still be able to traverse inside of this method.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/Modifier.Node.html#sideEffect(kotlin.Function0)">sideEffect</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;effect)</code></div>
+              <p>This can be called to register <code><a href="/reference/androidx/compose/ui/Modifier.Node.html#sideEffect(kotlin.Function0)">effect</a></code> as a function to be executed after all of the changes to the tree are applied.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getIsAttached()"></a><a name="setIsAttached()"></a><a name="getIsAttached--"></a><a name="setIsAttached--"></a>
+        <h3 class="api-name" id="isAttached()">isAttached</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Node.html#isAttached()">isAttached</a></pre>
+        <p>Indicates that the node is attached and part of the tree. This will get set to true right before <code><a href="/reference/androidx/compose/ui/Modifier.Node.html#onAttach()">onAttach</a></code> is called, and set to false right after <code><a href="/reference/androidx/compose/ui/Modifier.Node.html#onDetach()">onDetach</a></code> is called.</p>
+        <p>A Node will never be attached more than once.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/Modifier.Node.html#onAttach()">onAttach</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/Modifier.Node.html#onDetach()">onDetach</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getNode()"></a><a name="setNode()"></a><a name="getNode--"></a><a name="setNode--"></a>
+        <h3 class="api-name" id="node()">node</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a>&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Node.html#node()">node</a></pre>
+        <p>A reference of the <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that holds this node's position in the node hierarchy. If the node is a delegate of another node, this will point to that node. Otherwise, this will point to itself.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="Node--"></a><a name="node"></a>
+        <h3 class="api-name" id="Node()">Node</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Node.html#Node()">Node</a>()</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="onAttach--"></a><a name="onattach"></a>
+        <h3 class="api-name" id="onAttach()">onAttach</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Node.html#onAttach()">onAttach</a>()</pre>
+        <p>When called, <code>node</code> is guaranteed to be non-null. You can call sideEffect, coroutineScope, etc.</p>
+      </div>
+      <div class="api-item"><a name="onDetach--"></a><a name="ondetach"></a>
+        <h3 class="api-name" id="onDetach()">onDetach</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Node.html#onDetach()">onDetach</a>()</pre>
+        <p>This should be called right before the node gets removed from the list, so you should still be able to traverse inside of this method. Ideally we would not allow you to trigger side effects here.</p>
+      </div>
+      <div class="api-item"><a name="sideEffect-kotlin.Function0-"></a><a name="sideeffect"></a>
+        <h3 class="api-name" id="sideEffect(kotlin.Function0)">sideEffect</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Node.html#sideEffect(kotlin.Function0)">sideEffect</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;effect)</pre>
+        <p>This can be called to register <code><a href="/reference/androidx/compose/ui/Modifier.Node.html#sideEffect(kotlin.Function0)">effect</a></code> as a function to be executed after all of the changes to the tree are applied.</p>
+        <p>This API can only be called if the node <code><a href="/reference/androidx/compose/ui/Modifier.Node.html#isAttached()">isAttached</a></code>.</p>
+      </div>
+    </div>
+  </body>
+</html>

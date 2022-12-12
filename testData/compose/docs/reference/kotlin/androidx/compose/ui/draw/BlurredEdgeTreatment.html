@@ -1,0 +1,162 @@
+<html devsite="true">
+  <head>
+    <title>BlurredEdgeTreatment</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/draw/Blur.kt+class:androidx.compose.ui.draw.BlurredEdgeTreatment&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>BlurredEdgeTreatment</h1>
+    <p>
+      <pre>value class <a href="/reference/kotlin/androidx/compose/ui/draw/BlurredEdgeTreatment.html">BlurredEdgeTreatment</a></pre>
+    </p>
+    <hr>
+    <p>Determines the strategy used to render pixels in the blurred result that may extend beyond the bounds of the original input.</p>
+    <p><code><a href="/reference/kotlin/androidx/compose/ui/draw/BlurredEdgeTreatment.html">BlurredEdgeTreatment</a></code> will clip the blur result to the boundaries of the original content and optionally specified <code><a href="/reference/kotlin/androidx/compose/ui/draw/BlurredEdgeTreatment.html#shape()">shape</a></code>.</p>
+    <p>Sampling of pixels outside of content bounds will have the same value as the pixels at the closest edge. This is recommended for blurring content that does not contain transparent pixels and ensuring the blurred result does not extend beyond the original bounds (ex. blurring an image)</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">See also</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.Companion.html#Clamp()">Clamp</a></code></td>
+            <td>
+              <p>Alternatively using <code><a href="/reference/kotlin/androidx/compose/ui/draw/BlurredEdgeTreatment.Companion.html#Unbounded()">BlurredEdgeTreatment.Unbounded</a></code> will not clip the blur result to the boundaries of the original content. Sampling of pixels outside of the content bounds will sample transparent black instead. This is recommended for blurring content that is intended to render outside of the original bounds and may contain transparent pixels in the original bounds (ex. blurring an arbitrary shape or text)</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.Companion.html#Decal()">Decal</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public companion properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/draw/BlurredEdgeTreatment.html">BlurredEdgeTreatment</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/draw/BlurredEdgeTreatment.Companion.html#Rectangle()">Rectangle</a></code></div>
+              <p>Bounded <code><a href="/reference/kotlin/androidx/compose/ui/draw/BlurredEdgeTreatment.html">BlurredEdgeTreatment</a></code> that clips content bounds to a rectangular shape</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/draw/BlurredEdgeTreatment.html">BlurredEdgeTreatment</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/draw/BlurredEdgeTreatment.Companion.html#Unbounded()">Unbounded</a></code></div>
+              <p>Do not clip the blur result to the boundaries of the original content.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/draw/BlurredEdgeTreatment.html#BlurredEdgeTreatment(androidx.compose.ui.graphics.Shape)">BlurredEdgeTreatment</a>(shape:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Shape.html">Shape</a>?)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Shape.html">Shape</a>?</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/draw/BlurredEdgeTreatment.html#shape()">shape</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public companion properties</h2>
+      <div class="api-item"><a name="getRectangle()"></a><a name="setRectangle()"></a><a name="getRectangle--"></a><a name="setRectangle--"></a>
+        <h3 class="api-name" id="Rectangle()">Rectangle</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/draw/BlurredEdgeTreatment.Companion.html#Rectangle()">Rectangle</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/draw/BlurredEdgeTreatment.html">BlurredEdgeTreatment</a></pre>
+        <p>Bounded <code><a href="/reference/kotlin/androidx/compose/ui/draw/BlurredEdgeTreatment.html">BlurredEdgeTreatment</a></code> that clips content bounds to a rectangular shape</p>
+      </div>
+      <div class="api-item"><a name="getUnbounded()"></a><a name="setUnbounded()"></a><a name="getUnbounded--"></a><a name="setUnbounded--"></a>
+        <h3 class="api-name" id="Unbounded()">Unbounded</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/draw/BlurredEdgeTreatment.Companion.html#Unbounded()">Unbounded</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/draw/BlurredEdgeTreatment.html">BlurredEdgeTreatment</a></pre>
+        <p>Do not clip the blur result to the boundaries of the original content. Sampling of pixels outside of the content bounds will sample transparent black instead. This is recommended for blurring content that is intended to render outside of the original bounds and may contain transparent pixels in the original bounds (ex. blurring an arbitrary shape or text)</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.Companion.html#Decal()">Decal</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="BlurredEdgeTreatment-androidx.compose.ui.graphics.Shape-"></a><a name="blurrededgetreatment"></a>
+        <h3 class="api-name" id="BlurredEdgeTreatment(androidx.compose.ui.graphics.Shape)">BlurredEdgeTreatment</h3>
+        <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/ui/draw/BlurredEdgeTreatment.html#BlurredEdgeTreatment(androidx.compose.ui.graphics.Shape)">BlurredEdgeTreatment</a>(shape:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Shape.html">Shape</a>?)</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getShape()"></a><a name="setShape()"></a><a name="getShape--"></a><a name="setShape--"></a>
+        <h3 class="api-name" id="shape()">shape</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/draw/BlurredEdgeTreatment.html#shape()">shape</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Shape.html">Shape</a>?</pre>
+      </div>
+    </div>
+  </body>
+</html>

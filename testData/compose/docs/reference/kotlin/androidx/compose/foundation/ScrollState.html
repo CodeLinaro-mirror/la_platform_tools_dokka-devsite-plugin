@@ -5,7 +5,9 @@
 {% include "_shared/_reference-head-tags.html" %}
   </head>
   <body>
-    <div id="metadata-info-block"></div>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/Scroll.kt+class:androidx.compose.foundation.ScrollState&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
     <h1>ScrollState</h1>
     <p>
       <pre>class <a href="/reference/kotlin/androidx/compose/foundation/ScrollState.html">ScrollState</a> : <a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></pre>
@@ -167,6 +169,20 @@ Column {
           </tr>
         </thead>
         <tbody class="list">
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/ScrollState.html#canScrollBackward()">canScrollBackward</a></code></div>
+              <p>Whether this <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> can scroll backward (consume a negative delta).</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/ScrollState.html#canScrollForward()">canScrollForward</a></code></div>
+              <p>Whether this <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> can scroll forward (consume a positive delta).</p>
+            </td>
+          </tr>
           <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></code></td>
             <td>
@@ -395,6 +411,108 @@ Column {
     </div>
     <div class="list">
       <h2>Public properties</h2>
+      <div class="api-item"><a name="getCanScrollBackward()"></a><a name="setCanScrollBackward()"></a><a name="getCanScrollBackward--"></a><a name="setCanScrollBackward--"></a>
+        <h3 class="api-name" id="canScrollBackward()">canScrollBackward</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/ScrollState.html#canScrollBackward()">canScrollBackward</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <p>Whether this <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> can scroll backward (consume a negative delta). This is typically false if the scroll position is equal to its minimum value, and true otherwise.</p>
+        <p>Note that <code>true</code> here does not imply that delta <em>will</em> be consumed - the ScrollableState may decide not to handle the incoming delta (such as if it is already being scrolled separately). Additionally, for backwards compatibility with previous versions of ScrollableState this value defaults to <code>true</code>.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.Icon
+import androidx.compose.material.Text
+import androidx.compose.ui.graphics.graphicsLayer
+
+val state = rememberLazyListState()
+Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+    Icon(
+        Icons.Filled.KeyboardArrowUp,
+        null,
+        Modifier.graphicsLayer {
+            // Hide the icon if we cannot scroll backward (we are the start of the list)
+            // We use graphicsLayer here to control the alpha so that we only redraw when this
+            // value changes, instead of recomposing
+            alpha = if (state.canScrollBackward) 1f else 0f
+        },
+        Color.Red
+    )
+    val items = (1..100).toList()
+    LazyColumn(
+        Modifier
+            .weight(1f)
+            .fillMaxWidth(), state
+    ) {
+        items(items) {
+            Text(&quot;Item is $it&quot;)
+        }
+    }
+    Icon(
+        Icons.Filled.KeyboardArrowDown,
+        null,
+        Modifier.graphicsLayer {
+            // Hide the icon if we cannot scroll forward (we are the end of the list)
+            // We use graphicsLayer here to control the alpha so that we only redraw when this
+            // value changes, instead of recomposing
+            alpha = if (state.canScrollForward) 1f else 0f
+        },
+        Color.Red
+    )
+}</pre>
+      </div>
+      <div class="api-item"><a name="getCanScrollForward()"></a><a name="setCanScrollForward()"></a><a name="getCanScrollForward--"></a><a name="setCanScrollForward--"></a>
+        <h3 class="api-name" id="canScrollForward()">canScrollForward</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/ScrollState.html#canScrollForward()">canScrollForward</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <p>Whether this <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> can scroll forward (consume a positive delta). This is typically false if the scroll position is equal to its maximum value, and true otherwise.</p>
+        <p>Note that <code>true</code> here does not imply that delta <em>will</em> be consumed - the ScrollableState may decide not to handle the incoming delta (such as if it is already being scrolled separately). Additionally, for backwards compatibility with previous versions of ScrollableState this value defaults to <code>true</code>.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.Icon
+import androidx.compose.material.Text
+import androidx.compose.ui.graphics.graphicsLayer
+
+val state = rememberLazyListState()
+Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+    Icon(
+        Icons.Filled.KeyboardArrowUp,
+        null,
+        Modifier.graphicsLayer {
+            // Hide the icon if we cannot scroll backward (we are the start of the list)
+            // We use graphicsLayer here to control the alpha so that we only redraw when this
+            // value changes, instead of recomposing
+            alpha = if (state.canScrollBackward) 1f else 0f
+        },
+        Color.Red
+    )
+    val items = (1..100).toList()
+    LazyColumn(
+        Modifier
+            .weight(1f)
+            .fillMaxWidth(), state
+    ) {
+        items(items) {
+            Text(&quot;Item is $it&quot;)
+        }
+    }
+    Icon(
+        Icons.Filled.KeyboardArrowDown,
+        null,
+        Modifier.graphicsLayer {
+            // Hide the icon if we cannot scroll forward (we are the end of the list)
+            // We use graphicsLayer here to control the alpha so that we only redraw when this
+            // value changes, instead of recomposing
+            alpha = if (state.canScrollForward) 1f else 0f
+        },
+        Color.Red
+    )
+}</pre>
+      </div>
       <div class="api-item"><a name="getInteractionSource()"></a><a name="setInteractionSource()"></a><a name="getInteractionSource--"></a><a name="setInteractionSource--"></a>
         <h3 class="api-name" id="interactionSource()">interactionSource</h3>
         <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/ScrollState.html#interactionSource()">interactionSource</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></pre>

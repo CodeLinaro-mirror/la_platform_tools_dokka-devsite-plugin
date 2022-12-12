@@ -1,0 +1,361 @@
+<html devsite="true">
+  <head>
+    <title>Offset</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-geometry/androidx/compose/ui/geometry/Offset.kt+class:androidx.compose.ui.geometry.Offset&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>Offset</h1>
+    <p>
+      <pre>value public final class <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+    </p>
+    <hr>
+    <p>An immutable 2D floating-point offset.</p>
+    <p>Generally speaking, Offsets can be interpreted in two ways:</p>
+    <ol>
+      <li>
+        <p>As representing a point in Cartesian space a specified distance from a     separately-maintained origin. For example, the top-left position of     children in the RenderBox protocol is typically represented as an     <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> from the top left of the parent box.</p>
+      </li>
+      <li>
+        <p>As a vector that can be applied to coordinates. For example, when     painting a RenderObject, the parent is passed an <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> from the     screen's origin which it can add to the offsets of its children to find     the <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> from the screen's origin to each of the children.</p>
+      </li>
+    </ol>
+    <p>Because a particular <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> can be interpreted as one sense at one time then as the other sense at a later time, the same class is used for both senses.</p>
+    <p>See also:</p>
+    <ul>
+      <li>
+        <p><code><a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code>, which represents a vector describing the size of a rectangle.</p>
+      </li>
+    </ul>
+    <p>Creates an offset. The first argument sets <code><a href="/reference/androidx/compose/ui/geometry/Offset.html#x()">x</a></code>, the horizontal component, and the second sets <code><a href="/reference/androidx/compose/ui/geometry/Offset.html#y()">y</a></code>, the vertical component.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>public static class <a href="/reference/androidx/compose/ui/geometry/Offset.Companion.html">Offset.Companion</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/Offset.html#x()">x</a></code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/Offset.html#y()">y</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/Offset.html#component1()">component1</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/Offset.html#component2()">component2</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/Offset.html#copy(kotlin.Float,kotlin.Float)">copy</a>(float&nbsp;x,&nbsp;float&nbsp;y)</code></div>
+              <p>Returns a copy of this Offset instance optionally overriding the x or y parameter</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/Offset.html#div(kotlin.Float)">div</a>(float&nbsp;operand)</code></div>
+              <p>Division operator.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/Offset.html#getDistance()">getDistance</a>()</code></div>
+              <p>The magnitude of the offset.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/Offset.html#getDistanceSquared()">getDistanceSquared</a>()</code></div>
+              <p>The square of the magnitude of the offset.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/Offset.html#isValid()">isValid</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/Offset.html#minus(androidx.compose.ui.geometry.Offset)">minus</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;other)</code></div>
+              <p>Binary subtraction operator.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/Offset.html#plus(androidx.compose.ui.geometry.Offset)">plus</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;other)</code></div>
+              <p>Binary addition operator.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/Offset.html#rem(kotlin.Float)">rem</a>(float&nbsp;operand)</code></div>
+              <p>Modulo (remainder) operator.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/Offset.html#times(kotlin.Float)">times</a>(float&nbsp;operand)</code></div>
+              <p>Multiplication operator.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/Offset.html#toString()">toString</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/Offset.html#unaryMinus()">unaryMinus</a>()</code></div>
+              <p>Unary negation operator.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/IntOffsetKt.html">IntOffsetKt</a>.<a href="/reference/androidx/compose/ui/geometry/Offset.html#(androidx.compose.ui.geometry.Offset).minus(androidx.compose.ui.unit.IntOffset)">minus</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;receiver,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntOffset.html">IntOffset</a>&nbsp;offset)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/IntOffsetKt.html">IntOffsetKt</a>.<a href="/reference/androidx/compose/ui/geometry/Offset.html#(androidx.compose.ui.geometry.Offset).plus(androidx.compose.ui.unit.IntOffset)">plus</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;receiver,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntOffset.html">IntOffset</a>&nbsp;offset)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntOffset.html">IntOffset</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/IntOffsetKt.html">IntOffsetKt</a>.<a href="/reference/androidx/compose/ui/geometry/Offset.html#(androidx.compose.ui.geometry.Offset).round()">round</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;receiver)</code></div>
+              <p>Round a <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> down to the nearest <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code> coordinates.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/OffsetKt.html">OffsetKt</a>.<a href="/reference/androidx/compose/ui/geometry/Offset.html#(androidx.compose.ui.geometry.Offset).getIsFinite()">isFinite</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;receiver)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/OffsetKt.html">OffsetKt</a>.<a href="/reference/androidx/compose/ui/geometry/Offset.html#(androidx.compose.ui.geometry.Offset).getIsSpecified()">isSpecified</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;receiver)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/OffsetKt.html">OffsetKt</a>.<a href="/reference/androidx/compose/ui/geometry/Offset.html#(androidx.compose.ui.geometry.Offset).getIsUnspecified()">isUnspecified</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;receiver)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/OffsetKt.html">OffsetKt</a>.<a href="/reference/androidx/compose/ui/geometry/Offset.html#(androidx.compose.ui.geometry.Offset).takeOrElse(kotlin.Function0)">takeOrElse</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&gt;&nbsp;block<br>)</code></div>
+              <p>If this <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> <code><a href="/reference/androidx/compose/ui/geometry/package-summary.html#(androidx.compose.ui.geometry.Offset).isSpecified()">isSpecified</a></code> then this is returned, otherwise <code><a href="/reference/androidx/compose/ui/geometry/package-summary.html#(androidx.compose.ui.geometry.Offset).takeOrElse(kotlin.Function0)">block</a></code> is executed and its result is returned.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getX()"></a><a name="setX()"></a><a name="getX--"></a><a name="setX--"></a>
+        <h3 class="api-name" id="x()">x</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/geometry/Offset.html#x()">x</a></pre>
+      </div>
+      <div class="api-item"><a name="getY()"></a><a name="setY()"></a><a name="getY--"></a><a name="setY--"></a>
+        <h3 class="api-name" id="y()">y</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/geometry/Offset.html#y()">y</a></pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="component1--"></a><a name="component1"></a>
+        <h3 class="api-name" id="component1()">component1</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/geometry/Offset.html#component1()">component1</a>()</pre>
+      </div>
+      <div class="api-item"><a name="component2--"></a><a name="component2"></a>
+        <h3 class="api-name" id="component2()">component2</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/geometry/Offset.html#component2()">component2</a>()</pre>
+      </div>
+      <div class="api-item"><a name="copy(kotlin.Float, kotlin.Float)"></a><a name="copy-kotlin.Float-kotlin.Float-"></a><a name="copy"></a>
+        <h3 class="api-name" id="copy(kotlin.Float,kotlin.Float)">copy</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;<a href="/reference/androidx/compose/ui/geometry/Offset.html#copy(kotlin.Float,kotlin.Float)">copy</a>(float&nbsp;x,&nbsp;float&nbsp;y)</pre>
+        <p>Returns a copy of this Offset instance optionally overriding the x or y parameter</p>
+      </div>
+      <div class="api-item"><a name="div-kotlin.Float-"></a><a name="div"></a>
+        <h3 class="api-name" id="div(kotlin.Float)">div</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;<a href="/reference/androidx/compose/ui/geometry/Offset.html#div(kotlin.Float)">div</a>(float&nbsp;operand)</pre>
+        <p>Division operator.</p>
+        <p>Returns an offset whose coordinates are the coordinates of the left-hand-side operand (an Offset) divided by the scalar right-hand-side operand (a Float).</p>
+      </div>
+      <div class="api-item"><a name="getDistance--"></a><a name="getdistance"></a>
+        <h3 class="api-name" id="getDistance()">getDistance</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/geometry/Offset.html#getDistance()">getDistance</a>()</pre>
+        <p>The magnitude of the offset.</p>
+        <p>If you need this value to compare it to another <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code>'s distance, consider using <code><a href="/reference/androidx/compose/ui/geometry/Offset.html#getDistanceSquared()">getDistanceSquared</a></code> instead, since it is cheaper to compute.</p>
+      </div>
+      <div class="api-item"><a name="getDistanceSquared--"></a><a name="getdistancesquared"></a>
+        <h3 class="api-name" id="getDistanceSquared()">getDistanceSquared</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/geometry/Offset.html#getDistanceSquared()">getDistanceSquared</a>()</pre>
+        <p>The square of the magnitude of the offset.</p>
+        <p>This is cheaper than computing the <code><a href="/reference/androidx/compose/ui/geometry/Offset.html#getDistance()">getDistance</a></code> itself.</p>
+      </div>
+      <div class="api-item"><a name="isValid--"></a><a name="isvalid"></a>
+        <h3 class="api-name" id="isValid()">isValid</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/geometry/Offset.html#isValid()">isValid</a>()</pre>
+      </div>
+      <div class="api-item"><a name="minus-androidx.compose.ui.geometry.Offset-"></a><a name="minus"></a>
+        <h3 class="api-name" id="minus(androidx.compose.ui.geometry.Offset)">minus</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;<a href="/reference/androidx/compose/ui/geometry/Offset.html#minus(androidx.compose.ui.geometry.Offset)">minus</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;other)</pre>
+        <p>Binary subtraction operator.</p>
+        <p>Returns an offset whose <code><a href="/reference/androidx/compose/ui/geometry/Offset.html#x()">x</a></code> value is the left-hand-side operand's <code><a href="/reference/androidx/compose/ui/geometry/Offset.html#x()">x</a></code> minus the right-hand-side operand's <code><a href="/reference/androidx/compose/ui/geometry/Offset.html#x()">x</a></code> and whose <code><a href="/reference/androidx/compose/ui/geometry/Offset.html#y()">y</a></code> value is the left-hand-side operand's <code><a href="/reference/androidx/compose/ui/geometry/Offset.html#y()">y</a></code> minus the right-hand-side operand's <code><a href="/reference/androidx/compose/ui/geometry/Offset.html#y()">y</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="plus-androidx.compose.ui.geometry.Offset-"></a><a name="plus"></a>
+        <h3 class="api-name" id="plus(androidx.compose.ui.geometry.Offset)">plus</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;<a href="/reference/androidx/compose/ui/geometry/Offset.html#plus(androidx.compose.ui.geometry.Offset)">plus</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;other)</pre>
+        <p>Binary addition operator.</p>
+        <p>Returns an offset whose <code><a href="/reference/androidx/compose/ui/geometry/Offset.html#x()">x</a></code> value is the sum of the <code><a href="/reference/androidx/compose/ui/geometry/Offset.html#x()">x</a></code> values of the two operands, and whose <code><a href="/reference/androidx/compose/ui/geometry/Offset.html#y()">y</a></code> value is the sum of the <code><a href="/reference/androidx/compose/ui/geometry/Offset.html#y()">y</a></code> values of the two operands.</p>
+      </div>
+      <div class="api-item"><a name="rem-kotlin.Float-"></a><a name="rem"></a>
+        <h3 class="api-name" id="rem(kotlin.Float)">rem</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;<a href="/reference/androidx/compose/ui/geometry/Offset.html#rem(kotlin.Float)">rem</a>(float&nbsp;operand)</pre>
+        <p>Modulo (remainder) operator.</p>
+        <p>Returns an offset whose coordinates are the remainder of dividing the coordinates of the left-hand-side operand (an Offset) by the scalar right-hand-side operand (a Float).</p>
+      </div>
+      <div class="api-item"><a name="times-kotlin.Float-"></a><a name="times"></a>
+        <h3 class="api-name" id="times(kotlin.Float)">times</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;<a href="/reference/androidx/compose/ui/geometry/Offset.html#times(kotlin.Float)">times</a>(float&nbsp;operand)</pre>
+        <p>Multiplication operator.</p>
+        <p>Returns an offset whose coordinates are the coordinates of the left-hand-side operand (an Offset) multiplied by the scalar right-hand-side operand (a Float).</p>
+      </div>
+      <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+        <h3 class="api-name" id="toString()">toString</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/geometry/Offset.html#toString()">toString</a>()</pre>
+      </div>
+      <div class="api-item"><a name="unaryMinus--"></a><a name="unaryminus"></a>
+        <h3 class="api-name" id="unaryMinus()">unaryMinus</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;<a href="/reference/androidx/compose/ui/geometry/Offset.html#unaryMinus()">unaryMinus</a>()</pre>
+        <p>Unary negation operator.</p>
+        <p>Returns an offset with the coordinates negated.</p>
+        <p>If the <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> represents an arrow on a plane, this operator returns the same arrow but pointing in the reverse direction.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.geometry.Offset-.minus-androidx.compose.ui.unit.IntOffset-"></a><a name="minus"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.geometry.Offset).minus(androidx.compose.ui.unit.IntOffset)">IntOffsetKt.minus</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;<a href="/reference/androidx/compose/ui/geometry/IntOffsetKt.html">IntOffsetKt</a>.<a href="/reference/androidx/compose/ui/geometry/Offset.html#(androidx.compose.ui.geometry.Offset).minus(androidx.compose.ui.unit.IntOffset)">minus</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;receiver,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntOffset.html">IntOffset</a>&nbsp;offset)</pre>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.geometry.Offset-.plus-androidx.compose.ui.unit.IntOffset-"></a><a name="plus"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.geometry.Offset).plus(androidx.compose.ui.unit.IntOffset)">IntOffsetKt.plus</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;<a href="/reference/androidx/compose/ui/geometry/IntOffsetKt.html">IntOffsetKt</a>.<a href="/reference/androidx/compose/ui/geometry/Offset.html#(androidx.compose.ui.geometry.Offset).plus(androidx.compose.ui.unit.IntOffset)">plus</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;receiver,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntOffset.html">IntOffset</a>&nbsp;offset)</pre>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.geometry.Offset-.round--"></a><a name="round"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.geometry.Offset).round()">IntOffsetKt.round</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntOffset.html">IntOffset</a>&nbsp;<a href="/reference/androidx/compose/ui/geometry/IntOffsetKt.html">IntOffsetKt</a>.<a href="/reference/androidx/compose/ui/geometry/Offset.html#(androidx.compose.ui.geometry.Offset).round()">round</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;receiver)</pre>
+        <p>Round a <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> down to the nearest <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code> coordinates.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.geometry.Offset-.getIsFinite--"></a><a name="getisfinite"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.geometry.Offset).getIsFinite()">OffsetKt.isFinite</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/geometry/OffsetKt.html">OffsetKt</a>.<a href="/reference/androidx/compose/ui/geometry/Offset.html#(androidx.compose.ui.geometry.Offset).getIsFinite()">isFinite</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;receiver)</pre>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.geometry.Offset-.getIsSpecified--"></a><a name="getisspecified"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.geometry.Offset).getIsSpecified()">OffsetKt.isSpecified</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/geometry/OffsetKt.html">OffsetKt</a>.<a href="/reference/androidx/compose/ui/geometry/Offset.html#(androidx.compose.ui.geometry.Offset).getIsSpecified()">isSpecified</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;receiver)</pre>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.geometry.Offset-.getIsUnspecified--"></a><a name="getisunspecified"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.geometry.Offset).getIsUnspecified()">OffsetKt.isUnspecified</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/geometry/OffsetKt.html">OffsetKt</a>.<a href="/reference/androidx/compose/ui/geometry/Offset.html#(androidx.compose.ui.geometry.Offset).getIsUnspecified()">isUnspecified</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;receiver)</pre>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.geometry.Offset-.takeOrElse-kotlin.Function0-"></a><a name="takeorelse"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.geometry.Offset).takeOrElse(kotlin.Function0)">OffsetKt.takeOrElse</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;<a href="/reference/androidx/compose/ui/geometry/OffsetKt.html">OffsetKt</a>.<a href="/reference/androidx/compose/ui/geometry/Offset.html#(androidx.compose.ui.geometry.Offset).takeOrElse(kotlin.Function0)">takeOrElse</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&gt;&nbsp;block<br>)</pre>
+        <p>If this <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> <code><a href="/reference/androidx/compose/ui/geometry/package-summary.html#(androidx.compose.ui.geometry.Offset).isSpecified()">isSpecified</a></code> then this is returned, otherwise <code><a href="/reference/androidx/compose/ui/geometry/package-summary.html#(androidx.compose.ui.geometry.Offset).takeOrElse(kotlin.Function0)">block</a></code> is executed and its result is returned.</p>
+      </div>
+    </div>
+  </body>
+</html>

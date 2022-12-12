@@ -1,0 +1,1181 @@
+<html devsite="true">
+  <head>
+    <title>SpanStyle</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-text/androidx/compose/ui/text/SpanStyle.kt+class:androidx.compose.ui.text.SpanStyle&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>SpanStyle</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a></pre>
+    </p>
+    <hr>
+    <p>Styling configuration for a text span. This configuration only allows character level styling, in order to set paragraph level styling such as line height, or text alignment please see <code><a href="/reference/androidx/compose/ui/text/ParagraphStyle.html">ParagraphStyle</a></code>.</p>
+    <pre class="prettyprint">
+import androidx.compose.material.Text
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
+
+Text(
+    fontSize = 16.sp,
+    text = buildAnnotatedString {
+        withStyle(style = SpanStyle(color = Color.Red)) {
+            append(&quot;Hello&quot;)
+        }
+        withStyle(SpanStyle(color = Color.Blue)) {
+            append(&quot; World&quot;)
+        }
+    }
+)</pre>
+    <pre class="prettyprint">
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+
+buildAnnotatedString {
+    append(&quot;Hello&quot;)
+    // push green text style so that any appended text will be green
+    pushStyle(SpanStyle(color = Color.Green))
+    // append new text, this text will be rendered as green
+    append(&quot; World&quot;)
+    // pop the green style
+    pop()
+    // append a string without style
+    append(&quot;!&quot;)
+    // then style the last added word as red, exclamation mark will be red
+    addStyle(SpanStyle(color = Color.Red), &quot;Hello World&quot;.length, this.length)
+
+    toAnnotatedString()
+}</pre>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">See also</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/text/TextStyle.html">TextStyle</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/text/ParagraphStyle.html">ParagraphStyle</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br><a href="/reference/androidx/compose/ui/text/SpanStyle.html#alpha()">alpha</a></code></div>
+              <p>Opacity of text.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#background()">background</a></code></div>
+              <p>The background color for the text.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final <a href="/reference/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#baselineShift()">baselineShift</a></code></div>
+              <p>The amount by which the text is shifted up from the current baseline.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final <a href="/reference/androidx/compose/ui/graphics/Brush.html">Brush</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br><a href="/reference/androidx/compose/ui/text/SpanStyle.html#brush()">brush</a></code></div>
+              <p>Brush to draw text.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#color()">color</a></code></div>
+              <p>Color to draw text.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final <a href="/reference/androidx/compose/ui/graphics/drawscope/DrawStyle.html">DrawStyle</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br><a href="/reference/androidx/compose/ui/text/SpanStyle.html#drawStyle()">drawStyle</a></code></div>
+              <p>Drawing style of text, whether fill in the text while drawing or stroke around the edges.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final <a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#fontFamily()">fontFamily</a></code></div>
+              <p>The font family to be used when rendering the text.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#fontFeatureSettings()">fontFeatureSettings</a></code></div>
+              <p>The advanced typography settings provided by font.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#fontSize()">fontSize</a></code></div>
+              <p>The size of glyphs (in logical pixels) to use when painting the text.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final <a href="/reference/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#fontStyle()">fontStyle</a></code></div>
+              <p>The typeface variant to use when drawing the letters (e.g., italic).</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final <a href="/reference/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#fontSynthesis()">fontSynthesis</a></code></div>
+              <p>Whether to synthesize font weight and/or style when the requested weight or style cannot be found in the provided font family.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final <a href="/reference/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#fontWeight()">fontWeight</a></code></div>
+              <p>The typeface thickness to use when painting the text (e.g., bold).</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#letterSpacing()">letterSpacing</a></code></div>
+              <p>The amount of space (in em) to add between each letter.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final <a href="/reference/androidx/compose/ui/text/intl/LocaleList.html">LocaleList</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#localeList()">localeList</a></code></div>
+              <p>The locale list used to select region-specific glyphs.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final <a href="/reference/androidx/compose/ui/text/PlatformSpanStyle.html">PlatformSpanStyle</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#platformStyle()">platformStyle</a></code></div>
+              <p>Platform specific <code><a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a></code> parameters.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final <a href="/reference/androidx/compose/ui/graphics/Shadow.html">Shadow</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#shadow()">shadow</a></code></div>
+              <p>The shadow effect applied on the text.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final <a href="/reference/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#textDecoration()">textDecoration</a></code></div>
+              <p>The decorations to paint on the text (e.g., an underline).</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final <a href="/reference/androidx/compose/ui/text/style/TextGeometricTransform.html">TextGeometricTransform</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#textGeometricTransform()">textGeometricTransform</a></code></div>
+              <p>The geometric transformation applied the text.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#SpanStyle(androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis,androidx.compose.ui.text.font.FontFamily,kotlin.String,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.BaselineShift,androidx.compose.ui.text.style.TextGeometricTransform,androidx.compose.ui.text.intl.LocaleList,androidx.compose.ui.graphics.Color,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.Shadow)">SpanStyle</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;color,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;fontSize,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>&nbsp;fontWeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>&nbsp;fontStyle,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a>&nbsp;fontSynthesis,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a>&nbsp;fontFamily,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;fontFeatureSettings,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;letterSpacing,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a>&nbsp;baselineShift,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextGeometricTransform.html">TextGeometricTransform</a>&nbsp;textGeometricTransform,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/intl/LocaleList.html">LocaleList</a>&nbsp;localeList,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;background,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>&nbsp;textDecoration,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/Shadow.html">Shadow</a>&nbsp;shadow<br>)</code></div>
+              <p>Styling configuration for a text span.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#SpanStyle(androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis,androidx.compose.ui.text.font.FontFamily,kotlin.String,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.BaselineShift,androidx.compose.ui.text.style.TextGeometricTransform,androidx.compose.ui.text.intl.LocaleList,androidx.compose.ui.graphics.Color,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.PlatformSpanStyle)">SpanStyle</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;color,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;fontSize,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>&nbsp;fontWeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>&nbsp;fontStyle,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a>&nbsp;fontSynthesis,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a>&nbsp;fontFamily,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;fontFeatureSettings,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;letterSpacing,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a>&nbsp;baselineShift,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextGeometricTransform.html">TextGeometricTransform</a>&nbsp;textGeometricTransform,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/intl/LocaleList.html">LocaleList</a>&nbsp;localeList,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;background,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>&nbsp;textDecoration,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/Shadow.html">Shadow</a>&nbsp;shadow,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/PlatformSpanStyle.html">PlatformSpanStyle</a>&nbsp;platformStyle<br>)</code></div>
+              <p>Styling configuration for a text span.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br><a href="/reference/androidx/compose/ui/text/SpanStyle.html#SpanStyle(androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis,androidx.compose.ui.text.font.FontFamily,kotlin.String,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.BaselineShift,androidx.compose.ui.text.style.TextGeometricTransform,androidx.compose.ui.text.intl.LocaleList,androidx.compose.ui.graphics.Color,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.PlatformSpanStyle,androidx.compose.ui.graphics.drawscope.DrawStyle)">SpanStyle</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;color,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;fontSize,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>&nbsp;fontWeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>&nbsp;fontStyle,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a>&nbsp;fontSynthesis,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a>&nbsp;fontFamily,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;fontFeatureSettings,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;letterSpacing,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a>&nbsp;baselineShift,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextGeometricTransform.html">TextGeometricTransform</a>&nbsp;textGeometricTransform,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/intl/LocaleList.html">LocaleList</a>&nbsp;localeList,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;background,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>&nbsp;textDecoration,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/Shadow.html">Shadow</a>&nbsp;shadow,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/PlatformSpanStyle.html">PlatformSpanStyle</a>&nbsp;platformStyle,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/drawscope/DrawStyle.html">DrawStyle</a>&nbsp;drawStyle<br>)</code></div>
+              <p>Styling configuration for a text span.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br><a href="/reference/androidx/compose/ui/text/SpanStyle.html#SpanStyle(androidx.compose.ui.graphics.Brush,kotlin.Float,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis,androidx.compose.ui.text.font.FontFamily,kotlin.String,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.BaselineShift,androidx.compose.ui.text.style.TextGeometricTransform,androidx.compose.ui.text.intl.LocaleList,androidx.compose.ui.graphics.Color,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.PlatformSpanStyle,androidx.compose.ui.graphics.drawscope.DrawStyle)">SpanStyle</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/Brush.html">Brush</a>&nbsp;brush,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;alpha,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;fontSize,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>&nbsp;fontWeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>&nbsp;fontStyle,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a>&nbsp;fontSynthesis,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a>&nbsp;fontFamily,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;fontFeatureSettings,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;letterSpacing,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a>&nbsp;baselineShift,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextGeometricTransform.html">TextGeometricTransform</a>&nbsp;textGeometricTransform,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/intl/LocaleList.html">LocaleList</a>&nbsp;localeList,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;background,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>&nbsp;textDecoration,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/Shadow.html">Shadow</a>&nbsp;shadow,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/PlatformSpanStyle.html">PlatformSpanStyle</a>&nbsp;platformStyle,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/drawscope/DrawStyle.html">DrawStyle</a>&nbsp;drawStyle<br>)</code></div>
+              <p>Styling configuration for a text span.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#copy(androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis,androidx.compose.ui.text.font.FontFamily,kotlin.String,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.BaselineShift,androidx.compose.ui.text.style.TextGeometricTransform,androidx.compose.ui.text.intl.LocaleList,androidx.compose.ui.graphics.Color,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.Shadow)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;color,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;fontSize,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>&nbsp;fontWeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>&nbsp;fontStyle,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a>&nbsp;fontSynthesis,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a>&nbsp;fontFamily,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;fontFeatureSettings,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;letterSpacing,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a>&nbsp;baselineShift,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextGeometricTransform.html">TextGeometricTransform</a>&nbsp;textGeometricTransform,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/intl/LocaleList.html">LocaleList</a>&nbsp;localeList,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;background,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>&nbsp;textDecoration,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/Shadow.html">Shadow</a>&nbsp;shadow<br>)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#copy(androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis,androidx.compose.ui.text.font.FontFamily,kotlin.String,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.BaselineShift,androidx.compose.ui.text.style.TextGeometricTransform,androidx.compose.ui.text.intl.LocaleList,androidx.compose.ui.graphics.Color,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.PlatformSpanStyle)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;color,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;fontSize,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>&nbsp;fontWeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>&nbsp;fontStyle,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a>&nbsp;fontSynthesis,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a>&nbsp;fontFamily,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;fontFeatureSettings,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;letterSpacing,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a>&nbsp;baselineShift,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextGeometricTransform.html">TextGeometricTransform</a>&nbsp;textGeometricTransform,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/intl/LocaleList.html">LocaleList</a>&nbsp;localeList,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;background,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>&nbsp;textDecoration,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/Shadow.html">Shadow</a>&nbsp;shadow,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/PlatformSpanStyle.html">PlatformSpanStyle</a>&nbsp;platformStyle<br>)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br><a href="/reference/androidx/compose/ui/text/SpanStyle.html#copy(androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis,androidx.compose.ui.text.font.FontFamily,kotlin.String,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.BaselineShift,androidx.compose.ui.text.style.TextGeometricTransform,androidx.compose.ui.text.intl.LocaleList,androidx.compose.ui.graphics.Color,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.PlatformSpanStyle,androidx.compose.ui.graphics.drawscope.DrawStyle)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;color,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;fontSize,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>&nbsp;fontWeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>&nbsp;fontStyle,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a>&nbsp;fontSynthesis,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a>&nbsp;fontFamily,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;fontFeatureSettings,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;letterSpacing,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a>&nbsp;baselineShift,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextGeometricTransform.html">TextGeometricTransform</a>&nbsp;textGeometricTransform,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/intl/LocaleList.html">LocaleList</a>&nbsp;localeList,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;background,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>&nbsp;textDecoration,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/Shadow.html">Shadow</a>&nbsp;shadow,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/PlatformSpanStyle.html">PlatformSpanStyle</a>&nbsp;platformStyle,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/drawscope/DrawStyle.html">DrawStyle</a>&nbsp;drawStyle<br>)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br><a href="/reference/androidx/compose/ui/text/SpanStyle.html#copy(androidx.compose.ui.graphics.Brush,kotlin.Float,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis,androidx.compose.ui.text.font.FontFamily,kotlin.String,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.BaselineShift,androidx.compose.ui.text.style.TextGeometricTransform,androidx.compose.ui.text.intl.LocaleList,androidx.compose.ui.graphics.Color,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.PlatformSpanStyle,androidx.compose.ui.graphics.drawscope.DrawStyle)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/Brush.html">Brush</a>&nbsp;brush,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;alpha,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;fontSize,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>&nbsp;fontWeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>&nbsp;fontStyle,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a>&nbsp;fontSynthesis,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a>&nbsp;fontFamily,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;fontFeatureSettings,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;letterSpacing,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a>&nbsp;baselineShift,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextGeometricTransform.html">TextGeometricTransform</a>&nbsp;textGeometricTransform,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/intl/LocaleList.html">LocaleList</a>&nbsp;localeList,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;background,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>&nbsp;textDecoration,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/Shadow.html">Shadow</a>&nbsp;shadow,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/PlatformSpanStyle.html">PlatformSpanStyle</a>&nbsp;platformStyle,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/drawscope/DrawStyle.html">DrawStyle</a>&nbsp;drawStyle<br>)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#equals(kotlin.Any)">equals</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;other)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#hashCode()">hashCode</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#merge(androidx.compose.ui.text.SpanStyle)">merge</a>(<a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a>&nbsp;other)</code></div>
+              <p>Returns a new span style that is a combination of this style and the given <code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#merge(androidx.compose.ui.text.SpanStyle)">other</a></code> style.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#plus(androidx.compose.ui.text.SpanStyle)">plus</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a>&nbsp;other)</code></div>
+              <p>Plus operator overload that applies a <code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#merge(androidx.compose.ui.text.SpanStyle)">merge</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#toString()">toString</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getAlpha()"></a><a name="setAlpha()"></a><a name="getAlpha--"></a><a name="setAlpha--"></a>
+        <h3 class="api-name" id="alpha()">alpha</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#alpha()">alpha</a></pre>
+        <p>Opacity of text. This value is either provided along side Brush, or via alpha channel in color.</p>
+      </div>
+      <div class="api-item"><a name="getBackground()"></a><a name="setBackground()"></a><a name="getBackground--"></a><a name="setBackground--"></a>
+        <h3 class="api-name" id="background()">background</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#background()">background</a></pre>
+        <p>The background color for the text.</p>
+      </div>
+      <div class="api-item"><a name="getBaselineShift()"></a><a name="setBaselineShift()"></a><a name="getBaselineShift--"></a><a name="setBaselineShift--"></a>
+        <h3 class="api-name" id="baselineShift()">baselineShift</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a>&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#baselineShift()">baselineShift</a></pre>
+        <p>The amount by which the text is shifted up from the current baseline.</p>
+      </div>
+      <div class="api-item"><a name="getBrush()"></a><a name="setBrush()"></a><a name="getBrush--"></a><a name="setBrush--"></a>
+        <h3 class="api-name" id="brush()">brush</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>public&nbsp;final&nbsp;<a href="/reference/androidx/compose/ui/graphics/Brush.html">Brush</a>&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#brush()">brush</a></pre>
+        <p>Brush to draw text. If not null, overrides <code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#color()">color</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getColor()"></a><a name="setColor()"></a><a name="getColor--"></a><a name="setColor--"></a>
+        <h3 class="api-name" id="color()">color</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#color()">color</a></pre>
+        <p>Color to draw text.</p>
+      </div>
+      <div class="api-item"><a name="getDrawStyle()"></a><a name="setDrawStyle()"></a><a name="getDrawStyle--"></a><a name="setDrawStyle--"></a>
+        <h3 class="api-name" id="drawStyle()">drawStyle</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>public&nbsp;final&nbsp;<a href="/reference/androidx/compose/ui/graphics/drawscope/DrawStyle.html">DrawStyle</a>&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#drawStyle()">drawStyle</a></pre>
+        <p>Drawing style of text, whether fill in the text while drawing or stroke around the edges.</p>
+      </div>
+      <div class="api-item"><a name="getFontFamily()"></a><a name="setFontFamily()"></a><a name="getFontFamily--"></a><a name="setFontFamily--"></a>
+        <h3 class="api-name" id="fontFamily()">fontFamily</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a>&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#fontFamily()">fontFamily</a></pre>
+        <p>The font family to be used when rendering the text.</p>
+      </div>
+      <div class="api-item"><a name="getFontFeatureSettings()"></a><a name="setFontFeatureSettings()"></a><a name="getFontFeatureSettings--"></a><a name="setFontFeatureSettings--"></a>
+        <h3 class="api-name" id="fontFeatureSettings()">fontFeatureSettings</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#fontFeatureSettings()">fontFeatureSettings</a></pre>
+        <p>The advanced typography settings provided by font. The format is the same as the CSS font-feature-settings attribute: https://www.w3.org/TR/css-fonts-3/#font-feature-settings-prop</p>
+      </div>
+      <div class="api-item"><a name="getFontSize()"></a><a name="setFontSize()"></a><a name="getFontSize--"></a><a name="setFontSize--"></a>
+        <h3 class="api-name" id="fontSize()">fontSize</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#fontSize()">fontSize</a></pre>
+        <p>The size of glyphs (in logical pixels) to use when painting the text. This may be <code><a href="/reference/androidx/compose/ui/unit/TextUnit.Companion.html#Unspecified()">TextUnit.Unspecified</a></code> for inheriting from another <code><a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getFontStyle()"></a><a name="setFontStyle()"></a><a name="getFontStyle--"></a><a name="setFontStyle--"></a>
+        <h3 class="api-name" id="fontStyle()">fontStyle</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#fontStyle()">fontStyle</a></pre>
+        <p>The typeface variant to use when drawing the letters (e.g., italic).</p>
+      </div>
+      <div class="api-item"><a name="getFontSynthesis()"></a><a name="setFontSynthesis()"></a><a name="getFontSynthesis--"></a><a name="setFontSynthesis--"></a>
+        <h3 class="api-name" id="fontSynthesis()">fontSynthesis</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a>&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#fontSynthesis()">fontSynthesis</a></pre>
+        <p>Whether to synthesize font weight and/or style when the requested weight or style cannot be found in the provided font family.</p>
+      </div>
+      <div class="api-item"><a name="getFontWeight()"></a><a name="setFontWeight()"></a><a name="getFontWeight--"></a><a name="setFontWeight--"></a>
+        <h3 class="api-name" id="fontWeight()">fontWeight</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#fontWeight()">fontWeight</a></pre>
+        <p>The typeface thickness to use when painting the text (e.g., bold).</p>
+      </div>
+      <div class="api-item"><a name="getLetterSpacing()"></a><a name="setLetterSpacing()"></a><a name="getLetterSpacing--"></a><a name="setLetterSpacing--"></a>
+        <h3 class="api-name" id="letterSpacing()">letterSpacing</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#letterSpacing()">letterSpacing</a></pre>
+        <p>The amount of space (in em) to add between each letter.</p>
+      </div>
+      <div class="api-item"><a name="getLocaleList()"></a><a name="setLocaleList()"></a><a name="getLocaleList--"></a><a name="setLocaleList--"></a>
+        <h3 class="api-name" id="localeList()">localeList</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/compose/ui/text/intl/LocaleList.html">LocaleList</a>&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#localeList()">localeList</a></pre>
+        <p>The locale list used to select region-specific glyphs.</p>
+      </div>
+      <div class="api-item"><a name="getPlatformStyle()"></a><a name="setPlatformStyle()"></a><a name="getPlatformStyle--"></a><a name="setPlatformStyle--"></a>
+        <h3 class="api-name" id="platformStyle()">platformStyle</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/compose/ui/text/PlatformSpanStyle.html">PlatformSpanStyle</a>&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#platformStyle()">platformStyle</a></pre>
+        <p>Platform specific <code><a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a></code> parameters.</p>
+      </div>
+      <div class="api-item"><a name="getShadow()"></a><a name="setShadow()"></a><a name="getShadow--"></a><a name="setShadow--"></a>
+        <h3 class="api-name" id="shadow()">shadow</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/compose/ui/graphics/Shadow.html">Shadow</a>&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#shadow()">shadow</a></pre>
+        <p>The shadow effect applied on the text.</p>
+      </div>
+      <div class="api-item"><a name="getTextDecoration()"></a><a name="setTextDecoration()"></a><a name="getTextDecoration--"></a><a name="setTextDecoration--"></a>
+        <h3 class="api-name" id="textDecoration()">textDecoration</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#textDecoration()">textDecoration</a></pre>
+        <p>The decorations to paint on the text (e.g., an underline).</p>
+      </div>
+      <div class="api-item"><a name="getTextGeometricTransform()"></a><a name="setTextGeometricTransform()"></a><a name="getTextGeometricTransform--"></a><a name="setTextGeometricTransform--"></a>
+        <h3 class="api-name" id="textGeometricTransform()">textGeometricTransform</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextGeometricTransform.html">TextGeometricTransform</a>&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#textGeometricTransform()">textGeometricTransform</a></pre>
+        <p>The geometric transformation applied the text.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="SpanStyle(androidx.compose.ui.graphics.Color, androidx.compose.ui.unit.TextUnit, androidx.compose.ui.text.font.FontWeight, androidx.compose.ui.text.font.FontStyle, androidx.compose.ui.text.font.FontSynthesis, androidx.compose.ui.text.font.FontFamily, kotlin.String, androidx.compose.ui.unit.TextUnit, androidx.compose.ui.text.style.BaselineShift, androidx.compose.ui.text.style.TextGeometricTransform, androidx.compose.ui.text.intl.LocaleList, androidx.compose.ui.graphics.Color, androidx.compose.ui.text.style.TextDecoration, androidx.compose.ui.graphics.Shadow)"></a><a name="SpanStyle-androidx.compose.ui.graphics.Color-androidx.compose.ui.unit.TextUnit-androidx.compose.ui.text.font.FontWeight-androidx.compose.ui.text.font.FontStyle-androidx.compose.ui.text.font.FontSynthesis-androidx.compose.ui.text.font.FontFamily-kotlin.String-androidx.compose.ui.unit.TextUnit-androidx.compose.ui.text.style.BaselineShift-androidx.compose.ui.text.style.TextGeometricTransform-androidx.compose.ui.text.intl.LocaleList-androidx.compose.ui.graphics.Color-androidx.compose.ui.text.style.TextDecoration-androidx.compose.ui.graphics.Shadow-"></a><a name="spanstyle"></a>
+        <h3 class="api-name" id="SpanStyle(androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis,androidx.compose.ui.text.font.FontFamily,kotlin.String,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.BaselineShift,androidx.compose.ui.text.style.TextGeometricTransform,androidx.compose.ui.text.intl.LocaleList,androidx.compose.ui.graphics.Color,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.Shadow)">SpanStyle</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#SpanStyle(androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis,androidx.compose.ui.text.font.FontFamily,kotlin.String,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.BaselineShift,androidx.compose.ui.text.style.TextGeometricTransform,androidx.compose.ui.text.intl.LocaleList,androidx.compose.ui.graphics.Color,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.Shadow)">SpanStyle</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;color,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;fontSize,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>&nbsp;fontWeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>&nbsp;fontStyle,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a>&nbsp;fontSynthesis,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a>&nbsp;fontFamily,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;fontFeatureSettings,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;letterSpacing,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a>&nbsp;baselineShift,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextGeometricTransform.html">TextGeometricTransform</a>&nbsp;textGeometricTransform,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/intl/LocaleList.html">LocaleList</a>&nbsp;localeList,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;background,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>&nbsp;textDecoration,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/Shadow.html">Shadow</a>&nbsp;shadow<br>)</pre>
+        <p>Styling configuration for a text span. This configuration only allows character level styling, in order to set paragraph level styling such as line height, or text alignment please see <code><a href="/reference/androidx/compose/ui/text/ParagraphStyle.html">ParagraphStyle</a></code>.</p>
+        <pre class="prettyprint">
+import androidx.compose.material.Text
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
+
+Text(
+    fontSize = 16.sp,
+    text = buildAnnotatedString {
+        withStyle(style = SpanStyle(color = Color.Red)) {
+            append(&quot;Hello&quot;)
+        }
+        withStyle(SpanStyle(color = Color.Blue)) {
+            append(&quot; World&quot;)
+        }
+    }
+)</pre>
+        <pre class="prettyprint">
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+
+buildAnnotatedString {
+    append(&quot;Hello&quot;)
+    // push green text style so that any appended text will be green
+    pushStyle(SpanStyle(color = Color.Green))
+    // append new text, this text will be rendered as green
+    append(&quot; World&quot;)
+    // pop the green style
+    pop()
+    // append a string without style
+    append(&quot;!&quot;)
+    // then style the last added word as red, exclamation mark will be red
+    addStyle(SpanStyle(color = Color.Red), &quot;Hello World&quot;.length, this.length)
+
+    toAnnotatedString()
+}</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;color</code></td>
+                <td>
+                  <p>The text color.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;fontSize</code></td>
+                <td>
+                  <p>The size of glyphs (in logical pixels) to use when painting the text. This may be <code><a href="/reference/androidx/compose/ui/unit/TextUnit.Companion.html#Unspecified()">TextUnit.Unspecified</a></code> for inheriting from another <code><a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>&nbsp;fontWeight</code></td>
+                <td>
+                  <p>The typeface thickness to use when painting the text (e.g., bold).</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>&nbsp;fontStyle</code></td>
+                <td>
+                  <p>The typeface variant to use when drawing the letters (e.g., italic).</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a>&nbsp;fontSynthesis</code></td>
+                <td>
+                  <p>Whether to synthesize font weight and/or style when the requested weight or style cannot be found in the provided font family.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a>&nbsp;fontFamily</code></td>
+                <td>
+                  <p>The font family to be used when rendering the text.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;fontFeatureSettings</code></td>
+                <td>
+                  <p>The advanced typography settings provided by font. The format is the same as the CSS font-feature-settings attribute: https://www.w3.org/TR/css-fonts-3/#font-feature-settings-prop</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;letterSpacing</code></td>
+                <td>
+                  <p>The amount of space (in em) to add between each letter.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a>&nbsp;baselineShift</code></td>
+                <td>
+                  <p>The amount by which the text is shifted up from the current baseline.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/style/TextGeometricTransform.html">TextGeometricTransform</a>&nbsp;textGeometricTransform</code></td>
+                <td>
+                  <p>The geometric transformation applied the text.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/intl/LocaleList.html">LocaleList</a>&nbsp;localeList</code></td>
+                <td>
+                  <p>The locale list used to select region-specific glyphs.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;background</code></td>
+                <td>
+                  <p>The background color for the text.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>&nbsp;textDecoration</code></td>
+                <td>
+                  <p>The decorations to paint on the text (e.g., an underline).</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/Shadow.html">Shadow</a>&nbsp;shadow</code></td>
+                <td>
+                  <p>The shadow effect applied on the text.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/TextStyle.html">TextStyle</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/ParagraphStyle.html">ParagraphStyle</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="SpanStyle(androidx.compose.ui.graphics.Color, androidx.compose.ui.unit.TextUnit, androidx.compose.ui.text.font.FontWeight, androidx.compose.ui.text.font.FontStyle, androidx.compose.ui.text.font.FontSynthesis, androidx.compose.ui.text.font.FontFamily, kotlin.String, androidx.compose.ui.unit.TextUnit, androidx.compose.ui.text.style.BaselineShift, androidx.compose.ui.text.style.TextGeometricTransform, androidx.compose.ui.text.intl.LocaleList, androidx.compose.ui.graphics.Color, androidx.compose.ui.text.style.TextDecoration, androidx.compose.ui.graphics.Shadow, androidx.compose.ui.text.PlatformSpanStyle)"></a><a name="SpanStyle-androidx.compose.ui.graphics.Color-androidx.compose.ui.unit.TextUnit-androidx.compose.ui.text.font.FontWeight-androidx.compose.ui.text.font.FontStyle-androidx.compose.ui.text.font.FontSynthesis-androidx.compose.ui.text.font.FontFamily-kotlin.String-androidx.compose.ui.unit.TextUnit-androidx.compose.ui.text.style.BaselineShift-androidx.compose.ui.text.style.TextGeometricTransform-androidx.compose.ui.text.intl.LocaleList-androidx.compose.ui.graphics.Color-androidx.compose.ui.text.style.TextDecoration-androidx.compose.ui.graphics.Shadow-androidx.compose.ui.text.PlatformSpanStyle-"></a><a name="spanstyle"></a>
+        <h3 class="api-name" id="SpanStyle(androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis,androidx.compose.ui.text.font.FontFamily,kotlin.String,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.BaselineShift,androidx.compose.ui.text.style.TextGeometricTransform,androidx.compose.ui.text.intl.LocaleList,androidx.compose.ui.graphics.Color,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.PlatformSpanStyle)">SpanStyle</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#SpanStyle(androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis,androidx.compose.ui.text.font.FontFamily,kotlin.String,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.BaselineShift,androidx.compose.ui.text.style.TextGeometricTransform,androidx.compose.ui.text.intl.LocaleList,androidx.compose.ui.graphics.Color,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.PlatformSpanStyle)">SpanStyle</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;color,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;fontSize,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>&nbsp;fontWeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>&nbsp;fontStyle,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a>&nbsp;fontSynthesis,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a>&nbsp;fontFamily,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;fontFeatureSettings,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;letterSpacing,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a>&nbsp;baselineShift,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextGeometricTransform.html">TextGeometricTransform</a>&nbsp;textGeometricTransform,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/intl/LocaleList.html">LocaleList</a>&nbsp;localeList,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;background,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>&nbsp;textDecoration,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/Shadow.html">Shadow</a>&nbsp;shadow,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/PlatformSpanStyle.html">PlatformSpanStyle</a>&nbsp;platformStyle<br>)</pre>
+        <p>Styling configuration for a text span. This configuration only allows character level styling, in order to set paragraph level styling such as line height, or text alignment please see <code><a href="/reference/androidx/compose/ui/text/ParagraphStyle.html">ParagraphStyle</a></code>.</p>
+        <pre class="prettyprint">
+import androidx.compose.material.Text
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
+
+Text(
+    fontSize = 16.sp,
+    text = buildAnnotatedString {
+        withStyle(style = SpanStyle(color = Color.Red)) {
+            append(&quot;Hello&quot;)
+        }
+        withStyle(SpanStyle(color = Color.Blue)) {
+            append(&quot; World&quot;)
+        }
+    }
+)</pre>
+        <pre class="prettyprint">
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+
+buildAnnotatedString {
+    append(&quot;Hello&quot;)
+    // push green text style so that any appended text will be green
+    pushStyle(SpanStyle(color = Color.Green))
+    // append new text, this text will be rendered as green
+    append(&quot; World&quot;)
+    // pop the green style
+    pop()
+    // append a string without style
+    append(&quot;!&quot;)
+    // then style the last added word as red, exclamation mark will be red
+    addStyle(SpanStyle(color = Color.Red), &quot;Hello World&quot;.length, this.length)
+
+    toAnnotatedString()
+}</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;color</code></td>
+                <td>
+                  <p>The color to draw the text.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;fontSize</code></td>
+                <td>
+                  <p>The size of glyphs (in logical pixels) to use when painting the text. This may be <code><a href="/reference/androidx/compose/ui/unit/TextUnit.Companion.html#Unspecified()">TextUnit.Unspecified</a></code> for inheriting from another <code><a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>&nbsp;fontWeight</code></td>
+                <td>
+                  <p>The typeface thickness to use when painting the text (e.g., bold).</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>&nbsp;fontStyle</code></td>
+                <td>
+                  <p>The typeface variant to use when drawing the letters (e.g., italic).</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a>&nbsp;fontSynthesis</code></td>
+                <td>
+                  <p>Whether to synthesize font weight and/or style when the requested weight or style cannot be found in the provided font family.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a>&nbsp;fontFamily</code></td>
+                <td>
+                  <p>The font family to be used when rendering the text.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;fontFeatureSettings</code></td>
+                <td>
+                  <p>The advanced typography settings provided by font. The format is the same as the CSS font-feature-settings attribute: https://www.w3.org/TR/css-fonts-3/#font-feature-settings-prop</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;letterSpacing</code></td>
+                <td>
+                  <p>The amount of space (in em) to add between each letter.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a>&nbsp;baselineShift</code></td>
+                <td>
+                  <p>The amount by which the text is shifted up from the current baseline.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/style/TextGeometricTransform.html">TextGeometricTransform</a>&nbsp;textGeometricTransform</code></td>
+                <td>
+                  <p>The geometric transformation applied the text.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/intl/LocaleList.html">LocaleList</a>&nbsp;localeList</code></td>
+                <td>
+                  <p>The locale list used to select region-specific glyphs.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;background</code></td>
+                <td>
+                  <p>The background color for the text.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>&nbsp;textDecoration</code></td>
+                <td>
+                  <p>The decorations to paint on the text (e.g., an underline).</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/Shadow.html">Shadow</a>&nbsp;shadow</code></td>
+                <td>
+                  <p>The shadow effect applied on the text.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/PlatformSpanStyle.html">PlatformSpanStyle</a>&nbsp;platformStyle</code></td>
+                <td>
+                  <p>Platform specific <code><a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a></code> parameters.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/TextStyle.html">TextStyle</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/ParagraphStyle.html">ParagraphStyle</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="SpanStyle(androidx.compose.ui.graphics.Color, androidx.compose.ui.unit.TextUnit, androidx.compose.ui.text.font.FontWeight, androidx.compose.ui.text.font.FontStyle, androidx.compose.ui.text.font.FontSynthesis, androidx.compose.ui.text.font.FontFamily, kotlin.String, androidx.compose.ui.unit.TextUnit, androidx.compose.ui.text.style.BaselineShift, androidx.compose.ui.text.style.TextGeometricTransform, androidx.compose.ui.text.intl.LocaleList, androidx.compose.ui.graphics.Color, androidx.compose.ui.text.style.TextDecoration, androidx.compose.ui.graphics.Shadow, androidx.compose.ui.text.PlatformSpanStyle, androidx.compose.ui.graphics.drawscope.DrawStyle)"></a><a name="SpanStyle-androidx.compose.ui.graphics.Color-androidx.compose.ui.unit.TextUnit-androidx.compose.ui.text.font.FontWeight-androidx.compose.ui.text.font.FontStyle-androidx.compose.ui.text.font.FontSynthesis-androidx.compose.ui.text.font.FontFamily-kotlin.String-androidx.compose.ui.unit.TextUnit-androidx.compose.ui.text.style.BaselineShift-androidx.compose.ui.text.style.TextGeometricTransform-androidx.compose.ui.text.intl.LocaleList-androidx.compose.ui.graphics.Color-androidx.compose.ui.text.style.TextDecoration-androidx.compose.ui.graphics.Shadow-androidx.compose.ui.text.PlatformSpanStyle-androidx.compose.ui.graphics.drawscope.DrawStyle-"></a><a name="spanstyle"></a>
+        <h3 class="api-name" id="SpanStyle(androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis,androidx.compose.ui.text.font.FontFamily,kotlin.String,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.BaselineShift,androidx.compose.ui.text.style.TextGeometricTransform,androidx.compose.ui.text.intl.LocaleList,androidx.compose.ui.graphics.Color,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.PlatformSpanStyle,androidx.compose.ui.graphics.drawscope.DrawStyle)">SpanStyle</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>public&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#SpanStyle(androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis,androidx.compose.ui.text.font.FontFamily,kotlin.String,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.BaselineShift,androidx.compose.ui.text.style.TextGeometricTransform,androidx.compose.ui.text.intl.LocaleList,androidx.compose.ui.graphics.Color,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.PlatformSpanStyle,androidx.compose.ui.graphics.drawscope.DrawStyle)">SpanStyle</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;color,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;fontSize,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>&nbsp;fontWeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>&nbsp;fontStyle,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a>&nbsp;fontSynthesis,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a>&nbsp;fontFamily,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;fontFeatureSettings,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;letterSpacing,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a>&nbsp;baselineShift,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextGeometricTransform.html">TextGeometricTransform</a>&nbsp;textGeometricTransform,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/intl/LocaleList.html">LocaleList</a>&nbsp;localeList,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;background,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>&nbsp;textDecoration,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/Shadow.html">Shadow</a>&nbsp;shadow,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/PlatformSpanStyle.html">PlatformSpanStyle</a>&nbsp;platformStyle,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/drawscope/DrawStyle.html">DrawStyle</a>&nbsp;drawStyle<br>)</pre>
+        <p>Styling configuration for a text span. This configuration only allows character level styling, in order to set paragraph level styling such as line height, or text alignment please see <code><a href="/reference/androidx/compose/ui/text/ParagraphStyle.html">ParagraphStyle</a></code>.</p>
+        <pre class="prettyprint">
+import androidx.compose.material.Text
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
+
+Text(
+    fontSize = 16.sp,
+    text = buildAnnotatedString {
+        withStyle(style = SpanStyle(color = Color.Red)) {
+            append(&quot;Hello&quot;)
+        }
+        withStyle(SpanStyle(color = Color.Blue)) {
+            append(&quot; World&quot;)
+        }
+    }
+)</pre>
+        <pre class="prettyprint">
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+
+buildAnnotatedString {
+    append(&quot;Hello&quot;)
+    // push green text style so that any appended text will be green
+    pushStyle(SpanStyle(color = Color.Green))
+    // append new text, this text will be rendered as green
+    append(&quot; World&quot;)
+    // pop the green style
+    pop()
+    // append a string without style
+    append(&quot;!&quot;)
+    // then style the last added word as red, exclamation mark will be red
+    addStyle(SpanStyle(color = Color.Red), &quot;Hello World&quot;.length, this.length)
+
+    toAnnotatedString()
+}</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;color</code></td>
+                <td>
+                  <p>The color to draw the text.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;fontSize</code></td>
+                <td>
+                  <p>The size of glyphs (in logical pixels) to use when painting the text. This may be <code><a href="/reference/androidx/compose/ui/unit/TextUnit.Companion.html#Unspecified()">TextUnit.Unspecified</a></code> for inheriting from another <code><a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>&nbsp;fontWeight</code></td>
+                <td>
+                  <p>The typeface thickness to use when painting the text (e.g., bold).</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>&nbsp;fontStyle</code></td>
+                <td>
+                  <p>The typeface variant to use when drawing the letters (e.g., italic).</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a>&nbsp;fontSynthesis</code></td>
+                <td>
+                  <p>Whether to synthesize font weight and/or style when the requested weight or style cannot be found in the provided font family.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a>&nbsp;fontFamily</code></td>
+                <td>
+                  <p>The font family to be used when rendering the text.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;fontFeatureSettings</code></td>
+                <td>
+                  <p>The advanced typography settings provided by font. The format is the same as the CSS font-feature-settings attribute: https://www.w3.org/TR/css-fonts-3/#font-feature-settings-prop</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;letterSpacing</code></td>
+                <td>
+                  <p>The amount of space (in em) to add between each letter.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a>&nbsp;baselineShift</code></td>
+                <td>
+                  <p>The amount by which the text is shifted up from the current baseline.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/style/TextGeometricTransform.html">TextGeometricTransform</a>&nbsp;textGeometricTransform</code></td>
+                <td>
+                  <p>The geometric transformation applied the text.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/intl/LocaleList.html">LocaleList</a>&nbsp;localeList</code></td>
+                <td>
+                  <p>The locale list used to select region-specific glyphs.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;background</code></td>
+                <td>
+                  <p>The background color for the text.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>&nbsp;textDecoration</code></td>
+                <td>
+                  <p>The decorations to paint on the text (e.g., an underline).</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/Shadow.html">Shadow</a>&nbsp;shadow</code></td>
+                <td>
+                  <p>The shadow effect applied on the text.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/PlatformSpanStyle.html">PlatformSpanStyle</a>&nbsp;platformStyle</code></td>
+                <td>
+                  <p>Platform specific <code><a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a></code> parameters.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/drawscope/DrawStyle.html">DrawStyle</a>&nbsp;drawStyle</code></td>
+                <td>
+                  <p>Drawing style of text, whether fill in the text while drawing or stroke around the edges.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/TextStyle.html">TextStyle</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/ParagraphStyle.html">ParagraphStyle</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="SpanStyle(androidx.compose.ui.graphics.Brush, kotlin.Float, androidx.compose.ui.unit.TextUnit, androidx.compose.ui.text.font.FontWeight, androidx.compose.ui.text.font.FontStyle, androidx.compose.ui.text.font.FontSynthesis, androidx.compose.ui.text.font.FontFamily, kotlin.String, androidx.compose.ui.unit.TextUnit, androidx.compose.ui.text.style.BaselineShift, androidx.compose.ui.text.style.TextGeometricTransform, androidx.compose.ui.text.intl.LocaleList, androidx.compose.ui.graphics.Color, androidx.compose.ui.text.style.TextDecoration, androidx.compose.ui.graphics.Shadow, androidx.compose.ui.text.PlatformSpanStyle, androidx.compose.ui.graphics.drawscope.DrawStyle)"></a><a name="SpanStyle-androidx.compose.ui.graphics.Brush-kotlin.Float-androidx.compose.ui.unit.TextUnit-androidx.compose.ui.text.font.FontWeight-androidx.compose.ui.text.font.FontStyle-androidx.compose.ui.text.font.FontSynthesis-androidx.compose.ui.text.font.FontFamily-kotlin.String-androidx.compose.ui.unit.TextUnit-androidx.compose.ui.text.style.BaselineShift-androidx.compose.ui.text.style.TextGeometricTransform-androidx.compose.ui.text.intl.LocaleList-androidx.compose.ui.graphics.Color-androidx.compose.ui.text.style.TextDecoration-androidx.compose.ui.graphics.Shadow-androidx.compose.ui.text.PlatformSpanStyle-androidx.compose.ui.graphics.drawscope.DrawStyle-"></a><a name="spanstyle"></a>
+        <h3 class="api-name" id="SpanStyle(androidx.compose.ui.graphics.Brush,kotlin.Float,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis,androidx.compose.ui.text.font.FontFamily,kotlin.String,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.BaselineShift,androidx.compose.ui.text.style.TextGeometricTransform,androidx.compose.ui.text.intl.LocaleList,androidx.compose.ui.graphics.Color,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.PlatformSpanStyle,androidx.compose.ui.graphics.drawscope.DrawStyle)">SpanStyle</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>public&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#SpanStyle(androidx.compose.ui.graphics.Brush,kotlin.Float,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis,androidx.compose.ui.text.font.FontFamily,kotlin.String,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.BaselineShift,androidx.compose.ui.text.style.TextGeometricTransform,androidx.compose.ui.text.intl.LocaleList,androidx.compose.ui.graphics.Color,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.PlatformSpanStyle,androidx.compose.ui.graphics.drawscope.DrawStyle)">SpanStyle</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/Brush.html">Brush</a>&nbsp;brush,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;alpha,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;fontSize,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>&nbsp;fontWeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>&nbsp;fontStyle,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a>&nbsp;fontSynthesis,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a>&nbsp;fontFamily,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;fontFeatureSettings,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;letterSpacing,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a>&nbsp;baselineShift,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextGeometricTransform.html">TextGeometricTransform</a>&nbsp;textGeometricTransform,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/intl/LocaleList.html">LocaleList</a>&nbsp;localeList,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;background,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>&nbsp;textDecoration,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/Shadow.html">Shadow</a>&nbsp;shadow,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/PlatformSpanStyle.html">PlatformSpanStyle</a>&nbsp;platformStyle,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/drawscope/DrawStyle.html">DrawStyle</a>&nbsp;drawStyle<br>)</pre>
+        <p>Styling configuration for a text span. This configuration only allows character level styling, in order to set paragraph level styling such as line height, or text alignment please see <code><a href="/reference/androidx/compose/ui/text/ParagraphStyle.html">ParagraphStyle</a></code>.</p>
+        <pre class="prettyprint">
+import androidx.compose.material.Text
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
+
+val brushColors = listOf(Color.Red, Color.Blue, Color.Green, Color.Yellow)
+Text(
+    fontSize = 16.sp,
+    text = buildAnnotatedString {
+        withStyle(SpanStyle(
+            brush = Brush.radialGradient(brushColors)
+        )) {
+            append(&quot;Hello&quot;)
+        }
+        withStyle(SpanStyle(
+            brush = Brush.radialGradient(brushColors.asReversed())
+        )) {
+            append(&quot; World&quot;)
+        }
+    }
+)</pre>
+        <pre class="prettyprint">
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+
+buildAnnotatedString {
+    append(&quot;Hello&quot;)
+    // push green text style so that any appended text will be green
+    pushStyle(SpanStyle(color = Color.Green))
+    // append new text, this text will be rendered as green
+    append(&quot; World&quot;)
+    // pop the green style
+    pop()
+    // append a string without style
+    append(&quot;!&quot;)
+    // then style the last added word as red, exclamation mark will be red
+    addStyle(SpanStyle(color = Color.Red), &quot;Hello World&quot;.length, this.length)
+
+    toAnnotatedString()
+}</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/Brush.html">Brush</a>&nbsp;brush</code></td>
+                <td>
+                  <p>The brush to use when painting the text. If brush is given as null, it will be treated as unspecified. It is equivalent to calling the alternative color constructor with <code><a href="/reference/androidx/compose/ui/graphics/Color.Companion.html#Unspecified()">Color.Unspecified</a></code></p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>float&nbsp;alpha</code></td>
+                <td>
+                  <p>Opacity to be applied to <code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#&lt;init&gt;(androidx.compose.ui.graphics.Brush,kotlin.Float,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis,androidx.compose.ui.text.font.FontFamily,kotlin.String,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.BaselineShift,androidx.compose.ui.text.style.TextGeometricTransform,androidx.compose.ui.text.intl.LocaleList,androidx.compose.ui.graphics.Color,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.PlatformSpanStyle,androidx.compose.ui.graphics.drawscope.DrawStyle)">brush</a></code> from 0.0f to 1.0f representing fully transparent to fully opaque respectively.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;fontSize</code></td>
+                <td>
+                  <p>The size of glyphs (in logical pixels) to use when painting the text. This may be <code><a href="/reference/androidx/compose/ui/unit/TextUnit.Companion.html#Unspecified()">TextUnit.Unspecified</a></code> for inheriting from another <code><a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>&nbsp;fontWeight</code></td>
+                <td>
+                  <p>The typeface thickness to use when painting the text (e.g., bold).</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>&nbsp;fontStyle</code></td>
+                <td>
+                  <p>The typeface variant to use when drawing the letters (e.g., italic).</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a>&nbsp;fontSynthesis</code></td>
+                <td>
+                  <p>Whether to synthesize font weight and/or style when the requested weight or style cannot be found in the provided font family.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a>&nbsp;fontFamily</code></td>
+                <td>
+                  <p>The font family to be used when rendering the text.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;fontFeatureSettings</code></td>
+                <td>
+                  <p>The advanced typography settings provided by font. The format is the same as the CSS font-feature-settings attribute: https://www.w3.org/TR/css-fonts-3/#font-feature-settings-prop</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;letterSpacing</code></td>
+                <td>
+                  <p>The amount of space (in em) to add between each letter.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a>&nbsp;baselineShift</code></td>
+                <td>
+                  <p>The amount by which the text is shifted up from the current baseline.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/style/TextGeometricTransform.html">TextGeometricTransform</a>&nbsp;textGeometricTransform</code></td>
+                <td>
+                  <p>The geometric transformation applied the text.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/intl/LocaleList.html">LocaleList</a>&nbsp;localeList</code></td>
+                <td>
+                  <p>The locale list used to select region-specific glyphs.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;background</code></td>
+                <td>
+                  <p>The background color for the text.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>&nbsp;textDecoration</code></td>
+                <td>
+                  <p>The decorations to paint on the text (e.g., an underline).</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/Shadow.html">Shadow</a>&nbsp;shadow</code></td>
+                <td>
+                  <p>The shadow effect applied on the text.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/PlatformSpanStyle.html">PlatformSpanStyle</a>&nbsp;platformStyle</code></td>
+                <td>
+                  <p>Platform specific <code><a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a></code> parameters.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/drawscope/DrawStyle.html">DrawStyle</a>&nbsp;drawStyle</code></td>
+                <td>
+                  <p>Drawing style of text, whether fill in the text while drawing or stroke around the edges.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/TextStyle.html">TextStyle</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/ParagraphStyle.html">ParagraphStyle</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="copy(androidx.compose.ui.graphics.Color, androidx.compose.ui.unit.TextUnit, androidx.compose.ui.text.font.FontWeight, androidx.compose.ui.text.font.FontStyle, androidx.compose.ui.text.font.FontSynthesis, androidx.compose.ui.text.font.FontFamily, kotlin.String, androidx.compose.ui.unit.TextUnit, androidx.compose.ui.text.style.BaselineShift, androidx.compose.ui.text.style.TextGeometricTransform, androidx.compose.ui.text.intl.LocaleList, androidx.compose.ui.graphics.Color, androidx.compose.ui.text.style.TextDecoration, androidx.compose.ui.graphics.Shadow)"></a><a name="copy-androidx.compose.ui.graphics.Color-androidx.compose.ui.unit.TextUnit-androidx.compose.ui.text.font.FontWeight-androidx.compose.ui.text.font.FontStyle-androidx.compose.ui.text.font.FontSynthesis-androidx.compose.ui.text.font.FontFamily-kotlin.String-androidx.compose.ui.unit.TextUnit-androidx.compose.ui.text.style.BaselineShift-androidx.compose.ui.text.style.TextGeometricTransform-androidx.compose.ui.text.intl.LocaleList-androidx.compose.ui.graphics.Color-androidx.compose.ui.text.style.TextDecoration-androidx.compose.ui.graphics.Shadow-"></a><a name="copy"></a>
+        <h3 class="api-name" id="copy(androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis,androidx.compose.ui.text.font.FontFamily,kotlin.String,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.BaselineShift,androidx.compose.ui.text.style.TextGeometricTransform,androidx.compose.ui.text.intl.LocaleList,androidx.compose.ui.graphics.Color,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.Shadow)">copy</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a>&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#copy(androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis,androidx.compose.ui.text.font.FontFamily,kotlin.String,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.BaselineShift,androidx.compose.ui.text.style.TextGeometricTransform,androidx.compose.ui.text.intl.LocaleList,androidx.compose.ui.graphics.Color,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.Shadow)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;color,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;fontSize,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>&nbsp;fontWeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>&nbsp;fontStyle,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a>&nbsp;fontSynthesis,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a>&nbsp;fontFamily,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;fontFeatureSettings,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;letterSpacing,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a>&nbsp;baselineShift,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextGeometricTransform.html">TextGeometricTransform</a>&nbsp;textGeometricTransform,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/intl/LocaleList.html">LocaleList</a>&nbsp;localeList,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;background,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>&nbsp;textDecoration,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/Shadow.html">Shadow</a>&nbsp;shadow<br>)</pre>
+      </div>
+      <div class="api-item"><a name="copy(androidx.compose.ui.graphics.Color, androidx.compose.ui.unit.TextUnit, androidx.compose.ui.text.font.FontWeight, androidx.compose.ui.text.font.FontStyle, androidx.compose.ui.text.font.FontSynthesis, androidx.compose.ui.text.font.FontFamily, kotlin.String, androidx.compose.ui.unit.TextUnit, androidx.compose.ui.text.style.BaselineShift, androidx.compose.ui.text.style.TextGeometricTransform, androidx.compose.ui.text.intl.LocaleList, androidx.compose.ui.graphics.Color, androidx.compose.ui.text.style.TextDecoration, androidx.compose.ui.graphics.Shadow, androidx.compose.ui.text.PlatformSpanStyle)"></a><a name="copy-androidx.compose.ui.graphics.Color-androidx.compose.ui.unit.TextUnit-androidx.compose.ui.text.font.FontWeight-androidx.compose.ui.text.font.FontStyle-androidx.compose.ui.text.font.FontSynthesis-androidx.compose.ui.text.font.FontFamily-kotlin.String-androidx.compose.ui.unit.TextUnit-androidx.compose.ui.text.style.BaselineShift-androidx.compose.ui.text.style.TextGeometricTransform-androidx.compose.ui.text.intl.LocaleList-androidx.compose.ui.graphics.Color-androidx.compose.ui.text.style.TextDecoration-androidx.compose.ui.graphics.Shadow-androidx.compose.ui.text.PlatformSpanStyle-"></a><a name="copy"></a>
+        <h3 class="api-name" id="copy(androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis,androidx.compose.ui.text.font.FontFamily,kotlin.String,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.BaselineShift,androidx.compose.ui.text.style.TextGeometricTransform,androidx.compose.ui.text.intl.LocaleList,androidx.compose.ui.graphics.Color,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.PlatformSpanStyle)">copy</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a>&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#copy(androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis,androidx.compose.ui.text.font.FontFamily,kotlin.String,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.BaselineShift,androidx.compose.ui.text.style.TextGeometricTransform,androidx.compose.ui.text.intl.LocaleList,androidx.compose.ui.graphics.Color,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.PlatformSpanStyle)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;color,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;fontSize,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>&nbsp;fontWeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>&nbsp;fontStyle,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a>&nbsp;fontSynthesis,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a>&nbsp;fontFamily,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;fontFeatureSettings,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;letterSpacing,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a>&nbsp;baselineShift,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextGeometricTransform.html">TextGeometricTransform</a>&nbsp;textGeometricTransform,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/intl/LocaleList.html">LocaleList</a>&nbsp;localeList,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;background,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>&nbsp;textDecoration,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/Shadow.html">Shadow</a>&nbsp;shadow,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/PlatformSpanStyle.html">PlatformSpanStyle</a>&nbsp;platformStyle<br>)</pre>
+      </div>
+      <div class="api-item"><a name="copy(androidx.compose.ui.graphics.Color, androidx.compose.ui.unit.TextUnit, androidx.compose.ui.text.font.FontWeight, androidx.compose.ui.text.font.FontStyle, androidx.compose.ui.text.font.FontSynthesis, androidx.compose.ui.text.font.FontFamily, kotlin.String, androidx.compose.ui.unit.TextUnit, androidx.compose.ui.text.style.BaselineShift, androidx.compose.ui.text.style.TextGeometricTransform, androidx.compose.ui.text.intl.LocaleList, androidx.compose.ui.graphics.Color, androidx.compose.ui.text.style.TextDecoration, androidx.compose.ui.graphics.Shadow, androidx.compose.ui.text.PlatformSpanStyle, androidx.compose.ui.graphics.drawscope.DrawStyle)"></a><a name="copy-androidx.compose.ui.graphics.Color-androidx.compose.ui.unit.TextUnit-androidx.compose.ui.text.font.FontWeight-androidx.compose.ui.text.font.FontStyle-androidx.compose.ui.text.font.FontSynthesis-androidx.compose.ui.text.font.FontFamily-kotlin.String-androidx.compose.ui.unit.TextUnit-androidx.compose.ui.text.style.BaselineShift-androidx.compose.ui.text.style.TextGeometricTransform-androidx.compose.ui.text.intl.LocaleList-androidx.compose.ui.graphics.Color-androidx.compose.ui.text.style.TextDecoration-androidx.compose.ui.graphics.Shadow-androidx.compose.ui.text.PlatformSpanStyle-androidx.compose.ui.graphics.drawscope.DrawStyle-"></a><a name="copy"></a>
+        <h3 class="api-name" id="copy(androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis,androidx.compose.ui.text.font.FontFamily,kotlin.String,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.BaselineShift,androidx.compose.ui.text.style.TextGeometricTransform,androidx.compose.ui.text.intl.LocaleList,androidx.compose.ui.graphics.Color,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.PlatformSpanStyle,androidx.compose.ui.graphics.drawscope.DrawStyle)">copy</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a>&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#copy(androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis,androidx.compose.ui.text.font.FontFamily,kotlin.String,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.BaselineShift,androidx.compose.ui.text.style.TextGeometricTransform,androidx.compose.ui.text.intl.LocaleList,androidx.compose.ui.graphics.Color,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.PlatformSpanStyle,androidx.compose.ui.graphics.drawscope.DrawStyle)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;color,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;fontSize,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>&nbsp;fontWeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>&nbsp;fontStyle,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a>&nbsp;fontSynthesis,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a>&nbsp;fontFamily,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;fontFeatureSettings,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;letterSpacing,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a>&nbsp;baselineShift,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextGeometricTransform.html">TextGeometricTransform</a>&nbsp;textGeometricTransform,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/intl/LocaleList.html">LocaleList</a>&nbsp;localeList,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;background,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>&nbsp;textDecoration,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/Shadow.html">Shadow</a>&nbsp;shadow,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/PlatformSpanStyle.html">PlatformSpanStyle</a>&nbsp;platformStyle,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/drawscope/DrawStyle.html">DrawStyle</a>&nbsp;drawStyle<br>)</pre>
+      </div>
+      <div class="api-item"><a name="copy(androidx.compose.ui.graphics.Brush, kotlin.Float, androidx.compose.ui.unit.TextUnit, androidx.compose.ui.text.font.FontWeight, androidx.compose.ui.text.font.FontStyle, androidx.compose.ui.text.font.FontSynthesis, androidx.compose.ui.text.font.FontFamily, kotlin.String, androidx.compose.ui.unit.TextUnit, androidx.compose.ui.text.style.BaselineShift, androidx.compose.ui.text.style.TextGeometricTransform, androidx.compose.ui.text.intl.LocaleList, androidx.compose.ui.graphics.Color, androidx.compose.ui.text.style.TextDecoration, androidx.compose.ui.graphics.Shadow, androidx.compose.ui.text.PlatformSpanStyle, androidx.compose.ui.graphics.drawscope.DrawStyle)"></a><a name="copy-androidx.compose.ui.graphics.Brush-kotlin.Float-androidx.compose.ui.unit.TextUnit-androidx.compose.ui.text.font.FontWeight-androidx.compose.ui.text.font.FontStyle-androidx.compose.ui.text.font.FontSynthesis-androidx.compose.ui.text.font.FontFamily-kotlin.String-androidx.compose.ui.unit.TextUnit-androidx.compose.ui.text.style.BaselineShift-androidx.compose.ui.text.style.TextGeometricTransform-androidx.compose.ui.text.intl.LocaleList-androidx.compose.ui.graphics.Color-androidx.compose.ui.text.style.TextDecoration-androidx.compose.ui.graphics.Shadow-androidx.compose.ui.text.PlatformSpanStyle-androidx.compose.ui.graphics.drawscope.DrawStyle-"></a><a name="copy"></a>
+        <h3 class="api-name" id="copy(androidx.compose.ui.graphics.Brush,kotlin.Float,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis,androidx.compose.ui.text.font.FontFamily,kotlin.String,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.BaselineShift,androidx.compose.ui.text.style.TextGeometricTransform,androidx.compose.ui.text.intl.LocaleList,androidx.compose.ui.graphics.Color,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.PlatformSpanStyle,androidx.compose.ui.graphics.drawscope.DrawStyle)">copy</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a>&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#copy(androidx.compose.ui.graphics.Brush,kotlin.Float,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontSynthesis,androidx.compose.ui.text.font.FontFamily,kotlin.String,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.BaselineShift,androidx.compose.ui.text.style.TextGeometricTransform,androidx.compose.ui.text.intl.LocaleList,androidx.compose.ui.graphics.Color,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.PlatformSpanStyle,androidx.compose.ui.graphics.drawscope.DrawStyle)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/Brush.html">Brush</a>&nbsp;brush,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;alpha,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;fontSize,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>&nbsp;fontWeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>&nbsp;fontStyle,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontSynthesis.html">FontSynthesis</a>&nbsp;fontSynthesis,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a>&nbsp;fontFamily,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;fontFeatureSettings,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;letterSpacing,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a>&nbsp;baselineShift,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextGeometricTransform.html">TextGeometricTransform</a>&nbsp;textGeometricTransform,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/intl/LocaleList.html">LocaleList</a>&nbsp;localeList,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;background,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>&nbsp;textDecoration,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/Shadow.html">Shadow</a>&nbsp;shadow,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/PlatformSpanStyle.html">PlatformSpanStyle</a>&nbsp;platformStyle,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/drawscope/DrawStyle.html">DrawStyle</a>&nbsp;drawStyle<br>)</pre>
+      </div>
+      <div class="api-item"><a name="equals-kotlin.Any-"></a><a name="equals"></a>
+        <h3 class="api-name" id="equals(kotlin.Any)">equals</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#equals(kotlin.Any)">equals</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;other)</pre>
+      </div>
+      <div class="api-item"><a name="hashCode--"></a><a name="hashcode"></a>
+        <h3 class="api-name" id="hashCode()">hashCode</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#hashCode()">hashCode</a>()</pre>
+      </div>
+      <div class="api-item"><a name="merge-androidx.compose.ui.text.SpanStyle-"></a><a name="merge"></a>
+        <h3 class="api-name" id="merge(androidx.compose.ui.text.SpanStyle)">merge</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a>&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#merge(androidx.compose.ui.text.SpanStyle)">merge</a>(<a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a>&nbsp;other)</pre>
+        <p>Returns a new span style that is a combination of this style and the given <code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#merge(androidx.compose.ui.text.SpanStyle)">other</a></code> style.</p>
+        <p><code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#merge(androidx.compose.ui.text.SpanStyle)">other</a></code> span style's null or inherit properties are replaced with the non-null properties of this span style. Another way to think of it is that the &quot;missing&quot; properties of the <code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#merge(androidx.compose.ui.text.SpanStyle)">other</a></code> style are <em>filled</em> by the properties of this style.</p>
+        <p>If the given span style is null, returns this span style.</p>
+      </div>
+      <div class="api-item"><a name="plus-androidx.compose.ui.text.SpanStyle-"></a><a name="plus"></a>
+        <h3 class="api-name" id="plus(androidx.compose.ui.text.SpanStyle)">plus</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a>&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#plus(androidx.compose.ui.text.SpanStyle)">plus</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a>&nbsp;other)</pre>
+        <p>Plus operator overload that applies a <code><a href="/reference/androidx/compose/ui/text/SpanStyle.html#merge(androidx.compose.ui.text.SpanStyle)">merge</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+        <h3 class="api-name" id="toString()">toString</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/text/SpanStyle.html#toString()">toString</a>()</pre>
+      </div>
+    </div>
+  </body>
+</html>

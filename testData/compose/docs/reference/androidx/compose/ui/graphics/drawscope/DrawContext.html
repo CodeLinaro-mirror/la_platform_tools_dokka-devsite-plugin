@@ -1,0 +1,74 @@
+<html devsite="true">
+  <head>
+    <title>DrawContext</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-graphics/androidx/compose/ui/graphics/drawscope/DrawContext.kt+class:androidx.compose.ui.graphics.drawscope.DrawContext&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>DrawContext</h1>
+    <p>
+      <pre>public interface <a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html">DrawContext</a></pre>
+    </p>
+    <hr>
+    <p>Object that provides the dependencies to support a <code><a href="/reference/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a></code> drawing environment. Namely this provides the drawing bounds represented as a size as well as the target <code><a href="/reference/androidx/compose/ui/graphics/Canvas.html">Canvas</a></code> to issue drawing commands into. Additionally the <code><a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html">DrawContext</a></code> handles updating <code><a href="/reference/androidx/compose/ui/graphics/Canvas.html">Canvas</a></code> state during transformations and updating the size of the drawing bounds that may occur during these transformations.</p>
+    <p>This exposes necessary internal state to the implementation of the <code><a href="/reference/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a></code> in order to support inline scoped transformation calls without allowing consumers of <code><a href="/reference/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a></code> to modify state directly thus maintaining the stateless API surface</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Canvas.html">Canvas</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html#canvas()">canvas</a></code></div>
+              <p>The target canvas to issue drawing commands</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html#size()">size</a></code></div>
+              <p>The current size of the drawing environment</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/drawscope/DrawTransform.html">DrawTransform</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html#transform()">transform</a></code></div>
+              <p>The controller for issuing transformations to the drawing environment</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getCanvas()"></a><a name="setCanvas()"></a><a name="getCanvas--"></a><a name="setCanvas--"></a>
+        <h3 class="api-name" id="canvas()">canvas</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Canvas.html">Canvas</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html#canvas()">canvas</a></pre>
+        <p>The target canvas to issue drawing commands</p>
+      </div>
+      <div class="api-item"><a name="getSize()"></a><a name="setSize()"></a><a name="getSize--"></a><a name="setSize--"></a>
+        <h3 class="api-name" id="size()">size</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html#size()">size</a></pre>
+        <p>The current size of the drawing environment</p>
+      </div>
+      <div class="api-item"><a name="getTransform()"></a><a name="setTransform()"></a><a name="getTransform--"></a><a name="setTransform--"></a>
+        <h3 class="api-name" id="transform()">transform</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/drawscope/DrawTransform.html">DrawTransform</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/drawscope/DrawContext.html#transform()">transform</a></pre>
+        <p>The controller for issuing transformations to the drawing environment</p>
+      </div>
+    </div>
+  </body>
+</html>

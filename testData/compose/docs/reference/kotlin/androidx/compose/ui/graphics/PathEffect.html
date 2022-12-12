@@ -1,0 +1,202 @@
+<html devsite="true">
+  <head>
+    <title>PathEffect</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-graphics/androidx/compose/ui/graphics/PathEffect.kt+class:androidx.compose.ui.graphics.PathEffect&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>PathEffect</h1>
+    <p>
+      <pre>interface <a href="/reference/kotlin/androidx/compose/ui/graphics/PathEffect.html">PathEffect</a></pre>
+    </p>
+    <hr>
+    <p>Effect applied to the geometry of a drawing primitive. For example, this can be used to draw shapes as a dashed or shaped pattern, or apply a treatment around line segment intersections.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public companion functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/PathEffect.html">PathEffect</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/PathEffect.Companion.html#chainPathEffect(androidx.compose.ui.graphics.PathEffect,androidx.compose.ui.graphics.PathEffect)">chainPathEffect</a>(outer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/PathEffect.html">PathEffect</a>,&nbsp;inner:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/PathEffect.html">PathEffect</a>)</code></div>
+              <p>Create a PathEffect that applies the inner effect to the path, and then applies the outer effect to the result of the inner effect.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/PathEffect.html">PathEffect</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/PathEffect.Companion.html#cornerPathEffect(kotlin.Float)">cornerPathEffect</a>(radius:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+              <p>Replaces sharp angles between line segments into rounded angles of the specified radius</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/PathEffect.html">PathEffect</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/PathEffect.Companion.html#dashPathEffect(kotlin.FloatArray,kotlin.Float)">dashPathEffect</a>(intervals:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float-array/index.html">FloatArray</a>,&nbsp;phase:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+              <p>Draws a shape as a series of dashes with the given intervals and offset into the specified interval array.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/PathEffect.html">PathEffect</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/PathEffect.Companion.html#stampedPathEffect(androidx.compose.ui.graphics.Path,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.StampedPathEffectStyle)">stampedPathEffect</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;shape:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;advance:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;phase:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;style:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/StampedPathEffectStyle.html">StampedPathEffectStyle</a><br>)</code></div>
+              <p>Dash the drawn path by stamping it with the specified shape represented as a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://developer.android.com/reference/android/graphics/PathEffect.html">PathEffect</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/PathEffect.html">PathEffect</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/PathEffect.html#(androidx.compose.ui.graphics.PathEffect).asAndroidPathEffect()">asAndroidPathEffect</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public companion functions</h2>
+      <div class="api-item"><a name="chainPathEffect(androidx.compose.ui.graphics.PathEffect, androidx.compose.ui.graphics.PathEffect)"></a><a name="chainPathEffect-androidx.compose.ui.graphics.PathEffect-androidx.compose.ui.graphics.PathEffect-"></a><a name="chainpatheffect"></a>
+        <h3 class="api-name" id="chainPathEffect(androidx.compose.ui.graphics.PathEffect,androidx.compose.ui.graphics.PathEffect)">chainPathEffect</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/PathEffect.Companion.html#chainPathEffect(androidx.compose.ui.graphics.PathEffect,androidx.compose.ui.graphics.PathEffect)">chainPathEffect</a>(outer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/PathEffect.html">PathEffect</a>,&nbsp;inner:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/PathEffect.html">PathEffect</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/PathEffect.html">PathEffect</a></pre>
+        <p>Create a PathEffect that applies the inner effect to the path, and then applies the outer effect to the result of the inner effect. (e.g. outer(inner(path)).</p>
+      </div>
+      <div class="api-item"><a name="cornerPathEffect-kotlin.Float-"></a><a name="cornerpatheffect"></a>
+        <h3 class="api-name" id="cornerPathEffect(kotlin.Float)">cornerPathEffect</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/PathEffect.Companion.html#cornerPathEffect(kotlin.Float)">cornerPathEffect</a>(radius:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/PathEffect.html">PathEffect</a></pre>
+        <p>Replaces sharp angles between line segments into rounded angles of the specified radius</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>radius:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>Rounded corner radius to apply for each angle of the drawn shape</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="dashPathEffect(kotlin.FloatArray, kotlin.Float)"></a><a name="dashPathEffect-kotlin.FloatArray-kotlin.Float-"></a><a name="dashpatheffect"></a>
+        <h3 class="api-name" id="dashPathEffect(kotlin.FloatArray,kotlin.Float)">dashPathEffect</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/PathEffect.Companion.html#dashPathEffect(kotlin.FloatArray,kotlin.Float)">dashPathEffect</a>(intervals:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float-array/index.html">FloatArray</a>,&nbsp;phase:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = 0.0f):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/PathEffect.html">PathEffect</a></pre>
+        <p>Draws a shape as a series of dashes with the given intervals and offset into the specified interval array. The intervals must contain an even number of entries (>=2). The even indices specify &quot;on&quot; intervals and the odd indices represent &quot;off&quot; intervals. The phase parameter is the pixel offset into the intervals array (mod the sum of all of the intervals).</p>
+        <p>For example: if <code>intervals[] = {10, 20}</code>, and phase = 25, this will set up a dashed path like so: 5 pixels off 10 pixels on 20 pixels off 10 pixels on 20 pixels off</p>
+        <p>The phase parameter is an offset into the intervals array. The intervals array controls the length of the dashes. This is only applied for stroked shapes (ex. <code><a href="/reference/kotlin/androidx/compose/ui/graphics/PaintingStyle.Companion.html#Stroke()">PaintingStyle.Stroke</a></code> and is ignored for filled in shapes (ex. <code><a href="/reference/kotlin/androidx/compose/ui/graphics/PaintingStyle.Companion.html#Fill()">PaintingStyle.Fill</a></code></p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>intervals:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float-array/index.html">FloatArray</a></code></td>
+                <td>
+                  <p>Array of &quot;on&quot; and &quot;off&quot; distances for the dashed line segments</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>phase:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = 0.0f</code></td>
+                <td>
+                  <p>Pixel offset into the intervals array</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="stampedPathEffect(androidx.compose.ui.graphics.Path, kotlin.Float, kotlin.Float, androidx.compose.ui.graphics.StampedPathEffectStyle)"></a><a name="stampedPathEffect-androidx.compose.ui.graphics.Path-kotlin.Float-kotlin.Float-androidx.compose.ui.graphics.StampedPathEffectStyle-"></a><a name="stampedpatheffect"></a>
+        <h3 class="api-name" id="stampedPathEffect(androidx.compose.ui.graphics.Path,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.StampedPathEffectStyle)">stampedPathEffect</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/PathEffect.Companion.html#stampedPathEffect(androidx.compose.ui.graphics.Path,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.StampedPathEffectStyle)">stampedPathEffect</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;shape:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;advance:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;phase:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;style:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/StampedPathEffectStyle.html">StampedPathEffectStyle</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/PathEffect.html">PathEffect</a></pre>
+        <p>Dash the drawn path by stamping it with the specified shape represented as a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a></code>. This is only applied to stroke shapes and will be ignored with filled shapes. The stroke width used with this <code><a href="/reference/kotlin/androidx/compose/ui/graphics/PathEffect.html">PathEffect</a></code> is ignored as well.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>shape:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a></code></td>
+                <td>
+                  <p>Path to stamp along</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>advance:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>Spacing between each stamped shape</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>phase:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>Amount to offset before the first shape is stamped</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>style:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/StampedPathEffectStyle.html">StampedPathEffectStyle</a></code></td>
+                <td>
+                  <p>How to transform the shape at each position as it is stamped</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.PathEffect-.asAndroidPathEffect--"></a><a name="asandroidpatheffect"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.graphics.PathEffect).asAndroidPathEffect()">asAndroidPathEffect</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/PathEffect.html">PathEffect</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/PathEffect.html#(androidx.compose.ui.graphics.PathEffect).asAndroidPathEffect()">asAndroidPathEffect</a>():&nbsp;<a href="https://developer.android.com/reference/android/graphics/PathEffect.html">PathEffect</a></pre>
+      </div>
+    </div>
+  </body>
+</html>

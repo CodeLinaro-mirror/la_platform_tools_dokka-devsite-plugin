@@ -1,0 +1,214 @@
+<html devsite="true">
+  <head>
+    <title>LayoutModifier</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/layout/LayoutModifier.kt+class:androidx.compose.ui.layout.LayoutModifier&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>LayoutModifier</h1>
+    <p>
+      <pre>interface <a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a> : <a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a></pre>
+    </p>
+    <hr>
+    <p>A <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a></code> that changes how its wrapped content is measured and laid out. It has the same measurement and layout functionality as the <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">androidx.compose.ui.layout.Layout</a></code> component, while wrapping exactly one layout due to it being a modifier. In contrast, the <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">androidx.compose.ui.layout.Layout</a></code> component is used to define the layout behavior of multiple children.</p>
+    <pre class="prettyprint">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.layout.layout
+import androidx.compose.ui.unit.offset
+
+val verticalPadding = object : LayoutModifier {
+    override fun MeasureScope.measure(
+        measurable: Measurable,
+        constraints: Constraints
+    ): MeasureResult {
+        // an example modifier that adds 50 pixels of vertical padding.
+        val padding = 50
+        val placeable = measurable.measure(constraints.offset(vertical = -padding))
+        return layout(placeable.width, placeable.height + padding) {
+            placeable.placeRelative(0, padding)
+        }
+    }
+}
+Box(Modifier.background(Color.Gray).then(verticalPadding)) {
+    Box(Modifier.fillMaxSize().background(Color.DarkGray))
+}</pre>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">See also</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasureScope.html">IntrinsicMeasureScope</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html#(androidx.compose.ui.layout.IntrinsicMeasureScope).maxIntrinsicHeight(androidx.compose.ui.layout.IntrinsicMeasurable,kotlin.Int)">maxIntrinsicHeight</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;measurable:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasurable.html">IntrinsicMeasurable</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><br>)</code></div>
+              <p>The lambda used to calculate <code><a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasurable.html#maxIntrinsicHeight(kotlin.Int)">IntrinsicMeasurable.maxIntrinsicHeight</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasureScope.html">IntrinsicMeasureScope</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html#(androidx.compose.ui.layout.IntrinsicMeasureScope).maxIntrinsicWidth(androidx.compose.ui.layout.IntrinsicMeasurable,kotlin.Int)">maxIntrinsicWidth</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;measurable:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasurable.html">IntrinsicMeasurable</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;height:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><br>)</code></div>
+              <p>The function used to calculate <code><a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasurable.html#maxIntrinsicWidth(kotlin.Int)">IntrinsicMeasurable.maxIntrinsicWidth</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasureScope.html">MeasureScope</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html#(androidx.compose.ui.layout.MeasureScope).measure(androidx.compose.ui.layout.Measurable,androidx.compose.ui.unit.Constraints)">measure</a>(measurable:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/Measurable.html">Measurable</a>,&nbsp;constraints:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>)</code></div>
+              <p>The function used to measure the modifier.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasureScope.html">IntrinsicMeasureScope</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html#(androidx.compose.ui.layout.IntrinsicMeasureScope).minIntrinsicHeight(androidx.compose.ui.layout.IntrinsicMeasurable,kotlin.Int)">minIntrinsicHeight</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;measurable:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasurable.html">IntrinsicMeasurable</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><br>)</code></div>
+              <p>The lambda used to calculate <code><a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasurable.html#minIntrinsicHeight(kotlin.Int)">IntrinsicMeasurable.minIntrinsicHeight</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasureScope.html">IntrinsicMeasureScope</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html#(androidx.compose.ui.layout.IntrinsicMeasureScope).minIntrinsicWidth(androidx.compose.ui.layout.IntrinsicMeasurable,kotlin.Int)">minIntrinsicWidth</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;measurable:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasurable.html">IntrinsicMeasurable</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;height:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><br>)</code></div>
+              <p>The function used to calculate <code><a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasurable.html#minIntrinsicWidth(kotlin.Int)">IntrinsicMeasurable.minIntrinsicWidth</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/Modifier.html">androidx.compose.ui.Modifier</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>open&nbsp;infix <a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html#then(androidx.compose.ui.Modifier)">then</a>(other:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>)</code></div>
+                        <p>Concatenates this modifier with another.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html">androidx.compose.ui.Modifier.Element</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html#all(kotlin.Function1)">all</a>(predicate:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>)</code></div>
+                        <p>Returns <code>true</code> if <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html#all(kotlin.Function1)">predicate</a></code> returns true for all <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html">Element</a></code>s in this <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code> or if this <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code> contains no <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html">Element</a></code>s.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html#any(kotlin.Function1)">any</a>(predicate:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>)</code></div>
+                        <p>Returns <code>true</code> if <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html#any(kotlin.Function1)">predicate</a></code> returns true for any <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html">Element</a></code> in this <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open R</code></td>
+                      <td>
+                        <div><code>&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html#foldIn(kotlin.Any,kotlin.Function2)">foldIn</a>(initial:&nbsp;R,&nbsp;operation:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>, R) <span style="white-space: nowrap;">-&gt;</span> R)</code></div>
+                        <p>Accumulates a value starting with <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html#foldIn(kotlin.Any,kotlin.Function2)">initial</a></code> and applying <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html#foldIn(kotlin.Any,kotlin.Function2)">operation</a></code> to the current value and each element from outside in.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open R</code></td>
+                      <td>
+                        <div><code>&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html#foldOut(kotlin.Any,kotlin.Function2)">foldOut</a>(initial:&nbsp;R,&nbsp;operation:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>, R) <span style="white-space: nowrap;">-&gt;</span> R)</code></div>
+                        <p>Accumulates a value starting with <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html#foldOut(kotlin.Any,kotlin.Function2)">initial</a></code> and applying <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html#foldOut(kotlin.Any,kotlin.Function2)">operation</a></code> to the current value and each element from inside out.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="(androidx.compose.ui.layout.IntrinsicMeasureScope).maxIntrinsicHeight(androidx.compose.ui.layout.IntrinsicMeasurable, kotlin.Int)"></a><a name="-androidx.compose.ui.layout.IntrinsicMeasureScope-.maxIntrinsicHeight-androidx.compose.ui.layout.IntrinsicMeasurable-kotlin.Int-"></a><a name="maxintrinsicheight"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.layout.IntrinsicMeasureScope).maxIntrinsicHeight(androidx.compose.ui.layout.IntrinsicMeasurable,kotlin.Int)">maxIntrinsicHeight</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasureScope.html">IntrinsicMeasureScope</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html#(androidx.compose.ui.layout.IntrinsicMeasureScope).maxIntrinsicHeight(androidx.compose.ui.layout.IntrinsicMeasurable,kotlin.Int)">maxIntrinsicHeight</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;measurable:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasurable.html">IntrinsicMeasurable</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>The lambda used to calculate <code><a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasurable.html#maxIntrinsicHeight(kotlin.Int)">IntrinsicMeasurable.maxIntrinsicHeight</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.layout.IntrinsicMeasureScope).maxIntrinsicWidth(androidx.compose.ui.layout.IntrinsicMeasurable, kotlin.Int)"></a><a name="-androidx.compose.ui.layout.IntrinsicMeasureScope-.maxIntrinsicWidth-androidx.compose.ui.layout.IntrinsicMeasurable-kotlin.Int-"></a><a name="maxintrinsicwidth"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.layout.IntrinsicMeasureScope).maxIntrinsicWidth(androidx.compose.ui.layout.IntrinsicMeasurable,kotlin.Int)">maxIntrinsicWidth</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasureScope.html">IntrinsicMeasureScope</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html#(androidx.compose.ui.layout.IntrinsicMeasureScope).maxIntrinsicWidth(androidx.compose.ui.layout.IntrinsicMeasurable,kotlin.Int)">maxIntrinsicWidth</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;measurable:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasurable.html">IntrinsicMeasurable</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;height:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>The function used to calculate <code><a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasurable.html#maxIntrinsicWidth(kotlin.Int)">IntrinsicMeasurable.maxIntrinsicWidth</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.layout.MeasureScope).measure(androidx.compose.ui.layout.Measurable, androidx.compose.ui.unit.Constraints)"></a><a name="-androidx.compose.ui.layout.MeasureScope-.measure-androidx.compose.ui.layout.Measurable-androidx.compose.ui.unit.Constraints-"></a><a name="measure"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.layout.MeasureScope).measure(androidx.compose.ui.layout.Measurable,androidx.compose.ui.unit.Constraints)">measure</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/MeasureScope.html">MeasureScope</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html#(androidx.compose.ui.layout.MeasureScope).measure(androidx.compose.ui.layout.Measurable,androidx.compose.ui.unit.Constraints)">measure</a>(measurable:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/Measurable.html">Measurable</a>,&nbsp;constraints:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a></pre>
+        <p>The function used to measure the modifier. The <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html#(androidx.compose.ui.layout.MeasureScope).measure(androidx.compose.ui.layout.Measurable,androidx.compose.ui.unit.Constraints)">measurable</a></code> corresponds to the wrapped content, and it can be measured with the desired constraints according to the logic of the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code>. The modifier needs to choose its own size, which can depend on the size chosen by the wrapped content (the obtained <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code>), if the wrapped content was measured. The size needs to be returned as part of a <code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a></code>, alongside the placement logic of the <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.html">Placeable</a></code>, which defines how the wrapped content should be positioned inside the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code>. A convenient way to create the <code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a></code> is to use the <code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasureScope.html#layout(kotlin.Int,kotlin.Int,kotlin.collections.Map,kotlin.Function1)">MeasureScope.layout</a></code> factory function.</p>
+        <p>A <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> uses the same measurement and layout concepts and principles as a <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code>, the only difference is that they apply to exactly one child. For a more detailed explanation of measurement and layout, see <code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasurePolicy.html">MeasurePolicy</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.layout.IntrinsicMeasureScope).minIntrinsicHeight(androidx.compose.ui.layout.IntrinsicMeasurable, kotlin.Int)"></a><a name="-androidx.compose.ui.layout.IntrinsicMeasureScope-.minIntrinsicHeight-androidx.compose.ui.layout.IntrinsicMeasurable-kotlin.Int-"></a><a name="minintrinsicheight"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.layout.IntrinsicMeasureScope).minIntrinsicHeight(androidx.compose.ui.layout.IntrinsicMeasurable,kotlin.Int)">minIntrinsicHeight</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasureScope.html">IntrinsicMeasureScope</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html#(androidx.compose.ui.layout.IntrinsicMeasureScope).minIntrinsicHeight(androidx.compose.ui.layout.IntrinsicMeasurable,kotlin.Int)">minIntrinsicHeight</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;measurable:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasurable.html">IntrinsicMeasurable</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>The lambda used to calculate <code><a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasurable.html#minIntrinsicHeight(kotlin.Int)">IntrinsicMeasurable.minIntrinsicHeight</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.layout.IntrinsicMeasureScope).minIntrinsicWidth(androidx.compose.ui.layout.IntrinsicMeasurable, kotlin.Int)"></a><a name="-androidx.compose.ui.layout.IntrinsicMeasureScope-.minIntrinsicWidth-androidx.compose.ui.layout.IntrinsicMeasurable-kotlin.Int-"></a><a name="minintrinsicwidth"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.layout.IntrinsicMeasureScope).minIntrinsicWidth(androidx.compose.ui.layout.IntrinsicMeasurable,kotlin.Int)">minIntrinsicWidth</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasureScope.html">IntrinsicMeasureScope</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html#(androidx.compose.ui.layout.IntrinsicMeasureScope).minIntrinsicWidth(androidx.compose.ui.layout.IntrinsicMeasurable,kotlin.Int)">minIntrinsicWidth</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;measurable:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasurable.html">IntrinsicMeasurable</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;height:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>The function used to calculate <code><a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasurable.html#minIntrinsicWidth(kotlin.Int)">IntrinsicMeasurable.minIntrinsicWidth</a></code>.</p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -5,7 +5,9 @@
 {% include "_shared/_reference-head-tags.html" %}
   </head>
   <body>
-    <div id="metadata-info-block"></div>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/runtime/BroadcastFrameClock.kt+class:androidx.compose.runtime.BroadcastFrameClock&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
     <h1>BroadcastFrameClock</h1>
     <p>
       <pre>public final class <a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html">BroadcastFrameClock</a> implements <a href="/reference/androidx/compose/runtime/MonotonicFrameClock.html">MonotonicFrameClock</a></pre>
@@ -31,6 +33,7 @@
             <td><code>final boolean</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#hasAwaiters()">hasAwaiters</a></code></div>
+              <p><code>true</code> if there are any callers of <code><a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> awaiting to run for a pending frame.</p>
             </td>
           </tr>
         </tbody>
@@ -79,6 +82,7 @@
             <td><code>final void</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#sendFrame(kotlin.Long)">sendFrame</a>(long&nbsp;timeNanos)</code></div>
+              <p>Send a frame for time <code><a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#sendFrame(kotlin.Long)">timeNanos</a></code> to all current callers of <code><a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -190,6 +194,7 @@
       <div class="api-item"><a name="getHasAwaiters()"></a><a name="setHasAwaiters()"></a><a name="getHasAwaiters--"></a><a name="setHasAwaiters--"></a>
         <h3 class="api-name" id="hasAwaiters()">hasAwaiters</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#hasAwaiters()">hasAwaiters</a></pre>
+        <p><code>true</code> if there are any callers of <code><a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> awaiting to run for a pending frame.</p>
       </div>
     </div>
     <div class="list">
@@ -209,13 +214,14 @@
       <div class="api-item"><a name="sendFrame-kotlin.Long-"></a><a name="sendframe"></a>
         <h3 class="api-name" id="sendFrame(kotlin.Long)">sendFrame</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#sendFrame(kotlin.Long)">sendFrame</a>(long&nbsp;timeNanos)</pre>
+        <p>Send a frame for time <code><a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#sendFrame(kotlin.Long)">timeNanos</a></code> to all current callers of <code><a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code>. The <code>onFrame</code> callback for each caller is invoked synchronously during the call to <code><a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#sendFrame(kotlin.Long)">sendFrame</a></code>.</p>
       </div>
       <div class="api-item"><a name="withFrameNanos-kotlin.Function1-"></a><a name="withframenanos"></a>
         <h3 class="api-name" id="withFrameNanos(kotlin.Function1)">withFrameNanos</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;onFrame<br>)</pre>
         <p>Suspends until a new frame is requested, immediately invokes <code><a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#withFrameNanos(kotlin.Function1)">onFrame</a></code> with the frame time in nanoseconds in the calling context of frame dispatch, then resumes with the result from <code><a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#withFrameNanos(kotlin.Function1)">onFrame</a></code>.</p>
         <p><code>frameTimeNanos</code> should be used when calculating animation time deltas from frame to frame as it may be normalized to the target time for the frame, not necessarily a direct, &quot;now&quot; value.</p>
-        <p>The time base of the value provided by <code><a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> is implementation defined. Time values provided are monotonically increasing; after a call to <code><a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> completes it must not provide the same value again for a subsequent call.</p>
+        <p>The time base of the value provided by <code><a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> is implementation defined. Time values provided are strictly monotonically increasing; after a call to <code><a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> completes it must not provide the same value again for a subsequent call.</p>
       </div>
     </div>
   </body>

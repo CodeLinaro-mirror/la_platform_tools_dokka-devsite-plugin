@@ -30,6 +30,13 @@
               <p>Component that allow you to specify an area on the screen and perform canvas drawing on this area.</p>
             </td>
           </tr>
+          <tr>
+            <td><code>static&nbsp;final void</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/androidx/compose/foundation/CanvasKt.html#Canvas(androidx.compose.ui.Modifier,kotlin.String,kotlin.Function1)">Canvas</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;contentDescription,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDraw<br>)</code></div>
+              <p>Component that allow you to specify an area on the screen and perform canvas drawing on this area.</p>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -72,6 +79,70 @@ Canvas(modifier = Modifier.size(100.dp)) {
                 <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier</code></td>
                 <td>
                   <p>mandatory modifier to specify size strategy for this composable</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDraw</code></td>
+                <td>
+                  <p>lambda that will be called to perform drawing. Note that this lambda will be called during draw stage, you have no access to composition scope, meaning that <code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> function invocation inside it will result to runtime exception</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="Canvas(androidx.compose.ui.Modifier, kotlin.String, kotlin.Function1)"></a><a name="Canvas-androidx.compose.ui.Modifier-kotlin.String-kotlin.Function1-"></a><a name="canvas"></a>
+        <h3 class="api-name" id="Canvas(androidx.compose.ui.Modifier,kotlin.String,kotlin.Function1)">Canvas</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/foundation/CanvasKt.html#Canvas(androidx.compose.ui.Modifier,kotlin.String,kotlin.Function1)">Canvas</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;contentDescription,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDraw<br>)</pre>
+        <p>Component that allow you to specify an area on the screen and perform canvas drawing on this area. You MUST specify size with modifier, whether with exact sizes via Modifier.size modifier, or relative to parent, via Modifier.fillMaxSize, <code><a href="/reference/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).weight(kotlin.Float,kotlin.Boolean)">ColumnScope.weight</a></code>, etc. If parent wraps this child, only exact sizes must be specified.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+
+Canvas(
+    contentDescription = &quot;Pie chart: 80% apples, 20% bananas (localized string)&quot;,
+    modifier = Modifier.size(300.dp)
+) {
+    // Apples (80%)
+    drawCircle(
+        color = Color.Red,
+        radius = size.width / 2
+    )
+
+    // Bananas (20%)
+    drawArc(
+        color = Color.Yellow,
+        startAngle = 0f,
+        sweepAngle = 360f * 0.20f,
+        useCenter = true,
+        topLeft = Offset(0f, (size.height - size.width) / 2f),
+        size = Size(size.width, size.width)
+    )
+}</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier</code></td>
+                <td>
+                  <p>mandatory modifier to specify size strategy for this composable</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;contentDescription</code></td>
+                <td>
+                  <p>text used by accessibility services to describe what this canvas represents. This should be provided unless the canvas is used for decorative purposes or as part of a larger entity already described in some other way. This text should be localized, such as by using <code><a href="/reference/androidx/compose/ui/res/package-summary.html#stringResource(kotlin.Int)">androidx.compose.ui.res.stringResource</a></code></p>
                 </td>
               </tr>
               <tr>

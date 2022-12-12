@@ -5,7 +5,9 @@
 {% include "_shared/_reference-head-tags.html" %}
   </head>
   <body>
-    <div id="metadata-info-block"></div>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/runtime/Composer.kt+class:androidx.compose.runtime.Composer&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
     <h1>Composer</h1>
     <p>
       <pre>public interface <a href="/reference/androidx/compose/runtime/Composer.html">Composer</a></pre>
@@ -69,8 +71,8 @@
           <tr>
             <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/tooling/CompositionData.html">CompositionData</a></code></td>
             <td>
-              <div><code>@<a href="/reference/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br><a href="/reference/androidx/compose/runtime/Composer.html#compositionData()">compositionData</a></code></div>
-              <p>A Compose internal function.</p>
+              <div><code><a href="/reference/androidx/compose/runtime/Composer.html#compositionData()">compositionData</a></code></div>
+              <p>A tooling API function.</p>
             </td>
           </tr>
           <tr>
@@ -78,6 +80,13 @@
             <td>
               <div><code>@<a href="/reference/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br><a href="/reference/androidx/compose/runtime/Composer.html#compoundKeyHash()">compoundKeyHash</a></code></div>
               <p>A Compose internal property.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract int</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br><a href="/reference/androidx/compose/runtime/Composer.html#currentMarker()">currentMarker</a></code></div>
+              <p>A Compose compiler plugin API.</p>
             </td>
           </tr>
           <tr>
@@ -99,6 +108,13 @@
             <td>
               <div><code>@<a href="/reference/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br><a href="/reference/androidx/compose/runtime/Composer.html#recomposeScope()">recomposeScope</a></code></div>
               <p>A Compose internal property.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br><a href="/reference/androidx/compose/runtime/Composer.html#recomposeScopeIdentity()">recomposeScopeIdentity</a></code></div>
+              <p>A Compose compiler plugin API.</p>
             </td>
           </tr>
           <tr>
@@ -201,10 +217,17 @@
             </td>
           </tr>
           <tr>
+            <td><code>default boolean</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br><a href="/reference/androidx/compose/runtime/Composer.html#changedInstance(kotlin.Any)">changedInstance</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;value)</code></div>
+              <p>A Compose compiler plugin API.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>abstract void</code></td>
             <td>
-              <div><code>@<a href="/reference/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br><a href="/reference/androidx/compose/runtime/Composer.html#collectParameterInformation()">collectParameterInformation</a>()</code></div>
-              <p>A Compose internal function.</p>
+              <div><code><a href="/reference/androidx/compose/runtime/Composer.html#collectParameterInformation()">collectParameterInformation</a>()</code></div>
+              <p>A tooling API function.</p>
             </td>
           </tr>
           <tr>
@@ -224,8 +247,21 @@
           <tr>
             <td><code>abstract void</code></td>
             <td>
+              <div><code>@<a href="/reference/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br><a href="/reference/androidx/compose/runtime/Composer.html#deactivateToEndGroup(kotlin.Boolean)">deactivateToEndGroup</a>(boolean&nbsp;changed)</code></div>
+              <p>A Compose compiler plugin API.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
               <div><code>@<a href="/reference/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br><a href="/reference/androidx/compose/runtime/Composer.html#disableReusing()">disableReusing</a>()</code></div>
               <p>A Compose compiler plugin API.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/Composer.html#disableSourceInformation()">disableSourceInformation</a>()</code></div>
             </td>
           </tr>
           <tr>
@@ -282,6 +318,27 @@
             <td>
               <div><code>@<a href="/reference/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br><a href="/reference/androidx/compose/runtime/Composer.html#endReusableGroup()">endReusableGroup</a>()</code></div>
               <p>A Compose compiler plugin API.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br><a href="/reference/androidx/compose/runtime/Composer.html#endToMarker(kotlin.Int)">endToMarker</a>(int&nbsp;marker)</code></div>
+              <p>Compose compiler plugin API.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br><a href="/reference/androidx/compose/runtime/Composer.html#insertMovableContent(androidx.compose.runtime.MovableContent,kotlin.Any)">insertMovableContent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/MovableContent.html">MovableContent</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;value,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;parameter<br>)</code></div>
+              <p>A Compose internal API.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br><a href="/reference/androidx/compose/runtime/Composer.html#insertMovableContentReferences(kotlin.collections.List)">insertMovableContentReferences</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/MovableContentStateReference.html">MovableContentStateReference</a>,&nbsp;<a href="/reference/androidx/compose/runtime/MovableContentStateReference.html">MovableContentStateReference</a>&gt;&gt;&nbsp;references<br>)</code></div>
+              <p>A Compose internal API.</p>
             </td>
           </tr>
           <tr>
@@ -433,9 +490,16 @@
         </thead>
         <tbody class="list">
           <tr>
+            <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/ComposedModifierKt.html">ComposedModifierKt</a>.<a href="/reference/androidx/compose/runtime/Composer.html#(androidx.compose.runtime.Composer).materialize(androidx.compose.ui.Modifier)">materialize</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Composer.html">Composer</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier<br>)</code></div>
+              <p>Materialize any instance-specific <code><a href="/reference/androidx/compose/ui/package-summary.html#(androidx.compose.ui.Modifier).composed(kotlin.Function1,kotlin.Function1)">composed modifiers</a></code> for applying to a raw tree node.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
             <td>
-              <div><code>@<a href="/reference/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/ComposerKt.html">ComposerKt</a>.<a href="/reference/androidx/compose/runtime/Composer.html#(androidx.compose.runtime.Composer).cache(kotlin.Boolean,kotlin.Function0)">cache</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Composer.html">Composer</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;invalid,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;block<br>)</code></div>
+              <div><code>@<a href="/reference/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/ComposerKt.html">ComposerKt</a>.<a href="/reference/androidx/compose/runtime/Composer.html#(androidx.compose.runtime.Composer).cache(kotlin.Boolean,kotlin.Function0)">cache</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Composer.html">Composer</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;invalid,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;block<br>)</code></div>
               <p>A Compose compiler plugin API.</p>
             </td>
           </tr>
@@ -448,7 +512,8 @@
         <h3 class="api-name" id="applier()">applier</h3>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br>abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Applier.html">Applier</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;<a href="/reference/androidx/compose/runtime/Composer.html#applier()">applier</a></pre>
         <p>A Compose compiler plugin API. DO NOT call directly.</p>
-        <p>This is the instance that changes that are calculated by the composer will be played to. During while invoking <code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> functions none of the <code><a href="/reference/androidx/compose/runtime/Composer.html#applier()">applier</a></code> methods are called. The changes are made in a batch after the all <code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> functions have completed.</p>
+        <p>Changes calculated and recorded during composition and are sent to <code><a href="/reference/androidx/compose/runtime/Composer.html#applier()">applier</a></code> which makes the physical changes to the node tree implied by a composition.</p>
+        <p>Composition has two discrete phases, 1) calculate and record changes and 2) making the changes via the <code><a href="/reference/androidx/compose/runtime/Composer.html#applier()">applier</a></code>. While a <code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> functions is executing, none of the <code><a href="/reference/androidx/compose/runtime/Composer.html#applier()">applier</a></code> methods are called. The recorded changes are sent to the <code><a href="/reference/androidx/compose/runtime/Composer.html#applier()">applier</a></code> all at once after all <code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> functions have completed.</p>
       </div>
       <div class="api-item"><a name="getApplyCoroutineContext()"></a><a name="setApplyCoroutineContext()"></a><a name="getApplyCoroutineContext--"></a><a name="setApplyCoroutineContext--"></a>
         <h3 class="api-name" id="applyCoroutineContext()">applyCoroutineContext</h3>
@@ -463,8 +528,8 @@
       </div>
       <div class="api-item"><a name="getCompositionData()"></a><a name="setCompositionData()"></a><a name="getCompositionData--"></a><a name="setCompositionData--"></a>
         <h3 class="api-name" id="compositionData()">compositionData</h3>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br>abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/tooling/CompositionData.html">CompositionData</a>&nbsp;<a href="/reference/androidx/compose/runtime/Composer.html#compositionData()">compositionData</a></pre>
-        <p>A Compose internal function. DO NOT call directly.</p>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/tooling/CompositionData.html">CompositionData</a>&nbsp;<a href="/reference/androidx/compose/runtime/Composer.html#compositionData()">compositionData</a></pre>
+        <p>A tooling API function. DO NOT call directly.</p>
         <p>The data stored for the composition. This is used by Compose tools, such as the preview and the inspector, to display or interpret the result of composition.</p>
       </div>
       <div class="api-item"><a name="getCompoundKeyHash()"></a><a name="setCompoundKeyHash()"></a><a name="getCompoundKeyHash--"></a><a name="setCompoundKeyHash--"></a>
@@ -473,6 +538,12 @@
         <p>A Compose internal property. DO NOT call directly. Use <code><a href="/reference/androidx/compose/runtime/package-summary.html#currentCompositeKeyHash()">currentCompositeKeyHash</a></code> instead.</p>
         <p>This a hash value used to coordinate map externally stored state to the composition. For example, this is used by saved instance state to preserve state across activity lifetime boundaries.</p>
         <p>This value is not likely to be unique but is not guaranteed unique. There are known cases, such as for loops without a <code><a href="/reference/androidx/compose/runtime/package-summary.html#key(kotlin.Array,kotlin.Function0)">key</a></code>, where the runtime does not have enough information to make the compound key hash unique.</p>
+      </div>
+      <div class="api-item"><a name="getCurrentMarker()"></a><a name="setCurrentMarker()"></a><a name="getCurrentMarker--"></a><a name="setCurrentMarker--"></a>
+        <h3 class="api-name" id="currentMarker()">currentMarker</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br>abstract&nbsp;int&nbsp;<a href="/reference/androidx/compose/runtime/Composer.html#currentMarker()">currentMarker</a></pre>
+        <p>A Compose compiler plugin API. DO NOT call directly.</p>
+        <p>Return a marker for the current group that can be used in a call to <code><a href="/reference/androidx/compose/runtime/Composer.html#endToMarker(kotlin.Int)">endToMarker</a></code>.</p>
       </div>
       <div class="api-item"><a name="getDefaultsInvalid()"></a><a name="setDefaultsInvalid()"></a><a name="getDefaultsInvalid--"></a><a name="setDefaultsInvalid--"></a>
         <h3 class="api-name" id="defaultsInvalid()">defaultsInvalid</h3>
@@ -491,6 +562,13 @@
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br>abstract&nbsp;<a href="/reference/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a>&nbsp;<a href="/reference/androidx/compose/runtime/Composer.html#recomposeScope()">recomposeScope</a></pre>
         <p>A Compose internal property. DO NOT call directly. Use <code><a href="/reference/androidx/compose/runtime/package-summary.html#currentRecomposeScope()">currentRecomposeScope</a></code> instead.</p>
         <p>The invalidation current invalidation scope. An new invalidation scope is created whenever <code><a href="/reference/androidx/compose/runtime/Composer.html#startRestartGroup(kotlin.Int)">startRestartGroup</a></code> is called. when this scope's <code><a href="/reference/androidx/compose/runtime/RecomposeScope.html#invalidate()">RecomposeScope.invalidate</a></code> is called then lambda supplied to <code><a href="/reference/androidx/compose/runtime/Composer.html#endRestartGroup()">endRestartGroup</a></code>'s <code><a href="/reference/androidx/compose/runtime/ScopeUpdateScope.html">ScopeUpdateScope</a></code> will be scheduled to be run.</p>
+      </div>
+      <div class="api-item"><a name="getRecomposeScopeIdentity()"></a><a name="setRecomposeScopeIdentity()"></a><a name="getRecomposeScopeIdentity--"></a><a name="setRecomposeScopeIdentity--"></a>
+        <h3 class="api-name" id="recomposeScopeIdentity()">recomposeScopeIdentity</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br>abstract&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;<a href="/reference/androidx/compose/runtime/Composer.html#recomposeScopeIdentity()">recomposeScopeIdentity</a></pre>
+        <p>A Compose compiler plugin API. DO NOT call directly.</p>
+        <p>Return an object that can be used to uniquely identity of the current recomposition scope. This identity will be the same even if the recompose scope instance changes.</p>
+        <p>This is used internally by tooling track composable function invocations.</p>
       </div>
       <div class="api-item"><a name="getSkipping()"></a><a name="setSkipping()"></a><a name="getSkipping--"></a><a name="setSkipping--"></a>
         <h3 class="api-name" id="skipping()">skipping</h3>
@@ -980,10 +1058,58 @@
           </table>
         </div>
       </div>
+      <div class="api-item"><a name="changedInstance-kotlin.Any-"></a><a name="changedinstance"></a>
+        <h3 class="api-name" id="changedInstance(kotlin.Any)">changedInstance</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br>default&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/Composer.html#changedInstance(kotlin.Any)">changedInstance</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;value)</pre>
+        <p>A Compose compiler plugin API. DO NOT call directly.</p>
+        <p>Check <code><a href="/reference/androidx/compose/runtime/Composer.html#changedInstance(kotlin.Any)">value</a></code> is different than the value used in the previous composition using <code>===</code> instead of <code>==</code> equality. This is used,  for example, to check parameter values to determine if they have changed for values that use value equality but, for correct behavior, the composer needs reference equality.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;value</code></td>
+                <td>
+                  <p>the value to check</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>boolean</code></td>
+                <td>
+                  <p><code>true</code> if the value is === equal to the previous value and returns <code>false</code> when <code><a href="/reference/androidx/compose/runtime/Composer.html#changedInstance(kotlin.Any)">value</a></code> is different.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="api-item"><a name="collectParameterInformation--"></a><a name="collectparameterinformation"></a>
         <h3 class="api-name" id="collectParameterInformation()">collectParameterInformation</h3>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br>abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Composer.html#collectParameterInformation()">collectParameterInformation</a>()</pre>
-        <p>A Compose internal function. DO NOT call directly.</p>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Composer.html#collectParameterInformation()">collectParameterInformation</a>()</pre>
+        <p>A tooling API function. DO NOT call directly.</p>
         <p>Called by the inspector to inform the composer that it should collect additional information about call parameters. By default, only collect parameter information for scopes that are <code><a href="/reference/androidx/compose/runtime/Composer.html#recordUsed(androidx.compose.runtime.RecomposeScope)">recordUsed</a></code> has been called on. If <code><a href="/reference/androidx/compose/runtime/Composer.html#collectParameterInformation()">collectParameterInformation</a></code> is called it will attempt to collect all calls even if the runtime doesn't need them.</p>
         <p>WARNING: calling this will result in a significant number of additional allocations that are typically avoided.</p>
       </div>
@@ -1041,11 +1167,21 @@
           </table>
         </div>
       </div>
+      <div class="api-item"><a name="deactivateToEndGroup-kotlin.Boolean-"></a><a name="deactivatetoendgroup"></a>
+        <h3 class="api-name" id="deactivateToEndGroup(kotlin.Boolean)">deactivateToEndGroup</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br>abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Composer.html#deactivateToEndGroup(kotlin.Boolean)">deactivateToEndGroup</a>(boolean&nbsp;changed)</pre>
+        <p>A Compose compiler plugin API. DO NOT call directly.</p>
+        <p>Deactivates the content to the end of the group by treating content as if it was deleted and replaces all slot table entries for calls to <code><a href="/reference/androidx/compose/runtime/package-summary.html#(androidx.compose.runtime.Composer).cache(kotlin.Boolean,kotlin.Function0)">cache</a></code> to be <code><a href="/reference/androidx/compose/runtime/Composer.Companion.html#Empty()">Empty</a></code>. This must be called as the first call for a group.</p>
+      </div>
       <div class="api-item"><a name="disableReusing--"></a><a name="disablereusing"></a>
         <h3 class="api-name" id="disableReusing()">disableReusing</h3>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br>abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Composer.html#disableReusing()">disableReusing</a>()</pre>
         <p>A Compose compiler plugin API. DO NOT call directly.</p>
         <p>Temporarily disable reusing if it is enabled.</p>
+      </div>
+      <div class="api-item"><a name="disableSourceInformation--"></a><a name="disablesourceinformation"></a>
+        <h3 class="api-name" id="disableSourceInformation()">disableSourceInformation</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Composer.html#disableSourceInformation()">disableSourceInformation</a>()</pre>
       </div>
       <div class="api-item"><a name="enableReusing--"></a><a name="enablereusing"></a>
         <h3 class="api-name" id="enableReusing()">enableReusing</h3>
@@ -1170,6 +1306,24 @@
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br>abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Composer.html#endReusableGroup()">endReusableGroup</a>()</pre>
         <p>A Compose compiler plugin API. DO NOT call directly.</p>
         <p>Called at the end of a reusable group.</p>
+      </div>
+      <div class="api-item"><a name="endToMarker-kotlin.Int-"></a><a name="endtomarker"></a>
+        <h3 class="api-name" id="endToMarker(kotlin.Int)">endToMarker</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br>abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Composer.html#endToMarker(kotlin.Int)">endToMarker</a>(int&nbsp;marker)</pre>
+        <p>Compose compiler plugin API. DO NOT call directly.</p>
+        <p>Ends all the groups up to but not including the group that is the parent group when <code><a href="/reference/androidx/compose/runtime/Composer.html#currentMarker()">currentMarker</a></code> was called to produce <code><a href="/reference/androidx/compose/runtime/Composer.html#endToMarker(kotlin.Int)">marker</a></code>. All groups ended must have been started with either <code><a href="/reference/androidx/compose/runtime/Composer.html#startReplaceableGroup(kotlin.Int)">startReplaceableGroup</a></code> or <code><a href="/reference/androidx/compose/runtime/Composer.html#startMovableGroup(kotlin.Int,kotlin.Any)">startMovableGroup</a></code>. Ending other groups can cause the state of the composer to become inconsistent.</p>
+      </div>
+      <div class="api-item"><a name="insertMovableContent(androidx.compose.runtime.MovableContent, kotlin.Any)"></a><a name="insertMovableContent-androidx.compose.runtime.MovableContent-kotlin.Any-"></a><a name="insertmovablecontent"></a>
+        <h3 class="api-name" id="insertMovableContent(androidx.compose.runtime.MovableContent,kotlin.Any)">insertMovableContent</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br>abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Composer.html#insertMovableContent(androidx.compose.runtime.MovableContent,kotlin.Any)">insertMovableContent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/MovableContent.html">MovableContent</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;value,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;parameter<br>)</pre>
+        <p>A Compose internal API. DO NOT call directly.</p>
+        <p>Request movable content be inserted at the current location. This will schedule with the root composition parent a call to <code><a href="/reference/androidx/compose/runtime/Composer.html#insertMovableContent(androidx.compose.runtime.MovableContent,kotlin.Any)">insertMovableContent</a></code> with the correct <code><a href="/reference/androidx/compose/runtime/MovableContentState.html">MovableContentState</a></code> if one was released in another part of composition.</p>
+      </div>
+      <div class="api-item"><a name="insertMovableContentReferences-kotlin.collections.List-"></a><a name="insertmovablecontentreferences"></a>
+        <h3 class="api-name" id="insertMovableContentReferences(kotlin.collections.List)">insertMovableContentReferences</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br>abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Composer.html#insertMovableContentReferences(kotlin.collections.List)">insertMovableContentReferences</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/MovableContentStateReference.html">MovableContentStateReference</a>,&nbsp;<a href="/reference/androidx/compose/runtime/MovableContentStateReference.html">MovableContentStateReference</a>&gt;&gt;&nbsp;references<br>)</pre>
+        <p>A Compose internal API. DO NOT call directly.</p>
+        <p>Perform a late composition that adds to the current late apply that will insert the given references to <code><a href="/reference/androidx/compose/runtime/MovableContent.html">MovableContent</a></code> into the composition. If a <code><a href="/reference/androidx/compose/runtime/MovableContent.html">MovableContent</a></code> is paired then this is a request to move a released <code><a href="/reference/androidx/compose/runtime/MovableContent.html">MovableContent</a></code> from a different location or from a different composition. If it is not paired (i.e. the <code>second</code> <code><a href="/reference/androidx/compose/runtime/MovableContentStateReference.html">MovableContentStateReference</a></code> is <code>null</code>) then new state for the <code><a href="/reference/androidx/compose/runtime/MovableContent.html">MovableContent</a></code> is inserted into the composition.</p>
       </div>
       <div class="api-item"><a name="joinKey(kotlin.Any, kotlin.Any)"></a><a name="joinKey-kotlin.Any-kotlin.Any-"></a><a name="joinkey"></a>
         <h3 class="api-name" id="joinKey(kotlin.Any,kotlin.Any)">joinKey</h3>
@@ -1579,9 +1733,14 @@
     </div>
     <div class="list">
       <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.compose.runtime.Composer-.materialize-androidx.compose.ui.Modifier-"></a><a name="materialize"></a>
+        <h3 class="api-name" id="(androidx.compose.runtime.Composer).materialize(androidx.compose.ui.Modifier)">ComposedModifierKt.materialize</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/runtime/ComposedModifierKt.html">ComposedModifierKt</a>.<a href="/reference/androidx/compose/runtime/Composer.html#(androidx.compose.runtime.Composer).materialize(androidx.compose.ui.Modifier)">materialize</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Composer.html">Composer</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier<br>)</pre>
+        <p>Materialize any instance-specific <code><a href="/reference/androidx/compose/ui/package-summary.html#(androidx.compose.ui.Modifier).composed(kotlin.Function1,kotlin.Function1)">composed modifiers</a></code> for applying to a raw tree node. Call right before setting the returned modifier on an emitted node. You almost certainly do not need to call this function directly.</p>
+      </div>
       <div class="api-item"><a name="(androidx.compose.runtime.Composer).cache(kotlin.Boolean, kotlin.Function0)"></a><a name="-androidx.compose.runtime.Composer-.cache-kotlin.Boolean-kotlin.Function0-"></a><a name="cache"></a>
         <h3 class="api-name" id="(androidx.compose.runtime.Composer).cache(kotlin.Boolean,kotlin.Function0)">ComposerKt.cache</h3>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br>default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/ComposerKt.html">ComposerKt</a>.<a href="/reference/androidx/compose/runtime/Composer.html#(androidx.compose.runtime.Composer).cache(kotlin.Boolean,kotlin.Function0)">cache</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Composer.html">Composer</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;invalid,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;block<br>)</pre>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br>default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/ComposerKt.html">ComposerKt</a>.<a href="/reference/androidx/compose/runtime/Composer.html#(androidx.compose.runtime.Composer).cache(kotlin.Boolean,kotlin.Function0)">cache</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Composer.html">Composer</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;invalid,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;block<br>)</pre>
         <p>A Compose compiler plugin API. DO NOT call directly.</p>
         <p>Cache, that is remember, a value in the composition data of a composition. This is used to implement <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">remember</a></code> and used by the compiler plugin to generate more efficient calls to <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">remember</a></code> when it determines these optimizations are safe.</p>
       </div>

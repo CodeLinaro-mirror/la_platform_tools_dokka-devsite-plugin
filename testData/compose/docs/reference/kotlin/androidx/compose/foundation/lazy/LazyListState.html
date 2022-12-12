@@ -5,13 +5,15 @@
 {% include "_shared/_reference-head-tags.html" %}
   </head>
   <body>
-    <div id="metadata-info-block"></div>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/lazy/LazyListState.kt+class:androidx.compose.foundation.lazy.LazyListState&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
     <h1>LazyListState</h1>
     <p>
       <pre>class <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html">LazyListState</a> : <a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></pre>
     </p>
     <hr>
-    <p>A state object that can be hoisted to control and observe scrolling</p>
+    <p>A state object that can be hoisted to control and observe scrolling.</p>
     <p>In most cases, this will be created via <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/package-summary.html#rememberLazyListState(kotlin.Int,kotlin.Int)">rememberLazyListState</a></code>.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
@@ -112,10 +114,24 @@
         </thead>
         <tbody class="list">
           <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#canScrollBackward()">canScrollBackward</a></code></div>
+              <p>Whether this <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> can scroll backward (consume a negative delta).</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#canScrollForward()">canScrollForward</a></code></div>
+              <p>Whether this <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> can scroll forward (consume a positive delta).</p>
+            </td>
+          </tr>
+          <tr>
             <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#firstVisibleItemIndex()">firstVisibleItemIndex</a></code></div>
-              <p>The index of the first item that is visible</p>
+              <p>The index of the first item that is visible.</p>
             </td>
           </tr>
           <tr>
@@ -212,13 +228,13 @@
               <tr>
                 <td><code>index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
                 <td>
-                  <p>the index to which to scroll</p>
+                  <p>the index to which to scroll. Must be non-negative.</p>
                 </td>
               </tr>
               <tr>
                 <td><code>scrollOffset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 0</code></td>
                 <td>
-                  <p>the offset that the item should end up after the scroll (same as <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#scrollToItem(kotlin.Int,kotlin.Int)">scrollToItem</a></code>) - note that positive offset refers to forward scroll, so in a top-to-bottom list, positive offset will scroll the item further upward (taking it partly offscreen)</p>
+                  <p>the offset that the item should end up after the scroll. Note that positive offset refers to forward scroll, so in a top-to-bottom list, positive offset will scroll the item further upward (taking it partly offscreen).</p>
                 </td>
               </tr>
             </tbody>
@@ -278,14 +294,12 @@
         <h3 class="api-name" id="scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</h3>
         <pre class="api-signature no-pretty-print">open&nbsp;suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a>(scrollPriority:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MutatePriority.html">MutatePriority</a>,&nbsp;block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html">ScrollScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
         <p>Call this function to take control of scrolling and gain the ability to send scroll events via <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html#scrollBy(kotlin.Float)">ScrollScope.scrollBy</a></code>. All actions that change the logical scroll position must be performed within a <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code> block (even if they don't call any other methods on this object) in order to guarantee that mutual exclusion is enforced.</p>
-        <p>Cancels the currently running scroll, if any, and suspends until the cancellation is complete.</p>
         <p>If <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code> is called from elsewhere, this will be canceled.</p>
       </div>
       <div class="api-item"><a name="scrollToItem(kotlin.Int, kotlin.Int)"></a><a name="scrollToItem-kotlin.Int-kotlin.Int-"></a><a name="scrolltoitem"></a>
         <h3 class="api-name" id="scrollToItem(kotlin.Int,kotlin.Int)">scrollToItem</h3>
         <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#scrollToItem(kotlin.Int,kotlin.Int)">scrollToItem</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;scrollOffset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 0):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
         <p>Instantly brings the item at <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#scrollToItem(kotlin.Int,kotlin.Int)">index</a></code> to the top of the viewport, offset by <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#scrollToItem(kotlin.Int,kotlin.Int)">scrollOffset</a></code> pixels.</p>
-        <p>Cancels the currently running scroll, if any, and suspends until the cancellation is complete.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -301,13 +315,13 @@
               <tr>
                 <td><code>index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
                 <td>
-                  <p>the data index to snap to. Must be between 0 and the number of elements.</p>
+                  <p>the index to which to scroll. Must be non-negative.</p>
                 </td>
               </tr>
               <tr>
                 <td><code>scrollOffset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 0</code></td>
                 <td>
-                  <p>the number of pixels past the start of the item to snap to. Must not be negative.</p>
+                  <p>the offset that the item should end up after the scroll. Note that positive offset refers to forward scroll, so in a top-to-bottom list, positive offset will scroll the item further upward (taking it partly offscreen).</p>
                 </td>
               </tr>
             </tbody>
@@ -317,15 +331,168 @@
     </div>
     <div class="list">
       <h2>Public properties</h2>
+      <div class="api-item"><a name="getCanScrollBackward()"></a><a name="setCanScrollBackward()"></a><a name="getCanScrollBackward--"></a><a name="setCanScrollBackward--"></a>
+        <h3 class="api-name" id="canScrollBackward()">canScrollBackward</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#canScrollBackward()">canScrollBackward</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <p>Whether this <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> can scroll backward (consume a negative delta). This is typically false if the scroll position is equal to its minimum value, and true otherwise.</p>
+        <p>Note that <code>true</code> here does not imply that delta <em>will</em> be consumed - the ScrollableState may decide not to handle the incoming delta (such as if it is already being scrolled separately). Additionally, for backwards compatibility with previous versions of ScrollableState this value defaults to <code>true</code>.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.Icon
+import androidx.compose.material.Text
+import androidx.compose.ui.graphics.graphicsLayer
+
+val state = rememberLazyListState()
+Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+    Icon(
+        Icons.Filled.KeyboardArrowUp,
+        null,
+        Modifier.graphicsLayer {
+            // Hide the icon if we cannot scroll backward (we are the start of the list)
+            // We use graphicsLayer here to control the alpha so that we only redraw when this
+            // value changes, instead of recomposing
+            alpha = if (state.canScrollBackward) 1f else 0f
+        },
+        Color.Red
+    )
+    val items = (1..100).toList()
+    LazyColumn(
+        Modifier
+            .weight(1f)
+            .fillMaxWidth(), state
+    ) {
+        items(items) {
+            Text(&quot;Item is $it&quot;)
+        }
+    }
+    Icon(
+        Icons.Filled.KeyboardArrowDown,
+        null,
+        Modifier.graphicsLayer {
+            // Hide the icon if we cannot scroll forward (we are the end of the list)
+            // We use graphicsLayer here to control the alpha so that we only redraw when this
+            // value changes, instead of recomposing
+            alpha = if (state.canScrollForward) 1f else 0f
+        },
+        Color.Red
+    )
+}</pre>
+      </div>
+      <div class="api-item"><a name="getCanScrollForward()"></a><a name="setCanScrollForward()"></a><a name="getCanScrollForward--"></a><a name="setCanScrollForward--"></a>
+        <h3 class="api-name" id="canScrollForward()">canScrollForward</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#canScrollForward()">canScrollForward</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <p>Whether this <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> can scroll forward (consume a positive delta). This is typically false if the scroll position is equal to its maximum value, and true otherwise.</p>
+        <p>Note that <code>true</code> here does not imply that delta <em>will</em> be consumed - the ScrollableState may decide not to handle the incoming delta (such as if it is already being scrolled separately). Additionally, for backwards compatibility with previous versions of ScrollableState this value defaults to <code>true</code>.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.Icon
+import androidx.compose.material.Text
+import androidx.compose.ui.graphics.graphicsLayer
+
+val state = rememberLazyListState()
+Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+    Icon(
+        Icons.Filled.KeyboardArrowUp,
+        null,
+        Modifier.graphicsLayer {
+            // Hide the icon if we cannot scroll backward (we are the start of the list)
+            // We use graphicsLayer here to control the alpha so that we only redraw when this
+            // value changes, instead of recomposing
+            alpha = if (state.canScrollBackward) 1f else 0f
+        },
+        Color.Red
+    )
+    val items = (1..100).toList()
+    LazyColumn(
+        Modifier
+            .weight(1f)
+            .fillMaxWidth(), state
+    ) {
+        items(items) {
+            Text(&quot;Item is $it&quot;)
+        }
+    }
+    Icon(
+        Icons.Filled.KeyboardArrowDown,
+        null,
+        Modifier.graphicsLayer {
+            // Hide the icon if we cannot scroll forward (we are the end of the list)
+            // We use graphicsLayer here to control the alpha so that we only redraw when this
+            // value changes, instead of recomposing
+            alpha = if (state.canScrollForward) 1f else 0f
+        },
+        Color.Red
+    )
+}</pre>
+      </div>
       <div class="api-item"><a name="getFirstVisibleItemIndex()"></a><a name="setFirstVisibleItemIndex()"></a><a name="getFirstVisibleItemIndex--"></a><a name="setFirstVisibleItemIndex--"></a>
         <h3 class="api-name" id="firstVisibleItemIndex()">firstVisibleItemIndex</h3>
         <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#firstVisibleItemIndex()">firstVisibleItemIndex</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
-        <p>The index of the first item that is visible</p>
+        <p>The index of the first item that is visible.</p>
+        <p>Note that this property is observable and if you use it in the composable function it will be recomposed on every change causing potential performance issues.</p>
+        <p>If you want to run some side effects like sending an analytics event or updating a state based on this value consider using &quot;snapshotFlow&quot;:</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.snapshotFlow
+
+val listState = rememberLazyListState()
+LaunchedEffect(listState) {
+    snapshotFlow { listState.firstVisibleItemIndex }
+        .collect {
+            // use the new index
+        }
+}</pre>
+        <p>If you need to use it in the composition then consider wrapping the calculation into a derived state in order to only have recompositions when the derived value changes:</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.remember
+
+val listState = rememberLazyListState()
+val isAtTop by remember {
+    derivedStateOf {
+        listState.firstVisibleItemIndex == 0 &amp;&amp; listState.firstVisibleItemScrollOffset == 0
+    }
+}
+if (!isAtTop) {
+    ScrollToTopButton(listState)
+}</pre>
       </div>
       <div class="api-item"><a name="getFirstVisibleItemScrollOffset()"></a><a name="setFirstVisibleItemScrollOffset()"></a><a name="getFirstVisibleItemScrollOffset--"></a><a name="setFirstVisibleItemScrollOffset--"></a>
         <h3 class="api-name" id="firstVisibleItemScrollOffset()">firstVisibleItemScrollOffset</h3>
         <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#firstVisibleItemScrollOffset()">firstVisibleItemScrollOffset</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
-        <p>The scroll offset of the first visible item. Scrolling forward is positive - i.e., the amount that the item is offset backwards</p>
+        <p>The scroll offset of the first visible item. Scrolling forward is positive - i.e., the amount that the item is offset backwards.</p>
+        <p>Note that this property is observable and if you use it in the composable function it will be recomposed on every scroll causing potential performance issues.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#firstVisibleItemIndex()">firstVisibleItemIndex</a></code></td>
+                <td>
+                  <p>for samples with the recommended usage patterns.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <div class="api-item"><a name="getInteractionSource()"></a><a name="setInteractionSource()"></a><a name="getInteractionSource--"></a><a name="setInteractionSource--"></a>
         <h3 class="api-name" id="interactionSource()">interactionSource</h3>
@@ -341,6 +508,20 @@
         <h3 class="api-name" id="layoutInfo()">layoutInfo</h3>
         <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#layoutInfo()">layoutInfo</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html">LazyListLayoutInfo</a></pre>
         <p>The object of <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html">LazyListLayoutInfo</a></code> calculated during the last layout pass. For example, you can use it to calculate what items are currently visible.</p>
+        <p>Note that this property is observable and is updated after every scroll or remeasure. If you use it in the composable function it will be recomposed on every change causing potential performance issues including infinity recomposition loop. Therefore, avoid using it in the composition.</p>
+        <p>If you want to run some side effects like sending an analytics event or updating a state based on this value consider using &quot;snapshotFlow&quot;:</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.snapshotFlow
+
+val listState = rememberLazyListState()
+LaunchedEffect(listState) {
+    snapshotFlow { listState.layoutInfo.totalItemsCount }
+        .collect {
+            // use the new items count
+        }
+}</pre>
       </div>
     </div>
   </body>

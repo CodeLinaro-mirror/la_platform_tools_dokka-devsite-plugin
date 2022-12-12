@@ -1,0 +1,176 @@
+<html devsite="true">
+  <head>
+    <title>ContentScale</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/layout/ContentScale.kt+class:androidx.compose.ui.layout.ContentScale&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>ContentScale</h1>
+    <p>
+      <pre>interface <a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a></pre>
+    </p>
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
+        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/ui/layout/FixedScale.html">FixedScale</a></div>
+      </span>
+      <div id="subclasses-direct-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/FixedScale.html">FixedScale</a></code></td>
+                <td>
+                  <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a></code> implementation that always scales the dimension by the provided fixed floating point value</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
+    <hr>
+    <p>Represents a rule to apply to scale a source rectangle to be inscribed into a destination</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public companion properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.Companion.html#Crop()">Crop</a></code></div>
+              <p>Scale the source uniformly (maintaining the source's aspect ratio) so that both dimensions (width and height) of the source will be equal to or larger than the corresponding dimension of the destination.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.Companion.html#FillBounds()">FillBounds</a></code></div>
+              <p>Scale horizontal and vertically non-uniformly to fill the destination bounds.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.Companion.html#FillHeight()">FillHeight</a></code></div>
+              <p>Scale the source maintaining the aspect ratio so that the bounds match the destination height.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.Companion.html#FillWidth()">FillWidth</a></code></div>
+              <p>Scale the source maintaining the aspect ratio so that the bounds match the destination width.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.Companion.html#Fit()">Fit</a></code></div>
+              <p>Scale the source uniformly (maintaining the source's aspect ratio) so that both dimensions (width and height) of the source will be equal to or less than the corresponding dimension of the destination</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.Companion.html#Inside()">Inside</a></code></div>
+              <p>Scale the source to maintain the aspect ratio to be inside the destination bounds if the source is larger than the destination.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/FixedScale.html">FixedScale</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.Companion.html#None()">None</a></code></div>
+              <p>Do not apply any scaling to the source</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html#computeScaleFactor(androidx.compose.ui.geometry.Size,androidx.compose.ui.geometry.Size)">computeScaleFactor</a>(srcSize:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a>,&nbsp;dstSize:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a>)</code></div>
+              <p>Computes the scale factor to apply to the horizontal and vertical axes independently of one another to fit the source appropriately with the given destination</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public companion properties</h2>
+      <div class="api-item"><a name="getCrop()"></a><a name="setCrop()"></a><a name="getCrop--"></a><a name="setCrop--"></a>
+        <h3 class="api-name" id="Crop()">Crop</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.Companion.html#Crop()">Crop</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a></pre>
+        <p>Scale the source uniformly (maintaining the source's aspect ratio) so that both dimensions (width and height) of the source will be equal to or larger than the corresponding dimension of the destination.</p>
+        <p>This <code><a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a></code> implementation in combination with usage of Alignment.Center provides similar behavior to <code><a href="https://developer.android.com/reference/android/widget/ImageView.ScaleType.html#CENTER_CROP">android.widget.ImageView.ScaleType.CENTER_CROP</a></code></p>
+      </div>
+      <div class="api-item"><a name="getFillBounds()"></a><a name="setFillBounds()"></a><a name="getFillBounds--"></a><a name="setFillBounds--"></a>
+        <h3 class="api-name" id="FillBounds()">FillBounds</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.Companion.html#FillBounds()">FillBounds</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a></pre>
+        <p>Scale horizontal and vertically non-uniformly to fill the destination bounds.</p>
+      </div>
+      <div class="api-item"><a name="getFillHeight()"></a><a name="setFillHeight()"></a><a name="getFillHeight--"></a><a name="setFillHeight--"></a>
+        <h3 class="api-name" id="FillHeight()">FillHeight</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.Companion.html#FillHeight()">FillHeight</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a></pre>
+        <p>Scale the source maintaining the aspect ratio so that the bounds match the destination height. This can cover a larger area than the destination if the height is larger than the width.</p>
+      </div>
+      <div class="api-item"><a name="getFillWidth()"></a><a name="setFillWidth()"></a><a name="getFillWidth--"></a><a name="setFillWidth--"></a>
+        <h3 class="api-name" id="FillWidth()">FillWidth</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.Companion.html#FillWidth()">FillWidth</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a></pre>
+        <p>Scale the source maintaining the aspect ratio so that the bounds match the destination width. This can cover a larger area than the destination if the width is larger than the height.</p>
+      </div>
+      <div class="api-item"><a name="getFit()"></a><a name="setFit()"></a><a name="getFit--"></a><a name="setFit--"></a>
+        <h3 class="api-name" id="Fit()">Fit</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.Companion.html#Fit()">Fit</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a></pre>
+        <p>Scale the source uniformly (maintaining the source's aspect ratio) so that both dimensions (width and height) of the source will be equal to or less than the corresponding dimension of the destination</p>
+        <p>This <code><a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a></code> implementation in combination with usage of Alignment.Center provides similar behavior to <code><a href="https://developer.android.com/reference/android/widget/ImageView.ScaleType.html#FIT_CENTER">android.widget.ImageView.ScaleType.FIT_CENTER</a></code></p>
+      </div>
+      <div class="api-item"><a name="getInside()"></a><a name="setInside()"></a><a name="getInside--"></a><a name="setInside--"></a>
+        <h3 class="api-name" id="Inside()">Inside</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.Companion.html#Inside()">Inside</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a></pre>
+        <p>Scale the source to maintain the aspect ratio to be inside the destination bounds if the source is larger than the destination. If the source is smaller than or equal to the destination in both dimensions, this behaves similarly to <code><a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.Companion.html#None()">None</a></code>. This will always be contained within the bounds of the destination.</p>
+        <p>This <code><a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a></code> implementation in combination with usage of Alignment.Center provides similar behavior to <code><a href="https://developer.android.com/reference/android/widget/ImageView.ScaleType.html#CENTER_INSIDE">android.widget.ImageView.ScaleType.CENTER_INSIDE</a></code></p>
+      </div>
+      <div class="api-item"><a name="getNone()"></a><a name="setNone()"></a><a name="getNone--"></a><a name="setNone--"></a>
+        <h3 class="api-name" id="None()">None</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.Companion.html#None()">None</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/FixedScale.html">FixedScale</a></pre>
+        <p>Do not apply any scaling to the source</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="computeScaleFactor(androidx.compose.ui.geometry.Size, androidx.compose.ui.geometry.Size)"></a><a name="computeScaleFactor-androidx.compose.ui.geometry.Size-androidx.compose.ui.geometry.Size-"></a><a name="computescalefactor"></a>
+        <h3 class="api-name" id="computeScaleFactor(androidx.compose.ui.geometry.Size,androidx.compose.ui.geometry.Size)">computeScaleFactor</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html#computeScaleFactor(androidx.compose.ui.geometry.Size,androidx.compose.ui.geometry.Size)">computeScaleFactor</a>(srcSize:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a>,&nbsp;dstSize:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ScaleFactor.html">ScaleFactor</a></pre>
+        <p>Computes the scale factor to apply to the horizontal and vertical axes independently of one another to fit the source appropriately with the given destination</p>
+      </div>
+    </div>
+  </body>
+</html>

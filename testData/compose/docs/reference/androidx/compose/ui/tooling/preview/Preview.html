@@ -1,0 +1,323 @@
+<html devsite="true">
+  <head>
+    <title>Preview</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-tooling-preview/androidx/compose/ui/tooling/preview/Preview.kt+class:androidx.compose.ui.tooling.preview.Preview&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>Preview</h1>
+    <p>
+      <pre>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-must-be-documented/index.html">MustBeDocumented</a><br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-retention/index.html">Retention</a>(value&nbsp;=&nbsp;AnnotationRetention.BINARY)<br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-target/index.html">Target</a>(allowedTargets&nbsp;=&nbsp;[AnnotationTarget.ANNOTATION_CLASS,&nbsp;AnnotationTarget.FUNCTION])<br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-repeatable/index.html">Repeatable</a><br>public annotation <a href="/reference/androidx/compose/ui/tooling/preview/Preview.html">Preview</a></pre>
+    </p>
+    <hr>
+    <p><code><a href="/reference/androidx/compose/ui/tooling/preview/Preview.html">Preview</a></code> can be applied to either of the following:</p>
+    <ul>
+      <li>
+        <p>@<code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> methods with no parameters to show them in the Android Studio preview.</p>
+      </li>
+      <li>
+        <p>Annotation classes, that could then be used to annotate @<code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> methods or other annotation classes, which will then be considered as indirectly annotated with that <code><a href="/reference/androidx/compose/ui/tooling/preview/Preview.html">Preview</a></code>.</p>
+      </li>
+    </ul>
+    <p>The annotation contains a number of parameters that allow to define the way the @<code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> will be rendered within the preview.</p>
+    <p>The passed parameters are only read by Studio when rendering the preview.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#apiLevel()">apiLevel</a></code></div>
+              <p>API level to be used when rendering the annotated @<code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code></p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final long</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#backgroundColor()">backgroundColor</a></code></div>
+              <p>The 32-bit ARGB color int for the background or 0 if not set</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#device()">device</a></code></div>
+              <p>Device string indicating the device to use in the preview.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#fontScale()">fontScale</a></code></div>
+              <p>User preference for the scaling factor for fonts, relative to the base density scaling.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#group()">group</a></code></div>
+              <p>Group name for this @<code><a href="/reference/androidx/compose/ui/tooling/preview/Preview.html">Preview</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#heightDp()">heightDp</a></code></div>
+              <p>Max height in DP the annotated @<code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> will be rendered in.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#locale()">locale</a></code></div>
+              <p>Current user preference for the locale, corresponding to <a href="https://d.android.com/guide/topics/resources/providing-resources.html#LocaleQualifier">locale</a> resource qualifier.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#name()">name</a></code></div>
+              <p>Display name of this preview allowing to identify it in the panel.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#showBackground()">showBackground</a></code></div>
+              <p>If true, the @<code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> will use a default background color.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#showSystemUi()">showSystemUi</a></code></div>
+              <p>If true, the status bar and action bar of the device will be displayed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#uiMode()">uiMode</a></code></div>
+              <p>Bit mask of the ui mode as per <code><a href="https://developer.android.com/reference/android/content/res/Configuration.html#uiMode()">android.content.res.Configuration.uiMode</a></code></p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#wallpaper()">wallpaper</a></code></div>
+              <p>Integer defining which wallpaper from those available in Android Studio to use for dynamic theming.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#widthDp()">widthDp</a></code></div>
+              <p>Max width in DP the annotated @<code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> will be rendered in.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#Preview(kotlin.String,kotlin.String,kotlin.Int,kotlin.Int,kotlin.Int,kotlin.String,kotlin.Float,kotlin.Boolean,kotlin.Boolean,kotlin.Long,kotlin.Int,kotlin.String,kotlin.Int)">Preview</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;name,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;group,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;1) int&nbsp;apiLevel,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;widthDp,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;heightDp,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;locale,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/FloatRange.html">FloatRange</a>(from&nbsp;=&nbsp;0.01) float&nbsp;fontScale,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;showSystemUi,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;showBackground,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;backgroundColor,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;uiMode,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/ui/tooling/preview/Device.html">Device</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;device,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/ui/tooling/preview/Wallpaper.html">Wallpaper</a> int&nbsp;wallpaper<br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getApiLevel()"></a><a name="setApiLevel()"></a><a name="getApiLevel--"></a><a name="setApiLevel--"></a>
+        <h3 class="api-name" id="apiLevel()">apiLevel</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#apiLevel()">apiLevel</a></pre>
+        <p>API level to be used when rendering the annotated @<code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code></p>
+      </div>
+      <div class="api-item"><a name="getBackgroundColor()"></a><a name="setBackgroundColor()"></a><a name="getBackgroundColor--"></a><a name="setBackgroundColor--"></a>
+        <h3 class="api-name" id="backgroundColor()">backgroundColor</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;long&nbsp;<a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#backgroundColor()">backgroundColor</a></pre>
+        <p>The 32-bit ARGB color int for the background or 0 if not set</p>
+      </div>
+      <div class="api-item"><a name="getDevice()"></a><a name="setDevice()"></a><a name="getDevice--"></a><a name="setDevice--"></a>
+        <h3 class="api-name" id="device()">device</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#device()">device</a></pre>
+        <p>Device string indicating the device to use in the preview. See the available devices in <code><a href="/reference/androidx/compose/ui/tooling/preview/Devices.html">Devices</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getFontScale()"></a><a name="setFontScale()"></a><a name="getFontScale--"></a><a name="setFontScale--"></a>
+        <h3 class="api-name" id="fontScale()">fontScale</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#fontScale()">fontScale</a></pre>
+        <p>User preference for the scaling factor for fonts, relative to the base density scaling.</p>
+      </div>
+      <div class="api-item"><a name="getGroup()"></a><a name="setGroup()"></a><a name="getGroup--"></a><a name="setGroup--"></a>
+        <h3 class="api-name" id="group()">group</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#group()">group</a></pre>
+        <p>Group name for this @<code><a href="/reference/androidx/compose/ui/tooling/preview/Preview.html">Preview</a></code>. This allows grouping them in the UI and display only one or more of them.</p>
+      </div>
+      <div class="api-item"><a name="getHeightDp()"></a><a name="setHeightDp()"></a><a name="getHeightDp--"></a><a name="setHeightDp--"></a>
+        <h3 class="api-name" id="heightDp()">heightDp</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#heightDp()">heightDp</a></pre>
+        <p>Max height in DP the annotated @<code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> will be rendered in. Use this to restrict the size of the rendering viewport.</p>
+      </div>
+      <div class="api-item"><a name="getLocale()"></a><a name="setLocale()"></a><a name="getLocale--"></a><a name="setLocale--"></a>
+        <h3 class="api-name" id="locale()">locale</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#locale()">locale</a></pre>
+        <p>Current user preference for the locale, corresponding to <a href="https://d.android.com/guide/topics/resources/providing-resources.html#LocaleQualifier">locale</a> resource qualifier. By default, the <code>default</code> folder will be used.</p>
+      </div>
+      <div class="api-item"><a name="getName()"></a><a name="setName()"></a><a name="getName--"></a><a name="setName--"></a>
+        <h3 class="api-name" id="name()">name</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#name()">name</a></pre>
+        <p>Display name of this preview allowing to identify it in the panel.</p>
+      </div>
+      <div class="api-item"><a name="getShowBackground()"></a><a name="setShowBackground()"></a><a name="getShowBackground--"></a><a name="setShowBackground--"></a>
+        <h3 class="api-name" id="showBackground()">showBackground</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#showBackground()">showBackground</a></pre>
+        <p>If true, the @<code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> will use a default background color.</p>
+      </div>
+      <div class="api-item"><a name="getShowSystemUi()"></a><a name="setShowSystemUi()"></a><a name="getShowSystemUi--"></a><a name="setShowSystemUi--"></a>
+        <h3 class="api-name" id="showSystemUi()">showSystemUi</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#showSystemUi()">showSystemUi</a></pre>
+        <p>If true, the status bar and action bar of the device will be displayed. The @<code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> will be render in the context of a full activity.</p>
+      </div>
+      <div class="api-item"><a name="getUiMode()"></a><a name="setUiMode()"></a><a name="getUiMode--"></a><a name="setUiMode--"></a>
+        <h3 class="api-name" id="uiMode()">uiMode</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#uiMode()">uiMode</a></pre>
+        <p>Bit mask of the ui mode as per <code><a href="https://developer.android.com/reference/android/content/res/Configuration.html#uiMode()">android.content.res.Configuration.uiMode</a></code></p>
+      </div>
+      <div class="api-item"><a name="getWallpaper()"></a><a name="setWallpaper()"></a><a name="getWallpaper--"></a><a name="setWallpaper--"></a>
+        <h3 class="api-name" id="wallpaper()">wallpaper</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#wallpaper()">wallpaper</a></pre>
+        <p>Integer defining which wallpaper from those available in Android Studio to use for dynamic theming.</p>
+      </div>
+      <div class="api-item"><a name="getWidthDp()"></a><a name="setWidthDp()"></a><a name="getWidthDp--"></a><a name="setWidthDp--"></a>
+        <h3 class="api-name" id="widthDp()">widthDp</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#widthDp()">widthDp</a></pre>
+        <p>Max width in DP the annotated @<code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> will be rendered in. Use this to restrict the size of the rendering viewport.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="Preview(kotlin.String, kotlin.String, kotlin.Int, kotlin.Int, kotlin.Int, kotlin.String, kotlin.Float, kotlin.Boolean, kotlin.Boolean, kotlin.Long, kotlin.Int, kotlin.String, kotlin.Int)"></a><a name="Preview-kotlin.String-kotlin.String-kotlin.Int-kotlin.Int-kotlin.Int-kotlin.String-kotlin.Float-kotlin.Boolean-kotlin.Boolean-kotlin.Long-kotlin.Int-kotlin.String-kotlin.Int-"></a><a name="preview"></a>
+        <h3 class="api-name" id="Preview(kotlin.String,kotlin.String,kotlin.Int,kotlin.Int,kotlin.Int,kotlin.String,kotlin.Float,kotlin.Boolean,kotlin.Boolean,kotlin.Long,kotlin.Int,kotlin.String,kotlin.Int)">Preview</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/tooling/preview/Preview.html#Preview(kotlin.String,kotlin.String,kotlin.Int,kotlin.Int,kotlin.Int,kotlin.String,kotlin.Float,kotlin.Boolean,kotlin.Boolean,kotlin.Long,kotlin.Int,kotlin.String,kotlin.Int)">Preview</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;name,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;group,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;1) int&nbsp;apiLevel,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;widthDp,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;heightDp,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;locale,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/FloatRange.html">FloatRange</a>(from&nbsp;=&nbsp;0.01) float&nbsp;fontScale,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;showSystemUi,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;showBackground,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;backgroundColor,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;uiMode,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/ui/tooling/preview/Device.html">Device</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;device,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/ui/tooling/preview/Wallpaper.html">Wallpaper</a> int&nbsp;wallpaper<br>)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;name</code></td>
+                <td>
+                  <p>Display name of this preview allowing to identify it in the panel.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;group</code></td>
+                <td>
+                  <p>Group name for this @<code><a href="/reference/androidx/compose/ui/tooling/preview/Preview.html">Preview</a></code>. This allows grouping them in the UI and display only one or more of them.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;1) int&nbsp;apiLevel</code></td>
+                <td>
+                  <p>API level to be used when rendering the annotated @<code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code></p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>int&nbsp;widthDp</code></td>
+                <td>
+                  <p>Max width in DP the annotated @<code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> will be rendered in. Use this to restrict the size of the rendering viewport.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>int&nbsp;heightDp</code></td>
+                <td>
+                  <p>Max height in DP the annotated @<code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> will be rendered in. Use this to restrict the size of the rendering viewport.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;locale</code></td>
+                <td>
+                  <p>Current user preference for the locale, corresponding to <a href="https://d.android.com/guide/topics/resources/providing-resources.html#LocaleQualifier">locale</a> resource qualifier. By default, the <code>default</code> folder will be used.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/FloatRange.html">FloatRange</a>(from&nbsp;=&nbsp;0.01) float&nbsp;fontScale</code></td>
+                <td>
+                  <p>User preference for the scaling factor for fonts, relative to the base density scaling.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>boolean&nbsp;showSystemUi</code></td>
+                <td>
+                  <p>If true, the status bar and action bar of the device will be displayed. The @<code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> will be render in the context of a full activity.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>boolean&nbsp;showBackground</code></td>
+                <td>
+                  <p>If true, the @<code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> will use a default background color.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>long&nbsp;backgroundColor</code></td>
+                <td>
+                  <p>The 32-bit ARGB color int for the background or 0 if not set</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>int&nbsp;uiMode</code></td>
+                <td>
+                  <p>Bit mask of the ui mode as per <code><a href="https://developer.android.com/reference/android/content/res/Configuration.html#uiMode()">android.content.res.Configuration.uiMode</a></code></p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/compose/ui/tooling/preview/Device.html">Device</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;device</code></td>
+                <td>
+                  <p>Device string indicating the device to use in the preview. See the available devices in <code><a href="/reference/androidx/compose/ui/tooling/preview/Devices.html">Devices</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/compose/ui/tooling/preview/Wallpaper.html">Wallpaper</a> int&nbsp;wallpaper</code></td>
+                <td>
+                  <p>Integer defining which wallpaper from those available in Android Studio to use for dynamic theming.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

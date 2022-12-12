@@ -1,0 +1,1108 @@
+<html devsite="true">
+  <head>
+    <title>ArraySet</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/collection/ArraySet.kt+class:androidx.collection.ArraySet&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>ArraySet</h1>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>class <a href="/reference/kotlin/androidx/collection/ArraySet.html">ArraySet</a>&lt;E&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-abstract-mutable-collection/index.html">AbstractMutableCollection</a>, <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-set/index.html">MutableSet</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
+    <div class="devsite-table-wrapper">
+      <table class="jd-inheritance-table">
+        <tbody>
+          <tr>
+            <td colspan="4"><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">kotlin.Any</a></td>
+          </tr>
+          <tr>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="3"><a href="https://developer.android.com/reference/java/util/AbstractCollection.html">java.util.AbstractCollection</a></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="2"><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-abstract-mutable-collection/index.html">kotlin.collections.AbstractMutableCollection</a></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="1"><a href="/reference/kotlin/androidx/collection/ArraySet.html">androidx.collection.ArraySet</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr>
+    <p>ArraySet is a generic set data structure that is designed to be more memory efficient than a traditional <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-hash-set/index.html">HashSet</a></code>.  The design is very similar to ArrayMap, with all of the caveats described there.  This implementation is separate from ArrayMap, however, so the Object array contains only one item for each entry in the set (instead of a pair for a mapping).</p>
+    <p>Note that this implementation is not intended to be appropriate for data structures that may contain large numbers of items.  It is generally slower than a traditional HashSet, since lookups require a binary search and adds and removes require inserting and deleting entries in the array.  For containers holding up to hundreds of items, the performance difference is not significant, less than 50%.</p>
+    <p>Because this container is intended to better balance memory use, unlike most other standard Java containers it will shrink its array as items are removed from it.  Currently you have no control over this shrinking -- if you set a capacity and then remove an item, it may reduce the capacity to better match the current size.  In the future an explicit call to set the capacity should turn off this aggressive shrinking behavior.</p>
+    <p>This structure is <b>NOT</b> thread-safe.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="93%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public constructors</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td>
+                <div><code>&lt;E&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/collection/ArraySet.html#ArraySet(kotlin.Array)">ArraySet</a>(array:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;E&gt;?)</code></div>
+                <p>Create a new ArraySet with items from the given array.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td>
+                <div><code>&lt;E&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/collection/ArraySet.html#ArraySet(kotlin.Int)">ArraySet</a>(capacity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                <p>Creates a new empty ArraySet.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td>
+                <div><code>&lt;E&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/collection/ArraySet.html#ArraySet(androidx.collection.ArraySet)">ArraySet</a>(set:&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html">ArraySet</a>&lt;E&gt;?)</code></div>
+                <p>Create a new ArraySet with the mappings from the given ArraySet.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td>
+                <div><code>&lt;E&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/collection/ArraySet.html#ArraySet(kotlin.collections.Collection)">ArraySet</a>(set:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">Collection</a>&lt;E&gt;?)</code></div>
+                <p>Create a new ArraySet with the mappings from the given <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">Collection</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/ArraySet.html#add(kotlin.Any)">add</a>(element:&nbsp;E)</code></div>
+                <p>Adds the specified object to this set.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/ArraySet.html#addAll(androidx.collection.ArraySet)">addAll</a>(array:&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html">ArraySet</a>&lt;E&gt;)</code></div>
+                <p>Perform a <code><a href="/reference/kotlin/androidx/collection/ArraySet.html#add(kotlin.Any)">add</a></code> of all values in <code><a href="/reference/kotlin/androidx/collection/ArraySet.html#addAll(androidx.collection.ArraySet)">array</a></code></p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/ArraySet.html#addAll(kotlin.collections.Collection)">addAll</a>(elements:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">Collection</a>&lt;E&gt;)</code></div>
+                <p>Perform an <code><a href="/reference/kotlin/androidx/collection/ArraySet.html#add(kotlin.Any)">add</a></code> of all values in <code><a href="/reference/kotlin/androidx/collection/ArraySet.html#addAll(kotlin.collections.Collection)">elements</a></code></p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/ArraySet.html#clear()">clear</a>()</code></div>
+                <p>Make the array map empty.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open&nbsp;operator <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/ArraySet.html#contains(kotlin.Any)">contains</a>(element:&nbsp;E)</code></div>
+                <p>Check whether a value exists in the set.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/ArraySet.html#containsAll(kotlin.collections.Collection)">containsAll</a>(elements:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">Collection</a>&lt;E&gt;)</code></div>
+                <p>Determine if the array set contains all of the values in the given collection.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/ArraySet.html#ensureCapacity(kotlin.Int)">ensureCapacity</a>(minimumCapacity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                <p>Ensure the array map can hold at least <code><a href="/reference/kotlin/androidx/collection/ArraySet.html#ensureCapacity(kotlin.Int)">minimumCapacity</a></code> items.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open&nbsp;operator <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/ArraySet.html#equals(kotlin.Any)">equals</a>(other:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?)</code></div>
+                <p>This implementation returns false if the object is not a set, or if the sets have different sizes.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/ArraySet.html#hashCode()">hashCode</a>()</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/ArraySet.html#indexOf(kotlin.Any)">indexOf</a>(key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?)</code></div>
+                <p>Returns the index of a value in the set.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/ArraySet.html#isEmpty()">isEmpty</a>()</code></div>
+                <p>Return true if the array map contains no items.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open&nbsp;operator <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-iterator/index.html">MutableIterator</a>&lt;E&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/ArraySet.html#iterator()">iterator</a>()</code></div>
+                <p>Return a <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-iterator/index.html">MutableIterator</a></code> over all values in the set.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/ArraySet.html#remove(kotlin.Any)">remove</a>(element:&nbsp;E)</code></div>
+                <p>Removes the specified object from this set.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/ArraySet.html#removeAll(androidx.collection.ArraySet)">removeAll</a>(array:&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html">ArraySet</a>&lt;E&gt;)</code></div>
+                <p>Perform a <code><a href="/reference/kotlin/androidx/collection/ArraySet.html#remove(kotlin.Any)">remove</a></code> of all values in <code><a href="/reference/kotlin/androidx/collection/ArraySet.html#removeAll(androidx.collection.ArraySet)">array</a></code></p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/ArraySet.html#removeAll(kotlin.collections.Collection)">removeAll</a>(elements:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">Collection</a>&lt;E&gt;)</code></div>
+                <p>Remove all values in the array set that exist in the given collection.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>E</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/ArraySet.html#removeAt(kotlin.Int)">removeAt</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                <p>Remove the key/value mapping at the given index.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/ArraySet.html#retainAll(kotlin.collections.Collection)">retainAll</a>(elements:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">Collection</a>&lt;E&gt;)</code></div>
+                <p>Remove all values in the array set that do <b>not</b> exist in the given collection.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/ArraySet.html#toString()">toString</a>()</code></div>
+                <p>This implementation composes a string by iterating over its values.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>E</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/ArraySet.html#valueAt(kotlin.Int)">valueAt</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                <p>Return the value at the given index in the array.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/ArraySet.html#size()">size</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public constructors</h2>
+        <div class="api-item"><a name="ArraySet-kotlin.Array-"></a><a name="arrayset"></a>
+          <h3 class="api-name" id="ArraySet(kotlin.Array)">ArraySet</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">&lt;E&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/collection/ArraySet.html#ArraySet(kotlin.Array)">ArraySet</a>(array:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;E&gt;?)</pre>
+          <p>Create a new ArraySet with items from the given array.</p>
+        </div>
+        <div class="api-item"><a name="ArraySet-kotlin.Int-"></a><a name="arrayset"></a>
+          <h3 class="api-name" id="ArraySet(kotlin.Int)">ArraySet</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">&lt;E&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/collection/ArraySet.html#ArraySet(kotlin.Int)">ArraySet</a>(capacity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 0)</pre>
+          <p>Creates a new empty ArraySet. The default capacity of an array map is 0, and will grow once items are added to it.</p>
+        </div>
+        <div class="api-item"><a name="ArraySet-androidx.collection.ArraySet-"></a><a name="arrayset"></a>
+          <h3 class="api-name" id="ArraySet(androidx.collection.ArraySet)">ArraySet</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">&lt;E&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/collection/ArraySet.html#ArraySet(androidx.collection.ArraySet)">ArraySet</a>(set:&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html">ArraySet</a>&lt;E&gt;?)</pre>
+          <p>Create a new ArraySet with the mappings from the given ArraySet.</p>
+        </div>
+        <div class="api-item"><a name="ArraySet-kotlin.collections.Collection-"></a><a name="arrayset"></a>
+          <h3 class="api-name" id="ArraySet(kotlin.collections.Collection)">ArraySet</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">&lt;E&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/collection/ArraySet.html#ArraySet(kotlin.collections.Collection)">ArraySet</a>(set:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">Collection</a>&lt;E&gt;?)</pre>
+          <p>Create a new ArraySet with the mappings from the given <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">Collection</a></code>.</p>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="add-kotlin.Any-"></a><a name="add"></a>
+          <h3 class="api-name" id="add(kotlin.Any)">add</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html#add(kotlin.Any)">add</a>(element:&nbsp;E):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>Adds the specified object to this set. The set is not modified if it already contains the object.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>element:&nbsp;E</code></td>
+                  <td>
+                    <p>the object to add.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Returns</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                  <td>
+                    <p><code>true</code> if this set is modified, <code>false</code> otherwise.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Throws</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>kotlin.ConcurrentModificationException:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-concurrent-modification-exception/index.html">kotlin.ConcurrentModificationException</a></code></td>
+                  <td>
+                    <p>if concurrent modifications detected.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="addAll-androidx.collection.ArraySet-"></a><a name="addall"></a>
+          <h3 class="api-name" id="addAll(androidx.collection.ArraySet)">addAll</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html#addAll(androidx.collection.ArraySet)">addAll</a>(array:&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html">ArraySet</a>&lt;E&gt;):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Perform a <code><a href="/reference/kotlin/androidx/collection/ArraySet.html#add(kotlin.Any)">add</a></code> of all values in <code><a href="/reference/kotlin/androidx/collection/ArraySet.html#addAll(androidx.collection.ArraySet)">array</a></code></p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>array:&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html">ArraySet</a>&lt;E&gt;</code></td>
+                  <td>
+                    <p>The array whose contents are to be retrieved.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Throws</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>kotlin.ConcurrentModificationException:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-concurrent-modification-exception/index.html">kotlin.ConcurrentModificationException</a></code></td>
+                  <td>
+                    <p>if concurrent modifications detected.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="addAll-kotlin.collections.Collection-"></a><a name="addall"></a>
+          <h3 class="api-name" id="addAll(kotlin.collections.Collection)">addAll</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html#addAll(kotlin.collections.Collection)">addAll</a>(elements:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">Collection</a>&lt;E&gt;):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>Perform an <code><a href="/reference/kotlin/androidx/collection/ArraySet.html#add(kotlin.Any)">add</a></code> of all values in <code><a href="/reference/kotlin/androidx/collection/ArraySet.html#addAll(kotlin.collections.Collection)">elements</a></code></p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>elements:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">Collection</a>&lt;E&gt;</code></td>
+                  <td>
+                    <p>The collection whose contents are to be retrieved.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="clear--"></a><a name="clear"></a>
+          <h3 class="api-name" id="clear()">clear</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html#clear()">clear</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Make the array map empty.  All storage is released.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Throws</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>kotlin.ConcurrentModificationException:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-concurrent-modification-exception/index.html">kotlin.ConcurrentModificationException</a></code></td>
+                  <td>
+                    <p>if concurrent modifications detected.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="contains-kotlin.Any-"></a><a name="contains"></a>
+          <h3 class="api-name" id="contains(kotlin.Any)">contains</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html#contains(kotlin.Any)">contains</a>(element:&nbsp;E):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>Check whether a value exists in the set.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>element:&nbsp;E</code></td>
+                  <td>
+                    <p>The value to search for.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Returns</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                  <td>
+                    <p>Returns true if the value exists, else false.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="containsAll-kotlin.collections.Collection-"></a><a name="containsall"></a>
+          <h3 class="api-name" id="containsAll(kotlin.collections.Collection)">containsAll</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html#containsAll(kotlin.collections.Collection)">containsAll</a>(elements:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">Collection</a>&lt;E&gt;):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>Determine if the array set contains all of the values in the given collection.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>elements:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">Collection</a>&lt;E&gt;</code></td>
+                  <td>
+                    <p>The collection whose contents are to be checked against.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Returns</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                  <td>
+                    <p>Returns true if this array set contains a value for every entry in <code><a href="/reference/kotlin/androidx/collection/ArraySet.html#containsAll(kotlin.collections.Collection)">elements</a></code> else returns false.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="ensureCapacity-kotlin.Int-"></a><a name="ensurecapacity"></a>
+          <h3 class="api-name" id="ensureCapacity(kotlin.Int)">ensureCapacity</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html#ensureCapacity(kotlin.Int)">ensureCapacity</a>(minimumCapacity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Ensure the array map can hold at least <code><a href="/reference/kotlin/androidx/collection/ArraySet.html#ensureCapacity(kotlin.Int)">minimumCapacity</a></code> items.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Throws</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>kotlin.ConcurrentModificationException:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-concurrent-modification-exception/index.html">kotlin.ConcurrentModificationException</a></code></td>
+                  <td>
+                    <p>if concurrent modifications detected.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="equals-kotlin.Any-"></a><a name="equals"></a>
+          <h3 class="api-name" id="equals(kotlin.Any)">equals</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html#equals(kotlin.Any)">equals</a>(other:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>This implementation returns false if the object is not a set, or if the sets have different sizes.  Otherwise, for each value in this set, it checks to make sure the value also exists in the other set. If any value doesn't exist, the method returns false; otherwise, it returns true.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html">equals</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="hashCode--"></a><a name="hashcode"></a>
+          <h3 class="api-name" id="hashCode()">hashCode</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html#hashCode()">hashCode</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html">hashCode</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="indexOf-kotlin.Any-"></a><a name="indexof"></a>
+          <h3 class="api-name" id="indexOf(kotlin.Any)">indexOf</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html#indexOf(kotlin.Any)">indexOf</a>(key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>Returns the index of a value in the set.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?</code></td>
+                  <td>
+                    <p>The value to search for.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Returns</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                  <td>
+                    <p>Returns the index of the value if it exists, else a negative integer.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="isEmpty--"></a><a name="isempty"></a>
+          <h3 class="api-name" id="isEmpty()">isEmpty</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html#isEmpty()">isEmpty</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>Return true if the array map contains no items.</p>
+        </div>
+        <div class="api-item"><a name="iterator--"></a><a name="iterator"></a>
+          <h3 class="api-name" id="iterator()">iterator</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html#iterator()">iterator</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-iterator/index.html">MutableIterator</a>&lt;E&gt;</pre>
+          <p>Return a <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-iterator/index.html">MutableIterator</a></code> over all values in the set.</p>
+          <p><b>Note:</b> this is a less efficient way to access the array contents compared to looping from 0 until <code><a href="/reference/kotlin/androidx/collection/ArraySet.html#size()">size</a></code> and calling <code><a href="/reference/kotlin/androidx/collection/ArraySet.html#valueAt(kotlin.Int)">valueAt</a></code>.</p>
+        </div>
+        <div class="api-item"><a name="remove-kotlin.Any-"></a><a name="remove"></a>
+          <h3 class="api-name" id="remove(kotlin.Any)">remove</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html#remove(kotlin.Any)">remove</a>(element:&nbsp;E):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>Removes the specified object from this set.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>element:&nbsp;E</code></td>
+                  <td>
+                    <p>the object to remove.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Returns</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                  <td>
+                    <p><code>true</code> if this set was modified, <code>false</code> otherwise.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="removeAll-androidx.collection.ArraySet-"></a><a name="removeall"></a>
+          <h3 class="api-name" id="removeAll(androidx.collection.ArraySet)">removeAll</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html#removeAll(androidx.collection.ArraySet)">removeAll</a>(array:&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html">ArraySet</a>&lt;E&gt;):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>Perform a <code><a href="/reference/kotlin/androidx/collection/ArraySet.html#remove(kotlin.Any)">remove</a></code> of all values in <code><a href="/reference/kotlin/androidx/collection/ArraySet.html#removeAll(androidx.collection.ArraySet)">array</a></code></p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>array:&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html">ArraySet</a>&lt;E&gt;</code></td>
+                  <td>
+                    <p>The array whose contents are to be removed.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="removeAll-kotlin.collections.Collection-"></a><a name="removeall"></a>
+          <h3 class="api-name" id="removeAll(kotlin.collections.Collection)">removeAll</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html#removeAll(kotlin.collections.Collection)">removeAll</a>(elements:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">Collection</a>&lt;E&gt;):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>Remove all values in the array set that exist in the given collection.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>elements:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">Collection</a>&lt;E&gt;</code></td>
+                  <td>
+                    <p>The collection whose contents are to be used to remove values.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Returns</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                  <td>
+                    <p>Returns true if any values were removed from the array set, else false.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="removeAt-kotlin.Int-"></a><a name="removeat"></a>
+          <h3 class="api-name" id="removeAt(kotlin.Int)">removeAt</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html#removeAt(kotlin.Int)">removeAt</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;E</pre>
+          <p>Remove the key/value mapping at the given index.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                  <td>
+                    <p>The desired index, must be between 0 and <code><a href="/reference/kotlin/androidx/collection/ArraySet.html#size()">size</a></code>-1.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Returns</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>E</code></td>
+                  <td>
+                    <p>Returns the value that was stored at this index.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Throws</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>kotlin.ConcurrentModificationException:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-concurrent-modification-exception/index.html">kotlin.ConcurrentModificationException</a></code></td>
+                  <td>
+                    <p>if concurrent modifications detected.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="retainAll-kotlin.collections.Collection-"></a><a name="retainall"></a>
+          <h3 class="api-name" id="retainAll(kotlin.collections.Collection)">retainAll</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html#retainAll(kotlin.collections.Collection)">retainAll</a>(elements:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">Collection</a>&lt;E&gt;):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>Remove all values in the array set that do <b>not</b> exist in the given collection.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>elements:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">Collection</a>&lt;E&gt;</code></td>
+                  <td>
+                    <p>The collection whose contents are to be used to determine which values to keep.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Returns</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                  <td>
+                    <p>Returns true if any values were removed from the array set, else false.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+          <h3 class="api-name" id="toString()">toString</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html#toString()">toString</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></pre>
+          <p>This implementation composes a string by iterating over its values. If this set contains itself as a value, the string &quot;(this Set)&quot; will appear in its place.</p>
+        </div>
+        <div class="api-item"><a name="valueAt-kotlin.Int-"></a><a name="valueat"></a>
+          <h3 class="api-name" id="valueAt(kotlin.Int)">valueAt</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html#valueAt(kotlin.Int)">valueAt</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;E</pre>
+          <p>Return the value at the given index in the array.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                  <td>
+                    <p>The desired index, must be between 0 and <code><a href="/reference/kotlin/androidx/collection/ArraySet.html#size()">size</a></code>-1.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Returns</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>E</code></td>
+                  <td>
+                    <p>Returns the value stored at the given index.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getSize()"></a><a name="setSize()"></a><a name="getSize--"></a><a name="setSize--"></a>
+          <h3 class="api-name" id="size()">size</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/collection/ArraySet.html#size()">size</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        </div>
+      </div>
+    </devsite-filter >
+  </body>
+</html>

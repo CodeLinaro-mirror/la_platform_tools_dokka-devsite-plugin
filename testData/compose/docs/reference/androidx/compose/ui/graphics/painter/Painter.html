@@ -1,0 +1,211 @@
+<html devsite="true">
+  <head>
+    <title>Painter</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-graphics/androidx/compose/ui/graphics/painter/Painter.kt+class:androidx.compose.ui.graphics.painter.Painter&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>Painter</h1>
+    <p>
+      <pre>public abstract class <a href="/reference/androidx/compose/ui/graphics/painter/Painter.html">Painter</a></pre>
+    </p>
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
+        <div class="showalways" id="subclasses-direct"><a href="/reference/androidx/compose/ui/graphics/painter/BitmapPainter.html">BitmapPainter</a>, <a href="/reference/androidx/compose/ui/graphics/painter/BrushPainter.html">BrushPainter</a>, <a href="/reference/androidx/compose/ui/graphics/painter/ColorPainter.html">ColorPainter</a>, <a href="/reference/androidx/compose/ui/graphics/vector/VectorPainter.html">VectorPainter</a></div>
+      </span>
+      <div id="subclasses-direct-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/painter/BitmapPainter.html">BitmapPainter</a></code></td>
+                <td>
+                  <p><code><a href="/reference/androidx/compose/ui/graphics/painter/Painter.html">Painter</a></code> implementation used to draw an <code><a href="/reference/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a></code> into the provided canvas This implementation can handle applying alpha and <code><a href="/reference/androidx/compose/ui/graphics/ColorFilter.html">ColorFilter</a></code> to it's drawn result</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/painter/BrushPainter.html">BrushPainter</a></code></td>
+                <td>
+                  <p><code><a href="/reference/androidx/compose/ui/graphics/painter/Painter.html">Painter</a></code> implementation used to fill the provided bounds with the specified <code><a href="/reference/androidx/compose/ui/graphics/Brush.html">Brush</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/painter/ColorPainter.html">ColorPainter</a></code></td>
+                <td>
+                  <p><code><a href="/reference/androidx/compose/ui/graphics/painter/Painter.html">Painter</a></code> implementation used to fill the provided bounds with the specified color</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/vector/VectorPainter.html">VectorPainter</a></code></td>
+                <td>
+                  <p><code><a href="/reference/androidx/compose/ui/graphics/painter/Painter.html">Painter</a></code> implementation that abstracts the drawing of a Vector graphic.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
+    <hr>
+    <p>Abstraction for something that can be drawn. In addition to providing the ability to draw into a specified bounded area, <code><a href="/reference/androidx/compose/ui/graphics/painter/Painter.html">Painter</a></code> provides a few high level mechanisms that consumers can use to configure how the content is drawn. These include alpha, ColorFilter, and RTL</p>
+    <p>Implementations should provide a meaningful equals method that compares values of different <code><a href="/reference/androidx/compose/ui/graphics/painter/Painter.html">Painter</a></code> subclasses and not rely on just referential equality</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/painter/Painter.html#intrinsicSize()">intrinsicSize</a></code></div>
+              <p>Return the intrinsic size of the <code><a href="/reference/androidx/compose/ui/graphics/painter/Painter.html">Painter</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/painter/Painter.html#Painter()">Painter</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/painter/PainterKt.html">PainterKt</a>.<a href="/reference/androidx/compose/ui/graphics/painter/Painter.html#(androidx.compose.ui.graphics.drawscope.DrawScope).draw(androidx.compose.ui.geometry.Size,kotlin.Float,androidx.compose.ui.graphics.ColorFilter)">draw</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;size,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;alpha,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/ColorFilter.html">ColorFilter</a>&nbsp;colorFilter<br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Protected methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/painter/Painter.html#applyAlpha(kotlin.Float)">applyAlpha</a>(float&nbsp;alpha)</code></div>
+              <p>Apply the provided alpha value returning true if it was applied successfully, or false if it could not be applied</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/painter/Painter.html#applyColorFilter(androidx.compose.ui.graphics.ColorFilter)">applyColorFilter</a>(<a href="/reference/androidx/compose/ui/graphics/ColorFilter.html">ColorFilter</a>&nbsp;colorFilter)</code></div>
+              <p>Apply the provided color filter returning true if it was applied successfully, or false if it could not be applied</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/painter/Painter.html#applyLayoutDirection(androidx.compose.ui.unit.LayoutDirection)">applyLayoutDirection</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>&nbsp;layoutDirection)</code></div>
+              <p>Apply the appropriate internal configuration to positioning content with the given <code><a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code></p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/painter/PainterKt.html">PainterKt</a>.<a href="/reference/androidx/compose/ui/graphics/painter/Painter.html#(androidx.compose.ui.graphics.drawscope.DrawScope).onDraw()">onDraw</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>&nbsp;receiver)</code></div>
+              <p>Implementation of drawing logic for instances of <code><a href="/reference/androidx/compose/ui/graphics/painter/Painter.html">Painter</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getIntrinsicSize()"></a><a name="setIntrinsicSize()"></a><a name="getIntrinsicSize--"></a><a name="setIntrinsicSize--"></a>
+        <h3 class="api-name" id="intrinsicSize()">intrinsicSize</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/painter/Painter.html#intrinsicSize()">intrinsicSize</a></pre>
+        <p>Return the intrinsic size of the <code><a href="/reference/androidx/compose/ui/graphics/painter/Painter.html">Painter</a></code>. If the there is no intrinsic size (i.e. filling bounds with an arbitrary color) return <code><a href="/reference/androidx/compose/ui/geometry/Size.Companion.html#Unspecified()">Size.Unspecified</a></code>. If there is no intrinsic size in a single dimension, return <code><a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code> with <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/-na-n.html">Float.NaN</a></code> in the desired dimension. If a <code><a href="/reference/androidx/compose/ui/graphics/painter/Painter.html">Painter</a></code> does not have an intrinsic size, it will always draw within the full bounds of the destination</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="Painter--"></a><a name="painter"></a>
+        <h3 class="api-name" id="Painter()">Painter</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/graphics/painter/Painter.html#Painter()">Painter</a>()</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="(androidx.compose.ui.graphics.drawscope.DrawScope).draw(androidx.compose.ui.geometry.Size, kotlin.Float, androidx.compose.ui.graphics.ColorFilter)"></a><a name="-androidx.compose.ui.graphics.drawscope.DrawScope-.draw-androidx.compose.ui.geometry.Size-kotlin.Float-androidx.compose.ui.graphics.ColorFilter-"></a><a name="draw"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.graphics.drawscope.DrawScope).draw(androidx.compose.ui.geometry.Size,kotlin.Float,androidx.compose.ui.graphics.ColorFilter)">PainterKt.draw</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/painter/PainterKt.html">PainterKt</a>.<a href="/reference/androidx/compose/ui/graphics/painter/Painter.html#(androidx.compose.ui.graphics.drawscope.DrawScope).draw(androidx.compose.ui.geometry.Size,kotlin.Float,androidx.compose.ui.graphics.ColorFilter)">draw</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;size,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;alpha,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/ColorFilter.html">ColorFilter</a>&nbsp;colorFilter<br>)</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Protected methods</h2>
+      <div class="api-item"><a name="applyAlpha-kotlin.Float-"></a><a name="applyalpha"></a>
+        <h3 class="api-name" id="applyAlpha(kotlin.Float)">applyAlpha</h3>
+        <pre class="api-signature no-pretty-print">protected&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/painter/Painter.html#applyAlpha(kotlin.Float)">applyAlpha</a>(float&nbsp;alpha)</pre>
+        <p>Apply the provided alpha value returning true if it was applied successfully, or false if it could not be applied</p>
+      </div>
+      <div class="api-item"><a name="applyColorFilter-androidx.compose.ui.graphics.ColorFilter-"></a><a name="applycolorfilter"></a>
+        <h3 class="api-name" id="applyColorFilter(androidx.compose.ui.graphics.ColorFilter)">applyColorFilter</h3>
+        <pre class="api-signature no-pretty-print">protected&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/painter/Painter.html#applyColorFilter(androidx.compose.ui.graphics.ColorFilter)">applyColorFilter</a>(<a href="/reference/androidx/compose/ui/graphics/ColorFilter.html">ColorFilter</a>&nbsp;colorFilter)</pre>
+        <p>Apply the provided color filter returning true if it was applied successfully, or false if it could not be applied</p>
+      </div>
+      <div class="api-item"><a name="applyLayoutDirection-androidx.compose.ui.unit.LayoutDirection-"></a><a name="applylayoutdirection"></a>
+        <h3 class="api-name" id="applyLayoutDirection(androidx.compose.ui.unit.LayoutDirection)">applyLayoutDirection</h3>
+        <pre class="api-signature no-pretty-print">protected&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/painter/Painter.html#applyLayoutDirection(androidx.compose.ui.unit.LayoutDirection)">applyLayoutDirection</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>&nbsp;layoutDirection)</pre>
+        <p>Apply the appropriate internal configuration to positioning content with the given <code><a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code></p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.drawscope.DrawScope-.onDraw--"></a><a name="ondraw"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.graphics.drawscope.DrawScope).onDraw()">PainterKt.onDraw</h3>
+        <pre class="api-signature no-pretty-print">protected&nbsp;abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/painter/PainterKt.html">PainterKt</a>.<a href="/reference/androidx/compose/ui/graphics/painter/Painter.html#(androidx.compose.ui.graphics.drawscope.DrawScope).onDraw()">onDraw</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>&nbsp;receiver)</pre>
+        <p>Implementation of drawing logic for instances of <code><a href="/reference/androidx/compose/ui/graphics/painter/Painter.html">Painter</a></code>. This is invoked internally within <code><a href="/reference/androidx/compose/ui/graphics/painter/Painter.html#(androidx.compose.ui.graphics.drawscope.DrawScope).draw(androidx.compose.ui.geometry.Size,kotlin.Float,androidx.compose.ui.graphics.ColorFilter)">draw</a></code> after the positioning and configuring the <code><a href="/reference/androidx/compose/ui/graphics/painter/Painter.html">Painter</a></code></p>
+      </div>
+    </div>
+  </body>
+</html>

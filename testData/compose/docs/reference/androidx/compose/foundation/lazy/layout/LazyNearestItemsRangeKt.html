@@ -1,0 +1,99 @@
+<html devsite="true">
+  <head>
+    <title>LazyNearestItemsRangeKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>LazyNearestItemsRangeKt</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/foundation/lazy/layout/LazyNearestItemsRangeKt.html">LazyNearestItemsRangeKt</a></pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-int-range/index.html">IntRange</a>&gt;</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/androidx/compose/foundation/lazy/layout/LazyNearestItemsRangeKt.html#rememberLazyNearestItemsRangeState(kotlin.Function0,kotlin.Function0,kotlin.Function0)">rememberLazyNearestItemsRangeState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>&gt;&nbsp;firstVisibleItemIndex,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>&gt;&nbsp;slidingWindowSize,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>&gt;&nbsp;extraItemCount<br>)</code></div>
+              <p>Calculate and memoize range of indexes which contains at least <code><a href="/reference/androidx/compose/foundation/lazy/layout/package-summary.html#rememberLazyNearestItemsRangeState(kotlin.Function0,kotlin.Function0,kotlin.Function0)">extraItemCount</a></code> items near the first visible item.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="rememberLazyNearestItemsRangeState(kotlin.Function0, kotlin.Function0, kotlin.Function0)"></a><a name="rememberLazyNearestItemsRangeState-kotlin.Function0-kotlin.Function0-kotlin.Function0-"></a><a name="rememberlazynearestitemsrangestate"></a>
+        <h3 class="api-name" id="rememberLazyNearestItemsRangeState(kotlin.Function0,kotlin.Function0,kotlin.Function0)">rememberLazyNearestItemsRangeState</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-int-range/index.html">IntRange</a>&gt;&nbsp;<a href="/reference/androidx/compose/foundation/lazy/layout/LazyNearestItemsRangeKt.html#rememberLazyNearestItemsRangeState(kotlin.Function0,kotlin.Function0,kotlin.Function0)">rememberLazyNearestItemsRangeState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>&gt;&nbsp;firstVisibleItemIndex,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>&gt;&nbsp;slidingWindowSize,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>&gt;&nbsp;extraItemCount<br>)</pre>
+        <p>Calculate and memoize range of indexes which contains at least <code><a href="/reference/androidx/compose/foundation/lazy/layout/package-summary.html#rememberLazyNearestItemsRangeState(kotlin.Function0,kotlin.Function0,kotlin.Function0)">extraItemCount</a></code> items near the first visible item. It is optimized to return the same range for small changes in the firstVisibleItem value so we do not regenerate the map on each scroll.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>&gt;&nbsp;firstVisibleItemIndex</code></td>
+                <td>
+                  <p>Provider of the first item index currently visible on screen.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>&gt;&nbsp;slidingWindowSize</code></td>
+                <td>
+                  <p>Number items user can scroll up to this number of items until we have to regenerate item mapping.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>&gt;&nbsp;extraItemCount</code></td>
+                <td>
+                  <p>The minimum amount of items near the first visible item we want to have mapping for.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-int-range/index.html">IntRange</a>&gt;</code></td>
+                <td>
+                  <p>range of indexes with items near current the first visible position.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

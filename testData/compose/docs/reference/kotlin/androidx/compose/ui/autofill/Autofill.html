@@ -1,0 +1,106 @@
+<html devsite="true">
+  <head>
+    <title>Autofill</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/autofill/Autofill.kt+class:androidx.compose.ui.autofill.Autofill&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>Autofill</h1>
+    <p>
+      <pre>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>interface <a href="/reference/kotlin/androidx/compose/ui/autofill/Autofill.html">Autofill</a></pre>
+    </p>
+    <hr>
+    <p>Autofill API.</p>
+    <p>This interface is available to all composables via a CompositionLocal. The composable can then request or cancel autofill as required. For instance, the TextField can call <code><a href="/reference/kotlin/androidx/compose/ui/autofill/Autofill.html#requestAutofillForNode(androidx.compose.ui.autofill.AutofillNode)">requestAutofillForNode</a></code> when it gains focus, and <code><a href="/reference/kotlin/androidx/compose/ui/autofill/Autofill.html#cancelAutofillForNode(androidx.compose.ui.autofill.AutofillNode)">cancelAutofillForNode</a></code> when it loses focus.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/autofill/Autofill.html#cancelAutofillForNode(androidx.compose.ui.autofill.AutofillNode)">cancelAutofillForNode</a>(autofillNode:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillNode.html">AutofillNode</a>)</code></div>
+              <p>Cancel a previously supplied autofill request.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/autofill/Autofill.html#requestAutofillForNode(androidx.compose.ui.autofill.AutofillNode)">requestAutofillForNode</a>(autofillNode:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillNode.html">AutofillNode</a>)</code></div>
+              <p>Request autofill for the specified node.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="cancelAutofillForNode-androidx.compose.ui.autofill.AutofillNode-"></a><a name="cancelautofillfornode"></a>
+        <h3 class="api-name" id="cancelAutofillForNode(androidx.compose.ui.autofill.AutofillNode)">cancelAutofillForNode</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/autofill/Autofill.html#cancelAutofillForNode(androidx.compose.ui.autofill.AutofillNode)">cancelAutofillForNode</a>(autofillNode:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillNode.html">AutofillNode</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Cancel a previously supplied autofill request.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>autofillNode:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillNode.html">AutofillNode</a></code></td>
+                <td>
+                  <p>The node that needs to be autofilled.</p>
+                  <p>This function is usually called when an autofillable component loses focus.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="requestAutofillForNode-androidx.compose.ui.autofill.AutofillNode-"></a><a name="requestautofillfornode"></a>
+        <h3 class="api-name" id="requestAutofillForNode(androidx.compose.ui.autofill.AutofillNode)">requestAutofillForNode</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/autofill/Autofill.html#requestAutofillForNode(androidx.compose.ui.autofill.AutofillNode)">requestAutofillForNode</a>(autofillNode:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillNode.html">AutofillNode</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Request autofill for the specified node.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>autofillNode:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillNode.html">AutofillNode</a></code></td>
+                <td>
+                  <p>The node that needs to be autofilled.</p>
+                  <p>This function is usually called when an autofillable component gains focus.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

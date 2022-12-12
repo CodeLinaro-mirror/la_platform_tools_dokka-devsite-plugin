@@ -18,7 +18,6 @@ package com.google.devsite.integration
 
 import com.google.devsite.testing.IntegrationTestBase
 import org.junit.Assert.assertThrows
-import org.junit.Ignore
 import org.junit.Test
 
 /**
@@ -38,23 +37,6 @@ class BasicTest : IntegrationTestBase() {
     @Test
     fun `Validate inner classes`() {
         validateDirectory("innerClasses")
-    }
-
-    // Cannot be migrated to validatePrebuilts because we don't yet support KMP
-    @Test
-    fun `Validate prod AndroidX compose lib`() {
-        validateDirectory("compose", sampleLocations = listOf("samples"))
-    }
-
-    // We can certainly remove this test once the migration to validatePrebuilts is complete
-    @Test
-    fun `Validate AndroidX fragment sources and prebuilts generate identical docs`() {
-        // By sharing the same path, this test validates against the same goldens the next test does
-        validateDirectory(
-            path = "fragment",
-            sampleLocations = listOf("samples"),
-            useAndroidxBaseSourceLink = true
-        )
     }
 
     @Test
@@ -108,33 +90,24 @@ class BasicTest : IntegrationTestBase() {
                 // Either don't compile testData/paging/source or dackka applies the compose plugin
                 // "paging-compose"
             ),
-            samples = true,
-            includeFiles = listOf("metadata.md")
+            samples = true
         )
     }
 
+    // Is not KMP because Compose doesn't publish KMP source jars
     @Test
-    fun `Validate prod AndroidX paging lib`() {
-        validateDirectory(
-            path = "paging",
-            sampleLocations = listOf("samples"),
-            includeFiles = listOf("metadata.md"),
-            useAndroidxBaseSourceLink = true
-        )
-    }
-
-    // Cannot be migrated to validatePrebuilts because we don't yet support KMP
-    @Test
-    fun `Validate prod AndroidX collections-ktx lib`() {
-        validateDirectory("collections-ktx")
-    }
-
-    @Ignore // Does not work; KMP problems; collection-jvm doesn't label source jar properly
-    @Test
-    fun `Validate prod AndroidX collections prebuilts`() {
+    fun `Validate prod AndroidX compose prebuilts`() {
         validatePrebuilts(
-            testName = "collections",
-            artifactNames = listOf("collection", "collection-jvm", "collection-ktx"),
+            testName = "compose",
+            artifactNames = listOf(
+                "animation", "animation-core", "animation-graphics",
+                "foundation", "foundation-layout",
+                "material3", "material3-window-size-class",
+                "runtime",
+                "ui", "ui-geometry", "ui-graphics", "ui-text", "ui-unit", "ui-util",
+                "ui-tooling-preview"
+            ),
+            samples = true
         )
     }
 

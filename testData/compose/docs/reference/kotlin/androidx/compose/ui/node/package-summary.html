@@ -1,0 +1,575 @@
+<html devsite="true">
+  <head>
+    <title>androidx.compose.ui.node</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>androidx.compose.ui.node</h1>
+    <h2>Interfaces</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></code></td>
+            <td>
+              <p>Represents a <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> which can be a delegate of another <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/node/DrawModifierNode.html">DrawModifierNode</a></code></td>
+            <td>
+              <p>A <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that draws into the space of the layout.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/node/GlobalPositionAwareModifierNode.html">GlobalPositionAwareModifierNode</a></code></td>
+            <td>
+              <p>A <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">androidx.compose.ui.Modifier.Node</a></code> whose <code><a href="/reference/kotlin/androidx/compose/ui/node/GlobalPositionAwareModifierNode.html#onGloballyPositioned(androidx.compose.ui.layout.LayoutCoordinates)">onGloballyPositioned</a></code> is called with the final LayoutCoordinates of the Layout when the global position of the content may have changed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/node/IntermediateLayoutModifierNode.html">IntermediateLayoutModifierNode</a></code></td>
+            <td>
+              <p>IntermediateLayoutModifier is a <code><a href="/reference/kotlin/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a></code> that will be skipped when looking ahead.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/node/LayoutAwareModifierNode.html">LayoutAwareModifierNode</a></code></td>
+            <td>
+              <p>A <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">androidx.compose.ui.Modifier.Node</a></code> which receives various callbacks in response to local changes in layout.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a></code></td>
+            <td>
+              <p>A <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that changes how its wrapped content is measured and laid out.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/node/ObserverNode.html">ObserverNode</a></code></td>
+            <td>
+              <p><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code>s that implement ObserverNode can provide their own implementation of <code><a href="/reference/kotlin/androidx/compose/ui/node/ObserverNode.html#onObservedReadsChanged()">onObservedReadsChanged</a></code> that will be called whenever the value of read object has changed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/node/ParentDataModifierNode.html">ParentDataModifierNode</a></code></td>
+            <td>
+              <p>A <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that provides data to the parent <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">Layout</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a></code></td>
+            <td>
+              <p>A <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">androidx.compose.ui.Modifier.Node</a></code> that receives <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code>s, interprets them, and consumes the aspects of the changes that it is react to such that other <code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a></code>s don't also react to them.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/node/RootForTest.html">RootForTest</a></code></td>
+            <td>
+              <p>The marker interface to be implemented by the root backing the composition.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/node/SemanticsModifierNode.html">SemanticsModifierNode</a></code></td>
+            <td>
+              <p>A <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that adds semantics key/value for use in testing, accessibility, and similar use cases.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Classes</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatingNode.html">DelegatingNode</a></code></td>
+            <td>
+              <p>A <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> which is able to delegate work to other <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> instances.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/node/ModifierNodeElement.html">ModifierNodeElement</a></code></td>
+            <td>
+              <p>A <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a></code> which manages an instance of a particular <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> implementation.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/node/Ref.html">Ref</a></code></td>
+            <td>
+              <p>Value holder general purpose class.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Annotations</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/node/InternalCoreApi.html">InternalCoreApi</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Top-level functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code>inline <a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a>&gt; <a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#modifierElementOf(kotlin.Any,kotlin.Function0,kotlin.Function1,kotlin.Function1)">modifierElementOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;create:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;update:&nbsp;(T) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;definitions:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/InspectorInfo.html">InspectorInfo</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+              <p>A helpful API for constructing a <code><a href="/reference/kotlin/androidx/compose/ui/node/ModifierNodeElement.html">ModifierNodeElement</a></code> corresponding to a particular <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> implementation.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>inline <a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a>&gt; <a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#modifierElementOf(kotlin.Function0,kotlin.Function1)">modifierElementOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;create:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;definitions:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/InspectorInfo.html">InspectorInfo</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+              <p>A helpful API for constructing a <code><a href="/reference/kotlin/androidx/compose/ui/node/ModifierNodeElement.html">ModifierNodeElement</a></code> corresponding to a particular <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> implementation.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Extension functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsConfiguration.html">SemanticsConfiguration</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/node/SemanticsModifierNode.html">SemanticsModifierNode</a>.<a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.SemanticsModifierNode).collapsedSemanticsConfiguration()">collapsedSemanticsConfiguration</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/node/DrawModifierNode.html">DrawModifierNode</a>.<a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.DrawModifierNode).invalidateDraw()">invalidateDraw</a>()</code></div>
+              <p>Invalidates this modifier's draw layer, ensuring that a draw pass will be run on the next frame.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a>.<a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.LayoutModifierNode).invalidateLayer()">invalidateLayer</a>()</code></div>
+              <p>This will invalidate the current node's layer, and ensure that the layer is redrawn for the next frame.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a>.<a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.LayoutModifierNode).invalidateLayout()">invalidateLayout</a>()</code></div>
+              <p>This will invalidate the current node's layout pass, and ensure that relayout of this node will happen for the next frame.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a>.<a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.LayoutModifierNode).invalidateMeasurements()">invalidateMeasurements</a>()</code></div>
+              <p>This invalidates the current node's measure result, and ensures that a remeasurement of this node will happen for the next frame.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/node/ParentDataModifierNode.html">ParentDataModifierNode</a>.<a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.ParentDataModifierNode).invalidateParentData()">invalidateParentData</a>()</code></div>
+              <p>This invalidates the current node's parent data, and ensures that layouts that utilize it will be scheduled to relayout for the next frame.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/node/SemanticsModifierNode.html">SemanticsModifierNode</a>.<a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.SemanticsModifierNode).invalidateSemantics()">invalidateSemantics</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>.<a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.DelegatableNode).invalidateSubtree()">invalidateSubtree</a>()</code></div>
+              <p>Invalidates the subtree of this layout, including layout, drawing, parent data, etc.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a>&nbsp;&amp;&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/ObserverNode.html">ObserverNode</a>&gt; T.<a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.Modifier.Node).observeReads(kotlin.Function0)">observeReads</a>(block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+              <p>Use this function to observe reads within the specified <code><a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.Modifier.Node).observeReads(kotlin.Function0)">block</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Top-level functions</h2>
+    <div class="api-item"><a name="modifierElementOf(kotlin.Any, kotlin.Function0, kotlin.Function1, kotlin.Function1)"></a><a name="modifierElementOf-kotlin.Any-kotlin.Function0-kotlin.Function1-kotlin.Function1-"></a><a name="modifierelementof"></a>
+      <h3 class="api-name" id="modifierElementOf(kotlin.Any,kotlin.Function0,kotlin.Function1,kotlin.Function1)">modifierElementOf</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a>&gt; <a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#modifierElementOf(kotlin.Any,kotlin.Function0,kotlin.Function1,kotlin.Function1)">modifierElementOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;create:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;update:&nbsp;(T) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;definitions:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/InspectorInfo.html">InspectorInfo</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>A helpful API for constructing a <code><a href="/reference/kotlin/androidx/compose/ui/node/ModifierNodeElement.html">ModifierNodeElement</a></code> corresponding to a particular <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> implementation.</p>
+      <pre class="prettyprint">
+import androidx.compose.ui.node.modifierElementOf
+
+class Circle(var color: Color) : DrawModifierNode, Modifier.Node() {
+    override fun ContentDrawScope.draw() {
+        drawCircle(color)
+    }
+}
+fun Modifier.circle(color: Color) = this then modifierElementOf(
+    key = color,
+    create = { Circle(color) },
+    update = { it.color = color },
+    definitions = {
+        name = &quot;circle&quot;
+        properties[&quot;color&quot;] = color
+    }
+)</pre>
+      <pre class="prettyprint">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.layout.layout
+import androidx.compose.ui.node.modifierElementOf
+import androidx.compose.ui.unit.offset
+
+class VerticalPadding(var padding: Dp) : LayoutModifierNode, Modifier.Node() {
+    override fun MeasureScope.measure(
+        measurable: Measurable,
+        constraints: Constraints
+    ): MeasureResult {
+        val paddingPx = padding.roundToPx()
+        val placeable = measurable.measure(constraints.offset(vertical = -paddingPx))
+        return layout(placeable.width, placeable.height + paddingPx) {
+            placeable.placeRelative(0, paddingPx)
+        }
+    }
+}
+fun Modifier.verticalPadding(padding: Dp) = this then modifierElementOf(
+    key = padding,
+    create = { VerticalPadding(padding) },
+    update = { it.padding = padding },
+    definitions = {
+        name = &quot;verticalPadding&quot;
+        properties[&quot;padding&quot;] = padding
+    }
+)
+Box(Modifier.background(Color.Gray).verticalPadding(50.dp)) {
+    Box(Modifier.fillMaxSize().background(Color.DarkGray))
+}</pre>
+      <pre class="prettyprint">
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.node.modifierElementOf
+
+class CircleNode(var color: Color) : DrawModifierNode, Modifier.Node() {
+    override fun ContentDrawScope.draw() {
+        drawCircle(color)
+    }
+}
+fun Modifier.circle(color: Color) = this then modifierElementOf(
+    key = color,
+    create = { CircleNode(color) },
+    update = { it.color = color },
+    definitions = {
+        name = &quot;circle&quot;
+        properties[&quot;color&quot;] = color
+    }
+)
+Box(Modifier.fillMaxSize().circle(Color.Blue))</pre>
+      <pre class="prettyprint">
+import androidx.compose.ui.layout.positionInRoot
+import androidx.compose.ui.layout.positionInWindow
+import androidx.compose.ui.node.modifierElementOf
+
+class PositionLoggerNode(var id: String) : GlobalPositionAwareModifierNode, Modifier.Node() {
+    override fun onGloballyPositioned(coordinates: LayoutCoordinates) {
+        // This will be the size of the Layout.
+        coordinates.size
+        // The position of the Layout relative to the application window.
+        coordinates.positionInWindow()
+        // The position of the Layout relative to the Compose root.
+        coordinates.positionInRoot()
+        // These will be the alignment lines provided to the Layout
+        coordinates.providedAlignmentLines
+        // This will be a LayoutCoordinates instance corresponding to the parent of the Layout.
+        coordinates.parentLayoutCoordinates
+    }
+}
+
+fun Modifier.logPosition(id: String) = this then modifierElementOf(
+    key = id,
+    create = { PositionLoggerNode(id) },
+    update = { it.id = id },
+    definitions = {
+        name = &quot;logPosition&quot;
+        properties[&quot;id&quot;] = id
+    }
+)</pre>
+      <pre class="prettyprint">
+import androidx.compose.ui.node.modifierElementOf
+
+class SizeLoggerNode(var id: String) : LayoutAwareModifierNode, Modifier.Node() {
+    override fun onRemeasured(size: IntSize) {
+        println(&quot;The size of $id was $size&quot;)
+    }
+}
+
+fun Modifier.logSize(id: String) = this then modifierElementOf(
+    key = id,
+    create = { SizeLoggerNode(id) },
+    update = { it.id = id },
+    definitions = {
+        name = &quot;logSize&quot;
+        properties[&quot;id&quot;] = id
+    }
+)</pre>
+      <pre class="prettyprint">
+import androidx.compose.ui.node.modifierElementOf
+
+class OnPointerEventNode(var callback: (PointerEvent) -&gt; Unit) :
+    PointerInputModifierNode, Modifier.Node() {
+    override fun onPointerEvent(
+        pointerEvent: PointerEvent,
+        pass: PointerEventPass,
+        bounds: IntSize
+    ) {
+        if (pass == PointerEventPass.Initial) {
+            callback(pointerEvent)
+        }
+    }
+
+    override fun onCancelPointerInput() {
+        // Do nothing
+    }
+}
+
+fun Modifier.onPointerEvent(callback: (PointerEvent) -&gt; Unit) = this then modifierElementOf(
+    key = callback,
+    create = { OnPointerEventNode(callback) },
+    update = { it.callback = callback },
+    definitions = {
+        name = &quot;onPointerEvent&quot;
+        properties[&quot;callback&quot;] = callback
+    }
+)</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?</code></td>
+              <td>
+                <p>An object used to determine whether or not the created node should be updated or not.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>crossinline&nbsp;create:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T</code></td>
+              <td>
+                <p>The initial creation of the node. This will be called the first time the modifier is applied to the Layout and it should construct the correspoding <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> instance, referencing any captured inputs necessary.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>crossinline&nbsp;update:&nbsp;(T) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <p>Called when a modifier is applied to a Layout whose <code><a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#modifierElementOf(kotlin.Any,kotlin.Function0,kotlin.Function1,kotlin.Function1)">key</a></code> have changed from the previous application. This lambda will have the current node instance passed in as a parameter, and it is expected that the node will be brought up to date.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>crossinline&nbsp;definitions:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/InspectorInfo.html">InspectorInfo</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <p>This lambda will construct a debug-only set of information for use with tooling.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/node/ModifierNodeElement.html">ModifierNodeElement</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="api-item"><a name="modifierElementOf(kotlin.Function0, kotlin.Function1)"></a><a name="modifierElementOf-kotlin.Function0-kotlin.Function1-"></a><a name="modifierelementof"></a>
+      <h3 class="api-name" id="modifierElementOf(kotlin.Function0,kotlin.Function1)">modifierElementOf</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a>&gt; <a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#modifierElementOf(kotlin.Function0,kotlin.Function1)">modifierElementOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;create:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;definitions:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/InspectorInfo.html">InspectorInfo</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+      <p>A helpful API for constructing a <code><a href="/reference/kotlin/androidx/compose/ui/node/ModifierNodeElement.html">ModifierNodeElement</a></code> corresponding to a particular <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> implementation. This overload is expected to be used for parameter-less Modifier factories. For Modifier factories with parameters, consider using the overload of this method which accepts a &quot;params&quot; and &quot;update&quot; parameter.</p>
+      <pre class="prettyprint">
+import androidx.compose.ui.node.modifierElementOf
+
+class Circle(var color: Color) : DrawModifierNode, Modifier.Node() {
+    override fun ContentDrawScope.draw() {
+        drawCircle(color)
+    }
+}
+fun Modifier.circle(color: Color) = this then modifierElementOf(
+    key = color,
+    create = { Circle(color) },
+    update = { it.color = color },
+    definitions = {
+        name = &quot;circle&quot;
+        properties[&quot;color&quot;] = color
+    }
+)</pre>
+      <pre class="prettyprint">
+import androidx.compose.ui.node.modifierElementOf
+import androidx.compose.ui.semantics.SemanticsConfiguration
+import androidx.compose.ui.semantics.heading
+
+class HeadingNode : SemanticsModifierNode, Modifier.Node() {
+    override val semanticsConfiguration: SemanticsConfiguration = SemanticsConfiguration()
+        .apply {
+            heading()
+        }
+}
+fun Modifier.heading() = this then modifierElementOf(
+    create = { HeadingNode() },
+    definitions = {
+        name = &quot;heading&quot;
+    }
+)</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>crossinline&nbsp;create:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T</code></td>
+              <td>
+                <p>The initial creation of the node. This will be called the first time the modifier is applied to the Layout and it should construct the correspoding <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> instance</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>crossinline&nbsp;definitions:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/InspectorInfo.html">InspectorInfo</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <p>This lambda will construct a debug-only set of information for use with tooling.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/node/ModifierNodeElement.html">ModifierNodeElement</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h2>Extension functions</h2>
+    <div class="api-item"><a name="-androidx.compose.ui.node.SemanticsModifierNode-.collapsedSemanticsConfiguration--"></a><a name="collapsedsemanticsconfiguration"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.node.SemanticsModifierNode).collapsedSemanticsConfiguration()">collapsedSemanticsConfiguration</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/SemanticsModifierNode.html">SemanticsModifierNode</a>.<a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.SemanticsModifierNode).collapsedSemanticsConfiguration()">collapsedSemanticsConfiguration</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsConfiguration.html">SemanticsConfiguration</a></pre>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.node.DrawModifierNode-.invalidateDraw--"></a><a name="invalidatedraw"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.node.DrawModifierNode).invalidateDraw()">invalidateDraw</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/DrawModifierNode.html">DrawModifierNode</a>.<a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.DrawModifierNode).invalidateDraw()">invalidateDraw</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Invalidates this modifier's draw layer, ensuring that a draw pass will be run on the next frame.</p>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.node.LayoutModifierNode-.invalidateLayer--"></a><a name="invalidatelayer"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.node.LayoutModifierNode).invalidateLayer()">invalidateLayer</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a>.<a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.LayoutModifierNode).invalidateLayer()">invalidateLayer</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>This will invalidate the current node's layer, and ensure that the layer is redrawn for the next frame.</p>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.node.LayoutModifierNode-.invalidateLayout--"></a><a name="invalidatelayout"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.node.LayoutModifierNode).invalidateLayout()">invalidateLayout</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a>.<a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.LayoutModifierNode).invalidateLayout()">invalidateLayout</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>This will invalidate the current node's layout pass, and ensure that relayout of this node will happen for the next frame.</p>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.node.LayoutModifierNode-.invalidateMeasurements--"></a><a name="invalidatemeasurements"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.node.LayoutModifierNode).invalidateMeasurements()">invalidateMeasurements</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a>.<a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.LayoutModifierNode).invalidateMeasurements()">invalidateMeasurements</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>This invalidates the current node's measure result, and ensures that a remeasurement of this node will happen for the next frame.</p>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.node.ParentDataModifierNode-.invalidateParentData--"></a><a name="invalidateparentdata"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.node.ParentDataModifierNode).invalidateParentData()">invalidateParentData</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/ParentDataModifierNode.html">ParentDataModifierNode</a>.<a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.ParentDataModifierNode).invalidateParentData()">invalidateParentData</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>This invalidates the current node's parent data, and ensures that layouts that utilize it will be scheduled to relayout for the next frame.</p>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.node.SemanticsModifierNode-.invalidateSemantics--"></a><a name="invalidatesemantics"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.node.SemanticsModifierNode).invalidateSemantics()">invalidateSemantics</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/SemanticsModifierNode.html">SemanticsModifierNode</a>.<a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.SemanticsModifierNode).invalidateSemantics()">invalidateSemantics</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.node.DelegatableNode-.invalidateSubtree--"></a><a name="invalidatesubtree"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.node.DelegatableNode).invalidateSubtree()">invalidateSubtree</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>.<a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.DelegatableNode).invalidateSubtree()">invalidateSubtree</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Invalidates the subtree of this layout, including layout, drawing, parent data, etc.</p>
+      <p>Calling this method can be a relatively expensive operation as it will cause the entire subtree to relayout and redraw instead of just parts that are otherwise invalidated. Its use should be limited to structural changes.</p>
+    </div>
+    <div class="api-item"><a name="-androidx.compose.ui.Modifier.Node-.observeReads-kotlin.Function0-"></a><a name="observereads"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.Modifier.Node).observeReads(kotlin.Function0)">observeReads</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a>&nbsp;&amp;&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/ObserverNode.html">ObserverNode</a>&gt; T.<a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.Modifier.Node).observeReads(kotlin.Function0)">observeReads</a>(block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Use this function to observe reads within the specified <code><a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.Modifier.Node).observeReads(kotlin.Function0)">block</a></code>.</p>
+    </div>
+  </body>
+</html>

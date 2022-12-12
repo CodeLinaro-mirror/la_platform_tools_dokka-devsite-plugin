@@ -1,0 +1,119 @@
+<html devsite="true">
+  <head>
+    <title>BlendMode</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-graphics/androidx/compose/ui/graphics/BlendMode.kt+class:androidx.compose.ui.graphics.BlendMode&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>BlendMode</h1>
+    <p>
+      <pre>value public final class <a href="/reference/androidx/compose/ui/graphics/BlendMode.html">BlendMode</a></pre>
+    </p>
+    <hr>
+    <p>Algorithms to use when painting on the canvas.</p>
+    <p>When drawing a shape or image onto a canvas, different algorithms can be used to blend the pixels. The different values of <code><a href="/reference/androidx/compose/ui/graphics/BlendMode.html">BlendMode</a></code> specify different such algorithms.</p>
+    <p>Each algorithm has two inputs, the <em>source</em>, which is the image being drawn, and the <em>destination</em>, which is the image into which the source image is being composited. The destination is often thought of as the <em>background</em>. The source and destination both have four color channels, the red, green, blue, and alpha channels. These are typically represented as numbers in the range 0.0 to 1.0. The output of the algorithm also has these same four channels, with values computed from the source and destination.</p>
+    <h2> Application to the <code><a href="/reference/androidx/compose/ui/graphics/Canvas.html">Canvas</a></code> API</h2>
+    <p>When using <code><a href="/reference/androidx/compose/ui/graphics/Canvas.html#saveLayer(androidx.compose.ui.geometry.Rect,androidx.compose.ui.graphics.Paint)">Canvas.saveLayer</a></code> and <code><a href="/reference/androidx/compose/ui/graphics/Canvas.html#restore()">Canvas.restore</a></code>, the blend mode of the <code><a href="/reference/androidx/compose/ui/graphics/Paint.html">Paint</a></code> given to the <code><a href="/reference/androidx/compose/ui/graphics/Canvas.html#saveLayer(androidx.compose.ui.geometry.Rect,androidx.compose.ui.graphics.Paint)">Canvas.saveLayer</a></code> will be applied when <code><a href="/reference/androidx/compose/ui/graphics/Canvas.html#restore()">Canvas.restore</a></code> is called. Each call to <code><a href="/reference/androidx/compose/ui/graphics/Canvas.html#saveLayer(androidx.compose.ui.geometry.Rect,androidx.compose.ui.graphics.Paint)">Canvas.saveLayer</a></code> introduces a new layer onto which shapes and images are painted; when <code><a href="/reference/androidx/compose/ui/graphics/Canvas.html#restore()">Canvas.restore</a></code> is called, that layer is then composited onto the parent layer, with the source being the most-recently-drawn shapes and images, and the destination being the parent layer. (For the first <code><a href="/reference/androidx/compose/ui/graphics/Canvas.html#saveLayer(androidx.compose.ui.geometry.Rect,androidx.compose.ui.graphics.Paint)">Canvas.saveLayer</a></code> call, the parent layer is the canvas itself.)</p>
+    <p>See also:</p>
+    <ul>
+      <li>
+        <p><code><a href="/reference/androidx/compose/ui/graphics/Paint.html#blendMode()">Paint.blendMode</a></code>, which uses <code><a href="/reference/androidx/compose/ui/graphics/BlendMode.html">BlendMode</a></code> to define the compositing     strategy.</p>
+      </li>
+    </ul>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>public static class <a href="/reference/androidx/compose/ui/graphics/BlendMode.Companion.html">BlendMode.Companion</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/BlendMode.html#toString()">toString</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/AndroidBlendModeKt.html">AndroidBlendModeKt</a>.<a href="/reference/androidx/compose/ui/graphics/BlendMode.html#(androidx.compose.ui.graphics.BlendMode).isSupported()">isSupported</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/BlendMode.html">BlendMode</a>&nbsp;receiver)</code></div>
+              <p>Helper method to determine if the appropriate <code><a href="/reference/androidx/compose/ui/graphics/BlendMode.html">BlendMode</a></code> is supported on the given Android API level this provides an opportunity for consumers to fallback on an alternative user experience for devices that do not support the corresponding blend mode.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/BlendModeKt.html">BlendModeKt</a>.<a href="/reference/androidx/compose/ui/graphics/BlendMode.html#(androidx.compose.ui.graphics.BlendMode).isSupported()">isSupported</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/BlendMode.html">BlendMode</a>&nbsp;receiver)</code></div>
+              <p>Capability query to determine if the particular platform supports the <code><a href="/reference/androidx/compose/ui/graphics/BlendMode.html">BlendMode</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+        <h3 class="api-name" id="toString()">toString</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/BlendMode.html#toString()">toString</a>()</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.BlendMode-.isSupported--"></a><a name="issupported"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.graphics.BlendMode).isSupported()">AndroidBlendModeKt.isSupported</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/AndroidBlendModeKt.html">AndroidBlendModeKt</a>.<a href="/reference/androidx/compose/ui/graphics/BlendMode.html#(androidx.compose.ui.graphics.BlendMode).isSupported()">isSupported</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/BlendMode.html">BlendMode</a>&nbsp;receiver)</pre>
+        <p>Helper method to determine if the appropriate <code><a href="/reference/androidx/compose/ui/graphics/BlendMode.html">BlendMode</a></code> is supported on the given Android API level this provides an opportunity for consumers to fallback on an alternative user experience for devices that do not support the corresponding blend mode. Usages of <code><a href="/reference/androidx/compose/ui/graphics/BlendMode.html">BlendMode</a></code> types that are not supported will fallback onto the default of <code><a href="/reference/androidx/compose/ui/graphics/BlendMode.Companion.html#SrcOver()">BlendMode.SrcOver</a></code></p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.BlendMode-.isSupported--"></a><a name="issupported"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.graphics.BlendMode).isSupported()">BlendModeKt.isSupported</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/BlendModeKt.html">BlendModeKt</a>.<a href="/reference/androidx/compose/ui/graphics/BlendMode.html#(androidx.compose.ui.graphics.BlendMode).isSupported()">isSupported</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/BlendMode.html">BlendMode</a>&nbsp;receiver)</pre>
+        <p>Capability query to determine if the particular platform supports the <code><a href="/reference/androidx/compose/ui/graphics/BlendMode.html">BlendMode</a></code>. Not all platforms support all blend mode algorithms, however, <code><a href="/reference/androidx/compose/ui/graphics/BlendMode.Companion.html#SrcOver()">BlendMode.SrcOver</a></code> is guaranteed to be supported as it is the default drawing algorithm. If a <code><a href="/reference/androidx/compose/ui/graphics/BlendMode.html">BlendMode</a></code> that is not supported is used, the default of SrcOver is consumed instead.</p>
+      </div>
+    </div>
+  </body>
+</html>

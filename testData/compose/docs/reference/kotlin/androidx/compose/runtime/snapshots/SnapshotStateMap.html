@@ -5,7 +5,9 @@
 {% include "_shared/_reference-head-tags.html" %}
   </head>
   <body>
-    <div id="metadata-info-block"></div>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/runtime/snapshots/SnapshotStateMap.kt+class:androidx.compose.runtime.snapshots.SnapshotStateMap&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
     <h1>SnapshotStateMap</h1>
     <p>
       <pre>class <a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateMap.html">SnapshotStateMap</a>&lt;K&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a>, <a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html">StateObject</a></pre>
@@ -118,6 +120,13 @@
             <td><code>open V?</code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateMap.html#remove(kotlin.Any)">remove</a>(key:&nbsp;K)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a>&lt;K,&nbsp;V&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateMap.html#toMap()">toMap</a>()</code></div>
+              <p>Returns an immutable map containing all key-value pairs from the original map.</p>
             </td>
           </tr>
         </tbody>
@@ -340,6 +349,14 @@
       <div class="api-item"><a name="remove-kotlin.Any-"></a><a name="remove"></a>
         <h3 class="api-name" id="remove(kotlin.Any)">remove</h3>
         <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateMap.html#remove(kotlin.Any)">remove</a>(key:&nbsp;K):&nbsp;V?</pre>
+      </div>
+      <div class="api-item"><a name="toMap--"></a><a name="tomap"></a>
+        <h3 class="api-name" id="toMap()">toMap</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateMap.html#toMap()">toMap</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a>&lt;K,&nbsp;V&gt;</pre>
+        <p>Returns an immutable map containing all key-value pairs from the original map.</p>
+        <p>The content of the map returned will not change even if the content of the map is changed in the same snapshot. It also will be the same instance until the content is changed. It is not, however, guaranteed to be the same instance for the same content as adding and removing the same item from the this map might produce a different instance with the same content.</p>
+        <p>This operation is O(1) and does not involve a physically copying the map. It instead returns the underlying immutable map used internally to store the content of the map.</p>
+        <p>It is recommended to use <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateMap.html#toMap()">toMap</a></code> when using returning the value of this map from <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#snapshotFlow(kotlin.Function0)">androidx.compose.runtime.snapshotFlow</a></code>.</p>
       </div>
     </div>
     <div class="list">

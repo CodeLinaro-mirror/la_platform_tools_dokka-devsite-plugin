@@ -5,7 +5,9 @@
 {% include "_shared/_reference-head-tags.html" %}
   </head>
   <body>
-    <div id="metadata-info-block"></div>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/runtime/snapshots/Snapshot.kt+class:androidx.compose.runtime.snapshots.MutableSnapshot&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
     <h1>MutableSnapshot</h1>
     <p>
       <pre>public class <a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html">MutableSnapshot</a> extends <a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></pre>
@@ -198,6 +200,20 @@
                       <td>
                         <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">enter</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;block)</code></div>
                         <p>Enter the snapshot.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>final <a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code></td>
+                      <td>
+                        <div><code>@<a href="/reference/androidx/compose/runtime/ExperimentalComposeApi.html">ExperimentalComposeApi</a><br><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#unsafeEnter()">unsafeEnter</a>()</code></div>
+                        <p>Enter the snapshot, returning the previous <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code> for leaving this snapshot later using <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#unsafeLeave(androidx.compose.runtime.snapshots.Snapshot)">unsafeLeave</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>final void</code></td>
+                      <td>
+                        <div><code>@<a href="/reference/androidx/compose/runtime/ExperimentalComposeApi.html">ExperimentalComposeApi</a><br><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#unsafeLeave(androidx.compose.runtime.snapshots.Snapshot)">unsafeLeave</a>(<a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>&nbsp;oldSnapshot)</code></div>
+                        <p>Leave the snapshot, restoring the <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#unsafeLeave(androidx.compose.runtime.snapshots.Snapshot)">oldSnapshot</a></code> before returning.</p>
                       </td>
                     </tr>
                   </tbody>

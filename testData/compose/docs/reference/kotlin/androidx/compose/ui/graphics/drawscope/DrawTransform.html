@@ -1,0 +1,551 @@
+<html devsite="true">
+  <head>
+    <title>DrawTransform</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-graphics/androidx/compose/ui/graphics/drawscope/DrawTransform.kt+class:androidx.compose.ui.graphics.drawscope.DrawTransform&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>DrawTransform</h1>
+    <p>
+      <pre>@<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawScopeMarker.html">DrawScopeMarker</a><br>interface <a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html">DrawTransform</a></pre>
+    </p>
+    <hr>
+    <p>Defines transformations that can be applied to a drawing environment</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#clipPath(androidx.compose.ui.graphics.Path,androidx.compose.ui.graphics.ClipOp)">clipPath</a>(path:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a>,&nbsp;clipOp:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ClipOp.html">ClipOp</a>)</code></div>
+              <p>Reduces the clip region to the intersection of the current clip and the given rounded rectangle.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#clipRect(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.ClipOp)">clipRect</a>(left:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;top:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;right:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;bottom:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;clipOp:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ClipOp.html">ClipOp</a>)</code></div>
+              <p>Reduces the clip region to the intersection of the current clip and the given rectangle indicated by the given left, top, right and bottom bounds.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#inset(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">inset</a>(left:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;top:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;right:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;bottom:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+              <p>Simultaneously translate the coordinate space by <code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#inset(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">left</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#inset(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">top</a></code> as well as modify the dimensions of the current painting area.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#rotate(kotlin.Float,androidx.compose.ui.geometry.Offset)">rotate</a>(degrees:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;pivot:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>)</code></div>
+              <p>Add a rotation (in degrees clockwise) to the current transform at the given pivot point.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#scale(kotlin.Float,kotlin.Float,androidx.compose.ui.geometry.Offset)">scale</a>(scaleX:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;scaleY:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;pivot:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>)</code></div>
+              <p>Add an axis-aligned scale to the current transform, scaling by the first argument in the horizontal direction and the second in the vertical direction at the given pivot coordinate.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#transform(androidx.compose.ui.graphics.Matrix)">transform</a>(matrix:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Matrix.html">Matrix</a>)</code></div>
+              <p>Transform the drawing environment by the given matrix</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#translate(kotlin.Float,kotlin.Float)">translate</a>(left:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;top:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+              <p>Translate the coordinate space by the given delta in pixels in both the x and y coordinates respectively</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>open <a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#center()">center</a></code></div>
+              <p>Convenience method to obtain the current position of the current transformation</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#size()">size</a></code></div>
+              <p>Get the current size of the CanvasTransform</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>inline <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html">DrawTransform</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#(androidx.compose.ui.graphics.drawscope.DrawTransform).inset(kotlin.Float,kotlin.Float)">inset</a>(horizontal:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;vertical:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+              <p>Convenience method modifies the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html">DrawTransform</a></code> bounds to inset both left and right bounds by <code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/package-summary.html#(androidx.compose.ui.graphics.drawscope.DrawTransform).inset(kotlin.Float,kotlin.Float)">horizontal</a></code> as well as the top and bottom by <code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/package-summary.html#(androidx.compose.ui.graphics.drawscope.DrawTransform).inset(kotlin.Float,kotlin.Float)">vertical</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>inline <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html">DrawTransform</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#(androidx.compose.ui.graphics.drawscope.DrawTransform).inset(kotlin.Float)">inset</a>(inset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+              <p>Convenience method modifies the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a></code> bounds to inset both left, top, right and bottom bounds by <code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/package-summary.html#(androidx.compose.ui.graphics.drawscope.DrawTransform).inset(kotlin.Float)">inset</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>inline <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html">DrawTransform</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#(androidx.compose.ui.graphics.drawscope.DrawTransform).rotateRad(kotlin.Float,androidx.compose.ui.geometry.Offset)">rotateRad</a>(radians:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;pivot:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>)</code></div>
+              <p>Add a rotation (in radians clockwise) to the current transform at the given pivot point.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>inline <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html">DrawTransform</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#(androidx.compose.ui.graphics.drawscope.DrawTransform).scale(kotlin.Float,androidx.compose.ui.geometry.Offset)">scale</a>(scale:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;pivot:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>)</code></div>
+              <p>Add an axis-aligned scale to the current transform, scaling uniformly in both directions by the provided scale factor at the pivot coordinate.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="clipPath(androidx.compose.ui.graphics.Path, androidx.compose.ui.graphics.ClipOp)"></a><a name="clipPath-androidx.compose.ui.graphics.Path-androidx.compose.ui.graphics.ClipOp-"></a><a name="clippath"></a>
+        <h3 class="api-name" id="clipPath(androidx.compose.ui.graphics.Path,androidx.compose.ui.graphics.ClipOp)">clipPath</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#clipPath(androidx.compose.ui.graphics.Path,androidx.compose.ui.graphics.ClipOp)">clipPath</a>(path:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a>,&nbsp;clipOp:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ClipOp.html">ClipOp</a> = ClipOp.Intersect):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Reduces the clip region to the intersection of the current clip and the given rounded rectangle. After this method is invoked, this clip is no longer applied</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>path:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a></code></td>
+                <td>
+                  <p>Shape to clip drawing content within</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>clipOp:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ClipOp.html">ClipOp</a> = ClipOp.Intersect</code></td>
+                <td>
+                  <p>Clipping operation to conduct on the given bounds, defaults to <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ClipOp.Companion.html#Intersect()">ClipOp.Intersect</a></code></p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="clipRect(kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float, androidx.compose.ui.graphics.ClipOp)"></a><a name="clipRect-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-androidx.compose.ui.graphics.ClipOp-"></a><a name="cliprect"></a>
+        <h3 class="api-name" id="clipRect(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.ClipOp)">clipRect</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#clipRect(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.ClipOp)">clipRect</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;left:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = 0.0f,<br>&nbsp;&nbsp;&nbsp;&nbsp;top:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = 0.0f,<br>&nbsp;&nbsp;&nbsp;&nbsp;right:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = size.width,<br>&nbsp;&nbsp;&nbsp;&nbsp;bottom:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = size.height,<br>&nbsp;&nbsp;&nbsp;&nbsp;clipOp:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ClipOp.html">ClipOp</a> = ClipOp.Intersect<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Reduces the clip region to the intersection of the current clip and the given rectangle indicated by the given left, top, right and bottom bounds. After this method is invoked, this clip is no longer applied.</p>
+        <p>Use <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ClipOp.Companion.html#Difference()">ClipOp.Difference</a></code> to subtract the provided rectangle from the current clip.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>left:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = 0.0f</code></td>
+                <td>
+                  <p>Left bound of the rectangle to clip</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>top:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = 0.0f</code></td>
+                <td>
+                  <p>Top bound of the rectangle to clip</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>right:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = size.width</code></td>
+                <td>
+                  <p>Right bound ofthe rectangle to clip</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>bottom:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = size.height</code></td>
+                <td>
+                  <p>Bottom bound of the rectangle to clip</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>clipOp:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ClipOp.html">ClipOp</a> = ClipOp.Intersect</code></td>
+                <td>
+                  <p>Clipping operation to perform on the given bounds</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="inset(kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="inset-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="inset"></a>
+        <h3 class="api-name" id="inset(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">inset</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#inset(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">inset</a>(left:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;top:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;right:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;bottom:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Simultaneously translate the coordinate space by <code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#inset(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">left</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#inset(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">top</a></code> as well as modify the dimensions of the current painting area. This provides a callback to issue more drawing instructions within the modified coordinate space. This method modifies the width to be equivalent to width - (left + right) as well as height to height - (top + bottom)</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>left:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>number of pixels to inset the left drawing bound</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>top:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>number of pixels to inset the top drawing bound</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>right:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>number of pixels to inset the right drawing bound</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>bottom:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>number of pixels to inset the bottom drawing bound</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="rotate(kotlin.Float, androidx.compose.ui.geometry.Offset)"></a><a name="rotate-kotlin.Float-androidx.compose.ui.geometry.Offset-"></a><a name="rotate"></a>
+        <h3 class="api-name" id="rotate(kotlin.Float,androidx.compose.ui.geometry.Offset)">rotate</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#rotate(kotlin.Float,androidx.compose.ui.geometry.Offset)">rotate</a>(degrees:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;pivot:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a> = center):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Add a rotation (in degrees clockwise) to the current transform at the given pivot point. The pivot coordinate remains unchanged by the rotation transformation.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>degrees:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>to rotate clockwise</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>pivot:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a> = center</code></td>
+                <td>
+                  <p>The coordinates for the pivot point, defaults to the center of the coordinate space</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="scale(kotlin.Float, kotlin.Float, androidx.compose.ui.geometry.Offset)"></a><a name="scale-kotlin.Float-kotlin.Float-androidx.compose.ui.geometry.Offset-"></a><a name="scale"></a>
+        <h3 class="api-name" id="scale(kotlin.Float,kotlin.Float,androidx.compose.ui.geometry.Offset)">scale</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#scale(kotlin.Float,kotlin.Float,androidx.compose.ui.geometry.Offset)">scale</a>(scaleX:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;scaleY:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;pivot:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a> = center):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Add an axis-aligned scale to the current transform, scaling by the first argument in the horizontal direction and the second in the vertical direction at the given pivot coordinate. The pivot coordinate remains unchanged by the scale transformation.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>scaleX:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>The amount to scale in X</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>scaleY:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>The amount to scale in Y</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>pivot:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a> = center</code></td>
+                <td>
+                  <p>The coordinate for the pivot point, defaults to the center of the coordinate space</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="transform-androidx.compose.ui.graphics.Matrix-"></a><a name="transform"></a>
+        <h3 class="api-name" id="transform(androidx.compose.ui.graphics.Matrix)">transform</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#transform(androidx.compose.ui.graphics.Matrix)">transform</a>(matrix:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Matrix.html">Matrix</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Transform the drawing environment by the given matrix</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>matrix:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Matrix.html">Matrix</a></code></td>
+                <td>
+                  <p>transformation matrix used to transform the drawing environment</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="translate(kotlin.Float, kotlin.Float)"></a><a name="translate-kotlin.Float-kotlin.Float-"></a><a name="translate"></a>
+        <h3 class="api-name" id="translate(kotlin.Float,kotlin.Float)">translate</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#translate(kotlin.Float,kotlin.Float)">translate</a>(left:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = 0.0f,&nbsp;top:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = 0.0f):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Translate the coordinate space by the given delta in pixels in both the x and y coordinates respectively</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>left:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = 0.0f</code></td>
+                <td>
+                  <p>Pixels to translate the coordinate space in the x-axis</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>top:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = 0.0f</code></td>
+                <td>
+                  <p>Pixels to translate the coordinate space in the y-axis</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getCenter()"></a><a name="setCenter()"></a><a name="getCenter--"></a><a name="setCenter--"></a>
+        <h3 class="api-name" id="center()">center</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#center()">center</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+        <p>Convenience method to obtain the current position of the current transformation</p>
+      </div>
+      <div class="api-item"><a name="getSize()"></a><a name="setSize()"></a><a name="getSize--"></a><a name="setSize--"></a>
+        <h3 class="api-name" id="size()">size</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#size()">size</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></pre>
+        <p>Get the current size of the CanvasTransform</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="(androidx.compose.ui.graphics.drawscope.DrawTransform).inset(kotlin.Float, kotlin.Float)"></a><a name="-androidx.compose.ui.graphics.drawscope.DrawTransform-.inset-kotlin.Float-kotlin.Float-"></a><a name="inset"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.graphics.drawscope.DrawTransform).inset(kotlin.Float,kotlin.Float)">inset</h3>
+        <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html">DrawTransform</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#(androidx.compose.ui.graphics.drawscope.DrawTransform).inset(kotlin.Float,kotlin.Float)">inset</a>(horizontal:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = 0.0f,&nbsp;vertical:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = 0.0f):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Convenience method modifies the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html">DrawTransform</a></code> bounds to inset both left and right bounds by <code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/package-summary.html#(androidx.compose.ui.graphics.drawscope.DrawTransform).inset(kotlin.Float,kotlin.Float)">horizontal</a></code> as well as the top and bottom by <code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/package-summary.html#(androidx.compose.ui.graphics.drawscope.DrawTransform).inset(kotlin.Float,kotlin.Float)">vertical</a></code>. After this method is invoked, the coordinate space is returned to the state before the inset was applied</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>horizontal:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = 0.0f</code></td>
+                <td>
+                  <p>number of pixels to inset both left and right bounds. Zero by default.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>vertical:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = 0.0f</code></td>
+                <td>
+                  <p>number of pixels to inset both top and bottom bounds. Zero by default.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.drawscope.DrawTransform-.inset-kotlin.Float-"></a><a name="inset"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.graphics.drawscope.DrawTransform).inset(kotlin.Float)">inset</h3>
+        <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html">DrawTransform</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#(androidx.compose.ui.graphics.drawscope.DrawTransform).inset(kotlin.Float)">inset</a>(inset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Convenience method modifies the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a></code> bounds to inset both left, top, right and bottom bounds by <code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/package-summary.html#(androidx.compose.ui.graphics.drawscope.DrawTransform).inset(kotlin.Float)">inset</a></code>. After this method is invoked, the coordinate space is returned to the state before this inset was applied.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>inset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>number of pixels to inset left, top, right, and bottom bounds.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.graphics.drawscope.DrawTransform).rotateRad(kotlin.Float, androidx.compose.ui.geometry.Offset)"></a><a name="-androidx.compose.ui.graphics.drawscope.DrawTransform-.rotateRad-kotlin.Float-androidx.compose.ui.geometry.Offset-"></a><a name="rotaterad"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.graphics.drawscope.DrawTransform).rotateRad(kotlin.Float,androidx.compose.ui.geometry.Offset)">rotateRad</h3>
+        <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html">DrawTransform</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#(androidx.compose.ui.graphics.drawscope.DrawTransform).rotateRad(kotlin.Float,androidx.compose.ui.geometry.Offset)">rotateRad</a>(radians:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;pivot:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a> = center):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Add a rotation (in radians clockwise) to the current transform at the given pivot point. The pivot coordinate remains unchanged by the rotation transformation</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>radians:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>to rotate clockwise</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>pivot:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a> = center</code></td>
+                <td>
+                  <p>The coordinate for the pivot point, defaults to the center of the coordinate space</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.graphics.drawscope.DrawTransform).scale(kotlin.Float, androidx.compose.ui.geometry.Offset)"></a><a name="-androidx.compose.ui.graphics.drawscope.DrawTransform-.scale-kotlin.Float-androidx.compose.ui.geometry.Offset-"></a><a name="scale"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.graphics.drawscope.DrawTransform).scale(kotlin.Float,androidx.compose.ui.geometry.Offset)">scale</h3>
+        <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html">DrawTransform</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html#(androidx.compose.ui.graphics.drawscope.DrawTransform).scale(kotlin.Float,androidx.compose.ui.geometry.Offset)">scale</a>(scale:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;pivot:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a> = center):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Add an axis-aligned scale to the current transform, scaling uniformly in both directions by the provided scale factor at the pivot coordinate. The pivot coordinate remains unchanged by the scale transformation.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>scale:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>The amount to scale</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>pivot:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a> = center</code></td>
+                <td>
+                  <p>The coordinate for the pivot point, defaults to the center of the coordinate space</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,256 @@
+<html devsite="true">
+  <head>
+    <title>DelegatingNode</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/node/DelegatingNode.kt+class:androidx.compose.ui.node.DelegatingNode&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>DelegatingNode</h1>
+    <p>
+      <pre>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>abstract class <a href="/reference/kotlin/androidx/compose/ui/node/DelegatingNode.html">DelegatingNode</a> : <a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></pre>
+    </p>
+    <div class="devsite-table-wrapper">
+      <table class="jd-inheritance-table">
+        <tbody>
+          <tr>
+            <td colspan="3"><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">kotlin.Any</a></td>
+          </tr>
+          <tr>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="2"><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">androidx.compose.ui.Modifier.Node</a></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="1"><a href="/reference/kotlin/androidx/compose/ui/node/DelegatingNode.html">androidx.compose.ui.node.DelegatingNode</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr>
+    <p>A <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> which is able to delegate work to other <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> instances.</p>
+    <p>This can be useful to compose multiple node implementations into one.</p>
+    <pre class="prettyprint">
+import androidx.compose.ui.semantics.SemanticsConfiguration
+import androidx.compose.ui.semantics.onClick
+
+class TapGestureNode(var onTap: () -&gt; Unit) : PointerInputModifierNode, Modifier.Node() {
+    override fun onPointerEvent(
+        pointerEvent: PointerEvent,
+        pass: PointerEventPass,
+        bounds: IntSize
+    ) {
+        // ...
+    }
+
+    override fun onCancelPointerInput() {
+        // ...
+    }
+}
+class TapGestureWithClickSemantics(onTap: () -&gt; Unit) :
+    PointerInputModifierNode, SemanticsModifierNode, DelegatingNode() {
+    var onTap: () -&gt; Unit
+        get() = gesture.onTap
+        set(value) { gesture.onTap = value }
+
+    val gesture = delegated { TapGestureNode(onTap) }
+
+    override fun onPointerEvent(
+        pointerEvent: PointerEvent,
+        pass: PointerEventPass,
+        bounds: IntSize
+    ) {
+        gesture.onPointerEvent(pointerEvent, pass, bounds)
+    }
+
+    override fun onCancelPointerInput() {
+        gesture.onCancelPointerInput()
+    }
+
+    override val semanticsConfiguration: SemanticsConfiguration = SemanticsConfiguration()
+        .apply {
+            onClick {
+                gesture.onTap()
+                true
+            }
+        }
+}</pre>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">See also</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatingNode.html">DelegatingNode</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatingNode.html#DelegatingNode()">DelegatingNode</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a>&gt; <a href="/reference/kotlin/androidx/compose/ui/node/DelegatingNode.html#delegated(kotlin.Function0)">delegated</a>(fn:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T)</code></div>
+              <p>In order to properly delegate work to another <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code>, the delegated instance must be created and returned inside of a <code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatingNode.html#delegated(kotlin.Function0)">delegated</a></code> call.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatingNode.html#onAttach()">onAttach</a>()</code></div>
+              <p>When called, <code>node</code> is guaranteed to be non-null.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatingNode.html#onDetach()">onDetach</a>()</code></div>
+              <p>This should be called right before the node gets removed from the list, so you should still be able to traverse inside of this method.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">androidx.compose.ui.Modifier.Node</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html#sideEffect(kotlin.Function0)">sideEffect</a>(effect:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+                        <p>This can be called to register <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html#sideEffect(kotlin.Function0)">effect</a></code> as a function to be executed after all of the changes to the tree are applied.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">androidx.compose.ui.Modifier.Node</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html#isAttached()">isAttached</a></code></div>
+                        <p>Indicates that the node is attached and part of the tree.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>final <a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html#node()">node</a></code></div>
+                        <p>A reference of the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that holds this node's position in the node hierarchy.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="DelegatingNode--"></a><a name="delegatingnode"></a>
+        <h3 class="api-name" id="DelegatingNode()">DelegatingNode</h3>
+        <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/ui/node/DelegatingNode.html#DelegatingNode()">DelegatingNode</a>()</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="delegated-kotlin.Function0-"></a><a name="delegated"></a>
+        <h3 class="api-name" id="delegated(kotlin.Function0)">delegated</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a>&gt; <a href="/reference/kotlin/androidx/compose/ui/node/DelegatingNode.html#delegated(kotlin.Function0)">delegated</a>(fn:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T):&nbsp;T</pre>
+        <p>In order to properly delegate work to another <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code>, the delegated instance must be created and returned inside of a <code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatingNode.html#delegated(kotlin.Function0)">delegated</a></code> call. Doing this will ensure that the created node instance follows all of the right lifecycles and is properly discoverable in this position of the node tree.</p>
+        <p>By using <code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatingNode.html#delegated(kotlin.Function0)">delegated</a></code>, the <code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatingNode.html#delegated(kotlin.Function0)">fn</a></code> parameter is executed synchronously, and the result is returned from this function for immediate use.</p>
+        <p>This method can be called from within an <code>init</code> block, however the returned delegated node will not be attached until the delegating node is attached. If <code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatingNode.html#delegated(kotlin.Function0)">delegated</a></code> is called after the delegating node is already attached, the returned delegated node will be attached.</p>
+      </div>
+      <div class="api-item"><a name="onAttach--"></a><a name="onattach"></a>
+        <h3 class="api-name" id="onAttach()">onAttach</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/DelegatingNode.html#onAttach()">onAttach</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>When called, <code>node</code> is guaranteed to be non-null. You can call sideEffect, coroutineScope, etc.</p>
+      </div>
+      <div class="api-item"><a name="onDetach--"></a><a name="ondetach"></a>
+        <h3 class="api-name" id="onDetach()">onDetach</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/DelegatingNode.html#onDetach()">onDetach</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>This should be called right before the node gets removed from the list, so you should still be able to traverse inside of this method. Ideally we would not allow you to trigger side effects here.</p>
+      </div>
+    </div>
+  </body>
+</html>

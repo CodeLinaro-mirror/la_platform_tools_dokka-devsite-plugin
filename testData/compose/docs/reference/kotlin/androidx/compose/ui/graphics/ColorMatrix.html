@@ -1,0 +1,363 @@
+<html devsite="true">
+  <head>
+    <title>ColorMatrix</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-graphics/androidx/compose/ui/graphics/ColorMatrix.kt+class:androidx.compose.ui.graphics.ColorMatrix&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>ColorMatrix</h1>
+    <p>
+      <pre>value class <a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html">ColorMatrix</a></pre>
+    </p>
+    <hr>
+    <p>4x5 matrix for transforming the color and alpha components of a source. The matrix can be passed as single array, and is treated as follows:</p>
+    <pre class="prettyprint">[ a, b, c, d, e,<br>  f, g, h, i, j,<br>  k, l, m, n, o,<br>  p, q, r, s, t ]</pre>
+    <p>When applied to a color <code>[R, G, B, A]</code>, the resulting color is computed as:</p>
+    <pre class="prettyprint">R' = a*R + b*G + c*B + d*A + e;<br>G' = f*R + g*G + h*B + i*A + j;<br>B' = k*R + l*G + m*B + n*A + o;<br>A' = p*R + q*G + r*B + s*A + t;&lt;/pre&gt;</pre>
+    <p>That resulting color <code>[R', G', B', A']</code> then has each channel clamped to the <code>0</code> to <code>255</code> range.</p>
+    <p>The sample ColorMatrix below inverts incoming colors by scaling each channel by <code>-1</code>, and then shifting the result up by <code>255</code> to remain in the standard color space.</p>
+    <pre class="prettyprint">[ -1, 0, 0, 0, 255,<br>  0, -1, 0, 0, 255,<br>  0, 0, -1, 0, 255,<br>  0, 0, 0, 1, 0 ]</pre>
+    <p>This is often used as input for <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorFilter.Companion.html#colorMatrix(androidx.compose.ui.graphics.ColorMatrix)">ColorFilter.colorMatrix</a></code> and applied at draw time through <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Paint.html#colorFilter()">Paint.colorFilter</a></code></p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#ColorMatrix(kotlin.FloatArray)">ColorMatrix</a>(values:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float-array/index.html">FloatArray</a>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#convertRgbToYuv()">convertRgbToYuv</a>()</code></div>
+              <p>Set the matrix to convert RGB to YUV</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#convertYuvToRgb()">convertYuvToRgb</a>()</code></div>
+              <p>Set the matrix to convert from YUV to RGB</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>inline&nbsp;operator <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#get(kotlin.Int,kotlin.Int)">get</a>(row:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;column:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Obtain an instance of the matrix value at the given <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#get(kotlin.Int,kotlin.Int)">row</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#get(kotlin.Int,kotlin.Int)">column</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#reset()">reset</a>()</code></div>
+              <p>Set this colormatrix to identity:</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#set(androidx.compose.ui.graphics.ColorMatrix)">set</a>(src:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html">ColorMatrix</a>)</code></div>
+              <p>Assign the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#set(androidx.compose.ui.graphics.ColorMatrix)">src</a></code> colormatrix into this matrix, copying all of its values.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>inline&nbsp;operator <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#set(kotlin.Int,kotlin.Int,kotlin.Float)">set</a>(row:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;column:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;v:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+              <p>Set the matrix value at the given <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#set(kotlin.Int,kotlin.Int,kotlin.Float)">row</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#set(kotlin.Int,kotlin.Int,kotlin.Float)">column</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#setToRotateBlue(kotlin.Float)">setToRotateBlue</a>(degrees:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+              <p>Rotate by <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#setToRotateBlue(kotlin.Float)">degrees</a></code> along the blue color axis</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#setToRotateGreen(kotlin.Float)">setToRotateGreen</a>(degrees:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+              <p>Rotate by <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#setToRotateGreen(kotlin.Float)">degrees</a></code> along the green color axis</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#setToRotateRed(kotlin.Float)">setToRotateRed</a>(degrees:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+              <p>Rotate by <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#setToRotateRed(kotlin.Float)">degrees</a></code> along the red color axis</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#setToSaturation(kotlin.Float)">setToSaturation</a>(sat:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+              <p>Set the matrix to affect the saturation of colors.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#setToScale(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">setToScale</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;redScale:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;greenScale:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;blueScale:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;alphaScale:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a><br>)</code></div>
+              <p>Create a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html">ColorMatrix</a></code> with the corresponding scale parameters for the red, green, blue and alpha axes</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>operator <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#timesAssign(androidx.compose.ui.graphics.ColorMatrix)">timesAssign</a>(colorMatrix:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html">ColorMatrix</a>)</code></div>
+              <p>Multiply this matrix by <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#timesAssign(androidx.compose.ui.graphics.ColorMatrix)">colorMatrix</a></code> and assign the result to this matrix.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float-array/index.html">FloatArray</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#values()">values</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="ColorMatrix-kotlin.FloatArray-"></a><a name="colormatrix"></a>
+        <h3 class="api-name" id="ColorMatrix(kotlin.FloatArray)">ColorMatrix</h3>
+        <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#ColorMatrix(kotlin.FloatArray)">ColorMatrix</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;values:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float-array/index.html">FloatArray</a> = floatArrayOf(
+        1f, 0f, 0f, 0f, 0f,
+        0f, 1f, 0f, 0f, 0f,
+        0f, 0f, 1f, 0f, 0f,
+        0f, 0f, 0f, 1f, 0f
+    )<br>)</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="convertRgbToYuv--"></a><a name="convertrgbtoyuv"></a>
+        <h3 class="api-name" id="convertRgbToYuv()">convertRgbToYuv</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#convertRgbToYuv()">convertRgbToYuv</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Set the matrix to convert RGB to YUV</p>
+      </div>
+      <div class="api-item"><a name="convertYuvToRgb--"></a><a name="convertyuvtorgb"></a>
+        <h3 class="api-name" id="convertYuvToRgb()">convertYuvToRgb</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#convertYuvToRgb()">convertYuvToRgb</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Set the matrix to convert from YUV to RGB</p>
+      </div>
+      <div class="api-item"><a name="get(kotlin.Int, kotlin.Int)"></a><a name="get-kotlin.Int-kotlin.Int-"></a><a name="get"></a>
+        <h3 class="api-name" id="get(kotlin.Int,kotlin.Int)">get</h3>
+        <pre class="api-signature no-pretty-print">inline&nbsp;operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#get(kotlin.Int,kotlin.Int)">get</a>(row:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;column:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>Obtain an instance of the matrix value at the given <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#get(kotlin.Int,kotlin.Int)">row</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#get(kotlin.Int,kotlin.Int)">column</a></code>. <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html">ColorMatrix</a></code> follows row major order in regards to the positions of matrix values within the flattened array. That is, content order goes from left to right then top to bottom as opposed to column major order.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>row:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                <td>
+                  <p>Row index to query the ColorMatrix value. Range is from 0 to 3 as <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html">ColorMatrix</a></code> is represented as a 4 x 5 matrix</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>column:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                <td>
+                  <p>Column index to query the ColorMatrix value. Range is from 0 to 4 as <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html">ColorMatrix</a></code> is represented as a 4 x 5 matrix</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="reset--"></a><a name="reset"></a>
+        <h3 class="api-name" id="reset()">reset</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#reset()">reset</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Set this colormatrix to identity:</p>
+        <pre class="prettyprint">[ 1 0 0 0 0   - red vector<br>0 1 0 0 0   - green vector<br>0 0 1 0 0   - blue vector<br>0 0 0 1 0 ] - alpha vector</pre>
+      </div>
+      <div class="api-item"><a name="set-androidx.compose.ui.graphics.ColorMatrix-"></a><a name="set"></a>
+        <h3 class="api-name" id="set(androidx.compose.ui.graphics.ColorMatrix)">set</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#set(androidx.compose.ui.graphics.ColorMatrix)">set</a>(src:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html">ColorMatrix</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Assign the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#set(androidx.compose.ui.graphics.ColorMatrix)">src</a></code> colormatrix into this matrix, copying all of its values.</p>
+      </div>
+      <div class="api-item"><a name="set(kotlin.Int, kotlin.Int, kotlin.Float)"></a><a name="set-kotlin.Int-kotlin.Int-kotlin.Float-"></a><a name="set"></a>
+        <h3 class="api-name" id="set(kotlin.Int,kotlin.Int,kotlin.Float)">set</h3>
+        <pre class="api-signature no-pretty-print">inline&nbsp;operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#set(kotlin.Int,kotlin.Int,kotlin.Float)">set</a>(row:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;column:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;v:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Set the matrix value at the given <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#set(kotlin.Int,kotlin.Int,kotlin.Float)">row</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#set(kotlin.Int,kotlin.Int,kotlin.Float)">column</a></code>. <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html">ColorMatrix</a></code> follows row major order in regards to the positions of matrix values within the flattened array. That is, content order goes from left to right then top to bottom as opposed to column major order.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>row:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                <td>
+                  <p>Row index to query the ColorMatrix value. Range is from 0 to 3 as <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html">ColorMatrix</a></code> is represented as a 4 x 5 matrix</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>column:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                <td>
+                  <p>Column index to query the ColorMatrix value. Range is from 0 to 4 as <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html">ColorMatrix</a></code> is represented as a 4 x 5 matrix</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="setToRotateBlue-kotlin.Float-"></a><a name="settorotateblue"></a>
+        <h3 class="api-name" id="setToRotateBlue(kotlin.Float)">setToRotateBlue</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#setToRotateBlue(kotlin.Float)">setToRotateBlue</a>(degrees:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Rotate by <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#setToRotateBlue(kotlin.Float)">degrees</a></code> along the blue color axis</p>
+      </div>
+      <div class="api-item"><a name="setToRotateGreen-kotlin.Float-"></a><a name="settorotategreen"></a>
+        <h3 class="api-name" id="setToRotateGreen(kotlin.Float)">setToRotateGreen</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#setToRotateGreen(kotlin.Float)">setToRotateGreen</a>(degrees:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Rotate by <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#setToRotateGreen(kotlin.Float)">degrees</a></code> along the green color axis</p>
+      </div>
+      <div class="api-item"><a name="setToRotateRed-kotlin.Float-"></a><a name="settorotatered"></a>
+        <h3 class="api-name" id="setToRotateRed(kotlin.Float)">setToRotateRed</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#setToRotateRed(kotlin.Float)">setToRotateRed</a>(degrees:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Rotate by <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#setToRotateRed(kotlin.Float)">degrees</a></code> along the red color axis</p>
+      </div>
+      <div class="api-item"><a name="setToSaturation-kotlin.Float-"></a><a name="settosaturation"></a>
+        <h3 class="api-name" id="setToSaturation(kotlin.Float)">setToSaturation</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#setToSaturation(kotlin.Float)">setToSaturation</a>(sat:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Set the matrix to affect the saturation of colors.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>sat:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>A value of 0 maps the color to gray-scale. 1 is identity.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="setToScale(kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="setToScale-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="settoscale"></a>
+        <h3 class="api-name" id="setToScale(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">setToScale</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#setToScale(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">setToScale</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;redScale:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;greenScale:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;blueScale:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;alphaScale:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Create a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html">ColorMatrix</a></code> with the corresponding scale parameters for the red, green, blue and alpha axes</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>redScale:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>Desired scale parameter for the red channel</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>greenScale:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>Desired scale parameter for the green channel</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>blueScale:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>Desired scale parameter for the blue channel</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>alphaScale:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>Desired scale parameter for the alpha channel</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="timesAssign-androidx.compose.ui.graphics.ColorMatrix-"></a><a name="timesassign"></a>
+        <h3 class="api-name" id="timesAssign(androidx.compose.ui.graphics.ColorMatrix)">timesAssign</h3>
+        <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#timesAssign(androidx.compose.ui.graphics.ColorMatrix)">timesAssign</a>(colorMatrix:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html">ColorMatrix</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Multiply this matrix by <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#timesAssign(androidx.compose.ui.graphics.ColorMatrix)">colorMatrix</a></code> and assign the result to this matrix.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getValues()"></a><a name="setValues()"></a><a name="getValues--"></a><a name="setValues--"></a>
+        <h3 class="api-name" id="values()">values</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorMatrix.html#values()">values</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float-array/index.html">FloatArray</a></pre>
+      </div>
+    </div>
+  </body>
+</html>

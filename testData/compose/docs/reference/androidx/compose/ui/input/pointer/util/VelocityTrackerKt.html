@@ -1,0 +1,68 @@
+<html devsite="true">
+  <head>
+    <title>VelocityTrackerKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>VelocityTrackerKt</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/input/pointer/util/VelocityTrackerKt.html">VelocityTrackerKt</a></pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static&nbsp;final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/util/VelocityTrackerKt.html">VelocityTrackerKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/util/VelocityTrackerKt.html#(androidx.compose.ui.input.pointer.util.VelocityTracker).addPointerInputChange(androidx.compose.ui.input.pointer.PointerInputChange)">addPointerInputChange</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/util/VelocityTracker.html">VelocityTracker</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;event<br>)</code></div>
+              <p>Track the positions and timestamps inside this event change.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.input.pointer.util.VelocityTracker-.addPointerInputChange-androidx.compose.ui.input.pointer.PointerInputChange-"></a><a name="addpointerinputchange"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.pointer.util.VelocityTracker).addPointerInputChange(androidx.compose.ui.input.pointer.PointerInputChange)">VelocityTrackerKt.addPointerInputChange</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/util/VelocityTrackerKt.html">VelocityTrackerKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/util/VelocityTrackerKt.html#(androidx.compose.ui.input.pointer.util.VelocityTracker).addPointerInputChange(androidx.compose.ui.input.pointer.PointerInputChange)">addPointerInputChange</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/util/VelocityTracker.html">VelocityTracker</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;event<br>)</pre>
+        <p>Track the positions and timestamps inside this event change.</p>
+        <p>For optimal tracking, this should be called for the DOWN event and all MOVE events, including any touch-slop-captured MOVE event.</p>
+        <p>Since Compose uses relative positions inside PointerInputChange, this should be taken into consideration when using this method. Right now, we use the first down to initialize an accumulator and use subsequent deltas to simulate an actual movement from relative positions in PointerInputChange. This is required because VelocityTracker requires data that can be fit into a curve, which might not happen with relative positions inside a moving target for instance.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;event</code></td>
+                <td>
+                  <p>Pointer change to track.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

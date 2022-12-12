@@ -1,0 +1,861 @@
+<html devsite="true">
+  <head>
+    <title>ArrayMap</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/collection/ArrayMap.java+class:androidx.collection.ArrayMap&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>ArrayMap</h1>
+    <p>
+      <pre>public class <a href="/reference/androidx/collection/ArrayMap.html">ArrayMap</a>&lt;K,&nbsp;V&gt; extends <a href="/reference/androidx/collection/SimpleArrayMap.html">SimpleArrayMap</a> implements <a href="https://developer.android.com/reference/java/util/Map.html">Map</a></pre>
+    </p>
+    <div class="devsite-table-wrapper">
+      <table class="jd-inheritance-table">
+        <tbody>
+          <tr>
+            <td colspan="3"><a href="https://developer.android.com/reference/java/lang/Object.html">java.lang.Object</a></td>
+          </tr>
+          <tr>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="2"><a href="/reference/androidx/collection/SimpleArrayMap.html">androidx.collection.SimpleArrayMap</a></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="1"><a href="/reference/androidx/collection/ArrayMap.html">androidx.collection.ArrayMap</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr>
+    <p>ArrayMap is a generic key->value mapping data structure that is designed to be more memory efficient than a traditional <code><a href="https://developer.android.com/reference/java/util/HashMap.html">java.util.HashMap</a></code>, this implementation is a version of the platform's <code>android.util.ArrayMap</code> that can be used on older versions of the platform. It keeps its mappings in an array data structure -- an integer array of hash codes for each item, and an Object array of the key/value pairs. This allows it to avoid having to create an extra object for every entry put in to the map, and it also tries to control the growth of the size of these arrays more aggressively (since growing them only requires copying the entries in the array, not rebuilding a hash map). </p>
+    <p>If you don't need the standard Java container APIs provided here (iterators etc), consider using <code><a href="/reference/androidx/collection/SimpleArrayMap.html">SimpleArrayMap</a></code> instead.</p>
+    <p>Note that this implementation is not intended to be appropriate for data structures that may contain large numbers of items. It is generally slower than a traditional HashMap, since lookups require a binary search and adds and removes require inserting and deleting entries in the array. For containers holding up to hundreds of items, the performance difference is not significant, less than 50%.</p>
+    <p>Because this container is intended to better balance memory use, unlike most other standard Java containers it will shrink its array as items are removed from it. Currently you have no control over this shrinking -- if you set a capacity and then remove an item, it may reduce the capacity to better match the current size. In the future an explicit call to set the capacity should turn off this aggressive shrinking behavior.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/collection/ArrayMap.html#ArrayMap()">ArrayMap</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/collection/ArrayMap.html#ArrayMap(int)">ArrayMap</a>(int&nbsp;capacity)</code></div>
+              <p>Create a new ArrayMap with a given initial capacity.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/collection/ArrayMap.html#ArrayMap(androidx.collection.SimpleArrayMap)">ArrayMap</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="/reference/androidx/collection/SimpleArrayMap.html">SimpleArrayMap</a>&nbsp;map)</code></div>
+              <p>Create a new ArrayMap with the mappings from the given ArrayMap.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/ArrayMap.html#containsAll(java.util.Collection&lt;?&gt;)">containsAll</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Collection.html">Collection</a>&lt;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;collection)</code></div>
+              <p>Determine if the array map contains all of the keys in the given collection.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/ArrayMap.html#containsKey(java.lang.Object)">containsKey</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key)</code></div>
+              <p>Check whether a key exists in the array.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/ArrayMap.html#containsValue(java.lang.Object)">containsValue</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;value)</code></div>
+              <p>Check whether a value exists in the array.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Set.html">Set</a>&lt;<a href="https://developer.android.com/reference/java/util/Map.Entry.html">Map.Entry</a>&lt;K,&nbsp;V&gt;&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/ArrayMap.html#entrySet()">entrySet</a>()</code></div>
+              <p>Return a <code><a href="https://developer.android.com/reference/java/util/Set.html">java.util.Set</a></code> for iterating over and interacting with all mappings in the array map.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>V</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/ArrayMap.html#get(java.lang.Object)">get</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key)</code></div>
+              <p>Retrieve a value from the array.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Set.html">Set</a>&lt;K&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/ArrayMap.html#keySet()">keySet</a>()</code></div>
+              <p>Return a <code><a href="https://developer.android.com/reference/java/util/Set.html">java.util.Set</a></code> for iterating over and interacting with all keys in the array map.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/ArrayMap.html#putAll(java.util.Map&lt;? extends K,? extends V&gt;)">putAll</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Map.html">Map</a>&lt;K,&nbsp;V&gt;&nbsp;map)</code></div>
+              <p>Perform a put of all key/value pairs in <var>map</var></p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>V</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/ArrayMap.html#remove(java.lang.Object)">remove</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key)</code></div>
+              <p>Remove an existing key from the array map.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/ArrayMap.html#removeAll(java.util.Collection&lt;?&gt;)">removeAll</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Collection.html">Collection</a>&lt;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;collection)</code></div>
+              <p>Remove all keys in the array map that exist in the given collection.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/ArrayMap.html#retainAll(java.util.Collection&lt;?&gt;)">retainAll</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Collection.html">Collection</a>&lt;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;collection)</code></div>
+              <p>Remove all keys in the array map that do <b>not</b> exist in the given collection.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Collection.html">Collection</a>&lt;V&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/ArrayMap.html#values()">values</a>()</code></div>
+              <p>Return a <code><a href="https://developer.android.com/reference/java/util/Collection.html">java.util.Collection</a></code> for iterating over and interacting with all values in the array map.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="https://developer.android.com/reference/java/util/Map.html">java.util.Map</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>abstract void</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/Map.html#clear()">clear</a>()</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>V</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/Map.html#compute(K, java.util.function.BiFunction&amp;lt;? super K,? super V,? extends V&amp;gt;)">compute</a>(K&nbsp;key,&nbsp;<a href="https://developer.android.com/reference/java/util/function/BiFunction.html">BiFunction</a>&lt;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;V&gt;&nbsp;remappingFunction)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>V</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/Map.html#computeIfAbsent(K, java.util.function.Function&amp;lt;? super K,? extends V&amp;gt;)">computeIfAbsent</a>(K&nbsp;key,&nbsp;<a href="https://developer.android.com/reference/java/util/function/Function.html">Function</a>&lt;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;V&gt;&nbsp;mappingFunction)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>V</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/Map.html#computeIfPresent(K, java.util.function.BiFunction&amp;lt;? super K,? super V,? extends V&amp;gt;)">computeIfPresent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;K&nbsp;key,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/util/function/BiFunction.html">BiFunction</a>&lt;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;V&gt;&nbsp;remappingFunction<br>)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>static <a href="https://developer.android.com/reference/java/util/Map.html">Map</a>&lt;K,&nbsp;V&gt;</code></td>
+                      <td>
+                        <div><code>&lt;K,&nbsp;V&gt; <a href="https://developer.android.com/reference/java/util/Map.html#copyOf(java.util.Map&amp;lt;? extends K,? extends V&amp;gt;)">copyOf</a>(<a href="https://developer.android.com/reference/java/util/Map.html">Map</a>&lt;K,&nbsp;V&gt;&nbsp;map)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>static <a href="https://developer.android.com/reference/java/util/Map.Entry.html">Map.Entry</a>&lt;K,&nbsp;V&gt;</code></td>
+                      <td>
+                        <div><code>&lt;K,&nbsp;V&gt; <a href="https://developer.android.com/reference/java/util/Map.html#entry(K, V)">entry</a>(K&nbsp;k,&nbsp;V&nbsp;v)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract boolean</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/Map.html#equals(java.lang.Object)">equals</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;p)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>void</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/Map.html#forEach(java.util.function.BiConsumer&amp;lt;? super K,? super V&amp;gt;)">forEach</a>(<a href="https://developer.android.com/reference/java/util/function/BiConsumer.html">BiConsumer</a>&lt;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;action)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>V</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/Map.html#getOrDefault(java.lang.Object, V)">getOrDefault</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key,&nbsp;V&nbsp;defaultValue)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract int</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/Map.html#hashCode()">hashCode</a>()</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract boolean</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/Map.html#isEmpty()">isEmpty</a>()</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>V</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/Map.html#merge(K, V, java.util.function.BiFunction&amp;lt;? super V,? super V,? extends V&amp;gt;)">merge</a>(K&nbsp;key,&nbsp;V&nbsp;value,&nbsp;<a href="https://developer.android.com/reference/java/util/function/BiFunction.html">BiFunction</a>&lt;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;V&gt;&nbsp;remappingFunction)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>static <a href="https://developer.android.com/reference/java/util/Map.html">Map</a>&lt;K,&nbsp;V&gt;</code></td>
+                      <td>
+                        <div><code>&lt;K,&nbsp;V&gt; <a href="https://developer.android.com/reference/java/util/Map.html#of()">of</a>()</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>static <a href="https://developer.android.com/reference/java/util/Map.html">Map</a>&lt;K,&nbsp;V&gt;</code></td>
+                      <td>
+                        <div><code>&lt;K,&nbsp;V&gt; <a href="https://developer.android.com/reference/java/util/Map.html#ofEntries(java.util.Map.Entry&amp;lt;? extends K,? extends V&amp;gt;...)">ofEntries</a>(Map.Entry[]&nbsp;entries)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract V</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/Map.html#put(K, V)">put</a>(K&nbsp;p,&nbsp;V&nbsp;p1)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>V</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/Map.html#putIfAbsent(K, V)">putIfAbsent</a>(K&nbsp;key,&nbsp;V&nbsp;value)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>boolean</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/Map.html#remove(java.lang.Object, java.lang.Object)">remove</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key,&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;value)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>V</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/Map.html#replace(K, V)">replace</a>(K&nbsp;key,&nbsp;V&nbsp;value)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>boolean</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/Map.html#replace(K, V, V)">replace</a>(K&nbsp;key,&nbsp;V&nbsp;oldValue,&nbsp;V&nbsp;newValue)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>void</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/Map.html#replaceAll(java.util.function.BiFunction&amp;lt;? super K,? super V,? extends V&amp;gt;)">replaceAll</a>(<a href="https://developer.android.com/reference/java/util/function/BiFunction.html">BiFunction</a>&lt;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;V&gt;&nbsp;function)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract int</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/Map.html#size()">size</a>()</code></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/collection/SimpleArrayMap.html">androidx.collection.SimpleArrayMap</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>final int</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/collection/SimpleArrayMap.html#__restricted$indexOfValue(V)">__restricted$indexOfValue</a>(V&nbsp;value)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>void</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/collection/SimpleArrayMap.html#clear()">clear</a>()</code></div>
+                        <p>Make the array map empty.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>void</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/collection/SimpleArrayMap.html#ensureCapacity(int)">ensureCapacity</a>(int&nbsp;minimumCapacity)</code></div>
+                        <p>Ensure the array map can hold at least <code><a href="/reference/androidx/collection/SimpleArrayMap.html#ensureCapacity(kotlin.Int)">minimumCapacity</a></code> items.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>boolean</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/collection/SimpleArrayMap.html#equals(java.lang.Object)">equals</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;other)</code></div>
+                        <p>This implementation returns <code>false</code> if the object is not a <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a></code> or <code><a href="/reference/androidx/collection/SimpleArrayMap.html">SimpleArrayMap</a></code>, or if the maps have different sizes.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>V</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/collection/SimpleArrayMap.html#getOrDefault(java.lang.Object,V)">getOrDefault</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key,&nbsp;V&nbsp;defaultValue)</code></div>
+                        <p>Retrieve a value from the array, or <code><a href="/reference/androidx/collection/SimpleArrayMap.html#getOrDefault(kotlin.Any,kotlin.Any)">defaultValue</a></code> if there is no mapping for the key.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>int</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/collection/SimpleArrayMap.html#hashCode()">hashCode</a>()</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>int</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/collection/SimpleArrayMap.html#indexOfKey(K)">indexOfKey</a>(K&nbsp;key)</code></div>
+                        <p>Returns the index of a key in the set.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>boolean</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/collection/SimpleArrayMap.html#isEmpty()">isEmpty</a>()</code></div>
+                        <p>Return <code>true</code> if the array map contains no items.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>K</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/collection/SimpleArrayMap.html#keyAt(int)">keyAt</a>(int&nbsp;index)</code></div>
+                        <p>Return the key at the given index in the array.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>V</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/collection/SimpleArrayMap.html#put(K,V)">put</a>(K&nbsp;key,&nbsp;V&nbsp;value)</code></div>
+                        <p>Add a new value to the array map.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>void</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/collection/SimpleArrayMap.html#putAll(androidx.collection.SimpleArrayMap&lt;? extends K,? extends V&gt;)">putAll</a>(<a href="/reference/androidx/collection/SimpleArrayMap.html">SimpleArrayMap</a>&lt;K,&nbsp;V&gt;&nbsp;map)</code></div>
+                        <p>Perform a <code><a href="/reference/androidx/collection/SimpleArrayMap.html#put(kotlin.Any,kotlin.Any)">put</a></code> of all key/value pairs in <code><a href="/reference/androidx/collection/SimpleArrayMap.html#putAll(androidx.collection.SimpleArrayMap)">map</a></code></p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>V</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/collection/SimpleArrayMap.html#putIfAbsent(K,V)">putIfAbsent</a>(K&nbsp;key,&nbsp;V&nbsp;value)</code></div>
+                        <p>Add a new value to the array map only if the key does not already have a value or it is mapped to <code>null</code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>boolean</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/collection/SimpleArrayMap.html#remove(K,V)">remove</a>(K&nbsp;key,&nbsp;V&nbsp;value)</code></div>
+                        <p>Remove an existing key from the array map only if it is currently mapped to <code><a href="/reference/androidx/collection/SimpleArrayMap.html#remove(kotlin.Any,kotlin.Any)">value</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>V</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/collection/SimpleArrayMap.html#removeAt(int)">removeAt</a>(int&nbsp;index)</code></div>
+                        <p>Remove the key/value mapping at the given index.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>V</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/collection/SimpleArrayMap.html#replace(K,V)">replace</a>(K&nbsp;key,&nbsp;V&nbsp;value)</code></div>
+                        <p>Replace the mapping for <code><a href="/reference/androidx/collection/SimpleArrayMap.html#replace(kotlin.Any,kotlin.Any)">key</a></code> only if it is already mapped to a value.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>boolean</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/collection/SimpleArrayMap.html#replace(K,V,V)">replace</a>(K&nbsp;key,&nbsp;V&nbsp;oldValue,&nbsp;V&nbsp;newValue)</code></div>
+                        <p>Replace the mapping for <code><a href="/reference/androidx/collection/SimpleArrayMap.html#replace(kotlin.Any,kotlin.Any,kotlin.Any)">key</a></code> only if it is already mapped to <code><a href="/reference/androidx/collection/SimpleArrayMap.html#replace(kotlin.Any,kotlin.Any,kotlin.Any)">oldValue</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>V</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/collection/SimpleArrayMap.html#setValueAt(int,V)">setValueAt</a>(int&nbsp;index,&nbsp;V&nbsp;value)</code></div>
+                        <p>Set the value at a given index in the array.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>int</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/collection/SimpleArrayMap.html#size()">size</a>()</code></div>
+                        <p>Return the number of items in this array map.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code><a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/collection/SimpleArrayMap.html#toString()">toString</a>()</code></div>
+                        <p>Returns a string representation of the object.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>V</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/collection/SimpleArrayMap.html#valueAt(int)">valueAt</a>(int&nbsp;index)</code></div>
+                        <p>Return the value at the given index in the array.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="ArrayMap--"></a><a name="arraymap"></a>
+        <h3 class="api-name" id="ArrayMap()">ArrayMap</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/collection/ArrayMap.html#ArrayMap()">ArrayMap</a>()</pre>
+      </div>
+      <div class="api-item"><a name="ArrayMap-int-"></a><a name="arraymap"></a>
+        <h3 class="api-name" id="ArrayMap(int)">ArrayMap</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/collection/ArrayMap.html#ArrayMap(int)">ArrayMap</a>(int&nbsp;capacity)</pre>
+        <p>Create a new ArrayMap with a given initial capacity.</p>
+      </div>
+      <div class="api-item"><a name="ArrayMap-androidx.collection.SimpleArrayMap-"></a><a name="arraymap"></a>
+        <h3 class="api-name" id="ArrayMap(androidx.collection.SimpleArrayMap)">ArrayMap</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/collection/ArrayMap.html#ArrayMap(androidx.collection.SimpleArrayMap)">ArrayMap</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="/reference/androidx/collection/SimpleArrayMap.html">SimpleArrayMap</a>&nbsp;map)</pre>
+        <p>Create a new ArrayMap with the mappings from the given ArrayMap.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="containsAll-java.util.Collection&lt;?&gt;-"></a><a name="containsall"></a>
+        <h3 class="api-name" id="containsAll(java.util.Collection&lt;?&gt;)">containsAll</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/collection/ArrayMap.html#containsAll(java.util.Collection&lt;?&gt;)">containsAll</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Collection.html">Collection</a>&lt;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;collection)</pre>
+        <p>Determine if the array map contains all of the keys in the given collection.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Collection.html">Collection</a>&lt;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;collection</code></td>
+                <td>
+                  <p>The collection whose contents are to be checked against.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>boolean</code></td>
+                <td>
+                  <p>Returns true if this array map contains a key for every entry in <var>collection</var>, else returns false.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="containsKey-java.lang.Object-"></a><a name="containskey"></a>
+        <h3 class="api-name" id="containsKey(java.lang.Object)">containsKey</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/collection/ArrayMap.html#containsKey(java.lang.Object)">containsKey</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key)</pre>
+        <p>Check whether a key exists in the array.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key</code></td>
+                <td>
+                  <p>The key to search for. ** This must be the same type as <var>K</var> **</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>boolean</code></td>
+                <td>
+                  <p>Returns <code>true</code> if the key exists, else <code>false</code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="containsValue-java.lang.Object-"></a><a name="containsvalue"></a>
+        <h3 class="api-name" id="containsValue(java.lang.Object)">containsValue</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/collection/ArrayMap.html#containsValue(java.lang.Object)">containsValue</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;value)</pre>
+        <p>Check whether a value exists in the array. This requires a linear search through the entire array.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;value</code></td>
+                <td>
+                  <p>The value to search for. ** This must be the same type as <var>V</var> **</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>boolean</code></td>
+                <td>
+                  <p>Returns <code>true</code> if the value exists, else <code>false</code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="entrySet--"></a><a name="entryset"></a>
+        <h3 class="api-name" id="entrySet()">entrySet</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Set.html">Set</a>&lt;<a href="https://developer.android.com/reference/java/util/Map.Entry.html">Map.Entry</a>&lt;K,&nbsp;V&gt;&gt;&nbsp;<a href="/reference/androidx/collection/ArrayMap.html#entrySet()">entrySet</a>()</pre>
+        <p>Return a <code><a href="https://developer.android.com/reference/java/util/Set.html">java.util.Set</a></code> for iterating over and interacting with all mappings in the array map. </p>
+        <p><b>Note:</b> this is a very inefficient way to access the array contents, it requires generating a number of temporary objects.</p>
+        <p><b>Note:</b></p>
+ the semantics of this Set are subtly different than that of a <code><a href="https://developer.android.com/reference/java/util/HashMap.html">java.util.HashMap</a></code>: most important, the <code><a href="https://developer.android.com/reference/java/util/Map.Entry.html">Map.Entry</a></code> object returned by its iterator is a single object that exists for the entire iterator, so you can <b>not</b> hold on to it after calling <code><a href="https://developer.android.com/reference/java/util/Iterator.html#next()">Iterator.next</a></code>.</div>
+      <div class="api-item"><a name="get-java.lang.Object-"></a><a name="get"></a>
+        <h3 class="api-name" id="get(java.lang.Object)">get</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;V&nbsp;<a href="/reference/androidx/collection/ArrayMap.html#get(java.lang.Object)">get</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key)</pre>
+        <p>Retrieve a value from the array.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key</code></td>
+                <td>
+                  <p>The key of the value to retrieve. ** This must be the same type as <var>K</var> **</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>V</code></td>
+                <td>
+                  <p>Returns the value associated with the given key, or <code>null</code> if there is no such key.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="keySet--"></a><a name="keyset"></a>
+        <h3 class="api-name" id="keySet()">keySet</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Set.html">Set</a>&lt;K&gt;&nbsp;<a href="/reference/androidx/collection/ArrayMap.html#keySet()">keySet</a>()</pre>
+        <p>Return a <code><a href="https://developer.android.com/reference/java/util/Set.html">java.util.Set</a></code> for iterating over and interacting with all keys in the array map. </p>
+        <p><b>Note:</b> this is a fairly inefficient way to access the array contents, it requires generating a number of temporary objects.</p>
+      </div>
+      <div class="api-item"><a name="putAll-java.util.Map&lt;? extends K,? extends V&gt;-"></a><a name="putall"></a>
+        <h3 class="api-name" id="putAll(java.util.Map&lt;? extends K,? extends V&gt;)">putAll</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/collection/ArrayMap.html#putAll(java.util.Map&lt;? extends K,? extends V&gt;)">putAll</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Map.html">Map</a>&lt;K,&nbsp;V&gt;&nbsp;map)</pre>
+        <p>Perform a put of all key/value pairs in <var>map</var></p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Map.html">Map</a>&lt;K,&nbsp;V&gt;&nbsp;map</code></td>
+                <td>
+                  <p>The map whose contents are to be retrieved.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="remove-java.lang.Object-"></a><a name="remove"></a>
+        <h3 class="api-name" id="remove(java.lang.Object)">remove</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;V&nbsp;<a href="/reference/androidx/collection/ArrayMap.html#remove(java.lang.Object)">remove</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key)</pre>
+        <p>Remove an existing key from the array map.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key</code></td>
+                <td>
+                  <p>The key of the mapping to remove. ** This must be the same type as <var>V</var> **</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>V</code></td>
+                <td>
+                  <p>Returns the value that was stored under the key, or <code>null</code> if there was no such key.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="removeAll-java.util.Collection&lt;?&gt;-"></a><a name="removeall"></a>
+        <h3 class="api-name" id="removeAll(java.util.Collection&lt;?&gt;)">removeAll</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/collection/ArrayMap.html#removeAll(java.util.Collection&lt;?&gt;)">removeAll</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Collection.html">Collection</a>&lt;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;collection)</pre>
+        <p>Remove all keys in the array map that exist in the given collection.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Collection.html">Collection</a>&lt;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;collection</code></td>
+                <td>
+                  <p>The collection whose contents are to be used to remove keys.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>boolean</code></td>
+                <td>
+                  <p>Returns true if any keys were removed from the array map, else false.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="retainAll-java.util.Collection&lt;?&gt;-"></a><a name="retainall"></a>
+        <h3 class="api-name" id="retainAll(java.util.Collection&lt;?&gt;)">retainAll</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/collection/ArrayMap.html#retainAll(java.util.Collection&lt;?&gt;)">retainAll</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Collection.html">Collection</a>&lt;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;collection)</pre>
+        <p>Remove all keys in the array map that do <b>not</b> exist in the given collection.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Collection.html">Collection</a>&lt;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;collection</code></td>
+                <td>
+                  <p>The collection whose contents are to be used to determine which keys to keep.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>boolean</code></td>
+                <td>
+                  <p>Returns true if any keys were removed from the array map, else false.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="values--"></a><a name="values"></a>
+        <h3 class="api-name" id="values()">values</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Collection.html">Collection</a>&lt;V&gt;&nbsp;<a href="/reference/androidx/collection/ArrayMap.html#values()">values</a>()</pre>
+        <p>Return a <code><a href="https://developer.android.com/reference/java/util/Collection.html">java.util.Collection</a></code> for iterating over and interacting with all values in the array map. </p>
+        <p><b>Note:</b> this is a fairly inefficient way to access the array contents, it requires generating a number of temporary objects.</p>
+      </div>
+    </div>
+  </body>
+</html>

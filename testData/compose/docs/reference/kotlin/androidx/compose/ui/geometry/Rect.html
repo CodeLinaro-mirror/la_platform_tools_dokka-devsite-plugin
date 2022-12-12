@@ -1,0 +1,515 @@
+<html devsite="true">
+  <head>
+    <title>Rect</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-geometry/androidx/compose/ui/geometry/Rect.kt+class:androidx.compose.ui.geometry.Rect&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>Rect</h1>
+    <p>
+      <pre>data class <a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></pre>
+    </p>
+    <hr>
+    <p>An immutable, 2D, axis-aligned, floating-point rectangle whose coordinates are relative to a given origin.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public companion properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.Companion.html#Zero()">Zero</a></code></div>
+              <p>A rectangle with left, top, right, and bottom edges all at zero.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#Rect(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">Rect</a>(left:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;top:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;right:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;bottom:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>operator <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#contains(androidx.compose.ui.geometry.Offset)">contains</a>(offset:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>)</code></div>
+              <p>Whether the point specified by the given offset (which is assumed to be relative to the origin) lies between the left and right and the top and bottom edges of this rectangle.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#deflate(kotlin.Float)">deflate</a>(delta:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+              <p>Returns a new rectangle with edges moved inwards by the given delta.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#inflate(kotlin.Float)">inflate</a>(delta:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+              <p>Returns a new rectangle with edges moved outwards by the given delta.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#intersect(androidx.compose.ui.geometry.Rect)">intersect</a>(other:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>)</code></div>
+              <p>Returns a new rectangle that is the intersection of the given rectangle and this rectangle.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#overlaps(androidx.compose.ui.geometry.Rect)">overlaps</a>(other:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>)</code></div>
+              <p>Whether <code>other</code> has a nonzero area of overlap with this rectangle.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#toString()">toString</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#translate(androidx.compose.ui.geometry.Offset)">translate</a>(offset:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>)</code></div>
+              <p>Returns a new rectangle translated by the given offset.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#translate(kotlin.Float,kotlin.Float)">translate</a>(translateX:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;translateY:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+              <p>Returns a new rectangle with translateX added to the x components and translateY added to the y components.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#bottom()">bottom</a></code></div>
+              <p>The offset of the bottom edge of this rectangle from the y axis.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#bottomCenter()">bottomCenter</a></code></div>
+              <p>The offset to the center of the bottom edge of this rectangle.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#bottomLeft()">bottomLeft</a></code></div>
+              <p>The offset to the intersection of the bottom and left edges of this rectangle.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#bottomRight()">bottomRight</a></code></div>
+              <p>The offset to the intersection of the bottom and right edges of this rectangle.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#center()">center</a></code></div>
+              <p>The offset to the point halfway between the left and right and the top and bottom edges of this rectangle.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#centerLeft()">centerLeft</a></code></div>
+              <p>The offset to the center of the left edge of this rectangle.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#centerRight()">centerRight</a></code></div>
+              <p>The offset to the center of the right edge of this rectangle.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#height()">height</a></code></div>
+              <p>The distance between the top and bottom edges of this rectangle.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#isEmpty()">isEmpty</a></code></div>
+              <p>Whether this rectangle encloses a non-zero area.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#isFinite()">isFinite</a></code></div>
+              <p>Whether all coordinates of this rectangle are finite.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#isInfinite()">isInfinite</a></code></div>
+              <p>Whether any of the coordinates of this rectangle are equal to positive infinity.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#left()">left</a></code></div>
+              <p>The offset of the left edge of this rectangle from the x axis.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#maxDimension()">maxDimension</a></code></div>
+              <p>The greater of the magnitudes of the <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#width()">width</a></code> and the <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#height()">height</a></code> of this rectangle.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#minDimension()">minDimension</a></code></div>
+              <p>The lesser of the magnitudes of the <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#width()">width</a></code> and the <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#height()">height</a></code> of this rectangle.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#right()">right</a></code></div>
+              <p>The offset of the right edge of this rectangle from the x axis.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#size()">size</a></code></div>
+              <p>The distance between the upper-left corner and the lower-right corner of this rectangle.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#top()">top</a></code></div>
+              <p>The offset of the top edge of this rectangle from the y axis.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#topCenter()">topCenter</a></code></div>
+              <p>The offset to the center of the top edge of this rectangle.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#topLeft()">topLeft</a></code></div>
+              <p>The offset to the intersection of the top and left edges of this rectangle.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#topRight()">topRight</a></code></div>
+              <p>The offset to the intersection of the top and right edges of this rectangle.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#width()">width</a></code></div>
+              <p>The distance between the left and right edges of this rectangle.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/unit/IntRect.html">IntRect</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>.<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#(androidx.compose.ui.geometry.Rect).round()">round</a>()</code></div>
+              <p>Rounds a <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code> to an <code><a href="/reference/kotlin/androidx/compose/ui/unit/IntRect.html">IntRect</a></code></p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://developer.android.com/reference/android/graphics/Rect.html">Rect</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>.<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#(androidx.compose.ui.geometry.Rect).toAndroidRect()">toAndroidRect</a>()</code></div>
+              <p>Creates a new instance of <code><a href="https://developer.android.com/reference/android/graphics/Rect.html">android.graphics.Rect</a></code> with the same bounds specified in the given <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://developer.android.com/reference/android/graphics/RectF.html">RectF</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>.<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#(androidx.compose.ui.geometry.Rect).toAndroidRectF()">toAndroidRectF</a>()</code></div>
+              <p>Creates a new instance of <code><a href="https://developer.android.com/reference/android/graphics/RectF.html">android.graphics.RectF</a></code> with the same bounds specified in the given <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public companion properties</h2>
+      <div class="api-item"><a name="getZero()"></a><a name="setZero()"></a><a name="getZero--"></a><a name="setZero--"></a>
+        <h3 class="api-name" id="Zero()">Zero</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.Companion.html#Zero()">Zero</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></pre>
+        <p>A rectangle with left, top, right, and bottom edges all at zero.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="Rect(kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="Rect-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="rect"></a>
+        <h3 class="api-name" id="Rect(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">Rect</h3>
+        <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#Rect(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">Rect</a>(left:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;top:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;right:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;bottom:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="contains-androidx.compose.ui.geometry.Offset-"></a><a name="contains"></a>
+        <h3 class="api-name" id="contains(androidx.compose.ui.geometry.Offset)">contains</h3>
+        <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#contains(androidx.compose.ui.geometry.Offset)">contains</a>(offset:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <p>Whether the point specified by the given offset (which is assumed to be relative to the origin) lies between the left and right and the top and bottom edges of this rectangle.</p>
+        <p>Rectangles include their top and left edges but exclude their bottom and right edges.</p>
+      </div>
+      <div class="api-item"><a name="deflate-kotlin.Float-"></a><a name="deflate"></a>
+        <h3 class="api-name" id="deflate(kotlin.Float)">deflate</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#deflate(kotlin.Float)">deflate</a>(delta:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></pre>
+        <p>Returns a new rectangle with edges moved inwards by the given delta.</p>
+      </div>
+      <div class="api-item"><a name="inflate-kotlin.Float-"></a><a name="inflate"></a>
+        <h3 class="api-name" id="inflate(kotlin.Float)">inflate</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#inflate(kotlin.Float)">inflate</a>(delta:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></pre>
+        <p>Returns a new rectangle with edges moved outwards by the given delta.</p>
+      </div>
+      <div class="api-item"><a name="intersect-androidx.compose.ui.geometry.Rect-"></a><a name="intersect"></a>
+        <h3 class="api-name" id="intersect(androidx.compose.ui.geometry.Rect)">intersect</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#intersect(androidx.compose.ui.geometry.Rect)">intersect</a>(other:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></pre>
+        <p>Returns a new rectangle that is the intersection of the given rectangle and this rectangle. The two rectangles must overlap for this to be meaningful. If the two rectangles do not overlap, then the resulting Rect will have a negative width or height.</p>
+      </div>
+      <div class="api-item"><a name="overlaps-androidx.compose.ui.geometry.Rect-"></a><a name="overlaps"></a>
+        <h3 class="api-name" id="overlaps(androidx.compose.ui.geometry.Rect)">overlaps</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#overlaps(androidx.compose.ui.geometry.Rect)">overlaps</a>(other:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <p>Whether <code>other</code> has a nonzero area of overlap with this rectangle.</p>
+      </div>
+      <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+        <h3 class="api-name" id="toString()">toString</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#toString()">toString</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></pre>
+      </div>
+      <div class="api-item"><a name="translate-androidx.compose.ui.geometry.Offset-"></a><a name="translate"></a>
+        <h3 class="api-name" id="translate(androidx.compose.ui.geometry.Offset)">translate</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#translate(androidx.compose.ui.geometry.Offset)">translate</a>(offset:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></pre>
+        <p>Returns a new rectangle translated by the given offset.</p>
+        <p>To translate a rectangle by separate x and y components rather than by an <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code>, consider <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#translate(androidx.compose.ui.geometry.Offset)">translate</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="translate(kotlin.Float, kotlin.Float)"></a><a name="translate-kotlin.Float-kotlin.Float-"></a><a name="translate"></a>
+        <h3 class="api-name" id="translate(kotlin.Float,kotlin.Float)">translate</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#translate(kotlin.Float,kotlin.Float)">translate</a>(translateX:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;translateY:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></pre>
+        <p>Returns a new rectangle with translateX added to the x components and translateY added to the y components.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getBottom()"></a><a name="setBottom()"></a><a name="getBottom--"></a><a name="setBottom--"></a>
+        <h3 class="api-name" id="bottom()">bottom</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#bottom()">bottom</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>The offset of the bottom edge of this rectangle from the y axis.</p>
+      </div>
+      <div class="api-item"><a name="getBottomCenter()"></a><a name="setBottomCenter()"></a><a name="getBottomCenter--"></a><a name="setBottomCenter--"></a>
+        <h3 class="api-name" id="bottomCenter()">bottomCenter</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#bottomCenter()">bottomCenter</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+        <p>The offset to the center of the bottom edge of this rectangle.</p>
+      </div>
+      <div class="api-item"><a name="getBottomLeft()"></a><a name="setBottomLeft()"></a><a name="getBottomLeft--"></a><a name="setBottomLeft--"></a>
+        <h3 class="api-name" id="bottomLeft()">bottomLeft</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#bottomLeft()">bottomLeft</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+        <p>The offset to the intersection of the bottom and left edges of this rectangle.</p>
+      </div>
+      <div class="api-item"><a name="getBottomRight()"></a><a name="setBottomRight()"></a><a name="getBottomRight--"></a><a name="setBottomRight--"></a>
+        <h3 class="api-name" id="bottomRight()">bottomRight</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#bottomRight()">bottomRight</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+        <p>The offset to the intersection of the bottom and right edges of this rectangle.</p>
+      </div>
+      <div class="api-item"><a name="getCenter()"></a><a name="setCenter()"></a><a name="getCenter--"></a><a name="setCenter--"></a>
+        <h3 class="api-name" id="center()">center</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#center()">center</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+        <p>The offset to the point halfway between the left and right and the top and bottom edges of this rectangle.</p>
+        <p>See also <code><a href="/reference/kotlin/androidx/compose/ui/geometry/package-summary.html#(androidx.compose.ui.geometry.Size).center()">Size.center</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getCenterLeft()"></a><a name="setCenterLeft()"></a><a name="getCenterLeft--"></a><a name="setCenterLeft--"></a>
+        <h3 class="api-name" id="centerLeft()">centerLeft</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#centerLeft()">centerLeft</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+        <p>The offset to the center of the left edge of this rectangle.</p>
+      </div>
+      <div class="api-item"><a name="getCenterRight()"></a><a name="setCenterRight()"></a><a name="getCenterRight--"></a><a name="setCenterRight--"></a>
+        <h3 class="api-name" id="centerRight()">centerRight</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#centerRight()">centerRight</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+        <p>The offset to the center of the right edge of this rectangle.</p>
+      </div>
+      <div class="api-item"><a name="getHeight()"></a><a name="setHeight()"></a><a name="getHeight--"></a><a name="setHeight--"></a>
+        <h3 class="api-name" id="height()">height</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#height()">height</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>The distance between the top and bottom edges of this rectangle.</p>
+      </div>
+      <div class="api-item"><a name="getIsEmpty()"></a><a name="setIsEmpty()"></a><a name="getIsEmpty--"></a><a name="setIsEmpty--"></a>
+        <h3 class="api-name" id="isEmpty()">isEmpty</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#isEmpty()">isEmpty</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <p>Whether this rectangle encloses a non-zero area. Negative areas are considered empty.</p>
+      </div>
+      <div class="api-item"><a name="getIsFinite()"></a><a name="setIsFinite()"></a><a name="getIsFinite--"></a><a name="setIsFinite--"></a>
+        <h3 class="api-name" id="isFinite()">isFinite</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#isFinite()">isFinite</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <p>Whether all coordinates of this rectangle are finite.</p>
+      </div>
+      <div class="api-item"><a name="getIsInfinite()"></a><a name="setIsInfinite()"></a><a name="getIsInfinite--"></a><a name="setIsInfinite--"></a>
+        <h3 class="api-name" id="isInfinite()">isInfinite</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#isInfinite()">isInfinite</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <p>Whether any of the coordinates of this rectangle are equal to positive infinity.</p>
+      </div>
+      <div class="api-item"><a name="getLeft()"></a><a name="setLeft()"></a><a name="getLeft--"></a><a name="setLeft--"></a>
+        <h3 class="api-name" id="left()">left</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#left()">left</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>The offset of the left edge of this rectangle from the x axis.</p>
+      </div>
+      <div class="api-item"><a name="getMaxDimension()"></a><a name="setMaxDimension()"></a><a name="getMaxDimension--"></a><a name="setMaxDimension--"></a>
+        <h3 class="api-name" id="maxDimension()">maxDimension</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#maxDimension()">maxDimension</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>The greater of the magnitudes of the <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#width()">width</a></code> and the <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#height()">height</a></code> of this rectangle.</p>
+      </div>
+      <div class="api-item"><a name="getMinDimension()"></a><a name="setMinDimension()"></a><a name="getMinDimension--"></a><a name="setMinDimension--"></a>
+        <h3 class="api-name" id="minDimension()">minDimension</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#minDimension()">minDimension</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>The lesser of the magnitudes of the <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#width()">width</a></code> and the <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#height()">height</a></code> of this rectangle.</p>
+      </div>
+      <div class="api-item"><a name="getRight()"></a><a name="setRight()"></a><a name="getRight--"></a><a name="setRight--"></a>
+        <h3 class="api-name" id="right()">right</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#right()">right</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>The offset of the right edge of this rectangle from the x axis.</p>
+      </div>
+      <div class="api-item"><a name="getSize()"></a><a name="setSize()"></a><a name="getSize--"></a><a name="setSize--"></a>
+        <h3 class="api-name" id="size()">size</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#size()">size</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></pre>
+        <p>The distance between the upper-left corner and the lower-right corner of this rectangle.</p>
+      </div>
+      <div class="api-item"><a name="getTop()"></a><a name="setTop()"></a><a name="getTop--"></a><a name="setTop--"></a>
+        <h3 class="api-name" id="top()">top</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#top()">top</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>The offset of the top edge of this rectangle from the y axis.</p>
+      </div>
+      <div class="api-item"><a name="getTopCenter()"></a><a name="setTopCenter()"></a><a name="getTopCenter--"></a><a name="setTopCenter--"></a>
+        <h3 class="api-name" id="topCenter()">topCenter</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#topCenter()">topCenter</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+        <p>The offset to the center of the top edge of this rectangle.</p>
+      </div>
+      <div class="api-item"><a name="getTopLeft()"></a><a name="setTopLeft()"></a><a name="getTopLeft--"></a><a name="setTopLeft--"></a>
+        <h3 class="api-name" id="topLeft()">topLeft</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#topLeft()">topLeft</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+        <p>The offset to the intersection of the top and left edges of this rectangle.</p>
+      </div>
+      <div class="api-item"><a name="getTopRight()"></a><a name="setTopRight()"></a><a name="getTopRight--"></a><a name="setTopRight--"></a>
+        <h3 class="api-name" id="topRight()">topRight</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#topRight()">topRight</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+        <p>The offset to the intersection of the top and right edges of this rectangle.</p>
+      </div>
+      <div class="api-item"><a name="getWidth()"></a><a name="setWidth()"></a><a name="getWidth--"></a><a name="setWidth--"></a>
+        <h3 class="api-name" id="width()">width</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#width()">width</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>The distance between the left and right edges of this rectangle.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.geometry.Rect-.round--"></a><a name="round"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.geometry.Rect).round()">round</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>.<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#(androidx.compose.ui.geometry.Rect).round()">round</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntRect.html">IntRect</a></pre>
+        <p>Rounds a <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code> to an <code><a href="/reference/kotlin/androidx/compose/ui/unit/IntRect.html">IntRect</a></code></p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.geometry.Rect-.toAndroidRect--"></a><a name="toandroidrect"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.geometry.Rect).toAndroidRect()">toAndroidRect</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>.<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#(androidx.compose.ui.geometry.Rect).toAndroidRect()">toAndroidRect</a>():&nbsp;<a href="https://developer.android.com/reference/android/graphics/Rect.html">Rect</a></pre>
+        <p>Creates a new instance of <code><a href="https://developer.android.com/reference/android/graphics/Rect.html">android.graphics.Rect</a></code> with the same bounds specified in the given <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.geometry.Rect-.toAndroidRectF--"></a><a name="toandroidrectf"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.geometry.Rect).toAndroidRectF()">toAndroidRectF</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>.<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html#(androidx.compose.ui.geometry.Rect).toAndroidRectF()">toAndroidRectF</a>():&nbsp;<a href="https://developer.android.com/reference/android/graphics/RectF.html">RectF</a></pre>
+        <p>Creates a new instance of <code><a href="https://developer.android.com/reference/android/graphics/RectF.html">android.graphics.RectF</a></code> with the same bounds specified in the given <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></p>
+      </div>
+    </div>
+  </body>
+</html>

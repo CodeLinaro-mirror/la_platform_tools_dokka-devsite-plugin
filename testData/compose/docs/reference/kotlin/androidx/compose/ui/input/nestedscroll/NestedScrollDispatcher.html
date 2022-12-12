@@ -1,0 +1,386 @@
+<html devsite="true">
+  <head>
+    <title>NestedScrollDispatcher</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/input/nestedscroll/NestedScrollModifier.kt+class:androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>NestedScrollDispatcher</h1>
+    <p>
+      <pre>class <a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html">NestedScrollDispatcher</a></pre>
+    </p>
+    <hr>
+    <p>Nested scroll events dispatcher to notify the nested scroll system about the scrolling events that are happening on the element.</p>
+    <p>If the element/modifier itself is able to receive scroll events (from the touch, fling, mouse, etc) and it would like to respect nested scrolling by notifying elements above, it should properly dispatch nested scroll events when being scrolled</p>
+    <p>It is important to dispatch these events at the right time, provide valid information to the parents and react to the feedback received from them in order to provide good user experience with other nested scrolling nodes.</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">See also</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/package-summary.html#(androidx.compose.ui.Modifier).nestedScroll(androidx.compose.ui.input.nestedscroll.NestedScrollConnection,androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher)">nestedScroll</a></code></td>
+            <td>
+              <p>for the reference of the nested scroll process and more details</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></code></td>
+            <td>
+              <p>to connect to the nested scroll system</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html#NestedScrollDispatcher()">NestedScrollDispatcher</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>suspend <a href="/reference/kotlin/androidx/compose/ui/unit/Velocity.html">Velocity</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html#dispatchPostFling(androidx.compose.ui.unit.Velocity,androidx.compose.ui.unit.Velocity)">dispatchPostFling</a>(consumed:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Velocity.html">Velocity</a>,&nbsp;available:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Velocity.html">Velocity</a>)</code></div>
+              <p>Dispatch post fling pass and suspend until all the interested participants performed velocity process.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html#dispatchPostScroll(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,androidx.compose.ui.input.nestedscroll.NestedScrollSource)">dispatchPostScroll</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;consumed:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;available:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;source:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollSource.html">NestedScrollSource</a><br>)</code></div>
+              <p>Dispatch nested post-scrolling pass.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>suspend <a href="/reference/kotlin/androidx/compose/ui/unit/Velocity.html">Velocity</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html#dispatchPreFling(androidx.compose.ui.unit.Velocity)">dispatchPreFling</a>(available:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Velocity.html">Velocity</a>)</code></div>
+              <p>Dispatch pre fling pass and suspend until all the interested participants performed velocity pre consumption.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html#dispatchPreScroll(androidx.compose.ui.geometry.Offset,androidx.compose.ui.input.nestedscroll.NestedScrollSource)">dispatchPreScroll</a>(available:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>,&nbsp;source:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollSource.html">NestedScrollSource</a>)</code></div>
+              <p>Dispatch pre scroll pass.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html#coroutineScope()">coroutineScope</a></code></div>
+              <p>Get the outer coroutine scope to dispatch nested fling on.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="NestedScrollDispatcher--"></a><a name="nestedscrolldispatcher"></a>
+        <h3 class="api-name" id="NestedScrollDispatcher()">NestedScrollDispatcher</h3>
+        <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html#NestedScrollDispatcher()">NestedScrollDispatcher</a>()</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="dispatchPostFling(androidx.compose.ui.unit.Velocity, androidx.compose.ui.unit.Velocity)"></a><a name="dispatchPostFling-androidx.compose.ui.unit.Velocity-androidx.compose.ui.unit.Velocity-"></a><a name="dispatchpostfling"></a>
+        <h3 class="api-name" id="dispatchPostFling(androidx.compose.ui.unit.Velocity,androidx.compose.ui.unit.Velocity)">dispatchPostFling</h3>
+        <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html#dispatchPostFling(androidx.compose.ui.unit.Velocity,androidx.compose.ui.unit.Velocity)">dispatchPostFling</a>(consumed:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Velocity.html">Velocity</a>,&nbsp;available:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Velocity.html">Velocity</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Velocity.html">Velocity</a></pre>
+        <p>Dispatch post fling pass and suspend until all the interested participants performed velocity process. This triggers <code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html#onPostFling(androidx.compose.ui.unit.Velocity,androidx.compose.ui.unit.Velocity)">NestedScrollConnection.onPostFling</a></code> on all the ancestors, giving them possibility to react of the velocity that is left after the dispatching node itself flung with the desired amount.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>consumed:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Velocity.html">Velocity</a></code></td>
+                <td>
+                  <p>velocity already consumed by this node</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>available:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Velocity.html">Velocity</a></code></td>
+                <td>
+                  <p>velocity that is left for ancestors to consume</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/unit/Velocity.html">Velocity</a></code></td>
+                <td>
+                  <p>velocity that has been consumed by all the ancestors</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="dispatchPostScroll(androidx.compose.ui.geometry.Offset, androidx.compose.ui.geometry.Offset, androidx.compose.ui.input.nestedscroll.NestedScrollSource)"></a><a name="dispatchPostScroll-androidx.compose.ui.geometry.Offset-androidx.compose.ui.geometry.Offset-androidx.compose.ui.input.nestedscroll.NestedScrollSource-"></a><a name="dispatchpostscroll"></a>
+        <h3 class="api-name" id="dispatchPostScroll(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,androidx.compose.ui.input.nestedscroll.NestedScrollSource)">dispatchPostScroll</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html#dispatchPostScroll(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,androidx.compose.ui.input.nestedscroll.NestedScrollSource)">dispatchPostScroll</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;consumed:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;available:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;source:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollSource.html">NestedScrollSource</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+        <p>Dispatch nested post-scrolling pass. This triggers <code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html#onPostScroll(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,androidx.compose.ui.input.nestedscroll.NestedScrollSource)">NestedScrollConnection.onPostScroll</a></code> on all the ancestors giving them possibility to react of the scroll deltas that are left after the dispatching node itself and other <code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></code>s below consumed the desired amount.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>consumed:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+                <td>
+                  <p>the amount that this node consumed already</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>available:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+                <td>
+                  <p>the amount of delta left for ancestors</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>source:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollSource.html">NestedScrollSource</a></code></td>
+                <td>
+                  <p>source of the scroll</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+                <td>
+                  <p>the amount of scroll that was consumed by all ancestors</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="dispatchPreFling-androidx.compose.ui.unit.Velocity-"></a><a name="dispatchprefling"></a>
+        <h3 class="api-name" id="dispatchPreFling(androidx.compose.ui.unit.Velocity)">dispatchPreFling</h3>
+        <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html#dispatchPreFling(androidx.compose.ui.unit.Velocity)">dispatchPreFling</a>(available:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Velocity.html">Velocity</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Velocity.html">Velocity</a></pre>
+        <p>Dispatch pre fling pass and suspend until all the interested participants performed velocity pre consumption. This triggers <code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html#onPreFling(androidx.compose.ui.unit.Velocity)">NestedScrollConnection.onPreFling</a></code> on all the ancestors giving them a possibility to react on the fling that is about to happen and consume part of the velocity.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>available:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Velocity.html">Velocity</a></code></td>
+                <td>
+                  <p>velocity from the scroll evens that this node is about to fling with</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/unit/Velocity.html">Velocity</a></code></td>
+                <td>
+                  <p>total velocity that is pre-consumed by all ancestors in the chain. This velocity is unavailable for this node to consume, so it should adjust the consumption accordingly</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="dispatchPreScroll(androidx.compose.ui.geometry.Offset, androidx.compose.ui.input.nestedscroll.NestedScrollSource)"></a><a name="dispatchPreScroll-androidx.compose.ui.geometry.Offset-androidx.compose.ui.input.nestedscroll.NestedScrollSource-"></a><a name="dispatchprescroll"></a>
+        <h3 class="api-name" id="dispatchPreScroll(androidx.compose.ui.geometry.Offset,androidx.compose.ui.input.nestedscroll.NestedScrollSource)">dispatchPreScroll</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html#dispatchPreScroll(androidx.compose.ui.geometry.Offset,androidx.compose.ui.input.nestedscroll.NestedScrollSource)">dispatchPreScroll</a>(available:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>,&nbsp;source:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollSource.html">NestedScrollSource</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+        <p>Dispatch pre scroll pass. This triggers <code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html#onPreScroll(androidx.compose.ui.geometry.Offset,androidx.compose.ui.input.nestedscroll.NestedScrollSource)">NestedScrollConnection.onPreScroll</a></code> on all the ancestors giving them possibility to pre-consume delta if they desire so.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>available:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+                <td>
+                  <p>the delta arrived from a scroll event</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>source:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollSource.html">NestedScrollSource</a></code></td>
+                <td>
+                  <p>the source of the scroll event</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+                <td>
+                  <p>total delta that is pre-consumed by all ancestors in the chain. This delta is unavailable for this node to consume, so it should adjust the consumption accordingly</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getCoroutineScope()"></a><a name="setCoroutineScope()"></a><a name="getCoroutineScope--"></a><a name="setCoroutineScope--"></a>
+        <h3 class="api-name" id="coroutineScope()">coroutineScope</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html#coroutineScope()">coroutineScope</a>:&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></pre>
+        <p>Get the outer coroutine scope to dispatch nested fling on.</p>
+        <p>There might be situations when then component that is dispatching preFling or postFling to parent can be disposed together with its scope, so it's recommended to use launch nested fling dispatch using this scope to prevent abrupt scrolling user experience.</p>
+        <p><b>Note:</b> this scope is retrieved from the parent nestedScroll participants, unless the node knows its parent (which is usually after first composition commits), this will throw <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>kotlin.IllegalStateException:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">kotlin.IllegalStateException</a></code></td>
+                <td>
+                  <p>when this field is accessed before the <code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/package-summary.html#(androidx.compose.ui.Modifier).nestedScroll(androidx.compose.ui.input.nestedscroll.NestedScrollConnection,androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher)">nestedScroll</a></code> modifier with this <code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html">NestedScrollDispatcher</a></code> provided knows its nested scroll parent. Should be safe to access after the initial composition commits.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

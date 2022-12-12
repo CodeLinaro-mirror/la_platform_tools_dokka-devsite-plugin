@@ -1,0 +1,372 @@
+<html devsite="true">
+  <head>
+    <title>KeyEvent</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/input/key/KeyEvent.kt+class:androidx.compose.ui.input.key.KeyEvent&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>KeyEvent</h1>
+    <p>
+      <pre>value public final class <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a></pre>
+    </p>
+    <hr>
+    <p>When a user presses a key on a hardware keyboard, a <code><a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a></code> is sent to the item that is currently focused. Any parent composable can intercept this <code><a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">key event</a></code> on its way to the focused item by using Modifier.onPreviewKeyEvent()]<code><a href="/reference/androidx/compose/ui/input/key/package-summary.html#(androidx.compose.ui.Modifier).onPreviewKeyEvent(kotlin.Function1)">onPreviewKeyEvent</a></code>. If the item is not consumed, it returns back to each parent and can be intercepted by using Modifier.onKeyEvent()]<code><a href="/reference/androidx/compose/ui/input/key/package-summary.html#(androidx.compose.ui.Modifier).onKeyEvent(kotlin.Function1)">onKeyEvent</a></code>.</p>
+    <pre class="prettyprint">
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.input.key.onKeyEvent
+import androidx.compose.ui.input.key.onPreviewKeyEvent
+
+// When the inner Box is focused, and the user presses a key, the key goes down the hierarchy
+// and then back up to the parent. At any stage you can stop the propagation by returning
+// true to indicate that you consumed the event.
+Box(
+    Modifier
+        .onPreviewKeyEvent { keyEvent1 -&gt; false }
+        .onKeyEvent { keyEvent4 -&gt; false }
+) {
+    Box(
+        Modifier
+            .onPreviewKeyEvent { keyEvent2 -&gt; false }
+            .onKeyEvent { keyEvent3 -&gt; false }
+            .focusable()
+    )
+}</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/KeyEvent.html">KeyEvent</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#nativeKeyEvent()">nativeKeyEvent</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#KeyEvent(android.view.KeyEvent)">KeyEvent</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/KeyEvent.html">KeyEvent</a>&nbsp;nativeKeyEvent)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/Key.html">Key</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getKey()">getKey</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/Key.html">Key</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getKey()">getKey</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</code></div>
+              <p>The key that was pressed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEventType.html">KeyEventType</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getType()">getType</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEventType.html">KeyEventType</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getType()">getType</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</code></div>
+              <p>The <code><a href="/reference/androidx/compose/ui/input/key/KeyEventType.html">type</a></code> of key event.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getUtf16CodePoint()">getUtf16CodePoint</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getUtf16CodePoint()">getUtf16CodePoint</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</code></div>
+              <p>The UTF16 value corresponding to the key event that was pressed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getIsAltPressed()">isAltPressed</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getIsAltPressed()">isAltPressed</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</code></div>
+              <p>Indicates whether the Alt key is pressed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getIsCtrlPressed()">isCtrlPressed</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getIsCtrlPressed()">isCtrlPressed</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</code></div>
+              <p>Indicates whether the Ctrl key is pressed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getIsMetaPressed()">isMetaPressed</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getIsMetaPressed()">isMetaPressed</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</code></div>
+              <p>Indicates whether the Meta key is pressed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getIsShiftPressed()">isShiftPressed</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getIsShiftPressed()">isShiftPressed</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</code></div>
+              <p>Indicates whether the Shift key is pressed.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getNativeKeyEvent()"></a><a name="setNativeKeyEvent()"></a><a name="getNativeKeyEvent--"></a><a name="setNativeKeyEvent--"></a>
+        <h3 class="api-name" id="nativeKeyEvent()">nativeKeyEvent</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/KeyEvent.html">KeyEvent</a>&nbsp;<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#nativeKeyEvent()">nativeKeyEvent</a></pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="KeyEvent-android.view.KeyEvent-"></a><a name="keyevent"></a>
+        <h3 class="api-name" id="KeyEvent(android.view.KeyEvent)">KeyEvent</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#KeyEvent(android.view.KeyEvent)">KeyEvent</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/KeyEvent.html">KeyEvent</a>&nbsp;nativeKeyEvent)</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.input.key.KeyEvent-.getKey--"></a><a name="getkey"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.key.KeyEvent).getKey()">KeyEventKt.getKey</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/Key.html">Key</a>&nbsp;<a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getKey()">getKey</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</pre>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.input.key.KeyEvent-.getKey--"></a><a name="getkey"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.key.KeyEvent).getKey()">KeyEventKt.getKey</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/Key.html">Key</a>&nbsp;<a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getKey()">getKey</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</pre>
+        <p>The key that was pressed.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.input.key.onKeyEvent
+
+Box(
+    Modifier
+        .onKeyEvent {
+            if (it.isAltPressed &amp;&amp; it.key == Key.A) {
+                println(&quot;Alt + A is pressed&quot;)
+                true
+            } else {
+                false
+            }
+        }
+        .focusable()
+)</pre>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.input.key.KeyEvent-.getType--"></a><a name="gettype"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.key.KeyEvent).getType()">KeyEventKt.getType</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEventType.html">KeyEventType</a>&nbsp;<a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getType()">getType</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</pre>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.input.key.KeyEvent-.getType--"></a><a name="gettype"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.key.KeyEvent).getType()">KeyEventKt.getType</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEventType.html">KeyEventType</a>&nbsp;<a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getType()">getType</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</pre>
+        <p>The <code><a href="/reference/androidx/compose/ui/input/key/KeyEventType.html">type</a></code> of key event.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.input.key.onKeyEvent
+
+Box(
+    Modifier
+        .onKeyEvent {
+            when (it.type) {
+                KeyUp -&gt; println(&quot; KeyUp Pressed&quot;)
+                KeyDown -&gt; println(&quot; KeyUp Pressed&quot;)
+                Unknown -&gt; println(&quot;Unknown key type&quot;)
+                else -&gt; println(&quot;New KeyTpe (For Future Use)&quot;)
+            }
+            false
+        }
+        .focusable()
+)</pre>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.input.key.KeyEvent-.getUtf16CodePoint--"></a><a name="getutf16codepoint"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.key.KeyEvent).getUtf16CodePoint()">KeyEventKt.getUtf16CodePoint</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getUtf16CodePoint()">getUtf16CodePoint</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</pre>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.input.key.KeyEvent-.getUtf16CodePoint--"></a><a name="getutf16codepoint"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.key.KeyEvent).getUtf16CodePoint()">KeyEventKt.getUtf16CodePoint</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getUtf16CodePoint()">getUtf16CodePoint</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</pre>
+        <p>The UTF16 value corresponding to the key event that was pressed. The unicode character takes into account any meta keys that are pressed (eg. Pressing shift results in capital alphabets). The UTF16 value uses the U+n notation[http://www.unicode.org/reports/tr27/#notation] of the Unicode Standard.</p>
+        <p>An <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code> is used instead of a <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char/index.html">Char</a></code> so that we can support supplementary characters. The Unicode Standard allows for characters whose representation requires more than 16 bits. The range of legal code points is U+0000 to U+10FFFF, known as Unicode scalar value.</p>
+        <p>The set of characters from U+0000 to U+FFFF is sometimes referred to as the Basic Multilingual Plane (BMP). Characters whose code points are greater than U+FFFF are called supplementary characters. In this representation, supplementary characters are represented as a pair of char values, the first from the high-surrogates range, (\uD800-\uDBFF), the second from the low-surrogates range (\uDC00-\uDFFF).</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.input.key.KeyEvent-.getIsAltPressed--"></a><a name="getisaltpressed"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.key.KeyEvent).getIsAltPressed()">KeyEventKt.isAltPressed</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getIsAltPressed()">isAltPressed</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</pre>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.input.key.KeyEvent-.getIsAltPressed--"></a><a name="getisaltpressed"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.key.KeyEvent).getIsAltPressed()">KeyEventKt.isAltPressed</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getIsAltPressed()">isAltPressed</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</pre>
+        <p>Indicates whether the Alt key is pressed.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.input.key.onKeyEvent
+
+Box(
+    Modifier
+        .onKeyEvent {
+            if (it.isAltPressed &amp;&amp; it.key == Key.A) {
+                println(&quot;Alt + A is pressed&quot;)
+                true
+            } else {
+                false
+            }
+        }
+        .focusable()
+)</pre>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.input.key.KeyEvent-.getIsCtrlPressed--"></a><a name="getisctrlpressed"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.key.KeyEvent).getIsCtrlPressed()">KeyEventKt.isCtrlPressed</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getIsCtrlPressed()">isCtrlPressed</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</pre>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.input.key.KeyEvent-.getIsCtrlPressed--"></a><a name="getisctrlpressed"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.key.KeyEvent).getIsCtrlPressed()">KeyEventKt.isCtrlPressed</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getIsCtrlPressed()">isCtrlPressed</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</pre>
+        <p>Indicates whether the Ctrl key is pressed.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.input.key.onKeyEvent
+
+Box(
+    Modifier
+        .onKeyEvent {
+            if (it.isCtrlPressed &amp;&amp; it.key == Key.A) {
+                println(&quot;Ctrl + A is pressed&quot;)
+                true
+            } else {
+                false
+            }
+        }
+        .focusable()
+)</pre>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.input.key.KeyEvent-.getIsMetaPressed--"></a><a name="getismetapressed"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.key.KeyEvent).getIsMetaPressed()">KeyEventKt.isMetaPressed</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getIsMetaPressed()">isMetaPressed</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</pre>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.input.key.KeyEvent-.getIsMetaPressed--"></a><a name="getismetapressed"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.key.KeyEvent).getIsMetaPressed()">KeyEventKt.isMetaPressed</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getIsMetaPressed()">isMetaPressed</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</pre>
+        <p>Indicates whether the Meta key is pressed.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.input.key.onKeyEvent
+
+Box(
+    Modifier
+        .onKeyEvent {
+            if (it.isMetaPressed &amp;&amp; it.key == Key.A) {
+                println(&quot;Meta + A is pressed&quot;)
+                true
+            } else {
+                false
+            }
+        }
+        .focusable()
+)</pre>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.input.key.KeyEvent-.getIsShiftPressed--"></a><a name="getisshiftpressed"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.key.KeyEvent).getIsShiftPressed()">KeyEventKt.isShiftPressed</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getIsShiftPressed()">isShiftPressed</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</pre>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.input.key.KeyEvent-.getIsShiftPressed--"></a><a name="getisshiftpressed"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.key.KeyEvent).getIsShiftPressed()">KeyEventKt.isShiftPressed</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/key/KeyEventKt.html">KeyEventKt</a>.<a href="/reference/androidx/compose/ui/input/key/KeyEvent.html#(androidx.compose.ui.input.key.KeyEvent).getIsShiftPressed()">isShiftPressed</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;receiver)</pre>
+        <p>Indicates whether the Shift key is pressed.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.input.key.onKeyEvent
+
+Box(
+    Modifier
+        .onKeyEvent {
+            if (it.isShiftPressed &amp;&amp; it.key == Key.A) {
+                println(&quot;Shift + A is pressed&quot;)
+                true
+            } else {
+                false
+            }
+        }
+        .focusable()
+)</pre>
+      </div>
+    </div>
+  </body>
+</html>

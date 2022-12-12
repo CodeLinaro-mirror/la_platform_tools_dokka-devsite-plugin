@@ -66,7 +66,7 @@
       <div class="api-item"><a name="animate(kotlin.Float, kotlin.Float, kotlin.Float, androidx.compose.animation.core.AnimationSpec, kotlin.Function2)"></a><a name="animate-kotlin.Float-kotlin.Float-kotlin.Float-androidx.compose.animation.core.AnimationSpec-kotlin.Function2-"></a><a name="animate"></a>
         <h3 class="api-name" id="animate(kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.animation.core.AnimationSpec,kotlin.Function2)">animate</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/animation/core/SuspendAnimationKt.html#animate(kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.animation.core.AnimationSpec,kotlin.Function2)">animate</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;initialValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;targetValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;initialVelocity,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;&nbsp;animationSpec,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</pre>
-        <p>Target based animation that animates from the given <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animate(kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.animation.core.AnimationSpec,kotlin.Function2)">initialValue</a></code> towards the <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animate(kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.animation.core.AnimationSpec,kotlin.Function2)">targetValue</a></code>, with an optional <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animate(kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.animation.core.AnimationSpec,kotlin.Function2)">initialVelocity</a></code>. The <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animate(kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.animation.core.AnimationSpec,kotlin.Function2)">initialVelocity</a></code> defaults to 0f. By default, a <code><a href="/reference/androidx/compose/animation/core/package-summary.html#spring(kotlin.Float,kotlin.Float,kotlin.Any)">spring</a></code> will be used for the animation. An alternative <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animate(kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.animation.core.AnimationSpec,kotlin.Function2)">animationSpec</a></code> can be provided to replace the default <code><a href="/reference/androidx/compose/animation/core/package-summary.html#spring(kotlin.Float,kotlin.Float,kotlin.Any)">spring</a></code>. On each frame, the <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animate(kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.animation.core.AnimationSpec,kotlin.Function2)">block</a></code> will be invoked with up-to-date value and velocity.</p>
+        <p>Target based animation that animates from the given <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animate(kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.animation.core.AnimationSpec,kotlin.Function2)">initialValue</a></code> towards the <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animate(kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.animation.core.AnimationSpec,kotlin.Function2)">targetValue</a></code>, with an optional <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animate(kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.animation.core.AnimationSpec,kotlin.Function2)">initialVelocity</a></code>. By default, a <code><a href="/reference/androidx/compose/animation/core/package-summary.html#spring(kotlin.Float,kotlin.Float,kotlin.Any)">spring</a></code> will be used for the animation. An alternative <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animate(kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.animation.core.AnimationSpec,kotlin.Function2)">animationSpec</a></code> can be provided to replace the default <code><a href="/reference/androidx/compose/animation/core/package-summary.html#spring(kotlin.Float,kotlin.Float,kotlin.Any)">spring</a></code>.</p>
         <p>This is a convenient method for Float animation. If there's a need to access more info related to the animation such as start time, target, etc, consider using <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Boolean,kotlin.Function1)">AnimationState.animateTo</a></code>. To animate non-<code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code> data types, consider the <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animate(kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.animation.core.AnimationSpec,kotlin.Function2)">animate</a></code> overload/variant for generic types.</p>
         <pre class="prettyprint">
 import androidx.compose.animation.core.animate
@@ -120,6 +120,39 @@ fun InfiniteAnimationDemo() {
             </colgroup>
             <thead>
               <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>float&nbsp;initialVelocity</code></td>
+                <td>
+                  <p>The velocity to use for the animation. 0f by default.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;&nbsp;animationSpec</code></td>
+                <td>
+                  <p>The animation configuration that will be used. <code><a href="/reference/androidx/compose/animation/core/package-summary.html#spring(kotlin.Float,kotlin.Float,kotlin.Any)">spring</a></code> by default.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block</code></td>
+                <td>
+                  <p>Will be invoked on every frame with the current value and velocity of the animation for that frame.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
                 <th colspan="100%">See also</th>
               </tr>
             </thead>
@@ -161,16 +194,72 @@ fun InfiniteAnimationDemo() {
         <h3 class="api-name" id="(androidx.compose.animation.core.AnimationState).animateDecay(androidx.compose.animation.core.DecayAnimationSpec,kotlin.Boolean,kotlin.Function1)">SuspendAnimationKt.animateDecay</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;void&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/androidx/compose/animation/core/SuspendAnimationKt.html">SuspendAnimationKt</a>.<a href="/reference/androidx/compose/animation/core/SuspendAnimationKt.html#(androidx.compose.animation.core.AnimationState).animateDecay(androidx.compose.animation.core.DecayAnimationSpec,kotlin.Boolean,kotlin.Function1)">animateDecay</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationState.html">AnimationState</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;animationSpec,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;sequentialAnimation,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationScope.html">AnimationScope</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</pre>
         <p>Decay animation that slows down from the current velocity and value captured in <code><a href="/reference/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> until the velocity reaches 0. During the animation, the given <code><a href="/reference/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> will be updated with the up-to-date value/velocity, frame time, etc. This is often used to animate the result of a fling gesture.</p>
-        <p><code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateDecay(androidx.compose.animation.core.DecayAnimationSpec,kotlin.Boolean,kotlin.Function1)">animationSpec</a></code> defines the decay animation that will be used for this animation. Some options for <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateDecay(androidx.compose.animation.core.DecayAnimationSpec,kotlin.Boolean,kotlin.Function1)">animationSpec</a></code> include: <code><a href="/reference/androidx/compose/animation/package-summary.html#splineBasedDecay(androidx.compose.ui.unit.Density)">splineBasedDecay</a></code> and <code><a href="/reference/androidx/compose/animation/core/package-summary.html#exponentialDecay(kotlin.Float,kotlin.Float)">exponentialDecay</a></code>.</p>
-        <p>During the animation, <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateDecay(androidx.compose.animation.core.DecayAnimationSpec,kotlin.Boolean,kotlin.Function1)">block</a></code> will be invoked on every frame, and the <code><a href="/reference/androidx/compose/animation/core/AnimationScope.html">AnimationScope</a></code> will be checked against cancellation before the animation continues. To cancel the animation from the <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateDecay(androidx.compose.animation.core.DecayAnimationSpec,kotlin.Boolean,kotlin.Function1)">block</a></code>, simply call <code><a href="/reference/androidx/compose/animation/core/AnimationScope.html#cancelAnimation()">AnimationScope.cancelAnimation</a></code>.  After <code><a href="/reference/androidx/compose/animation/core/AnimationScope.html#cancelAnimation()">AnimationScope.cancelAnimation</a></code> is called, <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateDecay(androidx.compose.animation.core.DecayAnimationSpec,kotlin.Boolean,kotlin.Function1)">block</a></code> will not be invoked again. The animation loop will exit after the <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateDecay(androidx.compose.animation.core.DecayAnimationSpec,kotlin.Boolean,kotlin.Function1)">block</a></code> returns. All the animation related info can be accessed via <code><a href="/reference/androidx/compose/animation/core/AnimationScope.html">AnimationScope</a></code>.</p>
-        <p><code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateDecay(androidx.compose.animation.core.DecayAnimationSpec,kotlin.Boolean,kotlin.Function1)">sequentialAnimation</a></code> indicates whether the animation should use the <code><a href="/reference/androidx/compose/animation/core/AnimationState.html#lastFrameTimeNanos()">AnimationState.lastFrameTimeNanos</a></code> as the starting time (if true), or start in a new frame. By default, <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateDecay(androidx.compose.animation.core.DecayAnimationSpec,kotlin.Boolean,kotlin.Function1)">sequentialAnimation</a></code> is false, to start the animation in a few frame. In cases where an on-going animation is interrupted and a new animation is started to carry over the momentum, using the interruption time (captured in <code><a href="/reference/androidx/compose/animation/core/AnimationState.html#lastFrameTimeNanos()">AnimationState.lastFrameTimeNanos</a></code> creates a smoother animation.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;animationSpec</code></td>
+                <td>
+                  <p>Defines the decay animation that will be used for this animation. Some options for <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateDecay(androidx.compose.animation.core.DecayAnimationSpec,kotlin.Boolean,kotlin.Function1)">animationSpec</a></code> include: <code><a href="/reference/androidx/compose/animation/package-summary.html#splineBasedDecay(androidx.compose.ui.unit.Density)">splineBasedDecay</a></code> and <code><a href="/reference/androidx/compose/animation/core/package-summary.html#exponentialDecay(kotlin.Float,kotlin.Float)">exponentialDecay</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>boolean&nbsp;sequentialAnimation</code></td>
+                <td>
+                  <p>Indicates whether the animation should use the <code><a href="/reference/androidx/compose/animation/core/AnimationState.html#lastFrameTimeNanos()">AnimationState.lastFrameTimeNanos</a></code> as the starting time (if true), or start in a new frame. By default, <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateDecay(androidx.compose.animation.core.DecayAnimationSpec,kotlin.Boolean,kotlin.Function1)">sequentialAnimation</a></code> is false, to start the animation in a few frame. In cases where an on-going animation is interrupted and a new animation is started to carry over the momentum, using the interruption time (captured in <code><a href="/reference/androidx/compose/animation/core/AnimationState.html#lastFrameTimeNanos()">AnimationState.lastFrameTimeNanos</a></code>) creates a smoother animation.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationScope.html">AnimationScope</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block</code></td>
+                <td>
+                  <p>will be invoked on every frame during the animation, and the <code><a href="/reference/androidx/compose/animation/core/AnimationScope.html">AnimationScope</a></code> will be checked against cancellation before the animation continues. To cancel the animation from the <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateDecay(androidx.compose.animation.core.DecayAnimationSpec,kotlin.Boolean,kotlin.Function1)">block</a></code>, simply call <code><a href="/reference/androidx/compose/animation/core/AnimationScope.html#cancelAnimation()">AnimationScope.cancelAnimation</a></code>.  After <code><a href="/reference/androidx/compose/animation/core/AnimationScope.html#cancelAnimation()">AnimationScope.cancelAnimation</a></code> is called, <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateDecay(androidx.compose.animation.core.DecayAnimationSpec,kotlin.Boolean,kotlin.Function1)">block</a></code> will not be invoked again. The animation loop will exit after the <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateDecay(androidx.compose.animation.core.DecayAnimationSpec,kotlin.Boolean,kotlin.Function1)">block</a></code> returns. All the animation related info can be accessed via <code><a href="/reference/androidx/compose/animation/core/AnimationScope.html">AnimationScope</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <div class="api-item"><a name="animateDecay(kotlin.Float, kotlin.Float, androidx.compose.animation.core.FloatDecayAnimationSpec, kotlin.Function2)"></a><a name="animateDecay-kotlin.Float-kotlin.Float-androidx.compose.animation.core.FloatDecayAnimationSpec-kotlin.Function2-"></a><a name="animatedecay"></a>
         <h3 class="api-name" id="animateDecay(kotlin.Float,kotlin.Float,androidx.compose.animation.core.FloatDecayAnimationSpec,kotlin.Function2)">animateDecay</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/animation/core/SuspendAnimationKt.html#animateDecay(kotlin.Float,kotlin.Float,androidx.compose.animation.core.FloatDecayAnimationSpec,kotlin.Function2)">animateDecay</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;initialValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;initialVelocity,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/FloatDecayAnimationSpec.html">FloatDecayAnimationSpec</a>&nbsp;animationSpec,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</pre>
         <p>Decay animation that slows down from the given <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animateDecay(kotlin.Float,kotlin.Float,androidx.compose.animation.core.FloatDecayAnimationSpec,kotlin.Function2)">initialVelocity</a></code> starting at <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animateDecay(kotlin.Float,kotlin.Float,androidx.compose.animation.core.FloatDecayAnimationSpec,kotlin.Function2)">initialValue</a></code> until the velocity reaches 0. This is often used after a fling gesture.</p>
-        <p><code><a href="/reference/androidx/compose/animation/core/package-summary.html#animateDecay(kotlin.Float,kotlin.Float,androidx.compose.animation.core.FloatDecayAnimationSpec,kotlin.Function2)">animationSpec</a></code> defines the decay animation that will be used for this animation. Some options for this <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animateDecay(kotlin.Float,kotlin.Float,androidx.compose.animation.core.FloatDecayAnimationSpec,kotlin.Function2)">animationSpec</a></code> include: <code><a href="/reference/androidx/compose/animation/package-summary.html#splineBasedDecay(androidx.compose.ui.unit.Density)">splineBasedDecay</a></code> and <code><a href="/reference/androidx/compose/animation/core/package-summary.html#exponentialDecay(kotlin.Float,kotlin.Float)">exponentialDecay</a></code>. <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animateDecay(kotlin.Float,kotlin.Float,androidx.compose.animation.core.FloatDecayAnimationSpec,kotlin.Function2)">block</a></code> will be invoked on each animation frame with up-to-date value and velocity.</p>
-        <p>This is a convenient method for decay animation. If there's a need to access more info related to the animation such as start time, target, etc, consider using <code><a href="/reference/[JVM root]/package-summary.html">AnimationState.animateDecay</a></code>.</p>
+        <p>This is a convenient method for decay animation. If there's a need to access more info related to the animation such as start time, target, etc, consider using <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateDecay(androidx.compose.animation.core.DecayAnimationSpec,kotlin.Boolean,kotlin.Function1)">AnimationState.animateDecay</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/FloatDecayAnimationSpec.html">FloatDecayAnimationSpec</a>&nbsp;animationSpec</code></td>
+                <td>
+                  <p>Defines the decay animation that will be used for this animation. Some options for this <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animateDecay(kotlin.Float,kotlin.Float,androidx.compose.animation.core.FloatDecayAnimationSpec,kotlin.Function2)">animationSpec</a></code> include: <code><a href="/reference/androidx/compose/animation/package-summary.html#splineBasedDecay(androidx.compose.ui.unit.Density)">splineBasedDecay</a></code> and <code><a href="/reference/androidx/compose/animation/core/package-summary.html#exponentialDecay(kotlin.Float,kotlin.Float)">exponentialDecay</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block</code></td>
+                <td>
+                  <p>Will be invoked on each animation frame with up-to-date value and velocity.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -184,10 +273,8 @@ fun InfiniteAnimationDemo() {
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/[JVM root]/package-summary.html">[JVM root]</a></code></td>
-                <td>
-                  <p><code><a href="/reference/[JVM root]/package-summary.html">AnimationState.animateDecay</a></code></p>
-                </td>
+                <td><code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateDecay(androidx.compose.animation.core.DecayAnimationSpec,kotlin.Boolean,kotlin.Function1)">animateDecay</a></code></td>
+                <td></td>
               </tr>
             </tbody>
           </table>
@@ -197,8 +284,6 @@ fun InfiniteAnimationDemo() {
         <h3 class="api-name" id="(androidx.compose.animation.core.AnimationState).animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Boolean,kotlin.Function1)">SuspendAnimationKt.animateTo</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;void&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/androidx/compose/animation/core/SuspendAnimationKt.html">SuspendAnimationKt</a>.<a href="/reference/androidx/compose/animation/core/SuspendAnimationKt.html#(androidx.compose.animation.core.AnimationState).animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Boolean,kotlin.Function1)">animateTo</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationState.html">AnimationState</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;targetValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;animationSpec,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;sequentialAnimation,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationScope.html">AnimationScope</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</pre>
         <p>Target based animation that takes the value and velocity from the <code><a href="/reference/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> as the starting condition, and animate to the <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Boolean,kotlin.Function1)">targetValue</a></code>, using the <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Boolean,kotlin.Function1)">animationSpec</a></code>. During the animation, the given <code><a href="/reference/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> will be updated with the up-to-date value/velocity, frame time, etc.</p>
-        <p><code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Boolean,kotlin.Function1)">sequentialAnimation</a></code> indicates whether the animation should use the <code><a href="/reference/androidx/compose/animation/core/AnimationState.html#lastFrameTimeNanos()">AnimationState.lastFrameTimeNanos</a></code> as the starting time (if true), or start in a new frame. By default, <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Boolean,kotlin.Function1)">sequentialAnimation</a></code> is false, to start the animation in a few frame. In cases where an on-going animation is interrupted and a new animation is started to carry over the momentum, using the interruption time (captured in <code><a href="/reference/androidx/compose/animation/core/AnimationState.html#lastFrameTimeNanos()">AnimationState.lastFrameTimeNanos</a></code> creates a smoother animation.</p>
-        <p><code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Boolean,kotlin.Function1)">block</a></code> will be invoked on every frame, and the <code><a href="/reference/androidx/compose/animation/core/AnimationScope.html">AnimationScope</a></code> will be checked against cancellation before the animation continues. To cancel the animation from the <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Boolean,kotlin.Function1)">block</a></code>, simply call <code><a href="/reference/androidx/compose/animation/core/AnimationScope.html#cancelAnimation()">AnimationScope.cancelAnimation</a></code>.  After <code><a href="/reference/androidx/compose/animation/core/AnimationScope.html#cancelAnimation()">AnimationScope.cancelAnimation</a></code> is called, <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Boolean,kotlin.Function1)">block</a></code> will not be invoked again. The animation loop will exit after the <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Boolean,kotlin.Function1)">block</a></code> returns. All the animation related info can be accessed via <code><a href="/reference/androidx/compose/animation/core/AnimationScope.html">AnimationScope</a></code>.</p>
         <pre class="prettyprint">
 import androidx.compose.animation.core.AnimationState
 import androidx.compose.animation.core.animateTo
@@ -232,6 +317,45 @@ fun simpleAnimate(
     // Return the value updated by the animation.
     return animationState.value
 }</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;targetValue</code></td>
+                <td>
+                  <p>The target value that the animation will animate to.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;animationSpec</code></td>
+                <td>
+                  <p>The animation configuration that will be used. <code><a href="/reference/androidx/compose/animation/core/package-summary.html#spring(kotlin.Float,kotlin.Float,kotlin.Any)">spring</a></code> by default.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>boolean&nbsp;sequentialAnimation</code></td>
+                <td>
+                  <p>Indicates whether the animation should use the <code><a href="/reference/androidx/compose/animation/core/AnimationState.html#lastFrameTimeNanos()">AnimationState.lastFrameTimeNanos</a></code> as the starting time (if true), or start in a new frame. By default, <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Boolean,kotlin.Function1)">sequentialAnimation</a></code> is false, to start the animation in a few frame. In cases where an on-going animation is interrupted and a new animation is started to carry over the momentum, using the interruption time (captured in <code><a href="/reference/androidx/compose/animation/core/AnimationState.html#lastFrameTimeNanos()">AnimationState.lastFrameTimeNanos</a></code>) creates a smoother animation.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationScope.html">AnimationScope</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block</code></td>
+                <td>
+                  <p>Will be invoked on every frame, and the <code><a href="/reference/androidx/compose/animation/core/AnimationScope.html">AnimationScope</a></code> will be checked against cancellation before the animation continues. To cancel the animation from the <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Boolean,kotlin.Function1)">block</a></code>, simply call <code><a href="/reference/androidx/compose/animation/core/AnimationScope.html#cancelAnimation()">AnimationScope.cancelAnimation</a></code>.  After <code><a href="/reference/androidx/compose/animation/core/AnimationScope.html#cancelAnimation()">AnimationScope.cancelAnimation</a></code> is called, <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Boolean,kotlin.Function1)">block</a></code> will not be invoked again. The animation loop will exit after the <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Boolean,kotlin.Function1)">block</a></code> returns. All the animation related info can be accessed via <code><a href="/reference/androidx/compose/animation/core/AnimationScope.html">AnimationScope</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </body>

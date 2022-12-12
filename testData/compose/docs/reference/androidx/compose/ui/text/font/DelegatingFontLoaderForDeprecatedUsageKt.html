@@ -1,0 +1,51 @@
+<html devsite="true">
+  <head>
+    <title>DelegatingFontLoaderForDeprecatedUsageKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>DelegatingFontLoaderForDeprecatedUsageKt</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/text/font/DelegatingFontLoaderForDeprecatedUsageKt.html">DelegatingFontLoaderForDeprecatedUsageKt</a></pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontFamily.Resolver.html">FontFamily.Resolver</a></code></td>
+            <td>
+              <div><code><span><del><a href="/reference/androidx/compose/ui/text/font/DelegatingFontLoaderForDeprecatedUsageKt.html#createFontFamilyResolver(androidx.compose.ui.text.font.Font.ResourceLoader,android.content.Context)">createFontFamilyResolver</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/Font.ResourceLoader.html">Font.ResourceLoader</a>&nbsp;fontResourceLoader,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/content/Context.html">Context</a>&nbsp;context<br>)</code></div>
+              <p><strong>This method is deprecated.</strong> This exists to bridge existing Font.ResourceLoader subclasses to be used as aFontFamily.ResourceLoader during upgrade.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="createFontFamilyResolver(androidx.compose.ui.text.font.Font.ResourceLoader, android.content.Context)"></a><a name="createFontFamilyResolver-androidx.compose.ui.text.font.Font.ResourceLoader-android.content.Context-"></a><a name="createfontfamilyresolver"></a>
+        <h3 class="api-name" id="createFontFamilyResolver(androidx.compose.ui.text.font.Font.ResourceLoader,android.content.Context)">createFontFamilyResolver</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontFamily.Resolver.html">FontFamily.Resolver</a>&nbsp;<span><del><a href="/reference/androidx/compose/ui/text/font/DelegatingFontLoaderForDeprecatedUsageKt.html#createFontFamilyResolver(androidx.compose.ui.text.font.Font.ResourceLoader,android.content.Context)">createFontFamilyResolver</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/Font.ResourceLoader.html">Font.ResourceLoader</a>&nbsp;fontResourceLoader,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/content/Context.html">Context</a>&nbsp;context<br>)</pre>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>This exists to bridge existing Font.ResourceLoader subclasses to be used as aFontFamily.ResourceLoader during upgrade.</aside>
+        <p>Bridge between subclasses of Font.ResourceLoader and the new FontFamily.Resolver API.</p>
+        <p>To use add as a CompositionLocal replacing the default FontFamily.Resolver:</p>
+        <pre class="prettyprint">LocalFontFamilyResolver provides createFontFamilyResolver(myFontResourceLoader, context)</pre>
+        <p>This FontFamily.Resolver is capable of loading all fonts that the default FontFamily.Resolver is. In addition, it will delegate all resource fonts to the provided Font.ResourceLoader, preserving the behavior of Compose 1.0.</p>
+        <p>This method will be removed by Compose 2.0, and callers should migrate to using <code><a href="/reference/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a></code> to implement the same behavior using font fallback chains.</p>
+        <p>A FontFamily.Resolver created this way will not share caches with other FontFamily.Resolvers.</p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,552 @@
+<html devsite="true">
+  <head>
+    <title>LruCache</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/collection/LruCache.kt+class:androidx.collection.LruCache&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>LruCache</h1>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>open class <a href="/reference/kotlin/androidx/collection/LruCache.html">LruCache</a>&lt;K&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;V&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;</pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
+    <hr>
+    <p>Static library version of <code>android.util.LruCache</code>. Used to write apps that run on API levels prior to 12. When running on API level 12 or above, this implementation is still used; it does not try to switch to the framework's implementation. See the framework SDK documentation for a class overview.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="93%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public constructors</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td>
+                <div><code>&lt;K&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;V&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/collection/LruCache.html#LruCache(kotlin.Int)">LruCache</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/kotlin/androidx/collection/internal/IntRangeKmp.html">IntRangeKmp</a>(from&nbsp;=&nbsp;1,&nbsp;to&nbsp;=&nbsp;9223372036854775807) maxSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><br>)</code></div>
+                <p>Creates a new <code><a href="/reference/kotlin/androidx/collection/LruCache.html">LruCache</a></code></p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/LruCache.html#createCount()">createCount</a>()</code></div>
+                <p>Returns the number of times <code><a href="/reference/kotlin/androidx/collection/LruCache.html#create(kotlin.Any)">create</a></code> returned a value.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/LruCache.html#evictAll()">evictAll</a>()</code></div>
+                <p>Clear the cache, calling <code><a href="/reference/kotlin/androidx/collection/LruCache.html#entryRemoved(kotlin.Boolean,kotlin.Any,kotlin.Any,kotlin.Any)">entryRemoved</a></code> on each removed entry.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/LruCache.html#evictionCount()">evictionCount</a>()</code></div>
+                <p>Returns the number of values that have been evicted.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>operator V?</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/LruCache.html#get(kotlin.Any)">get</a>(key:&nbsp;K)</code></div>
+                <p>Returns the value for <code><a href="/reference/kotlin/androidx/collection/LruCache.html#get(kotlin.Any)">key</a></code> if it exists in the cache or can be created by <code><a href="/reference/kotlin/androidx/collection/LruCache.html#create(kotlin.Any)">create</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/LruCache.html#hitCount()">hitCount</a>()</code></div>
+                <p>Returns the number of times <code><a href="/reference/kotlin/androidx/collection/LruCache.html#get(kotlin.Any)">get</a></code> returned a value that was already present in the cache.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/LruCache.html#maxSize()">maxSize</a>()</code></div>
+                <p>For caches that do not override <code><a href="/reference/kotlin/androidx/collection/LruCache.html#sizeOf(kotlin.Any,kotlin.Any)">sizeOf</a></code>, this returns the maximum number of entries in the cache.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/LruCache.html#missCount()">missCount</a>()</code></div>
+                <p>Returns the number of times <code><a href="/reference/kotlin/androidx/collection/LruCache.html#get(kotlin.Any)">get</a></code> returned null or required a new value to be created.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>V?</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/LruCache.html#put(kotlin.Any,kotlin.Any)">put</a>(key:&nbsp;K,&nbsp;value:&nbsp;V)</code></div>
+                <p>Caches <code><a href="/reference/kotlin/androidx/collection/LruCache.html#put(kotlin.Any,kotlin.Any)">value</a></code> for <code><a href="/reference/kotlin/androidx/collection/LruCache.html#put(kotlin.Any,kotlin.Any)">key</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/LruCache.html#putCount()">putCount</a>()</code></div>
+                <p>Returns the number of times <code><a href="/reference/kotlin/androidx/collection/LruCache.html#put(kotlin.Any,kotlin.Any)">put</a></code> was called.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>V?</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/LruCache.html#remove(kotlin.Any)">remove</a>(key:&nbsp;K)</code></div>
+                <p>Removes the entry for <code><a href="/reference/kotlin/androidx/collection/LruCache.html#remove(kotlin.Any)">key</a></code> if it exists.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/LruCache.html#resize(kotlin.Int)">resize</a>(@<a href="/reference/kotlin/androidx/collection/internal/IntRangeKmp.html">IntRangeKmp</a>(from&nbsp;=&nbsp;1,&nbsp;to&nbsp;=&nbsp;9223372036854775807) maxSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                <p>Sets the size of the cache.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/LruCache.html#size()">size</a>()</code></div>
+                <p>For caches that do not override <code><a href="/reference/kotlin/androidx/collection/LruCache.html#sizeOf(kotlin.Any,kotlin.Any)">sizeOf</a></code>, this returns the number of entries in the cache.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a>&lt;K,&nbsp;V&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/LruCache.html#snapshot()">snapshot</a>()</code></div>
+                <p>Returns a mutable copy of the current contents of the cache, ordered from least recently accessed to most recently accessed.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/LruCache.html#toString()">toString</a>()</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/LruCache.html#trimToSize(kotlin.Int)">trimToSize</a>(maxSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                <p>Remove the eldest entries until the total of remaining entries is at or below the requested size.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Protected functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>open V?</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/LruCache.html#create(kotlin.Any)">create</a>(key:&nbsp;K)</code></div>
+                <p>Called after a cache miss to compute a value for the corresponding key.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/LruCache.html#entryRemoved(kotlin.Boolean,kotlin.Any,kotlin.Any,kotlin.Any)">entryRemoved</a>(evicted:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>,&nbsp;key:&nbsp;K,&nbsp;oldValue:&nbsp;V,&nbsp;newValue:&nbsp;V?)</code></div>
+                <p>Called for entries that have been evicted or removed.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/collection/LruCache.html#sizeOf(kotlin.Any,kotlin.Any)">sizeOf</a>(key:&nbsp;K,&nbsp;value:&nbsp;V)</code></div>
+                <p>Returns the size of the entry for <code><a href="/reference/kotlin/androidx/collection/LruCache.html#sizeOf(kotlin.Any,kotlin.Any)">key</a></code> and <code><a href="/reference/kotlin/androidx/collection/LruCache.html#sizeOf(kotlin.Any,kotlin.Any)">value</a></code> in user-defined units.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public constructors</h2>
+        <div class="api-item"><a name="LruCache-kotlin.Int-"></a><a name="lrucache"></a>
+          <h3 class="api-name" id="LruCache(kotlin.Int)">LruCache</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">&lt;K&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;V&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/collection/LruCache.html#LruCache(kotlin.Int)">LruCache</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/kotlin/androidx/collection/internal/IntRangeKmp.html">IntRangeKmp</a>(from&nbsp;=&nbsp;1,&nbsp;to&nbsp;=&nbsp;9223372036854775807) maxSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><br>)</pre>
+          <p>Creates a new <code><a href="/reference/kotlin/androidx/collection/LruCache.html">LruCache</a></code></p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>@<a href="/reference/kotlin/androidx/collection/internal/IntRangeKmp.html">IntRangeKmp</a>(from&nbsp;=&nbsp;1,&nbsp;to&nbsp;=&nbsp;9223372036854775807) maxSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                  <td>
+                    <p>for caches that do not override <code><a href="/reference/kotlin/androidx/collection/LruCache.html#sizeOf(kotlin.Any,kotlin.Any)">sizeOf</a></code>, this is the maximum number of entries in the cache. For all other caches, this is the maximum sum of the sizes of the entries in this cache.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="createCount--"></a><a name="createcount"></a>
+          <h3 class="api-name" id="createCount()">createCount</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/collection/LruCache.html#createCount()">createCount</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>Returns the number of times <code><a href="/reference/kotlin/androidx/collection/LruCache.html#create(kotlin.Any)">create</a></code> returned a value.</p>
+        </div>
+        <div class="api-item"><a name="evictAll--"></a><a name="evictall"></a>
+          <h3 class="api-name" id="evictAll()">evictAll</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/collection/LruCache.html#evictAll()">evictAll</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Clear the cache, calling <code><a href="/reference/kotlin/androidx/collection/LruCache.html#entryRemoved(kotlin.Boolean,kotlin.Any,kotlin.Any,kotlin.Any)">entryRemoved</a></code> on each removed entry.</p>
+        </div>
+        <div class="api-item"><a name="evictionCount--"></a><a name="evictioncount"></a>
+          <h3 class="api-name" id="evictionCount()">evictionCount</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/collection/LruCache.html#evictionCount()">evictionCount</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>Returns the number of values that have been evicted.</p>
+        </div>
+        <div class="api-item"><a name="get-kotlin.Any-"></a><a name="get"></a>
+          <h3 class="api-name" id="get(kotlin.Any)">get</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/collection/LruCache.html#get(kotlin.Any)">get</a>(key:&nbsp;K):&nbsp;V?</pre>
+          <p>Returns the value for <code><a href="/reference/kotlin/androidx/collection/LruCache.html#get(kotlin.Any)">key</a></code> if it exists in the cache or can be created by <code><a href="/reference/kotlin/androidx/collection/LruCache.html#create(kotlin.Any)">create</a></code>. If a value was returned, it is moved to the head of the queue. This returns <code>null</code> if a value is not cached and cannot be created.</p>
+        </div>
+        <div class="api-item"><a name="hitCount--"></a><a name="hitcount"></a>
+          <h3 class="api-name" id="hitCount()">hitCount</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/collection/LruCache.html#hitCount()">hitCount</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>Returns the number of times <code><a href="/reference/kotlin/androidx/collection/LruCache.html#get(kotlin.Any)">get</a></code> returned a value that was already present in the cache.</p>
+        </div>
+        <div class="api-item"><a name="maxSize--"></a><a name="maxsize"></a>
+          <h3 class="api-name" id="maxSize()">maxSize</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/collection/LruCache.html#maxSize()">maxSize</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>For caches that do not override <code><a href="/reference/kotlin/androidx/collection/LruCache.html#sizeOf(kotlin.Any,kotlin.Any)">sizeOf</a></code>, this returns the maximum number of entries in the cache. For all other caches, this returns the maximum sum of the sizes of the entries in this cache.</p>
+        </div>
+        <div class="api-item"><a name="missCount--"></a><a name="misscount"></a>
+          <h3 class="api-name" id="missCount()">missCount</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/collection/LruCache.html#missCount()">missCount</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>Returns the number of times <code><a href="/reference/kotlin/androidx/collection/LruCache.html#get(kotlin.Any)">get</a></code> returned null or required a new value to be created.</p>
+        </div>
+        <div class="api-item"><a name="put(kotlin.Any, kotlin.Any)"></a><a name="put-kotlin.Any-kotlin.Any-"></a><a name="put"></a>
+          <h3 class="api-name" id="put(kotlin.Any,kotlin.Any)">put</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/collection/LruCache.html#put(kotlin.Any,kotlin.Any)">put</a>(key:&nbsp;K,&nbsp;value:&nbsp;V):&nbsp;V?</pre>
+          <p>Caches <code><a href="/reference/kotlin/androidx/collection/LruCache.html#put(kotlin.Any,kotlin.Any)">value</a></code> for <code><a href="/reference/kotlin/androidx/collection/LruCache.html#put(kotlin.Any,kotlin.Any)">key</a></code>. The value is moved to the head of the queue.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Returns</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>V?</code></td>
+                  <td>
+                    <p>the previous value mapped by <code><a href="/reference/kotlin/androidx/collection/LruCache.html#put(kotlin.Any,kotlin.Any)">key</a></code>.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="putCount--"></a><a name="putcount"></a>
+          <h3 class="api-name" id="putCount()">putCount</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/collection/LruCache.html#putCount()">putCount</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>Returns the number of times <code><a href="/reference/kotlin/androidx/collection/LruCache.html#put(kotlin.Any,kotlin.Any)">put</a></code> was called.</p>
+        </div>
+        <div class="api-item"><a name="remove-kotlin.Any-"></a><a name="remove"></a>
+          <h3 class="api-name" id="remove(kotlin.Any)">remove</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/collection/LruCache.html#remove(kotlin.Any)">remove</a>(key:&nbsp;K):&nbsp;V?</pre>
+          <p>Removes the entry for <code><a href="/reference/kotlin/androidx/collection/LruCache.html#remove(kotlin.Any)">key</a></code> if it exists.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Returns</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>V?</code></td>
+                  <td>
+                    <p>the previous value mapped by <code><a href="/reference/kotlin/androidx/collection/LruCache.html#remove(kotlin.Any)">key</a></code>.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="resize-kotlin.Int-"></a><a name="resize"></a>
+          <h3 class="api-name" id="resize(kotlin.Int)">resize</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/collection/LruCache.html#resize(kotlin.Int)">resize</a>(@<a href="/reference/kotlin/androidx/collection/internal/IntRangeKmp.html">IntRangeKmp</a>(from&nbsp;=&nbsp;1,&nbsp;to&nbsp;=&nbsp;9223372036854775807) maxSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Sets the size of the cache.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>@<a href="/reference/kotlin/androidx/collection/internal/IntRangeKmp.html">IntRangeKmp</a>(from&nbsp;=&nbsp;1,&nbsp;to&nbsp;=&nbsp;9223372036854775807) maxSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                  <td>
+                    <p>The new maximum size.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="size--"></a><a name="size"></a>
+          <h3 class="api-name" id="size()">size</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/collection/LruCache.html#size()">size</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>For caches that do not override <code><a href="/reference/kotlin/androidx/collection/LruCache.html#sizeOf(kotlin.Any,kotlin.Any)">sizeOf</a></code>, this returns the number of entries in the cache. For all other caches, this returns the sum of the sizes of the entries in this cache.</p>
+        </div>
+        <div class="api-item"><a name="snapshot--"></a><a name="snapshot"></a>
+          <h3 class="api-name" id="snapshot()">snapshot</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/collection/LruCache.html#snapshot()">snapshot</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a>&lt;K,&nbsp;V&gt;</pre>
+          <p>Returns a mutable copy of the current contents of the cache, ordered from least recently accessed to most recently accessed.</p>
+        </div>
+        <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+          <h3 class="api-name" id="toString()">toString</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/collection/LruCache.html#toString()">toString</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></pre>
+        </div>
+        <div class="api-item"><a name="trimToSize-kotlin.Int-"></a><a name="trimtosize"></a>
+          <h3 class="api-name" id="trimToSize(kotlin.Int)">trimToSize</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/collection/LruCache.html#trimToSize(kotlin.Int)">trimToSize</a>(maxSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Remove the eldest entries until the total of remaining entries is at or below the requested size.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>maxSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                  <td>
+                    <p>the maximum size of the cache before returning. May be -1 to evict even 0-sized elements.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Protected functions</h2>
+        <div class="api-item"><a name="create-kotlin.Any-"></a><a name="create"></a>
+          <h3 class="api-name" id="create(kotlin.Any)">create</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">protected&nbsp;open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/collection/LruCache.html#create(kotlin.Any)">create</a>(key:&nbsp;K):&nbsp;V?</pre>
+          <p>Called after a cache miss to compute a value for the corresponding key. Returns the computed value or null if no value can be computed. The default implementation returns null.</p>
+          <p>The method is called without synchronization: other threads may access the cache while this method is executing.</p>
+          <p>If a value for <code><a href="/reference/kotlin/androidx/collection/LruCache.html#create(kotlin.Any)">key</a></code> exists in the cache when this method returns, the created value will be released with <code><a href="/reference/kotlin/androidx/collection/LruCache.html#entryRemoved(kotlin.Boolean,kotlin.Any,kotlin.Any,kotlin.Any)">entryRemoved</a></code> and discarded. This can occur when multiple threads request the same key at the same time (causing multiple values to be created), or when one thread calls <code><a href="/reference/kotlin/androidx/collection/LruCache.html#put(kotlin.Any,kotlin.Any)">put</a></code> while another is creating a value for the same key.</p>
+        </div>
+        <div class="api-item"><a name="entryRemoved(kotlin.Boolean, kotlin.Any, kotlin.Any, kotlin.Any)"></a><a name="entryRemoved-kotlin.Boolean-kotlin.Any-kotlin.Any-kotlin.Any-"></a><a name="entryremoved"></a>
+          <h3 class="api-name" id="entryRemoved(kotlin.Boolean,kotlin.Any,kotlin.Any,kotlin.Any)">entryRemoved</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">protected&nbsp;open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/collection/LruCache.html#entryRemoved(kotlin.Boolean,kotlin.Any,kotlin.Any,kotlin.Any)">entryRemoved</a>(evicted:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>,&nbsp;key:&nbsp;K,&nbsp;oldValue:&nbsp;V,&nbsp;newValue:&nbsp;V?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Called for entries that have been evicted or removed. This method is invoked when a value is evicted to make space, removed by a call to <code><a href="/reference/kotlin/androidx/collection/LruCache.html#remove(kotlin.Any)">remove</a></code>, or replaced by a call to <code><a href="/reference/kotlin/androidx/collection/LruCache.html#put(kotlin.Any,kotlin.Any)">put</a></code>. The default implementation does nothing.</p>
+          <p>The method is called without synchronization: other threads may access the cache while this method is executing.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>evicted:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                  <td>
+                    <p><code>true</code> if the entry is being removed to make space, <code>false</code> if the removal was caused by a <code><a href="/reference/kotlin/androidx/collection/LruCache.html#put(kotlin.Any,kotlin.Any)">put</a></code> or <code><a href="/reference/kotlin/androidx/collection/LruCache.html#remove(kotlin.Any)">remove</a></code>.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>newValue:&nbsp;V?</code></td>
+                  <td>
+                    <p>the new value for <code><a href="/reference/kotlin/androidx/collection/LruCache.html#entryRemoved(kotlin.Boolean,kotlin.Any,kotlin.Any,kotlin.Any)">key</a></code>, if it exists. If non-null, this removal was caused by a <code><a href="/reference/kotlin/androidx/collection/LruCache.html#put(kotlin.Any,kotlin.Any)">put</a></code>. Otherwise it was caused by an eviction or a <code><a href="/reference/kotlin/androidx/collection/LruCache.html#remove(kotlin.Any)">remove</a></code>.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="sizeOf(kotlin.Any, kotlin.Any)"></a><a name="sizeOf-kotlin.Any-kotlin.Any-"></a><a name="sizeof"></a>
+          <h3 class="api-name" id="sizeOf(kotlin.Any,kotlin.Any)">sizeOf</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">protected&nbsp;open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/collection/LruCache.html#sizeOf(kotlin.Any,kotlin.Any)">sizeOf</a>(key:&nbsp;K,&nbsp;value:&nbsp;V):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>Returns the size of the entry for <code><a href="/reference/kotlin/androidx/collection/LruCache.html#sizeOf(kotlin.Any,kotlin.Any)">key</a></code> and <code><a href="/reference/kotlin/androidx/collection/LruCache.html#sizeOf(kotlin.Any,kotlin.Any)">value</a></code> in user-defined units.  The default implementation returns 1 so that size is the number of entries and max size is the maximum number of entries.</p>
+          <p>An entry's size must not change while it is in the cache.</p>
+        </div>
+      </div>
+    </devsite-filter >
+  </body>
+</html>

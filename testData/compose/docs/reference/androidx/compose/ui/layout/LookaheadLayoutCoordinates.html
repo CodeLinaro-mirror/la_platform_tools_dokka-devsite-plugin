@@ -1,0 +1,183 @@
+<html devsite="true">
+  <head>
+    <title>LookaheadLayoutCoordinates</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/layout/LookaheadLayoutCoordinates.kt+class:androidx.compose.ui.layout.LookaheadLayoutCoordinates&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>LookaheadLayoutCoordinates</h1>
+    <p>
+      <pre>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public interface <a href="/reference/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a> extends <a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></pre>
+    </p>
+    <hr>
+    <p><code><a href="/reference/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code> interface holds layout coordinates from both the lookahead calculation and the post-lookahead layout pass.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html#localLookaheadPositionOf(androidx.compose.ui.layout.LookaheadLayoutCoordinates,androidx.compose.ui.geometry.Offset)">localLookaheadPositionOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a>&nbsp;sourceCoordinates,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;relativeToSource<br>)</code></div>
+              <p>Converts an <code><a href="/reference/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html#localLookaheadPositionOf(androidx.compose.ui.layout.LookaheadLayoutCoordinates,androidx.compose.ui.geometry.Offset)">relativeToSource</a></code> in <code><a href="/reference/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html#localLookaheadPositionOf(androidx.compose.ui.layout.LookaheadLayoutCoordinates,androidx.compose.ui.geometry.Offset)">sourceCoordinates</a></code> space into local coordinates.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">androidx.compose.ui.layout.LayoutCoordinates</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>abstract boolean</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#isAttached()">isAttached</a></code></div>
+                        <p>Returns false if the corresponding layout was detached from the hierarchy.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract <a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#parentCoordinates()">parentCoordinates</a></code></div>
+                        <p>The coordinates of the parent layout modifier or parent layout if there is no parent layout modifier, or <code>null</code> if there is no parent.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract <a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#parentLayoutCoordinates()">parentLayoutCoordinates</a></code></div>
+                        <p>The coordinates of the parent layout.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Set.html">Set</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a>&gt;</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#providedAlignmentLines()">providedAlignmentLines</a></code></div>
+                        <p>The alignment lines provided for this layout, not including inherited lines.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#size()">size</a></code></div>
+                        <p>The size of this layout in the local coordinates space.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">androidx.compose.ui.layout.LayoutCoordinates</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>abstract int</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#get(androidx.compose.ui.layout.AlignmentLine)">get</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a>&nbsp;alignmentLine)</code></div>
+                        <p>Returns the position in pixels of an <code><a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">alignment line</a></code>, or <code><a href="/reference/androidx/compose/ui/layout/AlignmentLine.Companion.html#Unspecified()">AlignmentLine.Unspecified</a></code> if the line is not provided.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#localBoundingBoxOf(androidx.compose.ui.layout.LayoutCoordinates,kotlin.Boolean)">localBoundingBoxOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>&nbsp;sourceCoordinates,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;clipBounds<br>)</code></div>
+                        <p>Returns the bounding box of <code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#localBoundingBoxOf(androidx.compose.ui.layout.LayoutCoordinates,kotlin.Boolean)">sourceCoordinates</a></code> in the local coordinates.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset)">localPositionOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>&nbsp;sourceCoordinates,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;relativeToSource<br>)</code></div>
+                        <p>Converts an <code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset)">relativeToSource</a></code> in <code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset)">sourceCoordinates</a></code> space into local coordinates.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#localToRoot(androidx.compose.ui.geometry.Offset)">localToRoot</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;relativeToLocal)</code></div>
+                        <p>Converts a local position within this layout into an offset from the root composable.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#localToWindow(androidx.compose.ui.geometry.Offset)">localToWindow</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;relativeToLocal)</code></div>
+                        <p>Converts <code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#localToWindow(androidx.compose.ui.geometry.Offset)">relativeToLocal</a></code> position within this layout into an <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> relative to the window's origin.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default void</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#transformFrom(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.graphics.Matrix)">transformFrom</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>&nbsp;sourceCoordinates,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Matrix.html">Matrix</a>&nbsp;matrix<br>)</code></div>
+                        <p>Modifies <code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#transformFrom(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.graphics.Matrix)">matrix</a></code> to be a transform to convert a coordinate in <code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#transformFrom(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.graphics.Matrix)">sourceCoordinates</a></code> to a coordinate in <code>this</code> <code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#windowToLocal(androidx.compose.ui.geometry.Offset)">windowToLocal</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;relativeToWindow)</code></div>
+                        <p>Converts <code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#windowToLocal(androidx.compose.ui.geometry.Offset)">relativeToWindow</a></code> relative to the window's origin into an <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> relative to this layout.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="localLookaheadPositionOf(androidx.compose.ui.layout.LookaheadLayoutCoordinates, androidx.compose.ui.geometry.Offset)"></a><a name="localLookaheadPositionOf-androidx.compose.ui.layout.LookaheadLayoutCoordinates-androidx.compose.ui.geometry.Offset-"></a><a name="locallookaheadpositionof"></a>
+        <h3 class="api-name" id="localLookaheadPositionOf(androidx.compose.ui.layout.LookaheadLayoutCoordinates,androidx.compose.ui.geometry.Offset)">localLookaheadPositionOf</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;<a href="/reference/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html#localLookaheadPositionOf(androidx.compose.ui.layout.LookaheadLayoutCoordinates,androidx.compose.ui.geometry.Offset)">localLookaheadPositionOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a>&nbsp;sourceCoordinates,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;relativeToSource<br>)</pre>
+        <p>Converts an <code><a href="/reference/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html#localLookaheadPositionOf(androidx.compose.ui.layout.LookaheadLayoutCoordinates,androidx.compose.ui.geometry.Offset)">relativeToSource</a></code> in <code><a href="/reference/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html#localLookaheadPositionOf(androidx.compose.ui.layout.LookaheadLayoutCoordinates,androidx.compose.ui.geometry.Offset)">sourceCoordinates</a></code> space into local coordinates. <code><a href="/reference/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html#localLookaheadPositionOf(androidx.compose.ui.layout.LookaheadLayoutCoordinates,androidx.compose.ui.geometry.Offset)">sourceCoordinates</a></code> may be any <code><a href="/reference/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code> that belong to the same compose layout hierarchy. Unlike <code><a href="/reference/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset)">localPositionOf</a></code>, <code><a href="/reference/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html#localLookaheadPositionOf(androidx.compose.ui.layout.LookaheadLayoutCoordinates,androidx.compose.ui.geometry.Offset)">localLookaheadPositionOf</a></code> uses the lookahead positions for coordinates calculation.</p>
+      </div>
+    </div>
+  </body>
+</html>

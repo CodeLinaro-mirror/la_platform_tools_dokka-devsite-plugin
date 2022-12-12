@@ -1,0 +1,221 @@
+<html devsite="true">
+  <head>
+    <title>SoftwareKeyboardController</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/platform/SoftwareKeyboardController.kt+class:androidx.compose.ui.platform.SoftwareKeyboardController&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>SoftwareKeyboardController</h1>
+    <p>
+      <pre>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>interface <a href="/reference/kotlin/androidx/compose/ui/platform/SoftwareKeyboardController.html">SoftwareKeyboardController</a></pre>
+    </p>
+    <hr>
+    <p>Provide software keyboard control.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/SoftwareKeyboardController.html#hide()">hide</a>()</code></div>
+              <p>Hide the software keyboard.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><span><del><a href="/reference/kotlin/androidx/compose/ui/platform/SoftwareKeyboardController.html#hideSoftwareKeyboard()">hideSoftwareKeyboard</a></del></span>()</code></div>
+              <p><strong>This function is deprecated.</strong> Use hide instead.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/SoftwareKeyboardController.html#show()">show</a>()</code></div>
+              <p>Request that the system show a software keyboard.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><span><del><a href="/reference/kotlin/androidx/compose/ui/platform/SoftwareKeyboardController.html#showSoftwareKeyboard()">showSoftwareKeyboard</a></del></span>()</code></div>
+              <p><strong>This function is deprecated.</strong> Use show instead.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="hide--"></a><a name="hide"></a>
+        <h3 class="api-name" id="hide()">hide</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/SoftwareKeyboardController.html#hide()">hide</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Hide the software keyboard.</p>
+        <p>This request is best effort, if the system cannot hide the software keyboard this call will silently be ignored.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+
+val keyboardController = LocalSoftwareKeyboardController.current
+
+// used to ensure a TextField is focused when showing keyboard
+val focusRequester = remember { FocusRequester() }
+var (text, setText) = remember {
+    mutableStateOf(&quot;Close keyboard on done ime action (blue ✔️)&quot;)
+}
+Column(Modifier.padding(16.dp)) {
+    BasicTextField(
+        text,
+        setText,
+        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+        keyboardActions = KeyboardActions(
+            onDone = { keyboardController?.hide() }
+        ),
+        modifier = Modifier
+            .focusRequester(focusRequester)
+            .fillMaxWidth()
+    )
+    Spacer(Modifier.height(16.dp))
+    Button(
+        onClick = {
+            focusRequester.requestFocus()
+            keyboardController?.show()
+        },
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Text(&quot;Show software keyboard.&quot;)
+    }
+}</pre>
+        <p>Calling this function is considered a side-effect and should not be called directly from recomposition.</p>
+      </div>
+      <div class="api-item"><a name="hideSoftwareKeyboard--"></a><a name="hidesoftwarekeyboard"></a>
+        <h3 class="api-name" id="hideSoftwareKeyboard()">hideSoftwareKeyboard</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<span><del><a href="/reference/kotlin/androidx/compose/ui/platform/SoftwareKeyboardController.html#hideSoftwareKeyboard()">hideSoftwareKeyboard</a></del></span>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <aside class="caution"><strong>This function is deprecated.</strong><br>Use hide instead.</aside>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/platform/SoftwareKeyboardController.html#hide()">hide</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="show--"></a><a name="show"></a>
+        <h3 class="api-name" id="show()">show</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/SoftwareKeyboardController.html#show()">show</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Request that the system show a software keyboard.</p>
+        <p>This request is best effort. If the system can currently show a software keyboard, it will be shown. However, there is no guarantee that the system will be able to show a software keyboard. If the system cannot show a software keyboard currently, this call will be silently ignored.</p>
+        <p>The software keyboard will never show if there is no composable that will accept text input, such as a <code><a href="/reference/kotlin/androidx/compose/foundation/text/package-summary.html#BasicTextField(kotlin.String,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.ui.text.input.VisualTransformation,kotlin.Function1,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Brush,kotlin.Function1)">TextField</a></code> when it is focused. You may find it useful to ensure focus when calling this function.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+
+val keyboardController = LocalSoftwareKeyboardController.current
+
+// used to ensure a TextField is focused when showing keyboard
+val focusRequester = remember { FocusRequester() }
+var (text, setText) = remember {
+    mutableStateOf(&quot;Close keyboard on done ime action (blue ✔️)&quot;)
+}
+Column(Modifier.padding(16.dp)) {
+    BasicTextField(
+        text,
+        setText,
+        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+        keyboardActions = KeyboardActions(
+            onDone = { keyboardController?.hide() }
+        ),
+        modifier = Modifier
+            .focusRequester(focusRequester)
+            .fillMaxWidth()
+    )
+    Spacer(Modifier.height(16.dp))
+    Button(
+        onClick = {
+            focusRequester.requestFocus()
+            keyboardController?.show()
+        },
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Text(&quot;Show software keyboard.&quot;)
+    }
+}</pre>
+        <p>You do not need to call this function unless you also call <code><a href="/reference/kotlin/androidx/compose/ui/platform/SoftwareKeyboardController.html#hide()">hide</a></code>, as the keyboard is automatically shown and hidden by focus events in the BasicTextField.</p>
+        <p>Calling this function is considered a side-effect and should not be called directly from recomposition.</p>
+      </div>
+      <div class="api-item"><a name="showSoftwareKeyboard--"></a><a name="showsoftwarekeyboard"></a>
+        <h3 class="api-name" id="showSoftwareKeyboard()">showSoftwareKeyboard</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<span><del><a href="/reference/kotlin/androidx/compose/ui/platform/SoftwareKeyboardController.html#showSoftwareKeyboard()">showSoftwareKeyboard</a></del></span>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <aside class="caution"><strong>This function is deprecated.</strong><br>Use show instead.</aside>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/platform/SoftwareKeyboardController.html#show()">show</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,173 @@
+<html devsite="true">
+  <head>
+    <title>MutableWindowInsets</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-layout/androidx/compose/foundation/layout/WindowInsets.kt+class:androidx.compose.foundation.layout.MutableWindowInsets&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>MutableWindowInsets</h1>
+    <p>
+      <pre>@<a href="/reference/kotlin/androidx/compose/foundation/layout/ExperimentalLayoutApi.html">ExperimentalLayoutApi</a><br>class <a href="/reference/kotlin/androidx/compose/foundation/layout/MutableWindowInsets.html">MutableWindowInsets</a> : <a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></pre>
+    </p>
+    <hr>
+    <p>A <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> whose values can change without changing the instance. This is useful to avoid recomposition when <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> can change.</p>
+    <pre class="prettyprint">
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.MutableWindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.exclude
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.onConsumedWindowInsetsChanged
+import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.remember
+
+class SampleActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        super.onCreate(savedInstanceState)
+        setContent {
+            val remainingInsets = remember { MutableWindowInsets() }
+            val safeContent = WindowInsets.safeContent
+            Box(
+                Modifier
+                    .navigationBarsPadding()
+                    .onConsumedWindowInsetsChanged { consumedWindowInsets -&gt;
+                        remainingInsets.insets = safeContent.exclude(consumedWindowInsets)
+                    }) {
+                // padding can be used without recomposition when insets change.
+                val padding = remainingInsets.asPaddingValues()
+                Box(Modifier.padding(padding))
+            }
+        }
+    }
+}</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/MutableWindowInsets.html#MutableWindowInsets(androidx.compose.foundation.layout.WindowInsets)">MutableWindowInsets</a>(initialInsets:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/MutableWindowInsets.html#getBottom(androidx.compose.ui.unit.Density)">getBottom</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>)</code></div>
+              <p>The space, in pixels, at the bottom of the window that the inset represents.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/MutableWindowInsets.html#getLeft(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection)">getLeft</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>,&nbsp;layoutDirection:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>)</code></div>
+              <p>The space, in pixels, at the left of the window that the inset represents.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/MutableWindowInsets.html#getRight(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection)">getRight</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>,&nbsp;layoutDirection:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>)</code></div>
+              <p>The space, in pixels, at the right of the window that the inset represents.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/MutableWindowInsets.html#getTop(androidx.compose.ui.unit.Density)">getTop</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>)</code></div>
+              <p>The space, in pixels, at the top of the window that the inset represents.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/MutableWindowInsets.html#insets()">insets</a></code></div>
+              <p>The <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> that are used for <code><a href="/reference/kotlin/androidx/compose/foundation/layout/MutableWindowInsets.html#getLeft(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection)">left</a></code>, <code><a href="/reference/kotlin/androidx/compose/foundation/layout/MutableWindowInsets.html#getTop(androidx.compose.ui.unit.Density)">top</a></code>, <code><a href="/reference/kotlin/androidx/compose/foundation/layout/MutableWindowInsets.html#getRight(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection)">right</a></code>, and <code><a href="/reference/kotlin/androidx/compose/foundation/layout/MutableWindowInsets.html#getBottom(androidx.compose.ui.unit.Density)">bottom</a></code> values.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="MutableWindowInsets-androidx.compose.foundation.layout.WindowInsets-"></a><a name="mutablewindowinsets"></a>
+        <h3 class="api-name" id="MutableWindowInsets(androidx.compose.foundation.layout.WindowInsets)">MutableWindowInsets</h3>
+        <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/foundation/layout/MutableWindowInsets.html#MutableWindowInsets(androidx.compose.foundation.layout.WindowInsets)">MutableWindowInsets</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;initialInsets:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a> = WindowInsets(0, 0, 0, 0)<br>)</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="getBottom-androidx.compose.ui.unit.Density-"></a><a name="getbottom"></a>
+        <h3 class="api-name" id="getBottom(androidx.compose.ui.unit.Density)">getBottom</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/MutableWindowInsets.html#getBottom(androidx.compose.ui.unit.Density)">getBottom</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>The space, in pixels, at the bottom of the window that the inset represents.</p>
+      </div>
+      <div class="api-item"><a name="getLeft(androidx.compose.ui.unit.Density, androidx.compose.ui.unit.LayoutDirection)"></a><a name="getLeft-androidx.compose.ui.unit.Density-androidx.compose.ui.unit.LayoutDirection-"></a><a name="getleft"></a>
+        <h3 class="api-name" id="getLeft(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection)">getLeft</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/MutableWindowInsets.html#getLeft(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection)">getLeft</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>,&nbsp;layoutDirection:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>The space, in pixels, at the left of the window that the inset represents.</p>
+      </div>
+      <div class="api-item"><a name="getRight(androidx.compose.ui.unit.Density, androidx.compose.ui.unit.LayoutDirection)"></a><a name="getRight-androidx.compose.ui.unit.Density-androidx.compose.ui.unit.LayoutDirection-"></a><a name="getright"></a>
+        <h3 class="api-name" id="getRight(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection)">getRight</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/MutableWindowInsets.html#getRight(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection)">getRight</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>,&nbsp;layoutDirection:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>The space, in pixels, at the right of the window that the inset represents.</p>
+      </div>
+      <div class="api-item"><a name="getTop-androidx.compose.ui.unit.Density-"></a><a name="gettop"></a>
+        <h3 class="api-name" id="getTop(androidx.compose.ui.unit.Density)">getTop</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/MutableWindowInsets.html#getTop(androidx.compose.ui.unit.Density)">getTop</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>The space, in pixels, at the top of the window that the inset represents.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getInsets()"></a><a name="setInsets()"></a><a name="getInsets--"></a><a name="setInsets--"></a>
+        <h3 class="api-name" id="insets()">insets</h3>
+        <pre class="api-signature no-pretty-print">var&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/MutableWindowInsets.html#insets()">insets</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></pre>
+        <p>The <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> that are used for <code><a href="/reference/kotlin/androidx/compose/foundation/layout/MutableWindowInsets.html#getLeft(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection)">left</a></code>, <code><a href="/reference/kotlin/androidx/compose/foundation/layout/MutableWindowInsets.html#getTop(androidx.compose.ui.unit.Density)">top</a></code>, <code><a href="/reference/kotlin/androidx/compose/foundation/layout/MutableWindowInsets.html#getRight(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection)">right</a></code>, and <code><a href="/reference/kotlin/androidx/compose/foundation/layout/MutableWindowInsets.html#getBottom(androidx.compose.ui.unit.Density)">bottom</a></code> values.</p>
+      </div>
+    </div>
+  </body>
+</html>

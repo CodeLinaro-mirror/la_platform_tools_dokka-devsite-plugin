@@ -1,0 +1,182 @@
+<html devsite="true">
+  <head>
+    <title>BaselineShift</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-text/androidx/compose/ui/text/style/BaselineShift.kt+class:androidx.compose.ui.text.style.BaselineShift&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>BaselineShift</h1>
+    <p>
+      <pre>value class <a href="/reference/kotlin/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a></pre>
+    </p>
+    <hr>
+    <p>The amount by which the text is shifted up or down from current the baseline.</p>
+    <pre class="prettyprint">
+import androidx.compose.material.Text
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
+
+Text(
+    fontSize = 20.sp,
+    text = buildAnnotatedString {
+        append(text = &quot;Hello&quot;)
+        withStyle(SpanStyle(baselineShift = BaselineShift.Superscript, fontSize = 16.sp)) {
+            append(&quot;superscript&quot;)
+            withStyle(SpanStyle(baselineShift = BaselineShift.Subscript)) {
+                append(&quot;subscript&quot;)
+            }
+        }
+    }
+)</pre>
+    <pre class="prettyprint">
+import androidx.compose.material.Text
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
+
+val annotatedString = buildAnnotatedString {
+    append(&quot;Text &quot;)
+    withStyle(SpanStyle(baselineShift = BaselineShift.Superscript)) {
+        append(&quot;Demo&quot;)
+    }
+}
+Text(text = annotatedString)</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public companion properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/style/BaselineShift.Companion.html#None()">None</a></code></div>
+              <p>Constant for no baseline shift.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/style/BaselineShift.Companion.html#Subscript()">Subscript</a></code></div>
+              <p>Default baseline shift for subscript</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/style/BaselineShift.Companion.html#Superscript()">Superscript</a></code></div>
+              <p>Default baseline shift for superscript.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/style/BaselineShift.html#BaselineShift(kotlin.Float)">BaselineShift</a>(multiplier:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/style/BaselineShift.html#multiplier()">multiplier</a></code></div>
+              <p>shift the baseline by multiplier * (baseline - ascent)</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public companion properties</h2>
+      <div class="api-item"><a name="getNone()"></a><a name="setNone()"></a><a name="getNone--"></a><a name="setNone--"></a>
+        <h3 class="api-name" id="None()">None</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/BaselineShift.Companion.html#None()">None</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a></pre>
+        <p>Constant for no baseline shift.</p>
+      </div>
+      <div class="api-item"><a name="getSubscript()"></a><a name="setSubscript()"></a><a name="getSubscript--"></a><a name="setSubscript--"></a>
+        <h3 class="api-name" id="Subscript()">Subscript</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/BaselineShift.Companion.html#Subscript()">Subscript</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a></pre>
+        <p>Default baseline shift for subscript</p>
+      </div>
+      <div class="api-item"><a name="getSuperscript()"></a><a name="setSuperscript()"></a><a name="getSuperscript--"></a><a name="setSuperscript--"></a>
+        <h3 class="api-name" id="Superscript()">Superscript</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/BaselineShift.Companion.html#Superscript()">Superscript</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/BaselineShift.html">BaselineShift</a></pre>
+        <p>Default baseline shift for superscript.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="BaselineShift-kotlin.Float-"></a><a name="baselineshift"></a>
+        <h3 class="api-name" id="BaselineShift(kotlin.Float)">BaselineShift</h3>
+        <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/ui/text/style/BaselineShift.html#BaselineShift(kotlin.Float)">BaselineShift</a>(multiplier:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>multiplier:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>shift the baseline by multiplier * (baseline - ascent)</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getMultiplier()"></a><a name="setMultiplier()"></a><a name="getMultiplier--"></a><a name="setMultiplier--"></a>
+        <h3 class="api-name" id="multiplier()">multiplier</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/BaselineShift.html#multiplier()">multiplier</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>shift the baseline by multiplier * (baseline - ascent)</p>
+      </div>
+    </div>
+  </body>
+</html>

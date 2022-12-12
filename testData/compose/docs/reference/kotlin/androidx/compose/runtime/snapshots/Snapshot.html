@@ -5,7 +5,9 @@
 {% include "_shared/_reference-head-tags.html" %}
   </head>
   <body>
-    <div id="metadata-info-block"></div>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/runtime/snapshots/Snapshot.kt+class:androidx.compose.runtime.snapshots.Snapshot&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
     <h1>Snapshot</h1>
     <p>
       <pre>sealed class <a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></pre>
@@ -153,6 +155,13 @@
               <p>Take a <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html">MutableSnapshot</a></code> and run <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withMutableSnapshot(kotlin.Function0)">block</a></code> within it.</p>
             </td>
           </tr>
+          <tr>
+            <td><code>inline T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withoutReadObservation(kotlin.Function0)">withoutReadObservation</a>(block:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> () <span style="white-space: nowrap;">-&gt;</span> T)</code></div>
+              <p>Passed <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withoutReadObservation(kotlin.Function0)">block</a></code> will be run with all the currently set snapshot read observers disabled.</p>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -238,6 +247,20 @@
               <p>Take a snapshot of the state values in this snapshot.</p>
             </td>
           </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>?</code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/ExperimentalComposeApi.html">ExperimentalComposeApi</a><br><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#unsafeEnter()">unsafeEnter</a>()</code></div>
+              <p>Enter the snapshot, returning the previous <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code> for leaving this snapshot later using <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#unsafeLeave(androidx.compose.runtime.snapshots.Snapshot)">unsafeLeave</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/ExperimentalComposeApi.html">ExperimentalComposeApi</a><br><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#unsafeLeave(androidx.compose.runtime.snapshots.Snapshot)">unsafeLeave</a>(oldSnapshot:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>?)</code></div>
+              <p>Leave the snapshot, restoring the <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#unsafeLeave(androidx.compose.runtime.snapshots.Snapshot)">oldSnapshot</a></code> before returning.</p>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -272,6 +295,28 @@
             <td>
               <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#root()">root</a></code></div>
               <p>The root snapshot for this snapshot.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotContextElement.html">SnapshotContextElement</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/ExperimentalComposeApi.html">ExperimentalComposeApi</a><br><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>.<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#(androidx.compose.runtime.snapshots.Snapshot).asContextElement()">asContextElement</a>()</code></div>
+              <p>Return a <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotContextElement.html">SnapshotContextElement</a></code> that will <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">enter</a></code> this <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code> whenever the associated coroutine is resumed and leave this snapshot when it suspends.</p>
             </td>
           </tr>
         </tbody>
@@ -542,6 +587,11 @@
         <p>Prior to returning, any changes made to snapshot state (e.g. state holders returned by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#mutableStateOf(kotlin.Any,androidx.compose.runtime.SnapshotMutationPolicy)">androidx.compose.runtime.mutableStateOf</a></code> are not visible to other threads. When <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withMutableSnapshot(kotlin.Function0)">withMutableSnapshot</a></code> returns successfully those changes will be made visible to other threads  and any snapshot observers (e.g. <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#snapshotFlow(kotlin.Function0)">androidx.compose.runtime.snapshotFlow</a></code>) will be notified of changes.</p>
         <p><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withMutableSnapshot(kotlin.Function0)">block</a></code> must not suspend if <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withMutableSnapshot(kotlin.Function0)">withMutableSnapshot</a></code> is called from a suspend function.</p>
       </div>
+      <div class="api-item"><a name="withoutReadObservation-kotlin.Function0-"></a><a name="withoutreadobservation"></a>
+        <h3 class="api-name" id="withoutReadObservation(kotlin.Function0)">withoutReadObservation</h3>
+        <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withoutReadObservation(kotlin.Function0)">withoutReadObservation</a>(block:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> () <span style="white-space: nowrap;">-&gt;</span> T):&nbsp;T</pre>
+        <p>Passed <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withoutReadObservation(kotlin.Function0)">block</a></code> will be run with all the currently set snapshot read observers disabled.</p>
+      </div>
     </div>
     <div class="list">
       <h2>Public companion properties</h2>
@@ -569,7 +619,7 @@
         <h3 class="api-name" id="enter(kotlin.Function0)">enter</h3>
         <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">enter</a>(block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T):&nbsp;T</pre>
         <p>Enter the snapshot. In <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">block</a></code> all state objects have the value associated with this snapshot. The value of <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#currentSnapshot()">currentSnapshot</a></code> will be this snapshot until this <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">block</a></code> returns or a nested call to <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">enter</a></code> is called. When <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">block</a></code> returns, the previous current snapshot is restored if there was one.</p>
-        <p>All changes to state object inside <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">block</a></code> are isolated to this snapshot and are not visible to other snapshot or as global state. If this is a <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#readOnly()">readOnly</a></code> snapshot, any changes to state objects will throw an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code>.</p>
+        <p>All changes to state objects inside <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">block</a></code> are isolated to this snapshot and are not visible to other snapshot or as global state. If this is a <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#readOnly()">readOnly</a></code> snapshot, any changes to state objects will throw an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code>.</p>
         <p>For a <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html">MutableSnapshot</a></code>, changes made to a snapshot inside <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">block</a></code> can be applied atomically to the global state (or to its parent snapshot if it is a nested snapshot) by calling <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">MutableSnapshot.apply</a></code>.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -609,6 +659,19 @@
         <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#takeNestedSnapshot(kotlin.Function1)">takeNestedSnapshot</a>(readObserver:&nbsp;((<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)? = null):&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></pre>
         <p>Take a snapshot of the state values in this snapshot. The resulting <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code> is read-only. All nested snapshots need to be disposed by calling <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#dispose()">dispose</a></code> before resources associated with this snapshot can be collected. Nested snapshots are still valid after the parent has been disposed.</p>
       </div>
+      <div class="api-item"><a name="unsafeEnter--"></a><a name="unsafeenter"></a>
+        <h3 class="api-name" id="unsafeEnter()">unsafeEnter</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/ExperimentalComposeApi.html">ExperimentalComposeApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#unsafeEnter()">unsafeEnter</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>?</pre>
+        <p>Enter the snapshot, returning the previous <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code> for leaving this snapshot later using <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#unsafeLeave(androidx.compose.runtime.snapshots.Snapshot)">unsafeLeave</a></code>. Prefer <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">enter</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#(androidx.compose.runtime.snapshots.Snapshot).asContextElement()">asContextElement</a></code> instead of using <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#unsafeEnter()">unsafeEnter</a></code> directly to prevent mismatched <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#unsafeEnter()">unsafeEnter</a></code>/<code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#unsafeLeave(androidx.compose.runtime.snapshots.Snapshot)">unsafeLeave</a></code> calls.</p>
+        <p>After returning all state objects have the value associated with this snapshot. The value of <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#currentSnapshot()">currentSnapshot</a></code> will be this snapshot until <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#unsafeLeave(androidx.compose.runtime.snapshots.Snapshot)">unsafeLeave</a></code> is called with the returned <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code> or another call to <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#unsafeEnter()">unsafeEnter</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">enter</a></code> is made.</p>
+        <p>All changes to state objects until another snapshot is entered or this snapshot is left are isolated to this snapshot and are not visible to other snapshot or as global state. If this is a <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#readOnly()">readOnly</a></code> snapshot, any changes to state objects will throw an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code>.</p>
+        <p>For a <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html">MutableSnapshot</a></code>, changes made to a snapshot can be applied atomically to the global state (or to its parent snapshot if it is a nested snapshot) by calling <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">MutableSnapshot.apply</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="unsafeLeave-androidx.compose.runtime.snapshots.Snapshot-"></a><a name="unsafeleave"></a>
+        <h3 class="api-name" id="unsafeLeave(androidx.compose.runtime.snapshots.Snapshot)">unsafeLeave</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/ExperimentalComposeApi.html">ExperimentalComposeApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#unsafeLeave(androidx.compose.runtime.snapshots.Snapshot)">unsafeLeave</a>(oldSnapshot:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Leave the snapshot, restoring the <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#unsafeLeave(androidx.compose.runtime.snapshots.Snapshot)">oldSnapshot</a></code> before returning. See <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#unsafeEnter()">unsafeEnter</a></code>.</p>
+      </div>
     </div>
     <div class="list">
       <h2>Public properties</h2>
@@ -626,6 +689,31 @@
         <h3 class="api-name" id="root()">root</h3>
         <pre class="api-signature no-pretty-print">abstract&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#root()">root</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></pre>
         <p>The root snapshot for this snapshot. For non-nested snapshots this is always <code>this</code>. For nested snapshot it is the parent's <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#root()">root</a></code>.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.compose.runtime.snapshots.Snapshot-.asContextElement--"></a><a name="ascontextelement"></a>
+        <h3 class="api-name" id="(androidx.compose.runtime.snapshots.Snapshot).asContextElement()">asContextElement</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/ExperimentalComposeApi.html">ExperimentalComposeApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>.<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#(androidx.compose.runtime.snapshots.Snapshot).asContextElement()">asContextElement</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotContextElement.html">SnapshotContextElement</a></pre>
+        <p>Return a <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotContextElement.html">SnapshotContextElement</a></code> that will <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">enter</a></code> this <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code> whenever the associated coroutine is resumed and leave this snapshot when it suspends. The snapshot still must be <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#dispose()">disposed</a></code> separately when it will no longer be used.</p>
+        <pre class="prettyprint">
+import androidx.compose.runtime.snapshots.asContextElement
+
+runBlocking {
+    val snapshot = Snapshot.takeSnapshot()
+    try {
+        withContext(snapshot.asContextElement()) {
+            // Data observed by separately reading stateA and stateB are consistent with
+            // the snapshot context element across suspensions
+            doSomethingSuspending(someObject.stateA)
+            doSomethingSuspending(someObject.stateB)
+        }
+    } finally {
+        // Snapshot must be disposed after it will not be used again
+        snapshot.dispose()
+    }
+}</pre>
       </div>
     </div>
   </body>

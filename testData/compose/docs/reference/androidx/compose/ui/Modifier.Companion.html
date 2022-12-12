@@ -1,0 +1,132 @@
+<html devsite="true">
+  <head>
+    <title>Modifier.Companion</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/Modifier.kt+class:androidx.compose.ui.Modifier.Companion&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>Modifier.Companion</h1>
+    <p>
+      <pre>public static class <a href="/reference/androidx/compose/ui/Modifier.Companion.html">Modifier.Companion</a> implements <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+    </p>
+    <hr>
+    <p>The companion object <code>Modifier</code> is the empty, default, or starter <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code> that contains no <code><a href="/reference/androidx/compose/ui/Modifier.Element.html">elements</a></code>. Use it to create a new <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code> using modifier extension factory functions:</p>
+    <pre class="prettyprint">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Text
+
+Text(
+    &quot;Hello, World!&quot;,
+    Modifier.padding(16.dp) // Outer padding; outside background
+        .background(color = Color.Green) // Solid element background color
+        .padding(16.dp) // Inner padding; inside background, around text
+)</pre>
+    <p>or as the default value for <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code> parameters:</p>
+    <pre class="prettyprint">
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+
+@Composable
+fun PaddedColumn(modifier: Modifier = Modifier) {
+    Column(modifier.padding(10.dp)) {
+        // ...
+    }
+}</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/Modifier.Companion.html#all(kotlin.Function1)">all</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;predicate<br>)</code></div>
+              <p>Returns <code>true</code> if <code><a href="/reference/androidx/compose/ui/Modifier.Companion.html#all(kotlin.Function1)">predicate</a></code> returns true for all <code><a href="/reference/androidx/compose/ui/Modifier.Element.html">Element</a></code>s in this <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code> or if this <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code> contains no <code><a href="/reference/androidx/compose/ui/Modifier.Element.html">Element</a></code>s.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/Modifier.Companion.html#any(kotlin.Function1)">any</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;predicate<br>)</code></div>
+              <p>Returns <code>true</code> if <code><a href="/reference/androidx/compose/ui/Modifier.Companion.html#any(kotlin.Function1)">predicate</a></code> returns true for any <code><a href="/reference/androidx/compose/ui/Modifier.Element.html">Element</a></code> in this <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R</code></td>
+            <td>
+              <div><code>&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/Modifier.Companion.html#foldIn(kotlin.Any,kotlin.Function2)">foldIn</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;initial,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;operation<br>)</code></div>
+              <p>Accumulates a value starting with <code><a href="/reference/androidx/compose/ui/Modifier.Companion.html#foldIn(kotlin.Any,kotlin.Function2)">initial</a></code> and applying <code><a href="/reference/androidx/compose/ui/Modifier.Companion.html#foldIn(kotlin.Any,kotlin.Function2)">operation</a></code> to the current value and each element from outside in.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R</code></td>
+            <td>
+              <div><code>&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/Modifier.Companion.html#foldOut(kotlin.Any,kotlin.Function2)">foldOut</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;initial,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;operation<br>)</code></div>
+              <p>Accumulates a value starting with <code><a href="/reference/androidx/compose/ui/Modifier.Companion.html#foldOut(kotlin.Any,kotlin.Function2)">initial</a></code> and applying <code><a href="/reference/androidx/compose/ui/Modifier.Companion.html#foldOut(kotlin.Any,kotlin.Function2)">operation</a></code> to the current value and each element from inside out.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;infix @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/Modifier.Companion.html#then(androidx.compose.ui.Modifier)">then</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;other)</code></div>
+              <p>Concatenates this modifier with another.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/Modifier.Companion.html#toString()">toString</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="all-kotlin.Function1-"></a><a name="all"></a>
+        <h3 class="api-name" id="all(kotlin.Function1)">all</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Companion.html#all(kotlin.Function1)">all</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;predicate<br>)</pre>
+        <p>Returns <code>true</code> if <code><a href="/reference/androidx/compose/ui/Modifier.Companion.html#all(kotlin.Function1)">predicate</a></code> returns true for all <code><a href="/reference/androidx/compose/ui/Modifier.Element.html">Element</a></code>s in this <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code> or if this <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code> contains no <code><a href="/reference/androidx/compose/ui/Modifier.Element.html">Element</a></code>s.</p>
+      </div>
+      <div class="api-item"><a name="any-kotlin.Function1-"></a><a name="any"></a>
+        <h3 class="api-name" id="any(kotlin.Function1)">any</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Companion.html#any(kotlin.Function1)">any</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;predicate<br>)</pre>
+        <p>Returns <code>true</code> if <code><a href="/reference/androidx/compose/ui/Modifier.Companion.html#any(kotlin.Function1)">predicate</a></code> returns true for any <code><a href="/reference/androidx/compose/ui/Modifier.Element.html">Element</a></code> in this <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="foldIn(kotlin.Any, kotlin.Function2)"></a><a name="foldIn-kotlin.Any-kotlin.Function2-"></a><a name="foldin"></a>
+        <h3 class="api-name" id="foldIn(kotlin.Any,kotlin.Function2)">foldIn</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/Modifier.Companion.html#foldIn(kotlin.Any,kotlin.Function2)">foldIn</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;initial,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;operation<br>)</pre>
+        <p>Accumulates a value starting with <code><a href="/reference/androidx/compose/ui/Modifier.Companion.html#foldIn(kotlin.Any,kotlin.Function2)">initial</a></code> and applying <code><a href="/reference/androidx/compose/ui/Modifier.Companion.html#foldIn(kotlin.Any,kotlin.Function2)">operation</a></code> to the current value and each element from outside in.</p>
+        <p>Elements wrap one another in a chain from left to right; an <code><a href="/reference/androidx/compose/ui/Modifier.Element.html">Element</a></code> that appears to the left of another in a <code>+</code> expression or in <code><a href="/reference/androidx/compose/ui/Modifier.Companion.html#foldIn(kotlin.Any,kotlin.Function2)">operation</a></code>'s parameter order affects all of the elements that appear after it. <code><a href="/reference/androidx/compose/ui/Modifier.Companion.html#foldIn(kotlin.Any,kotlin.Function2)">foldIn</a></code> may be used to accumulate a value starting from the parent or head of the modifier chain to the final wrapped child.</p>
+      </div>
+      <div class="api-item"><a name="foldOut(kotlin.Any, kotlin.Function2)"></a><a name="foldOut-kotlin.Any-kotlin.Function2-"></a><a name="foldout"></a>
+        <h3 class="api-name" id="foldOut(kotlin.Any,kotlin.Function2)">foldOut</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/Modifier.Companion.html#foldOut(kotlin.Any,kotlin.Function2)">foldOut</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;initial,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;operation<br>)</pre>
+        <p>Accumulates a value starting with <code><a href="/reference/androidx/compose/ui/Modifier.Companion.html#foldOut(kotlin.Any,kotlin.Function2)">initial</a></code> and applying <code><a href="/reference/androidx/compose/ui/Modifier.Companion.html#foldOut(kotlin.Any,kotlin.Function2)">operation</a></code> to the current value and each element from inside out.</p>
+        <p>Elements wrap one another in a chain from left to right; an <code><a href="/reference/androidx/compose/ui/Modifier.Element.html">Element</a></code> that appears to the left of another in a <code>+</code> expression or in <code><a href="/reference/androidx/compose/ui/Modifier.Companion.html#foldOut(kotlin.Any,kotlin.Function2)">operation</a></code>'s parameter order affects all of the elements that appear after it. <code><a href="/reference/androidx/compose/ui/Modifier.Companion.html#foldOut(kotlin.Any,kotlin.Function2)">foldOut</a></code> may be used to accumulate a value starting from the child or tail of the modifier chain up to the parent or head of the chain.</p>
+      </div>
+      <div class="api-item"><a name="then-androidx.compose.ui.Modifier-"></a><a name="then"></a>
+        <h3 class="api-name" id="then(androidx.compose.ui.Modifier)">then</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;infix&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Companion.html#then(androidx.compose.ui.Modifier)">then</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;other)</pre>
+        <p>Concatenates this modifier with another.</p>
+        <p>Returns a <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code> representing this modifier followed by <code><a href="/reference/androidx/compose/ui/Modifier.Companion.html#then(androidx.compose.ui.Modifier)">other</a></code> in sequence.</p>
+      </div>
+      <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+        <h3 class="api-name" id="toString()">toString</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Companion.html#toString()">toString</a>()</pre>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,701 @@
+<html devsite="true">
+  <head>
+    <title>FocusOrder</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/focus/FocusOrderModifier.kt+class:androidx.compose.ui.focus.FocusOrder&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>FocusOrder</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/focus/FocusOrder.html">FocusOrder</a></pre>
+    </p>
+    <hr>
+    <aside class="caution"><strong>This class is deprecated.</strong><br>Use FocusProperties instead</aside>
+    <p>Specifies custom focus destinations that are used instead of the default focus traversal order.</p>
+    <pre class="prettyprint">
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.runtime.remember
+import androidx.compose.ui.focus.focusProperties
+import androidx.compose.ui.focus.focusRequester
+
+Column(Modifier.fillMaxSize(), Arrangement.SpaceEvenly) {
+    val (item1, item2, item3, item4) = remember { FocusRequester.createRefs() }
+    Row(Modifier.fillMaxWidth(), Arrangement.SpaceEvenly) {
+        Box(
+            Modifier
+                .focusRequester(item1)
+                .focusProperties {
+                    next = item2
+                    right = item2
+                    down = item3
+                    previous = item4
+                }
+                .focusable()
+        )
+        Box(
+            Modifier
+                .focusRequester(item2)
+                .focusProperties {
+                    next = item3
+                    right = item1
+                    down = item4
+                    previous = item1
+                }
+                .focusable()
+        )
+    }
+    Row(Modifier.fillMaxWidth(), Arrangement.SpaceEvenly) {
+        Box(
+            Modifier
+                .focusRequester(item3)
+                .focusProperties {
+                    next = item4
+                    right = item4
+                    up = item1
+                    previous = item2
+                }
+        )
+        Box(
+            Modifier
+                .focusRequester(item4)
+                .focusProperties {
+                    next = item1
+                    left = item3
+                    up = item2
+                    previous = item3
+                }
+        )
+    }
+}</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/focus/FocusOrder.html#down()">down</a></code></div>
+              <p>A custom item to be used when the user moves focus &quot;down&quot;.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/focus/FocusOrder.html#end()">end</a></code></div>
+              <p>A custom item to be used when the user requests a focus moves to the &quot;right&quot; in LTR mode and &quot;left&quot; in RTL mode.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/focus/FocusOrder.html#left()">left</a></code></div>
+              <p>A custom item to be used when the user requests a focus moves to the &quot;left&quot; item.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/focus/FocusOrder.html#next()">next</a></code></div>
+              <p>A custom item to be used when the user requests a focus moves to the &quot;next&quot; item.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/focus/FocusOrder.html#previous()">previous</a></code></div>
+              <p>A custom item to be used when the user requests a focus moves to the &quot;previous&quot; item.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/focus/FocusOrder.html#right()">right</a></code></div>
+              <p>A custom item to be used when the user requests a focus moves to the &quot;right&quot; item.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/focus/FocusOrder.html#start()">start</a></code></div>
+              <p>A custom item to be used when the user requests a focus moves to the &quot;left&quot; in LTR mode and &quot;right&quot; in RTL mode.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/focus/FocusOrder.html#up()">up</a></code></div>
+              <p>A custom item to be used when the user moves focus &quot;up&quot;.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/focus/FocusOrder.html#FocusOrder()">FocusOrder</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getDown()"></a><a name="setDown()"></a><a name="getDown--"></a><a name="setDown--"></a>
+        <h3 class="api-name" id="down()">down</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a>&nbsp;<a href="/reference/androidx/compose/ui/focus/FocusOrder.html#down()">down</a></pre>
+        <p>A custom item to be used when the user moves focus &quot;down&quot;.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.runtime.remember
+import androidx.compose.ui.focus.focusProperties
+import androidx.compose.ui.focus.focusRequester
+
+Column(Modifier.fillMaxSize(), Arrangement.SpaceEvenly) {
+    val (item1, item2, item3, item4) = remember { FocusRequester.createRefs() }
+    Row(Modifier.fillMaxWidth(), Arrangement.SpaceEvenly) {
+        Box(
+            Modifier
+                .focusRequester(item1)
+                .focusProperties {
+                    next = item2
+                    right = item2
+                    down = item3
+                    previous = item4
+                }
+                .focusable()
+        )
+        Box(
+            Modifier
+                .focusRequester(item2)
+                .focusProperties {
+                    next = item3
+                    right = item1
+                    down = item4
+                    previous = item1
+                }
+                .focusable()
+        )
+    }
+    Row(Modifier.fillMaxWidth(), Arrangement.SpaceEvenly) {
+        Box(
+            Modifier
+                .focusRequester(item3)
+                .focusProperties {
+                    next = item4
+                    right = item4
+                    up = item1
+                    previous = item2
+                }
+        )
+        Box(
+            Modifier
+                .focusRequester(item4)
+                .focusProperties {
+                    next = item1
+                    left = item3
+                    up = item2
+                    previous = item3
+                }
+        )
+    }
+}</pre>
+      </div>
+      <div class="api-item"><a name="getEnd()"></a><a name="setEnd()"></a><a name="getEnd--"></a><a name="setEnd--"></a>
+        <h3 class="api-name" id="end()">end</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a>&nbsp;<a href="/reference/androidx/compose/ui/focus/FocusOrder.html#end()">end</a></pre>
+        <p>A custom item to be used when the user requests a focus moves to the &quot;right&quot; in LTR mode and &quot;left&quot; in RTL mode.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.runtime.remember
+import androidx.compose.ui.focus.focusProperties
+import androidx.compose.ui.focus.focusRequester
+
+Column(Modifier.fillMaxSize(), Arrangement.SpaceEvenly) {
+    val (item1, item2, item3, item4) = remember { FocusRequester.createRefs() }
+    Row(Modifier.fillMaxWidth(), Arrangement.SpaceEvenly) {
+        Box(
+            Modifier
+                .focusRequester(item1)
+                .focusProperties {
+                    next = item2
+                    right = item2
+                    down = item3
+                    previous = item4
+                }
+                .focusable()
+        )
+        Box(
+            Modifier
+                .focusRequester(item2)
+                .focusProperties {
+                    next = item3
+                    right = item1
+                    down = item4
+                    previous = item1
+                }
+                .focusable()
+        )
+    }
+    Row(Modifier.fillMaxWidth(), Arrangement.SpaceEvenly) {
+        Box(
+            Modifier
+                .focusRequester(item3)
+                .focusProperties {
+                    next = item4
+                    right = item4
+                    up = item1
+                    previous = item2
+                }
+        )
+        Box(
+            Modifier
+                .focusRequester(item4)
+                .focusProperties {
+                    next = item1
+                    left = item3
+                    up = item2
+                    previous = item3
+                }
+        )
+    }
+}</pre>
+      </div>
+      <div class="api-item"><a name="getLeft()"></a><a name="setLeft()"></a><a name="getLeft--"></a><a name="setLeft--"></a>
+        <h3 class="api-name" id="left()">left</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a>&nbsp;<a href="/reference/androidx/compose/ui/focus/FocusOrder.html#left()">left</a></pre>
+        <p>A custom item to be used when the user requests a focus moves to the &quot;left&quot; item.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.runtime.remember
+import androidx.compose.ui.focus.focusProperties
+import androidx.compose.ui.focus.focusRequester
+
+Column(Modifier.fillMaxSize(), Arrangement.SpaceEvenly) {
+    val (item1, item2, item3, item4) = remember { FocusRequester.createRefs() }
+    Row(Modifier.fillMaxWidth(), Arrangement.SpaceEvenly) {
+        Box(
+            Modifier
+                .focusRequester(item1)
+                .focusProperties {
+                    next = item2
+                    right = item2
+                    down = item3
+                    previous = item4
+                }
+                .focusable()
+        )
+        Box(
+            Modifier
+                .focusRequester(item2)
+                .focusProperties {
+                    next = item3
+                    right = item1
+                    down = item4
+                    previous = item1
+                }
+                .focusable()
+        )
+    }
+    Row(Modifier.fillMaxWidth(), Arrangement.SpaceEvenly) {
+        Box(
+            Modifier
+                .focusRequester(item3)
+                .focusProperties {
+                    next = item4
+                    right = item4
+                    up = item1
+                    previous = item2
+                }
+        )
+        Box(
+            Modifier
+                .focusRequester(item4)
+                .focusProperties {
+                    next = item1
+                    left = item3
+                    up = item2
+                    previous = item3
+                }
+        )
+    }
+}</pre>
+      </div>
+      <div class="api-item"><a name="getNext()"></a><a name="setNext()"></a><a name="getNext--"></a><a name="setNext--"></a>
+        <h3 class="api-name" id="next()">next</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a>&nbsp;<a href="/reference/androidx/compose/ui/focus/FocusOrder.html#next()">next</a></pre>
+        <p>A custom item to be used when the user requests a focus moves to the &quot;next&quot; item.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.runtime.remember
+import androidx.compose.ui.focus.focusProperties
+import androidx.compose.ui.focus.focusRequester
+
+Column(Modifier.fillMaxSize(), Arrangement.SpaceEvenly) {
+    val (item1, item2, item3, item4) = remember { FocusRequester.createRefs() }
+    Row(Modifier.fillMaxWidth(), Arrangement.SpaceEvenly) {
+        Box(
+            Modifier
+                .focusRequester(item1)
+                .focusProperties {
+                    next = item2
+                    right = item2
+                    down = item3
+                    previous = item4
+                }
+                .focusable()
+        )
+        Box(
+            Modifier
+                .focusRequester(item2)
+                .focusProperties {
+                    next = item3
+                    right = item1
+                    down = item4
+                    previous = item1
+                }
+                .focusable()
+        )
+    }
+    Row(Modifier.fillMaxWidth(), Arrangement.SpaceEvenly) {
+        Box(
+            Modifier
+                .focusRequester(item3)
+                .focusProperties {
+                    next = item4
+                    right = item4
+                    up = item1
+                    previous = item2
+                }
+        )
+        Box(
+            Modifier
+                .focusRequester(item4)
+                .focusProperties {
+                    next = item1
+                    left = item3
+                    up = item2
+                    previous = item3
+                }
+        )
+    }
+}</pre>
+      </div>
+      <div class="api-item"><a name="getPrevious()"></a><a name="setPrevious()"></a><a name="getPrevious--"></a><a name="setPrevious--"></a>
+        <h3 class="api-name" id="previous()">previous</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a>&nbsp;<a href="/reference/androidx/compose/ui/focus/FocusOrder.html#previous()">previous</a></pre>
+        <p>A custom item to be used when the user requests a focus moves to the &quot;previous&quot; item.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.runtime.remember
+import androidx.compose.ui.focus.focusProperties
+import androidx.compose.ui.focus.focusRequester
+
+Column(Modifier.fillMaxSize(), Arrangement.SpaceEvenly) {
+    val (item1, item2, item3, item4) = remember { FocusRequester.createRefs() }
+    Row(Modifier.fillMaxWidth(), Arrangement.SpaceEvenly) {
+        Box(
+            Modifier
+                .focusRequester(item1)
+                .focusProperties {
+                    next = item2
+                    right = item2
+                    down = item3
+                    previous = item4
+                }
+                .focusable()
+        )
+        Box(
+            Modifier
+                .focusRequester(item2)
+                .focusProperties {
+                    next = item3
+                    right = item1
+                    down = item4
+                    previous = item1
+                }
+                .focusable()
+        )
+    }
+    Row(Modifier.fillMaxWidth(), Arrangement.SpaceEvenly) {
+        Box(
+            Modifier
+                .focusRequester(item3)
+                .focusProperties {
+                    next = item4
+                    right = item4
+                    up = item1
+                    previous = item2
+                }
+        )
+        Box(
+            Modifier
+                .focusRequester(item4)
+                .focusProperties {
+                    next = item1
+                    left = item3
+                    up = item2
+                    previous = item3
+                }
+        )
+    }
+}</pre>
+      </div>
+      <div class="api-item"><a name="getRight()"></a><a name="setRight()"></a><a name="getRight--"></a><a name="setRight--"></a>
+        <h3 class="api-name" id="right()">right</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a>&nbsp;<a href="/reference/androidx/compose/ui/focus/FocusOrder.html#right()">right</a></pre>
+        <p>A custom item to be used when the user requests a focus moves to the &quot;right&quot; item.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.runtime.remember
+import androidx.compose.ui.focus.focusProperties
+import androidx.compose.ui.focus.focusRequester
+
+Column(Modifier.fillMaxSize(), Arrangement.SpaceEvenly) {
+    val (item1, item2, item3, item4) = remember { FocusRequester.createRefs() }
+    Row(Modifier.fillMaxWidth(), Arrangement.SpaceEvenly) {
+        Box(
+            Modifier
+                .focusRequester(item1)
+                .focusProperties {
+                    next = item2
+                    right = item2
+                    down = item3
+                    previous = item4
+                }
+                .focusable()
+        )
+        Box(
+            Modifier
+                .focusRequester(item2)
+                .focusProperties {
+                    next = item3
+                    right = item1
+                    down = item4
+                    previous = item1
+                }
+                .focusable()
+        )
+    }
+    Row(Modifier.fillMaxWidth(), Arrangement.SpaceEvenly) {
+        Box(
+            Modifier
+                .focusRequester(item3)
+                .focusProperties {
+                    next = item4
+                    right = item4
+                    up = item1
+                    previous = item2
+                }
+        )
+        Box(
+            Modifier
+                .focusRequester(item4)
+                .focusProperties {
+                    next = item1
+                    left = item3
+                    up = item2
+                    previous = item3
+                }
+        )
+    }
+}</pre>
+      </div>
+      <div class="api-item"><a name="getStart()"></a><a name="setStart()"></a><a name="getStart--"></a><a name="setStart--"></a>
+        <h3 class="api-name" id="start()">start</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a>&nbsp;<a href="/reference/androidx/compose/ui/focus/FocusOrder.html#start()">start</a></pre>
+        <p>A custom item to be used when the user requests a focus moves to the &quot;left&quot; in LTR mode and &quot;right&quot; in RTL mode.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.runtime.remember
+import androidx.compose.ui.focus.focusProperties
+import androidx.compose.ui.focus.focusRequester
+
+Column(Modifier.fillMaxSize(), Arrangement.SpaceEvenly) {
+    val (item1, item2, item3, item4) = remember { FocusRequester.createRefs() }
+    Row(Modifier.fillMaxWidth(), Arrangement.SpaceEvenly) {
+        Box(
+            Modifier
+                .focusRequester(item1)
+                .focusProperties {
+                    next = item2
+                    right = item2
+                    down = item3
+                    previous = item4
+                }
+                .focusable()
+        )
+        Box(
+            Modifier
+                .focusRequester(item2)
+                .focusProperties {
+                    next = item3
+                    right = item1
+                    down = item4
+                    previous = item1
+                }
+                .focusable()
+        )
+    }
+    Row(Modifier.fillMaxWidth(), Arrangement.SpaceEvenly) {
+        Box(
+            Modifier
+                .focusRequester(item3)
+                .focusProperties {
+                    next = item4
+                    right = item4
+                    up = item1
+                    previous = item2
+                }
+        )
+        Box(
+            Modifier
+                .focusRequester(item4)
+                .focusProperties {
+                    next = item1
+                    left = item3
+                    up = item2
+                    previous = item3
+                }
+        )
+    }
+}</pre>
+      </div>
+      <div class="api-item"><a name="getUp()"></a><a name="setUp()"></a><a name="getUp--"></a><a name="setUp--"></a>
+        <h3 class="api-name" id="up()">up</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a>&nbsp;<a href="/reference/androidx/compose/ui/focus/FocusOrder.html#up()">up</a></pre>
+        <p>A custom item to be used when the user moves focus &quot;up&quot;.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.runtime.remember
+import androidx.compose.ui.focus.focusProperties
+import androidx.compose.ui.focus.focusRequester
+
+Column(Modifier.fillMaxSize(), Arrangement.SpaceEvenly) {
+    val (item1, item2, item3, item4) = remember { FocusRequester.createRefs() }
+    Row(Modifier.fillMaxWidth(), Arrangement.SpaceEvenly) {
+        Box(
+            Modifier
+                .focusRequester(item1)
+                .focusProperties {
+                    next = item2
+                    right = item2
+                    down = item3
+                    previous = item4
+                }
+                .focusable()
+        )
+        Box(
+            Modifier
+                .focusRequester(item2)
+                .focusProperties {
+                    next = item3
+                    right = item1
+                    down = item4
+                    previous = item1
+                }
+                .focusable()
+        )
+    }
+    Row(Modifier.fillMaxWidth(), Arrangement.SpaceEvenly) {
+        Box(
+            Modifier
+                .focusRequester(item3)
+                .focusProperties {
+                    next = item4
+                    right = item4
+                    up = item1
+                    previous = item2
+                }
+        )
+        Box(
+            Modifier
+                .focusRequester(item4)
+                .focusProperties {
+                    next = item1
+                    left = item3
+                    up = item2
+                    previous = item3
+                }
+        )
+    }
+}</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="FocusOrder--"></a><a name="focusorder"></a>
+        <h3 class="api-name" id="FocusOrder()">FocusOrder</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/focus/FocusOrder.html#FocusOrder()">FocusOrder</a>()</pre>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,296 @@
+<html devsite="true">
+  <head>
+    <title>TextMeasurer</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-text/androidx/compose/ui/text/TextMeasurer.kt+class:androidx.compose.ui.text.TextMeasurer&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>TextMeasurer</h1>
+    <p>
+      <pre>@<a href="/reference/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>public final class <a href="/reference/androidx/compose/ui/text/TextMeasurer.html">TextMeasurer</a></pre>
+    </p>
+    <hr>
+    <p>TextMeasurer is responsible for measuring a text in its entirety so that it's ready to be drawn.</p>
+    <p>A TextMeasurer instance should be created via <code>androidx.compose.ui.rememberTextMeasurer</code> in a Composable context to use fallback values from default composition locals.</p>
+    <p>Text layout is a computationally expensive task. Therefore, this class holds an internal LRU Cache of layout input and output pairs to optimize the repeated measure calls that use the same input parameters.</p>
+    <p>Although most input parameters have a direct influence on layout, some parameters like color, brush, and shadow can be ignored during layout and set at the end. Using TextMeasurer with appropriate <code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html#cacheSize()">cacheSize</a></code> should provide significant improvements while animating non-layout-affecting attributes like color.</p>
+    <p>Moreover, if there is a need to render multiple static texts, you can provide the number of texts by <code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html#cacheSize()">cacheSize</a></code> and their layouts should be cached for repeating calls. Be careful that even a slight change in input parameters like fontSize, maxLines, an additional character in text would create a distinct set of input parameters. As a result, a new layout would be calculated and a new set of input and output pair would be placed in LRU Cache, possibly evicting an earlier result.</p>
+    <p><code><a href="/reference/androidx/compose/ui/text/font/FontFamily.Resolver.html">FontFamily.Resolver</a></code>, <code><a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code>, and <code><a href="/reference/androidx/compose/ui/unit/Density.html">Density</a></code> are required parameters to construct a text layout but they have no safe fallbacks outside of composition. These parameters must be provided during the construction of a <code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html">TextMeasurer</a></code> to be used as default values when they are skipped in <code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html#measure(androidx.compose.ui.text.AnnotatedString,androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,kotlin.collections.List,androidx.compose.ui.unit.Constraints,androidx.compose.ui.unit.LayoutDirection,androidx.compose.ui.unit.Density,androidx.compose.ui.text.font.FontFamily.Resolver,kotlin.Boolean)">TextMeasurer.measure</a></code> call.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html#TextMeasurer(androidx.compose.ui.text.font.FontFamily.Resolver,androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection,kotlin.Int)">TextMeasurer</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontFamily.Resolver.html">FontFamily.Resolver</a>&nbsp;fallbackFontFamilyResolver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a>&nbsp;fallbackDensity,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>&nbsp;fallbackLayoutDirection,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;cacheSize<br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextLayoutResult.html">TextLayoutResult</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html#measure(kotlin.String,androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,androidx.compose.ui.unit.Constraints,androidx.compose.ui.unit.LayoutDirection,androidx.compose.ui.unit.Density,androidx.compose.ui.text.font.FontFamily.Resolver,kotlin.Boolean)">measure</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;text,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextStyle.html">TextStyle</a>&nbsp;style,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/style/TextOverflow.html">TextOverflow</a>&nbsp;overflow,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;softWrap,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;maxLines,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;constraints,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>&nbsp;layoutDirection,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a>&nbsp;density,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontFamily.Resolver.html">FontFamily.Resolver</a>&nbsp;fontFamilyResolver,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;skipCache<br>)</code></div>
+              <p>Creates a <code><a href="/reference/androidx/compose/ui/text/TextLayoutResult.html">TextLayoutResult</a></code> according to given parameters.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextLayoutResult.html">TextLayoutResult</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html#measure(androidx.compose.ui.text.AnnotatedString,androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,kotlin.collections.List,androidx.compose.ui.unit.Constraints,androidx.compose.ui.unit.LayoutDirection,androidx.compose.ui.unit.Density,androidx.compose.ui.text.font.FontFamily.Resolver,kotlin.Boolean)">measure</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&nbsp;text,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextStyle.html">TextStyle</a>&nbsp;style,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/style/TextOverflow.html">TextOverflow</a>&nbsp;overflow,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;softWrap,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;maxLines,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.Range.html">AnnotatedString.Range</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/Placeholder.html">Placeholder</a>&gt;&gt;&nbsp;placeholders,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;constraints,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>&nbsp;layoutDirection,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a>&nbsp;density,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontFamily.Resolver.html">FontFamily.Resolver</a>&nbsp;fontFamilyResolver,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;skipCache<br>)</code></div>
+              <p>Creates a <code><a href="/reference/androidx/compose/ui/text/TextLayoutResult.html">TextLayoutResult</a></code> according to given parameters.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="TextMeasurer(androidx.compose.ui.text.font.FontFamily.Resolver, androidx.compose.ui.unit.Density, androidx.compose.ui.unit.LayoutDirection, kotlin.Int)"></a><a name="TextMeasurer-androidx.compose.ui.text.font.FontFamily.Resolver-androidx.compose.ui.unit.Density-androidx.compose.ui.unit.LayoutDirection-kotlin.Int-"></a><a name="textmeasurer"></a>
+        <h3 class="api-name" id="TextMeasurer(androidx.compose.ui.text.font.FontFamily.Resolver,androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection,kotlin.Int)">TextMeasurer</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/text/TextMeasurer.html#TextMeasurer(androidx.compose.ui.text.font.FontFamily.Resolver,androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection,kotlin.Int)">TextMeasurer</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontFamily.Resolver.html">FontFamily.Resolver</a>&nbsp;fallbackFontFamilyResolver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a>&nbsp;fallbackDensity,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>&nbsp;fallbackLayoutDirection,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;cacheSize<br>)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontFamily.Resolver.html">FontFamily.Resolver</a>&nbsp;fallbackFontFamilyResolver</code></td>
+                <td>
+                  <p>to be used to load fonts given in <code><a href="/reference/androidx/compose/ui/text/TextStyle.html">TextStyle</a></code> and <code><a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a></code>s in <code><a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a>&nbsp;fallbackDensity</code></td>
+                <td>
+                  <p>density of the measurement environment. Density controls the scaling factor for fonts.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>&nbsp;fallbackLayoutDirection</code></td>
+                <td>
+                  <p>layout direction of the measurement environment.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>int&nbsp;cacheSize</code></td>
+                <td>
+                  <p>Capacity of internal cache inside TextMeasurer. Size unit is the number of unique text layout inputs that are measured. Value of this parameter highly depends on the consumer use case. Provide a cache size that is in line with how many distinct text layouts are going to be calculated by this measurer repeatedly. If you are animating font attributes, or any other layout affecting input, cache can be skipped because most repeated measure calls would miss the cache.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="measure(kotlin.String, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.style.TextOverflow, kotlin.Boolean, kotlin.Int, androidx.compose.ui.unit.Constraints, androidx.compose.ui.unit.LayoutDirection, androidx.compose.ui.unit.Density, androidx.compose.ui.text.font.FontFamily.Resolver, kotlin.Boolean)"></a><a name="measure-kotlin.String-androidx.compose.ui.text.TextStyle-androidx.compose.ui.text.style.TextOverflow-kotlin.Boolean-kotlin.Int-androidx.compose.ui.unit.Constraints-androidx.compose.ui.unit.LayoutDirection-androidx.compose.ui.unit.Density-androidx.compose.ui.text.font.FontFamily.Resolver-kotlin.Boolean-"></a><a name="measure"></a>
+        <h3 class="api-name" id="measure(kotlin.String,androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,androidx.compose.ui.unit.Constraints,androidx.compose.ui.unit.LayoutDirection,androidx.compose.ui.unit.Density,androidx.compose.ui.text.font.FontFamily.Resolver,kotlin.Boolean)">measure</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextLayoutResult.html">TextLayoutResult</a>&nbsp;<a href="/reference/androidx/compose/ui/text/TextMeasurer.html#measure(kotlin.String,androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,androidx.compose.ui.unit.Constraints,androidx.compose.ui.unit.LayoutDirection,androidx.compose.ui.unit.Density,androidx.compose.ui.text.font.FontFamily.Resolver,kotlin.Boolean)">measure</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;text,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextStyle.html">TextStyle</a>&nbsp;style,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/style/TextOverflow.html">TextOverflow</a>&nbsp;overflow,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;softWrap,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;maxLines,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;constraints,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>&nbsp;layoutDirection,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a>&nbsp;density,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontFamily.Resolver.html">FontFamily.Resolver</a>&nbsp;fontFamilyResolver,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;skipCache<br>)</pre>
+        <p>Creates a <code><a href="/reference/androidx/compose/ui/text/TextLayoutResult.html">TextLayoutResult</a></code> according to given parameters.</p>
+        <p>This function supports laying out text that consists of multiple paragraphs, includes placeholders, wraps around soft line breaks, and might overflow outside the specified size.</p>
+        <p>Most parameters for text affect the final text layout. One pixel change in <code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html#measure(kotlin.String,androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,androidx.compose.ui.unit.Constraints,androidx.compose.ui.unit.LayoutDirection,androidx.compose.ui.unit.Density,androidx.compose.ui.text.font.FontFamily.Resolver,kotlin.Boolean)">constraints</a></code> boundaries can displace a word to another line which would cause a chain reaction that completely changes how text is rendered.</p>
+        <p>On the other hand, some attributes only play a role when drawing the created text layout. For example text layout can be created completely in black color but we can apply <code><a href="/reference/androidx/compose/ui/text/TextStyle.html#color()">TextStyle.color</a></code> later in draw phase. This also means that animating text color shouldn't invalidate text layout.</p>
+        <p>Thus, <code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html#textLayoutCache()">textLayoutCache</a></code> helps in the process of converting a set of text layout inputs to a text layout while ignoring non-layout-affecting attributes. Iterative calls that use the same input parameters should benefit from substantial performance improvements.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;text</code></td>
+                <td>
+                  <p>the text to be laid out</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextStyle.html">TextStyle</a>&nbsp;style</code></td>
+                <td>
+                  <p>the <code><a href="/reference/androidx/compose/ui/text/TextStyle.html">TextStyle</a></code> to be applied to the whole text</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/style/TextOverflow.html">TextOverflow</a>&nbsp;overflow</code></td>
+                <td>
+                  <p>How visual overflow should be handled.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>boolean&nbsp;softWrap</code></td>
+                <td>
+                  <p>Whether the text should break at soft line breaks. If false, the glyphs in the text will be positioned as if there was unlimited horizontal space. If <code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html#measure(kotlin.String,androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,androidx.compose.ui.unit.Constraints,androidx.compose.ui.unit.LayoutDirection,androidx.compose.ui.unit.Density,androidx.compose.ui.text.font.FontFamily.Resolver,kotlin.Boolean)">softWrap</a></code> is false, <code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html#measure(kotlin.String,androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,androidx.compose.ui.unit.Constraints,androidx.compose.ui.unit.LayoutDirection,androidx.compose.ui.unit.Density,androidx.compose.ui.text.font.FontFamily.Resolver,kotlin.Boolean)">overflow</a></code> and TextAlign may have unexpected effects.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>int&nbsp;maxLines</code></td>
+                <td>
+                  <p>An optional maximum number of lines for the text to span, wrapping if necessary. If the text exceeds the given number of lines, it will be truncated according to <code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html#measure(kotlin.String,androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,androidx.compose.ui.unit.Constraints,androidx.compose.ui.unit.LayoutDirection,androidx.compose.ui.unit.Density,androidx.compose.ui.text.font.FontFamily.Resolver,kotlin.Boolean)">overflow</a></code> and <code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html#measure(kotlin.String,androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,androidx.compose.ui.unit.Constraints,androidx.compose.ui.unit.LayoutDirection,androidx.compose.ui.unit.Density,androidx.compose.ui.text.font.FontFamily.Resolver,kotlin.Boolean)">softWrap</a></code>. If it is not null, then it must be greater than zero.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;constraints</code></td>
+                <td>
+                  <p>how wide and tall the text is allowed to be. <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#maxWidth()">Constraints.maxWidth</a></code> will define the width of the MultiParagraph. <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#maxHeight()">Constraints.maxHeight</a></code> helps defining the number of lines that fit with ellipsis is true. <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#minWidth()">Constraints.minWidth</a></code> defines the minimum width the resulting <code><a href="/reference/androidx/compose/ui/text/TextLayoutResult.html#size()">TextLayoutResult.size</a></code> will report. <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#minHeight()">Constraints.minHeight</a></code> is no-op.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>&nbsp;layoutDirection</code></td>
+                <td>
+                  <p>layout direction of the measurement environment. If not specified, defaults to the value that was given during initialization of this <code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html">TextMeasurer</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a>&nbsp;density</code></td>
+                <td>
+                  <p>density of the measurement environment. If not specified, defaults to the value that was given during initialization of this <code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html">TextMeasurer</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontFamily.Resolver.html">FontFamily.Resolver</a>&nbsp;fontFamilyResolver</code></td>
+                <td>
+                  <p>to be used to load the font given in <code><a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a></code>s. If not specified, defaults to the value that was given during initialization of this <code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html">TextMeasurer</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>boolean&nbsp;skipCache</code></td>
+                <td>
+                  <p>Disables cache optimization if it is passed as true.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="measure(androidx.compose.ui.text.AnnotatedString, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.style.TextOverflow, kotlin.Boolean, kotlin.Int, kotlin.collections.List, androidx.compose.ui.unit.Constraints, androidx.compose.ui.unit.LayoutDirection, androidx.compose.ui.unit.Density, androidx.compose.ui.text.font.FontFamily.Resolver, kotlin.Boolean)"></a><a name="measure-androidx.compose.ui.text.AnnotatedString-androidx.compose.ui.text.TextStyle-androidx.compose.ui.text.style.TextOverflow-kotlin.Boolean-kotlin.Int-kotlin.collections.List-androidx.compose.ui.unit.Constraints-androidx.compose.ui.unit.LayoutDirection-androidx.compose.ui.unit.Density-androidx.compose.ui.text.font.FontFamily.Resolver-kotlin.Boolean-"></a><a name="measure"></a>
+        <h3 class="api-name" id="measure(androidx.compose.ui.text.AnnotatedString,androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,kotlin.collections.List,androidx.compose.ui.unit.Constraints,androidx.compose.ui.unit.LayoutDirection,androidx.compose.ui.unit.Density,androidx.compose.ui.text.font.FontFamily.Resolver,kotlin.Boolean)">measure</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextLayoutResult.html">TextLayoutResult</a>&nbsp;<a href="/reference/androidx/compose/ui/text/TextMeasurer.html#measure(androidx.compose.ui.text.AnnotatedString,androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,kotlin.collections.List,androidx.compose.ui.unit.Constraints,androidx.compose.ui.unit.LayoutDirection,androidx.compose.ui.unit.Density,androidx.compose.ui.text.font.FontFamily.Resolver,kotlin.Boolean)">measure</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&nbsp;text,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextStyle.html">TextStyle</a>&nbsp;style,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/style/TextOverflow.html">TextOverflow</a>&nbsp;overflow,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;softWrap,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;maxLines,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.Range.html">AnnotatedString.Range</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/Placeholder.html">Placeholder</a>&gt;&gt;&nbsp;placeholders,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;constraints,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>&nbsp;layoutDirection,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a>&nbsp;density,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontFamily.Resolver.html">FontFamily.Resolver</a>&nbsp;fontFamilyResolver,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;skipCache<br>)</pre>
+        <p>Creates a <code><a href="/reference/androidx/compose/ui/text/TextLayoutResult.html">TextLayoutResult</a></code> according to given parameters.</p>
+        <p>This function supports laying out text that consists of multiple paragraphs, includes placeholders, wraps around soft line breaks, and might overflow outside the specified size.</p>
+        <p>Most parameters for text affect the final text layout. One pixel change in <code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html#measure(androidx.compose.ui.text.AnnotatedString,androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,kotlin.collections.List,androidx.compose.ui.unit.Constraints,androidx.compose.ui.unit.LayoutDirection,androidx.compose.ui.unit.Density,androidx.compose.ui.text.font.FontFamily.Resolver,kotlin.Boolean)">constraints</a></code> boundaries can displace a word to another line which would cause a chain reaction that completely changes how text is rendered.</p>
+        <p>On the other hand, some attributes only play a role when drawing the created text layout. For example text layout can be created completely in black color but we can apply <code><a href="/reference/androidx/compose/ui/text/TextStyle.html#color()">TextStyle.color</a></code> later in draw phase. This also means that animating text color shouldn't invalidate text layout.</p>
+        <p>Thus, <code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html#textLayoutCache()">textLayoutCache</a></code> helps in the process of converting a set of text layout inputs to a text layout while ignoring non-layout-affecting attributes. Iterative calls that use the same input parameters should benefit from substantial performance improvements.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&nbsp;text</code></td>
+                <td>
+                  <p>the text to be laid out</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextStyle.html">TextStyle</a>&nbsp;style</code></td>
+                <td>
+                  <p>the <code><a href="/reference/androidx/compose/ui/text/TextStyle.html">TextStyle</a></code> to be applied to the whole text</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/style/TextOverflow.html">TextOverflow</a>&nbsp;overflow</code></td>
+                <td>
+                  <p>How visual overflow should be handled.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>boolean&nbsp;softWrap</code></td>
+                <td>
+                  <p>Whether the text should break at soft line breaks. If false, the glyphs in the text will be positioned as if there was unlimited horizontal space. If <code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html#measure(androidx.compose.ui.text.AnnotatedString,androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,kotlin.collections.List,androidx.compose.ui.unit.Constraints,androidx.compose.ui.unit.LayoutDirection,androidx.compose.ui.unit.Density,androidx.compose.ui.text.font.FontFamily.Resolver,kotlin.Boolean)">softWrap</a></code> is false, <code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html#measure(androidx.compose.ui.text.AnnotatedString,androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,kotlin.collections.List,androidx.compose.ui.unit.Constraints,androidx.compose.ui.unit.LayoutDirection,androidx.compose.ui.unit.Density,androidx.compose.ui.text.font.FontFamily.Resolver,kotlin.Boolean)">overflow</a></code> and TextAlign may have unexpected effects.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>int&nbsp;maxLines</code></td>
+                <td>
+                  <p>An optional maximum number of lines for the text to span, wrapping if necessary. If the text exceeds the given number of lines, it will be truncated according to <code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html#measure(androidx.compose.ui.text.AnnotatedString,androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,kotlin.collections.List,androidx.compose.ui.unit.Constraints,androidx.compose.ui.unit.LayoutDirection,androidx.compose.ui.unit.Density,androidx.compose.ui.text.font.FontFamily.Resolver,kotlin.Boolean)">overflow</a></code> and <code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html#measure(androidx.compose.ui.text.AnnotatedString,androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,kotlin.collections.List,androidx.compose.ui.unit.Constraints,androidx.compose.ui.unit.LayoutDirection,androidx.compose.ui.unit.Density,androidx.compose.ui.text.font.FontFamily.Resolver,kotlin.Boolean)">softWrap</a></code>. If it is not null, then it must be greater than zero.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.Range.html">AnnotatedString.Range</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/Placeholder.html">Placeholder</a>&gt;&gt;&nbsp;placeholders</code></td>
+                <td>
+                  <p>a list of <code><a href="/reference/androidx/compose/ui/text/Placeholder.html">Placeholder</a></code>s that specify ranges of text which will be skipped during layout and replaced with <code><a href="/reference/androidx/compose/ui/text/Placeholder.html">Placeholder</a></code>. It's required that the range of each <code><a href="/reference/androidx/compose/ui/text/Placeholder.html">Placeholder</a></code> doesn't cross paragraph boundary, otherwise <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">IllegalArgumentException</a></code> is thrown.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;constraints</code></td>
+                <td>
+                  <p>how wide and tall the text is allowed to be. <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#maxWidth()">Constraints.maxWidth</a></code> will define the width of the MultiParagraph. <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#maxHeight()">Constraints.maxHeight</a></code> helps defining the number of lines that fit with ellipsis is true. <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#minWidth()">Constraints.minWidth</a></code> defines the minimum width the resulting <code><a href="/reference/androidx/compose/ui/text/TextLayoutResult.html#size()">TextLayoutResult.size</a></code> will report. <code><a href="/reference/androidx/compose/ui/unit/Constraints.html#minHeight()">Constraints.minHeight</a></code> is no-op.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>&nbsp;layoutDirection</code></td>
+                <td>
+                  <p>layout direction of the measurement environment. If not specified, defaults to the value that was given during initialization of this <code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html">TextMeasurer</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a>&nbsp;density</code></td>
+                <td>
+                  <p>density of the measurement environment. If not specified, defaults to the value that was given during initialization of this <code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html">TextMeasurer</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontFamily.Resolver.html">FontFamily.Resolver</a>&nbsp;fontFamilyResolver</code></td>
+                <td>
+                  <p>to be used to load the font given in <code><a href="/reference/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a></code>s. If not specified, defaults to the value that was given during initialization of this <code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html">TextMeasurer</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>boolean&nbsp;skipCache</code></td>
+                <td>
+                  <p>Disables cache optimization if it is passed as true.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

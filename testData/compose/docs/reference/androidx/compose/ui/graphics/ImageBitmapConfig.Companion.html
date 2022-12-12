@@ -1,0 +1,107 @@
+<html devsite="true">
+  <head>
+    <title>ImageBitmapConfig.Companion</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-graphics/androidx/compose/ui/graphics/ImageBitmap.kt+class:androidx.compose.ui.graphics.ImageBitmapConfig.Companion&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>ImageBitmapConfig.Companion</h1>
+    <p>
+      <pre>public static class <a href="/reference/androidx/compose/ui/graphics/ImageBitmapConfig.Companion.html">ImageBitmapConfig.Companion</a></pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/ImageBitmapConfig.html">ImageBitmapConfig</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/ImageBitmapConfig.Companion.html#Alpha8()">Alpha8</a></code></div>
+              <p>Each pixel is stored as a single translucency (alpha) channel.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/ImageBitmapConfig.html">ImageBitmapConfig</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/ImageBitmapConfig.Companion.html#Argb8888()">Argb8888</a></code></div>
+              <p>Each pixel is stored on 4 bytes.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/ImageBitmapConfig.html">ImageBitmapConfig</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/ImageBitmapConfig.Companion.html#F16()">F16</a></code></div>
+              <p>Each pixel is stored on 8 bytes.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/ImageBitmapConfig.html">ImageBitmapConfig</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/ImageBitmapConfig.Companion.html#Gpu()">Gpu</a></code></div>
+              <p>Special configuration, when an ImageBitmap is stored only in graphic memory.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/ImageBitmapConfig.html">ImageBitmapConfig</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/ImageBitmapConfig.Companion.html#Rgb565()">Rgb565</a></code></div>
+              <p>Each pixel is stored on 2 bytes and only the RGB channels are encoded: red is stored with 5 bits of precision (32 possible values), green is stored with 6 bits of precision (64 possible values) and blue is stored with 5 bits of precision.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getAlpha8()"></a><a name="setAlpha8()"></a><a name="getAlpha8--"></a><a name="setAlpha8--"></a>
+        <h3 class="api-name" id="Alpha8()">Alpha8</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/ImageBitmapConfig.html">ImageBitmapConfig</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/ImageBitmapConfig.Companion.html#Alpha8()">Alpha8</a></pre>
+        <p>Each pixel is stored as a single translucency (alpha) channel. This is very useful to efficiently store masks for instance. No color information is stored. With this configuration, each pixel requires 1 byte of memory.</p>
+      </div>
+      <div class="api-item"><a name="getArgb8888()"></a><a name="setArgb8888()"></a><a name="getArgb8888--"></a><a name="setArgb8888--"></a>
+        <h3 class="api-name" id="Argb8888()">Argb8888</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/ImageBitmapConfig.html">ImageBitmapConfig</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/ImageBitmapConfig.Companion.html#Argb8888()">Argb8888</a></pre>
+        <p>Each pixel is stored on 4 bytes. Each channel (RGB and alpha for translucency) is stored with 8 bits of precision (256 possible values.)</p>
+        <p>This configuration is very flexible and offers the best quality. It should be used whenever possible.</p>
+        <pre class="prettyprint">Use this formula to pack into 32 bits:</pre>
+        <pre class="prettyprint">val color =<br>   ((A and 0xff) shl 24) or<br>   ((B and 0xff) shl 16) or<br>   ((G and 0xff) shl 8) or<br>   (R and 0xff)</pre>
+      </div>
+      <div class="api-item"><a name="getF16()"></a><a name="setF16()"></a><a name="getF16--"></a><a name="setF16--"></a>
+        <h3 class="api-name" id="F16()">F16</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/ImageBitmapConfig.html">ImageBitmapConfig</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/ImageBitmapConfig.Companion.html#F16()">F16</a></pre>
+        <p>Each pixel is stored on 8 bytes. Each channel (RGB and alpha for translucency) is stored as a half-precision floating point value.</p>
+        <p>This configuration is particularly suited for wide-gamut and HDR content.</p>
+        <pre class="prettyprint">Use this formula to pack into 64 bits:</pre>
+        <pre class="prettyprint">    val color =<br>      ((A and 0xffff) shl 48) or<br>      ((B and 0xffff) shl 32) or<br>      ((G and 0xffff) shl 16) or<br>      (R and 0xffff)</pre>
+      </div>
+      <div class="api-item"><a name="getGpu()"></a><a name="setGpu()"></a><a name="getGpu--"></a><a name="setGpu--"></a>
+        <h3 class="api-name" id="Gpu()">Gpu</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/ImageBitmapConfig.html">ImageBitmapConfig</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/ImageBitmapConfig.Companion.html#Gpu()">Gpu</a></pre>
+        <p>Special configuration, when an ImageBitmap is stored only in graphic memory. ImageBitmaps in this configuration are always immutable.</p>
+        <p>It is optimal for cases, when the only operation with the ImageBitmap is to draw it on a screen.</p>
+      </div>
+      <div class="api-item"><a name="getRgb565()"></a><a name="setRgb565()"></a><a name="getRgb565--"></a><a name="setRgb565--"></a>
+        <h3 class="api-name" id="Rgb565()">Rgb565</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/ImageBitmapConfig.html">ImageBitmapConfig</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/ImageBitmapConfig.Companion.html#Rgb565()">Rgb565</a></pre>
+        <p>Each pixel is stored on 2 bytes and only the RGB channels are encoded: red is stored with 5 bits of precision (32 possible values), green is stored with 6 bits of precision (64 possible values) and blue is stored with 5 bits of precision.</p>
+        <p>This configuration can produce slight visual artifacts depending on the configuration of the source. For instance, without dithering, the result might show a greenish tint. To get better results dithering should be applied.</p>
+        <p>This configuration may be useful when using opaque bitmaps that do not require high color fidelity.</p>
+        <pre class="prettyprint">Use this formula to pack into 16 bits:</pre>
+        <pre class="prettyprint">val color =<br>    ((R and 0x1f) shl 11) or<br>    ((G and 0x3f) shl 5) or<br>    (B and 0x1f)</pre>
+      </div>
+    </div>
+  </body>
+</html>

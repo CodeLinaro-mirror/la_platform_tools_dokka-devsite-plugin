@@ -5,13 +5,15 @@
 {% include "_shared/_reference-head-tags.html" %}
   </head>
   <body>
-    <div id="metadata-info-block"></div>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/lazy/LazyListLayoutInfo.kt+class:androidx.compose.foundation.lazy.LazyListLayoutInfo&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
     <h1>LazyListLayoutInfo</h1>
     <p>
       <pre>public interface <a href="/reference/androidx/compose/foundation/lazy/LazyListLayoutInfo.html">LazyListLayoutInfo</a></pre>
     </p>
     <hr>
-    <p>Contains useful information about the currently displayed layout state of lazy lists like <code><a href="/reference/androidx/compose/foundation/lazy/package-summary.html#LazyColumn(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Function1)">LazyColumn</a></code> or <code><a href="/reference/androidx/compose/foundation/lazy/package-summary.html#LazyRow(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Function1)">LazyRow</a></code>. For example you can get the list of currently displayed item.</p>
+    <p>Contains useful information about the currently displayed layout state of lazy lists like <code><a href="/reference/androidx/compose/foundation/lazy/package-summary.html#LazyColumn(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyColumn</a></code> or <code><a href="/reference/androidx/compose/foundation/lazy/package-summary.html#LazyRow(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyRow</a></code>. For example you can get the list of currently displayed item.</p>
     <p>Use <code><a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#layoutInfo()">LazyListState.layoutInfo</a></code> to retrieve this</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
@@ -27,24 +29,59 @@
         </thead>
         <tbody class="list">
           <tr>
+            <td><code>default int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#afterContentPadding()">afterContentPadding</a></code></div>
+              <p>The content padding in pixels applied after the last item in the direction of scrolling.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#beforeContentPadding()">beforeContentPadding</a></code></div>
+              <p>The content padding in pixels applied before the first item in the direction of scrolling.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/gestures/Orientation.html">Orientation</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#orientation()">orientation</a></code></div>
+              <p>The orientation of the lazy list.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#reverseLayout()">reverseLayout</a></code></div>
+              <p>True if the direction of scrolling and layout is reversed.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>abstract int</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#totalItemsCount()">totalItemsCount</a></code></div>
-              <p>The total count of items passed to <code><a href="/reference/androidx/compose/foundation/lazy/package-summary.html#LazyColumn(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Function1)">LazyColumn</a></code> or <code><a href="/reference/androidx/compose/foundation/lazy/package-summary.html#LazyRow(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Function1)">LazyRow</a></code>.</p>
+              <p>The total count of items passed to <code><a href="/reference/androidx/compose/foundation/lazy/package-summary.html#LazyColumn(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyColumn</a></code> or <code><a href="/reference/androidx/compose/foundation/lazy/package-summary.html#LazyRow(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyRow</a></code>.</p>
             </td>
           </tr>
           <tr>
             <td><code>abstract int</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#viewportEndOffset()">viewportEndOffset</a></code></div>
-              <p>The end offset of the layout's viewport.</p>
+              <p>The end offset of the layout's viewport in pixels.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#viewportSize()">viewportSize</a></code></div>
+              <p>The size of the viewport in pixels.</p>
             </td>
           </tr>
           <tr>
             <td><code>abstract int</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#viewportStartOffset()">viewportStartOffset</a></code></div>
-              <p>The start offset of the layout's viewport.</p>
+              <p>The start offset of the layout's viewport in pixels.</p>
             </td>
           </tr>
           <tr>
@@ -59,21 +96,46 @@
     </div>
     <div class="list">
       <h2>Public fields</h2>
+      <div class="api-item"><a name="getAfterContentPadding()"></a><a name="setAfterContentPadding()"></a><a name="getAfterContentPadding--"></a><a name="setAfterContentPadding--"></a>
+        <h3 class="api-name" id="afterContentPadding()">afterContentPadding</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;int&nbsp;<a href="/reference/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#afterContentPadding()">afterContentPadding</a></pre>
+        <p>The content padding in pixels applied after the last item in the direction of scrolling. For example it is a bottom content padding for LazyColumn with reverseLayout set to false.</p>
+      </div>
+      <div class="api-item"><a name="getBeforeContentPadding()"></a><a name="setBeforeContentPadding()"></a><a name="getBeforeContentPadding--"></a><a name="setBeforeContentPadding--"></a>
+        <h3 class="api-name" id="beforeContentPadding()">beforeContentPadding</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;int&nbsp;<a href="/reference/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#beforeContentPadding()">beforeContentPadding</a></pre>
+        <p>The content padding in pixels applied before the first item in the direction of scrolling. For example it is a top content padding for LazyColumn with reverseLayout set to false.</p>
+      </div>
+      <div class="api-item"><a name="getOrientation()"></a><a name="setOrientation()"></a><a name="getOrientation--"></a><a name="setOrientation--"></a>
+        <h3 class="api-name" id="orientation()">orientation</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/gestures/Orientation.html">Orientation</a>&nbsp;<a href="/reference/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#orientation()">orientation</a></pre>
+        <p>The orientation of the lazy list.</p>
+      </div>
+      <div class="api-item"><a name="getReverseLayout()"></a><a name="setReverseLayout()"></a><a name="getReverseLayout--"></a><a name="setReverseLayout--"></a>
+        <h3 class="api-name" id="reverseLayout()">reverseLayout</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#reverseLayout()">reverseLayout</a></pre>
+        <p>True if the direction of scrolling and layout is reversed.</p>
+      </div>
       <div class="api-item"><a name="getTotalItemsCount()"></a><a name="setTotalItemsCount()"></a><a name="getTotalItemsCount--"></a><a name="setTotalItemsCount--"></a>
         <h3 class="api-name" id="totalItemsCount()">totalItemsCount</h3>
         <pre class="api-signature no-pretty-print">abstract&nbsp;int&nbsp;<a href="/reference/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#totalItemsCount()">totalItemsCount</a></pre>
-        <p>The total count of items passed to <code><a href="/reference/androidx/compose/foundation/lazy/package-summary.html#LazyColumn(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Function1)">LazyColumn</a></code> or <code><a href="/reference/androidx/compose/foundation/lazy/package-summary.html#LazyRow(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Function1)">LazyRow</a></code>.</p>
+        <p>The total count of items passed to <code><a href="/reference/androidx/compose/foundation/lazy/package-summary.html#LazyColumn(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyColumn</a></code> or <code><a href="/reference/androidx/compose/foundation/lazy/package-summary.html#LazyRow(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyRow</a></code>.</p>
       </div>
       <div class="api-item"><a name="getViewportEndOffset()"></a><a name="setViewportEndOffset()"></a><a name="getViewportEndOffset--"></a><a name="setViewportEndOffset--"></a>
         <h3 class="api-name" id="viewportEndOffset()">viewportEndOffset</h3>
         <pre class="api-signature no-pretty-print">abstract&nbsp;int&nbsp;<a href="/reference/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#viewportEndOffset()">viewportEndOffset</a></pre>
-        <p>The end offset of the layout's viewport. You can think of it as a maximum offset which would be visible. Usually it is a size of the lazy list container plus a content padding.</p>
+        <p>The end offset of the layout's viewport in pixels. You can think of it as a maximum offset which would be visible. It is the size of the lazy list layout minus <code><a href="/reference/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#beforeContentPadding()">beforeContentPadding</a></code>.</p>
         <p>You can use it to understand what items from <code><a href="/reference/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#visibleItemsInfo()">visibleItemsInfo</a></code> are fully visible.</p>
+      </div>
+      <div class="api-item"><a name="getViewportSize()"></a><a name="setViewportSize()"></a><a name="getViewportSize--"></a><a name="setViewportSize--"></a>
+        <h3 class="api-name" id="viewportSize()">viewportSize</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a>&nbsp;<a href="/reference/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#viewportSize()">viewportSize</a></pre>
+        <p>The size of the viewport in pixels. It is the lazy list layout size including all the content paddings.</p>
       </div>
       <div class="api-item"><a name="getViewportStartOffset()"></a><a name="setViewportStartOffset()"></a><a name="getViewportStartOffset--"></a><a name="setViewportStartOffset--"></a>
         <h3 class="api-name" id="viewportStartOffset()">viewportStartOffset</h3>
         <pre class="api-signature no-pretty-print">abstract&nbsp;int&nbsp;<a href="/reference/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#viewportStartOffset()">viewportStartOffset</a></pre>
-        <p>The start offset of the layout's viewport. You can think of it as a minimum offset which would be visible. Usually it is 0, but it can be negative if a content padding was applied as the content displayed in the content padding area is still visible.</p>
+        <p>The start offset of the layout's viewport in pixels. You can think of it as a minimum offset which would be visible. Usually it is 0, but it can be negative if non-zero <code><a href="/reference/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#beforeContentPadding()">beforeContentPadding</a></code> was applied as the content displayed in the content padding area is still visible.</p>
         <p>You can use it to understand what items from <code><a href="/reference/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#visibleItemsInfo()">visibleItemsInfo</a></code> are fully visible.</p>
       </div>
       <div class="api-item"><a name="getVisibleItemsInfo()"></a><a name="setVisibleItemsInfo()"></a><a name="getVisibleItemsInfo--"></a><a name="setVisibleItemsInfo--"></a>

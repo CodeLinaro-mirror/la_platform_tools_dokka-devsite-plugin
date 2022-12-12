@@ -1,0 +1,150 @@
+<html devsite="true">
+  <head>
+    <title>TextOverflow.Companion</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-text/androidx/compose/ui/text/style/TextOverflow.kt+class:androidx.compose.ui.text.style.TextOverflow.Companion&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>TextOverflow.Companion</h1>
+    <p>
+      <pre>public static class <a href="/reference/androidx/compose/ui/text/style/TextOverflow.Companion.html">TextOverflow.Companion</a></pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/style/TextOverflow.html">TextOverflow</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/style/TextOverflow.Companion.html#Clip()">Clip</a></code></div>
+              <p>Clip the overflowing text to fix its container.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/style/TextOverflow.html">TextOverflow</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/style/TextOverflow.Companion.html#Ellipsis()">Ellipsis</a></code></div>
+              <p>Use an ellipsis to indicate that the text has overflowed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/style/TextOverflow.html">TextOverflow</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/style/TextOverflow.Companion.html#Visible()">Visible</a></code></div>
+              <p>Display all text, even if there is not enough space in the specified bounds.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getClip()"></a><a name="setClip()"></a><a name="getClip--"></a><a name="setClip--"></a>
+        <h3 class="api-name" id="Clip()">Clip</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/style/TextOverflow.html">TextOverflow</a>&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextOverflow.Companion.html#Clip()">Clip</a></pre>
+        <p>Clip the overflowing text to fix its container.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.Text
+
+Text(
+    text = &quot;Hello &quot;.repeat(2),
+    modifier = Modifier.size(100.dp, 70.dp).background(Color.Cyan),
+    fontSize = 35.sp,
+    overflow = TextOverflow.Clip
+)</pre>
+      </div>
+      <div class="api-item"><a name="getEllipsis()"></a><a name="setEllipsis()"></a><a name="getEllipsis--"></a><a name="setEllipsis--"></a>
+        <h3 class="api-name" id="Ellipsis()">Ellipsis</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/style/TextOverflow.html">TextOverflow</a>&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextOverflow.Companion.html#Ellipsis()">Ellipsis</a></pre>
+        <p>Use an ellipsis to indicate that the text has overflowed.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.Text
+
+Text(
+    text = &quot;Hello &quot;.repeat(2),
+    modifier = Modifier.width(100.dp).background(Color.Cyan),
+    fontSize = 35.sp,
+    overflow = TextOverflow.Ellipsis,
+    maxLines = 1
+)</pre>
+      </div>
+      <div class="api-item"><a name="getVisible()"></a><a name="setVisible()"></a><a name="getVisible--"></a><a name="setVisible--"></a>
+        <h3 class="api-name" id="Visible()">Visible</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/style/TextOverflow.html">TextOverflow</a>&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextOverflow.Companion.html#Visible()">Visible</a></pre>
+        <p>Display all text, even if there is not enough space in the specified bounds. When overflow is visible, text may be rendered outside the bounds of the composable displaying the text. This ensures that all text is displayed to the user, and is typically the right choice for most text display. It does mean that the text may visually occupy a region larger than the bounds of it's composable. This can lead to situations where text displays outside the bounds of the background and clickable on a Text composable with a fixed height and width.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+
+val background = remember { mutableStateOf(Color.Cyan) }
+Box(modifier = Modifier.size(100.dp, 100.dp)) {
+    Text(
+        text = &quot;Hello &quot;.repeat(2),
+        modifier = Modifier.size(100.dp, 70.dp)
+            .background(background.value)
+            .clickable {
+                background.value = if (background.value == Color.Cyan) {
+                    Color.Gray
+                } else {
+                    Color.Cyan
+                }
+            },
+        fontSize = 35.sp,
+        overflow = TextOverflow.Visible
+    )
+}</pre>
+        <p>To make the background and click region expand to match the size of the text, allow it to expand vertically/horizontally using <code>Modifier.heightIn</code>/<code>Modifier.widthIn</code> or similar.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+
+val background = remember { mutableStateOf(Color.Cyan) }
+val count = remember { mutableStateOf(1) }
+Box(modifier = Modifier.size(100.dp, 100.dp)) {
+    Text(
+        text = &quot;Hello&quot;.repeat(count.value),
+        modifier = Modifier.width(100.dp).heightIn(min = 70.dp)
+            .background(background.value)
+            .clickable {
+                background.value =
+                    if (background.value == Color.Cyan) Color.Gray else Color.Cyan
+                count.value = if (count.value == 1) 2 else 1
+            },
+        fontSize = 35.sp,
+        overflow = TextOverflow.Visible
+    )
+}</pre>
+        <p>Note: text that expands past its bounds using <code>Visible</code> may be clipped by other modifiers such as <code>Modifier.clipToBounds</code>.</p>
+      </div>
+    </div>
+  </body>
+</html>

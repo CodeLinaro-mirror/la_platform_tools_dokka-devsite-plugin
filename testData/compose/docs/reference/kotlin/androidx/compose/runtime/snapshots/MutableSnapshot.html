@@ -5,7 +5,9 @@
 {% include "_shared/_reference-head-tags.html" %}
   </head>
   <body>
-    <div id="metadata-info-block"></div>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/runtime/snapshots/Snapshot.kt+class:androidx.compose.runtime.snapshots.MutableSnapshot&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
     <h1>MutableSnapshot</h1>
     <p>
       <pre>open class <a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html">MutableSnapshot</a> : <a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></pre>
@@ -166,6 +168,20 @@
                       <td>
                         <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">enter</a>(block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T)</code></div>
                         <p>Enter the snapshot.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>?</code></td>
+                      <td>
+                        <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/ExperimentalComposeApi.html">ExperimentalComposeApi</a><br><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#unsafeEnter()">unsafeEnter</a>()</code></div>
+                        <p>Enter the snapshot, returning the previous <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code> for leaving this snapshot later using <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#unsafeLeave(androidx.compose.runtime.snapshots.Snapshot)">unsafeLeave</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/ExperimentalComposeApi.html">ExperimentalComposeApi</a><br><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#unsafeLeave(androidx.compose.runtime.snapshots.Snapshot)">unsafeLeave</a>(oldSnapshot:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>?)</code></div>
+                        <p>Leave the snapshot, restoring the <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#unsafeLeave(androidx.compose.runtime.snapshots.Snapshot)">oldSnapshot</a></code> before returning.</p>
                       </td>
                     </tr>
                   </tbody>

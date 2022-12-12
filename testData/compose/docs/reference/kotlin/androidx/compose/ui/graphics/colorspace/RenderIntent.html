@@ -1,0 +1,134 @@
+<html devsite="true">
+  <head>
+    <title>RenderIntent</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-graphics/androidx/compose/ui/graphics/colorspace/RenderIntent.kt+class:androidx.compose.ui.graphics.colorspace.RenderIntent&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>RenderIntent</h1>
+    <p>
+      <pre>value class <a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/RenderIntent.html">RenderIntent</a></pre>
+    </p>
+    <hr>
+    <p>A render intent determines how a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/Connector.html">connector</a></code> maps colors from one color space to another. The choice of mapping is important when the source color space has a larger color gamut than the destination color space.</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">See also</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/package-summary.html#(androidx.compose.ui.graphics.colorspace.ColorSpace).connect(androidx.compose.ui.graphics.colorspace.ColorSpace,androidx.compose.ui.graphics.colorspace.RenderIntent)">connect</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public companion properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/RenderIntent.html">RenderIntent</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/RenderIntent.Companion.html#Absolute()">Absolute</a></code></div>
+              <p>Colors that are in the destination gamut are left unchanged.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/RenderIntent.html">RenderIntent</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/RenderIntent.Companion.html#Perceptual()">Perceptual</a></code></div>
+              <p>Compresses the source gamut into the destination gamut.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/RenderIntent.html">RenderIntent</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/RenderIntent.Companion.html#Relative()">Relative</a></code></div>
+              <p>Similar to the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/RenderIntent.Companion.html#Absolute()">Absolute</a></code> render intent, this render intent matches the closest color in the destination gamut but makes adjustments for the destination white point.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/RenderIntent.html">RenderIntent</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/RenderIntent.Companion.html#Saturation()">Saturation</a></code></div>
+              <p>Attempts to maintain the relative saturation of colors from the source gamut to the destination gamut, to keep highly saturated colors as saturated as possible.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/RenderIntent.html#toString()">toString</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public companion properties</h2>
+      <div class="api-item"><a name="getAbsolute()"></a><a name="setAbsolute()"></a><a name="getAbsolute--"></a><a name="setAbsolute--"></a>
+        <h3 class="api-name" id="Absolute()">Absolute</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/RenderIntent.Companion.html#Absolute()">Absolute</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/RenderIntent.html">RenderIntent</a></pre>
+        <p>Colors that are in the destination gamut are left unchanged. Colors that fall outside of the destination gamut are mapped to the closest possible color within the gamut of the destination color space (they are clipped).</p>
+      </div>
+      <div class="api-item"><a name="getPerceptual()"></a><a name="setPerceptual()"></a><a name="getPerceptual--"></a><a name="setPerceptual--"></a>
+        <h3 class="api-name" id="Perceptual()">Perceptual</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/RenderIntent.Companion.html#Perceptual()">Perceptual</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/RenderIntent.html">RenderIntent</a></pre>
+        <p>Compresses the source gamut into the destination gamut. This render intent affects all colors, inside and outside of destination gamut. The goal of this render intent is to preserve the visual relationship between colors.</p>
+        <p>This render intent is currently not implemented and behaves like <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/RenderIntent.Companion.html#Relative()">Relative</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getRelative()"></a><a name="setRelative()"></a><a name="getRelative--"></a><a name="setRelative--"></a>
+        <h3 class="api-name" id="Relative()">Relative</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/RenderIntent.Companion.html#Relative()">Relative</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/RenderIntent.html">RenderIntent</a></pre>
+        <p>Similar to the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/RenderIntent.Companion.html#Absolute()">Absolute</a></code> render intent, this render intent matches the closest color in the destination gamut but makes adjustments for the destination white point.</p>
+      </div>
+      <div class="api-item"><a name="getSaturation()"></a><a name="setSaturation()"></a><a name="getSaturation--"></a><a name="setSaturation--"></a>
+        <h3 class="api-name" id="Saturation()">Saturation</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/RenderIntent.Companion.html#Saturation()">Saturation</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/RenderIntent.html">RenderIntent</a></pre>
+        <p>Attempts to maintain the relative saturation of colors from the source gamut to the destination gamut, to keep highly saturated colors as saturated as possible.</p>
+        <p>This render intent is currently not implemented and behaves like <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/RenderIntent.Companion.html#Relative()">Relative</a></code>.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+        <h3 class="api-name" id="toString()">toString</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/RenderIntent.html#toString()">toString</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></pre>
+      </div>
+    </div>
+  </body>
+</html>

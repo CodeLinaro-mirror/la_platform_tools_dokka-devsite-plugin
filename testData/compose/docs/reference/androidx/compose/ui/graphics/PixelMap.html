@@ -1,0 +1,281 @@
+<html devsite="true">
+  <head>
+    <title>PixelMap</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-graphics/androidx/compose/ui/graphics/PixelMap.kt+class:androidx.compose.ui.graphics.PixelMap&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>PixelMap</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/graphics/PixelMap.html">PixelMap</a></pre>
+    </p>
+    <hr>
+    <p>Result of a pixel read operation. This contains the <code><a href="/reference/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a></code> pixel information represented as a 1 dimensional array of values that supports queries of pixel values based on the 2 dimensional coordinates of the corresponding <code><a href="/reference/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a></code> this was obtained from</p>
+    <pre class="prettyprint">
+import androidx.compose.ui.graphics.PixelMap
+
+val imageBitmap = createImageBitmap()
+
+val buffer = IntArray(20 * 10)
+imageBitmap.readPixels(
+    buffer = buffer,
+    startX = 8,
+    startY = 9,
+    width = 20,
+    height = 10
+)
+
+val pixelmap = PixelMap(
+    buffer = buffer,
+    width = 20,
+    height = 10,
+    stride = 20,
+    bufferOffset = 0
+)
+
+// create a histogram to count the number of occurrences of a color within the specified
+// subsection of the provided ImageBitmap
+val histogram = HashMap&lt;Color, Int&gt;()
+for (x in 0 until pixelmap.width) {
+    for (y in 0 until pixelmap.height) {
+        val color = pixelmap[x, y]
+        val colorCount = histogram[color] ?: 0
+        histogram[color] = (colorCount + 1)
+    }
+}</pre>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">See also</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/graphics/ImageBitmap.html#readPixels(kotlin.IntArray,kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">readPixels</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.ImageBitmap).toPixelMap(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int,kotlin.IntArray,kotlin.Int,kotlin.Int)">toPixelMap</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> int[]</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/PixelMap.html#buffer()">buffer</a></code></div>
+              <p>IntArray where pixel information is stored as an ARGB value packed into an Int</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/PixelMap.html#bufferOffset()">bufferOffset</a></code></div>
+              <p>first index in the buffer where pixel information for the <code><a href="/reference/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a></code> is stored</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/PixelMap.html#height()">height</a></code></div>
+              <p>Height of the subsection of the <code><a href="/reference/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a></code> this buffer represents</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/PixelMap.html#stride()">stride</a></code></div>
+              <p>Number of entries to skip between rows</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/PixelMap.html#width()">width</a></code></div>
+              <p>Width of the subsection of the <code><a href="/reference/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a></code> this buffer represents</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/PixelMap.html#PixelMap(kotlin.IntArray,kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">PixelMap</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> int[]&nbsp;buffer,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;width,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;height,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;bufferOffset,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;stride<br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/PixelMap.html#get(kotlin.Int,kotlin.Int)">get</a>(int&nbsp;x,&nbsp;int&nbsp;y)</code></div>
+              <p>Obtain the color of the pixel at the given coordinate.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getBuffer()"></a><a name="setBuffer()"></a><a name="getBuffer--"></a><a name="setBuffer--"></a>
+        <h3 class="api-name" id="buffer()">buffer</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> int[]&nbsp;<a href="/reference/androidx/compose/ui/graphics/PixelMap.html#buffer()">buffer</a></pre>
+        <p>IntArray where pixel information is stored as an ARGB value packed into an Int</p>
+      </div>
+      <div class="api-item"><a name="getBufferOffset()"></a><a name="setBufferOffset()"></a><a name="getBufferOffset--"></a><a name="setBufferOffset--"></a>
+        <h3 class="api-name" id="bufferOffset()">bufferOffset</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/graphics/PixelMap.html#bufferOffset()">bufferOffset</a></pre>
+        <p>first index in the buffer where pixel information for the <code><a href="/reference/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a></code> is stored</p>
+      </div>
+      <div class="api-item"><a name="getHeight()"></a><a name="setHeight()"></a><a name="getHeight--"></a><a name="setHeight--"></a>
+        <h3 class="api-name" id="height()">height</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/graphics/PixelMap.html#height()">height</a></pre>
+        <p>Height of the subsection of the <code><a href="/reference/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a></code> this buffer represents</p>
+      </div>
+      <div class="api-item"><a name="getStride()"></a><a name="setStride()"></a><a name="getStride--"></a><a name="setStride--"></a>
+        <h3 class="api-name" id="stride()">stride</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/graphics/PixelMap.html#stride()">stride</a></pre>
+        <p>Number of entries to skip between rows</p>
+      </div>
+      <div class="api-item"><a name="getWidth()"></a><a name="setWidth()"></a><a name="getWidth--"></a><a name="setWidth--"></a>
+        <h3 class="api-name" id="width()">width</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/graphics/PixelMap.html#width()">width</a></pre>
+        <p>Width of the subsection of the <code><a href="/reference/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a></code> this buffer represents</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="PixelMap(kotlin.IntArray, kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Int)"></a><a name="PixelMap-kotlin.IntArray-kotlin.Int-kotlin.Int-kotlin.Int-kotlin.Int-"></a><a name="pixelmap"></a>
+        <h3 class="api-name" id="PixelMap(kotlin.IntArray,kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">PixelMap</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/graphics/PixelMap.html#PixelMap(kotlin.IntArray,kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">PixelMap</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> int[]&nbsp;buffer,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;width,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;height,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;bufferOffset,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;stride<br>)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> int[]&nbsp;buffer</code></td>
+                <td>
+                  <p>IntArray where pixel information is stored as an ARGB value packed into an Int</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>int&nbsp;width</code></td>
+                <td>
+                  <p>Width of the subsection of the <code><a href="/reference/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a></code> this buffer represents</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>int&nbsp;height</code></td>
+                <td>
+                  <p>Height of the subsection of the <code><a href="/reference/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a></code> this buffer represents</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>int&nbsp;bufferOffset</code></td>
+                <td>
+                  <p>first index in the buffer where pixel information for the <code><a href="/reference/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a></code> is stored</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>int&nbsp;stride</code></td>
+                <td>
+                  <p>Number of entries to skip between rows</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="get(kotlin.Int, kotlin.Int)"></a><a name="get-kotlin.Int-kotlin.Int-"></a><a name="get"></a>
+        <h3 class="api-name" id="get(kotlin.Int,kotlin.Int)">get</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/PixelMap.html#get(kotlin.Int,kotlin.Int)">get</a>(int&nbsp;x,&nbsp;int&nbsp;y)</pre>
+        <p>Obtain the color of the pixel at the given coordinate.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int&nbsp;x</code></td>
+                <td>
+                  <p>the horizontal pixel coordinate, minimum 1</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>int&nbsp;y</code></td>
+                <td>
+                  <p>the vertical pixel coordinate, minimum 1</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

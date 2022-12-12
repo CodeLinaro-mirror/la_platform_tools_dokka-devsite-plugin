@@ -1,0 +1,253 @@
+<html devsite="true">
+  <head>
+    <title>androidx.compose.ui.platform</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>androidx.compose.ui.platform</h1>
+    <h2>Interfaces</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/AccessibilityManager.html">AccessibilityManager</a></code></td>
+            <td>
+              <p>Interface for managing accessibility.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/ClipboardManager.html">ClipboardManager</a></code></td>
+            <td>
+              <p>Interface for managing the Clipboard.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/InfiniteAnimationPolicy.html">InfiniteAnimationPolicy</a></code></td>
+            <td>
+              <p>Provides a policy that will be applied to animations that get their frame time from <code><a href="/reference/androidx/compose/animation/core/package-summary.html#withInfiniteAnimationFrameNanos(kotlin.Function1)">withInfiniteAnimationFrameNanos</a></code> or <code><a href="/reference/androidx/compose/animation/core/package-summary.html#withInfiniteAnimationFrameMillis(kotlin.Function1)">withInfiniteAnimationFrameMillis</a></code> This can be used to intervene in infinite animations to make them finite, for example by cancelling such coroutines.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/InspectableValue.html">InspectableValue</a></code></td>
+            <td>
+              <p>A compose value that is inspectable by tools.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/SoftwareKeyboardController.html">SoftwareKeyboardController</a></code></td>
+            <td>
+              <p>Provide software keyboard control.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/TextToolbar.html">TextToolbar</a></code></td>
+            <td>
+              <p>Interface for text-related toolbar.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/UriHandler.html">UriHandler</a></code></td>
+            <td>
+              <p>An interface of providing platform specific URL handling.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/ViewCompositionStrategy.html">ViewCompositionStrategy</a></code></td>
+            <td>
+              <p>A strategy for managing the underlying Composition of Compose UI <code><a href="https://developer.android.com/reference/android/view/View.html">View</a></code>s such as <code><a href="/reference/androidx/compose/ui/platform/ComposeView.html">ComposeView</a></code> and <code><a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html">AbstractComposeView</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html">ViewConfiguration</a></code></td>
+            <td>
+              <p>Contains methods to standard constants used in the UI for timeouts, sizes, and distances.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/ViewRootForInspector.html">ViewRootForInspector</a></code></td>
+            <td>
+              <p>The marker interface to be implemented by <code><a href="https://developer.android.com/reference/android/view/View.html">View</a></code>s that are initialized from Compose.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/WindowInfo.html">WindowInfo</a></code></td>
+            <td>
+              <p>Provides information about the Window that is hosting this compose hierarchy.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/WindowRecomposerFactory.html">WindowRecomposerFactory</a></code></td>
+            <td>
+              <p>A factory for creating an Android window-scoped <code><a href="/reference/androidx/compose/runtime/Recomposer.html">Recomposer</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Classes</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html">AbstractComposeView</a></code></td>
+            <td>
+              <p>Base class for custom <code><a href="https://developer.android.com/reference/android/view/View.html">android.view.View</a></code>s implemented using Jetpack Compose UI.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/AndroidCompositionLocalsKt.html">AndroidCompositionLocalsKt</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/AndroidUiDispatcher.html">AndroidUiDispatcher</a></code></td>
+            <td>
+              <p>A <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a></code> that will perform dispatch during a <code><a href="/reference/androidx/compose/ui/platform/AndroidUiDispatcher.html#handler()">handler</a></code> callback or <code><a href="/reference/androidx/compose/ui/platform/AndroidUiDispatcher.html#choreographer()">choreographer</a></code>'s animation frame stage, whichever comes first.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/AndroidUiFrameClock.html">AndroidUiFrameClock</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/AndroidUriHandler.html">AndroidUriHandler</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/AndroidViewConfiguration.html">AndroidViewConfiguration</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/AtomicInt.html">AtomicInt</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/ComposeView.html">ComposeView</a></code></td>
+            <td>
+              <p>A <code><a href="https://developer.android.com/reference/android/view/View.html">android.view.View</a></code> that can host Jetpack Compose UI content.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/CompositionLocalsKt.html">CompositionLocalsKt</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/InspectableModifier.html">InspectableModifier</a></code></td>
+            <td>
+              <p>Annotates a range of modifiers in a chain with inspector metadata.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/InspectableModifier.End.html">InspectableModifier.End</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/InspectableValueKt.html">InspectableValueKt</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/InspectionModeKt.html">InspectionModeKt</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/InspectorInfo.html">InspectorInfo</a></code></td>
+            <td>
+              <p>A builder for an <code><a href="/reference/androidx/compose/ui/platform/InspectableValue.html">InspectableValue</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/InspectorValueInfo.html">InspectorValueInfo</a></code></td>
+            <td>
+              <p>Implementation of <code><a href="/reference/androidx/compose/ui/platform/InspectableValue.html">InspectableValue</a></code> based on a builder <code><a href="/reference/androidx/compose/ui/platform/InspectorInfo.html">InspectorInfo</a></code> DSL.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/NestedScrollInteropConnectionKt.html">NestedScrollInteropConnectionKt</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/TestTagKt.html">TestTagKt</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/ValueElement.html">ValueElement</a></code></td>
+            <td>
+              <p>A <code><a href="/reference/androidx/compose/ui/platform/ValueElement.html">ValueElement</a></code> describes an element of a compose value instance.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/ValueElementSequence.html">ValueElementSequence</a></code></td>
+            <td>
+              <p>A builder for a sequence of <code><a href="/reference/androidx/compose/ui/platform/ValueElement.html">ValueElement</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/ViewCompositionStrategy.DisposeOnLifecycleDestroyed.html">ViewCompositionStrategy.DisposeOnLifecycleDestroyed</a></code></td>
+            <td>
+              <p><code><a href="/reference/androidx/compose/ui/platform/ViewCompositionStrategy.html">ViewCompositionStrategy</a></code> that disposes the composition when <code><a href="/reference/androidx/compose/ui/platform/ViewCompositionStrategy.DisposeOnLifecycleDestroyed.html#lifecycle()">lifecycle</a></code> is <code><a href="/reference/androidx/lifecycle/Lifecycle.Event.ON_DESTROY.html">destroyed</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/WindowRecomposerKt.html">WindowRecomposerKt</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/InfiniteAnimationPolicy.Key.html">InfiniteAnimationPolicy.Key</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/LocalSoftwareKeyboardController.html">LocalSoftwareKeyboardController</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/ViewCompositionStrategy.DisposeOnDetachedFromWindow.html">ViewCompositionStrategy.DisposeOnDetachedFromWindow</a></code></td>
+            <td>
+              <p><code><a href="/reference/androidx/compose/ui/platform/ViewCompositionStrategy.html">ViewCompositionStrategy</a></code> that disposes the composition whenever the view becomes detached from a window.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool.html">ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool</a></code></td>
+            <td>
+              <p>The composition will be disposed automatically when the view is detached from a window, unless it is part of a isPoolingContainer, such as <code>RecyclerView</code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed.html">ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed</a></code></td>
+            <td>
+              <p><code><a href="/reference/androidx/compose/ui/platform/ViewCompositionStrategy.html">ViewCompositionStrategy</a></code> that disposes the composition when the <code><a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code> returned by <code><a href="/reference/androidx/lifecycle/package-summary.html#(android.view.View).findViewTreeLifecycleOwner()">findViewTreeLifecycleOwner</a></code> of the next window the view is attached to is <code><a href="/reference/androidx/lifecycle/Lifecycle.Event.ON_DESTROY.html">destroyed</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/WindowRecomposerPolicy.html">WindowRecomposerPolicy</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Enums</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/platform/TextToolbarStatus.html">TextToolbarStatus</a></code></td>
+            <td>
+              <p>Status of the <code><a href="/reference/androidx/compose/ui/platform/TextToolbar.html">TextToolbar</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

@@ -5,7 +5,9 @@
 {% include "_shared/_reference-head-tags.html" %}
   </head>
   <body>
-    <div id="metadata-info-block"></div>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/animation/EnterExitTransition.kt+class:androidx.compose.animation.ExitTransition.Companion&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
     <h1>ExitTransition.Companion</h1>
     <p>
       <pre>public static class <a href="/reference/androidx/compose/animation/ExitTransition.Companion.html">ExitTransition.Companion</a></pre>
@@ -28,7 +30,7 @@
             <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/ExitTransition.html">ExitTransition</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/animation/ExitTransition.Companion.html#None()">None</a></code></div>
-              <p>This can be used when no built-in <code><a href="/reference/androidx/compose/animation/ExitTransition.html">ExitTransition</a></code> (i.e. fade/slide, etc) is desired for the <code><a href="/reference/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.Function1)">AnimatedVisibility</a></code>, but rather the children are defining their own exit animation using the <code><a href="/reference/androidx/compose/animation/core/Transition.html">Transition</a></code> scope.</p>
+              <p>This can be used when no built-in <code><a href="/reference/androidx/compose/animation/ExitTransition.html">ExitTransition</a></code> (i.e. fade/slide, etc) is desired for the <code><a href="/reference/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String,kotlin.Function1)">AnimatedVisibility</a></code>, but rather the children are defining their own exit animation using the <code><a href="/reference/androidx/compose/animation/core/Transition.html">Transition</a></code> scope.</p>
             </td>
           </tr>
         </tbody>
@@ -39,8 +41,8 @@
       <div class="api-item"><a name="getNone()"></a><a name="setNone()"></a><a name="getNone--"></a><a name="setNone--"></a>
         <h3 class="api-name" id="None()">None</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/ExitTransition.html">ExitTransition</a>&nbsp;<a href="/reference/androidx/compose/animation/ExitTransition.Companion.html#None()">None</a></pre>
-        <p>This can be used when no built-in <code><a href="/reference/androidx/compose/animation/ExitTransition.html">ExitTransition</a></code> (i.e. fade/slide, etc) is desired for the <code><a href="/reference/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.Function1)">AnimatedVisibility</a></code>, but rather the children are defining their own exit animation using the <code><a href="/reference/androidx/compose/animation/core/Transition.html">Transition</a></code> scope.</p>
-        <p><b>Note:</b> If <code><a href="/reference/androidx/compose/animation/ExitTransition.Companion.html#None()">None</a></code> is used, and nothing is animating in the Transition<EnterExitState> scope that <code><a href="/reference/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.Function1)">AnimatedVisibility</a></code> provided, the content will be removed from <code><a href="/reference/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.Function1)">AnimatedVisibility</a></code> right away.</p>
+        <p>This can be used when no built-in <code><a href="/reference/androidx/compose/animation/ExitTransition.html">ExitTransition</a></code> (i.e. fade/slide, etc) is desired for the <code><a href="/reference/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String,kotlin.Function1)">AnimatedVisibility</a></code>, but rather the children are defining their own exit animation using the <code><a href="/reference/androidx/compose/animation/core/Transition.html">Transition</a></code> scope.</p>
+        <p><b>Note:</b> If <code><a href="/reference/androidx/compose/animation/ExitTransition.Companion.html#None()">None</a></code> is used, and nothing is animating in the Transition<EnterExitState> scope that <code><a href="/reference/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String,kotlin.Function1)">AnimatedVisibility</a></code> provided, the content will be removed from <code><a href="/reference/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String,kotlin.Function1)">AnimatedVisibility</a></code> right away.</p>
         <pre class="prettyprint">
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloat
@@ -100,7 +102,6 @@ fun AnimatedVisibilityScope.Item(
     }
 }
 
-@OptIn(ExperimentalAnimationApi::class, ExperimentalTransitionApi::class)
 @Composable
 fun AnimateMainContent(mainContentVisible: MutableTransitionState&lt;Boolean&gt;) {
     Box {

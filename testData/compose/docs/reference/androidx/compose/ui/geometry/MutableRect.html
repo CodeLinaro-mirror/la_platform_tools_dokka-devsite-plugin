@@ -1,0 +1,292 @@
+<html devsite="true">
+  <head>
+    <title>MutableRect</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-geometry/androidx/compose/ui/geometry/MutableRect.kt+class:androidx.compose.ui.geometry.MutableRect&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>MutableRect</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/geometry/MutableRect.html">MutableRect</a></pre>
+    </p>
+    <hr>
+    <p>An mutable, 2D, axis-aligned, floating-point rectangle whose coordinates are relative to a given origin.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#bottom()">bottom</a></code></div>
+              <p>The offset of the bottom edge of this rectangle from the y axis.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#height()">height</a></code></div>
+              <p>The distance between the top and bottom edges of this rectangle.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#isEmpty()">isEmpty</a></code></div>
+              <p>Whether this rectangle encloses a non-zero area.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#left()">left</a></code></div>
+              <p>The offset of the left edge of this rectangle from the x axis.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#right()">right</a></code></div>
+              <p>The offset of the right edge of this rectangle from the x axis.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#size()">size</a></code></div>
+              <p>The distance between the upper-left corner and the lower-right corner of this rectangle.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#top()">top</a></code></div>
+              <p>The offset of the top edge of this rectangle from the y axis.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#width()">width</a></code></div>
+              <p>The distance between the left and right edges of this rectangle.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#MutableRect(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">MutableRect</a>(float&nbsp;left,&nbsp;float&nbsp;top,&nbsp;float&nbsp;right,&nbsp;float&nbsp;bottom)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#contains(androidx.compose.ui.geometry.Offset)">contains</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;offset)</code></div>
+              <p>Whether the point specified by the given offset (which is assumed to be relative to the origin) lies between the left and right and the top and bottom edges of this rectangle.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#intersect(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">intersect</a>(float&nbsp;left,&nbsp;float&nbsp;top,&nbsp;float&nbsp;right,&nbsp;float&nbsp;bottom)</code></div>
+              <p>Modifies <code>this</code> to be the intersection of this and the rect formed by <code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#intersect(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">left</a></code>, <code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#intersect(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">top</a></code>, <code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#intersect(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">right</a></code>, and <code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#intersect(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">bottom</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#set(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">set</a>(float&nbsp;left,&nbsp;float&nbsp;top,&nbsp;float&nbsp;right,&nbsp;float&nbsp;bottom)</code></div>
+              <p>Sets new bounds to (<code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#set(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">left</a></code>, <code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#set(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">top</a></code>, <code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#set(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">right</a></code>, <code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#set(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">bottom</a></code>)</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#toString()">toString</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/MutableRectKt.html">MutableRectKt</a>.<a href="/reference/androidx/compose/ui/geometry/MutableRect.html#(androidx.compose.ui.geometry.MutableRect).toRect()">toRect</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/MutableRect.html">MutableRect</a>&nbsp;receiver)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getBottom()"></a><a name="setBottom()"></a><a name="getBottom--"></a><a name="setBottom--"></a>
+        <h3 class="api-name" id="bottom()">bottom</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/geometry/MutableRect.html#bottom()">bottom</a></pre>
+        <p>The offset of the bottom edge of this rectangle from the y axis.</p>
+      </div>
+      <div class="api-item"><a name="getHeight()"></a><a name="setHeight()"></a><a name="getHeight--"></a><a name="setHeight--"></a>
+        <h3 class="api-name" id="height()">height</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/geometry/MutableRect.html#height()">height</a></pre>
+        <p>The distance between the top and bottom edges of this rectangle.</p>
+      </div>
+      <div class="api-item"><a name="getIsEmpty()"></a><a name="setIsEmpty()"></a><a name="getIsEmpty--"></a><a name="setIsEmpty--"></a>
+        <h3 class="api-name" id="isEmpty()">isEmpty</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/geometry/MutableRect.html#isEmpty()">isEmpty</a></pre>
+        <p>Whether this rectangle encloses a non-zero area. Negative areas are considered empty.</p>
+      </div>
+      <div class="api-item"><a name="getLeft()"></a><a name="setLeft()"></a><a name="getLeft--"></a><a name="setLeft--"></a>
+        <h3 class="api-name" id="left()">left</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/geometry/MutableRect.html#left()">left</a></pre>
+        <p>The offset of the left edge of this rectangle from the x axis.</p>
+      </div>
+      <div class="api-item"><a name="getRight()"></a><a name="setRight()"></a><a name="getRight--"></a><a name="setRight--"></a>
+        <h3 class="api-name" id="right()">right</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/geometry/MutableRect.html#right()">right</a></pre>
+        <p>The offset of the right edge of this rectangle from the x axis.</p>
+      </div>
+      <div class="api-item"><a name="getSize()"></a><a name="setSize()"></a><a name="getSize--"></a><a name="setSize--"></a>
+        <h3 class="api-name" id="size()">size</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;<a href="/reference/androidx/compose/ui/geometry/MutableRect.html#size()">size</a></pre>
+        <p>The distance between the upper-left corner and the lower-right corner of this rectangle.</p>
+      </div>
+      <div class="api-item"><a name="getTop()"></a><a name="setTop()"></a><a name="getTop--"></a><a name="setTop--"></a>
+        <h3 class="api-name" id="top()">top</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/geometry/MutableRect.html#top()">top</a></pre>
+        <p>The offset of the top edge of this rectangle from the y axis.</p>
+      </div>
+      <div class="api-item"><a name="getWidth()"></a><a name="setWidth()"></a><a name="getWidth--"></a><a name="setWidth--"></a>
+        <h3 class="api-name" id="width()">width</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/geometry/MutableRect.html#width()">width</a></pre>
+        <p>The distance between the left and right edges of this rectangle.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="MutableRect(kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="MutableRect-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="mutablerect"></a>
+        <h3 class="api-name" id="MutableRect(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">MutableRect</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/geometry/MutableRect.html#MutableRect(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">MutableRect</a>(float&nbsp;left,&nbsp;float&nbsp;top,&nbsp;float&nbsp;right,&nbsp;float&nbsp;bottom)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>float&nbsp;left</code></td>
+                <td>
+                  <p>The offset of the left edge of this rectangle from the x axis.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>float&nbsp;top</code></td>
+                <td>
+                  <p>The offset of the top edge of this rectangle from the y axis.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>float&nbsp;right</code></td>
+                <td>
+                  <p>The offset of the right edge of this rectangle from the x axis.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>float&nbsp;bottom</code></td>
+                <td>
+                  <p>The offset of the bottom edge of this rectangle from the y axis.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="contains-androidx.compose.ui.geometry.Offset-"></a><a name="contains"></a>
+        <h3 class="api-name" id="contains(androidx.compose.ui.geometry.Offset)">contains</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/geometry/MutableRect.html#contains(androidx.compose.ui.geometry.Offset)">contains</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;offset)</pre>
+        <p>Whether the point specified by the given offset (which is assumed to be relative to the origin) lies between the left and right and the top and bottom edges of this rectangle.</p>
+        <p>Rectangles include their top and left edges but exclude their bottom and right edges.</p>
+      </div>
+      <div class="api-item"><a name="intersect(kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="intersect-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="intersect"></a>
+        <h3 class="api-name" id="intersect(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">intersect</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/geometry/MutableRect.html#intersect(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">intersect</a>(float&nbsp;left,&nbsp;float&nbsp;top,&nbsp;float&nbsp;right,&nbsp;float&nbsp;bottom)</pre>
+        <p>Modifies <code>this</code> to be the intersection of this and the rect formed by <code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#intersect(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">left</a></code>, <code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#intersect(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">top</a></code>, <code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#intersect(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">right</a></code>, and <code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#intersect(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">bottom</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="set(kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="set-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="set"></a>
+        <h3 class="api-name" id="set(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">set</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/geometry/MutableRect.html#set(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">set</a>(float&nbsp;left,&nbsp;float&nbsp;top,&nbsp;float&nbsp;right,&nbsp;float&nbsp;bottom)</pre>
+        <p>Sets new bounds to (<code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#set(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">left</a></code>, <code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#set(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">top</a></code>, <code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#set(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">right</a></code>, <code><a href="/reference/androidx/compose/ui/geometry/MutableRect.html#set(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">bottom</a></code>)</p>
+      </div>
+      <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+        <h3 class="api-name" id="toString()">toString</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/geometry/MutableRect.html#toString()">toString</a>()</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.geometry.MutableRect-.toRect--"></a><a name="torect"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.geometry.MutableRect).toRect()">MutableRectKt.toRect</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a>&nbsp;<a href="/reference/androidx/compose/ui/geometry/MutableRectKt.html">MutableRectKt</a>.<a href="/reference/androidx/compose/ui/geometry/MutableRect.html#(androidx.compose.ui.geometry.MutableRect).toRect()">toRect</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/MutableRect.html">MutableRect</a>&nbsp;receiver)</pre>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,114 @@
+<html devsite="true">
+  <head>
+    <title>FontVariation.Setting</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-text/androidx/compose/ui/text/font/FontVariation.kt+class:androidx.compose.ui.text.font.FontVariation.Setting&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>FontVariation.Setting</h1>
+    <p>
+      <pre>public interface <a href="/reference/androidx/compose/ui/text/font/FontVariation.Setting.html">FontVariation.Setting</a></pre>
+    </p>
+    <hr>
+    <p>Represents a single point in a variation, such as 0.7 or 100</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/font/FontVariation.Setting.html#axisName()">axisName</a></code></div>
+              <p>The font variation axis, such as 'wdth' or 'ital'</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/font/FontVariation.Setting.html#needsDensity()">needsDensity</a></code></div>
+              <p>True if this setting requires density to resolve</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/font/FontVariation.Setting.html#toVariationValue(androidx.compose.ui.unit.Density)">toVariationValue</a>(<a href="/reference/androidx/compose/ui/unit/Density.html">Density</a>&nbsp;density)</code></div>
+              <p>Convert a value to a final value for use as a font variation setting.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getAxisName()"></a><a name="setAxisName()"></a><a name="getAxisName--"></a><a name="setAxisName--"></a>
+        <h3 class="api-name" id="axisName()">axisName</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontVariation.Setting.html#axisName()">axisName</a></pre>
+        <p>The font variation axis, such as 'wdth' or 'ital'</p>
+      </div>
+      <div class="api-item"><a name="getNeedsDensity()"></a><a name="setNeedsDensity()"></a><a name="getNeedsDensity--"></a><a name="setNeedsDensity--"></a>
+        <h3 class="api-name" id="needsDensity()">needsDensity</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontVariation.Setting.html#needsDensity()">needsDensity</a></pre>
+        <p>True if this setting requires density to resolve</p>
+        <p>When false, may toVariationValue may be called with null or any Density</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="toVariationValue-androidx.compose.ui.unit.Density-"></a><a name="tovariationvalue"></a>
+        <h3 class="api-name" id="toVariationValue(androidx.compose.ui.unit.Density)">toVariationValue</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontVariation.Setting.html#toVariationValue(androidx.compose.ui.unit.Density)">toVariationValue</a>(<a href="/reference/androidx/compose/ui/unit/Density.html">Density</a>&nbsp;density)</pre>
+        <p>Convert a value to a final value for use as a font variation setting.</p>
+        <p>If <code><a href="/reference/androidx/compose/ui/text/font/FontVariation.Setting.html#needsDensity()">needsDensity</a></code> is false, density may be null</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/unit/Density.html">Density</a>&nbsp;density</code></td>
+                <td>
+                  <p>to resolve from Compose types to feature-specific ranges.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -61,7 +61,10 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.IntOffset
 
 Box(
-    Modifier.size(200.dp).clipToBounds().background(Color.LightGray)
+    Modifier
+        .size(200.dp)
+        .clipToBounds()
+        .background(Color.LightGray)
 ) {
     // set up all transformation states
     var scale by remember { mutableStateOf(1f) }
@@ -71,7 +74,8 @@ Box(
     // let's create a modifier state to specify how to update our UI state defined above
     val state = rememberTransformableState { zoomChange, offsetChange, rotationChange -&gt;
         // note: scale goes by factor, not an absolute difference, so we need to multiply it
-        scale *= zoomChange
+        // for this example, we don't allow downscaling, so cap it to 1f
+        scale = max(scale * zoomChange, 1f)
         rotation += rotationChange
         offset += offsetChange
     }

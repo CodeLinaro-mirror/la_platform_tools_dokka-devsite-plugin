@@ -138,6 +138,8 @@ testDataSourcesKmp.setResolveSources(isKmp = true)
 
 val lifecycleVersion = "2.5.1"
 val collectionsVersion = "1.3.0-alpha02"
+val composeVersion = "1.4.0-alpha05"
+val composeMaterial3Version = "1.1.0-alpha03"
 dependencies {
     testDataImpl("io.reactivex.rxjava3:rxjava:3.0.0")
     testDataImpl("io.reactivex.rxjava2:rxjava:2.2.9")
@@ -182,11 +184,6 @@ dependencies {
     testDataSources("androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion")
     testDataSources("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     testDataSources("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycleVersion")
-/*      Collections doesn't properly declare a documentation variant. KMP problems.
-    testDataSources("androidx.collection:collection:$collectionsVersion")
-    testDataSources("androidx.collection:collection-jvm:$collectionsVersion")
-    testDataSources("androidx.collection:collection-ktx:$collectionsVersion")
-*/
     testDataSources("androidx.activity:activity:1.6.0-beta01")
     testDataSources("androidx.activity:activity-ktx:1.6.0-beta01")
     testDataSources("androidx.ads:ads-identifier:1.0.0-alpha04")
@@ -244,9 +241,14 @@ dependencies {
     // testDataSources("androidx.car:car-cluster:1.0.0-alpha5")
     // testDataSources("androidx.car:car-moderator:1.0.0-alpha1")
     testDataSources("androidx.cardview:cardview:1.0.0")
-    // Collection is KMP
-    // Compose is KMP
-    testDataSourcesKmp("androidx.datastore:datastore-core:1.1.0-alpha01")
+    // We do not test against androidx.test, because they are not part of the androidx build
+    // and also publish source jars with problematic no-write-permission on parts
+    testDataAars("androidx.test.uiautomator:uiautomator:2.2.0") // no source jar
+    testDataSources("androidx.tracing:tracing:1.2.0-alpha01")
+    testDataSources("androidx.tracing:tracing-ktx:1.2.0-alpha01")
+    testDataSources("androidx.tracing:tracing-perfetto:1.0.0-alpha01")
+    testDataSources("androidx.tracing:tracing-perfetto-binary:1.0.0-alpha02")
+    testDataSources("androidx.tracing:tracing-perfetto-common:1.0.0-alpha01")
 
     testDataSources("androidx.paging:paging-common:3.2.0-alpha02")
     testDataSources("androidx.paging:paging-common-ktx:3.2.0-alpha02")
@@ -258,18 +260,25 @@ dependencies {
     testDataSources("androidx.paging:paging-guava:3.2.0-alpha02")
     testDataSources("androidx.paging:paging-compose:1.0.0-alpha16")
 
+    // Compose is KMP, but they don't publish KMP source jars
+    testDataSources("androidx.compose.animation:animation:$composeVersion")
+    testDataSources("androidx.compose.animation:animation-core:$composeVersion")
+    testDataSources("androidx.compose.animation:animation-graphics:$composeVersion")
+    testDataSources("androidx.compose.foundation:foundation:$composeVersion")
+    testDataSources("androidx.compose.foundation:foundation-layout:$composeVersion")
+    testDataSources("androidx.compose.material3:material3:$composeMaterial3Version")
+    testDataSources("androidx.compose.material3:material3-window-size-class:$composeMaterial3Version")
+    testDataSources("androidx.compose.runtime:runtime:$composeVersion")
+    testDataSources("androidx.compose.ui:ui:$composeVersion")
+    testDataSources("androidx.compose.ui:ui-geometry:$composeVersion")
+    testDataSources("androidx.compose.ui:ui-graphics:$composeVersion")
+    testDataSources("androidx.compose.ui:ui-text:$composeVersion")
+    testDataSources("androidx.compose.ui:ui-tooling-preview:$composeVersion")
+    testDataSources("androidx.compose.ui:ui-unit:$composeVersion")
+    testDataSources("androidx.compose.ui:ui-util:$composeVersion")
 
-    // We do not test against androidx.test, because they are not part of the androidx build
-    // and also publish source jars with problematic no-write-permission on parts
-    testDataAars("androidx.test.uiautomator:uiautomator:2.2.0") // no source jar
-    testDataSources("androidx.tracing:tracing:1.2.0-alpha01")
-    testDataSources("androidx.tracing:tracing-ktx:1.2.0-alpha01")
-    testDataSources("androidx.tracing:tracing-perfetto:1.0.0-alpha01")
-    testDataSources("androidx.tracing:tracing-perfetto-binary:1.0.0-alpha02")
-    testDataSources("androidx.tracing:tracing-perfetto-common:1.0.0-alpha01")
-
-
-
+    testDataSourcesKmp("androidx.collection:collection:$collectionsVersion")
+    testDataSourcesKmp("androidx.datastore:datastore-core:1.1.0-alpha01")
 }
 
 val explodeAars by tasks.registering(Sync::class) {

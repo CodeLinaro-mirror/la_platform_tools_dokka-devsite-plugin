@@ -1,0 +1,193 @@
+<html devsite="true">
+  <head>
+    <title>FocusRequesterModifier</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/focus/FocusRequesterModifier.kt+class:androidx.compose.ui.focus.FocusRequesterModifier&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>FocusRequesterModifier</h1>
+    <p>
+      <pre>public interface <a href="/reference/androidx/compose/ui/focus/FocusRequesterModifier.html">FocusRequesterModifier</a> extends <a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a></pre>
+    </p>
+    <hr>
+    <aside class="caution"><strong>This interface is deprecated.</strong><br>Use FocusRequesterModifierNode instead</aside>
+    <p>A <code><a href="/reference/androidx/compose/ui/Modifier.Element.html">modifier</a></code> that is used to pass in a <code><a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code> that can be used to request focus state changes.</p>
+    <pre class="prettyprint">
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
+
+val focusRequester = remember { FocusRequester() }
+var color by remember { mutableStateOf(Black) }
+Box(
+    Modifier
+        .clickable { focusRequester.requestFocus() }
+        .border(2.dp, color)
+        // The focusRequester should be added BEFORE the focusable.
+        .focusRequester(focusRequester)
+        // The onFocusChanged should be added BEFORE the focusable that is being observed.
+        .onFocusChanged { color = if (it.isFocused) Green else Black }
+        .focusable()
+)</pre>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">See also</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusRequester(androidx.compose.ui.focus.FocusRequester)">focusRequester</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/focus/FocusRequesterModifier.html#focusRequester()">focusRequester</a></code></div>
+              <p>An instance of <code><a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code>, that can be used to request focus state changes.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/ui/Modifier.html">androidx.compose.ui.Modifier</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>default&nbsp;infix @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/Modifier.html#then(androidx.compose.ui.Modifier)">then</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;other)</code></div>
+                        <p>Concatenates this modifier with another.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/ui/Modifier.Element.html">androidx.compose.ui.Modifier.Element</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>default boolean</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/Modifier.Element.html#all(kotlin.Function1)">all</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;predicate<br>)</code></div>
+                        <p>Returns <code>true</code> if <code><a href="/reference/androidx/compose/ui/Modifier.Element.html#all(kotlin.Function1)">predicate</a></code> returns true for all <code><a href="/reference/androidx/compose/ui/Modifier.Element.html">Element</a></code>s in this <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code> or if this <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code> contains no <code><a href="/reference/androidx/compose/ui/Modifier.Element.html">Element</a></code>s.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default boolean</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/Modifier.Element.html#any(kotlin.Function1)">any</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;predicate<br>)</code></div>
+                        <p>Returns <code>true</code> if <code><a href="/reference/androidx/compose/ui/Modifier.Element.html#any(kotlin.Function1)">predicate</a></code> returns true for any <code><a href="/reference/androidx/compose/ui/Modifier.Element.html">Element</a></code> in this <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R</code></td>
+                      <td>
+                        <div><code>&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/Modifier.Element.html#foldIn(kotlin.Any,kotlin.Function2)">foldIn</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;initial,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;operation<br>)</code></div>
+                        <p>Accumulates a value starting with <code><a href="/reference/androidx/compose/ui/Modifier.Element.html#foldIn(kotlin.Any,kotlin.Function2)">initial</a></code> and applying <code><a href="/reference/androidx/compose/ui/Modifier.Element.html#foldIn(kotlin.Any,kotlin.Function2)">operation</a></code> to the current value and each element from outside in.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R</code></td>
+                      <td>
+                        <div><code>&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/Modifier.Element.html#foldOut(kotlin.Any,kotlin.Function2)">foldOut</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;initial,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;operation<br>)</code></div>
+                        <p>Accumulates a value starting with <code><a href="/reference/androidx/compose/ui/Modifier.Element.html#foldOut(kotlin.Any,kotlin.Function2)">initial</a></code> and applying <code><a href="/reference/androidx/compose/ui/Modifier.Element.html#foldOut(kotlin.Any,kotlin.Function2)">operation</a></code> to the current value and each element from inside out.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getFocusRequester()"></a><a name="setFocusRequester()"></a><a name="getFocusRequester--"></a><a name="setFocusRequester--"></a>
+        <h3 class="api-name" id="focusRequester()">focusRequester</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a>&nbsp;<a href="/reference/androidx/compose/ui/focus/FocusRequesterModifier.html#focusRequester()">focusRequester</a></pre>
+        <p>An instance of <code><a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code>, that can be used to request focus state changes.</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
+
+val focusRequester = remember { FocusRequester() }
+var color by remember { mutableStateOf(Black) }
+Box(
+    Modifier
+        .clickable { focusRequester.requestFocus() }
+        .border(2.dp, color)
+        // The focusRequester should be added BEFORE the focusable.
+        .focusRequester(focusRequester)
+        // The onFocusChanged should be added BEFORE the focusable that is being observed.
+        .onFocusChanged { color = if (it.isFocused) Green else Black }
+        .focusable()
+)</pre>
+      </div>
+    </div>
+  </body>
+</html>

@@ -40,6 +40,14 @@ class KmpTest : IntegrationTestBase() {
     }
 
     @Test
+    fun `Validate prod AndroidX collections prebuilts`() {
+        validatePrebuilts(
+            testName = "collections",
+            artifactNames = listOf("collection"),
+        )
+    }
+
+    @Test
     fun `Validate prod AndroidX datastore-core prebuilts`() {
         squashAndroid = true
         validatePrebuilts(

@@ -1,0 +1,682 @@
+<html devsite="true">
+  <head>
+    <title>PointerInputScope</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/input/pointer/SuspendingPointerInputFilter.kt+class:androidx.compose.ui.input.pointer.PointerInputScope&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>PointerInputScope</h1>
+    <p>
+      <pre>public interface <a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html">PointerInputScope</a> extends <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a></pre>
+    </p>
+    <hr>
+    <p>Receiver scope for <code><a href="/reference/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).pointerInput(kotlin.coroutines.SuspendFunction1)">Modifier.pointerInput</a></code> that permits <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#awaitPointerEventScope(kotlin.coroutines.SuspendFunction1)">handling pointer input</a></code>.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#extendedTouchPadding()">extendedTouchPadding</a></code></div>
+              <p>The additional space applied to each side of the layout area when the layout is smaller than <code><a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html#minimumTouchTargetSize()">ViewConfiguration.minimumTouchTargetSize</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#interceptOutOfBoundsChildEvents()">interceptOutOfBoundsChildEvents</a></code></div>
+              <p>Intercept pointer input that children receive even if the pointer is out of bounds.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#size()">size</a></code></div>
+              <p>The measured size of the pointer input region.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html">ViewConfiguration</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#viewConfiguration()">viewConfiguration</a></code></div>
+              <p>The <code><a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html">ViewConfiguration</a></code> used to tune gesture detectors.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R</code></td>
+            <td>
+              <div><code>&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#awaitPointerEventScope(kotlin.coroutines.SuspendFunction1)">awaitPointerEventScope</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-suspend-function1/index.html">SuspendFunction1</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/AwaitPointerEventScope.html">AwaitPointerEventScope</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;block<br>)</code></div>
+              <p>Suspend and install a pointer input <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#awaitPointerEventScope(kotlin.coroutines.SuspendFunction1)">block</a></code> that can await input events and respond to them immediately.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>default&nbsp;final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/DragGestureDetectorKt.html">DragGestureDetectorKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">detectDragGestures</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html">PointerInputScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDragStart,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDragEnd,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDragCancel,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDrag<br>)</code></div>
+              <p>Gesture detector that waits for pointer down and touch slop in any direction and then calls <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">onDrag</a></code> for each drag event.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/DragGestureDetectorKt.html">DragGestureDetectorKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectDragGesturesAfterLongPress(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">detectDragGesturesAfterLongPress</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html">PointerInputScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDragStart,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDragEnd,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDragCancel,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDrag<br>)</code></div>
+              <p>Gesture detector that waits for pointer down and long press, after which it calls <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectDragGesturesAfterLongPress(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">onDrag</a></code> for each drag event.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/DragGestureDetectorKt.html">DragGestureDetectorKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectHorizontalDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">detectHorizontalDragGestures</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html">PointerInputScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDragStart,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDragEnd,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDragCancel,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onHorizontalDrag<br>)</code></div>
+              <p>Gesture detector that waits for pointer down and touch slop in the horizontal direction and then calls <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectHorizontalDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">onHorizontalDrag</a></code> for each horizontal drag event.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/DragGestureDetectorKt.html">DragGestureDetectorKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectVerticalDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">detectVerticalDragGestures</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html">PointerInputScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDragStart,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDragEnd,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDragCancel,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onVerticalDrag<br>)</code></div>
+              <p>Gesture detector that waits for pointer down and touch slop in the vertical direction and then calls <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectVerticalDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">onVerticalDrag</a></code> for each vertical drag event.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/TransformGestureDetectorKt.html">TransformGestureDetectorKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectTransformGestures(kotlin.Boolean,kotlin.Function4)">detectTransformGestures</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html">PointerInputScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;panZoomLock,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function4&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onGesture<br>)</code></div>
+              <p>A gesture detector for rotation, panning, and zoom.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/ui/unit/Density.html">androidx.compose.ui.unit.Density</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>abstract float</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/Density.html#density()">density</a></code></div>
+                        <p>The logical density of the display.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract float</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/Density.html#fontScale()">fontScale</a></code></div>
+                        <p>Current user preference for the scaling factor for fonts.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/ui/unit/Density.html">androidx.compose.ui.unit.Density</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>default int</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).roundToPx()">roundToPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
+                        <p>Convert <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code> to <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code> by rounding</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default int</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).roundToPx()">roundToPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
+                        <p>Convert Sp to <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code> by rounding</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toDp()">toDp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
+                        <p>Convert Sp to <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Int).toDp()">toDp</a>(int&nbsp;receiver)</code></div>
+                        <p>Convert an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code> pixel value to <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Float).toDp()">toDp</a>(float&nbsp;receiver)</code></div>
+                        <p>Convert a <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code> pixel value to a Dp</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/DpSize.html">DpSize</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.geometry.Size).toDpSize()">toDpSize</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;receiver)</code></div>
+                        <p>Convert a <code><a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code> to a <code><a href="/reference/androidx/compose/ui/unit/DpSize.html">DpSize</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default float</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toPx()">toPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
+                        <p>Convert <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code> to pixels.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default float</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toPx()">toPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
+                        <p>Convert Sp to pixels.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.DpRect).toRect()">toRect</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/DpRect.html">DpRect</a>&nbsp;receiver)</code></div>
+                        <p>Convert a <code><a href="/reference/androidx/compose/ui/unit/DpRect.html">DpRect</a></code> to a <code><a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.DpSize).toSize()">toSize</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/DpSize.html">DpSize</a>&nbsp;receiver)</code></div>
+                        <p>Convert a <code><a href="/reference/androidx/compose/ui/unit/DpSize.html">DpSize</a></code> to a <code><a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toSp()">toSp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
+                        <p>Convert <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code> to Sp.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Int).toSp()">toSp</a>(int&nbsp;receiver)</code></div>
+                        <p>Convert an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code> pixel value to Sp.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Float).toSp()">toSp</a>(float&nbsp;receiver)</code></div>
+                        <p>Convert a <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code> pixel value to a Sp</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getExtendedTouchPadding()"></a><a name="setExtendedTouchPadding()"></a><a name="getExtendedTouchPadding--"></a><a name="setExtendedTouchPadding--"></a>
+        <h3 class="api-name" id="extendedTouchPadding()">extendedTouchPadding</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#extendedTouchPadding()">extendedTouchPadding</a></pre>
+        <p>The additional space applied to each side of the layout area when the layout is smaller than <code><a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html#minimumTouchTargetSize()">ViewConfiguration.minimumTouchTargetSize</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getInterceptOutOfBoundsChildEvents()"></a><a name="setInterceptOutOfBoundsChildEvents()"></a><a name="getInterceptOutOfBoundsChildEvents--"></a><a name="setInterceptOutOfBoundsChildEvents--"></a>
+        <h3 class="api-name" id="interceptOutOfBoundsChildEvents()">interceptOutOfBoundsChildEvents</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#interceptOutOfBoundsChildEvents()">interceptOutOfBoundsChildEvents</a></pre>
+        <p>Intercept pointer input that children receive even if the pointer is out of bounds.</p>
+        <p>If <code>true</code>, and a child has been moved out of this layout and receives an event, this will receive that event. If <code>false</code>, a child receiving pointer input outside of the bounds of this layout will not trigger any events in this.</p>
+      </div>
+      <div class="api-item"><a name="getSize()"></a><a name="setSize()"></a><a name="getSize--"></a><a name="setSize--"></a>
+        <h3 class="api-name" id="size()">size</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a>&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#size()">size</a></pre>
+        <p>The measured size of the pointer input region. Input events will be reported with a coordinate space of (0, 0) to (size.width, size,height) as the input region, with (0, 0) indicating the upper left corner.</p>
+      </div>
+      <div class="api-item"><a name="getViewConfiguration()"></a><a name="setViewConfiguration()"></a><a name="getViewConfiguration--"></a><a name="setViewConfiguration--"></a>
+        <h3 class="api-name" id="viewConfiguration()">viewConfiguration</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html">ViewConfiguration</a>&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#viewConfiguration()">viewConfiguration</a></pre>
+        <p>The <code><a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html">ViewConfiguration</a></code> used to tune gesture detectors.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="awaitPointerEventScope-kotlin.coroutines.SuspendFunction1-"></a><a name="awaitpointereventscope"></a>
+        <h3 class="api-name" id="awaitPointerEventScope(kotlin.coroutines.SuspendFunction1)">awaitPointerEventScope</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#awaitPointerEventScope(kotlin.coroutines.SuspendFunction1)">awaitPointerEventScope</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-suspend-function1/index.html">SuspendFunction1</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/AwaitPointerEventScope.html">AwaitPointerEventScope</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;block<br>)</pre>
+        <p>Suspend and install a pointer input <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#awaitPointerEventScope(kotlin.coroutines.SuspendFunction1)">block</a></code> that can await input events and respond to them immediately. A call to <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#awaitPointerEventScope(kotlin.coroutines.SuspendFunction1)">awaitPointerEventScope</a></code> will resume with <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#awaitPointerEventScope(kotlin.coroutines.SuspendFunction1)">block</a></code>'s result after it completes.</p>
+        <p>More than one <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#awaitPointerEventScope(kotlin.coroutines.SuspendFunction1)">awaitPointerEventScope</a></code> can run concurrently in the same <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html">PointerInputScope</a></code> by using <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/index.html">kotlinx.coroutines.launch</a></code>. <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#awaitPointerEventScope(kotlin.coroutines.SuspendFunction1)">block</a></code>s are dispatched to in the order in which they were installed.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="(androidx.compose.ui.input.pointer.PointerInputScope).detectDragGestures(kotlin.Function1, kotlin.Function0, kotlin.Function0, kotlin.Function2)"></a><a name="-androidx.compose.ui.input.pointer.PointerInputScope-.detectDragGestures-kotlin.Function1-kotlin.Function0-kotlin.Function0-kotlin.Function2-"></a><a name="detectdraggestures"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.pointer.PointerInputScope).detectDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">DragGestureDetectorKt.detectDragGestures</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/DragGestureDetectorKt.html">DragGestureDetectorKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">detectDragGestures</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html">PointerInputScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDragStart,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDragEnd,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDragCancel,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDrag<br>)</pre>
+        <p>Gesture detector that waits for pointer down and touch slop in any direction and then calls <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">onDrag</a></code> for each drag event. It follows the touch slop detection of <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.AwaitPointerEventScope).awaitTouchSlopOrCancellation(androidx.compose.ui.input.pointer.PointerId,kotlin.Function2)">awaitTouchSlopOrCancellation</a></code> but will consume the position change automatically once the touch slop has been crossed.</p>
+        <p><code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">onDragStart</a></code> called when the touch slop has been passed and includes an <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> representing the last known pointer position relative to the containing element. The <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> can be outside the actual bounds of the element itself meaning the numbers can be negative or larger than the element bounds if the touch target is smaller than the <code><a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html#minimumTouchTargetSize()">ViewConfiguration.minimumTouchTargetSize</a></code>.</p>
+        <p><code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">onDragEnd</a></code> is called after all pointers are up and <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">onDragCancel</a></code> is called if another gesture has consumed pointer input, canceling this gesture.</p>
+        <p>Example Usage:</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.toSize
+
+val offsetX = remember { mutableStateOf(0f) }
+val offsetY = remember { mutableStateOf(0f) }
+var size by remember { mutableStateOf(Size.Zero) }
+Box(
+    Modifier.fillMaxSize()
+        .onSizeChanged { size = it.toSize() }
+) {
+    Box(
+        Modifier.offset { IntOffset(offsetX.value.roundToInt(), offsetY.value.roundToInt()) }
+            .size(50.dp)
+            .background(Color.Blue)
+            .pointerInput(Unit) {
+                detectDragGestures { _, dragAmount -&gt;
+                    val original = Offset(offsetX.value, offsetY.value)
+                    val summed = original + dragAmount
+                    val newValue = Offset(
+                        x = summed.x.coerceIn(0f, size.width - 50.dp.toPx()),
+                        y = summed.y.coerceIn(0f, size.height - 50.dp.toPx())
+                    )
+                    offsetX.value = newValue.x
+                    offsetY.value = newValue.y
+                }
+            }
+    )
+}</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectVerticalDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">detectVerticalDragGestures</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectHorizontalDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">detectHorizontalDragGestures</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectDragGesturesAfterLongPress(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">detectDragGesturesAfterLongPress</a></code></td>
+                <td>
+                  <p>to detect gestures after long press</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.input.pointer.PointerInputScope).detectDragGesturesAfterLongPress(kotlin.Function1, kotlin.Function0, kotlin.Function0, kotlin.Function2)"></a><a name="-androidx.compose.ui.input.pointer.PointerInputScope-.detectDragGesturesAfterLongPress-kotlin.Function1-kotlin.Function0-kotlin.Function0-kotlin.Function2-"></a><a name="detectdraggesturesafterlongpress"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.pointer.PointerInputScope).detectDragGesturesAfterLongPress(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">DragGestureDetectorKt.detectDragGesturesAfterLongPress</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/DragGestureDetectorKt.html">DragGestureDetectorKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectDragGesturesAfterLongPress(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">detectDragGesturesAfterLongPress</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html">PointerInputScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDragStart,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDragEnd,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDragCancel,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDrag<br>)</pre>
+        <p>Gesture detector that waits for pointer down and long press, after which it calls <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectDragGesturesAfterLongPress(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">onDrag</a></code> for each drag event.</p>
+        <p><code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectDragGesturesAfterLongPress(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">onDragStart</a></code> called when a long press is detected and includes an <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> representing the last known pointer position relative to the containing element. The <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> can be outside the actual bounds of the element itself meaning the numbers can be negative or larger than the element bounds if the touch target is smaller than the <code><a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html#minimumTouchTargetSize()">ViewConfiguration.minimumTouchTargetSize</a></code>.</p>
+        <p><code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectDragGesturesAfterLongPress(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">onDragEnd</a></code> is called after all pointers are up and <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectDragGesturesAfterLongPress(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">onDragCancel</a></code> is called if another gesture has consumed pointer input, canceling this gesture. This function will automatically consume all the position change after the long press.</p>
+        <p>Example Usage:</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.toSize
+
+val offsetX = remember { mutableStateOf(0f) }
+val offsetY = remember { mutableStateOf(0f) }
+var size by remember { mutableStateOf(Size.Zero) }
+Box(
+    Modifier.fillMaxSize()
+        .onSizeChanged { size = it.toSize() }
+) {
+    Box(
+        Modifier.offset { IntOffset(offsetX.value.roundToInt(), offsetY.value.roundToInt()) }
+            .size(50.dp)
+            .background(Color.Blue)
+            .pointerInput(Unit) {
+                detectDragGesturesAfterLongPress { _, dragAmount -&gt;
+                    val original = Offset(offsetX.value, offsetY.value)
+                    val summed = original + dragAmount
+                    val newValue = Offset(
+                        x = summed.x.coerceIn(0f, size.width - 50.dp.toPx()),
+                        y = summed.y.coerceIn(0f, size.height - 50.dp.toPx())
+                    )
+                    offsetX.value = newValue.x
+                    offsetY.value = newValue.y
+                }
+            }
+    )
+}</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectVerticalDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">detectVerticalDragGestures</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectHorizontalDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">detectHorizontalDragGestures</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">detectDragGestures</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.input.pointer.PointerInputScope).detectHorizontalDragGestures(kotlin.Function1, kotlin.Function0, kotlin.Function0, kotlin.Function2)"></a><a name="-androidx.compose.ui.input.pointer.PointerInputScope-.detectHorizontalDragGestures-kotlin.Function1-kotlin.Function0-kotlin.Function0-kotlin.Function2-"></a><a name="detecthorizontaldraggestures"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.pointer.PointerInputScope).detectHorizontalDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">DragGestureDetectorKt.detectHorizontalDragGestures</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/DragGestureDetectorKt.html">DragGestureDetectorKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectHorizontalDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">detectHorizontalDragGestures</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html">PointerInputScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDragStart,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDragEnd,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDragCancel,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onHorizontalDrag<br>)</pre>
+        <p>Gesture detector that waits for pointer down and touch slop in the horizontal direction and then calls <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectHorizontalDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">onHorizontalDrag</a></code> for each horizontal drag event. It follows the touch slop detection of <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.AwaitPointerEventScope).awaitHorizontalTouchSlopOrCancellation(androidx.compose.ui.input.pointer.PointerId,kotlin.Function2)">awaitHorizontalTouchSlopOrCancellation</a></code>, but will consume the position change automatically once the touch slop has been crossed.</p>
+        <p><code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectHorizontalDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">onDragStart</a></code> called when the touch slop has been passed and includes an <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> representing the last known pointer position relative to the containing element. The <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> can be outside the actual bounds of the element itself meaning the numbers can be negative or larger than the element bounds if the touch target is smaller than the <code><a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html#minimumTouchTargetSize()">ViewConfiguration.minimumTouchTargetSize</a></code>.</p>
+        <p><code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectHorizontalDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">onDragEnd</a></code> is called after all pointers are up and <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectHorizontalDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">onDragCancel</a></code> is called if another gesture has consumed pointer input, canceling this gesture.</p>
+        <p>This gesture detector will coordinate with <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectVerticalDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">detectVerticalDragGestures</a></code> and <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.AwaitPointerEventScope).awaitVerticalTouchSlopOrCancellation(androidx.compose.ui.input.pointer.PointerId,kotlin.Function2)">awaitVerticalTouchSlopOrCancellation</a></code> to ensure only vertical or horizontal dragging is locked, but not both.</p>
+        <p>Example Usage:</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.width
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.unit.IntOffset
+
+val offsetX = remember { mutableStateOf(0f) }
+val offsetY = remember { mutableStateOf(0f) }
+var width by remember { mutableStateOf(0f) }
+Box(
+    Modifier.fillMaxSize()
+        .onSizeChanged { width = it.width.toFloat() }
+) {
+    Box(
+        Modifier.offset { IntOffset(offsetX.value.roundToInt(), offsetY.value.roundToInt()) }
+            .fillMaxHeight()
+            .width(50.dp)
+            .background(Color.Blue)
+            .pointerInput(Unit) {
+                detectHorizontalDragGestures { _, dragAmount -&gt;
+                    val originalX = offsetX.value
+                    val newValue = (originalX + dragAmount).coerceIn(0f, width - 50.dp.toPx())
+                    offsetX.value = newValue
+                }
+            }
+    )
+}</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectVerticalDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">detectVerticalDragGestures</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">detectDragGestures</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.input.pointer.PointerInputScope).detectVerticalDragGestures(kotlin.Function1, kotlin.Function0, kotlin.Function0, kotlin.Function2)"></a><a name="-androidx.compose.ui.input.pointer.PointerInputScope-.detectVerticalDragGestures-kotlin.Function1-kotlin.Function0-kotlin.Function0-kotlin.Function2-"></a><a name="detectverticaldraggestures"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.pointer.PointerInputScope).detectVerticalDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">DragGestureDetectorKt.detectVerticalDragGestures</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/DragGestureDetectorKt.html">DragGestureDetectorKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectVerticalDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">detectVerticalDragGestures</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html">PointerInputScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDragStart,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDragEnd,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onDragCancel,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onVerticalDrag<br>)</pre>
+        <p>Gesture detector that waits for pointer down and touch slop in the vertical direction and then calls <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectVerticalDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">onVerticalDrag</a></code> for each vertical drag event. It follows the touch slop detection of <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.AwaitPointerEventScope).awaitVerticalTouchSlopOrCancellation(androidx.compose.ui.input.pointer.PointerId,kotlin.Function2)">awaitVerticalTouchSlopOrCancellation</a></code>, but will consume the position change automatically once the touch slop has been crossed.</p>
+        <p><code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectVerticalDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">onDragStart</a></code> called when the touch slop has been passed and includes an <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> representing the last known pointer position relative to the containing element. The <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> can be outside the actual bounds of the element itself meaning the numbers can be negative or larger than the element bounds if the touch target is smaller than the <code><a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html#minimumTouchTargetSize()">ViewConfiguration.minimumTouchTargetSize</a></code>.</p>
+        <p><code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectVerticalDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">onDragEnd</a></code> is called after all pointers are up and <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectVerticalDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">onDragCancel</a></code> is called if another gesture has consumed pointer input, canceling this gesture.</p>
+        <p>This gesture detector will coordinate with <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectHorizontalDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">detectHorizontalDragGestures</a></code> and <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.AwaitPointerEventScope).awaitHorizontalTouchSlopOrCancellation(androidx.compose.ui.input.pointer.PointerId,kotlin.Function2)">awaitHorizontalTouchSlopOrCancellation</a></code> to ensure only vertical or horizontal dragging is locked, but not both.</p>
+        <p>Example Usage:</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectVerticalDragGestures
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.unit.IntOffset
+
+val offsetX = remember { mutableStateOf(0f) }
+val offsetY = remember { mutableStateOf(0f) }
+var height by remember { mutableStateOf(0f) }
+Box(
+    Modifier.fillMaxSize()
+        .onSizeChanged { height = it.height.toFloat() }
+) {
+    Box(
+        Modifier.offset { IntOffset(offsetX.value.roundToInt(), offsetY.value.roundToInt()) }
+            .fillMaxWidth()
+            .height(50.dp)
+            .background(Color.Blue)
+            .pointerInput(Unit) {
+                detectVerticalDragGestures { _, dragAmount -&gt;
+                    val originalY = offsetY.value
+                    val newValue = (originalY + dragAmount).coerceIn(0f, height - 50.dp.toPx())
+                    offsetY.value = newValue
+                }
+            }
+    )
+}</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">detectDragGestures</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectHorizontalDragGestures(kotlin.Function1,kotlin.Function0,kotlin.Function0,kotlin.Function2)">detectHorizontalDragGestures</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.input.pointer.PointerInputScope).detectTransformGestures(kotlin.Boolean, kotlin.Function4)"></a><a name="-androidx.compose.ui.input.pointer.PointerInputScope-.detectTransformGestures-kotlin.Boolean-kotlin.Function4-"></a><a name="detecttransformgestures"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.pointer.PointerInputScope).detectTransformGestures(kotlin.Boolean,kotlin.Function4)">TransformGestureDetectorKt.detectTransformGestures</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/TransformGestureDetectorKt.html">TransformGestureDetectorKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectTransformGestures(kotlin.Boolean,kotlin.Function4)">detectTransformGestures</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html">PointerInputScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;panZoomLock,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function4&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onGesture<br>)</pre>
+        <p>A gesture detector for rotation, panning, and zoom. Once touch slop has been reached, the user can use rotation, panning and zoom gestures. <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectTransformGestures(kotlin.Boolean,kotlin.Function4)">onGesture</a></code> will be called when any of the rotation, zoom or pan occurs, passing the rotation angle in degrees, zoom in scale factor and pan as an offset in pixels. Each of these changes is a difference between the previous call and the current gesture. This will consume all position changes after touch slop has been reached. <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectTransformGestures(kotlin.Boolean,kotlin.Function4)">onGesture</a></code> will also provide centroid of all the pointers that are down.</p>
+        <p>If <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectTransformGestures(kotlin.Boolean,kotlin.Function4)">panZoomLock</a></code> is <code>true</code>, rotation is allowed only if touch slop is detected for rotation before pan or zoom motions. If not, pan and zoom gestures will be detected, but rotation gestures will not be. If <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectTransformGestures(kotlin.Boolean,kotlin.Function4)">panZoomLock</a></code> is <code>false</code>, once touch slop is reached, all three gestures are detected.</p>
+        <p>Example Usage:</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTransformGestures
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.TransformOrigin
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.pointerInput
+
+/**
+ * Rotates the given offset around the origin by the given angle in degrees.
+ *
+ * A positive angle indicates a counterclockwise rotation around the right-handed 2D Cartesian
+ * coordinate system.
+ *
+ * See: [Rotation matrix](https://en.wikipedia.org/wiki/Rotation_matrix)
+ */
+fun Offset.rotateBy(angle: Float): Offset {
+    val angleInRadians = angle * PI / 180
+    return Offset(
+        (x * cos(angleInRadians) - y * sin(angleInRadians)).toFloat(),
+        (x * sin(angleInRadians) + y * cos(angleInRadians)).toFloat()
+    )
+}
+
+var offset by remember { mutableStateOf(Offset.Zero) }
+var zoom by remember { mutableStateOf(1f) }
+var angle by remember { mutableStateOf(0f) }
+
+Box(
+    Modifier
+        .pointerInput(Unit) {
+            detectTransformGestures(
+                onGesture = { centroid, pan, gestureZoom, gestureRotate -&gt;
+                    val oldScale = zoom
+                    val newScale = zoom * gestureZoom
+
+                    // For natural zooming and rotating, the centroid of the gesture should
+                    // be the fixed point where zooming and rotating occurs.
+                    // We compute where the centroid was (in the pre-transformed coordinate
+                    // space), and then compute where it will be after this delta.
+                    // We then compute what the new offset should be to keep the centroid
+                    // visually stationary for rotating and zooming, and also apply the pan.
+                    offset = (offset + centroid / oldScale).rotateBy(gestureRotate) -
+                        (centroid / newScale + pan / oldScale)
+                    zoom = newScale
+                    angle += gestureRotate
+                }
+            )
+        }
+        .graphicsLayer {
+            translationX = -offset.x * zoom
+            translationY = -offset.y * zoom
+            scaleX = zoom
+            scaleY = zoom
+            rotationZ = angle
+            transformOrigin = TransformOrigin(0f, 0f)
+        }
+        .background(Color.Blue)
+        .fillMaxSize()
+)</pre>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+<html devsite="true">
+  <head>
+    <title>CompositingStrategy</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/graphics/GraphicsLayerModifier.kt+class:androidx.compose.ui.graphics.CompositingStrategy&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>CompositingStrategy</h1>
+    <p>
+      <pre>value class <a href="/reference/kotlin/androidx/compose/ui/graphics/CompositingStrategy.html">CompositingStrategy</a></pre>
+    </p>
+    <hr>
+    <p>Determines when to render the contents of a layer into an offscreen buffer before being drawn to the destination.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public companion properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/CompositingStrategy.html">CompositingStrategy</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/CompositingStrategy.Companion.html#Auto()">Auto</a></code></div>
+              <p>Rendering to an offscreen buffer will be determined automatically by the rest of the graphicsLayer parameters.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/CompositingStrategy.html">CompositingStrategy</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/CompositingStrategy.Companion.html#ModulateAlpha()">ModulateAlpha</a></code></div>
+              <p>Modulates alpha for each of the drawing instructions recorded within the graphicsLayer.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/CompositingStrategy.html">CompositingStrategy</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/CompositingStrategy.Companion.html#Offscreen()">Offscreen</a></code></div>
+              <p>Rendering of content will always be rendered into an offscreen buffer first then drawn to the destination regardless of the other parameters configured on the graphics layer.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public companion properties</h2>
+      <div class="api-item"><a name="getAuto()"></a><a name="setAuto()"></a><a name="getAuto--"></a><a name="setAuto--"></a>
+        <h3 class="api-name" id="Auto()">Auto</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/CompositingStrategy.Companion.html#Auto()">Auto</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/CompositingStrategy.html">CompositingStrategy</a></pre>
+        <p>Rendering to an offscreen buffer will be determined automatically by the rest of the graphicsLayer parameters. This is the default behavior. For example, whenever an alpha value less than 1.0f is provided on <code><a href="/reference/kotlin/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.Modifier).graphicsLayer(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.TransformOrigin,androidx.compose.ui.graphics.Shape,kotlin.Boolean)">Modifier.graphicsLayer</a></code>, a compositing layer is created automatically to first render the contents fully opaque, then draw this offscreen buffer to the destination with the corresponding alpha. This is necessary for correctness otherwise alpha applied to individual drawing instructions that overlap will have a different result than expected. Additionally usage of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/RenderEffect.html">RenderEffect</a></code> on the graphicsLayer will also render into an intermediate offscreen buffer before being drawn into the destination.</p>
+      </div>
+      <div class="api-item"><a name="getModulateAlpha()"></a><a name="setModulateAlpha()"></a><a name="getModulateAlpha--"></a><a name="setModulateAlpha--"></a>
+        <h3 class="api-name" id="ModulateAlpha()">ModulateAlpha</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/CompositingStrategy.Companion.html#ModulateAlpha()">ModulateAlpha</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/CompositingStrategy.html">CompositingStrategy</a></pre>
+        <p>Modulates alpha for each of the drawing instructions recorded within the graphicsLayer. This avoids usage of an offscreen buffer for purposes of alpha rendering. <code><a href="/reference/kotlin/androidx/compose/ui/graphics/CompositingStrategy.Companion.html#ModulateAlpha()">ModulateAlpha</a></code> is more efficient than <code><a href="/reference/kotlin/androidx/compose/ui/graphics/CompositingStrategy.Companion.html#Auto()">Auto</a></code> in performance in scenarios where an alpha value less than 1.0f is provided. Otherwise the performance is similar to that of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/CompositingStrategy.Companion.html#Auto()">Auto</a></code>. However, this can provide different results than <code><a href="/reference/kotlin/androidx/compose/ui/graphics/CompositingStrategy.Companion.html#Auto()">Auto</a></code> if there is overlapping content within the layer and alpha is applied. This should only be used if the contents of the layer are known well in advance and are expected to not be overlapping.</p>
+      </div>
+      <div class="api-item"><a name="getOffscreen()"></a><a name="setOffscreen()"></a><a name="getOffscreen--"></a><a name="setOffscreen--"></a>
+        <h3 class="api-name" id="Offscreen()">Offscreen</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/CompositingStrategy.Companion.html#Offscreen()">Offscreen</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/CompositingStrategy.html">CompositingStrategy</a></pre>
+        <p>Rendering of content will always be rendered into an offscreen buffer first then drawn to the destination regardless of the other parameters configured on the graphics layer. This is useful for leveraging different blending algorithms for masking content. For example, the contents can be drawn into this graphics layer and masked out by drawing additional shapes with <code><a href="/reference/kotlin/androidx/compose/ui/graphics/BlendMode.Companion.html#Clear()">BlendMode.Clear</a></code></p>
+      </div>
+    </div>
+  </body>
+</html>

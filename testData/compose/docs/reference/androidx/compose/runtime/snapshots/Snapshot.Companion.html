@@ -5,7 +5,9 @@
 {% include "_shared/_reference-head-tags.html" %}
   </head>
   <body>
-    <div id="metadata-info-block"></div>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/runtime/snapshots/Snapshot.kt+class:androidx.compose.runtime.snapshots.Snapshot.Companion&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
     <h1>Snapshot.Companion</h1>
     <p>
       <pre>public static class <a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html">Snapshot.Companion</a></pre>
@@ -113,6 +115,13 @@
             <td>
               <div><code>&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withMutableSnapshot(kotlin.Function0)">withMutableSnapshot</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;block)</code></div>
               <p>Take a <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html">MutableSnapshot</a></code> and run <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withMutableSnapshot(kotlin.Function0)">block</a></code> within it.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withoutReadObservation(kotlin.Function0)">withoutReadObservation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;block<br>)</code></div>
+              <p>Passed <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withoutReadObservation(kotlin.Function0)">block</a></code> will be run with all the currently set snapshot read observers disabled.</p>
             </td>
           </tr>
         </tbody>
@@ -390,6 +399,11 @@
         <p>Take a <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html">MutableSnapshot</a></code> and run <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withMutableSnapshot(kotlin.Function0)">block</a></code> within it. When <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withMutableSnapshot(kotlin.Function0)">block</a></code> returns successfully, attempt to <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">MutableSnapshot.apply</a></code> the snapshot. Returns the result of <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withMutableSnapshot(kotlin.Function0)">block</a></code> or throws <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotApplyConflictException.html">SnapshotApplyConflictException</a></code> if snapshot changes attempted by <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withMutableSnapshot(kotlin.Function0)">block</a></code> could not be applied.</p>
         <p>Prior to returning, any changes made to snapshot state (e.g. state holders returned by <code><a href="/reference/androidx/compose/runtime/package-summary.html#mutableStateOf(kotlin.Any,androidx.compose.runtime.SnapshotMutationPolicy)">androidx.compose.runtime.mutableStateOf</a></code> are not visible to other threads. When <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withMutableSnapshot(kotlin.Function0)">withMutableSnapshot</a></code> returns successfully those changes will be made visible to other threads  and any snapshot observers (e.g. <code><a href="/reference/androidx/compose/runtime/package-summary.html#snapshotFlow(kotlin.Function0)">androidx.compose.runtime.snapshotFlow</a></code>) will be notified of changes.</p>
         <p><code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withMutableSnapshot(kotlin.Function0)">block</a></code> must not suspend if <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withMutableSnapshot(kotlin.Function0)">withMutableSnapshot</a></code> is called from a suspend function.</p>
+      </div>
+      <div class="api-item"><a name="withoutReadObservation-kotlin.Function0-"></a><a name="withoutreadobservation"></a>
+        <h3 class="api-name" id="withoutReadObservation(kotlin.Function0)">withoutReadObservation</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withoutReadObservation(kotlin.Function0)">withoutReadObservation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;block<br>)</pre>
+        <p>Passed <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withoutReadObservation(kotlin.Function0)">block</a></code> will be run with all the currently set snapshot read observers disabled.</p>
       </div>
     </div>
   </body>

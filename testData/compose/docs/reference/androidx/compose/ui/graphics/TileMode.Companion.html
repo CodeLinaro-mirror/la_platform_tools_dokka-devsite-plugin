@@ -1,0 +1,86 @@
+<html devsite="true">
+  <head>
+    <title>TileMode.Companion</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-graphics/androidx/compose/ui/graphics/TileMode.kt+class:androidx.compose.ui.graphics.TileMode.Companion&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>TileMode.Companion</h1>
+    <p>
+      <pre>public static class <a href="/reference/androidx/compose/ui/graphics/TileMode.Companion.html">TileMode.Companion</a></pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/TileMode.html">TileMode</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/TileMode.Companion.html#Clamp()">Clamp</a></code></div>
+              <p>Edge is clamped to the final color.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/TileMode.html">TileMode</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/TileMode.Companion.html#Decal()">Decal</a></code></div>
+              <p>Render the shader's image pixels only within its original bounds.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/TileMode.html">TileMode</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/TileMode.Companion.html#Mirror()">Mirror</a></code></div>
+              <p>Edge is mirrored from last color to first.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/TileMode.html">TileMode</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/TileMode.Companion.html#Repeated()">Repeated</a></code></div>
+              <p>Edge is repeated from first color to last.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getClamp()"></a><a name="setClamp()"></a><a name="getClamp--"></a><a name="setClamp--"></a>
+        <h3 class="api-name" id="Clamp()">Clamp</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/TileMode.html">TileMode</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/TileMode.Companion.html#Clamp()">Clamp</a></pre>
+        <p>Edge is clamped to the final color.</p>
+        <p>The gradient will paint the all the regions outside the inner area with the color of the point closest to that region. <img alt="TileMode.Clamp" src="https://developer.android.com/static/images/jetpack/compose/graphics/brush/tile_mode_clamp.png"></p>
+      </div>
+      <div class="api-item"><a name="getDecal()"></a><a name="setDecal()"></a><a name="getDecal--"></a><a name="setDecal--"></a>
+        <h3 class="api-name" id="Decal()">Decal</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/TileMode.html">TileMode</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/TileMode.Companion.html#Decal()">Decal</a></pre>
+        <p>Render the shader's image pixels only within its original bounds. If the shader draws outside of its original bounds, transparent black is drawn instead. <img alt="TileMode.Decal" src="https://developer.android.com/static/images/jetpack/compose/graphics/brush/tile_mode_decal.png"></p>
+      </div>
+      <div class="api-item"><a name="getMirror()"></a><a name="setMirror()"></a><a name="getMirror--"></a><a name="setMirror--"></a>
+        <h3 class="api-name" id="Mirror()">Mirror</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/TileMode.html">TileMode</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/TileMode.Companion.html#Mirror()">Mirror</a></pre>
+        <p>Edge is mirrored from last color to first. This is as if the stop points from 0.0 to 1.0 were then repeated backwards from 2.0 to 1.0, then forwards from 2.0 to 3.0, then backwards again from 4.0 to 3.0, and so forth (and for linear gradients, similarly from in the negative direction). <img alt="TileMode.Mirror" src="https://developer.android.com/static/images/jetpack/compose/graphics/brush/tile_mode_mirror.png"></p>
+      </div>
+      <div class="api-item"><a name="getRepeated()"></a><a name="setRepeated()"></a><a name="getRepeated--"></a><a name="setRepeated--"></a>
+        <h3 class="api-name" id="Repeated()">Repeated</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/TileMode.html">TileMode</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/TileMode.Companion.html#Repeated()">Repeated</a></pre>
+        <p>Edge is repeated from first color to last.</p>
+        <p>This is as if the stop points from 0.0 to 1.0 were then repeated from 1.0 to 2.0, 2.0 to 3.0, and so forth (and for linear gradients, similarly from -1.0 to 0.0, -2.0 to -1.0, etc). <img alt="TileMode.Repeated" src="https://developer.android.com/static/images/jetpack/compose/graphics/brush/tile_mode_repeated.png"></p>
+      </div>
+    </div>
+  </body>
+</html>

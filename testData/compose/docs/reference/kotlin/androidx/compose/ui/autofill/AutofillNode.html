@@ -1,0 +1,150 @@
+<html devsite="true">
+  <head>
+    <title>AutofillNode</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/autofill/Autofill.kt+class:androidx.compose.ui.autofill.AutofillNode&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>AutofillNode</h1>
+    <p>
+      <pre>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>class <a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillNode.html">AutofillNode</a></pre>
+    </p>
+    <hr>
+    <p>Every autofillable composable will have an <code><a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillNode.html">AutofillNode</a></code>. (An autofill node will be created for every semantics node that adds autofill properties). This node is used to request/cancel autofill, and it holds the <code><a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillNode.html#onFill()">onFill</a></code> lambda which is called by the autofill framework.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillNode.html#AutofillNode(kotlin.collections.List,androidx.compose.ui.geometry.Rect,kotlin.Function1)">AutofillNode</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;autofillTypes:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillType.html">AutofillType</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;boundingBox:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;onFill:&nbsp;((<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)?<br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>open&nbsp;operator <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillNode.html#equals(kotlin.Any)">equals</a>(other:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillNode.html#hashCode()">hashCode</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillType.html">AutofillType</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillNode.html#autofillTypes()">autofillTypes</a></code></div>
+              <p>A list of autofill types for this node.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>?</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillNode.html#boundingBox()">boundingBox</a></code></div>
+              <p>The screen coordinates of the composable being autofilled.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillNode.html#id()">id</a></code></div>
+              <p>A virtual id that is automatically generated for each node.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>((<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)?</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillNode.html#onFill()">onFill</a></code></div>
+              <p>The callback that is called by the autofill framework to perform autofill.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="AutofillNode(kotlin.collections.List, androidx.compose.ui.geometry.Rect, kotlin.Function1)"></a><a name="AutofillNode-kotlin.collections.List-androidx.compose.ui.geometry.Rect-kotlin.Function1-"></a><a name="autofillnode"></a>
+        <h3 class="api-name" id="AutofillNode(kotlin.collections.List,androidx.compose.ui.geometry.Rect,kotlin.Function1)">AutofillNode</h3>
+        <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillNode.html#AutofillNode(kotlin.collections.List,androidx.compose.ui.geometry.Rect,kotlin.Function1)">AutofillNode</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;autofillTypes:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillType.html">AutofillType</a>&gt; = listOf(),<br>&nbsp;&nbsp;&nbsp;&nbsp;boundingBox:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;onFill:&nbsp;((<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)?<br>)</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="equals-kotlin.Any-"></a><a name="equals"></a>
+        <h3 class="api-name" id="equals(kotlin.Any)">equals</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillNode.html#equals(kotlin.Any)">equals</a>(other:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+      </div>
+      <div class="api-item"><a name="hashCode--"></a><a name="hashcode"></a>
+        <h3 class="api-name" id="hashCode()">hashCode</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillNode.html#hashCode()">hashCode</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getAutofillTypes()"></a><a name="setAutofillTypes()"></a><a name="getAutofillTypes--"></a><a name="setAutofillTypes--"></a>
+        <h3 class="api-name" id="autofillTypes()">autofillTypes</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillNode.html#autofillTypes()">autofillTypes</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillType.html">AutofillType</a>&gt;</pre>
+        <p>A list of autofill types for this node. These types are conveyed to the autofill framework and it is used to call <code><a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillNode.html#onFill()">onFill</a></code> with the appropriate value. If you don't set this property, the autofill framework will use heuristics to guess the type. This property is a list because some fields can have multiple types. For instance, userid in a login form can either be a username or an email address. TODO(b/138731416): Check with the autofill service team if the order matters, and how duplicate types are handled.</p>
+      </div>
+      <div class="api-item"><a name="getBoundingBox()"></a><a name="setBoundingBox()"></a><a name="getBoundingBox--"></a><a name="setBoundingBox--"></a>
+        <h3 class="api-name" id="boundingBox()">boundingBox</h3>
+        <pre class="api-signature no-pretty-print">var&nbsp;<a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillNode.html#boundingBox()">boundingBox</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>?</pre>
+        <p>The screen coordinates of the composable being autofilled. This data is used by the autofill framework to decide where to show the autofill popup.</p>
+      </div>
+      <div class="api-item"><a name="getId()"></a><a name="setId()"></a><a name="getId--"></a><a name="setId--"></a>
+        <h3 class="api-name" id="id()">id</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillNode.html#id()">id</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>A virtual id that is automatically generated for each node.</p>
+      </div>
+      <div class="api-item"><a name="getOnFill()"></a><a name="setOnFill()"></a><a name="getOnFill--"></a><a name="setOnFill--"></a>
+        <h3 class="api-name" id="onFill()">onFill</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/autofill/AutofillNode.html#onFill()">onFill</a>:&nbsp;((<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)?</pre>
+        <p>The callback that is called by the autofill framework to perform autofill.</p>
+      </div>
+    </div>
+  </body>
+</html>

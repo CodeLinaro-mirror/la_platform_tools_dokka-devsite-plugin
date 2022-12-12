@@ -1,0 +1,244 @@
+<html devsite="true">
+  <head>
+    <title>CacheDrawScope</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/draw/DrawModifier.kt+class:androidx.compose.ui.draw.CacheDrawScope&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>CacheDrawScope</h1>
+    <p>
+      <pre>class <a href="/reference/kotlin/androidx/compose/ui/draw/CacheDrawScope.html">CacheDrawScope</a> : <a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a></pre>
+    </p>
+    <hr>
+    <p>Handle to a drawing environment that enables caching of content based on the resolved size. Consumers define parameters and refer to them in the captured draw callback provided in <code><a href="/reference/kotlin/androidx/compose/ui/draw/CacheDrawScope.html#onDrawBehind(kotlin.Function1)">onDrawBehind</a></code> or <code><a href="/reference/kotlin/androidx/compose/ui/draw/CacheDrawScope.html#onDrawWithContent(kotlin.Function1)">onDrawWithContent</a></code>.</p>
+    <p><code><a href="/reference/kotlin/androidx/compose/ui/draw/CacheDrawScope.html#onDrawBehind(kotlin.Function1)">onDrawBehind</a></code> will draw behind the layout's drawing contents however, <code><a href="/reference/kotlin/androidx/compose/ui/draw/CacheDrawScope.html#onDrawWithContent(kotlin.Function1)">onDrawWithContent</a></code> will provide the ability to draw before or after the layout's contents</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/draw/DrawResult.html">DrawResult</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/draw/CacheDrawScope.html#onDrawBehind(kotlin.Function1)">onDrawBehind</a>(block:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+              <p>Issue drawing commands to be executed before the layout content is drawn</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/draw/DrawResult.html">DrawResult</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/draw/CacheDrawScope.html#onDrawWithContent(kotlin.Function1)">onDrawWithContent</a>(block:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/ContentDrawScope.html">ContentDrawScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+              <p>Issue drawing commands before or after the layout's drawing contents</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/draw/CacheDrawScope.html#density()">density</a></code></div>
+              <p>The logical density of the display.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/draw/CacheDrawScope.html#fontScale()">fontScale</a></code></div>
+              <p>Current user preference for the scaling factor for fonts.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/draw/CacheDrawScope.html#layoutDirection()">layoutDirection</a></code></div>
+              <p>Provides the <code><a href="/reference/kotlin/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/draw/CacheDrawScope.html#size()">size</a></code></div>
+              <p>Provides the dimensions of the current drawing environment</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">androidx.compose.ui.unit.Density</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).roundToPx()">roundToPx</a>()</code></div>
+                        <p>Convert <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code> to <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code> by rounding</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).roundToPx()">roundToPx</a>()</code></div>
+                        <p>Convert Sp to <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code> by rounding</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toDp()">toDp</a>()</code></div>
+                        <p>Convert Sp to <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+                      <td>
+                        <div><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(kotlin.Int).toDp()">toDp</a>()</code></div>
+                        <p>Convert an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code> pixel value to <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+                      <td>
+                        <div><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(kotlin.Float).toDp()">toDp</a>()</code></div>
+                        <p>Convert a <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code> pixel value to a Dp</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/DpSize.html">DpSize</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.geometry.Size).toDpSize()">toDpSize</a>()</code></div>
+                        <p>Convert a <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code> to a <code><a href="/reference/kotlin/androidx/compose/ui/unit/DpSize.html">DpSize</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toPx()">toPx</a>()</code></div>
+                        <p>Convert <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code> to pixels.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toPx()">toPx</a>()</code></div>
+                        <p>Convert Sp to pixels.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/DpRect.html">DpRect</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.DpRect).toRect()">toRect</a>()</code></div>
+                        <p>Convert a <code><a href="/reference/kotlin/androidx/compose/ui/unit/DpRect.html">DpRect</a></code> to a <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/DpSize.html">DpSize</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.DpSize).toSize()">toSize</a>()</code></div>
+                        <p>Convert a <code><a href="/reference/kotlin/androidx/compose/ui/unit/DpSize.html">DpSize</a></code> to a <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toSp()">toSp</a>()</code></div>
+                        <p>Convert <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code> to Sp.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
+                      <td>
+                        <div><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(kotlin.Int).toSp()">toSp</a>()</code></div>
+                        <p>Convert an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code> pixel value to Sp.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
+                      <td>
+                        <div><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(kotlin.Float).toSp()">toSp</a>()</code></div>
+                        <p>Convert a <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code> pixel value to a Sp</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="onDrawBehind-kotlin.Function1-"></a><a name="ondrawbehind"></a>
+        <h3 class="api-name" id="onDrawBehind(kotlin.Function1)">onDrawBehind</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/draw/CacheDrawScope.html#onDrawBehind(kotlin.Function1)">onDrawBehind</a>(block:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/draw/DrawResult.html">DrawResult</a></pre>
+        <p>Issue drawing commands to be executed before the layout content is drawn</p>
+      </div>
+      <div class="api-item"><a name="onDrawWithContent-kotlin.Function1-"></a><a name="ondrawwithcontent"></a>
+        <h3 class="api-name" id="onDrawWithContent(kotlin.Function1)">onDrawWithContent</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/draw/CacheDrawScope.html#onDrawWithContent(kotlin.Function1)">onDrawWithContent</a>(block:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/ContentDrawScope.html">ContentDrawScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/draw/DrawResult.html">DrawResult</a></pre>
+        <p>Issue drawing commands before or after the layout's drawing contents</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getDensity()"></a><a name="setDensity()"></a><a name="getDensity--"></a><a name="setDensity--"></a>
+        <h3 class="api-name" id="density()">density</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/draw/CacheDrawScope.html#density()">density</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>The logical density of the display. This is a scaling factor for the Dp unit.</p>
+      </div>
+      <div class="api-item"><a name="getFontScale()"></a><a name="setFontScale()"></a><a name="getFontScale--"></a><a name="setFontScale--"></a>
+        <h3 class="api-name" id="fontScale()">fontScale</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/draw/CacheDrawScope.html#fontScale()">fontScale</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>Current user preference for the scaling factor for fonts.</p>
+      </div>
+      <div class="api-item"><a name="getLayoutDirection()"></a><a name="setLayoutDirection()"></a><a name="getLayoutDirection--"></a><a name="setLayoutDirection--"></a>
+        <h3 class="api-name" id="layoutDirection()">layoutDirection</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/draw/CacheDrawScope.html#layoutDirection()">layoutDirection</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></pre>
+        <p>Provides the <code><a href="/reference/kotlin/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getSize()"></a><a name="setSize()"></a><a name="getSize--"></a><a name="setSize--"></a>
+        <h3 class="api-name" id="size()">size</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/draw/CacheDrawScope.html#size()">size</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></pre>
+        <p>Provides the dimensions of the current drawing environment</p>
+      </div>
+    </div>
+  </body>
+</html>

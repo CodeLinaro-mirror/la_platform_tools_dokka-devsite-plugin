@@ -1,0 +1,120 @@
+<html devsite="true">
+  <head>
+    <title>SubcomposeLayoutState.PrecomposedSlotHandle</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/layout/SubcomposeLayout.kt+class:androidx.compose.ui.layout.SubcomposeLayoutState.PrecomposedSlotHandle&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>SubcomposeLayoutState.PrecomposedSlotHandle</h1>
+    <p>
+      <pre>public interface <a href="/reference/androidx/compose/ui/layout/SubcomposeLayoutState.PrecomposedSlotHandle.html">SubcomposeLayoutState.PrecomposedSlotHandle</a></pre>
+    </p>
+    <hr>
+    <p>Instance of this interface is returned by <code><a href="/reference/androidx/compose/ui/layout/SubcomposeLayoutState.html#precompose(kotlin.Any,kotlin.Function0)">precompose</a></code> function.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>default int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/layout/SubcomposeLayoutState.PrecomposedSlotHandle.html#placeablesCount()">placeablesCount</a></code></div>
+              <p>The amount of placeables composed into this slot.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/layout/SubcomposeLayoutState.PrecomposedSlotHandle.html#dispose()">dispose</a>()</code></div>
+              <p>This function allows to dispose the content for the slot which was precomposed previously via <code><a href="/reference/androidx/compose/ui/layout/SubcomposeLayoutState.html#precompose(kotlin.Any,kotlin.Function0)">precompose</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/layout/SubcomposeLayoutState.PrecomposedSlotHandle.html#premeasure(kotlin.Int,androidx.compose.ui.unit.Constraints)">premeasure</a>(int&nbsp;index,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;constraints)</code></div>
+              <p>Performs synchronous measure of the placeable at the given <code><a href="/reference/androidx/compose/ui/layout/SubcomposeLayoutState.PrecomposedSlotHandle.html#premeasure(kotlin.Int,androidx.compose.ui.unit.Constraints)">index</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getPlaceablesCount()"></a><a name="setPlaceablesCount()"></a><a name="getPlaceablesCount--"></a><a name="setPlaceablesCount--"></a>
+        <h3 class="api-name" id="placeablesCount()">placeablesCount</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/layout/SubcomposeLayoutState.PrecomposedSlotHandle.html#placeablesCount()">placeablesCount</a></pre>
+        <p>The amount of placeables composed into this slot.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="dispose--"></a><a name="dispose"></a>
+        <h3 class="api-name" id="dispose()">dispose</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/layout/SubcomposeLayoutState.PrecomposedSlotHandle.html#dispose()">dispose</a>()</pre>
+        <p>This function allows to dispose the content for the slot which was precomposed previously via <code><a href="/reference/androidx/compose/ui/layout/SubcomposeLayoutState.html#precompose(kotlin.Any,kotlin.Function0)">precompose</a></code>.</p>
+        <p>If this slot was already used during the regular measure pass via <code><a href="/reference/androidx/compose/ui/layout/SubcomposeMeasureScope.html#subcompose(kotlin.Any,kotlin.Function0)">SubcomposeMeasureScope.subcompose</a></code> this function will do nothing.</p>
+        <p>This could be useful if after the future calculations this item is not anymore expected to be used during the measure pass anytime soon.</p>
+      </div>
+      <div class="api-item"><a name="premeasure(kotlin.Int, androidx.compose.ui.unit.Constraints)"></a><a name="premeasure-kotlin.Int-androidx.compose.ui.unit.Constraints-"></a><a name="premeasure"></a>
+        <h3 class="api-name" id="premeasure(kotlin.Int,androidx.compose.ui.unit.Constraints)">premeasure</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/layout/SubcomposeLayoutState.PrecomposedSlotHandle.html#premeasure(kotlin.Int,androidx.compose.ui.unit.Constraints)">premeasure</a>(int&nbsp;index,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;constraints)</pre>
+        <p>Performs synchronous measure of the placeable at the given <code><a href="/reference/androidx/compose/ui/layout/SubcomposeLayoutState.PrecomposedSlotHandle.html#premeasure(kotlin.Int,androidx.compose.ui.unit.Constraints)">index</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int&nbsp;index</code></td>
+                <td>
+                  <p>the placeable index. Should be smaller than <code><a href="/reference/androidx/compose/ui/layout/SubcomposeLayoutState.PrecomposedSlotHandle.html#placeablesCount()">placeablesCount</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>&nbsp;constraints</code></td>
+                <td>
+                  <p>Constraints to measure this placeable with.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

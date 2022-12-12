@@ -1,0 +1,205 @@
+<html devsite="true">
+  <head>
+    <title>OffsetMapping</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-text/androidx/compose/ui/text/input/OffsetMapping.kt+class:androidx.compose.ui.text.input.OffsetMapping&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>OffsetMapping</h1>
+    <p>
+      <pre>public interface <a href="/reference/androidx/compose/ui/text/input/OffsetMapping.html">OffsetMapping</a></pre>
+    </p>
+    <hr>
+    <p>Provides bidirectional offset mapping between original and transformed text.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>public static class <a href="/reference/androidx/compose/ui/text/input/OffsetMapping.Companion.html">OffsetMapping.Companion</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/input/OffsetMapping.html#originalToTransformed(kotlin.Int)">originalToTransformed</a>(int&nbsp;offset)</code></div>
+              <p>Convert offset in original text into the offset in transformed text.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/input/OffsetMapping.html#transformedToOriginal(kotlin.Int)">transformedToOriginal</a>(int&nbsp;offset)</code></div>
+              <p>Convert offset in transformed text into the offset in original text.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="originalToTransformed-kotlin.Int-"></a><a name="originaltotransformed"></a>
+        <h3 class="api-name" id="originalToTransformed(kotlin.Int)">originalToTransformed</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/text/input/OffsetMapping.html#originalToTransformed(kotlin.Int)">originalToTransformed</a>(int&nbsp;offset)</pre>
+        <p>Convert offset in original text into the offset in transformed text.</p>
+        <p>This function must be a monotonically non-decreasing function. In other words, if a cursor advances in the original text, the cursor in the transformed text must advance or stay there.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int&nbsp;offset</code></td>
+                <td>
+                  <p>offset in original text.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int</code></td>
+                <td>
+                  <p>offset in transformed text</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/input/VisualTransformation.html">VisualTransformation</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="transformedToOriginal-kotlin.Int-"></a><a name="transformedtooriginal"></a>
+        <h3 class="api-name" id="transformedToOriginal(kotlin.Int)">transformedToOriginal</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/text/input/OffsetMapping.html#transformedToOriginal(kotlin.Int)">transformedToOriginal</a>(int&nbsp;offset)</pre>
+        <p>Convert offset in transformed text into the offset in original text.</p>
+        <p>This function must be a monotonically non-decreasing function. In other words, if a cursor advances in the transformed text, the cusrsor in the original text must advance or stay there.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int&nbsp;offset</code></td>
+                <td>
+                  <p>offset in transformed text</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int</code></td>
+                <td>
+                  <p>offset in original text</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/input/VisualTransformation.html">VisualTransformation</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

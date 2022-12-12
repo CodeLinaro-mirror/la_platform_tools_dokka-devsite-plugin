@@ -1,0 +1,198 @@
+<html devsite="true">
+  <head>
+    <title>AndroidPathMeasure</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-graphics/androidx/compose/ui/graphics/AndroidPathMeasure.android.kt+class:androidx.compose.ui.graphics.AndroidPathMeasure&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>AndroidPathMeasure</h1>
+    <p>
+      <pre>class <a href="/reference/kotlin/androidx/compose/ui/graphics/AndroidPathMeasure.html">AndroidPathMeasure</a> : <a href="/reference/kotlin/androidx/compose/ui/graphics/PathMeasure.html">PathMeasure</a></pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>open <a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/AndroidPathMeasure.html#getPosition(kotlin.Float)">getPosition</a>(distance:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+              <p>Pins distance to 0 <= distance <= getLength(), and then computes the corresponding position</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/AndroidPathMeasure.html#getSegment(kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.Path,kotlin.Boolean)">getSegment</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;startDistance:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;stopDistance:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;destination:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;startWithMoveTo:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><br>)</code></div>
+              <p>Given a start and stop distance, return in dst the intervening segment(s).</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/AndroidPathMeasure.html#getTangent(kotlin.Float)">getTangent</a>(distance:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+              <p>Pins distance to 0 <= distance <= getLength(), and then computes the corresponding tangent</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/AndroidPathMeasure.html#setPath(androidx.compose.ui.graphics.Path,kotlin.Boolean)">setPath</a>(path:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a>?,&nbsp;forceClosed:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>)</code></div>
+              <p>Assign a new path, or null to have none.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/AndroidPathMeasure.html#length()">length</a></code></div>
+              <p>The total length of the current contour, or 0 if no path is associated with this measure object.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="getPosition-kotlin.Float-"></a><a name="getposition"></a>
+        <h3 class="api-name" id="getPosition(kotlin.Float)">getPosition</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/AndroidPathMeasure.html#getPosition(kotlin.Float)">getPosition</a>(distance:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+        <p>Pins distance to 0 <= distance <= getLength(), and then computes the corresponding position</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>distance:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>The distance along the current contour to sample</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+                <td>
+                  <p><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.Companion.html#Unspecified()">Offset.Unspecified</a></code> if there is no path set</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getSegment(kotlin.Float, kotlin.Float, androidx.compose.ui.graphics.Path, kotlin.Boolean)"></a><a name="getSegment-kotlin.Float-kotlin.Float-androidx.compose.ui.graphics.Path-kotlin.Boolean-"></a><a name="getsegment"></a>
+        <h3 class="api-name" id="getSegment(kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.Path,kotlin.Boolean)">getSegment</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/AndroidPathMeasure.html#getSegment(kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.Path,kotlin.Boolean)">getSegment</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;startDistance:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;stopDistance:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;destination:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;startWithMoveTo:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <p>Given a start and stop distance, return in dst the intervening segment(s). If the segment is zero-length, return false, else return true. startD and stopD are pinned to legal values (0..getLength()). If startD >= stopD then return false (and leave dst untouched). Begin the segment with a moveTo if startWithMoveTo is true.</p>
+      </div>
+      <div class="api-item"><a name="getTangent-kotlin.Float-"></a><a name="gettangent"></a>
+        <h3 class="api-name" id="getTangent(kotlin.Float)">getTangent</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/AndroidPathMeasure.html#getTangent(kotlin.Float)">getTangent</a>(distance:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+        <p>Pins distance to 0 <= distance <= getLength(), and then computes the corresponding tangent</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>distance:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>The distance along the current contour to sample</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+                <td>
+                  <p><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.Companion.html#Unspecified()">Offset.Unspecified</a></code> if there is no path set</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="setPath(androidx.compose.ui.graphics.Path, kotlin.Boolean)"></a><a name="setPath-androidx.compose.ui.graphics.Path-kotlin.Boolean-"></a><a name="setpath"></a>
+        <h3 class="api-name" id="setPath(androidx.compose.ui.graphics.Path,kotlin.Boolean)">setPath</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/AndroidPathMeasure.html#setPath(androidx.compose.ui.graphics.Path,kotlin.Boolean)">setPath</a>(path:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Path.html">Path</a>?,&nbsp;forceClosed:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Assign a new path, or null to have none.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getLength()"></a><a name="setLength()"></a><a name="getLength--"></a><a name="setLength--"></a>
+        <h3 class="api-name" id="length()">length</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/AndroidPathMeasure.html#length()">length</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+        <p>The total length of the current contour, or 0 if no path is associated with this measure object.</p>
+      </div>
+    </div>
+  </body>
+</html>

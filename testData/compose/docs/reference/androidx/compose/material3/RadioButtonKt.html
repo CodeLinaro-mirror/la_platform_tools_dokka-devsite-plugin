@@ -1,0 +1,167 @@
+<html devsite="true">
+  <head>
+    <title>RadioButtonKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>RadioButtonKt</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/material3/RadioButtonKt.html">RadioButtonKt</a></pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static&nbsp;final void</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/androidx/compose/material3/RadioButtonKt.html#RadioButton(kotlin.Boolean,kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.material3.RadioButtonColors,androidx.compose.foundation.interaction.MutableInteractionSource)">RadioButton</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;selected,<br>&nbsp;&nbsp;&nbsp;&nbsp;Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onClick,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;enabled,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/RadioButtonColors.html">RadioButtonColors</a>&nbsp;colors,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a>&nbsp;interactionSource<br>)</code></div>
+              <p><a href="https://m3.material.io/components/radio-button/overview" class="external" target="_blank">Material Design radio button</a>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="RadioButton(kotlin.Boolean, kotlin.Function0, androidx.compose.ui.Modifier, kotlin.Boolean, androidx.compose.material3.RadioButtonColors, androidx.compose.foundation.interaction.MutableInteractionSource)"></a><a name="RadioButton-kotlin.Boolean-kotlin.Function0-androidx.compose.ui.Modifier-kotlin.Boolean-androidx.compose.material3.RadioButtonColors-androidx.compose.foundation.interaction.MutableInteractionSource-"></a><a name="radiobutton"></a>
+        <h3 class="api-name" id="RadioButton(kotlin.Boolean,kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.material3.RadioButtonColors,androidx.compose.foundation.interaction.MutableInteractionSource)">RadioButton</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/material3/RadioButtonKt.html#RadioButton(kotlin.Boolean,kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.material3.RadioButtonColors,androidx.compose.foundation.interaction.MutableInteractionSource)">RadioButton</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;selected,<br>&nbsp;&nbsp;&nbsp;&nbsp;Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onClick,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;enabled,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/RadioButtonColors.html">RadioButtonColors</a>&nbsp;colors,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a>&nbsp;interactionSource<br>)</pre>
+        <p><a href="https://m3.material.io/components/radio-button/overview" class="external" target="_blank">Material Design radio button</a>.</p>
+        <p>Radio buttons allow users to select one option from a set.</p>
+        <p><img alt="Radio button image" src="https://developer.android.com/images/reference/androidx/compose/material3/radio-button.png"></p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.material3.RadioButton
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.semantics.semantics
+
+// We have two radio buttons and only one can be selected
+var state by remember { mutableStateOf(true) }
+// Note that Modifier.selectableGroup() is essential to ensure correct accessibility behavior.
+// We also set a content description for this sample, but note that a RadioButton would usually
+// be part of a higher level component, such as a raw with text, and that component would need
+// to provide an appropriate content description. See RadioGroupSample.
+Row(Modifier.selectableGroup()) {
+    RadioButton(
+        selected = state,
+        onClick = { state = true },
+        modifier = Modifier.semantics { contentDescription = &quot;Localized Description&quot; }
+    )
+    RadioButton(
+        selected = !state,
+        onClick = { state = false },
+        modifier = Modifier.semantics { contentDescription = &quot;Localized Description&quot; }
+    )
+}</pre>
+        <p><code><a href="/reference/androidx/compose/material3/package-summary.html#RadioButton(kotlin.Boolean,kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.material3.RadioButtonColors,androidx.compose.foundation.interaction.MutableInteractionSource)">RadioButton</a></code>s can be combined together with <code><a href="/reference/androidx/compose/material3/package-summary.html#Text(kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontFamily,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.text.style.TextAlign,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,kotlin.Int,kotlin.Function1,androidx.compose.ui.text.TextStyle)">Text</a></code> in the desired layout (e.g. <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#Column(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,kotlin.Function1)">Column</a></code> or <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#Row(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.ui.Alignment.Vertical,kotlin.Function1)">Row</a></code>) to achieve radio group-like behaviour, where the entire layout is selectable:</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+
+val radioOptions = listOf(&quot;Calls&quot;, &quot;Missed&quot;, &quot;Friends&quot;)
+val (selectedOption, onOptionSelected) = remember { mutableStateOf(radioOptions[0]) }
+// Note that Modifier.selectableGroup() is essential to ensure correct accessibility behavior
+Column(Modifier.selectableGroup()) {
+    radioOptions.forEach { text -&gt;
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .height(56.dp)
+                .selectable(
+                    selected = (text == selectedOption),
+                    onClick = { onOptionSelected(text) },
+                    role = Role.RadioButton
+                )
+                .padding(horizontal = 16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            RadioButton(
+                selected = (text == selectedOption),
+                onClick = null // null recommended for accessibility with screenreaders
+            )
+            Text(
+                text = text,
+                style = MaterialTheme.typography.bodyLarge,
+                modifier = Modifier.padding(start = 16.dp)
+            )
+        }
+    }
+}</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>boolean&nbsp;selected</code></td>
+                <td>
+                  <p>whether this radio button is selected or not</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onClick</code></td>
+                <td>
+                  <p>called when this radio button is clicked. If <code>null</code>, then this radio button will not be interactable, unless something else handles its input events and updates its state.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier</code></td>
+                <td>
+                  <p>the <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code> to be applied to this radio button</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>boolean&nbsp;enabled</code></td>
+                <td>
+                  <p>controls the enabled state of this radio button. When <code>false</code>, this component will not respond to user input, and it will appear visually disabled and disabled to accessibility services.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/RadioButtonColors.html">RadioButtonColors</a>&nbsp;colors</code></td>
+                <td>
+                  <p><code><a href="/reference/androidx/compose/material3/RadioButtonColors.html">RadioButtonColors</a></code> that will be used to resolve the color used for this radio button in different states. See <code><a href="/reference/androidx/compose/material3/RadioButtonDefaults.html#colors(androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">RadioButtonDefaults.colors</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a>&nbsp;interactionSource</code></td>
+                <td>
+                  <p>the <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> representing the stream of <code><a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s for this radio button. You can create and pass in your own <code>remember</code>ed instance to observe <code><a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s and customize the appearance / behavior of this radio button in different states.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

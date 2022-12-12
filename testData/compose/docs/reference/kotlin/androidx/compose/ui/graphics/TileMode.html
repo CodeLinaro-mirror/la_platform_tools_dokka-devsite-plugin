@@ -1,0 +1,169 @@
+<html devsite="true">
+  <head>
+    <title>TileMode</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-graphics/androidx/compose/ui/graphics/TileMode.kt+class:androidx.compose.ui.graphics.TileMode&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>TileMode</h1>
+    <p>
+      <pre>value class <a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html">TileMode</a></pre>
+    </p>
+    <hr>
+    <p>Defines what happens at the edge of the gradient. A gradient is defined along a finite inner area. In the case of a linear gradient, it's between the parallel lines that are orthogonal to the line drawn between two points. In the case of radial gradients, it's the disc that covers the circle centered on a particular point up to a given radius.</p>
+    <p>This enum is used to define how the gradient should paint the regions outside that defined inner area.</p>
+    <p>See also: <code><a href="/reference/kotlin/androidx/compose/ui/graphics/package-summary.html#LinearGradientShader(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.collections.List,kotlin.collections.List,androidx.compose.ui.graphics.TileMode)">LinearGradientShader</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/package-summary.html#RadialGradientShader(androidx.compose.ui.geometry.Offset,kotlin.Float,kotlin.collections.List,kotlin.collections.List,androidx.compose.ui.graphics.TileMode)">RadialGradientShader</a></code> which works in relative coordinates and can create a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Shader.html">Shader</a></code> representing the gradient for a particular Rect on demand.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public companion properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html">TileMode</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.Companion.html#Clamp()">Clamp</a></code></div>
+              <p>Edge is clamped to the final color.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html">TileMode</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.Companion.html#Decal()">Decal</a></code></div>
+              <p>Render the shader's image pixels only within its original bounds.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html">TileMode</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.Companion.html#Mirror()">Mirror</a></code></div>
+              <p>Edge is mirrored from last color to first.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html">TileMode</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.Companion.html#Repeated()">Repeated</a></code></div>
+              <p>Edge is repeated from first color to last.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html#toString()">toString</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html">TileMode</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html#(androidx.compose.ui.graphics.TileMode).isSupported()">isSupported</a>()</code></div>
+              <p>Helper method to determine if the appropriate <code><a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html">TileMode</a></code> is supported on the given Android API level this provides an opportunity for consumers to fallback on an alternative user experience for devices that do not support the corresponding blend mode.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://developer.android.com/reference/android/graphics/Shader.TileMode.html">Shader.TileMode</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html">TileMode</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html#(androidx.compose.ui.graphics.TileMode).toAndroidTileMode()">toAndroidTileMode</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html">TileMode</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html#(androidx.compose.ui.graphics.TileMode).isSupported()">isSupported</a>()</code></div>
+              <p>Capability query to determine if the particular platform supports the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html">TileMode</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public companion properties</h2>
+      <div class="api-item"><a name="getClamp()"></a><a name="setClamp()"></a><a name="getClamp--"></a><a name="setClamp--"></a>
+        <h3 class="api-name" id="Clamp()">Clamp</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.Companion.html#Clamp()">Clamp</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html">TileMode</a></pre>
+        <p>Edge is clamped to the final color.</p>
+        <p>The gradient will paint the all the regions outside the inner area with the color of the point closest to that region. <img alt="TileMode.Clamp" src="https://developer.android.com/static/images/jetpack/compose/graphics/brush/tile_mode_clamp.png"></p>
+      </div>
+      <div class="api-item"><a name="getDecal()"></a><a name="setDecal()"></a><a name="getDecal--"></a><a name="setDecal--"></a>
+        <h3 class="api-name" id="Decal()">Decal</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.Companion.html#Decal()">Decal</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html">TileMode</a></pre>
+        <p>Render the shader's image pixels only within its original bounds. If the shader draws outside of its original bounds, transparent black is drawn instead. <img alt="TileMode.Decal" src="https://developer.android.com/static/images/jetpack/compose/graphics/brush/tile_mode_decal.png"></p>
+      </div>
+      <div class="api-item"><a name="getMirror()"></a><a name="setMirror()"></a><a name="getMirror--"></a><a name="setMirror--"></a>
+        <h3 class="api-name" id="Mirror()">Mirror</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.Companion.html#Mirror()">Mirror</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html">TileMode</a></pre>
+        <p>Edge is mirrored from last color to first. This is as if the stop points from 0.0 to 1.0 were then repeated backwards from 2.0 to 1.0, then forwards from 2.0 to 3.0, then backwards again from 4.0 to 3.0, and so forth (and for linear gradients, similarly from in the negative direction). <img alt="TileMode.Mirror" src="https://developer.android.com/static/images/jetpack/compose/graphics/brush/tile_mode_mirror.png"></p>
+      </div>
+      <div class="api-item"><a name="getRepeated()"></a><a name="setRepeated()"></a><a name="getRepeated--"></a><a name="setRepeated--"></a>
+        <h3 class="api-name" id="Repeated()">Repeated</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.Companion.html#Repeated()">Repeated</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html">TileMode</a></pre>
+        <p>Edge is repeated from first color to last.</p>
+        <p>This is as if the stop points from 0.0 to 1.0 were then repeated from 1.0 to 2.0, 2.0 to 3.0, and so forth (and for linear gradients, similarly from -1.0 to 0.0, -2.0 to -1.0, etc). <img alt="TileMode.Repeated" src="https://developer.android.com/static/images/jetpack/compose/graphics/brush/tile_mode_repeated.png"></p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+        <h3 class="api-name" id="toString()">toString</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html#toString()">toString</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.TileMode-.isSupported--"></a><a name="issupported"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.graphics.TileMode).isSupported()">isSupported</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html">TileMode</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html#(androidx.compose.ui.graphics.TileMode).isSupported()">isSupported</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <p>Helper method to determine if the appropriate <code><a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html">TileMode</a></code> is supported on the given Android API level this provides an opportunity for consumers to fallback on an alternative user experience for devices that do not support the corresponding blend mode. Usages of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html">TileMode</a></code> types that are not supported will fallback onto the default of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.Companion.html#Clamp()">TileMode.Clamp</a></code></p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.TileMode-.toAndroidTileMode--"></a><a name="toandroidtilemode"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.graphics.TileMode).toAndroidTileMode()">toAndroidTileMode</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html">TileMode</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html#(androidx.compose.ui.graphics.TileMode).toAndroidTileMode()">toAndroidTileMode</a>():&nbsp;<a href="https://developer.android.com/reference/android/graphics/Shader.TileMode.html">Shader.TileMode</a></pre>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.TileMode-.isSupported--"></a><a name="issupported"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.graphics.TileMode).isSupported()">isSupported</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html">TileMode</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html#(androidx.compose.ui.graphics.TileMode).isSupported()">isSupported</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <p>Capability query to determine if the particular platform supports the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html">TileMode</a></code>. Not all platforms support all tile mode algorithms, however, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.Companion.html#Clamp()">TileMode.Clamp</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.Companion.html#Repeated()">TileMode.Repeated</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.Companion.html#Mirror()">TileMode.Mirror</a></code> are guaranteed to be supported. If a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.html">TileMode</a></code> that is not supported is used, the default of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/TileMode.Companion.html#Clamp()">TileMode.Clamp</a></code> is consumed instead.</p>
+      </div>
+    </div>
+  </body>
+</html>

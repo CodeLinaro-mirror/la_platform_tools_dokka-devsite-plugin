@@ -1,0 +1,114 @@
+<html devsite="true">
+  <head>
+    <title>Hyphens</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-text/androidx/compose/ui/text/style/Hyphens.kt+class:androidx.compose.ui.text.style.Hyphens&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>Hyphens</h1>
+    <p>
+      <pre>class <a href="/reference/kotlin/androidx/compose/ui/text/style/Hyphens.html">Hyphens</a></pre>
+    </p>
+    <hr>
+    <p>Automatic hyphenation configuration.</p>
+    <p>Hyphenation is a dash-like punctuation mark used to join two-words into one or separate syl-lab-les of a word.</p>
+    <p>Automatic hyphenation is added between syllables at appropriate hyphenation points, following language rules.</p>
+    <p>However, user can override automatic break point selection, suggesting line break opportunities (see Suggesting line break opportunities below).</p>
+    <p>Suggesting line break opportunities:</p>
+    <ul>
+      <li>
+        <p><code>\u2010</code> (&quot;hard&quot; hyphen) Indicates a visible line break opportunity. Even if the line is not actually broken at that point, the hyphen is still rendered.</p>
+      </li>
+      <li>
+        <p><code>\u00AD</code> (&quot;soft&quot; hyphen) This character is not rendered visibly; instead, it marks a place where the word can be broken if hyphenation is necessary.</p>
+      </li>
+    </ul>
+    <p>The default configuration for <code><a href="/reference/kotlin/androidx/compose/ui/text/style/Hyphens.html">Hyphens</a></code> = <code><a href="/reference/kotlin/androidx/compose/ui/text/style/Hyphens.Companion.html#None()">Hyphens.None</a></code></p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public companion properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/text/style/Hyphens.html">Hyphens</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/style/Hyphens.Companion.html#Auto()">Auto</a></code></div>
+              <p>The words will be automatically broken at appropriate hyphenation points.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/text/style/Hyphens.html">Hyphens</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/style/Hyphens.Companion.html#None()">None</a></code></div>
+              <p>Lines will break with no hyphenation.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/style/Hyphens.html#toString()">toString</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public companion properties</h2>
+      <div class="api-item"><a name="getAuto()"></a><a name="setAuto()"></a><a name="getAuto--"></a><a name="setAuto--"></a>
+        <h3 class="api-name" id="Auto()">Auto</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/Hyphens.Companion.html#Auto()">Auto</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/Hyphens.html">Hyphens</a></pre>
+        <p>The words will be automatically broken at appropriate hyphenation points.</p>
+        <p>However, suggested line break opportunities (see Suggesting line break opportunities above) will override automatic break point selection when present.</p>
+<pre>
++---------+
+| Experi- |
+| mental  |
++---------+
+</pre>      </div>
+      <div class="api-item"><a name="getNone()"></a><a name="setNone()"></a><a name="getNone--"></a><a name="setNone--"></a>
+        <h3 class="api-name" id="None()">None</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/Hyphens.Companion.html#None()">None</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/Hyphens.html">Hyphens</a></pre>
+        <p>Lines will break with no hyphenation.</p>
+        <p>&quot;Hard&quot; hyphens will still be respected. However, no automatic hyphenation will be attempted. If a word must be broken due to being longer than a line, it will break at any character and will not attempt to break at a syllable boundary.</p>
+<pre>
++---------+
+| Experim |
+| ental   |
++---------+
+</pre>      </div>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+        <h3 class="api-name" id="toString()">toString</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/Hyphens.html#toString()">toString</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></pre>
+      </div>
+    </div>
+  </body>
+</html>

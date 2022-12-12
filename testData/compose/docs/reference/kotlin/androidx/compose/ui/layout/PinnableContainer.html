@@ -1,0 +1,72 @@
+<html devsite="true">
+  <head>
+    <title>PinnableContainer</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/layout/PinnableContainer.kt+class:androidx.compose.ui.layout.PinnableContainer&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>PinnableContainer</h1>
+    <p>
+      <pre>interface <a href="/reference/kotlin/androidx/compose/ui/layout/PinnableContainer.html">PinnableContainer</a></pre>
+    </p>
+    <hr>
+    <p>Represents a container which can be pinned by some of its parents.</p>
+    <p>For example in lists which only compose visible items it means this item will be kept composed even when it will be scrolled out of the view.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>fun interface <a href="/reference/kotlin/androidx/compose/ui/layout/PinnableContainer.PinnedHandle.html">PinnableContainer.PinnedHandle</a></code></div>
+              <p>This is an object returned by <code><a href="/reference/kotlin/androidx/compose/ui/layout/PinnableContainer.html#pin()">pin</a></code> which allows to unpin the content.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/PinnableContainer.PinnedHandle.html">PinnableContainer.PinnedHandle</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/PinnableContainer.html#pin()">pin</a>()</code></div>
+              <p>Pin the current container when its content needs to be kept alive, for example when it has focus or user is interacting with it in some other way.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="pin--"></a><a name="pin"></a>
+        <h3 class="api-name" id="pin()">pin</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/PinnableContainer.html#pin()">pin</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/PinnableContainer.PinnedHandle.html">PinnableContainer.PinnedHandle</a></pre>
+        <p>Pin the current container when its content needs to be kept alive, for example when it has focus or user is interacting with it in some other way.</p>
+        <p>Don't forget to call <code><a href="/reference/kotlin/androidx/compose/ui/layout/PinnableContainer.PinnedHandle.html#unpin()">PinnedHandle.unpin</a></code> when this content is not needed anymore.</p>
+      </div>
+    </div>
+  </body>
+</html>

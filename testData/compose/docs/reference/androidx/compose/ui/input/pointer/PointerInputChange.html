@@ -1,0 +1,604 @@
+<html devsite="true">
+  <head>
+    <title>PointerInputChange</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/input/pointer/PointerEvent.kt+class:androidx.compose.ui.input.pointer.PointerInputChange&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>PointerInputChange</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></pre>
+    </p>
+    <hr>
+    <p>Describes a change that has occurred for a particular pointer, as well as how much of the change has been consumed (meaning, used by a node in the UI).</p>
+    <p>The <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#position()">position</a></code> represents the position of the pointer relative to the element that this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code> is being dispatched to.</p>
+    <p>Note: The <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#position()">position</a></code> values can be outside the actual bounds of the element itself meaning the numbers can be negative or larger than the element bounds.</p>
+    <p>The <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#previousPosition()">previousPosition</a></code> represents the position of the pointer offset to the current position of the pointer relative to the screen.</p>
+    <p>This means that <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#position()">position</a></code> and <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#previousPosition()">previousPosition</a></code> can always be used to understand how much a pointer has moved relative to an element, even if that element is moving along with the changes to the pointer.  For example, if a pointer touches a 1x1 pixel box in the middle, <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#position()">position</a></code> will report a position of (0, 0) when dispatched to it.  If the next event moves x position 5 pixels, <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#position()">position</a></code> will report (5, 0) and <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#previousPosition()">previousPosition</a></code> will report (0, 0). If the box moves all 5 pixels, and the next event represents the pointer moving along the x axis for 5 more pixels, <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#position()">position</a></code> will again report (5, 0) and <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#previousPosition()">previousPosition</a></code> will report (0, 0).</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/ConsumedData.html">ConsumedData</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#consumed()">consumed</a></code></div>
+              <p><strong>This field is deprecated.</strong> use isConsumed and consume() pair of methods instead</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/HistoricalChange.html">HistoricalChange</a>&gt;</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#historical()">historical</a></code></div>
+              <p>Optional high-frequency pointer moves in between the last two dispatched events.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerId.html">PointerId</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#id()">id</a></code></div>
+              <p>The unique id of the pointer associated with this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#isConsumed()">isConsumed</a></code></div>
+              <p>Indicates whether the change was consumed or not.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#position()">position</a></code></div>
+              <p>The <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> of the current pointer event, relative to the containing element (values can be negative or larger than the element bounds).</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#pressed()">pressed</a></code></div>
+              <p><code>true</code> if the pointer event is considered &quot;pressed.&quot; For example, finger touching the screen or a mouse button is pressed <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#pressed()">pressed</a></code> would be <code>true</code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#pressure()">pressure</a></code></div>
+              <p>Pressure for pointer event</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#previousPosition()">previousPosition</a></code></div>
+              <p>The <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> of the previous pointer event, offset to the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#position()">position</a></code> and relative to the containing element.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#previousPressed()">previousPressed</a></code></div>
+              <p><code>true</code> if the pointer event was considered &quot;pressed.&quot; For example , if a finger was touching the screen or a mouse button was pressed, <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#previousPressed()">previousPressed</a></code> would be <code>true</code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final long</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#previousUptimeMillis()">previousUptimeMillis</a></code></div>
+              <p>The <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#uptimeMillis()">uptimeMillis</a></code> of the previous pointer event</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#scrollDelta()">scrollDelta</a></code></div>
+              <p>The amount of scroll wheel movement in the horizontal and vertical directions.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerType.html">PointerType</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#type()">type</a></code></div>
+              <p>The device type that produced the event, such as <code><a href="/reference/androidx/compose/ui/input/pointer/PointerType.Companion.html#Mouse()">mouse</a></code>, or <code><a href="/reference/androidx/compose/ui/input/pointer/PointerType.Companion.html#Touch()">touch</a></code>.git</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final long</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#uptimeMillis()">uptimeMillis</a></code></div>
+              <p>The time of the current pointer event, in milliseconds.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#PointerInputChange(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">PointerInputChange</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerId.html">PointerId</a>&nbsp;id,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;uptimeMillis,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;pressed,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;previousUptimeMillis,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;previousPosition,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;previousPressed,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;isInitiallyConsumed,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerType.html">PointerType</a>&nbsp;type,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;scrollDelta<br>)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#PointerInputChange(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">PointerInputChange</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerId.html">PointerId</a>&nbsp;id,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;uptimeMillis,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;pressed,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;pressure,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;previousUptimeMillis,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;previousPosition,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;previousPressed,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;isInitiallyConsumed,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerType.html">PointerType</a>&nbsp;type,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;scrollDelta<br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#consume()">consume</a>()</code></div>
+              <p>Consume change event, claiming all the corresponding change info to the caller.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#copy(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerId.html">PointerId</a>&nbsp;id,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;currentTime,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;currentPosition,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;currentPressed,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;previousTime,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;previousPosition,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;previousPressed,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerType.html">PointerType</a>&nbsp;type,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;scrollDelta<br>)</code></div>
+              <p>Make a shallow copy of the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code></p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code></td>
+            <td>
+              <div><code><span><del><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#copy(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,androidx.compose.ui.input.pointer.ConsumedData,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">copy</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerId.html">PointerId</a>&nbsp;id,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;currentTime,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;currentPosition,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;currentPressed,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;previousTime,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;previousPosition,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;previousPressed,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/ConsumedData.html">ConsumedData</a>&nbsp;consumed,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerType.html">PointerType</a>&nbsp;type,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;scrollDelta<br>)</code></div>
+              <p><strong>This method is deprecated.</strong> Partial consumption has been deprecated.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#copy(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,kotlin.collections.List,androidx.compose.ui.geometry.Offset)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerId.html">PointerId</a>&nbsp;id,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;currentTime,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;currentPosition,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;currentPressed,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;previousTime,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;previousPosition,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;previousPressed,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerType.html">PointerType</a>&nbsp;type,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/HistoricalChange.html">HistoricalChange</a>&gt;&nbsp;historical,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;scrollDelta<br>)</code></div>
+              <p>Make a shallow copy of the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code></p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#copy(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,kotlin.collections.List,androidx.compose.ui.geometry.Offset)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerId.html">PointerId</a>&nbsp;id,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;currentTime,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;currentPosition,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;currentPressed,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;pressure,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;previousTime,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;previousPosition,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;previousPressed,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerType.html">PointerType</a>&nbsp;type,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/HistoricalChange.html">HistoricalChange</a>&gt;&nbsp;historical,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;scrollDelta<br>)</code></div>
+              <p>Make a shallow copy of the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code></p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#toString()">toString</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<span><del><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).anyChangeConsumed()">anyChangeConsumed</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver)</code></div>
+              <p><strong>This method is deprecated.</strong> Partial consumption has been deprecated.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).changedToDown()">changedToDown</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver)</code></div>
+              <p>True if this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code> represents a pointer coming in contact with the screen and that change has not been consumed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).changedToDownIgnoreConsumed()">changedToDownIgnoreConsumed</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver<br>)</code></div>
+              <p>True if this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code> represents a pointer coming in contact with the screen, whether or not that change has been consumed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).changedToUp()">changedToUp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver)</code></div>
+              <p>True if this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code> represents a pointer breaking contact with the screen and that change has not been consumed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).changedToUpIgnoreConsumed()">changedToUpIgnoreConsumed</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver<br>)</code></div>
+              <p>True if this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code> represents a pointer breaking contact with the screen, whether or not that change has been consumed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<span><del><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).consumeAllChanges()">consumeAllChanges</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver)</code></div>
+              <p><strong>This method is deprecated.</strong> Use consume() instead</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<span><del><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).consumeDownChange()">consumeDownChange</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver)</code></div>
+              <p><strong>This method is deprecated.</strong> Partial consumption has been deprecated.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<span><del><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).consumePositionChange()">consumePositionChange</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver<br>)</code></div>
+              <p><strong>This method is deprecated.</strong> Partial consumption has been deprecated.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<span><del><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).isOutOfBounds(androidx.compose.ui.unit.IntSize)">isOutOfBounds</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a>&nbsp;size<br>)</code></div>
+              <p><strong>This method is deprecated.</strong> Use isOutOfBounds() that supports minimum touch target</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).isOutOfBounds(androidx.compose.ui.unit.IntSize,androidx.compose.ui.geometry.Size)">isOutOfBounds</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a>&nbsp;size,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;extendedTouchPadding<br>)</code></div>
+              <p>Returns <code>true</code> if the pointer has moved outside of the pointer region.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).positionChange()">positionChange</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver)</code></div>
+              <p>The distance that the pointer has moved on the screen minus any distance that has been consumed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<span><del><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).positionChangeConsumed()">positionChangeConsumed</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver<br>)</code></div>
+              <p><strong>This method is deprecated.</strong> Partial consumption has been deprecated.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).positionChangeIgnoreConsumed()">positionChangeIgnoreConsumed</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver<br>)</code></div>
+              <p>The distance that the pointer has moved on the screen, ignoring the fact that it might have been consumed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).positionChanged()">positionChanged</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver)</code></div>
+              <p>True if this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code> represents a pointer moving on the screen and some of that movement has not been consumed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).positionChangedIgnoreConsumed()">positionChangedIgnoreConsumed</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver<br>)</code></div>
+              <p>True if this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code> represents a pointer moving on the screen ignoring how much of that movement may have been consumed.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getConsumed()"></a><a name="setConsumed()"></a><a name="getConsumed--"></a><a name="setConsumed--"></a>
+        <h3 class="api-name" id="consumed()">consumed</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/ConsumedData.html">ConsumedData</a>&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#consumed()">consumed</a></pre>
+        <aside class="caution"><strong>This field is deprecated.</strong><br>use isConsumed and consume() pair of methods instead</aside>
+      </div>
+      <div class="api-item"><a name="getHistorical()"></a><a name="setHistorical()"></a><a name="getHistorical--"></a><a name="setHistorical--"></a>
+        <h3 class="api-name" id="historical()">historical</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/HistoricalChange.html">HistoricalChange</a>&gt;&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#historical()">historical</a></pre>
+        <p>Optional high-frequency pointer moves in between the last two dispatched events. Can be used for extra accuracy when touchscreen rate exceeds framerate.</p>
+      </div>
+      <div class="api-item"><a name="getId()"></a><a name="setId()"></a><a name="getId--"></a><a name="setId--"></a>
+        <h3 class="api-name" id="id()">id</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerId.html">PointerId</a>&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#id()">id</a></pre>
+        <p>The unique id of the pointer associated with this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getIsConsumed()"></a><a name="setIsConsumed()"></a><a name="getIsConsumed--"></a><a name="setIsConsumed--"></a>
+        <h3 class="api-name" id="isConsumed()">isConsumed</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#isConsumed()">isConsumed</a></pre>
+        <p>Indicates whether the change was consumed or not. Note that the change must be consumed in full as there's no partial consumption system provided.</p>
+      </div>
+      <div class="api-item"><a name="getPosition()"></a><a name="setPosition()"></a><a name="getPosition--"></a><a name="setPosition--"></a>
+        <h3 class="api-name" id="position()">position</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#position()">position</a></pre>
+        <p>The <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> of the current pointer event, relative to the containing element (values can be negative or larger than the element bounds).</p>
+      </div>
+      <div class="api-item"><a name="getPressed()"></a><a name="setPressed()"></a><a name="getPressed--"></a><a name="setPressed--"></a>
+        <h3 class="api-name" id="pressed()">pressed</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#pressed()">pressed</a></pre>
+        <p><code>true</code> if the pointer event is considered &quot;pressed.&quot; For example, finger touching the screen or a mouse button is pressed <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#pressed()">pressed</a></code> would be <code>true</code>.</p>
+      </div>
+      <div class="api-item"><a name="getPressure()"></a><a name="setPressure()"></a><a name="getPressure--"></a><a name="setPressure--"></a>
+        <h3 class="api-name" id="pressure()">pressure</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#pressure()">pressure</a></pre>
+        <p>Pressure for pointer event</p>
+      </div>
+      <div class="api-item"><a name="getPreviousPosition()"></a><a name="setPreviousPosition()"></a><a name="getPreviousPosition--"></a><a name="setPreviousPosition--"></a>
+        <h3 class="api-name" id="previousPosition()">previousPosition</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#previousPosition()">previousPosition</a></pre>
+        <p>The <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> of the previous pointer event, offset to the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#position()">position</a></code> and relative to the containing element.</p>
+      </div>
+      <div class="api-item"><a name="getPreviousPressed()"></a><a name="setPreviousPressed()"></a><a name="getPreviousPressed--"></a><a name="setPreviousPressed--"></a>
+        <h3 class="api-name" id="previousPressed()">previousPressed</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#previousPressed()">previousPressed</a></pre>
+        <p><code>true</code> if the pointer event was considered &quot;pressed.&quot; For example , if a finger was touching the screen or a mouse button was pressed, <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#previousPressed()">previousPressed</a></code> would be <code>true</code>.</p>
+      </div>
+      <div class="api-item"><a name="getPreviousUptimeMillis()"></a><a name="setPreviousUptimeMillis()"></a><a name="getPreviousUptimeMillis--"></a><a name="setPreviousUptimeMillis--"></a>
+        <h3 class="api-name" id="previousUptimeMillis()">previousUptimeMillis</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;long&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#previousUptimeMillis()">previousUptimeMillis</a></pre>
+        <p>The <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#uptimeMillis()">uptimeMillis</a></code> of the previous pointer event</p>
+      </div>
+      <div class="api-item"><a name="getScrollDelta()"></a><a name="setScrollDelta()"></a><a name="getScrollDelta--"></a><a name="setScrollDelta--"></a>
+        <h3 class="api-name" id="scrollDelta()">scrollDelta</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#scrollDelta()">scrollDelta</a></pre>
+        <p>The amount of scroll wheel movement in the horizontal and vertical directions.</p>
+      </div>
+      <div class="api-item"><a name="getType()"></a><a name="setType()"></a><a name="getType--"></a><a name="setType--"></a>
+        <h3 class="api-name" id="type()">type</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerType.html">PointerType</a>&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#type()">type</a></pre>
+        <p>The device type that produced the event, such as <code><a href="/reference/androidx/compose/ui/input/pointer/PointerType.Companion.html#Mouse()">mouse</a></code>, or <code><a href="/reference/androidx/compose/ui/input/pointer/PointerType.Companion.html#Touch()">touch</a></code>.git</p>
+      </div>
+      <div class="api-item"><a name="getUptimeMillis()"></a><a name="setUptimeMillis()"></a><a name="getUptimeMillis--"></a><a name="setUptimeMillis--"></a>
+        <h3 class="api-name" id="uptimeMillis()">uptimeMillis</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;long&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#uptimeMillis()">uptimeMillis</a></pre>
+        <p>The time of the current pointer event, in milliseconds. The start (<code>0</code>) time is platform-dependent</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="PointerInputChange(androidx.compose.ui.input.pointer.PointerId, kotlin.Long, androidx.compose.ui.geometry.Offset, kotlin.Boolean, kotlin.Long, androidx.compose.ui.geometry.Offset, kotlin.Boolean, kotlin.Boolean, androidx.compose.ui.input.pointer.PointerType, androidx.compose.ui.geometry.Offset)"></a><a name="PointerInputChange-androidx.compose.ui.input.pointer.PointerId-kotlin.Long-androidx.compose.ui.geometry.Offset-kotlin.Boolean-kotlin.Long-androidx.compose.ui.geometry.Offset-kotlin.Boolean-kotlin.Boolean-androidx.compose.ui.input.pointer.PointerType-androidx.compose.ui.geometry.Offset-"></a><a name="pointerinputchange"></a>
+        <h3 class="api-name" id="PointerInputChange(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">PointerInputChange</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#PointerInputChange(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">PointerInputChange</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerId.html">PointerId</a>&nbsp;id,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;uptimeMillis,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;pressed,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;previousUptimeMillis,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;previousPosition,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;previousPressed,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;isInitiallyConsumed,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerType.html">PointerType</a>&nbsp;type,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;scrollDelta<br>)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerId.html">PointerId</a>&nbsp;id</code></td>
+                <td>
+                  <p>The unique id of the pointer associated with this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>long&nbsp;uptimeMillis</code></td>
+                <td>
+                  <p>The time of the current pointer event, in milliseconds. The start (<code>0</code>) time is platform-dependent</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position</code></td>
+                <td>
+                  <p>The <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> of the current pointer event, relative to the containing element (values can be negative or larger than the element bounds).</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>boolean&nbsp;pressed</code></td>
+                <td>
+                  <p><code>true</code> if the pointer event is considered &quot;pressed.&quot; For example, finger touching the screen or a mouse button is pressed <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#&lt;init&gt;(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">pressed</a></code> would be <code>true</code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>long&nbsp;previousUptimeMillis</code></td>
+                <td>
+                  <p>The <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#&lt;init&gt;(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">uptimeMillis</a></code> of the previous pointer event</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;previousPosition</code></td>
+                <td>
+                  <p>The <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> of the previous pointer event, offset to the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#&lt;init&gt;(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">position</a></code> and relative to the containing element.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>boolean&nbsp;previousPressed</code></td>
+                <td>
+                  <p><code>true</code> if the pointer event was considered &quot;pressed.&quot; For example , if a finger was touching the screen or a mouse button was pressed, <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#&lt;init&gt;(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">previousPressed</a></code> would be <code>true</code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>boolean&nbsp;isInitiallyConsumed</code></td>
+                <td>
+                  <p>whether the change was consumed from the start or not. This value can change over time as change is propagated through the pointer handlers. To query the actual status of the change use <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#isConsumed()">isConsumed</a></code></p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerType.html">PointerType</a>&nbsp;type</code></td>
+                <td>
+                  <p>The device type that produced the event, such as <code><a href="/reference/androidx/compose/ui/input/pointer/PointerType.Companion.html#Mouse()">mouse</a></code>, or <code><a href="/reference/androidx/compose/ui/input/pointer/PointerType.Companion.html#Touch()">touch</a></code>.git</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;scrollDelta</code></td>
+                <td>
+                  <p>The amount of scroll wheel movement in the horizontal and vertical directions.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="PointerInputChange(androidx.compose.ui.input.pointer.PointerId, kotlin.Long, androidx.compose.ui.geometry.Offset, kotlin.Boolean, kotlin.Float, kotlin.Long, androidx.compose.ui.geometry.Offset, kotlin.Boolean, kotlin.Boolean, androidx.compose.ui.input.pointer.PointerType, androidx.compose.ui.geometry.Offset)"></a><a name="PointerInputChange-androidx.compose.ui.input.pointer.PointerId-kotlin.Long-androidx.compose.ui.geometry.Offset-kotlin.Boolean-kotlin.Float-kotlin.Long-androidx.compose.ui.geometry.Offset-kotlin.Boolean-kotlin.Boolean-androidx.compose.ui.input.pointer.PointerType-androidx.compose.ui.geometry.Offset-"></a><a name="pointerinputchange"></a>
+        <h3 class="api-name" id="PointerInputChange(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">PointerInputChange</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#PointerInputChange(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">PointerInputChange</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerId.html">PointerId</a>&nbsp;id,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;uptimeMillis,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;pressed,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;pressure,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;previousUptimeMillis,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;previousPosition,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;previousPressed,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;isInitiallyConsumed,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerType.html">PointerType</a>&nbsp;type,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;scrollDelta<br>)</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="consume--"></a><a name="consume"></a>
+        <h3 class="api-name" id="consume()">consume</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#consume()">consume</a>()</pre>
+        <p>Consume change event, claiming all the corresponding change info to the caller. This is usually needed when, button, when being clicked, consumed the &quot;up&quot; event so no other parents of this button could consume this &quot;up&quot; again.</p>
+        <p>&quot;Consumption&quot; is just an indication of the claim and each pointer input handler implementation must manually check this flag to respect it.</p>
+      </div>
+      <div class="api-item"><a name="copy(androidx.compose.ui.input.pointer.PointerId, kotlin.Long, androidx.compose.ui.geometry.Offset, kotlin.Boolean, kotlin.Long, androidx.compose.ui.geometry.Offset, kotlin.Boolean, androidx.compose.ui.input.pointer.PointerType, androidx.compose.ui.geometry.Offset)"></a><a name="copy-androidx.compose.ui.input.pointer.PointerId-kotlin.Long-androidx.compose.ui.geometry.Offset-kotlin.Boolean-kotlin.Long-androidx.compose.ui.geometry.Offset-kotlin.Boolean-androidx.compose.ui.input.pointer.PointerType-androidx.compose.ui.geometry.Offset-"></a><a name="copy"></a>
+        <h3 class="api-name" id="copy(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">copy</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#copy(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerId.html">PointerId</a>&nbsp;id,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;currentTime,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;currentPosition,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;currentPressed,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;previousTime,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;previousPosition,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;previousPressed,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerType.html">PointerType</a>&nbsp;type,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;scrollDelta<br>)</pre>
+        <p>Make a shallow copy of the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code></p>
+        <p><b>NOTE:</b> Due to the need of the inner contract of the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code>, this method performs a shallow copy of the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code>. Any <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#consume()">consume</a></code> call between any of the copies will consume any other copy automatically. Therefore, copy with the new <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#isConsumed()">isConsumed</a></code> is not possible. Consider creating a new <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code></p>
+      </div>
+      <div class="api-item"><a name="copy(androidx.compose.ui.input.pointer.PointerId, kotlin.Long, androidx.compose.ui.geometry.Offset, kotlin.Boolean, kotlin.Long, androidx.compose.ui.geometry.Offset, kotlin.Boolean, androidx.compose.ui.input.pointer.ConsumedData, androidx.compose.ui.input.pointer.PointerType, androidx.compose.ui.geometry.Offset)"></a><a name="copy-androidx.compose.ui.input.pointer.PointerId-kotlin.Long-androidx.compose.ui.geometry.Offset-kotlin.Boolean-kotlin.Long-androidx.compose.ui.geometry.Offset-kotlin.Boolean-androidx.compose.ui.input.pointer.ConsumedData-androidx.compose.ui.input.pointer.PointerType-androidx.compose.ui.geometry.Offset-"></a><a name="copy"></a>
+        <h3 class="api-name" id="copy(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,androidx.compose.ui.input.pointer.ConsumedData,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">copy</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;<span><del><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#copy(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,androidx.compose.ui.input.pointer.ConsumedData,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">copy</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerId.html">PointerId</a>&nbsp;id,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;currentTime,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;currentPosition,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;currentPressed,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;previousTime,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;previousPosition,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;previousPressed,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/ConsumedData.html">ConsumedData</a>&nbsp;consumed,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerType.html">PointerType</a>&nbsp;type,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;scrollDelta<br>)</pre>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>Partial consumption has been deprecated. Use copy() instead without `consumed` parameter to create a shallow copy or a constructor to create a new PointerInputChange</aside>
+      </div>
+      <div class="api-item"><a name="copy(androidx.compose.ui.input.pointer.PointerId, kotlin.Long, androidx.compose.ui.geometry.Offset, kotlin.Boolean, kotlin.Long, androidx.compose.ui.geometry.Offset, kotlin.Boolean, androidx.compose.ui.input.pointer.PointerType, kotlin.collections.List, androidx.compose.ui.geometry.Offset)"></a><a name="copy-androidx.compose.ui.input.pointer.PointerId-kotlin.Long-androidx.compose.ui.geometry.Offset-kotlin.Boolean-kotlin.Long-androidx.compose.ui.geometry.Offset-kotlin.Boolean-androidx.compose.ui.input.pointer.PointerType-kotlin.collections.List-androidx.compose.ui.geometry.Offset-"></a><a name="copy"></a>
+        <h3 class="api-name" id="copy(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,kotlin.collections.List,androidx.compose.ui.geometry.Offset)">copy</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#copy(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,kotlin.collections.List,androidx.compose.ui.geometry.Offset)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerId.html">PointerId</a>&nbsp;id,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;currentTime,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;currentPosition,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;currentPressed,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;previousTime,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;previousPosition,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;previousPressed,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerType.html">PointerType</a>&nbsp;type,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/HistoricalChange.html">HistoricalChange</a>&gt;&nbsp;historical,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;scrollDelta<br>)</pre>
+        <p>Make a shallow copy of the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code></p>
+        <p><b>NOTE:</b> Due to the need of the inner contract of the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code>, this method performs a shallow copy of the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code>. Any <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#consume()">consume</a></code> call between any of the copies will consume any other copy automatically. Therefore, copy with the new <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#isConsumed()">isConsumed</a></code> is not possible. Consider creating a new <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="copy(androidx.compose.ui.input.pointer.PointerId, kotlin.Long, androidx.compose.ui.geometry.Offset, kotlin.Boolean, kotlin.Float, kotlin.Long, androidx.compose.ui.geometry.Offset, kotlin.Boolean, androidx.compose.ui.input.pointer.PointerType, kotlin.collections.List, androidx.compose.ui.geometry.Offset)"></a><a name="copy-androidx.compose.ui.input.pointer.PointerId-kotlin.Long-androidx.compose.ui.geometry.Offset-kotlin.Boolean-kotlin.Float-kotlin.Long-androidx.compose.ui.geometry.Offset-kotlin.Boolean-androidx.compose.ui.input.pointer.PointerType-kotlin.collections.List-androidx.compose.ui.geometry.Offset-"></a><a name="copy"></a>
+        <h3 class="api-name" id="copy(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,kotlin.collections.List,androidx.compose.ui.geometry.Offset)">copy</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#copy(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,kotlin.collections.List,androidx.compose.ui.geometry.Offset)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerId.html">PointerId</a>&nbsp;id,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;currentTime,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;currentPosition,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;currentPressed,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;pressure,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;previousTime,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;previousPosition,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;previousPressed,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerType.html">PointerType</a>&nbsp;type,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/HistoricalChange.html">HistoricalChange</a>&gt;&nbsp;historical,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;scrollDelta<br>)</pre>
+        <p>Make a shallow copy of the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code></p>
+        <p><b>NOTE:</b> Due to the need of the inner contract of the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code>, this method performs a shallow copy of the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code>. Any <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#consume()">consume</a></code> call between any of the copies will consume any other copy automatically. Therefore, copy with the new <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#isConsumed()">isConsumed</a></code> is not possible. Consider creating a new <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+        <h3 class="api-name" id="toString()">toString</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#toString()">toString</a>()</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.input.pointer.PointerInputChange-.anyChangeConsumed--"></a><a name="anychangeconsumed"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.pointer.PointerInputChange).anyChangeConsumed()">PointerEventKt.anyChangeConsumed</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<span><del><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).anyChangeConsumed()">anyChangeConsumed</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver)</pre>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>Partial consumption has been deprecated. Use isConsumed instead</aside>
+        <p>True if any aspect of this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code> has been consumed.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.input.pointer.PointerInputChange-.changedToDown--"></a><a name="changedtodown"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.pointer.PointerInputChange).changedToDown()">PointerEventKt.changedToDown</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).changedToDown()">changedToDown</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver)</pre>
+        <p>True if this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code> represents a pointer coming in contact with the screen and that change has not been consumed.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.input.pointer.PointerInputChange-.changedToDownIgnoreConsumed--"></a><a name="changedtodownignoreconsumed"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.pointer.PointerInputChange).changedToDownIgnoreConsumed()">PointerEventKt.changedToDownIgnoreConsumed</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).changedToDownIgnoreConsumed()">changedToDownIgnoreConsumed</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver<br>)</pre>
+        <p>True if this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code> represents a pointer coming in contact with the screen, whether or not that change has been consumed.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.input.pointer.PointerInputChange-.changedToUp--"></a><a name="changedtoup"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.pointer.PointerInputChange).changedToUp()">PointerEventKt.changedToUp</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).changedToUp()">changedToUp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver)</pre>
+        <p>True if this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code> represents a pointer breaking contact with the screen and that change has not been consumed.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.input.pointer.PointerInputChange-.changedToUpIgnoreConsumed--"></a><a name="changedtoupignoreconsumed"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.pointer.PointerInputChange).changedToUpIgnoreConsumed()">PointerEventKt.changedToUpIgnoreConsumed</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).changedToUpIgnoreConsumed()">changedToUpIgnoreConsumed</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver<br>)</pre>
+        <p>True if this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code> represents a pointer breaking contact with the screen, whether or not that change has been consumed.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.input.pointer.PointerInputChange-.consumeAllChanges--"></a><a name="consumeallchanges"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.pointer.PointerInputChange).consumeAllChanges()">PointerEventKt.consumeAllChanges</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<span><del><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).consumeAllChanges()">consumeAllChanges</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver)</pre>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>Use consume() instead</aside>
+        <p>Consumes all changes associated with the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code></p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.input.pointer.PointerInputChange-.consumeDownChange--"></a><a name="consumedownchange"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.pointer.PointerInputChange).consumeDownChange()">PointerEventKt.consumeDownChange</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<span><del><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).consumeDownChange()">consumeDownChange</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver)</pre>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>Partial consumption has been deprecated. Use consume() instead.</aside>
+        <p>Consume the up or down change of this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code> if there is an up or down change to consume.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.input.pointer.PointerInputChange-.consumePositionChange--"></a><a name="consumepositionchange"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.pointer.PointerInputChange).consumePositionChange()">PointerEventKt.consumePositionChange</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<span><del><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).consumePositionChange()">consumePositionChange</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver<br>)</pre>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>Partial consumption has been deprecated. Use consume() instead.</aside>
+        <p>Consume position change if there is any</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.input.pointer.PointerInputChange-.isOutOfBounds-androidx.compose.ui.unit.IntSize-"></a><a name="isoutofbounds"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.pointer.PointerInputChange).isOutOfBounds(androidx.compose.ui.unit.IntSize)">PointerEventKt.isOutOfBounds</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<span><del><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).isOutOfBounds(androidx.compose.ui.unit.IntSize)">isOutOfBounds</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a>&nbsp;size<br>)</pre>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>Use isOutOfBounds() that supports minimum touch target</aside>
+        <p>Returns <code>true</code> if the pointer has moved outside of the region of <code>(0, 0, size.width, size.height)</code> or <code>false</code> if the current pointer is up or it is inside the given bounds.</p>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.input.pointer.PointerInputChange).isOutOfBounds(androidx.compose.ui.unit.IntSize, androidx.compose.ui.geometry.Size)"></a><a name="-androidx.compose.ui.input.pointer.PointerInputChange-.isOutOfBounds-androidx.compose.ui.unit.IntSize-androidx.compose.ui.geometry.Size-"></a><a name="isoutofbounds"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.pointer.PointerInputChange).isOutOfBounds(androidx.compose.ui.unit.IntSize,androidx.compose.ui.geometry.Size)">PointerEventKt.isOutOfBounds</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).isOutOfBounds(androidx.compose.ui.unit.IntSize,androidx.compose.ui.geometry.Size)">isOutOfBounds</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a>&nbsp;size,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;extendedTouchPadding<br>)</pre>
+        <p>Returns <code>true</code> if the pointer has moved outside of the pointer region. For Touch events, this is (-extendedTouchPadding.width, -extendedTouchPadding.height, size.width + extendedTouchPadding.width, size.height + extendedTouchPadding.height) and for other events, this is <code>(0, 0, size.width, size.height)</code>. Returns<code>false</code> if the current pointer is up or it is inside the pointer region.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.input.pointer.PointerInputChange-.positionChange--"></a><a name="positionchange"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.pointer.PointerInputChange).positionChange()">PointerEventKt.positionChange</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).positionChange()">positionChange</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver)</pre>
+        <p>The distance that the pointer has moved on the screen minus any distance that has been consumed.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.input.pointer.PointerInputChange-.positionChangeConsumed--"></a><a name="positionchangeconsumed"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.pointer.PointerInputChange).positionChangeConsumed()">PointerEventKt.positionChangeConsumed</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<span><del><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).positionChangeConsumed()">positionChangeConsumed</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver<br>)</pre>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>Partial consumption has been deprecated. Use isConsumed instead</aside>
+        <p>True if this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code>'s movement has been consumed.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.input.pointer.PointerInputChange-.positionChangeIgnoreConsumed--"></a><a name="positionchangeignoreconsumed"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.pointer.PointerInputChange).positionChangeIgnoreConsumed()">PointerEventKt.positionChangeIgnoreConsumed</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).positionChangeIgnoreConsumed()">positionChangeIgnoreConsumed</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver<br>)</pre>
+        <p>The distance that the pointer has moved on the screen, ignoring the fact that it might have been consumed.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.input.pointer.PointerInputChange-.positionChanged--"></a><a name="positionchanged"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.pointer.PointerInputChange).positionChanged()">PointerEventKt.positionChanged</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).positionChanged()">positionChanged</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver)</pre>
+        <p>True if this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code> represents a pointer moving on the screen and some of that movement has not been consumed.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.input.pointer.PointerInputChange-.positionChangedIgnoreConsumed--"></a><a name="positionchangedignoreconsumed"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.input.pointer.PointerInputChange).positionChangedIgnoreConsumed()">PointerEventKt.positionChangedIgnoreConsumed</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a>.<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerInputChange).positionChangedIgnoreConsumed()">positionChangedIgnoreConsumed</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>&nbsp;receiver<br>)</pre>
+        <p>True if this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code> represents a pointer moving on the screen ignoring how much of that movement may have been consumed.</p>
+      </div>
+    </div>
+  </body>
+</html>

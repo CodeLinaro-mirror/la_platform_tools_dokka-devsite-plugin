@@ -1,0 +1,80 @@
+<html devsite="true">
+  <head>
+    <title>androidx.compose.ui.input.pointer.util</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>androidx.compose.ui.input.pointer.util</h1>
+    <h2>Classes</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/util/VelocityTracker.html">VelocityTracker</a></code></td>
+            <td>
+              <p>Computes a pointer's velocity.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/util/VelocityTracker1D.html">VelocityTracker1D</a></code></td>
+            <td>
+              <p>A velocity tracker calculating velocity in 1 dimension.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Extension functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/util/VelocityTracker.html">VelocityTracker</a>.<a href="/reference/kotlin/androidx/compose/ui/input/pointer/util/package-summary.html#(androidx.compose.ui.input.pointer.util.VelocityTracker).addPointerInputChange(androidx.compose.ui.input.pointer.PointerInputChange)">addPointerInputChange</a>(event:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>)</code></div>
+              <p>Track the positions and timestamps inside this event change.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Extension functions</h2>
+    <div class="api-item"><a name="-androidx.compose.ui.input.pointer.util.VelocityTracker-.addPointerInputChange-androidx.compose.ui.input.pointer.PointerInputChange-"></a><a name="addpointerinputchange"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.input.pointer.util.VelocityTracker).addPointerInputChange(androidx.compose.ui.input.pointer.PointerInputChange)">addPointerInputChange</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/util/VelocityTracker.html">VelocityTracker</a>.<a href="/reference/kotlin/androidx/compose/ui/input/pointer/util/package-summary.html#(androidx.compose.ui.input.pointer.util.VelocityTracker).addPointerInputChange(androidx.compose.ui.input.pointer.PointerInputChange)">addPointerInputChange</a>(event:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Track the positions and timestamps inside this event change.</p>
+      <p>For optimal tracking, this should be called for the DOWN event and all MOVE events, including any touch-slop-captured MOVE event.</p>
+      <p>Since Compose uses relative positions inside PointerInputChange, this should be taken into consideration when using this method. Right now, we use the first down to initialize an accumulator and use subsequent deltas to simulate an actual movement from relative positions in PointerInputChange. This is required because VelocityTracker requires data that can be fit into a curve, which might not happen with relative positions inside a moving target for instance.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>event:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code></td>
+              <td>
+                <p>Pointer change to track.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

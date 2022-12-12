@@ -1,0 +1,145 @@
+<html devsite="true">
+  <head>
+    <title>MotionDurationScale</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/MotionDurationScale.kt+class:androidx.compose.ui.MotionDurationScale&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>MotionDurationScale</h1>
+    <p>
+      <pre>public interface <a href="/reference/androidx/compose/ui/MotionDurationScale.html">MotionDurationScale</a> extends <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/index.html">CoroutineContext.Element</a></pre>
+    </p>
+    <hr>
+    <p>Provides a duration scale for motion such as animations. When the duration <code><a href="/reference/androidx/compose/ui/MotionDurationScale.html#scaleFactor()">scaleFactor</a></code> is 0, the motion will end in the next frame callback. Otherwise, the duration <code><a href="/reference/androidx/compose/ui/MotionDurationScale.html#scaleFactor()">scaleFactor</a></code> will be used as a multiplier to scale the duration of the motion. The larger the scale, the longer the motion will take to finish, and therefore the slower it will be perceived.</p>
+    <h2> Testing</h2>
+    <p>To control the motion duration scale in tests, create an implementation of this interface and pass it to the <code>effectContext</code> parameter either where you call <code>runComposeUiTest</code> or where you create your test rule.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>public static class <a href="/reference/androidx/compose/ui/MotionDurationScale.Key.html">MotionDurationScale.Key</a> implements <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-key/index.html">CoroutineContext.Key</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-key/index.html">CoroutineContext.Key</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/MotionDurationScale.html#key()">key</a></code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/MotionDurationScale.html#scaleFactor()">scaleFactor</a></code></div>
+              <p>Defines the multiplier for the duration of the motion.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">kotlin.coroutines.CoroutineContext</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code></td>
+                      <td>
+                        <div><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/plus.html">plus</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>&nbsp;context)</code></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/index.html">kotlin.coroutines.CoroutineContext.Element</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R</code></td>
+                      <td>
+                        <div><code>&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/fold.html">fold</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;initial,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/index.html">CoroutineContext.Element</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;operation<br>)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default E</code></td>
+                      <td>
+                        <div><code>&lt;E&nbsp;extends&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/index.html">CoroutineContext.Element</a>&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/get.html">get</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-key/index.html">CoroutineContext.Key</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E&gt;&nbsp;key<br>)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code></td>
+                      <td>
+                        <div><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/minus-key.html">minusKey</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-key/index.html">CoroutineContext.Key</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;key)</code></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getKey()"></a><a name="setKey()"></a><a name="getKey--"></a><a name="setKey--"></a>
+        <h3 class="api-name" id="key()">key</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-key/index.html">CoroutineContext.Key</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;<a href="/reference/androidx/compose/ui/MotionDurationScale.html#key()">key</a></pre>
+      </div>
+      <div class="api-item"><a name="getScaleFactor()"></a><a name="setScaleFactor()"></a><a name="getScaleFactor--"></a><a name="setScaleFactor--"></a>
+        <h3 class="api-name" id="scaleFactor()">scaleFactor</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/MotionDurationScale.html#scaleFactor()">scaleFactor</a></pre>
+        <p>Defines the multiplier for the duration of the motion. This value should be non-negative.</p>
+        <p>A <code><a href="/reference/androidx/compose/ui/MotionDurationScale.html#scaleFactor()">scaleFactor</a></code> of 1.0f would play the motion in real time. 0f would cause motion to finish in the next frame callback. Larger <code><a href="/reference/androidx/compose/ui/MotionDurationScale.html#scaleFactor()">scaleFactor</a></code> will result in longer durations for the motion/animation (i.e. slower animation). For example, a <code><a href="/reference/androidx/compose/ui/MotionDurationScale.html#scaleFactor()">scaleFactor</a></code> of 10f would cause an animation with a duration of 100ms to finish in 1000ms.</p>
+      </div>
+    </div>
+  </body>
+</html>

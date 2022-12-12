@@ -1,0 +1,94 @@
+<html devsite="true">
+  <head>
+    <title>KeyInputModifierNode</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/input/key/KeyInputModifierNode.kt+class:androidx.compose.ui.input.key.KeyInputModifierNode&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>KeyInputModifierNode</h1>
+    <p>
+      <pre>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public interface <a href="/reference/androidx/compose/ui/input/key/KeyInputModifierNode.html">KeyInputModifierNode</a> extends <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></pre>
+    </p>
+    <hr>
+    <p>Implement this interface to create a <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that can intercept hardware Key events.</p>
+    <p>The event is routed to the focused item. Before reaching the focused item, <a href="">onPreKeyEvent</a> is called for parents of the focused item. If the parents don't consume the event, <a href="">onPreKeyEvent</a> is called for the focused item. If the event is still not consumed, <a href="">onKeyEvent</a> is called on the focused item's parents.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/key/KeyInputModifierNode.html#onKeyEvent(androidx.compose.ui.input.key.KeyEvent)">onKeyEvent</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;event)</code></div>
+              <p>This function is called when a <code><a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a></code> is received by this node during the upward pass.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/key/KeyInputModifierNode.html#onPreKeyEvent(androidx.compose.ui.input.key.KeyEvent)">onPreKeyEvent</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;event)</code></div>
+              <p>This function is called when a <code><a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a></code> is received by this node during the downward pass.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">androidx.compose.ui.node.DelegatableNode</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/node/DelegatableNode.html#node()">node</a></code></div>
+                        <p>A reference of the <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that holds this node's position in the node hierarchy.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="onKeyEvent-androidx.compose.ui.input.key.KeyEvent-"></a><a name="onkeyevent"></a>
+        <h3 class="api-name" id="onKeyEvent(androidx.compose.ui.input.key.KeyEvent)">onKeyEvent</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/key/KeyInputModifierNode.html#onKeyEvent(androidx.compose.ui.input.key.KeyEvent)">onKeyEvent</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;event)</pre>
+        <p>This function is called when a <code><a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a></code> is received by this node during the upward pass. While implementing this callback, return true to stop propagation of this event. If you return false, the key event will be sent to this <code><a href="/reference/androidx/compose/ui/input/key/KeyInputModifierNode.html">KeyInputModifierNode</a></code>'s parent.</p>
+      </div>
+      <div class="api-item"><a name="onPreKeyEvent-androidx.compose.ui.input.key.KeyEvent-"></a><a name="onprekeyevent"></a>
+        <h3 class="api-name" id="onPreKeyEvent(androidx.compose.ui.input.key.KeyEvent)">onPreKeyEvent</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/key/KeyInputModifierNode.html#onPreKeyEvent(androidx.compose.ui.input.key.KeyEvent)">onPreKeyEvent</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a>&nbsp;event)</pre>
+        <p>This function is called when a <code><a href="/reference/androidx/compose/ui/input/key/KeyEvent.html">KeyEvent</a></code> is received by this node during the downward pass. It gives ancestors of a focused component the chance to intercept an event. Return true to stop propagation of this event. If you return false, the event will be sent to this <code><a href="/reference/androidx/compose/ui/input/key/KeyInputModifierNode.html">KeyInputModifierNode</a></code>'s child. If none of the children consume the event, it will be sent back up to the root using the <code><a href="/reference/androidx/compose/ui/input/key/KeyInputModifierNode.html#onKeyEvent(androidx.compose.ui.input.key.KeyEvent)">onKeyEvent</a></code> function.</p>
+      </div>
+    </div>
+  </body>
+</html>

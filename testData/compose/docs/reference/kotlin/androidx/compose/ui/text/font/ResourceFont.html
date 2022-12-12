@@ -1,0 +1,200 @@
+<html devsite="true">
+  <head>
+    <title>ResourceFont</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:-text/androidx/compose/ui/text/font/Font.kt+class:androidx.compose.ui.text.font.ResourceFont&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>ResourceFont</h1>
+    <p>
+      <pre>class <a href="/reference/kotlin/androidx/compose/ui/text/font/ResourceFont.html">ResourceFont</a> : <a href="/reference/kotlin/androidx/compose/ui/text/font/Font.html">Font</a></pre>
+    </p>
+    <hr>
+    <p>Defines a font to be used while rendering text with resource ID.</p>
+    <pre class="prettyprint">
+import androidx.compose.material.Text
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+
+val fontFamily = FontFamily(
+    Font(
+        resId = R.font.my_font_400_regular,
+        weight = FontWeight.W400,
+        style = FontStyle.Normal
+    ),
+    Font(
+        resId = R.font.my_font_400_italic,
+        weight = FontWeight.W400,
+        style = FontStyle.Italic
+    )
+)
+Text(text = &quot;Demo Text&quot;, fontFamily = fontFamily)</pre>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">See also</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/text/font/ResourceFont.html">ResourceFont</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/font/ResourceFont.html#copy(kotlin.Int,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle)">copy</a>(resId:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;weight:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>,&nbsp;style:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/text/font/ResourceFont.html">ResourceFont</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br><a href="/reference/kotlin/androidx/compose/ui/text/font/ResourceFont.html#copy(kotlin.Int,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontLoadingStrategy,androidx.compose.ui.text.font.FontVariation.Settings)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;resId:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;weight:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;style:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;loadingStrategy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontLoadingStrategy.html">FontLoadingStrategy</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;variationSettings:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontVariation.Settings.html">FontVariation.Settings</a><br>)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open&nbsp;operator <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/font/ResourceFont.html#equals(kotlin.Any)">equals</a>(other:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/font/ResourceFont.html#hashCode()">hashCode</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/font/ResourceFont.html#toString()">toString</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>open <a href="/reference/kotlin/androidx/compose/ui/text/font/FontLoadingStrategy.html">FontLoadingStrategy</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br><a href="/reference/kotlin/androidx/compose/ui/text/font/ResourceFont.html#loadingStrategy()">loadingStrategy</a></code></div>
+              <p>Loading strategy for this font.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/font/ResourceFont.html#resId()">resId</a></code></div>
+              <p>The resource ID of the font file in font resources. i.e. &quot;R.font.myfont&quot;.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="/reference/kotlin/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/font/ResourceFont.html#style()">style</a></code></div>
+              <p>The style of the font, normal or italic.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontVariation.Settings.html">FontVariation.Settings</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/font/ResourceFont.html#variationSettings()">variationSettings</a></code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="/reference/kotlin/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/font/ResourceFont.html#weight()">weight</a></code></div>
+              <p>The weight of the font.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="copy(kotlin.Int, androidx.compose.ui.text.font.FontWeight, androidx.compose.ui.text.font.FontStyle)"></a><a name="copy-kotlin.Int-androidx.compose.ui.text.font.FontWeight-androidx.compose.ui.text.font.FontStyle-"></a><a name="copy"></a>
+        <h3 class="api-name" id="copy(kotlin.Int,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle)">copy</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/ResourceFont.html#copy(kotlin.Int,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;resId:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = this.resId,<br>&nbsp;&nbsp;&nbsp;&nbsp;weight:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a> = this.weight,<br>&nbsp;&nbsp;&nbsp;&nbsp;style:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a> = this.style<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/ResourceFont.html">ResourceFont</a></pre>
+      </div>
+      <div class="api-item"><a name="copy(kotlin.Int, androidx.compose.ui.text.font.FontWeight, androidx.compose.ui.text.font.FontStyle, androidx.compose.ui.text.font.FontLoadingStrategy, androidx.compose.ui.text.font.FontVariation.Settings)"></a><a name="copy-kotlin.Int-androidx.compose.ui.text.font.FontWeight-androidx.compose.ui.text.font.FontStyle-androidx.compose.ui.text.font.FontLoadingStrategy-androidx.compose.ui.text.font.FontVariation.Settings-"></a><a name="copy"></a>
+        <h3 class="api-name" id="copy(kotlin.Int,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontLoadingStrategy,androidx.compose.ui.text.font.FontVariation.Settings)">copy</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/ResourceFont.html#copy(kotlin.Int,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontLoadingStrategy,androidx.compose.ui.text.font.FontVariation.Settings)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;resId:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = this.resId,<br>&nbsp;&nbsp;&nbsp;&nbsp;weight:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a> = this.weight,<br>&nbsp;&nbsp;&nbsp;&nbsp;style:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a> = this.style,<br>&nbsp;&nbsp;&nbsp;&nbsp;loadingStrategy:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontLoadingStrategy.html">FontLoadingStrategy</a> = this.loadingStrategy,<br>&nbsp;&nbsp;&nbsp;&nbsp;variationSettings:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontVariation.Settings.html">FontVariation.Settings</a> = this.variationSettings<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/ResourceFont.html">ResourceFont</a></pre>
+      </div>
+      <div class="api-item"><a name="equals-kotlin.Any-"></a><a name="equals"></a>
+        <h3 class="api-name" id="equals(kotlin.Any)">equals</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/ResourceFont.html#equals(kotlin.Any)">equals</a>(other:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+      </div>
+      <div class="api-item"><a name="hashCode--"></a><a name="hashcode"></a>
+        <h3 class="api-name" id="hashCode()">hashCode</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/ResourceFont.html#hashCode()">hashCode</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+      </div>
+      <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+        <h3 class="api-name" id="toString()">toString</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/ResourceFont.html#toString()">toString</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getLoadingStrategy()"></a><a name="setLoadingStrategy()"></a><a name="getLoadingStrategy--"></a><a name="setLoadingStrategy--"></a>
+        <h3 class="api-name" id="loadingStrategy()">loadingStrategy</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/ResourceFont.html#loadingStrategy()">loadingStrategy</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontLoadingStrategy.html">FontLoadingStrategy</a></pre>
+        <p>Loading strategy for this font.</p>
+      </div>
+      <div class="api-item"><a name="getResId()"></a><a name="setResId()"></a><a name="getResId--"></a><a name="setResId--"></a>
+        <h3 class="api-name" id="resId()">resId</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/ResourceFont.html#resId()">resId</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>The resource ID of the font file in font resources. i.e. &quot;R.font.myfont&quot;.</p>
+      </div>
+      <div class="api-item"><a name="getStyle()"></a><a name="setStyle()"></a><a name="getStyle--"></a><a name="setStyle--"></a>
+        <h3 class="api-name" id="style()">style</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/ResourceFont.html#style()">style</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontStyle.html">FontStyle</a></pre>
+        <p>The style of the font, normal or italic. The system uses this to match a font to a font request that is given in a <code><a href="/reference/kotlin/androidx/compose/ui/text/TextStyle.html">androidx.compose.ui.text.TextStyle</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getVariationSettings()"></a><a name="setVariationSettings()"></a><a name="getVariationSettings--"></a><a name="setVariationSettings--"></a>
+        <h3 class="api-name" id="variationSettings()">variationSettings</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/ResourceFont.html#variationSettings()">variationSettings</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontVariation.Settings.html">FontVariation.Settings</a></pre>
+      </div>
+      <div class="api-item"><a name="getWeight()"></a><a name="setWeight()"></a><a name="getWeight--"></a><a name="setWeight--"></a>
+        <h3 class="api-name" id="weight()">weight</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/ResourceFont.html#weight()">weight</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/FontWeight.html">FontWeight</a></pre>
+        <p>The weight of the font. The system uses this to match a font to a font request that is given in a <code><a href="/reference/kotlin/androidx/compose/ui/text/TextStyle.html">androidx.compose.ui.text.TextStyle</a></code>.</p>
+      </div>
+    </div>
+  </body>
+</html>

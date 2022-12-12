@@ -5,7 +5,9 @@
 {% include "_shared/_reference-head-tags.html" %}
   </head>
   <body>
-    <div id="metadata-info-block"></div>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/runtime/snapshots/SnapshotStateMap.kt+class:androidx.compose.runtime.snapshots.SnapshotStateMap&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
     <h1>SnapshotStateMap</h1>
     <p>
       <pre>public final class <a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateMap.html">SnapshotStateMap</a>&lt;K&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;V&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; implements <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a>, <a href="/reference/androidx/compose/runtime/snapshots/StateObject.html">StateObject</a></pre>
@@ -164,6 +166,13 @@
             <td><code>V</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateMap.html#remove(kotlin.Any)">remove</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> K&nbsp;key)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Map.html">Map</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> K,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateMap.html#toMap()">toMap</a>()</code></div>
+              <p>Returns an immutable map containing all key-value pairs from the original map.</p>
             </td>
           </tr>
         </tbody>
@@ -364,6 +373,14 @@
       <div class="api-item"><a name="remove-kotlin.Any-"></a><a name="remove"></a>
         <h3 class="api-name" id="remove(kotlin.Any)">remove</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;V&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateMap.html#remove(kotlin.Any)">remove</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> K&nbsp;key)</pre>
+      </div>
+      <div class="api-item"><a name="toMap--"></a><a name="tomap"></a>
+        <h3 class="api-name" id="toMap()">toMap</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Map.html">Map</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> K,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateMap.html#toMap()">toMap</a>()</pre>
+        <p>Returns an immutable map containing all key-value pairs from the original map.</p>
+        <p>The content of the map returned will not change even if the content of the map is changed in the same snapshot. It also will be the same instance until the content is changed. It is not, however, guaranteed to be the same instance for the same content as adding and removing the same item from the this map might produce a different instance with the same content.</p>
+        <p>This operation is O(1) and does not involve a physically copying the map. It instead returns the underlying immutable map used internally to store the content of the map.</p>
+        <p>It is recommended to use <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateMap.html#toMap()">toMap</a></code> when using returning the value of this map from <code><a href="/reference/androidx/compose/runtime/package-summary.html#snapshotFlow(kotlin.Function0)">androidx.compose.runtime.snapshotFlow</a></code>.</p>
       </div>
     </div>
   </body>

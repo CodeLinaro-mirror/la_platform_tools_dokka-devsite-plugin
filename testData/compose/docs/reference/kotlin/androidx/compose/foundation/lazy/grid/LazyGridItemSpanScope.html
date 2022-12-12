@@ -1,0 +1,63 @@
+<html devsite="true">
+  <head>
+    <title>LazyGridItemSpanScope</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/lazy/grid/LazyGridSpan.kt+class:androidx.compose.foundation.lazy.grid.LazyGridItemSpanScope&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>LazyGridItemSpanScope</h1>
+    <p>
+      <pre>@<a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridScopeMarker.html">LazyGridScopeMarker</a><br>interface <a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridItemSpanScope.html">LazyGridItemSpanScope</a></pre>
+    </p>
+    <hr>
+    <p>Scope of lambdas used to calculate the spans of items in lazy grids.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridItemSpanScope.html#maxCurrentLineSpan()">maxCurrentLineSpan</a></code></div>
+              <p>The max current line (horizontal for vertical grids) the item can occupy, such that it will be positioned on the current line.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridItemSpanScope.html#maxLineSpan()">maxLineSpan</a></code></div>
+              <p>The max line span (horizontal for vertical grids) an item can occupy.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getMaxCurrentLineSpan()"></a><a name="setMaxCurrentLineSpan()"></a><a name="getMaxCurrentLineSpan--"></a><a name="setMaxCurrentLineSpan--"></a>
+        <h3 class="api-name" id="maxCurrentLineSpan()">maxCurrentLineSpan</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridItemSpanScope.html#maxCurrentLineSpan()">maxCurrentLineSpan</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>The max current line (horizontal for vertical grids) the item can occupy, such that it will be positioned on the current line.</p>
+        <p>For example if <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/package-summary.html#LazyVerticalGrid(androidx.compose.foundation.lazy.grid.GridCells,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.grid.LazyGridState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyVerticalGrid</a></code> has 3 columns this value will be 3 for the first cell in the line, 2 for the second cell, and 1 for the last one. If you return a span count larger than <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridItemSpanScope.html#maxCurrentLineSpan()">maxCurrentLineSpan</a></code> this means we can't fit this cell into the current line, so the cell will be positioned on the next line.</p>
+      </div>
+      <div class="api-item"><a name="getMaxLineSpan()"></a><a name="setMaxLineSpan()"></a><a name="getMaxLineSpan--"></a><a name="setMaxLineSpan--"></a>
+        <h3 class="api-name" id="maxLineSpan()">maxLineSpan</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/LazyGridItemSpanScope.html#maxLineSpan()">maxLineSpan</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>The max line span (horizontal for vertical grids) an item can occupy. This will be the number of columns in vertical grids or the number of rows in horizontal grids.</p>
+        <p>For example if <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/grid/package-summary.html#LazyVerticalGrid(androidx.compose.foundation.lazy.grid.GridCells,androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.grid.LazyGridState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyVerticalGrid</a></code> has 3 columns this value will be 3 for each cell.</p>
+      </div>
+    </div>
+  </body>
+</html>
