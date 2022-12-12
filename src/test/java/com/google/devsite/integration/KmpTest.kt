@@ -16,64 +16,52 @@
 
 package com.google.devsite.integration
 
-import com.google.devsite.DevsiteConfiguration
 import com.google.devsite.capitalize
 import com.google.devsite.testing.IntegrationTestBase
-import com.google.devsite.testing.TestOutputWriterPlugin
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.DokkaSourceSetID
-import org.jetbrains.dokka.ExternalDocumentationLink
-import org.jetbrains.dokka.PluginConfigurationImpl
-import org.jetbrains.dokka.pages.RootPageNode
-import org.jetbrains.dokka.plugability.DokkaContext
-import org.jetbrains.dokka.toJsonString
+import org.jetbrains.dokka.ExternalDocumentationLinkImpl
 import org.junit.Test
 import testApi.testRunner.SourceSetsBuilder
+import testApi.testRunner.TestDokkaConfigurationBuilder
 import java.io.File
-import java.net.URL
 
 class KmpTest : IntegrationTestBase() {
     @Test
-    fun `Validate kmp classes`() {
-        validateDirectory("kmp")
+    fun `Simple KMP classes test`() {
+        squashAndroid = true
+        validateDirectory("simple-kmp")
     }
 
-    override fun validateDirectory(
-        path: String,
-        sampleLocations: List<String>,
-        includeFiles: List<String>,
-        docRootPath: String,
-        projectPath: String?,
-        javaDocsDirectory: String?,
-        kotlinDocsDirectory: String?,
-        suffix: String
-    ) {
-        val baseDir = "testData/$path"
-        val sourceDir = "$baseDir/source"
+    @Test
+    fun `Validate prod AndroidX datastore-core prebuilts`() {
+        squashAndroid = true
+        validatePrebuilts(
+            testName = "datastore-kmp",
+            artifactNames = listOf("datastore-core"),
+            samples = true
+        )
+    }
 
-        val externalLinks = mapOf(
-            "coroutines" to "https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core",
-            "android" to "https://developer.android.com/reference",
-            "guava" to "https://guava.dev/releases/18.0/api/docs/package-list",
-            "kotlin" to "https://kotlinlang.org/api/latest/jvm/stdlib/"
-        ).map {
-            ExternalDocumentationLink(
-                url = URL(it.value),
-                packageListUrl = File("testData").toPath()
-                    .resolve("package-lists/${it.key}/package-list").toUri().toURL()
-            )
-        }
+    private var squashAndroid = true
+
+    /** For when a test uses source outside of `./testData/` */
+    override fun TestDokkaConfigurationBuilder.makeSourcesets(
+        sources: List<File>,
+        samplesLocations: List<String>,
+        includeFiles: List<String>,
+        externalLinks: List<ExternalDocumentationLinkImpl>
+    ) {
         fun SourceSetsBuilder.createSourceSet(
             name: String,
+            sourcesOfPlatform: List<File>,
+            ssDependencies: Set<DokkaSourceSetID> = emptySet(),
             displayName: String = name.capitalize(),
             analysisPlatform: String = name,
-            dependentSourceSets: Set<DokkaSourceSetID> = emptySet()
         ) = sourceSet {
             this.name = name
             this.displayName = displayName
-            val sources = File(sourceDir + "/" + name + "Main").absoluteFile
-            check(sources.isDirectory) { "$sources does not exist or is not a directory" }
-            sourceRoots = listOf(sources.absolutePath)
+            sourceRoots = sourcesOfPlatform.map { it.absolutePath }
             classpath = classpathFromFile("testData/classpath.txt")
             externalDocumentationLinks = externalLinks
             documentedVisibilities = setOf(
@@ -81,47 +69,26 @@ class KmpTest : IntegrationTestBase() {
                 DokkaConfiguration.Visibility.PROTECTED
             )
             this.analysisPlatform = analysisPlatform
-            this.dependentSourceSets = dependentSourceSets
+            this.dependentSourceSets = ssDependencies
         }
-        // TODO: write a test that has multiple libraries across the source sets
-
-        val inferredProjectPath = projectPath
-            ?: File(sourceDir).listFiles().orEmpty().singleOrNull { it.isDirectory }?.name
-            ?: "dokkatest"
-
-        val configuration = dokkaConfiguration {
-            sourceSets {
-                val common = createSourceSet("common")
-                createSourceSet("jvm", "JVM", "jvm", setOf(common.value.sourceSetID))
-                createSourceSet("native", dependentSourceSets = setOf(common.value.sourceSetID))
-            }
-            offlineMode = true
-            pluginsConfigurations = mutableListOf(
-                PluginConfigurationImpl(
-                    fqPluginName = "com.google.devsite.DevsitePlugin",
-                    serializationFormat = DokkaConfiguration.SerializationFormat.JSON,
-                    values = DevsiteConfiguration(
-                        docRootPath = docRootPath,
-                        projectPath = inferredProjectPath,
-                        excludedPackages = null,
-                        excludedPackagesForJava = null,
-                        excludedPackagesForKotlin = null,
-                        libraryMetadataFilename = null,
-                        javaDocsPath = javaDocsDirectory,
-                        kotlinDocsPath = kotlinDocsDirectory
-                    ).toJsonString()
-                )
-            )
+        fun List<File>.filterForPlatform(identifier: String) = filter { it.isDirectory }.flatMap {
+            it.listFiles()?.filter { identifier.lowercase() in it.name.lowercase() } ?: emptyList()
         }
 
-        val writerPlugin = TestOutputWriterPlugin()
-        testFromData(
-            configuration,
-            pluginOverrides = listOf(writerPlugin)
-        ) {
-            renderingStage = { _: RootPageNode, _: DokkaContext ->
-                verifyOutput(writerPlugin, "$baseDir/docs")
-            }
+        var jvmSources = sources.filterForPlatform("jvm")
+        var androidSources = sources.filterForPlatform("android")
+        if (squashAndroid) {
+            jvmSources = jvmSources + androidSources; androidSources = emptyList()
+        } else throw RuntimeException(
+            "Due to upstream squashing, not squashing android into jvm isn't currently supported."
+        )
+
+        return sourceSets {
+            val common = createSourceSet("common", sources.filterForPlatform("common"))
+            val dependOnCommon = setOf(common.value.sourceSetID)
+            createSourceSet("jvm", jvmSources, dependOnCommon)
+            if (!squashAndroid) createSourceSet("android", androidSources, dependOnCommon)
+            createSourceSet("native", sources.filterForPlatform("native"), dependOnCommon)
         }
     }
 }

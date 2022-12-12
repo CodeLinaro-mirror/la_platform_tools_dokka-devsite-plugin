@@ -111,13 +111,13 @@ val testDataImpl = project.configurations.getByName(testData.implementationConfi
 val testDataAars by project.configurations.creating
 val testDataParent by project.configurations.sourceArtifacts
 testDataParent.isCanBeResolved = false
-fun Configuration.setResolveSources() {
+fun Configuration.setResolveSources(isKmp: Boolean = false) {
     isTransitive = false
     isCanBeConsumed = false
     attributes {
         attribute(
             Usage.USAGE_ATTRIBUTE,
-            project.objects.named(Usage.JAVA_RUNTIME)
+            project.objects.named(if (isKmp) "androidx-multiplatform-docs" else Usage.JAVA_RUNTIME)
         )
         attribute(
             Category.CATEGORY_ATTRIBUTE,
@@ -137,6 +137,9 @@ testDataParent.setResolveSources()
 val testDataSources by project.configurations.creating
 testDataSources.extendsFrom(testDataParent)
 testDataSources.setResolveSources()
+val testDataSourcesKmp by project.configurations.creating
+testDataSourcesKmp.extendsFrom(testDataParent)
+testDataSourcesKmp.setResolveSources(isKmp = true)
 
 val lifecycleVersion = "2.5.1"
 val collectionsVersion = "1.3.0-alpha02"
@@ -247,6 +250,7 @@ dependencies {
     testDataSources("androidx.cardview:cardview:1.0.0")
     // Collection is KMP
     // Compose is KMP
+    testDataSourcesKmp("androidx.datastore:datastore-core:1.1.0-alpha01")
 
     testDataSources("androidx.paging:paging-common:3.2.0-alpha02")
     testDataSources("androidx.paging:paging-common-ktx:3.2.0-alpha02")
@@ -287,7 +291,7 @@ val explodeAars by tasks.registering(Sync::class) {
 }
 
 val explodeSources by tasks.registering {
-    testDataSources.files.filter {
+    (testDataSources.files + testDataSourcesKmp.files).filter {
         it.nameWithoutExtension.endsWith("sources")
     }.forEach { arch ->
         sync {

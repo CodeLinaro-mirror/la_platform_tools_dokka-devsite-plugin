@@ -1,0 +1,81 @@
+<html devsite="true">
+  <head>
+    <title>Storage</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block"></div>
+    <h1>Storage</h1>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-common">Common</option><option selected="selected" value="platform-jvm">JVM</option><option selected="selected" value="platform-js">Javascript</option><option selected="selected" value="platform-native">Native</option></select></devsite-select >
+    <p>
+      <pre>interface <a href="/reference/kotlin/androidx/datastore/core/Storage.html">Storage</a>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</pre>
+    </p>
+    <hr>
+    <p>Storage provides a way to create StorageConnections that allow read and write a particular type <T> of data.  Storage is used to construct DataStore objects, and encapsulates all the specifics of the data format and persistence.</p>
+    <p>Implementers provide the specifics of how and where the data is stored.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/datastore/core/StorageConnection.html">StorageConnection</a>&lt;T&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/datastore/core/Storage.html#createConnection()">createConnection</a>()</code></div>
+                <p>Creates a storage connection which allows reading and writing to the underlying storage.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform">Cmn</div>
+                <!--platform-Common--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="createConnection--"></a><a name="createconnection"></a>
+          <h3 class="api-name" id="createConnection()">createConnection</h3>
+<span class="kotlin-platform">Cmn</span>
+          <!--platform-Common-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/datastore/core/Storage.html#createConnection()">createConnection</a>():&nbsp;<a href="/reference/kotlin/androidx/datastore/core/StorageConnection.html">StorageConnection</a>&lt;T&gt;</pre>
+          <p>Creates a storage connection which allows reading and writing to the underlying storage.</p>
+          <p>Should be closed after usage.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Throws</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>androidx.datastore.core.IOException:&nbsp;<a href="/reference/kotlin/androidx/datastore/core/IOException.html">androidx.datastore.core.IOException</a></code></td>
+                  <td>
+                    <p>Unrecoverable IO exception when trying to access the underlying storage.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </devsite-filter >
+  </body>
+</html>

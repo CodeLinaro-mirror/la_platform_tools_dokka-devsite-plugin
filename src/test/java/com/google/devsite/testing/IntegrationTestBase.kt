@@ -21,6 +21,7 @@ import com.google.devsite.DevsiteConfiguration
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.DokkaConfigurationImpl
 import org.jetbrains.dokka.ExternalDocumentationLink
+import org.jetbrains.dokka.ExternalDocumentationLinkImpl
 import org.jetbrains.dokka.PluginConfigurationImpl
 import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
 import org.jetbrains.dokka.pages.RootPageNode
@@ -29,6 +30,7 @@ import org.jetbrains.dokka.testApi.logger.TestLogger
 import org.jetbrains.dokka.toJsonString
 import org.jetbrains.dokka.utilities.DokkaConsoleLogger
 import org.jetbrains.dokka.utilities.LoggingLevel
+import testApi.testRunner.TestDokkaConfigurationBuilder
 import java.io.File
 import java.net.URL
 
@@ -40,6 +42,26 @@ import java.net.URL
 abstract class IntegrationTestBase : BaseAbstractTest(
     logger = TestLogger(DokkaConsoleLogger(LoggingLevel.DEBUG))
 ) {
+    open fun TestDokkaConfigurationBuilder.makeSourcesets(
+        sources: List<File>,
+        samplesLocations: List<String>,
+        includeFiles: List<String> = emptyList(),
+        externalLinks: List<ExternalDocumentationLinkImpl> = emptyList()
+    ) = sourceSets {
+        sourceSet {
+            sourceRoots = sources.map { it.absolutePath }
+            // TODO: find a workaround to using a fixed classpath file b/243842129
+            classpath = classpathFromFile("testData/classpath.txt")
+            externalDocumentationLinks = externalLinks
+            samples = samplesLocations
+            includes = includeFiles
+            documentedVisibilities = setOf(
+                DokkaConfiguration.Visibility.PUBLIC,
+                DokkaConfiguration.Visibility.PROTECTED
+            )
+        }
+    }
+
     /** For when a test uses source outside of `./testData/` */
     open fun makeExternalConfiguration(
         sources: List<File>,
@@ -65,20 +87,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             )
         }
         return dokkaConfiguration {
-            sourceSets {
-                sourceSet {
-                    sourceRoots = sources.map { it.absolutePath }
-                    // TODO: find a workaround to using a fixed classpath file b/243842129
-                    classpath = classpathFromFile("testData/classpath.txt")
-                    externalDocumentationLinks = externalLinks
-                    samples = samplesLocations
-                    includes = includeFiles
-                    documentedVisibilities = setOf(
-                        DokkaConfiguration.Visibility.PUBLIC,
-                        DokkaConfiguration.Visibility.PROTECTED
-                    )
-                }
-            }
+            makeSourcesets(sources, samplesLocations, includeFiles, externalLinks)
             offlineMode = true
             pluginsConfigurations = mutableListOf(
                 PluginConfigurationImpl(
