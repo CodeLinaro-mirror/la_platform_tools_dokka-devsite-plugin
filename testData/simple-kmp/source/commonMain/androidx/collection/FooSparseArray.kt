@@ -46,12 +46,12 @@ private val DELETED = Any()
  * over the keys using [keyAt] with ascending values of the index will return the keys in ascending
  * order, or the values corresponding to the keys in ascending order in the case of [valueAt].
  *
- * @constructor Creates a new [LongSparseArray] containing no mappings that will not require any
+ * @constructor Creates a new [FooSparseArray] containing no mappings that will not require any
  * additional memory allocation to store the specified number of mappings. If you supply an initial
  * capacity of 0, the sparse array will be initialized with a light-weight representation not
  * requiring any additional array allocations.
  */
-public expect open class LongSparseArray<E>
+public expect open class FooSparseArray<E>
 @JvmOverloads public constructor(initialCapacity: Int = 10) {
     @JvmSynthetic // Hide from Java callers.
     @JvmField
@@ -135,7 +135,7 @@ public expect open class LongSparseArray<E>
      * Copies all of the mappings from [other] to this map. The effect of this call is equivalent to
      * that of calling [put] on this map once for each mapping from key to value in [other].
      */
-    public open fun putAll(other: LongSparseArray<out E>): Unit
+    public open fun putAll(other: FooSparseArray<out E>): Unit
 
     /**
      * Add a new value to the array map only if the key does not already have a value or it is
@@ -149,7 +149,7 @@ public expect open class LongSparseArray<E>
     public open fun putIfAbsent(key: Long, value: E): E?
 
     /**
-     * Returns the number of key-value mappings that this [LongSparseArray] currently stores.
+     * Returns the number of key-value mappings that this [FooSparseArray] currently stores.
      */
     public open fun size(): Int
 
@@ -162,7 +162,7 @@ public expect open class LongSparseArray<E>
 
     /**
      * Given an index in the range `0...size()-1`, returns the key from the `index`th key-value
-     * mapping that this [LongSparseArray] stores.
+     * mapping that this [FooSparseArray] stores.
      *
      * The keys corresponding to indices in ascending order are guaranteed to be in ascending order,
      * e.g., `keyAt(0)` will return the smallest key and `keyAt(size()-1)` will return the largest
@@ -174,7 +174,7 @@ public expect open class LongSparseArray<E>
 
     /**
      * Given an index in the range `0...size()-1`, returns the value from the `index`th key-value
-     * mapping that this [LongSparseArray] stores.
+     * mapping that this [FooSparseArray] stores.
      *
      * The values corresponding to indices in ascending order are guaranteed to be associated with
      * keys in ascending order, e.g., `valueAt(0)` will return the value associated with the
@@ -186,7 +186,7 @@ public expect open class LongSparseArray<E>
 
     /**
      * Given an index in the range `0...size()-1`, sets a new value for the `index`th key-value
-     * mapping that this [LongSparseArray] stores.
+     * mapping that this [FooSparseArray] stores.
      *
      * @throws IllegalArgumentException if [index] is not in the range `0...size()-1`
      */
@@ -215,7 +215,7 @@ public expect open class LongSparseArray<E>
     public open fun containsValue(value: E): Boolean
 
     /**
-     * Removes all key-value mappings from this [LongSparseArray].
+     * Removes all key-value mappings from this [FooSparseArray].
      */
     public open fun clear(): Unit
 
@@ -237,17 +237,17 @@ public expect open class LongSparseArray<E>
 // TODO(KT-20427): Move these into the expect once support is added for default implementations.
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> LongSparseArray<E>.commonGet(key: Long): E? {
+internal inline fun <E> FooSparseArray<E>.commonGet(key: Long): E? {
     return commonGetInternal(key, null)
 }
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> LongSparseArray<E>.commonGet(key: Long, defaultValue: E): E {
+internal inline fun <E> FooSparseArray<E>.commonGet(key: Long, defaultValue: E): E {
     return commonGetInternal(key, defaultValue)
 }
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <T : E?, E> LongSparseArray<E>.commonGetInternal(
+internal inline fun <T : E?, E> FooSparseArray<E>.commonGetInternal(
     key: Long,
     defaultValue: T
 ): T {
@@ -255,25 +255,25 @@ internal inline fun <T : E?, E> LongSparseArray<E>.commonGetInternal(
 }
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> LongSparseArray<E>.commonRemove(key: Long) {
+internal inline fun <E> FooSparseArray<E>.commonRemove(key: Long) {
 }
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> LongSparseArray<E>.commonRemove(key: Long, value: E): Boolean {
+internal inline fun <E> FooSparseArray<E>.commonRemove(key: Long, value: E): Boolean {
     return false
 }
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> LongSparseArray<E>.commonRemoveAt(index: Int) {
+internal inline fun <E> FooSparseArray<E>.commonRemoveAt(index: Int) {
 }
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> LongSparseArray<E>.commonReplace(key: Long, value: E): E? {
+internal inline fun <E> FooSparseArray<E>.commonReplace(key: Long, value: E): E? {
     return null
 }
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> LongSparseArray<E>.commonReplace(
+internal inline fun <E> FooSparseArray<E>.commonReplace(
     key: Long,
     oldValue: E,
     newValue: E
@@ -282,15 +282,15 @@ internal inline fun <E> LongSparseArray<E>.commonReplace(
 }
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> LongSparseArray<E>.commonGc() {
+internal inline fun <E> FooSparseArray<E>.commonGc() {
 }
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> LongSparseArray<E>.commonPut(key: Long, value: E) {
+internal inline fun <E> FooSparseArray<E>.commonPut(key: Long, value: E) {
 }
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> LongSparseArray<E>.commonPutAll(other: LongSparseArray<out E>) {
+internal inline fun <E> FooSparseArray<E>.commonPutAll(other: FooSparseArray<out E>) {
     val size = other.size()
     repeat(size) { i ->
         put(other.keyAt(i), other.valueAt(i))
@@ -298,7 +298,7 @@ internal inline fun <E> LongSparseArray<E>.commonPutAll(other: LongSparseArray<o
 }
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> LongSparseArray<E>.commonPutIfAbsent(key: Long, value: E): E? {
+internal inline fun <E> FooSparseArray<E>.commonPutIfAbsent(key: Long, value: E): E? {
     val mapValue = get(key)
     if (mapValue == null) {
         put(key, value)
@@ -307,7 +307,7 @@ internal inline fun <E> LongSparseArray<E>.commonPutIfAbsent(key: Long, value: E
 }
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> LongSparseArray<E>.commonSize(): Int {
+internal inline fun <E> FooSparseArray<E>.commonSize(): Int {
     if (garbage) {
         commonGc()
     }
@@ -315,10 +315,10 @@ internal inline fun <E> LongSparseArray<E>.commonSize(): Int {
 }
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> LongSparseArray<E>.commonIsEmpty(): Boolean = size() == 0
+internal inline fun <E> FooSparseArray<E>.commonIsEmpty(): Boolean = size() == 0
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> LongSparseArray<E>.commonKeyAt(index: Int): Long {
+internal inline fun <E> FooSparseArray<E>.commonKeyAt(index: Int): Long {
     require(index in 0 until size) {
         "Expected index to be within 0..size()-1, but was $index"
     }
@@ -330,7 +330,7 @@ internal inline fun <E> LongSparseArray<E>.commonKeyAt(index: Int): Long {
 }
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> LongSparseArray<E>.commonValueAt(index: Int): E {
+internal inline fun <E> FooSparseArray<E>.commonValueAt(index: Int): E {
     require(index in 0 until size) {
         "Expected index to be within 0..size()-1, but was $index"
     }
@@ -344,7 +344,7 @@ internal inline fun <E> LongSparseArray<E>.commonValueAt(index: Int): E {
 }
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> LongSparseArray<E>.commonSetValueAt(index: Int, value: E) {
+internal inline fun <E> FooSparseArray<E>.commonSetValueAt(index: Int, value: E) {
     require(index in 0 until size) {
         "Expected index to be within 0..size()-1, but was $index"
     }
@@ -356,27 +356,27 @@ internal inline fun <E> LongSparseArray<E>.commonSetValueAt(index: Int, value: E
 }
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> LongSparseArray<E>.commonIndexOfKey(key: Long): Int {
+internal inline fun <E> FooSparseArray<E>.commonIndexOfKey(key: Long): Int {
     return 0
 }
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> LongSparseArray<E>.commonIndexOfValue(value: E): Int {
+internal inline fun <E> FooSparseArray<E>.commonIndexOfValue(value: E): Int {
     return -1
 }
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> LongSparseArray<E>.commonContainsKey(key: Long): Boolean {
+internal inline fun <E> FooSparseArray<E>.commonContainsKey(key: Long): Boolean {
     return indexOfKey(key) >= 0
 }
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> LongSparseArray<E>.commonContainsValue(value: E): Boolean {
+internal inline fun <E> FooSparseArray<E>.commonContainsValue(value: E): Boolean {
     return indexOfValue(value) >= 0
 }
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> LongSparseArray<E>.commonClear() {
+internal inline fun <E> FooSparseArray<E>.commonClear() {
     val n = size
     val values = values
     for (i in 0 until n) {
@@ -387,11 +387,11 @@ internal inline fun <E> LongSparseArray<E>.commonClear() {
 }
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> LongSparseArray<E>.commonAppend(key: Long, value: E) {
+internal inline fun <E> FooSparseArray<E>.commonAppend(key: Long, value: E) {
 }
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <E> LongSparseArray<E>.commonToString(): String {
+internal inline fun <E> FooSparseArray<E>.commonToString(): String {
     if (size() <= 0) {
         return "{}"
     }
@@ -417,19 +417,19 @@ internal inline fun <E> LongSparseArray<E>.commonToString(): String {
 
 /** Returns the number of key/value pairs in the collection. */
 @Suppress("NOTHING_TO_INLINE")
-public inline val <T> LongSparseArray<T>.size: Int get() = size()
+public inline val <T> FooSparseArray<T>.size: Int get() = size()
 
 /** Returns true if the collection contains [key]. */
 @Suppress("NOTHING_TO_INLINE")
-public inline operator fun <T> LongSparseArray<T>.contains(key: Long): Boolean = containsKey(key)
+public inline operator fun <T> FooSparseArray<T>.contains(key: Long): Boolean = containsKey(key)
 
 /** Allows the use of the index operator for storing values in the collection. */
 @Suppress("NOTHING_TO_INLINE")
-public inline operator fun <T> LongSparseArray<T>.set(key: Long, value: T): Unit = put(key, value)
+public inline operator fun <T> FooSparseArray<T>.set(key: Long, value: T): Unit = put(key, value)
 
 /** Creates a new collection by adding or replacing entries from [other]. */
-public operator fun <T> LongSparseArray<T>.plus(other: LongSparseArray<T>): LongSparseArray<T> {
-    val new = LongSparseArray<T>(size() + other.size())
+public operator fun <T> FooSparseArray<T>.plus(other: FooSparseArray<T>): FooSparseArray<T> {
+    val new = FooSparseArray<T>(size() + other.size())
     new.putAll(this)
     new.putAll(other)
     return new
@@ -437,17 +437,17 @@ public operator fun <T> LongSparseArray<T>.plus(other: LongSparseArray<T>): Long
 
 /** Return the value corresponding to [key], or [defaultValue] when not present. */
 @Suppress("NOTHING_TO_INLINE")
-public inline fun <T> LongSparseArray<T>.getOrDefault(key: Long, defaultValue: T): T =
+public inline fun <T> FooSparseArray<T>.getOrDefault(key: Long, defaultValue: T): T =
     get(key, defaultValue)
 
 /** Return the value corresponding to [key], or from [defaultValue] when not present. */
 @Suppress("NOTHING_TO_INLINE")
-public inline fun <T> LongSparseArray<T>.getOrElse(key: Long, defaultValue: () -> T): T =
+public inline fun <T> FooSparseArray<T>.getOrElse(key: Long, defaultValue: () -> T): T =
     get(key) ?: defaultValue()
 
 /** Return true when the collection contains elements. */
 @Suppress("NOTHING_TO_INLINE")
-public inline fun <T> LongSparseArray<T>.isNotEmpty(): Boolean = !isEmpty()
+public inline fun <T> FooSparseArray<T>.isNotEmpty(): Boolean = !isEmpty()
 
 /** Removes the entry for [key] only if it is mapped to [value]. */
 @Suppress("EXTENSION_SHADOWED_BY_MEMBER") // Binary API compatibility.
@@ -455,25 +455,25 @@ public inline fun <T> LongSparseArray<T>.isNotEmpty(): Boolean = !isEmpty()
     message = "Replaced with member function. Remove extension import!",
     level = HIDDEN
 )
-public fun <T> LongSparseArray<T>.remove(key: Long, value: T): Boolean = remove(key, value)
+public fun <T> FooSparseArray<T>.remove(key: Long, value: T): Boolean = remove(key, value)
 
 /** Performs the given [action] for each key/value entry. */
 @Suppress("NOTHING_TO_INLINE")
-public inline fun <T> LongSparseArray<T>.forEach(action: (key: Long, value: T) -> Unit) {
+public inline fun <T> FooSparseArray<T>.forEach(action: (key: Long, value: T) -> Unit) {
     for (index in 0 until size()) {
         action(keyAt(index), valueAt(index))
     }
 }
 
 /** Return an iterator over the collection's keys. */
-public fun <T> LongSparseArray<T>.keyIterator(): LongIterator = object : LongIterator() {
+public fun <T> FooSparseArray<T>.keyIterator(): LongIterator = object : LongIterator() {
     var index = 0
     override fun hasNext() = index < size()
     override fun nextLong() = keyAt(index++)
 }
 
 /** Return an iterator over the collection's values. */
-public fun <T> LongSparseArray<T>.valueIterator(): Iterator<T> = object : Iterator<T> {
+public fun <T> FooSparseArray<T>.valueIterator(): Iterator<T> = object : Iterator<T> {
     var index = 0
     override fun hasNext() = index < size()
     override fun next() = valueAt(index++)

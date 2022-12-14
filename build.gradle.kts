@@ -16,7 +16,6 @@
 
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.gradle.api.tasks.testing.logging.TestLogEvent
-import org.gradle.kotlin.dsl.provider.gradleKotlinDslOf
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 defaultTasks = mutableListOf("test", "jar", "shadowJar", "ktlint", "publish")
@@ -85,29 +84,25 @@ javaComponent.withVariantsFromConfiguration(configurations["shadowRuntimeElement
     skip()
 }
 
-val testData by sourceSets.creating {
-    java.srcDirs(
-        // "testData/collections-ktx/source",   // this project is multiplatform
-        "testData/companionStatic/source",
-        "testData/complicatedPlatform/source",
-        // "testData/compose/source",           // this project is multiplatform
-        "testData/getterSetterModifier/source/",
-        "testData/hidden/source",
-        "testData/hiddenParents/source",
-        "testData/inheritance/source",
-        "testData/innerClasses/source",
-        "testData/linking/source",
-        "testData/multifile/source",
-        "testData/paging/source",
-        "testData/restrictTo/source",
-        "testData/sampleAnnotation/source",
-        "testData/simple/source",
-        "testData/simpleVersioned/source",
-        "testData/topLevelFunctions/source",
-    )
+val kmpIntegrationSourceDirs = listOf("simple-kmp", "datastore-kmp")
+// compose requires compose compiler plugin, fragment is fragmentary (missing internal dependencies)
+val unCompilableIntegrationTestSourceDirs = listOf("collections-ktx", "compose", "fragment")
+val (kmpSourceDirs, javaSourceDirs) = File("testData").listFiles()!!
+    .mapNotNull { testDir -> testDir.listFiles()?.singleOrNull { "source" in it.name } }
+    .filterNot { unCompilableIntegrationTestSourceDirs.any { badName -> badName in it.path  } }
+    .partition { kmpIntegrationSourceDirs.any { badName -> badName in it.path  } }
+val javaTestDataSS: SourceSet by sourceSets.creating {
+    javaSourceDirs.forEach { java.srcDir(it) }
+}
+val kmpTestDataSSs: List<SourceSet> = kmpSourceDirs.flatMap {
+    it.listFiles()!!.map { sourceSetDir ->
+        val ss = sourceSets.maybeCreate(sourceSetDir.name)
+        //ss.java.srcDir(sourceSetDir) // TODO(make KMP testData compile)
+        ss
+    }
 }
 
-val testDataImpl = project.configurations.getByName(testData.implementationConfigurationName)
+val testDataImpl = project.configurations.getByName(javaTestDataSS.implementationConfigurationName)
 val testDataAars by project.configurations.creating
 val testDataParent by project.configurations.sourceArtifacts
 testDataParent.isCanBeResolved = false
@@ -154,6 +149,7 @@ dependencies {
     testDataImpl("org.robolectric:android-all-instrumented:12-robolectric-7732740-i4")
     testDataImpl("junit:junit:4.13.2")
     testDataImpl("com.google.truth:truth:1.1.3")
+    testDataImpl("com.android.tools.build:gradle:8.0.0-alpha07")
 
     testDataImpl(fileTree("$buildDir/exploded"))
 
@@ -309,11 +305,12 @@ val explodeSources by tasks.registering {
 val classpathForTests by tasks.registering(ClasspathForTestsTask::class) {
     dependsOn(explodeAars)
     dependsOn(explodeSources)
-    classpath = testData.compileClasspath
+    classpath = javaTestDataSS.compileClasspath
+    kmpTestDataSSs.forEach { classpath += it.compileClasspath }
     location.set(file("testData/classpath.txt"))
 }
 
-val compileTestDataKotlin: KotlinCompile by tasks.getting(KotlinCompile::class) {
+tasks.withType<KotlinCompile>().configureEach {
     kotlinOptions {
         // we are only checking if the classpath is complete
         freeCompilerArgs += "-Xmulti-platform"
@@ -323,7 +320,7 @@ val compileTestDataKotlin: KotlinCompile by tasks.getting(KotlinCompile::class) 
 
 tasks.getByName("test") {
     dependsOn(classpathForTests)
-    dependsOn(compileTestDataKotlin) // this will check classpath for all needed dependencies
+    dependsOn(tasks.withType<KotlinCompile>())
 }
 
 val zipTask = project.tasks.register<Zip>("zipResultsOf${name.capitalize()}") {

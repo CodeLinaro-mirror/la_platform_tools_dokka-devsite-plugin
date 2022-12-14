@@ -39,12 +39,12 @@ package androidx.collection
  * over the keys using [keyAt] with ascending values of the index will return the keys in ascending
  * order, or the values corresponding to the keys in ascending order in the case of [valueAt].
  *
- * @constructor Creates a new [LongSparseArray] containing no mappings that will not require any
+ * @constructor Creates a new [FooSparseArray] containing no mappings that will not require any
  * additional memory allocation to store the specified number of mappings. If you supply an initial
  * capacity of 0, the sparse array will be initialized with a light-weight representation not
  * requiring any additional array allocations.
  */
-public actual open class LongSparseArray<E>
+public actual open class FooSparseArray<E>
 
 // TODO(b/237405792): Default value for optional argument is required here to workaround Metalava's
 //  lack of support for expect / actual.
@@ -73,9 +73,9 @@ public actual open class LongSparseArray<E>
         values = arrayOfNulls<Any>(0)
     }
 
-    public override fun clone(): LongSparseArray<E> {
+    public override fun clone(): FooSparseArray<E> {
         @Suppress("UNCHECKED_CAST")
-        val clone: LongSparseArray<E> = super.clone() as LongSparseArray<E>
+        val clone: FooSparseArray<E> = super.clone() as FooSparseArray<E>
         clone.keys = keys.clone()
         clone.values = values.clone()
         return clone
@@ -148,7 +148,7 @@ public actual open class LongSparseArray<E>
      * Copies all of the mappings from [other] to this map. The effect of this call is equivalent to
      * that of calling [put] on this map once for each mapping from key to value in [other].
      */
-    public actual open fun putAll(other: LongSparseArray<out E>): Unit = commonPutAll(other)
+    public actual open fun putAll(other: FooSparseArray<out E>): Unit = commonPutAll(other)
 
     /**
      * Add a new value to the array map only if the key does not already have a value or it is
@@ -162,7 +162,7 @@ public actual open class LongSparseArray<E>
     public actual open fun putIfAbsent(key: Long, value: E): E? = commonPutIfAbsent(key, value)
 
     /**
-     * Returns the number of key-value mappings that this [LongSparseArray] currently stores.
+     * Returns the number of key-value mappings that this [FooSparseArray] currently stores.
      */
     public actual open fun size(): Int = commonSize()
 
@@ -175,7 +175,7 @@ public actual open class LongSparseArray<E>
 
     /**
      * Given an index in the range `0...size()-1`, returns the key from the `index`th key-value
-     * mapping that this [LongSparseArray] stores.
+     * mapping that this [FooSparseArray] stores.
      *
      * The keys corresponding to indices in ascending order are guaranteed to be in ascending order,
      * e.g., `keyAt(0)` will return the smallest key and `keyAt(size()-1)` will return the largest
@@ -187,7 +187,7 @@ public actual open class LongSparseArray<E>
 
     /**
      * Given an index in the range `0...size()-1`, returns the value from the `index`th key-value
-     * mapping that this [LongSparseArray] stores.
+     * mapping that this [FooSparseArray] stores.
      *
      * The values corresponding to indices in ascending order are guaranteed to be associated with
      * keys in ascending order, e.g., `valueAt(0)` will return the value associated with the
@@ -199,7 +199,7 @@ public actual open class LongSparseArray<E>
 
     /**
      * Given an index in the range `0...size()-1`, sets a new value for the `index`th key-value
-     * mapping that this [LongSparseArray] stores.
+     * mapping that this [FooSparseArray] stores.
      *
      * @throws IllegalArgumentException if [index] is not in the range `0...size()-1`
      */
@@ -228,7 +228,7 @@ public actual open class LongSparseArray<E>
     public actual open fun containsValue(value: E): Boolean = commonContainsValue(value)
 
     /**
-     * Removes all key-value mappings from this [LongSparseArray].
+     * Removes all key-value mappings from this [FooSparseArray].
      */
     public actual open fun clear(): Unit = commonClear()
 
