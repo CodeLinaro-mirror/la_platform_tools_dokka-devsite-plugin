@@ -117,6 +117,22 @@ abstract class IntegrationTestBase : BaseAbstractTest(
                         includedHeadTagsPathKotlin = includedHeadTagsPathKotlin,
                         packagePrefixToRemoveInToc = null,
                         baseSourceLink = baseSourceLink,
+                        // These lists are based on the AndroidX excluded annotations
+                        annotationsNotToDisplay = listOf(
+                            "androidx.compose.runtime.Stable",
+                            "androidx.compose.runtime.Immutable",
+                            "androidx.compose.runtime.ReadOnlyComposable",
+                            "androidx.annotation.OptIn",
+                            "kotlin.OptIn",
+                            "androidx.annotation.CheckResult",
+                            "kotlin.ParameterName",
+                            "kotlin.js.JsName",
+                            "java.lang.Override"
+                        ),
+                        annotationsNotToDisplayJava = null,
+                        annotationsNotToDisplayKotlin = listOf(
+                            "kotlin.ExtensionFunctionType"
+                        ),
                     ).toJsonString()
                 )
             )

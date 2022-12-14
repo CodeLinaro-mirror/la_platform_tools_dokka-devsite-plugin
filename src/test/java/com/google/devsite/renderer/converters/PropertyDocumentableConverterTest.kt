@@ -382,7 +382,8 @@ internal class PropertyDocumentableConverterTest(
         val converter = PropertyDocumentableConverter(
             displayLanguage,
             pathProvider,
-            docConverter
+            docConverter,
+            holder
         )
         return converter.summary(property(name)!!, hints)
     }
@@ -396,7 +397,8 @@ internal class PropertyDocumentableConverterTest(
         val converter = PropertyDocumentableConverter(
             displayLanguage,
             pathProvider,
-            docConverter
+            docConverter,
+            holder
         )
         return converter.detail(property(name)!!, hints)
     }
@@ -410,7 +412,8 @@ internal class PropertyDocumentableConverterTest(
         val converter = PropertyDocumentableConverter(
             displayLanguage,
             pathProvider,
-            docConverter
+            docConverter,
+            holder
         )
         return converter.summary(property(name)!!, hints).data.description.data.signature
     }

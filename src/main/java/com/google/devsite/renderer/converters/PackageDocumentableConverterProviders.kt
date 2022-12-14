@@ -36,9 +36,9 @@ internal class NonKmpPackageConverter(
 ) {
     override val header: DefaultDevsitePlatformSelector? = null
     private val functionConverter =
-        FunctionDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
+        FunctionDocumentableConverter(displayLanguage, pathProvider, javadocConverter, docsHolder)
     private val propertyConverter =
-        PropertyDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
+        PropertyDocumentableConverter(displayLanguage, pathProvider, javadocConverter, docsHolder)
     override val functionToSummaryConverter = functionConverter::summary
     override val functionToDetailConverter = functionConverter::detail
     override val propertyToSummaryConverter = propertyConverter::summary
@@ -61,9 +61,9 @@ internal class KmpPackageConverter(
         platforms = listOf(Platform.COMMON, Platform.JVM, Platform.JS, Platform.NATIVE)
     )
     private val functionConverter =
-        FunctionDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
+        FunctionDocumentableConverter(displayLanguage, pathProvider, javadocConverter, docsHolder)
     private val propertyConverter =
-        PropertyDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
+        PropertyDocumentableConverter(displayLanguage, pathProvider, javadocConverter, docsHolder)
     override val functionToSummaryConverter = functionConverter::summaryKmp
     override val functionToDetailConverter = functionConverter::detailKmp
     override val propertyToSummaryConverter = propertyConverter::summaryKmp

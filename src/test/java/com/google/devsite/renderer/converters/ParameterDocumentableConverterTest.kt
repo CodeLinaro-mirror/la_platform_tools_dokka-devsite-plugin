@@ -648,7 +648,7 @@ internal class ParameterDocumentableConverterTest(
             val lambdaSymbol = (lambdaParam.type as LambdaTypeProjectionComponent)
             assertThat(lambdaSymbol.data.type.data.name).isEqualTo("String")
             assertThat(lambdaSymbol.nullable).isFalse()
-            assertThat(lambdaSymbol.annotations).isEmpty()
+            assertThat(lambdaSymbol.annotations.single().name).isEqualTo("ExtensionFunctionType")
             assertThat(lambdaSymbol.data.lambdaModifiers).isEmpty()
             assertThat(lambdaSymbol.data.lambdaParams).isEmpty()
             assertThat(lambdaSymbol.data.receiver!!.nullable).isFalse()
@@ -911,9 +911,8 @@ internal class ParameterDocumentableConverterTest(
             assertThat(lambdaParam.data.name).isEqualTo("factory")
             assertThat(lambdaParam.typeName()).isEqualTo("String")
 
-            // We have decided to suppress the ParameterName annotation for now
-            val lambdaParamAnnotation = lambdaParam.annotations.single()
-            assertThat(lambdaParamAnnotation.data.type.data.name).isEqualTo("Something")
+            val lambdaParamAnnotations = lambdaParam.annotations.map { it.data.type.data.name }
+            assertThat(lambdaParamAnnotations).containsExactly("Something", "ParameterName")
 
             // We de-deuplicate and assort annotations on lambda parameter parameter names/types
             // Just like we do on functions/return types
@@ -1292,10 +1291,11 @@ internal class ParameterDocumentableConverterTest(
 
     private fun DModule.param(name: String = "foo", forSummary: Boolean = false):
         ParameterComponent {
-        val (_, pathProvider) = holderAndProvider(this)
+        val (holder, pathProvider) = holderAndProvider(this)
         val converter = ParameterDocumentableConverter(
             displayLanguage,
-            pathProvider
+            pathProvider,
+            holder
         )
         return converter.componentForParameter(
             param = parameterDoc(name),
@@ -1306,10 +1306,11 @@ internal class ParameterDocumentableConverterTest(
     }
 
     private fun DModule.returnType(functionName: String = "foo"): TypeProjectionComponent {
-        val (_, pathProvider) = holderAndProvider(this)
+        val (holder, pathProvider) = holderAndProvider(this)
         val converter = ParameterDocumentableConverter(
             displayLanguage,
-            pathProvider
+            pathProvider,
+            holder
         )
         return converter.componentForProjection(
             projection = function(functionName)!!.type,

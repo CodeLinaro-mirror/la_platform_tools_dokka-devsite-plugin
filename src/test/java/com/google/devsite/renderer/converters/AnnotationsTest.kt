@@ -61,46 +61,18 @@ internal class AnnotationsTest : ConverterTestBase() {
     }
 
     @Test
-    fun `@CheckResult annotation is ignored`() {
-
-        // Declare the CheckResult annotation class before it's used
+    fun `Annotations in the do-not-document list are not displayed`() {
         val annotation = """
-            |annotation class CheckResult
-            |
-            |@CheckResult
+            |@Override
             |fun foo() = Unit
         """.render().functionAnnotations()
 
-        assertThat(annotation.components().exceptNonNull()).isEmpty()
-    }
+        // When no annotations are hidden, Override is displayed
+        assertThat(annotation.components().exceptNonNull().single().name).isEqualTo("Override")
 
-    @Test
-    fun `@JsName annotation is ignored`() {
-
-        // Declare the JsName annotation class before it's used
-        val annotation = """
-            |annotation class JsName
-            |
-            |@JsName("somethingElse")
-            |fun foo() = Unit
-        """.render().functionAnnotations()
-
-        assertThat(annotation.components().exceptNonNull()).isEmpty()
-    }
-
-    @Test
-    fun `@Override annotation is ignored`() {
-
-        // Declare the JsName annotation class before it's used
-        val annotation = """
-            |public class Foo {
-            |   @Override
-            |   public String toString() { return "A A A"; }
-            |}
-        """.render(java = true).explicitClasslike("Foo").functions.single { it.name == "toString" }
-            .allAnnotations()
-
-        assertThat(annotation.components().exceptNonNull()).isEmpty()
+        // Override is not displayed when hidden
+        val hidden = setOf("java.lang.Override")
+        assertThat(annotation.components(hiddenAnnotations = hidden).exceptNonNull()).isEmpty()
     }
 
     @Test
@@ -438,13 +410,15 @@ internal class AnnotationsTest : ConverterTestBase() {
     private fun List<Annotation>.components(
         displayLanguage: Language = JAVA,
         isKotlinNullable: Boolean = false,
-        isFromJava: Boolean = true
+        isFromJava: Boolean = true,
+        hiddenAnnotations: Set<String> = emptySet()
     ) = annotationComponents(
         pathProvider = pathProvider(),
         displayLanguage = displayLanguage,
         nullability = if (isKotlinNullable) Nullability.KOTLIN_NULLABLE
         else this.inferNullability()
-            ?: defaultNullability(isFromJava)
+            ?: defaultNullability(isFromJava),
+        annotationsNotToDocument = hiddenAnnotations
     )
 
     private fun AnnotationComponent.link(): Link.Params = data.type.data

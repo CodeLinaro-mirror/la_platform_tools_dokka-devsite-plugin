@@ -61,13 +61,15 @@ import org.jetbrains.dokka.model.properties.WithExtraProperties
  * @param displayLanguage nullability annotations are present only in Java
  * @param nullability the nullability of the annotated element. Contains information such as source
  * language and whether we care about the nullability of the annotated element.
+ * @param annotationsNotToDocument annotation names not to be included in the annotation components
  *
  * @return the AnnotationComponents for the given annotations on the annotated element
  */
 internal fun List<Annotation>.annotationComponents(
     pathProvider: FilePathProvider,
     displayLanguage: Language,
-    nullability: Nullability
+    nullability: Nullability,
+    annotationsNotToDocument: Set<String>
 ): List<AnnotationComponent> {
     val injectedAnnotations = mutableListOf<Annotation?>()
     if (any { it.isBadNonNull }) {
@@ -87,7 +89,7 @@ internal fun List<Annotation>.annotationComponents(
     }
 
     return (this + injectedAnnotations).filterNotNull().filter { annotation ->
-        shouldDocumentAnnotation(annotation, displayLanguage, nullability)
+        shouldDocumentAnnotation(annotation, displayLanguage, nullability, annotationsNotToDocument)
     }.distinctBy { it.identifier }.map { annotation -> annotation.toDackkaAnnotation(pathProvider) }
 }
 
@@ -179,14 +181,14 @@ internal fun Annotation.isDeprecated(): Boolean = dri.classNames == "Deprecated"
 private fun shouldDocumentAnnotation(
     annotation: Annotation,
     displayLanguage: Language,
-    nullability: Nullability
+    nullability: Nullability,
+    annotationsNotToDocument: Set<String>
 ): Boolean {
     val name = annotation.dri.classNames
     // Not useful to developers
     val isSuppressAnnotation = name in SUPPRESSION_ANNOTATION_NAMES
     val isKotlinJvmAnnotation = annotation.dri.packageName == "kotlin.jvm"
-    val isExplicitlyBannedAnnotation = name in EXPLICITLY_BANNED_ANNOTATION_NAMES ||
-        (displayLanguage == Language.KOTLIN && name in EXPLICITLY_BANNED_ANNOTATIONS_IN_KOTLIN)
+    val isExplicitlyBannedAnnotation = annotation.dri.fullName in annotationsNotToDocument
     if (isSuppressAnnotation || isKotlinJvmAnnotation || isExplicitlyBannedAnnotation) return false
     // Surfaced separately
     if (annotation.isDeprecated()) return false
@@ -210,25 +212,6 @@ private val SUPPRESSION_ANNOTATION_NAMES = listOf("Suppress", "SuppressWarnings"
 // We transform javax.validation.constraints.NotNull into androidx.annotation.NonNull and WARN:
 internal val NULLABILITY_ANNOTATION_NAMES = listOf("NonNull", "Nullable", "NotNull")
 
-private val EXPLICITLY_BANNED_ANNOTATION_NAMES = listOf(
-    // This information is compose runtime implementation details; not useful for most
-    // and those who would want it should be looking at source
-    "Stable", "Immutable", "ReadOnlyComposable",
-    // This opt-in requirement is non-propagating so developers don't need to know about it
-    // https://kotlinlang.org/docs/opt-in-requirements.html#non-propagating-opt-in
-    "OptIn",
-    // This annotation is used mostly in paging, and was removed at the request of the paging team
-    "CheckResult",
-    // This annotation is apparently generated upstream. Dokka uses it for signature serialization
-    "ParameterName", // It doesn't seem to be useful for developers
-    // This annotations is not useful for developers but right now is @ShowAnnotation?
-    "JsName",
-    // This annotation is intended to target the compiler and is general not useful for devs
-    "Override"
-)
-private val EXPLICITLY_BANNED_ANNOTATIONS_IN_KOTLIN = listOf(
-    "ExtensionFunctionType"
-)
 // List of androidx annotations that (now that we are on Java 8) ideally would be migrated
 // ANNOTATION_TARGET.METHOD -> ANNOTATION_TARGET.TYPE. If on a function, they refer to return type
 private val KNOWN_TYPEBOUND_ANNOTATION_NAMES = listOf("Dimension", "Px", "Size")

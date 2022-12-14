@@ -99,12 +99,13 @@ internal abstract class ClasslikeDocumentableConverter(
 ) {
     protected abstract val header: DefaultDevsitePlatformSelector?
 
-    private val paramConverter = ParameterDocumentableConverter(displayLanguage, pathProvider)
+    private val paramConverter =
+        ParameterDocumentableConverter(displayLanguage, pathProvider, docsHolder)
     // TODO(KMP b/254490320)
     protected val javadocConverter = DocTagConverter(displayLanguage, pathProvider, docsHolder)
     // TODO(KMP b/256172699)
     private val enumConverter =
-        EnumValueDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
+        EnumValueDocumentableConverter(displayLanguage, pathProvider, javadocConverter, docsHolder)
 
     protected abstract val functionToSummaryConverter:
         (DFunction, ModifierHints) -> TypeSummaryItem<FunctionSignature>
@@ -702,7 +703,8 @@ internal abstract class ClasslikeDocumentableConverter(
                     annotationComponents = classlike.annotations(sourceSet).annotationComponents(
                         pathProvider = pathProvider,
                         displayLanguage = displayLanguage,
-                        nullability = Nullability.DONT_CARE // Classlike definitions aren't null
+                        nullability = Nullability.DONT_CARE, // Classlike definitions aren't null
+                        annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                     )
                 )
             )
@@ -727,7 +729,8 @@ internal abstract class ClasslikeDocumentableConverter(
                 annotationComponents = classlike.annotations(sourceSet).annotationComponents(
                     pathProvider = pathProvider,
                     displayLanguage = displayLanguage,
-                    nullability = Nullability.DONT_CARE // Classlike definitions aren't null
+                    nullability = Nullability.DONT_CARE, // Classlike definitions aren't null
+                    annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                 )
             )
         )

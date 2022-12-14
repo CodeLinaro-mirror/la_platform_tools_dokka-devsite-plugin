@@ -219,6 +219,9 @@ internal abstract class ConverterTestBase(
                     kotlinDocsPath = "kotlin",
                     packagePrefixToRemoveInToc = null,
                     baseSourceLink = null,
+                    annotationsNotToDisplay = null,
+                    annotationsNotToDisplayJava = null,
+                    annotationsNotToDisplayKotlin = null,
                 ).toJsonString()
             )
         )
@@ -349,7 +352,8 @@ internal abstract class ConverterTestBase(
         val converter = FunctionDocumentableConverter(
             displayLanguage,
             pathProvider,
-            docConverter
+            docConverter,
+            holder
         )
         return converter.summary(this.doc(), hints.copy(isSummary = true))
     }
@@ -362,7 +366,8 @@ internal abstract class ConverterTestBase(
         val converter = FunctionDocumentableConverter(
             displayLanguage,
             pathProvider,
-            docConverter
+            docConverter,
+            holder
         )
         return functions()!!.associate {
             it.name to converter.summary(it, hints.copy(isSummary = true))
@@ -378,7 +383,8 @@ internal abstract class ConverterTestBase(
         val converter = FunctionDocumentableConverter(
             displayLanguage,
             pathProvider,
-            docConverter
+            docConverter,
+            holder
         )
         return converter.detail(this.doc(), hints)
     }
@@ -391,7 +397,8 @@ internal abstract class ConverterTestBase(
         val converter = FunctionDocumentableConverter(
             displayLanguage,
             pathProvider,
-            docConverter
+            docConverter,
+            holder
         )
         return with(converter) { this@functionSignature.doc().signature(isSummary = false) }
     }

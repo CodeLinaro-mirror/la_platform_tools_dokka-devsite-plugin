@@ -35,6 +35,7 @@ import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.KmpTableRowSummaryItem
 import com.google.devsite.components.table.TableRowSummaryItem
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.DefaultValue
@@ -43,9 +44,11 @@ import org.jetbrains.dokka.model.DefaultValue
 internal class PropertyDocumentableConverter(
     private val displayLanguage: Language,
     private val pathProvider: FilePathProvider,
-    private val javadocConverter: DocTagConverter
+    private val javadocConverter: DocTagConverter,
+    private val docsHolder: DocumentablesHolder
 ) {
-    private val paramConverter = ParameterDocumentableConverter(displayLanguage, pathProvider)
+    private val paramConverter =
+        ParameterDocumentableConverter(displayLanguage, pathProvider, docsHolder)
 
     /** @return the property summary component */
     fun summary(property: DProperty, hints: ModifierHints): TypeSummaryItem<PropertySignature> {
@@ -76,7 +79,9 @@ internal class PropertyDocumentableConverter(
                         annotationComponents = nonTypeAnnotations.annotationComponents(
                             pathProvider = pathProvider,
                             displayLanguage = displayLanguage,
-                            nullability = Nullability.DONT_CARE // Propagates to return type instead
+                            // Propagates to return type instead
+                            nullability = Nullability.DONT_CARE,
+                            annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                         )
                     )
                 )
@@ -116,7 +121,9 @@ internal class PropertyDocumentableConverter(
                         annotationComponents = nonTypeAnnotations.annotationComponents(
                             pathProvider = pathProvider,
                             displayLanguage = displayLanguage,
-                            nullability = Nullability.DONT_CARE // Propagates to return type instead
+                            // Propagates to return type instead
+                            nullability = Nullability.DONT_CARE,
+                            annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                         )
                     )
                 ),
@@ -162,7 +169,8 @@ internal class PropertyDocumentableConverter(
                 annotationComponents = nonTypeAnnotations.annotationComponents(
                     pathProvider = pathProvider,
                     displayLanguage = displayLanguage,
-                    nullability = Nullability.DONT_CARE // Propagates to return type instead
+                    nullability = Nullability.DONT_CARE, // Propagates to return type instead
+                    annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                 )
             )
         )
@@ -207,7 +215,8 @@ internal class PropertyDocumentableConverter(
                 annotationComponents = nonTypeAnnotations.annotationComponents(
                     pathProvider = pathProvider,
                     displayLanguage = displayLanguage,
-                    nullability = Nullability.DONT_CARE // Propagates to return type instead
+                    nullability = Nullability.DONT_CARE, // Propagates to return type instead
+                    annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                 ),
                 platforms = DefaultPlatformComponent(property.sourceSets)
             )

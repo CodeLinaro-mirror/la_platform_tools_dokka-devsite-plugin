@@ -30,6 +30,7 @@ import com.google.devsite.components.symbols.ParameterComponent
 import com.google.devsite.components.symbols.TypeParameterComponent
 import com.google.devsite.components.symbols.TypeProjectionComponent
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.ANY_DRI
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.DokkaConfiguration
@@ -66,7 +67,8 @@ import java.util.concurrent.ConcurrentHashMap
 /** Converts parameter and parameter-likes into their components. */
 internal class ParameterDocumentableConverter(
     private val displayLanguage: Language,
-    private val pathProvider: FilePathProvider
+    private val pathProvider: FilePathProvider,
+    private val docsHolder: DocumentablesHolder
 ) {
     /**
      * Returns the component for a parameter.
@@ -120,7 +122,8 @@ internal class ParameterDocumentableConverter(
                     annotationComponents = retainedAnnotations.annotationComponents(
                         pathProvider,
                         displayLanguage,
-                        nullability = Nullability.DONT_CARE // Propagate Nullability, don't retain
+                        nullability = Nullability.DONT_CARE, // Propagate Nullability, don't retain
+                        annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                     )
                 )
             )
@@ -181,7 +184,8 @@ internal class ParameterDocumentableConverter(
                     .annotationComponents(
                         pathProvider,
                         displayLanguage,
-                        nullability = Nullability.DONT_CARE // as-Kotlin doesn't nullable-annotate
+                        nullability = Nullability.DONT_CARE, // as-Kotlin doesn't nullable-annotate
+                        annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                     )
             )
         )
@@ -262,7 +266,8 @@ internal class ParameterDocumentableConverter(
                         pathProvider = pathProvider,
                         displayLanguage = displayLanguage,
                         nullability = projection
-                            .getNullability(displayLanguage, isFromJava)
+                            .getNullability(displayLanguage, isFromJava),
+                        annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                     )
             )
         )
@@ -350,7 +355,8 @@ internal class ParameterDocumentableConverter(
         val annotationComponents = annotations.annotationComponents(
             pathProvider = pathProvider,
             displayLanguage = displayLanguage,
-            nullability = nullability
+            nullability = nullability,
+            annotationsNotToDocument = docsHolder.annotationsNotToDisplay
         )
 
         return when (displayLanguage) {
@@ -433,7 +439,8 @@ internal class ParameterDocumentableConverter(
                     displayLanguage = displayLanguage,
                     // Don't inject space-consuming nullability annotations for type parameters
                     nullability = if (displayLanguage == Language.JAVA) Nullability.DONT_CARE
-                    else proj.getNullability(displayLanguage, false, annotations) or nullability
+                    else proj.getNullability(displayLanguage, false, annotations) or nullability,
+                    annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                 )
             )
         )

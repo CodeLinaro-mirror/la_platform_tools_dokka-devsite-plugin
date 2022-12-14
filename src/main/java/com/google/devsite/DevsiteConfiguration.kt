@@ -58,6 +58,13 @@ import org.jetbrains.dokka.plugability.ConfigurableBlock
  * string with placeholders for the filepath and (optionally) the qualified name of the class
  * (`https://cs.android.com/search?q=file:%s+class:%s&ss=androidx/platform/frameworks/support` is
  * the [baseSourceLink] for AndroidX). Optional, if not specified, no source links are generated.
+ * @param annotationsNotToDisplay A list of annotation names (including the package name, e.g.
+ * `java.lang.Override`) which should not be displayed in the docs. Optional, if unspecified
+ * defaults to an empty list. Note that nullability annotations are handled separately.
+ * @param annotationsNotToDisplayJava A list of annotation names which should not be displayed in
+ * the Java docs, in addition to those in [annotationsNotToDisplay]. Optional, if unspecified
+ * defaults to an empty list.
+ * @param annotationsNotToDisplayKotlin Equivalent to [annotationsNotToDisplayJava] for Kotlin docs.
  */
 data class DevsiteConfiguration(
     val docRootPath: String = "reference",
@@ -72,6 +79,9 @@ data class DevsiteConfiguration(
     val includedHeadTagsPathKotlin: String? = "_shared/_reference-head-tags.html",
     val packagePrefixToRemoveInToc: String?,
     val baseSourceLink: String?,
+    val annotationsNotToDisplay: List<String>?,
+    val annotationsNotToDisplayJava: List<String>?,
+    val annotationsNotToDisplayKotlin: List<String>?
 ) : ConfigurableBlock {
     init {
         if (javaDocsPath == null && kotlinDocsPath == null) {
@@ -100,5 +110,20 @@ data class DevsiteConfiguration(
     val computedExcludedPackagesForKotlin: Set<Regex> by lazy {
         computedExcludedPackagesForBoth +
             (excludedPackagesForKotlin?.map { it.toRegex() }?.toSet() ?: emptySet())
+    }
+
+    // Computed sets for all annotations not to display for each language.
+    private val annotationsNotToDisplayAsSet: Set<String> by lazy {
+        annotationsNotToDisplay?.toSet() ?: emptySet()
+    }
+
+    val allAnnotationsNotToDisplayJava: Set<String> by lazy {
+        annotationsNotToDisplayAsSet +
+            (annotationsNotToDisplayJava?.toSet() ?: emptyList())
+    }
+
+    val allAnnotationsNotToDisplayKotlin: Set<String> by lazy {
+        annotationsNotToDisplayAsSet +
+            (annotationsNotToDisplayKotlin?.toSet() ?: emptyList())
     }
 }

@@ -38,6 +38,7 @@ import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.KmpTableRowSummaryItem
 import com.google.devsite.components.table.TableRowSummaryItem
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.model.DFunction
 import java.util.Locale
@@ -46,9 +47,11 @@ import java.util.Locale
 internal class FunctionDocumentableConverter(
     private val displayLanguage: Language,
     private val pathProvider: FilePathProvider,
-    private val javadocConverter: DocTagConverter
+    private val javadocConverter: DocTagConverter,
+    private val docsHolder: DocumentablesHolder
 ) {
-    private val paramConverter = ParameterDocumentableConverter(displayLanguage, pathProvider)
+    private val paramConverter =
+        ParameterDocumentableConverter(displayLanguage, pathProvider, docsHolder)
 
     /** @return the function summary component */
     fun summary(function: DFunction, hints: ModifierHints): TypeSummaryItem<FunctionSignature> {
@@ -81,7 +84,9 @@ internal class FunctionDocumentableConverter(
                         annotationComponents = nonTypeAnnotations.annotationComponents(
                             pathProvider = pathProvider,
                             displayLanguage = displayLanguage,
-                            nullability = Nullability.DONT_CARE // Propagates to return type instead
+                            // Propagates to return type instead
+                            nullability = Nullability.DONT_CARE,
+                            annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                         )
                     )
                 )
@@ -123,7 +128,9 @@ internal class FunctionDocumentableConverter(
                         annotationComponents = nonTypeAnnotations.annotationComponents(
                             pathProvider = pathProvider,
                             displayLanguage = displayLanguage,
-                            nullability = Nullability.DONT_CARE // Propagates to return type instead
+                            // Propagates to return type instead
+                            nullability = Nullability.DONT_CARE,
+                            annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                         )
                     )
                 ),
@@ -147,7 +154,9 @@ internal class FunctionDocumentableConverter(
                             .annotationComponents(
                                 pathProvider = pathProvider,
                                 displayLanguage = displayLanguage,
-                                nullability = Nullability.DONT_CARE // Goes to return type instead
+                                // Propagates to return type instead
+                                nullability = Nullability.DONT_CARE,
+                                annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                             )
                     )
                 )
@@ -170,7 +179,9 @@ internal class FunctionDocumentableConverter(
                             .annotationComponents(
                                 pathProvider = pathProvider,
                                 displayLanguage = displayLanguage,
-                                nullability = Nullability.DONT_CARE // Goes to return type instead
+                                // Propagates to return type instead
+                                nullability = Nullability.DONT_CARE,
+                                annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                             )
                     )
                 ),
@@ -240,7 +251,9 @@ internal class FunctionDocumentableConverter(
                 annotationComponents = signatureAnnotations.annotationComponents(
                     pathProvider = pathProvider,
                     displayLanguage = displayLanguage,
-                    nullability = Nullability.DONT_CARE // Nullability is on the return type instead
+                    // Nullability is on the return type instead
+                    nullability = Nullability.DONT_CARE,
+                    annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                 )
             )
         )
@@ -294,7 +307,9 @@ internal class FunctionDocumentableConverter(
                 annotationComponents = signatureAnnotations.annotationComponents(
                     pathProvider = pathProvider,
                     displayLanguage = displayLanguage,
-                    nullability = Nullability.DONT_CARE // Nullability is on the return type instead
+                    // Nullability is on the return type instead
+                    nullability = Nullability.DONT_CARE,
+                    annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                 ),
                 platforms = DefaultPlatformComponent(function.sourceSets)
             )
