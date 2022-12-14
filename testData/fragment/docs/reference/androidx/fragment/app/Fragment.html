@@ -2097,7 +2097,7 @@ requestKey</code> using its <code><a href="/reference/androidx/fragment/app/Frag
         <aside class="caution"><strong>This method is deprecated.</strong><br>
           <p>This method has been deprecated in favor of using the Activity Result API which brings increased type safety via an <code><a href="/reference/androidx/activity/result/contract/ActivityResultContract.html">ActivityResultContract</a></code> and the prebuilt contracts for common intents available in <code><a href="/reference/androidx/activity/result/contract/ActivityResultContracts.html">androidx.activity.result.contract.ActivityResultContracts</a></code>, provides hooks for testing, and allow receiving results in separate, testable classes independent from your fragment. Use <code><a href="/reference/androidx/fragment/app/Fragment.html#registerForActivityResult(androidx.activity.result.contract.ActivityResultContract&lt;I,O&gt;,androidx.activity.result.ActivityResultCallback&lt;O&gt;)">registerForActivityResult</a></code> with the appropriate <code><a href="/reference/androidx/activity/result/contract/ActivityResultContract.html">ActivityResultContract</a></code> and handling the result in the <code><a href="/reference/androidx/activity/result/ActivityResultCallback.html#onActivityResult(O)">callback</a></code>.</p>
         </aside>
-        <p>Receive the result from a previous call to <code><a href="/reference/androidx/fragment/app/Fragment.html#startActivityForResult(android.content.Intent,int)">startActivityForResult</a></code>. This follows the related Activity API as described there in <code><a href="https://developer.android.com/reference/android/app/Activity.html#onActivityResult(int,int,android.content.Intent)">onActivityResult</a></code>.</p>
+        <p>Receive the result from a previous call to <code><a href="/reference/androidx/fragment/app/Fragment.html#startActivityForResult(android.content.Intent,int)">startActivityForResult</a></code>. This follows the related Activity API as described there in <code><a href="https://developer.android.com/reference/android/app/Activity.html#onActivityResult(int, int, android.content.Intent)">onActivityResult</a></code>.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -2337,7 +2337,7 @@ requestKey</code> using its <code><a href="/reference/androidx/fragment/app/Frag
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/MainThread.html">MainThread</a><br>public&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html#onCreateContextMenu(android.view.ContextMenu,android.view.View,android.view.ContextMenu.ContextMenuInfo)">onCreateContextMenu</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/ContextMenu.html">ContextMenu</a>&nbsp;menu,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/View.html">View</a>&nbsp;v,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/android/view/ContextMenu.ContextMenuInfo.html">ContextMenu.ContextMenuInfo</a>&nbsp;menuInfo<br>)</pre>
         <p>Called when a context menu for the <code>view</code> is about to be shown. Unlike <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreateOptionsMenu(android.view.Menu,android.view.MenuInflater)">onCreateOptionsMenu</a></code>, this will be called every time the context menu is about to be shown and should be populated for the view (or item inside the view for <code><a href="https://developer.android.com/reference/android/widget/AdapterView.html">AdapterView</a></code> subclasses, this can be found in the <code>menuInfo</code>)). </p>
         <p> Use <code><a href="/reference/androidx/fragment/app/Fragment.html#onContextItemSelected(android.view.MenuItem)">onContextItemSelected</a></code> to know when an item has been selected. </p>
-        <p> The default implementation calls up to <code><a href="https://developer.android.com/reference/android/app/Activity.html#onCreateContextMenu(android.view.ContextMenu,android.view.View,android.view.ContextMenu.ContextMenuInfo)">Activity.onCreateContextMenu</a></code>, though you can not call this implementation if you don't want that behavior. </p>
+        <p> The default implementation calls up to <code><a href="https://developer.android.com/reference/android/app/Activity.html#onCreateContextMenu(android.view.ContextMenu, android.view.View, android.view.ContextMenu.ContextMenuInfo)">Activity.onCreateContextMenu</a></code>, though you can not call this implementation if you don't want that behavior. </p>
         <p> It is not safe to hold onto the context menu after this method returns.</p>
       </div>
       <div class="api-item"><a name="onCreateOptionsMenu(android.view.Menu, android.view.MenuInflater)"></a><a name="onCreateOptionsMenu-android.view.Menu-android.view.MenuInflater-"></a><a name="oncreateoptionsmenu"></a>
@@ -4180,7 +4180,7 @@ requestKey</code> using its <code><a href="/reference/androidx/fragment/app/Frag
         <aside class="caution"><strong>This method is deprecated.</strong><br>
           <p>This method has been deprecated in favor of using the Activity Result API which brings increased type safety via an <code><a href="/reference/androidx/activity/result/contract/ActivityResultContract.html">ActivityResultContract</a></code> and the prebuilt contracts for common intents available in <code><a href="/reference/androidx/activity/result/contract/ActivityResultContracts.html">androidx.activity.result.contract.ActivityResultContracts</a></code>, provides hooks for testing, and allow receiving results in separate, testable classes independent from your fragment. Use <code><a href="/reference/androidx/fragment/app/Fragment.html#registerForActivityResult(androidx.activity.result.contract.ActivityResultContract&lt;I,O&gt;,androidx.activity.result.ActivityResultCallback&lt;O&gt;)">registerForActivityResult</a></code> passing in a <code><a href="/reference/androidx/activity/result/contract/ActivityResultContracts.StartActivityForResult.html">StartActivityForResult</a></code> object for the <code><a href="/reference/androidx/activity/result/contract/ActivityResultContract.html">ActivityResultContract</a></code>.</p>
         </aside>
-        <p>Call <code><a href="https://developer.android.com/reference/android/app/Activity.html#startActivityForResult(android.content.Intent,int,android.os.Bundle)">startActivityForResult</a></code> from the fragment's containing Activity.</p>
+        <p>Call <code><a href="https://developer.android.com/reference/android/app/Activity.html#startActivityForResult(android.content.Intent, int, android.os.Bundle)">startActivityForResult</a></code> from the fragment's containing Activity.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -4208,7 +4208,7 @@ requestKey</code> using its <code><a href="/reference/androidx/fragment/app/Frag
               <tr>
                 <td><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>&nbsp;options</code></td>
                 <td>
-                  <p>Additional options for how the Activity should be started. See <code><a href="https://developer.android.com/reference/android/content/Context.html#startActivity(android.content.Intent,android.os.Bundle)">startActivity</a></code> for more details. This value may be null.</p>
+                  <p>Additional options for how the Activity should be started. See <code><a href="https://developer.android.com/reference/android/content/Context.html#startActivity(android.content.Intent, android.os.Bundle)">startActivity</a></code> for more details. This value may be null.</p>
                 </td>
               </tr>
             </tbody>
@@ -4221,7 +4221,7 @@ requestKey</code> using its <code><a href="/reference/androidx/fragment/app/Frag
         <aside class="caution"><strong>This method is deprecated.</strong><br>
           <p>This method has been deprecated in favor of using the Activity Result API which brings increased type safety via an <code><a href="/reference/androidx/activity/result/contract/ActivityResultContract.html">ActivityResultContract</a></code> and the prebuilt contracts for common intents available in <code><a href="/reference/androidx/activity/result/contract/ActivityResultContracts.html">androidx.activity.result.contract.ActivityResultContracts</a></code>, provides hooks for testing, and allow receiving results in separate, testable classes independent from your fragment. Use <code><a href="/reference/androidx/fragment/app/Fragment.html#registerForActivityResult(androidx.activity.result.contract.ActivityResultContract&lt;I,O&gt;,androidx.activity.result.ActivityResultCallback&lt;O&gt;)">registerForActivityResult</a></code> passing in a <code><a href="/reference/androidx/activity/result/contract/ActivityResultContracts.StartActivityForResult.html">StartActivityForResult</a></code> object for the <code><a href="/reference/androidx/activity/result/contract/ActivityResultContract.html">ActivityResultContract</a></code>.</p>
         </aside>
-        <p>Call <code><a href="https://developer.android.com/reference/android/app/Activity.html#startActivityForResult(android.content.Intent,int)">startActivityForResult</a></code> from the fragment's containing Activity.</p>
+        <p>Call <code><a href="https://developer.android.com/reference/android/app/Activity.html#startActivityForResult(android.content.Intent, int)">startActivityForResult</a></code> from the fragment's containing Activity.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -4256,7 +4256,7 @@ requestKey</code> using its <code><a href="/reference/androidx/fragment/app/Frag
         <aside class="caution"><strong>This method is deprecated.</strong><br>
           <p>This method has been deprecated in favor of using the Activity Result API which brings increased type safety via an <code><a href="/reference/androidx/activity/result/contract/ActivityResultContract.html">ActivityResultContract</a></code> and the prebuilt contracts for common intents available in <code><a href="/reference/androidx/activity/result/contract/ActivityResultContracts.html">androidx.activity.result.contract.ActivityResultContracts</a></code>, provides hooks for testing, and allow receiving results in separate, testable classes independent from your fragment. Use <code><a href="/reference/androidx/fragment/app/Fragment.html#registerForActivityResult(androidx.activity.result.contract.ActivityResultContract&lt;I,O&gt;,androidx.activity.result.ActivityResultCallback&lt;O&gt;)">registerForActivityResult</a></code> passing in a <code><a href="/reference/androidx/activity/result/contract/ActivityResultContracts.StartIntentSenderForResult.html">StartIntentSenderForResult</a></code> object for the <code><a href="/reference/androidx/activity/result/contract/ActivityResultContract.html">ActivityResultContract</a></code>.</p>
         </aside>
-        <p>Call <code><a href="https://developer.android.com/reference/android/app/Activity.html#startIntentSenderForResult(android.content.IntentSender,int,android.content.Intent,int,int,int,android.os.Bundle)">startIntentSenderForResult</a></code> from the fragment's containing Activity.</p>
+        <p>Call <code><a href="https://developer.android.com/reference/android/app/Activity.html#startIntentSenderForResult(android.content.IntentSender, int, android.content.Intent, int, int, int, android.os.Bundle)">startIntentSenderForResult</a></code> from the fragment's containing Activity.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -4284,7 +4284,7 @@ requestKey</code> using its <code><a href="/reference/androidx/fragment/app/Frag
               <tr>
                 <td><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/android/content/Intent.html">Intent</a>&nbsp;fillInIntent</code></td>
                 <td>
-                  <p>If non-null, this will be provided as the intent parameter to <code><a href="https://developer.android.com/reference/android/content/IntentSender.html#sendIntent(android.content.Context,int,android.content.Intent,android.content.IntentSender.OnFinished,android.os.Handler)">sendIntent</a></code>. This value may be null.</p>
+                  <p>If non-null, this will be provided as the intent parameter to <code><a href="https://developer.android.com/reference/android/content/IntentSender.html#sendIntent(android.content.Context, int, android.content.Intent, android.content.IntentSender.OnFinished, android.os.Handler)">sendIntent</a></code>. This value may be null.</p>
                 </td>
               </tr>
               <tr>
@@ -4308,7 +4308,7 @@ requestKey</code> using its <code><a href="/reference/androidx/fragment/app/Frag
               <tr>
                 <td><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>&nbsp;options</code></td>
                 <td>
-                  <p>Additional options for how the Activity should be started. See <code><a href="https://developer.android.com/reference/android/content/Context.html#startActivity(android.content.Intent,android.os.Bundle)">startActivity</a></code> for more details. This value may be null.</p>
+                  <p>Additional options for how the Activity should be started. See <code><a href="https://developer.android.com/reference/android/content/Context.html#startActivity(android.content.Intent, android.os.Bundle)">startActivity</a></code> for more details. This value may be null.</p>
                 </td>
               </tr>
             </tbody>
