@@ -50,7 +50,11 @@ class BasicTest : IntegrationTestBase() {
     @Test
     fun `Validate AndroidX fragment sources and prebuilts generate identical docs`() {
         // By sharing the same path, this test validates against the same goldens the next test does
-        validateDirectory("fragment", sampleLocations = listOf("samples"))
+        validateDirectory(
+            path = "fragment",
+            sampleLocations = listOf("samples"),
+            useAndroidxBaseSourceLink = true
+        )
     }
 
     @Test
@@ -114,7 +118,8 @@ class BasicTest : IntegrationTestBase() {
         validateDirectory(
             path = "paging",
             sampleLocations = listOf("samples"),
-            includeFiles = listOf("metadata.md")
+            includeFiles = listOf("metadata.md"),
+            useAndroidxBaseSourceLink = true
         )
     }
 

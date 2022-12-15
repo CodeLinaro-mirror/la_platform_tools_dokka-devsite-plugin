@@ -73,6 +73,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         kotlinDocsPath: String?,
         includedHeadTagsPathJava: String? = "_shared/_reference-head-tags.html",
         includedHeadTagsPathKotlin: String? = "_shared/_reference-head-tags.html",
+        useAndroidxBaseSourceLink: Boolean = false
     ): DokkaConfigurationImpl {
         sources.forEach { check(it.isDirectory) { "$it does not exist or is not a directory" } }
         val externalLinks = mapOf(
@@ -88,6 +89,14 @@ abstract class IntegrationTestBase : BaseAbstractTest(
                     .resolve("package-lists/${it.key}/package-list").toUri().toURL()
             )
         }
+
+        val baseSourceLink = if (useAndroidxBaseSourceLink) {
+            "https://cs.android.com/search?q=file:%s+class:%s" +
+                "&ss=androidx/platform/frameworks/support"
+        } else {
+            null
+        }
+
         return dokkaConfiguration {
             makeSourcesets(sources, samplesLocations, includeFiles, externalLinks)
             offlineMode = true
@@ -107,7 +116,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
                         includedHeadTagsPathJava = includedHeadTagsPathJava,
                         includedHeadTagsPathKotlin = includedHeadTagsPathKotlin,
                         packagePrefixToRemoveInToc = null,
-                        baseSourceLink = null,
+                        baseSourceLink = baseSourceLink,
                     ).toJsonString()
                 )
             )
@@ -126,6 +135,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         kotlinDocsDirectory: String?,
         includedHeadTagsPathJava: String?,
         includedHeadTagsPathKotlin: String?,
+        useAndroidxBaseSourceLink: Boolean,
     ): DokkaConfigurationImpl {
         val sources = File(sourceDir).absoluteFile
         return makeExternalConfiguration(
@@ -138,6 +148,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             kotlinDocsDirectory,
             includedHeadTagsPathJava,
             includedHeadTagsPathKotlin,
+            useAndroidxBaseSourceLink,
         )
     }
 
@@ -154,7 +165,8 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             docRootPath = "reference",
             projectPath = "androidx",
             javaDocsPath = "",
-            kotlinDocsPath = "kotlin"
+            kotlinDocsPath = "kotlin",
+            useAndroidxBaseSourceLink = true,
         )
 
         val writerPlugin = TestOutputWriterPlugin()
@@ -216,7 +228,8 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             docRootPath = "reference",
             projectPath = "androidx",
             javaDocsPath = "",
-            kotlinDocsPath = "kotlin"
+            kotlinDocsPath = "kotlin",
+            useAndroidxBaseSourceLink = true,
         )
 
         val writerPlugin = TestOutputWriterPlugin()
@@ -247,7 +260,8 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             docRootPath = "reference",
             projectPath = "androidx",
             javaDocsPath = "",
-            kotlinDocsPath = "kotlin"
+            kotlinDocsPath = "kotlin",
+            useAndroidxBaseSourceLink = true
         )
 
         val writerPlugin = TestOutputWriterPlugin()
@@ -274,7 +288,8 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         kotlinDocsDirectory: String? = "kotlin",
         includedHeadTagsPathJava: String? = "_shared/_reference-head-tags.html",
         includedHeadTagsPathKotlin: String? = "_shared/_reference-head-tags.html",
-        suffix: String = "source"
+        suffix: String = "source",
+        useAndroidxBaseSourceLink: Boolean = false
     ) {
         val samplesBaseDir = "testData/$path"
         val outputBaseDir = "testData/$path/docs"
@@ -295,6 +310,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             kotlinDocsDirectory,
             includedHeadTagsPathJava,
             includedHeadTagsPathKotlin,
+            useAndroidxBaseSourceLink
         )
 
         val writerPlugin = TestOutputWriterPlugin()
@@ -316,12 +332,17 @@ abstract class IntegrationTestBase : BaseAbstractTest(
      *      into `build/explodedSources/$artifactName-$version-sources/`
      * outputs are located at `testData/$testName/docs`
      * Samples are kept locally (read from `testData/$testName/samples/`), as they are not published
+     *
+     * Use useAndroidxBaseSourceLink=true to include AndroidX source links in the generated page.
+     * Multiple artifact names and source links don't work well together, links end up using
+     * absolute paths.
      */
     fun validatePrebuilts(
         testName: String,
         artifactNames: List<String>,
         samples: Boolean = false,
-        includeFiles: List<String> = emptyList()
+        includeFiles: List<String> = emptyList(),
+        useAndroidxBaseSourceLink: Boolean = true
     ) {
         val outputBaseDir = "testData/$testName/docs"
         val samplesBaseDir = "testData/$testName/samples"
@@ -333,7 +354,8 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             docRootPath = "reference",
             projectPath = "androidx",
             javaDocsPath = "",
-            kotlinDocsPath = "kotlin"
+            kotlinDocsPath = "kotlin",
+            useAndroidxBaseSourceLink = useAndroidxBaseSourceLink
         )
 
         val writerPlugin = TestOutputWriterPlugin()
