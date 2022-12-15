@@ -79,6 +79,7 @@ internal class ParameterDocumentableConverter(
      * Kotlin with Kotlin sources has the nullability type info built in, but rendering Kotlin with
      * Java sources does not.
      */
+    // TODO(KMP, b/254493209)
     fun componentForParameter(
         param: DParameter,
         isSummary: Boolean,
@@ -86,14 +87,14 @@ internal class ParameterDocumentableConverter(
         parent: Documentable
     ): ParameterComponent = when (displayLanguage) {
         Language.JAVA -> {
-            val (propagatedAnnotations, retainedAnnotations) = param.annotations()
-                .partition { it.belongsOnReturnType() }
+            val (propagatedAnnotations, retainedAnnotations) =
+                param.annotations(param.getExpectOrCommonSourceSet())
+                    .partition { it.belongsOnReturnType() }
             val nullability =
                 param.type.getNullability(
                     displayLanguage,
-                    param.getExpectOrCommonSourceSet(),
                     isFromJava,
-                    param.annotations()
+                    param.sourceSetIndependentAnnotations()
                 )
             DefaultParameterComponent(
                 ParameterComponent.Params(
@@ -140,7 +141,7 @@ internal class ParameterDocumentableConverter(
                             isSummary = false
                         )
                     ),
-                annotations = param.annotations(),
+                annotations = param.annotations(param.getExpectOrCommonSourceSet()),
                 isFromJava = isFromJava
             )
         }
@@ -203,9 +204,8 @@ internal class ParameterDocumentableConverter(
                     } else {
                         it.getNullability(
                             displayLanguage,
-                            param.getExpectOrCommonSourceSet(),
                             isFromJava,
-                            param.annotations()
+                            param.sourceSetIndependentAnnotations()
                         )
                     }
                 )
@@ -262,7 +262,7 @@ internal class ParameterDocumentableConverter(
                         pathProvider = pathProvider,
                         displayLanguage = displayLanguage,
                         nullability = projection
-                            .getNullability(displayLanguage, sourceSet, isFromJava)
+                            .getNullability(displayLanguage, isFromJava)
                     )
             )
         )
@@ -344,7 +344,7 @@ internal class ParameterDocumentableConverter(
             propagatedAnnotations + projection.annotations(sourceSet) - removedAnnotations
 
         val nullability =
-            proj.getNullability(displayLanguage, sourceSet, isJavaSource, propagatedAnnotations) or
+            proj.getNullability(displayLanguage, isJavaSource, propagatedAnnotations) or
                 propagatedNullability
 
         val annotationComponents = annotations.annotationComponents(
@@ -422,7 +422,7 @@ internal class ParameterDocumentableConverter(
         return DefaultLambdaTypeProjectionComponent(
             LambdaTypeProjectionComponent.Params(
                 type = returnType.toLink(),
-                nullability = proj.getNullability(displayLanguage, sourceSet) or nullability,
+                nullability = proj.getNullability(displayLanguage) or nullability,
                 displayLanguage = displayLanguage,
                 lambdaModifiers = lambdaModifiers,
                 lambdaParams = lambdaParams,
@@ -433,8 +433,7 @@ internal class ParameterDocumentableConverter(
                     displayLanguage = displayLanguage,
                     // Don't inject space-consuming nullability annotations for type parameters
                     nullability = if (displayLanguage == Language.JAVA) Nullability.DONT_CARE
-                    else proj.getNullability(displayLanguage, sourceSet, false, annotations)
-                        or nullability
+                    else proj.getNullability(displayLanguage, false, annotations) or nullability
                 )
             )
         )

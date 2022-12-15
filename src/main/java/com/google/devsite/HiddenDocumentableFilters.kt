@@ -19,6 +19,7 @@ package com.google.devsite
 import com.google.devsite.renderer.converters.annotations
 import com.google.devsite.renderer.converters.asString
 import com.google.devsite.renderer.converters.explodedChildren
+import com.google.devsite.renderer.converters.getExpectOrCommonSourceSet
 import com.google.devsite.renderer.converters.isDeprecated
 import org.jetbrains.dokka.base.transformers.documentables.SuppressedByConditionDocumentableFilterTransformer
 import org.jetbrains.dokka.links.DRI
@@ -87,7 +88,7 @@ private fun Documentable.isHidden(): Boolean =
         this.hasAnnotation(visibleForTestingDri)
 
 private fun Documentable.hasDeprecationLevelHidden(): Boolean =
-    this.annotations().any {
+    this.annotations(getExpectOrCommonSourceSet()).any {
         it.isDeprecated() && ("DeprecationLevel.HIDDEN" in it.params["level"].asString())
     }
 

@@ -41,20 +41,21 @@ internal class EnumValueDocumentableConverter(
     /** @return the enum value summary component */
     // TODO(KMP, b/256172699)
     fun summary(enumValue: DEnumEntry): TableRowSummaryItem<Link, DescriptionComponent> {
-        val annotations = enumValue.annotations()
         return DefaultTableRowSummaryItem(
             TableRowSummaryItem.Params(
                 title = pathProvider.linkForReference(enumValue.dri, enumValue.name),
-                description = javadocConverter.summaryDescription(enumValue, annotations)
+                description = javadocConverter.summaryDescription(enumValue)
             )
         )
     }
 
     /** @return the enum detail component */
+    // TODO(KMP, b/256172699)
     fun detail(dEnum: DEnum, enumValue: DEnumEntry, hints: ModifierHints):
         SymbolDetail<PropertySignature> {
         val (typeAnnotations, nonTypeAnnotations) =
-            dEnum.annotations().partition { it.belongsOnReturnType() }
+            dEnum.annotations(dEnum.getExpectOrCommonSourceSet())
+                .partition { it.belongsOnReturnType() }
         val projection = paramConverter.componentForProjection(
             GenericTypeConstructor(dEnum.dri, emptyList()),
             isJavaSource = dEnum.isFromJava(),
@@ -75,7 +76,7 @@ internal class EnumValueDocumentableConverter(
                     documentable = enumValue,
                     returnType = projection,
                     paramNames = listOf(),
-                    annotations = nonTypeAnnotations,
+                    deprecationAnnotation = nonTypeAnnotations.deprecationAnnotation(),
                     isFromJava = dEnum.isFromJava()
                 ),
                 displayLanguage = displayLanguage,
@@ -90,6 +91,7 @@ internal class EnumValueDocumentableConverter(
         )
     }
 
+    // TODO(KMP, b/256172699)
     internal fun DEnumEntry.signature(): PropertySignature {
         return DefaultPropertySignature(
             PropertySignature.Params(

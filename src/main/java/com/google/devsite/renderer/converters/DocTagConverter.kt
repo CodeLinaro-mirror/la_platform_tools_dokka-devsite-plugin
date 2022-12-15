@@ -44,6 +44,7 @@ import com.google.devsite.components.table.TableTitle
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
+import com.google.devsite.strictSingleOrNull
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.links.DRI
@@ -107,12 +108,18 @@ internal class DocTagConverter(
     private val analysisMap = runBlocking { docsHolder.analysisMap() }
     private val paramConverter = ParameterDocumentableConverter(displayLanguage, pathProvider)
 
-    /** @return the hand-written javadoc */
+    /**
+     * @param documentable the documentable we are getting the documentation of
+     * @param deprecationAnnotation the @Deprecated annotation. Is a parameter because for e.g.
+     * getters, the annotation will be propagated manually from some higher element, so we can't
+     * just use documentable.deprecationAnnotation() in such a case.
+     * @return the in-source hand-written element documentation
+     */
     fun summaryDescription(
         documentable: Documentable,
-        annotations: List<Annotations.Annotation> = emptyList()
+        deprecationAnnotation: Annotations.Annotation? = documentable.deprecationAnnotation()
     ): DescriptionComponent {
-        return deprecationComponent(documentable, summary = true, annotations)
+        return deprecationComponent(documentable, summary = true, deprecationAnnotation)
             ?: documentable.getDescription(summary = true)
     }
 
@@ -121,17 +128,17 @@ internal class DocTagConverter(
         documentable: T,
         returnType: TypeProjectionComponent? = null,
         paramNames: List<String> = emptyList(),
-        annotations: List<Annotations.Annotation> = emptyList()
+        deprecationAnnotation: Annotations.Annotation? = documentable.deprecationAnnotation()
     ) where T : Documentable, T : WithSources =
-        metadataImpl(documentable, returnType, paramNames, annotations)
+        metadataImpl(documentable, returnType, paramNames, deprecationAnnotation)
 
     fun metadata(
         documentable: Documentable,
         returnType: TypeProjectionComponent? = null,
         paramNames: List<String> = emptyList(),
-        annotations: List<Annotations.Annotation> = emptyList(),
+        deprecationAnnotation: Annotations.Annotation? = documentable.deprecationAnnotation(),
         isFromJava: Boolean
-    ) = metadataImpl(documentable, returnType, paramNames, annotations, isFromJava)
+    ) = metadataImpl(documentable, returnType, paramNames, deprecationAnnotation, isFromJava)
 
     /**
      * Returns a breakdown of the different metadata as a deprecation warning, description, and then
@@ -142,7 +149,7 @@ internal class DocTagConverter(
         documentable: Documentable,
         returnType: TypeProjectionComponent? = null,
         paramNames: List<String> = emptyList(),
-        annotations: List<Annotations.Annotation> = emptyList(),
+        deprecationAnnotation: Annotations.Annotation? = documentable.deprecationAnnotation(),
         isFromJavaParam: Boolean? = null
     ): List<ContextFreeComponent> {
         val isFromJava = if (isFromJavaParam != null) isFromJavaParam
@@ -151,7 +158,7 @@ internal class DocTagConverter(
             (documentable as WithSources).isFromJava()
         }
         val description = documentable.getDescription(summary = false)
-        val deprecation = deprecationComponent(documentable, summary = false, annotations)
+        val deprecation = deprecationComponent(documentable, summary = false, deprecationAnnotation)
         val receiverParam = documentable.find<Receiver>()?.let {
             Param(it.root, "receiver")
         }
@@ -654,9 +661,9 @@ internal class DocTagConverter(
     private fun deprecationComponent(
         documentable: Documentable,
         summary: Boolean,
-        annotations: List<Annotations.Annotation>
+        deprecationAnnotation: Annotations.Annotation?
     ): DescriptionComponent? {
-        val deprecation = findDeprecation(documentable, annotations) ?: return null
+        val deprecation = findDeprecation(documentable, deprecationAnnotation) ?: return null
         return description(deprecation.children, summary, documentable.deprecationText())
     }
 
@@ -665,7 +672,7 @@ internal class DocTagConverter(
      */
     private fun findDeprecation(
         documentable: Documentable,
-        annotations: List<Annotations.Annotation>
+        deprecationAnnotation: Annotations.Annotation?
     ): Deprecated? {
         val javadocDeprecation = documentable.find<Deprecated>()
         if (javadocDeprecation != null) {
@@ -673,9 +680,8 @@ internal class DocTagConverter(
             return javadocDeprecation
         }
 
-        val annotationDeprecationMessage = annotations.filter {
-            it.isDeprecated()
-        }.strictSingleOrNull()?.params?.get("message")?.cast<StringValue>()?.value ?: return null
+        val annotationDeprecationMessage = deprecationAnnotation?.params?.get("message")
+            ?.cast<StringValue>()?.value ?: return null
         // Dokka makes message="foo" show up as "\"foo\"" since you typically want to show quotes
         // when rendering an annotation. Remove those outer quotes.
         val message = annotationDeprecationMessage.removeSurrounding("\"")
@@ -695,13 +701,6 @@ internal class DocTagConverter(
      */
     private fun Documentable.tags() = documentation[getExpectOrCommonSourceSet()]?.children
         ?: emptyList()
-
-    /** Like singleOrNull, but requires that only one element be present if any. */
-    private fun <T> List<T>.strictSingleOrNull() = if (isEmpty()) {
-        null
-    } else {
-        single()
-    }
 
     private fun tagOrder(paramNames: List<String>) = compareBy<TagWrapper> { tag ->
         when (tag) {
@@ -845,7 +844,7 @@ internal class DocTagConverter(
         documentable: Documentable,
         showAnnotations: Boolean = false
     ): TableRowSummaryItem<Link, DescriptionComponent> {
-        val annotations = documentable.annotations()
+        val annotations = documentable.annotations(documentable.getExpectOrCommonSourceSet())
         return DefaultTableRowSummaryItem(
             TableRowSummaryItem.Params(
                 title = if (showAnnotations) {
@@ -862,7 +861,10 @@ internal class DocTagConverter(
                 } else {
                     pathProvider.linkForReference(documentable.dri)
                 },
-                description = summaryDescription(documentable, annotations)
+                description = summaryDescription(
+                    documentable,
+                    documentable.deprecationAnnotation()
+                )
             )
         )
     }
@@ -887,11 +889,10 @@ internal class DocTagConverter(
     internal fun summaryForDocumentableKmp(
         documentable: Documentable
     ): TableRowSummaryItem<Link, DescriptionComponent> {
-        val annotations = documentable.annotations()
         return DefaultKmpTableRowSummaryItem(
             KmpTableRowSummaryItem.Params(
                 title = pathProvider.linkForReference(documentable.dri),
-                description = summaryDescription(documentable, annotations),
+                description = summaryDescription(documentable),
                 platforms = DefaultPlatformComponent(documentable.sourceSets)
             )
         )

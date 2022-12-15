@@ -57,6 +57,10 @@ inline fun <reified T> tensorOf(vararg arrays: Array<T>): Array<Array<T>> =
     tensorOf(*(arrays.map { it.asIterable() }.toTypedArray()))
         .map { it.toTypedArray() }.toTypedArray()
 
+/** Like singleOrNull, but requires that only one element be present if any. */
+internal fun <T> List<T>.strictSingleOrNull() =
+    if (isEmpty()) null else single()
+
 internal typealias TypeSummaryItem<T> = TableRowSummaryItem<TypeSummary, SymbolSummary<T>>
 internal typealias KmpTypeSummaryItem<T> = KmpTableRowSummaryItem<TypeSummary, SymbolSummary<T>>
 internal typealias PropertySummaryList = SummaryList<TypeSummaryItem<PropertySignature>>
