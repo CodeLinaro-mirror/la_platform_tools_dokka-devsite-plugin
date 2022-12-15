@@ -29,15 +29,16 @@ import org.jetbrains.dokka.model.WithVisibility
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 
 /** @return the complete list of modifiers for this type */
-// TODO(KMP, b/254490320)
-internal fun Documentable.modifiers(): List<String> {
+internal fun Documentable.modifiers(
+    sourceSet: DokkaConfiguration.DokkaSourceSet
+): List<String> {
     val result = mutableListOf<String?>()
     if (this is WithAbstraction)
-        result += listOf(modifier[getExpectOrCommonSourceSet()]?.name)
+        result += listOf(modifier[sourceSet]?.name)
     if (this is WithVisibility)
-        result += listOf(visibility[getExpectOrCommonSourceSet()]?.name)
+        result += listOf(visibility[sourceSet]?.name)
     if (this is WithExtraProperties<*>)
-        result += getExtraModifiers(getExpectOrCommonSourceSet())
+        result += getExtraModifiers(sourceSet)
     return result.filterNotNull().filter { it.isNotEmpty() }
 }
 
@@ -53,8 +54,9 @@ internal fun <T : WithExtraProperties<*>> T.getExtraModifiers(
 }
 
 /** @return true if the modifiers represent a constant symbol, false otherwise */
-internal fun isConstant(modifiers: List<String>) =
-    "const" in modifiers || ("static" in modifiers && "final" in modifiers)
+internal fun Documentable.isConstant(
+    modifiers: List<String> = modifiers(getExpectOrCommonSourceSet())
+) = "const" in modifiers || ("static" in modifiers && "final" in modifiers)
 
 internal open class Modifiers(baselist: List<String>) : ArrayList<String>(baselist) {
     constructor(vararg items: String) : this(items.asList())

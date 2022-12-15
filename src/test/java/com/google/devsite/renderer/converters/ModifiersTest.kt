@@ -44,6 +44,8 @@ internal class ModifiersTest : ConverterTestBase() {
         isFromJava = true
     )
 
+    private val dummyDoc = DModule("dummy", emptyList(), emptyMap(), null, emptySet())
+
     @Test
     fun `Public modifier is found`() {
         val modifiers = """
@@ -129,14 +131,14 @@ internal class ModifiersTest : ConverterTestBase() {
     fun `Const modifier is considered constant`() {
         val modifiers = listOf("const")
 
-        assertThat(isConstant(modifiers)).isTrue()
+        assertThat(dummyDoc.isConstant(modifiers)).isTrue()
     }
 
     @Test
     fun `Static final modifiers are considered constant`() {
         val modifiers = listOf("static", "final")
 
-        assertThat(isConstant(modifiers)).isTrue()
+        assertThat(dummyDoc.isConstant(modifiers)).isTrue()
     }
 
     @Test
@@ -219,8 +221,10 @@ internal class ModifiersTest : ConverterTestBase() {
     }
 
     private fun DModule.modifierz(): List<String> {
-        return function("foo")!!.modifiers()
+        return function("foo")!!.modifierz()
     }
+
+    private fun DFunction.modifierz() = modifiers(getExpectOrCommonSourceSet())
 
     @Test
     fun `"default" modifier for interfaces works`() {
@@ -236,9 +240,9 @@ internal class ModifiersTest : ConverterTestBase() {
             |}
         """.render(java = true).classlike()!!.classlikes.single()
         val onCreateModifiers = theInterface.functions.single { it.name == "onCreate" }
-            .modifiers()
+            .modifierz()
         val nonDefaultModifiers = theInterface.functions.single { it.name == "nonDefaultMethod" }
-            .modifiers()
+            .modifierz()
         val hintsJ = javaHints.copy(containingType = DInterface::class.java)
         val hintsK = kotlinHints.copy(containingType = DInterface::class.java)
         assertThat(onCreateModifiers.modifiersFor(hintsJ).single()).isEqualTo("default")

@@ -61,7 +61,8 @@ internal class PropertyDocumentableConverter(
                             property.sourceSets.single(),
                             typeAnnotations
                         ),
-                        modifiers = property.modifiers().modifiersFor(hints)
+                        modifiers = property.modifiers(property.getExpectOrCommonSourceSet())
+                            .modifiersFor(hints)
                     )
                 ),
                 description = DefaultSymbolSummary(
@@ -95,7 +96,9 @@ internal class PropertyDocumentableConverter(
                             property.getExpectOrCommonSourceSet(),
                             typeAnnotations
                         ),
-                        modifiers = property.modifiers().modifiersFor(hints)
+                        // TODO(KMP, b/254493209)
+                        modifiers = property.modifiers(property.getExpectOrCommonSourceSet())
+                            .modifiersFor(hints),
                     )
                 ),
                 description = DefaultSymbolSummary(
@@ -147,7 +150,8 @@ internal class PropertyDocumentableConverter(
                     annotations = nonTypeAnnotations
                 ),
                 displayLanguage = displayLanguage,
-                modifiers = property.modifiers().modifiersFor(hints),
+                modifiers = property.modifiers(property.getExpectOrCommonSourceSet())
+                    .modifiersFor(hints),
                 annotationComponents = nonTypeAnnotations.annotationComponents(
                     pathProvider = pathProvider,
                     displayLanguage = displayLanguage,
@@ -189,7 +193,9 @@ internal class PropertyDocumentableConverter(
                     annotations = nonTypeAnnotations
                 ),
                 displayLanguage = displayLanguage,
-                modifiers = property.modifiers().modifiersFor(hints),
+                // TODO(KMP, b/254493209)
+                modifiers = property.modifiers(property.getExpectOrCommonSourceSet())
+                    .modifiersFor(hints),
                 annotationComponents = nonTypeAnnotations.annotationComponents(
                     pathProvider = pathProvider,
                     displayLanguage = displayLanguage,
@@ -200,6 +206,7 @@ internal class PropertyDocumentableConverter(
         )
     }
 
+    // TODO(KMP, b/254493209)
     private fun DProperty.signature(isSummary: Boolean): PropertySignature {
         val receiver = receiver?.let {
             paramConverter.componentForParameter(
@@ -209,7 +216,7 @@ internal class PropertyDocumentableConverter(
                 parent = this
             )
         }
-        val constantValue = if (isConstant(modifiers())) {
+        val constantValue = if (isConstant()) {
             // the value of a constant is stored as a DefaultValue, pick it out if it exists
             extra.allOfType<DefaultValue>().singleOrNull()?.expression
                 ?.get(getExpectOrCommonSourceSet())?.getValue()

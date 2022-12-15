@@ -66,7 +66,8 @@ internal class FunctionDocumentableConverter(
                             isJavaSource = function.isFromJava(),
                             sourceSet = function.sourceSets.single()
                         ),
-                        modifiers = function.modifiers().modifiersFor(hints)
+                        modifiers = function.modifiers(function.getExpectOrCommonSourceSet())
+                            .modifiersFor(hints)
                     )
                 ),
                 description = DefaultSymbolSummary(
@@ -104,7 +105,9 @@ internal class FunctionDocumentableConverter(
                             isJavaSource = function.isFromJava(),
                             sourceSet = function.getExpectOrCommonSourceSet()
                         ),
-                        modifiers = function.modifiers().modifiersFor(hints)
+                        // TODO(KMP, b/254493209)
+                        modifiers = function.modifiers(function.getExpectOrCommonSourceSet())
+                            .modifiersFor(hints)
                     )
                 ),
                 description = DefaultSymbolSummary(
@@ -224,7 +227,8 @@ internal class FunctionDocumentableConverter(
                     annotations = signatureAnnotations
                 ),
                 displayLanguage = displayLanguage,
-                modifiers = function.modifiers().modifiersFor(hints),
+                modifiers = function.modifiers(function.getExpectOrCommonSourceSet())
+                    .modifiersFor(hints),
                 extFunctionClass = function.receiver?.let { nameForSyntheticClass(function) },
                 annotationComponents = signatureAnnotations.annotationComponents(
                     pathProvider = pathProvider,
@@ -274,7 +278,9 @@ internal class FunctionDocumentableConverter(
                     annotations = signatureAnnotations
                 ),
                 displayLanguage = displayLanguage,
-                modifiers = function.modifiers().modifiersFor(hints),
+                // TODO(KMP, b/254493209)
+                modifiers = function.modifiers(function.getExpectOrCommonSourceSet())
+                    .modifiersFor(hints),
                 extFunctionClass = function.receiver?.let { nameForSyntheticClass(function) },
                 annotationComponents = signatureAnnotations.annotationComponents(
                     pathProvider = pathProvider,

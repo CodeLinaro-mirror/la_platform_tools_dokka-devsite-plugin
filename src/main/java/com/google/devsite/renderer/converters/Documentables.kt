@@ -175,8 +175,9 @@ private fun Hashable.isFromJava() =
         else isPsi == true
     }
 
+// TODO(investigate KMP and whether lateinit-ness can vary by sourceSet and how to handle that)
 internal fun Documentable.isJavaStaticField() = this is DProperty && run {
-    val modifiers = modifiers()
+    val modifiers = modifiers(getExpectOrCommonSourceSet())
     "const" in modifiers || "lateinit" in modifiers || isStaticAnnotated()
 }
 
@@ -446,7 +447,7 @@ internal fun DProperty.isJvmFieldAnnotated() =
  * Returns whether property is annotated as @JvmField
  */
 fun DProperty.isJvmField(): Boolean {
-    return isJvmFieldAnnotated() || "const" in modifiers()
+    return isJvmFieldAnnotated() || isConstant()
 }
 
 internal fun List<DFunction>.names() = map { it.name }
