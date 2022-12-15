@@ -873,7 +873,7 @@ internal abstract class ClasslikeDocumentableConverter(
         val entry = getSourceEntry(classlike) ?: return null
         val path = getSourceFilePath(entry)
         val jsonLibraryMetadata = findMatchingJsonLibraryMetadata(path)
-        val sourceUrl = createLinkToSource(entry, path)
+        val sourceUrl = createLinkToSource(path)
 
         return DefaultMetadataComponent(
             MetadataComponent.Params(
@@ -928,30 +928,12 @@ internal abstract class ClasslikeDocumentableConverter(
     }
 
     /**
-     * Creates a link to the source of the classlike based on the base URL in the source entry's
-     * source link.
+     * Creates a link to the source of the classlike using the base URL from the configuration.
      *
-     * Returns null if the source entry has no source link.
-     *
-     * This supports one source link per source set and will error if more than one is provided.
+     * Returns null if there was no base source link in the configuration.
      */
-    private fun createLinkToSource(sourceEntry: SourceEntry, path: String): String? {
-        val sourceLinks = sourceEntry.key.sourceLinks
-        if (sourceLinks.isEmpty()) {
-            return null
-        } else if (sourceLinks.size > 1) {
-            throw RuntimeException(
-                "Multiple source links provided for source set ${sourceEntry.key.displayName}. " +
-                    "Dackka supports only one source link per source set.\n" +
-                    "The source link URL should be a format string with placeholders for the " +
-                    "filepath and (optionally) the qualified name of the class.\n" +
-                    "For example, `https://cs.android.com/search?q=file:%s+class:%s&ss=androidx/" +
-                    "platform/frameworks/support` is the source link for AndroidX."
-            )
-        }
-
-        val sourceLink = sourceLinks.single().remoteUrl.toString()
-        return sourceLink.format(path, classlike.dri.fullName)
+    private fun createLinkToSource(path: String): String? {
+        return docsHolder.baseSourceLink?.format(path, classlike.dri.fullName)
     }
 
     /** Converts the classlikes to link components for use in the related symbols component. */

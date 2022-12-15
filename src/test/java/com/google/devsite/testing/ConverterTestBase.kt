@@ -44,7 +44,6 @@ import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.DokkaGenerator
 import org.jetbrains.dokka.ExternalDocumentationLink
 import org.jetbrains.dokka.PluginConfigurationImpl
-import org.jetbrains.dokka.SourceLinkDefinitionImpl
 import org.jetbrains.dokka.base.resolvers.local.DokkaLocationProvider
 import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
 import org.jetbrains.dokka.base.translators.descriptors.DefaultExternalDocumentablesProvider
@@ -192,13 +191,6 @@ internal abstract class ConverterTestBase(
                 .resolve("package-lists/${it.key}/package-list").toUri().toURL()
         )
     }
-    private val sourceLinkList = listOf(
-        SourceLinkDefinitionImpl(
-            localDirectory = "/",
-            remoteUrl = URL("https://cs.android.com/search?q=file:%s class:%s"),
-            remoteLineSuffix = null
-        )
-    )
     private val configuration = dokkaConfiguration {
         sourceSets {
             sourceSet {
@@ -209,7 +201,6 @@ internal abstract class ConverterTestBase(
                     DokkaConfiguration.Visibility.PUBLIC,
                     DokkaConfiguration.Visibility.PROTECTED
                 )
-                sourceLinks = sourceLinkList
             }
         }
         offlineMode = true
@@ -227,6 +218,7 @@ internal abstract class ConverterTestBase(
                     javaDocsPath = "",
                     kotlinDocsPath = "kotlin",
                     packagePrefixToRemoveInToc = null,
+                    baseSourceLink = null,
                 ).toJsonString()
             )
         )
@@ -253,6 +245,7 @@ internal abstract class ConverterTestBase(
                 this,
                 context = context,
                 externalDocumentablesProvider = externalDocumentablesProvider,
+                baseSourceLink = "https://cs.android.com/search?q=file:%s+class:%s",
             )
         }
         val classGraph = runBlocking { holder.classGraph() }

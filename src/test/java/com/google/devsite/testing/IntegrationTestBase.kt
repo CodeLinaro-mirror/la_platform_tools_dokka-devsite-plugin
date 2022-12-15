@@ -107,6 +107,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
                         includedHeadTagsPathJava = includedHeadTagsPathJava,
                         includedHeadTagsPathKotlin = includedHeadTagsPathKotlin,
                         packagePrefixToRemoveInToc = null,
+                        baseSourceLink = null,
                     ).toJsonString()
                 )
             )

@@ -54,6 +54,10 @@ import org.jetbrains.dokka.plugability.ConfigurableBlock
  * provided value does not end in `.`, the `.` is still included in the string to trim. This only
  * applies to the table of contents, not other pages (e.g. the package index and the summary page
  * for each package). Optional, defaults to `null` (no string trimmed from package names).
+ * @param baseSourceLink Used to generate links to the source for each class page. This is a format
+ * string with placeholders for the filepath and (optionally) the qualified name of the class
+ * (`https://cs.android.com/search?q=file:%s+class:%s&ss=androidx/platform/frameworks/support` is
+ * the [baseSourceLink] for AndroidX). Optional, if not specified, no source links are generated.
  */
 data class DevsiteConfiguration(
     val docRootPath: String = "reference",
@@ -67,6 +71,7 @@ data class DevsiteConfiguration(
     val includedHeadTagsPathJava: String? = "_shared/_reference-head-tags.html",
     val includedHeadTagsPathKotlin: String? = "_shared/_reference-head-tags.html",
     val packagePrefixToRemoveInToc: String?,
+    val baseSourceLink: String?,
 ) : ConfigurableBlock {
     init {
         if (javaDocsPath == null && kotlinDocsPath == null) {

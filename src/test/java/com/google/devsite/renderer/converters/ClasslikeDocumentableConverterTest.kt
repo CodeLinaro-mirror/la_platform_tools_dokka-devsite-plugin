@@ -2407,7 +2407,7 @@ internal class ClasslikeDocumentableConverterTest(
 
         val expectedPath = "kotlin/androidx/example/Test.kt"
         val expectedClass = "androidx.example.Foo"
-        val expected = "https://cs.android.com/search?q=file:$expectedPath class:$expectedClass"
+        val expected = "https://cs.android.com/search?q=file:$expectedPath+class:$expectedClass"
         assertThat(link!!.data.url).isEqualTo(expected)
     }
 
