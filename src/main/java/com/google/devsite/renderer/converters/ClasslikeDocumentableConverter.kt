@@ -672,9 +672,12 @@ internal abstract class ClasslikeDocumentableConverter(
         }
     }
 
-    private fun computeSignature(classlike: DClasslike, classGraph: ClassGraph):
-        ClasslikeSignature {
-        val modifiers = classlike.modifiers().modifiersFor(
+    protected open fun computeSignature(
+        classlike: DClasslike,
+        classGraph: ClassGraph,
+        sourceSet: DokkaSourceSet = classlike.getExpectOrCommonSourceSet()
+    ): ClasslikeSignature {
+        val modifiers = classlike.modifiers(sourceSet).modifiersFor(
             ModifierHints(
                 displayLanguage,
                 type = classlike::class.java,
@@ -791,7 +794,7 @@ internal abstract class ClasslikeDocumentableConverter(
 
         val (consts, properties) = symbols.filterIsInstance<DProperty>()
             .sortedBy { "${it.name} ${it.dri}" }
-            .partition { isConstant(it.modifiers()) }
+            .partition { it.isConstant() }
 
         val constsSummary = consts.takeIf { it.isNotEmpty() }
             ?.createInheritedCategory(title = inheritedConstantsTitle()) {
@@ -1113,20 +1116,14 @@ internal fun List<DClasslike>.withoutNeglectableCompanionOf(
         it.shouldNotBeDisplayed(displayLanguage)
 }
 
-private fun isPublic(function: DFunction) = "public" in function.modifiers()
-private fun isProtected(function: DFunction) = "protected" in function.modifiers()
-
-/** Filters for public, non-constant properties. */
-private fun isPublicNonConst(property: DProperty): Boolean {
-    val modifiers = property.modifiers()
-    return "public" in modifiers && !isConstant(modifiers)
-}
-
-/** Filters for protected, non-constant properties. */
-private fun isProtectedNonConst(property: DProperty): Boolean {
-    val modifiers = property.modifiers()
-    return "protected" in modifiers && !isConstant(modifiers)
-}
+// TODO(investigate when / whether visibility can change by sourceSet and how to handle that.)
+private fun isPublic(element: Documentable) =
+    "public" in element.modifiers(element.getExpectOrCommonSourceSet())
+private fun isProtected(element: Documentable) =
+    "protected" in element.modifiers(element.getExpectOrCommonSourceSet())
+/** Filter out constants, because those have a separate display sections from properties. */
+private fun isPublicNonConst(prop: DProperty) = isPublic(prop) && !prop.isConstant()
+private fun isProtectedNonConst(prop: DProperty) = isProtected(prop) && !prop.isConstant()
 
 /**
  * Returns true if function is a suspend function itself, or takes a suspend function as a
@@ -1135,7 +1132,7 @@ private fun isProtectedNonConst(property: DProperty): Boolean {
 private fun DFunction.isSuspendFunction() =
     type.isSuspend() || parameters.any { it.type.isSuspend() }
 
-private fun List<DProperty>.constants() = filter { isConstant(it.modifiers()) }.toSet().toList()
+private fun List<DProperty>.constants() = filter { it.isConstant() }.toSet().toList()
 
 internal fun nestedTypesTitle() = "Nested types"
 

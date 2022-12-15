@@ -202,11 +202,11 @@ internal abstract class PackageDocumentableConverter(
     }
 
     private fun topLevelConstants() = dPackage.properties
-        .filter { isConstant(it.modifiers()) }
+        .filter { it.isConstant() }
         .sortedBy { it.name }
 
     private fun topLevelProperties() = dPackage.properties
-        .filterNot { isConstant(it.modifiers()) }
+        .filterNot { it.isConstant() }
         .filter { it.receiver == null }
         .sortedBy { it.name }
 
