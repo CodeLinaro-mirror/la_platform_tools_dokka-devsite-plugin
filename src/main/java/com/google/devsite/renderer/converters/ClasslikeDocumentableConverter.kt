@@ -123,79 +123,20 @@ internal abstract class ClasslikeDocumentableConverter(
 
     /** @return the classlike component */
     suspend fun classlike(): DevsitePage<Classlike> = coroutineScope {
-        var (declaredFunctions, declaredProperties) = classlike.nonInheritedTypes()
+        val (unsortedCompanionFunctions, unsortedCompanionProperties) =
+            classlike.companionFunctionsAndProperties()
+        val companionFunctions = unsortedCompanionFunctions
+            .sortedWith(functionSignatureComparator())
+        val companionProperties = unsortedCompanionProperties.sortedBy { it.name }
+
+        val (initialFunctions, initialProperties) = classlike.nonInheritedTypes()
         val inheritedAll = (classlike.children + classlike.properties.gettersAndSetters())
             .inheritedTypes(classlike.supertypesForDisplayLanguage())
-        var (companionFunctions, companionProperties) = classlike.companionFunctionsAndProperties()
 
-        // Java documentation needs to respect @jvm* annotations
-        if (displayLanguage == Language.JAVA) {
-            declaredFunctions = declaredFunctions.filterOutJvmSynthetic().map { it.withJvmName() }
-            declaredProperties = declaredProperties.filterOutJvmSynthetic()
-        }
-
-        // Some symbols are moved from the companion object type to the enclosing class in java
-        if (displayLanguage == Language.JAVA) {
-            // Objects that are not top-level
-            if (classlike is DObject && docsHolder.isCompanion(classlike)) {
-                // Hoist companion JvmFields
-                declaredProperties = declaredProperties.filterNot { it.isJvmField() }
-            } else if (classlike is DObject) {
-                declaredProperties += DProperty(
-                    dri = classlike.dri.copy(
-                        callable = Callable(name = "INSTANCE", params = emptyList())
-                    ),
-                    name = "INSTANCE",
-                    documentation = emptyMap(),
-                    expectPresentInSet = classlike.expectPresentInSet,
-                    sources = classlike.sources,
-                    visibility = classlike.visibility,
-                    type = GenericTypeConstructor(dri = classlike.dri, projections = emptyList()),
-                    receiver = null,
-                    setter = null,
-                    getter = null,
-                    modifier = emptyMap(),
-                    sourceSets = classlike.sourceSets,
-                    generics = emptyList(),
-                    isExpectActual = false,
-                    extra = PropertyContainer.withAll(
-                        classlike.sourceSets.map {
-                            mapOf(
-                                it to setOf(ExtraModifiers.JavaOnlyModifiers.Static)
-                            ).toAdditionalModifiers()
-                        } + classlike.sourceSets.map {
-                            Annotations(
-                                mapOf(
-                                    it to listOf(
-                                        Annotations.Annotation(
-                                            dri = DRI(
-                                                packageName = "kotlin.jvm",
-                                                classNames = "JvmField"
-                                            ),
-                                            params = emptyMap()
-                                        )
-                                    )
-                                )
-                            )
-                        }
-                    )
-                )
-            } else {
-                // Classlikes that are not (top-level) objects
-                declaredProperties += companionProperties.filter { it.isJavaStaticField() }
-                declaredProperties += companionProperties.filter { it.isJvmFieldAnnotated() }.map {
-                    // It is technically incorrect to put @JvmStatic on a property, but we use this
-                    // to remember that we should later inject the `static` modifier to this
-                    it.withNewExtras(it.extra.addAnnotation(JvmStatic))
-                }
-                declaredFunctions += companionFunctions.filter { it.isJavaStaticMethod() }
-            }
-        }
-
-        declaredFunctions = declaredFunctions.sortedWith(functionSignatureComparator())
-        declaredProperties = declaredProperties.sortedBy { it.name }
-        companionFunctions = companionFunctions.sortedWith(functionSignatureComparator())
-        companionProperties = companionProperties.sortedBy { it.name }
+        val declaredFunctions = computeDeclaredFunctions(initialFunctions, companionFunctions)
+            .sortedWith(functionSignatureComparator())
+        val declaredProperties = computeDeclaredProperties(initialProperties, companionProperties)
+            .sortedBy { it.name }
 
         val enumValues = (classlike as? DEnum)?.entries.orEmpty().sortedBy { it.name }
 
@@ -665,6 +606,108 @@ internal abstract class ClasslikeDocumentableConverter(
                 enumConverter.detail(dEnum, it, modifierHints)
             }
         }
+    }
+
+    /**
+     * Creates a list of properties which are declared on the classlike.
+     *
+     * For Kotlin docs, this is just the list of [initialProperties].
+     *
+     * For Java, the list is modified based on @Jvm annotations, and some properties are not
+     * included because they are converted to getters and setters. Some [companionProperties] are
+     * hoisted to the containing classlike (or, if the classlike is a companion, no properties are
+     * declared on it as they are hoisted or converted to getters/setters).
+     */
+    private fun computeDeclaredProperties(
+        initialProperties: List<DProperty>,
+        companionProperties: List<DProperty>
+    ): List<DProperty> {
+        if (displayLanguage == Language.KOTLIN) return initialProperties
+
+        // Java documentation needs to respect @jvm* annotations
+        val properties = initialProperties.filterOutJvmSynthetic()
+
+        // Some symbols are moved from the companion object type to the enclosing class in java
+        // Objects that are not top-level
+        return if (classlike is DObject && docsHolder.isCompanion(classlike)) {
+            // Hoist companion JvmFields
+            properties.filterNot { it.isJvmField() }
+        } else if (classlike is DObject) {
+            properties + objectInstanceProperty
+        } else {
+            // Classlikes that are not (top-level) objects
+            properties +
+                companionProperties.filter { it.isJavaStaticField() } +
+                companionProperties.filter { it.isJvmFieldAnnotated() }.map {
+                    // It is technically incorrect to put @JvmStatic on a property, but we use this
+                    // to remember that we should later inject the `static` modifier to this
+                    it.withNewExtras(it.extra.addAnnotation(JvmStatic))
+                }
+        }
+    }
+
+    /**
+     * Creates a list of functions which are declared on the classlike.
+     *
+     * For Kotlin docs, this is just the list of [initialFunctions].
+     *
+     * For Java, the list is modified based on @Jvm annotations. Some [companionFunctions] are
+     * hoisted to the containing classlike. The [initialFunctions] list should include generated
+     * property accessors.
+     */
+    private fun computeDeclaredFunctions(
+        initialFunctions: List<DFunction>,
+        companionFunctions: List<DFunction>
+    ): List<DFunction> {
+        if (displayLanguage == Language.KOTLIN) return initialFunctions
+
+        // Java documentation needs to respect @jvm* annotations
+        val functions = initialFunctions
+            // (classlike.functions + classlike.properties.gettersAndSetters())
+            .filterOutJvmSynthetic().map { it.withJvmName() }
+        return functions + companionFunctions.filter { it.isJavaStaticMethod() }
+    }
+
+    private val objectInstanceProperty: DProperty by lazy {
+        DProperty(
+            dri = classlike.dri.copy(
+                callable = Callable(name = "INSTANCE", params = emptyList())
+            ),
+            name = "INSTANCE",
+            documentation = emptyMap(),
+            expectPresentInSet = classlike.expectPresentInSet,
+            sources = classlike.sources,
+            visibility = classlike.visibility,
+            type = GenericTypeConstructor(dri = classlike.dri, projections = emptyList()),
+            receiver = null,
+            setter = null,
+            getter = null,
+            modifier = emptyMap(),
+            sourceSets = classlike.sourceSets,
+            generics = emptyList(),
+            isExpectActual = false,
+            extra = PropertyContainer.withAll(
+                classlike.sourceSets.map {
+                    mapOf(
+                        it to setOf(ExtraModifiers.JavaOnlyModifiers.Static)
+                    ).toAdditionalModifiers()
+                } + classlike.sourceSets.map {
+                    Annotations(
+                        mapOf(
+                            it to listOf(
+                                Annotations.Annotation(
+                                    dri = DRI(
+                                        packageName = "kotlin.jvm",
+                                        classNames = "JvmField"
+                                    ),
+                                    params = emptyMap()
+                                )
+                            )
+                        )
+                    )
+                }
+            )
+        )
     }
 
     // To allow consolidating identical ClasslikeSignatures generated from different sourceSets,
