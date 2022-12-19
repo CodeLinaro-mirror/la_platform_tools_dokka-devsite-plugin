@@ -192,7 +192,7 @@ dependencies {
     testDataSources("androidx.ads:ads-identifier:1.0.0-alpha04")
     testDataSources("androidx.ads:ads-identifier-common:1.0.0-alpha04")
     testDataSources("androidx.ads:ads-identifier-provider:1.0.0-alpha04")
-    testDataSources("androidx.annotation:annotation:1.5.0-alpha02")
+    testDataSourcesKmp("androidx.annotation:annotation:1.6.0-alpha01")
     testDataSources("androidx.annotation:annotation-experimental:1.3.0")
     //testDataSources("androidx.annotation:annotation-experimental-lint:1.0.0-rc01") // need dep
     testDataSources("androidx.appcompat:appcompat:1.6.0-beta01")

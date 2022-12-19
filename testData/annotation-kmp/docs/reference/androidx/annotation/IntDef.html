@@ -1,0 +1,123 @@
+<html devsite="true">
+  <head>
+    <title>IntDef</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/annotation/IntDef.kt+class:androidx.annotation.IntDef&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>IntDef</h1>
+    <p>
+      <pre>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-retention/index.html">Retention</a>(value&nbsp;=&nbsp;AnnotationRetention.SOURCE)<br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-target/index.html">Target</a>(allowedTargets&nbsp;=&nbsp;[AnnotationTarget.ANNOTATION_CLASS])<br>public annotation <a href="/reference/androidx/annotation/IntDef.html">IntDef</a></pre>
+    </p>
+    <hr>
+    <p>Denotes that the annotated element of integer type, represents a logical type and that its value should be one of the explicitly named constants. If the IntDef#flag() attribute is set to true, multiple constants can be combined.</p>
+    <p>Example:</p>
+    <pre class="prettyprint">@Retention(SOURCE)<br>@IntDef({NAVIGATION_MODE_STANDARD, NAVIGATION_MODE_LIST, NAVIGATION_MODE_TABS})<br>public @interface NavigationMode {}<br>public static final int NAVIGATION_MODE_STANDARD = 0;<br>public static final int NAVIGATION_MODE_LIST = 1;<br>public static final int NAVIGATION_MODE_TABS = 2;<br>...<br>public abstract void setNavigationMode(@NavigationMode int mode);<br><br>@NavigationMode<br>public abstract int getNavigationMode();</pre>
+    <p>For a flag, set the flag attribute:</p>
+    <pre class="prettyprint">@IntDef(<br>flag = true,<br>value = {NAVIGATION_MODE_STANDARD, NAVIGATION_MODE_LIST, NAVIGATION_MODE_TABS}<br>)</pre>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">See also</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/androidx/annotation/LongDef.html">LongDef</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/IntDef.html#flag()">flag</a></code></div>
+              <p>Defines whether the constants can be used as a flag, or just as an enum (the default)</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/IntDef.html#open()">open</a></code></div>
+              <p>Whether any other values are allowed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> int[]</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/IntDef.html#value()">value</a></code></div>
+              <p>Defines the allowed constants for this element</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/IntDef.html#IntDef(kotlin.IntArray,kotlin.Boolean,kotlin.Boolean)">IntDef</a>(int&nbsp;value,&nbsp;boolean&nbsp;flag,&nbsp;boolean&nbsp;open)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getFlag()"></a><a name="setFlag()"></a><a name="getFlag--"></a><a name="setFlag--"></a>
+        <h3 class="api-name" id="flag()">flag</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/annotation/IntDef.html#flag()">flag</a></pre>
+        <p>Defines whether the constants can be used as a flag, or just as an enum (the default)</p>
+      </div>
+      <div class="api-item"><a name="getOpen()"></a><a name="setOpen()"></a><a name="getOpen--"></a><a name="setOpen--"></a>
+        <h3 class="api-name" id="open()">open</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/annotation/IntDef.html#open()">open</a></pre>
+        <p>Whether any other values are allowed. Normally this is not the case, but this allows you to specify a set of expected constants, which helps code completion in the IDE and documentation generation and so on, but without flagging compilation warnings if other values are specified.</p>
+      </div>
+      <div class="api-item"><a name="getValue()"></a><a name="setValue()"></a><a name="getValue--"></a><a name="setValue--"></a>
+        <h3 class="api-name" id="value()">value</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> int[]&nbsp;<a href="/reference/androidx/annotation/IntDef.html#value()">value</a></pre>
+        <p>Defines the allowed constants for this element</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="IntDef(kotlin.IntArray, kotlin.Boolean, kotlin.Boolean)"></a><a name="IntDef-kotlin.IntArray-kotlin.Boolean-kotlin.Boolean-"></a><a name="intdef"></a>
+        <h3 class="api-name" id="IntDef(kotlin.IntArray,kotlin.Boolean,kotlin.Boolean)">IntDef</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/annotation/IntDef.html#IntDef(kotlin.IntArray,kotlin.Boolean,kotlin.Boolean)">IntDef</a>(int&nbsp;value,&nbsp;boolean&nbsp;flag,&nbsp;boolean&nbsp;open)</pre>
+      </div>
+    </div>
+  </body>
+</html>

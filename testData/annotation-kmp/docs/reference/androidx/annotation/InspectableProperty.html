@@ -1,0 +1,301 @@
+<html devsite="true">
+  <head>
+    <title>InspectableProperty</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/annotation/InspectableProperty.kt+class:androidx.annotation.InspectableProperty&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>InspectableProperty</h1>
+    <p>
+      <pre>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-target/index.html">Target</a>(allowedTargets&nbsp;=&nbsp;[AnnotationTarget.FUNCTION,&nbsp;AnnotationTarget.PROPERTY_GETTER,&nbsp;AnnotationTarget.PROPERTY_SETTER])<br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-retention/index.html">Retention</a>(value&nbsp;=&nbsp;AnnotationRetention.SOURCE)<br>public annotation <a href="/reference/androidx/annotation/InspectableProperty.html">InspectableProperty</a></pre>
+    </p>
+    <hr>
+    <aside class="caution"><strong>This annotation is deprecated.</strong><br>Replaced by the {@code androidx.resourceinpsection} package.</aside>
+    <p>Denotes that the annotated method is the getter for a resources-backed property that should be shown in Android Studio's inspection tools.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-target/index.html">Target</a>(allowedTargets&nbsp;=&nbsp;[AnnotationTarget.ANNOTATION_CLASS,&nbsp;AnnotationTarget.CLASS])<br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-retention/index.html">Retention</a>(value&nbsp;=&nbsp;AnnotationRetention.SOURCE)<br>public annotation <a href="/reference/androidx/annotation/InspectableProperty.EnumEntry.html">InspectableProperty.EnumEntry</a></code></div>
+              <p>One entry in an enumeration packed into a primitive {int}.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><code>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-target/index.html">Target</a>(allowedTargets&nbsp;=&nbsp;[AnnotationTarget.ANNOTATION_CLASS,&nbsp;AnnotationTarget.CLASS])<br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-retention/index.html">Retention</a>(value&nbsp;=&nbsp;AnnotationRetention.SOURCE)<br>public annotation <a href="/reference/androidx/annotation/InspectableProperty.FlagEntry.html">InspectableProperty.FlagEntry</a></code></div>
+              <p>One flag value of many that may be packed into a primitive {int}.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><code>public enum <a href="/reference/androidx/annotation/InspectableProperty.ValueType.html">InspectableProperty.ValueType</a> extends <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html">Enum</a></code></div>
+              <p>The type of value packed into a primitive {int}.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/InspectableProperty.html#attributeId()">attributeId</a></code></div>
+              <p>If the property is inflated from XML, the resource ID of its XML attribute.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> InspectableProperty.EnumEntry[]</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/InspectableProperty.html#enumMapping()">enumMapping</a></code></div>
+              <p>For enumerations packed into primitive {int} properties, map the values to string names.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> InspectableProperty.FlagEntry[]</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/InspectableProperty.html#flagMapping()">flagMapping</a></code></div>
+              <p>For flags packed into primitive {int} properties, model the string names of the flags.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/InspectableProperty.html#hasAttributeId()">hasAttributeId</a></code></div>
+              <p>If this property has an attribute ID.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/InspectableProperty.html#name()">name</a></code></div>
+              <p>The name of the property.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/annotation/InspectableProperty.ValueType.html">InspectableProperty.ValueType</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/InspectableProperty.html#valueType()">valueType</a></code></div>
+              <p>Specify how to interpret a value type packed into a primitive integer.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/InspectableProperty.html#InspectableProperty(kotlin.String,kotlin.Int,kotlin.Boolean,androidx.annotation.InspectableProperty.ValueType,kotlin.Array,kotlin.Array)">InspectableProperty</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;name,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;attributeId,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;hasAttributeId,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/annotation/InspectableProperty.ValueType.html">InspectableProperty.ValueType</a>&nbsp;valueType,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> InspectableProperty.EnumEntry[]&nbsp;enumMapping,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> InspectableProperty.FlagEntry[]&nbsp;flagMapping<br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getAttributeId()"></a><a name="setAttributeId()"></a><a name="getAttributeId--"></a><a name="setAttributeId--"></a>
+        <h3 class="api-name" id="attributeId()">attributeId</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/annotation/InspectableProperty.html#attributeId()">attributeId</a></pre>
+        <p>If the property is inflated from XML, the resource ID of its XML attribute.</p>
+        <p>If left as the default, and <code><a href="/reference/androidx/annotation/InspectableProperty.html#hasAttributeId()">hasAttributeId</a></code> is true, the attribute ID will be inferred from <code><a href="/reference/androidx/annotation/InspectableProperty.html#name()">name</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int</code></td>
+                <td>
+                  <p>The attribute ID of the property or the default null resource ID</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getEnumMapping()"></a><a name="setEnumMapping()"></a><a name="getEnumMapping--"></a><a name="setEnumMapping--"></a>
+        <h3 class="api-name" id="enumMapping()">enumMapping</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> InspectableProperty.EnumEntry[]&nbsp;<a href="/reference/androidx/annotation/InspectableProperty.html#enumMapping()">enumMapping</a></pre>
+        <p>For enumerations packed into primitive {int} properties, map the values to string names.</p>
+        <p>Note that <code>#enumMapping()</code> cannot be used simultaneously with <code><a href="/reference/androidx/annotation/InspectableProperty.html#flagMapping()">flagMapping</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> InspectableProperty.EnumEntry[]</code></td>
+                <td>
+                  <p>An array of <code><a href="/reference/androidx/annotation/InspectableProperty.EnumEntry.html">EnumEntry</a></code>, empty if not applicable</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getFlagMapping()"></a><a name="setFlagMapping()"></a><a name="getFlagMapping--"></a><a name="setFlagMapping--"></a>
+        <h3 class="api-name" id="flagMapping()">flagMapping</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> InspectableProperty.FlagEntry[]&nbsp;<a href="/reference/androidx/annotation/InspectableProperty.html#flagMapping()">flagMapping</a></pre>
+        <p>For flags packed into primitive {int} properties, model the string names of the flags.</p>
+        <p>Note that <code>#flagMapping()</code> cannot be used simultaneously with <code><a href="/reference/androidx/annotation/InspectableProperty.html#enumMapping()">enumMapping</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> InspectableProperty.FlagEntry[]</code></td>
+                <td>
+                  <p>An array of <code><a href="/reference/androidx/annotation/InspectableProperty.FlagEntry.html">FlagEntry</a></code>, empty if not applicable</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getHasAttributeId()"></a><a name="setHasAttributeId()"></a><a name="getHasAttributeId--"></a><a name="setHasAttributeId--"></a>
+        <h3 class="api-name" id="hasAttributeId()">hasAttributeId</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/annotation/InspectableProperty.html#hasAttributeId()">hasAttributeId</a></pre>
+        <p>If this property has an attribute ID.</p>
+        <p>Set to false if the annotated property does not have an attribute ID, that is, it is not inflated from an XML attribute. This will prevent the automatic inference of the attribute.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>boolean</code></td>
+                <td>
+                  <p>Whether to infer an attribute ID if not supplied</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getName()"></a><a name="setName()"></a><a name="getName--"></a><a name="setName--"></a>
+        <h3 class="api-name" id="name()">name</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/annotation/InspectableProperty.html#name()">name</a></pre>
+        <p>The name of the property.</p>
+        <p>If left empty (the default), the property name will be inferred from the name of the getter method.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+                <td>
+                  <p>The name of the property.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getValueType()"></a><a name="setValueType()"></a><a name="getValueType--"></a><a name="setValueType--"></a>
+        <h3 class="api-name" id="valueType()">valueType</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/annotation/InspectableProperty.ValueType.html">InspectableProperty.ValueType</a>&nbsp;<a href="/reference/androidx/annotation/InspectableProperty.html#valueType()">valueType</a></pre>
+        <p>Specify how to interpret a value type packed into a primitive integer.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/annotation/InspectableProperty.ValueType.html">InspectableProperty.ValueType</a></code></td>
+                <td>
+                  <p>A <code><a href="/reference/androidx/annotation/InspectableProperty.ValueType.html">ValueType</a></code></p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="InspectableProperty(kotlin.String, kotlin.Int, kotlin.Boolean, androidx.annotation.InspectableProperty.ValueType, kotlin.Array, kotlin.Array)"></a><a name="InspectableProperty-kotlin.String-kotlin.Int-kotlin.Boolean-androidx.annotation.InspectableProperty.ValueType-kotlin.Array-kotlin.Array-"></a><a name="inspectableproperty"></a>
+        <h3 class="api-name" id="InspectableProperty(kotlin.String,kotlin.Int,kotlin.Boolean,androidx.annotation.InspectableProperty.ValueType,kotlin.Array,kotlin.Array)">InspectableProperty</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/annotation/InspectableProperty.html#InspectableProperty(kotlin.String,kotlin.Int,kotlin.Boolean,androidx.annotation.InspectableProperty.ValueType,kotlin.Array,kotlin.Array)">InspectableProperty</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;name,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;attributeId,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;hasAttributeId,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/annotation/InspectableProperty.ValueType.html">InspectableProperty.ValueType</a>&nbsp;valueType,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> InspectableProperty.EnumEntry[]&nbsp;enumMapping,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> InspectableProperty.FlagEntry[]&nbsp;flagMapping<br>)</pre>
+      </div>
+    </div>
+  </body>
+</html>

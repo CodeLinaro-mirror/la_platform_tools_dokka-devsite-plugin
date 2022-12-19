@@ -1,0 +1,125 @@
+<html devsite="true">
+  <head>
+    <title>RequiresExtension</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/annotation/RequiresExtension.kt+class:androidx.annotation.RequiresExtension&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>RequiresExtension</h1>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+            <!--platform-Android/JVM-->
+            <pre>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-must-be-documented/index.html">MustBeDocumented</a><br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-retention/index.html">Retention</a>(value&nbsp;=&nbsp;AnnotationRetention.BINARY)<br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-target/index.html">Target</a>(allowedTargets&nbsp;=&nbsp;[AnnotationTarget.ANNOTATION_CLASS,&nbsp;AnnotationTarget.CLASS,&nbsp;AnnotationTarget.FUNCTION,&nbsp;AnnotationTarget.PROPERTY_GETTER,&nbsp;AnnotationTarget.PROPERTY_SETTER,&nbsp;AnnotationTarget.CONSTRUCTOR,&nbsp;AnnotationTarget.FIELD,&nbsp;AnnotationTarget.FILE])<br>@<a href="https://developer.android.com/reference/java/lang/annotation/Target.html">Target</a>(value&nbsp;=&nbsp;[ElementType.TYPE,&nbsp;ElementType.METHOD,&nbsp;ElementType.CONSTRUCTOR,&nbsp;ElementType.FIELD,&nbsp;ElementType.PACKAGE])<br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-repeatable/index.html">Repeatable</a><br>annotation <a href="/reference/kotlin/androidx/annotation/RequiresExtension.html">RequiresExtension</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
+    <hr>
+    <p>Denotes that the annotated element should only be called if the given extension is at least the given version.</p>
+    <p>This annotation is repeatable, and if specified multiple times, you are required to have one of (not all of) the specified extension versions.</p>
+    <p>Example:</p>
+    <pre class="prettyprint">@RequiresExtension(extension = Build.VERSION_CODES.R, version = 3)<br>fun methodUsingApisFromR() { ... }</pre>
+    <p>For the special case of <code><a href="/reference/kotlin/androidx/annotation/RequiresExtension.html#extension()">extension</a></code> == 0, you can instead use the <code><a href="/reference/kotlin/androidx/annotation/RequiresApi.html">RequiresApi</a></code> annotation; <code>@RequiresApi(30)</code> is equivalent to <code>@RequiresExtension(extension=0, version=30)</code>.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="93%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public constructors</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/annotation/RequiresExtension.html#RequiresExtension(kotlin.Int,kotlin.Int)">RequiresExtension</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;extension:&nbsp;@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;1) <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;version:&nbsp;@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;1) <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><br>)</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+                <!--platform-Android/JVM--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/annotation/RequiresExtension.html#extension()">extension</a></code></div>
+                <p>The extension SDK ID.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+                <!--platform-Android/JVM--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/annotation/RequiresExtension.html#version()">version</a></code></div>
+                <p>The minimum version to require</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+                <!--platform-Android/JVM--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public constructors</h2>
+        <div class="api-item"><a name="RequiresExtension(kotlin.Int, kotlin.Int)"></a><a name="RequiresExtension-kotlin.Int-kotlin.Int-"></a><a name="requiresextension"></a>
+          <h3 class="api-name" id="RequiresExtension(kotlin.Int,kotlin.Int)">RequiresExtension</h3>
+<span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+          <!--platform-Android/JVM-->
+          <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/annotation/RequiresExtension.html#RequiresExtension(kotlin.Int,kotlin.Int)">RequiresExtension</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;extension:&nbsp;@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;1) <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;version:&nbsp;@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;1) <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><br>)</pre>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getExtension()"></a><a name="setExtension()"></a><a name="getExtension--"></a><a name="setExtension--"></a>
+          <h3 class="api-name" id="extension()">extension</h3>
+<span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+          <!--platform-Android/JVM-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/annotation/RequiresExtension.html#extension()">extension</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The extension SDK ID. This corresponds to the extension id's allowed by <code><a href="/reference/kotlin/android/os/ext/SdkExtensions.html#getExtensionVersion(kotlin.Int)">android.os.ext.SdkExtensions.getExtensionVersion</a></code>, and for id values less than 1_000_000 is one of the <code><a href="https://developer.android.com/reference/android/os/Build.VERSION_CODES.html">android.os.Build.VERSION_CODES</a></code>.</p>
+        </div>
+        <div class="api-item"><a name="getVersion()"></a><a name="setVersion()"></a><a name="getVersion--"></a><a name="setVersion--"></a>
+          <h3 class="api-name" id="version()">version</h3>
+<span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+          <!--platform-Android/JVM-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/annotation/RequiresExtension.html#version()">version</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The minimum version to require</p>
+        </div>
+      </div>
+    </devsite-filter >
+  </body>
+</html>

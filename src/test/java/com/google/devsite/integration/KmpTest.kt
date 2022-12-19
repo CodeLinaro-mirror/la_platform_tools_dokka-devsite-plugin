@@ -49,6 +49,15 @@ class KmpTest : IntegrationTestBase() {
         )
     }
 
+    @Test
+    fun `Validate prod AndroidX annotations prebuilts`() {
+        squashAndroid = true
+        validatePrebuilts(
+            testName = "annotation-kmp",
+            artifactNames = listOf("annotation")
+        )
+    }
+
     private var squashAndroid = true
 
     /** For when a test uses source outside of `./testData/` */
