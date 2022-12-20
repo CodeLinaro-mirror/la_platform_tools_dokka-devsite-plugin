@@ -865,15 +865,15 @@ internal abstract class ClasslikeDocumentableConverter(
     }
 
     /**
-     * Creates a metadata component for this classlike. If [getSourceEntry] returns null for the
+     * Creates a metadata component for this classlike. If [getSourceEntries] returns null for the
      * classlike, this will also return null as the source entry is needed to create both the
      * library metadata and the source link.
      */
     private fun getMetadata(): MetadataComponent? {
-        val entry = getSourceEntry(classlike) ?: return null
-        val path = getSourceFilePath(entry)
-        val jsonLibraryMetadata = findMatchingJsonLibraryMetadata(path)
-        val sourceUrl = createLinkToSource(path)
+        val entries = getSourceEntries(classlike) ?: return null
+        val paths = entries.map { entry -> getSourceFilePath(entry) }
+        val jsonLibraryMetadata = findMatchingJsonLibraryMetadata(paths)
+        val sourceUrl = createLinkToSource(paths)
 
         return DefaultMetadataComponent(
             MetadataComponent.Params(
@@ -887,15 +887,24 @@ internal abstract class ClasslikeDocumentableConverter(
      * Iterate through the library metadata Map to find a [LibraryMetadata] that matches the
      * current class being processed.  Otherwise, return null.
      */
-    private fun findMatchingJsonLibraryMetadata(path: String): LibraryMetadata? {
+    private fun findMatchingJsonLibraryMetadata(paths: List<String>): LibraryMetadata? {
+        if (paths.size > 1) {
+            docsHolder.logger.warn(
+                "Multiple sources exist for ${classlike.name}. Artifact ID metadata will not be " +
+                    "displayed"
+            )
+            return null
+        }
+        val path = paths.single()
+
         return docsHolder.fileMetadataMap[path]
     }
 
     /**
-     * Finds the single source entry associated with the classlike. Returns null and logs a warning
-     * if there are no source entries or multiple sources entries for the classlike.
+     * Finds the source entries associated with the classlike. Returns null and logs a warning
+     * if there are no source entries.
      */
-    private fun getSourceEntry(classlike: DClasslike): SourceEntry? {
+    private fun getSourceEntries(classlike: DClasslike): Set<SourceEntry>? {
         val logger = docsHolder.logger
         val sources = classlike.sources
         if (sources.isEmpty()) {
@@ -903,14 +912,7 @@ internal abstract class ClasslikeDocumentableConverter(
             return null
         }
 
-        if (sources.size > 1) {
-            logger.warn(
-                "Multiple sources for ${classlike.name} detected. Source size is ${sources.size}"
-            )
-            return null
-        }
-
-        return sources.entries.single()
+        return sources.entries
     }
 
     /**
@@ -934,7 +936,9 @@ internal abstract class ClasslikeDocumentableConverter(
      *
      * Returns null if there was no base source link in the configuration.
      */
-    private fun createLinkToSource(path: String): String? {
+    private fun createLinkToSource(paths: List<String>): String? {
+        // Reduce the list of paths to a single path by taking the common prefix of all of them.
+        val path = paths.reduce { currPrefix, nextPath -> currPrefix.commonPrefixWith(nextPath) }
         return docsHolder.baseSourceLink?.format(path, classlike.dri.fullName)
     }
 
