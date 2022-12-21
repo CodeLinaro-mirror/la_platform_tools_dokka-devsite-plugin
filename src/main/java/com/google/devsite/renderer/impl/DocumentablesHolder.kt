@@ -397,7 +397,8 @@ internal class DocumentablesHolder(
      *
      * This method uses @file:JvmName if it exists or the filename with "Kt" appended
      **/
-    private fun List<WithSources>.mapToSyntheticNames(): Map<String, List<WithSources>> =
+    private fun <T> List<T>.mapToSyntheticNames(): Map<String, List<T>>
+    where T : Documentable, T : WithSources =
         map { it.sources to it }
             .groupBy({ (_, function) -> nameForSyntheticClass(function) }) { it.second }
 

@@ -50,7 +50,8 @@ internal class PropertyDocumentableConverter(
     /** @return the property summary component */
     fun summary(property: DProperty, hints: ModifierHints): TypeSummaryItem<PropertySignature> {
         val (typeAnnotations, nonTypeAnnotations) =
-            property.annotations().partition { it.belongsOnReturnType() }
+            property.annotations(property.getExpectOrCommonSourceSet())
+                .partition { it.belongsOnReturnType() }
         return DefaultTableRowSummaryItem(
             TableRowSummaryItem.Params(
                 title = DefaultTypeSummary(
@@ -68,8 +69,10 @@ internal class PropertyDocumentableConverter(
                 description = DefaultSymbolSummary(
                     SymbolSummary.Params(
                         signature = property.signature(isSummary = true),
-                        description = javadocConverter
-                            .summaryDescription(property, nonTypeAnnotations),
+                        description = javadocConverter.summaryDescription(
+                            property,
+                            nonTypeAnnotations.deprecationAnnotation()
+                        ),
                         annotationComponents = nonTypeAnnotations.annotationComponents(
                             pathProvider = pathProvider,
                             displayLanguage = displayLanguage,
@@ -84,8 +87,10 @@ internal class PropertyDocumentableConverter(
     /** @return the property summary component */
     fun summaryKmp(property: DProperty, hints: ModifierHints):
         KmpTypeSummaryItem<PropertySignature> {
+        // TODO(KMP member signatures)
         val (typeAnnotations, nonTypeAnnotations) =
-            property.annotations().partition { it.belongsOnReturnType() }
+            property.annotations(property.getExpectOrCommonSourceSet())
+                .partition { it.belongsOnReturnType() }
         return DefaultKmpTableRowSummaryItem(
             KmpTableRowSummaryItem.Params(
                 title = DefaultTypeSummary(
@@ -104,8 +109,10 @@ internal class PropertyDocumentableConverter(
                 description = DefaultSymbolSummary(
                     SymbolSummary.Params(
                         signature = property.signature(isSummary = true),
-                        description = javadocConverter
-                            .summaryDescription(property, nonTypeAnnotations),
+                        description = javadocConverter.summaryDescription(
+                            property,
+                            nonTypeAnnotations.deprecationAnnotation()
+                        ),
                         annotationComponents = nonTypeAnnotations.annotationComponents(
                             pathProvider = pathProvider,
                             displayLanguage = displayLanguage,
@@ -121,7 +128,8 @@ internal class PropertyDocumentableConverter(
     /** @return the property detail component */
     fun detail(property: DProperty, hints: ModifierHints): SymbolDetail<PropertySignature> {
         val (typeAnnotations, nonTypeAnnotations) =
-            property.annotations().partition { it.belongsOnReturnType() }
+            property.annotations(property.getExpectOrCommonSourceSet())
+                .partition { it.belongsOnReturnType() }
         val returnType = paramConverter.componentForProjection(
             property.type,
             property.isFromJava(),
@@ -130,7 +138,6 @@ internal class PropertyDocumentableConverter(
             propagatedNullability = property.type
                 .getNullability(
                     displayLanguage = displayLanguage,
-                    sourceSet = property.getExpectOrCommonSourceSet(),
                     isJavaSource = property.isFromJava(),
                     injectedAnnotations = typeAnnotations
                 )
@@ -147,7 +154,7 @@ internal class PropertyDocumentableConverter(
                     documentable = property,
                     returnType = returnType,
                     paramNames = listOf("receiver"),
-                    annotations = nonTypeAnnotations
+                    deprecationAnnotation = nonTypeAnnotations.deprecationAnnotation()
                 ),
                 displayLanguage = displayLanguage,
                 modifiers = property.modifiers(property.getExpectOrCommonSourceSet())
@@ -163,8 +170,10 @@ internal class PropertyDocumentableConverter(
 
     /** @return the property detail component */
     fun detailKmp(property: DProperty, hints: ModifierHints): KmpSymbolDetail<PropertySignature> {
+        // TODO(KMP member signatures)
         val (typeAnnotations, nonTypeAnnotations) =
-            property.annotations().partition { it.belongsOnReturnType() }
+            property.annotations(property.getExpectOrCommonSourceSet())
+                .partition { it.belongsOnReturnType() }
         val returnType = paramConverter.componentForProjection(
             property.type,
             property.isFromJava(),
@@ -173,7 +182,6 @@ internal class PropertyDocumentableConverter(
             propagatedNullability = property.type
                 .getNullability(
                     displayLanguage = displayLanguage,
-                    sourceSet = property.getExpectOrCommonSourceSet(),
                     isJavaSource = property.isFromJava(),
                     injectedAnnotations = typeAnnotations
                 )
@@ -190,7 +198,7 @@ internal class PropertyDocumentableConverter(
                     documentable = property,
                     returnType = returnType,
                     paramNames = listOf("receiver"),
-                    annotations = nonTypeAnnotations
+                    deprecationAnnotation = nonTypeAnnotations.deprecationAnnotation()
                 ),
                 displayLanguage = displayLanguage,
                 // TODO(KMP, b/254493209)

@@ -209,8 +209,6 @@ internal abstract class ClasslikeDocumentableConverter(
         ) {
             allConstructors = listOf(createDefaultConstructorFor(classlike))
         }
-        val annotations = classlike.annotations()
-
         val enumValuesSummary = async {
             enumValuesToSummary(enumValuesTitle(), enumValues)
         }
@@ -378,10 +376,7 @@ internal abstract class ClasslikeDocumentableConverter(
                         signature = signature.await(),
                         hierarchy = hierarchy.await(),
                         relatedSymbols = relatedSymbols.await(),
-                        description = javadocConverter.metadata(
-                            classlike,
-                            annotations = annotations
-                        ),
+                        description = javadocConverter.metadata(classlike),
                         nestedTypesSummary = nestedTypesSummary.await(),
                         enumValuesSummary = enumValuesSummary.await(),
                         enumValuesDetails = TitledList(
@@ -687,7 +682,7 @@ internal abstract class ClasslikeDocumentableConverter(
                 isSummary = false
             )
         )
-
+        // Does not vary by sourceSet
         val typeParameters = classlike.generics().map {
             errorContextInjector(it) {
                 paramConverter.componentForTypeParameter(it, classlike.isFromJava())
@@ -704,7 +699,7 @@ internal abstract class ClasslikeDocumentableConverter(
                     implements = emptyList(),
                     extends = emptyList(),
                     typeParameters = typeParameters,
-                    annotationComponents = classlike.annotations().annotationComponents(
+                    annotationComponents = classlike.annotations(sourceSet).annotationComponents(
                         pathProvider = pathProvider,
                         displayLanguage = displayLanguage,
                         nullability = Nullability.DONT_CARE // Classlike definitions aren't null
@@ -712,10 +707,10 @@ internal abstract class ClasslikeDocumentableConverter(
                 )
             )
         }
+        // TODO(KMP ClassGraph b/253454963)
         val extends = classGraph.getValue(classlike.dri).directSuperClasses.map {
             pathProvider.linkForReference(it.dri)
         }
-
         val implements = classGraph.getValue(classlike.dri).directInterfaces.map {
             pathProvider.linkForReference(it.dri)
         }
@@ -729,7 +724,7 @@ internal abstract class ClasslikeDocumentableConverter(
                 implements = implements,
                 extends = extends,
                 typeParameters = typeParameters,
-                annotationComponents = classlike.annotations().annotationComponents(
+                annotationComponents = classlike.annotations(sourceSet).annotationComponents(
                     pathProvider = pathProvider,
                     displayLanguage = displayLanguage,
                     nullability = Nullability.DONT_CARE // Classlike definitions aren't null
@@ -1104,7 +1099,7 @@ internal fun List<DClasslike>.withoutNeglectableCompanionOf(
         it.shouldNotBeDisplayed(displayLanguage)
 }
 
-// TODO(investigate when / whether visibility can change by sourceSet and how to handle that.)
+// an `actual` cannot narrow visibility, but can widen it TODO(b/262710702)
 private fun isPublic(element: Documentable) =
     "public" in element.modifiers(element.getExpectOrCommonSourceSet())
 private fun isProtected(element: Documentable) =

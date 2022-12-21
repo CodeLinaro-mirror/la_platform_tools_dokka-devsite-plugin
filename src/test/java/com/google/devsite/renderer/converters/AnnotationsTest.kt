@@ -98,7 +98,7 @@ internal class AnnotationsTest : ConverterTestBase() {
             |   public String toString() { return "A A A"; }
             |}
         """.render(java = true).explicitClasslike("Foo").functions.single { it.name == "toString" }
-            .annotations()
+            .allAnnotations()
 
         assertThat(annotation.components().exceptNonNull()).isEmpty()
     }
@@ -200,7 +200,7 @@ internal class AnnotationsTest : ConverterTestBase() {
             |@Hello("abc")
             |@Hello(bar = "baz")
             |val foo: String = "foofoo"
-        """.render().property()!!.annotations()
+        """.render().property()!!.allAnnotations()
         val annotationsJ = """
             |@Retention(RetentionPolicy.RUNTIME)
             |@Target(ElementType.FIELD)
@@ -210,7 +210,7 @@ internal class AnnotationsTest : ConverterTestBase() {
             |@Hello("abc")
             |@Hello(bar = "baz")
             |public String foo = "foofoo"
-        """.render(java = true).property()!!.annotations()
+        """.render(java = true).property()!!.allAnnotations()
 
         for (annotations in listOf(annotationsK, annotationsJ)) {
             val annotationOne = annotations.components(isFromJava = annotations == annotationsJ)
@@ -234,7 +234,7 @@ internal class AnnotationsTest : ConverterTestBase() {
         val annotationsK = """
             |annotation class Hello(val bar: String)
             |fun foo(@Hello("abc") @Hello(bar = "baz") arg: String) = Unit
-        """.render().function()!!.parameters.single().annotations()
+        """.render().function()!!.parameters.single().allAnnotations()
         val annotationsJ = """
             |@Retention(RetentionPolicy.RUNTIME)
             |@Target(ElementType.PARAMETER)
@@ -242,7 +242,7 @@ internal class AnnotationsTest : ConverterTestBase() {
             |    public String bar() default "";
             |}
             |public void foo(@Hello("abc") @Hello(bar = "baz") @NonNull String arg)
-        """.render(java = true).function()!!.parameters.single().annotations()
+        """.render(java = true).function()!!.parameters.single().allAnnotations()
 
         for (annotations in listOf(annotationsK, annotationsJ)) {
             val annotationOne = annotations.components(isFromJava = annotations == annotationsJ)
@@ -265,7 +265,7 @@ internal class AnnotationsTest : ConverterTestBase() {
         val annotationsK = """
             |annotation class Hello(val bar: String)
             |fun <@Hello("abc") @Hello(bar = "baz") T> foo(arg: String): List<T>
-        """.render().function()!!.generics.single().annotations()
+        """.render().function()!!.generics.single().allAnnotations()
         val annotationsJ = """
             |@Retention(RetentionPolicy.RUNTIME)
             |@Target(ElementType.TYPE_PARAMETER)
@@ -273,7 +273,7 @@ internal class AnnotationsTest : ConverterTestBase() {
             |    public String bar() default "";
             |}
             |public <@Hello("abc") @Hello(bar = "baz") T> java.util.List<T> foo()
-        """.render(java = true).function()!!.generics.single().annotations()
+        """.render(java = true).function()!!.generics.single().allAnnotations()
 
         for (annotations in listOf(annotationsK, annotationsJ)) {
             val annotationOne = annotations.components(isFromJava = annotations == annotationsJ)
@@ -403,7 +403,7 @@ internal class AnnotationsTest : ConverterTestBase() {
             |annotation class Foo(bar: Long)
 
             |fun baz(@Foo(bar = 100) arg: Long): Long = 1
-        """.render().function()!!.parameters.single().annotations()
+        """.render().function()!!.parameters.single().allAnnotations()
         val paramValue = annotationsKt.components(isFromJava = false)
             .first().data.parameters.single()
         val data = (paramValue as NamedValueAnnotationParameter).data
@@ -428,7 +428,7 @@ internal class AnnotationsTest : ConverterTestBase() {
     }
 
     private fun DModule.functionAnnotations(name: String = "foo"): List<Annotation> {
-        return function(name)!!.annotations()
+        return function(name)!!.allAnnotations()
     }
 
     private fun DModule.functionReturnAnnotations(name: String = "foo"): List<Annotation> {

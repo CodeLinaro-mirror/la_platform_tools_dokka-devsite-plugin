@@ -17,7 +17,6 @@
 package com.google.devsite.renderer.converters
 
 import com.google.devsite.renderer.Language
-import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.model.Annotations
 import org.jetbrains.dokka.model.DefinitelyNonNullable
 import org.jetbrains.dokka.model.Dynamic
@@ -32,6 +31,7 @@ import org.jetbrains.dokka.model.TypeParameter
 import org.jetbrains.dokka.model.UnresolvedBound
 import org.jetbrains.dokka.model.Variance
 import org.jetbrains.dokka.model.Void
+import org.jetbrains.dokka.model.properties.WithExtraProperties
 import kotlin.math.min
 
 /**
@@ -92,10 +92,18 @@ enum class Nullability {
     }
 }
 
-/** @return true if this is a nullable type, false otherwise */
+/**
+ * @return true if this is a nullable type, false otherwise
+ *
+ * Re: KMP: Kotlin enforces that the nullability of `actual`s matches the nullability of `expect`s,
+ * as part of enforcing that the type of `actual`s and `expect`s match.
+ * HOWEVER, it does not do this for `actual typealias`es into java code, because if they did that
+ * they wouldn't be able to have the `actual typealias`es they want in kotlin standard lib, like
+ * `RuntimeException`.
+ * Here, we are ignoring that error, and claiming the nullability of the `expect` as canonical.
+ */
 internal fun Projection.getNullability(
     displayLanguage: Language,
-    sourceSet: DokkaConfiguration.DokkaSourceSet,
     isJavaSource: Boolean? = null,
     injectedAnnotations: List<Annotations.Annotation> = emptyList()
 ): Nullability {
@@ -106,17 +114,19 @@ internal fun Projection.getNullability(
     return when (this) {
         is Nullable -> Nullability.KOTLIN_NULLABLE
         is DefinitelyNonNullable -> Nullability.KOTLIN_DEFAULT
-        is Variance<*> -> inner.getNullability(displayLanguage, sourceSet, isJavaSource)
-        is TypeAliased -> inner.getNullability(displayLanguage, sourceSet, isJavaSource)
+        is Variance<*> -> inner.getNullability(displayLanguage, isJavaSource)
+        is TypeAliased -> inner.getNullability(displayLanguage, isJavaSource)
         Void -> Nullability.JAVA_NEVER_NULL // Not nullable by definition
         Dynamic, Star -> Nullability.KOTLIN_DEFAULT // Can come from Kotlin source only
         // Unannotated java projections are nullable, default Kotlin aren't
         is TypeParameter, is TypeConstructor, is JavaObject, is UnresolvedBound,
         is PrimitiveJavaType -> {
+            var annotations = injectedAnnotations
             // Java arrays are nullable; non-array primitives aren't
-            if (this is PrimitiveJavaType && "[" !in name) Nullability.JAVA_NEVER_NULL
+            if (this is PrimitiveJavaType) if ("[" !in name) Nullability.JAVA_NEVER_NULL
             // This is the only case where annotations can override the normal nullability
-            val allAnnotations = injectedAnnotations + this.annotations(sourceSet)
+            if (this is WithExtraProperties<*>) annotations += sourceSetIndependentAnnotations()
+
             // We hide nullability annotations on Kotlin docs even if they were explicit in Kotlin
             // source. This is highly opinionated. As such, we throw a warningto make this explicit.
             /*if (isJavaSource == false && (this is TypeParameter || this is TypeConstructor) &&
@@ -131,7 +141,7 @@ internal fun Projection.getNullability(
             /* if (isJavaSource == true && this is TypeConstructor &&
                 this.dri.packageName == "kotlin" && this.dri.classNames in kotlinPrimitives
             ) return Nullability.JAVA_NEVER_NULL */
-            allAnnotations.inferNullability()?.let { return@getNullability it }
+            annotations.inferNullability()?.let { return@getNullability it }
             // If there are no nullability annotations:
             defaultNullability(isJavaSource)
         }

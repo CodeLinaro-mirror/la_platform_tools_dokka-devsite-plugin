@@ -1613,7 +1613,8 @@ internal class DocTagConverterTest(
         DescriptionComponent {
         val (holder, pathProvider) = holderAndProvider(this)
         val converter = DocTagConverter(displayLanguage, pathProvider, holder)
-        val annotations = this.doc().annotations().orEmpty()
+        val annotations =
+            this.doc().annotations(getExpectOrCommonSourceSet()).deprecationAnnotation()
         return converter.summaryDescription(this.doc(), annotations)
     }
 

@@ -188,7 +188,7 @@ internal fun DFunction.isStaticAccessor() = false
 // extra[OriginalProperty]?.original?.isStaticAnnotated() ?: false TODO(b/168340963 accessors)
 
 internal fun Documentable.isStaticAnnotated() =
-    annotations().any { it.dri == JvmStatic.dri }
+    annotations(getAsJavaSourceSet()).any { it.dri == JvmStatic.dri }
 
 private val INTERNAL_PACKAGES = listOf("java", "Kotlin", "google", "android")
 internal fun DRI.isExternal() = !packageName?.startsWithAnyOf(INTERNAL_PACKAGES) ?: true
@@ -295,26 +295,25 @@ private fun DParameter.paramAsString() =
 
 /**
  * Returns the value of the @JvmName for this function if one exists or null
+ * This is only relevant for as-Java docs
  */
 fun Documentable.jvmName(): String? {
-    return annotations().firstOrNull { it.isJvmName() }?.nameAsString()
+    return annotations(getAsJavaSourceSet()).firstOrNull { it.isJvmName() }?.nameAsString()
 }
 
 /**
  * Returns the value of the file:@JvmName if one exists or null
  */
-fun WithSources.jvmFileName(): String? {
-    return fileLevelAnnotations().firstOrNull { it.isJvmName() }?.nameAsString()
-}
+fun <T> T.jvmFileName() where T : WithSources, T : Documentable =
+    fileLevelAnnotations(getAsJavaSourceSet()).firstOrNull { it.isJvmName() }?.nameAsString()
 
 /**
  * Returns the value of the file:@JvmName if one exists or null
  */
-fun nameForSyntheticClass(entry: WithSources): String {
-    return entry.jvmFileName() ?: entry.sources.let {
+fun <T> nameForSyntheticClass(entry: T) where T : WithSources, T : Documentable =
+    entry.jvmFileName() ?: entry.sources.let {
         it.entries.first().value.path.split("/").last().split(".").first() + "Kt"
     }
-}
 
 fun DFunction.driForSyntheticClass() = DRI(dri.packageName, nameForSyntheticClass(this))
 
@@ -322,7 +321,7 @@ fun DFunction.driForSyntheticClass() = DRI(dri.packageName, nameForSyntheticClas
  * Filters out elements that are annotated with @JvmSynthetic
  */
 fun <T : Documentable> List<T>.filterOutJvmSynthetic(): List<T> = this.filterNot { elem ->
-    elem.annotations().any { it.dri.classNames.equals("JvmSynthetic") }
+    elem.annotations(elem.getAsJavaSourceSet()).any { it.dri.classNames.equals("JvmSynthetic") }
 }
 
 /** Adds an annotation to a Documentable. Often used for injecting e.g. @JvmStatic. */
@@ -441,7 +440,7 @@ private fun DRI.isAtJvmField(): Boolean = packageName == "kotlin.jvm" && classNa
 
 private fun Annotations.Annotation.isAtJvmField(): Boolean = dri.isAtJvmField()
 internal fun DProperty.isJvmFieldAnnotated() =
-    annotations().any { it.isAtJvmField() }
+    annotations(getAsJavaSourceSet()).any { it.isAtJvmField() }
 
 /**
  * Returns whether property is annotated as @JvmField
@@ -464,4 +463,12 @@ internal fun Documentable.getExpectOrCommonSourceSet() =
         ?: sourceSets.singleOrNull { "common" in it.displayName }
         ?: throw RuntimeException(
             "Unable to determine the expect or common sourceSet for ${this::class.simpleName} $dri"
+        )
+
+internal fun Documentable.getAsJavaSourceSet() =
+    sourceSets.singleOrNull()
+        ?: (sourceSets - expectPresentInSet).singleOrNull()
+        ?: sourceSets.singleOrNull { it.analysisPlatform == org.jetbrains.dokka.Platform.jvm }
+        ?: throw RuntimeException(
+            "Unable to determine the as-Java sourceSet for ${this::class.simpleName} $dri"
         )

@@ -28,6 +28,7 @@ import com.google.devsite.components.symbols.NamedValueAnnotationParameter
 import com.google.devsite.hasBeenHidden
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
+import com.google.devsite.strictSingleOrNull
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.AnnotationParameterValue
@@ -128,12 +129,16 @@ private fun WithExtraProperties<*>.annotations(sourceSet: DokkaConfiguration.Dok
         annotations.directAnnotations[sourceSet] ?: emptyList()
     }
 
-internal fun Documentable.annotations() =
-    (this as? WithExtraProperties<*>)?.annotations(getExpectOrCommonSourceSet()) ?: emptyList()
+internal fun Documentable.annotations(sourceSet: DokkaConfiguration.DokkaSourceSet) =
+    (this as? WithExtraProperties<*>)?.annotations(sourceSet) ?: emptyList()
 
 internal fun Projection.annotations(sourceSet: DokkaConfiguration.DokkaSourceSet) =
     (this as? Bound)?.annotations(sourceSet)
         ?: (this as? WithExtraProperties<*>)?.annotations(sourceSet) ?: emptyList()
+
+internal fun WithExtraProperties<*>.sourceSetIndependentAnnotations(): List<Annotation> =
+    extra.allOfType<Annotations>()
+        .strictSingleOrNull()?.directAnnotations?.values?.firstOrNull() ?: emptyList()
 
 private fun Bound.annotations(sourceSet: DokkaConfiguration.DokkaSourceSet): List<Annotation> =
     when (this) {
@@ -145,13 +150,25 @@ private fun Bound.annotations(sourceSet: DokkaConfiguration.DokkaSourceSet): Lis
         is DefinitelyNonNullable -> this.inner.annotations(sourceSet).filter { it != AT_NULLABLE }
     }
 
+internal fun WithExtraProperties<*>.allAnnotations() =
+    extra.allOfType<Annotations>().flatMap { annotations ->
+        annotations.directAnnotations.values
+    }.flatten()
+
+// TODO(KMP per-sourceset variance of deprecation status b/262711247)
+internal fun Documentable.deprecationAnnotation() = annotations(getExpectOrCommonSourceSet())
+    .deprecationAnnotation()
+internal fun List<Annotations.Annotation>.deprecationAnnotation() =
+    filter { it.isDeprecated() }.strictSingleOrNull()
+
 /**
  * All existing WithSources are WithExtraProperties, and fileLevelAnnotations require sources.
  * @return the list of file-level annotations on this WithSource's source file
  */
-internal fun WithSources.fileLevelAnnotations(): List<Annotation> =
+internal fun <T> T.fileLevelAnnotations(sourceSet: DokkaConfiguration.DokkaSourceSet)
+where T : WithSources, T : Documentable =
     (this as WithExtraProperties<*>).extra.allOfType<Annotations>().flatMap { annotations ->
-        annotations.fileLevelAnnotations[(this as Documentable).getExpectOrCommonSourceSet()]
+        annotations.fileLevelAnnotations[sourceSet]
             ?: emptyList()
     }
 

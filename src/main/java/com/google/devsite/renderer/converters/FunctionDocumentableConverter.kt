@@ -53,7 +53,8 @@ internal class FunctionDocumentableConverter(
     /** @return the function summary component */
     fun summary(function: DFunction, hints: ModifierHints): TypeSummaryItem<FunctionSignature> {
         val (typeAnnotations, nonTypeAnnotations) =
-            function.annotations().partition { it.belongsOnReturnType() }
+            function.annotations(function.getExpectOrCommonSourceSet())
+                .partition { it.belongsOnReturnType() }
         return DefaultTableRowSummaryItem(
             TableRowSummaryItem.Params(
                 title = DefaultTypeSummary(
@@ -75,7 +76,7 @@ internal class FunctionDocumentableConverter(
                         signature = function.signature(isSummary = true),
                         description = javadocConverter.summaryDescription(
                             function,
-                            nonTypeAnnotations
+                            nonTypeAnnotations.deprecationAnnotation()
                         ),
                         annotationComponents = nonTypeAnnotations.annotationComponents(
                             pathProvider = pathProvider,
@@ -91,8 +92,10 @@ internal class FunctionDocumentableConverter(
     /** @return the function summary component */
     fun summaryKmp(function: DFunction, hints: ModifierHints):
         KmpTypeSummaryItem<FunctionSignature> {
+        // TODO(KMP member signatures b/254493209)
         val (typeAnnotations, nonTypeAnnotations) =
-            function.annotations().partition { it.belongsOnReturnType() }
+            function.annotations(function.getExpectOrCommonSourceSet())
+                .partition { it.belongsOnReturnType() }
         return DefaultKmpTableRowSummaryItem(
             KmpTableRowSummaryItem.Params(
                 title = DefaultTypeSummary(
@@ -115,7 +118,7 @@ internal class FunctionDocumentableConverter(
                         signature = function.signature(isSummary = true),
                         description = javadocConverter.summaryDescription(
                             function,
-                            nonTypeAnnotations
+                            nonTypeAnnotations.deprecationAnnotation()
                         ),
                         annotationComponents = nonTypeAnnotations.annotationComponents(
                             pathProvider = pathProvider,
@@ -131,46 +134,49 @@ internal class FunctionDocumentableConverter(
 
     /** @return the constructor summary component */
     fun summaryForConstructor(function: DFunction):
-        TableRowSummaryItem<Nothing?, SymbolSummary<FunctionSignature>> {
-        return DefaultTableRowSummaryItem(
+        TableRowSummaryItem<Nothing?, SymbolSummary<FunctionSignature>> =
+        DefaultTableRowSummaryItem(
             TableRowSummaryItem.Params(
                 title = null,
                 DefaultSymbolSummary(
                     SymbolSummary.Params(
                         signature = function.signature(isSummary = true),
                         description = javadocConverter.summaryDescription(function),
-                        annotationComponents = function.annotations().annotationComponents(
-                            pathProvider = pathProvider,
-                            displayLanguage = displayLanguage,
-                            nullability = Nullability.DONT_CARE // Propagates to return type instead
-                        )
+                        annotationComponents = function
+                            .annotations(function.getExpectOrCommonSourceSet())
+                            .annotationComponents(
+                                pathProvider = pathProvider,
+                                displayLanguage = displayLanguage,
+                                nullability = Nullability.DONT_CARE // Goes to return type instead
+                            )
                     )
                 )
             )
         )
-    }
 
     /** @return the constructor summary component */
     fun summaryForKmpConstructor(function: DFunction):
-        KmpTableRowSummaryItem<Nothing?, SymbolSummary<FunctionSignature>> {
-        return DefaultKmpTableRowSummaryItem(
+        KmpTableRowSummaryItem<Nothing?, SymbolSummary<FunctionSignature>> =
+        DefaultKmpTableRowSummaryItem(
             KmpTableRowSummaryItem.Params(
                 title = null,
                 DefaultSymbolSummary(
                     SymbolSummary.Params(
                         signature = function.signature(isSummary = true),
                         description = javadocConverter.summaryDescription(function),
-                        annotationComponents = function.annotations().annotationComponents(
-                            pathProvider = pathProvider,
-                            displayLanguage = displayLanguage,
-                            nullability = Nullability.DONT_CARE // Propagates to return type instead
-                        )
+                        // TODO(KMP member signatures b/254493209)
+                        annotationComponents = function
+                            .annotations(function.getExpectOrCommonSourceSet())
+                            .annotationComponents(
+                                pathProvider = pathProvider,
+                                displayLanguage = displayLanguage,
+                                nullability = Nullability.DONT_CARE // Goes to return type instead
+                            )
                     )
                 ),
                 platforms = DefaultPlatformComponent(function.sourceSets)
             )
         )
-    }
 
     /** @return the function detail component */
     fun detail(function: DFunction, hints: ModifierHints) =
@@ -195,7 +201,8 @@ internal class FunctionDocumentableConverter(
         kind: SymbolDetail.SymbolKind
     ): SymbolDetail<FunctionSignature> {
         val (typeAnnotations, signatureAnnotations) =
-            function.annotations().partition { it.belongsOnReturnType() }
+            function.annotations(function.getExpectOrCommonSourceSet())
+                .partition { it.belongsOnReturnType() }
         val returnType = paramConverter.componentForProjection(
             projection = function.type,
             isJavaSource = function.isFromJava(),
@@ -224,7 +231,7 @@ internal class FunctionDocumentableConverter(
                     documentable = function,
                     returnType = returnType,
                     paramNames = listOf("receiver") + function.parameters.map { it.name!! },
-                    annotations = signatureAnnotations
+                    deprecationAnnotation = signatureAnnotations.deprecationAnnotation()
                 ),
                 displayLanguage = displayLanguage,
                 modifiers = function.modifiers(function.getExpectOrCommonSourceSet())
@@ -245,8 +252,10 @@ internal class FunctionDocumentableConverter(
         hints: ModifierHints,
         kind: SymbolDetail.SymbolKind
     ): KmpSymbolDetail<FunctionSignature> {
+        // TODO(KMP member signatures b/254493209)
         val (typeAnnotations, signatureAnnotations) =
-            function.annotations().partition { it.belongsOnReturnType() }
+            function.annotations(function.getExpectOrCommonSourceSet())
+                .partition { it.belongsOnReturnType() }
         val returnType = paramConverter.componentForProjection(
             projection = function.type,
             isJavaSource = function.isFromJava(),
@@ -275,7 +284,7 @@ internal class FunctionDocumentableConverter(
                     documentable = function,
                     returnType = returnType,
                     paramNames = listOf("receiver") + function.parameters.map { it.name!! },
-                    annotations = signatureAnnotations
+                    deprecationAnnotation = signatureAnnotations.deprecationAnnotation()
                 ),
                 displayLanguage = displayLanguage,
                 // TODO(KMP, b/254493209)
@@ -328,7 +337,8 @@ internal class FunctionDocumentableConverter(
                     Language.JAVA -> listOfNotNull(receiver) + parameters
                     Language.KOTLIN -> parameters
                 },
-                isDeprecated = annotations().isDeprecated()
+                // TODO(handle sourceSet-varying deprecations b/262711247)
+                isDeprecated = annotations(getExpectOrCommonSourceSet()).isDeprecated()
             )
         )
     }
