@@ -40,6 +40,8 @@ internal class EnumValueDocumentableConverter(
 ) {
     private val paramConverter =
         ParameterDocumentableConverter(displayLanguage, pathProvider, docsHolder)
+    private val annotationConverter =
+        AnnotationDocumentableConverter(displayLanguage, pathProvider, docsHolder)
 
     /** @return the enum value summary component */
     // TODO(KMP, b/256172699)
@@ -85,11 +87,9 @@ internal class EnumValueDocumentableConverter(
                 displayLanguage = displayLanguage,
                 modifiers = enumValue.getExtraModifiers(enumValue.getExpectOrCommonSourceSet())
                     .modifiersFor(hints),
-                annotationComponents = nonTypeAnnotations.annotationComponents(
-                    pathProvider = pathProvider,
-                    displayLanguage = displayLanguage,
+                annotationComponents = annotationConverter.annotationComponents(
+                    annotations = nonTypeAnnotations,
                     nullability = Nullability.DONT_CARE, // See above
-                    annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                 )
             )
         )

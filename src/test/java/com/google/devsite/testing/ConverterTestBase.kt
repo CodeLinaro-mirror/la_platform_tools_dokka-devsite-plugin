@@ -22,14 +22,17 @@ import com.google.devsite.DevsitePlugin
 import com.google.devsite.TypeSummaryItem
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.pages.PackageSummary
+import com.google.devsite.components.symbols.AnnotationComponent
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.joinMaybePrefix
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.AnnotationDocumentableConverter
 import com.google.devsite.renderer.converters.DocTagConverter
 import com.google.devsite.renderer.converters.FunctionDocumentableConverter
 import com.google.devsite.renderer.converters.ModifierHints
 import com.google.devsite.renderer.converters.NonKmpPackageConverter
+import com.google.devsite.renderer.converters.Nullability
 import com.google.devsite.renderer.converters.isFromBaseClass
 import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.renderer.impl.DocumentablesHolder
@@ -47,6 +50,7 @@ import org.jetbrains.dokka.PluginConfigurationImpl
 import org.jetbrains.dokka.base.resolvers.local.DokkaLocationProvider
 import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
 import org.jetbrains.dokka.base.translators.descriptors.DefaultExternalDocumentablesProvider
+import org.jetbrains.dokka.model.Annotations
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DFunction
@@ -241,14 +245,19 @@ internal abstract class ConverterTestBase(
     internal val externalDocumentablesProvider =
         DefaultExternalDocumentablesProvider(context)
 
-    internal fun holderAndProvider(module: DModule): Pair<DocumentablesHolder, FilePathProvider> {
+    internal fun holderAndProvider(
+        module: DModule,
+        baseSourceLink: String? = null,
+        hiddenAnnotations: Set<String> = emptySet()
+    ): Pair<DocumentablesHolder, FilePathProvider> {
         val holder = runBlocking {
             DocumentablesHolder(
                 module,
                 this,
                 context = context,
                 externalDocumentablesProvider = externalDocumentablesProvider,
-                baseSourceLink = "https://cs.android.com/search?q=file:%s+class:%s",
+                baseSourceLink = baseSourceLink,
+                annotationsNotToDisplay = hiddenAnnotations
             )
         }
         val classGraph = runBlocking { holder.classGraph() }
@@ -412,6 +421,20 @@ internal abstract class ConverterTestBase(
         funName: String,
         hints: ModifierHints = defaultHints
     ) = functionDetail({ this.function(funName)!! }, hints)
+
+    protected fun DModule.annotationComponents(
+        annotations: List<Annotations.Annotation>,
+        nullability: Nullability = Nullability.DONT_CARE,
+        hiddenAnnotations: Set<String> = emptySet()
+    ): List<AnnotationComponent> {
+        val (holder, pathProvider) = holderAndProvider(this, hiddenAnnotations = hiddenAnnotations)
+        val converter = AnnotationDocumentableConverter(
+            displayLanguage,
+            pathProvider,
+            holder
+        )
+        return converter.annotationComponents(annotations, nullability)
+    }
 
     /** In case you aren't explicit, our best guess at what you want docs for. */
     private fun smartDoc(module: DModule): DFunction {

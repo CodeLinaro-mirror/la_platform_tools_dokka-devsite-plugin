@@ -108,6 +108,8 @@ internal class DocTagConverter(
     private val analysisMap = runBlocking { docsHolder.analysisMap() }
     private val paramConverter =
         ParameterDocumentableConverter(displayLanguage, pathProvider, docsHolder)
+    private val annotationConverter =
+        AnnotationDocumentableConverter(displayLanguage, pathProvider, docsHolder)
 
     /**
      * @param documentable the documentable we are getting the documentation of
@@ -851,11 +853,9 @@ internal class DocTagConverter(
                 title = if (showAnnotations) {
                     DefaultAnnotatedLink(
                         AnnotatedLink.Params(
-                            annotations = annotations.annotationComponents(
-                                pathProvider = pathProvider,
-                                displayLanguage = displayLanguage,
+                            annotations = annotationConverter.annotationComponents(
+                                annotations = annotations,
                                 nullability = Nullability.DONT_CARE, // Not useful for these cases
-                                annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                             ),
                             link = pathProvider.linkForReference(documentable.dri)
                         )

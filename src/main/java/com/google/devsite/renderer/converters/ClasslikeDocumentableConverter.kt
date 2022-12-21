@@ -116,6 +116,8 @@ internal abstract class ClasslikeDocumentableConverter(
     // TODO(KMP b/256172699)
     private val enumConverter =
         EnumValueDocumentableConverter(displayLanguage, pathProvider, javadocConverter, docsHolder)
+    private val annotationConverter =
+        AnnotationDocumentableConverter(displayLanguage, pathProvider, docsHolder)
 
     protected abstract val functionToSummaryConverter:
         (DFunction, ModifierHints) -> TypeSummaryItem<FunctionSignature>
@@ -746,11 +748,9 @@ internal abstract class ClasslikeDocumentableConverter(
                             )
                         }
                     },
-                    annotationComponents = sourceSetDependentInput.annotations.annotationComponents(
-                        pathProvider = pathProvider,
-                        displayLanguage = displayLanguage,
+                    annotationComponents = annotationConverter.annotationComponents(
+                        annotations = sourceSetDependentInput.annotations,
                         nullability = Nullability.DONT_CARE, // Classlike definitions aren't null
-                        annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                     ),
                     typeAliasEquals = sourceSetDependentInput.typeAliasEquals
                 )

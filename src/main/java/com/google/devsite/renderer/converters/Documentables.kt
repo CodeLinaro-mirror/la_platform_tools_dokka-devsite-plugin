@@ -342,6 +342,10 @@ internal fun <T> PropertyContainer<T>.addAnnotation(newA: Annotations.Annotation
 
 internal val JvmStatic = Annotations.Annotation(DRI("kotlin.jvm", "JvmStatic"), params = emptyMap())
 
+internal fun String?.orNull() = if (this == "") null else this
+
+internal val DRI.fullName: String get() = (packageName.orNull()?.let { "$it." }) + classNames
+
 internal fun DRI.possiblyConvertMappedType(displayLanguage: Language) =
     when (displayLanguage) {
         Language.JAVA -> possiblyAsJava()

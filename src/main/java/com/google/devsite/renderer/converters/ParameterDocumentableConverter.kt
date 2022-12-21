@@ -70,6 +70,9 @@ internal class ParameterDocumentableConverter(
     private val pathProvider: FilePathProvider,
     private val docsHolder: DocumentablesHolder
 ) {
+    private val annotationConverter: AnnotationDocumentableConverter =
+        AnnotationDocumentableConverter(displayLanguage, pathProvider, docsHolder)
+
     /**
      * Returns the component for a parameter.
      *
@@ -119,11 +122,9 @@ internal class ParameterDocumentableConverter(
                                 isSummary = false,
                             )
                         ),
-                    annotationComponents = retainedAnnotations.annotationComponents(
-                        pathProvider,
-                        displayLanguage,
+                    annotationComponents = annotationConverter.annotationComponents(
+                        annotations = retainedAnnotations,
                         nullability = Nullability.DONT_CARE, // Propagate Nullability, don't retain
-                        annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                     )
                 )
             )
@@ -180,13 +181,10 @@ internal class ParameterDocumentableConverter(
                 displayLanguage = Language.KOTLIN,
                 modifiers = modifiers,
                 defaultValue = defaultValue,
-                annotationComponents = annotations.filter { !it.belongsOnReturnType() }
-                    .annotationComponents(
-                        pathProvider,
-                        displayLanguage,
-                        nullability = Nullability.DONT_CARE, // as-Kotlin doesn't nullable-annotate
-                        annotationsNotToDocument = docsHolder.annotationsNotToDisplay
-                    )
+                annotationComponents = annotationConverter.annotationComponents(
+                    annotations = annotations.filter { !it.belongsOnReturnType() },
+                    nullability = Nullability.DONT_CARE, // as-Kotlin doesn't nullable-annotate
+                )
             )
         )
     }
@@ -260,15 +258,11 @@ internal class ParameterDocumentableConverter(
                 displayLanguage = Language.KOTLIN,
                 modifiers = modifiers,
                 defaultValue = defaultValue,
-                annotationComponents = projection.annotations(sourceSet)
-                    .filter { !it.belongsOnReturnType() }
-                    .annotationComponents(
-                        pathProvider = pathProvider,
-                        displayLanguage = displayLanguage,
-                        nullability = projection
-                            .getNullability(displayLanguage, isFromJava),
-                        annotationsNotToDocument = docsHolder.annotationsNotToDisplay
-                    )
+                annotationComponents = annotationConverter.annotationComponents(
+                    annotations = projection.annotations(sourceSet)
+                        .filter { !it.belongsOnReturnType() },
+                    nullability = projection.getNullability(displayLanguage, isFromJava)
+                )
             )
         )
     }
@@ -352,11 +346,9 @@ internal class ParameterDocumentableConverter(
             proj.getNullability(displayLanguage, isJavaSource, propagatedAnnotations) or
                 propagatedNullability
 
-        val annotationComponents = annotations.annotationComponents(
-            pathProvider = pathProvider,
-            displayLanguage = displayLanguage,
+        val annotationComponents = annotationConverter.annotationComponents(
+            annotations = annotations,
             nullability = nullability,
-            annotationsNotToDocument = docsHolder.annotationsNotToDisplay
         )
 
         return when (displayLanguage) {
@@ -434,13 +426,11 @@ internal class ParameterDocumentableConverter(
                 lambdaParams = lambdaParams,
                 receiver = proj.receiver()?.let { componentForProjection(it, false, sourceSet) },
                 generics = returnType.generics(isJavaSource = false, sourceSet = sourceSet),
-                annotationComponents = annotations.annotationComponents(
-                    pathProvider = pathProvider,
-                    displayLanguage = displayLanguage,
+                annotationComponents = annotationConverter.annotationComponents(
+                    annotations = annotations,
                     // Don't inject space-consuming nullability annotations for type parameters
                     nullability = if (displayLanguage == Language.JAVA) Nullability.DONT_CARE
                     else proj.getNullability(displayLanguage, false, annotations) or nullability,
-                    annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                 )
             )
         )

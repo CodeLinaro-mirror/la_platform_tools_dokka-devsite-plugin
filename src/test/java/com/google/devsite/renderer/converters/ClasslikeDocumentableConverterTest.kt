@@ -2406,7 +2406,7 @@ internal class ClasslikeDocumentableConverterTest(
     fun `Source links are generated correctly`() {
         val page = """
                 |class Foo
-            """.render().page()
+            """.render().page(baseSourceLink = "https://cs.android.com/search?q=file:%s+class:%s")
 
         val metadataComponent = page.data.metadataComponent
         assertThat(metadataComponent).isNotNull()
@@ -2419,17 +2419,39 @@ internal class ClasslikeDocumentableConverterTest(
         assertThat(link!!.data.url).isEqualTo(expected)
     }
 
-    private fun DModule.page(name: String = "Foo"): DevsitePage<Classlike> {
-        val classlike = explicitClasslikes(name).single()
-        return page { classlike }
+    @Test
+    fun `Source links are generated correctly with no class in format string`() {
+        val page = """
+                |class Foo
+            """.render().page(baseSourceLink = "https://cs.android.com/search?q=file:%s")
+
+        val metadataComponent = page.data.metadataComponent
+        assertThat(metadataComponent).isNotNull()
+        val link = metadataComponent!!.data.sourceLink
+        assertThat(link).isNotNull()
+
+        val expectedPath = "kotlin/androidx/example/Test.kt"
+        val expected = "https://cs.android.com/search?q=file:$expectedPath"
+        assertThat(link!!.data.url).isEqualTo(expected)
     }
 
-    private fun DModule.page(name: DModule.() -> DClasslike) =
-        pages(listOf(name())).single()
+    private fun DModule.page(
+        name: String = "Foo",
+        baseSourceLink: String? = null
+    ): DevsitePage<Classlike> {
+        val classlike = explicitClasslikes(name).single()
+        return page(baseSourceLink = baseSourceLink) { classlike }
+    }
+
+    private fun DModule.page(baseSourceLink: String? = null, name: DModule.() -> DClasslike) =
+        pages(listOf(name()), baseSourceLink = baseSourceLink).single()
 
     @JvmName("pagesForClasslikes")
-    private fun DModule.pages(classlikes: List<DClasslike>): List<DevsitePage<Classlike>> {
-        val (holder, pathProvider) = holderAndProvider(this)
+    private fun DModule.pages(
+        classlikes: List<DClasslike>,
+        baseSourceLink: String? = null
+    ): List<DevsitePage<Classlike>> {
+        val (holder, pathProvider) = holderAndProvider(this, baseSourceLink = baseSourceLink)
         val extFunctionMap = runBlocking { holder.extensionFunctionMap(displayLanguage) }
         val extPropertyMap = runBlocking { holder.extensionPropertyMap() }
         val converters = classlikes.map {

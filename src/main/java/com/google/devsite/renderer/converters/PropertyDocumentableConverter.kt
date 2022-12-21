@@ -49,6 +49,8 @@ internal class PropertyDocumentableConverter(
 ) {
     private val paramConverter =
         ParameterDocumentableConverter(displayLanguage, pathProvider, docsHolder)
+    private val annotationConverter =
+        AnnotationDocumentableConverter(displayLanguage, pathProvider, docsHolder)
 
     /** @return the property summary component */
     fun summary(property: DProperty, hints: ModifierHints): TypeSummaryItem<PropertySignature> {
@@ -76,12 +78,10 @@ internal class PropertyDocumentableConverter(
                             property,
                             nonTypeAnnotations.deprecationAnnotation()
                         ),
-                        annotationComponents = nonTypeAnnotations.annotationComponents(
-                            pathProvider = pathProvider,
-                            displayLanguage = displayLanguage,
+                        annotationComponents = annotationConverter.annotationComponents(
+                            annotations = nonTypeAnnotations,
                             // Propagates to return type instead
                             nullability = Nullability.DONT_CARE,
-                            annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                         )
                     )
                 )
@@ -118,12 +118,10 @@ internal class PropertyDocumentableConverter(
                             property,
                             nonTypeAnnotations.deprecationAnnotation()
                         ),
-                        annotationComponents = nonTypeAnnotations.annotationComponents(
-                            pathProvider = pathProvider,
-                            displayLanguage = displayLanguage,
+                        annotationComponents = annotationConverter.annotationComponents(
+                            annotations = nonTypeAnnotations,
                             // Propagates to return type instead
                             nullability = Nullability.DONT_CARE,
-                            annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                         )
                     )
                 ),
@@ -166,11 +164,9 @@ internal class PropertyDocumentableConverter(
                 displayLanguage = displayLanguage,
                 modifiers = property.modifiers(property.getExpectOrCommonSourceSet())
                     .modifiersFor(hints),
-                annotationComponents = nonTypeAnnotations.annotationComponents(
-                    pathProvider = pathProvider,
-                    displayLanguage = displayLanguage,
+                annotationComponents = annotationConverter.annotationComponents(
+                    annotations = nonTypeAnnotations,
                     nullability = Nullability.DONT_CARE, // Propagates to return type instead
-                    annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                 )
             )
         )
@@ -212,11 +208,9 @@ internal class PropertyDocumentableConverter(
                 // TODO(KMP, b/254493209)
                 modifiers = property.modifiers(property.getExpectOrCommonSourceSet())
                     .modifiersFor(hints),
-                annotationComponents = nonTypeAnnotations.annotationComponents(
-                    pathProvider = pathProvider,
-                    displayLanguage = displayLanguage,
+                annotationComponents = annotationConverter.annotationComponents(
+                    annotations = nonTypeAnnotations,
                     nullability = Nullability.DONT_CARE, // Propagates to return type instead
-                    annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                 ),
                 platforms = DefaultPlatformComponent(property.sourceSets)
             )

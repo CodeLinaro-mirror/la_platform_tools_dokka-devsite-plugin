@@ -52,6 +52,8 @@ internal class FunctionDocumentableConverter(
 ) {
     private val paramConverter =
         ParameterDocumentableConverter(displayLanguage, pathProvider, docsHolder)
+    private val annotationConverter =
+        AnnotationDocumentableConverter(displayLanguage, pathProvider, docsHolder)
 
     /** @return the function summary component */
     fun summary(function: DFunction, hints: ModifierHints): TypeSummaryItem<FunctionSignature> {
@@ -81,12 +83,10 @@ internal class FunctionDocumentableConverter(
                             function,
                             nonTypeAnnotations.deprecationAnnotation()
                         ),
-                        annotationComponents = nonTypeAnnotations.annotationComponents(
-                            pathProvider = pathProvider,
-                            displayLanguage = displayLanguage,
+                        annotationComponents = annotationConverter.annotationComponents(
+                            annotations = nonTypeAnnotations,
                             // Propagates to return type instead
                             nullability = Nullability.DONT_CARE,
-                            annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                         )
                     )
                 )
@@ -125,12 +125,10 @@ internal class FunctionDocumentableConverter(
                             function,
                             nonTypeAnnotations.deprecationAnnotation()
                         ),
-                        annotationComponents = nonTypeAnnotations.annotationComponents(
-                            pathProvider = pathProvider,
-                            displayLanguage = displayLanguage,
+                        annotationComponents = annotationConverter.annotationComponents(
+                            annotations = nonTypeAnnotations,
                             // Propagates to return type instead
                             nullability = Nullability.DONT_CARE,
-                            annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                         )
                     )
                 ),
@@ -149,15 +147,12 @@ internal class FunctionDocumentableConverter(
                     SymbolSummary.Params(
                         signature = function.signature(isSummary = true),
                         description = javadocConverter.summaryDescription(function),
-                        annotationComponents = function
-                            .annotations(function.getExpectOrCommonSourceSet())
-                            .annotationComponents(
-                                pathProvider = pathProvider,
-                                displayLanguage = displayLanguage,
-                                // Propagates to return type instead
-                                nullability = Nullability.DONT_CARE,
-                                annotationsNotToDocument = docsHolder.annotationsNotToDisplay
-                            )
+                        annotationComponents = annotationConverter.annotationComponents(
+                            annotations = function
+                                .annotations(function.getExpectOrCommonSourceSet()),
+                            // Propagates to return type instead
+                            nullability = Nullability.DONT_CARE,
+                        )
                     )
                 )
             )
@@ -174,15 +169,12 @@ internal class FunctionDocumentableConverter(
                         signature = function.signature(isSummary = true),
                         description = javadocConverter.summaryDescription(function),
                         // TODO(KMP member signatures b/254493209)
-                        annotationComponents = function
-                            .annotations(function.getExpectOrCommonSourceSet())
-                            .annotationComponents(
-                                pathProvider = pathProvider,
-                                displayLanguage = displayLanguage,
-                                // Propagates to return type instead
-                                nullability = Nullability.DONT_CARE,
-                                annotationsNotToDocument = docsHolder.annotationsNotToDisplay
-                            )
+                        annotationComponents = annotationConverter.annotationComponents(
+                            annotations = function
+                                .annotations(function.getExpectOrCommonSourceSet()),
+                            // Propagates to return type instead
+                            nullability = Nullability.DONT_CARE,
+                        )
                     )
                 ),
                 platforms = DefaultPlatformComponent(function.sourceSets)
@@ -248,12 +240,10 @@ internal class FunctionDocumentableConverter(
                 modifiers = function.modifiers(function.getExpectOrCommonSourceSet())
                     .modifiersFor(hints),
                 extFunctionClass = function.receiver?.let { nameForSyntheticClass(function) },
-                annotationComponents = signatureAnnotations.annotationComponents(
-                    pathProvider = pathProvider,
-                    displayLanguage = displayLanguage,
+                annotationComponents = annotationConverter.annotationComponents(
+                    annotations = signatureAnnotations,
                     // Nullability is on the return type instead
                     nullability = Nullability.DONT_CARE,
-                    annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                 )
             )
         )
@@ -304,12 +294,10 @@ internal class FunctionDocumentableConverter(
                 modifiers = function.modifiers(function.getExpectOrCommonSourceSet())
                     .modifiersFor(hints),
                 extFunctionClass = function.receiver?.let { nameForSyntheticClass(function) },
-                annotationComponents = signatureAnnotations.annotationComponents(
-                    pathProvider = pathProvider,
-                    displayLanguage = displayLanguage,
+                annotationComponents = annotationConverter.annotationComponents(
+                    annotations = signatureAnnotations,
                     // Nullability is on the return type instead
                     nullability = Nullability.DONT_CARE,
-                    annotationsNotToDocument = docsHolder.annotationsNotToDisplay
                 ),
                 platforms = DefaultPlatformComponent(function.sourceSets)
             )

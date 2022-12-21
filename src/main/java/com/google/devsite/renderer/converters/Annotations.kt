@@ -16,18 +16,6 @@
 
 package com.google.devsite.renderer.converters
 
-import com.google.devsite.components.impl.DefaultAnnotationComponent
-import com.google.devsite.components.impl.DefaultAnnotationValueAnnotationParameter
-import com.google.devsite.components.impl.DefaultArrayValueAnnotationParameter
-import com.google.devsite.components.impl.DefaultNamedValueAnnotationParameter
-import com.google.devsite.components.symbols.AnnotationComponent
-import com.google.devsite.components.symbols.AnnotationParameter
-import com.google.devsite.components.symbols.AnnotationValueAnnotationParameter
-import com.google.devsite.components.symbols.ArrayValueAnnotationParameter
-import com.google.devsite.components.symbols.NamedValueAnnotationParameter
-import com.google.devsite.hasBeenHidden
-import com.google.devsite.renderer.Language
-import com.google.devsite.renderer.impl.paths.FilePathProvider
 import com.google.devsite.strictSingleOrNull
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.links.DRI
@@ -57,55 +45,10 @@ import org.jetbrains.dokka.model.Void
 import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 
-/**
- * @param displayLanguage nullability annotations are present only in Java
- * @param nullability the nullability of the annotated element. Contains information such as source
- * language and whether we care about the nullability of the annotated element.
- * @param annotationsNotToDocument annotation names not to be included in the annotation components
- *
- * @return the AnnotationComponents for the given annotations on the annotated element
- */
-internal fun List<Annotation>.annotationComponents(
-    pathProvider: FilePathProvider,
-    displayLanguage: Language,
-    nullability: Nullability,
-    annotationsNotToDocument: Set<String>
-): List<AnnotationComponent> {
-    val injectedAnnotations = mutableListOf<Annotation?>()
-    if (any { it.isBadNonNull }) {
-        injectedAnnotations.add(AT_NON_NULL) // Bad ones get filtered out later
-        println("WARN: Use @androidx.annotation.NonNull, not @${first{it.isBadNonNull}.dri}")
-        assert(nullability != Nullability.JAVA_NOT_ANNOTATED)
-    }
-    if (any { it.isBadNullable }) {
-        injectedAnnotations.add(AT_NULLABLE) // Again, this generally means a bad test classpath
-        println("WARN: Use @androidx.annotation.Nullable, not @${first{it.isBadNullable}.dri}")
-        assert(nullability != Nullability.JAVA_NOT_ANNOTATED)
-    }
-
-    // NOTE: we inject @NonNull, but not @Nullable, as that is usually not useful to Java devs
-    if (displayLanguage == Language.JAVA) {
-        injectedAnnotations += nullability.renderAsJavaAnnotation()
-    }
-
-    return (this + injectedAnnotations).filterNotNull().filter { annotation ->
-        shouldDocumentAnnotation(annotation, displayLanguage, nullability, annotationsNotToDocument)
-    }.distinctBy { it.identifier }.map { annotation -> annotation.toDackkaAnnotation(pathProvider) }
-}
-
-internal fun String?.orNull() = if (this == "") null else this
-
-internal val DRI.fullName: String get() = (packageName.orNull()?.let { "$it." }) + classNames
 internal val Annotation.identifier: String get() = "${dri.fullName}(${params.values.map { "$it" }})"
 
 internal val AT_NULLABLE = Annotation(DRI("androidx.annotation", "Nullable"), emptyMap())
 internal val AT_NON_NULL = Annotation(DRI("androidx.annotation", "NonNull"), emptyMap())
-
-private fun Annotation.toDackkaAnnotation(pathProvider: FilePathProvider): AnnotationComponent {
-    val type = pathProvider.linkForReference(dri)
-    val params = params.map { (name, contents) -> contents.toComponent(name, pathProvider) }
-    return DefaultAnnotationComponent(AnnotationComponent.Params(type, params))
-}
 
 /** @return true if an `@Nullable` annotation is present, false otherwise */
 internal fun List<Annotation>.hasAtNullable(): Boolean =
@@ -117,9 +60,9 @@ internal fun List<Annotation>.hasAtNonNull(): Boolean =
 internal fun List<Annotation>.isDeprecated(): Boolean = any { it.isDeprecated() }
 
 /** We sometimes convert androidx annotations to the android. namespace */
-private val Annotation.isBadNullable get() = dri.classNames == "Nullable" &&
+internal val Annotation.isBadNullable get() = dri.classNames == "Nullable" &&
     dri.fullName !in listOf(AT_NULLABLE.dri.fullName, "android.annotation.Nullable")
-private val Annotation.isBadNonNull get() = dri.classNames == "NotNull" ||
+internal val Annotation.isBadNonNull get() = dri.classNames == "NotNull" ||
     (
         dri.classNames == "NonNull" &&
             dri.fullName !in listOf(AT_NON_NULL.dri.fullName, "android.annotation.NonNull")
@@ -160,7 +103,7 @@ internal fun WithExtraProperties<*>.allAnnotations() =
 // TODO(KMP per-sourceset variance of deprecation status b/262711247)
 internal fun Documentable.deprecationAnnotation() = annotations(getExpectOrCommonSourceSet())
     .deprecationAnnotation()
-internal fun List<Annotations.Annotation>.deprecationAnnotation() =
+internal fun List<Annotation>.deprecationAnnotation() =
     filter { it.isDeprecated() }.strictSingleOrNull()
 
 /**
@@ -177,38 +120,12 @@ where T : WithSources, T : Documentable =
 /** @return true if the `@Deprecated` annotation is present, false otherwise */
 internal fun Annotation.isDeprecated(): Boolean = dri.classNames == "Deprecated"
 
-/** @return true if a developer would find this annotation useful, false otherwise */
-private fun shouldDocumentAnnotation(
-    annotation: Annotation,
-    displayLanguage: Language,
-    nullability: Nullability,
-    annotationsNotToDocument: Set<String>
-): Boolean {
-    val name = annotation.dri.classNames
-    // Not useful to developers
-    val isSuppressAnnotation = name in SUPPRESSION_ANNOTATION_NAMES
-    val isKotlinJvmAnnotation = annotation.dri.packageName == "kotlin.jvm"
-    val isExplicitlyBannedAnnotation = annotation.dri.fullName in annotationsNotToDocument
-    if (isSuppressAnnotation || isKotlinJvmAnnotation || isExplicitlyBannedAnnotation) return false
-    // Surfaced separately
-    if (annotation.isDeprecated()) return false
-
-    if (name in NULLABILITY_ANNOTATION_NAMES) {
-        // Ignored and overwritten with androidx.annotation.NonNull
-        if (annotation.isBadNullable || annotation.isBadNonNull) return false
-        // Explicitly hidden nullability annotations
-        if (nullability == Nullability.DONT_CARE) return false
-        // Nullability annotations do not appear in Kotlin, even if explicit in Kotlin source
-        if (displayLanguage == Language.KOTLIN) return false
-    }
-
-    return !hasBeenHidden(annotation.dri)
-}
-
 internal fun Annotation.belongsOnReturnType() =
     dri.classNames in NULLABILITY_ANNOTATION_NAMES || dri.classNames?.shouldBeTypebound() ?: false
 
 private val SUPPRESSION_ANNOTATION_NAMES = listOf("Suppress", "SuppressWarnings", "SuppressLint")
+internal fun Annotation.isSuppressAnnotation() = dri.classNames in SUPPRESSION_ANNOTATION_NAMES
+
 // We transform javax.validation.constraints.NotNull into androidx.annotation.NonNull and WARN:
 internal val NULLABILITY_ANNOTATION_NAMES = listOf("NonNull", "Nullable", "NotNull")
 
@@ -225,31 +142,6 @@ private fun String.finalWord(): String {
     val lastIndexOfCapital = lastOrNull { it.isUpperCase() }
         ?.let { indexOf(it) } ?: 0
     return substring(lastIndexOfCapital)
-}
-
-internal fun AnnotationParameterValue.toComponent(
-    name: String? = null,
-    pathProvider: FilePathProvider
-): AnnotationParameter = when (this) {
-    is StringValue -> DefaultNamedValueAnnotationParameter(
-        NamedValueAnnotationParameter.Params(name, "\"${asString()}\"")
-    )
-    is LiteralValue, is EnumValue, is ClassValue ->
-        DefaultNamedValueAnnotationParameter(
-            NamedValueAnnotationParameter.Params(name, asString())
-        )
-    is ArrayValue -> DefaultArrayValueAnnotationParameter(
-        ArrayValueAnnotationParameter.Params(
-            name,
-            innerAnnotationParameters = value.map { it.toComponent(pathProvider = pathProvider) }
-        )
-    )
-    is AnnotationValue -> DefaultAnnotationValueAnnotationParameter(
-        AnnotationValueAnnotationParameter.Params(
-            name,
-            annotationComponentValue = annotation.toDackkaAnnotation(pathProvider)
-        )
-    )
 }
 
 internal fun AnnotationParameterValue?.asString() = when (this) {
