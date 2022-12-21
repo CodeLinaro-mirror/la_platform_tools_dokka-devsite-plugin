@@ -21,24 +21,13 @@ import com.google.devsite.components.render
 import com.google.devsite.joinMaybePrefix
 import kotlinx.html.FlowContent
 import kotlinx.html.h2
-import kotlinx.html.hr
-import kotlinx.html.p
-import kotlinx.html.pre
 
 /** Default implementation of class-like pages. */
 internal data class DefaultClasslike(
     override val data: Classlike.Params
 ) : Classlike {
     override fun render(into: FlowContent) = into.run {
-        if (data.header != null) data.header.render(this)
-        p {
-            pre {
-                data.signature.render(this)
-            }
-        }
-        data.hierarchy.render(this)
-        data.relatedSymbols.render(this)
-        data.description.render(into, separator = null, header = { hr() })
+        data.description.render(this)
         // The ordering logic for these summaries is in Classlike.kt
         allVisibleSummaries.render(into, separator = null, header = { h2 { +"Summary" } })
 
@@ -56,9 +45,7 @@ internal data class DefaultClasslike(
         }
     }
 
-    override fun toString() = data.signature.toString() + " " +
-        data.hierarchy + data.relatedSymbols +
-        data.description.joinToString() +
+    override fun toString() = data.description.toString() +
         inheritedSummarySections.filter { it.hasContent() } +
         allSummarySections.filter { it.hasContent() }.joinMaybePrefix(prefix = "Summaries") +
         allDetailsSections.filter { it.symbols.isNotEmpty() }.joinMaybePrefix(prefix = "Details")

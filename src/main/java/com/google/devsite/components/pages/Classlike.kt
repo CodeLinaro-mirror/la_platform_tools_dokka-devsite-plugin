@@ -23,14 +23,12 @@ import com.google.devsite.LinkDescriptionSummaryList
 import com.google.devsite.PropertySummaryList
 import com.google.devsite.components.Component
 import com.google.devsite.components.ContextFreeComponent
-import com.google.devsite.components.symbols.ClasslikeSignature
+import com.google.devsite.components.symbols.ClasslikeDescription
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSignature
-import com.google.devsite.components.table.ClassHierarchy
 import com.google.devsite.components.table.InheritedSymbolsList
-import com.google.devsite.components.table.RelatedSymbols
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.renderer.Language
 import kotlinx.html.FlowContent
@@ -40,12 +38,9 @@ internal interface Classlike : ContextFreeComponent {
     val data: Params
 
     data class Params(
-        val header: ContextFreeComponent?,
         val displayLanguage: Language,
-        val signature: ClasslikeSignature,
-        val hierarchy: ClassHierarchy,
-        val relatedSymbols: RelatedSymbols,
-        val description: List<ContextFreeComponent>,
+        val description: ClasslikeDescription,
+
         val nestedTypesSummary: ClasslikeSummaryList,
         val enumValuesSummary: LinkDescriptionSummaryList,
         val enumValuesDetails: TitledList<SymbolDetail<PropertySignature>>,
