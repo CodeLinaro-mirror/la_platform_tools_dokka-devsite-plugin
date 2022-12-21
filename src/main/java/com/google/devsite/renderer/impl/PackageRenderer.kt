@@ -19,10 +19,16 @@ package com.google.devsite.renderer.impl
 import com.google.devsite.components.impl.DefaultRedirectPage
 import com.google.devsite.components.pages.RedirectPage
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.AnnotationDocumentableConverter
+import com.google.devsite.renderer.converters.DocTagConverter
+import com.google.devsite.renderer.converters.EnumValueDocumentableConverter
+import com.google.devsite.renderer.converters.FunctionDocumentableConverter
 import com.google.devsite.renderer.converters.KmpClasslikeConverter
 import com.google.devsite.renderer.converters.KmpPackageConverter
 import com.google.devsite.renderer.converters.NonKmpClasslikeConverter
 import com.google.devsite.renderer.converters.NonKmpPackageConverter
+import com.google.devsite.renderer.converters.ParameterDocumentableConverter
+import com.google.devsite.renderer.converters.PropertyDocumentableConverter
 import com.google.devsite.renderer.converters.isSynthetic
 import com.google.devsite.renderer.converters.name
 import com.google.devsite.renderer.converters.packageName
@@ -43,7 +49,13 @@ internal class PackageRenderer(
     private val outputWriter: OutputWriter,
     private val pathProvider: FilePathProvider,
     private val displayLanguage: Language,
-    private val docsHolder: DocumentablesHolder
+    private val docsHolder: DocumentablesHolder,
+    private val functionConverter: FunctionDocumentableConverter,
+    private val propertyConverter: PropertyDocumentableConverter,
+    private val enumConverter: EnumValueDocumentableConverter,
+    private val javadocConverter: DocTagConverter,
+    private val paramConverter: ParameterDocumentableConverter,
+    private val annotationConverter: AnnotationDocumentableConverter
 ) {
     /** Writes the home page. Is a redirect page with no content. */
     suspend fun writeIndex(dPackage: DPackage) {
@@ -61,9 +73,27 @@ internal class PackageRenderer(
 
     suspend fun writePackageSummary(dPackage: DPackage) {
         val converter = if (dPackage.isKMP())
-            KmpPackageConverter(displayLanguage, dPackage, pathProvider, docsHolder)
+            KmpPackageConverter(
+                displayLanguage,
+                dPackage,
+                pathProvider,
+                docsHolder,
+                functionConverter,
+                propertyConverter,
+                javadocConverter,
+                paramConverter
+            )
         else
-            NonKmpPackageConverter(displayLanguage, dPackage, pathProvider, docsHolder)
+            NonKmpPackageConverter(
+                displayLanguage,
+                dPackage,
+                pathProvider,
+                docsHolder,
+                functionConverter,
+                propertyConverter,
+                javadocConverter,
+                paramConverter
+            )
         val page = converter.summaryPage()
         val packageSummary = createHTML().html {
             page.render(this)
@@ -91,6 +121,12 @@ internal class PackageRenderer(
                 classlikeDoc,
                 pathProvider,
                 docsHolder,
+                functionConverter,
+                propertyConverter,
+                enumConverter,
+                javadocConverter,
+                paramConverter,
+                annotationConverter,
                 classExtensionFunctions,
                 classExtensionProperties
             )
@@ -100,6 +136,12 @@ internal class PackageRenderer(
                 classlikeDoc,
                 pathProvider,
                 docsHolder,
+                functionConverter,
+                propertyConverter,
+                enumConverter,
+                javadocConverter,
+                paramConverter,
+                annotationConverter,
                 classExtensionFunctions,
                 classExtensionProperties
             )

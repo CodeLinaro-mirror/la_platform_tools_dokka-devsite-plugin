@@ -102,23 +102,16 @@ internal abstract class ClasslikeDocumentableConverter(
     protected val classlike: DClasslike,
     private val pathProvider: FilePathProvider,
     protected val docsHolder: DocumentablesHolder,
+    protected val functionConverter: FunctionDocumentableConverter,
+    protected val propertyConverter: PropertyDocumentableConverter,
+    protected val enumConverter: EnumValueDocumentableConverter, // TODO(KMP b/256172699)
+    protected val javadocConverter: DocTagConverter, // TODO(KMP b/254490320)
+    protected val paramConverter: ParameterDocumentableConverter,
+    private val annotationConverter: AnnotationDocumentableConverter,
     private val classExtensionFunctions: List<DFunction> = emptyList(),
     private val classExtensionProperties: List<DProperty> = emptyList()
 ) {
     protected abstract val header: DefaultDevsitePlatformSelector?
-
-    private val paramConverter =
-        ParameterDocumentableConverter(displayLanguage, pathProvider, docsHolder)
-
-    // TODO(KMP b/254490320)
-    protected val javadocConverter = DocTagConverter(displayLanguage, pathProvider, docsHolder)
-
-    // TODO(KMP b/256172699)
-    private val enumConverter =
-        EnumValueDocumentableConverter(displayLanguage, pathProvider, javadocConverter, docsHolder)
-    private val annotationConverter =
-        AnnotationDocumentableConverter(displayLanguage, pathProvider, docsHolder)
-
     protected abstract val functionToSummaryConverter:
         (DFunction, ModifierHints) -> TypeSummaryItem<FunctionSignature>
     protected abstract val functionToDetailConverter:

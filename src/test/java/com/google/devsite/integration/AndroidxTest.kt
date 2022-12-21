@@ -63,7 +63,8 @@ class AndroidxTest : IntegrationTestBase() {
             "watchface-samples-minimal-instances",
             "watchface-samples-minimal-complications",
             "watchface-samples-minimal-style",
-            "generator" // material-icons-generator
+            "generator", // material-icons-generator
+            "appsearch-builtin-types"
         )
         crawlingExecTest(getAndroidxPath(), excludedPaths)
     }

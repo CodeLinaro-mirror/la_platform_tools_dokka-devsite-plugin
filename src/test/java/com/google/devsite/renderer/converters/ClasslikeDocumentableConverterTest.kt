@@ -2451,15 +2451,25 @@ internal class ClasslikeDocumentableConverterTest(
         classlikes: List<DClasslike>,
         baseSourceLink: String? = null
     ): List<DevsitePage<Classlike>> {
-        val (holder, pathProvider) = holderAndProvider(this, baseSourceLink = baseSourceLink)
+        val (holder, provider) = holderAndProvider(this, baseSourceLink = baseSourceLink)
         val extFunctionMap = runBlocking { holder.extensionFunctionMap(displayLanguage) }
         val extPropertyMap = runBlocking { holder.extensionPropertyMap() }
+        val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
+        val paramConverter = ParameterDocumentableConverter(displayLanguage, provider, holder)
+        val javadocConverter =
+            DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
         val converters = classlikes.map {
             NonKmpClasslikeConverter(
                 displayLanguage,
                 it,
-                pathProvider,
+                provider,
                 holder,
+                FunctionDocumentableConverter(displayLanguage, provider, javadocConverter, holder),
+                PropertyDocumentableConverter(displayLanguage, provider, javadocConverter, holder),
+                EnumValueDocumentableConverter(displayLanguage, provider, javadocConverter, holder),
+                javadocConverter,
+                paramConverter,
+                annotationConverter,
                 extFunctionMap.getOrDefault(it.dri, emptyList()),
                 extPropertyMap.getOrDefault(it.dri, emptyList())
             )

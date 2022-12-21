@@ -17,6 +17,12 @@
 package com.google.devsite.renderer
 
 import com.google.devsite.DevsiteConfiguration
+import com.google.devsite.renderer.converters.AnnotationDocumentableConverter
+import com.google.devsite.renderer.converters.DocTagConverter
+import com.google.devsite.renderer.converters.EnumValueDocumentableConverter
+import com.google.devsite.renderer.converters.FunctionDocumentableConverter
+import com.google.devsite.renderer.converters.ParameterDocumentableConverter
+import com.google.devsite.renderer.converters.PropertyDocumentableConverter
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.MetadataRenderer
 import com.google.devsite.renderer.impl.PackageRenderer
@@ -114,9 +120,26 @@ internal class MultiLanguageRenderer(
             classGraph,
             documentablesGraph
         )
+
+        val annotationConverter = AnnotationDocumentableConverter(language, filePaths, holder)
+        val paramConverter = ParameterDocumentableConverter(language, filePaths, holder)
+        val javadocConverter =
+            DocTagConverter(language, filePaths, holder, paramConverter, annotationConverter)
+
         DevsiteRenderer(
-            MetadataRenderer(outputWriter, filePaths, language, holder),
-            PackageRenderer(outputWriter, filePaths, language, holder),
+            MetadataRenderer(outputWriter, filePaths, language, holder, javadocConverter),
+            PackageRenderer(
+                outputWriter,
+                filePaths,
+                language,
+                holder,
+                FunctionDocumentableConverter(language, filePaths, javadocConverter, holder),
+                PropertyDocumentableConverter(language, filePaths, javadocConverter, holder),
+                EnumValueDocumentableConverter(language, filePaths, javadocConverter, holder),
+                javadocConverter,
+                paramConverter,
+                annotationConverter
+            ),
             holder,
             language,
             devsiteConfiguration,

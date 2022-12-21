@@ -44,10 +44,9 @@ import org.jetbrains.dokka.model.DTypeAlias
 internal class RootDocumentableConverter(
     private val displayLanguage: Language,
     private val pathProvider: FilePathProvider,
-    private val docsHolder: DocumentablesHolder
+    private val docsHolder: DocumentablesHolder,
+    private val javadocConverter: DocTagConverter
 ) {
-    private val javadocConverter = DocTagConverter(displayLanguage, pathProvider, docsHolder)
-
     /** @return the root component for the class index page */
     // TODO(KMP b/256171288)
     suspend fun classesIndexPage(): DevsitePage<ClassIndex> {

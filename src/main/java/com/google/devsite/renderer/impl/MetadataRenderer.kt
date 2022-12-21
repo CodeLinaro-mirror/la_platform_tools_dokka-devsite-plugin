@@ -21,6 +21,7 @@ import com.google.devsite.components.impl.DefaultRedirectPage
 import com.google.devsite.components.pages.PackageList
 import com.google.devsite.components.pages.RedirectPage
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.DocTagConverter
 import com.google.devsite.renderer.converters.RootDocumentableConverter
 import com.google.devsite.renderer.impl.paths.CLASS_INDEX_FILE
 import com.google.devsite.renderer.impl.paths.FilePathProvider
@@ -32,9 +33,17 @@ import org.jetbrains.dokka.base.renderers.OutputWriter
 internal class MetadataRenderer(
     private val outputWriter: OutputWriter,
     private val pathProvider: FilePathProvider,
-    private val displayLanguage: Language,
-    private val docsHolder: DocumentablesHolder
+    displayLanguage: Language,
+    private val docsHolder: DocumentablesHolder,
+    javadocConverter: DocTagConverter
 ) {
+    private val converter = RootDocumentableConverter(
+        displayLanguage,
+        pathProvider,
+        docsHolder,
+        javadocConverter
+    )
+
     /** Writes the list of packages in machine-readable format. */
     suspend fun writePackageList() {
         val component =
@@ -42,7 +51,6 @@ internal class MetadataRenderer(
         val packageList = buildString {
             component.render(this)
         }
-
         outputWriter.write(pathProvider.packageList, packageList, "")
     }
 
@@ -52,39 +60,32 @@ internal class MetadataRenderer(
         val rootIndex = createHTML().html {
             redirectComponent.render(this)
         }
-
         outputWriter.write(pathProvider.rootIndex, rootIndex, "")
     }
 
     /** Writes the list of packages in human-readable format. */
     suspend fun writePackages() {
-        val converter = RootDocumentableConverter(displayLanguage, pathProvider, docsHolder)
         val page = converter.packagesIndexPage()
         val packageIndex = createHTML().html {
             page.render(this)
         }
-
         outputWriter.write(pathProvider.packages, packageIndex, "")
     }
 
     /** Writes the list of classes in human-readable format. */
     suspend fun writeClasses() {
-        val converter = RootDocumentableConverter(displayLanguage, pathProvider, docsHolder)
         val page = converter.classesIndexPage()
         val classIndex = createHTML().html {
             page.render(this)
         }
-
         outputWriter.write(pathProvider.classes, classIndex, "")
     }
 
     /** Writes the ToC for devsite consumption. */
     suspend fun writeToc(packagePrefixToRemove: String?) {
-        val converter = RootDocumentableConverter(displayLanguage, pathProvider, docsHolder)
         val toc = buildString {
             converter.tocPage(packagePrefixToRemove).render(this)
         }
-
         outputWriter.write(pathProvider.toc, toc, "")
     }
 }

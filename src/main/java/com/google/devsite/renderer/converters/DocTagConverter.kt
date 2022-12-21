@@ -103,13 +103,11 @@ import java.io.File
 internal class DocTagConverter(
     private val displayLanguage: Language,
     private val pathProvider: FilePathProvider,
-    private val docsHolder: DocumentablesHolder
+    private val docsHolder: DocumentablesHolder,
+    private val paramConverter: ParameterDocumentableConverter,
+    private val annotationConverter: AnnotationDocumentableConverter
 ) {
     private val analysisMap = runBlocking { docsHolder.analysisMap() }
-    private val paramConverter =
-        ParameterDocumentableConverter(displayLanguage, pathProvider, docsHolder)
-    private val annotationConverter =
-        AnnotationDocumentableConverter(displayLanguage, pathProvider, docsHolder)
 
     /**
      * @param documentable the documentable we are getting the documentation of

@@ -377,11 +377,14 @@ internal class PropertyDocumentableConverterTest(
         name: String = "foo",
         hints: ModifierHints = defaultHints
     ): TypeSummaryItem<PropertySignature> {
-        val (holder, pathProvider) = holderAndProvider(this)
-        val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
+        val (holder, provider) = holderAndProvider(this)
+        val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
+        val paramConverter = ParameterDocumentableConverter(displayLanguage, provider, holder)
+        val docConverter =
+            DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
         val converter = PropertyDocumentableConverter(
             displayLanguage,
-            pathProvider,
+            provider,
             docConverter,
             holder
         )
@@ -392,11 +395,14 @@ internal class PropertyDocumentableConverterTest(
         name: String = "foo",
         hints: ModifierHints = defaultHints
     ): SymbolDetail<PropertySignature> {
-        val (holder, pathProvider) = holderAndProvider(this)
-        val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
+        val (holder, provider) = holderAndProvider(this)
+        val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
+        val paramConverter = ParameterDocumentableConverter(displayLanguage, provider, holder)
+        val docConverter =
+            DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
         val converter = PropertyDocumentableConverter(
             displayLanguage,
-            pathProvider,
+            provider,
             docConverter,
             holder
         )
@@ -407,11 +413,14 @@ internal class PropertyDocumentableConverterTest(
         name: String = "foo",
         hints: ModifierHints = defaultHints
     ): PropertySignature {
-        val (holder, pathProvider) = holderAndProvider(this)
-        val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
+        val (holder, provider) = holderAndProvider(this)
+        val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
+        val paramConverter = ParameterDocumentableConverter(displayLanguage, provider, holder)
+        val docConverter =
+            DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
         val converter = PropertyDocumentableConverter(
             displayLanguage,
-            pathProvider,
+            provider,
             docConverter,
             holder
         )

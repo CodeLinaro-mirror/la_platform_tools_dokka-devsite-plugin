@@ -431,31 +431,46 @@ internal class RootDocumentableConverterTest(
     }
 
     private fun DModule.indexPageForClasses(): DevsitePage<ClassIndex> {
-        val (holder, pathProvider) = holderAndProvider(this)
+        val (holder, provider) = holderAndProvider(this)
+        val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
+        val paramConverter = ParameterDocumentableConverter(displayLanguage, provider, holder)
+        val javadocConverter =
+            DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
         val converter = RootDocumentableConverter(
             displayLanguage,
-            pathProvider,
-            holder
+            provider,
+            holder,
+            javadocConverter
         )
         return runBlocking { converter.classesIndexPage() }
     }
 
     private fun DModule.indexPageForPackages(): DevsitePage<PackageIndex> {
-        val (holder, pathProvider) = holderAndProvider(this)
+        val (holder, provider) = holderAndProvider(this)
+        val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
+        val paramConverter = ParameterDocumentableConverter(displayLanguage, provider, holder)
+        val javadocConverter =
+            DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
         val converter = RootDocumentableConverter(
             displayLanguage,
-            pathProvider,
-            holder
+            provider,
+            holder,
+            javadocConverter
         )
         return runBlocking { converter.packagesIndexPage() }
     }
 
     private fun DModule.toc(packagePrefixToRemove: String? = null): TableOfContents {
-        val (holder, pathProvider) = holderAndProvider(this)
+        val (holder, provider) = holderAndProvider(this)
+        val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
+        val paramConverter = ParameterDocumentableConverter(displayLanguage, provider, holder)
+        val javadocConverter =
+            DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
         val converter = RootDocumentableConverter(
             displayLanguage,
-            pathProvider,
-            holder
+            provider,
+            holder,
+            javadocConverter
         )
         return runBlocking { converter.tocPage(packagePrefixToRemove) }
     }

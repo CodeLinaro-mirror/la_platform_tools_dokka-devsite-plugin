@@ -47,10 +47,13 @@ internal abstract class PackageDocumentableConverter(
     private val displayLanguage: Language,
     private val dPackage: DPackage,
     private val pathProvider: FilePathProvider,
-    private val docsHolder: DocumentablesHolder
+    private val docsHolder: DocumentablesHolder,
+    protected val functionConverter: FunctionDocumentableConverter,
+    protected val propertyConverter: PropertyDocumentableConverter,
+    protected val javadocConverter: DocTagConverter,
+    protected val paramConverter: ParameterDocumentableConverter
 ) {
     protected abstract val header: DefaultDevsitePlatformSelector?
-    protected val javadocConverter = DocTagConverter(displayLanguage, pathProvider, docsHolder)
     protected abstract val functionToSummaryConverter:
         (DFunction, ModifierHints) -> TypeSummaryItem<FunctionSignature>
     protected abstract val functionToDetailConverter:
