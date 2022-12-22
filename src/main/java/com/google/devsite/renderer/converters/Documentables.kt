@@ -175,7 +175,7 @@ private fun Hashable.isFromJava() =
         else isPsi == true
     }
 
-// TODO(investigate KMP and whether lateinit-ness can vary by sourceSet and how to handle that)
+// `expect`s cannot be `lateinit`, and `actual`s cannot either because they must match modifiers
 internal fun Documentable.isJavaStaticField() = this is DProperty && run {
     val modifiers = modifiers(getExpectOrCommonSourceSet())
     "const" in modifiers || "lateinit" in modifiers || isStaticAnnotated()

@@ -44,7 +44,7 @@ internal class ModifiersTest : ConverterTestBase() {
         isFromJava = true
     )
 
-    private val dummyDoc = DModule("dummy", emptyList(), emptyMap(), null, emptySet())
+    private val noopDoc = DModule("irrelevant", emptyList(), emptyMap(), null, emptySet())
 
     @Test
     fun `Public modifier is found`() {
@@ -131,14 +131,14 @@ internal class ModifiersTest : ConverterTestBase() {
     fun `Const modifier is considered constant`() {
         val modifiers = listOf("const")
 
-        assertThat(dummyDoc.isConstant(modifiers)).isTrue()
+        assertThat(noopDoc.isConstant(modifiers)).isTrue()
     }
 
     @Test
     fun `Static final modifiers are considered constant`() {
         val modifiers = listOf("static", "final")
 
-        assertThat(dummyDoc.isConstant(modifiers)).isTrue()
+        assertThat(noopDoc.isConstant(modifiers)).isTrue()
     }
 
     @Test
