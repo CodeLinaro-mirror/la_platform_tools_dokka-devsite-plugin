@@ -25,6 +25,7 @@ import com.google.devsite.TypeSummaryItem
 import com.google.devsite.components.Link
 import com.google.devsite.components.impl.DefaultClassHierarchy
 import com.google.devsite.components.impl.DefaultClasslike
+import com.google.devsite.components.impl.DefaultClasslikeDescription
 import com.google.devsite.components.impl.DefaultClasslikeSignature
 import com.google.devsite.components.impl.DefaultClasslikeSummary
 import com.google.devsite.components.impl.DefaultDevsitePage
@@ -40,6 +41,7 @@ import com.google.devsite.components.impl.emptySummaryList
 import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.Classlike.TitledList
 import com.google.devsite.components.pages.DevsitePage
+import com.google.devsite.components.symbols.ClasslikeDescription
 import com.google.devsite.components.symbols.ClasslikeSignature
 import com.google.devsite.components.symbols.ClasslikeSummary
 import com.google.devsite.components.symbols.FunctionSignature
@@ -372,12 +374,16 @@ internal abstract class ClasslikeDocumentableConverter(
                 title = classlike.name(),
                 content = DefaultClasslike(
                     Classlike.Params(
-                        header = header,
+                        description = DefaultClasslikeDescription(
+                            ClasslikeDescription.Params(
+                                header = header,
+                                primarySignature = signature.await(),
+                                hierarchy = hierarchy.await(),
+                                relatedSymbols = relatedSymbols.await(),
+                                descriptionDocs = javadocConverter.metadata(classlike)
+                            )
+                        ),
                         displayLanguage = displayLanguage,
-                        signature = signature.await(),
-                        hierarchy = hierarchy.await(),
-                        relatedSymbols = relatedSymbols.await(),
-                        description = javadocConverter.metadata(classlike),
                         nestedTypesSummary = nestedTypesSummary.await(),
                         enumValuesSummary = enumValuesSummary.await(),
                         enumValuesDetails = TitledList(

@@ -31,6 +31,7 @@ import com.google.devsite.components.symbols.SymbolSignature
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.companionName
 import com.google.devsite.renderer.converters.testing.description
+import com.google.devsite.renderer.converters.testing.descriptionDocs
 import com.google.devsite.renderer.converters.testing.from
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
@@ -357,7 +358,8 @@ internal class ClasslikeDocumentableConverterTest(
         """.render().page()
 
         val classlike = page.data.content
-        val subclasses = classlike.data.relatedSymbols.data.directSubclasses.items(2)
+        val subclasses = classlike.data.description.data
+            .relatedSymbols.data.directSubclasses.items(2)
 
         assertThat(subclasses.first().data.name).isEqualTo("A")
         assertThat(subclasses.last().data.name).isEqualTo("B")
@@ -373,7 +375,8 @@ internal class ClasslikeDocumentableConverterTest(
         """.render().page()
 
         val classlike = page.data.content
-        val subclasses = classlike.data.relatedSymbols.data.indirectSubclasses.items(2)
+        val subclasses = classlike.data.description.data
+            .relatedSymbols.data.indirectSubclasses.items(2)
 
         assertThat(subclasses.first().data.name).isEqualTo("A")
         assertThat(subclasses.last().data.name).isEqualTo("B")
@@ -386,7 +389,7 @@ internal class ClasslikeDocumentableConverterTest(
         """.render().page()
 
         val classlike = page.data.content
-        val parents = classlike.data.hierarchy.data.parents
+        val parents = classlike.data.description.data.hierarchy.data.parents
 
         assertThat(parents).isEmpty()
     }
@@ -399,7 +402,7 @@ internal class ClasslikeDocumentableConverterTest(
         """.render().page()
 
         val classlike = page.data.content
-        val parents = classlike.data.hierarchy.data.parents.items(3).toList()
+        val parents = classlike.data.description.data.hierarchy.data.parents.items(3).toList()
 
         javaOnly { assertThat(parents[0].data.name).isEqualTo("java.lang.Object") }
         kotlinOnly { assertThat(parents[0].data.name).isEqualTo("kotlin.Any") }
@@ -417,7 +420,7 @@ internal class ClasslikeDocumentableConverterTest(
         """.render().page()
 
         val classlike = page.data.content
-        val parents = classlike.data.hierarchy.data.parents.items(5).toList()
+        val parents = classlike.data.description.data.hierarchy.data.parents.items(5).toList()
 
         javaOnly { assertThat(parents[0].data.name).isEqualTo("java.lang.Object") }
         kotlinOnly { assertThat(parents[0].data.name).isEqualTo("kotlin.Any") }
@@ -442,7 +445,7 @@ internal class ClasslikeDocumentableConverterTest(
 
         for (page in listOf(pageJ, pageK)) {
             val prefix = if (page == pageK) "" else "Test."
-            val classSignature = page.data.content.data.signature.data
+            val classSignature = page.data.content.data.description.data.primarySignature.data
             assertThat(classSignature.type).isEqualTo("class")
             assertThat(classSignature.extends.single().data.name).isEqualTo("${prefix}B")
             assertThat(classSignature.implements.single().data.name).isEqualTo("${prefix}A")
@@ -460,10 +463,10 @@ internal class ClasslikeDocumentableConverterTest(
         """.render(java = true).page("Foo").data.content
 
         for (page in listOf(pageJ, pageK)) {
-            val classSignature = page.data.signature.data
+            val classSignature = page.data.description.data.primarySignature.data
             assertThat(classSignature.type).isEqualTo("class")
             assertThat(classSignature.extends.single().data.name).isEqualTo("List<String>")
-            val hierarchy = page.data.hierarchy.data
+            val hierarchy = page.data.description.data.hierarchy.data
             assertThat(hierarchy.parents.size).isEqualTo(2)
             assertThat(hierarchy.parents.first().data.name).isEqualTo("List<String>")
         }
@@ -487,8 +490,8 @@ internal class ClasslikeDocumentableConverterTest(
         val pageExternalJ = """
             |public class JavaArgsLazy implements Lazy {}
         """.renderJava(imports = listOf("kotlin.LazyKt.Lazy")).page(name = "JavaArgsLazy")
-        val signatureK = pageExternalK.data.content.data.signature
-        val signatureJ = pageExternalJ.data.content.data.signature
+        val signatureK = pageExternalK.data.content.data.description.data.primarySignature
+        val signatureJ = pageExternalJ.data.content.data.description.data.primarySignature
         assertThat(
             signatureK.data.implements.map { it.data.name }
         ).isEqualTo(listOf("Lazy"))
@@ -505,11 +508,11 @@ internal class ClasslikeDocumentableConverterTest(
             |import java.util.AbstractList
             |public class MyList() : AbstractList<Int>()
         """.render().page(name = "MyList")
-        val signatureK = pageExternalK.data.content.data.signature
+        val signatureK = pageExternalK.data.content.data.description.data.primarySignature
         val pageExternalJ = """
             |public class MyList extends AbstractList<String> {}
         """.renderJava(imports = listOf("java.util.*")).page(name = "MyList")
-        val signatureJ = pageExternalJ.data.content.data.signature
+        val signatureJ = pageExternalJ.data.content.data.description.data.primarySignature
         for (signature in listOf(signatureJ, signatureK)) {
             assertThat(
                 signature.data.extends.map { it.data.name }
@@ -594,8 +597,8 @@ internal class ClasslikeDocumentableConverterTest(
 
         for (page in listOf(pageK, pageJ)) {
             val classlike = page.data.content
-            val signature = classlike.data.signature.data
-            val description = (classlike.data.description.first() as DescriptionComponent)
+            val signature = classlike.data.description.data.primarySignature.data
+            val description = (classlike.descriptionDocs.first() as DescriptionComponent)
 
             val enumSummary = classlike.data.enumValuesSummary
             val enumDetails = classlike.data.enumValuesDetails
@@ -680,9 +683,9 @@ internal class ClasslikeDocumentableConverterTest(
 
             if (pages == pagesK) {
                 // overriding class docs is maybe something we want in kotlin, but is not jdoc spec
-                val fooDescription = (fooClass.data.description.first() as DescriptionComponent)
-                val barDescription = (barClass.data.description.first() as DescriptionComponent)
-                val bazDescription = (bazClass.data.description.first() as DescriptionComponent)
+                val fooDescription = (fooClass.descriptionDocs.first() as DescriptionComponent)
+                val barDescription = (barClass.descriptionDocs.first() as DescriptionComponent)
+                val bazDescription = (bazClass.descriptionDocs.first() as DescriptionComponent)
                 assertThat(fooDescription.text()).isEqualTo("docs for foo")
                 // assertThat(barDescription.text()).isEqualTo("docs for foo")
                 assertThat(bazDescription.text()).isEqualTo("overriding docs for baz")
@@ -1070,7 +1073,8 @@ internal class ClasslikeDocumentableConverterTest(
         val page = """
             |class Foo<T: Number, U>() {}
         """.render().page()
-        val typeParams = page.data.content.data.signature.data.typeParameters
+        val typeParams = page.data.content.data.description.data.primarySignature
+            .data.typeParameters
         assertThat(typeParams.first().data.name).isEqualTo("T")
         assertThat(typeParams.first().projectionName()).isEqualTo("Number")
         assertThat(typeParams.last().data.name).isEqualTo("U")
@@ -2181,11 +2185,13 @@ internal class ClasslikeDocumentableConverterTest(
         val signatureJ = """
             public interface Foo {}
             public interface Bar extends Foo {}
-        """.trimIndent().render(java = true).page("Bar").data.content.data.signature
+        """.trimIndent().render(java = true).page("Bar")
+            .data.content.data.description.data.primarySignature
         val signatureK = """
             public interface Foo {}
             public interface Bar : Foo {}
-        """.trimIndent().render(java = false).page("Bar").data.content.data.signature
+        """.trimIndent().render(java = false).page("Bar")
+            .data.content.data.description.data.primarySignature
 
         assertThat(signatureJ.data.extends).isEmpty()
         assertThat(signatureK.data.extends).isEmpty()
@@ -2263,9 +2269,10 @@ internal class ClasslikeDocumentableConverterTest(
                 if (module == moduleK) this.containsExactly("public", "static").inOrder()
                 else this.containsExactly("public").inOrder()
 
+            val topObjectSignature = topObject.data.description.data.primarySignature
             if (displayLanguage == Language.KOTLIN && module == moduleK)
-                assertThat(topObject.data.signature.data.type).isEqualTo("object")
-            else assertThat(topObject.data.signature.data.type).isEqualTo("class")
+                assertThat(topObjectSignature.data.type).isEqualTo("object")
+            else assertThat(topObjectSignature.data.type).isEqualTo("class")
 
             javaOnly {
                 // top-level static classes don't exist in Java
@@ -2285,9 +2292,10 @@ internal class ClasslikeDocumentableConverterTest(
             assertThat(companionFun.urlSuffix())
                 .isEqualTo("Container.Companion.html#companionFun()")
 
+            val companionObjectSignature = companionObject.data.description.data.primarySignature
             if (displayLanguage == Language.KOTLIN && module == moduleK)
-                assertThat(companionObject.data.signature.data.type).isEqualTo("object")
-            else assertThat(companionObject.data.signature.data.type).isEqualTo("class")
+                assertThat(companionObjectSignature.data.type).isEqualTo("object")
+            else assertThat(companionObjectSignature.data.type).isEqualTo("class")
 
             javaOnly {
                 assertThat(companionObject.modifiers()).containsPublicMaybeStatic()

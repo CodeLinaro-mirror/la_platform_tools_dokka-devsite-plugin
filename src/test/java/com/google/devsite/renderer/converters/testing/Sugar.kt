@@ -73,7 +73,8 @@ internal fun TableRowSummaryItem<ParameterComponent, DescriptionComponent>.link(
 internal val <T : SymbolSignature> TypeSummaryItem<T>.description get() = data.description
 
 internal fun TableRowSummaryItem<TypeSummary, *>.modifiers() = data.title.data.modifiers
-internal fun Classlike.modifiers() = data.signature.data.modifiers
+internal fun Classlike.modifiers() = data.description.data.primarySignature.data.modifiers
+internal val Classlike.descriptionDocs get() = data.description.data.descriptionDocs
 
 @JvmName("TypeSymbolSummaryName")
 internal fun <T : SymbolSignature> TypeSummaryItem<T>.name():
