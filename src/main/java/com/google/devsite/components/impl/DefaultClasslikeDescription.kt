@@ -28,7 +28,7 @@ internal data class DefaultClasslikeDescription(
 ) : ClasslikeDescription {
 
     override fun render(into: FlowContent) = into.run {
-        if (data.header != null) data.header.render(this)
+        data.header?.render(this)
         p {
             pre {
                 data.primarySignature.render(this)

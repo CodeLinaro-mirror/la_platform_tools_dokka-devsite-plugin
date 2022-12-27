@@ -25,7 +25,7 @@ internal interface PlatformComponent : ContextFreeComponent {
     val data: Params
 
     data class Params(
-        val platforms: List<Platform>
+        val platforms: Set<Platform>
     )
 
     fun renderForDetail(into: FlowContent)

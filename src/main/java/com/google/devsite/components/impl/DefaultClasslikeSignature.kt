@@ -35,6 +35,8 @@ internal data class DefaultClasslikeSignature(
 
         data.typeParameters.render(into, ShouldBreak.NO, brackets = "<>")
 
+        data.typeAliasEquals?.let { +" = "; it.render(into) }
+
         when (data.displayLanguage) {
             Language.JAVA -> {
                 data.extends.render(into, header = { +" extends " })
@@ -52,7 +54,8 @@ internal data class DefaultClasslikeSignature(
             if (data.displayLanguage == Language.JAVA) {
                 data.extends.joinMaybePrefix(prefix = " extends ") +
                     data.implements.joinMaybePrefix(prefix = interfaceInheritsPhrase)
-            } else (data.extends + data.implements).joinMaybePrefix(prefix = " : ")
+            } else (data.extends + data.implements).joinMaybePrefix(prefix = " : ") +
+                data.typeAliasEquals?.let { "= ${data.typeAliasEquals}" }
 
     // Classes _implement_ interfaces, but interfaces _extend_ other interfaces
     private val interfaceInheritsPhrase = if (data.type == "interface") "extends" else "implements"

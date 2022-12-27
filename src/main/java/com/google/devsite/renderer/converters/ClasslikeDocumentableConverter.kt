@@ -50,6 +50,7 @@ import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSignature
 import com.google.devsite.components.symbols.SymbolSummary
+import com.google.devsite.components.symbols.TypeProjectionComponent
 import com.google.devsite.components.table.ClassHierarchy
 import com.google.devsite.components.table.InheritedSymbolsList
 import com.google.devsite.components.table.RelatedSymbols
@@ -61,14 +62,18 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
+import com.google.devsite.strictSingleOrNull
 import com.google.devsite.util.LibraryMetadata
+import com.jetbrains.rd.util.concurrentMapOf
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import org.jetbrains.dokka.DokkaConfiguration.DokkaSourceSet
 import org.jetbrains.dokka.links.Callable
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.parent
+import org.jetbrains.dokka.model.ActualTypealias
 import org.jetbrains.dokka.model.Annotations
+import org.jetbrains.dokka.model.Bound
 import org.jetbrains.dokka.model.DAnnotation
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
@@ -77,6 +82,7 @@ import org.jetbrains.dokka.model.DEnumEntry
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DObject
 import org.jetbrains.dokka.model.DProperty
+import org.jetbrains.dokka.model.DTypeParameter
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.DocumentableSource
 import org.jetbrains.dokka.model.ExtraModifiers
@@ -93,9 +99,9 @@ import org.jetbrains.dokka.model.toAdditionalModifiers
 /** Converts documentable class-likes into the classlike component. */
 internal abstract class ClasslikeDocumentableConverter(
     private val displayLanguage: Language,
-    private val classlike: DClasslike,
+    protected val classlike: DClasslike,
     private val pathProvider: FilePathProvider,
-    private val docsHolder: DocumentablesHolder,
+    protected val docsHolder: DocumentablesHolder,
     private val classExtensionFunctions: List<DFunction> = emptyList(),
     private val classExtensionProperties: List<DProperty> = emptyList()
 ) {
@@ -103,8 +109,10 @@ internal abstract class ClasslikeDocumentableConverter(
 
     private val paramConverter =
         ParameterDocumentableConverter(displayLanguage, pathProvider, docsHolder)
+
     // TODO(KMP b/254490320)
     protected val javadocConverter = DocTagConverter(displayLanguage, pathProvider, docsHolder)
+
     // TODO(KMP b/256172699)
     private val enumConverter =
         EnumValueDocumentableConverter(displayLanguage, pathProvider, javadocConverter, docsHolder)
@@ -319,9 +327,6 @@ internal abstract class ClasslikeDocumentableConverter(
                 ?: propertiesToDetail(companionProperties.filter(::isProtectedNonConst))
         }
 
-        val signature = async { computeSignature(classlike, docsHolder.classGraph()) }
-        val hierarchy = async { computeHierarchy() }
-        val relatedSymbols = async { findRelatedSymbols() }
         val inheritedTypes = async { computeInheritedSymbols(inheritedAll) }
         val metadataComponent = async { getMetadata() }
 
@@ -374,15 +379,7 @@ internal abstract class ClasslikeDocumentableConverter(
                 title = classlike.name(),
                 content = DefaultClasslike(
                     Classlike.Params(
-                        description = DefaultClasslikeDescription(
-                            ClasslikeDescription.Params(
-                                header = header,
-                                primarySignature = signature.await(),
-                                hierarchy = hierarchy.await(),
-                                relatedSymbols = relatedSymbols.await(),
-                                descriptionDocs = javadocConverter.metadata(classlike)
-                            )
-                        ),
+                        description = getClasslikeDescription(),
                         displayLanguage = displayLanguage,
                         nestedTypesSummary = nestedTypesSummary.await(),
                         enumValuesSummary = enumValuesSummary.await(),
@@ -474,6 +471,21 @@ internal abstract class ClasslikeDocumentableConverter(
 
     private fun <T> emptyListIfJava() =
         if (displayLanguage == Language.JAVA) emptyList<T>() else null
+
+    protected open suspend fun getClasslikeDescription(): ClasslikeDescription = coroutineScope {
+        val signature = async { computeSignature(classlike, docsHolder.classGraph()) }
+        val hierarchy = async { computeHierarchy() }
+        val relatedSymbols = async { findRelatedSymbols() }
+        DefaultClasslikeDescription(
+            ClasslikeDescription.Params(
+                header = header,
+                primarySignature = signature.await(),
+                hierarchy = hierarchy.await(),
+                relatedSymbols = relatedSymbols.await(),
+                descriptionDocs = javadocConverter.metadata(classlike)
+            )
+        )
+    }
 
     private fun nestedTypesToSummary(nestedClasslikes: List<DClasslike>, classGraph: ClassGraph):
         ClasslikeSummaryList {
@@ -674,76 +686,113 @@ internal abstract class ClasslikeDocumentableConverter(
         }
     }
 
+    // To allow consolidating identical ClasslikeSignatures generated from different sourceSets,
+    // we want all identical ClasslikeSignatures to be ==. Because we can't rely on == for upstream
+    // data classes like DClasslike, we need a workaround. We abstract out the inputs to this fun.
+    private data class SourceSetDependentSignatureInputs(
+        val modifiers: Modifiers,
+        val annotations: List<Annotations.Annotation>,
+        val typeAliasEquals: TypeProjectionComponent? = null
+    )
+    private data class SourceSetIndependentSignatureInputs(
+        val generics: List<DTypeParameter>,
+        val name: String,
+        val dri: DRI,
+        val type: String,
+        val isFromJava: Boolean
+    )
+    private val SIGNATURE_INSTANCES = concurrentMapOf<
+        Pair<SourceSetDependentSignatureInputs, SourceSetIndependentSignatureInputs>,
+        ClasslikeSignature>()
+
     protected open fun computeSignature(
         classlike: DClasslike,
         classGraph: ClassGraph,
-        sourceSet: DokkaSourceSet = classlike.getExpectOrCommonSourceSet()
+        sourceSet: DokkaSourceSet = classlike.getExpectOrCommonSourceSet(),
+        typealiasEquals: Bound? = null
     ): ClasslikeSignature {
-        val modifiers = classlike.modifiers(sourceSet).modifiersFor(
-            ModifierHints(
-                displayLanguage,
-                type = classlike::class.java,
-                containingType = null,
-                injectStatic = classlike is DObject && displayLanguage == Language.JAVA,
-                isFromJava = classlike.isFromJava(),
-                isSummary = false
-            )
-        )
-        // Does not vary by sourceSet
-        val typeParameters = classlike.generics().map {
-            errorContextInjector(it) {
-                paramConverter.componentForTypeParameter(it, classlike.isFromJava())
-            }
-        }
+        val sourceSetDependentInput = computeSourceSetDependentSignatureInputs(classlike, sourceSet)
+        val sourceSetIndepInput = computeSourceSetIndependentSignatureInputs(classlike)
 
-        if (classlike !is WithSupertypes) {
-            return DefaultClasslikeSignature(
+        return SIGNATURE_INSTANCES.getOrPut(
+            sourceSetDependentInput to sourceSetIndepInput
+        ) {
+            // TODO(KMP ClassGraph b/253454963. Move these into sourceSetDependentInput.)
+            val (extends, implements) = when (sourceSetIndepInput.type) {
+                "class", "interface", "enum", "object" -> (
+                    classGraph.getValue(sourceSetIndepInput.dri).directSuperClasses.map {
+                        pathProvider.linkForReference(it.dri)
+                    } to classGraph.getValue(sourceSetIndepInput.dri).directInterfaces.map {
+                        pathProvider.linkForReference(it.dri)
+                    }
+                    )
+                else -> emptyList<Link>() to emptyList<Link>()
+            }
+            DefaultClasslikeSignature(
                 ClasslikeSignature.Params(
                     displayLanguage = displayLanguage,
-                    name = pathProvider.linkForReference(classlike.dri, classlike.name()),
-                    type = classlike.stringForType(displayLanguage),
-                    modifiers = modifiers,
-                    implements = emptyList(),
-                    extends = emptyList(),
-                    typeParameters = typeParameters,
-                    annotationComponents = classlike.annotations(sourceSet).annotationComponents(
+                    name = pathProvider
+                        .linkForReference(sourceSetIndepInput.dri, sourceSetIndepInput.name),
+                    type = if (sourceSetDependentInput.typeAliasEquals != null) "typealias"
+                    else sourceSetIndepInput.type,
+                    modifiers = sourceSetDependentInput.modifiers,
+                    implements = implements,
+                    extends = extends,
+                    typeParameters = sourceSetIndepInput.generics.map {
+                        errorContextInjector(it) {
+                            paramConverter.componentForTypeParameter(
+                                it,
+                                sourceSetIndepInput.isFromJava
+                            )
+                        }
+                    },
+                    annotationComponents = sourceSetDependentInput.annotations.annotationComponents(
                         pathProvider = pathProvider,
                         displayLanguage = displayLanguage,
                         nullability = Nullability.DONT_CARE, // Classlike definitions aren't null
                         annotationsNotToDocument = docsHolder.annotationsNotToDisplay
-                    )
+                    ),
+                    typeAliasEquals = sourceSetDependentInput.typeAliasEquals
                 )
             )
         }
-        // TODO(KMP ClassGraph b/253454963)
-        val extends = classGraph.getValue(classlike.dri).directSuperClasses.map {
-            pathProvider.linkForReference(it.dri)
-        }
-        val implements = classGraph.getValue(classlike.dri).directInterfaces.map {
-            pathProvider.linkForReference(it.dri)
-        }
-
-        return DefaultClasslikeSignature(
-            ClasslikeSignature.Params(
-                displayLanguage = displayLanguage,
-                name = pathProvider.linkForReference(classlike.dri, classlike.name()),
-                type = classlike.stringForType(displayLanguage),
-                modifiers = modifiers,
-                implements = implements,
-                extends = extends,
-                typeParameters = typeParameters,
-                annotationComponents = classlike.annotations(sourceSet).annotationComponents(
-                    pathProvider = pathProvider,
-                    displayLanguage = displayLanguage,
-                    nullability = Nullability.DONT_CARE, // Classlike definitions aren't null
-                    annotationsNotToDocument = docsHolder.annotationsNotToDisplay
-                )
-            )
-        )
     }
 
+    private fun computeSourceSetDependentSignatureInputs(
+        classlike: DClasslike,
+        sourceSet: DokkaSourceSet
+    ): SourceSetDependentSignatureInputs {
+        val typeAliasEquals = (classlike as? WithExtraProperties<*>)?.extra
+            ?.allOfType<ActualTypealias>()?.strictSingleOrNull()?.underlyingType?.get(sourceSet)
+        val modifiers = classlike.modifiers(sourceSet) +
+            (typeAliasEquals?.let { listOf("actual") } ?: emptyList())
+        return SourceSetDependentSignatureInputs(
+            modifiers.modifiersFor(
+                ModifierHints(
+                    displayLanguage,
+                    type = classlike::class.java,
+                    containingType = null,
+                    injectStatic = classlike is DObject && displayLanguage == Language.JAVA,
+                    isFromJava = classlike.isFromJava(),
+                    isSummary = false
+                )
+            ),
+            classlike.annotations(sourceSet),
+            typeAliasEquals?.let { paramConverter.componentForProjection(it, false, sourceSet) }
+        )
+    }
+    private fun computeSourceSetIndependentSignatureInputs(
+        classlike: DClasslike
+    ) = SourceSetIndependentSignatureInputs(
+        dri = classlike.dri,
+        name = classlike.name(),
+        type = classlike.stringForType(displayLanguage),
+        generics = classlike.generics(),
+        isFromJava = classlike.isFromJava()
+    )
+
     /** Walks up this class' type hierarchy and returns the hierarchy component. */
-    private suspend fun computeHierarchy(): ClassHierarchy {
+    protected suspend fun computeHierarchy(): ClassHierarchy {
         if (classlike !is WithSupertypes) {
             return DefaultClassHierarchy(ClassHierarchy.Params(parents = emptyList()))
         }
@@ -852,7 +901,7 @@ internal abstract class ClasslikeDocumentableConverter(
 
     /** Finds the direct and indirect subclasses for this classlike, returning their component. */
     // We know our subclasses will always be DClasslikes
-    private suspend fun findRelatedSymbols(): RelatedSymbols {
+    protected suspend fun findRelatedSymbols(): RelatedSymbols {
         val classNode = docsHolder.classGraph().getValue(classlike.dri)
         val directSubclasses = classNode.directSubClasses
         val indirectSubclasses = classNode.indirectSubClasses

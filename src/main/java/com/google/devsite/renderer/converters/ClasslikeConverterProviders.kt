@@ -17,13 +17,23 @@
 package com.google.devsite.renderer.converters
 
 import com.google.devsite.components.impl.DefaultDevsitePlatformSelector
+import com.google.devsite.components.impl.DefaultKmpClasslikeDescription
+import com.google.devsite.components.impl.DefaultPlatformComponent
+import com.google.devsite.components.symbols.ClasslikeDescription
+import com.google.devsite.components.symbols.ClasslikeSignature
+import com.google.devsite.components.symbols.KmpClasslikeDescription
 import com.google.devsite.components.symbols.Platform
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
+import com.jetbrains.rd.util.concurrentMapOf
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DProperty
+import org.jetbrains.dokka.utilities.parallelForEach
 
 internal class NonKmpClasslikeConverter(
     displayLanguage: Language,
@@ -81,4 +91,41 @@ internal class KmpClasslikeConverter(
     override val propertyToDetailConverter = propertyConverter::detailKmp
     override val constructorToSummaryConverter = functionConverter::summaryForKmpConstructor
     override val constructorToDetailConverter = functionConverter::detailForKmpConstructor
+
+    override suspend fun getClasslikeDescription(): ClasslikeDescription = coroutineScope {
+        val signatures =
+            concurrentMapOf<ClasslikeSignature, MutableSet<DokkaConfiguration.DokkaSourceSet>>()
+        var primarySignature: ClasslikeSignature? = null
+        val primarySourceSet = classlike.getExpectOrCommonSourceSet()
+
+        (classlike.sourceSets).parallelForEach { sourceSet ->
+            // We must do this computation every time, because we don't know what will and what
+            // won't affect the signature until after we calculate it for each sourceSet
+            // E.g. the JVM sourceSet might have an `@JvmName` but otherwise have the same signature
+            // `@JvmName` doesn't affect displayed signature, so those should all be collapsed.
+            val sig = computeSignature(
+                classlike = classlike,
+                classGraph = docsHolder.classGraph(),
+                sourceSet = sourceSet,
+            )
+            if (sig !in signatures) signatures[sig] = mutableSetOf()
+            signatures[sig]!!.add(sourceSet)
+            if (sourceSet == primarySourceSet) primarySignature = sig
+        }
+
+        val hierarchy = async { computeHierarchy() }
+        val relatedSymbols = async { findRelatedSymbols() }
+        DefaultKmpClasslikeDescription(
+            KmpClasslikeDescription.Params(
+                header = header,
+                primarySignature = primarySignature!!,
+                hierarchy = hierarchy.await(),
+                relatedSymbols = relatedSymbols.await(),
+                descriptionDocs = javadocConverter.metadata(classlike),
+                platform = DefaultPlatformComponent(setOf(classlike.getExpectOrCommonSourceSet())),
+                allSignatures = signatures.mapValues { (_, v) -> DefaultPlatformComponent(v) }
+                    .toList()
+            )
+        )
+    }
 }
