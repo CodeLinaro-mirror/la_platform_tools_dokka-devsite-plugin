@@ -43,10 +43,12 @@ internal data class DefaultMetadataComponent(
                     it.render(this)
                 }
             }
+            data.versionMetadata?.render(this)
         }
     }
 
     override fun toString() = "Metadata:" +
         data.libraryMetadata?.link?.let { " Release Notes URL: $it" }.orEmpty() +
-        data.sourceLinkUrl?.let { " Source Link URL: $it" }.orEmpty()
+        data.sourceLinkUrl?.let { " Source Link URL: $it" }.orEmpty() +
+        data.versionMetadata?.let { " Version metadata: $it" }.orEmpty()
 }

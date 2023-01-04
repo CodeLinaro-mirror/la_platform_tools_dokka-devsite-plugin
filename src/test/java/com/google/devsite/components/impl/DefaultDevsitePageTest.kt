@@ -106,10 +106,16 @@ class DefaultDevsitePageTest {
             artifactId = "artifact",
             releaseNotesUrl = "https://d.android.com"
         )
+        val versionMetadata = DefaultVersionMetadataComponent.createVersionMetadataWithBaseUrl(
+            addedIn = "1.5.4",
+            deprecatedIn = "1.6.0-alpha04",
+            baseUrl = "https://developer.android.com/jetpack/androidx/releases/fragment"
+        )
         val metadataComponent = DefaultMetadataComponent(
             MetadataComponent.Params(
                 libraryMetadata = libraryMetadata,
-                sourceLinkUrl = "https://cs.android.com"
+                sourceLinkUrl = "https://cs.android.com",
+                versionMetadata = versionMetadata
             )
         )
         val pageComponent = DefaultDevsitePage(
@@ -141,6 +147,10 @@ class DefaultDevsitePageTest {
     <div id="metadata-info-block">
       <div id="maven-coordinates">Artifact: <a href="https://d.android.com">android.x:artifact</a></div>
       <div id="source-link"><a href="https://cs.android.com" class="external">View Source</a></div>
+      <div id="version-metadata">
+        <div id="added-in">Added in <a href="https://developer.android.com/jetpack/androidx/releases/fragment#1.5.4">1.5.4</a></div>
+        <div id="deprecated-in">Deprecated in <a href="https://developer.android.com/jetpack/androidx/releases/fragment#1.6.0-alpha04">1.6.0-alpha04</a></div>
+      </div>
     </div>
     <h1>Page Title</h1>
     <div>noop</div>
@@ -160,7 +170,8 @@ class DefaultDevsitePageTest {
         val metadataComponent = DefaultMetadataComponent(
             MetadataComponent.Params(
                 libraryMetadata = libraryMetadata,
-                sourceLinkUrl = null
+                sourceLinkUrl = null,
+                versionMetadata = null
             )
         )
         val pageComponent = DefaultDevsitePage(

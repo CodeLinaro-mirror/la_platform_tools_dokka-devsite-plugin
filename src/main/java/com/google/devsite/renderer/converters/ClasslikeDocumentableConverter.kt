@@ -924,7 +924,9 @@ internal abstract class ClasslikeDocumentableConverter(
         return DefaultMetadataComponent(
             MetadataComponent.Params(
                 libraryMetadata = jsonLibraryMetadata,
-                sourceLinkUrl = sourceUrl
+                sourceLinkUrl = sourceUrl,
+                // TODO(b/264280671): display version metadata for classes
+                versionMetadata = null
             )
         )
     }
