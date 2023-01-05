@@ -506,9 +506,10 @@ internal class ParameterDocumentableConverter(
         is GenericTypeConstructor, is TypeParameter, is PrimitiveJavaType,
         is UnresolvedBound, is JavaObject, Star, Void -> null
         is Nullable -> inner.receiver()
+        is DefinitelyNonNullable -> inner.receiver()
         is Variance<*> -> inner.receiver()
         is TypeAliased -> inner.receiver()
-        else -> error("Unknown bound: $this")
+        Dynamic -> error("Unknown bound: $this")
     }
 
     /**
@@ -546,7 +547,12 @@ internal class ParameterDocumentableConverter(
         }
         is UnresolvedBound -> DefaultLink(Link.Params(name = name, url = ""))
         is Nullable -> inner.toLink(suffix = "?")
-        else -> error("Unknown bound: $this")
+        is DefinitelyNonNullable -> inner.toLink()
+        Dynamic, is TypeAliased, is Contravariance<*>, is Covariance<*>, is Invariance<*> ->
+            throw RuntimeException(
+                "Error in type projection: ${(this::class).simpleName} bound" +
+                    "is not supported here: $this"
+            )
     }
 
     /** Determine whether a param is a lambda using the kotlin function type. */
@@ -558,9 +564,10 @@ internal class ParameterDocumentableConverter(
         is Nullable -> inner.isLambda()
         is Variance<*> -> inner.isLambda()
         is TypeAliased -> inner.isLambda()
+        is DefinitelyNonNullable -> inner.isLambda()
         is TypeParameter, is PrimitiveJavaType,
         is UnresolvedBound, is JavaObject, Star, Void -> false
-        else -> error("Unknown bound: $this of type ${this::class.java}")
+        Dynamic -> error("Unknown bound: $this of type ${this::class.java}")
     }
 
     /** Gets the type constructor of a *lambda param only*. */

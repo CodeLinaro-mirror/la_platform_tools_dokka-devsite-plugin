@@ -115,6 +115,18 @@ internal class ParameterDocumentableConverterTest(
     }
 
     @Test
+    fun `Parameter understands definitely-not-null generics`() {
+        val param = """
+            |fun <T> foo(a: List<T & Any>) : List<T & Any>
+        """.render().param()
+
+        val paramType = param.data.type
+        val generic = paramType.data.generics.item()
+
+        assertThat(generic.link().name).isEqualTo("T")
+    }
+
+    @Test
     fun `Parameter understands nested generics`() {
         val param = """
             |fun foo(a: List<Set<String>>)
