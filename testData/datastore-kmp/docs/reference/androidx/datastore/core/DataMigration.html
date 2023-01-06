@@ -10,9 +10,15 @@
     </div>
     <h1>DataMigration</h1>
     <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-common">Common</option><option selected="selected" value="platform-jvm">JVM</option><option selected="selected" value="platform-js">Javascript</option><option selected="selected" value="platform-native">Native</option></select></devsite-select >
-    <p>
-      <pre>public interface <a href="/reference/androidx/datastore/core/DataMigration.html">DataMigration</a>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;</pre>
-    </p>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <div class="kotlin-platform">Cmn</div>
+        <!--platform-Common-->
+        <p>
+          <pre>public interface <a href="/reference/androidx/datastore/core/DataMigration.html">DataMigration</a>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;</pre>
+        </p>
+      </div>
+    </devsite-filter >
     <hr>
     <p>Interface for migrations to DataStore. Methods on this migration (<code><a href="/reference/androidx/datastore/core/DataMigration.html#shouldMigrate(kotlin.Any)">shouldMigrate</a></code>, <code><a href="/reference/androidx/datastore/core/DataMigration.html#migrate(kotlin.Any)">migrate</a></code> and <code><a href="/reference/androidx/datastore/core/DataMigration.html#cleanUp()">cleanUp</a></code>) may be called multiple times, so their implementations must be idempotent. These methods may be called multiple times if DataStore encounters issues when writing the newly migrated data to disk or if any migration installed in the same DataStore throws an Exception.</p>
     <p>If you're migrating from SharedPreferences see SharedPreferencesMigration.</p>

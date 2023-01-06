@@ -58,10 +58,10 @@ internal fun Documentable.isConstant(
     modifiers: List<String> = modifiers(getExpectOrCommonSourceSet())
 ) = "const" in modifiers || ("static" in modifiers && "final" in modifiers)
 
-internal open class Modifiers(baselist: List<String>) : ArrayList<String>(baselist) {
+internal data class Modifiers(var baselist: List<String>) : ArrayList<String>(baselist) {
     constructor(vararg items: String) : this(items.asList())
 }
-internal object EmptyModifiers : Modifiers()
+internal val EmptyModifiers = Modifiers()
 
 /** Returns a filtered and re-written list of modifiers. */
 internal fun List<String>.modifiersFor(

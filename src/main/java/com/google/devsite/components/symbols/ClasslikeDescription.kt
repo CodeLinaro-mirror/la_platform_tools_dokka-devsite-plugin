@@ -25,11 +25,36 @@ import com.google.devsite.components.table.RelatedSymbols
 internal interface ClasslikeDescription : ContextFreeComponent {
     val data: Params
 
-    data class Params(
+    open class Params(
         open val header: DefaultDevsitePlatformSelector?,
         open val primarySignature: ClasslikeSignature,
         open val hierarchy: ClassHierarchy,
         open val relatedSymbols: RelatedSymbols,
         open val descriptionDocs: List<ContextFreeComponent>
-    )
+    ) {
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            if (other !is Params) return false
+
+            if (header != other.header) return false
+            if (primarySignature != other.primarySignature) return false
+            if (hierarchy != other.hierarchy) return false
+            if (relatedSymbols != other.relatedSymbols) return false
+            if (descriptionDocs != other.descriptionDocs) return false
+
+            return true
+        }
+
+        override fun hashCode(): Int {
+            var result = header?.hashCode() ?: 0
+            result = 31 * result + primarySignature.hashCode()
+            result = 31 * result + hierarchy.hashCode()
+            result = 31 * result + relatedSymbols.hashCode()
+            result = 31 * result + descriptionDocs.hashCode()
+            return result
+        }
+
+        override fun toString() = "Classlike Description:\n$header\n$primarySignature\n$hierarchy" +
+            (if (!relatedSymbols.isEmpty) relatedSymbols else "") + (descriptionDocs.ifEmpty { "" })
+    }
 }

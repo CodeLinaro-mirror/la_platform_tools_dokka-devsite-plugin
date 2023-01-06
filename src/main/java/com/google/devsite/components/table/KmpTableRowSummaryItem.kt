@@ -33,7 +33,6 @@ internal interface KmpTableRowSummaryItem<T : ContextFreeComponent?, V : Context
     TableRowSummaryItem<T, V> {
     override val data: Params<T, V>
 
-    // TODO(KMP b/254489852)
     data class Params<T : ContextFreeComponent?, V : ContextFreeComponent>(
         override val title: T,
         override val description: V,

@@ -26,12 +26,18 @@ import kotlinx.html.div
 import kotlinx.html.span
 import org.jetbrains.dokka.DokkaConfiguration
 
+private val FIXED_INSTANCES = mutableMapOf<PlatformComponent.Params, DefaultPlatformComponent>()
+
+internal fun DefaultPlatformComponent(sourceSets: Set<DokkaConfiguration.DokkaSourceSet>) =
+    with(sourceSets.map { Platform.from(it.analysisPlatform) }.toSet()) {
+        FIXED_INSTANCES.getOrPut(PlatformComponent.Params(platforms = this)) {
+            DefaultPlatformComponent(PlatformComponent.Params(platforms = this))
+        }
+    }
 /** Default implementation of a table header. */
 internal data class DefaultPlatformComponent(
     override val data: PlatformComponent.Params
 ) : PlatformComponent {
-    internal constructor(sourceSets: Set<DokkaConfiguration.DokkaSourceSet>) :
-        this(PlatformComponent.Params(sourceSets.map { Platform.from(it.analysisPlatform) }))
 
     override fun render(into: FlowContent) = into.run {
         data.platforms.forEach {
