@@ -46,6 +46,7 @@ internal class NonKmpClasslikeConverter(
     javadocConverter: DocTagConverter,
     paramConverter: ParameterDocumentableConverter,
     annotationConverter: AnnotationDocumentableConverter,
+    metadataConverter: MetadataConverter,
     classExtensionFunctions: List<DFunction> = emptyList(),
     classExtensionProperties: List<DProperty> = emptyList()
 ) : ClasslikeDocumentableConverter(
@@ -59,6 +60,7 @@ internal class NonKmpClasslikeConverter(
     javadocConverter,
     paramConverter,
     annotationConverter,
+    metadataConverter,
     classExtensionFunctions,
     classExtensionProperties
 ) {
@@ -82,6 +84,7 @@ internal class KmpClasslikeConverter(
     javadocConverter: DocTagConverter,
     paramConverter: ParameterDocumentableConverter,
     annotationConverter: AnnotationDocumentableConverter,
+    metadataConverter: MetadataConverter,
     classExtensionFunctions: List<DFunction> = emptyList(),
     classExtensionProperties: List<DProperty> = emptyList(),
     platforms: List<Platform>
@@ -96,6 +99,7 @@ internal class KmpClasslikeConverter(
     javadocConverter,
     paramConverter,
     annotationConverter,
+    metadataConverter,
     classExtensionFunctions,
     classExtensionProperties
 ) {

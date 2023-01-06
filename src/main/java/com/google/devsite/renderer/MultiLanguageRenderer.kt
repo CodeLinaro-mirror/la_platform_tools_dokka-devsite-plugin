@@ -21,6 +21,7 @@ import com.google.devsite.renderer.converters.AnnotationDocumentableConverter
 import com.google.devsite.renderer.converters.DocTagConverter
 import com.google.devsite.renderer.converters.EnumValueDocumentableConverter
 import com.google.devsite.renderer.converters.FunctionDocumentableConverter
+import com.google.devsite.renderer.converters.MetadataConverter
 import com.google.devsite.renderer.converters.ParameterDocumentableConverter
 import com.google.devsite.renderer.converters.PropertyDocumentableConverter
 import com.google.devsite.renderer.impl.DocumentablesHolder
@@ -135,6 +136,7 @@ internal class MultiLanguageRenderer(
         val enumConverter = EnumValueDocumentableConverter(
             language, filePaths, javadocConverter, paramConverter, annotationConverter
         )
+        val metadataConverter = MetadataConverter(holder)
 
         DevsiteRenderer(
             MetadataRenderer(outputWriter, filePaths, language, holder, javadocConverter),
@@ -148,7 +150,8 @@ internal class MultiLanguageRenderer(
                 enumConverter,
                 javadocConverter,
                 paramConverter,
-                annotationConverter
+                annotationConverter,
+                metadataConverter
             ),
             holder,
             language,
