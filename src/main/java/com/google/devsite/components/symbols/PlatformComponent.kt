@@ -67,7 +67,7 @@ enum class Platform {
 fun Platform.shortName() = when (this) {
     Platform.JS -> "JS"
     Platform.NATIVE -> "N"
-    Platform.JVM -> "JVM"
+    Platform.JVM -> "A"
     Platform.COMMON -> "Cmn"
 }
 
@@ -84,7 +84,7 @@ fun Platform.devsiteId() = when (this) {
 fun Platform.selectorDisplayName() = when (this) {
     Platform.JS -> "Javascript"
     Platform.NATIVE -> "Native"
-    Platform.JVM -> "JVM"
+    Platform.JVM -> "Android/JVM"
     Platform.COMMON -> "Common"
 }
 

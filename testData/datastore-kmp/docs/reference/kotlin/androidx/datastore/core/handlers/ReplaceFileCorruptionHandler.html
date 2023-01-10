@@ -9,7 +9,7 @@
       <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/datastore/core/handlers/ReplaceFileCorruptionHandler.+class:androidx.datastore.core.handlers.ReplaceFileCorruptionHandler&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>ReplaceFileCorruptionHandler</h1>
-    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-common">Common</option><option selected="selected" value="platform-jvm">JVM</option><option selected="selected" value="platform-native">Native</option></select></devsite-select >
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-common">Common</option><option selected="selected" value="platform-jvm">Android/JVM</option><option selected="selected" value="platform-native">Native</option></select></devsite-select >
     <devsite-filter  select-el-container-id="platform">
       <div class="list">
         <div class="kotlin-platform" data-title="Common">Cmn</div>
@@ -41,8 +41,8 @@
                 <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/datastore/core/handlers/ReplaceFileCorruptionHandler.html#ReplaceFileCorruptionHandler(kotlin.Function1)">ReplaceFileCorruptionHandler</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;produceNewData:&nbsp;(<a href="/reference/kotlin/androidx/datastore/core/CorruptionException.html">CorruptionException</a>) <span style="white-space: nowrap;">-&gt;</span> T<br>)</code></div>
               </td>
               <td>
-                <div class="kotlin-platform" data-title="JVM">JVM</div>
-                <!--platform-JVM--></td>
+                <div class="kotlin-platform" data-title="Android/JVM">A</div>
+                <!--platform-Android/JVM--></td>
             </tr>
           </tbody>
         </table>
@@ -69,8 +69,8 @@
                 <p>This function will be called by DataStore when it encounters corruption.</p>
               </td>
               <td>
-                <div class="kotlin-platform" data-title="JVM">JVM</div>
-                <!--platform-JVM--></td>
+                <div class="kotlin-platform" data-title="Android/JVM">A</div>
+                <!--platform-Android/JVM--></td>
             </tr>
             <tr>
               <td><code>abstract&nbsp;suspend T</code></td>
@@ -91,8 +91,8 @@
         <h2>Public constructors</h2>
         <div class="api-item"><a name="ReplaceFileCorruptionHandler-kotlin.Function1-"></a><a name="replacefilecorruptionhandler"></a>
           <h3 class="api-name" id="ReplaceFileCorruptionHandler(kotlin.Function1)">ReplaceFileCorruptionHandler</h3>
-<span class="kotlin-platform" data-title="JVM">JVM</span>
-          <!--platform-JVM-->
+<span class="kotlin-platform" data-title="Android/JVM">A</span>
+          <!--platform-Android/JVM-->
           <pre class="api-signature no-pretty-print">&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/datastore/core/handlers/ReplaceFileCorruptionHandler.html#ReplaceFileCorruptionHandler(kotlin.Function1)">ReplaceFileCorruptionHandler</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;produceNewData:&nbsp;(<a href="/reference/kotlin/androidx/datastore/core/CorruptionException.html">CorruptionException</a>) <span style="white-space: nowrap;">-&gt;</span> T<br>)</pre>
           <div class="devsite-table-wrapper">
             <table class="responsive">
@@ -123,8 +123,8 @@
         <h2>Public functions</h2>
         <div class="api-item"><a name="handleCorruption-androidx.datastore.core.CorruptionException-"></a><a name="handlecorruption"></a>
           <h3 class="api-name" id="handleCorruption(androidx.datastore.core.CorruptionException)">handleCorruption</h3>
-<span class="kotlin-platform" data-title="JVM">JVM</span>
-          <!--platform-JVM-->
+<span class="kotlin-platform" data-title="Android/JVM">A</span>
+          <!--platform-Android/JVM-->
           <pre class="api-signature no-pretty-print">open&nbsp;suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/datastore/core/handlers/ReplaceFileCorruptionHandler.html#handleCorruption(androidx.datastore.core.CorruptionException)">handleCorruption</a>(ex:&nbsp;<a href="/reference/kotlin/androidx/datastore/core/CorruptionException.html">CorruptionException</a>):&nbsp;T</pre>
           <p>This function will be called by DataStore when it encounters corruption. If the implementation of this function throws an exception, it will be propagated to the original call to DataStore. Otherwise, the returned data will be written to disk.</p>
           <p>This function should not interact with any DataStore API - doing so can result in a deadlock.</p>
