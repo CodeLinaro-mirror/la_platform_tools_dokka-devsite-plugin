@@ -18,6 +18,7 @@ package com.google.devsite.renderer.impl
 
 import com.google.devsite.components.impl.DefaultRedirectPage
 import com.google.devsite.components.pages.RedirectPage
+import com.google.devsite.components.symbols.Platform
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.AnnotationDocumentableConverter
 import com.google.devsite.renderer.converters.DocTagConverter
@@ -72,7 +73,8 @@ internal class PackageRenderer(
     }
 
     suspend fun writePackageSummary(dPackage: DPackage) {
-        val converter = if (dPackage.isKMP())
+        val converter = if (dPackage.isKMP()) {
+            val platforms = dPackage.sourceSets.map { Platform.from(it.analysisPlatform) }
             KmpPackageConverter(
                 displayLanguage,
                 dPackage,
@@ -81,9 +83,10 @@ internal class PackageRenderer(
                 functionConverter,
                 propertyConverter,
                 javadocConverter,
-                paramConverter
+                paramConverter,
+                platforms
             )
-        else
+        } else
             NonKmpPackageConverter(
                 displayLanguage,
                 dPackage,
@@ -115,7 +118,8 @@ internal class PackageRenderer(
         if (classlikeDoc.isSynthetic && displayLanguage == Language.KOTLIN) {
             return
         }
-        val converter = if (dPackage.isKMP())
+        val converter = if (dPackage.isKMP()) {
+            val platforms = dPackage.sourceSets.map { Platform.from(it.analysisPlatform) }
             KmpClasslikeConverter(
                 displayLanguage,
                 classlikeDoc,
@@ -128,9 +132,10 @@ internal class PackageRenderer(
                 paramConverter,
                 annotationConverter,
                 classExtensionFunctions,
-                classExtensionProperties
+                classExtensionProperties,
+                platforms
             )
-        else
+        } else
             NonKmpClasslikeConverter(
                 displayLanguage,
                 classlikeDoc,

@@ -83,7 +83,8 @@ internal class KmpClasslikeConverter(
     paramConverter: ParameterDocumentableConverter,
     annotationConverter: AnnotationDocumentableConverter,
     classExtensionFunctions: List<DFunction> = emptyList(),
-    classExtensionProperties: List<DProperty> = emptyList()
+    classExtensionProperties: List<DProperty> = emptyList(),
+    platforms: List<Platform>
 ) : ClasslikeDocumentableConverter(
     displayLanguage,
     classlike,
@@ -98,9 +99,7 @@ internal class KmpClasslikeConverter(
     classExtensionFunctions,
     classExtensionProperties
 ) {
-    override val header = DefaultDevsitePlatformSelector(
-        platforms = listOf(Platform.COMMON, Platform.JVM, Platform.JS, Platform.NATIVE)
-    )
+    override val header = DefaultDevsitePlatformSelector(platforms)
     override val functionToSummaryConverter = functionConverter::summaryKmp
     override val functionToDetailConverter = functionConverter::detailKmp
     override val propertyToSummaryConverter = propertyConverter::summaryKmp
