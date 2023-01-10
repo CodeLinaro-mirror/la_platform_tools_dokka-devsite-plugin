@@ -44,6 +44,7 @@ internal data class DefaultPlatformComponent(
             div {
                 // Hooks up to devsite/android/en/assets/css/reference-docs.css
                 classes = setOf("kotlin-platform")
+                attributes["data-title"] = it.selectorDisplayName()
                 +it.shortName()
             }
             comment("platform-${it.selectorDisplayName()}")
@@ -55,6 +56,7 @@ internal data class DefaultPlatformComponent(
             span {
                 // TODO(improve detail section display, e.g. move to right-aligned)
                 classes = setOf("kotlin-platform")
+                attributes["data-title"] = it.selectorDisplayName()
                 +it.shortName()
             }
             comment("platform-${it.selectorDisplayName()}")
