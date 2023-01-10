@@ -3062,6 +3062,43 @@ internal class ClasslikeDocumentableConverterTest(
         assertThat(a.hashCode() == b.hashCode()).isTrue()
     }
 
+    @Ignore // Test does not work; problems mixing Java and Kotlin sources. b/282167724
+    @Test
+    fun `Can distinguish boxing of Java primitives used from Kotlin`() {
+        val src = listOf(
+            """/src/main/java/androidx/example/JavaParent.java
+            |package androidx.example;
+            |public class JavaParent {
+            |   public int unboxed = 5;
+            |   public Integer boxed = 5;
+            |}
+            |public class JavaChild extends JavaParent implements KotlinParent {}""",
+            """/src/main/kotlin/androidx/example/KotlinParent.kt
+            |package androidx.example
+            |open interface KotlinParent""",
+            """/src/main/kotlin/androidx/example/KotlinChild.kt
+            |package androidx.example
+            |class KotlinChild: androidx.example.JavaParent(), KotlinParent"""
+        )
+
+        val module = testWithRootPageNode(src.map { it.trimMargin() })
+        val parent = module.page("Parent").data.content
+        val child = module.page("Child").data.content
+        assertThat(child.data.description.data.hierarchy.data.parents.single().data.name)
+            .isEqualTo("Parent")
+        val unboxedDirect = parent.propertySymbol("unboxed")!!.data.title.data.type
+        val boxedDirect = parent.propertySymbol("boxed")!!.data.title.data.type
+        val unboxedInherited = child.propertySymbol("unboxed")!!.data.title.data.type
+        val boxedInherited = child.propertySymbol("boxed")!!.data.title.data.type
+        val expectedBoxedType = if (displayLanguage == Language.KOTLIN) "Int" else "Integer"
+        val expectedUnboxedType = if (displayLanguage == Language.KOTLIN) "Int" else "int"
+
+        assertThat(unboxedDirect.data.type.data.name).isEqualTo(expectedUnboxedType)
+        assertThat(boxedDirect.data.type.data.name).isEqualTo(expectedBoxedType)
+        assertThat(unboxedInherited.data.type.data.name).isEqualTo(expectedUnboxedType)
+        assertThat(boxedInherited.data.type.data.name).isEqualTo(expectedBoxedType)
+    }
+
     @Test
     fun `Source links are generated correctly`() {
         val page = """
@@ -3347,7 +3384,7 @@ internal class ClasslikeDocumentableConverterTest(
     else "get" + this.capitalize()
 
     private fun Classlike.propertySymbol(name: String = "foo") =
-        (data.publicPropertiesSummary + data.protectedPropertiesSummary)
+        (data.publicPropertiesSummary + data.protectedPropertiesSummary + data.inheritedProperties)
             .singleOrNull { it.name() == name }
 
     private fun ConstructorSummaryList.constructor() = data.items.item().data.description

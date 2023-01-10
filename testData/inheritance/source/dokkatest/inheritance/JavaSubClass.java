@@ -16,6 +16,8 @@
 
 package dokkatest.inheritance;
 
+import java.util.List;
+
 public class JavaSubClass extends KotlinSuperClass {
     /**
      * javaSubClassFunction docs
@@ -25,4 +27,12 @@ public class JavaSubClass extends KotlinSuperClass {
     public String javaSubClassFunction(String bar) {
         return "JavaSubClass";
     }
+
+    // Expected: KotlinLeafClass : JavaSubClass, when accessed from Java, preserves this boxing diff
+    // Actual: all do not appear properly in KotlinLeafClass as-Java. b/234132128
+    public int unboxed = 5;
+    public Integer boxed = 5;
+    public int[] arrayOfUnboxed = {};
+    public Integer[] arrayOfBoxed = {};
+    public List<Integer> listOfBoxed = null;
 }

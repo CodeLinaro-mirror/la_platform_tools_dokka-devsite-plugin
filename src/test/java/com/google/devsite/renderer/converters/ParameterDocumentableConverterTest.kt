@@ -1321,9 +1321,10 @@ internal class ParameterDocumentableConverterTest(
         )
     }
 
-    private fun DModule.returnType(functionName: String = "foo"): TypeProjectionComponent {
+    private fun DModule.returnType(functionName: String = "foo", className: String? = null):
+        TypeProjectionComponent {
         return paramConverter().componentForProjection(
-            projection = function(functionName)!!.type,
+            projection = function(functionName, className)!!.type,
             // Propagate ALL annotations _for display in the summary_, b/197321617
             propagatedAnnotations = emptyList(),
             isReturnType = true,

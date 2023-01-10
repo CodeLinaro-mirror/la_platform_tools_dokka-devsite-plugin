@@ -91,8 +91,8 @@ internal abstract class ConverterTestBase(
     protected fun String.renderJava(imports: List<String> = emptyList()) =
         testJavaWithRootPageNode(trimMargin(), imports)
 
-    protected fun DModule.classlike() = packages.single().classlikes
-        .firstOrNull { it.name !in listOf("Nullable", "NonNull") }
+    protected fun DModule.classlike(name: String? = null) = name?.let { explicitClasslike(it) }
+        ?: packages.single().classlikes.firstOrNull { it.name !in listOf("Nullable", "NonNull") }
 
     protected fun DModule.explicitClasslike(name: String) =
         this.explicitClasslikes(name).singleOrNull() ?: throw RuntimeException()
@@ -112,11 +112,11 @@ internal abstract class ConverterTestBase(
         if (this.name == name) this
         else this.classlikes.mapNotNull { it.explicitSubClasslike(name) }.singleOrNull()
 
-    protected fun DModule.function(name: String? = null) =
+    protected fun DModule.function(name: String? = null, classname: String? = null) =
         packages.single().functions.singleOrNull { it.name == name }
-            ?: classlike()?.functions?.singleOrNull { it.name == name }
+            ?: classlike(classname)?.functions?.singleOrNull { it.name == name }
             ?: packages.single().functions.singleOrNull { !it.dri.isFromBaseClass() }
-            ?: classlike()?.functions?.singleOrNull { !it.dri.isFromBaseClass() }
+            ?: classlike(classname)?.functions?.singleOrNull { !it.dri.isFromBaseClass() }
 
     protected fun DModule.constructor() = constructors().single()
 
