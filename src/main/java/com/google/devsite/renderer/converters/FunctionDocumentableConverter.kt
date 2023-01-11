@@ -38,7 +38,6 @@ import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.KmpTableRowSummaryItem
 import com.google.devsite.components.table.TableRowSummaryItem
 import com.google.devsite.renderer.Language
-import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.model.DFunction
 import java.util.Locale
@@ -48,12 +47,9 @@ internal class FunctionDocumentableConverter(
     private val displayLanguage: Language,
     private val pathProvider: FilePathProvider,
     private val javadocConverter: DocTagConverter,
-    private val docsHolder: DocumentablesHolder
+    private val paramConverter: ParameterDocumentableConverter,
+    private val annotationConverter: AnnotationDocumentableConverter
 ) {
-    private val paramConverter =
-        ParameterDocumentableConverter(displayLanguage, pathProvider, docsHolder)
-    private val annotationConverter =
-        AnnotationDocumentableConverter(displayLanguage, pathProvider, docsHolder)
 
     /** @return the function summary component */
     fun summary(function: DFunction, hints: ModifierHints): TypeSummaryItem<FunctionSignature>? {

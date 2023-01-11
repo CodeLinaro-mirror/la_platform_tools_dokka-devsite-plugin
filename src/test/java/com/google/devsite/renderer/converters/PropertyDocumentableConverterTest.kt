@@ -373,58 +373,42 @@ internal class PropertyDocumentableConverterTest(
             assertThat(shouldBeAVar == SymbolDetail.SymbolKind.PROPERTY)
     }
 
+    private fun DModule.propertyConverter(): PropertyDocumentableConverter {
+        val (holder, provider) = holderAndProvider(this)
+        val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
+        val paramConverter =
+            ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
+        val docConverter =
+            DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
+        return PropertyDocumentableConverter(
+            displayLanguage,
+            provider,
+            docConverter,
+            paramConverter,
+            annotationConverter
+        )
+    }
+
     private fun DModule.summary(
         name: String = "foo",
         hints: ModifierHints = defaultHints
     ): TypeSummaryItem<PropertySignature> {
-        val (holder, provider) = holderAndProvider(this)
-        val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
-        val paramConverter = ParameterDocumentableConverter(displayLanguage, provider, holder)
-        val docConverter =
-            DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
-        val converter = PropertyDocumentableConverter(
-            displayLanguage,
-            provider,
-            docConverter,
-            holder
-        )
-        return converter.summary(property(name)!!, hints)!!
+        return propertyConverter().summary(property(name)!!, hints)!!
     }
 
     private fun DModule.detail(
         name: String = "foo",
         hints: ModifierHints = defaultHints
     ): SymbolDetail<PropertySignature> {
-        val (holder, provider) = holderAndProvider(this)
-        val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
-        val paramConverter = ParameterDocumentableConverter(displayLanguage, provider, holder)
-        val docConverter =
-            DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
-        val converter = PropertyDocumentableConverter(
-            displayLanguage,
-            provider,
-            docConverter,
-            holder
-        )
-        return converter.detail(property(name)!!, hints)!!
+        return propertyConverter().detail(property(name)!!, hints)!!
     }
 
     private fun DModule.signature(
         name: String = "foo",
         hints: ModifierHints = defaultHints
     ): PropertySignature {
-        val (holder, provider) = holderAndProvider(this)
-        val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
-        val paramConverter = ParameterDocumentableConverter(displayLanguage, provider, holder)
-        val docConverter =
-            DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
-        val converter = PropertyDocumentableConverter(
-            displayLanguage,
-            provider,
-            docConverter,
-            holder
-        )
-        return converter.summary(property(name)!!, hints)!!.data.description.data.signature
+        return propertyConverter().summary(property(name)!!, hints)!!
+            .data.description.data.signature
     }
 
     private fun TypeProjectionComponent.link(): Link.Params = data.type.data

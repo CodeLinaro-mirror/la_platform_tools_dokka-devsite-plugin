@@ -430,49 +430,31 @@ internal class RootDocumentableConverterTest(
         assertThat(packageNames).containsExactly("a", "b")
     }
 
-    private fun DModule.indexPageForClasses(): DevsitePage<ClassIndex> {
+    private fun DModule.rootConverter(): RootDocumentableConverter {
         val (holder, provider) = holderAndProvider(this)
         val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
-        val paramConverter = ParameterDocumentableConverter(displayLanguage, provider, holder)
+        val paramConverter =
+            ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
         val javadocConverter =
             DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
-        val converter = RootDocumentableConverter(
+        return RootDocumentableConverter(
             displayLanguage,
             provider,
             holder,
             javadocConverter
         )
-        return runBlocking { converter.classesIndexPage() }
+    }
+
+    private fun DModule.indexPageForClasses(): DevsitePage<ClassIndex> {
+        return runBlocking { rootConverter().classesIndexPage() }
     }
 
     private fun DModule.indexPageForPackages(): DevsitePage<PackageIndex> {
-        val (holder, provider) = holderAndProvider(this)
-        val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
-        val paramConverter = ParameterDocumentableConverter(displayLanguage, provider, holder)
-        val javadocConverter =
-            DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
-        val converter = RootDocumentableConverter(
-            displayLanguage,
-            provider,
-            holder,
-            javadocConverter
-        )
-        return runBlocking { converter.packagesIndexPage() }
+        return runBlocking { rootConverter().packagesIndexPage() }
     }
 
     private fun DModule.toc(packagePrefixToRemove: String? = null): TableOfContents {
-        val (holder, provider) = holderAndProvider(this)
-        val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
-        val paramConverter = ParameterDocumentableConverter(displayLanguage, provider, holder)
-        val javadocConverter =
-            DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
-        val converter = RootDocumentableConverter(
-            displayLanguage,
-            provider,
-            holder,
-            javadocConverter
-        )
-        return runBlocking { converter.tocPage(packagePrefixToRemove) }
+        return runBlocking { rootConverter().tocPage(packagePrefixToRemove) }
     }
 
     companion object {

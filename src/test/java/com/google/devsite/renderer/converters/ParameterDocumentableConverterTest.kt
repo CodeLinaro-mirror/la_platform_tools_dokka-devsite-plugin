@@ -1301,15 +1301,20 @@ internal class ParameterDocumentableConverterTest(
         }
     }
 
-    private fun DModule.param(name: String = "foo", forSummary: Boolean = false):
-        ParameterComponent {
+    private fun DModule.paramConverter(): ParameterDocumentableConverter {
         val (holder, pathProvider) = holderAndProvider(this)
-        val converter = ParameterDocumentableConverter(
+        val annotationConverter =
+            AnnotationDocumentableConverter(displayLanguage, pathProvider, holder)
+        return ParameterDocumentableConverter(
             displayLanguage,
             pathProvider,
-            holder
+            annotationConverter
         )
-        return converter.componentForParameter(
+    }
+
+    private fun DModule.param(name: String = "foo", forSummary: Boolean = false):
+        ParameterComponent {
+        return paramConverter().componentForParameter(
             param = parameterDoc(name),
             isSummary = forSummary,
             isFromJava = function()!!.isFromJava(),
@@ -1318,13 +1323,7 @@ internal class ParameterDocumentableConverterTest(
     }
 
     private fun DModule.returnType(functionName: String = "foo"): TypeProjectionComponent {
-        val (holder, pathProvider) = holderAndProvider(this)
-        val converter = ParameterDocumentableConverter(
-            displayLanguage,
-            pathProvider,
-            holder
-        )
-        return converter.componentForProjection(
+        return paramConverter().componentForProjection(
             projection = function(functionName)!!.type,
             // Propagate ALL annotations _for display in the summary_, b/197321617
             propagatedAnnotations = emptyList(),

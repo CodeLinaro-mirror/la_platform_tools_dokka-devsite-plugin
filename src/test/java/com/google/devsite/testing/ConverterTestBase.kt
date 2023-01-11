@@ -345,57 +345,59 @@ internal abstract class ConverterTestBase(
     protected fun DModule.packagePage(): DevsitePage<PackageSummary> {
         val (holder, provider) = holderAndProvider(this)
         val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
-        val paramConverter = ParameterDocumentableConverter(displayLanguage, provider, holder)
+        val paramConverter =
+            ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
         val javadocConverter =
             DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
+        val functionConverter = FunctionDocumentableConverter(
+            displayLanguage, provider, javadocConverter, paramConverter, annotationConverter
+        )
+        val propertyConverter = PropertyDocumentableConverter(
+            displayLanguage, provider, javadocConverter, paramConverter, annotationConverter
+        )
+
         val converter =
             NonKmpPackageConverter(
                 displayLanguage,
                 packages.single(),
                 provider,
                 holder,
-                FunctionDocumentableConverter(displayLanguage, provider, javadocConverter, holder),
-                PropertyDocumentableConverter(displayLanguage, provider, javadocConverter, holder),
+                functionConverter,
+                propertyConverter,
                 javadocConverter,
                 paramConverter
             )
         return runBlocking { converter.summaryPage() }
     }
 
+    private fun DModule.functionConverter(): FunctionDocumentableConverter {
+        val (holder, provider) = holderAndProvider(this)
+        val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
+        val paramConverter =
+            ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
+        val javadocConverter =
+            DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
+        return FunctionDocumentableConverter(
+            displayLanguage,
+            provider,
+            javadocConverter,
+            paramConverter,
+            annotationConverter
+        )
+    }
+
     protected fun DModule.functionSummary(
         doc: DModule.() -> DFunction = ::smartDoc,
         hints: ModifierHints = defaultHints
     ): TypeSummaryItem<FunctionSignature> {
-        val (holder, provider) = holderAndProvider(this)
-        val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
-        val paramConverter = ParameterDocumentableConverter(displayLanguage, provider, holder)
-        val javadocConverter =
-            DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
-        val converter = FunctionDocumentableConverter(
-            displayLanguage,
-            provider,
-            javadocConverter,
-            holder
-        )
-        return converter.summary(this.doc(), hints.copy(isSummary = true))!!
+        return functionConverter().summary(this.doc(), hints.copy(isSummary = true))!!
     }
 
     protected fun DModule.functionSummaries(
         hints: ModifierHints = defaultHints
     ): Map<String, TypeSummaryItem<FunctionSignature>> {
-        val (holder, provider) = holderAndProvider(this)
-        val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
-        val paramConverter = ParameterDocumentableConverter(displayLanguage, provider, holder)
-        val javadocConverter =
-            DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
-        val converter = FunctionDocumentableConverter(
-            displayLanguage,
-            provider,
-            javadocConverter,
-            holder
-        )
         return functions()!!.associate {
-            it.name to converter.summary(it, hints.copy(isSummary = true))!!
+            it.name to functionConverter().summary(it, hints.copy(isSummary = true))!!
         }
     }
 
@@ -403,35 +405,15 @@ internal abstract class ConverterTestBase(
         doc: DModule.() -> DFunction = ::smartDoc,
         hints: ModifierHints = defaultHints
     ): SymbolDetail<FunctionSignature> {
-        val (holder, provider) = holderAndProvider(this)
-        val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
-        val paramConverter = ParameterDocumentableConverter(displayLanguage, provider, holder)
-        val javadocConverter =
-            DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
-        val converter = FunctionDocumentableConverter(
-            displayLanguage,
-            provider,
-            javadocConverter,
-            holder
-        )
-        return converter.detail(this.doc(), hints)!!
+        return functionConverter().detail(this.doc(), hints)!!
     }
 
     protected fun DModule.functionSignature(
         doc: DModule.() -> DFunction = ::smartDoc
     ): FunctionSignature {
-        val (holder, provider) = holderAndProvider(this)
-        val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
-        val paramConverter = ParameterDocumentableConverter(displayLanguage, provider, holder)
-        val javadocConverter =
-            DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
-        val converter = FunctionDocumentableConverter(
-            displayLanguage,
-            provider,
-            javadocConverter,
-            holder
-        )
-        return with(converter) { this@functionSignature.doc().signature(isSummary = false) }
+        return with(functionConverter()) {
+            this@functionSignature.doc().signature(isSummary = false)
+        }
     }
 
     protected fun DModule.functionSummary(

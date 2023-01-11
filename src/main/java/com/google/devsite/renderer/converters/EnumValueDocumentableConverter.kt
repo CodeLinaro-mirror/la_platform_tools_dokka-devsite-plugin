@@ -25,7 +25,6 @@ import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.table.TableRowSummaryItem
 import com.google.devsite.renderer.Language
-import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.model.DEnum
 import org.jetbrains.dokka.model.DEnumEntry
@@ -36,12 +35,9 @@ internal class EnumValueDocumentableConverter(
     private val displayLanguage: Language,
     private val pathProvider: FilePathProvider,
     private val javadocConverter: DocTagConverter,
-    private val docsHolder: DocumentablesHolder
+    private val paramConverter: ParameterDocumentableConverter,
+    private val annotationConverter: AnnotationDocumentableConverter
 ) {
-    private val paramConverter =
-        ParameterDocumentableConverter(displayLanguage, pathProvider, docsHolder)
-    private val annotationConverter =
-        AnnotationDocumentableConverter(displayLanguage, pathProvider, docsHolder)
 
     /** @return the enum value summary component */
     // TODO(KMP, b/256172699)

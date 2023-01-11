@@ -1451,17 +1451,29 @@ internal class DocTagConverterTest(
         """.render()
         val (holder, provider) = holderAndProvider(module)
         val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
-        val paramConverter = ParameterDocumentableConverter(displayLanguage, provider, holder)
+        val paramConverter =
+            ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
         val javadocConverter =
             DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
+        val functionConverter =
+            FunctionDocumentableConverter(
+                displayLanguage, provider, javadocConverter, paramConverter, annotationConverter
+            )
+        val propertyConverter =
+            PropertyDocumentableConverter(
+                displayLanguage, provider, javadocConverter, paramConverter, annotationConverter
+            )
+        val enumConverter = EnumValueDocumentableConverter(
+            displayLanguage, provider, javadocConverter, paramConverter, annotationConverter
+        )
         val classConverter1 = NonKmpClasslikeConverter(
             displayLanguage,
             module.explicitClasslike("DynamicNavGraphBuilder"),
             provider,
             holder,
-            FunctionDocumentableConverter(displayLanguage, provider, javadocConverter, holder),
-            PropertyDocumentableConverter(displayLanguage, provider, javadocConverter, holder),
-            EnumValueDocumentableConverter(displayLanguage, provider, javadocConverter, holder),
+            functionConverter,
+            propertyConverter,
+            enumConverter,
             javadocConverter,
             paramConverter,
             annotationConverter
@@ -1472,9 +1484,9 @@ internal class DocTagConverterTest(
             module.explicitClasslike("ParcelableArrayType"),
             provider,
             holder,
-            FunctionDocumentableConverter(displayLanguage, provider, javadocConverter, holder),
-            PropertyDocumentableConverter(displayLanguage, provider, javadocConverter, holder),
-            EnumValueDocumentableConverter(displayLanguage, provider, javadocConverter, holder),
+            functionConverter,
+            propertyConverter,
+            enumConverter,
             javadocConverter,
             paramConverter,
             annotationConverter
@@ -1629,7 +1641,8 @@ internal class DocTagConverterTest(
         DescriptionComponent {
         val (holder, provider) = holderAndProvider(this)
         val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
-        val paramConverter = ParameterDocumentableConverter(displayLanguage, provider, holder)
+        val paramConverter =
+            ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
         val converter =
             DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
         val annotations =
@@ -1644,7 +1657,8 @@ internal class DocTagConverterTest(
     ): List<ContextFreeComponent> {
         val (holder, provider) = holderAndProvider(this)
         val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
-        val paramConverter = ParameterDocumentableConverter(displayLanguage, provider, holder)
+        val paramConverter =
+            ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
         val converter =
             DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
         val doc = doc()

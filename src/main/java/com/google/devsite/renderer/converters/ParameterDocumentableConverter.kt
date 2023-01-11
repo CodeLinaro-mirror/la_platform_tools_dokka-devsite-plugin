@@ -30,7 +30,6 @@ import com.google.devsite.components.symbols.ParameterComponent
 import com.google.devsite.components.symbols.TypeParameterComponent
 import com.google.devsite.components.symbols.TypeProjectionComponent
 import com.google.devsite.renderer.Language
-import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.ANY_DRI
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.DokkaConfiguration
@@ -68,10 +67,8 @@ import java.util.concurrent.ConcurrentHashMap
 internal class ParameterDocumentableConverter(
     private val displayLanguage: Language,
     private val pathProvider: FilePathProvider,
-    private val docsHolder: DocumentablesHolder
+    private val annotationConverter: AnnotationDocumentableConverter
 ) {
-    private val annotationConverter: AnnotationDocumentableConverter =
-        AnnotationDocumentableConverter(displayLanguage, pathProvider, docsHolder)
 
     /**
      * Returns the component for a parameter.

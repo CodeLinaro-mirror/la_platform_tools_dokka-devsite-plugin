@@ -122,9 +122,19 @@ internal class MultiLanguageRenderer(
         )
 
         val annotationConverter = AnnotationDocumentableConverter(language, filePaths, holder)
-        val paramConverter = ParameterDocumentableConverter(language, filePaths, holder)
+        val paramConverter =
+            ParameterDocumentableConverter(language, filePaths, annotationConverter)
         val javadocConverter =
             DocTagConverter(language, filePaths, holder, paramConverter, annotationConverter)
+        val functionConverter = FunctionDocumentableConverter(
+            language, filePaths, javadocConverter, paramConverter, annotationConverter
+        )
+        val propertyConverter = PropertyDocumentableConverter(
+            language, filePaths, javadocConverter, paramConverter, annotationConverter
+        )
+        val enumConverter = EnumValueDocumentableConverter(
+            language, filePaths, javadocConverter, paramConverter, annotationConverter
+        )
 
         DevsiteRenderer(
             MetadataRenderer(outputWriter, filePaths, language, holder, javadocConverter),
@@ -133,9 +143,9 @@ internal class MultiLanguageRenderer(
                 filePaths,
                 language,
                 holder,
-                FunctionDocumentableConverter(language, filePaths, javadocConverter, holder),
-                PropertyDocumentableConverter(language, filePaths, javadocConverter, holder),
-                EnumValueDocumentableConverter(language, filePaths, javadocConverter, holder),
+                functionConverter,
+                propertyConverter,
+                enumConverter,
                 javadocConverter,
                 paramConverter,
                 annotationConverter
