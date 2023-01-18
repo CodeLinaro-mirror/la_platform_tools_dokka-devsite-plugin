@@ -85,6 +85,7 @@ internal class DocumentablesHolder(
     scope: CoroutineScope,
     context: DokkaContext? = null,
     private val externalDocumentablesProvider: ExternalDocumentablesProvider? = null,
+    // TODO(handle packages with no common or JVM targets, as-Java. b/265948930)
     private val excludedPackages: Set<Regex> = emptySet(),
     val fileMetadataMap: Map<String, LibraryMetadata> = emptyMap(),
     val baseSourceLink: String? = null,

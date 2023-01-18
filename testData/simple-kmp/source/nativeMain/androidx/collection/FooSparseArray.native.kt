@@ -225,3 +225,5 @@ public actual constructor(initialCapacity: Int) {
 
     }
 }
+
+fun nativeOnlyFunction() = 5

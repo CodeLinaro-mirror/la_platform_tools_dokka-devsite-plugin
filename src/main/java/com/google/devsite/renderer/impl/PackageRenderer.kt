@@ -39,6 +39,7 @@ import com.google.devsite.renderer.impl.paths.PACKAGE_SUMMARY_FILE
 import com.google.devsite.renderer.impl.paths.PACKAGE_SUMMARY_NAME
 import kotlinx.html.html
 import kotlinx.html.stream.createHTML
+import org.jetbrains.dokka.Platform.jvm
 import org.jetbrains.dokka.base.renderers.OutputWriter
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DFunction
@@ -161,6 +162,7 @@ internal class PackageRenderer(
             ""
         )
     }
+    // Note: this cannot distinguish java-only, android-only, and non-KMP libraries.
+    private fun DPackage.isKMP() = displayLanguage == Language.KOTLIN &&
+        (sourceSets.size > 1 || sourceSets.single().analysisPlatform != jvm)
 }
-
-private fun DPackage.isKMP() = sourceSets.size > 1

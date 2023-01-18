@@ -22,6 +22,7 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.Memoizers.isFromJavaMap
 import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.startsWithAnyOf
+import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.analysis.PsiDocumentableSource
 import org.jetbrains.dokka.base.transformers.documentables.isException
 import org.jetbrains.dokka.links.DRI
@@ -71,8 +72,10 @@ import java.io.File
 import java.util.concurrent.ConcurrentHashMap
 
 /** For use when generating error messages. Is slow. */
-internal fun <T> T.getErrorLocation(): String where T : WithSources, T : Documentable {
-    val sourceFilePath = this.sources.values.single().path
+internal fun <T> T.getErrorLocation(
+    sourceSet: DokkaConfiguration.DokkaSourceSet = getExpectOrCommonSourceSet()
+): String where T : WithSources, T : Documentable {
+    val sourceFilePath: String = this.sources[sourceSet]!!.path
     val result = "in declaration of $name in file $sourceFilePath"
     // Regex that matches the declaration of `this`
     val matcher = when (sourceFilePath.substringAfterLast(".")) {
@@ -478,10 +481,14 @@ internal fun Documentable.getExpectOrCommonSourceSet() =
             "Unable to determine the expect or common sourceSet for ${this::class.simpleName} $dri"
         )
 
+/**
+ * Used in as-Java docs and when getting JVM-exclusive annotations.
+ *
+ * Returns null if the documentable is not accessible in a jvm context.
+ *
+ * Uses common sourceSet as a fallback, because poorly-implemented JVM-exclusive annotations could
+ * be there, and because java code can access Kotlin common code.
+ */
 internal fun Documentable.getAsJavaSourceSet() =
-    sourceSets.singleOrNull()
-        ?: (sourceSets - expectPresentInSet).singleOrNull()
-        ?: sourceSets.singleOrNull { it.analysisPlatform == org.jetbrains.dokka.Platform.jvm }
-        ?: throw RuntimeException(
-            "Unable to determine the as-Java sourceSet for ${this::class.simpleName} $dri"
-        )
+    sourceSets.singleOrNull { it.analysisPlatform == org.jetbrains.dokka.Platform.jvm }
+        ?: sourceSets.singleOrNull { it.analysisPlatform == org.jetbrains.dokka.Platform.common }

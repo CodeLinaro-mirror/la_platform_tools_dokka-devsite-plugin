@@ -69,15 +69,15 @@ internal val Annotation.isBadNonNull get() = dri.classNames == "NotNull" ||
         )
 
 /** @return the complete list of annotations for this type */
-private fun WithExtraProperties<*>.annotations(sourceSet: DokkaConfiguration.DokkaSourceSet) =
+private fun WithExtraProperties<*>.annotations(sourceSet: DokkaConfiguration.DokkaSourceSet?) =
     extra.allOfType<Annotations>().flatMap { annotations ->
         annotations.directAnnotations[sourceSet] ?: emptyList()
     }
 
-internal fun Documentable.annotations(sourceSet: DokkaConfiguration.DokkaSourceSet) =
+internal fun Documentable.annotations(sourceSet: DokkaConfiguration.DokkaSourceSet?) =
     (this as? WithExtraProperties<*>)?.annotations(sourceSet) ?: emptyList()
 
-internal fun Projection.annotations(sourceSet: DokkaConfiguration.DokkaSourceSet) =
+internal fun Projection.annotations(sourceSet: DokkaConfiguration.DokkaSourceSet?) =
     (this as? Bound)?.annotations(sourceSet)
         ?: (this as? WithExtraProperties<*>)?.annotations(sourceSet) ?: emptyList()
 
@@ -85,7 +85,7 @@ internal fun WithExtraProperties<*>.sourceSetIndependentAnnotations(): List<Anno
     extra.allOfType<Annotations>()
         .strictSingleOrNull()?.directAnnotations?.values?.firstOrNull() ?: emptyList()
 
-private fun Bound.annotations(sourceSet: DokkaConfiguration.DokkaSourceSet): List<Annotation> =
+private fun Bound.annotations(sourceSet: DokkaConfiguration.DokkaSourceSet?): List<Annotation> =
     when (this) {
         is TypeParameter, is GenericTypeConstructor, is FunctionalTypeConstructor ->
             (this as WithExtraProperties<*>).annotations(sourceSet)
@@ -110,7 +110,7 @@ internal fun List<Annotation>.deprecationAnnotation() =
  * All existing WithSources are WithExtraProperties, and fileLevelAnnotations require sources.
  * @return the list of file-level annotations on this WithSource's source file
  */
-internal fun <T> T.fileLevelAnnotations(sourceSet: DokkaConfiguration.DokkaSourceSet)
+internal fun <T> T.fileLevelAnnotations(sourceSet: DokkaConfiguration.DokkaSourceSet?)
 where T : WithSources, T : Documentable =
     (this as WithExtraProperties<*>).extra.allOfType<Annotations>().flatMap { annotations ->
         annotations.fileLevelAnnotations[sourceSet]

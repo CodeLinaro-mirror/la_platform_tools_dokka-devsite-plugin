@@ -388,7 +388,7 @@ internal class PropertyDocumentableConverterTest(
             docConverter,
             holder
         )
-        return converter.summary(property(name)!!, hints)
+        return converter.summary(property(name)!!, hints)!!
     }
 
     private fun DModule.detail(
@@ -406,7 +406,7 @@ internal class PropertyDocumentableConverterTest(
             docConverter,
             holder
         )
-        return converter.detail(property(name)!!, hints)
+        return converter.detail(property(name)!!, hints)!!
     }
 
     private fun DModule.signature(
@@ -424,7 +424,7 @@ internal class PropertyDocumentableConverterTest(
             docConverter,
             holder
         )
-        return converter.summary(property(name)!!, hints).data.description.data.signature
+        return converter.summary(property(name)!!, hints)!!.data.description.data.signature
     }
 
     private fun TypeProjectionComponent.link(): Link.Params = data.type.data

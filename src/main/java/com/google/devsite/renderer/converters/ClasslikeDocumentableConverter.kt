@@ -113,17 +113,17 @@ internal abstract class ClasslikeDocumentableConverter(
 ) {
     protected abstract val header: DefaultDevsitePlatformSelector?
     protected abstract val functionToSummaryConverter:
-        (DFunction, ModifierHints) -> TypeSummaryItem<FunctionSignature>
+        (DFunction, ModifierHints) -> TypeSummaryItem<FunctionSignature>?
     protected abstract val functionToDetailConverter:
-        (DFunction, ModifierHints) -> SymbolDetail<FunctionSignature>
+        (DFunction, ModifierHints) -> SymbolDetail<FunctionSignature>?
     protected abstract val propertyToSummaryConverter:
-        (DProperty, ModifierHints) -> TypeSummaryItem<PropertySignature>
+        (DProperty, ModifierHints) -> TypeSummaryItem<PropertySignature>?
     protected abstract val propertyToDetailConverter:
-        (DProperty, ModifierHints) -> SymbolDetail<PropertySignature>
+        (DProperty, ModifierHints) -> SymbolDetail<PropertySignature>?
     protected abstract val constructorToSummaryConverter:
-        (DFunction) -> TableRowSummaryItem<Nothing?, SymbolSummary<FunctionSignature>>
+        (DFunction) -> TableRowSummaryItem<Nothing?, SymbolSummary<FunctionSignature>>?
     protected abstract val constructorToDetailConverter:
-        (DFunction, ModifierHints) -> SymbolDetail<FunctionSignature>
+        (DFunction, ModifierHints) -> SymbolDetail<FunctionSignature>?
 
     /** @return the classlike component */
     suspend fun classlike(): DevsitePage<Classlike> = coroutineScope {
@@ -515,7 +515,7 @@ internal abstract class ClasslikeDocumentableConverter(
 
     private fun functionsToSummary(name: String? = null, functions: List<DFunction>):
         FunctionSummaryList {
-        val components = functions.map {
+        val components = functions.mapNotNull {
             val modifierHints = ModifierHints(
                 displayLanguage = displayLanguage,
                 type = DFunction::class.java,
@@ -546,7 +546,7 @@ internal abstract class ClasslikeDocumentableConverter(
 
     private fun constructorsToSummary(name: String, constructors: List<DFunction>):
         ConstructorSummaryList {
-        val components = constructors.map {
+        val components = constructors.mapNotNull {
             errorContextInjector(it) {
                 constructorToSummaryConverter(it)
             }
@@ -567,7 +567,7 @@ internal abstract class ClasslikeDocumentableConverter(
 
     private fun functionsToDetail(functions: List<DFunction>):
         List<SymbolDetail<FunctionSignature>> {
-        return functions.map {
+        return functions.mapNotNull {
             val modifierHints = ModifierHints(
                 displayLanguage = displayLanguage,
                 isSummary = false,
@@ -592,7 +592,7 @@ internal abstract class ClasslikeDocumentableConverter(
             isSummary = false,
             isConstructor = true
         )
-        return functions.map {
+        return functions.mapNotNull {
             errorContextInjector(it) {
                 constructorToDetailConverter(it, modifierHints)
             }
@@ -617,7 +617,7 @@ internal abstract class ClasslikeDocumentableConverter(
 
     private fun propertiesToSummary(name: String? = null, properties: List<DProperty>):
         PropertySummaryList {
-        val components = properties.map {
+        val components = properties.mapNotNull {
             val modifierHints = ModifierHints(
                 displayLanguage = displayLanguage,
                 type = DProperty::class.java,
@@ -650,7 +650,7 @@ internal abstract class ClasslikeDocumentableConverter(
 
     private fun propertiesToDetail(properties: List<DProperty>):
         List<SymbolDetail<PropertySignature>> {
-        return properties.map {
+        return properties.mapNotNull {
             val modifierHints = ModifierHints(
                 displayLanguage = displayLanguage,
                 type = DProperty::class.java,
@@ -1102,8 +1102,9 @@ internal abstract class ClasslikeDocumentableConverter(
             isExpectActual = false
         )
 
-    private fun <I : Documentable, O> errorContextInjector(
+    protected open fun <I : Documentable, O> errorContextInjector(
         documentable: I,
+        sourceSet: DokkaSourceSet = documentable.getExpectOrCommonSourceSet(),
         toDo: (I) -> O,
     ): O {
         try {
@@ -1111,7 +1112,8 @@ internal abstract class ClasslikeDocumentableConverter(
         } catch (e: Exception) {
             var message = "Error when handling ${documentable::class} ${documentable.name} " +
                 "in ${classlike.name}"
-            if (documentable is WithSources) message += ", " + documentable.getErrorLocation()
+            if (documentable is WithSources)
+                message += ", " + documentable.getErrorLocation(sourceSet)
             throw RuntimeException(message, e)
         }
     }

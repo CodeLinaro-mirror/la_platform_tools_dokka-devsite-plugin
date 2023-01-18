@@ -53,22 +53,21 @@ internal class PropertyDocumentableConverter(
         AnnotationDocumentableConverter(displayLanguage, pathProvider, docsHolder)
 
     /** @return the property summary component */
-    fun summary(property: DProperty, hints: ModifierHints): TypeSummaryItem<PropertySignature> {
+    fun summary(property: DProperty, hints: ModifierHints): TypeSummaryItem<PropertySignature>? {
+        val jvmSourceSet = property.getAsJavaSourceSet() ?: return null
         val (typeAnnotations, nonTypeAnnotations) =
-            property.annotations(property.getExpectOrCommonSourceSet())
-                .partition { it.belongsOnReturnType() }
+            property.annotations(jvmSourceSet).partition { it.belongsOnReturnType() }
         return DefaultTableRowSummaryItem(
             TableRowSummaryItem.Params(
                 title = DefaultTypeSummary(
                     TypeSummary.Params(
                         type = paramConverter.componentForProjection(
-                            property.type,
-                            property.isFromJava(),
-                            property.sourceSets.single(),
-                            typeAnnotations
+                            projection = property.type,
+                            isJavaSource = property.isFromJava(),
+                            sourceSet = jvmSourceSet,
+                            propagatedAnnotations = typeAnnotations
                         ),
-                        modifiers = property.modifiers(property.getExpectOrCommonSourceSet())
-                            .modifiersFor(hints)
+                        modifiers = property.modifiers(jvmSourceSet).modifiersFor(hints)
                     )
                 ),
                 description = DefaultSymbolSummary(
@@ -131,15 +130,15 @@ internal class PropertyDocumentableConverter(
     }
 
     /** @return the property detail component */
-    fun detail(property: DProperty, hints: ModifierHints): SymbolDetail<PropertySignature> {
+    fun detail(property: DProperty, hints: ModifierHints): SymbolDetail<PropertySignature>? {
+        val jvmSourceSet = property.getAsJavaSourceSet() ?: return null
         val (typeAnnotations, nonTypeAnnotations) =
-            property.annotations(property.getExpectOrCommonSourceSet())
-                .partition { it.belongsOnReturnType() }
+            property.annotations(jvmSourceSet).partition { it.belongsOnReturnType() }
         val returnType = paramConverter.componentForProjection(
-            property.type,
-            property.isFromJava(),
-            property.sourceSets.single(),
-            typeAnnotations,
+            projection = property.type,
+            isJavaSource = property.isFromJava(),
+            sourceSet = jvmSourceSet,
+            propagatedAnnotations = typeAnnotations,
             propagatedNullability = property.type
                 .getNullability(
                     displayLanguage = displayLanguage,
@@ -162,8 +161,7 @@ internal class PropertyDocumentableConverter(
                     deprecationAnnotation = nonTypeAnnotations.deprecationAnnotation()
                 ),
                 displayLanguage = displayLanguage,
-                modifiers = property.modifiers(property.getExpectOrCommonSourceSet())
-                    .modifiersFor(hints),
+                modifiers = property.modifiers(jvmSourceSet).modifiersFor(hints),
                 annotationComponents = annotationConverter.annotationComponents(
                     annotations = nonTypeAnnotations,
                     nullability = Nullability.DONT_CARE, // Propagates to return type instead

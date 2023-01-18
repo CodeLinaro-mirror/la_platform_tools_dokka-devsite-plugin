@@ -55,13 +55,13 @@ internal abstract class PackageDocumentableConverter(
 ) {
     protected abstract val header: DefaultDevsitePlatformSelector?
     protected abstract val functionToSummaryConverter:
-        (DFunction, ModifierHints) -> TypeSummaryItem<FunctionSignature>
+        (DFunction, ModifierHints) -> TypeSummaryItem<FunctionSignature>?
     protected abstract val functionToDetailConverter:
-        (DFunction, ModifierHints) -> SymbolDetail<FunctionSignature>
+        (DFunction, ModifierHints) -> SymbolDetail<FunctionSignature>?
     protected abstract val propertyToSummaryConverter:
-        (DProperty, ModifierHints) -> TypeSummaryItem<PropertySignature>
+        (DProperty, ModifierHints) -> TypeSummaryItem<PropertySignature>?
     protected abstract val propertyToDetailConverter:
-        (DProperty, ModifierHints) -> SymbolDetail<PropertySignature>
+        (DProperty, ModifierHints) -> SymbolDetail<PropertySignature>?
     protected abstract val docsToSummary:
         (List<Documentable>) -> SummaryList<TableRowSummaryItem<Link, DescriptionComponent>>
 
@@ -139,7 +139,7 @@ internal abstract class PackageDocumentableConverter(
     }
 
     private fun functionsToSummary(functions: List<DFunction>): FunctionSummaryList {
-        val components = functions.map {
+        val components = functions.mapNotNull {
             val modifierHints = ModifierHints(
                 displayLanguage = displayLanguage,
                 type = DFunction::class.java,
@@ -159,7 +159,7 @@ internal abstract class PackageDocumentableConverter(
 
     private fun functionsToDetail(functions: List<DFunction>):
         List<SymbolDetail<FunctionSignature>> {
-        return functions.map {
+        return functions.mapNotNull {
             val modifierHints = ModifierHints(
                 displayLanguage = displayLanguage,
                 type = DFunction::class.java,
@@ -172,7 +172,7 @@ internal abstract class PackageDocumentableConverter(
     }
 
     private fun propertiesToSummary(properties: List<DProperty>): PropertySummaryList {
-        val components = properties.map {
+        val components = properties.mapNotNull {
             val modifierHints = ModifierHints(
                 displayLanguage = displayLanguage,
                 type = DProperty::class.java,
@@ -192,7 +192,7 @@ internal abstract class PackageDocumentableConverter(
 
     private fun propertiesToDetail(properties: List<DProperty>):
         List<SymbolDetail<PropertySignature>> {
-        return properties.map {
+        return properties.mapNotNull {
             val modifierHints = ModifierHints(
                 displayLanguage = displayLanguage,
                 type = DProperty::class.java,

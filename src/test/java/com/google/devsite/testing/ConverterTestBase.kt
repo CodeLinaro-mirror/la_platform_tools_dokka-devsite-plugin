@@ -377,7 +377,7 @@ internal abstract class ConverterTestBase(
             javadocConverter,
             holder
         )
-        return converter.summary(this.doc(), hints.copy(isSummary = true))
+        return converter.summary(this.doc(), hints.copy(isSummary = true))!!
     }
 
     protected fun DModule.functionSummaries(
@@ -395,7 +395,7 @@ internal abstract class ConverterTestBase(
             holder
         )
         return functions()!!.associate {
-            it.name to converter.summary(it, hints.copy(isSummary = true))
+            it.name to converter.summary(it, hints.copy(isSummary = true))!!
         }
     }
 
@@ -414,7 +414,7 @@ internal abstract class ConverterTestBase(
             javadocConverter,
             holder
         )
-        return converter.detail(this.doc(), hints)
+        return converter.detail(this.doc(), hints)!!
     }
 
     protected fun DModule.functionSignature(

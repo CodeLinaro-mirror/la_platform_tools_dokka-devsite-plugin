@@ -9,92 +9,67 @@
       <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/datastore/core/StorageConnection.kt+class:androidx.datastore.core.StorageConnection&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>StorageConnection</h1>
-    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-common">Common</option><option selected="selected" value="platform-jvm">Android/JVM</option><option selected="selected" value="platform-native">Native</option></select></devsite-select >
-    <devsite-filter  select-el-container-id="platform">
-      <div class="list">
-        <div class="kotlin-platform" data-title="Common">Cmn</div>
-        <!--platform-Common-->
-        <p>
-          <pre>public interface <a href="/reference/androidx/datastore/core/StorageConnection.html">StorageConnection</a>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; extends <a href="/reference/androidx/datastore/core/Closeable.html">Closeable</a></pre>
-        </p>
-      </div>
-    </devsite-filter >
+    <p>
+      <pre>public interface <a href="/reference/androidx/datastore/core/StorageConnection.html">StorageConnection</a>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; extends <a href="/reference/androidx/datastore/core/Closeable.html">Closeable</a></pre>
+    </p>
     <hr>
     <p>StorageConnection provides a way to read and write a particular type <T> of data. StorageConnections are created from <code><a href="/reference/androidx/datastore/core/Storage.html">Storage</a></code> objects.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <devsite-filter  select-el-container-id="platform">
-        <table class="fixed">
-          <colgroup>
-            <col width="35%">
-            <col width="58%">
-            <col>
-          </colgroup>
-          <thead>
-            <tr>
-              <th colspan="100%"><h3>Public methods</h3></th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R</code></td>
-              <td>
-                <div><code>&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/datastore/core/StorageConnection.html#readScope(kotlin.coroutines.SuspendFunction2)">readScope</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-suspend-function2/index.html">SuspendFunction2</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/datastore/core/ReadScope.html">ReadScope</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;block<br>)</code></div>
-                <p>Creates a scope for reading to allow storage reads, and will try to obtain a read lock.</p>
-              </td>
-              <td>
-                <div class="kotlin-platform" data-title="Common">Cmn</div>
-                <!--platform-Common--></td>
-            </tr>
-            <tr>
-              <td><code>abstract void</code></td>
-              <td>
-                <div><code><a href="/reference/androidx/datastore/core/StorageConnection.html#writeScope(kotlin.coroutines.SuspendFunction1)">writeScope</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-suspend-function1/index.html">SuspendFunction1</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/datastore/core/WriteScope.html">WriteScope</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</code></div>
-                <p>Creates an write scope that guaranteed to only have one single writer, ensuring also that any reads within this scope have the most current data.</p>
-              </td>
-              <td>
-                <div class="kotlin-platform" data-title="Common">Cmn</div>
-                <!--platform-Common--></td>
-            </tr>
-          </tbody>
-        </table>
-      </devsite-filter >
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R</code></td>
+            <td>
+              <div><code>&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/datastore/core/StorageConnection.html#readScope(kotlin.coroutines.SuspendFunction2)">readScope</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-suspend-function2/index.html">SuspendFunction2</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/datastore/core/ReadScope.html">ReadScope</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;block<br>)</code></div>
+              <p>Creates a scope for reading to allow storage reads, and will try to obtain a read lock.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/datastore/core/StorageConnection.html#writeScope(kotlin.coroutines.SuspendFunction1)">writeScope</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-suspend-function1/index.html">SuspendFunction1</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/datastore/core/WriteScope.html">WriteScope</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</code></div>
+              <p>Creates an write scope that guaranteed to only have one single writer, ensuring also that any reads within this scope have the most current data.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <div class="devsite-table-wrapper">
-      <devsite-filter  select-el-container-id="platform">
-        <table class="fixed">
-          <colgroup>
-            <col width="35%">
-            <col width="58%">
-            <col>
-          </colgroup>
-          <thead>
-            <tr>
-              <th colspan="100%"><h3>Extension functions</h3></th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
-              <td>
-                <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/datastore/core/StorageConnectionKt.html">StorageConnectionKt</a>.<a href="/reference/androidx/datastore/core/StorageConnection.html#(androidx.datastore.core.StorageConnection).readData()">readData</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/datastore/core/StorageConnection.html">StorageConnection</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver<br>)</code></div>
-              </td>
-              <td>
-                <div class="kotlin-platform" data-title="Common">Cmn</div>
-                <!--platform-Common--></td>
-            </tr>
-            <tr>
-              <td><code>default&nbsp;final void</code></td>
-              <td>
-                <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/datastore/core/StorageConnectionKt.html">StorageConnectionKt</a>.<a href="/reference/androidx/datastore/core/StorageConnection.html#(androidx.datastore.core.StorageConnection).writeData(kotlin.Any)">writeData</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/datastore/core/StorageConnection.html">StorageConnection</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;value<br>)</code></div>
-              </td>
-              <td>
-                <div class="kotlin-platform" data-title="Common">Cmn</div>
-                <!--platform-Common--></td>
-            </tr>
-          </tbody>
-        </table>
-      </devsite-filter >
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/datastore/core/StorageConnectionKt.html">StorageConnectionKt</a>.<a href="/reference/androidx/datastore/core/StorageConnection.html#(androidx.datastore.core.StorageConnection).readData()">readData</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/datastore/core/StorageConnection.html">StorageConnection</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver<br>)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final void</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/datastore/core/StorageConnectionKt.html">StorageConnectionKt</a>.<a href="/reference/androidx/datastore/core/StorageConnection.html#(androidx.datastore.core.StorageConnection).writeData(kotlin.Any)">writeData</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/datastore/core/StorageConnection.html">StorageConnection</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;value<br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive" id="inhmethods">
@@ -107,131 +82,113 @@
           <tr>
             <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/datastore/core/Closeable.html">androidx.datastore.core.Closeable</a></span>
               <div class="devsite-table-wrapper">
-                <devsite-filter  select-el-container-id="platform">
-                  <table class="fixed">
-                    <colgroup>
-                      <col width="35%">
-                      <col width="58%">
-                      <col>
-                    </colgroup>
-                    <tbody class="list">
-                      <tr>
-                        <td><code>abstract void</code></td>
-                        <td>
-                          <div><code><a href="/reference/androidx/datastore/core/Closeable.html#close()">close</a>()</code></div>
-                          <p>Closes the specified resource.</p>
-                        </td>
-                        <td>
-                          <div class="kotlin-platform" data-title="Common">Cmn</div>
-                          <!--platform-Common--></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </devsite-filter >
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>abstract void</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/datastore/core/Closeable.html#close()">close</a>()</code></div>
+                        <p>Closes the specified resource.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
 </devsite-expandable>            </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <devsite-filter  select-el-container-id="platform">
-      <div class="list">
-        <h2>Public methods</h2>
-        <div class="api-item"><a name="readScope-kotlin.coroutines.SuspendFunction2-"></a><a name="readscope"></a>
-          <h3 class="api-name" id="readScope(kotlin.coroutines.SuspendFunction2)">readScope</h3>
-<span class="kotlin-platform" data-title="Common">Cmn</span>
-          <!--platform-Common-->
-          <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/datastore/core/StorageConnection.html#readScope(kotlin.coroutines.SuspendFunction2)">readScope</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-suspend-function2/index.html">SuspendFunction2</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/datastore/core/ReadScope.html">ReadScope</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;block<br>)</pre>
-          <p>Creates a scope for reading to allow storage reads, and will try to obtain a read lock.</p>
-          <div class="devsite-table-wrapper">
-            <table class="responsive">
-              <colgroup>
-                <col width="40%">
-                <col>
-              </colgroup>
-              <thead>
-                <tr>
-                  <th colspan="100%">Parameters</th>
-                </tr>
-              </thead>
-              <tbody class="list">
-                <tr>
-                  <td><code>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-suspend-function2/index.html">SuspendFunction2</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/datastore/core/ReadScope.html">ReadScope</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;block</code></td>
-                  <td>
-                    <p>The block of code that is performed within this scope.  Block will receive <code>locked</code> parameter which is true if the try lock succeeded.</p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="devsite-table-wrapper">
-            <table class="responsive">
-              <colgroup>
-                <col width="40%">
-                <col>
-              </colgroup>
-              <thead>
-                <tr>
-                  <th colspan="100%">Throws</th>
-                </tr>
-              </thead>
-              <tbody class="list">
-                <tr>
-                  <td><code><a href="/reference/androidx/datastore/core/IOException.html">androidx.datastore.core.IOException</a>&nbsp;androidx.datastore.core.IOException</code></td>
-                  <td>
-                    <p>when there is an unrecoverable exception in reading.</p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="readScope-kotlin.coroutines.SuspendFunction2-"></a><a name="readscope"></a>
+        <h3 class="api-name" id="readScope(kotlin.coroutines.SuspendFunction2)">readScope</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/datastore/core/StorageConnection.html#readScope(kotlin.coroutines.SuspendFunction2)">readScope</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-suspend-function2/index.html">SuspendFunction2</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/datastore/core/ReadScope.html">ReadScope</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;block<br>)</pre>
+        <p>Creates a scope for reading to allow storage reads, and will try to obtain a read lock.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-suspend-function2/index.html">SuspendFunction2</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/datastore/core/ReadScope.html">ReadScope</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;block</code></td>
+                <td>
+                  <p>The block of code that is performed within this scope.  Block will receive <code>locked</code> parameter which is true if the try lock succeeded.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="api-item"><a name="writeScope-kotlin.coroutines.SuspendFunction1-"></a><a name="writescope"></a>
-          <h3 class="api-name" id="writeScope(kotlin.coroutines.SuspendFunction1)">writeScope</h3>
-<span class="kotlin-platform" data-title="Common">Cmn</span>
-          <!--platform-Common-->
-          <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/datastore/core/StorageConnection.html#writeScope(kotlin.coroutines.SuspendFunction1)">writeScope</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-suspend-function1/index.html">SuspendFunction1</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/datastore/core/WriteScope.html">WriteScope</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</pre>
-          <p>Creates an write scope that guaranteed to only have one single writer, ensuring also that any reads within this scope have the most current data.</p>
-          <div class="devsite-table-wrapper">
-            <table class="responsive">
-              <colgroup>
-                <col width="40%">
-                <col>
-              </colgroup>
-              <thead>
-                <tr>
-                  <th colspan="100%">Throws</th>
-                </tr>
-              </thead>
-              <tbody class="list">
-                <tr>
-                  <td><code><a href="/reference/androidx/datastore/core/IOException.html">androidx.datastore.core.IOException</a>&nbsp;androidx.datastore.core.IOException</code></td>
-                  <td>
-                    <p>when there is an unrecoverable exception in writing.</p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/datastore/core/IOException.html">androidx.datastore.core.IOException</a>&nbsp;androidx.datastore.core.IOException</code></td>
+                <td>
+                  <p>when there is an unrecoverable exception in reading.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-    </devsite-filter >
-    <devsite-filter  select-el-container-id="platform">
-      <div class="list">
-        <h2>Extension functions</h2>
-        <div class="api-item"><a name="-androidx.datastore.core.StorageConnection-.readData--"></a><a name="readdata"></a>
-          <h3 class="api-name" id="(androidx.datastore.core.StorageConnection).readData()">StorageConnectionKt.readData</h3>
-<span class="kotlin-platform" data-title="Common">Cmn</span>
-          <!--platform-Common-->
-          <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/datastore/core/StorageConnectionKt.html">StorageConnectionKt</a>.<a href="/reference/androidx/datastore/core/StorageConnection.html#(androidx.datastore.core.StorageConnection).readData()">readData</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/datastore/core/StorageConnection.html">StorageConnection</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver<br>)</pre>
-        </div>
-        <div class="api-item"><a name="-androidx.datastore.core.StorageConnection-.writeData-kotlin.Any-"></a><a name="writedata"></a>
-          <h3 class="api-name" id="(androidx.datastore.core.StorageConnection).writeData(kotlin.Any)">StorageConnectionKt.writeData</h3>
-<span class="kotlin-platform" data-title="Common">Cmn</span>
-          <!--platform-Common-->
-          <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/datastore/core/StorageConnectionKt.html">StorageConnectionKt</a>.<a href="/reference/androidx/datastore/core/StorageConnection.html#(androidx.datastore.core.StorageConnection).writeData(kotlin.Any)">writeData</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/datastore/core/StorageConnection.html">StorageConnection</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;value<br>)</pre>
+      <div class="api-item"><a name="writeScope-kotlin.coroutines.SuspendFunction1-"></a><a name="writescope"></a>
+        <h3 class="api-name" id="writeScope(kotlin.coroutines.SuspendFunction1)">writeScope</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/datastore/core/StorageConnection.html#writeScope(kotlin.coroutines.SuspendFunction1)">writeScope</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-suspend-function1/index.html">SuspendFunction1</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/datastore/core/WriteScope.html">WriteScope</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</pre>
+        <p>Creates an write scope that guaranteed to only have one single writer, ensuring also that any reads within this scope have the most current data.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/datastore/core/IOException.html">androidx.datastore.core.IOException</a>&nbsp;androidx.datastore.core.IOException</code></td>
+                <td>
+                  <p>when there is an unrecoverable exception in writing.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-    </devsite-filter >
+    </div>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.datastore.core.StorageConnection-.readData--"></a><a name="readdata"></a>
+        <h3 class="api-name" id="(androidx.datastore.core.StorageConnection).readData()">StorageConnectionKt.readData</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/datastore/core/StorageConnectionKt.html">StorageConnectionKt</a>.<a href="/reference/androidx/datastore/core/StorageConnection.html#(androidx.datastore.core.StorageConnection).readData()">readData</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/datastore/core/StorageConnection.html">StorageConnection</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver<br>)</pre>
+      </div>
+      <div class="api-item"><a name="-androidx.datastore.core.StorageConnection-.writeData-kotlin.Any-"></a><a name="writedata"></a>
+        <h3 class="api-name" id="(androidx.datastore.core.StorageConnection).writeData(kotlin.Any)">StorageConnectionKt.writeData</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/datastore/core/StorageConnectionKt.html">StorageConnectionKt</a>.<a href="/reference/androidx/datastore/core/StorageConnection.html#(androidx.datastore.core.StorageConnection).writeData(kotlin.Any)">writeData</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/datastore/core/StorageConnection.html">StorageConnection</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;value<br>)</pre>
+      </div>
+    </div>
   </body>
 </html>

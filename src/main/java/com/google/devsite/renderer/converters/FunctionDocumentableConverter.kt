@@ -56,10 +56,10 @@ internal class FunctionDocumentableConverter(
         AnnotationDocumentableConverter(displayLanguage, pathProvider, docsHolder)
 
     /** @return the function summary component */
-    fun summary(function: DFunction, hints: ModifierHints): TypeSummaryItem<FunctionSignature> {
+    fun summary(function: DFunction, hints: ModifierHints): TypeSummaryItem<FunctionSignature>? {
+        val jvmSourceSet = function.getAsJavaSourceSet() ?: return null
         val (typeAnnotations, nonTypeAnnotations) =
-            function.annotations(function.getExpectOrCommonSourceSet())
-                .partition { it.belongsOnReturnType() }
+            function.annotations(jvmSourceSet).partition { it.belongsOnReturnType() }
         return DefaultTableRowSummaryItem(
             TableRowSummaryItem.Params(
                 title = DefaultTypeSummary(
@@ -70,10 +70,9 @@ internal class FunctionDocumentableConverter(
                             propagatedAnnotations = typeAnnotations,
                             isReturnType = true,
                             isJavaSource = function.isFromJava(),
-                            sourceSet = function.sourceSets.single()
+                            sourceSet = jvmSourceSet
                         ),
-                        modifiers = function.modifiers(function.getExpectOrCommonSourceSet())
-                            .modifiersFor(hints)
+                        modifiers = function.modifiers(jvmSourceSet).modifiersFor(hints)
                     )
                 ),
                 description = DefaultSymbolSummary(
@@ -139,8 +138,9 @@ internal class FunctionDocumentableConverter(
 
     /** @return the constructor summary component */
     fun summaryForConstructor(function: DFunction):
-        TableRowSummaryItem<Nothing?, SymbolSummary<FunctionSignature>> =
-        DefaultTableRowSummaryItem(
+        TableRowSummaryItem<Nothing?, SymbolSummary<FunctionSignature>>? {
+        val jvmSourceSet = function.getAsJavaSourceSet() ?: return null
+        return DefaultTableRowSummaryItem(
             TableRowSummaryItem.Params(
                 title = null,
                 DefaultSymbolSummary(
@@ -148,8 +148,7 @@ internal class FunctionDocumentableConverter(
                         signature = function.signature(isSummary = true),
                         description = javadocConverter.summaryDescription(function),
                         annotationComponents = annotationConverter.annotationComponents(
-                            annotations = function
-                                .annotations(function.getExpectOrCommonSourceSet()),
+                            annotations = function.annotations(jvmSourceSet),
                             // Propagates to return type instead
                             nullability = Nullability.DONT_CARE,
                         )
@@ -157,6 +156,7 @@ internal class FunctionDocumentableConverter(
                 )
             )
         )
+    }
 
     /** @return the constructor summary component */
     fun summaryForKmpConstructor(function: DFunction):
@@ -202,10 +202,10 @@ internal class FunctionDocumentableConverter(
         function: DFunction,
         hints: ModifierHints,
         kind: SymbolDetail.SymbolKind
-    ): SymbolDetail<FunctionSignature> {
+    ): SymbolDetail<FunctionSignature>? {
+        val jvmSourceSet = function.getAsJavaSourceSet() ?: return null
         val (typeAnnotations, signatureAnnotations) =
-            function.annotations(function.getExpectOrCommonSourceSet())
-                .partition { it.belongsOnReturnType() }
+            function.annotations(jvmSourceSet).partition { it.belongsOnReturnType() }
         val returnType = paramConverter.componentForProjection(
             projection = function.type,
             isJavaSource = function.isFromJava(),
@@ -214,7 +214,7 @@ internal class FunctionDocumentableConverter(
             propagatedNullability =
             if (kind == SymbolDetail.SymbolKind.CONSTRUCTOR || function.isConstructor)
                 Nullability.DONT_CARE else null,
-            sourceSet = function.sourceSets.single()
+            sourceSet = jvmSourceSet
         )
 
         // So far I've only seen this in unit tests where we use the wrong entry point into
@@ -237,8 +237,7 @@ internal class FunctionDocumentableConverter(
                     deprecationAnnotation = signatureAnnotations.deprecationAnnotation()
                 ),
                 displayLanguage = displayLanguage,
-                modifiers = function.modifiers(function.getExpectOrCommonSourceSet())
-                    .modifiersFor(hints),
+                modifiers = function.modifiers(jvmSourceSet).modifiersFor(hints),
                 extFunctionClass = function.receiver?.let { nameForSyntheticClass(function) },
                 annotationComponents = annotationConverter.annotationComponents(
                     annotations = signatureAnnotations,
