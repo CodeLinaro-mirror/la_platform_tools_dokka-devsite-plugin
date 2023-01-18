@@ -55,7 +55,7 @@ class DefaultClasslikeDescriptionTest {
         Truth.assertThat(output).isEqualTo(
             """
 <body>
-  <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-common">Common</option></select></devsite-select >
+  <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-common">Common/All</option></select></devsite-select >
   <p>
     <pre>Signature</pre>
   </p>

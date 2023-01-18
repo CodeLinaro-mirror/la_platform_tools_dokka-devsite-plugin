@@ -9,11 +9,11 @@
       <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/datastore/core/DataMigration.kt+class:androidx.datastore.core.DataMigration&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>DataMigration</h1>
-    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-common">Common</option><option selected="selected" value="platform-jvm">Android/JVM</option><option selected="selected" value="platform-native">Native</option></select></devsite-select >
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-common">Common/All</option><option selected="selected" value="platform-jvm">Android/JVM</option></select></devsite-select >
     <devsite-filter  select-el-container-id="platform">
       <div class="list">
-        <div class="kotlin-platform" data-title="Common">Cmn</div>
-        <!--platform-Common-->
+        <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+        <!--platform-Common/All-->
         <p>
           <pre>interface <a href="/reference/kotlin/androidx/datastore/core/DataMigration.html">DataMigration</a>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</pre>
         </p>
@@ -44,8 +44,8 @@
                 <p>Clean up any old state/data that was migrated into the DataStore.</p>
               </td>
               <td>
-                <div class="kotlin-platform" data-title="Common">Cmn</div>
-                <!--platform-Common--></td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
             </tr>
             <tr>
               <td><code>suspend T</code></td>
@@ -54,8 +54,8 @@
                 <p>Perform the migration.</p>
               </td>
               <td>
-                <div class="kotlin-platform" data-title="Common">Cmn</div>
-                <!--platform-Common--></td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
             </tr>
             <tr>
               <td><code>suspend <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
@@ -64,8 +64,8 @@
                 <p>Return whether this migration needs to be performed.</p>
               </td>
               <td>
-                <div class="kotlin-platform" data-title="Common">Cmn</div>
-                <!--platform-Common--></td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
             </tr>
           </tbody>
         </table>
@@ -76,16 +76,16 @@
         <h2>Public functions</h2>
         <div class="api-item"><a name="cleanUp--"></a><a name="cleanup"></a>
           <h3 class="api-name" id="cleanUp()">cleanUp</h3>
-<span class="kotlin-platform" data-title="Common">Cmn</span>
-          <!--platform-Common-->
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
           <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/datastore/core/DataMigration.html#cleanUp()">cleanUp</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>Clean up any old state/data that was migrated into the DataStore. This will not be called if the migration fails. If cleanUp throws an exception, the exception will be propagated back to the DataStore call that triggered the migration and future calls to DataStore will result in DataMigrations being attempted again. This method may be run multiple times when any failure is encountered.</p>
           <p>This is useful for cleaning up files or data outside of DataStore and accessing any data from DataStore directly from inside this function will result in deadlock, since DataStore doesn't return data until all migrations complete.</p>
         </div>
         <div class="api-item"><a name="migrate-kotlin.Any-"></a><a name="migrate"></a>
           <h3 class="api-name" id="migrate(kotlin.Any)">migrate</h3>
-<span class="kotlin-platform" data-title="Common">Cmn</span>
-          <!--platform-Common-->
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
           <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/datastore/core/DataMigration.html#migrate(kotlin.Any)">migrate</a>(currentData:&nbsp;T):&nbsp;T</pre>
           <p>Perform the migration. Implementations should be idempotent since this may be called multiple times. If migrate fails, DataStore will not commit any data to disk, cleanUp will not be called, and the exception will be propagated back to the DataStore call that triggered the migration. Future calls to DataStore will result in DataMigrations being attempted again. This method may be run multiple times when any failure is encountered.</p>
           <p>Note that this will always be called before a call to <code><a href="/reference/kotlin/androidx/datastore/core/DataMigration.html#cleanUp()">cleanUp</a></code>.</p>
@@ -135,8 +135,8 @@
         </div>
         <div class="api-item"><a name="shouldMigrate-kotlin.Any-"></a><a name="shouldmigrate"></a>
           <h3 class="api-name" id="shouldMigrate(kotlin.Any)">shouldMigrate</h3>
-<span class="kotlin-platform" data-title="Common">Cmn</span>
-          <!--platform-Common-->
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
           <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/datastore/core/DataMigration.html#shouldMigrate(kotlin.Any)">shouldMigrate</a>(currentData:&nbsp;T):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
           <p>Return whether this migration needs to be performed. If this returns false, no migration or cleanup will occur. Apps should do the cheapest possible check to determine if this migration should run, since this will be called every time the DataStore is initialized. This method may be run multiple times when any failure is encountered.</p>
           <p>Note that this will always be called before each call to <code><a href="/reference/kotlin/androidx/datastore/core/DataMigration.html#migrate(kotlin.Any)">migrate</a></code>.</p>

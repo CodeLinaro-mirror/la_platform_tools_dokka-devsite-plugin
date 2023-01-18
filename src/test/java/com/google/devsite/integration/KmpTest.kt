@@ -34,6 +34,12 @@ class KmpTest : IntegrationTestBase() {
     }
 
     @Test
+    fun `Single-platform KMP package test`() {
+        squashAndroid = true
+        validateDirectory("singlePlatformKMP")
+    }
+
+    @Test
     fun `Validate prod AndroidX datastore-core prebuilts`() {
         squashAndroid = true
         validatePrebuilts(
@@ -75,10 +81,12 @@ class KmpTest : IntegrationTestBase() {
             it.listFiles()?.filter { identifier.lowercase() in it.name.lowercase() } ?: emptyList()
         }
 
-        var jvmSources = sources.filterForPlatform("jvm")
-        var androidSources = sources.filterForPlatform("android")
+        val sourceFolders = listOf("jvm", "android", "native", "js")
+            .associateWith { sources.filterForPlatform(it) }.toMutableMap()
+
         if (squashAndroid) {
-            jvmSources = jvmSources + androidSources; androidSources = emptyList()
+            sourceFolders["jvm"] = sourceFolders["jvm"]!! + sourceFolders["android"]!!
+            sourceFolders.remove("android")
         } else throw RuntimeException(
             "Due to upstream squashing, not squashing android into jvm isn't currently supported."
         )
@@ -86,9 +94,9 @@ class KmpTest : IntegrationTestBase() {
         return sourceSets {
             val common = createSourceSet("common", sources.filterForPlatform("common"))
             val dependOnCommon = setOf(common.value.sourceSetID)
-            createSourceSet("jvm", jvmSources, dependOnCommon)
-            if (!squashAndroid) createSourceSet("android", androidSources, dependOnCommon)
-            createSourceSet("native", sources.filterForPlatform("native"), dependOnCommon)
+            sourceFolders.filter { it.value.isNotEmpty() }.map {
+                createSourceSet(it.key, it.value, dependOnCommon)
+            }
         }
     }
 }

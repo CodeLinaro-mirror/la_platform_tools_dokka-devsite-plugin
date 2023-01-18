@@ -17,7 +17,12 @@
 package com.google.devsite.components.symbols
 
 import com.google.devsite.components.ContextFreeComponent
+import com.google.devsite.components.symbols.Platform.COMMON
+import com.google.devsite.components.symbols.Platform.JS
+import com.google.devsite.components.symbols.Platform.JVM
+import com.google.devsite.components.symbols.Platform.NATIVE
 import kotlinx.html.FlowContent
+import kotlinx.html.span
 import org.jetbrains.dokka.Platform as DokkaPlatform
 
 /** Represents a platform. */
@@ -65,27 +70,34 @@ enum class Platform {
  * Returns the shortname displayed inline with documentables
  */
 fun Platform.shortName() = when (this) {
-    Platform.JS -> "JS"
-    Platform.NATIVE -> "N"
-    Platform.JVM -> "A"
-    Platform.COMMON -> "Cmn"
+    JS -> "JS"
+    NATIVE -> "N"
+    JVM -> "A"
+    COMMON -> "Cmn"
+}
+
+fun Platform.render(into: FlowContent) = into.run {
+    when (this@render) {
+        JS, NATIVE, COMMON -> +shortName()
+        JVM -> span(classes = "material-symbols-outlined") { +"android" }
+    }
 }
 
 fun Platform.devsiteId() = when (this) {
-    Platform.JS -> "platform-js"
-    Platform.NATIVE -> "platform-native"
-    Platform.JVM -> "platform-jvm"
-    Platform.COMMON -> "platform-common"
+    JS -> "platform-js"
+    NATIVE -> "platform-native"
+    JVM -> "platform-jvm"
+    COMMON -> "platform-common"
 }
 
 /**
  * Returns the display name for the platform that is used in the dropdown selector
  */
 fun Platform.selectorDisplayName() = when (this) {
-    Platform.JS -> "Javascript"
-    Platform.NATIVE -> "Native"
-    Platform.JVM -> "Android/JVM"
-    Platform.COMMON -> "Common"
+    JS -> "Javascript"
+    NATIVE -> "Native/C/iOS"
+    JVM -> "Android/JVM"
+    COMMON -> "Common/All"
 }
 
 // Docs: https://github.com/Kotlin/dokka/blob/master/plugins/base/src/main/kotlin/translators/documentables/DefaultPageCreator.kt

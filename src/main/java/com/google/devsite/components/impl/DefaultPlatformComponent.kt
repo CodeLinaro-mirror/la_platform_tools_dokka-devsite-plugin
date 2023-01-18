@@ -18,8 +18,8 @@ package com.google.devsite.components.impl
 
 import com.google.devsite.components.symbols.Platform
 import com.google.devsite.components.symbols.PlatformComponent
+import com.google.devsite.components.symbols.render
 import com.google.devsite.components.symbols.selectorDisplayName
-import com.google.devsite.components.symbols.shortName
 import kotlinx.html.FlowContent
 import kotlinx.html.classes
 import kotlinx.html.div
@@ -45,7 +45,7 @@ internal data class DefaultPlatformComponent(
                 // Hooks up to devsite/android/en/assets/css/reference-docs.css
                 classes = setOf("kotlin-platform")
                 attributes["data-title"] = it.selectorDisplayName()
-                +it.shortName()
+                it.render(into)
             }
             comment("platform-${it.selectorDisplayName()}")
         }
@@ -57,7 +57,7 @@ internal data class DefaultPlatformComponent(
                 // TODO(improve detail section display, e.g. move to right-aligned)
                 classes = setOf("kotlin-platform")
                 attributes["data-title"] = it.selectorDisplayName()
-                +it.shortName()
+                it.render(into)
             }
             comment("platform-${it.selectorDisplayName()}")
         }

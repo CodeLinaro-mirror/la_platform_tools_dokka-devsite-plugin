@@ -75,7 +75,6 @@ internal class PackageRenderer(
 
     suspend fun writePackageSummary(dPackage: DPackage) {
         val converter = if (dPackage.isKMP()) {
-            val platforms = dPackage.sourceSets.map { Platform.from(it.analysisPlatform) }
             KmpPackageConverter(
                 displayLanguage,
                 dPackage,
@@ -85,7 +84,7 @@ internal class PackageRenderer(
                 propertyConverter,
                 javadocConverter,
                 paramConverter,
-                platforms
+                dPackage.getPlatforms()
             )
         } else
             NonKmpPackageConverter(
@@ -120,7 +119,6 @@ internal class PackageRenderer(
             return
         }
         val converter = if (dPackage.isKMP()) {
-            val platforms = dPackage.sourceSets.map { Platform.from(it.analysisPlatform) }
             KmpClasslikeConverter(
                 displayLanguage,
                 classlikeDoc,
@@ -134,7 +132,7 @@ internal class PackageRenderer(
                 annotationConverter,
                 classExtensionFunctions,
                 classExtensionProperties,
-                platforms
+                dPackage.getPlatforms()
             )
         } else
             NonKmpClasslikeConverter(
@@ -166,3 +164,5 @@ internal class PackageRenderer(
     private fun DPackage.isKMP() = displayLanguage == Language.KOTLIN &&
         (sourceSets.size > 1 || sourceSets.single().analysisPlatform != jvm)
 }
+private fun DPackage.getPlatforms() =
+    sourceSets.map { Platform.from(it.analysisPlatform) }.toSet().sorted()
