@@ -38,7 +38,6 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DPackage
-import org.jetbrains.dokka.model.DTypeAlias
 
 /** Converts documentables into components for the root metadata (class/package index). */
 internal class RootDocumentableConverter(
@@ -143,7 +142,6 @@ internal class RootDocumentableConverter(
         val enums = docsHolder.enumsFor(dPackage).map(::typeForToc)
         val exceptions = docsHolder.exceptionsFor(dPackage).map(::typeForToc)
         val annotations = docsHolder.annotationsFor(dPackage).map(::typeForToc)
-        val typeAliases = docsHolder.typeAliasesFor(dPackage).map(::typeForToc)
         val objects = docsHolder.interestingObjectsFor(dPackage, displayLanguage).map(::typeForToc)
 
         // Update the string to trim to end with a `.` if it doesn't already.
@@ -158,19 +156,13 @@ internal class RootDocumentableConverter(
                 enums = enums,
                 exceptions = exceptions,
                 annotations = annotations,
-                typeAliases = typeAliases,
                 objects = objects
-            )
+            ) // Typealiases do not appear in the toc because they do not get their own pages
         )
     }
 
     private fun typeForToc(classlike: DClasslike): TocPackage.Type {
         val url = pathProvider.forReference(classlike.dri).url
         return TocPackage.Type(classlike.name(), url)
-    }
-
-    private fun typeForToc(typeAlias: DTypeAlias): TocPackage.Type {
-        val url = pathProvider.forReference(typeAlias.dri).url
-        return TocPackage.Type(typeAlias.name, url)
     }
 }

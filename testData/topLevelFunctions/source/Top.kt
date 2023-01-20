@@ -34,7 +34,7 @@ val String.world: Int get() = 42
 fun a() = Unit
 
 /** Top level function docs next to [a]. This is a second sentence. Talk to [world]. */
-fun b(i1: Int?, i2: String?, i3: Boolean, foo: Bar): String = ""
+fun b(i1: Int?, i2: String?, i3: Boolean, foo: Baz): String = ""
 
 /** I'm so sad, they're deleting me! */
 @Deprecated("This method was too sad.")
@@ -77,4 +77,4 @@ class Foo
 )
 annotation class Wassup(val a: String = "", val f: Array<String> = [])
 
-typealias Bar = Foo
+typealias Baz = Foo

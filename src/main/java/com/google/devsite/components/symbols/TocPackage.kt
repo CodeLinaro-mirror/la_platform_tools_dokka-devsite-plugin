@@ -30,9 +30,8 @@ internal interface TocPackage : TextComponent {
         val enums: List<Type> = emptyList(),
         val exceptions: List<Type> = emptyList(),
         val annotations: List<Type> = emptyList(),
-        val typeAliases: List<Type> = emptyList(),
         val objects: List<Type> = emptyList()
-    )
+    ) // Typealiases do not appear in the toc because they do not get their own pages
 
     data class Type(val name: String, val url: String)
 }

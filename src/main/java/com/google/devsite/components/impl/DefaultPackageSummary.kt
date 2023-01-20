@@ -17,8 +17,8 @@
 package com.google.devsite.components.impl
 
 import com.google.devsite.FunctionSummaryList
-import com.google.devsite.LinkDescriptionSummaryList
 import com.google.devsite.PropertySummaryList
+import com.google.devsite.WithDescriptionList
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.pages.PackageSummary
 import com.google.devsite.components.render
@@ -70,7 +70,10 @@ internal data class DefaultPackageSummary(
         }
     }
 
-    private fun FlowContent.renderSummary(summary: LinkDescriptionSummaryList, title: String) {
+    private fun <T : ContextFreeComponent> FlowContent.renderSummary(
+        summary: WithDescriptionList<T>,
+        title: String
+    ) {
         if (summary.hasContent()) {
             h2 { +title }
         }

@@ -19,8 +19,10 @@ package com.google.devsite.components.pages
 import com.google.devsite.FunctionSummaryList
 import com.google.devsite.LinkDescriptionSummaryList
 import com.google.devsite.PropertySummaryList
+import com.google.devsite.WithDescriptionList
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.impl.DefaultDevsitePlatformSelector
+import com.google.devsite.components.impl.DefaultUnlink
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolDetail
@@ -40,7 +42,7 @@ internal interface PackageSummary : ContextFreeComponent {
         val objects: LinkDescriptionSummaryList,
         val exceptions: LinkDescriptionSummaryList,
         val annotations: LinkDescriptionSummaryList,
-        val typeAliases: LinkDescriptionSummaryList,
+        val typeAliases: WithDescriptionList<DefaultUnlink>,
         val topLevelConstantsSummary: PropertySummaryList,
         val topLevelPropertiesSummary: PropertySummaryList,
         val topLevelFunctionsSummary: FunctionSummaryList,

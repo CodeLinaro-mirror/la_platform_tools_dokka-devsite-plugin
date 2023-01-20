@@ -33,7 +33,6 @@ internal data class DefaultTocPackage(
             data.enums,
             data.exceptions,
             data.annotations,
-            data.typeAliases,
             data.objects
         ).flatten()
         if (content.isEmpty()) return
@@ -45,7 +44,6 @@ internal data class DefaultTocPackage(
         renderTypes("Enums", data.enums)
         renderTypes("Exceptions", data.exceptions)
         renderTypes("Annotations", data.annotations)
-        renderTypes("Type aliases", data.typeAliases)
         renderTypes("Objects", data.objects)
     }
 
@@ -71,5 +69,5 @@ internal data class DefaultTocPackage(
     override fun toString() = "Table of Contents for package ${data.name} at ${data.packageUrl}. " +
         "Interfaces: ${data.interfaces}, Classes: ${data.classes}, Enums: ${data.enums}, " +
         "Exceptions: ${data.exceptions}, Annotations: ${data.annotations}, " +
-        "TypeAliases: ${data.typeAliases}, Objects: ${data.objects}."
+        "Objects: ${data.objects}."
 }

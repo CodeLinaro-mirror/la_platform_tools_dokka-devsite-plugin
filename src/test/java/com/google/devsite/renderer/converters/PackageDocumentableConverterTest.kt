@@ -220,7 +220,7 @@ internal class PackageDocumentableConverterTest(
     }
 
     @Test
-    fun `Package summary creates components for type aliases`() {
+    fun `Package summary doesn't create components for type aliases`() {
         val page = """
             |typealias ImATypeAlias = String
         """.render().packagePage()
@@ -229,7 +229,7 @@ internal class PackageDocumentableConverterTest(
         val annotation = summary.data.typeAliases.item()
 
         assertThat(annotation.link().name).isEqualTo("ImATypeAlias")
-        assertPath(annotation.link().url, "androidx/example/ImATypeAlias.html")
+        assertThat(annotation.link().url).isEmpty()
     }
 
     @Test

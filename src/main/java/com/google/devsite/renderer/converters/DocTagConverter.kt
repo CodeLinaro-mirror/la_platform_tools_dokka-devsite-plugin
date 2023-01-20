@@ -32,6 +32,7 @@ import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableRowSummaryItem
 import com.google.devsite.components.impl.DefaultTableTitle
 import com.google.devsite.components.impl.DefaultTypeProjectionComponent
+import com.google.devsite.components.impl.DefaultUnlink
 import com.google.devsite.components.impl.UndocumentedSymbolDescriptionComponent
 import com.google.devsite.components.symbols.AnnotatedLink
 import com.google.devsite.components.symbols.ParameterComponent
@@ -54,6 +55,7 @@ import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DParameter
 import org.jetbrains.dokka.model.DProperty
+import org.jetbrains.dokka.model.DTypeAlias
 import org.jetbrains.dokka.model.DTypeParameter
 import org.jetbrains.dokka.model.DefinitelyNonNullable
 import org.jetbrains.dokka.model.Documentable
@@ -846,6 +848,9 @@ internal class DocTagConverter(
         showAnnotations: Boolean = false
     ): TableRowSummaryItem<Link, DescriptionComponent> {
         val annotations = documentable.annotations(documentable.getExpectOrCommonSourceSet())
+        val link = if (documentable is DTypeAlias) // typealiases have no pages
+            DefaultUnlink(Link.Params(documentable.name, ""))
+        else pathProvider.linkForReference(documentable.dri)
         return DefaultTableRowSummaryItem(
             TableRowSummaryItem.Params(
                 title = if (showAnnotations) {
@@ -855,12 +860,10 @@ internal class DocTagConverter(
                                 annotations = annotations,
                                 nullability = Nullability.DONT_CARE, // Not useful for these cases
                             ),
-                            link = pathProvider.linkForReference(documentable.dri)
+                            link = link
                         )
                     )
-                } else {
-                    pathProvider.linkForReference(documentable.dri)
-                },
+                } else link,
                 description = summaryDescription(
                     documentable,
                     documentable.deprecationAnnotation()
