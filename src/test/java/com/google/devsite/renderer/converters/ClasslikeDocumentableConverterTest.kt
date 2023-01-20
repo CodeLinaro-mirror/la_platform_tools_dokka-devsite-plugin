@@ -2461,6 +2461,35 @@ internal class ClasslikeDocumentableConverterTest(
         assertThat(link!!.data.url).isEqualTo(expected)
     }
 
+    @Test
+    fun `Constants in companion object appear properly in page`() {
+        // Note: this code is from gms dtdi
+        val page = """
+            |@Target(AnnotationTarget.TYPE)
+            |annotation class ApiSurface {
+            |  /** Possible values of ApiSurface. */
+            |  companion object {
+            |    /** The API surface was not requested or cannot be determined. */
+            |    const val UNKNOWN = 0
+            |    /** The API surface associated with [DtdiClient.createDevicePickerIntent]. */
+            |    const val DISCOVERY = 1
+            |    /**
+            |     * The API surface associated with [DtdiClient.sendPayload] and
+            |     * [DtdiClient.registerPayloadReceiver].
+            |     */
+            |    const val CONNECTIONS = 2
+            |    /** The API surface associated with the higher level Sessions APIs. */
+            |    const val SESSIONS = 3
+            |    /** The API surface associated with waking up an application on the remote device. */
+            |    const val WAKE_UP = 4
+            |  }
+            |}
+        """.render().page("ApiSurface")
+        val constants = page.data.content.data.constantsSummary
+        assertThat(constants.data.items.map { it.name() })
+            .containsExactly("UNKNOWN", "DISCOVERY", "CONNECTIONS", "SESSIONS", "WAKE_UP")
+    }
+
     private fun DModule.page(
         name: String = "Foo",
         baseSourceLink: String? = null
