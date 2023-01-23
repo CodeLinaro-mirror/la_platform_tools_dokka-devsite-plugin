@@ -27,7 +27,6 @@ import com.google.devsite.renderer.converters.packageName
 import com.google.devsite.renderer.converters.setUpAnalysis
 import com.google.devsite.renderer.converters.shouldNotBeDisplayed
 import com.google.devsite.renderer.converters.withJavaSynthetic
-import com.google.devsite.renderer.converters.withoutNeglectableCompanionOf
 import com.google.devsite.util.LibraryMetadata
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
@@ -215,7 +214,7 @@ internal class DocumentablesHolder(
         // link to the companion object can be omitted. Named companion objects are presumably
         // intended to be viewable as first-class elements. Similar for companion objects which
         // inherit from another type.
-        return theseNestedClasslikes.withoutNeglectableCompanionOf(classlike, displayLanguage)
+        return theseNestedClasslikes.filterNot { it.shouldNotBeDisplayed(displayLanguage) }
     }
 
     suspend fun classesFor(dPackage: DPackage, displayLanguage: Language): List<DClass> {

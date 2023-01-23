@@ -33,6 +33,7 @@ import com.google.devsite.renderer.converters.testing.companionName
 import com.google.devsite.renderer.converters.testing.description
 import com.google.devsite.renderer.converters.testing.descriptionDocs
 import com.google.devsite.renderer.converters.testing.from
+import com.google.devsite.renderer.converters.testing.fullName
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
@@ -1505,6 +1506,31 @@ internal class ClasslikeDocumentableConverterTest(
         kotlinOnly {
             // Inherited companion functions are not hoisted
             assertThat(classPage.data.inheritedFunctions).isEmpty()
+        }
+    }
+
+    @Test
+    fun `Boring companion objects do not appear in 'nested types'`() {
+        val module = """
+            |class Foo {
+            |    class Bar {
+            |        companion object
+            |    }
+            |}
+        """.render()
+
+        val fooPage = module.page("Foo").data.content
+        val barPage = module.page("Bar").data.content
+        fun Classlike.nestedTypeNames() =
+            data.nestedTypesSummary.map { it.data.description.data.signature.fullName() }
+
+        kotlinOnly {
+            assertThat(fooPage.nestedTypeNames()).containsExactly("Foo.Bar")
+            assertThat(barPage.nestedTypeNames()).isEmpty()
+        }
+        javaOnly {
+            assertThat(fooPage.nestedTypeNames()).containsExactly("Foo.Bar", "Foo.Bar.Companion")
+            assertThat(barPage.nestedTypeNames()).containsExactly("Foo.Bar.Companion")
         }
     }
 

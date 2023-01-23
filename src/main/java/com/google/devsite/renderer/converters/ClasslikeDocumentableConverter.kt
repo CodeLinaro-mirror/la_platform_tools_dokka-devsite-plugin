@@ -1123,8 +1123,10 @@ typealias SourceEntry = Map.Entry<DokkaSourceSet, DocumentableSource>
 
 /**
  * Returns whether this DObject is an ordinary companion and is not signifcant enough to show on its
- * own. This requires that it be not named, not inherit anything, and not contain anything that is
- * not hoisted onto the containing object.
+ * own. This requires that it be not named, not inherit anything, and *not contain anything that is
+ * not hoisted onto the containing object*.
+ *
+ * This is a best-effort temporary approximation. Even as-Java, companions can be fully hoistable.
  *
  * This function can also be used on DObjects where it is unknown whether it is a companion at all.
  * This works because we enforce non-companion objects being named 'Companion' as an error.
@@ -1139,20 +1141,6 @@ internal fun DObject.isOrdinaryCompanion(): Boolean =
 
 internal fun DClasslike.shouldNotBeDisplayed(displayLanguage: Language) =
     displayLanguage == Language.KOTLIN && this is DObject && this.isOrdinaryCompanion()
-
-/**
- * Returns all [Documentable]s from the list which are not a companion object of [classlike] that
- * has only hoistable elements, such that direct use of the companion is never warranted.
- *
- * This is a best-effort temporary approximation. Even as-Java, companions can be fully hoistable.
- */
-internal fun List<DClasslike>.withoutNeglectableCompanionOf(
-    classlike: DClasslike,
-    displayLanguage: Language
-) = filterNot {
-    classlike is DClass && it.dri == classlike.companion?.dri &&
-        it.shouldNotBeDisplayed(displayLanguage)
-}
 
 // an `actual` cannot narrow visibility, but can widen it TODO(b/262710702)
 private fun isPublic(element: Documentable) =
