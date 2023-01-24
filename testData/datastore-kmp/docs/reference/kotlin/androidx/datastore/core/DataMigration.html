@@ -11,13 +11,15 @@
     <h1>DataMigration</h1>
     <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
     <devsite-filter  select-el-container-id="platform">
-      <ul style="list-style: none; padding-left: 0">
-        <li>
-          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-          <!--platform-Common/All-->
-          <pre>interface <a href="/reference/kotlin/androidx/datastore/core/DataMigration.html">DataMigration</a>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</pre>
-        </li>
-      </ul>
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>interface <a href="/reference/kotlin/androidx/datastore/core/DataMigration.html">DataMigration</a>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</pre>
+          </li>
+        </ul>
+      </div>
     </devsite-filter >
     <hr>
     <p>Interface for migrations to DataStore. Methods on this migration (<code><a href="/reference/kotlin/androidx/datastore/core/DataMigration.html#shouldMigrate(kotlin.Any)">shouldMigrate</a></code>, <code><a href="/reference/kotlin/androidx/datastore/core/DataMigration.html#migrate(kotlin.Any)">migrate</a></code> and <code><a href="/reference/kotlin/androidx/datastore/core/DataMigration.html#cleanUp()">cleanUp</a></code>) may be called multiple times, so their implementations must be idempotent. These methods may be called multiple times if DataStore encounters issues when writing the newly migrated data to disk or if any migration installed in the same DataStore throws an Exception.</p>

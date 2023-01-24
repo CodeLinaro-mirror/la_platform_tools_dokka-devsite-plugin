@@ -20,6 +20,7 @@ import com.google.devsite.components.devsiteFilter
 import com.google.devsite.components.render
 import com.google.devsite.components.symbols.KmpClasslikeDescription
 import kotlinx.html.FlowContent
+import kotlinx.html.div
 import kotlinx.html.hr
 import kotlinx.html.li
 import kotlinx.html.pre
@@ -33,20 +34,22 @@ internal data class DefaultKmpClasslikeDescription(
     override fun render(into: FlowContent) = into.run {
         if (data.header != null) data.header.render(this)
         devsiteFilter {
-            into.ul {
-                style = "list-style: none; padding-left: 0"
-                li { // sadly, we can't easily sort allSignatures by platform; sig -> List<Platform>
-                    data.platform.render(this)
-                    pre {
-                        data.primarySignature.render(this)
-                    }
-                }
-                data.allSignatures.forEach { (signature, platform) ->
-                    if (signature == data.primarySignature) return@forEach
-                    li {
-                        platform.render(this)
+            into.div {
+                into.ul("list") {
+                    style = "list-style: none; padding-left: 0"
+                    li { // sadly, we can't easily sort allSignatures by platform; sig -> List<Platform>
+                        data.platform.render(this)
                         pre {
-                            signature.render(this)
+                            data.primarySignature.render(this)
+                        }
+                    }
+                    data.allSignatures.forEach { (signature, platform) ->
+                        if (signature == data.primarySignature) return@forEach
+                        li {
+                            platform.render(this)
+                            pre {
+                                signature.render(this)
+                            }
                         }
                     }
                 }

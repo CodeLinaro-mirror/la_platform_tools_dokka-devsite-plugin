@@ -11,13 +11,15 @@
     <h1>DataStore</h1>
     <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
     <devsite-filter  select-el-container-id="platform">
-      <ul style="list-style: none; padding-left: 0">
-        <li>
-          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-          <!--platform-Common/All-->
-          <pre>interface <a href="/reference/kotlin/androidx/datastore/core/DataStore.html">DataStore</a>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</pre>
-        </li>
-      </ul>
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>interface <a href="/reference/kotlin/androidx/datastore/core/DataStore.html">DataStore</a>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</pre>
+          </li>
+        </ul>
+      </div>
     </devsite-filter >
     <hr>
     <p>DataStore provides a safe and durable way to store small amounts of data, such as preferences and application state. It does not support partial updates: if any field is modified, the whole object will be serialized and persisted to disk. If you want partial updates, consider the Room API (SQLite).</p>
