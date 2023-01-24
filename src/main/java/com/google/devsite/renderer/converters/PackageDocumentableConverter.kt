@@ -19,12 +19,14 @@ package com.google.devsite.renderer.converters
 import com.google.devsite.FunctionSummaryList
 import com.google.devsite.PropertySummaryList
 import com.google.devsite.TypeSummaryItem
+import com.google.devsite.WithDescriptionList
 import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.Link
 import com.google.devsite.components.impl.DefaultDevsitePage
 import com.google.devsite.components.impl.DefaultDevsitePlatformSelector
 import com.google.devsite.components.impl.DefaultPackageSummary
 import com.google.devsite.components.impl.DefaultSummaryList
+import com.google.devsite.components.impl.DefaultUnlink
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.pages.PackageSummary
 import com.google.devsite.components.symbols.FunctionSignature
@@ -85,7 +87,9 @@ internal abstract class PackageDocumentableConverter(
         val annotations = async {
             docsToSummary(docsHolder.annotationsFor(dPackage))
         }
-        val typeAliases = async { docsToSummary(docsHolder.typeAliasesFor(dPackage)) }
+        @Suppress("UNCHECKED_CAST") val typeAliases = async {
+            docsToSummary(docsHolder.typeAliasesFor(dPackage)) as WithDescriptionList<DefaultUnlink>
+        }
 
         val topLevelConstantsSummary = async { propertiesToSummary(topLevelConstants()) }
         val topLevelPropertiesSummary = async { propertiesToSummary(topLevelProperties()) }

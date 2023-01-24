@@ -20,6 +20,7 @@ import com.google.common.truth.Truth.assertThat
 import com.google.devsite.FunctionSummaryList
 import com.google.devsite.LinkDescriptionSummaryList
 import com.google.devsite.PropertySummaryList
+import com.google.devsite.WithDescriptionList
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.pages.PackageSummary.Params
 import com.google.devsite.components.symbols.FunctionSignature
@@ -471,7 +472,7 @@ class DefaultPackageSummaryTest {
         objects: LinkDescriptionSummaryList = NoopSummaryList(show = false),
         exceptions: LinkDescriptionSummaryList = NoopSummaryList(show = false),
         annotations: LinkDescriptionSummaryList = NoopSummaryList(show = false),
-        typeAliases: LinkDescriptionSummaryList = NoopSummaryList(show = false),
+        typeAliases: WithDescriptionList<DefaultUnlink> = NoopSummaryList(show = false),
         topLevelConstantsSummary: PropertySummaryList = NoopSummaryList(show = false),
         topLevelPropertiesSummary: PropertySummaryList = NoopSummaryList(show = false),
         topLevelFunctionsSummary: FunctionSummaryList = NoopSummaryList(show = false),

@@ -64,7 +64,7 @@ internal fun <T : ContextFreeComponent, V : ContextFreeComponent>
 SummaryList<TableRowSummaryItem<T, V>>.single() = items().single()
 internal fun <V : SummaryItem> SummaryList<V>.first() = data.items.first()
 
-internal fun TableRowSummaryItem<Link, DescriptionComponent>.link() = data.title.data
+internal fun <T : Link> TableRowSummaryItem<T, DescriptionComponent>.link() = data.title.data
 @JvmName("paramDescriptionTableRowSummaryItemLink")
 internal fun TableRowSummaryItem<ParameterComponent, DescriptionComponent>.link() =
     data.title.data.type.link()

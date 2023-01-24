@@ -14,6 +14,24 @@
  * limitations under the License.
  */
 
-package dokkatest.toplevel
+package com.google.devsite.components.impl
 
-fun bar() = ""
+import com.google.devsite.components.Link
+import kotlinx.html.FlowContent
+
+/** Default implementation of a link. */
+internal data class DefaultUnlink(
+    override val data: Link.Params
+) : Link {
+    init {
+        assert(data.url == "")
+    }
+
+    override fun render(into: FlowContent) = into.run {
+        if (data.url.isEmpty()) {
+            +data.name
+        }
+    }
+
+    override fun toString() = data.name + if (data.url.isNotEmpty()) "<ref=${data.url}>" else ""
+}
