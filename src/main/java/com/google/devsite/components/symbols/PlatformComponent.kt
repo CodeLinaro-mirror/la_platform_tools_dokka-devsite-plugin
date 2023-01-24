@@ -83,12 +83,7 @@ fun Platform.render(into: FlowContent) = into.run {
     }
 }
 
-fun Platform.devsiteId() = when (this) {
-    JS -> "platform-js"
-    NATIVE -> "platform-native"
-    JVM -> "platform-jvm"
-    COMMON -> "platform-common"
-}
+fun Platform.devsiteId() = "platform-${selectorDisplayName()}"
 
 /**
  * Returns the display name for the platform that is used in the dropdown selector
