@@ -51,6 +51,11 @@ object TopLevelObject {
     const val namedTopLevelconst = 4.125
     lateinit var topLevelLateInitVar: String
     @JvmStatic lateinit var topLevelStaticLateInitVar: String
+    // Modifier 'companion' is not applicable inside 'object'
+    object InsideAnotherObjectObject {
+        @JvmStatic val objectObjectStaticProperty = 5
+        const val objectObjectNonStaticProperty = 5
+    }
 }
 // Modifier 'open' is not applicable to '(companion )object'
 object TopLevelInheritingObject : Exception() {
