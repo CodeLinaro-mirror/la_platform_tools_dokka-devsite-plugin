@@ -1,0 +1,161 @@
+<html devsite="true">
+  <head>
+    <title>IntDef</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/annotation/IntDef.kt+class:androidx.annotation.IntDef&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>IntDef</h1>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-retention/index.html">Retention</a>(value&nbsp;=&nbsp;AnnotationRetention.SOURCE)<br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-target/index.html">Target</a>(allowedTargets&nbsp;=&nbsp;[AnnotationTarget.ANNOTATION_CLASS])<br>annotation <a href="/reference/kotlin/androidx/annotation/IntDef.html">IntDef</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
+    <hr>
+    <p>Denotes that the annotated element of integer type, represents a logical type and that its value should be one of the explicitly named constants. If the IntDef#flag() attribute is set to true, multiple constants can be combined.</p>
+    <p>Example:</p>
+    <pre class="prettyprint">@Retention(SOURCE)<br>@IntDef({NAVIGATION_MODE_STANDARD, NAVIGATION_MODE_LIST, NAVIGATION_MODE_TABS})<br>public @interface NavigationMode {}<br>public static final int NAVIGATION_MODE_STANDARD = 0;<br>public static final int NAVIGATION_MODE_LIST = 1;<br>public static final int NAVIGATION_MODE_TABS = 2;<br>...<br>public abstract void setNavigationMode(@NavigationMode int mode);<br><br>@NavigationMode<br>public abstract int getNavigationMode();</pre>
+    <p>For a flag, set the flag attribute:</p>
+    <pre class="prettyprint">@IntDef(<br>flag = true,<br>value = {NAVIGATION_MODE_STANDARD, NAVIGATION_MODE_LIST, NAVIGATION_MODE_TABS}<br>)</pre>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">See also</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/annotation/LongDef.html">LongDef</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="93%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public constructors</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/annotation/IntDef.html#IntDef(kotlin.IntArray,kotlin.Boolean,kotlin.Boolean)">IntDef</a>(vararg&nbsp;value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;flag:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>,&nbsp;open:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>)</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/annotation/IntDef.html#flag()">flag</a></code></div>
+                <p>Defines whether the constants can be used as a flag, or just as an enum (the default)</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/annotation/IntDef.html#open()">open</a></code></div>
+                <p>Whether any other values are allowed.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int-array/index.html">IntArray</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/annotation/IntDef.html#value()">value</a></code></div>
+                <p>Defines the allowed constants for this element</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public constructors</h2>
+        <div class="api-item"><a name="IntDef(kotlin.IntArray, kotlin.Boolean, kotlin.Boolean)"></a><a name="IntDef-kotlin.IntArray-kotlin.Boolean-kotlin.Boolean-"></a><a name="intdef"></a>
+          <h3 class="api-name" id="IntDef(kotlin.IntArray,kotlin.Boolean,kotlin.Boolean)">IntDef</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/annotation/IntDef.html#IntDef(kotlin.IntArray,kotlin.Boolean,kotlin.Boolean)">IntDef</a>(vararg&nbsp;value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = [],&nbsp;flag:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false,&nbsp;open:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false)</pre>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getFlag()"></a><a name="setFlag()"></a><a name="getFlag--"></a><a name="setFlag--"></a>
+          <h3 class="api-name" id="flag()">flag</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/annotation/IntDef.html#flag()">flag</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>Defines whether the constants can be used as a flag, or just as an enum (the default)</p>
+        </div>
+        <div class="api-item"><a name="getOpen()"></a><a name="setOpen()"></a><a name="getOpen--"></a><a name="setOpen--"></a>
+          <h3 class="api-name" id="open()">open</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/annotation/IntDef.html#open()">open</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>Whether any other values are allowed. Normally this is not the case, but this allows you to specify a set of expected constants, which helps code completion in the IDE and documentation generation and so on, but without flagging compilation warnings if other values are specified.</p>
+        </div>
+        <div class="api-item"><a name="getValue()"></a><a name="setValue()"></a><a name="getValue--"></a><a name="setValue--"></a>
+          <h3 class="api-name" id="value()">value</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/annotation/IntDef.html#value()">value</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int-array/index.html">IntArray</a></pre>
+          <p>Defines the allowed constants for this element</p>
+        </div>
+      </div>
+    </devsite-filter >
+  </body>
+</html>

@@ -1,0 +1,167 @@
+<html devsite="true">
+  <head>
+    <title>VisibleForTesting</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/annotation/VisibleForTesting.kt+class:androidx.annotation.VisibleForTesting&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>VisibleForTesting</h1>
+    <p>
+      <pre>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-retention/index.html">Retention</a>(value&nbsp;=&nbsp;AnnotationRetention.BINARY)<br>public annotation <a href="/reference/androidx/annotation/VisibleForTesting.html">VisibleForTesting</a></pre>
+    </p>
+    <hr>
+    <p>Denotes that the class, method or field has its visibility relaxed, so that it is more widely visible than otherwise necessary to make code testable.</p>
+    <p>You can optionally specify what the visibility <b>should</b> have been if not for testing; this allows tools to catch unintended access from within production code.</p>
+    <p>Example:</p>
+    <pre class="prettyprint">@VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)<br>public String printDiagnostics() { ... }</pre>
+    <p>If not specified, the intended visibility is assumed to be private.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>public static class <a href="/reference/androidx/annotation/VisibleForTesting.Companion.html">VisibleForTesting.Companion</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Constants</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static&nbsp;final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/VisibleForTesting.Companion.html#NONE()">NONE</a> = 5</code></div>
+              <p>The annotated element should never be called from production code, only from tests.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/VisibleForTesting.Companion.html#PACKAGE_PRIVATE()">PACKAGE_PRIVATE</a> = 3</code></div>
+              <p>The annotated element would have &quot;package private&quot; visibility</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/VisibleForTesting.Companion.html#PRIVATE()">PRIVATE</a> = 2</code></div>
+              <p>The annotated element would have &quot;private&quot; visibility</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/VisibleForTesting.Companion.html#PROTECTED()">PROTECTED</a> = 4</code></div>
+              <p>The annotated element would have &quot;protected&quot; visibility</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/VisibleForTesting.html#otherwise()">otherwise</a></code></div>
+              <p>The visibility the annotated element would have if it did not need to be made visible for testing.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/VisibleForTesting.html#VisibleForTesting(kotlin.Int)">VisibleForTesting</a>(int&nbsp;otherwise)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Constants</h2>
+      <div class="api-item"><a name="getNONE()"></a><a name="setNONE()"></a><a name="getNONE--"></a><a name="setNONE--"></a>
+        <h3 class="api-name" id="NONE()">NONE</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/annotation/VisibleForTesting.Companion.html#NONE()">NONE</a> = 5</pre>
+        <p>The annotated element should never be called from production code, only from tests.</p>
+        <p>This is equivalent to <code>@RestrictTo.Scope.TESTS</code>.</p>
+      </div>
+      <div class="api-item"><a name="getPACKAGE_PRIVATE()"></a><a name="setPACKAGE_PRIVATE()"></a><a name="getPACKAGE_PRIVATE--"></a><a name="setPACKAGE_PRIVATE--"></a>
+        <h3 class="api-name" id="PACKAGE_PRIVATE()">PACKAGE_PRIVATE</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/annotation/VisibleForTesting.Companion.html#PACKAGE_PRIVATE()">PACKAGE_PRIVATE</a> = 3</pre>
+        <p>The annotated element would have &quot;package private&quot; visibility</p>
+      </div>
+      <div class="api-item"><a name="getPRIVATE()"></a><a name="setPRIVATE()"></a><a name="getPRIVATE--"></a><a name="setPRIVATE--"></a>
+        <h3 class="api-name" id="PRIVATE()">PRIVATE</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/annotation/VisibleForTesting.Companion.html#PRIVATE()">PRIVATE</a> = 2</pre>
+        <p>The annotated element would have &quot;private&quot; visibility</p>
+      </div>
+      <div class="api-item"><a name="getPROTECTED()"></a><a name="setPROTECTED()"></a><a name="getPROTECTED--"></a><a name="setPROTECTED--"></a>
+        <h3 class="api-name" id="PROTECTED()">PROTECTED</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/annotation/VisibleForTesting.Companion.html#PROTECTED()">PROTECTED</a> = 4</pre>
+        <p>The annotated element would have &quot;protected&quot; visibility</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getOtherwise()"></a><a name="setOtherwise()"></a><a name="getOtherwise--"></a><a name="setOtherwise--"></a>
+        <h3 class="api-name" id="otherwise()">otherwise</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/annotation/VisibleForTesting.html#otherwise()">otherwise</a></pre>
+        <p>The visibility the annotated element would have if it did not need to be made visible for testing.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="VisibleForTesting-kotlin.Int-"></a><a name="visiblefortesting"></a>
+        <h3 class="api-name" id="VisibleForTesting(kotlin.Int)">VisibleForTesting</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/annotation/VisibleForTesting.html#VisibleForTesting(kotlin.Int)">VisibleForTesting</a>(int&nbsp;otherwise)</pre>
+      </div>
+    </div>
+  </body>
+</html>

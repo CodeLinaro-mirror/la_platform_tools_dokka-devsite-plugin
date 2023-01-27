@@ -1,0 +1,200 @@
+<html devsite="true">
+  <head>
+    <title>VisibleForTesting</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/annotation/VisibleForTesting.kt+class:androidx.annotation.VisibleForTesting&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>VisibleForTesting</h1>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-retention/index.html">Retention</a>(value&nbsp;=&nbsp;AnnotationRetention.BINARY)<br>annotation <a href="/reference/kotlin/androidx/annotation/VisibleForTesting.html">VisibleForTesting</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
+    <hr>
+    <p>Denotes that the class, method or field has its visibility relaxed, so that it is more widely visible than otherwise necessary to make code testable.</p>
+    <p>You can optionally specify what the visibility <b>should</b> have been if not for testing; this allows tools to catch unintended access from within production code.</p>
+    <p>Example:</p>
+    <pre class="prettyprint">@VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)<br>public String printDiagnostics() { ... }</pre>
+    <p>If not specified, the intended visibility is assumed to be private.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Constants</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>const <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/annotation/VisibleForTesting.Companion.html#NONE()">NONE</a> = 5</code></div>
+                <p>The annotated element should never be called from production code, only from tests.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>const <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/annotation/VisibleForTesting.Companion.html#PACKAGE_PRIVATE()">PACKAGE_PRIVATE</a> = 3</code></div>
+                <p>The annotated element would have &quot;package private&quot; visibility</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>const <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/annotation/VisibleForTesting.Companion.html#PRIVATE()">PRIVATE</a> = 2</code></div>
+                <p>The annotated element would have &quot;private&quot; visibility</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>const <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/annotation/VisibleForTesting.Companion.html#PROTECTED()">PROTECTED</a> = 4</code></div>
+                <p>The annotated element would have &quot;protected&quot; visibility</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="93%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public constructors</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/annotation/VisibleForTesting.html#VisibleForTesting(kotlin.Int)">VisibleForTesting</a>(otherwise:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/annotation/VisibleForTesting.html#otherwise()">otherwise</a></code></div>
+                <p>The visibility the annotated element would have if it did not need to be made visible for testing.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Constants</h2>
+        <div class="api-item"><a name="getNONE()"></a><a name="setNONE()"></a><a name="getNONE--"></a><a name="setNONE--"></a>
+          <h3 class="api-name" id="NONE()">NONE</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">const&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/annotation/VisibleForTesting.Companion.html#NONE()">NONE</a> = 5:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The annotated element should never be called from production code, only from tests.</p>
+          <p>This is equivalent to <code>@RestrictTo.Scope.TESTS</code>.</p>
+        </div>
+        <div class="api-item"><a name="getPACKAGE_PRIVATE()"></a><a name="setPACKAGE_PRIVATE()"></a><a name="getPACKAGE_PRIVATE--"></a><a name="setPACKAGE_PRIVATE--"></a>
+          <h3 class="api-name" id="PACKAGE_PRIVATE()">PACKAGE_PRIVATE</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">const&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/annotation/VisibleForTesting.Companion.html#PACKAGE_PRIVATE()">PACKAGE_PRIVATE</a> = 3:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The annotated element would have &quot;package private&quot; visibility</p>
+        </div>
+        <div class="api-item"><a name="getPRIVATE()"></a><a name="setPRIVATE()"></a><a name="getPRIVATE--"></a><a name="setPRIVATE--"></a>
+          <h3 class="api-name" id="PRIVATE()">PRIVATE</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">const&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/annotation/VisibleForTesting.Companion.html#PRIVATE()">PRIVATE</a> = 2:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The annotated element would have &quot;private&quot; visibility</p>
+        </div>
+        <div class="api-item"><a name="getPROTECTED()"></a><a name="setPROTECTED()"></a><a name="getPROTECTED--"></a><a name="setPROTECTED--"></a>
+          <h3 class="api-name" id="PROTECTED()">PROTECTED</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">const&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/annotation/VisibleForTesting.Companion.html#PROTECTED()">PROTECTED</a> = 4:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The annotated element would have &quot;protected&quot; visibility</p>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public constructors</h2>
+        <div class="api-item"><a name="VisibleForTesting-kotlin.Int-"></a><a name="visiblefortesting"></a>
+          <h3 class="api-name" id="VisibleForTesting(kotlin.Int)">VisibleForTesting</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/annotation/VisibleForTesting.html#VisibleForTesting(kotlin.Int)">VisibleForTesting</a>(otherwise:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = PRIVATE)</pre>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getOtherwise()"></a><a name="setOtherwise()"></a><a name="getOtherwise--"></a><a name="setOtherwise--"></a>
+          <h3 class="api-name" id="otherwise()">otherwise</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/annotation/VisibleForTesting.html#otherwise()">otherwise</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The visibility the annotated element would have if it did not need to be made visible for testing.</p>
+        </div>
+      </div>
+    </devsite-filter >
+  </body>
+</html>

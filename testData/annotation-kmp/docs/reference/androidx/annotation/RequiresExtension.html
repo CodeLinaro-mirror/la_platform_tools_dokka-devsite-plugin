@@ -1,0 +1,92 @@
+<html devsite="true">
+  <head>
+    <title>RequiresExtension</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/annotation/RequiresExtension.kt+class:androidx.annotation.RequiresExtension&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>RequiresExtension</h1>
+    <p>
+      <pre>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-must-be-documented/index.html">MustBeDocumented</a><br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-retention/index.html">Retention</a>(value&nbsp;=&nbsp;AnnotationRetention.BINARY)<br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-target/index.html">Target</a>(allowedTargets&nbsp;=&nbsp;[AnnotationTarget.ANNOTATION_CLASS,&nbsp;AnnotationTarget.CLASS,&nbsp;AnnotationTarget.FUNCTION,&nbsp;AnnotationTarget.PROPERTY_GETTER,&nbsp;AnnotationTarget.PROPERTY_SETTER,&nbsp;AnnotationTarget.CONSTRUCTOR,&nbsp;AnnotationTarget.FIELD,&nbsp;AnnotationTarget.FILE])<br>@<a href="https://developer.android.com/reference/java/lang/annotation/Target.html">Target</a>(value&nbsp;=&nbsp;[ElementType.TYPE,&nbsp;ElementType.METHOD,&nbsp;ElementType.CONSTRUCTOR,&nbsp;ElementType.FIELD,&nbsp;ElementType.PACKAGE])<br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-repeatable/index.html">Repeatable</a><br>public annotation <a href="/reference/androidx/annotation/RequiresExtension.html">RequiresExtension</a></pre>
+    </p>
+    <hr>
+    <p>Denotes that the annotated element should only be called if the given extension is at least the given version.</p>
+    <p>This annotation is repeatable, and if specified multiple times, you are required to have one of (not all of) the specified extension versions.</p>
+    <p>Example:</p>
+    <pre class="prettyprint">@RequiresExtension(extension = Build.VERSION_CODES.R, version = 3)<br>fun methodUsingApisFromR() { ... }</pre>
+    <p>For the special case of <code><a href="/reference/androidx/annotation/RequiresExtension.html#extension()">extension</a></code> == 0, you can instead use the <code><a href="/reference/androidx/annotation/RequiresApi.html">RequiresApi</a></code> annotation; <code>@RequiresApi(30)</code> is equivalent to <code>@RequiresExtension(extension=0, version=30)</code>.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/RequiresExtension.html#extension()">extension</a></code></div>
+              <p>The extension SDK ID.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/RequiresExtension.html#version()">version</a></code></div>
+              <p>The minimum version to require</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/RequiresExtension.html#RequiresExtension(kotlin.Int,kotlin.Int)">RequiresExtension</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;1) int&nbsp;extension,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;1) int&nbsp;version<br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getExtension()"></a><a name="setExtension()"></a><a name="getExtension--"></a><a name="setExtension--"></a>
+        <h3 class="api-name" id="extension()">extension</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/annotation/RequiresExtension.html#extension()">extension</a></pre>
+        <p>The extension SDK ID. This corresponds to the extension id's allowed by <code><a href="/reference/android/os/ext/SdkExtensions.html#getExtensionVersion(kotlin.Int)">android.os.ext.SdkExtensions.getExtensionVersion</a></code>, and for id values less than 1_000_000 is one of the <code><a href="https://developer.android.com/reference/android/os/Build.VERSION_CODES.html">android.os.Build.VERSION_CODES</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getVersion()"></a><a name="setVersion()"></a><a name="getVersion--"></a><a name="setVersion--"></a>
+        <h3 class="api-name" id="version()">version</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/annotation/RequiresExtension.html#version()">version</a></pre>
+        <p>The minimum version to require</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="RequiresExtension(kotlin.Int, kotlin.Int)"></a><a name="RequiresExtension-kotlin.Int-kotlin.Int-"></a><a name="requiresextension"></a>
+        <h3 class="api-name" id="RequiresExtension(kotlin.Int,kotlin.Int)">RequiresExtension</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/annotation/RequiresExtension.html#RequiresExtension(kotlin.Int,kotlin.Int)">RequiresExtension</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;1) int&nbsp;extension,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;1) int&nbsp;version<br>)</pre>
+      </div>
+    </div>
+  </body>
+</html>

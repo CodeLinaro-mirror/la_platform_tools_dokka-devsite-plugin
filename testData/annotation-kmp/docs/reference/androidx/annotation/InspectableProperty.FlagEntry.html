@@ -1,0 +1,165 @@
+<html devsite="true">
+  <head>
+    <title>InspectableProperty.FlagEntry</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/annotation/InspectableProperty.kt+class:androidx.annotation.InspectableProperty.FlagEntry&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>InspectableProperty.FlagEntry</h1>
+    <p>
+      <pre>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-target/index.html">Target</a>(allowedTargets&nbsp;=&nbsp;[AnnotationTarget.ANNOTATION_CLASS,&nbsp;AnnotationTarget.CLASS])<br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-retention/index.html">Retention</a>(value&nbsp;=&nbsp;AnnotationRetention.SOURCE)<br>public annotation <a href="/reference/androidx/annotation/InspectableProperty.FlagEntry.html">InspectableProperty.FlagEntry</a></pre>
+    </p>
+    <hr>
+    <p>One flag value of many that may be packed into a primitive {int}.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/InspectableProperty.FlagEntry.html#mask()">mask</a></code></div>
+              <p>A mask that the property will be bitwise anded with before comparing to the target.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/InspectableProperty.FlagEntry.html#name()">name</a></code></div>
+              <p>The string name of this flag.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/InspectableProperty.FlagEntry.html#target()">target</a></code></div>
+              <p>A target value that the property's value must equal after masking.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/InspectableProperty.FlagEntry.html#FlagEntry(kotlin.String,kotlin.Int,kotlin.Int)">FlagEntry</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;name,&nbsp;int&nbsp;target,&nbsp;int&nbsp;mask)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getMask()"></a><a name="setMask()"></a><a name="getMask--"></a><a name="setMask--"></a>
+        <h3 class="api-name" id="mask()">mask</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/annotation/InspectableProperty.FlagEntry.html#mask()">mask</a></pre>
+        <p>A mask that the property will be bitwise anded with before comparing to the target.</p>
+        <p>If set to 0 (the default), the value of <code><a href="/reference/androidx/annotation/InspectableProperty.FlagEntry.html#target()">target</a></code> will be used as a mask. Zero was chosen as the default since bitwise and with zero is always zero.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int</code></td>
+                <td>
+                  <p>A mask, or 0 to use the target as a mask</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getName()"></a><a name="setName()"></a><a name="getName--"></a><a name="setName--"></a>
+        <h3 class="api-name" id="name()">name</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/annotation/InspectableProperty.FlagEntry.html#name()">name</a></pre>
+        <p>The string name of this flag.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+                <td>
+                  <p>A string name</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getTarget()"></a><a name="setTarget()"></a><a name="getTarget--"></a><a name="setTarget--"></a>
+        <h3 class="api-name" id="target()">target</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/annotation/InspectableProperty.FlagEntry.html#target()">target</a></pre>
+        <p>A target value that the property's value must equal after masking.</p>
+        <p>If a mask is not supplied (i.e., <code><a href="/reference/androidx/annotation/InspectableProperty.FlagEntry.html#mask()">mask</a></code> is 0), the target will be reused as the mask. This handles the common case where no flags mutually exclude each other.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int</code></td>
+                <td>
+                  <p>The target value to compare against</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="FlagEntry(kotlin.String, kotlin.Int, kotlin.Int)"></a><a name="FlagEntry-kotlin.String-kotlin.Int-kotlin.Int-"></a><a name="flagentry"></a>
+        <h3 class="api-name" id="FlagEntry(kotlin.String,kotlin.Int,kotlin.Int)">FlagEntry</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/annotation/InspectableProperty.FlagEntry.html#FlagEntry(kotlin.String,kotlin.Int,kotlin.Int)">FlagEntry</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;name,&nbsp;int&nbsp;target,&nbsp;int&nbsp;mask)</pre>
+      </div>
+    </div>
+  </body>
+</html>

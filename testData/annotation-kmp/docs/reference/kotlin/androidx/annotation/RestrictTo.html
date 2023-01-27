@@ -1,0 +1,141 @@
+<html devsite="true">
+  <head>
+    <title>RestrictTo</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/annotation/RestrictTo.+class:androidx.annotation.RestrictTo&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>RestrictTo</h1>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-must-be-documented/index.html">MustBeDocumented</a><br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-retention/index.html">Retention</a>(value&nbsp;=&nbsp;AnnotationRetention.BINARY)<br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-target/index.html">Target</a>(allowedTargets&nbsp;=&nbsp;[AnnotationTarget.ANNOTATION_CLASS,&nbsp;AnnotationTarget.CLASS,&nbsp;AnnotationTarget.FUNCTION,&nbsp;AnnotationTarget.PROPERTY_GETTER,&nbsp;AnnotationTarget.PROPERTY_SETTER,&nbsp;AnnotationTarget.CONSTRUCTOR,&nbsp;AnnotationTarget.FIELD,&nbsp;AnnotationTarget.FILE])<br>annotation <a href="/reference/kotlin/androidx/annotation/RestrictTo.html">RestrictTo</a></pre>
+          </li>
+          <li>
+            <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+            <!--platform-Android/JVM-->
+            <pre>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-must-be-documented/index.html">MustBeDocumented</a><br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-retention/index.html">Retention</a>(value&nbsp;=&nbsp;AnnotationRetention.BINARY)<br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-target/index.html">Target</a>(allowedTargets&nbsp;=&nbsp;[AnnotationTarget.ANNOTATION_CLASS,&nbsp;AnnotationTarget.CLASS,&nbsp;AnnotationTarget.FUNCTION,&nbsp;AnnotationTarget.PROPERTY_GETTER,&nbsp;AnnotationTarget.PROPERTY_SETTER,&nbsp;AnnotationTarget.CONSTRUCTOR,&nbsp;AnnotationTarget.FIELD,&nbsp;AnnotationTarget.FILE])<br>@<a href="https://developer.android.com/reference/java/lang/annotation/Target.html">Target</a>(value&nbsp;=&nbsp;[ElementType.ANNOTATION_TYPE,&nbsp;ElementType.TYPE,&nbsp;ElementType.METHOD,&nbsp;ElementType.CONSTRUCTOR,&nbsp;ElementType.FIELD,&nbsp;ElementType.PACKAGE])<br>annotation <a href="/reference/kotlin/androidx/annotation/RestrictTo.html">RestrictTo</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
+    <hr>
+    <p>Denotes that the annotated element should only be accessed from within a specific scope (as defined by <code><a href="/reference/kotlin/androidx/annotation/RestrictTo.Scope.html">Scope</a></code>).</p>
+    <p>Example of restricting usage within a library (based on gradle group ID):</p>
+    <pre class="prettyprint">@RestrictTo(GROUP_ID)<br>public void resetPaddingToInitialValues() { ...</pre>
+    <p>Example of restricting usage to tests:</p>
+    <pre class="prettyprint">@RestrictTo(Scope.TESTS)<br>public abstract int getUserId();</pre>
+    <p>Example of restricting usage to subclasses:</p>
+    <pre class="prettyprint">@RestrictTo(Scope.SUBCLASSES)<br>public void onDrawForeground(Canvas canvas) { ...</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>enum <a href="/reference/kotlin/androidx/annotation/RestrictTo.Scope.html">RestrictTo.Scope</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html">Enum</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="93%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public constructors</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/annotation/RestrictTo.html#RestrictTo(kotlin.Array)">RestrictTo</a>(vararg&nbsp;value:&nbsp;<a href="/reference/kotlin/androidx/annotation/RestrictTo.Scope.html">RestrictTo.Scope</a>)</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All-->
+                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+                <!--platform-Android/JVM--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;<a href="/reference/kotlin/androidx/annotation/RestrictTo.Scope.html">RestrictTo.Scope</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/annotation/RestrictTo.html#value()">value</a></code></div>
+                <p>The scope to which usage should be restricted.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All-->
+                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+                <!--platform-Android/JVM--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public constructors</h2>
+        <div class="api-item"><a name="RestrictTo-kotlin.Array-"></a><a name="restrictto"></a>
+          <h3 class="api-name" id="RestrictTo(kotlin.Array)">RestrictTo</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All--><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+          <!--platform-Android/JVM-->
+          <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/annotation/RestrictTo.html#RestrictTo(kotlin.Array)">RestrictTo</a>(vararg&nbsp;value:&nbsp;<a href="/reference/kotlin/androidx/annotation/RestrictTo.Scope.html">RestrictTo.Scope</a>)</pre>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getValue()"></a><a name="setValue()"></a><a name="getValue--"></a><a name="setValue--"></a>
+          <h3 class="api-name" id="value()">value</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All--><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+          <!--platform-Android/JVM-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/annotation/RestrictTo.html#value()">value</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;<a href="/reference/kotlin/androidx/annotation/RestrictTo.Scope.html">RestrictTo.Scope</a>&gt;</pre>
+          <p>The scope to which usage should be restricted.</p>
+        </div>
+      </div>
+    </devsite-filter >
+  </body>
+</html>

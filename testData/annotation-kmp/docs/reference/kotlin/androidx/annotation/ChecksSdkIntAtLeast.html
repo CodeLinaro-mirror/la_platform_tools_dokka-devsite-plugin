@@ -1,0 +1,175 @@
+<html devsite="true">
+  <head>
+    <title>ChecksSdkIntAtLeast</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/annotation/ChecksSdkIntAtLeast.kt+class:androidx.annotation.ChecksSdkIntAtLeast&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>ChecksSdkIntAtLeast</h1>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+            <!--platform-Android/JVM-->
+            <pre>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-must-be-documented/index.html">MustBeDocumented</a><br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-retention/index.html">Retention</a>(value&nbsp;=&nbsp;AnnotationRetention.BINARY)<br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-target/index.html">Target</a>(allowedTargets&nbsp;=&nbsp;[AnnotationTarget.FUNCTION,&nbsp;AnnotationTarget.PROPERTY_GETTER,&nbsp;AnnotationTarget.PROPERTY_SETTER,&nbsp;AnnotationTarget.FIELD])<br>annotation <a href="/reference/kotlin/androidx/annotation/ChecksSdkIntAtLeast.html">ChecksSdkIntAtLeast</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
+    <hr>
+    <p>Denotes that the annotated method checks if the SDK_INT API level is at least the given value, and either returns it or executes the given lambda in that case (or if it's a field, has the value true).</p>
+    <p>The API level can be specified either as an API level via .api, or for preview platforms as a codename (such as &quot;R&quot;) via .codename}, or it can be passed in to the method; in that case, the parameter containing the API level or code name should be specified via .parameter, where the first parameter is numbered 0.</p>
+    <p>Examples:</p>
+    <pre class="prettyprint">// Simple version check<br>@ChecksSdkIntAtLeast(api = Build.VERSION_CODES.O)<br>public static boolean isAtLeastO() {<br>    return Build.VERSION.SDK_INT &gt;= 26;<br>}<br><br>// Required API level is passed in as first argument, and function<br>// in second parameter is executed if SDK_INT is at least that high:<br>@ChecksSdkIntAtLeast(parameter = 0, lambda = 1)<br>inline fun fromApi(value: Int, action: () -&gt; Unit) {<br>    if (Build.VERSION.SDK_INT &gt;= value) {<br>        action()<br>    }<br>}<br><br>// Kotlin property:<br>@get:ChecksSdkIntAtLeast(api = Build.VERSION_CODES.GINGERBREAD)<br>val isGingerbread: Boolean<br>get() = Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.GINGERBREAD<br><br>// Java field:<br>@ChecksSdkIntAtLeast(api = Build.VERSION_CODES.LOLLIPOP)<br>public static final boolean SUPPORTS_LETTER_SPACING =<br>Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.LOLLIPOP;</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="93%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public constructors</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/annotation/ChecksSdkIntAtLeast.html#ChecksSdkIntAtLeast(kotlin.Int,kotlin.String,kotlin.Int,kotlin.Int,kotlin.Int)">ChecksSdkIntAtLeast</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;api:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;codename:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;parameter:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;lambda:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;extension:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><br>)</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+                <!--platform-Android/JVM--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/annotation/ChecksSdkIntAtLeast.html#api()">api</a></code></div>
+                <p>The API level is at least the given level</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+                <!--platform-Android/JVM--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/annotation/ChecksSdkIntAtLeast.html#codename()">codename</a></code></div>
+                <p>The API level is at least the given codename (such as &quot;R&quot;)</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+                <!--platform-Android/JVM--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/annotation/ChecksSdkIntAtLeast.html#extension()">extension</a></code></div>
+                <p>The associated Extension SDK id, or 0 if the Android platform</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+                <!--platform-Android/JVM--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/annotation/ChecksSdkIntAtLeast.html#lambda()">lambda</a></code></div>
+                <p>The parameter number for a lambda that will be executed if the API level is at least the value supplied via <code><a href="/reference/kotlin/androidx/annotation/ChecksSdkIntAtLeast.html#api()">api</a></code>, <code><a href="/reference/kotlin/androidx/annotation/ChecksSdkIntAtLeast.html#codename()">codename</a></code> or <code><a href="/reference/kotlin/androidx/annotation/ChecksSdkIntAtLeast.html#parameter()">parameter</a></code></p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+                <!--platform-Android/JVM--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/annotation/ChecksSdkIntAtLeast.html#parameter()">parameter</a></code></div>
+                <p>The API level is specified in the given parameter, where the first parameter is number 0</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+                <!--platform-Android/JVM--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public constructors</h2>
+        <div class="api-item"><a name="ChecksSdkIntAtLeast(kotlin.Int, kotlin.String, kotlin.Int, kotlin.Int, kotlin.Int)"></a><a name="ChecksSdkIntAtLeast-kotlin.Int-kotlin.String-kotlin.Int-kotlin.Int-kotlin.Int-"></a><a name="checkssdkintatleast"></a>
+          <h3 class="api-name" id="ChecksSdkIntAtLeast(kotlin.Int,kotlin.String,kotlin.Int,kotlin.Int,kotlin.Int)">ChecksSdkIntAtLeast</h3>
+<span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+          <!--platform-Android/JVM-->
+          <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/annotation/ChecksSdkIntAtLeast.html#ChecksSdkIntAtLeast(kotlin.Int,kotlin.String,kotlin.Int,kotlin.Int,kotlin.Int)">ChecksSdkIntAtLeast</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;api:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = -1,<br>&nbsp;&nbsp;&nbsp;&nbsp;codename:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a> = &quot;&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;parameter:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = -1,<br>&nbsp;&nbsp;&nbsp;&nbsp;lambda:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = -1,<br>&nbsp;&nbsp;&nbsp;&nbsp;extension:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 0<br>)</pre>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getApi()"></a><a name="setApi()"></a><a name="getApi--"></a><a name="setApi--"></a>
+          <h3 class="api-name" id="api()">api</h3>
+<span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+          <!--platform-Android/JVM-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/annotation/ChecksSdkIntAtLeast.html#api()">api</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The API level is at least the given level</p>
+        </div>
+        <div class="api-item"><a name="getCodename()"></a><a name="setCodename()"></a><a name="getCodename--"></a><a name="setCodename--"></a>
+          <h3 class="api-name" id="codename()">codename</h3>
+<span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+          <!--platform-Android/JVM-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/annotation/ChecksSdkIntAtLeast.html#codename()">codename</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></pre>
+          <p>The API level is at least the given codename (such as &quot;R&quot;)</p>
+        </div>
+        <div class="api-item"><a name="getExtension()"></a><a name="setExtension()"></a><a name="getExtension--"></a><a name="setExtension--"></a>
+          <h3 class="api-name" id="extension()">extension</h3>
+<span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+          <!--platform-Android/JVM-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/annotation/ChecksSdkIntAtLeast.html#extension()">extension</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The associated Extension SDK id, or 0 if the Android platform</p>
+        </div>
+        <div class="api-item"><a name="getLambda()"></a><a name="setLambda()"></a><a name="getLambda--"></a><a name="setLambda--"></a>
+          <h3 class="api-name" id="lambda()">lambda</h3>
+<span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+          <!--platform-Android/JVM-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/annotation/ChecksSdkIntAtLeast.html#lambda()">lambda</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The parameter number for a lambda that will be executed if the API level is at least the value supplied via <code><a href="/reference/kotlin/androidx/annotation/ChecksSdkIntAtLeast.html#api()">api</a></code>, <code><a href="/reference/kotlin/androidx/annotation/ChecksSdkIntAtLeast.html#codename()">codename</a></code> or <code><a href="/reference/kotlin/androidx/annotation/ChecksSdkIntAtLeast.html#parameter()">parameter</a></code></p>
+        </div>
+        <div class="api-item"><a name="getParameter()"></a><a name="setParameter()"></a><a name="getParameter--"></a><a name="setParameter--"></a>
+          <h3 class="api-name" id="parameter()">parameter</h3>
+<span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+          <!--platform-Android/JVM-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/annotation/ChecksSdkIntAtLeast.html#parameter()">parameter</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The API level is specified in the given parameter, where the first parameter is number 0</p>
+        </div>
+      </div>
+    </devsite-filter >
+  </body>
+</html>

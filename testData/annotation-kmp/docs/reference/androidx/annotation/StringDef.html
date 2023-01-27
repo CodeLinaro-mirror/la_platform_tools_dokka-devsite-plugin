@@ -1,0 +1,90 @@
+<html devsite="true">
+  <head>
+    <title>StringDef</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/annotation/StringDef.kt+class:androidx.annotation.StringDef&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>StringDef</h1>
+    <p>
+      <pre>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-retention/index.html">Retention</a>(value&nbsp;=&nbsp;AnnotationRetention.SOURCE)<br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-target/index.html">Target</a>(allowedTargets&nbsp;=&nbsp;[AnnotationTarget.ANNOTATION_CLASS])<br>public annotation <a href="/reference/androidx/annotation/StringDef.html">StringDef</a></pre>
+    </p>
+    <hr>
+    <p>Denotes that the annotated String element, represents a logical type and that its value should be one of the explicitly named constants.</p>
+    <p>Example:</p>
+    <pre class="prettyprint">@Retention(SOURCE)<br>@StringDef({<br>    POWER_SERVICE,<br>    WINDOW_SERVICE,<br>    LAYOUT_INFLATER_SERVICE<br>})<br>public @interface ServiceName {}<br>public static final String POWER_SERVICE = &quot;power&quot;;<br>public static final String WINDOW_SERVICE = &quot;window&quot;;<br>public static final String LAYOUT_INFLATER_SERVICE = &quot;layout_inflater&quot;;<br>...<br>public abstract Object getSystemService(@ServiceName String name);</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/StringDef.html#open()">open</a></code></div>
+              <p>Whether any other values are allowed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> String[]</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/StringDef.html#value()">value</a></code></div>
+              <p>Defines the allowed constants for this element</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/StringDef.html#StringDef(kotlin.Array,kotlin.Boolean)">StringDef</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;value,&nbsp;boolean&nbsp;open)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getOpen()"></a><a name="setOpen()"></a><a name="getOpen--"></a><a name="setOpen--"></a>
+        <h3 class="api-name" id="open()">open</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/annotation/StringDef.html#open()">open</a></pre>
+        <p>Whether any other values are allowed. Normally this is not the case, but this allows you to specify a set of expected constants, which helps code completion in the IDE and documentation generation and so on, but without flagging compilation warnings if other values are specified.</p>
+      </div>
+      <div class="api-item"><a name="getValue()"></a><a name="setValue()"></a><a name="getValue--"></a><a name="setValue--"></a>
+        <h3 class="api-name" id="value()">value</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> String[]&nbsp;<a href="/reference/androidx/annotation/StringDef.html#value()">value</a></pre>
+        <p>Defines the allowed constants for this element</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="StringDef(kotlin.Array, kotlin.Boolean)"></a><a name="StringDef-kotlin.Array-kotlin.Boolean-"></a><a name="stringdef"></a>
+        <h3 class="api-name" id="StringDef(kotlin.Array,kotlin.Boolean)">StringDef</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/annotation/StringDef.html#StringDef(kotlin.Array,kotlin.Boolean)">StringDef</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;value,&nbsp;boolean&nbsp;open)</pre>
+      </div>
+    </div>
+  </body>
+</html>
