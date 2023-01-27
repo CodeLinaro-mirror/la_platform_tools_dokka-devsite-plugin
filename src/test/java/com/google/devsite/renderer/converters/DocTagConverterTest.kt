@@ -1466,6 +1466,7 @@ internal class DocTagConverterTest(
         val enumConverter = EnumValueDocumentableConverter(
             displayLanguage, provider, javadocConverter, paramConverter, annotationConverter
         )
+        val metadataConverter = MetadataConverter(holder)
         val classConverter1 = NonKmpClasslikeConverter(
             displayLanguage,
             module.explicitClasslike("DynamicNavGraphBuilder"),
@@ -1476,7 +1477,8 @@ internal class DocTagConverterTest(
             enumConverter,
             javadocConverter,
             paramConverter,
-            annotationConverter
+            annotationConverter,
+            metadataConverter
         )
         val documentedClass1 = runBlocking { classConverter1.classlike() }
         val classConverter2 = NonKmpClasslikeConverter(
@@ -1489,7 +1491,8 @@ internal class DocTagConverterTest(
             enumConverter,
             javadocConverter,
             paramConverter,
-            annotationConverter
+            annotationConverter,
+            metadataConverter
         )
         val documentedClass2 = runBlocking { classConverter2.classlike() }
         assertThat(outputStreamCaptor.toString()).doesNotContain("WARNING")

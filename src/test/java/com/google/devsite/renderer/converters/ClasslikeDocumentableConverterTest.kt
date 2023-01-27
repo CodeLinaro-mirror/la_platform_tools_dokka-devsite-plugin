@@ -2523,6 +2523,7 @@ internal class ClasslikeDocumentableConverterTest(
         val enumConverter = EnumValueDocumentableConverter(
             displayLanguage, provider, javadocConverter, paramConverter, annotationConverter
         )
+        val metadataConverter = MetadataConverter(holder)
         val converters = classlikes.map {
             NonKmpClasslikeConverter(
                 displayLanguage,
@@ -2535,6 +2536,7 @@ internal class ClasslikeDocumentableConverterTest(
                 javadocConverter,
                 paramConverter,
                 annotationConverter,
+                metadataConverter,
                 extFunctionMap.getOrDefault(it.dri, emptyList()),
                 extPropertyMap.getOrDefault(it.dri, emptyList())
             )

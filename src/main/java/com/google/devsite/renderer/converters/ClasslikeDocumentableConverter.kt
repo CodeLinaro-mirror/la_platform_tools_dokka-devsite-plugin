@@ -31,7 +31,6 @@ import com.google.devsite.components.impl.DefaultClasslikeSummary
 import com.google.devsite.components.impl.DefaultDevsitePage
 import com.google.devsite.components.impl.DefaultDevsitePlatformSelector
 import com.google.devsite.components.impl.DefaultInheritedSymbols
-import com.google.devsite.components.impl.DefaultMetadataComponent
 import com.google.devsite.components.impl.DefaultRelatedSymbols
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableRowSummaryItem
@@ -45,7 +44,6 @@ import com.google.devsite.components.symbols.ClasslikeDescription
 import com.google.devsite.components.symbols.ClasslikeSignature
 import com.google.devsite.components.symbols.ClasslikeSummary
 import com.google.devsite.components.symbols.FunctionSignature
-import com.google.devsite.components.symbols.MetadataComponent
 import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSignature
@@ -63,7 +61,6 @@ import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import com.google.devsite.strictSingleOrNull
-import com.google.devsite.util.LibraryMetadata
 import com.jetbrains.rd.util.concurrentMapOf
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
@@ -83,7 +80,6 @@ import org.jetbrains.dokka.model.DObject
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.DTypeParameter
 import org.jetbrains.dokka.model.Documentable
-import org.jetbrains.dokka.model.DocumentableSource
 import org.jetbrains.dokka.model.ExtraModifiers
 import org.jetbrains.dokka.model.GenericTypeConstructor
 import org.jetbrains.dokka.model.InheritedMember
@@ -108,6 +104,7 @@ internal abstract class ClasslikeDocumentableConverter(
     protected val javadocConverter: DocTagConverter, // TODO(KMP b/254490320)
     protected val paramConverter: ParameterDocumentableConverter,
     private val annotationConverter: AnnotationDocumentableConverter,
+    private val metadataConverter: MetadataConverter,
     private val classExtensionFunctions: List<DFunction> = emptyList(),
     private val classExtensionProperties: List<DProperty> = emptyList()
 ) {
@@ -323,7 +320,7 @@ internal abstract class ClasslikeDocumentableConverter(
         }
 
         val inheritedTypes = async { computeInheritedSymbols(inheritedAll) }
-        val metadataComponent = async { getMetadata() }
+        val metadataComponent = async { metadataConverter.getMetadataForClasslike(classlike) }
 
         var extensionFunctions = classExtensionFunctions +
             if (displayLanguage == Language.JAVA)
@@ -910,86 +907,6 @@ internal abstract class ClasslikeDocumentableConverter(
         )
     }
 
-    /**
-     * Creates a metadata component for this classlike. If [getSourceEntries] returns null for the
-     * classlike, this will also return null as the source entry is needed to create both the
-     * library metadata and the source link.
-     */
-    private fun getMetadata(): MetadataComponent? {
-        val entries = getSourceEntries(classlike) ?: return null
-        val paths = entries.map { entry -> getSourceFilePath(entry) }
-        val jsonLibraryMetadata = findMatchingJsonLibraryMetadata(paths)
-        val sourceUrl = createLinkToSource(paths)
-
-        return DefaultMetadataComponent(
-            MetadataComponent.Params(
-                libraryMetadata = jsonLibraryMetadata,
-                sourceLinkUrl = sourceUrl,
-                // TODO(b/264280671): display version metadata for classes
-                versionMetadata = null
-            )
-        )
-    }
-
-    /**
-     * Iterate through the library metadata Map to find a [LibraryMetadata] that matches the
-     * current class being processed.  Otherwise, return null.
-     */
-    private fun findMatchingJsonLibraryMetadata(paths: List<String>): LibraryMetadata? {
-        if (paths.size > 1) {
-            docsHolder.logger.warn(
-                "Multiple sources exist for ${classlike.name}. Artifact ID metadata will not be " +
-                    "displayed"
-            )
-            return null
-        }
-        val path = paths.single()
-
-        return docsHolder.fileMetadataMap[path]
-    }
-
-    /**
-     * Finds the source entries associated with the classlike. Returns null and logs a warning
-     * if there are no source entries.
-     */
-    private fun getSourceEntries(classlike: DClasslike): Set<SourceEntry>? {
-        val logger = docsHolder.logger
-        val sources = classlike.sources
-        if (sources.isEmpty()) {
-            logger.warn("Sources for ${classlike.name} is empty")
-            return null
-        }
-
-        return sources.entries
-    }
-
-    /**
-     * Get the source file path from the [SourceEntry] relative to the root of the source directory.
-     *
-     * For example - this would return "androidx/paging/compose/LazyPagingItems.kt" if the path was
-     * "/location/to/root/of/source/files/androidx/paging/compose/LazyPagingItems.kt".
-     */
-    private fun getSourceFilePath(sourceEntry: SourceEntry): String {
-        val sourceRoots = sourceEntry.key.sourceRoots.map { it.toString() }
-        val fullFilePath = sourceEntry.value.path
-        // Find the source root that the file path starts with, so it can be trimmed off.
-        // This assumes the full file path always begins with one of the source roots.
-        val relevantSourceRoot = sourceRoots.first { fullFilePath.startsWith(it) }
-        val filePath = fullFilePath.substringAfter(relevantSourceRoot)
-        return filePath.removePrefix("/")
-    }
-
-    /**
-     * Creates a link to the source of the classlike using the base URL from the configuration.
-     *
-     * Returns null if there was no base source link in the configuration.
-     */
-    private fun createLinkToSource(paths: List<String>): String? {
-        // Reduce the list of paths to a single path by taking the common prefix of all of them.
-        val path = paths.reduce { currPrefix, nextPath -> currPrefix.commonPrefixWith(nextPath) }
-        return docsHolder.baseSourceLink?.format(path, classlike.dri.fullName)
-    }
-
     /** Converts the classlikes to link components for use in the related symbols component. */
     private fun linksForClasslikes(docs: List<DClasslike>): List<Link> {
         return docs.map { pathProvider.linkForReference(it.dri) }
@@ -1118,8 +1035,6 @@ internal abstract class ClasslikeDocumentableConverter(
         }
     }
 }
-
-typealias SourceEntry = Map.Entry<DokkaSourceSet, DocumentableSource>
 
 /**
  * Returns whether this DObject is an ordinary companion and is not signifcant enough to show on its

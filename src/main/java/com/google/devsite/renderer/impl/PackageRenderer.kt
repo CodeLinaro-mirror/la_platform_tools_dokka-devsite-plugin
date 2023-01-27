@@ -26,6 +26,7 @@ import com.google.devsite.renderer.converters.EnumValueDocumentableConverter
 import com.google.devsite.renderer.converters.FunctionDocumentableConverter
 import com.google.devsite.renderer.converters.KmpClasslikeConverter
 import com.google.devsite.renderer.converters.KmpPackageConverter
+import com.google.devsite.renderer.converters.MetadataConverter
 import com.google.devsite.renderer.converters.NonKmpClasslikeConverter
 import com.google.devsite.renderer.converters.NonKmpPackageConverter
 import com.google.devsite.renderer.converters.ParameterDocumentableConverter
@@ -57,7 +58,8 @@ internal class PackageRenderer(
     private val enumConverter: EnumValueDocumentableConverter,
     private val javadocConverter: DocTagConverter,
     private val paramConverter: ParameterDocumentableConverter,
-    private val annotationConverter: AnnotationDocumentableConverter
+    private val annotationConverter: AnnotationDocumentableConverter,
+    private val metadataConverter: MetadataConverter
 ) {
     /** Writes the home page. Is a redirect page with no content. */
     suspend fun writeIndex(dPackage: DPackage) {
@@ -130,6 +132,7 @@ internal class PackageRenderer(
                 javadocConverter,
                 paramConverter,
                 annotationConverter,
+                metadataConverter,
                 classExtensionFunctions,
                 classExtensionProperties,
                 dPackage.getPlatforms()
@@ -146,6 +149,7 @@ internal class PackageRenderer(
                 javadocConverter,
                 paramConverter,
                 annotationConverter,
+                metadataConverter,
                 classExtensionFunctions,
                 classExtensionProperties
             )
