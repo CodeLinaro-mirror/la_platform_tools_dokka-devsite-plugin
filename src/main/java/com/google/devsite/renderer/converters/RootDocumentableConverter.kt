@@ -138,11 +138,11 @@ internal class RootDocumentableConverter(
         packagePrefixToRemove: String?
     ): Deferred<DefaultTocPackage> = async {
         val interfaces = docsHolder.interfacesFor(dPackage).map(::typeForToc)
+        val objects = docsHolder.interestingObjectsFor(dPackage).map(::typeForToc)
         val classes = docsHolder.classesFor(dPackage, displayLanguage).map(::typeForToc)
         val enums = docsHolder.enumsFor(dPackage).map(::typeForToc)
         val exceptions = docsHolder.exceptionsFor(dPackage).map(::typeForToc)
         val annotations = docsHolder.annotationsFor(dPackage).map(::typeForToc)
-        val objects = docsHolder.interestingObjectsFor(dPackage, displayLanguage).map(::typeForToc)
 
         // Update the string to trim to end with a `.` if it doesn't already.
         val prefixToTrim = (packagePrefixToRemove?.removeSuffix(".")?.plus(".")) ?: ""
@@ -152,11 +152,12 @@ internal class RootDocumentableConverter(
                 name = dPackage.name.removePrefix(prefixToTrim),
                 packageUrl = pathProvider.forReference(dPackage.dri).url,
                 interfaces = interfaces,
-                classes = classes,
+                classes = if (displayLanguage == Language.KOTLIN) classes
+                else (classes + objects).sortedBy { it.name },
                 enums = enums,
                 exceptions = exceptions,
                 annotations = annotations,
-                objects = objects
+                objects = if (displayLanguage == Language.KOTLIN) objects else emptyList()
             ) // Typealiases do not appear in the toc because they do not get their own pages
         )
     }

@@ -404,9 +404,15 @@ internal class RootDocumentableConverterTest(
         """.render().toc()
 
         val tocPackage = toc.item()
-        kotlinOnly { assertThat(tocPackage.data.objects.single().name).isEqualTo("Bar.Baz") }
-        javaOnly { assertThat(tocPackage.data.objects).isEmpty() }
-        assertThat(tocPackage.data.classes.size).isEqualTo(2)
+        kotlinOnly {
+            assertThat(tocPackage.data.objects.single().name).isEqualTo("Bar.Baz")
+            assertThat(tocPackage.data.classes.map { it.name }).containsExactly("Foo", "Bar")
+        }
+        javaOnly {
+            assertThat(tocPackage.data.objects).isEmpty()
+            assertThat(tocPackage.data.classes.map { it.name })
+                .containsExactly("Foo", "Bar", "Bar.Baz")
+        }
     }
 
     @Test

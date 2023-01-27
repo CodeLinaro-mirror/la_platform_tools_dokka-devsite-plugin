@@ -120,6 +120,15 @@ internal class DocumentablesHolder(
         scope.apply {
             for (dPackage in module.packages) {
                 val children = async { dPackage.explodedChildren }
+                val companionsMap = async {
+                    computeCompanions(children.await().filterIsInstance<WithCompanion>())
+                }
+                val interestingKotlinObjectsList = async {
+                    computeInterestingObjectsForKotlin(
+                        children.await().filterIsInstance<DObject>(),
+                        companionsMap.await().keys
+                    )
+                }
                 val syntheticClassList = async { computeSyntheticClasses(dPackage) }
                 val combinedClasslikesList = async {
                     computeClasslikes(
@@ -135,10 +144,6 @@ internal class DocumentablesHolder(
                 val annotationList = async { computeAnnotations(children.await()) }
                 val typeAliasList = async { computeTypesAliases(dPackage) }
                 val exceptionList = async { computeExceptions(children.await()) }
-                val companionsMap = async { computeCompanions(children.await()) }
-                val interestingKotlinObjectsList = async {
-                    computeInterestingObjectsForKotlin(children.await(), companionsMap.await().keys)
-                }
 
                 classlikes[dPackage.dri] = combinedClasslikesList
                 classes[dPackage.dri] = classList
@@ -242,13 +247,8 @@ internal class DocumentablesHolder(
     suspend fun exceptionsFor(dPackage: DPackage): List<DClass> =
         exceptions.getValue(dPackage.dri).await()
 
-    suspend fun interestingObjectsFor(dPackage: DPackage, displayLanguage: Language) =
-        if (displayLanguage == Language.JAVA) {
-            // TODO(b/203678085): Objects are instead converted to top-level static inner classes
-            emptyList()
-        } else {
-            interestingKotlinObjects.getValue(dPackage.dri).await()
-        }
+    suspend fun interestingObjectsFor(dPackage: DPackage) =
+        interestingKotlinObjects.getValue(dPackage.dri).await()
 
     /**
      * Iterate through the all packages and create map of each class to its associated
@@ -360,7 +360,8 @@ internal class DocumentablesHolder(
     /** Computes the syntheticClasses from top level functions that are used to document Kotlin as
      * Java
      */
-    internal fun computeSyntheticClasses(dPackage: DPackage): Set<DClass> {
+    internal fun computeSyntheticClasses(dPackage: DPackage):
+        Set<DClass> {
         // functions that are JvmSynthetic are not accessible from Java, so they should not appear
         // in the documentation
         val javaFunctions = dPackage.functions.filterOutJvmSynthetic()
@@ -425,13 +426,14 @@ internal class DocumentablesHolder(
     }
 
     /** Returns a Map<DRI, DObject> because `Set<Documentable>.contains` is unusable b/232944038. */
-    private fun computeCompanions(docs: List<Documentable>) =
-        docs.filterIsInstance<WithCompanion>().mapNotNull { it.companion }.associateBy { it.dri }
+    private fun computeCompanions(docs: List<WithCompanion>) =
+        docs.mapNotNull { it.companion }.associateBy { it.dri }
 
     /** Computes the list of objects that are interesting in Kotlin */
-    private fun computeInterestingObjectsForKotlin(docs: List<Documentable>, companions: Set<DRI>):
-        List<DObject> {
-        val allObjects = docs.filterIsInstance<DObject>()
+    private fun computeInterestingObjectsForKotlin(
+        allObjects: List<DObject>,
+        companions: Set<DRI>
+    ): List<DObject> {
 
         // Un-ordinary companions are companions, but also appear in the ToC.
         val (boringObjects, interestingObjects) =
