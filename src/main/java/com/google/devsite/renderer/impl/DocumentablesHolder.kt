@@ -35,7 +35,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.DokkaConfiguration
-import org.jetbrains.dokka.analysis.EnvironmentAndFacade
+import org.jetbrains.dokka.analysis.DokkaResolutionFacade
 import org.jetbrains.dokka.base.signatures.KotlinSignatureUtils.driOrNull
 import org.jetbrains.dokka.base.translators.descriptors.ExternalDocumentablesProvider
 import org.jetbrains.dokka.links.DRI
@@ -112,7 +112,7 @@ internal class DocumentablesHolder(
     private val nestedClasslikes = mutableMapOf<DRI, Deferred<List<DClasslike>>>()
     private val classGraph: Deferred<ClassGraph>
     private val documentablesGraph: Deferred<DocumentablesGraph>
-    private val analysisMap: Deferred<Map<DokkaConfiguration.DokkaSourceSet, EnvironmentAndFacade>>
+    private val analysisMap: Deferred<Map<DokkaConfiguration.DokkaSourceSet, DokkaResolutionFacade>>
 
     internal val logger = context?.logger ?: DokkaConsoleLogger(LoggingLevel.WARN)
 
@@ -192,7 +192,7 @@ internal class DocumentablesHolder(
 
     suspend fun documentablesGraph(): Map<DRI, Documentable> = documentablesGraph.await()
 
-    suspend fun analysisMap(): Map<DokkaConfiguration.DokkaSourceSet, EnvironmentAndFacade> =
+    suspend fun analysisMap(): Map<DokkaConfiguration.DokkaSourceSet, DokkaResolutionFacade> =
         analysisMap.await()
 
     suspend fun classlikesFor(dPackage: DPackage, displayLanguage: Language): List<DClasslike> {

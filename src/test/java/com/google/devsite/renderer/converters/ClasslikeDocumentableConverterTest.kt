@@ -2167,10 +2167,7 @@ internal class ClasslikeDocumentableConverterTest(
         // test the Documentables tree. The correct behavior would be both isNotEmpty
         for (module in listOf(moduleJ, moduleK)) {
             val classlike = module.explicitClasslike("Foo")
-            if (module == moduleK)
-                assertThat((classlike as DClass).constructors).isNotEmpty()
-            else
-                assertThat((classlike as DClass).constructors).isEmpty()
+            assertThat((classlike as DClass).constructors).isNotEmpty()
         }
 
         // test the Documentables tree. The correct behavior is both isNotEmpty
@@ -2197,12 +2194,8 @@ internal class ClasslikeDocumentableConverterTest(
         }
 
         // test our Components tree. The correct behavior is both isEmpty.
-        // Our fix for the next test breaks us in this case. I think this is unavoidably upstream.
         for (classlike in listOf(classlikeJ, classlikeK)) {
-            if (classlike == classlikeK)
-                assertThat(classlike.data.publicConstructorsDetails).isEmpty()
-            else
-                assertThat(classlike.data.publicConstructorsDetails).isNotEmpty()
+            assertThat(classlike.data.publicConstructorsDetails).isEmpty()
         }
     }
 

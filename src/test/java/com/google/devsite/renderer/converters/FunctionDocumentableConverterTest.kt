@@ -43,7 +43,6 @@ import org.jetbrains.dokka.model.GenericTypeConstructor
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
-import kotlin.test.assertFails
 
 @RunWith(Parameterized::class)
 internal class FunctionDocumentableConverterTest(
@@ -427,15 +426,12 @@ internal class FunctionDocumentableConverterTest(
         val summaryK = """
             |class Foo
         """.render().functionSummary()
-        val constructor = summaryK.data.description
-        assertThat(constructor.name()).isEqualTo("Foo")
-
-        assertFails {
-            val jjj = """
+        val summaryJ = """
             |public class Foo {}
-            """.render(java = true)
-            val summaryJ = jjj.functionSummary()
-            // val constructor = summaryJ.data.description as SymbolSummary
+        """.render(java = true).functionSummary()
+        for (summary in listOf(summaryJ, summaryK)) {
+            val ctor = summaryK.data.description
+            assertThat(ctor.name()).isEqualTo("Foo")
         }
     }
 
