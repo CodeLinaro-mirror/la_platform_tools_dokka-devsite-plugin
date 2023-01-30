@@ -85,7 +85,7 @@ class PostMergePackageDocumentableFilter : DocumentableTransformer {
 private fun Documentable.isHidden(): Boolean =
     this.hasAnnotation(restrictToDri) || this.hasDeprecationLevelHidden() ||
         this.hasHideJavadocTag() || this.hasRemovedJavadocTag() ||
-        this.hasAnnotation(visibleForTestingDri)
+        this.hasAnnotation(visibleForTestingDri) || this.hasAnnotation(gmsHideDri)
 
 private fun Documentable.hasDeprecationLevelHidden(): Boolean =
     this.annotations(getExpectOrCommonSourceSet()).any {
@@ -123,9 +123,10 @@ private val Documentable.annotations
         ?.get(Annotations)
 
 private val restrictToDri = DRI(packageName = "androidx.annotation", classNames = "RestrictTo")
-private val visibleForTestingDri = DRI(
-    packageName = "androidx.annotation", classNames = "VisibleForTesting"
-)
+private val visibleForTestingDri =
+    DRI(packageName = "androidx.annotation", classNames = "VisibleForTesting")
+private val gmsHideDri =
+    DRI(packageName = "com.google.android.gms.common.internal", classNames = "Hide")
 
 fun hasBeenHidden(dri: DRI): Boolean {
     return hiddenDocumentables.contains(dri)
