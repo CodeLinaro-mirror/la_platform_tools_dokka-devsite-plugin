@@ -32,6 +32,13 @@
             </td>
           </tr>
           <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/foundation/layout/Arrangement.HorizontalOrVertical.html">Arrangement.HorizontalOrVertical</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/Arrangement.Absolute.html#spacedBy(androidx.compose.ui.unit.Dp)">spacedBy</a>(space:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>)</code></div>
+              <p>Place children such that each two adjacent ones are spaced by a fixed <code><a href="/reference/kotlin/androidx/compose/foundation/layout/Arrangement.Absolute.html#spacedBy(androidx.compose.ui.unit.Dp)">space</a></code> distance across the main axis.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code><a href="/reference/kotlin/androidx/compose/foundation/layout/Arrangement.Horizontal.html">Arrangement.Horizontal</a></code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/Arrangement.Absolute.html#spacedBy(androidx.compose.ui.unit.Dp,androidx.compose.ui.Alignment.Horizontal)">spacedBy</a>(space:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>,&nbsp;alignment:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Alignment.Horizontal.html">Alignment.Horizontal</a>)</code></div>
@@ -43,13 +50,6 @@
             <td>
               <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/Arrangement.Absolute.html#spacedBy(androidx.compose.ui.unit.Dp,androidx.compose.ui.Alignment.Vertical)">spacedBy</a>(space:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>,&nbsp;alignment:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Alignment.Vertical.html">Alignment.Vertical</a>)</code></div>
               <p>Place children vertically such that each two adjacent ones are spaced by a fixed <code><a href="/reference/kotlin/androidx/compose/foundation/layout/Arrangement.Absolute.html#spacedBy(androidx.compose.ui.unit.Dp,androidx.compose.ui.Alignment.Vertical)">space</a></code> distance.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/foundation/layout/Arrangement.HorizontalOrVertical.html">Arrangement.HorizontalOrVertical</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/Arrangement.Absolute.html#spacedBy(androidx.compose.ui.unit.Dp)">spacedBy</a>(space:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>)</code></div>
-              <p>Place children such that each two adjacent ones are spaced by a fixed <code><a href="/reference/kotlin/androidx/compose/foundation/layout/Arrangement.Absolute.html#spacedBy(androidx.compose.ui.unit.Dp)">space</a></code> distance across the main axis.</p>
             </td>
           </tr>
         </tbody>
@@ -141,6 +141,33 @@
           </table>
         </div>
       </div>
+      <div class="api-item"><a name="spacedBy-androidx.compose.ui.unit.Dp-"></a><a name="spacedby"></a>
+        <h3 class="api-name" id="spacedBy(androidx.compose.ui.unit.Dp)">spacedBy</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/Arrangement.Absolute.html#spacedBy(androidx.compose.ui.unit.Dp)">spacedBy</a>(space:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/Arrangement.HorizontalOrVertical.html">Arrangement.HorizontalOrVertical</a></pre>
+        <p>Place children such that each two adjacent ones are spaced by a fixed <code><a href="/reference/kotlin/androidx/compose/foundation/layout/Arrangement.Absolute.html#spacedBy(androidx.compose.ui.unit.Dp)">space</a></code> distance across the main axis. The spacing will be subtracted from the available space that the children can occupy.</p>
+        <p>Unlike <code><a href="/reference/kotlin/androidx/compose/foundation/layout/Arrangement.html#spacedBy(androidx.compose.ui.unit.Dp)">Arrangement.spacedBy</a></code>, when the layout direction is RTL, the children will not be mirrored and as such children will appear in the order they are composed inside the <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#Row(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.ui.Alignment.Vertical,kotlin.Function1)">Row</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>space:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+                <td>
+                  <p>The space between adjacent children.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="api-item"><a name="spacedBy(androidx.compose.ui.unit.Dp, androidx.compose.ui.Alignment.Horizontal)"></a><a name="spacedBy-androidx.compose.ui.unit.Dp-androidx.compose.ui.Alignment.Horizontal-"></a><a name="spacedby"></a>
         <h3 class="api-name" id="spacedBy(androidx.compose.ui.unit.Dp,androidx.compose.ui.Alignment.Horizontal)">spacedBy</h3>
         <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/Arrangement.Absolute.html#spacedBy(androidx.compose.ui.unit.Dp,androidx.compose.ui.Alignment.Horizontal)">spacedBy</a>(space:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>,&nbsp;alignment:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Alignment.Horizontal.html">Alignment.Horizontal</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/Arrangement.Horizontal.html">Arrangement.Horizontal</a></pre>
@@ -201,33 +228,6 @@
                 <td><code>alignment:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Alignment.Vertical.html">Alignment.Vertical</a></code></td>
                 <td>
                   <p>The alignment of the spaced children inside the parent.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="spacedBy-androidx.compose.ui.unit.Dp-"></a><a name="spacedby"></a>
-        <h3 class="api-name" id="spacedBy(androidx.compose.ui.unit.Dp)">spacedBy</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/Arrangement.Absolute.html#spacedBy(androidx.compose.ui.unit.Dp)">spacedBy</a>(space:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/Arrangement.HorizontalOrVertical.html">Arrangement.HorizontalOrVertical</a></pre>
-        <p>Place children such that each two adjacent ones are spaced by a fixed <code><a href="/reference/kotlin/androidx/compose/foundation/layout/Arrangement.Absolute.html#spacedBy(androidx.compose.ui.unit.Dp)">space</a></code> distance across the main axis. The spacing will be subtracted from the available space that the children can occupy.</p>
-        <p>Unlike <code><a href="/reference/kotlin/androidx/compose/foundation/layout/Arrangement.html#spacedBy(androidx.compose.ui.unit.Dp)">Arrangement.spacedBy</a></code>, when the layout direction is RTL, the children will not be mirrored and as such children will appear in the order they are composed inside the <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#Row(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.ui.Alignment.Vertical,kotlin.Function1)">Row</a></code>.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>space:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
-                <td>
-                  <p>The space between adjacent children.</p>
                 </td>
               </tr>
             </tbody>

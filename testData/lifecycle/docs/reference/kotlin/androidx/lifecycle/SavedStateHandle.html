@@ -80,14 +80,14 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/lifecycle/MutableLiveData.html">MutableLiveData</a>&lt;T&gt;</code></td>
             <td>
-              <div><code>@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/lifecycle/SavedStateHandle.html#getLiveData(kotlin.String,kotlin.Any)">getLiveData</a>(key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,&nbsp;initialValue:&nbsp;T)</code></div>
+              <div><code>@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/lifecycle/SavedStateHandle.html#getLiveData(kotlin.String)">getLiveData</a>(key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>)</code></div>
               <p>Returns a <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">androidx.lifecycle.LiveData</a></code> that access data associated with the given key.</p>
             </td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/androidx/lifecycle/MutableLiveData.html">MutableLiveData</a>&lt;T&gt;</code></td>
             <td>
-              <div><code>@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/lifecycle/SavedStateHandle.html#getLiveData(kotlin.String)">getLiveData</a>(key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>)</code></div>
+              <div><code>@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/lifecycle/SavedStateHandle.html#getLiveData(kotlin.String,kotlin.Any)">getLiveData</a>(key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,&nbsp;initialValue:&nbsp;T)</code></div>
               <p>Returns a <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">androidx.lifecycle.LiveData</a></code> that access data associated with the given key.</p>
             </td>
           </tr>
@@ -264,41 +264,6 @@
           </table>
         </div>
       </div>
-      <div class="api-item"><a name="getLiveData(kotlin.String, kotlin.Any)"></a><a name="getLiveData-kotlin.String-kotlin.Any-"></a><a name="getlivedata"></a>
-        <h3 class="api-name" id="getLiveData(kotlin.String,kotlin.Any)">getLiveData</h3>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/lifecycle/SavedStateHandle.html#getLiveData(kotlin.String,kotlin.Any)">getLiveData</a>(key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,&nbsp;initialValue:&nbsp;T):&nbsp;<a href="/reference/kotlin/androidx/lifecycle/MutableLiveData.html">MutableLiveData</a>&lt;T&gt;</pre>
-        <p>Returns a <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">androidx.lifecycle.LiveData</a></code> that access data associated with the given key.</p>
-        <pre class="prettyprint">`LiveData&lt;String&gt; liveData = savedStateHandle.get(KEY, &quot;defaultValue&quot;);`</pre>
-        <p>Keep in mind that <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code> can have <code>null</code> as a valid value. If the <code>initialValue</code> is <code>null</code> and the data does not already exist in the <code><a href="/reference/kotlin/androidx/lifecycle/SavedStateHandle.html">SavedStateHandle</a></code>, the value of the returned <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code> will be set to <code>null</code> and observers will be notified. You can call <code><a href="/reference/kotlin/androidx/lifecycle/SavedStateHandle.html#getLiveData(kotlin.String)">getLiveData</a></code> if you want to avoid dispatching <code>null</code> to observers.</p>
-        <pre class="prettyprint">`String defaultValue = ...; // nullable<br>LiveData&lt;String&gt; liveData;<br>if (defaultValue != null) {<br>    liveData = savedStateHandle.getLiveData(KEY, defaultValue);<br>} else {<br>    liveData = savedStateHandle.getLiveData(KEY);<br>}`</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></code></td>
-                <td>
-                  <p>The identifier for the value</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>initialValue:&nbsp;T</code></td>
-                <td>
-                  <p>If no value exists with the given <code>key</code>, a new one is created with the given <code>initialValue</code>. Note that passing <code>null</code> will create a <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code> with <code>null</code> value.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
       <div class="api-item"><a name="getLiveData-kotlin.String-"></a><a name="getlivedata"></a>
         <h3 class="api-name" id="getLiveData(kotlin.String)">getLiveData</h3>
         <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/lifecycle/SavedStateHandle.html#getLiveData(kotlin.String)">getLiveData</a>(key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>):&nbsp;<a href="/reference/kotlin/androidx/lifecycle/MutableLiveData.html">MutableLiveData</a>&lt;T&gt;</pre>
@@ -339,6 +304,41 @@
               <tr>
                 <td><code><a href="/reference/kotlin/androidx/lifecycle/SavedStateHandle.html#getLiveData(kotlin.String)">getLiveData</a></code></td>
                 <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getLiveData(kotlin.String, kotlin.Any)"></a><a name="getLiveData-kotlin.String-kotlin.Any-"></a><a name="getlivedata"></a>
+        <h3 class="api-name" id="getLiveData(kotlin.String,kotlin.Any)">getLiveData</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/lifecycle/SavedStateHandle.html#getLiveData(kotlin.String,kotlin.Any)">getLiveData</a>(key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,&nbsp;initialValue:&nbsp;T):&nbsp;<a href="/reference/kotlin/androidx/lifecycle/MutableLiveData.html">MutableLiveData</a>&lt;T&gt;</pre>
+        <p>Returns a <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">androidx.lifecycle.LiveData</a></code> that access data associated with the given key.</p>
+        <pre class="prettyprint">`LiveData&lt;String&gt; liveData = savedStateHandle.get(KEY, &quot;defaultValue&quot;);`</pre>
+        <p>Keep in mind that <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code> can have <code>null</code> as a valid value. If the <code>initialValue</code> is <code>null</code> and the data does not already exist in the <code><a href="/reference/kotlin/androidx/lifecycle/SavedStateHandle.html">SavedStateHandle</a></code>, the value of the returned <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code> will be set to <code>null</code> and observers will be notified. You can call <code><a href="/reference/kotlin/androidx/lifecycle/SavedStateHandle.html#getLiveData(kotlin.String)">getLiveData</a></code> if you want to avoid dispatching <code>null</code> to observers.</p>
+        <pre class="prettyprint">`String defaultValue = ...; // nullable<br>LiveData&lt;String&gt; liveData;<br>if (defaultValue != null) {<br>    liveData = savedStateHandle.getLiveData(KEY, defaultValue);<br>} else {<br>    liveData = savedStateHandle.getLiveData(KEY);<br>}`</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></code></td>
+                <td>
+                  <p>The identifier for the value</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>initialValue:&nbsp;T</code></td>
+                <td>
+                  <p>If no value exists with the given <code>key</code>, a new one is created with the given <code>initialValue</code>. Note that passing <code>null</code> will create a <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code> with <code>null</code> value.</p>
+                </td>
               </tr>
             </tbody>
           </table>

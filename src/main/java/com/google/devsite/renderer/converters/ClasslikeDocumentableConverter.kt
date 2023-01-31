@@ -193,20 +193,15 @@ internal abstract class ClasslikeDocumentableConverter(
             }
         }
 
-        declaredFunctions = declaredFunctions.sortedBy {
-            "${it.name} ${it.receiver} ${it.parameters.joinToString(" ")}"
-        }
+        declaredFunctions = declaredFunctions.sortedWith(functionSignatureComparator())
         declaredProperties = declaredProperties.sortedBy { it.name }
-        companionFunctions = companionFunctions.sortedBy {
-            "${it.name} ${it.receiver} ${it.parameters.joinToString(" ")}"
-        }
+        companionFunctions = companionFunctions.sortedWith(functionSignatureComparator())
         companionProperties = companionProperties.sortedBy { it.name }
 
         val enumValues = (classlike as? DEnum)?.entries.orEmpty().sortedBy { it.name }
 
-        var allConstructors = (classlike as? WithConstructors)?.constructors.orEmpty().sortedBy {
-            String.format("%03d", it.parameters.size) + " " + it.parameters.joinToString()
-        }
+        var allConstructors = (classlike as? WithConstructors)?.constructors.orEmpty()
+            .sortedWith(functionSignatureComparator())
         if (classlike is WithConstructors && allConstructors.isEmpty() && classlike.isFromJava() &&
             classlike !is DAnnotation
         ) {

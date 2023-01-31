@@ -73,15 +73,15 @@
           <tr>
             <td><code>abstract <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int)">onResult</a>(data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;,&nbsp;position:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;totalCount:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
-              <p>Called to pass initial load state from a DataSource.</p>
+              <div><code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int)">onResult</a>(data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;,&nbsp;position:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Called to pass initial load state from a DataSource without total count, when placeholders aren't requested.</p>
             </td>
           </tr>
           <tr>
             <td><code>abstract <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int)">onResult</a>(data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;,&nbsp;position:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
-              <p>Called to pass initial load state from a DataSource without total count, when placeholders aren't requested.</p>
+              <div><code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int)">onResult</a>(data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;,&nbsp;position:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;totalCount:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Called to pass initial load state from a DataSource.</p>
             </td>
           </tr>
         </tbody>
@@ -117,6 +117,40 @@
     </div>
     <div class="list">
       <h2>Public functions</h2>
+      <div class="api-item"><a name="onResult(kotlin.collections.List, kotlin.Int)"></a><a name="onResult-kotlin.collections.List-kotlin.Int-"></a><a name="onresult"></a>
+        <h3 class="api-name" id="onResult(kotlin.collections.List,kotlin.Int)">onResult</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int)">onResult</a>(data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;,&nbsp;position:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Called to pass initial load state from a DataSource without total count, when placeholders aren't requested.</p>
+        <p><b>Note:</b> This method can only be called when placeholders are disabled (i.e., <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadInitialParams.html#placeholdersEnabled()">LoadInitialParams.placeholdersEnabled</a></code> is <code>false</code>).</p>
+        <p>Call this method from <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#loadInitial(androidx.paging.PositionalDataSource.LoadInitialParams)">loadInitial</a></code> function to return data, if position is known but total size is not. If placeholders are requested, call the three parameter variant: <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int)">onResult</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;</code></td>
+                <td>
+                  <p>List of items loaded from the <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>. If this is empty, the <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code> is treated as empty, and no further loads will occur.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>position:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                <td>
+                  <p>Position of the item at the front of the list. If there are N items before the items in data that can be provided by this <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>, pass N.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="api-item"><a name="onResult(kotlin.collections.List, kotlin.Int, kotlin.Int)"></a><a name="onResult-kotlin.collections.List-kotlin.Int-kotlin.Int-"></a><a name="onresult"></a>
         <h3 class="api-name" id="onResult(kotlin.collections.List,kotlin.Int,kotlin.Int)">onResult</h3>
         <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int)">onResult</a>(data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;,&nbsp;position:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;totalCount:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
@@ -150,40 +184,6 @@
                 <td><code>totalCount:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
                 <td>
                   <p>Total number of items that may be returned from this DataSource. Includes the number in the initial <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int)">data</a></code> parameter as well as any items that can be loaded in front or behind of <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int)">data</a></code>.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="onResult(kotlin.collections.List, kotlin.Int)"></a><a name="onResult-kotlin.collections.List-kotlin.Int-"></a><a name="onresult"></a>
-        <h3 class="api-name" id="onResult(kotlin.collections.List,kotlin.Int)">onResult</h3>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int)">onResult</a>(data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;,&nbsp;position:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Called to pass initial load state from a DataSource without total count, when placeholders aren't requested.</p>
-        <p><b>Note:</b> This method can only be called when placeholders are disabled (i.e., <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadInitialParams.html#placeholdersEnabled()">LoadInitialParams.placeholdersEnabled</a></code> is <code>false</code>).</p>
-        <p>Call this method from <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#loadInitial(androidx.paging.PositionalDataSource.LoadInitialParams)">loadInitial</a></code> function to return data, if position is known but total size is not. If placeholders are requested, call the three parameter variant: <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int)">onResult</a></code>.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;</code></td>
-                <td>
-                  <p>List of items loaded from the <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>. If this is empty, the <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code> is treated as empty, and no further loads will occur.</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>position:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
-                <td>
-                  <p>Position of the item at the front of the list. If there are N items before the items in data that can be provided by this <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>, pass N.</p>
                 </td>
               </tr>
             </tbody>

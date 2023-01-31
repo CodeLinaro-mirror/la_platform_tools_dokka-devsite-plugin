@@ -144,15 +144,15 @@
           <tr>
             <td><code>void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList,androidx.paging.PagedList)">onCurrentListChanged</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;previousList,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;currentList<br>)</code></div>
-              <p>Called when the current PagedList is updated.</p>
+              <div><code><span><del><a href="/reference/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</a></del></span>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;currentList)</code></div>
+              <p><strong>This method is deprecated.</strong> Use the two argument variant instead.</p>
             </td>
           </tr>
           <tr>
             <td><code>void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</a></del></span>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;currentList)</code></div>
-              <p><strong>This method is deprecated.</strong> Use the two argument variant instead.</p>
+              <div><code><a href="/reference/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList,androidx.paging.PagedList)">onCurrentListChanged</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;previousList,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;currentList<br>)</code></div>
+              <p>Called when the current PagedList is updated.</p>
             </td>
           </tr>
           <tr>
@@ -165,14 +165,14 @@
           <tr>
             <td><code>void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</a>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagedList,&nbsp;<a href="https://developer.android.com/reference/java/lang/Runnable.html">Runnable</a>&nbsp;commitCallback)</code></div>
+              <div><code><a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagedList)</code></div>
               <p>Set the new list to be displayed.</p>
             </td>
           </tr>
           <tr>
             <td><code>void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagedList)</code></div>
+              <div><code><a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</a>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagedList,&nbsp;<a href="https://developer.android.com/reference/java/lang/Runnable.html">Runnable</a>&nbsp;commitCallback)</code></div>
               <p>Set the new list to be displayed.</p>
             </td>
           </tr>
@@ -567,6 +567,54 @@
         <h3 class="api-name" id="getItemCount()">getItemCount</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/paging/PagedListAdapter.html#getItemCount()">getItemCount</a>()</pre>
       </div>
+      <div class="api-item"><a name="onCurrentListChanged-androidx.paging.PagedList-"></a><a name="oncurrentlistchanged"></a>
+        <h3 class="api-name" id="onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</a></del></span>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;currentList)</pre>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>Use the two argument variant instead.</aside>
+        <p>Called when the current PagedList is updated.</p>
+        <p>This may be dispatched as part of <code><a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a></code> if a background diff isn't needed (such as when the first list is passed, or the list is cleared). In either case, PagedListAdapter will simply call <code><a href="/reference/androidx/paging/PagedListAdapter.html#notifyItemRangeInserted(kotlin.Int,kotlin.Int)">notifyItemRangeInserted/Removed(0, mPreviousSize)</a></code>.</p>
+        <p>This method will <em>not</em>be called when the Adapter switches from presenting a PagedList to a snapshot version of the PagedList during a diff. This means you cannot observe each PagedList via this method.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;currentList</code></td>
+                <td>
+                  <p>new PagedList being displayed, may be null.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="api-item"><a name="onCurrentListChanged(androidx.paging.PagedList, androidx.paging.PagedList)"></a><a name="onCurrentListChanged-androidx.paging.PagedList-androidx.paging.PagedList-"></a><a name="oncurrentlistchanged"></a>
         <h3 class="api-name" id="onCurrentListChanged(androidx.paging.PagedList,androidx.paging.PagedList)">onCurrentListChanged</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList,androidx.paging.PagedList)">onCurrentListChanged</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;previousList,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;currentList<br>)</pre>
@@ -620,54 +668,6 @@
           </table>
         </div>
       </div>
-      <div class="api-item"><a name="onCurrentListChanged-androidx.paging.PagedList-"></a><a name="oncurrentlistchanged"></a>
-        <h3 class="api-name" id="onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</a></del></span>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;currentList)</pre>
-        <aside class="caution"><strong>This method is deprecated.</strong><br>Use the two argument variant instead.</aside>
-        <p>Called when the current PagedList is updated.</p>
-        <p>This may be dispatched as part of <code><a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a></code> if a background diff isn't needed (such as when the first list is passed, or the list is cleared). In either case, PagedListAdapter will simply call <code><a href="/reference/androidx/paging/PagedListAdapter.html#notifyItemRangeInserted(kotlin.Int,kotlin.Int)">notifyItemRangeInserted/Removed(0, mPreviousSize)</a></code>.</p>
-        <p>This method will <em>not</em>be called when the Adapter switches from presenting a PagedList to a snapshot version of the PagedList during a diff. This means you cannot observe each PagedList via this method.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;currentList</code></td>
-                <td>
-                  <p>new PagedList being displayed, may be null.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
       <div class="api-item"><a name="removeLoadStateListener-kotlin.Function2-"></a><a name="removeloadstatelistener"></a>
         <h3 class="api-name" id="removeLoadStateListener(kotlin.Function2)">removeLoadStateListener</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagedListAdapter.html#removeLoadStateListener(kotlin.Function2)">removeLoadStateListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
@@ -713,6 +713,33 @@
           </table>
         </div>
       </div>
+      <div class="api-item"><a name="submitList-androidx.paging.PagedList-"></a><a name="submitlist"></a>
+        <h3 class="api-name" id="submitList(androidx.paging.PagedList)">submitList</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagedList)</pre>
+        <p>Set the new list to be displayed.</p>
+        <p>If a list is already being displayed, a diff will be computed on a background thread, which will dispatch Adapter.notifyItem events on the main thread.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagedList</code></td>
+                <td>
+                  <p>The new list to be displayed.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="api-item"><a name="submitList(androidx.paging.PagedList, java.lang.Runnable)"></a><a name="submitList-androidx.paging.PagedList-java.lang.Runnable-"></a><a name="submitlist"></a>
         <h3 class="api-name" id="submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</a>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagedList,&nbsp;<a href="https://developer.android.com/reference/java/lang/Runnable.html">Runnable</a>&nbsp;commitCallback)</pre>
@@ -741,33 +768,6 @@
                 <td><code><a href="https://developer.android.com/reference/java/lang/Runnable.html">Runnable</a>&nbsp;commitCallback</code></td>
                 <td>
                   <p>Optional runnable that is executed when the PagedList is committed, if it is committed.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="submitList-androidx.paging.PagedList-"></a><a name="submitlist"></a>
-        <h3 class="api-name" id="submitList(androidx.paging.PagedList)">submitList</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagedList)</pre>
-        <p>Set the new list to be displayed.</p>
-        <p>If a list is already being displayed, a diff will be computed on a background thread, which will dispatch Adapter.notifyItem events on the main thread.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagedList</code></td>
-                <td>
-                  <p>The new list to be displayed.</p>
                 </td>
               </tr>
             </tbody>

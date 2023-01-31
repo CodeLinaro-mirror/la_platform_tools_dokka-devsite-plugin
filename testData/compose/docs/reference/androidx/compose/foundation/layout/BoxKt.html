@@ -26,15 +26,15 @@
           <tr>
             <td><code>static&nbsp;final void</code></td>
             <td>
-              <div><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/androidx/compose/foundation/layout/BoxKt.html#Box(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">Box</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Alignment.html">Alignment</a>&nbsp;contentAlignment,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;propagateMinConstraints,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/layout/BoxScope.html">BoxScope</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content<br>)</code></div>
-              <p>A layout composable with <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#Box(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">content</a></code>.</p>
+              <div><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/androidx/compose/foundation/layout/BoxKt.html#Box(androidx.compose.ui.Modifier)">Box</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier)</code></div>
+              <p>A box with no content that can participate in layout, drawing, pointer input due to the <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#Box(androidx.compose.ui.Modifier)">modifier</a></code> applied to it.</p>
             </td>
           </tr>
           <tr>
             <td><code>static&nbsp;final void</code></td>
             <td>
-              <div><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/androidx/compose/foundation/layout/BoxKt.html#Box(androidx.compose.ui.Modifier)">Box</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier)</code></div>
-              <p>A box with no content that can participate in layout, drawing, pointer input due to the <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#Box(androidx.compose.ui.Modifier)">modifier</a></code> applied to it.</p>
+              <div><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/androidx/compose/foundation/layout/BoxKt.html#Box(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">Box</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Alignment.html">Alignment</a>&nbsp;contentAlignment,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;propagateMinConstraints,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/layout/BoxScope.html">BoxScope</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content<br>)</code></div>
+              <p>A layout composable with <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#Box(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">content</a></code>.</p>
             </td>
           </tr>
         </tbody>
@@ -42,6 +42,68 @@
     </div>
     <div class="list">
       <h2>Public methods</h2>
+      <div class="api-item"><a name="Box-androidx.compose.ui.Modifier-"></a><a name="box"></a>
+        <h3 class="api-name" id="Box(androidx.compose.ui.Modifier)">Box</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/foundation/layout/BoxKt.html#Box(androidx.compose.ui.Modifier)">Box</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier)</pre>
+        <p>A box with no content that can participate in layout, drawing, pointer input due to the <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#Box(androidx.compose.ui.Modifier)">modifier</a></code> applied to it.</p>
+        <p>Example usage:</p>
+        <pre class="prettyprint">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+
+Box {
+    Box(Modifier.fillMaxSize().background(Color.Cyan))
+    Box(
+        Modifier.matchParentSize()
+            .padding(top = 20.dp, bottom = 20.dp)
+            .background(Color.Yellow)
+    )
+    Box(
+        Modifier.matchParentSize()
+            .padding(40.dp)
+            .background(Color.Magenta)
+    )
+    Box(
+        Modifier.align(Alignment.Center)
+            .size(300.dp, 300.dp)
+            .background(Color.Green)
+    )
+    Box(
+        Modifier.align(Alignment.TopStart)
+            .size(150.dp, 150.dp)
+            .background(Color.Red)
+    )
+    Box(
+        Modifier.align(Alignment.BottomEnd)
+            .size(150.dp, 150.dp)
+            .background(Color.Blue)
+    )
+}</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier</code></td>
+                <td>
+                  <p>The modifier to be applied to the layout.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="api-item"><a name="Box(androidx.compose.ui.Modifier, androidx.compose.ui.Alignment, kotlin.Boolean, kotlin.Function1)"></a><a name="Box-androidx.compose.ui.Modifier-androidx.compose.ui.Alignment-kotlin.Boolean-kotlin.Function1-"></a><a name="box"></a>
         <h3 class="api-name" id="Box(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">Box</h3>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/foundation/layout/BoxKt.html#Box(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">Box</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Alignment.html">Alignment</a>&nbsp;contentAlignment,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;propagateMinConstraints,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/layout/BoxScope.html">BoxScope</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content<br>)</pre>
@@ -116,68 +178,6 @@ Box {
                 <td><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/layout/BoxScope.html">BoxScope</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content</code></td>
                 <td>
                   <p>The content of the <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#Box(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">Box</a></code>.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="Box-androidx.compose.ui.Modifier-"></a><a name="box"></a>
-        <h3 class="api-name" id="Box(androidx.compose.ui.Modifier)">Box</h3>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/foundation/layout/BoxKt.html#Box(androidx.compose.ui.Modifier)">Box</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier)</pre>
-        <p>A box with no content that can participate in layout, drawing, pointer input due to the <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#Box(androidx.compose.ui.Modifier)">modifier</a></code> applied to it.</p>
-        <p>Example usage:</p>
-        <pre class="prettyprint">
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-
-Box {
-    Box(Modifier.fillMaxSize().background(Color.Cyan))
-    Box(
-        Modifier.matchParentSize()
-            .padding(top = 20.dp, bottom = 20.dp)
-            .background(Color.Yellow)
-    )
-    Box(
-        Modifier.matchParentSize()
-            .padding(40.dp)
-            .background(Color.Magenta)
-    )
-    Box(
-        Modifier.align(Alignment.Center)
-            .size(300.dp, 300.dp)
-            .background(Color.Green)
-    )
-    Box(
-        Modifier.align(Alignment.TopStart)
-            .size(150.dp, 150.dp)
-            .background(Color.Red)
-    )
-    Box(
-        Modifier.align(Alignment.BottomEnd)
-            .size(150.dp, 150.dp)
-            .background(Color.Blue)
-    )
-}</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier</code></td>
-                <td>
-                  <p>The modifier to be applied to the layout.</p>
                 </td>
               </tr>
             </tbody>
