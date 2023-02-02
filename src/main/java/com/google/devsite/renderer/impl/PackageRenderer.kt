@@ -36,7 +36,6 @@ import com.google.devsite.renderer.converters.name
 import com.google.devsite.renderer.converters.packageName
 import com.google.devsite.renderer.impl.paths.DIR_INDEX_NAME
 import com.google.devsite.renderer.impl.paths.FilePathProvider
-import com.google.devsite.renderer.impl.paths.PACKAGE_SUMMARY_FILE
 import com.google.devsite.renderer.impl.paths.PACKAGE_SUMMARY_NAME
 import kotlinx.html.html
 import kotlinx.html.stream.createHTML
@@ -63,7 +62,8 @@ internal class PackageRenderer(
 ) {
     /** Writes the home page. Is a redirect page with no content. */
     suspend fun writeIndex(dPackage: DPackage) {
-        val redirectComponent = DefaultRedirectPage(RedirectPage.Params(PACKAGE_SUMMARY_FILE))
+        val redirectUrl = pathProvider.forType(dPackage.name, PACKAGE_SUMMARY_NAME)
+        val redirectComponent = DefaultRedirectPage(RedirectPage.Params(redirectUrl))
         val index = createHTML().html {
             redirectComponent.render(this)
         }

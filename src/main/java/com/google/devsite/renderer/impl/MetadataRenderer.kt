@@ -23,7 +23,6 @@ import com.google.devsite.components.pages.RedirectPage
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.DocTagConverter
 import com.google.devsite.renderer.converters.RootDocumentableConverter
-import com.google.devsite.renderer.impl.paths.CLASS_INDEX_FILE
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.html.html
 import kotlinx.html.stream.createHTML
@@ -56,7 +55,8 @@ internal class MetadataRenderer(
 
     /** Writes the home page. */
     suspend fun writeRootIndex() {
-        val redirectComponent = DefaultRedirectPage(RedirectPage.Params(CLASS_INDEX_FILE))
+        val redirectUrl = pathProvider.classes
+        val redirectComponent = DefaultRedirectPage(RedirectPage.Params(redirectUrl))
         val rootIndex = createHTML().html {
             redirectComponent.render(this)
         }
