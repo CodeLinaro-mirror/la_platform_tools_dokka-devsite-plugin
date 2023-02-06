@@ -21,7 +21,6 @@ import org.jetbrains.dokka.Platform
 import org.jetbrains.dokka.analysis.AnalysisEnvironment
 import org.jetbrains.dokka.analysis.DokkaMessageCollector
 import org.jetbrains.dokka.analysis.DokkaResolutionFacade
-import org.jetbrains.dokka.analysis.EnvironmentAndFacade
 import org.jetbrains.dokka.model.doc.CodeBlock
 import org.jetbrains.dokka.model.doc.Text
 import org.jetbrains.dokka.plugability.DokkaContext
@@ -167,8 +166,7 @@ internal fun setUpAnalysis(context: DokkaContext) = context.configuration.source
             loadLanguageVersionSettings(sourceSet.languageVersion, sourceSet.apiVersion)
 
             val environment = createCoreEnvironment()
-            val (facade, _) = createResolutionFacade(environment)
-            EnvironmentAndFacade(environment, facade)
+            createResolutionFacade(environment).first
         }
     }
 

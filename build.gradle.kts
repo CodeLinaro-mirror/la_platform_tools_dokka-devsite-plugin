@@ -26,9 +26,9 @@ repositories {
 
 }
 
-val kotlinVersion = "1.7.10"
+val kotlinVersion = "1.8.0"
 plugins {
-    kotlin("jvm") version "1.7.10"
+    kotlin("jvm") version "1.8.0"
     id("com.github.johnrengelman.shadow") version "7.1.1"
     id("application")
     id("maven-publish")
@@ -37,7 +37,7 @@ plugins {
 application {
     mainClass.set("org.jetbrains.dokka.MainKt")
 }
-val dokkaVersion = "1.7.20"
+val dokkaVersion = "1.8.10-dev-193"
 val jacksonVersion = "2.13.1"
 val coroutinesVersion = "1.6.3"
 

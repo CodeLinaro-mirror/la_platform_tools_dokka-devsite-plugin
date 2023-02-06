@@ -21,6 +21,7 @@ import com.google.devsite.components.symbols.Platform.COMMON
 import com.google.devsite.components.symbols.Platform.JS
 import com.google.devsite.components.symbols.Platform.JVM
 import com.google.devsite.components.symbols.Platform.NATIVE
+import com.google.devsite.components.symbols.Platform.WASM
 import kotlinx.html.FlowContent
 import kotlinx.html.span
 import org.jetbrains.dokka.Platform as DokkaPlatform
@@ -45,6 +46,7 @@ enum class Platform {
     COMMON,
     JVM,
     NATIVE,
+    WASM,
     JS;
     /* Not used yet; strategy undecided
     ANDROID,
@@ -61,6 +63,7 @@ enum class Platform {
                 DokkaPlatform.js -> JS
                 DokkaPlatform.native -> NATIVE
                 DokkaPlatform.common -> COMMON
+                DokkaPlatform.wasm -> WASM
             }
         }
     }
@@ -74,11 +77,12 @@ fun Platform.shortName() = when (this) {
     NATIVE -> "N"
     JVM -> "A"
     COMMON -> "Cmn"
+    WASM -> "WASM"
 }
 
 fun Platform.render(into: FlowContent) = into.run {
     when (this@render) {
-        JS, NATIVE, COMMON -> +shortName()
+        WASM, JS, NATIVE, COMMON -> +shortName()
         JVM -> span(classes = "material-symbols-outlined") { +"android" }
     }
 }
@@ -90,6 +94,7 @@ fun Platform.devsiteId() = "platform-${selectorDisplayName()}"
  */
 fun Platform.selectorDisplayName() = when (this) {
     JS -> "Javascript"
+    WASM -> "Web Assembly"
     NATIVE -> "Native/C/iOS"
     JVM -> "Android/JVM"
     COMMON -> "Common/All"
