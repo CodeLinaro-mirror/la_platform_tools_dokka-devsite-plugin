@@ -51,6 +51,7 @@ import org.jetbrains.dokka.model.IntegerConstant
 import org.jetbrains.dokka.model.KotlinModifier
 import org.jetbrains.dokka.model.KotlinVisibility
 import org.jetbrains.dokka.model.Modifier
+import org.jetbrains.dokka.model.SourceSetDependent
 import org.jetbrains.dokka.model.StringConstant
 import org.jetbrains.dokka.model.TypeConstructor
 import org.jetbrains.dokka.model.UnresolvedBound
@@ -61,6 +62,9 @@ import org.jetbrains.dokka.model.WithGenerics
 import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.WithSupertypes
 import org.jetbrains.dokka.model.WithVisibility
+import org.jetbrains.dokka.model.doc.Description
+import org.jetbrains.dokka.model.doc.DocumentationNode
+import org.jetbrains.dokka.model.doc.Param
 import org.jetbrains.dokka.model.isJvmName
 import org.jetbrains.dokka.model.properties.PropertyContainer
 import org.jetbrains.dokka.model.properties.WithExtraProperties
@@ -179,16 +183,10 @@ private fun Hashable.isFromJava() =
     }
 
 // `expect`s cannot be `lateinit`, and `actual`s cannot either because they must match modifiers
-internal fun Documentable.isJavaStaticField() = this is DProperty && run {
-    val modifiers = modifiers(getExpectOrCommonSourceSet())
-    "const" in modifiers || "lateinit" in modifiers || isStaticAnnotated()
-}
+internal fun DProperty.isLateinit(): Boolean =
+    "lateinit" in modifiers(getExpectOrCommonSourceSet())
 
-internal fun Documentable.isJavaStaticMethod() = this is DFunction &&
-    (isStaticAnnotated() || isStaticAccessor())
-
-internal fun DFunction.isStaticAccessor() = false
-// extra[OriginalProperty]?.original?.isStaticAnnotated() ?: false TODO(b/168340963 accessors)
+internal fun Documentable.isJavaStaticMethod() = this is DFunction && isStaticAnnotated()
 
 internal fun Documentable.isStaticAnnotated() =
     annotations(getAsJavaSourceSet()).any { it.dri == JvmStatic.dri }
@@ -328,19 +326,31 @@ fun <T : Documentable> List<T>.filterOutJvmSynthetic(): List<T> = this.filterNot
 }
 
 /** Adds an annotation to a Documentable. Often used for injecting e.g. @JvmStatic. */
-internal fun <T> PropertyContainer<T>.addAnnotation(newA: Annotations.Annotation):
-    PropertyContainer<T>
-    where T : WithExtraProperties<T>, T : AnnotationTarget {
-    val annotationsWithoutJvmName = get(Annotations)?.let { annotations ->
-        annotations.copy(
-            (annotations.directAnnotations).map { (sourceset, annotations) ->
-                sourceset to (annotations + newA)
-            }.toMap() + annotations.fileLevelAnnotations
-        )
+internal fun <T> T.addAnnotation(newA: Annotations.Annotation): T
+where T : Documentable, T : WithExtraProperties<T> {
+    return withNewExtras(extra.addAnnotation(newA, sourceSets))
+}
+
+/**
+ * Adds [newA] as an annotation for each source set of [sourceSets] (even if the source set did not
+ * previously have any annotations associated with it).
+ */
+internal fun <T> PropertyContainer<T>.addAnnotation(
+    newA: Annotations.Annotation,
+    sourceSets: Set<DokkaConfiguration.DokkaSourceSet>
+): PropertyContainer<T>
+    where T : AnnotationTarget {
+    val newAnnotations = this[Annotations]?.let { annotations ->
+        val newDirectAnnotations =
+            sourceSets.associateWith {
+                val previous = annotations.directAnnotations[it] ?: emptyList()
+                previous + newA
+            }
+        annotations.copy(myContent = newDirectAnnotations + annotations.fileLevelAnnotations)
     }
     val extraWithoutAnnotations: PropertyContainer<T> = minus(Annotations)
 
-    return extraWithoutAnnotations.addAll(listOfNotNull(annotationsWithoutJvmName))
+    return extraWithoutAnnotations.addAll(listOfNotNull(newAnnotations))
 }
 
 internal val JvmStatic = Annotations.Annotation(DRI("kotlin.jvm", "JvmStatic"), params = emptyMap())
@@ -411,19 +421,32 @@ fun Expression.getValue(): String? = when (this) {
 }
 
 /**
- * Returns property getters / setters. Omits generated Kotlin getters and setters (which can be
- * identified by looking for a callable name like <get-foo> or <set-bar>) unless explicitly allowed.
+ * Whether the property should show up as a class/object property in the Java docs.
+ * Properties that don't fall into one of these categories only appear as accessors.
  */
-fun List<DProperty>.gettersAndSetters(allowDefault: Boolean = false): List<DFunction> {
-    return flatMap {
-        listOf(it.getter, it.setter)
-    }.map {
-        val callableName = it?.dri?.callable?.name ?: ""
+fun DProperty.isPropertyInJava() = isJvmField() || isFromJava() || isLateinit()
+
+/**
+ * Returns property getters / setters. Includes generated accessors for Kotlin properties, fixing
+ * their names and adding static annotations as needed.
+ */
+fun List<DProperty>.gettersAndSetters(): List<DFunction> {
+    return filter {
+        // JvmFields are only accessed as fields, not through accessors
+        !it.isJvmField()
+    }.flatMap {
+        listOf(it to it.getter, it to it.setter)
+    }.mapNotNull {
+        var (property, func) = it
+        // Static properties should also have static accessors
+        if (property.isConstant() || property.isStaticAnnotated()) {
+            func = func?.addAnnotation(JvmStatic)
+        }
+        val callableName = func?.dri?.callable?.name ?: ""
         if (callableName.startsWith("<get-") || callableName.startsWith("<set-"))
-            if (allowDefault) it!!.withFixedName()
-            else null
-        else it
-    }.filterNotNull()
+            func!!.withFixedName()
+        else func
+    }
 }
 
 /** Fixes the name of synthetic accessors, e.g. <get-bar> to getBar */

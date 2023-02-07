@@ -130,8 +130,7 @@ internal abstract class ClasslikeDocumentableConverter(
         val companionProperties = unsortedCompanionProperties.sortedBy { it.name }
 
         val (initialFunctions, initialProperties) = classlike.nonInheritedTypes()
-        val inheritedAll = (classlike.children + classlike.properties.gettersAndSetters())
-            .inheritedTypes(classlike.supertypesForDisplayLanguage())
+        val inheritedAll = classlike.inheritedTypes(classlike.supertypesForDisplayLanguage())
 
         val declaredFunctions = computeDeclaredFunctions(initialFunctions, companionFunctions)
             .sortedWith(functionSignatureComparator())
@@ -252,11 +251,9 @@ internal abstract class ClasslikeDocumentableConverter(
         val inheritedTypes = async { computeInheritedSymbols(inheritedAll) }
         val metadataComponent = async { metadataConverter.getMetadataForClasslike(classlike) }
 
-        var extensionFunctions = classExtensionFunctions +
-            if (displayLanguage == Language.JAVA)
-                classExtensionProperties.gettersAndSetters(allowDefault = true)
-            else emptyList()
-        extensionFunctions = extensionFunctions
+        // Note: getters and setters of extension properties are already included in
+        // classExtensionFunctions from DocumentablesHolder.extensionFunctionMap
+        var extensionFunctions = classExtensionFunctions
             // Sort by the class the extension function came from first, so they will be grouped
             // together in a logical way
             .sortedBy { nameForSyntheticClass(it) + it.name }
@@ -551,7 +548,7 @@ internal abstract class ClasslikeDocumentableConverter(
                 containingType = classlike::class.java,
                 isFromJava = classlike.isFromJava(),
                 isSummary = true,
-                injectStatic = it.isJavaStaticField()
+                injectStatic = it.isStaticAnnotated()
             )
             errorContextInjector(it) {
                 propertyToSummaryConverter(it, modifierHints)
@@ -584,7 +581,7 @@ internal abstract class ClasslikeDocumentableConverter(
                 containingType = classlike::class.java,
                 isFromJava = classlike.isFromJava(),
                 isSummary = false,
-                injectStatic = it.isJavaStaticField()
+                injectStatic = it.isStaticAnnotated()
             )
             errorContextInjector(it) {
                 propertyToDetailConverter(it, modifierHints)
@@ -625,23 +622,26 @@ internal abstract class ClasslikeDocumentableConverter(
         if (displayLanguage == Language.KOTLIN) return initialProperties
 
         // Java documentation needs to respect @jvm* annotations
-        val properties = initialProperties.filterOutJvmSynthetic()
+        val properties = initialProperties.filterOutJvmSynthetic().filter { it.isPropertyInJava() }
 
         // Some symbols are moved from the companion object type to the enclosing class in java
         // Objects that are not top-level
         return if (classlike is DObject && docsHolder.isCompanion(classlike)) {
-            // Hoist companion JvmFields
-            properties.filterNot { it.isJvmField() }
+            // Either the property is hoisted to the containing classlike, or it shows up as getters
+            // and setters on the companion (or both), so a companion always has no properties.
+            emptyList()
         } else if (classlike is DObject) {
             properties + objectInstanceProperty
         } else {
             // Classlikes that are not (top-level) objects
             properties +
-                companionProperties.filter { it.isJavaStaticField() } +
-                companionProperties.filter { it.isJvmFieldAnnotated() }.map {
+                // Constants are documented in a separate section than other properties, so these
+                // do not have @JvmStatic injected like the other companion properties.
+                companionProperties.filter { it.isConstant() } +
+                companionProperties.filter { it.isJvmFieldAnnotated() || it.isLateinit() }.map {
                     // It is technically incorrect to put @JvmStatic on a property, but we use this
                     // to remember that we should later inject the `static` modifier to this
-                    it.withNewExtras(it.extra.addAnnotation(JvmStatic))
+                    it.addAnnotation(JvmStatic)
                 }
         }
     }
@@ -661,11 +661,10 @@ internal abstract class ClasslikeDocumentableConverter(
     ): List<DFunction> {
         if (displayLanguage == Language.KOTLIN) return initialFunctions
 
-        // Java documentation needs to respect @jvm* annotations
-        val functions = initialFunctions
-            // (classlike.functions + classlike.properties.gettersAndSetters())
+        // Static companion functions are hoisted to the containing class
+        return (initialFunctions + companionFunctions.filter { it.isJavaStaticMethod() })
+            // Java documentation needs to respect @jvm* annotations
             .filterOutJvmSynthetic().map { it.withJvmName() }
-        return functions + companionFunctions.filter { it.isJavaStaticMethod() }
     }
 
     private val objectInstanceProperty: DProperty by lazy {
@@ -1019,11 +1018,16 @@ internal abstract class ClasslikeDocumentableConverter(
      * Returns the list of inherited symbols, not from Any or Object
      * If class is synthetic there should be no inherited methods
      */
-    private fun <T : Documentable> List<T>.inheritedTypes(supertypes: Set<DRI>): List<T> {
-        if (classlike.isSynthetic) {
+    private fun DClasslike.inheritedTypes(supertypes: Set<DRI>): List<Documentable> {
+        if (this.isSynthetic) {
             return emptyList()
         }
-        return filter { symbol -> symbol.isInherited(supertypes) && !symbol.dri.isFromBaseClass() }
+        val allSymbols = when (displayLanguage) {
+            Language.KOTLIN -> this.children
+            Language.JAVA -> (this.children + this.properties.gettersAndSetters())
+                .filterNot { it is DProperty && !it.isPropertyInJava() }
+        }
+        return allSymbols.filter { it.isInherited(supertypes) && !it.dri.isFromBaseClass() }
     }
 
     private fun <T : Documentable> T.isInherited(supertypes: Set<DRI>): Boolean {

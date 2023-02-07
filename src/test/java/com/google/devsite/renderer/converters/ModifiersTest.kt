@@ -129,16 +129,22 @@ internal class ModifiersTest : ConverterTestBase() {
 
     @Test
     fun `Const modifier is considered constant`() {
-        val modifiers = listOf("const")
+        val foo = """
+            |class Foo {
+            |    const val foo = 0
+            |}
+        """.render().property("foo")!!
 
-        assertThat(noopDoc.isConstant(modifiers)).isTrue()
+        assertThat(foo.isConstant(foo.modifierz())).isTrue()
     }
 
     @Test
     fun `Static final modifiers are considered constant`() {
-        val modifiers = listOf("static", "final")
+        val foo = """
+            |public static final int FOO = 0;
+        """.render(java = true).property("FOO")!!
 
-        assertThat(noopDoc.isConstant(modifiers)).isTrue()
+        assertThat(foo.isConstant(foo.modifierz())).isTrue()
     }
 
     @Test
@@ -225,6 +231,8 @@ internal class ModifiersTest : ConverterTestBase() {
     }
 
     private fun DFunction.modifierz() = modifiers(getExpectOrCommonSourceSet())
+
+    private fun DProperty.modifierz() = modifiers(getExpectOrCommonSourceSet())
 
     @Test
     fun `"default" modifier for interfaces works`() {
