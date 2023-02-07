@@ -443,27 +443,78 @@ fun List<DProperty>.gettersAndSetters(): List<DFunction> {
             func = func?.addAnnotation(JvmStatic)
         }
         val callableName = func?.dri?.callable?.name ?: ""
-        if (callableName.startsWith("<get-") || callableName.startsWith("<set-"))
-            func!!.withFixedName()
-        else func
+        if (callableName.startsWith("<get-")) {
+            func!!.fixSyntheticAccessor(property.name, getter = true)
+        } else if (callableName.startsWith("<set-")) {
+            func!!.fixSyntheticAccessor(property.name, getter = false)
+        } else {
+            func
+        }
     }
 }
 
-/** Fixes the name of synthetic accessors, e.g. <get-bar> to getBar */
-private fun DFunction.withFixedName() = copy(
-    dri = dri.copy(
-        callable = dri.callable!!.copy(
-            name = fixCallableName(dri.callable?.name ?: "")
-        )
+/**
+ * Fixes issues with the given synthetic accessor for [propertyName] to be documented in Java, using
+ * [DRI.withFixedName] and [fixDocsForAccessor]. If [getter] is false, the function is a setter.
+ */
+private fun DFunction.fixSyntheticAccessor(propertyName: String, getter: Boolean) = copy(
+    dri = dri.withFixedName(getter),
+    documentation = fixDocsForAccessor(documentation, propertyName, getter)
+)
+
+/**
+ * Fixes the name of synthetic accessors, e.g. <get-bar> to getBar
+ * If [getter] is true, it is assumed the function name starts with "<get-", otherwise it is
+ * assumes it starts with "<set-".
+ */
+private fun DRI.withFixedName(getter: Boolean) = copy(
+    callable = callable!!.copy(
+        name = fixCallableName(callable?.name ?: "", getter)
     )
 )
 
-private fun fixCallableName(badName: String) = when {
-    badName.startsWith("<get-") ->
+private fun fixCallableName(badName: String, getter: Boolean) =
+    if (getter) {
         "get" + badName.removePrefix("<get-").removeSuffix(">").capitalize()
-    badName.startsWith("<set-") ->
+    } else {
         "set" + badName.removePrefix("<set-").removeSuffix(">").capitalize()
-    else -> throw RuntimeException("This should never happen; error fixing accessor name")
+    }
+
+/**
+ * This function converts @param tags in synthetic accessor docs [sourceSetDocs], based on whether
+ * the accessor is a [getter] or setter (which is assumed if [getter] is false).
+ * There are two separate issues here:
+ *
+ * For getters: Some properties are documented with @param tags in a class constructor. When
+ * converted to synthetic accessors, the @param tag stays with the function. However, a synthetic
+ * getter has no parameters, so Dackka won't know how to interpret the tag. In this case, all
+ * [Param] wrappers are removed from the docs, with the text inside left as a [Description].
+ *
+ * For setters: The generated setter for a Kotlin property will have one parameter, named
+ * [propertyName]. This is true in Dackka even if the setter was explicitly defined with a different
+ * parameter name (b/268236485). To work around this, any [Param] tags for setters are set to have
+ * [propertyName] as the name of the parameter.
+ */
+private fun fixDocsForAccessor(
+    sourceSetDocs: SourceSetDependent<DocumentationNode>,
+    propertyName: String,
+    getter: Boolean
+): SourceSetDependent<DocumentationNode> {
+    return sourceSetDocs.mapValues { entry ->
+        DocumentationNode(
+            entry.value.children.map {
+                when (it) {
+                    is Param -> {
+                        // Getters should have no params, move text out into a description
+                        if (getter) Description(it.root)
+                        // Setters have one param, named the same as the property (b/268236485)
+                        else Param(it.root, propertyName)
+                    }
+                    else -> it
+                }
+            }
+        )
+    }
 }
 
 private fun DRI.isAtJvmField(): Boolean = packageName == "kotlin.jvm" && classNames == "JvmField"

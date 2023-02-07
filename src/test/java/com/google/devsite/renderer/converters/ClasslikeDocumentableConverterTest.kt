@@ -27,6 +27,7 @@ import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSignature
+import com.google.devsite.components.table.SummaryList
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.companionName
 import com.google.devsite.renderer.converters.testing.description
@@ -734,7 +735,64 @@ internal class ClasslikeDocumentableConverterTest(
         assertThat(mazDoitDocs).isNotEqualTo("dew it")
     }
 
-    @Ignore("fixed in following CL")
+    @Suppress("UNCHECKED_CAST")
+    @Test
+    fun `Property parameter documentation from interfaces inherits properly`() {
+        val pages = """
+            |/**
+            | * @param param1 param1_docs
+            | * @property property1 property1_docs
+            | */
+            |interface Interfaz(val param1: String, val property1: Int) {}
+            |class Foo(param1: String, property1: Int): Interfaz(param1, property1)
+            |/**
+            | * @param param1 override_param1_docs
+            | * @property property1 override_property1_docs
+            | */
+            |class Baz(override val param1: String, override val property1: Int): Interfaz(param1, property1)
+        """.render()
+
+        val foo = pages.page("Foo").data.content.data
+        val baz = pages.page("Baz").data.content.data
+
+        val fooFromInterfaz = if (displayLanguage == Language.KOTLIN) {
+            foo.inheritedProperties.from("androidx.example.Interfaz")!!.value
+        } else {
+            foo.inheritedFunctions.from("androidx.example.Interfaz")!!.value
+        }
+
+        val fooParam1 = fooFromInterfaz
+            .single { it.data.description.name() == "param1".possiblyAsGetter() }.data.description
+        assertThat(fooParam1.text()).isEqualTo("param1_docs")
+        val fooProp1 = fooFromInterfaz
+            .single { it.data.description.name() == "property1".possiblyAsGetter() }
+            .data.description
+        assertThat(fooProp1.text()).isEqualTo("property1_docs")
+
+        assertThat(foo.publicPropertiesSummary.hasContent()).isFalse()
+        assertThat(foo.publicFunctionsSummary.hasContent()).isFalse()
+
+        val bazDefinitions = if (displayLanguage == Language.KOTLIN) {
+            baz.publicPropertiesSummary
+        } else {
+            baz.publicFunctionsSummary
+        }
+
+        val bazParam1 = bazDefinitions
+            .single { it.data.description.name() == "param1".possiblyAsGetter() }.data.description
+        assertThat(bazParam1.text()).isEqualTo("override_param1_docs")
+        val bazProp1 = bazDefinitions
+            .single { it.data.description.name() == "property1".possiblyAsGetter() }
+            .data.description
+        assertThat(bazProp1.text()).isEqualTo("override_property1_docs")
+
+        val bazConstructorParams = baz.publicConstructorsDetails.symbols.single()
+            .data.metadata[1] as DocsSummaryList
+        val bazConstructorParam1 = bazConstructorParams.items().single { it.name() == "param1" }
+            .data.description
+        assertThat(bazConstructorParam1.text()).isEqualTo("override_param1_docs")
+    }
+
     @Suppress("UNCHECKED_CAST") // TODO: add tests once @constructor doc inheritance is implemented
     @Test // TODO: patch upstream dokka to implement kotlin documentation inheritance b/184361891
     fun `Property parameter documentation inherits properly`() {
@@ -743,105 +801,103 @@ internal class ClasslikeDocumentableConverterTest(
             | * @param param1 param1_docs
             | * @property property1 property1_docs
             | */
-            |class Supclaz(val param1: String, val property1: Int) {}
+            |open class Supclaz(open val param1: String, open val property1: Int) {}
             |/**
             | * @param param2 param2_docs
             | * @property property2 property2_docs
             | */
-            |interface Interfaz(val param2: String, val property2: Int) {}
-            |/**
-            | * @param param3 param3_docs
-            | * @property property3 property3_docs
-            | */
-            |sealed class Sealclaz(internal val param3: String, protected val property3: Int) {}
-            |class Foo(param1: String, property1: Int, param2: String, property2: Int): Supclaz(param1, property1), Interfaz(param2, property2)
+            |sealed class Sealclaz(internal open val param2: String, protected open val property2: Int) {}
+            |class Foo(param1: String, property1: Int): Supclaz(param1, property1)
             |/**
             | * @param param1 override_param1_docs
-            | * @param param2 override_param2_docs
             | * @property property1 override_property1_docs
-            | * @property property2 override_property2_docs
             | */
-            |class Baz(override val param1: String, override val property1: Int, param2: String, override val property2: Int): Supclaz(param1, property1), Interfaz(param2, property2)
-            |class Bar(override val param3: String, override val property3: Int): Sealclaz(param3, property3)
+            |class Baz(override val param1: String, override val property1: Int): Supclaz(param1, property1)
+            |class Bar(override val param2: String, override val property2: Int): Sealclaz(param2, property2)
         """.render()
-        val fooClass = pages.page("Foo").data.content
-        val fromSupclaz = fooClass.data.inheritedProperties.from("androidx.example.Supclaz")!!.value
-        val fromInterfaz =
-            fooClass.data.inheritedProperties.from("androidx.example.Interfaz")!!.value
-        val pparam1docs = fromSupclaz.items().single { it.name() == "param1" }.data.description
-        val pparam2docs = fromInterfaz.items().single { it.name() == "param2" }.data.description
-        val prop1docs = fromSupclaz.items().single { it.name() == "property1" }.data.description
-        val prop2docs = fromInterfaz.items().single { it.name() == "property2" }.data.description
+        val foo = pages.page("Foo").data.content
+        val baz = pages.page("Baz").data.content
+        val bar = pages.page("Bar").data.content
 
-        assertThat(fooClass.data.publicPropertiesSummary.hasContent()).isFalse()
+        val fooFromSupclaz = if (displayLanguage == Language.KOTLIN) {
+            foo.data.inheritedProperties.from("androidx.example.Supclaz")!!.value
+        } else {
+            foo.data.inheritedFunctions.from("androidx.example.Supclaz")!!.value
+        }
 
-        assertThat(pparam1docs.text()).isEqualTo("param1_docs")
-        assertThat(prop1docs.text()).isEqualTo("property1_docs")
-        assertThat(pparam2docs.text()).isEqualTo("param2_docs")
-        assertThat(prop2docs.text()).isEqualTo("property2_docs")
+        val fooParam1 = fooFromSupclaz
+            .single { it.data.description.name() == "param1".possiblyAsGetter() }.data.description
+        assertThat(fooParam1.text()).isEqualTo("param1_docs")
+        val fooProp1 = fooFromSupclaz
+            .single { it.data.description.name() == "property1".possiblyAsGetter() }
+            .data.description
+        assertThat(fooProp1.text()).isEqualTo("property1_docs")
+
+        assertThat(foo.data.publicPropertiesSummary.hasContent()).isFalse()
+        assertThat(foo.data.publicFunctionsSummary.hasContent()).isFalse()
+
+        val bazDefinitions = if (displayLanguage == Language.KOTLIN) {
+            baz.data.publicPropertiesSummary
+        } else {
+            baz.data.publicFunctionsSummary
+        }
+
+        val bazParam1 = bazDefinitions
+            .single { it.data.description.name() == "param1".possiblyAsGetter() }.data.description
+        assertThat(bazParam1.text()).isEqualTo("override_param1_docs")
+        val bazProp1 = bazDefinitions
+            .single { it.data.description.name() == "property1".possiblyAsGetter() }
+            .data.description
+        assertThat(bazProp1.text()).isEqualTo("override_property1_docs")
+
+        val barProtectedDefinitions = if (displayLanguage == Language.KOTLIN) {
+            bar.data.protectedPropertiesSummary
+        } else {
+            bar.data.protectedFunctionsSummary
+        }
+
+        assertThat(barProtectedDefinitions).hasSize(1)
+        val barProp2 = barProtectedDefinitions
+            .single { it.data.description.name() == "property2".possiblyAsGetter() }
+            .data.description
+        assertThat(barProp2.text()).isEqualTo("property2_docs")
+
         /* Constructors don't magically inherit and merge @params from parents' constructors
         val constructorDetails = fooClass.symbolsForConstructors().second.symbols.single()
         val ctrDocsParamTable = constructorDetails.data.metadata[1] as DocsSummaryList
         val param1docs = ctrDocsParamTable.items().single { it.name() == "param1" }.data.description
-        val param2docs = ctrDocsParamTable.items().single { it.name() == "param2" }.data.description
         assertThat(param1docs.text()).isEqualTo("param1_docs")
-        assertThat(param2docs.text()).isEqualTo("param2_docs")
         */
 
-        val bazClass = pages.page("Baz").data.content
-        val zpparam1docs = bazClass.propertySymbol("param1")!!.data.description
-        val zprop1docs = bazClass.propertySymbol("property1")!!.data.description
-        val zprop2docs = bazClass.propertySymbol("property2")!!.data.description
+        val bazConstructorParams = baz.data.publicConstructorsDetails.symbols.single()
+            .data.metadata[1] as DocsSummaryList
+        val bazConstructorParam1 = bazConstructorParams.items().single { it.name() == "param1" }
+            .data.description
+        assertThat(bazConstructorParam1.text()).isEqualTo("override_param1_docs")
 
-        assertThat(zprop1docs.text()).isEqualTo("override_property1_docs")
-        assertThat(zprop2docs.text()).isEqualTo("override_property2_docs")
-
-        // This param explicitly has "override val" so shows up as a property
-        assertThat(zpparam1docs.text()).isEqualTo("override_param1_docs")
-        // the "Inherited Propeties" section doesn't contain overriding documentation
-        val zFromInterfaz = fooClass.data.inheritedProperties
-            .from("androidx.example.Interfaz")!!.value
-        val zpparam2docs = zFromInterfaz.items().single { it.name() == "param2" }.data.description
-        assertThat(zpparam2docs.text()).isEqualTo("param2_docs")
-
-        val zConstructorDetails = bazClass.data.publicConstructorsDetails.symbols.single()
-        val zctrDocsParamTabl = zConstructorDetails.data.metadata[1] as DocsSummaryList
-        val zparam1doc = zctrDocsParamTabl.items().single { it.name() == "param1" }.data.description
-        val zparam2doc = zctrDocsParamTabl.items().single { it.name() == "param2" }.data.description
-        assertThat(zparam1doc.text()).isEqualTo("override_param1_docs")
-        assertThat(zparam2doc.text()).isEqualTo("override_param2_docs")
-
-        val barClass = pages.page("Bar").data.content
         // TODO: patch upstream dokka to support inheriting documentation on hidden components
-        // val pparam3docs = barClass.propertySymbol("param3").data.description
-        // assertThat(pparam3docs.text()).isEqualTo("param3_docs")
-
-        val prop3docs = barClass.propertySymbol("property3")!!.data.description
-        assertThat(prop3docs.text()).isEqualTo("property3_docs")
-        assertThat(barClass.data.protectedPropertiesSummary.data.items.single().data.description)
-            .isEqualTo(prop3docs)
+        // val pparam2docs = barClass.propertySymbol("param2").data.description
+        // assertThat(pparam2docs.text()).isEqualTo("param2_docs")
 
         val expected = when (displayLanguage) {
             Language.KOTLIN -> listOf(
-                barClass.data.publicConstructorsSummary,
-                barClass.data.publicPropertiesSummary,
-                barClass.data.protectedPropertiesSummary
+                bar.data.publicConstructorsSummary,
+                bar.data.protectedPropertiesSummary
             )
             Language.JAVA -> listOf(
-                barClass.data.publicPropertiesSummary,
-                barClass.data.protectedPropertiesSummary,
-                barClass.data.publicConstructorsSummary
+                bar.data.publicConstructorsSummary,
+                bar.data.protectedFunctionsSummary
             )
         }
-        val observed = barClass.allSummarySections.filter { it.hasContent() } +
-            barClass.inheritedSummarySections.filter { it.hasContent() }
+        val observed = bar.allSummarySections.filter { it.hasContent() } +
+            bar.inheritedSummarySections.filter { it.hasContent() }
         assertThat(observed).containsExactlyElementsIn(expected).inOrder()
 
         /* Constructors don't inherit docs
         val bConstructorDetails = fooClass.symbolsForConstructors().second.symbols.single()
         val bctrDocsParamTabl = bConstructorDetails.data.metadata[1] as DocsSummaryList
-        val bparam3doc = bctrDocsParamTabl.items().single { it.name() == "param3" }.data.description
-        assertThat(bparam3doc.text()).isEqualTo("param3_docs")
+        val bparam2doc = bctrDocsParamTabl.items().single { it.name() == "param2" }.data.description
+        assertThat(bparam2doc.text()).isEqualTo("param2_docs")
         */
     }
 
@@ -2399,6 +2455,47 @@ internal class ClasslikeDocumentableConverterTest(
         kotlinOnly {
             assertThat(methodNames).isEmpty()
             assertThat(propertyNames).containsExactly("a", "b", "c")
+        }
+    }
+
+    @Test
+    fun `Docs for defined setter are correct`() {
+        val fooK = """
+            |class Foo {
+            |    var currentState: Int
+            |       get() = 0
+            |        /**
+            |         * Sets the state.
+            |         * @param state new state
+            |         */
+            |        set(state) {}
+            |}
+        """.render().page().data.content
+        val fooJ = """
+            |public class Foo {
+            |    private int currentState = 0;
+            |    public int getCurrentState() { return currentState; }
+            |    /**
+            |     * Sets the state.
+            |     * @param state new state
+            |     */
+            |    public void setCurrentState(int state) { currentState = state; }
+            |}
+        """.render(java = true).page().data.content
+
+        for (foo in listOf(fooJ, fooK)) {
+            javaOnly {
+                val functions = foo.data.publicFunctionsDetails
+                val setter = functions.single { it.data.name == "setCurrentState" }
+                val setterDocs = setter.data.metadata[0] as DescriptionComponent
+                assertThat(setterDocs.text()).isEqualTo("Sets the state.")
+                val setterParamDocs = (setter.data.metadata[1] as SummaryList<*>)[0]
+                    .data.description as DescriptionComponent
+                assertThat(setterParamDocs.text()).isEqualTo("new state")
+                val setterParam = setter.data.signature.data.parameters.single().data
+                // TODO (b/268236485): the given name is ignored
+                // assertThat(setterParam.name).isEqualTo("state")
+            }
         }
     }
 
