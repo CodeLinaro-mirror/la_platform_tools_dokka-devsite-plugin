@@ -102,42 +102,6 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>int</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#id()">id</a></code></div>
-              <p>The snapshot id of the snapshot.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>abstract boolean</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#readOnly()">readOnly</a></code></div>
-              <p>True if any change to a state object in this snapshot will throw.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#root()">root</a></code></div>
-              <p>The root snapshot for this snapshot.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
             <th colspan="100%"><h3>Protected constructors</h3></th>
           </tr>
         </thead>
@@ -174,6 +138,27 @@
             <td>
               <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">enter</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;block)</code></div>
               <p>Enter the snapshot.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#getId()">getId</a>()</code></div>
+              <p>The snapshot id of the snapshot.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#getReadOnly()">getReadOnly</a>()</code></div>
+              <p>True if any change to a state object in this snapshot will throw.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#getRoot()">getRoot</a>()</code></div>
+              <p>The root snapshot for this snapshot.</p>
             </td>
           </tr>
           <tr>
@@ -230,24 +215,6 @@
       </table>
     </div>
     <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="getId()"></a><a name="setId()"></a><a name="getId--"></a><a name="setId--"></a>
-        <h3 class="api-name" id="id()">id</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#id()">id</a></pre>
-        <p>The snapshot id of the snapshot. This is a unique number from a monotonically increasing value for each snapshot taken.</p>
-      </div>
-      <div class="api-item"><a name="getReadOnly()"></a><a name="setReadOnly()"></a><a name="getReadOnly--"></a><a name="setReadOnly--"></a>
-        <h3 class="api-name" id="readOnly()">readOnly</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#readOnly()">readOnly</a></pre>
-        <p>True if any change to a state object in this snapshot will throw.</p>
-      </div>
-      <div class="api-item"><a name="getRoot()"></a><a name="setRoot()"></a><a name="getRoot--"></a><a name="setRoot--"></a>
-        <h3 class="api-name" id="root()">root</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#root()">root</a></pre>
-        <p>The root snapshot for this snapshot. For non-nested snapshots this is always <code>this</code>. For nested snapshot it is the parent's <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#root()">root</a></code>.</p>
-      </div>
-    </div>
-    <div class="list">
       <h2>Protected constructors</h2>
       <div class="api-item"><a name="Snapshot(kotlin.Int, androidx.compose.runtime.snapshots.SnapshotIdSet)"></a><a name="Snapshot-kotlin.Int-androidx.compose.runtime.snapshots.SnapshotIdSet-"></a><a name="snapshot"></a>
         <h3 class="api-name" id="Snapshot(kotlin.Int,androidx.compose.runtime.snapshots.SnapshotIdSet)">Snapshot</h3>
@@ -294,6 +261,21 @@
             </tbody>
           </table>
         </div>
+      </div>
+      <div class="api-item"><a name="getId--"></a><a name="getid"></a>
+        <h3 class="api-name" id="getId()">getId</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#getId()">getId</a>()</pre>
+        <p>The snapshot id of the snapshot. This is a unique number from a monotonically increasing value for each snapshot taken.</p>
+      </div>
+      <div class="api-item"><a name="getReadOnly--"></a><a name="getreadonly"></a>
+        <h3 class="api-name" id="getReadOnly()">getReadOnly</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#getReadOnly()">getReadOnly</a>()</pre>
+        <p>True if any change to a state object in this snapshot will throw.</p>
+      </div>
+      <div class="api-item"><a name="getRoot--"></a><a name="getroot"></a>
+        <h3 class="api-name" id="getRoot()">getRoot</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#getRoot()">getRoot</a>()</pre>
+        <p>The root snapshot for this snapshot. For non-nested snapshots this is always <code>this</code>. For nested snapshot it is the parent's <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#root()">root</a></code>.</p>
       </div>
       <div class="api-item"><a name="hasPendingChanges--"></a><a name="haspendingchanges"></a>
         <h3 class="api-name" id="hasPendingChanges()">hasPendingChanges</h3>

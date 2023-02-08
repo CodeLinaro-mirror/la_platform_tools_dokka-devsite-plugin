@@ -75,35 +75,6 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>boolean</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#readOnly()">readOnly</a></code></div>
-              <p>True if any change to a state object in this snapshot will throw.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#root()">root</a></code></div>
-              <p>The root snapshot for this snapshot.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
             <th colspan="100%"><h3>Public methods</h3></th>
           </tr>
         </thead>
@@ -125,8 +96,29 @@
           <tr>
             <td><code>boolean</code></td>
             <td>
+              <div><code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#getReadOnly()">getReadOnly</a>()</code></div>
+              <p>True if any change to a state object in this snapshot will throw.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#getRoot()">getRoot</a>()</code></div>
+              <p>The root snapshot for this snapshot.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>boolean</code></td>
+            <td>
               <div><code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#hasPendingChanges()">hasPendingChanges</a>()</code></div>
               <p>Whether there are any pending changes in this snapshot.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#setModified(kotlin.collections.MutableSet)">setModified</a>(<a href="https://developer.android.com/reference/java/util/Set.html">Set</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/StateObject.html">StateObject</a>&gt;&nbsp;modified)</code></div>
+              <p>The set of state objects that have been modified in this snapshot.</p>
             </td>
           </tr>
           <tr>
@@ -142,38 +134,6 @@
               <div><code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#takeNestedSnapshot(kotlin.Function1)">takeNestedSnapshot</a>(Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;readObserver)</code></div>
               <p>Take a snapshot of the state values in this snapshot.</p>
             </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive" id="inhmethods">
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Inherited fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html">androidx.compose.runtime.snapshots.Snapshot</a></span>
-              <div class="devsite-table-wrapper">
-                <table class="responsive">
-                  <colgroup>
-                    <col width="40%">
-                    <col>
-                  </colgroup>
-                  <tbody class="list">
-                    <tr>
-                      <td><code>int</code></td>
-                      <td>
-                        <div><code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#id()">id</a></code></div>
-                        <p>The snapshot id of the snapshot.</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-</devsite-expandable>            </td>
           </tr>
         </tbody>
       </table>
@@ -203,6 +163,13 @@
                       </td>
                     </tr>
                     <tr>
+                      <td><code>int</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#getId()">getId</a>()</code></div>
+                        <p>The snapshot id of the snapshot.</p>
+                      </td>
+                    </tr>
+                    <tr>
                       <td><code>final <a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code></td>
                       <td>
                         <div><code>@<a href="/reference/androidx/compose/runtime/ExperimentalComposeApi.html">ExperimentalComposeApi</a><br><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#unsafeEnter()">unsafeEnter</a>()</code></div>
@@ -225,19 +192,6 @@
       </table>
     </div>
     <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="getReadOnly()"></a><a name="setReadOnly()"></a><a name="getReadOnly--"></a><a name="setReadOnly--"></a>
-        <h3 class="api-name" id="readOnly()">readOnly</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#readOnly()">readOnly</a></pre>
-        <p>True if any change to a state object in this snapshot will throw.</p>
-      </div>
-      <div class="api-item"><a name="getRoot()"></a><a name="setRoot()"></a><a name="getRoot--"></a><a name="setRoot--"></a>
-        <h3 class="api-name" id="root()">root</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#root()">root</a></pre>
-        <p>The root snapshot for this snapshot. For non-nested snapshots this is always <code>this</code>. For nested snapshot it is the parent's <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#root()">root</a></code>.</p>
-      </div>
-    </div>
-    <div class="list">
       <h2>Public methods</h2>
       <div class="api-item"><a name="apply--"></a><a name="apply"></a>
         <h3 class="api-name" id="apply()">apply</h3>
@@ -252,10 +206,25 @@
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#dispose()">dispose</a>()</pre>
         <p>Dispose the snapshot. Neglecting to dispose a snapshot will result in difficult to diagnose memory leaks as it indirectly causes all state objects to maintain its value for the un-disposed snapshot.</p>
       </div>
+      <div class="api-item"><a name="getReadOnly--"></a><a name="getreadonly"></a>
+        <h3 class="api-name" id="getReadOnly()">getReadOnly</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#getReadOnly()">getReadOnly</a>()</pre>
+        <p>True if any change to a state object in this snapshot will throw.</p>
+      </div>
+      <div class="api-item"><a name="getRoot--"></a><a name="getroot"></a>
+        <h3 class="api-name" id="getRoot()">getRoot</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#getRoot()">getRoot</a>()</pre>
+        <p>The root snapshot for this snapshot. For non-nested snapshots this is always <code>this</code>. For nested snapshot it is the parent's <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#root()">root</a></code>.</p>
+      </div>
       <div class="api-item"><a name="hasPendingChanges--"></a><a name="haspendingchanges"></a>
         <h3 class="api-name" id="hasPendingChanges()">hasPendingChanges</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#hasPendingChanges()">hasPendingChanges</a>()</pre>
         <p>Whether there are any pending changes in this snapshot. These changes are not visible until the snapshot is applied.</p>
+      </div>
+      <div class="api-item"><a name="setModified-kotlin.collections.MutableSet-"></a><a name="setmodified"></a>
+        <h3 class="api-name" id="setModified(kotlin.collections.MutableSet)">setModified</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#setModified(kotlin.collections.MutableSet)">setModified</a>(<a href="https://developer.android.com/reference/java/util/Set.html">Set</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/StateObject.html">StateObject</a>&gt;&nbsp;modified)</pre>
+        <p>The set of state objects that have been modified in this snapshot.</p>
       </div>
       <div class="api-item"><a name="takeNestedMutableSnapshot(kotlin.Function1, kotlin.Function1)"></a><a name="takeNestedMutableSnapshot-kotlin.Function1-kotlin.Function1-"></a><a name="takenestedmutablesnapshot"></a>
         <h3 class="api-name" id="takeNestedMutableSnapshot(kotlin.Function1,kotlin.Function1)">takeNestedMutableSnapshot</h3>

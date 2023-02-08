@@ -120,27 +120,6 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>boolean</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/paging/DataSource.html#isInvalid()">isInvalid</a></code></div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
             <th colspan="100%"><h3>Public methods</h3></th>
           </tr>
         </thead>
@@ -157,6 +136,12 @@
             <td>
               <div><code>@<a href="/reference/androidx/annotation/AnyThread.html">AnyThread</a><br><a href="/reference/androidx/paging/DataSource.html#invalidate()">invalidate</a>()</code></div>
               <p>Signal the data source to stop loading, and notify its callback.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>boolean</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/annotation/WorkerThread.html">WorkerThread</a><br><a href="/reference/androidx/paging/DataSource.html#getIsInvalid()">isInvalid</a>()</code></div>
             </td>
           </tr>
           <tr>
@@ -182,34 +167,6 @@
           </tr>
         </tbody>
       </table>
-    </div>
-    <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="getIsInvalid()"></a><a name="setIsInvalid()"></a><a name="getIsInvalid--"></a><a name="setIsInvalid--"></a>
-        <h3 class="api-name" id="isInvalid()">isInvalid</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/paging/DataSource.html#isInvalid()">isInvalid</a></pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Returns</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>boolean</code></td>
-                <td>
-                  <p><code>true</code> if the data source is invalid, and can no longer be queried for data.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
     </div>
     <div class="list">
       <h2>Public methods</h2>
@@ -247,6 +204,31 @@
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/AnyThread.html">AnyThread</a><br>public&nbsp;void&nbsp;<a href="/reference/androidx/paging/DataSource.html#invalidate()">invalidate</a>()</pre>
         <p>Signal the data source to stop loading, and notify its callback.</p>
         <p>If invalidate has already been called, this method does nothing.</p>
+      </div>
+      <div class="api-item"><a name="getIsInvalid--"></a><a name="getisinvalid"></a>
+        <h3 class="api-name" id="getIsInvalid()">isInvalid</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/WorkerThread.html">WorkerThread</a><br>public&nbsp;boolean&nbsp;<a href="/reference/androidx/paging/DataSource.html#getIsInvalid()">isInvalid</a>()</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>boolean</code></td>
+                <td>
+                  <p><code>true</code> if the data source is invalid, and can no longer be queried for data.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <div class="api-item"><a name="map-androidx.arch.core.util.Function-"></a><a name="map"></a>
         <h3 class="api-name" id="map(androidx.arch.core.util.Function)">map</h3>

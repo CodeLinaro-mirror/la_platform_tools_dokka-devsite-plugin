@@ -47,48 +47,6 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/text/input/TextFieldValue.html#annotatedString()">annotatedString</a></code></div>
-              <p>the text to be rendered.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>final <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a></code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/text/input/TextFieldValue.html#composition()">composition</a></code></div>
-              <p>Composition range created by  IME.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a></code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/text/input/TextFieldValue.html#selection()">selection</a></code></div>
-              <p>The selection range.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/text/input/TextFieldValue.html#text()">text</a></code></div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
             <th colspan="100%"><h3>Public constructors</h3></th>
           </tr>
         </thead>
@@ -136,6 +94,33 @@
             <td><code>boolean</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/text/input/TextFieldValue.html#equals(kotlin.Any)">equals</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;other)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/input/TextFieldValue.html#getAnnotatedString()">getAnnotatedString</a>()</code></div>
+              <p>the text to be rendered.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/input/TextFieldValue.html#getComposition()">getComposition</a>()</code></div>
+              <p>Composition range created by  IME.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/input/TextFieldValue.html#getSelection()">getSelection</a>()</code></div>
+              <p>The selection range.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/input/TextFieldValue.html#getText()">getText</a>()</code></div>
             </td>
           </tr>
           <tr>
@@ -188,30 +173,6 @@
           </tr>
         </tbody>
       </table>
-    </div>
-    <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="getAnnotatedString()"></a><a name="setAnnotatedString()"></a><a name="getAnnotatedString--"></a><a name="setAnnotatedString--"></a>
-        <h3 class="api-name" id="annotatedString()">annotatedString</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&nbsp;<a href="/reference/androidx/compose/ui/text/input/TextFieldValue.html#annotatedString()">annotatedString</a></pre>
-        <p>the text to be rendered.</p>
-      </div>
-      <div class="api-item"><a name="getComposition()"></a><a name="setComposition()"></a><a name="getComposition--"></a><a name="setComposition--"></a>
-        <h3 class="api-name" id="composition()">composition</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a>&nbsp;<a href="/reference/androidx/compose/ui/text/input/TextFieldValue.html#composition()">composition</a></pre>
-        <p>Composition range created by  IME. If null, there is no composition range.</p>
-        <p>Input service composition is an instance of text produced by IME. An example visual for the composition is that the currently composed word is visually separated from others with underline, or text background. For description of composition please check <a href="https://www.w3.org/TR/ime-api/#ime-composition">W3C IME Composition</a></p>
-        <p>Composition can be set on the by the system, however it is possible to apply an existing composition by setting the value to null. Applying a composition will accept the changes that were still being composed by IME.</p>
-      </div>
-      <div class="api-item"><a name="getSelection()"></a><a name="setSelection()"></a><a name="getSelection--"></a><a name="setSelection--"></a>
-        <h3 class="api-name" id="selection()">selection</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a>&nbsp;<a href="/reference/androidx/compose/ui/text/input/TextFieldValue.html#selection()">selection</a></pre>
-        <p>The selection range. If the selection is collapsed, it represents cursor location. When selection range is out of bounds, it is constrained with the text length.</p>
-      </div>
-      <div class="api-item"><a name="getText()"></a><a name="setText()"></a><a name="getText--"></a><a name="setText--"></a>
-        <h3 class="api-name" id="text()">text</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/text/input/TextFieldValue.html#text()">text</a></pre>
-      </div>
     </div>
     <div class="list">
       <h2>Public constructors</h2>
@@ -305,6 +266,27 @@
       <div class="api-item"><a name="equals-kotlin.Any-"></a><a name="equals"></a>
         <h3 class="api-name" id="equals(kotlin.Any)">equals</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/text/input/TextFieldValue.html#equals(kotlin.Any)">equals</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;other)</pre>
+      </div>
+      <div class="api-item"><a name="getAnnotatedString--"></a><a name="getannotatedstring"></a>
+        <h3 class="api-name" id="getAnnotatedString()">getAnnotatedString</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&nbsp;<a href="/reference/androidx/compose/ui/text/input/TextFieldValue.html#getAnnotatedString()">getAnnotatedString</a>()</pre>
+        <p>the text to be rendered.</p>
+      </div>
+      <div class="api-item"><a name="getComposition--"></a><a name="getcomposition"></a>
+        <h3 class="api-name" id="getComposition()">getComposition</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a>&nbsp;<a href="/reference/androidx/compose/ui/text/input/TextFieldValue.html#getComposition()">getComposition</a>()</pre>
+        <p>Composition range created by  IME. If null, there is no composition range.</p>
+        <p>Input service composition is an instance of text produced by IME. An example visual for the composition is that the currently composed word is visually separated from others with underline, or text background. For description of composition please check <a href="https://www.w3.org/TR/ime-api/#ime-composition">W3C IME Composition</a></p>
+        <p>Composition can be set on the by the system, however it is possible to apply an existing composition by setting the value to null. Applying a composition will accept the changes that were still being composed by IME.</p>
+      </div>
+      <div class="api-item"><a name="getSelection--"></a><a name="getselection"></a>
+        <h3 class="api-name" id="getSelection()">getSelection</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a>&nbsp;<a href="/reference/androidx/compose/ui/text/input/TextFieldValue.html#getSelection()">getSelection</a>()</pre>
+        <p>The selection range. If the selection is collapsed, it represents cursor location. When selection range is out of bounds, it is constrained with the text length.</p>
+      </div>
+      <div class="api-item"><a name="getText--"></a><a name="gettext"></a>
+        <h3 class="api-name" id="getText()">getText</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/ui/text/input/TextFieldValue.html#getText()">getText</a>()</pre>
       </div>
       <div class="api-item"><a name="hashCode--"></a><a name="hashcode"></a>
         <h3 class="api-name" id="hashCode()">hashCode</h3>

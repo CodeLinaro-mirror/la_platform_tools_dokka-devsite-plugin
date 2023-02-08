@@ -42,28 +42,6 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>abstract T</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/lifecycle/LiveDataScope.html#latestValue()">latestValue</a></code></div>
-              <p>References the current value of the <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code>.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
             <th colspan="100%"><h3>Public methods</h3></th>
           </tr>
         </thead>
@@ -82,18 +60,15 @@
               <p>Add the given <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code> as a source, similar to <code><a href="/reference/androidx/lifecycle/MediatorLiveData.html#addSource(androidx.lifecycle.LiveData,androidx.lifecycle.Observer)">MediatorLiveData.addSource</a></code>.</p>
             </td>
           </tr>
+          <tr>
+            <td><code>abstract T</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/lifecycle/LiveDataScope.html#getLatestValue()">getLatestValue</a>()</code></div>
+              <p>References the current value of the <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code>.</p>
+            </td>
+          </tr>
         </tbody>
       </table>
-    </div>
-    <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="getLatestValue()"></a><a name="setLatestValue()"></a><a name="getLatestValue--"></a><a name="setLatestValue--"></a>
-        <h3 class="api-name" id="latestValue()">latestValue</h3>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;T&nbsp;<a href="/reference/androidx/lifecycle/LiveDataScope.html#latestValue()">latestValue</a></pre>
-        <p>References the current value of the <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code>.</p>
-        <p>If the block never <code>emit</code>ed a value, <code><a href="/reference/androidx/lifecycle/LiveDataScope.html#latestValue()">latestValue</a></code> will be <code>null</code>. You can use this value to check what was then latest value <code>emit</code>ed by your <code>block</code> before it got cancelled.</p>
-        <p>Note that if the block called <code><a href="/reference/androidx/lifecycle/LiveDataScope.html#emitSource(androidx.lifecycle.LiveData)">emitSource</a></code>, then <code>latestValue</code> will be last value dispatched by the <code>source</code> <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code>.</p>
-      </div>
     </div>
     <div class="list">
       <h2>Public methods</h2>
@@ -195,6 +170,13 @@
             </tbody>
           </table>
         </div>
+      </div>
+      <div class="api-item"><a name="getLatestValue--"></a><a name="getlatestvalue"></a>
+        <h3 class="api-name" id="getLatestValue()">getLatestValue</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;T&nbsp;<a href="/reference/androidx/lifecycle/LiveDataScope.html#getLatestValue()">getLatestValue</a>()</pre>
+        <p>References the current value of the <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code>.</p>
+        <p>If the block never <code>emit</code>ed a value, <code><a href="/reference/androidx/lifecycle/LiveDataScope.html#latestValue()">latestValue</a></code> will be <code>null</code>. You can use this value to check what was then latest value <code>emit</code>ed by your <code>block</code> before it got cancelled.</p>
+        <p>Note that if the block called <code><a href="/reference/androidx/lifecycle/LiveDataScope.html#emitSource(androidx.lifecycle.LiveData)">emitSource</a></code>, then <code>latestValue</code> will be last value dispatched by the <code>source</code> <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code>.</p>
       </div>
     </div>
   </body>

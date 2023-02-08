@@ -23,35 +23,6 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>abstract int</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html#itemCount()">itemCount</a></code></div>
-              <p>The total number of items in the lazy layout (visible or not).</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Map.html">Map</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html#keyToIndexMap()">keyToIndexMap</a></code></div>
-              <p>Contains the mapping between the key and the index.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
             <th colspan="100%"><h3>Public methods</h3></th>
           </tr>
         </thead>
@@ -71,27 +42,28 @@
             </td>
           </tr>
           <tr>
+            <td><code>abstract int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html#getItemCount()">getItemCount</a>()</code></div>
+              <p>The total number of items in the lazy layout (visible or not).</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html#getKey(kotlin.Int)">getKey</a>(int&nbsp;index)</code></div>
               <p>Returns the key for the item on this index.</p>
             </td>
           </tr>
+          <tr>
+            <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Map.html">Map</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html#getKeyToIndexMap()">getKeyToIndexMap</a>()</code></div>
+              <p>Contains the mapping between the key and the index.</p>
+            </td>
+          </tr>
         </tbody>
       </table>
-    </div>
-    <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="getItemCount()"></a><a name="setItemCount()"></a><a name="getItemCount--"></a><a name="setItemCount--"></a>
-        <h3 class="api-name" id="itemCount()">itemCount</h3>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;int&nbsp;<a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html#itemCount()">itemCount</a></pre>
-        <p>The total number of items in the lazy layout (visible or not).</p>
-      </div>
-      <div class="api-item"><a name="getKeyToIndexMap()"></a><a name="setKeyToIndexMap()"></a><a name="getKeyToIndexMap--"></a><a name="setKeyToIndexMap--"></a>
-        <h3 class="api-name" id="keyToIndexMap()">keyToIndexMap</h3>
-        <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Map.html">Map</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>&gt;&nbsp;<a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html#keyToIndexMap()">keyToIndexMap</a></pre>
-        <p>Contains the mapping between the key and the index. It could contain not all the items of the list as an optimization or be empty if user didn't provide a custom key-index mapping.</p>
-      </div>
     </div>
     <div class="list">
       <h2>Public methods</h2>
@@ -104,6 +76,11 @@
         <h3 class="api-name" id="getContentType(kotlin.Int)">getContentType</h3>
         <pre class="api-signature no-pretty-print">default&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;<a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html#getContentType(kotlin.Int)">getContentType</a>(int&nbsp;index)</pre>
         <p>Returns the content type for the item on this index. It is used to improve the item compositions reusing efficiency. Note that null is a valid type and items of such type will be considered compatible.</p>
+      </div>
+      <div class="api-item"><a name="getItemCount--"></a><a name="getitemcount"></a>
+        <h3 class="api-name" id="getItemCount()">getItemCount</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;int&nbsp;<a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html#getItemCount()">getItemCount</a>()</pre>
+        <p>The total number of items in the lazy layout (visible or not).</p>
       </div>
       <div class="api-item"><a name="getKey-kotlin.Int-"></a><a name="getkey"></a>
         <h3 class="api-name" id="getKey(kotlin.Int)">getKey</h3>
@@ -130,6 +107,11 @@
             </tbody>
           </table>
         </div>
+      </div>
+      <div class="api-item"><a name="getKeyToIndexMap--"></a><a name="getkeytoindexmap"></a>
+        <h3 class="api-name" id="getKeyToIndexMap()">getKeyToIndexMap</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Map.html">Map</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>&gt;&nbsp;<a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html#getKeyToIndexMap()">getKeyToIndexMap</a>()</pre>
+        <p>Contains the mapping between the key and the index. It could contain not all the items of the list as an optimization or be empty if user didn't provide a custom key-index mapping.</p>
       </div>
     </div>
   </body>

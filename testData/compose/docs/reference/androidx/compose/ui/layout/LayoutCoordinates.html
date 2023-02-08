@@ -45,56 +45,6 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>abstract boolean</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#isAttached()">isAttached</a></code></div>
-              <p>Returns false if the corresponding layout was detached from the hierarchy.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>abstract <a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#parentCoordinates()">parentCoordinates</a></code></div>
-              <p>The coordinates of the parent layout modifier or parent layout if there is no parent layout modifier, or <code>null</code> if there is no parent.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>abstract <a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#parentLayoutCoordinates()">parentLayoutCoordinates</a></code></div>
-              <p>The coordinates of the parent layout.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Set.html">Set</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#providedAlignmentLines()">providedAlignmentLines</a></code></div>
-              <p>The alignment lines provided for this layout, not including inherited lines.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a></code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#size()">size</a></code></div>
-              <p>The size of this layout in the local coordinates space.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
             <th colspan="100%"><h3>Public methods</h3></th>
           </tr>
         </thead>
@@ -104,6 +54,41 @@
             <td>
               <div><code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#get(androidx.compose.ui.layout.AlignmentLine)">get</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a>&nbsp;alignmentLine)</code></div>
               <p>Returns the position in pixels of an <code><a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">alignment line</a></code>, or <code><a href="/reference/androidx/compose/ui/layout/AlignmentLine.Companion.html#Unspecified()">AlignmentLine.Unspecified</a></code> if the line is not provided.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract <a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#getParentCoordinates()">getParentCoordinates</a>()</code></div>
+              <p>The coordinates of the parent layout modifier or parent layout if there is no parent layout modifier, or <code>null</code> if there is no parent.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract <a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#getParentLayoutCoordinates()">getParentLayoutCoordinates</a>()</code></div>
+              <p>The coordinates of the parent layout.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Set.html">Set</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#getProvidedAlignmentLines()">getProvidedAlignmentLines</a>()</code></div>
+              <p>The alignment lines provided for this layout, not including inherited lines.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#getSize()">getSize</a>()</code></div>
+              <p>The size of this layout in the local coordinates space.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#getIsAttached()">isAttached</a>()</code></div>
+              <p>Returns false if the corresponding layout was detached from the hierarchy.</p>
             </td>
           </tr>
           <tr>
@@ -216,39 +201,36 @@
       </table>
     </div>
     <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="getIsAttached()"></a><a name="setIsAttached()"></a><a name="getIsAttached--"></a><a name="setIsAttached--"></a>
-        <h3 class="api-name" id="isAttached()">isAttached</h3>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#isAttached()">isAttached</a></pre>
-        <p>Returns false if the corresponding layout was detached from the hierarchy.</p>
-      </div>
-      <div class="api-item"><a name="getParentCoordinates()"></a><a name="setParentCoordinates()"></a><a name="getParentCoordinates--"></a><a name="setParentCoordinates--"></a>
-        <h3 class="api-name" id="parentCoordinates()">parentCoordinates</h3>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;<a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>&nbsp;<a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#parentCoordinates()">parentCoordinates</a></pre>
-        <p>The coordinates of the parent layout modifier or parent layout if there is no parent layout modifier, or <code>null</code> if there is no parent.</p>
-      </div>
-      <div class="api-item"><a name="getParentLayoutCoordinates()"></a><a name="setParentLayoutCoordinates()"></a><a name="getParentLayoutCoordinates--"></a><a name="setParentLayoutCoordinates--"></a>
-        <h3 class="api-name" id="parentLayoutCoordinates()">parentLayoutCoordinates</h3>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;<a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>&nbsp;<a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#parentLayoutCoordinates()">parentLayoutCoordinates</a></pre>
-        <p>The coordinates of the parent layout. Null if there is no parent.</p>
-      </div>
-      <div class="api-item"><a name="getProvidedAlignmentLines()"></a><a name="setProvidedAlignmentLines()"></a><a name="getProvidedAlignmentLines--"></a><a name="setProvidedAlignmentLines--"></a>
-        <h3 class="api-name" id="providedAlignmentLines()">providedAlignmentLines</h3>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Set.html">Set</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a>&gt;&nbsp;<a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#providedAlignmentLines()">providedAlignmentLines</a></pre>
-        <p>The alignment lines provided for this layout, not including inherited lines.</p>
-      </div>
-      <div class="api-item"><a name="getSize()"></a><a name="setSize()"></a><a name="getSize--"></a><a name="setSize--"></a>
-        <h3 class="api-name" id="size()">size</h3>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a>&nbsp;<a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#size()">size</a></pre>
-        <p>The size of this layout in the local coordinates space.</p>
-      </div>
-    </div>
-    <div class="list">
       <h2>Public methods</h2>
       <div class="api-item"><a name="get-androidx.compose.ui.layout.AlignmentLine-"></a><a name="get"></a>
         <h3 class="api-name" id="get(androidx.compose.ui.layout.AlignmentLine)">get</h3>
         <pre class="api-signature no-pretty-print">abstract&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#get(androidx.compose.ui.layout.AlignmentLine)">get</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a>&nbsp;alignmentLine)</pre>
         <p>Returns the position in pixels of an <code><a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">alignment line</a></code>, or <code><a href="/reference/androidx/compose/ui/layout/AlignmentLine.Companion.html#Unspecified()">AlignmentLine.Unspecified</a></code> if the line is not provided.</p>
+      </div>
+      <div class="api-item"><a name="getParentCoordinates--"></a><a name="getparentcoordinates"></a>
+        <h3 class="api-name" id="getParentCoordinates()">getParentCoordinates</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;<a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>&nbsp;<a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#getParentCoordinates()">getParentCoordinates</a>()</pre>
+        <p>The coordinates of the parent layout modifier or parent layout if there is no parent layout modifier, or <code>null</code> if there is no parent.</p>
+      </div>
+      <div class="api-item"><a name="getParentLayoutCoordinates--"></a><a name="getparentlayoutcoordinates"></a>
+        <h3 class="api-name" id="getParentLayoutCoordinates()">getParentLayoutCoordinates</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;<a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>&nbsp;<a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#getParentLayoutCoordinates()">getParentLayoutCoordinates</a>()</pre>
+        <p>The coordinates of the parent layout. Null if there is no parent.</p>
+      </div>
+      <div class="api-item"><a name="getProvidedAlignmentLines--"></a><a name="getprovidedalignmentlines"></a>
+        <h3 class="api-name" id="getProvidedAlignmentLines()">getProvidedAlignmentLines</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Set.html">Set</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a>&gt;&nbsp;<a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#getProvidedAlignmentLines()">getProvidedAlignmentLines</a>()</pre>
+        <p>The alignment lines provided for this layout, not including inherited lines.</p>
+      </div>
+      <div class="api-item"><a name="getSize--"></a><a name="getsize"></a>
+        <h3 class="api-name" id="getSize()">getSize</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a>&nbsp;<a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#getSize()">getSize</a>()</pre>
+        <p>The size of this layout in the local coordinates space.</p>
+      </div>
+      <div class="api-item"><a name="getIsAttached--"></a><a name="getisattached"></a>
+        <h3 class="api-name" id="getIsAttached()">isAttached</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html#getIsAttached()">isAttached</a>()</pre>
+        <p>Returns false if the corresponding layout was detached from the hierarchy.</p>
       </div>
       <div class="api-item"><a name="localBoundingBoxOf(androidx.compose.ui.layout.LayoutCoordinates, kotlin.Boolean)"></a><a name="localBoundingBoxOf-androidx.compose.ui.layout.LayoutCoordinates-kotlin.Boolean-"></a><a name="localboundingboxof"></a>
         <h3 class="api-name" id="localBoundingBoxOf(androidx.compose.ui.layout.LayoutCoordinates,kotlin.Boolean)">localBoundingBoxOf</h3>

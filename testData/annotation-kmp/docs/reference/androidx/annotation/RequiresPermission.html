@@ -64,36 +64,13 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
+            <th colspan="100%"><h3>Public constructors</h3></th>
           </tr>
         </thead>
         <tbody class="list">
           <tr>
-            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> String[]</code></td>
             <td>
-              <div><code><a href="/reference/androidx/annotation/RequiresPermission.html#allOf()">allOf</a></code></div>
-              <p>Specifies a list of permission names that are all required.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> String[]</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/annotation/RequiresPermission.html#anyOf()">anyOf</a></code></div>
-              <p>Specifies a list of permission names where at least one is required</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>final boolean</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/annotation/RequiresPermission.html#conditional()">conditional</a></code></div>
-              <p>If true, the permission may not be required in all cases (e.g. it may only be enforced on certain platforms, or for certain call parameters, etc.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
-            <td>
-              <div><code><a href="/reference/androidx/annotation/RequiresPermission.html#value()">value</a></code></div>
-              <p>The name of the permission that is required, if precisely one permission is required.</p>
+              <div><code><a href="/reference/androidx/annotation/RequiresPermission.html#RequiresPermission(kotlin.String,kotlin.Array,kotlin.Array,kotlin.Boolean)">RequiresPermission</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;value,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> String[]&nbsp;allOf,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> String[]&nbsp;anyOf,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;conditional<br>)</code></div>
             </td>
           </tr>
         </tbody>
@@ -107,49 +84,72 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public constructors</h3></th>
+            <th colspan="100%"><h3>Public methods</h3></th>
           </tr>
         </thead>
         <tbody class="list">
           <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> String[]</code></td>
             <td>
-              <div><code><a href="/reference/androidx/annotation/RequiresPermission.html#RequiresPermission(kotlin.String,kotlin.Array,kotlin.Array,kotlin.Boolean)">RequiresPermission</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;value,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> String[]&nbsp;allOf,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> String[]&nbsp;anyOf,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;conditional<br>)</code></div>
+              <div><code><a href="/reference/androidx/annotation/RequiresPermission.html#getAllOf()">getAllOf</a>()</code></div>
+              <p>Specifies a list of permission names that are all required.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> String[]</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/RequiresPermission.html#getAnyOf()">getAnyOf</a>()</code></div>
+              <p>Specifies a list of permission names where at least one is required</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/RequiresPermission.html#getConditional()">getConditional</a>()</code></div>
+              <p>If true, the permission may not be required in all cases (e.g. it may only be enforced on certain platforms, or for certain call parameters, etc.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/annotation/RequiresPermission.html#getValue()">getValue</a>()</code></div>
+              <p>The name of the permission that is required, if precisely one permission is required.</p>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="getAllOf()"></a><a name="setAllOf()"></a><a name="getAllOf--"></a><a name="setAllOf--"></a>
-        <h3 class="api-name" id="allOf()">allOf</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> String[]&nbsp;<a href="/reference/androidx/annotation/RequiresPermission.html#allOf()">allOf</a></pre>
-        <p>Specifies a list of permission names that are all required.</p>
-        <p>If specified, <code><a href="/reference/androidx/annotation/RequiresPermission.html#anyOf()">anyOf</a></code> and <code><a href="/reference/androidx/annotation/RequiresPermission.html#value()">value</a></code> must both be null.</p>
-      </div>
-      <div class="api-item"><a name="getAnyOf()"></a><a name="setAnyOf()"></a><a name="getAnyOf--"></a><a name="setAnyOf--"></a>
-        <h3 class="api-name" id="anyOf()">anyOf</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> String[]&nbsp;<a href="/reference/androidx/annotation/RequiresPermission.html#anyOf()">anyOf</a></pre>
-        <p>Specifies a list of permission names where at least one is required</p>
-        <p>If specified, <code><a href="/reference/androidx/annotation/RequiresPermission.html#allOf()">allOf</a></code> and <code><a href="/reference/androidx/annotation/RequiresPermission.html#value()">value</a></code> must both be null.</p>
-      </div>
-      <div class="api-item"><a name="getConditional()"></a><a name="setConditional()"></a><a name="getConditional--"></a><a name="setConditional--"></a>
-        <h3 class="api-name" id="conditional()">conditional</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/annotation/RequiresPermission.html#conditional()">conditional</a></pre>
-        <p>If true, the permission may not be required in all cases (e.g. it may only be enforced on certain platforms, or for certain call parameters, etc.</p>
-      </div>
-      <div class="api-item"><a name="getValue()"></a><a name="setValue()"></a><a name="getValue--"></a><a name="setValue--"></a>
-        <h3 class="api-name" id="value()">value</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/annotation/RequiresPermission.html#value()">value</a></pre>
-        <p>The name of the permission that is required, if precisely one permission is required. If more than one permission is required, specify either <code><a href="/reference/androidx/annotation/RequiresPermission.html#allOf()">allOf</a></code> or <code><a href="/reference/androidx/annotation/RequiresPermission.html#anyOf()">anyOf</a></code> instead.</p>
-        <p>If specified, <code><a href="/reference/androidx/annotation/RequiresPermission.html#anyOf()">anyOf</a></code> and <code><a href="/reference/androidx/annotation/RequiresPermission.html#allOf()">allOf</a></code> must both be null.</p>
-      </div>
-    </div>
-    <div class="list">
       <h2>Public constructors</h2>
       <div class="api-item"><a name="RequiresPermission(kotlin.String, kotlin.Array, kotlin.Array, kotlin.Boolean)"></a><a name="RequiresPermission-kotlin.String-kotlin.Array-kotlin.Array-kotlin.Boolean-"></a><a name="requirespermission"></a>
         <h3 class="api-name" id="RequiresPermission(kotlin.String,kotlin.Array,kotlin.Array,kotlin.Boolean)">RequiresPermission</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/annotation/RequiresPermission.html#RequiresPermission(kotlin.String,kotlin.Array,kotlin.Array,kotlin.Boolean)">RequiresPermission</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;value,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> String[]&nbsp;allOf,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> String[]&nbsp;anyOf,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;conditional<br>)</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="getAllOf--"></a><a name="getallof"></a>
+        <h3 class="api-name" id="getAllOf()">getAllOf</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> String[]&nbsp;<a href="/reference/androidx/annotation/RequiresPermission.html#getAllOf()">getAllOf</a>()</pre>
+        <p>Specifies a list of permission names that are all required.</p>
+        <p>If specified, <code><a href="/reference/androidx/annotation/RequiresPermission.html#anyOf()">anyOf</a></code> and <code><a href="/reference/androidx/annotation/RequiresPermission.html#value()">value</a></code> must both be null.</p>
+      </div>
+      <div class="api-item"><a name="getAnyOf--"></a><a name="getanyof"></a>
+        <h3 class="api-name" id="getAnyOf()">getAnyOf</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> String[]&nbsp;<a href="/reference/androidx/annotation/RequiresPermission.html#getAnyOf()">getAnyOf</a>()</pre>
+        <p>Specifies a list of permission names where at least one is required</p>
+        <p>If specified, <code><a href="/reference/androidx/annotation/RequiresPermission.html#allOf()">allOf</a></code> and <code><a href="/reference/androidx/annotation/RequiresPermission.html#value()">value</a></code> must both be null.</p>
+      </div>
+      <div class="api-item"><a name="getConditional--"></a><a name="getconditional"></a>
+        <h3 class="api-name" id="getConditional()">getConditional</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/annotation/RequiresPermission.html#getConditional()">getConditional</a>()</pre>
+        <p>If true, the permission may not be required in all cases (e.g. it may only be enforced on certain platforms, or for certain call parameters, etc.</p>
+      </div>
+      <div class="api-item"><a name="getValue--"></a><a name="getvalue"></a>
+        <h3 class="api-name" id="getValue()">getValue</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/annotation/RequiresPermission.html#getValue()">getValue</a>()</pre>
+        <p>The name of the permission that is required, if precisely one permission is required. If more than one permission is required, specify either <code><a href="/reference/androidx/annotation/RequiresPermission.html#allOf()">allOf</a></code> or <code><a href="/reference/androidx/annotation/RequiresPermission.html#anyOf()">anyOf</a></code> instead.</p>
+        <p>If specified, <code><a href="/reference/androidx/annotation/RequiresPermission.html#anyOf()">anyOf</a></code> and <code><a href="/reference/androidx/annotation/RequiresPermission.html#allOf()">allOf</a></code> must both be null.</p>
       </div>
     </div>
   </body>

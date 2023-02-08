@@ -19,28 +19,6 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/paging/PagingLiveData.html#(androidx.paging.Pager).liveData()">liveData</a></code></div>
-              <p>A <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code> of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code>, which mirrors the stream provided by <code><a href="/reference/androidx/paging/Pager.html#flow()">Pager.flow</a></code>, but exposes it as a <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code>.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
             <th colspan="100%"><h3>Public methods</h3></th>
           </tr>
         </thead>
@@ -66,17 +44,15 @@
               <p>Operator which caches a <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code> of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> within the scope of a <code><a href="/reference/androidx/lifecycle/ViewModel.html">ViewModel</a></code>.</p>
             </td>
           </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/paging/PagingLiveDataKt.html">PagingLiveDataKt</a>.<a href="/reference/androidx/paging/PagingLiveData.html#(androidx.paging.Pager).getLiveData()">getLiveData</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/Pager.html">Pager</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;receiver<br>)</code></div>
+              <p>A <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code> of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code>, which mirrors the stream provided by <code><a href="/reference/androidx/paging/Pager.html#flow()">Pager.flow</a></code>, but exposes it as a <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code>.</p>
+            </td>
+          </tr>
         </tbody>
       </table>
-    </div>
-    <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="(androidx.paging.Pager).getLiveData()"></a><a name="(androidx.paging.Pager).setLiveData()"></a><a name="-androidx.paging.Pager-.getLiveData--"></a><a name="-androidx.paging.Pager-.setLiveData--"></a>
-        <h3 class="api-name" id="(androidx.paging.Pager).liveData()">liveData</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&gt;&nbsp;<a href="/reference/androidx/paging/PagingLiveData.html#(androidx.paging.Pager).liveData()">liveData</a></pre>
-        <p>A <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code> of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code>, which mirrors the stream provided by <code><a href="/reference/androidx/paging/Pager.html#flow()">Pager.flow</a></code>, but exposes it as a <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code>.</p>
-        <p>NOTE: Instances of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> emitted by this <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code> are not re-usable and cannot be submitted multiple times. This is especially relevant because <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code> will replays the latest value downstream. To ensure you get a new instance of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> for each downstream observer, you should use the <code><a href="/reference/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a></code> operator which multicasts the <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code> in a way that returns a new instance of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> with cached data pre-loaded.</p>
-      </div>
     </div>
     <div class="list">
       <h2>Public methods</h2>
@@ -163,6 +139,12 @@
             </tbody>
           </table>
         </div>
+      </div>
+      <div class="api-item"><a name="-androidx.paging.Pager-.getLiveData--"></a><a name="getlivedata"></a>
+        <h3 class="api-name" id="(androidx.paging.Pager).getLiveData()">PagingLiveDataKt.getLiveData</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&gt;&nbsp;<a href="/reference/androidx/paging/PagingLiveDataKt.html">PagingLiveDataKt</a>.<a href="/reference/androidx/paging/PagingLiveData.html#(androidx.paging.Pager).getLiveData()">getLiveData</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/Pager.html">Pager</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;receiver<br>)</pre>
+        <p>A <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code> of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code>, which mirrors the stream provided by <code><a href="/reference/androidx/paging/Pager.html#flow()">Pager.flow</a></code>, but exposes it as a <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code>.</p>
+        <p>NOTE: Instances of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> emitted by this <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code> are not re-usable and cannot be submitted multiple times. This is especially relevant because <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code> will replays the latest value downstream. To ensure you get a new instance of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> for each downstream observer, you should use the <code><a href="/reference/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a></code> operator which multicasts the <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code> in a way that returns a new instance of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> with cached data pre-loaded.</p>
       </div>
     </div>
   </body>

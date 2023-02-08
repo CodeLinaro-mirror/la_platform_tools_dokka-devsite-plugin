@@ -71,35 +71,6 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#currentList()">currentList</a></code></div>
-              <p>Returns the PagedList currently being displayed by the differ.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>int</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#itemCount()">itemCount</a></code></div>
-              <p>Get the number of items currently presented by this Differ.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
             <th colspan="100%"><h3>Public constructors</h3></th>
           </tr>
         </thead>
@@ -153,10 +124,24 @@
             </td>
           </tr>
           <tr>
+            <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#getCurrentList()">getCurrentList</a>()</code></div>
+              <p>Returns the PagedList currently being displayed by the differ.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>T</code></td>
             <td>
               <div><code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#getItem(kotlin.Int)">getItem</a>(int&nbsp;index)</code></div>
               <p>Get the item from the current PagedList at the specified index.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#getItemCount()">getItemCount</a>()</code></div>
+              <p>Get the number of items currently presented by this Differ.</p>
             </td>
           </tr>
           <tr>
@@ -196,62 +181,6 @@
           </tr>
         </tbody>
       </table>
-    </div>
-    <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="getCurrentList()"></a><a name="setCurrentList()"></a><a name="getCurrentList--"></a><a name="setCurrentList--"></a>
-        <h3 class="api-name" id="currentList()">currentList</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;<a href="/reference/androidx/paging/AsyncPagedListDiffer.html#currentList()">currentList</a></pre>
-        <p>Returns the PagedList currently being displayed by the differ.</p>
-        <p>This is not necessarily the most recent list passed to <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList)">submitList</a></code>, because a diff is computed asynchronously between the new list and the current list before updating the currentList value. May be <code>null</code> if no <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> is being presented.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Returns</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
-                <td>
-                  <p>The list currently being displayed, may be <code>null</code>.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getItemCount()"></a><a name="setItemCount()"></a><a name="getItemCount--"></a><a name="setItemCount--"></a>
-        <h3 class="api-name" id="itemCount()">itemCount</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/paging/AsyncPagedListDiffer.html#itemCount()">itemCount</a></pre>
-        <p>Get the number of items currently presented by this Differ. This value can be directly returned to <code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#getItemCount()">RecyclerView.Adapter.getItemCount</a></code>.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Returns</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>int</code></td>
-                <td>
-                  <p>Number of items being presented.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
     </div>
     <div class="list">
       <h2>Public constructors</h2>
@@ -441,6 +370,33 @@
           </table>
         </div>
       </div>
+      <div class="api-item"><a name="getCurrentList--"></a><a name="getcurrentlist"></a>
+        <h3 class="api-name" id="getCurrentList()">getCurrentList</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;<a href="/reference/androidx/paging/AsyncPagedListDiffer.html#getCurrentList()">getCurrentList</a>()</pre>
+        <p>Returns the PagedList currently being displayed by the differ.</p>
+        <p>This is not necessarily the most recent list passed to <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList)">submitList</a></code>, because a diff is computed asynchronously between the new list and the current list before updating the currentList value. May be <code>null</code> if no <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> is being presented.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+                <td>
+                  <p>The list currently being displayed, may be <code>null</code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="api-item"><a name="getItem-kotlin.Int-"></a><a name="getitem"></a>
         <h3 class="api-name" id="getItem(kotlin.Int)">getItem</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;T&nbsp;<a href="/reference/androidx/paging/AsyncPagedListDiffer.html#getItem(kotlin.Int)">getItem</a>(int&nbsp;index)</pre>
@@ -504,6 +460,32 @@
                 <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-index-out-of-bounds-exception/index.html">kotlin.IndexOutOfBoundsException</a>&nbsp;kotlin.IndexOutOfBoundsException</code></td>
                 <td>
                   <p>if <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#itemCount()">itemCount</a></code> is 0.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getItemCount--"></a><a name="getitemcount"></a>
+        <h3 class="api-name" id="getItemCount()">getItemCount</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/paging/AsyncPagedListDiffer.html#getItemCount()">getItemCount</a>()</pre>
+        <p>Get the number of items currently presented by this Differ. This value can be directly returned to <code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#getItemCount()">RecyclerView.Adapter.getItemCount</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int</code></td>
+                <td>
+                  <p>Number of items being presented.</p>
                 </td>
               </tr>
             </tbody>

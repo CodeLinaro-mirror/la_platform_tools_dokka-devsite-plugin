@@ -67,34 +67,6 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/Choreographer.html">Choreographer</a></code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/platform/AndroidUiDispatcher.html#choreographer()">choreographer</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/MonotonicFrameClock.html">MonotonicFrameClock</a></code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/platform/AndroidUiDispatcher.html#frameClock()">frameClock</a></code></div>
-              <p>A <code><a href="/reference/androidx/compose/runtime/MonotonicFrameClock.html">MonotonicFrameClock</a></code> associated with this <code><a href="/reference/androidx/compose/ui/platform/AndroidUiDispatcher.html">AndroidUiDispatcher</a></code>'s <code><a href="/reference/androidx/compose/ui/platform/AndroidUiDispatcher.html#choreographer()">choreographer</a></code> that may be used to await <code><a href="https://developer.android.com/reference/android/view/Choreographer.html">Choreographer</a></code> frame dispatch.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
             <th colspan="100%"><h3>Public methods</h3></th>
           </tr>
         </thead>
@@ -105,6 +77,19 @@
               <div><code><a href="/reference/androidx/compose/ui/platform/AndroidUiDispatcher.html#dispatch(kotlin.coroutines.CoroutineContext,java.lang.Runnable)">dispatch</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>&nbsp;context,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Runnable.html">Runnable</a>&nbsp;block)</code></div>
             </td>
           </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/Choreographer.html">Choreographer</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/platform/AndroidUiDispatcher.html#getChoreographer()">getChoreographer</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/MonotonicFrameClock.html">MonotonicFrameClock</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/platform/AndroidUiDispatcher.html#getFrameClock()">getFrameClock</a>()</code></div>
+              <p>A <code><a href="/reference/androidx/compose/runtime/MonotonicFrameClock.html">MonotonicFrameClock</a></code> associated with this <code><a href="/reference/androidx/compose/ui/platform/AndroidUiDispatcher.html">AndroidUiDispatcher</a></code>'s <code><a href="/reference/androidx/compose/ui/platform/AndroidUiDispatcher.html#choreographer()">choreographer</a></code> that may be used to await <code><a href="https://developer.android.com/reference/android/view/Choreographer.html">Choreographer</a></code> frame dispatch.</p>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -112,7 +97,7 @@
       <table class="responsive" id="inhmethods">
         <thead>
           <tr>
-            <th colspan="100%"><h3>Inherited fields</h3></th>
+            <th colspan="100%"><h3>Inherited methods</h3></th>
           </tr>
         </thead>
         <tbody class="list">
@@ -128,7 +113,7 @@
                     <tr>
                       <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-key/index.html">CoroutineContext.Key</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;</code></td>
                       <td>
-                        <div><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-abstract-coroutine-context-element/key.html">key</a></code></div>
+                        <div><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-abstract-coroutine-context-element/get-key.html">getKey</a>()</code></div>
                       </td>
                     </tr>
                   </tbody>
@@ -136,17 +121,6 @@
               </div>
 </devsite-expandable>            </td>
           </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive" id="inhmethods">
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Inherited methods</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
           <tr>
             <td><devsite-expandable><span class="expand-control">From <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">kotlin.coroutines.CoroutineContext</a></span>
               <div class="devsite-table-wrapper">
@@ -260,22 +234,19 @@
       </table>
     </div>
     <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="getChoreographer()"></a><a name="setChoreographer()"></a><a name="getChoreographer--"></a><a name="setChoreographer--"></a>
-        <h3 class="api-name" id="choreographer()">choreographer</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/Choreographer.html">Choreographer</a>&nbsp;<a href="/reference/androidx/compose/ui/platform/AndroidUiDispatcher.html#choreographer()">choreographer</a></pre>
-      </div>
-      <div class="api-item"><a name="getFrameClock()"></a><a name="setFrameClock()"></a><a name="getFrameClock--"></a><a name="setFrameClock--"></a>
-        <h3 class="api-name" id="frameClock()">frameClock</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/MonotonicFrameClock.html">MonotonicFrameClock</a>&nbsp;<a href="/reference/androidx/compose/ui/platform/AndroidUiDispatcher.html#frameClock()">frameClock</a></pre>
-        <p>A <code><a href="/reference/androidx/compose/runtime/MonotonicFrameClock.html">MonotonicFrameClock</a></code> associated with this <code><a href="/reference/androidx/compose/ui/platform/AndroidUiDispatcher.html">AndroidUiDispatcher</a></code>'s <code><a href="/reference/androidx/compose/ui/platform/AndroidUiDispatcher.html#choreographer()">choreographer</a></code> that may be used to await <code><a href="https://developer.android.com/reference/android/view/Choreographer.html">Choreographer</a></code> frame dispatch.</p>
-      </div>
-    </div>
-    <div class="list">
       <h2>Public methods</h2>
       <div class="api-item"><a name="dispatch(kotlin.coroutines.CoroutineContext, java.lang.Runnable)"></a><a name="dispatch-kotlin.coroutines.CoroutineContext-java.lang.Runnable-"></a><a name="dispatch"></a>
         <h3 class="api-name" id="dispatch(kotlin.coroutines.CoroutineContext,java.lang.Runnable)">dispatch</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/platform/AndroidUiDispatcher.html#dispatch(kotlin.coroutines.CoroutineContext,java.lang.Runnable)">dispatch</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>&nbsp;context,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Runnable.html">Runnable</a>&nbsp;block)</pre>
+      </div>
+      <div class="api-item"><a name="getChoreographer--"></a><a name="getchoreographer"></a>
+        <h3 class="api-name" id="getChoreographer()">getChoreographer</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/Choreographer.html">Choreographer</a>&nbsp;<a href="/reference/androidx/compose/ui/platform/AndroidUiDispatcher.html#getChoreographer()">getChoreographer</a>()</pre>
+      </div>
+      <div class="api-item"><a name="getFrameClock--"></a><a name="getframeclock"></a>
+        <h3 class="api-name" id="getFrameClock()">getFrameClock</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/MonotonicFrameClock.html">MonotonicFrameClock</a>&nbsp;<a href="/reference/androidx/compose/ui/platform/AndroidUiDispatcher.html#getFrameClock()">getFrameClock</a>()</pre>
+        <p>A <code><a href="/reference/androidx/compose/runtime/MonotonicFrameClock.html">MonotonicFrameClock</a></code> associated with this <code><a href="/reference/androidx/compose/ui/platform/AndroidUiDispatcher.html">AndroidUiDispatcher</a></code>'s <code><a href="/reference/androidx/compose/ui/platform/AndroidUiDispatcher.html#choreographer()">choreographer</a></code> that may be used to await <code><a href="https://developer.android.com/reference/android/view/Choreographer.html">Choreographer</a></code> frame dispatch.</p>
       </div>
     </div>
   </body>

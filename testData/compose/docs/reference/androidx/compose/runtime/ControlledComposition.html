@@ -44,35 +44,6 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>abstract boolean</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#hasPendingChanges()">hasPendingChanges</a></code></div>
-              <p>True after <code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a></code> or <code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code> has been called and <code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a></code> is expected as the next call.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>abstract boolean</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#isComposing()">isComposing</a></code></div>
-              <p>True if the composition is actively compositing such as when actively in a call to <code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a></code> or <code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code>.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
             <th colspan="100%"><h3>Public methods</h3></th>
           </tr>
         </thead>
@@ -120,6 +91,13 @@
             </td>
           </tr>
           <tr>
+            <td><code>abstract boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#getHasPendingChanges()">getHasPendingChanges</a>()</code></div>
+              <p>True after <code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a></code> or <code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code> has been called and <code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a></code> is expected as the next call.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>abstract void</code></td>
             <td>
               <div><code>@<a href="/reference/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br><a href="/reference/androidx/compose/runtime/ControlledComposition.html#insertMovableContent(kotlin.collections.List)">insertMovableContent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/MovableContentStateReference.html">MovableContentStateReference</a>,&nbsp;<a href="/reference/androidx/compose/runtime/MovableContentStateReference.html">MovableContentStateReference</a>&gt;&gt;&nbsp;references<br>)</code></div>
@@ -131,6 +109,13 @@
             <td>
               <div><code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#invalidateAll()">invalidateAll</a>()</code></div>
               <p>Invalidate all invalidation scopes.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#getIsComposing()">isComposing</a>()</code></div>
+              <p>True if the composition is actively compositing such as when actively in a call to <code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a></code> or <code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -201,46 +186,8 @@
             <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code></td>
             <td>
               <div><code>@<a href="/reference/androidx/compose/runtime/ExperimentalComposeApi.html">ExperimentalComposeApi</a><br><a href="/reference/androidx/compose/runtime/CompositionKt.html">CompositionKt</a>.<a href="/reference/androidx/compose/runtime/ControlledComposition.html#(androidx.compose.runtime.ControlledComposition).getRecomposeCoroutineContext()">getRecomposeCoroutineContext</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/ControlledComposition.html">ControlledComposition</a>&nbsp;receiver<br>)</code></div>
+              <p>The <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code> that should be used to perform concurrent recompositions of this <code><a href="/reference/androidx/compose/runtime/ControlledComposition.html">ControlledComposition</a></code> when used in an environment supporting concurrent composition.</p>
             </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive" id="inhmethods">
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Inherited fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/runtime/Composition.html">androidx.compose.runtime.Composition</a></span>
-              <div class="devsite-table-wrapper">
-                <table class="responsive">
-                  <colgroup>
-                    <col width="40%">
-                    <col>
-                  </colgroup>
-                  <tbody class="list">
-                    <tr>
-                      <td><code>abstract boolean</code></td>
-                      <td>
-                        <div><code><a href="/reference/androidx/compose/runtime/Composition.html#hasInvalidations()">hasInvalidations</a></code></div>
-                        <p>Returns true if any pending invalidations have been scheduled.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>abstract boolean</code></td>
-                      <td>
-                        <div><code><a href="/reference/androidx/compose/runtime/Composition.html#isDisposed()">isDisposed</a></code></div>
-                        <p>True if <code><a href="/reference/androidx/compose/runtime/Composition.html#dispose()">dispose</a></code> has been called.</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-</devsite-expandable>            </td>
           </tr>
         </tbody>
       </table>
@@ -270,6 +217,20 @@
                       </td>
                     </tr>
                     <tr>
+                      <td><code>abstract boolean</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/runtime/Composition.html#getHasInvalidations()">getHasInvalidations</a>()</code></div>
+                        <p>Returns true if any pending invalidations have been scheduled.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract boolean</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/runtime/Composition.html#getIsDisposed()">isDisposed</a>()</code></div>
+                        <p>True if <code><a href="/reference/androidx/compose/runtime/Composition.html#dispose()">dispose</a></code> has been called.</p>
+                      </td>
+                    </tr>
+                    <tr>
                       <td><code>abstract void</code></td>
                       <td>
                         <div><code><a href="/reference/androidx/compose/runtime/Composition.html#setContent(kotlin.Function0)">setContent</a>(@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content)</code></div>
@@ -283,19 +244,6 @@
           </tr>
         </tbody>
       </table>
-    </div>
-    <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="getHasPendingChanges()"></a><a name="setHasPendingChanges()"></a><a name="getHasPendingChanges--"></a><a name="setHasPendingChanges--"></a>
-        <h3 class="api-name" id="hasPendingChanges()">hasPendingChanges</h3>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/ControlledComposition.html#hasPendingChanges()">hasPendingChanges</a></pre>
-        <p>True after <code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a></code> or <code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code> has been called and <code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a></code> is expected as the next call. An exception will be throw in <code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a></code> or <code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code> is called while there are pending from the previous composition pending to be applied.</p>
-      </div>
-      <div class="api-item"><a name="getIsComposing()"></a><a name="setIsComposing()"></a><a name="getIsComposing--"></a><a name="setIsComposing--"></a>
-        <h3 class="api-name" id="isComposing()">isComposing</h3>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/ControlledComposition.html#isComposing()">isComposing</a></pre>
-        <p>True if the composition is actively compositing such as when actively in a call to <code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a></code> or <code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code>.</p>
-      </div>
     </div>
     <div class="list">
       <h2>Public methods</h2>
@@ -350,6 +298,11 @@
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br>abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/ControlledComposition.html#disposeUnusedMovableContent(androidx.compose.runtime.MovableContentState)">disposeUnusedMovableContent</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/MovableContentState.html">MovableContentState</a>&nbsp;state)</pre>
         <p>Dispose the value state that is no longer needed.</p>
       </div>
+      <div class="api-item"><a name="getHasPendingChanges--"></a><a name="gethaspendingchanges"></a>
+        <h3 class="api-name" id="getHasPendingChanges()">getHasPendingChanges</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/ControlledComposition.html#getHasPendingChanges()">getHasPendingChanges</a>()</pre>
+        <p>True after <code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a></code> or <code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code> has been called and <code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a></code> is expected as the next call. An exception will be throw in <code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a></code> or <code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code> is called while there are pending from the previous composition pending to be applied.</p>
+      </div>
       <div class="api-item"><a name="insertMovableContent-kotlin.collections.List-"></a><a name="insertmovablecontent"></a>
         <h3 class="api-name" id="insertMovableContent(kotlin.collections.List)">insertMovableContent</h3>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br>abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/ControlledComposition.html#insertMovableContent(kotlin.collections.List)">insertMovableContent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/MovableContentStateReference.html">MovableContentStateReference</a>,&nbsp;<a href="/reference/androidx/compose/runtime/MovableContentStateReference.html">MovableContentStateReference</a>&gt;&gt;&nbsp;references<br>)</pre>
@@ -359,6 +312,11 @@
         <h3 class="api-name" id="invalidateAll()">invalidateAll</h3>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/ControlledComposition.html#invalidateAll()">invalidateAll</a>()</pre>
         <p>Invalidate all invalidation scopes. This is called, for example, by <code><a href="/reference/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> when the Recomposer becomes active after a previous period of inactivity, potentially missing more granular invalidations.</p>
+      </div>
+      <div class="api-item"><a name="getIsComposing--"></a><a name="getiscomposing"></a>
+        <h3 class="api-name" id="getIsComposing()">isComposing</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/ControlledComposition.html#getIsComposing()">isComposing</a>()</pre>
+        <p>True if the composition is actively compositing such as when actively in a call to <code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a></code> or <code><a href="/reference/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code>.</p>
       </div>
       <div class="api-item"><a name="observesAnyOf-kotlin.collections.Set-"></a><a name="observesanyof"></a>
         <h3 class="api-name" id="observesAnyOf(kotlin.collections.Set)">observesAnyOf</h3>
@@ -464,6 +422,8 @@
       <div class="api-item"><a name="-androidx.compose.runtime.ControlledComposition-.getRecomposeCoroutineContext--"></a><a name="getrecomposecoroutinecontext"></a>
         <h3 class="api-name" id="(androidx.compose.runtime.ControlledComposition).getRecomposeCoroutineContext()">CompositionKt.getRecomposeCoroutineContext</h3>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/ExperimentalComposeApi.html">ExperimentalComposeApi</a><br>default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>&nbsp;<a href="/reference/androidx/compose/runtime/CompositionKt.html">CompositionKt</a>.<a href="/reference/androidx/compose/runtime/ControlledComposition.html#(androidx.compose.runtime.ControlledComposition).getRecomposeCoroutineContext()">getRecomposeCoroutineContext</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/ControlledComposition.html">ControlledComposition</a>&nbsp;receiver<br>)</pre>
+        <p>The <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code> that should be used to perform concurrent recompositions of this <code><a href="/reference/androidx/compose/runtime/ControlledComposition.html">ControlledComposition</a></code> when used in an environment supporting concurrent composition.</p>
+        <p>See <code><a href="/reference/androidx/compose/runtime/Recomposer.html#runRecomposeConcurrentlyAndApplyChanges(kotlin.coroutines.CoroutineContext)">Recomposer.runRecomposeConcurrentlyAndApplyChanges</a></code> as an example of configuring such an environment.</p>
       </div>
     </div>
   </body>

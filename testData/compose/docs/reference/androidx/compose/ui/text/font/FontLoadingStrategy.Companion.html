@@ -22,28 +22,28 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
+            <th colspan="100%"><h3>Public methods</h3></th>
           </tr>
         </thead>
         <tbody class="list">
           <tr>
             <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.html">FontLoadingStrategy</a></code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.Companion.html#Async()">Async</a></code></div>
+              <div><code><a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.Companion.html#getAsync()">getAsync</a>()</code></div>
               <p>Loading this font will never block, and will load on a background thread.</p>
             </td>
           </tr>
           <tr>
             <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.html">FontLoadingStrategy</a></code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.Companion.html#Blocking()">Blocking</a></code></div>
+              <div><code><a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.Companion.html#getBlocking()">getBlocking</a>()</code></div>
               <p>Resolving this font will always block until the font loads.</p>
             </td>
           </tr>
           <tr>
             <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.html">FontLoadingStrategy</a></code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.Companion.html#OptionalLocal()">OptionalLocal</a></code></div>
+              <div><code><a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.Companion.html#getOptionalLocal()">getOptionalLocal</a>()</code></div>
               <p>Resolving this font is best-effort and will attempt to load from a local resource that MAY be available.</p>
             </td>
           </tr>
@@ -51,10 +51,10 @@
       </table>
     </div>
     <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="getAsync()"></a><a name="setAsync()"></a><a name="getAsync--"></a><a name="setAsync--"></a>
-        <h3 class="api-name" id="Async()">Async</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.html">FontLoadingStrategy</a>&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.Companion.html#Async()">Async</a></pre>
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="getAsync--"></a><a name="getasync"></a>
+        <h3 class="api-name" id="getAsync()">getAsync</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.html">FontLoadingStrategy</a>&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.Companion.html#getAsync()">getAsync</a>()</pre>
         <p>Loading this font will never block, and will load on a background thread.</p>
         <p>During loading, the app will not block but instead will find the next available font that is immediately available (<code><a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.Companion.html#Blocking()">Blocking</a></code> or <code><a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.Companion.html#OptionalLocal()">OptionalLocal</a></code>). When the font finishes loading, text will reflow with the resolved typeface.</p>
         <p>If no fallback fonts are available immediately, the platform default typeface will be used to draw text during loading.</p>
@@ -62,17 +62,17 @@
         <p>This should typically not be used for fonts that are stored on-device and needed for the first frame. Instead use <code><a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.Companion.html#Blocking()">Blocking</a></code> or <code><a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.Companion.html#OptionalLocal()">OptionalLocal</a></code>.</p>
         <p>This should always be used for fonts that are fetched from a remote source such as over http.</p>
       </div>
-      <div class="api-item"><a name="getBlocking()"></a><a name="setBlocking()"></a><a name="getBlocking--"></a><a name="setBlocking--"></a>
-        <h3 class="api-name" id="Blocking()">Blocking</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.html">FontLoadingStrategy</a>&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.Companion.html#Blocking()">Blocking</a></pre>
+      <div class="api-item"><a name="getBlocking--"></a><a name="getblocking"></a>
+        <h3 class="api-name" id="getBlocking()">getBlocking</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.html">FontLoadingStrategy</a>&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.Companion.html#getBlocking()">getBlocking</a>()</pre>
         <p>Resolving this font will always block until the font loads.</p>
         <p>This means that the first frame that uses this font will always display using the desired font, and text will never reflow.</p>
         <p>This should typically be used for fonts that stored on-device. It is acceptable to block the first frame of an application to read a font from disk.</p>
         <p>This should typically not be used for fonts that are fetched from a remote source such as over http, as it will block all rendering until the font loads. Instead use <code><a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.Companion.html#Async()">Async</a></code>.</p>
       </div>
-      <div class="api-item"><a name="getOptionalLocal()"></a><a name="setOptionalLocal()"></a><a name="getOptionalLocal--"></a><a name="setOptionalLocal--"></a>
-        <h3 class="api-name" id="OptionalLocal()">OptionalLocal</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.html">FontLoadingStrategy</a>&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.Companion.html#OptionalLocal()">OptionalLocal</a></pre>
+      <div class="api-item"><a name="getOptionalLocal--"></a><a name="getoptionallocal"></a>
+        <h3 class="api-name" id="getOptionalLocal()">getOptionalLocal</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.html">FontLoadingStrategy</a>&nbsp;<a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.Companion.html#getOptionalLocal()">getOptionalLocal</a>()</pre>
         <p>Resolving this font is best-effort and will attempt to load from a local resource that MAY be available.</p>
         <p>Resolving this font will always block until the font resolves, and text will never reflow.</p>
         <p>An <code><a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.Companion.html#OptionalLocal()">OptionalLocal</a></code> font describes a font that is installed locally, such as an optional system installed font. Resolution of an <code><a href="/reference/androidx/compose/ui/text/font/FontLoadingStrategy.Companion.html#OptionalLocal()">OptionalLocal</a></code> font is expected to fail whenever the resource is not available, which will fallback to the next font in the <code><a href="/reference/androidx/compose/ui/text/font/FontFamily.html">FontFamily</a></code>.</p>

@@ -52,28 +52,6 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html#coroutineScope()">coroutineScope</a></code></div>
-              <p>Get the outer coroutine scope to dispatch nested fling on.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
             <th colspan="100%"><h3>Public constructors</h3></th>
           </tr>
         </thead>
@@ -126,39 +104,14 @@
               <p>Dispatch pre scroll pass.</p>
             </td>
           </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html#getCoroutineScope()">getCoroutineScope</a>()</code></div>
+            </td>
+          </tr>
         </tbody>
       </table>
-    </div>
-    <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="getCoroutineScope()"></a><a name="setCoroutineScope()"></a><a name="getCoroutineScope--"></a><a name="setCoroutineScope--"></a>
-        <h3 class="api-name" id="coroutineScope()">coroutineScope</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>&nbsp;<a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html#coroutineScope()">coroutineScope</a></pre>
-        <p>Get the outer coroutine scope to dispatch nested fling on.</p>
-        <p>There might be situations when then component that is dispatching preFling or postFling to parent can be disposed together with its scope, so it's recommended to use launch nested fling dispatch using this scope to prevent abrupt scrolling user experience.</p>
-        <p><b>Note:</b> this scope is retrieved from the parent nestedScroll participants, unless the node knows its parent (which is usually after first composition commits), this will throw <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code>.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Throws</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">kotlin.IllegalStateException</a>&nbsp;kotlin.IllegalStateException</code></td>
-                <td>
-                  <p>when this field is accessed before the <code><a href="/reference/androidx/compose/ui/input/nestedscroll/package-summary.html#(androidx.compose.ui.Modifier).nestedScroll(androidx.compose.ui.input.nestedscroll.NestedScrollConnection,androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher)">nestedScroll</a></code> modifier with this <code><a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html">NestedScrollDispatcher</a></code> provided knows its nested scroll parent. Should be safe to access after the initial composition commits.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
     </div>
     <div class="list">
       <h2>Public constructors</h2>
@@ -375,6 +328,31 @@
                 <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
                 <td>
                   <p>total delta that is pre-consumed by all ancestors in the chain. This delta is unavailable for this node to consume, so it should adjust the consumption accordingly</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getCoroutineScope--"></a><a name="getcoroutinescope"></a>
+        <h3 class="api-name" id="getCoroutineScope()">getCoroutineScope</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>&nbsp;<a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html#getCoroutineScope()">getCoroutineScope</a>()</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">kotlin.IllegalStateException</a>&nbsp;kotlin.IllegalStateException</code></td>
+                <td>
+                  <p>when this field is accessed before the <code><a href="/reference/androidx/compose/ui/input/nestedscroll/package-summary.html#(androidx.compose.ui.Modifier).nestedScroll(androidx.compose.ui.input.nestedscroll.NestedScrollConnection,androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher)">nestedScroll</a></code> modifier with this <code><a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html">NestedScrollDispatcher</a></code> provided knows its nested scroll parent. Should be safe to access after the initial composition commits.</p>
                 </td>
               </tr>
             </tbody>

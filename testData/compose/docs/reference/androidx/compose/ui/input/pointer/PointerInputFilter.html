@@ -23,42 +23,6 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>boolean</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputFilter.html#interceptOutOfBoundsChildEvents()">interceptOutOfBoundsChildEvents</a></code></div>
-              <p>Intercept pointer input that children receive even if the pointer is out of bounds.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>boolean</code></td>
-            <td>
-              <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/input/pointer/PointerInputFilter.html#shareWithSiblings()">shareWithSiblings</a></code></div>
-              <p>If <code>false</code>, then this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputFilter.html">PointerInputFilter</a></code> will not allow siblings under it to respond to events.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a></code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputFilter.html#size()">size</a></code></div>
-              <p>The layout size assigned to this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputFilter.html">PointerInputFilter</a></code>.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
             <th colspan="100%"><h3>Public constructors</h3></th>
           </tr>
         </thead>
@@ -84,6 +48,27 @@
         </thead>
         <tbody class="list">
           <tr>
+            <td><code>boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputFilter.html#getInterceptOutOfBoundsChildEvents()">getInterceptOutOfBoundsChildEvents</a>()</code></div>
+              <p>Intercept pointer input that children receive even if the pointer is out of bounds.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>boolean</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/input/pointer/PointerInputFilter.html#getShareWithSiblings()">getShareWithSiblings</a>()</code></div>
+              <p>If <code>false</code>, then this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputFilter.html">PointerInputFilter</a></code> will not allow siblings under it to respond to events.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputFilter.html#getSize()">getSize</a>()</code></div>
+              <p>The layout size assigned to this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputFilter.html">PointerInputFilter</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>abstract void</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputFilter.html#onCancel()">onCancel</a>()</code></div>
@@ -101,25 +86,6 @@
       </table>
     </div>
     <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="getInterceptOutOfBoundsChildEvents()"></a><a name="setInterceptOutOfBoundsChildEvents()"></a><a name="getInterceptOutOfBoundsChildEvents--"></a><a name="setInterceptOutOfBoundsChildEvents--"></a>
-        <h3 class="api-name" id="interceptOutOfBoundsChildEvents()">interceptOutOfBoundsChildEvents</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputFilter.html#interceptOutOfBoundsChildEvents()">interceptOutOfBoundsChildEvents</a></pre>
-        <p>Intercept pointer input that children receive even if the pointer is out of bounds.</p>
-        <p>If <code>true</code>, and a child has been moved out of this layout and receives an event, this will receive that event. If <code>false</code>, a child receiving pointer input outside of the bounds of this layout will not trigger any events in this.</p>
-      </div>
-      <div class="api-item"><a name="getShareWithSiblings()"></a><a name="setShareWithSiblings()"></a><a name="getShareWithSiblings--"></a><a name="setShareWithSiblings--"></a>
-        <h3 class="api-name" id="shareWithSiblings()">shareWithSiblings</h3>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputFilter.html#shareWithSiblings()">shareWithSiblings</a></pre>
-        <p>If <code>false</code>, then this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputFilter.html">PointerInputFilter</a></code> will not allow siblings under it to respond to events. If <code>true</code>, this will have the first chance to respond and the next sibling under will then get a chance to respond as well. This trigger acts at the Layout level, so if any <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputFilter.html">PointerInputFilter</a></code>s on a Layout has <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputFilter.html#shareWithSiblings()">shareWithSiblings</a></code> set to <code>true</code> then the Layout will share with siblings.</p>
-      </div>
-      <div class="api-item"><a name="getSize()"></a><a name="setSize()"></a><a name="getSize--"></a><a name="setSize--"></a>
-        <h3 class="api-name" id="size()">size</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a>&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputFilter.html#size()">size</a></pre>
-        <p>The layout size assigned to this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputFilter.html">PointerInputFilter</a></code>.</p>
-      </div>
-    </div>
-    <div class="list">
       <h2>Public constructors</h2>
       <div class="api-item"><a name="PointerInputFilter--"></a><a name="pointerinputfilter"></a>
         <h3 class="api-name" id="PointerInputFilter()">PointerInputFilter</h3>
@@ -128,6 +94,22 @@
     </div>
     <div class="list">
       <h2>Public methods</h2>
+      <div class="api-item"><a name="getInterceptOutOfBoundsChildEvents--"></a><a name="getinterceptoutofboundschildevents"></a>
+        <h3 class="api-name" id="getInterceptOutOfBoundsChildEvents()">getInterceptOutOfBoundsChildEvents</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputFilter.html#getInterceptOutOfBoundsChildEvents()">getInterceptOutOfBoundsChildEvents</a>()</pre>
+        <p>Intercept pointer input that children receive even if the pointer is out of bounds.</p>
+        <p>If <code>true</code>, and a child has been moved out of this layout and receives an event, this will receive that event. If <code>false</code>, a child receiving pointer input outside of the bounds of this layout will not trigger any events in this.</p>
+      </div>
+      <div class="api-item"><a name="getShareWithSiblings--"></a><a name="getsharewithsiblings"></a>
+        <h3 class="api-name" id="getShareWithSiblings()">getShareWithSiblings</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputFilter.html#getShareWithSiblings()">getShareWithSiblings</a>()</pre>
+        <p>If <code>false</code>, then this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputFilter.html">PointerInputFilter</a></code> will not allow siblings under it to respond to events. If <code>true</code>, this will have the first chance to respond and the next sibling under will then get a chance to respond as well. This trigger acts at the Layout level, so if any <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputFilter.html">PointerInputFilter</a></code>s on a Layout has <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputFilter.html#shareWithSiblings()">shareWithSiblings</a></code> set to <code>true</code> then the Layout will share with siblings.</p>
+      </div>
+      <div class="api-item"><a name="getSize--"></a><a name="getsize"></a>
+        <h3 class="api-name" id="getSize()">getSize</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a>&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputFilter.html#getSize()">getSize</a>()</pre>
+        <p>The layout size assigned to this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputFilter.html">PointerInputFilter</a></code>.</p>
+      </div>
       <div class="api-item"><a name="onCancel--"></a><a name="oncancel"></a>
         <h3 class="api-name" id="onCancel()">onCancel</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputFilter.html#onCancel()">onCancel</a>()</pre>

@@ -46,35 +46,6 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Iterable.html">Iterable</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html">CompositionGroup</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/runtime/tooling/CompositionData.html#compositionGroups()">compositionGroups</a></code></div>
-              <p>Iterate the composition data in the group.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>abstract boolean</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/runtime/tooling/CompositionData.html#isEmpty()">isEmpty</a></code></div>
-              <p>Returns true if no composition data has been collected.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
             <th colspan="100%"><h3>Public methods</h3></th>
           </tr>
         </thead>
@@ -86,21 +57,22 @@
               <p>Find a sub-group by identity.</p>
             </td>
           </tr>
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Iterable.html">Iterable</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html">CompositionGroup</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/tooling/CompositionData.html#getCompositionGroups()">getCompositionGroups</a>()</code></div>
+              <p>Iterate the composition data in the group.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/tooling/CompositionData.html#getIsEmpty()">isEmpty</a>()</code></div>
+              <p>Returns true if no composition data has been collected.</p>
+            </td>
+          </tr>
         </tbody>
       </table>
-    </div>
-    <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="getCompositionGroups()"></a><a name="setCompositionGroups()"></a><a name="getCompositionGroups--"></a><a name="setCompositionGroups--"></a>
-        <h3 class="api-name" id="compositionGroups()">compositionGroups</h3>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Iterable.html">Iterable</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html">CompositionGroup</a>&gt;&nbsp;<a href="/reference/androidx/compose/runtime/tooling/CompositionData.html#compositionGroups()">compositionGroups</a></pre>
-        <p>Iterate the composition data in the group.  The composition data is structured as a tree of values that corresponds to the call graph of the functions that produced the tree. Interspersed are groups that represents the nodes themselves.</p>
-      </div>
-      <div class="api-item"><a name="getIsEmpty()"></a><a name="setIsEmpty()"></a><a name="getIsEmpty--"></a><a name="setIsEmpty--"></a>
-        <h3 class="api-name" id="isEmpty()">isEmpty</h3>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/tooling/CompositionData.html#isEmpty()">isEmpty</a></pre>
-        <p>Returns true if no composition data has been collected. This occurs when the first composition into this composition data has not completed yet or, if it is a group, it doesn't contain any child groups.</p>
-      </div>
     </div>
     <div class="list">
       <h2>Public methods</h2>
@@ -108,6 +80,16 @@
         <h3 class="api-name" id="find(kotlin.Any)">find</h3>
         <pre class="api-signature no-pretty-print">default&nbsp;<a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html">CompositionGroup</a>&nbsp;<a href="/reference/androidx/compose/runtime/tooling/CompositionData.html#find(kotlin.Any)">find</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;identityToFind)</pre>
         <p>Find a sub-group by identity. Returns <code>null</code> if the group is not found or the implementation of this interface does not support finding groups by their identity. In other words, a <code>null</code> result from this method should not be interpreted as the identity is not a group in the composition data.</p>
+      </div>
+      <div class="api-item"><a name="getCompositionGroups--"></a><a name="getcompositiongroups"></a>
+        <h3 class="api-name" id="getCompositionGroups()">getCompositionGroups</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Iterable.html">Iterable</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html">CompositionGroup</a>&gt;&nbsp;<a href="/reference/androidx/compose/runtime/tooling/CompositionData.html#getCompositionGroups()">getCompositionGroups</a>()</pre>
+        <p>Iterate the composition data in the group.  The composition data is structured as a tree of values that corresponds to the call graph of the functions that produced the tree. Interspersed are groups that represents the nodes themselves.</p>
+      </div>
+      <div class="api-item"><a name="getIsEmpty--"></a><a name="getisempty"></a>
+        <h3 class="api-name" id="getIsEmpty()">isEmpty</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/tooling/CompositionData.html#getIsEmpty()">isEmpty</a>()</pre>
+        <p>Returns true if no composition data has been collected. This occurs when the first composition into this composition data has not completed yet or, if it is a group, it doesn't contain any child groups.</p>
       </div>
     </div>
   </body>

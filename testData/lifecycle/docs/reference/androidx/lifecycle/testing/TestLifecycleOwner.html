@@ -24,35 +24,6 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code></td>
-            <td>
-              <div><code><a href="/reference/androidx/lifecycle/testing/TestLifecycleOwner.html#currentState()">currentState</a></code></div>
-              <p>The current <code><a href="/reference/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code> of this owner.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>final int</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/lifecycle/testing/TestLifecycleOwner.html#observerCount()">observerCount</a></code></div>
-              <p>Get the number of observers.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
             <th colspan="100%"><h3>Public constructors</h3></th>
           </tr>
         </thead>
@@ -78,10 +49,24 @@
         </thead>
         <tbody class="list">
           <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/lifecycle/testing/TestLifecycleOwner.html#getCurrentState()">getCurrentState</a>()</code></div>
+              <p>The current <code><a href="/reference/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code> of this owner.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleRegistry.html">LifecycleRegistry</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/lifecycle/testing/TestLifecycleOwner.html#getLifecycle()">getLifecycle</a>()</code></div>
               <p>Returns the Lifecycle of the provider.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/lifecycle/testing/TestLifecycleOwner.html#getObserverCount()">getObserverCount</a>()</code></div>
+              <p>Get the number of observers.</p>
             </td>
           </tr>
           <tr>
@@ -91,21 +76,15 @@
               <p>Update the <code><a href="/reference/androidx/lifecycle/testing/TestLifecycleOwner.html#currentState()">currentState</a></code> by moving it to the state directly after the given <code><a href="/reference/androidx/lifecycle/testing/TestLifecycleOwner.html#handleLifecycleEvent(androidx.lifecycle.Lifecycle.Event)">event</a></code>.</p>
             </td>
           </tr>
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/lifecycle/testing/TestLifecycleOwner.html#setCurrentState(androidx.lifecycle.Lifecycle.State)">setCurrentState</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a>&nbsp;currentState)</code></div>
+              <p>The current <code><a href="/reference/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code> of this owner.</p>
+            </td>
+          </tr>
         </tbody>
       </table>
-    </div>
-    <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="getCurrentState()"></a><a name="setCurrentState()"></a><a name="getCurrentState--"></a><a name="setCurrentState--"></a>
-        <h3 class="api-name" id="currentState()">currentState</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a>&nbsp;<a href="/reference/androidx/lifecycle/testing/TestLifecycleOwner.html#currentState()">currentState</a></pre>
-        <p>The current <code><a href="/reference/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code> of this owner. This is safe to mutate on any thread.</p>
-      </div>
-      <div class="api-item"><a name="getObserverCount()"></a><a name="setObserverCount()"></a><a name="getObserverCount--"></a><a name="setObserverCount--"></a>
-        <h3 class="api-name" id="observerCount()">observerCount</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/lifecycle/testing/TestLifecycleOwner.html#observerCount()">observerCount</a></pre>
-        <p>Get the number of observers.</p>
-      </div>
     </div>
     <div class="list">
       <h2>Public constructors</h2>
@@ -137,6 +116,11 @@
     </div>
     <div class="list">
       <h2>Public methods</h2>
+      <div class="api-item"><a name="getCurrentState--"></a><a name="getcurrentstate"></a>
+        <h3 class="api-name" id="getCurrentState()">getCurrentState</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a>&nbsp;<a href="/reference/androidx/lifecycle/testing/TestLifecycleOwner.html#getCurrentState()">getCurrentState</a>()</pre>
+        <p>The current <code><a href="/reference/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code> of this owner. This is safe to mutate on any thread.</p>
+      </div>
       <div class="api-item"><a name="getLifecycle--"></a><a name="getlifecycle"></a>
         <h3 class="api-name" id="getLifecycle()">getLifecycle</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleRegistry.html">LifecycleRegistry</a>&nbsp;<a href="/reference/androidx/lifecycle/testing/TestLifecycleOwner.html#getLifecycle()">getLifecycle</a>()</pre>
@@ -163,10 +147,20 @@
           </table>
         </div>
       </div>
+      <div class="api-item"><a name="getObserverCount--"></a><a name="getobservercount"></a>
+        <h3 class="api-name" id="getObserverCount()">getObserverCount</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/lifecycle/testing/TestLifecycleOwner.html#getObserverCount()">getObserverCount</a>()</pre>
+        <p>Get the number of observers.</p>
+      </div>
       <div class="api-item"><a name="handleLifecycleEvent-androidx.lifecycle.Lifecycle.Event-"></a><a name="handlelifecycleevent"></a>
         <h3 class="api-name" id="handleLifecycleEvent(androidx.lifecycle.Lifecycle.Event)">handleLifecycleEvent</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/lifecycle/testing/TestLifecycleOwner.html#handleLifecycleEvent(androidx.lifecycle.Lifecycle.Event)">handleLifecycleEvent</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.Event.html">Lifecycle.Event</a>&nbsp;event)</pre>
         <p>Update the <code><a href="/reference/androidx/lifecycle/testing/TestLifecycleOwner.html#currentState()">currentState</a></code> by moving it to the state directly after the given <code><a href="/reference/androidx/lifecycle/testing/TestLifecycleOwner.html#handleLifecycleEvent(androidx.lifecycle.Lifecycle.Event)">event</a></code>. This is safe to call on any thread.</p>
+      </div>
+      <div class="api-item"><a name="setCurrentState-androidx.lifecycle.Lifecycle.State-"></a><a name="setcurrentstate"></a>
+        <h3 class="api-name" id="setCurrentState(androidx.lifecycle.Lifecycle.State)">setCurrentState</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/lifecycle/testing/TestLifecycleOwner.html#setCurrentState(androidx.lifecycle.Lifecycle.State)">setCurrentState</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a>&nbsp;currentState)</pre>
+        <p>The current <code><a href="/reference/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code> of this owner. This is safe to mutate on any thread.</p>
       </div>
     </div>
   </body>

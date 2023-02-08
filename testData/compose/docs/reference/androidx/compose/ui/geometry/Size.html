@@ -44,47 +44,6 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>final float</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/geometry/Size.html#height()">height</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code>final float</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/geometry/Size.html#maxDimension()">maxDimension</a></code></div>
-              <p>The greater of the magnitudes of the <code><a href="/reference/androidx/compose/ui/geometry/Size.html#width()">width</a></code> and the <code><a href="/reference/androidx/compose/ui/geometry/Size.html#height()">height</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>final float</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/geometry/Size.html#minDimension()">minDimension</a></code></div>
-              <p>The lesser of the magnitudes of the <code><a href="/reference/androidx/compose/ui/geometry/Size.html#width()">width</a></code> and the <code><a href="/reference/androidx/compose/ui/geometry/Size.html#height()">height</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>final float</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/geometry/Size.html#width()">width</a></code></div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
             <th colspan="100%"><h3>Public methods</h3></th>
           </tr>
         </thead>
@@ -113,6 +72,32 @@
             <td>
               <div><code><a href="/reference/androidx/compose/ui/geometry/Size.html#div(kotlin.Float)">div</a>(float&nbsp;operand)</code></div>
               <p>Division operator.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/Size.html#getHeight()">getHeight</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/Size.html#getMaxDimension()">getMaxDimension</a>()</code></div>
+              <p>The greater of the magnitudes of the <code><a href="/reference/androidx/compose/ui/geometry/Size.html#width()">width</a></code> and the <code><a href="/reference/androidx/compose/ui/geometry/Size.html#height()">height</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/Size.html#getMinDimension()">getMinDimension</a>()</code></div>
+              <p>The lesser of the magnitudes of the <code><a href="/reference/androidx/compose/ui/geometry/Size.html#width()">width</a></code> and the <code><a href="/reference/androidx/compose/ui/geometry/Size.html#height()">height</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/geometry/Size.html#getWidth()">getWidth</a>()</code></div>
             </td>
           </tr>
           <tr>
@@ -168,18 +153,21 @@
             <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/geometry/SizeKt.html">SizeKt</a>.<a href="/reference/androidx/compose/ui/geometry/Size.html#(androidx.compose.ui.geometry.Size).getCenter()">getCenter</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;receiver)</code></div>
+              <p>Returns the <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> of the center of the rect from the point of 0, 0 with this <code><a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code>.</p>
             </td>
           </tr>
           <tr>
             <td><code>final boolean</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/geometry/SizeKt.html">SizeKt</a>.<a href="/reference/androidx/compose/ui/geometry/Size.html#(androidx.compose.ui.geometry.Size).getIsSpecified()">isSpecified</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;receiver)</code></div>
+              <p><code>false</code> when this is <code><a href="/reference/androidx/compose/ui/geometry/Size.Companion.html#Unspecified()">Size.Unspecified</a></code>.</p>
             </td>
           </tr>
           <tr>
             <td><code>final boolean</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/geometry/SizeKt.html">SizeKt</a>.<a href="/reference/androidx/compose/ui/geometry/Size.html#(androidx.compose.ui.geometry.Size).getIsUnspecified()">isUnspecified</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;receiver)</code></div>
+              <p><code>true</code> when this is <code><a href="/reference/androidx/compose/ui/geometry/Size.Companion.html#Unspecified()">Size.Unspecified</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -198,27 +186,6 @@
           </tr>
         </tbody>
       </table>
-    </div>
-    <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="getHeight()"></a><a name="setHeight()"></a><a name="getHeight--"></a><a name="setHeight--"></a>
-        <h3 class="api-name" id="height()">height</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/geometry/Size.html#height()">height</a></pre>
-      </div>
-      <div class="api-item"><a name="getMaxDimension()"></a><a name="setMaxDimension()"></a><a name="getMaxDimension--"></a><a name="setMaxDimension--"></a>
-        <h3 class="api-name" id="maxDimension()">maxDimension</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/geometry/Size.html#maxDimension()">maxDimension</a></pre>
-        <p>The greater of the magnitudes of the <code><a href="/reference/androidx/compose/ui/geometry/Size.html#width()">width</a></code> and the <code><a href="/reference/androidx/compose/ui/geometry/Size.html#height()">height</a></code>.</p>
-      </div>
-      <div class="api-item"><a name="getMinDimension()"></a><a name="setMinDimension()"></a><a name="getMinDimension--"></a><a name="setMinDimension--"></a>
-        <h3 class="api-name" id="minDimension()">minDimension</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/geometry/Size.html#minDimension()">minDimension</a></pre>
-        <p>The lesser of the magnitudes of the <code><a href="/reference/androidx/compose/ui/geometry/Size.html#width()">width</a></code> and the <code><a href="/reference/androidx/compose/ui/geometry/Size.html#height()">height</a></code>.</p>
-      </div>
-      <div class="api-item"><a name="getWidth()"></a><a name="setWidth()"></a><a name="getWidth--"></a><a name="setWidth--"></a>
-        <h3 class="api-name" id="width()">width</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/geometry/Size.html#width()">width</a></pre>
-      </div>
     </div>
     <div class="list">
       <h2>Public methods</h2>
@@ -240,6 +207,24 @@
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;<a href="/reference/androidx/compose/ui/geometry/Size.html#div(kotlin.Float)">div</a>(float&nbsp;operand)</pre>
         <p>Division operator.</p>
         <p>Returns a <code><a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code> whose dimensions are the dimensions of the left-hand-side operand (a <code><a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code>) divided by the scalar right-hand-side operand (a <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code>).</p>
+      </div>
+      <div class="api-item"><a name="getHeight--"></a><a name="getheight"></a>
+        <h3 class="api-name" id="getHeight()">getHeight</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/geometry/Size.html#getHeight()">getHeight</a>()</pre>
+      </div>
+      <div class="api-item"><a name="getMaxDimension--"></a><a name="getmaxdimension"></a>
+        <h3 class="api-name" id="getMaxDimension()">getMaxDimension</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/geometry/Size.html#getMaxDimension()">getMaxDimension</a>()</pre>
+        <p>The greater of the magnitudes of the <code><a href="/reference/androidx/compose/ui/geometry/Size.html#width()">width</a></code> and the <code><a href="/reference/androidx/compose/ui/geometry/Size.html#height()">height</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getMinDimension--"></a><a name="getmindimension"></a>
+        <h3 class="api-name" id="getMinDimension()">getMinDimension</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/geometry/Size.html#getMinDimension()">getMinDimension</a>()</pre>
+        <p>The lesser of the magnitudes of the <code><a href="/reference/androidx/compose/ui/geometry/Size.html#width()">width</a></code> and the <code><a href="/reference/androidx/compose/ui/geometry/Size.html#height()">height</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getWidth--"></a><a name="getwidth"></a>
+        <h3 class="api-name" id="getWidth()">getWidth</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/geometry/Size.html#getWidth()">getWidth</a>()</pre>
       </div>
       <div class="api-item"><a name="isEmpty--"></a><a name="isempty"></a>
         <h3 class="api-name" id="isEmpty()">isEmpty</h3>
@@ -275,14 +260,17 @@
       <div class="api-item"><a name="-androidx.compose.ui.geometry.Size-.getCenter--"></a><a name="getcenter"></a>
         <h3 class="api-name" id="(androidx.compose.ui.geometry.Size).getCenter()">SizeKt.getCenter</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;<a href="/reference/androidx/compose/ui/geometry/SizeKt.html">SizeKt</a>.<a href="/reference/androidx/compose/ui/geometry/Size.html#(androidx.compose.ui.geometry.Size).getCenter()">getCenter</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;receiver)</pre>
+        <p>Returns the <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> of the center of the rect from the point of 0, 0 with this <code><a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code>.</p>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.geometry.Size-.getIsSpecified--"></a><a name="getisspecified"></a>
         <h3 class="api-name" id="(androidx.compose.ui.geometry.Size).getIsSpecified()">SizeKt.isSpecified</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/geometry/SizeKt.html">SizeKt</a>.<a href="/reference/androidx/compose/ui/geometry/Size.html#(androidx.compose.ui.geometry.Size).getIsSpecified()">isSpecified</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;receiver)</pre>
+        <p><code>false</code> when this is <code><a href="/reference/androidx/compose/ui/geometry/Size.Companion.html#Unspecified()">Size.Unspecified</a></code>.</p>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.geometry.Size-.getIsUnspecified--"></a><a name="getisunspecified"></a>
         <h3 class="api-name" id="(androidx.compose.ui.geometry.Size).getIsUnspecified()">SizeKt.isUnspecified</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/geometry/SizeKt.html">SizeKt</a>.<a href="/reference/androidx/compose/ui/geometry/Size.html#(androidx.compose.ui.geometry.Size).getIsUnspecified()">isUnspecified</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;receiver)</pre>
+        <p><code>true</code> when this is <code><a href="/reference/androidx/compose/ui/geometry/Size.Companion.html#Unspecified()">Size.Unspecified</a></code>.</p>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.geometry.Size-.takeOrElse-kotlin.Function0-"></a><a name="takeorelse"></a>
         <h3 class="api-name" id="(androidx.compose.ui.geometry.Size).takeOrElse(kotlin.Function0)">SizeKt.takeOrElse</h3>

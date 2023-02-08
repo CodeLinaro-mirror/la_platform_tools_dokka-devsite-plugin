@@ -24,45 +24,6 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>abstract boolean</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/collection/FooSparseArray.html#garbage()">garbage</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> long[]</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/collection/FooSparseArray.html#keys()">keys</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code>abstract int</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/collection/FooSparseArray.html#size()">size</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Object[]</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/collection/FooSparseArray.html#values()">values</a></code></div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
             <th colspan="100%"><h3>Public methods</h3></th>
           </tr>
         </thead>
@@ -114,6 +75,30 @@
             <td>
               <div><code><a href="/reference/androidx/collection/FooSparseArray.html#get(kotlin.Long,kotlin.Any)">get</a>(long&nbsp;key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E&nbsp;defaultValue)</code></div>
               <p>Gets the value mapped from the specified <code><a href="/reference/androidx/collection/FooSparseArray.html#get(kotlin.Long,kotlin.Any)">key</a></code>, or <code><a href="/reference/androidx/collection/FooSparseArray.html#get(kotlin.Long,kotlin.Any)">defaultValue</a></code> if no such mapping has been made.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/FooSparseArray.html#getGarbage()">getGarbage</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> long[]</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/FooSparseArray.html#getKeys()">getKeys</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/FooSparseArray.html#getSize()">getSize</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Object[]</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/FooSparseArray.html#getValues()">getValues</a>()</code></div>
             </td>
           </tr>
           <tr>
@@ -203,8 +188,32 @@
           <tr>
             <td><code>abstract void</code></td>
             <td>
+              <div><code><a href="/reference/androidx/collection/FooSparseArray.html#setGarbage(kotlin.Boolean)">setGarbage</a>(boolean&nbsp;garbage)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/FooSparseArray.html#setKeys(kotlin.LongArray)">setKeys</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> long[]&nbsp;keys)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/FooSparseArray.html#setSize(kotlin.Int)">setSize</a>(int&nbsp;size)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
               <div><code><a href="/reference/androidx/collection/FooSparseArray.html#setValueAt(kotlin.Int,kotlin.Any)">setValueAt</a>(int&nbsp;index,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E&nbsp;value)</code></div>
               <p>Given an index in the range <code>0...size()-1</code>, sets a new value for the <code>index</code>th key-value mapping that this <code><a href="/reference/androidx/collection/FooSparseArray.html">FooSparseArray</a></code> stores.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/collection/FooSparseArray.html#setValues(kotlin.Array)">setValues</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Object[]&nbsp;values)</code></div>
             </td>
           </tr>
           <tr>
@@ -275,6 +284,7 @@
             <td><code>default&nbsp;final int</code></td>
             <td>
               <div><code><a href="/reference/androidx/collection/FooSparseArrayKt.html">FooSparseArrayKt</a>.<a href="/reference/androidx/collection/FooSparseArray.html#(androidx.collection.FooSparseArray).getSize()">getSize</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/collection/FooSparseArray.html">FooSparseArray</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver)</code></div>
+              <p>Returns the number of key/value pairs in the collection.</p>
             </td>
           </tr>
           <tr>
@@ -307,25 +317,6 @@
           </tr>
         </tbody>
       </table>
-    </div>
-    <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="getGarbage()"></a><a name="setGarbage()"></a><a name="getGarbage--"></a><a name="setGarbage--"></a>
-        <h3 class="api-name" id="garbage()">garbage</h3>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/collection/FooSparseArray.html#garbage()">garbage</a></pre>
-      </div>
-      <div class="api-item"><a name="getKeys()"></a><a name="setKeys()"></a><a name="getKeys--"></a><a name="setKeys--"></a>
-        <h3 class="api-name" id="keys()">keys</h3>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> long[]&nbsp;<a href="/reference/androidx/collection/FooSparseArray.html#keys()">keys</a></pre>
-      </div>
-      <div class="api-item"><a name="getSize()"></a><a name="setSize()"></a><a name="getSize--"></a><a name="setSize--"></a>
-        <h3 class="api-name" id="size()">size</h3>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;int&nbsp;<a href="/reference/androidx/collection/FooSparseArray.html#size()">size</a></pre>
-      </div>
-      <div class="api-item"><a name="getValues()"></a><a name="setValues()"></a><a name="getValues--"></a><a name="setValues--"></a>
-        <h3 class="api-name" id="values()">values</h3>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Object[]&nbsp;<a href="/reference/androidx/collection/FooSparseArray.html#values()">values</a></pre>
-      </div>
     </div>
     <div class="list">
       <h2>Public methods</h2>
@@ -364,6 +355,22 @@
         <h3 class="api-name" id="get(kotlin.Long,kotlin.Any)">get</h3>
         <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E&nbsp;<a href="/reference/androidx/collection/FooSparseArray.html#get(kotlin.Long,kotlin.Any)">get</a>(long&nbsp;key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E&nbsp;defaultValue)</pre>
         <p>Gets the value mapped from the specified <code><a href="/reference/androidx/collection/FooSparseArray.html#get(kotlin.Long,kotlin.Any)">key</a></code>, or <code><a href="/reference/androidx/collection/FooSparseArray.html#get(kotlin.Long,kotlin.Any)">defaultValue</a></code> if no such mapping has been made.</p>
+      </div>
+      <div class="api-item"><a name="getGarbage--"></a><a name="getgarbage"></a>
+        <h3 class="api-name" id="getGarbage()">getGarbage</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/collection/FooSparseArray.html#getGarbage()">getGarbage</a>()</pre>
+      </div>
+      <div class="api-item"><a name="getKeys--"></a><a name="getkeys"></a>
+        <h3 class="api-name" id="getKeys()">getKeys</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> long[]&nbsp;<a href="/reference/androidx/collection/FooSparseArray.html#getKeys()">getKeys</a>()</pre>
+      </div>
+      <div class="api-item"><a name="getSize--"></a><a name="getsize"></a>
+        <h3 class="api-name" id="getSize()">getSize</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;int&nbsp;<a href="/reference/androidx/collection/FooSparseArray.html#getSize()">getSize</a>()</pre>
+      </div>
+      <div class="api-item"><a name="getValues--"></a><a name="getvalues"></a>
+        <h3 class="api-name" id="getValues()">getValues</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Object[]&nbsp;<a href="/reference/androidx/collection/FooSparseArray.html#getValues()">getValues</a>()</pre>
       </div>
       <div class="api-item"><a name="indexOfKey-kotlin.Long-"></a><a name="indexofkey"></a>
         <h3 class="api-name" id="indexOfKey(kotlin.Long)">indexOfKey</h3>
@@ -667,6 +674,18 @@
           </table>
         </div>
       </div>
+      <div class="api-item"><a name="setGarbage-kotlin.Boolean-"></a><a name="setgarbage"></a>
+        <h3 class="api-name" id="setGarbage(kotlin.Boolean)">setGarbage</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/collection/FooSparseArray.html#setGarbage(kotlin.Boolean)">setGarbage</a>(boolean&nbsp;garbage)</pre>
+      </div>
+      <div class="api-item"><a name="setKeys-kotlin.LongArray-"></a><a name="setkeys"></a>
+        <h3 class="api-name" id="setKeys(kotlin.LongArray)">setKeys</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/collection/FooSparseArray.html#setKeys(kotlin.LongArray)">setKeys</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> long[]&nbsp;keys)</pre>
+      </div>
+      <div class="api-item"><a name="setSize-kotlin.Int-"></a><a name="setsize"></a>
+        <h3 class="api-name" id="setSize(kotlin.Int)">setSize</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/collection/FooSparseArray.html#setSize(kotlin.Int)">setSize</a>(int&nbsp;size)</pre>
+      </div>
       <div class="api-item"><a name="setValueAt(kotlin.Int, kotlin.Any)"></a><a name="setValueAt-kotlin.Int-kotlin.Any-"></a><a name="setvalueat"></a>
         <h3 class="api-name" id="setValueAt(kotlin.Int,kotlin.Any)">setValueAt</h3>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/collection/FooSparseArray.html#setValueAt(kotlin.Int,kotlin.Any)">setValueAt</a>(int&nbsp;index,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E&nbsp;value)</pre>
@@ -692,6 +711,10 @@
             </tbody>
           </table>
         </div>
+      </div>
+      <div class="api-item"><a name="setValues-kotlin.Array-"></a><a name="setvalues"></a>
+        <h3 class="api-name" id="setValues(kotlin.Array)">setValues</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/collection/FooSparseArray.html#setValues(kotlin.Array)">setValues</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Object[]&nbsp;values)</pre>
       </div>
       <div class="api-item"><a name="size--"></a><a name="size"></a>
         <h3 class="api-name" id="size()">size</h3>
@@ -757,6 +780,7 @@
       <div class="api-item"><a name="-androidx.collection.FooSparseArray-.getSize--"></a><a name="getsize"></a>
         <h3 class="api-name" id="(androidx.collection.FooSparseArray).getSize()">FooSparseArrayKt.getSize</h3>
         <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/collection/FooSparseArrayKt.html">FooSparseArrayKt</a>.<a href="/reference/androidx/collection/FooSparseArray.html#(androidx.collection.FooSparseArray).getSize()">getSize</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/collection/FooSparseArray.html">FooSparseArray</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver)</pre>
+        <p>Returns the number of key/value pairs in the collection.</p>
       </div>
       <div class="api-item"><a name="-androidx.collection.FooSparseArray-.isNotEmpty--"></a><a name="isnotempty"></a>
         <h3 class="api-name" id="(androidx.collection.FooSparseArray).isNotEmpty()">FooSparseArrayKt.isNotEmpty</h3>

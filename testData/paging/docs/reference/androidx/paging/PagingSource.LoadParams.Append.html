@@ -41,28 +41,6 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/paging/PagingSource.LoadParams.Append.html#key()">key</a></code></div>
-              <p>Key for the page to be loaded.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
             <th colspan="100%"><h3>Public constructors</h3></th>
           </tr>
         </thead>
@@ -76,10 +54,32 @@
       </table>
     </div>
     <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/paging/PagingSource.LoadParams.Append.html#getKey()">getKey</a>()</code></div>
+              <p>Key for the page to be loaded.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
       <table class="responsive" id="inhmethods">
         <thead>
           <tr>
-            <th colspan="100%"><h3>Inherited fields</h3></th>
+            <th colspan="100%"><h3>Inherited methods</h3></th>
           </tr>
         </thead>
         <tbody class="list">
@@ -95,14 +95,14 @@
                     <tr>
                       <td><code>final int</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/paging/PagingSource.LoadParams.html#loadSize()">loadSize</a></code></div>
+                        <div><code><a href="/reference/androidx/paging/PagingSource.LoadParams.html#getLoadSize()">getLoadSize</a>()</code></div>
                         <p>Requested number of items to load.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final boolean</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/paging/PagingSource.LoadParams.html#placeholdersEnabled()">placeholdersEnabled</a></code></div>
+                        <div><code><a href="/reference/androidx/paging/PagingSource.LoadParams.html#getPlaceholdersEnabled()">getPlaceholdersEnabled</a>()</code></div>
                         <p>From <code><a href="/reference/androidx/paging/PagingConfig.html#enablePlaceholders()">PagingConfig.enablePlaceholders</a></code>, true if placeholders are enabled and the load request for this <code><a href="/reference/androidx/paging/PagingSource.LoadParams.html">LoadParams</a></code> should populate <code><a href="/reference/androidx/paging/PagingSource.LoadResult.Page.html#itemsBefore()">LoadResult.Page.itemsBefore</a></code> and <code><a href="/reference/androidx/paging/PagingSource.LoadResult.Page.html#itemsAfter()">LoadResult.Page.itemsAfter</a></code> if possible.</p>
                       </td>
                     </tr>
@@ -115,10 +115,17 @@
       </table>
     </div>
     <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="getKey()"></a><a name="setKey()"></a><a name="getKey--"></a><a name="setKey--"></a>
-        <h3 class="api-name" id="key()">key</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key&nbsp;<a href="/reference/androidx/paging/PagingSource.LoadParams.Append.html#key()">key</a></pre>
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="Append(kotlin.Any, kotlin.Int, kotlin.Boolean)"></a><a name="Append-kotlin.Any-kotlin.Int-kotlin.Boolean-"></a><a name="append"></a>
+        <h3 class="api-name" id="Append(kotlin.Any,kotlin.Int,kotlin.Boolean)">Append</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;&lt;Key&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/paging/PagingSource.LoadParams.Append.html#Append(kotlin.Any,kotlin.Int,kotlin.Boolean)">Append</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key&nbsp;key,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;loadSize,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;placeholdersEnabled<br>)</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="getKey--"></a><a name="getkey"></a>
+        <h3 class="api-name" id="getKey()">getKey</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key&nbsp;<a href="/reference/androidx/paging/PagingSource.LoadParams.Append.html#getKey()">getKey</a>()</pre>
         <p>Key for the page to be loaded.</p>
         <p><code><a href="/reference/androidx/paging/PagingSource.LoadParams.Append.html#key()">key</a></code> can be <code>null</code> only if this <code><a href="/reference/androidx/paging/PagingSource.LoadParams.html">LoadParams</a></code> is <code><a href="/reference/androidx/paging/PagingSource.LoadParams.Refresh.html">Refresh</a></code>, and either no <code>initialKey</code> is provided to the <code><a href="/reference/androidx/paging/Pager.html">Pager</a></code> or <code><a href="/reference/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">PagingSource.getRefreshKey</a></code> from the previous <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> returns <code>null</code>.</p>
         <p>The value of <code><a href="/reference/androidx/paging/PagingSource.LoadParams.Append.html#key()">key</a></code> is dependent on the type of <code><a href="/reference/androidx/paging/PagingSource.LoadParams.html">LoadParams</a></code>:</p>
@@ -141,13 +148,6 @@
             <p><code><a href="/reference/androidx/paging/PagingSource.LoadParams.Append.html">Append</a></code> - <code><a href="/reference/androidx/paging/PagingSource.LoadResult.Page.html#nextKey()">LoadResult.Page.nextKey</a></code> of the loaded page at the end of the list.</p>
           </li>
         </ul>
-      </div>
-    </div>
-    <div class="list">
-      <h2>Public constructors</h2>
-      <div class="api-item"><a name="Append(kotlin.Any, kotlin.Int, kotlin.Boolean)"></a><a name="Append-kotlin.Any-kotlin.Int-kotlin.Boolean-"></a><a name="append"></a>
-        <h3 class="api-name" id="Append(kotlin.Any,kotlin.Int,kotlin.Boolean)">Append</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;&lt;Key&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/paging/PagingSource.LoadParams.Append.html#Append(kotlin.Any,kotlin.Int,kotlin.Boolean)">Append</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key&nbsp;key,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;loadSize,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;placeholdersEnabled<br>)</pre>
       </div>
     </div>
   </body>

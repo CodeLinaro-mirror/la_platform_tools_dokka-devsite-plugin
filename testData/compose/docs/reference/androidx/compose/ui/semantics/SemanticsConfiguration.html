@@ -24,34 +24,6 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>final boolean</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#isClearingSemantics()">isClearingSemantics</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code>final boolean</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#isMergingSemanticsOfDescendants()">isMergingSemanticsOfDescendants</a></code></div>
-              <p>Whether the semantic information provided by the owning component and all of its descendants should be treated as one logical entity.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
             <th colspan="100%"><h3>Public constructors</h3></th>
           </tr>
         </thead>
@@ -121,6 +93,19 @@
             </td>
           </tr>
           <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#getIsClearingSemantics()">isClearingSemantics</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#getIsMergingSemanticsOfDescendants()">isMergingSemanticsOfDescendants</a>()</code></div>
+              <p>Whether the semantic information provided by the owning component and all of its descendants should be treated as one logical entity.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Iterator.html">Iterator</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Map.Entry.html">Map.Entry</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;,&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&gt;</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#iterator()">iterator</a>()</code></div>
@@ -130,6 +115,19 @@
             <td><code>void</code></td>
             <td>
               <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#set(androidx.compose.ui.semantics.SemanticsPropertyKey,kotlin.Any)">set</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;value)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#setIsClearingSemantics(kotlin.Boolean)">setClearingSemantics</a>(boolean&nbsp;isClearingSemantics)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#setIsMergingSemanticsOfDescendants(kotlin.Boolean)">setMergingSemanticsOfDescendants</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;isMergingSemanticsOfDescendants<br>)</code></div>
+              <p>Whether the semantic information provided by the owning component and all of its descendants should be treated as one logical entity.</p>
             </td>
           </tr>
           <tr>
@@ -200,19 +198,6 @@
       </table>
     </div>
     <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="getIsClearingSemantics()"></a><a name="setIsClearingSemantics()"></a><a name="getIsClearingSemantics--"></a><a name="setIsClearingSemantics--"></a>
-        <h3 class="api-name" id="isClearingSemantics()">isClearingSemantics</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#isClearingSemantics()">isClearingSemantics</a></pre>
-      </div>
-      <div class="api-item"><a name="getIsMergingSemanticsOfDescendants()"></a><a name="setIsMergingSemanticsOfDescendants()"></a><a name="getIsMergingSemanticsOfDescendants--"></a><a name="setIsMergingSemanticsOfDescendants--"></a>
-        <h3 class="api-name" id="isMergingSemanticsOfDescendants()">isMergingSemanticsOfDescendants</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#isMergingSemanticsOfDescendants()">isMergingSemanticsOfDescendants</a></pre>
-        <p>Whether the semantic information provided by the owning component and all of its descendants should be treated as one logical entity.</p>
-        <p>If set to true, the descendants of the owning component's <code><a href="/reference/androidx/compose/ui/semantics/SemanticsNode.html">SemanticsNode</a></code> will merge their semantic information into the <code><a href="/reference/androidx/compose/ui/semantics/SemanticsNode.html">SemanticsNode</a></code> representing the owning component.</p>
-      </div>
-    </div>
-    <div class="list">
       <h2>Public constructors</h2>
       <div class="api-item"><a name="SemanticsConfiguration--"></a><a name="semanticsconfiguration"></a>
         <h3 class="api-name" id="SemanticsConfiguration()">SemanticsConfiguration</h3>
@@ -251,6 +236,16 @@
         <h3 class="api-name" id="hashCode()">hashCode</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#hashCode()">hashCode</a>()</pre>
       </div>
+      <div class="api-item"><a name="getIsClearingSemantics--"></a><a name="getisclearingsemantics"></a>
+        <h3 class="api-name" id="getIsClearingSemantics()">isClearingSemantics</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#getIsClearingSemantics()">isClearingSemantics</a>()</pre>
+      </div>
+      <div class="api-item"><a name="getIsMergingSemanticsOfDescendants--"></a><a name="getismergingsemanticsofdescendants"></a>
+        <h3 class="api-name" id="getIsMergingSemanticsOfDescendants()">isMergingSemanticsOfDescendants</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#getIsMergingSemanticsOfDescendants()">isMergingSemanticsOfDescendants</a>()</pre>
+        <p>Whether the semantic information provided by the owning component and all of its descendants should be treated as one logical entity.</p>
+        <p>If set to true, the descendants of the owning component's <code><a href="/reference/androidx/compose/ui/semantics/SemanticsNode.html">SemanticsNode</a></code> will merge their semantic information into the <code><a href="/reference/androidx/compose/ui/semantics/SemanticsNode.html">SemanticsNode</a></code> representing the owning component.</p>
+      </div>
       <div class="api-item"><a name="iterator--"></a><a name="iterator"></a>
         <h3 class="api-name" id="iterator()">iterator</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Iterator.html">Iterator</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Map.Entry.html">Map.Entry</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;,&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&gt;&nbsp;<a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#iterator()">iterator</a>()</pre>
@@ -258,6 +253,16 @@
       <div class="api-item"><a name="set(androidx.compose.ui.semantics.SemanticsPropertyKey, kotlin.Any)"></a><a name="set-androidx.compose.ui.semantics.SemanticsPropertyKey-kotlin.Any-"></a><a name="set"></a>
         <h3 class="api-name" id="set(androidx.compose.ui.semantics.SemanticsPropertyKey,kotlin.Any)">set</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#set(androidx.compose.ui.semantics.SemanticsPropertyKey,kotlin.Any)">set</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;value)</pre>
+      </div>
+      <div class="api-item"><a name="setIsClearingSemantics-kotlin.Boolean-"></a><a name="setisclearingsemantics"></a>
+        <h3 class="api-name" id="setIsClearingSemantics(kotlin.Boolean)">setClearingSemantics</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#setIsClearingSemantics(kotlin.Boolean)">setClearingSemantics</a>(boolean&nbsp;isClearingSemantics)</pre>
+      </div>
+      <div class="api-item"><a name="setIsMergingSemanticsOfDescendants-kotlin.Boolean-"></a><a name="setismergingsemanticsofdescendants"></a>
+        <h3 class="api-name" id="setIsMergingSemanticsOfDescendants(kotlin.Boolean)">setMergingSemanticsOfDescendants</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#setIsMergingSemanticsOfDescendants(kotlin.Boolean)">setMergingSemanticsOfDescendants</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;isMergingSemanticsOfDescendants<br>)</pre>
+        <p>Whether the semantic information provided by the owning component and all of its descendants should be treated as one logical entity.</p>
+        <p>If set to true, the descendants of the owning component's <code><a href="/reference/androidx/compose/ui/semantics/SemanticsNode.html">SemanticsNode</a></code> will merge their semantic information into the <code><a href="/reference/androidx/compose/ui/semantics/SemanticsNode.html">SemanticsNode</a></code> representing the owning component.</p>
       </div>
       <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
         <h3 class="api-name" id="toString()">toString</h3>

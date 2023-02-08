@@ -22,48 +22,6 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/PathFillType.html">PathFillType</a></code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#fillType()">fillType</a></code></div>
-              <p>Determines how the interior of this path is calculated.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/graphics/Path.html">Path</a></code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#internalPath()">internalPath</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code>boolean</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#isConvex()">isConvex</a></code></div>
-              <p>Returns the path's convexity, as defined by the content of the path.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>boolean</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#isEmpty()">isEmpty</a></code></div>
-              <p>Returns true if the path is empty (contains no lines or curves)</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
             <th colspan="100%"><h3>Public constructors</h3></th>
           </tr>
         </thead>
@@ -159,6 +117,33 @@
             </td>
           </tr>
           <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/PathFillType.html">PathFillType</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#getFillType()">getFillType</a>()</code></div>
+              <p>Determines how the interior of this path is calculated.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/graphics/Path.html">Path</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#getInternalPath()">getInternalPath</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#getIsConvex()">isConvex</a>()</code></div>
+              <p>Returns the path's convexity, as defined by the content of the path.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#getIsEmpty()">isEmpty</a>()</code></div>
+              <p>Returns true if the path is empty (contains no lines or curves)</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>void</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#lineTo(kotlin.Float,kotlin.Float)">lineTo</a>(float&nbsp;x,&nbsp;float&nbsp;y)</code></div>
@@ -224,6 +209,13 @@
           <tr>
             <td><code>void</code></td>
             <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#setFillType(androidx.compose.ui.graphics.PathFillType)">setFillType</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/PathFillType.html">PathFillType</a>&nbsp;fillType)</code></div>
+              <p>Determines how the interior of this path is calculated.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>void</code></td>
+            <td>
               <div><code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#translate(androidx.compose.ui.geometry.Offset)">translate</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;offset)</code></div>
               <p>Translates all the segments of every subpath by the given offset.</p>
             </td>
@@ -262,52 +254,6 @@
           </tr>
         </tbody>
       </table>
-    </div>
-    <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="getFillType()"></a><a name="setFillType()"></a><a name="getFillType--"></a><a name="setFillType--"></a>
-        <h3 class="api-name" id="fillType()">fillType</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/PathFillType.html">PathFillType</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#fillType()">fillType</a></pre>
-        <p>Determines how the interior of this path is calculated.</p>
-        <p>Defaults to the non-zero winding rule, <code><a href="/reference/androidx/compose/ui/graphics/PathFillType.Companion.html#NonZero()">PathFillType.NonZero</a></code>.</p>
-      </div>
-      <div class="api-item"><a name="getInternalPath()"></a><a name="setInternalPath()"></a><a name="getInternalPath--"></a><a name="setInternalPath--"></a>
-        <h3 class="api-name" id="internalPath()">internalPath</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/graphics/Path.html">Path</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#internalPath()">internalPath</a></pre>
-      </div>
-      <div class="api-item"><a name="getIsConvex()"></a><a name="setIsConvex()"></a><a name="getIsConvex--"></a><a name="setIsConvex--"></a>
-        <h3 class="api-name" id="isConvex()">isConvex</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#isConvex()">isConvex</a></pre>
-        <p>Returns the path's convexity, as defined by the content of the path.</p>
-        <p>A path is convex if it has a single contour, and only ever curves in a single direction.</p>
-        <p>This function will calculate the convexity of the path from its control points, and cache the result.</p>
-      </div>
-      <div class="api-item"><a name="getIsEmpty()"></a><a name="setIsEmpty()"></a><a name="getIsEmpty--"></a><a name="setIsEmpty--"></a>
-        <h3 class="api-name" id="isEmpty()">isEmpty</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#isEmpty()">isEmpty</a></pre>
-        <p>Returns true if the path is empty (contains no lines or curves)</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Returns</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>boolean</code></td>
-                <td>
-                  <p>true if the path is empty (contains no lines or curves)</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
     </div>
     <div class="list">
       <h2>Public constructors</h2>
@@ -371,6 +317,49 @@
         <h3 class="api-name" id="getBounds()">getBounds</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#getBounds()">getBounds</a>()</pre>
         <p>Compute the bounds of the control points of the path, and write the answer into bounds. If the path contains 0 or 1 points, the bounds is set to (0,0,0,0)</p>
+      </div>
+      <div class="api-item"><a name="getFillType--"></a><a name="getfilltype"></a>
+        <h3 class="api-name" id="getFillType()">getFillType</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/PathFillType.html">PathFillType</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#getFillType()">getFillType</a>()</pre>
+        <p>Determines how the interior of this path is calculated.</p>
+        <p>Defaults to the non-zero winding rule, <code><a href="/reference/androidx/compose/ui/graphics/PathFillType.Companion.html#NonZero()">PathFillType.NonZero</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getInternalPath--"></a><a name="getinternalpath"></a>
+        <h3 class="api-name" id="getInternalPath()">getInternalPath</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/graphics/Path.html">Path</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#getInternalPath()">getInternalPath</a>()</pre>
+      </div>
+      <div class="api-item"><a name="getIsConvex--"></a><a name="getisconvex"></a>
+        <h3 class="api-name" id="getIsConvex()">isConvex</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#getIsConvex()">isConvex</a>()</pre>
+        <p>Returns the path's convexity, as defined by the content of the path.</p>
+        <p>A path is convex if it has a single contour, and only ever curves in a single direction.</p>
+        <p>This function will calculate the convexity of the path from its control points, and cache the result.</p>
+      </div>
+      <div class="api-item"><a name="getIsEmpty--"></a><a name="getisempty"></a>
+        <h3 class="api-name" id="getIsEmpty()">isEmpty</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#getIsEmpty()">isEmpty</a>()</pre>
+        <p>Returns true if the path is empty (contains no lines or curves)</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>boolean</code></td>
+                <td>
+                  <p>true if the path is empty (contains no lines or curves)</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <div class="api-item"><a name="lineTo(kotlin.Float, kotlin.Float)"></a><a name="lineTo-kotlin.Float-kotlin.Float-"></a><a name="lineto"></a>
         <h3 class="api-name" id="lineTo(kotlin.Float,kotlin.Float)">lineTo</h3>
@@ -464,6 +453,12 @@
         <h3 class="api-name" id="reset()">reset</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#reset()">reset</a>()</pre>
         <p>Clears the <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code> object of all subpaths, returning it to the same state it had when it was created. The <em>current point</em> is reset to the origin. This does NOT change the fill-type setting.</p>
+      </div>
+      <div class="api-item"><a name="setFillType-androidx.compose.ui.graphics.PathFillType-"></a><a name="setfilltype"></a>
+        <h3 class="api-name" id="setFillType(androidx.compose.ui.graphics.PathFillType)">setFillType</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#setFillType(androidx.compose.ui.graphics.PathFillType)">setFillType</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/PathFillType.html">PathFillType</a>&nbsp;fillType)</pre>
+        <p>Determines how the interior of this path is calculated.</p>
+        <p>Defaults to the non-zero winding rule, <code><a href="/reference/androidx/compose/ui/graphics/PathFillType.Companion.html#NonZero()">PathFillType.NonZero</a></code>.</p>
       </div>
       <div class="api-item"><a name="translate-androidx.compose.ui.geometry.Offset-"></a><a name="translate"></a>
         <h3 class="api-name" id="translate(androidx.compose.ui.geometry.Offset)">translate</h3>

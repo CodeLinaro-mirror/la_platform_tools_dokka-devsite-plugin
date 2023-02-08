@@ -148,34 +148,6 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/runtime/AbstractApplier.html#current()">current</a></code></div>
-              <p>The node that operations will be applied on at any given time.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/runtime/AbstractApplier.html#root()">root</a></code></div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
             <th colspan="100%"><h3>Public constructors</h3></th>
           </tr>
         </thead>
@@ -212,6 +184,19 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
             <td>
               <div><code><a href="/reference/androidx/compose/runtime/AbstractApplier.html#down(kotlin.Any)">down</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;node)</code></div>
               <p>Indicates that the applier is getting traversed &quot;down&quot; the tree.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/AbstractApplier.html#getCurrent()">getCurrent</a>()</code></div>
+              <p>The node that operations will be applied on at any given time.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/AbstractApplier.html#getRoot()">getRoot</a>()</code></div>
             </td>
           </tr>
           <tr>
@@ -253,6 +238,13 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
             <td><code>final void</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/runtime/ApplierKt.html">ApplierKt</a>.<a href="/reference/androidx/compose/runtime/AbstractApplier.html#(kotlin.collections.MutableList).remove(kotlin.Int,kotlin.Int)">remove</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,&nbsp;int&nbsp;index,&nbsp;int&nbsp;count)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/AbstractApplier.html#setCurrent(kotlin.Any)">setCurrent</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;current)</code></div>
+              <p>The node that operations will be applied on at any given time.</p>
             </td>
           </tr>
         </tbody>
@@ -326,18 +318,6 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
       </table>
     </div>
     <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="getCurrent()"></a><a name="setCurrent()"></a><a name="getCurrent--"></a><a name="setCurrent--"></a>
-        <h3 class="api-name" id="current()">current</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;<a href="/reference/androidx/compose/runtime/AbstractApplier.html#current()">current</a></pre>
-        <p>The node that operations will be applied on at any given time. It is expected that the value of this property will change as <code><a href="/reference/androidx/compose/runtime/AbstractApplier.html#down(kotlin.Any)">down</a></code> and <code><a href="/reference/androidx/compose/runtime/AbstractApplier.html#up()">up</a></code> are called.</p>
-      </div>
-      <div class="api-item"><a name="getRoot()"></a><a name="setRoot()"></a><a name="getRoot--"></a><a name="setRoot--"></a>
-        <h3 class="api-name" id="root()">root</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;<a href="/reference/androidx/compose/runtime/AbstractApplier.html#root()">root</a></pre>
-      </div>
-    </div>
-    <div class="list">
       <h2>Public constructors</h2>
       <div class="api-item"><a name="AbstractApplier-kotlin.Any-"></a><a name="abstractapplier"></a>
         <h3 class="api-name" id="AbstractApplier(kotlin.Any)">AbstractApplier</h3>
@@ -355,6 +335,15 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
         <h3 class="api-name" id="down(kotlin.Any)">down</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/AbstractApplier.html#down(kotlin.Any)">down</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;node)</pre>
         <p>Indicates that the applier is getting traversed &quot;down&quot; the tree. When this gets called, <code><a href="/reference/androidx/compose/runtime/AbstractApplier.html#down(kotlin.Any)">node</a></code> is expected to be a child of <code><a href="/reference/androidx/compose/runtime/AbstractApplier.html#current()">current</a></code>, and after this operation, <code><a href="/reference/androidx/compose/runtime/AbstractApplier.html#down(kotlin.Any)">node</a></code> is expected to be the new <code><a href="/reference/androidx/compose/runtime/AbstractApplier.html#current()">current</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getCurrent--"></a><a name="getcurrent"></a>
+        <h3 class="api-name" id="getCurrent()">getCurrent</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;<a href="/reference/androidx/compose/runtime/AbstractApplier.html#getCurrent()">getCurrent</a>()</pre>
+        <p>The node that operations will be applied on at any given time. It is expected that the value of this property will change as <code><a href="/reference/androidx/compose/runtime/AbstractApplier.html#down(kotlin.Any)">down</a></code> and <code><a href="/reference/androidx/compose/runtime/AbstractApplier.html#up()">up</a></code> are called.</p>
+      </div>
+      <div class="api-item"><a name="getRoot--"></a><a name="getroot"></a>
+        <h3 class="api-name" id="getRoot()">getRoot</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;<a href="/reference/androidx/compose/runtime/AbstractApplier.html#getRoot()">getRoot</a>()</pre>
       </div>
       <div class="api-item"><a name="up--"></a><a name="up"></a>
         <h3 class="api-name" id="up()">up</h3>
@@ -376,6 +365,11 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
       <div class="api-item"><a name="(kotlin.collections.MutableList).remove(kotlin.Int, kotlin.Int)"></a><a name="-kotlin.collections.MutableList-.remove-kotlin.Int-kotlin.Int-"></a><a name="remove"></a>
         <h3 class="api-name" id="(kotlin.collections.MutableList).remove(kotlin.Int,kotlin.Int)">ApplierKt.remove</h3>
         <pre class="api-signature no-pretty-print">protected&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/ApplierKt.html">ApplierKt</a>.<a href="/reference/androidx/compose/runtime/AbstractApplier.html#(kotlin.collections.MutableList).remove(kotlin.Int,kotlin.Int)">remove</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,&nbsp;int&nbsp;index,&nbsp;int&nbsp;count)</pre>
+      </div>
+      <div class="api-item"><a name="setCurrent-kotlin.Any-"></a><a name="setcurrent"></a>
+        <h3 class="api-name" id="setCurrent(kotlin.Any)">setCurrent</h3>
+        <pre class="api-signature no-pretty-print">protected&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/AbstractApplier.html#setCurrent(kotlin.Any)">setCurrent</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;current)</pre>
+        <p>The node that operations will be applied on at any given time. It is expected that the value of this property will change as <code><a href="/reference/androidx/compose/runtime/AbstractApplier.html#down(kotlin.Any)">down</a></code> and <code><a href="/reference/androidx/compose/runtime/AbstractApplier.html#up()">up</a></code> are called.</p>
       </div>
     </div>
   </body>

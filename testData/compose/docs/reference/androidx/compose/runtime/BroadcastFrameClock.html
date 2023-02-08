@@ -25,28 +25,6 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>final boolean</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#hasAwaiters()">hasAwaiters</a></code></div>
-              <p><code>true</code> if there are any callers of <code><a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> awaiting to run for a pending frame.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
             <th colspan="100%"><h3>Public constructors</h3></th>
           </tr>
         </thead>
@@ -79,6 +57,13 @@
             </td>
           </tr>
           <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#getHasAwaiters()">getHasAwaiters</a>()</code></div>
+              <p><code>true</code> if there are any callers of <code><a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> awaiting to run for a pending frame.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>final void</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#sendFrame(kotlin.Long)">sendFrame</a>(long&nbsp;timeNanos)</code></div>
@@ -91,37 +76,6 @@
               <div><code>&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;onFrame<br>)</code></div>
               <p>Suspends until a new frame is requested, immediately invokes <code><a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#withFrameNanos(kotlin.Function1)">onFrame</a></code> with the frame time in nanoseconds in the calling context of frame dispatch, then resumes with the result from <code><a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#withFrameNanos(kotlin.Function1)">onFrame</a></code>.</p>
             </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive" id="inhmethods">
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Inherited fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/runtime/MonotonicFrameClock.html">androidx.compose.runtime.MonotonicFrameClock</a></span>
-              <div class="devsite-table-wrapper">
-                <table class="responsive">
-                  <colgroup>
-                    <col width="40%">
-                    <col>
-                  </colgroup>
-                  <tbody class="list">
-                    <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-key/index.html">CoroutineContext.Key</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;</code></td>
-                      <td>
-                        <div><code><a href="/reference/androidx/compose/runtime/MonotonicFrameClock.html#key()">key</a></code></div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-</devsite-expandable>            </td>
           </tr>
         </tbody>
       </table>
@@ -186,16 +140,28 @@
               </div>
 </devsite-expandable>            </td>
           </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/runtime/MonotonicFrameClock.html">androidx.compose.runtime.MonotonicFrameClock</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-key/index.html">CoroutineContext.Key</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/runtime/MonotonicFrameClock.html#getKey()">getKey</a>()</code></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
         </tbody>
       </table>
-    </div>
-    <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="getHasAwaiters()"></a><a name="setHasAwaiters()"></a><a name="getHasAwaiters--"></a><a name="setHasAwaiters--"></a>
-        <h3 class="api-name" id="hasAwaiters()">hasAwaiters</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#hasAwaiters()">hasAwaiters</a></pre>
-        <p><code>true</code> if there are any callers of <code><a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> awaiting to run for a pending frame.</p>
-      </div>
     </div>
     <div class="list">
       <h2>Public constructors</h2>
@@ -210,6 +176,11 @@
         <h3 class="api-name" id="cancel(java.util.concurrent.CancellationException)">cancel</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#cancel(java.util.concurrent.CancellationException)">cancel</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/concurrent/CancellationException.html">CancellationException</a>&nbsp;cancellationException)</pre>
         <p>Permanently cancel this <code><a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html">BroadcastFrameClock</a></code> and cancel all current and future awaiters with <code><a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#cancel(java.util.concurrent.CancellationException)">cancellationException</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getHasAwaiters--"></a><a name="gethasawaiters"></a>
+        <h3 class="api-name" id="getHasAwaiters()">getHasAwaiters</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#getHasAwaiters()">getHasAwaiters</a>()</pre>
+        <p><code>true</code> if there are any callers of <code><a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> awaiting to run for a pending frame.</p>
       </div>
       <div class="api-item"><a name="sendFrame-kotlin.Long-"></a><a name="sendframe"></a>
         <h3 class="api-name" id="sendFrame(kotlin.Long)">sendFrame</h3>

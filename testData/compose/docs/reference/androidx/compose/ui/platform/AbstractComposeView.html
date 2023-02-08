@@ -70,57 +70,6 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>final boolean</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#hasComposition()">hasComposition</a></code></div>
-              <p><code>true</code> if this View is host to an active Compose UI composition.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>final boolean</code></td>
-            <td>
-              <div><code>@<a href="/reference/androidx/compose/ui/InternalComposeUiApi.html">InternalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#showLayoutBounds()">showLayoutBounds</a></code></div>
-              <p>Enables the display of visual layout bounds for the Compose UI content of this view.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Protected fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>boolean</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#shouldCreateCompositionOnAttachedToWindow()">shouldCreateCompositionOnAttachedToWindow</a></code></div>
-              <p>If <code>true</code>, this View's composition will be created when it becomes attached to a window for the first time.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
             <th colspan="100%"><h3>Public constructors</h3></th>
           </tr>
         </thead>
@@ -197,6 +146,20 @@
             </td>
           </tr>
           <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#getHasComposition()">getHasComposition</a>()</code></div>
+              <p><code>true</code> if this View is host to an active Compose UI composition.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#getShowLayoutBounds()">getShowLayoutBounds</a>()</code></div>
+              <p>Enables the display of visual layout bounds for the Compose UI content of this view.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>boolean</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#isTransitionGroup()">isTransitionGroup</a>()</code></div>
@@ -213,6 +176,13 @@
             <td>
               <div><code><a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#setParentCompositionContext(androidx.compose.runtime.CompositionContext)">setParentCompositionContext</a>(<a href="/reference/androidx/compose/runtime/CompositionContext.html">CompositionContext</a>&nbsp;parent)</code></div>
               <p>Set the <code><a href="/reference/androidx/compose/runtime/CompositionContext.html">CompositionContext</a></code> that should be the parent of this view's composition.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#setShowLayoutBounds(kotlin.Boolean)">setShowLayoutBounds</a>(@<a href="/reference/androidx/compose/ui/InternalComposeUiApi.html">InternalComposeUiApi</a> boolean&nbsp;showLayoutBounds)</code></div>
+              <p>Enables the display of visual layout bounds for the Compose UI content of this view.</p>
             </td>
           </tr>
           <tr>
@@ -262,6 +232,13 @@
             </td>
           </tr>
           <tr>
+            <td><code>boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#getShouldCreateCompositionOnAttachedToWindow()">getShouldCreateCompositionOnAttachedToWindow</a>()</code></div>
+              <p>If <code>true</code>, this View's composition will be created when it becomes attached to a window for the first time.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>void</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#onAttachedToWindow()">onAttachedToWindow</a>()</code></div>
@@ -278,207 +255,6 @@
             <td>
               <div><code><a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#onMeasure(kotlin.Int,kotlin.Int)">onMeasure</a>(int&nbsp;widthMeasureSpec,&nbsp;int&nbsp;heightMeasureSpec)</code></div>
             </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive" id="inhmethods">
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Inherited fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><devsite-expandable><span class="expand-control">From <a href="https://developer.android.com/reference/android/view/View.html">android.view.View</a></span>
-              <div class="devsite-table-wrapper">
-                <table class="responsive">
-                  <colgroup>
-                    <col width="40%">
-                    <col>
-                  </colgroup>
-                  <tbody class="list">
-                    <tr>
-                      <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> String[]</code></td>
-                      <td>
-                        <div><code>@<a href="https://developer.android.com/reference/android/view/ViewDebug.ExportedProperty.html">ViewDebug.ExportedProperty</a>(category&nbsp;=&nbsp;&quot;attributes&quot;,&nbsp;hasAdjacentMapping&nbsp;=&nbsp;true)<br><a href="https://developer.android.com/reference/android/view/View.html#mAttributes()">mAttributes</a></code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>final int</code></td>
-                      <td>
-                        <div><code>@<a href="https://developer.android.com/reference/android/view/ViewDebug.ExportedProperty.html">ViewDebug.ExportedProperty</a>(category&nbsp;=&nbsp;&quot;layout&quot;)<br>@<a href="/reference/android/compat/annotation/UnsupportedAppUsage.html">UnsupportedAppUsage</a>(maxTargetSdk&nbsp;=&nbsp;28)<br><a href="https://developer.android.com/reference/android/view/View.html#mBottom()">mBottom</a></code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>final boolean</code></td>
-                      <td>
-                        <div><code>@<a href="/reference/android/compat/annotation/UnsupportedAppUsage.html">UnsupportedAppUsage</a>(maxTargetSdk&nbsp;=&nbsp;30,&nbsp;trackingBug&nbsp;=&nbsp;170729553)<br><a href="https://developer.android.com/reference/android/view/View.html#mCachingFailed()">mCachingFailed</a></code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/content/Context.html">Context</a></code></td>
-                      <td>
-                        <div><code>@<a href="https://developer.android.com/reference/android/view/ViewDebug.ExportedProperty.html">ViewDebug.ExportedProperty</a>(deepExport&nbsp;=&nbsp;true)<br>@<a href="/reference/android/compat/annotation/UnsupportedAppUsage.html">UnsupportedAppUsage</a><br><a href="https://developer.android.com/reference/android/view/View.html#mContext()">mContext</a></code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/animation/Animation.html">Animation</a></code></td>
-                      <td>
-                        <div><code><a href="https://developer.android.com/reference/android/view/View.html#mCurrentAnimation()">mCurrentAnimation</a></code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/InputEventConsistencyVerifier.html">InputEventConsistencyVerifier</a></code></td>
-                      <td>
-                        <div><code><a href="https://developer.android.com/reference/android/view/View.html#mInputEventConsistencyVerifier()">mInputEventConsistencyVerifier</a></code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/ViewGroup.LayoutParams.html">ViewGroup.LayoutParams</a></code></td>
-                      <td>
-                        <div><code>@<a href="/reference/android/compat/annotation/UnsupportedAppUsage.html">UnsupportedAppUsage</a>(maxTargetSdk&nbsp;=&nbsp;28)<br><a href="https://developer.android.com/reference/android/view/View.html#mLayoutParams()">mLayoutParams</a></code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>final int</code></td>
-                      <td>
-                        <div><code>@<a href="https://developer.android.com/reference/android/view/ViewDebug.ExportedProperty.html">ViewDebug.ExportedProperty</a>(category&nbsp;=&nbsp;&quot;layout&quot;)<br>@<a href="/reference/android/compat/annotation/UnsupportedAppUsage.html">UnsupportedAppUsage</a>(maxTargetSdk&nbsp;=&nbsp;28)<br><a href="https://developer.android.com/reference/android/view/View.html#mLeft()">mLeft</a></code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>final int</code></td>
-                      <td>
-                        <div><code>@<a href="https://developer.android.com/reference/android/view/ViewDebug.ExportedProperty.html">ViewDebug.ExportedProperty</a>(category&nbsp;=&nbsp;&quot;padding&quot;)<br>@<a href="/reference/android/compat/annotation/UnsupportedAppUsage.html">UnsupportedAppUsage</a><br><a href="https://developer.android.com/reference/android/view/View.html#mPaddingBottom()">mPaddingBottom</a></code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>final int</code></td>
-                      <td>
-                        <div><code>@<a href="https://developer.android.com/reference/android/view/ViewDebug.ExportedProperty.html">ViewDebug.ExportedProperty</a>(category&nbsp;=&nbsp;&quot;padding&quot;)<br>@<a href="/reference/android/compat/annotation/UnsupportedAppUsage.html">UnsupportedAppUsage</a><br><a href="https://developer.android.com/reference/android/view/View.html#mPaddingLeft()">mPaddingLeft</a></code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>final int</code></td>
-                      <td>
-                        <div><code>@<a href="https://developer.android.com/reference/android/view/ViewDebug.ExportedProperty.html">ViewDebug.ExportedProperty</a>(category&nbsp;=&nbsp;&quot;padding&quot;)<br>@<a href="/reference/android/compat/annotation/UnsupportedAppUsage.html">UnsupportedAppUsage</a><br><a href="https://developer.android.com/reference/android/view/View.html#mPaddingRight()">mPaddingRight</a></code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>final int</code></td>
-                      <td>
-                        <div><code>@<a href="https://developer.android.com/reference/android/view/ViewDebug.ExportedProperty.html">ViewDebug.ExportedProperty</a>(category&nbsp;=&nbsp;&quot;padding&quot;)<br>@<a href="/reference/android/compat/annotation/UnsupportedAppUsage.html">UnsupportedAppUsage</a><br><a href="https://developer.android.com/reference/android/view/View.html#mPaddingTop()">mPaddingTop</a></code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/ViewParent.html">ViewParent</a></code></td>
-                      <td>
-                        <div><code>@<a href="/reference/android/compat/annotation/UnsupportedAppUsage.html">UnsupportedAppUsage</a>(maxTargetSdk&nbsp;=&nbsp;28)<br><a href="https://developer.android.com/reference/android/view/View.html#mParent()">mParent</a></code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>final int</code></td>
-                      <td>
-                        <div><code>@<a href="https://developer.android.com/reference/android/view/ViewDebug.ExportedProperty.html">ViewDebug.ExportedProperty</a>(flagMapping&nbsp;=&nbsp;[@<a href="https://developer.android.com/reference/android/view/ViewDebug.FlagToString.html">ViewDebug.FlagToString</a>(mask&nbsp;=&nbsp;4096,&nbsp;equals&nbsp;=&nbsp;4096,&nbsp;name&nbsp;=&nbsp;&quot;FORCE_LAYOUT&quot;),&nbsp;@<a href="https://developer.android.com/reference/android/view/ViewDebug.FlagToString.html">ViewDebug.FlagToString</a>(mask&nbsp;=&nbsp;8192,&nbsp;equals&nbsp;=&nbsp;8192,&nbsp;name&nbsp;=&nbsp;&quot;LAYOUT_REQUIRED&quot;),&nbsp;@<a href="https://developer.android.com/reference/android/view/ViewDebug.FlagToString.html">ViewDebug.FlagToString</a>(mask&nbsp;=&nbsp;32768,&nbsp;equals&nbsp;=&nbsp;32768,&nbsp;name&nbsp;=&nbsp;&quot;DRAWING_CACHE_INVALID&quot;,&nbsp;outputIf&nbsp;=&nbsp;false),&nbsp;@<a href="https://developer.android.com/reference/android/view/ViewDebug.FlagToString.html">ViewDebug.FlagToString</a>(mask&nbsp;=&nbsp;32,&nbsp;equals&nbsp;=&nbsp;32,&nbsp;name&nbsp;=&nbsp;&quot;DRAWN&quot;,&nbsp;outputIf&nbsp;=&nbsp;true),&nbsp;@<a href="https://developer.android.com/reference/android/view/ViewDebug.FlagToString.html">ViewDebug.FlagToString</a>(mask&nbsp;=&nbsp;32,&nbsp;equals&nbsp;=&nbsp;32,&nbsp;name&nbsp;=&nbsp;&quot;NOT_DRAWN&quot;,&nbsp;outputIf&nbsp;=&nbsp;false),&nbsp;@<a href="https://developer.android.com/reference/android/view/ViewDebug.FlagToString.html">ViewDebug.FlagToString</a>(mask&nbsp;=&nbsp;2097152,&nbsp;equals&nbsp;=&nbsp;2097152,&nbsp;name&nbsp;=&nbsp;&quot;DIRTY&quot;)],&nbsp;formatToHexString&nbsp;=&nbsp;true)<br>@<a href="/reference/android/compat/annotation/UnsupportedAppUsage.html">UnsupportedAppUsage</a>(maxTargetSdk&nbsp;=&nbsp;28,&nbsp;trackingBug&nbsp;=&nbsp;123769414)<br><a href="https://developer.android.com/reference/android/view/View.html#mPrivateFlags()">mPrivateFlags</a></code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>final int</code></td>
-                      <td>
-                        <div><code>@<a href="https://developer.android.com/reference/android/view/ViewDebug.ExportedProperty.html">ViewDebug.ExportedProperty</a>(category&nbsp;=&nbsp;&quot;layout&quot;)<br>@<a href="/reference/android/compat/annotation/UnsupportedAppUsage.html">UnsupportedAppUsage</a>(maxTargetSdk&nbsp;=&nbsp;28)<br><a href="https://developer.android.com/reference/android/view/View.html#mRight()">mRight</a></code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>final int</code></td>
-                      <td>
-                        <div><code>@<a href="https://developer.android.com/reference/android/view/ViewDebug.ExportedProperty.html">ViewDebug.ExportedProperty</a>(category&nbsp;=&nbsp;&quot;scrolling&quot;)<br>@<a href="/reference/android/compat/annotation/UnsupportedAppUsage.html">UnsupportedAppUsage</a>(maxTargetSdk&nbsp;=&nbsp;28)<br><a href="https://developer.android.com/reference/android/view/View.html#mScrollX()">mScrollX</a></code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>final int</code></td>
-                      <td>
-                        <div><code>@<a href="https://developer.android.com/reference/android/view/ViewDebug.ExportedProperty.html">ViewDebug.ExportedProperty</a>(category&nbsp;=&nbsp;&quot;scrolling&quot;)<br>@<a href="/reference/android/compat/annotation/UnsupportedAppUsage.html">UnsupportedAppUsage</a>(maxTargetSdk&nbsp;=&nbsp;28)<br><a href="https://developer.android.com/reference/android/view/View.html#mScrollY()">mScrollY</a></code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a></code></td>
-                      <td>
-                        <div><code>@<a href="/reference/android/compat/annotation/UnsupportedAppUsage.html">UnsupportedAppUsage</a>(maxTargetSdk&nbsp;=&nbsp;30,&nbsp;trackingBug&nbsp;=&nbsp;170729553)<br><a href="https://developer.android.com/reference/android/view/View.html#mTag()">mTag</a></code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>final int</code></td>
-                      <td>
-                        <div><code>@<a href="https://developer.android.com/reference/android/view/ViewDebug.ExportedProperty.html">ViewDebug.ExportedProperty</a>(category&nbsp;=&nbsp;&quot;layout&quot;)<br>@<a href="/reference/android/compat/annotation/UnsupportedAppUsage.html">UnsupportedAppUsage</a>(maxTargetSdk&nbsp;=&nbsp;28)<br><a href="https://developer.android.com/reference/android/view/View.html#mTop()">mTop</a></code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/View.TransformationInfo.html">View.TransformationInfo</a></code></td>
-                      <td>
-                        <div><code>@<a href="/reference/android/compat/annotation/UnsupportedAppUsage.html">UnsupportedAppUsage</a><br><a href="https://developer.android.com/reference/android/view/View.html#mTransformationInfo()">mTransformationInfo</a></code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>final int</code></td>
-                      <td>
-                        <div><code>@<a href="https://developer.android.com/reference/android/view/ViewDebug.ExportedProperty.html">ViewDebug.ExportedProperty</a>(category&nbsp;=&nbsp;&quot;padding&quot;)<br><a href="https://developer.android.com/reference/android/view/View.html#mUserPaddingBottom()">mUserPaddingBottom</a></code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>final int</code></td>
-                      <td>
-                        <div><code>@<a href="https://developer.android.com/reference/android/view/ViewDebug.ExportedProperty.html">ViewDebug.ExportedProperty</a>(category&nbsp;=&nbsp;&quot;padding&quot;)<br><a href="https://developer.android.com/reference/android/view/View.html#mUserPaddingLeft()">mUserPaddingLeft</a></code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>final int</code></td>
-                      <td>
-                        <div><code>@<a href="https://developer.android.com/reference/android/view/ViewDebug.ExportedProperty.html">ViewDebug.ExportedProperty</a>(category&nbsp;=&nbsp;&quot;padding&quot;)<br><a href="https://developer.android.com/reference/android/view/View.html#mUserPaddingRight()">mUserPaddingRight</a></code></div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-</devsite-expandable>            </td>
-          </tr>
-          <tr>
-            <td><devsite-expandable><span class="expand-control">From <a href="https://developer.android.com/reference/android/view/ViewGroup.html">android.view.ViewGroup</a></span>
-              <div class="devsite-table-wrapper">
-                <table class="responsive">
-                  <colgroup>
-                    <col width="40%">
-                    <col>
-                  </colgroup>
-                  <tbody class="list">
-                    <tr>
-                      <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/ArrayList.html">ArrayList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/View.html">View</a>&gt;</code></td>
-                      <td>
-                        <div><code>@<a href="/reference/android/compat/annotation/UnsupportedAppUsage.html">UnsupportedAppUsage</a><br><a href="https://developer.android.com/reference/android/view/ViewGroup.html#mDisappearingChildren()">mDisappearingChildren</a></code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>final int</code></td>
-                      <td>
-                        <div><code>@<a href="https://developer.android.com/reference/android/view/ViewDebug.ExportedProperty.html">ViewDebug.ExportedProperty</a>(flagMapping&nbsp;=&nbsp;[@<a href="https://developer.android.com/reference/android/view/ViewDebug.FlagToString.html">ViewDebug.FlagToString</a>(mask&nbsp;=&nbsp;1,&nbsp;equals&nbsp;=&nbsp;1,&nbsp;name&nbsp;=&nbsp;&quot;CLIP_CHILDREN&quot;),&nbsp;@<a href="https://developer.android.com/reference/android/view/ViewDebug.FlagToString.html">ViewDebug.FlagToString</a>(mask&nbsp;=&nbsp;2,&nbsp;equals&nbsp;=&nbsp;2,&nbsp;name&nbsp;=&nbsp;&quot;CLIP_TO_PADDING&quot;),&nbsp;@<a href="https://developer.android.com/reference/android/view/ViewDebug.FlagToString.html">ViewDebug.FlagToString</a>(mask&nbsp;=&nbsp;32,&nbsp;equals&nbsp;=&nbsp;32,&nbsp;name&nbsp;=&nbsp;&quot;PADDING_NOT_NULL&quot;)],&nbsp;formatToHexString&nbsp;=&nbsp;true)<br>@<a href="/reference/android/compat/annotation/UnsupportedAppUsage.html">UnsupportedAppUsage</a>(maxTargetSdk&nbsp;=&nbsp;28,&nbsp;trackingBug&nbsp;=&nbsp;123769411)<br><a href="https://developer.android.com/reference/android/view/ViewGroup.html#mGroupFlags()">mGroupFlags</a></code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/ViewGroup.OnHierarchyChangeListener.html">ViewGroup.OnHierarchyChangeListener</a></code></td>
-                      <td>
-                        <div><code>@<a href="/reference/android/compat/annotation/UnsupportedAppUsage.html">UnsupportedAppUsage</a>(maxTargetSdk&nbsp;=&nbsp;28,&nbsp;trackingBug&nbsp;=&nbsp;123768704)<br><a href="https://developer.android.com/reference/android/view/ViewGroup.html#mOnHierarchyChangeListener()">mOnHierarchyChangeListener</a></code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>final int</code></td>
-                      <td>
-                        <div><code>@<a href="/reference/android/compat/annotation/UnsupportedAppUsage.html">UnsupportedAppUsage</a><br><a href="https://developer.android.com/reference/android/view/ViewGroup.html#mPersistentDrawingCache()">mPersistentDrawingCache</a></code></div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-</devsite-expandable>            </td>
           </tr>
         </tbody>
       </table>
@@ -6221,28 +5997,6 @@
       </table>
     </div>
     <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="getHasComposition()"></a><a name="setHasComposition()"></a><a name="getHasComposition--"></a><a name="setHasComposition--"></a>
-        <h3 class="api-name" id="hasComposition()">hasComposition</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#hasComposition()">hasComposition</a></pre>
-        <p><code>true</code> if this View is host to an active Compose UI composition. An active composition may consume resources.</p>
-      </div>
-      <div class="api-item"><a name="getShowLayoutBounds()"></a><a name="setShowLayoutBounds()"></a><a name="getShowLayoutBounds--"></a><a name="setShowLayoutBounds--"></a>
-        <h3 class="api-name" id="showLayoutBounds()">showLayoutBounds</h3>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/InternalComposeUiApi.html">InternalComposeUiApi</a><br>public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#showLayoutBounds()">showLayoutBounds</a></pre>
-        <p>Enables the display of visual layout bounds for the Compose UI content of this view. This is typically managed</p>
-      </div>
-    </div>
-    <div class="list">
-      <h2>Protected fields</h2>
-      <div class="api-item"><a name="getShouldCreateCompositionOnAttachedToWindow()"></a><a name="setShouldCreateCompositionOnAttachedToWindow()"></a><a name="getShouldCreateCompositionOnAttachedToWindow--"></a><a name="setShouldCreateCompositionOnAttachedToWindow--"></a>
-        <h3 class="api-name" id="shouldCreateCompositionOnAttachedToWindow()">shouldCreateCompositionOnAttachedToWindow</h3>
-        <pre class="api-signature no-pretty-print">protected&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#shouldCreateCompositionOnAttachedToWindow()">shouldCreateCompositionOnAttachedToWindow</a></pre>
-        <p>If <code>true</code>, this View's composition will be created when it becomes attached to a window for the first time. Defaults to <code>true</code>.</p>
-        <p>Subclasses may choose to override this property to prevent this eager initial composition in cases where the view's content is not yet ready. Initial composition will still occur when this view is first measured.</p>
-      </div>
-    </div>
-    <div class="list">
       <h2>Public constructors</h2>
       <div class="api-item"><a name="AbstractComposeView(android.content.Context, android.util.AttributeSet, kotlin.Int)"></a><a name="AbstractComposeView-android.content.Context-android.util.AttributeSet-kotlin.Int-"></a><a name="abstractcomposeview"></a>
         <h3 class="api-name" id="AbstractComposeView(android.content.Context,android.util.AttributeSet,kotlin.Int)">AbstractComposeView</h3>
@@ -6288,6 +6042,16 @@
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#disposeComposition()">disposeComposition</a>()</pre>
         <p>Dispose of the underlying composition and <code><a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#requestLayout()">requestLayout</a></code>. A new composition will be created if <code><a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#createComposition()">createComposition</a></code> is called or when needed to lay out this view.</p>
       </div>
+      <div class="api-item"><a name="getHasComposition--"></a><a name="gethascomposition"></a>
+        <h3 class="api-name" id="getHasComposition()">getHasComposition</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#getHasComposition()">getHasComposition</a>()</pre>
+        <p><code>true</code> if this View is host to an active Compose UI composition. An active composition may consume resources.</p>
+      </div>
+      <div class="api-item"><a name="getShowLayoutBounds--"></a><a name="getshowlayoutbounds"></a>
+        <h3 class="api-name" id="getShowLayoutBounds()">getShowLayoutBounds</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#getShowLayoutBounds()">getShowLayoutBounds</a>()</pre>
+        <p>Enables the display of visual layout bounds for the Compose UI content of this view. This is typically managed</p>
+      </div>
       <div class="api-item"><a name="isTransitionGroup--"></a><a name="istransitiongroup"></a>
         <h3 class="api-name" id="isTransitionGroup()">isTransitionGroup</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#isTransitionGroup()">isTransitionGroup</a>()</pre>
@@ -6300,6 +6064,11 @@
         <h3 class="api-name" id="setParentCompositionContext(androidx.compose.runtime.CompositionContext)">setParentCompositionContext</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#setParentCompositionContext(androidx.compose.runtime.CompositionContext)">setParentCompositionContext</a>(<a href="/reference/androidx/compose/runtime/CompositionContext.html">CompositionContext</a>&nbsp;parent)</pre>
         <p>Set the <code><a href="/reference/androidx/compose/runtime/CompositionContext.html">CompositionContext</a></code> that should be the parent of this view's composition. If <code><a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#setParentCompositionContext(androidx.compose.runtime.CompositionContext)">parent</a></code> is <code>null</code> it will be determined automatically from the window the view is attached to.</p>
+      </div>
+      <div class="api-item"><a name="setShowLayoutBounds-kotlin.Boolean-"></a><a name="setshowlayoutbounds"></a>
+        <h3 class="api-name" id="setShowLayoutBounds(kotlin.Boolean)">setShowLayoutBounds</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#setShowLayoutBounds(kotlin.Boolean)">setShowLayoutBounds</a>(@<a href="/reference/androidx/compose/ui/InternalComposeUiApi.html">InternalComposeUiApi</a> boolean&nbsp;showLayoutBounds)</pre>
+        <p>Enables the display of visual layout bounds for the Compose UI content of this view. This is typically managed</p>
       </div>
       <div class="api-item"><a name="setTransitionGroup-kotlin.Boolean-"></a><a name="settransitiongroup"></a>
         <h3 class="api-name" id="setTransitionGroup(kotlin.Boolean)">setTransitionGroup</h3>
@@ -6326,6 +6095,12 @@
       <div class="api-item"><a name="addViewInLayout(android.view.View, kotlin.Int, android.view.ViewGroup.LayoutParams, kotlin.Boolean)"></a><a name="addViewInLayout-android.view.View-kotlin.Int-android.view.ViewGroup.LayoutParams-kotlin.Boolean-"></a><a name="addviewinlayout"></a>
         <h3 class="api-name" id="addViewInLayout(android.view.View,kotlin.Int,android.view.ViewGroup.LayoutParams,kotlin.Boolean)">addViewInLayout</h3>
         <pre class="api-signature no-pretty-print">protected&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#addViewInLayout(android.view.View,kotlin.Int,android.view.ViewGroup.LayoutParams,kotlin.Boolean)">addViewInLayout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/android/view/View.html">View</a>&nbsp;child,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;index,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/android/view/ViewGroup.LayoutParams.html">ViewGroup.LayoutParams</a>&nbsp;params,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;preventRequestLayout<br>)</pre>
+      </div>
+      <div class="api-item"><a name="getShouldCreateCompositionOnAttachedToWindow--"></a><a name="getshouldcreatecompositiononattachedtowindow"></a>
+        <h3 class="api-name" id="getShouldCreateCompositionOnAttachedToWindow()">getShouldCreateCompositionOnAttachedToWindow</h3>
+        <pre class="api-signature no-pretty-print">protected&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html#getShouldCreateCompositionOnAttachedToWindow()">getShouldCreateCompositionOnAttachedToWindow</a>()</pre>
+        <p>If <code>true</code>, this View's composition will be created when it becomes attached to a window for the first time. Defaults to <code>true</code>.</p>
+        <p>Subclasses may choose to override this property to prevent this eager initial composition in cases where the view's content is not yet ready. Initial composition will still occur when this view is first measured.</p>
       </div>
       <div class="api-item"><a name="onAttachedToWindow--"></a><a name="onattachedtowindow"></a>
         <h3 class="api-name" id="onAttachedToWindow()">onAttachedToWindow</h3>

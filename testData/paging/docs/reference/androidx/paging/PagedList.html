@@ -151,77 +151,6 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Config.html">PagedList.Config</a></code></td>
-            <td>
-              <div><code><a href="/reference/androidx/paging/PagedList.html#config()">config</a></code></div>
-              <p>Return the Config used to construct this PagedList.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/DataSource.html">DataSource</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/paging/PagedList.html#dataSource()">dataSource</a></code></div>
-              <p><strong>This field is deprecated.</strong> DataSource is deprecated and has been replaced by PagingSource.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>abstract boolean</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/paging/PagedList.html#isDetached()">isDetached</a></code></div>
-              <p>True if the <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> has detached the <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> it was loading from, and will no longer load new data.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>boolean</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/paging/PagedList.html#isImmutable()">isImmutable</a></code></div>
-              <p>Returns whether the list is immutable.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>abstract <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a></code></td>
-            <td>
-              <div><code><a href="/reference/androidx/paging/PagedList.html#lastKey()">lastKey</a></code></div>
-              <p>Return the key for the position passed most recently to <code><a href="/reference/androidx/paging/PagedList.html#loadAround(kotlin.Int)">loadAround</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>final int</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/paging/PagedList.html#loadedCount()">loadedCount</a></code></div>
-              <p>Returns the number of items loaded in the <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>final int</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/paging/PagedList.html#positionOffset()">positionOffset</a></code></div>
-              <p>Position offset of the data in the list.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>int</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/paging/PagedList.html#size()">size</a></code></div>
-              <p>Size of the list, including any placeholders (not-yet-loaded null padding).</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
             <th colspan="100%"><h3>Public methods</h3></th>
           </tr>
         </thead>
@@ -262,6 +191,61 @@
             </td>
           </tr>
           <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Config.html">PagedList.Config</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/paging/PagedList.html#getConfig()">getConfig</a>()</code></div>
+              <p>Return the Config used to construct this PagedList.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/DataSource.html">DataSource</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/paging/PagedList.html#getDataSource()">getDataSource</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/paging/PagedList.html#getLastKey()">getLastKey</a>()</code></div>
+              <p>Return the key for the position passed most recently to <code><a href="/reference/androidx/paging/PagedList.html#loadAround(kotlin.Int)">loadAround</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/paging/PagedList.html#getLoadedCount()">getLoadedCount</a>()</code></div>
+              <p>Returns the number of items loaded in the <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/paging/PagedList.html#getPositionOffset()">getPositionOffset</a>()</code></div>
+              <p>Position offset of the data in the list.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/paging/PagedList.html#getSize()">getSize</a>()</code></div>
+              <p>Size of the list, including any placeholders (not-yet-loaded null padding).</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/paging/PagedList.html#getIsDetached()">isDetached</a>()</code></div>
+              <p>True if the <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> has detached the <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> it was loading from, and will no longer load new data.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/paging/PagedList.html#getIsImmutable()">isImmutable</a>()</code></div>
+              <p>Returns whether the list is immutable.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>final void</code></td>
             <td>
               <div><code><a href="/reference/androidx/paging/PagedList.html#loadAround(kotlin.Int)">loadAround</a>(int&nbsp;index)</code></div>
@@ -295,37 +279,6 @@
               <div><code><a href="/reference/androidx/paging/PagedList.html#snapshot()">snapshot</a>()</code></div>
               <p>Returns an immutable snapshot of the <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> in its current state.</p>
             </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive" id="inhmethods">
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Inherited fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><devsite-expandable><span class="expand-control">From <a href="https://developer.android.com/reference/java/util/AbstractList.html">java.util.AbstractList</a></span>
-              <div class="devsite-table-wrapper">
-                <table class="responsive">
-                  <colgroup>
-                    <col width="40%">
-                    <col>
-                  </colgroup>
-                  <tbody class="list">
-                    <tr>
-                      <td><code>final int</code></td>
-                      <td>
-                        <div><code><a href="https://developer.android.com/reference/java/util/AbstractList.html#modCount()">modCount</a></code></div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-</devsite-expandable>            </td>
           </tr>
         </tbody>
       </table>
@@ -625,222 +578,6 @@
       </table>
     </div>
     <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="getConfig()"></a><a name="setConfig()"></a><a name="getConfig--"></a><a name="setConfig--"></a>
-        <h3 class="api-name" id="config()">config</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Config.html">PagedList.Config</a>&nbsp;<a href="/reference/androidx/paging/PagedList.html#config()">config</a></pre>
-        <p>Return the Config used to construct this PagedList.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Returns</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Config.html">PagedList.Config</a></code></td>
-                <td>
-                  <p>the Config of this PagedList</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getDataSource()"></a><a name="setDataSource()"></a><a name="getDataSource--"></a><a name="setDataSource--"></a>
-        <h3 class="api-name" id="dataSource()">dataSource</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/DataSource.html">DataSource</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;<a href="/reference/androidx/paging/PagedList.html#dataSource()">dataSource</a></pre>
-        <aside class="caution"><strong>This field is deprecated.</strong><br>DataSource is deprecated and has been replaced by PagingSource. PagedList offers indirect ways of controlling fetch ('loadAround()', 'retry()') so that you should not need to access the DataSource/PagingSource.</aside>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Throws</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">kotlin.IllegalStateException</a>&nbsp;kotlin.IllegalStateException</code></td>
-                <td>
-                  <p>if this <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> was instantiated without a wrapping a backing <code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code></p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getIsDetached()"></a><a name="setIsDetached()"></a><a name="getIsDetached--"></a><a name="setIsDetached--"></a>
-        <h3 class="api-name" id="isDetached()">isDetached</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/paging/PagedList.html#isDetached()">isDetached</a></pre>
-        <p>True if the <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> has detached the <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> it was loading from, and will no longer load new data.</p>
-        <p>A detached list is <code><a href="/reference/androidx/paging/PagedList.html#isImmutable()">immutable</a></code>.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Returns</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>boolean</code></td>
-                <td>
-                  <p><code>true</code> if the data source is detached.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getIsImmutable()"></a><a name="setIsImmutable()"></a><a name="getIsImmutable--"></a><a name="setIsImmutable--"></a>
-        <h3 class="api-name" id="isImmutable()">isImmutable</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/paging/PagedList.html#isImmutable()">isImmutable</a></pre>
-        <p>Returns whether the list is immutable.</p>
-        <p>Immutable lists may not become mutable again, and may safely be accessed from any thread.</p>
-        <p>In the future, this method may return true when a PagedList has completed loading from its <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>. Currently, it is equivalent to <code><a href="/reference/androidx/paging/PagedList.html#isDetached()">isDetached</a></code>.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Returns</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>boolean</code></td>
-                <td>
-                  <p><code>true</code> if the <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> is immutable.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getLastKey()"></a><a name="setLastKey()"></a><a name="getLastKey--"></a><a name="setLastKey--"></a>
-        <h3 class="api-name" id="lastKey()">lastKey</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;<a href="/reference/androidx/paging/PagedList.html#lastKey()">lastKey</a></pre>
-        <p>Return the key for the position passed most recently to <code><a href="/reference/androidx/paging/PagedList.html#loadAround(kotlin.Int)">loadAround</a></code>.</p>
-        <p>When a PagedList is invalidated, you can pass the key returned by this function to initialize the next PagedList. This ensures (depending on load times) that the next PagedList that arrives will have data that overlaps. If you use androidx.paging.LivePagedListBuilder, it will do this for you.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Returns</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="https://developer.android.com/reference/java/lang/Object.html">Object</a></code></td>
-                <td>
-                  <p>Key of position most recently passed to <code><a href="/reference/androidx/paging/PagedList.html#loadAround(kotlin.Int)">loadAround</a></code>.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getLoadedCount()"></a><a name="setLoadedCount()"></a><a name="getLoadedCount--"></a><a name="setLoadedCount--"></a>
-        <h3 class="api-name" id="loadedCount()">loadedCount</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/paging/PagedList.html#loadedCount()">loadedCount</a></pre>
-        <p>Returns the number of items loaded in the <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code>.</p>
-        <p>Unlike <code><a href="/reference/androidx/paging/PagedList.html#size()">size</a></code> this counts only loaded items, not placeholders.</p>
-        <p>If placeholders are <code><a href="/reference/androidx/paging/PagedList.Config.html#enablePlaceholders()">disabled</a></code>, this method is equivalent to <code><a href="/reference/androidx/paging/PagedList.html#size()">size</a></code>.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Returns</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>int</code></td>
-                <td>
-                  <p>Number of items currently loaded, not counting placeholders.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/androidx/paging/PagedList.html#size()">size</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getPositionOffset()"></a><a name="setPositionOffset()"></a><a name="getPositionOffset--"></a><a name="setPositionOffset--"></a>
-        <h3 class="api-name" id="positionOffset()">positionOffset</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/paging/PagedList.html#positionOffset()">positionOffset</a></pre>
-        <p>Position offset of the data in the list.</p>
-        <p>If the PagingSource backing this PagedList is counted, the item returned from <code>get(i)</code> has a position in the original data set of <code>i + getPositionOffset()</code>.</p>
-        <p>If placeholders are enabled, this value is always <code>0</code>, since <code>get(i)</code> will return either the data in its original index, or null if it is not loaded.</p>
-      </div>
-      <div class="api-item"><a name="getSize()"></a><a name="setSize()"></a><a name="getSize--"></a><a name="setSize--"></a>
-        <h3 class="api-name" id="size()">size</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/paging/PagedList.html#size()">size</a></pre>
-        <p>Size of the list, including any placeholders (not-yet-loaded null padding).</p>
-        <p>To get the number of loaded items, not counting placeholders, use <code><a href="/reference/androidx/paging/PagedList.html#loadedCount()">loadedCount</a></code>.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/androidx/paging/PagedList.html#loadedCount()">loadedCount</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-    <div class="list">
       <h2>Public methods</h2>
       <div class="api-item"><a name="addWeakCallback-androidx.paging.PagedList.Callback-"></a><a name="addweakcallback"></a>
         <h3 class="api-name" id="addWeakCallback(androidx.paging.PagedList.Callback)">addWeakCallback</h3>
@@ -1055,6 +792,218 @@
               <tr>
                 <td><code><a href="/reference/androidx/paging/PagedList.html#size()">size</a></code></td>
                 <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getConfig--"></a><a name="getconfig"></a>
+        <h3 class="api-name" id="getConfig()">getConfig</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Config.html">PagedList.Config</a>&nbsp;<a href="/reference/androidx/paging/PagedList.html#getConfig()">getConfig</a>()</pre>
+        <p>Return the Config used to construct this PagedList.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Config.html">PagedList.Config</a></code></td>
+                <td>
+                  <p>the Config of this PagedList</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getDataSource--"></a><a name="getdatasource"></a>
+        <h3 class="api-name" id="getDataSource()">getDataSource</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/DataSource.html">DataSource</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;<a href="/reference/androidx/paging/PagedList.html#getDataSource()">getDataSource</a>()</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">kotlin.IllegalStateException</a>&nbsp;kotlin.IllegalStateException</code></td>
+                <td>
+                  <p>if this <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> was instantiated without a wrapping a backing <code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code></p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getLastKey--"></a><a name="getlastkey"></a>
+        <h3 class="api-name" id="getLastKey()">getLastKey</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;<a href="/reference/androidx/paging/PagedList.html#getLastKey()">getLastKey</a>()</pre>
+        <p>Return the key for the position passed most recently to <code><a href="/reference/androidx/paging/PagedList.html#loadAround(kotlin.Int)">loadAround</a></code>.</p>
+        <p>When a PagedList is invalidated, you can pass the key returned by this function to initialize the next PagedList. This ensures (depending on load times) that the next PagedList that arrives will have data that overlaps. If you use androidx.paging.LivePagedListBuilder, it will do this for you.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://developer.android.com/reference/java/lang/Object.html">Object</a></code></td>
+                <td>
+                  <p>Key of position most recently passed to <code><a href="/reference/androidx/paging/PagedList.html#loadAround(kotlin.Int)">loadAround</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getLoadedCount--"></a><a name="getloadedcount"></a>
+        <h3 class="api-name" id="getLoadedCount()">getLoadedCount</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/paging/PagedList.html#getLoadedCount()">getLoadedCount</a>()</pre>
+        <p>Returns the number of items loaded in the <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code>.</p>
+        <p>Unlike <code><a href="/reference/androidx/paging/PagedList.html#size()">size</a></code> this counts only loaded items, not placeholders.</p>
+        <p>If placeholders are <code><a href="/reference/androidx/paging/PagedList.Config.html#enablePlaceholders()">disabled</a></code>, this method is equivalent to <code><a href="/reference/androidx/paging/PagedList.html#size()">size</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int</code></td>
+                <td>
+                  <p>Number of items currently loaded, not counting placeholders.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/paging/PagedList.html#size()">size</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getPositionOffset--"></a><a name="getpositionoffset"></a>
+        <h3 class="api-name" id="getPositionOffset()">getPositionOffset</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/paging/PagedList.html#getPositionOffset()">getPositionOffset</a>()</pre>
+        <p>Position offset of the data in the list.</p>
+        <p>If the PagingSource backing this PagedList is counted, the item returned from <code>get(i)</code> has a position in the original data set of <code>i + getPositionOffset()</code>.</p>
+        <p>If placeholders are enabled, this value is always <code>0</code>, since <code>get(i)</code> will return either the data in its original index, or null if it is not loaded.</p>
+      </div>
+      <div class="api-item"><a name="getSize--"></a><a name="getsize"></a>
+        <h3 class="api-name" id="getSize()">getSize</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/paging/PagedList.html#getSize()">getSize</a>()</pre>
+        <p>Size of the list, including any placeholders (not-yet-loaded null padding).</p>
+        <p>To get the number of loaded items, not counting placeholders, use <code><a href="/reference/androidx/paging/PagedList.html#loadedCount()">loadedCount</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/paging/PagedList.html#loadedCount()">loadedCount</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getIsDetached--"></a><a name="getisdetached"></a>
+        <h3 class="api-name" id="getIsDetached()">isDetached</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/paging/PagedList.html#getIsDetached()">isDetached</a>()</pre>
+        <p>True if the <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> has detached the <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> it was loading from, and will no longer load new data.</p>
+        <p>A detached list is <code><a href="/reference/androidx/paging/PagedList.html#isImmutable()">immutable</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>boolean</code></td>
+                <td>
+                  <p><code>true</code> if the data source is detached.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getIsImmutable--"></a><a name="getisimmutable"></a>
+        <h3 class="api-name" id="getIsImmutable()">isImmutable</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/paging/PagedList.html#getIsImmutable()">isImmutable</a>()</pre>
+        <p>Returns whether the list is immutable.</p>
+        <p>Immutable lists may not become mutable again, and may safely be accessed from any thread.</p>
+        <p>In the future, this method may return true when a PagedList has completed loading from its <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>. Currently, it is equivalent to <code><a href="/reference/androidx/paging/PagedList.html#isDetached()">isDetached</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>boolean</code></td>
+                <td>
+                  <p><code>true</code> if the <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> is immutable.</p>
+                </td>
               </tr>
             </tbody>
           </table>

@@ -120,35 +120,6 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>final boolean</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/Modifier.Node.html#isAttached()">isAttached</a></code></div>
-              <p>Indicates that the node is attached and part of the tree.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/Modifier.Node.html#node()">node</a></code></div>
-              <p>A reference of the <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that holds this node's position in the node hierarchy.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
             <th colspan="100%"><h3>Public constructors</h3></th>
           </tr>
         </thead>
@@ -174,6 +145,20 @@
         </thead>
         <tbody class="list">
           <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/Modifier.Node.html#getNode()">getNode</a>()</code></div>
+              <p>A reference of the <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that holds this node's position in the node hierarchy.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/Modifier.Node.html#getIsAttached()">isAttached</a>()</code></div>
+              <p>Indicates that the node is attached and part of the tree.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>void</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/Modifier.Node.html#onAttach()">onAttach</a>()</code></div>
@@ -198,10 +183,22 @@
       </table>
     </div>
     <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="getIsAttached()"></a><a name="setIsAttached()"></a><a name="getIsAttached--"></a><a name="setIsAttached--"></a>
-        <h3 class="api-name" id="isAttached()">isAttached</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Node.html#isAttached()">isAttached</a></pre>
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="Node--"></a><a name="node"></a>
+        <h3 class="api-name" id="Node()">Node</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Node.html#Node()">Node</a>()</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="getNode--"></a><a name="getnode"></a>
+        <h3 class="api-name" id="getNode()">getNode</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a>&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Node.html#getNode()">getNode</a>()</pre>
+        <p>A reference of the <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that holds this node's position in the node hierarchy. If the node is a delegate of another node, this will point to that node. Otherwise, this will point to itself.</p>
+      </div>
+      <div class="api-item"><a name="getIsAttached--"></a><a name="getisattached"></a>
+        <h3 class="api-name" id="getIsAttached()">isAttached</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Node.html#getIsAttached()">isAttached</a>()</pre>
         <p>Indicates that the node is attached and part of the tree. This will get set to true right before <code><a href="/reference/androidx/compose/ui/Modifier.Node.html#onAttach()">onAttach</a></code> is called, and set to false right after <code><a href="/reference/androidx/compose/ui/Modifier.Node.html#onDetach()">onDetach</a></code> is called.</p>
         <p>A Node will never be attached more than once.</p>
         <div class="devsite-table-wrapper">
@@ -228,21 +225,6 @@
           </table>
         </div>
       </div>
-      <div class="api-item"><a name="getNode()"></a><a name="setNode()"></a><a name="getNode--"></a><a name="setNode--"></a>
-        <h3 class="api-name" id="node()">node</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a>&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Node.html#node()">node</a></pre>
-        <p>A reference of the <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that holds this node's position in the node hierarchy. If the node is a delegate of another node, this will point to that node. Otherwise, this will point to itself.</p>
-      </div>
-    </div>
-    <div class="list">
-      <h2>Public constructors</h2>
-      <div class="api-item"><a name="Node--"></a><a name="node"></a>
-        <h3 class="api-name" id="Node()">Node</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Node.html#Node()">Node</a>()</pre>
-      </div>
-    </div>
-    <div class="list">
-      <h2>Public methods</h2>
       <div class="api-item"><a name="onAttach--"></a><a name="onattach"></a>
         <h3 class="api-name" id="onAttach()">onAttach</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Node.html#onAttach()">onAttach</a>()</pre>

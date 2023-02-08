@@ -23,49 +23,6 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#extendedTouchPadding()">extendedTouchPadding</a></code></div>
-              <p>The additional space applied to each side of the layout area when the layout is smaller than <code><a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html#minimumTouchTargetSize()">ViewConfiguration.minimumTouchTargetSize</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>default boolean</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#interceptOutOfBoundsChildEvents()">interceptOutOfBoundsChildEvents</a></code></div>
-              <p>Intercept pointer input that children receive even if the pointer is out of bounds.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a></code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#size()">size</a></code></div>
-              <p>The measured size of the pointer input region.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html">ViewConfiguration</a></code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#viewConfiguration()">viewConfiguration</a></code></div>
-              <p>The <code><a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html">ViewConfiguration</a></code> used to tune gesture detectors.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
             <th colspan="100%"><h3>Public methods</h3></th>
           </tr>
         </thead>
@@ -75,6 +32,41 @@
             <td>
               <div><code>&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#awaitPointerEventScope(kotlin.coroutines.SuspendFunction1)">awaitPointerEventScope</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-suspend-function1/index.html">SuspendFunction1</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/AwaitPointerEventScope.html">AwaitPointerEventScope</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;block<br>)</code></div>
               <p>Suspend and install a pointer input <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#awaitPointerEventScope(kotlin.coroutines.SuspendFunction1)">block</a></code> that can await input events and respond to them immediately.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#getExtendedTouchPadding()">getExtendedTouchPadding</a>()</code></div>
+              <p>The additional space applied to each side of the layout area when the layout is smaller than <code><a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html#minimumTouchTargetSize()">ViewConfiguration.minimumTouchTargetSize</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#getInterceptOutOfBoundsChildEvents()">getInterceptOutOfBoundsChildEvents</a>()</code></div>
+              <p>Intercept pointer input that children receive even if the pointer is out of bounds.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#getSize()">getSize</a>()</code></div>
+              <p>The measured size of the pointer input region.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html">ViewConfiguration</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#getViewConfiguration()">getViewConfiguration</a>()</code></div>
+              <p>The <code><a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html">ViewConfiguration</a></code> used to tune gesture detectors.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#setInterceptOutOfBoundsChildEvents(kotlin.Boolean)">setInterceptOutOfBoundsChildEvents</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;interceptOutOfBoundsChildEvents<br>)</code></div>
+              <p>Intercept pointer input that children receive even if the pointer is out of bounds.</p>
             </td>
           </tr>
         </tbody>
@@ -134,45 +126,6 @@
       <table class="responsive" id="inhmethods">
         <thead>
           <tr>
-            <th colspan="100%"><h3>Inherited fields</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/ui/unit/Density.html">androidx.compose.ui.unit.Density</a></span>
-              <div class="devsite-table-wrapper">
-                <table class="responsive">
-                  <colgroup>
-                    <col width="40%">
-                    <col>
-                  </colgroup>
-                  <tbody class="list">
-                    <tr>
-                      <td><code>abstract float</code></td>
-                      <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/Density.html#density()">density</a></code></div>
-                        <p>The logical density of the display.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>abstract float</code></td>
-                      <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/Density.html#fontScale()">fontScale</a></code></div>
-                        <p>Current user preference for the scaling factor for fonts.</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-</devsite-expandable>            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive" id="inhmethods">
-        <thead>
-          <tr>
             <th colspan="100%"><h3>Inherited methods</h3></th>
           </tr>
         </thead>
@@ -186,6 +139,20 @@
                     <col>
                   </colgroup>
                   <tbody class="list">
+                    <tr>
+                      <td><code>abstract float</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/Density.html#getDensity()">getDensity</a>()</code></div>
+                        <p>The logical density of the display.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract float</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/Density.html#getFontScale()">getFontScale</a>()</code></div>
+                        <p>Current user preference for the scaling factor for fonts.</p>
+                      </td>
+                    </tr>
                     <tr>
                       <td><code>default int</code></td>
                       <td>
@@ -286,36 +253,39 @@
       </table>
     </div>
     <div class="list">
-      <h2>Public fields</h2>
-      <div class="api-item"><a name="getExtendedTouchPadding()"></a><a name="setExtendedTouchPadding()"></a><a name="getExtendedTouchPadding--"></a><a name="setExtendedTouchPadding--"></a>
-        <h3 class="api-name" id="extendedTouchPadding()">extendedTouchPadding</h3>
-        <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#extendedTouchPadding()">extendedTouchPadding</a></pre>
-        <p>The additional space applied to each side of the layout area when the layout is smaller than <code><a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html#minimumTouchTargetSize()">ViewConfiguration.minimumTouchTargetSize</a></code>.</p>
-      </div>
-      <div class="api-item"><a name="getInterceptOutOfBoundsChildEvents()"></a><a name="setInterceptOutOfBoundsChildEvents()"></a><a name="getInterceptOutOfBoundsChildEvents--"></a><a name="setInterceptOutOfBoundsChildEvents--"></a>
-        <h3 class="api-name" id="interceptOutOfBoundsChildEvents()">interceptOutOfBoundsChildEvents</h3>
-        <pre class="api-signature no-pretty-print">default&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#interceptOutOfBoundsChildEvents()">interceptOutOfBoundsChildEvents</a></pre>
-        <p>Intercept pointer input that children receive even if the pointer is out of bounds.</p>
-        <p>If <code>true</code>, and a child has been moved out of this layout and receives an event, this will receive that event. If <code>false</code>, a child receiving pointer input outside of the bounds of this layout will not trigger any events in this.</p>
-      </div>
-      <div class="api-item"><a name="getSize()"></a><a name="setSize()"></a><a name="getSize--"></a><a name="setSize--"></a>
-        <h3 class="api-name" id="size()">size</h3>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a>&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#size()">size</a></pre>
-        <p>The measured size of the pointer input region. Input events will be reported with a coordinate space of (0, 0) to (size.width, size,height) as the input region, with (0, 0) indicating the upper left corner.</p>
-      </div>
-      <div class="api-item"><a name="getViewConfiguration()"></a><a name="setViewConfiguration()"></a><a name="getViewConfiguration--"></a><a name="setViewConfiguration--"></a>
-        <h3 class="api-name" id="viewConfiguration()">viewConfiguration</h3>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html">ViewConfiguration</a>&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#viewConfiguration()">viewConfiguration</a></pre>
-        <p>The <code><a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html">ViewConfiguration</a></code> used to tune gesture detectors.</p>
-      </div>
-    </div>
-    <div class="list">
       <h2>Public methods</h2>
       <div class="api-item"><a name="awaitPointerEventScope-kotlin.coroutines.SuspendFunction1-"></a><a name="awaitpointereventscope"></a>
         <h3 class="api-name" id="awaitPointerEventScope(kotlin.coroutines.SuspendFunction1)">awaitPointerEventScope</h3>
         <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#awaitPointerEventScope(kotlin.coroutines.SuspendFunction1)">awaitPointerEventScope</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-suspend-function1/index.html">SuspendFunction1</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/AwaitPointerEventScope.html">AwaitPointerEventScope</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;block<br>)</pre>
         <p>Suspend and install a pointer input <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#awaitPointerEventScope(kotlin.coroutines.SuspendFunction1)">block</a></code> that can await input events and respond to them immediately. A call to <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#awaitPointerEventScope(kotlin.coroutines.SuspendFunction1)">awaitPointerEventScope</a></code> will resume with <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#awaitPointerEventScope(kotlin.coroutines.SuspendFunction1)">block</a></code>'s result after it completes.</p>
         <p>More than one <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#awaitPointerEventScope(kotlin.coroutines.SuspendFunction1)">awaitPointerEventScope</a></code> can run concurrently in the same <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html">PointerInputScope</a></code> by using <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/index.html">kotlinx.coroutines.launch</a></code>. <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#awaitPointerEventScope(kotlin.coroutines.SuspendFunction1)">block</a></code>s are dispatched to in the order in which they were installed.</p>
+      </div>
+      <div class="api-item"><a name="getExtendedTouchPadding--"></a><a name="getextendedtouchpadding"></a>
+        <h3 class="api-name" id="getExtendedTouchPadding()">getExtendedTouchPadding</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#getExtendedTouchPadding()">getExtendedTouchPadding</a>()</pre>
+        <p>The additional space applied to each side of the layout area when the layout is smaller than <code><a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html#minimumTouchTargetSize()">ViewConfiguration.minimumTouchTargetSize</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getInterceptOutOfBoundsChildEvents--"></a><a name="getinterceptoutofboundschildevents"></a>
+        <h3 class="api-name" id="getInterceptOutOfBoundsChildEvents()">getInterceptOutOfBoundsChildEvents</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#getInterceptOutOfBoundsChildEvents()">getInterceptOutOfBoundsChildEvents</a>()</pre>
+        <p>Intercept pointer input that children receive even if the pointer is out of bounds.</p>
+        <p>If <code>true</code>, and a child has been moved out of this layout and receives an event, this will receive that event. If <code>false</code>, a child receiving pointer input outside of the bounds of this layout will not trigger any events in this.</p>
+      </div>
+      <div class="api-item"><a name="getSize--"></a><a name="getsize"></a>
+        <h3 class="api-name" id="getSize()">getSize</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a>&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#getSize()">getSize</a>()</pre>
+        <p>The measured size of the pointer input region. Input events will be reported with a coordinate space of (0, 0) to (size.width, size,height) as the input region, with (0, 0) indicating the upper left corner.</p>
+      </div>
+      <div class="api-item"><a name="getViewConfiguration--"></a><a name="getviewconfiguration"></a>
+        <h3 class="api-name" id="getViewConfiguration()">getViewConfiguration</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html">ViewConfiguration</a>&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#getViewConfiguration()">getViewConfiguration</a>()</pre>
+        <p>The <code><a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html">ViewConfiguration</a></code> used to tune gesture detectors.</p>
+      </div>
+      <div class="api-item"><a name="setInterceptOutOfBoundsChildEvents-kotlin.Boolean-"></a><a name="setinterceptoutofboundschildevents"></a>
+        <h3 class="api-name" id="setInterceptOutOfBoundsChildEvents(kotlin.Boolean)">setInterceptOutOfBoundsChildEvents</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#setInterceptOutOfBoundsChildEvents(kotlin.Boolean)">setInterceptOutOfBoundsChildEvents</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;interceptOutOfBoundsChildEvents<br>)</pre>
+        <p>Intercept pointer input that children receive even if the pointer is out of bounds.</p>
+        <p>If <code>true</code>, and a child has been moved out of this layout and receives an event, this will receive that event. If <code>false</code>, a child receiving pointer input outside of the bounds of this layout will not trigger any events in this.</p>
       </div>
     </div>
     <div class="list">
