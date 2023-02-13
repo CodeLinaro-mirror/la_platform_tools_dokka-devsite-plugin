@@ -65,6 +65,7 @@ import org.jetbrains.dokka.model.WithVisibility
 import org.jetbrains.dokka.model.doc.Description
 import org.jetbrains.dokka.model.doc.DocumentationNode
 import org.jetbrains.dokka.model.doc.Param
+import org.jetbrains.dokka.model.doc.Property
 import org.jetbrains.dokka.model.isJvmName
 import org.jetbrains.dokka.model.properties.PropertyContainer
 import org.jetbrains.dokka.model.properties.WithExtraProperties
@@ -444,9 +445,9 @@ fun List<DProperty>.gettersAndSetters(): List<DFunction> {
         }
         val callableName = func?.dri?.callable?.name ?: ""
         if (callableName.startsWith("<get-")) {
-            func!!.fixSyntheticAccessor(property.name, getter = true)
+            func!!.fixSyntheticAccessor(property, getter = true)
         } else if (callableName.startsWith("<set-")) {
-            func!!.fixSyntheticAccessor(property.name, getter = false)
+            func!!.fixSyntheticAccessor(property, getter = false)
         } else {
             func
         }
@@ -455,11 +456,12 @@ fun List<DProperty>.gettersAndSetters(): List<DFunction> {
 
 /**
  * Fixes issues with the given synthetic accessor for [propertyName] to be documented in Java, using
- * [DRI.withFixedName] and [fixDocsForAccessor]. If [getter] is false, the function is a setter.
+ * [DRI.withFixedName] and [correctTagsInAccessorDocs]. If [getter] is false, the function is a setter.
  */
-private fun DFunction.fixSyntheticAccessor(propertyName: String, getter: Boolean) = copy(
+private fun DFunction.fixSyntheticAccessor(forProperty: DProperty, getter: Boolean) = copy(
     dri = dri.withFixedName(getter),
-    documentation = fixDocsForAccessor(documentation, propertyName, getter)
+    documentation = injectPropertyDocsToAccessor(this, forProperty)
+        .correctTagsInAccessorDocs(forProperty.name, getter)
 )
 
 /**
@@ -481,9 +483,26 @@ private fun fixCallableName(badName: String, getter: Boolean) =
     }
 
 /**
- * This function converts @param tags in synthetic accessor docs [sourceSetDocs], based on whether
- * the accessor is a [getter] or setter (which is assumed if [getter] is false).
- * There are two separate issues here:
+ * For each sourceset, if the property has docs but the accessor does not, injects the property docs
+ * to the accessor. This prevents property descriptions from being lost in the as-Java docs.
+ */
+private fun injectPropertyDocsToAccessor(
+    accessor: DFunction,
+    property: DProperty
+): SourceSetDependent<DocumentationNode> {
+    val accessorDocs = accessor.documentation.toMutableMap()
+    property.documentation.forEach { (sourceSet, propertyDocs) ->
+        if (!accessorDocs.containsKey(sourceSet)) {
+            accessorDocs[sourceSet] = propertyDocs
+        }
+    }
+    return accessorDocs
+}
+
+/**
+ * This function converts @param and @property tags in synthetic accessor docs, based on whether the
+ * accessor is a [getter] or setter (which is assumed if [getter] is false).
+ * There are a few separate issues here:
  *
  * For getters: Some properties are documented with @param tags in a class constructor. When
  * converted to synthetic accessors, the @param tag stays with the function. However, a synthetic
@@ -494,13 +513,14 @@ private fun fixCallableName(badName: String, getter: Boolean) =
  * [propertyName]. This is true in Dackka even if the setter was explicitly defined with a different
  * parameter name (b/268236485). To work around this, any [Param] tags for setters are set to have
  * [propertyName] as the name of the parameter.
+ *
+ * For @property tags, they can be unwrapped for both getters and setters to just descriptions.
  */
-private fun fixDocsForAccessor(
-    sourceSetDocs: SourceSetDependent<DocumentationNode>,
+private fun SourceSetDependent<DocumentationNode>.correctTagsInAccessorDocs(
     propertyName: String,
     getter: Boolean
 ): SourceSetDependent<DocumentationNode> {
-    return sourceSetDocs.mapValues { entry ->
+    return this.mapValues { entry ->
         DocumentationNode(
             entry.value.children.map {
                 when (it) {
@@ -510,6 +530,7 @@ private fun fixDocsForAccessor(
                         // Setters have one param, named the same as the property (b/268236485)
                         else Param(it.root, propertyName)
                     }
+                    is Property -> Description(it.root)
                     else -> it
                 }
             }
