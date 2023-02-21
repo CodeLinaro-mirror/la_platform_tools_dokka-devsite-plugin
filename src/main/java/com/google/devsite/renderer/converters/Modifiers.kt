@@ -25,7 +25,6 @@ import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.WithAbstraction
-import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.WithVisibility
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 
@@ -55,11 +54,13 @@ internal fun <T : WithExtraProperties<*>> T.getExtraModifiers(
 }
 
 /** @return true if the modifiers represent a constant symbol, false otherwise */
-internal fun <T> T.isConstant(
+internal fun DProperty.isConstant(
     modifiers: List<String> = modifiers(getExpectOrCommonSourceSet())
-): Boolean where T : Documentable, T : WithSources {
+): Boolean {
     return "const" in modifiers ||
-        (this.isFromJava() && "static" in modifiers && "final" in modifiers)
+        // A Java `static final` property is generally a constant, but due to b/241259955 could be
+        // a private field, so if a getter exists that should be displayed.
+        (this.isFromJava() && "static" in modifiers && "final" in modifiers && this.getter == null)
 }
 
 internal data class Modifiers(var baselist: List<String>) : ArrayList<String>(baselist) {

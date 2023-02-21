@@ -3021,6 +3021,35 @@ internal class ClasslikeDocumentableConverterTest(
         }
     }
 
+    @Test
+    fun `Getter for private static final Java field appears in the docs`() {
+        val foo = """
+            |public class Foo {
+            |    private static final Foo privateWithGetter = new Foo();
+            |    public static final int publicNoGetter = 0;
+            |    private static final int privateNoGetter = 0;
+            |
+            |    private Foo() {}
+            |
+            |    public static Foo getPrivateWithGetter() {
+            |        return privateWithGetter;
+            |    }
+            |}
+        """.render(java = true).page().data.content.data
+
+        // TODO (b/241259955): privateWithGetter is private, getter should exist for kotlin as well
+        javaOnly {
+            assertThat(foo.publicFunctionsSummary.map { it.name() })
+                .containsExactly("getPrivateWithGetter")
+        }
+
+        // TODO (b/241259955): privateWithGetter is private
+        assertThat(foo.publicPropertiesSummary.map { it.name() })
+            .containsExactly("privateWithGetter")
+
+        assertThat(foo.constantsSummary.map { it.name() }).containsExactly("publicNoGetter")
+    }
+
     private fun DModule.page(
         name: String = "Foo",
         baseSourceLink: String? = null
