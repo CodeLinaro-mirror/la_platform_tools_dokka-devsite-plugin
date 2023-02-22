@@ -26,7 +26,13 @@ repositories {
 
 }
 
+group = "com.google.devsite"
+version = "1.3.0" // This is appended to archiveBaseName in the ShadowJar task.
+
+val dokkaVersion = "1.8.10-dev-193"
 val kotlinVersion = "1.8.0"
+val jacksonVersion = "2.13.1"
+val coroutinesVersion = "1.6.3"
 plugins {
     kotlin("jvm") version "1.8.0"
     id("com.github.johnrengelman.shadow") version "7.1.1"
@@ -37,9 +43,6 @@ plugins {
 application {
     mainClass.set("org.jetbrains.dokka.MainKt")
 }
-val dokkaVersion = "1.8.10-dev-193"
-val jacksonVersion = "2.13.1"
-val coroutinesVersion = "1.6.3"
 
 dependencies {
     implementation("org.jetbrains.dokka:dokka-gradle-plugin:$dokkaVersion")
@@ -62,9 +65,6 @@ dependencies {
     testImplementation("org.mockito:mockito-inline:4.2.0")
     testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
 }
-
-group = "com.google.devsite"
-version = "1.2.0" // This is appended to archiveBaseName in the ShadowJar task.
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
