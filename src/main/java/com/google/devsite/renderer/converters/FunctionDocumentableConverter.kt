@@ -48,7 +48,8 @@ internal class FunctionDocumentableConverter(
     private val pathProvider: FilePathProvider,
     private val javadocConverter: DocTagConverter,
     private val paramConverter: ParameterDocumentableConverter,
-    private val annotationConverter: AnnotationDocumentableConverter
+    private val annotationConverter: AnnotationDocumentableConverter,
+    private val metadataConverter: MetadataConverter
 ) {
 
     /** @return the function summary component */
@@ -239,7 +240,8 @@ internal class FunctionDocumentableConverter(
                     annotations = signatureAnnotations,
                     // Nullability is on the return type instead
                     nullability = Nullability.DONT_CARE,
-                )
+                ),
+                metadataComponent = metadataConverter.getMetadataForFunction(function)
             )
         )
     }
@@ -294,7 +296,8 @@ internal class FunctionDocumentableConverter(
                     // Nullability is on the return type instead
                     nullability = Nullability.DONT_CARE,
                 ),
-                platforms = DefaultPlatformComponent(function.sourceSets)
+                platforms = DefaultPlatformComponent(function.sourceSets),
+                metadataComponent = metadataConverter.getMetadataForFunction(function)
             )
         )
     }

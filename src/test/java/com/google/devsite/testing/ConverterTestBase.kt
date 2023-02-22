@@ -30,6 +30,7 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.AnnotationDocumentableConverter
 import com.google.devsite.renderer.converters.DocTagConverter
 import com.google.devsite.renderer.converters.FunctionDocumentableConverter
+import com.google.devsite.renderer.converters.MetadataConverter
 import com.google.devsite.renderer.converters.ModifierHints
 import com.google.devsite.renderer.converters.NonKmpPackageConverter
 import com.google.devsite.renderer.converters.Nullability
@@ -344,13 +345,15 @@ internal abstract class ConverterTestBase(
 
     protected fun DModule.packagePage(): DevsitePage<PackageSummary> {
         val (holder, provider) = holderAndProvider(this)
+        val metadataConverter = MetadataConverter(holder)
         val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
         val paramConverter =
             ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
         val javadocConverter =
             DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
         val functionConverter = FunctionDocumentableConverter(
-            displayLanguage, provider, javadocConverter, paramConverter, annotationConverter
+            displayLanguage, provider, javadocConverter, paramConverter,
+            annotationConverter, metadataConverter
         )
         val propertyConverter = PropertyDocumentableConverter(
             displayLanguage, provider, javadocConverter, paramConverter, annotationConverter
@@ -372,6 +375,7 @@ internal abstract class ConverterTestBase(
 
     private fun DModule.functionConverter(): FunctionDocumentableConverter {
         val (holder, provider) = holderAndProvider(this)
+        val metadataConverter = MetadataConverter(holder)
         val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
         val paramConverter =
             ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
@@ -382,7 +386,8 @@ internal abstract class ConverterTestBase(
             provider,
             javadocConverter,
             paramConverter,
-            annotationConverter
+            annotationConverter,
+            metadataConverter
         )
     }
 

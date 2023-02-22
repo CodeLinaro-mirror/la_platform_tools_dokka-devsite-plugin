@@ -40,6 +40,8 @@ internal data class DefaultSymbolDetail<T : SymbolSignature>(
             a { attributes["name"] = anchor }
         }
 
+        data.metadataComponent?.render(this)
+
         h3("api-name") {
             data.anchors.firstOrNull()?.let { attributes["id"] = it }
             if (data.displayLanguage == Language.JAVA && data.extFunctionClass != null) {

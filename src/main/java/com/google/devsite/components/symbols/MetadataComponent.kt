@@ -34,5 +34,8 @@ internal interface MetadataComponent : ContextFreeComponent {
             get() = sourceLinkUrl?.let {
                 DefaultLink(Link.Params(name = "View Source", url = it, externalLink = true))
             }
+
+        internal val isEmpty: Boolean = libraryMetadata == null && sourceLinkUrl == null &&
+            versionMetadata == null
     }
 }

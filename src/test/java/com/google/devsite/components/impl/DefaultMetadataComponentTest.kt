@@ -296,9 +296,7 @@ internal class DefaultMetadataComponentTest {
         // language=html
         assertThat(output).isEqualTo(
             """
-<body>
-  <div id="metadata-info-block"></div>
-</body>
+<body></body>
             """.trim()
         )
     }
