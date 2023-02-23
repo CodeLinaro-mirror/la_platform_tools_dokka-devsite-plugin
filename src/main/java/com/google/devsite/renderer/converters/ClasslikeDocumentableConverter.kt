@@ -446,7 +446,8 @@ internal abstract class ClasslikeDocumentableConverter(
                 containingType = classlike::class.java,
                 isFromJava = classlike.isFromJava(),
                 isSummary = true,
-                injectStatic = it.isJavaStaticMethod()
+                injectStatic = it.isJavaStaticMethod(),
+                inCompanion = classlike.isCompanion()
             )
             errorContextInjector(it) {
                 functionToSummaryConverter(it, modifierHints)
@@ -498,7 +499,8 @@ internal abstract class ClasslikeDocumentableConverter(
                 type = DFunction::class.java,
                 containingType = classlike::class.java,
                 isFromJava = classlike.isFromJava(),
-                injectStatic = it.isJavaStaticMethod()
+                injectStatic = it.isJavaStaticMethod(),
+                inCompanion = classlike.isCompanion()
             )
             errorContextInjector(it) {
                 functionToDetailConverter(it, modifierHints)
@@ -626,19 +628,22 @@ internal abstract class ClasslikeDocumentableConverter(
 
         // Some symbols are moved from the companion object type to the enclosing class in java
         // Objects that are not top-level
-        return if (classlike is DObject && docsHolder.isCompanion(classlike)) {
+        return if (classlike.isCompanion()) {
             // Either the property is hoisted to the containing classlike, or it shows up as getters
             // and setters on the companion (or both), so a companion always has no properties.
             emptyList()
         } else if (classlike is DObject) {
-            properties + objectInstanceProperty
+            val (static, nonStatic) = properties.partition { it.objectPropertyNeedsStaticInJava() }
+            nonStatic + objectInstanceProperty +
+                // Inject the @JvmStatic annotation to properties that need it
+                static.map { it.addAnnotation(JvmStatic) }
         } else {
             // Classlikes that are not (top-level) objects
             properties +
                 // Constants are documented in a separate section than other properties, so these
                 // do not have @JvmStatic injected like the other companion properties.
                 companionProperties.filter { it.isConstant() } +
-                companionProperties.filter { it.isJvmFieldAnnotated() || it.isLateinit() }.map {
+                companionProperties.filter { it.objectPropertyNeedsStaticInJava() }.map {
                     // It is technically incorrect to put @JvmStatic on a property, but we use this
                     // to remember that we should later inject the `static` modifier to this
                     it.addAnnotation(JvmStatic)
@@ -708,6 +713,8 @@ internal abstract class ClasslikeDocumentableConverter(
             )
         )
     }
+
+    private fun DClasslike.isCompanion() = this is DObject && docsHolder.isCompanion(this)
 
     // To allow consolidating identical ClasslikeSignatures generated from different sourceSets,
     // we want all identical ClasslikeSignatures to be ==. Because we can't rely on == for upstream

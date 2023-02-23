@@ -20,7 +20,6 @@ import com.google.devsite.renderer.Language
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.model.AdditionalModifiers
 import org.jetbrains.dokka.model.DInterface
-import org.jetbrains.dokka.model.DObject
 import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
@@ -107,7 +106,7 @@ internal fun List<String>.modifiersFor(
 
             // Members of companion objects and top-level objects become static
             // As do top-level elements that get converted to be in *Kt files, even if extensions
-            if (hints.inObject || hints.inPackage) {
+            if (hints.inCompanion || hints.inPackage) {
                 modifiers.add("static")
             }
 
@@ -230,10 +229,10 @@ internal data class ModifierHints(
     val isFromJava: Boolean,
     val isSummary: Boolean = false,
     val injectStatic: Boolean = false,
-    val isConstructor: Boolean = false
+    val isConstructor: Boolean = false,
+    val inCompanion: Boolean = false
 ) {
     val inInterface get() = containingType == DInterface::class.java
-    val inObject get() = containingType == DObject::class.java
     val inPackage get() = containingType == DPackage::class.java
     val isProperty get() = type == DProperty::class.java
 }

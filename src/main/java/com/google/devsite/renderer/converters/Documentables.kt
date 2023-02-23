@@ -455,6 +455,11 @@ fun Expression.getValue(): String? = when (this) {
 fun DProperty.isPropertyInJava() = isJvmField() || isFromJava() || isLateinit()
 
 /**
+ * Whether the property (belonging to an object) needs a static modifier injected in the Java docs.
+ */
+fun DProperty.objectPropertyNeedsStaticInJava() = isJvmFieldAnnotated() || isLateinit()
+
+/**
  * Returns property getters / setters. Includes generated accessors for Kotlin properties, fixing
  * their names and adding static annotations as needed.
  */

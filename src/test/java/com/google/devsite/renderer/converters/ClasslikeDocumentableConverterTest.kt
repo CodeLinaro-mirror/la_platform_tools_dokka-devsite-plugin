@@ -1373,9 +1373,10 @@ internal class ClasslikeDocumentableConverterTest(
 
         val moduleJ = """${javaHeader("Foo")}
             |public class Foo {
-            |  public static final void bar() {}
-            |  public static final String baz = "baz"
-            |  public static Foo INSTANCE = new Foo()
+            |  private Foo() {}
+            |  public final void bar() {}
+            |  public static final String baz = "baz";
+            |  public static Foo INSTANCE = new Foo();
             |}
         """.renderWithoutLanguageHeader()
         val classlikeJ = moduleJ.page("Foo").data.content
@@ -1397,12 +1398,11 @@ internal class ClasslikeDocumentableConverterTest(
             val barModifiers = barMethod.modifiers()
             val bazConst = consts.single { it.name() == "baz" }
             kotlinOnly {
-                if (classlike == classlikeK) assertThat(barModifiers).isEmpty()
-                else assertThat(barModifiers).isEqualTo(listOf("java-static"))
+                assertThat(barModifiers).isEmpty()
                 assertThat(bazConst.modifiers()).isEqualTo(listOf("const"))
             }
             javaOnly {
-                assertThat(barModifiers).isEqualTo(listOf("static", "final"))
+                assertThat(barModifiers).isEqualTo(listOf("final"))
                 assertThat(bazConst.modifiers()).isEqualTo(listOf("static", "final"))
             }
         }
@@ -1630,8 +1630,7 @@ internal class ClasslikeDocumentableConverterTest(
             val staticFunctions = functions
                 .filter { it.data.title.data.modifiers.contains("static") }
                 .map { it.name() }
-            // TODO (b/268528790): all functions are incorrectly appearing as static on objects
-            // assertThat(staticFunctions).containsExactly("getJvmStaticVar")
+            assertThat(staticFunctions).containsExactly("getJvmStaticVar", "setJvmStaticVar")
 
             val properties = foo.publicPropertiesSummary
             assertThat(properties.map { it.name() }).containsExactly(
@@ -1691,9 +1690,9 @@ internal class ClasslikeDocumentableConverterTest(
                 assertThat(getter.data.description.data.signature.data.parameters).hasSize(1)
             }
 
-            // TODO (b/268528790): all functions are incorrectly appearing as static on objects
             val statics = functions.filter { it.modifiers().contains("static") }.map { it.name() }
-            // assertThat(statics).containsExactly("getObjExtensionWithStaticGetter")
+            assertThat(statics)
+                .containsExactly("getObjExtensionWithStaticGetter", "getObjStaticExtension")
 
             assertThat(foo.publicPropertiesSummary.data.items.map { it.name() })
                 .containsExactly("INSTANCE")
@@ -2708,7 +2707,7 @@ internal class ClasslikeDocumentableConverterTest(
         """ + javaHeader("TopLevelObject") + """
             |public class TopLevelObject {
             |   public static TopLevelObject INSTANCE = TopLevelObject()
-            |   public static int topObjectFun() {}
+            |   public int topObjectFun() {}
             |}
         """.trimIndent()
         val moduleJ = sourceJ.renderWithoutLanguageHeader()
@@ -2738,8 +2737,8 @@ internal class ClasslikeDocumentableConverterTest(
             val topObject = module.page("TopLevelObject").data.content
             val topObjectFun = topObject.data.publicFunctionsSummary.single()
             assertThat(topObjectFun.name()).isEqualTo("topObjectFun")
-            // TODO (b/268528790): top object fun defined in kotlin should not be static in java
-            javaOnly { assertThat(topObjectFun.data.title.data.modifiers).contains("static") }
+            // This function is not annotated with @JvmStatic, so it isn't static
+            assertThat(topObjectFun.data.title.data.modifiers).doesNotContain("static")
             assertThat(topObjectFun.urlSuffix()).isEqualTo("TopLevelObject.html#topObjectFun()")
 
             if (testKt != null) assertThat(testKt.data.nestedTypesSummary).isEmpty()
