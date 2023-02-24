@@ -45,7 +45,8 @@ internal interface SymbolDetail<T : SymbolSignature> : ContextFreeComponent {
         open val displayLanguage: Language,
         open val modifiers: Modifiers = EmptyModifiers,
         open val extFunctionClass: String? = null,
-        open val annotationComponents: List<AnnotationComponent> = emptyList()
+        open val annotationComponents: List<AnnotationComponent> = emptyList(),
+        open val metadataComponent: MetadataComponent? = null
     ) {
         override fun equals(other: Any?): Boolean {
             if (this === other) return true

@@ -3069,13 +3069,15 @@ internal class ClasslikeDocumentableConverterTest(
         val (holder, provider) = holderAndProvider(this, baseSourceLink = baseSourceLink)
         val extFunctionMap = runBlocking { holder.extensionFunctionMap(displayLanguage) }
         val extPropertyMap = runBlocking { holder.extensionPropertyMap() }
+        val metadataConverter = MetadataConverter(holder)
         val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
         val paramConverter =
             ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
         val javadocConverter =
             DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
         val functionConverter = FunctionDocumentableConverter(
-            displayLanguage, provider, javadocConverter, paramConverter, annotationConverter
+            displayLanguage, provider, javadocConverter, paramConverter,
+            annotationConverter, metadataConverter
         )
         val propertyConverter = PropertyDocumentableConverter(
             displayLanguage, provider, javadocConverter, paramConverter, annotationConverter
@@ -3083,7 +3085,6 @@ internal class ClasslikeDocumentableConverterTest(
         val enumConverter = EnumValueDocumentableConverter(
             displayLanguage, provider, javadocConverter, paramConverter, annotationConverter
         )
-        val metadataConverter = MetadataConverter(holder)
         val converters = classlikes.map {
             NonKmpClasslikeConverter(
                 displayLanguage,

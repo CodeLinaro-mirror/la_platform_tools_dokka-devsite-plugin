@@ -1450,6 +1450,7 @@ internal class DocTagConverterTest(
             | }
         """.render()
         val (holder, provider) = holderAndProvider(module)
+        val metadataConverter = MetadataConverter(holder)
         val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
         val paramConverter =
             ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
@@ -1457,7 +1458,8 @@ internal class DocTagConverterTest(
             DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
         val functionConverter =
             FunctionDocumentableConverter(
-                displayLanguage, provider, javadocConverter, paramConverter, annotationConverter
+                displayLanguage, provider, javadocConverter, paramConverter,
+                annotationConverter, metadataConverter
             )
         val propertyConverter =
             PropertyDocumentableConverter(
@@ -1466,7 +1468,6 @@ internal class DocTagConverterTest(
         val enumConverter = EnumValueDocumentableConverter(
             displayLanguage, provider, javadocConverter, paramConverter, annotationConverter
         )
-        val metadataConverter = MetadataConverter(holder)
         val classConverter1 = NonKmpClasslikeConverter(
             displayLanguage,
             module.explicitClasslike("DynamicNavGraphBuilder"),

@@ -17,14 +17,18 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
+import com.google.devsite.components.Link
+import com.google.devsite.components.symbols.MetadataComponent
 import com.google.devsite.components.symbols.SymbolDetail.Params
 import com.google.devsite.components.symbols.SymbolDetail.SymbolKind
+import com.google.devsite.components.symbols.VersionMetadataComponent
 import com.google.devsite.components.testing.NoopAnnotationComponent
 import com.google.devsite.components.testing.NoopContextFreeComponent
 import com.google.devsite.components.testing.NoopFunctionSignature
 import com.google.devsite.components.testing.NoopTypeProjectionComponent
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.Modifiers
+import com.google.devsite.util.LibraryMetadata
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
 import org.junit.Test
@@ -373,6 +377,62 @@ class DefaultSymbolDetailTest {
 <div>
   <div class="api-item">
     <h3 class="api-name">MyClassKt.foo</h3>
+    <pre class="api-signature no-pretty-print">void&nbsp;foo()</pre>
+  </div>
+</div>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Simple Java function with metadata renders correctly`() {
+        val metadataComponent = DefaultMetadataComponent(
+            MetadataComponent.Params(
+                libraryMetadata = LibraryMetadata(
+                    groupId = "testGroup",
+                    artifactId = "testArtifactId",
+                    releaseNotesUrl = "https://d.android.com"
+                ),
+                sourceLinkUrl = "https://cs.android.com",
+                versionMetadata = DefaultVersionMetadataComponent(
+                    VersionMetadataComponent.Params(
+                        addedIn = DefaultLink(Link.Params(name = "API Level 8", url = "")),
+                        deprecatedIn = DefaultLink(Link.Params(name = "API Level 12", url = ""))
+                    )
+                )
+            )
+        )
+        val component = DefaultSymbolDetail(
+            Params(
+                name = "foo",
+                returnType = NoopTypeProjectionComponent("void"),
+                symbolKind = SymbolKind.FUNCTION,
+                signature = NoopFunctionSignature("foo()"),
+                anchors = linkedSetOf(),
+                metadata = emptyList(),
+                displayLanguage = Language.JAVA,
+                metadataComponent = metadataComponent
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>
+  <div class="api-item">
+    <div id="metadata-info-block">
+      <div id="maven-coordinates">Artifact: <a href="https://d.android.com">testGroup:testArtifactId</a></div>
+      <div id="source-link"><a href="https://cs.android.com" class="external">View Source</a></div>
+      <div id="version-metadata">
+        <div id="added-in">Added in API Level 8</div>
+        <div id="deprecated-in">Deprecated in API Level 12</div>
+      </div>
+    </div>
+    <h3 class="api-name">foo</h3>
     <pre class="api-signature no-pretty-print">void&nbsp;foo()</pre>
   </div>
 </div>

@@ -22,6 +22,7 @@ import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.util.LibraryMetadata
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.model.DClasslike
+import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.DocumentableSource
 import org.jetbrains.dokka.model.WithSources
@@ -49,6 +50,21 @@ internal class MetadataConverter(
                 libraryMetadata = jsonLibraryMetadata,
                 sourceLinkUrl = sourceUrl,
                 // TODO(b/264280671): display version metadata for classes
+                versionMetadata = null
+            )
+        )
+    }
+
+    /**
+     * Creates a metadata component for the [function].
+     */
+    fun getMetadataForFunction(function: DFunction): MetadataComponent {
+        return DefaultMetadataComponent(
+            MetadataComponent.Params(
+                // TODO(b/264828018): display artifact ID and source link for some functions
+                libraryMetadata = null,
+                sourceLinkUrl = null,
+                // TODO(b/264280616): display version metadata for functions
                 versionMetadata = null
             )
         )

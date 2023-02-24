@@ -27,23 +27,26 @@ internal data class DefaultMetadataComponent(
 ) : MetadataComponent {
 
     override fun render(into: FlowContent): Unit = into.run {
-        // CSS ids are declared in internal codebase (cl/475581680)
-        div {
-            id = "metadata-info-block"
-            data.libraryMetadata?.let {
-                div {
-                    id = "maven-coordinates"
-                    +"Artifact: "
-                    it.link.render(this)
+        // Only renders the div when there will be something inside it
+        if (!data.isEmpty) {
+            // CSS ids are declared in internal codebase (cl/475581680)
+            div {
+                id = "metadata-info-block"
+                data.libraryMetadata?.let {
+                    div {
+                        id = "maven-coordinates"
+                        +"Artifact: "
+                        it.link.render(this)
+                    }
                 }
-            }
-            data.sourceLink?.let {
-                div {
-                    id = "source-link"
-                    it.render(this)
+                data.sourceLink?.let {
+                    div {
+                        id = "source-link"
+                        it.render(this)
+                    }
                 }
+                data.versionMetadata?.render(this)
             }
-            data.versionMetadata?.render(this)
         }
     }
 
