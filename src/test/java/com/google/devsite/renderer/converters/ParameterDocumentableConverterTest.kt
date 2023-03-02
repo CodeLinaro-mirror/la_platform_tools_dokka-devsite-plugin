@@ -868,8 +868,7 @@ internal class ParameterDocumentableConverterTest(
         """.render().param()
 
         assertThat(param.data.name).isEqualTo("stuff")
-        javaOnly { assertThat(param.data.modifiers).isEmpty() }
-        kotlinOnly { assertThat(param.data.modifiers.last()).isEqualTo("vararg") }
+        assertThat(param.data.modifiers.last()).isEqualTo("vararg")
     }
 
     @Ignore // Kotlin does not support modifiers on lambda params

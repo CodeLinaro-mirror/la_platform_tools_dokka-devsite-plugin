@@ -129,9 +129,9 @@ internal fun List<String>.modifiersFor(
             modifiers.remove("operator")
             modifiers.remove("override")
             modifiers.remove("open")
-            modifiers.remove("sealed")
             modifiers.remove("const")
-            modifiers.remove("vararg")
+            modifiers.remove("infix")
+            modifiers.remove("data")
         }
         Language.KOTLIN -> {
             if ("static" in modifiers && "final" in modifiers &&
@@ -191,7 +191,7 @@ val modifierOrder = listOf(
     // Types (one of)
     "enum", "annotation", "fun",
     // More (could be more than one)
-    "companion", "inline", "infix", "operator", "data"
+    "companion", "inline", "infix", "operator", "data", "noinline", "crossinline"
 )
 
 /**

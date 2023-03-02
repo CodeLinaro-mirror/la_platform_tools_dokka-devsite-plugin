@@ -153,10 +153,13 @@ internal class ModifiersTest : ConverterTestBase() {
             "suspend",
             "inline",
             "noinline",
+            "crossinline",
             "reified",
             "operator",
             "override",
-            "open"
+            "open",
+            "infix",
+            "data"
         )
 
         assertThat(modifiers.modifiersFor(javaHints)).isEmpty()
