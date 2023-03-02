@@ -372,8 +372,8 @@ internal class DocumentablesHolder(
                 DClass(
                     dri = dPackage.dri.withClass(syntheticClassName),
                     name = syntheticClassName,
-                    // TODO (b/168340963) handle kotlin as java properties
-                    properties = nodes.filterIsInstance<DProperty>(),
+                    properties = nodes.filterIsInstance<DProperty>()
+                        .map { it.withJavaSynthetic(syntheticClassName) },
                     constructors = emptyList(),
                     functions = nodes.filterIsInstance<DFunction>().map {
                         it.withJavaSynthetic(syntheticClassName)

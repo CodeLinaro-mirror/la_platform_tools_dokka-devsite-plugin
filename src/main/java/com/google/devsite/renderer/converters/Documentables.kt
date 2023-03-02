@@ -27,6 +27,7 @@ import org.jetbrains.dokka.analysis.PsiDocumentableSource
 import org.jetbrains.dokka.base.transformers.documentables.isException
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.PointingToDeclaration
+import org.jetbrains.dokka.model.AdditionalModifiers
 import org.jetbrains.dokka.model.AnnotationTarget
 import org.jetbrains.dokka.model.Annotations
 import org.jetbrains.dokka.model.BooleanConstant
@@ -69,7 +70,6 @@ import org.jetbrains.dokka.model.doc.Property
 import org.jetbrains.dokka.model.isJvmName
 import org.jetbrains.dokka.model.properties.PropertyContainer
 import org.jetbrains.dokka.model.properties.WithExtraProperties
-import org.jetbrains.dokka.model.toAdditionalModifiers
 import org.jetbrains.kotlin.builtins.jvm.JavaToKotlinClassMap
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
@@ -239,26 +239,53 @@ val DClasslike.isSynthetic: Boolean
     get() = name().endsWith("Kt") || this.jvmFileName() != null
 
 /**
- * Converts a top level function to its representation under a Java synthetic class
- * and with JvmName
- * Replaces the dri to point to the synthetic class and applies the static modifier
+ * Converts a top level function to its representation under a Java synthetic class.
+ * Replaces the dri to point to the synthetic class and applies the static modifier.
+ * This doesn't change the name to the [jvmName], because that's handled later in
+ * [ClasslikeDocumentableConverter].
  */
-fun DFunction.withJavaSynthetic(syntheticClassName: String): DFunction {
-    val jvmName = jvmName() ?: name
-    return copy(
-        name = jvmName,
+internal fun DFunction.withJavaSynthetic(syntheticClassName: String): DFunction =
+    copy(
         // this needs to be the dri IN the synthetic class
-        dri = dri.copy(
-            classNames = syntheticClassName,
-            callable = dri.callable?.copy(name = jvmName)
-        ),
-        // put the static modifier on functions in the synthetic class
-        extra = extra.addAll(
-            sourceSets.map {
-                mapOf(it to setOf(ExtraModifiers.JavaOnlyModifiers.Static)).toAdditionalModifiers()
+        dri = dri.copy(classNames = syntheticClassName),
+        // put the static annotation on functions in the synthetic class
+        extra = extra.addModifier(ExtraModifiers.JavaOnlyModifiers.Static, sourceSets)
+    )
+
+/**
+ * Converts a top level property to its representation under a Java synthetic class.
+ * Replaces the dri to point to the synthetic class and applies the static modifier, as well as
+ * converting the property's accessors.
+ * This doesn't change the name to the [jvmName], because that's handled later in
+ * [ClasslikeDocumentableConverter].
+ */
+internal fun DProperty.withJavaSynthetic(syntheticClassName: String): DProperty =
+    copy(
+        // this needs to be the dri IN the synthetic class
+        dri = dri.copy(classNames = syntheticClassName),
+        // put the static annotation on properties in the synthetic class
+        extra = extra.addModifier(ExtraModifiers.JavaOnlyModifiers.Static, sourceSets),
+        // convert the getter and setter as well
+        getter = getter?.withJavaSynthetic(syntheticClassName),
+        setter = setter?.withJavaSynthetic(syntheticClassName)
+    )
+
+/**
+ * Adds the [newModifier] to the [PropertyContainer] for each of the [sourceSets] provided.
+ */
+internal fun <T> PropertyContainer<T>.addModifier(
+    newModifier: ExtraModifiers,
+    sourceSets: Set<DokkaConfiguration.DokkaSourceSet>
+): PropertyContainer<T> where T : Documentable {
+    val newModifiers = this.allOfType<AdditionalModifiers>().map { modifiers ->
+        AdditionalModifiers(
+            sourceSets.associateWith { sourceSet ->
+                val previous = modifiers.content[sourceSet] ?: emptySet()
+                previous + newModifier
             }
         )
-    )
+    }
+    return addAll(newModifiers)
 }
 
 /**
@@ -440,7 +467,7 @@ fun List<DProperty>.gettersAndSetters(): List<DFunction> {
     }.mapNotNull {
         var (property, func) = it
         // Static properties should also have static accessors
-        if (property.isConstant() || property.isStaticAnnotated()) {
+        if (property.isStaticAnnotated()) {
             func = func?.addAnnotation(JvmStatic)
         }
         val callableName = func?.dri?.callable?.name ?: ""

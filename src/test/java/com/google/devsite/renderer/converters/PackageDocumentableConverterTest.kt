@@ -281,29 +281,6 @@ internal class PackageDocumentableConverterTest(
     }
 
     @Test
-    fun `Synthetic classes for top-level functions in Java use @JvmName`() {
-        val page = """
-            |@JvmName("bar")
-            |fun foo()
-            |
-            |@JvmName("aardvark")
-            |fun baz()
-            |
-            |fun apple()
-        """.render()
-
-        javaOnly {
-            val classes = runBlocking {
-                val holder = DocumentablesHolder(page, this)
-                holder.classesFor(page.packages.last(), displayLanguage)
-            }
-            // testing first and last here is also asserting the alphabetical sort, after jvmname
-            val names = classes.last().functions.map { it.name }
-            assertThat(names).isEqualTo(listOf("aardvark", "apple", "bar"))
-        }
-    }
-
-    @Test
     fun `Synthetic classes for top-level functions use file JvmName appropriately`() {
         val page = """
         |

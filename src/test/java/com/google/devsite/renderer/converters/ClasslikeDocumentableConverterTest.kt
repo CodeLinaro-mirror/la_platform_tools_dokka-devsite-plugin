@@ -1555,9 +1555,13 @@ internal class ClasslikeDocumentableConverterTest(
     @Test
     fun `Top-level properties correctly interop to Java`() {
         val testKt = """
+            |/** Some documentation **/
             |var topLevelRegularVar = 0
+            |/** Some documentation **/
             |@JvmField var topLevelJvmFieldVar = 0
+            |/** Some documentation **/
             |const val topLevelConstVal = 0
+            |/** Some documentation **/
             |lateinit var topLevelLateinitVar: String
             ||// @JvmStatic is not allowed in this context
         """.render().page("TestKt").data.content.data
@@ -1576,10 +1580,32 @@ internal class ClasslikeDocumentableConverterTest(
             val consts = testKt.constantsSummary.data.items
             assertThat(consts.map { it.name() }).containsExactly("topLevelConstVal")
 
-            // TODO (b/268187188): Everything should be static
-            // assertThat(functions.filter { it.modifiers().contains("static") }).hasSize(4)
-            // assertThat(properties.filter { it.modifiers().contains("static") }).hasSize(2)
-            // assertThat(consts.filter { it.modifiers().contains("static") }).hasSize(1)
+            assertThat(functions.filter { it.modifiers().contains("static") }).hasSize(4)
+            assertThat(properties.filter { it.modifiers().contains("static") }).hasSize(2)
+            assertThat(consts.filter { it.modifiers().contains("static") }).hasSize(1)
+
+            for (item in functions + properties + consts) {
+                assertThat(item.data.description.text()).isEqualTo("Some documentation")
+            }
+        }
+    }
+
+    @Test
+    fun `Synthetic classes for top-level functions in Java use @JvmName`() {
+        val testKt = """
+            |@JvmName("bar")
+            |fun foo()
+            |
+            |@JvmName("aardvark")
+            |fun baz()
+            |
+            |fun apple()
+        """.render().page("TestKt").data.content.data
+
+        javaOnly {
+            // also assert the alphabetical sort, after jvmname
+            val names = testKt.publicFunctionsSummary.map { it.name() }
+            assertThat(names).isEqualTo(listOf("aardvark", "apple", "bar"))
         }
     }
 
@@ -1624,6 +1650,7 @@ internal class ClasslikeDocumentableConverterTest(
     fun `Top level extension properties are correctly documented in Java`() {
         javaOnly {
             val testKt = """
+                |/** Some documentation **/
                 |val String.extensionProp: Int get() = length
                 |// @JvmStatic is not allowed at the top level
                 |// const, lateinit, and @JvmField extension properties are not allowed
@@ -1637,8 +1664,8 @@ internal class ClasslikeDocumentableConverterTest(
 
             assertThat(testKt.publicPropertiesSummary.data.items).isEmpty()
 
-            // TODO (b/268187188): This should be static
-            // assertThat(getExtensionProp.modifiers()).contains("static")
+            assertThat(getExtensionProp.modifiers()).contains("static")
+            assertThat(getExtensionProp.description.text()).isEqualTo("Some documentation")
         }
     }
 
