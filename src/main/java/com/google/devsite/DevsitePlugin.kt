@@ -23,21 +23,12 @@ import org.jetbrains.dokka.CoreExtensions
 import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.translators.descriptors.ExternalDocumentablesProvider
 import org.jetbrains.dokka.plugability.DokkaPlugin
-import org.jetbrains.dokka.plugability.DokkaPluginApiPreview
-import org.jetbrains.dokka.plugability.PluginApiPreviewAcknowledgement
 import org.jetbrains.dokka.plugability.configuration
 import org.jetbrains.dokka.plugability.querySingle
 
 class DevsitePlugin : DokkaPlugin() {
     private val dokkaBase by lazy { plugin<DokkaBase>() }
     private val externalDocumentablesProvider by extensionPoint<ExternalDocumentablesProvider>()
-
-    /** "All of Dokka's plugin API is in preview and it can be changed in a backwards-incompatible
-     *  manner with a best-effort migration. By opting in, you (we) acknowledge the risks of relying
-     *  on preview API."
-     */
-    @OptIn(DokkaPluginApiPreview::class)
-    override fun pluginApiPreviewAcknowledgement() = PluginApiPreviewAcknowledgement
 
     val translator by extending {
         CoreExtensions.documentableToPageTranslator providing {

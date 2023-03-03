@@ -19,16 +19,12 @@ package com.google.devsite.testing
 import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.renderers.OutputWriter
 import org.jetbrains.dokka.plugability.DokkaPlugin
-import org.jetbrains.dokka.plugability.DokkaPluginApiPreview
-import org.jetbrains.dokka.plugability.PluginApiPreviewAcknowledgement
 import java.util.Collections
 
 class TestOutputWriterPlugin(failOnOverwrite: Boolean = false) : DokkaPlugin() {
     val writer = TestOutputWriter(failOnOverwrite)
 
     private val dokkaBase by lazy { plugin<DokkaBase>() }
-    @OptIn(DokkaPluginApiPreview::class)
-    override fun pluginApiPreviewAcknowledgement() = PluginApiPreviewAcknowledgement
 
     val testWriter by extending {
         (

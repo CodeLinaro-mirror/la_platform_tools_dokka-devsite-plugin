@@ -23,12 +23,13 @@ defaultTasks = mutableListOf("test", "jar", "shadowJar", "ktlint", "publish")
 repositories {
     maven("../../prebuilts/androidx/external")
     maven("../../prebuilts/androidx/internal")
+
 }
 
 group = "com.google.devsite"
 version = "1.3.0" // This is appended to archiveBaseName in the ShadowJar task.
 
-val dokkaVersion = "1.8.10-dev-203"
+val dokkaVersion = "1.8.10-dev-193"
 val kotlinVersion = "1.8.0"
 val jacksonVersion = "2.13.1"
 val coroutinesVersion = "1.6.3"

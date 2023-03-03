@@ -62,8 +62,6 @@ import org.jetbrains.dokka.pages.ModulePageNode
 import org.jetbrains.dokka.pages.RootPageNode
 import org.jetbrains.dokka.plugability.DokkaContext
 import org.jetbrains.dokka.plugability.DokkaPlugin
-import org.jetbrains.dokka.plugability.DokkaPluginApiPreview
-import org.jetbrains.dokka.plugability.PluginApiPreviewAcknowledgement
 import org.jetbrains.dokka.renderers.Renderer
 import org.jetbrains.dokka.toJsonString
 import org.jetbrains.dokka.utilities.DokkaConsoleLogger
@@ -335,8 +333,6 @@ internal abstract class ConverterTestBase(
 
     object NoopPlugin : DokkaPlugin() {
         private val devsite by lazy { plugin<DevsitePlugin>() }
-        @OptIn(DokkaPluginApiPreview::class)
-        override fun pluginApiPreviewAcknowledgement() = PluginApiPreviewAcknowledgement
 
         val renderer by extending {
             CoreExtensions.renderer providing { NoopRenderer } override devsite.renderer
