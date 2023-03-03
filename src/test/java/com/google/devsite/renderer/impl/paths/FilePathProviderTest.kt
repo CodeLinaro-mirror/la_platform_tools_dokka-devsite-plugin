@@ -259,4 +259,51 @@ internal class FilePathProviderTest : ConverterTestBase() {
         val expected = "D"
         assertThat(actual).isEqualTo(expected)
     }
+
+    @Test
+    fun `Reference to hoisted companion value goes to the containing class page`() {
+        val module = """
+            |class Foo {
+            |    companion object {
+            |        @JvmField val hoistedVal = 3
+            |    }
+            |}
+        """.trimIndent().render()
+        val classGraph = runBlocking { DocumentablesHolder(module, this).classGraph() }
+        val dri = DRI(
+            packageName = "androidx.example",
+            classNames = "Foo.Companion",
+            callable = Callable(name = "hoistedVal", params = emptyList())
+        )
+        val reference = pathProvider(
+            externalLocationProvider = null,
+            classGraph = classGraph
+        ).forReference(dri)
+        assertThat(reference.name).isEqualTo("hoistedVal")
+        assertThat(reference.url).isEqualTo("/reference/androidx/example/Foo.html#hoistedVal()")
+    }
+
+    @Test
+    fun `Reference to non-hoisted companion function goes to the companion page`() {
+        val module = """
+            |class Foo {
+            |    companion object {
+            |        fun nonHoistedFun() = Unit
+            |    }
+            |}
+        """.trimIndent().render()
+        val classGraph = runBlocking { DocumentablesHolder(module, this).classGraph() }
+        val dri = DRI(
+            packageName = "androidx.example",
+            classNames = "Foo.Companion",
+            callable = Callable(name = "nonHoistedFun", params = emptyList())
+        )
+        val reference = pathProvider(
+            externalLocationProvider = null,
+            classGraph = classGraph
+        ).forReference(dri)
+        assertThat(reference.name).isEqualTo("nonHoistedFun")
+        assertThat(reference.url)
+            .isEqualTo("/reference/androidx/example/Foo.Companion.html#nonHoistedFun()")
+    }
 }

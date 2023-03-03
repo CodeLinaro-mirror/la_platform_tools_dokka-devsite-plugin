@@ -1096,6 +1096,19 @@ internal fun DObject.isOrdinaryCompanion(): Boolean =
         supertypes.all { it.value.isEmpty() } &&
         children.none { it is DClasslike }
 
+/**
+ * Whether the [Documentable] as a child of a companion object would be documented on the containing
+ * classlike of the companion for the given [displayLanguage].
+ *
+ * All companion properties and functions appear on the class page for Kotlin but not all for Java.
+ */
+internal fun Documentable.isHoistedFromCompanion(displayLanguage: Language): Boolean =
+    when (displayLanguage) {
+        Language.KOTLIN -> this is DProperty || this is DFunction
+        Language.JAVA -> (this is DFunction && this.isJavaStaticMethod()) ||
+            (this is DProperty && this.objectPropertyHoistedInJava())
+    }
+
 internal fun DClasslike.shouldNotBeDisplayed(displayLanguage: Language) =
     displayLanguage == Language.KOTLIN && this is DObject && this.isOrdinaryCompanion()
 

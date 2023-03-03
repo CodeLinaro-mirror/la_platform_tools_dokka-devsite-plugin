@@ -21,9 +21,12 @@ import com.google.devsite.components.impl.DefaultLink
 import com.google.devsite.components.symbols.TypeProjectionComponent
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.anchor
+import com.google.devsite.renderer.converters.isHoistedFromCompanion
 import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.renderer.impl.DocumentablesGraph
 import org.jetbrains.dokka.links.DRI
+import org.jetbrains.dokka.links.parent
+import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DEnumEntry
 import org.jetbrains.dokka.model.Documentable
 import java.nio.file.Paths
@@ -35,6 +38,9 @@ private val NON_DOCUMENTABLE_PACKAGES = listOf(
 
 /** Converts various inputs to output file paths. */
 internal interface FilePathProvider {
+
+    /** The language the docs are displayed in, which impacts some paths */
+    val language: Language
 
     /** The DokkaLocationProvider that is used to provide locations of external documentation */
     val locationProvider: ExternalDokkaLocationProvider?
@@ -121,6 +127,15 @@ internal interface FilePathProvider {
             return ReferencePath(typeName, "$outerTypeUrl#$innerClassName")
         }
 
+        // If this is the child of a companion object that is documented on the page of the
+        // companion's containing class, link to the class page instead of the companion page.
+        if (symbol != null && outerClassName != null && documentable != null &&
+            isCompanion(dri.parent) && documentable.isHoistedFromCompanion(language)
+        ) {
+            val outerTypeUrl = forType(packageName, outerClassName)
+            return ReferencePath(symbol.name, "$outerTypeUrl#${symbol.anchor()}")
+        }
+
         return if (symbol == null) {
             ReferencePath(typeName, typeUrl)
         } else {
@@ -133,6 +148,15 @@ internal interface FilePathProvider {
      */
     fun findInDocumentablesGraph(dri: DRI): Documentable? {
         return documentablesGraph[dri]
+    }
+
+    /**
+     * Checks if the [dri] represents a companion object based on if the parent is a class and
+     * has a companion with an identical DRI.
+     */
+    fun isCompanion(dri: DRI): Boolean {
+        val parentDocumentable = findInDocumentablesGraph(dri.parent)
+        return parentDocumentable is DClass && parentDocumentable.companion?.dri == dri
     }
 
     data class ReferencePath(val name: String, val url: String)

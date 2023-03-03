@@ -37,7 +37,7 @@
       </table>
     </div>
     <hr>
-    <p>A <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a></code> that will perform dispatch during a <code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.html#handler()">handler</a></code> callback or <code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.html#choreographer()">choreographer</a></code>'s animation frame stage, whichever comes first. Use <code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.Companion.html#Main()">Main</a></code> to obtain a dispatcher for the process's main thread (i.e. the activity thread) or <code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.Companion.html#CurrentThread()">CurrentThread</a></code> to obtain a dispatcher for the current thread.</p>
+    <p>A <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a></code> that will perform dispatch during a <code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.html#handler()">handler</a></code> callback or <code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.html#choreographer()">choreographer</a></code>'s animation frame stage, whichever comes first. Use <code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.html#Main()">Main</a></code> to obtain a dispatcher for the process's main thread (i.e. the activity thread) or <code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.html#CurrentThread()">CurrentThread</a></code> to obtain a dispatcher for the current thread.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -54,14 +54,14 @@
           <tr>
             <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.Companion.html#CurrentThread()">CurrentThread</a></code></div>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.html#CurrentThread()">CurrentThread</a></code></div>
               <p>The canonical <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code> containing the <code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.html">AndroidUiDispatcher</a></code> and its <code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.html#frameClock()">frameClock</a></code> for the calling thread.</p>
             </td>
           </tr>
           <tr>
             <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.Companion.html#Main()">Main</a></code></div>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.html#Main()">Main</a></code></div>
               <p>The <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code> containing the <code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.html">AndroidUiDispatcher</a></code> and its <code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.html#frameClock()">frameClock</a></code> for the process's main thread.</p>
             </td>
           </tr>
@@ -272,13 +272,13 @@
       <h2>Public companion properties</h2>
       <div class="api-item"><a name="getCurrentThread()"></a><a name="setCurrentThread()"></a><a name="getCurrentThread--"></a><a name="setCurrentThread--"></a>
         <h3 class="api-name" id="CurrentThread()">CurrentThread</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.Companion.html#CurrentThread()">CurrentThread</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></pre>
-        <p>The canonical <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code> containing the <code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.html">AndroidUiDispatcher</a></code> and its <code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.html#frameClock()">frameClock</a></code> for the calling thread. Returns <code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.Companion.html#Main()">Main</a></code> if accessed from the process's main thread.</p>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.html#CurrentThread()">CurrentThread</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></pre>
+        <p>The canonical <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code> containing the <code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.html">AndroidUiDispatcher</a></code> and its <code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.html#frameClock()">frameClock</a></code> for the calling thread. Returns <code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.html#Main()">Main</a></code> if accessed from the process's main thread.</p>
         <p>Throws <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code> if the calling thread does not have both a <code><a href="https://developer.android.com/reference/android/view/Choreographer.html">Choreographer</a></code> and an active <code><a href="https://developer.android.com/reference/android/os/Looper.html">Looper</a></code>.</p>
       </div>
       <div class="api-item"><a name="getMain()"></a><a name="setMain()"></a><a name="getMain--"></a><a name="setMain--"></a>
         <h3 class="api-name" id="Main()">Main</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.Companion.html#Main()">Main</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></pre>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.html#Main()">Main</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></pre>
         <p>The <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code> containing the <code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.html">AndroidUiDispatcher</a></code> and its <code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.html#frameClock()">frameClock</a></code> for the process's main thread.</p>
       </div>
     </div>

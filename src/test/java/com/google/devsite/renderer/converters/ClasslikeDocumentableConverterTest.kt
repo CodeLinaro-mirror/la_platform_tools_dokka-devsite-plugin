@@ -2769,8 +2769,12 @@ internal class ClasslikeDocumentableConverterTest(
             val companionFun = companionObject.data.publicFunctionsSummary.single()
             assertThat(companionFun.name()).isEqualTo("companionFun")
             javaOnly { assertThat(companionFun.modifiers()).contains("static") }
-            assertThat(companionFun.urlSuffix())
-                .isEqualTo("Container.Companion.html#companionFun()")
+            // For Kotlin source and display only, the link is hoisted to the containing class
+            if (module == moduleJ || displayLanguage == Language.JAVA)
+                assertThat(companionFun.urlSuffix())
+                    .isEqualTo("Container.Companion.html#companionFun()")
+            else
+                assertThat(companionFun.urlSuffix()).isEqualTo("Container.html#companionFun()")
 
             val companionObjectSignature = companionObject.data.description.data.primarySignature
             if (displayLanguage == Language.KOTLIN && module == moduleK)
@@ -2787,10 +2791,7 @@ internal class ClasslikeDocumentableConverterTest(
             assertThat(hoistedField.name()).isEqualTo("hoistedField")
             javaOnly { assertThat(hoistedField.modifiers()).contains("static") }
             kotlinOnly { assertThat(hoistedField.modifiers()).contains("const") }
-            if (module == moduleJ)
-                assertThat(hoistedField.urlSuffix()).isEqualTo("Container.html#hoistedField()")
-            else assertThat(hoistedField.urlSuffix())
-                .isEqualTo("Container.Companion.html#hoistedField()")
+            assertThat(hoistedField.urlSuffix()).isEqualTo("Container.html#hoistedField()")
         }
     }
 
