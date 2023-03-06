@@ -153,7 +153,7 @@ internal abstract class ClasslikeDocumentableConverter(
         }
         val constantsSummary = async {
             propertiesToSummary(
-                constantsTitle(), (declaredProperties + companionProperties).constants()
+                constantsTitle(), declaredProperties.constants()
             )
         }
         val publicPropertiesSummary = async {
@@ -221,7 +221,7 @@ internal abstract class ClasslikeDocumentableConverter(
             async { enumValuesToDetail(it, enumValues) }
         }
         val constantsDetails =
-            async { propertiesToDetail((declaredProperties + companionProperties).constants()) }
+            async { propertiesToDetail(declaredProperties.constants()) }
         val publicPropertiesDetails =
             async { propertiesToDetail(declaredProperties.filter(::isPublicNonConst)) }
         val protectedPropertiesDetails =
@@ -610,7 +610,7 @@ internal abstract class ClasslikeDocumentableConverter(
     /**
      * Creates a list of properties which are declared on the classlike.
      *
-     * For Kotlin docs, this is just the list of [initialProperties].
+     * For Kotlin docs, this is the list of [initialProperties] and constant [companionProperties].
      *
      * For Java, the list is modified based on @Jvm annotations, and some properties are not
      * included because they are converted to getters and setters. Some [companionProperties] are
@@ -621,7 +621,9 @@ internal abstract class ClasslikeDocumentableConverter(
         initialProperties: List<DProperty>,
         companionProperties: List<DProperty>
     ): List<DProperty> {
-        if (displayLanguage == Language.KOTLIN) return initialProperties
+        if (displayLanguage == Language.KOTLIN) {
+            return initialProperties + companionProperties.constants()
+        }
 
         // Java documentation needs to respect @jvm* annotations
         val properties = initialProperties.filterOutJvmSynthetic().filter { it.isPropertyInJava() }
@@ -633,19 +635,16 @@ internal abstract class ClasslikeDocumentableConverter(
             // and setters on the companion (or both), so a companion always has no properties.
             emptyList()
         } else if (classlike is DObject) {
-            val (static, nonStatic) = properties.partition { it.objectPropertyNeedsStaticInJava() }
+            val (static, nonStatic) = properties.partition { it.objectPropertyHoistedInJava() }
             nonStatic + objectInstanceProperty +
                 // Inject the @JvmStatic annotation to properties that need it
                 static.map { it.addAnnotation(JvmStatic) }
         } else {
             // Classlikes that are not (top-level) objects
             properties +
-                // Constants are documented in a separate section than other properties, so these
-                // do not have @JvmStatic injected like the other companion properties.
-                companionProperties.filter { it.isConstant() } +
-                companionProperties.filter { it.objectPropertyNeedsStaticInJava() }.map {
-                    // It is technically incorrect to put @JvmStatic on a property, but we use this
-                    // to remember that we should later inject the `static` modifier to this
+                // It is technically incorrect to put @JvmStatic on a property, but we use this
+                // to remember that we should later inject the `static` modifier to this
+                companionProperties.filter { it.objectPropertyHoistedInJava() }.map {
                     it.addAnnotation(JvmStatic)
                 }
         }
@@ -1116,7 +1115,7 @@ private fun isProtectedNonConst(prop: DProperty) = isProtected(prop) && !prop.is
 private fun DFunction.isSuspendFunction() =
     type.isSuspend() || parameters.any { it.type.isSuspend() }
 
-private fun List<DProperty>.constants() = filter { it.isConstant() }.toSet().toList()
+private fun List<DProperty>.constants() = filter { it.isConstant() }
 
 internal fun nestedTypesTitle() = "Nested types"
 
