@@ -76,15 +76,15 @@ public class JavaStatics {
         // athing = TopLevelMultiInheritingObject.getMessage(); // Non-static method; static context
         athing = TopLevelMultiInheritingObject.multiInheritingTopLevelConst;
         athing = TopLevelMultiInheritingObject.multiInheritingTopLevelField;
-        athing = ContainerOfBoring.boringCompanionConst;                        // Parent Only
-        athing = ContainerOfBoring.boringCompanionStaticField;                  // Parent Only
-        athing = ContainerOfBoring.boringCompanionStaticField2;                 // Parent Only
-        athing = ContainerOfBoring.getBoringCompanionStaticProp();              // Is Duplicated
-        athing = ContainerOfBoring.boringCompanionStaticFun();                  // Is Duplicated
-        athing = ContainerOfBoring.Companion.getBoringCompanionStaticProp();    // Is Duplicated
-        athing = ContainerOfBoring.Companion.boringCompanionStaticFun();        // Is Duplicated
-        athing = ContainerOfBoring.Companion.getBoringCompanionObjectProp();    // Companion Only
-        athing = ContainerOfBoring.Companion.boringCompanionObjectFun();        // Companion Only
+        athing = ContainerOfKotlinBoring.boringCompanionConst;                        // Parent Only
+        athing = ContainerOfKotlinBoring.boringCompanionStaticField;                  // Parent Only
+        athing = ContainerOfKotlinBoring.boringCompanionStaticField2;                 // Parent Only
+        athing = ContainerOfKotlinBoring.getBoringCompanionStaticProp();              // Is Duplicated
+        athing = ContainerOfKotlinBoring.boringCompanionStaticFun();                  // Is Duplicated
+        athing = ContainerOfKotlinBoring.Companion.getBoringCompanionStaticProp();    // Is Duplicated
+        athing = ContainerOfKotlinBoring.Companion.boringCompanionStaticFun();        // Is Duplicated
+        athing = ContainerOfKotlinBoring.Companion.getBoringCompanionObjectProp();    // Companion Only
+        athing = ContainerOfKotlinBoring.Companion.boringCompanionObjectFun();        // Companion Only
         // athing = ContainerOfBoring.Companion.INSTANCE;   // not generated for companions
         athing = ContainerOfNamed.namedCompanionConst;                          // Parent Only
         athing = ContainerOfNamed.getNamedCompanionStaticProp();                // Is Duplicated
@@ -123,6 +123,13 @@ public class JavaStatics {
      //   astring = ContainerOfLateinit.Companion.companionNotLateInitVar;
      //   astring = ContainerOfLateinit.Companion.companionLateInitVar;
      //   astring = ContainerOfLateinit.Companion.companionStaticLateInitVar;
+
+        // astring = ContainerOfLateinit.Companion.companionLateInitVarWithStaticAccessors;
+        astring = ContainerOfLateinit.companionLateInitVarWithStaticAccessors;
+        astring = ContainerOfLateinit.Companion.getCompanionLateInitVarWithStaticAccessors();
+        astring = ContainerOfLateinit.getCompanionLateInitVarWithStaticAccessors();
+        ContainerOfLateinit.Companion.setCompanionLateInitVarWithStaticAccessors(astring);
+        ContainerOfLateinit.setCompanionLateInitVarWithStaticAccessors(astring);
 
         // In conclusion, lateinit vars have a hoisted public static backing field
         // but not a hoisted public static getter

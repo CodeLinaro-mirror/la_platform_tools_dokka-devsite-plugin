@@ -104,7 +104,7 @@ internal class DocumentablesHolder(
     private val typeAliases = mutableMapOf<DRI, Deferred<List<DTypeAlias>>>()
     private val exceptions = mutableMapOf<DRI, Deferred<List<DClass>>>()
     private val companions = mutableMapOf<DRI, Deferred<Map<DRI, DObject>>>()
-    private val interestingKotlinObjects = mutableMapOf<DRI, Deferred<List<DObject>>>()
+    private val interestingObjects = mutableMapOf<DRI, Deferred<List<DObject>>>()
     private val extensionFunctionMap = scope.async { computeExtensionFunctionMap() }
     private val extensionPropertyMap = scope.async { computeExtensionPropertyMap() }
 
@@ -126,8 +126,8 @@ internal class DocumentablesHolder(
                 val companionsMap = async {
                     computeCompanions(children.await().filterIsInstance<WithCompanion>())
                 }
-                val interestingKotlinObjectsList = async {
-                    computeInterestingObjectsForKotlin(
+                val interestingObjectsList = async {
+                    computeInterestingObjects(
                         children.await().filterIsInstance<DObject>(),
                         companionsMap.await().keys
                     )
@@ -156,7 +156,7 @@ internal class DocumentablesHolder(
                 annotations[dPackage.dri] = annotationList
                 typeAliases[dPackage.dri] = typeAliasList
                 exceptions[dPackage.dri] = exceptionList
-                interestingKotlinObjects[dPackage.dri] = interestingKotlinObjectsList
+                interestingObjects[dPackage.dri] = interestingObjectsList
                 companions[dPackage.dri] = companionsMap
             }
         }
@@ -200,7 +200,7 @@ internal class DocumentablesHolder(
 
     suspend fun classlikesFor(dPackage: DPackage, displayLanguage: Language): List<DClasslike> {
         val classlikes = classlikes.getValue(dPackage.dri).await()
-            .filterNot { shouldNotBeDisplayed(it, displayLanguage) }
+            .filterNot { shouldNotBeDisplayed(it) }
         val syntheticClasses = syntheticClasses.getValue(dPackage.dri).await()
         return if (displayLanguage == Language.JAVA) {
             classlikes
@@ -212,17 +212,12 @@ internal class DocumentablesHolder(
     /**
      * Returns a classlike's nested classlikes.
      * Does not include should-not-be-documented Documentables.
-     * Currently, this means only as-Kotlin fully-hoistable companion objects
      */
-    suspend fun nestedClasslikesFor(classlike: DClasslike, displayLanguage: Language):
-        List<DClasslike> {
+    suspend fun nestedClasslikesFor(classlike: DClasslike): List<DClasslike> {
         nestedClasslikesJob.join()
         val theseNestedClasslikes = nestedClasslikes.getValue(classlike.dri).await()
-        // When displaying Kotlin pages, anonymous companion functions will be inlined and the
-        // link to the companion object can be omitted. Named companion objects are presumably
-        // intended to be viewable as first-class elements. Similar for companion objects which
-        // inherit from another type.
-        return theseNestedClasslikes.filterNot { shouldNotBeDisplayed(it, displayLanguage) }
+        // Remove boring companions, as defined by [shouldNotBeDisplayed]
+        return theseNestedClasslikes.filterNot { shouldNotBeDisplayed(it) }
     }
 
     suspend fun classesFor(dPackage: DPackage, displayLanguage: Language): List<DClass> {
@@ -251,7 +246,7 @@ internal class DocumentablesHolder(
         exceptions.getValue(dPackage.dri).await()
 
     suspend fun interestingObjectsFor(dPackage: DPackage) =
-        interestingKotlinObjects.getValue(dPackage.dri).await()
+        interestingObjects.getValue(dPackage.dri).await()
 
     suspend fun extensionFunctionsFor(dClasslike: DClasslike) =
         extensionFunctionMap.await().getOrDefault(dClasslike.dri, emptyList())
@@ -441,18 +436,16 @@ internal class DocumentablesHolder(
     private fun computeCompanions(docs: List<WithCompanion>) =
         docs.mapNotNull { it.companion }.associateBy { it.dri }
 
-    /** Computes the list of objects that are interesting in Kotlin */
-    private suspend fun computeInterestingObjectsForKotlin(
+    /** Computes the list of objects that are interesting in the display language */
+    private suspend fun computeInterestingObjects(
         allObjects: List<DObject>,
         companions: Set<DRI>
     ): List<DObject> {
-
         // Un-ordinary companions are companions, but also appear in the ToC.
-        val (boringObjects, interestingObjects) =
-            allObjects.partition { shouldNotBeDisplayed(it, Language.KOTLIN) }
+        val interestingObjects = allObjects.filter { !it.isBoringCompanion() }
         // Error-level enforcement that non-companion objects aren't named 'Companion'
-        // Thus, we can elsewhere freely use `isOrdinaryCompanion` without checking companionhood.
-        (boringObjects.map { it.dri } - companions).forEach {
+        // Thus, we can elsewhere freely use `isBoringCompanion` without checking companionhood.
+        (allObjects.filter { it.name == "Companion" }.map { it.dri } - companions).forEach {
             throw RuntimeException(
                 "Object with illegal name: named 'Companion' but is not a companion object: $it."
             )
@@ -474,7 +467,7 @@ internal class DocumentablesHolder(
      * Returns true: is both a companion and uninteresting
      * Returns false: either is not a companion, or is interesting
      */
-    private suspend fun DObject.isOrdinaryCompanion(displayLanguage: Language): Boolean =
+    private suspend fun DObject.isBoringCompanion(): Boolean =
         name == "Companion" &&
             supertypes.all { it.value.isEmpty() } &&
             children.all { it.isHoistedFromCompanion(displayLanguage) } &&
@@ -487,9 +480,10 @@ internal class DocumentablesHolder(
             extensionPropertiesFor(this).isEmpty()
 
     /**
-     * Determines whether the [classlike] should not be displayed in the given [displayLanguage],
-     * which is true for ordinary companion objects in Kotlin.
+     * Determines whether the [classlike] should not be displayed, which is true for objects that
+     * aren't considered interesting.
      */
-    internal suspend fun shouldNotBeDisplayed(classlike: DClasslike, displayLanguage: Language) =
-        classlike is DObject && classlike.isOrdinaryCompanion(displayLanguage)
+    internal suspend fun shouldNotBeDisplayed(classlike: DClasslike) =
+        // TODO: can this reuse `interestingObjects` instead of calling `isBoringCompanion` again?
+        classlike is DObject && classlike.isBoringCompanion()
 }

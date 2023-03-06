@@ -1467,8 +1467,6 @@ internal class ClasslikeDocumentableConverterTest(
             |}
         """.render()
         val classlikeK = moduleK.page().data.content
-        // Companion class is included in both modules
-        val companionK = moduleK.page("Companion").data.content
 
         val classlikeJ = """
             |public class Foo {
@@ -1496,6 +1494,7 @@ internal class ClasslikeDocumentableConverterTest(
             assertThat(companionProperties).hasSize(1)
         }
         javaOnly {
+            val companionK = moduleK.page("Companion").data.content
             // nested companion object is documented but companion functions are not inlined
             assertThat(companionK.data.publicPropertiesDetails).isEmpty()
             assertThat(companionK.data.publicFunctionsDetails.map { it.data.name })
@@ -2827,7 +2826,7 @@ internal class ClasslikeDocumentableConverterTest(
             |   fun topObjectFun() = 5
             |}
             |class Container {
-            |   companion object {
+            |   companion object ContainerCompanion {
             |       fun companionFun() = 5
             |       const val hoistedField = 5
             |   }
@@ -2835,7 +2834,7 @@ internal class ClasslikeDocumentableConverterTest(
         """.render()
         val sourceJ = javaHeader("Container") + """
             |public class Container {
-            |   public static class Companion {
+            |   public static class ContainerCompanion {
             |      public static int companionFun() {}
             |   }
             |   public static final int hoistedField = 5
@@ -2902,13 +2901,13 @@ internal class ClasslikeDocumentableConverterTest(
             }
 
             // companion <-> inner static class
-            val companionObject = module.page("Companion").data.content
+            val companionObject = module.page("ContainerCompanion").data.content
             val companionFun = companionObject.data.publicFunctionsSummary.single()
             assertThat(companionFun.name()).isEqualTo("companionFun")
             javaOnly { assertThat(companionFun.modifiers()).contains("static") }
             if (module == moduleJ || displayLanguage == Language.JAVA)
                 assertThat(companionFun.urlSuffix())
-                    .isEqualTo("Container.Companion.html#companionFun()")
+                    .isEqualTo("Container.ContainerCompanion.html#companionFun()")
             // For Kotlin source and display only, the link is hoisted to the containing class
             else
                 assertThat(companionFun.urlSuffix()).isEqualTo("Container.html#companionFun()")

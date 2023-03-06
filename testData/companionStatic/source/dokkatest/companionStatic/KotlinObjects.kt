@@ -81,15 +81,23 @@ object TopLevelMultiInheritingObject : Exception(), Comparator<TopLevelMultiInhe
         TODO("Not implemented")
     }
 }
-open class ContainerOfBoring {
+open class ContainerOfKotlinBoring {
     companion object {
-        fun boringCompanionObjectFun() = 2
-        protected val boringCompanionObjectProp = 1
-        @JvmStatic protected fun boringCompanionStaticFun() = 0.8
-        @JvmStatic val boringCompanionStaticProp = 0.6
-        @JvmField val boringCompanionStaticField = 0.4
-        @JvmField protected val boringCompanionStaticField2 = 0.2
-        protected const val boringCompanionConst = 0.1
+        fun kotlinBoringCompanionObjectFun() = 2
+        protected val kotlinBoringCompanionObjectProp = 1
+        @JvmStatic protected fun kotlinBoringCompanionStaticFun() = 0.8
+        @JvmStatic val kotlinBoringCompanionStaticProp = 0.6
+        @JvmField val kotlinBoringCompanionStaticField = 0.4
+        @JvmField protected val kotlinBoringCompanionStaticField2 = 0.2
+        protected const val kotlinBoringCompanionConst = 0.1
+    }
+}
+
+open class ContainerOfAlwaysBoring {
+    companion object {
+        @JvmStatic fun alwaysBoringCompanionStaticFun() = 0
+        @JvmField val alwaysBoringCompanionStaticField = 0
+        protected const val alwaysBoringCompanionConst = 0
     }
 }
 open class ContainerOfNamed {
@@ -115,6 +123,7 @@ open class ContainerOfLateinit {
         var companionNotLateInitVar = "String"
         lateinit var companionLateInitVar: String
         @JvmStatic lateinit var companionStaticLateInitVar: String
+        @get:JvmStatic @set:JvmStatic lateinit var companionLateInitVarWithStaticAccessors: String
     }
 }
 
@@ -128,14 +137,14 @@ open class ContainerOfWithNested {
 private fun tests() {
     assert(JavaStatics.classStaticFunction() == 999)
     assert(JavaStatics.classStaticProp == 999)
-    assert(ContainerOfBoring.boringCompanionStaticField == 999.0)           // Is Duplicated
-    assert(ContainerOfBoring.Companion.boringCompanionStaticField == 999.0) // Is Duplicated
+    assert(ContainerOfKotlinBoring.kotlinBoringCompanionStaticField == 999.0)           // Is Duplicated
+    assert(ContainerOfKotlinBoring.Companion.kotlinBoringCompanionStaticField == 999.0) // Is Duplicated
     assert(ContainerOfNamed.namedCompanionConst == 999.0)                   // Is Duplicated
     assert(ContainerOfNamed.NamedCompanion.namedCompanionConst == 999.0)    // Is Duplicated
     // Not valid; named companions can't be accessed as Companion. However, they should still be in
     // the "Companion properties" section because they can be accessed as Container.theProp.
     // assert(ContainerOfNamed.Companion.namedCompanionConst == 999.0)
-    assert(ContainerOfBoring.boringCompanionObjectFun() == 999)
+    assert(ContainerOfKotlinBoring.kotlinBoringCompanionObjectFun() == 999)
 
     assert(JavaStatics.InnerJavaStatics().notStaticInnerFun() == 999)
     assert(JavaStatics.InnerJavaStatics().notStaticinnerField == 999)

@@ -145,7 +145,7 @@ internal abstract class ClasslikeDocumentableConverter(
         val nestedTypesSummary = async {
             nestedTypesToSummary(
                 // These are filtered for not-shown classlikes when accessed
-                docsHolder.nestedClasslikesFor(classlike, displayLanguage),
+                docsHolder.nestedClasslikesFor(classlike),
                 docsHolder.classGraph()
             )
         }
