@@ -257,6 +257,7 @@ internal abstract class ConverterTestBase(
     ): Pair<DocumentablesHolder, FilePathProvider> {
         val holder = runBlocking {
             DocumentablesHolder(
+                displayLanguage,
                 module,
                 this,
                 context = context,

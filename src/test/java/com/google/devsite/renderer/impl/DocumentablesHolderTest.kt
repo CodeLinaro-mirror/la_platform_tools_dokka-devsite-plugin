@@ -17,14 +17,20 @@
 package com.google.devsite.renderer.impl
 
 import com.google.common.truth.Truth
+import com.google.devsite.renderer.Language
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DPackage
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.Parameterized
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 
-class DocumentablesHolderTest {
+@RunWith(Parameterized::class)
+class DocumentablesHolderTest(
+    private val displayLanguage: Language
+) {
     private val packageA = mock<DPackage> {
         on { name } doReturn "com.example.a"
         on { packageName } doReturn "com.example.a"
@@ -49,7 +55,9 @@ class DocumentablesHolderTest {
     fun `computePackages returns list of packages sorted by package name`() {
         val expected = listOf("com.example.a", "com.example.b", "com.example.c", "com.exclude.a")
             .toTypedArray()
-        val packages = runBlocking { DocumentablesHolder(module, this).packages() }
+        val packages = runBlocking {
+            DocumentablesHolder(displayLanguage, module, this).packages()
+        }
         val result = packages.map { it.packageName }.toTypedArray()
         Truth.assertThat(result).isEqualTo(expected)
     }
@@ -63,6 +71,7 @@ class DocumentablesHolderTest {
         )
         val packages = runBlocking {
             DocumentablesHolder(
+                displayLanguage,
                 module,
                 this,
                 excludedPackages = excludedPackages
@@ -70,5 +79,14 @@ class DocumentablesHolderTest {
         }
         val result = packages.map { it.packageName }.toTypedArray()
         Truth.assertThat(result).isEqualTo(expected)
+    }
+
+    companion object {
+        @JvmStatic
+        @Parameterized.Parameters(name = "{0}")
+        fun data() = listOf(
+            arrayOf(Language.JAVA),
+            arrayOf(Language.KOTLIN)
+        )
     }
 }

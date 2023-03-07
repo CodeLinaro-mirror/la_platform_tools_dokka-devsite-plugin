@@ -80,6 +80,7 @@ import java.util.concurrent.atomic.AtomicInteger
  * All doc rewriting should occur here.
  */
 internal class DocumentablesHolder(
+    val displayLanguage: Language,
     module: DModule,
     scope: CoroutineScope,
     context: DokkaContext? = null,

@@ -64,6 +64,7 @@ internal class MultiLanguageRenderer(
             )
             val fileMetadataMap = LibraryMetadata.convertJsonMetadataToFileMap(libraryMetadataArray)
             val jHolder = DocumentablesHolder(
+                displayLanguage = Language.JAVA,
                 module = module,
                 scope = this,
                 context = context,
@@ -74,6 +75,7 @@ internal class MultiLanguageRenderer(
                 annotationsNotToDisplay = devsiteConfiguration.allAnnotationsNotToDisplayJava
             )
             val kHolder = DocumentablesHolder(
+                displayLanguage = Language.KOTLIN,
                 module = module,
                 scope = this,
                 context = context,

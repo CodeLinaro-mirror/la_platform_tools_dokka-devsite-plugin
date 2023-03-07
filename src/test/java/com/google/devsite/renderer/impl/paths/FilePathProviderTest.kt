@@ -17,15 +17,23 @@
 package com.google.devsite.renderer.impl.paths
 
 import com.google.common.truth.Truth.assertThat
+import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.links.Callable
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.TypeConstructor
+import org.jetbrains.dokka.model.DModule
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.Parameterized
 
-internal class FilePathProviderTest : ConverterTestBase() {
+@RunWith(Parameterized::class)
+internal class FilePathProviderTest(
+    private val displayLanguage: Language
+) : ConverterTestBase(displayLanguage) {
 
     val pathProvider = pathProvider(externalLocationProvider = externalProvider)
 
@@ -145,7 +153,7 @@ internal class FilePathProviderTest : ConverterTestBase() {
                  }
             }
         """.trimIndent().render()
-        val classGraph = runBlocking { DocumentablesHolder(module, this).classGraph() }
+        val classGraph = classGraph(module)
         val dri = DRI(
             packageName = "androidx.example",
             classNames = "Outer.Inner.FOO",
@@ -206,7 +214,7 @@ internal class FilePathProviderTest : ConverterTestBase() {
         val module = """
             |class Foo {}
         """.trimIndent().render()
-        val classGraph = runBlocking { DocumentablesHolder(module, this).classGraph() }
+        val classGraph = classGraph(module)
         val dri = DRI(
             packageName = "androidx.example",
             classNames = "Foo",
@@ -227,7 +235,7 @@ internal class FilePathProviderTest : ConverterTestBase() {
             |    class Inner {}
             |}
         """.trimIndent().render()
-        val classGraph = runBlocking { DocumentablesHolder(module, this).classGraph() }
+        val classGraph = classGraph(module)
         val dri = DRI(
             packageName = "androidx.example",
             classNames = "Outer.Inner",
@@ -246,7 +254,7 @@ internal class FilePathProviderTest : ConverterTestBase() {
         val module = """
             |class A { class B { class C { class D {} } } }
         """.trimIndent().render()
-        val classGraph = runBlocking { DocumentablesHolder(module, this).classGraph() }
+        val classGraph = classGraph(module)
         val dri = DRI(
             packageName = "androidx.example",
             classNames = "A.B.C.D",
@@ -269,7 +277,7 @@ internal class FilePathProviderTest : ConverterTestBase() {
             |    }
             |}
         """.trimIndent().render()
-        val classGraph = runBlocking { DocumentablesHolder(module, this).classGraph() }
+        val classGraph = classGraph(module)
         val dri = DRI(
             packageName = "androidx.example",
             classNames = "Foo.Companion",
@@ -280,31 +288,36 @@ internal class FilePathProviderTest : ConverterTestBase() {
             classGraph = classGraph
         ).forReference(dri)
         assertThat(reference.name).isEqualTo("hoistedVal")
-        assertThat(reference.url).isEqualTo("/reference/androidx/example/Foo.html#hoistedVal()")
+        assertThat(reference.url.urlSuffix()).isEqualTo("Foo.html#hoistedVal()")
     }
 
     @Test
-    fun `Reference to non-hoisted companion function goes to the companion page`() {
+    fun `Reference to non-hoisted in Java companion function goes to the companion page in Java`() {
+        val funName = "nonHoistedInJavaFun"
         val module = """
             |class Foo {
             |    companion object {
-            |        fun nonHoistedFun() = Unit
+            |        fun $funName() = Unit
             |    }
             |}
         """.trimIndent().render()
-        val classGraph = runBlocking { DocumentablesHolder(module, this).classGraph() }
+        val classGraph = classGraph(module)
         val dri = DRI(
             packageName = "androidx.example",
             classNames = "Foo.Companion",
-            callable = Callable(name = "nonHoistedFun", params = emptyList())
+            callable = Callable(name = funName, params = emptyList())
         )
         val reference = pathProvider(
             externalLocationProvider = null,
             classGraph = classGraph
         ).forReference(dri)
-        assertThat(reference.name).isEqualTo("nonHoistedFun")
-        assertThat(reference.url)
-            .isEqualTo("/reference/androidx/example/Foo.Companion.html#nonHoistedFun()")
+        assertThat(reference.name).isEqualTo(funName)
+        // All functions are hoisted in Kotlin
+        val expected = when (displayLanguage) {
+            Language.JAVA -> "Foo.Companion.html#$funName()"
+            Language.KOTLIN -> "Foo.html#$funName()"
+        }
+        assertThat(reference.url.urlSuffix()).isEqualTo(expected)
     }
 
     @Test
@@ -316,7 +329,7 @@ internal class FilePathProviderTest : ConverterTestBase() {
             |    }
             |}
         """.trimIndent().render()
-        val classGraph = runBlocking { DocumentablesHolder(module, this).classGraph() }
+        val classGraph = classGraph(module)
         val dri = DRI(
             packageName = "androidx.example",
             classNames = "Foo.FooCompanion",
@@ -327,20 +340,20 @@ internal class FilePathProviderTest : ConverterTestBase() {
             classGraph = classGraph
         ).forReference(dri)
         assertThat(reference.name).isEqualTo("hoistedFun")
-        assertThat(reference.url)
-            .isEqualTo("/reference/androidx/example/Foo.html#hoistedFun()")
+        assertThat(reference.url.urlSuffix()).isEqualTo("Foo.html#hoistedFun()")
     }
 
     @Test
-    fun `Reference to non-hoisted property of named companion goes to the companion page`() {
+    fun `Reference to non-hoisted in Java companion property goes to the companion page in Java`() {
+        val propertyName = "nonHoistedVal"
         val module = """
             |class Foo {
             |    companion object FooCompanion {
-            |        val nonHoistedVal = 0
+            |        val $propertyName = 0
             |    }
             |}
         """.trimIndent().render()
-        val classGraph = runBlocking { DocumentablesHolder(module, this).classGraph() }
+        val classGraph = classGraph(module)
         val dri = DRI(
             packageName = "androidx.example",
             classNames = "Foo.FooCompanion",
@@ -350,8 +363,28 @@ internal class FilePathProviderTest : ConverterTestBase() {
             externalLocationProvider = null,
             classGraph = classGraph
         ).forReference(dri)
-        assertThat(reference.name).isEqualTo("nonHoistedVal")
-        assertThat(reference.url)
-            .isEqualTo("/reference/androidx/example/Foo.FooCompanion.html#nonHoistedVal()")
+        assertThat(reference.name).isEqualTo(propertyName)
+        // All properties are hoisted in Kotlin
+        val expected = when (displayLanguage) {
+            Language.JAVA -> "Foo.FooCompanion.html#$propertyName()"
+            Language.KOTLIN -> "Foo.html#$propertyName()"
+        }
+        assertThat(reference.url.urlSuffix()).isEqualTo(expected)
+    }
+
+    private fun classGraph(module: DModule): ClassGraph =
+        runBlocking {
+            DocumentablesHolder(displayLanguage, module, this).classGraph()
+        }
+
+    private fun String.urlSuffix() = substringAfter("example/")
+
+    companion object {
+        @JvmStatic
+        @Parameterized.Parameters(name = "{0}")
+        fun data() = listOf(
+            arrayOf(Language.JAVA),
+            arrayOf(Language.KOTLIN)
+        )
     }
 }
