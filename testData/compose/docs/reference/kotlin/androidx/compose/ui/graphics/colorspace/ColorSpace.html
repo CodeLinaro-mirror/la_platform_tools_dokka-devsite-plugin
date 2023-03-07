@@ -26,7 +26,7 @@
               <tr>
                 <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/Rgb.html">Rgb</a></code></td>
                 <td>
-                  <p>An RGB color space is an additive color space using the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorModel.Companion.html#Rgb()">RGB</a></code> color model (a color is therefore represented by a tuple of 3 numbers).</p>
+                  <p>An RGB color space is an additive color space using the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorModel.html#Rgb()">RGB</a></code> color model (a color is therefore represented by a tuple of 3 numbers).</p>
                 </td>
               </tr>
             </tbody>
@@ -35,7 +35,7 @@
       </div>
 </devsite-expandable>    </div>
     <hr>
-    <p>A <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code> is used to identify a specific organization of colors. Each color space is characterized by a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorModel.html">color model</a></code> that defines how a color value is represented (for instance the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorModel.Companion.html#Rgb()">RGB</a></code> color model defines a color value as a triplet of numbers).</p>
+    <p>A <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code> is used to identify a specific organization of colors. Each color space is characterized by a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorModel.html">color model</a></code> that defines how a color value is represented (for instance the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorModel.html#Rgb()">RGB</a></code> color model defines a color value as a triplet of numbers).</p>
     <p>Each component of a color must fall within a valid range, specific to each color space, defined by <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMinValue(kotlin.Int)">getMinValue</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMaxValue(kotlin.Int)">getMaxValue</a></code> This range is commonly <code>[0..1]</code>. While it is recommended to use values in the valid range, a color space always clamps input and output values when performing operations such as converting to a different color space.</p>
     <h3> Using color spaces</h3>
     <p>This implementation provides a pre-defined set of common color spaces described in the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpaces.html">ColorSpaces</a></code> object.</p>
@@ -608,7 +608,7 @@ val connector = ColorSpaces.CieLab.connect(ColorSpaces.Bt709)</pre>
       <div class="api-item"><a name="toXyz-kotlin.FloatArray-"></a><a name="toxyz"></a>
         <h3 class="api-name" id="toXyz(kotlin.FloatArray)">toXyz</h3>
         <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html#toXyz(kotlin.FloatArray)">toXyz</a>(v:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float-array/index.html">FloatArray</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float-array/index.html">FloatArray</a></pre>
-        <p>Converts a color value from this color space's model to tristimulus CIE XYZ values. If the color model of this color space is not <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorModel.Companion.html#Rgb()">RGB</a></code>, it is assumed that the target CIE XYZ space uses a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/Illuminant.html#D50()">D50</a></code> standard illuminant.</p>
+        <p>Converts a color value from this color space's model to tristimulus CIE XYZ values. If the color model of this color space is not <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorModel.html#Rgb()">RGB</a></code>, it is assumed that the target CIE XYZ space uses a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/Illuminant.html#D50()">D50</a></code> standard illuminant.</p>
         <p>The specified array's length  must be at least equal to to the number of color components as returned by <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorModel.html#componentCount()">ColorModel.componentCount</a></code>.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -679,8 +679,8 @@ val connector = ColorSpaces.CieLab.connect(ColorSpaces.Bt709)</pre>
       <div class="api-item"><a name="toXyz(kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="toXyz-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="toxyz"></a>
         <h3 class="api-name" id="toXyz(kotlin.Float,kotlin.Float,kotlin.Float)">toXyz</h3>
         <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html#toXyz(kotlin.Float,kotlin.Float,kotlin.Float)">toXyz</a>(r:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;g:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;b:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float-array/index.html">FloatArray</a></pre>
-        <p>Converts a color value from this color space's model to tristimulus CIE XYZ values. If the color model of this color space is not <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorModel.Companion.html#Rgb()">RGB</a></code>, it is assumed that the target CIE XYZ space uses a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/Illuminant.html#D50()">D50</a></code> standard illuminant.</p>
-        <p>This method is a convenience for color spaces with a model of 3 components (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorModel.Companion.html#Rgb()">RGB</a></code> or <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorModel.Companion.html#Lab()">ColorModel.Lab</a></code> for instance). With color spaces using fewer or more components, use <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html#toXyz(kotlin.Float,kotlin.Float,kotlin.Float)">toXyz</a></code> instead.</p>
+        <p>Converts a color value from this color space's model to tristimulus CIE XYZ values. If the color model of this color space is not <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorModel.html#Rgb()">RGB</a></code>, it is assumed that the target CIE XYZ space uses a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/Illuminant.html#D50()">D50</a></code> standard illuminant.</p>
+        <p>This method is a convenience for color spaces with a model of 3 components (<code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorModel.html#Rgb()">RGB</a></code> or <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorModel.html#Lab()">ColorModel.Lab</a></code> for instance). With color spaces using fewer or more components, use <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html#toXyz(kotlin.Float,kotlin.Float,kotlin.Float)">toXyz</a></code> instead.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -818,7 +818,7 @@ val connector = ColorSpaces.CieLab.connect(ColorSpaces.Bt709)</pre>
         <p>A color space is considered sRGB if it meets all the following conditions:</p>
         <ul>
           <li>
-            <p>Its color model is <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorModel.Companion.html#Rgb()">ColorModel.Rgb</a></code>.</p>
+            <p>Its color model is <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorModel.html#Rgb()">ColorModel.Rgb</a></code>.</p>
           </li>
           <li></li>
         </ul>
@@ -964,7 +964,7 @@ val connector = ColorSpaces.CieLab.connect(ColorSpaces.Bt709)</pre>
       <div class="api-item"><a name="(androidx.compose.ui.graphics.colorspace.ColorSpace).adapt(androidx.compose.ui.graphics.colorspace.WhitePoint, androidx.compose.ui.graphics.colorspace.Adaptation)"></a><a name="-androidx.compose.ui.graphics.colorspace.ColorSpace-.adapt-androidx.compose.ui.graphics.colorspace.WhitePoint-androidx.compose.ui.graphics.colorspace.Adaptation-"></a><a name="adapt"></a>
         <h3 class="api-name" id="(androidx.compose.ui.graphics.colorspace.ColorSpace).adapt(androidx.compose.ui.graphics.colorspace.WhitePoint,androidx.compose.ui.graphics.colorspace.Adaptation)">adapt</h3>
         <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a>.<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html#(androidx.compose.ui.graphics.colorspace.ColorSpace).adapt(androidx.compose.ui.graphics.colorspace.WhitePoint,androidx.compose.ui.graphics.colorspace.Adaptation)">adapt</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;whitePoint:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/WhitePoint.html">WhitePoint</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;adaptation:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/Adaptation.html">Adaptation</a> = Adaptation.Bradford<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></pre>
-        <p>Performs the chromatic adaptation of a color space from its native white point to the specified white point. If the specified color space does not have an <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorModel.Companion.html#Rgb()">RGB</a></code> color model, or if the color space already has the target white point, the color space is returned unmodified.</p>
+        <p>Performs the chromatic adaptation of a color space from its native white point to the specified white point. If the specified color space does not have an <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorModel.html#Rgb()">RGB</a></code> color model, or if the color space already has the target white point, the color space is returned unmodified.</p>
         <p>The chromatic adaptation is performed using the von Kries method described in the documentation of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/Adaptation.html">Adaptation</a></code>.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">

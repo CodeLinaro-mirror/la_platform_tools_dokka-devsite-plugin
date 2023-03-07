@@ -18,10 +18,12 @@ package com.google.devsite.renderer.impl
 
 import com.google.devsite.hasBeenHidden
 import com.google.devsite.renderer.converters.getExpectOrCommonSourceSet
+import com.google.devsite.renderer.converters.gettersAndSetters
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.base.translators.descriptors.ExternalDocumentablesProvider
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.DClasslike
+import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.JavaClassKindTypes
 import org.jetbrains.dokka.model.KotlinClassKindTypes
@@ -90,7 +92,10 @@ internal fun computeDocumentablesGraph(classGraph: ClassGraph): DocumentablesGra
     fun addToDocumentablesGraph(graph: MutableMap<DRI, Documentable>, documentable: Documentable) {
         if (!graph.containsKey(documentable.dri)) {
             graph[documentable.dri] = documentable
-            for (child in documentable.children) {
+            // Include generated property accessors
+            val allChildren = documentable.children +
+                documentable.children.filterIsInstance<DProperty>().gettersAndSetters()
+            for (child in allChildren) {
                 addToDocumentablesGraph(graph, child)
             }
         }

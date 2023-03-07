@@ -26,7 +26,7 @@ import com.google.devsite.renderer.impl.paths.FilePathProvider.Companion.joinPat
 
 /** Directory structure tailored for devsite tenants. */
 internal open class DevsiteFilePathProvider(
-    language: Language,
+    override val language: Language,
     docRootPath: String,
     languagePath: String,
     projectPath: String,
