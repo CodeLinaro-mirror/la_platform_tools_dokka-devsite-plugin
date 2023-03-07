@@ -306,4 +306,52 @@ internal class FilePathProviderTest : ConverterTestBase() {
         assertThat(reference.url)
             .isEqualTo("/reference/androidx/example/Foo.Companion.html#nonHoistedFun()")
     }
+
+    @Test
+    fun `Reference to hoisted function of named companion goes to the class page`() {
+        val module = """
+            |class Foo {
+            |    companion object FooCompanion {
+            |        @JvmStatic fun hoistedFun() = Unit
+            |    }
+            |}
+        """.trimIndent().render()
+        val classGraph = runBlocking { DocumentablesHolder(module, this).classGraph() }
+        val dri = DRI(
+            packageName = "androidx.example",
+            classNames = "Foo.FooCompanion",
+            callable = Callable(name = "hoistedFun", params = emptyList())
+        )
+        val reference = pathProvider(
+            externalLocationProvider = null,
+            classGraph = classGraph
+        ).forReference(dri)
+        assertThat(reference.name).isEqualTo("hoistedFun")
+        assertThat(reference.url)
+            .isEqualTo("/reference/androidx/example/Foo.html#hoistedFun()")
+    }
+
+    @Test
+    fun `Reference to non-hoisted property of named companion goes to the companion page`() {
+        val module = """
+            |class Foo {
+            |    companion object FooCompanion {
+            |        val nonHoistedVal = 0
+            |    }
+            |}
+        """.trimIndent().render()
+        val classGraph = runBlocking { DocumentablesHolder(module, this).classGraph() }
+        val dri = DRI(
+            packageName = "androidx.example",
+            classNames = "Foo.FooCompanion",
+            callable = Callable(name = "nonHoistedVal", params = emptyList())
+        )
+        val reference = pathProvider(
+            externalLocationProvider = null,
+            classGraph = classGraph
+        ).forReference(dri)
+        assertThat(reference.name).isEqualTo("nonHoistedVal")
+        assertThat(reference.url)
+            .isEqualTo("/reference/androidx/example/Foo.FooCompanion.html#nonHoistedVal()")
+    }
 }

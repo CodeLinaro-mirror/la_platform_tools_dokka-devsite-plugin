@@ -2712,9 +2712,6 @@ internal class ClasslikeDocumentableConverterTest(
         """.trimIndent()
         val moduleJ = sourceJ.renderWithoutLanguageHeader()
 
-        fun <T : SymbolSignature> TypeSummaryItem<T>.urlSuffix() =
-            data.description.data.signature.data.name.data.url.substringAfter("example/")
-
         for (module in listOf(moduleK, moduleJ)) {
             val testKt = if (displayLanguage == Language.JAVA || module == moduleJ)
                 module.page("TestKt").data.content
@@ -2769,10 +2766,10 @@ internal class ClasslikeDocumentableConverterTest(
             val companionFun = companionObject.data.publicFunctionsSummary.single()
             assertThat(companionFun.name()).isEqualTo("companionFun")
             javaOnly { assertThat(companionFun.modifiers()).contains("static") }
-            // For Kotlin source and display only, the link is hoisted to the containing class
             if (module == moduleJ || displayLanguage == Language.JAVA)
                 assertThat(companionFun.urlSuffix())
                     .isEqualTo("Container.Companion.html#companionFun()")
+            // For Kotlin source and display only, the link is hoisted to the containing class
             else
                 assertThat(companionFun.urlSuffix()).isEqualTo("Container.html#companionFun()")
 
@@ -2792,6 +2789,47 @@ internal class ClasslikeDocumentableConverterTest(
             javaOnly { assertThat(hoistedField.modifiers()).contains("static") }
             kotlinOnly { assertThat(hoistedField.modifiers()).contains("const") }
             assertThat(hoistedField.urlSuffix()).isEqualTo("Container.html#hoistedField()")
+        }
+    }
+
+    @Test
+    fun `Extensions of companion objects link are validly linked`() {
+        val module = """
+            |class Foo {
+            |    companion object {}
+            |}
+            |fun Foo.Companion.extOfBoringCompanion() = Unit
+            |
+            |class Bar {
+            |    companion object BarCompanion {}
+            |}
+            |fun Bar.BarCompanion.extOfInterestingCompanion() = Unit
+        """.render()
+
+        val fooSuffix = "(androidx.example.Foo.Companion).extOfBoringCompanion()"
+        val barSuffix = "(androidx.example.Bar.BarCompanion).extOfInterestingCompanion()"
+
+        // For Kotlin, the extensions are on the package summary page, for Java, they're on a
+        // synthetic class page. Either way, the links should go to the same page as they appear.
+        val (extensionFunctions, extensionPage) = when (displayLanguage) {
+            Language.KOTLIN -> Pair(
+                module.packagePage().data.content.data.extensionFunctionsSummary,
+                "package-summary.html"
+            )
+            Language.JAVA -> Pair(
+                module.page("TestKt").data.content.data.publicFunctionsSummary,
+                "TestKt.html"
+            )
+        }
+        assertThat(extensionFunctions[0].urlSuffix()).isEqualTo("$extensionPage#$fooSuffix")
+        assertThat(extensionFunctions[1].urlSuffix()).isEqualTo("$extensionPage#$barSuffix")
+
+        // In Kotlin, the extension will also show up on the companion page itself, if it exists.
+        kotlinOnly {
+            val barExtension = module.page("BarCompanion").data.content.data
+                .extensionFunctionsSummary.single()
+            val barExtensionPage = "Bar.BarCompanion.html"
+            assertThat(barExtension.urlSuffix()).isEqualTo("$barExtensionPage#$barSuffix")
         }
     }
 
@@ -3151,6 +3189,9 @@ internal class ClasslikeDocumentableConverterTest(
             .singleOrNull { it.name() == name }
 
     private fun ConstructorSummaryList.constructor() = data.items.item().data.description
+
+    fun <T : SymbolSignature> TypeSummaryItem<T>.urlSuffix() =
+        data.description.data.signature.data.name.data.url.substringAfter("example/")
 
     companion object {
         @JvmStatic
