@@ -21,6 +21,7 @@ import com.google.devsite.renderer.converters.explodedChildren
 import com.google.devsite.renderer.converters.filterOutJvmSynthetic
 import com.google.devsite.renderer.converters.gettersAndSetters
 import com.google.devsite.renderer.converters.isExceptionClass
+import com.google.devsite.renderer.converters.isHoistedFromCompanion
 import com.google.devsite.renderer.converters.name
 import com.google.devsite.renderer.converters.nameForSyntheticClass
 import com.google.devsite.renderer.converters.packageName
@@ -467,19 +468,21 @@ internal class DocumentablesHolder(
      * anything that is not hoisted onto the containing object* (extension functions and properties
      * are not hoisted onto the containing object).
      *
-     * This is a best-effort temporary approximation. Even as-Java, companions can be fully
-     * hoistable.
-     *
      * This function can also be used on DObjects where it is unknown whether it is a companion at
      * all. This works because we enforce non-companion objects being named 'Companion' as an error.
      *
      * Returns true: is both a companion and uninteresting
      * Returns false: either is not a companion, or is interesting
      */
-    private suspend fun DObject.isOrdinaryCompanion(): Boolean =
+    private suspend fun DObject.isOrdinaryCompanion(displayLanguage: Language): Boolean =
         name == "Companion" &&
             supertypes.all { it.value.isEmpty() } &&
-            children.none { it is DClasslike } &&
+            children.all { it.isHoistedFromCompanion(displayLanguage) } &&
+            // Even if all properties are hoisted, their Java accessors may not be.
+            (
+                displayLanguage != Language.JAVA || properties.gettersAndSetters()
+                    .all { it.isHoistedFromCompanion(displayLanguage) }
+                ) &&
             extensionFunctionsFor(this).isEmpty() &&
             extensionPropertiesFor(this).isEmpty()
 
@@ -488,6 +491,5 @@ internal class DocumentablesHolder(
      * which is true for ordinary companion objects in Kotlin.
      */
     internal suspend fun shouldNotBeDisplayed(classlike: DClasslike, displayLanguage: Language) =
-        displayLanguage == Language.KOTLIN &&
-            classlike is DObject && classlike.isOrdinaryCompanion()
+        classlike is DObject && classlike.isOrdinaryCompanion(displayLanguage)
 }

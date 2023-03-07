@@ -337,7 +337,7 @@ internal class ClasslikeDocumentableConverterTest(
     }
 
     @Test
-    fun `Unnamed companions are documented in Java but not Kotlin because they're inlined`() {
+    fun `Empty unnamed companions are not documented, empty named companions are`() {
         val module = """
             |class Foo {
             |    companion object FooCompanion
@@ -350,12 +350,60 @@ internal class ClasslikeDocumentableConverterTest(
         val bar = module.page("Bar").data.content
 
         assertThat(foo.companionName()).isEqualTo("Foo.FooCompanion")
-        kotlinOnly {
-            assertThat(bar.data.nestedTypesSummary).isEmpty()
-        }
+        assertThat(bar.data.nestedTypesSummary).isEmpty()
+    }
+
+    @Test
+    fun `Companions are interesting for Java when they have un-hoisted functions or properties`() {
+        val module = """
+            |class UnhoistedProperty {
+            |    companion object {
+            |        // Not hoisted in Java
+            |        val ordinaryVal = 0
+            |        // Hoisted in Java
+            |        @JvmStatic fun jvmStaticFun() = Unit
+            |    }
+            |}
+            |class UnhoistedFunction {
+            |    companion object {
+            |        // Not hoisted in Java
+            |        fun ordinaryFun() = Unit
+            |        // Hoisted in Java
+            |        @JvmStatic fun jvmStaticFun() = Unit
+            |    }
+            |}
+            |class LateinitUnhoistedProperty {
+            |    companion object {
+            |        // lateinit vars are hoisted, but their accessors are not
+            |        lateinit var lateinitVar: String
+            |    }
+            |}
+            |class AllHoisted {
+            |    companion object {
+            |        // Hoisted in Java
+            |        @JvmField val jvmFieldVal = 0
+            |        @JvmStatic fun jvmStaticFun() = Unit
+            |    }
+            |}
+        """.render()
+
+        val unhoistedProperty = module.page("UnhoistedProperty").data.content
+        val unhoistedFunction = module.page("UnhoistedFunction").data.content
+        val lateinitUnhoistedProperty = module.page("LateinitUnhoistedProperty").data.content
+        val allHoisted = module.page("AllHoisted").data.content
+
         javaOnly {
-            assertThat(bar.companionName()).isEqualTo("Bar.Companion")
+            assertThat(unhoistedProperty.data.nestedTypesSummary).hasSize(1)
+            assertThat(unhoistedFunction.data.nestedTypesSummary).hasSize(1)
+            assertThat(lateinitUnhoistedProperty.data.nestedTypesSummary).hasSize(1)
         }
+        kotlinOnly {
+            assertThat(unhoistedProperty.data.nestedTypesSummary).isEmpty()
+            assertThat(unhoistedFunction.data.nestedTypesSummary).isEmpty()
+            assertThat(lateinitUnhoistedProperty.data.nestedTypesSummary).isEmpty()
+        }
+
+        assertThat(allHoisted.data.nestedTypesSummary).isEmpty()
     }
 
     @Test
@@ -1487,7 +1535,7 @@ internal class ClasslikeDocumentableConverterTest(
     fun `JvmField in companion object is static field in java and unchanged in kotlin`() {
         val module = """
             |class Foo {
-            |   companion object {
+            |   companion object FooCompanion {
             |       @JvmField val BAR = 8
             |       @JvmField var BAZ = "abc"
             |   }
@@ -1495,7 +1543,7 @@ internal class ClasslikeDocumentableConverterTest(
         """.render()
 
         val classPage = module.page("Foo").data.content
-        val companionPage = module.page("Companion").data.content
+        val companionPage = module.page("FooCompanion").data.content
 
         val nestedTypes = classPage.data.nestedTypesSummary
         val fields = classPage.data.publicPropertiesSummary
@@ -1703,14 +1751,14 @@ internal class ClasslikeDocumentableConverterTest(
     fun `lateinit property in companion object is static field in java and unchanged in kotlin`() {
         val module = """
             |class Foo {
-            |   companion object {
+            |   companion object FooCompanion {
             |       lateinit var bar: String;
             |   }
             |}
         """.render()
 
         val classPage = module.page("Foo").data.content
-        val companionPage = module.page("Companion").data.content
+        val companionPage = module.page("FooCompanion").data.content
 
         val nestedTypes = classPage.data.nestedTypesSummary
         val fields = classPage.data.publicPropertiesSummary
@@ -1865,14 +1913,8 @@ internal class ClasslikeDocumentableConverterTest(
         fun Classlike.nestedTypeNames() =
             data.nestedTypesSummary.map { it.data.description.data.signature.fullName() }
 
-        kotlinOnly {
-            assertThat(fooPage.nestedTypeNames()).containsExactly("Foo.Bar")
-            assertThat(barPage.nestedTypeNames()).isEmpty()
-        }
-        javaOnly {
-            assertThat(fooPage.nestedTypeNames()).containsExactly("Foo.Bar", "Foo.Bar.Companion")
-            assertThat(barPage.nestedTypeNames()).containsExactly("Foo.Bar.Companion")
-        }
+        assertThat(fooPage.nestedTypeNames()).containsExactly("Foo.Bar")
+        assertThat(barPage.nestedTypeNames()).isEmpty()
     }
 
     @Test
