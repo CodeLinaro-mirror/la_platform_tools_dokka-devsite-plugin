@@ -29,8 +29,6 @@ import org.jetbrains.dokka.links.parent
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DEnumEntry
 import org.jetbrains.dokka.model.Documentable
-import java.nio.file.Paths
-import kotlin.io.path.pathString
 
 private val NON_DOCUMENTABLE_PACKAGES = listOf(
     "kotlin.jvm.functions"
@@ -179,8 +177,10 @@ internal interface FilePathProvider {
     val ANY: TypeProjectionComponent
 
     companion object {
-        fun joinPaths(pathComponent: String, vararg pathComponents: String): String =
-            Paths.get(pathComponent, *pathComponents).pathString
+        fun joinPaths(vararg pathComponents: String): String =
+            pathComponents.filter { it.isNotEmpty() }.joinToString("/")
+
+        fun cleanPath(path: String): String = path.trim('/', ' ')
     }
 }
 
