@@ -22,7 +22,6 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.Nullability
 import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.renderer.impl.DocumentablesGraph
-import com.google.devsite.renderer.impl.paths.FilePathProvider.Companion.cleanPath
 import com.google.devsite.renderer.impl.paths.FilePathProvider.Companion.joinPaths
 
 /** Directory structure tailored for devsite tenants. */
@@ -36,28 +35,19 @@ internal open class DevsiteFilePathProvider(
     override val classGraph: ClassGraph,
     override val documentablesGraph: DocumentablesGraph,
 ) : FilePathProvider {
+    private val rootPath = joinPaths("/", docRootPath, languagePath)
 
-    private val rootPath: String
-    final override val packageList: String
-    final override val packages: String
-    final override val classes: String
-    final override val rootIndex: String
-    final override val toc: String
-    final override val book: String
+    override val packageList = joinPaths(rootPath, projectPath, MACHINE_PACKAGE_LIST_FILE)
 
-    init {
-        val cleanDocRootPath = "/" + cleanPath(docRootPath)
-        val cleanLanguagePath = cleanPath(languagePath)
-        val cleanProjectPath = cleanPath(projectPath)
+    override val packages = joinPaths(rootPath, projectPath, PACKAGE_INDEX_FILE)
 
-        rootPath = joinPaths(cleanDocRootPath, cleanLanguagePath)
-        packageList = joinPaths(rootPath, cleanProjectPath, MACHINE_PACKAGE_LIST_FILE)
-        packages = joinPaths(rootPath, cleanProjectPath, PACKAGE_INDEX_FILE)
-        classes = joinPaths(rootPath, cleanProjectPath, CLASS_INDEX_FILE)
-        rootIndex = joinPaths(rootPath, cleanProjectPath, DIR_INDEX_FILE)
-        toc = joinPaths(rootPath, cleanProjectPath, TOC_FILE)
-        book = joinPaths(rootPath, cleanProjectPath, BOOK_FILE)
-    }
+    override val classes = joinPaths(rootPath, projectPath, CLASS_INDEX_FILE)
+
+    override val rootIndex = joinPaths(rootPath, projectPath, DIR_INDEX_FILE)
+
+    override val toc = joinPaths(rootPath, projectPath, TOC_FILE)
+
+    override val book = joinPaths(rootPath, projectPath, BOOK_FILE)
 
     override fun forType(packageName: String, name: String): String {
         val packageAsPath = packageName.replace(".", "/")
