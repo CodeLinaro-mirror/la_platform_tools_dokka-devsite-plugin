@@ -462,6 +462,18 @@ fun DProperty.objectPropertyHoistedInJava() =
     isJvmFieldAnnotated() || isLateinit() || isConstant()
 
 /**
+ * If the function has a receiver, converts it to a parameter named "receiver".
+ * Otherwise, returns the original function.
+ */
+fun DFunction.convertReceiverForJava() =
+    receiver?.let { receiver ->
+        copy(
+            parameters = listOf(receiver.copy(name = "receiver")) + parameters,
+            receiver = null
+        )
+    } ?: this
+
+/**
  * Returns property getters / setters. Includes generated accessors for Kotlin properties, fixing
  * their names and adding static annotations as needed.
  */

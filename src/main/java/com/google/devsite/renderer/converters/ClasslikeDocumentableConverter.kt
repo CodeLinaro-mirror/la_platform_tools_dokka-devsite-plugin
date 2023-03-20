@@ -662,6 +662,7 @@ internal abstract class ClasslikeDocumentableConverter(
         return (initialFunctions + companionFunctions.filter { it.isJavaStaticMethod() })
             // Java documentation needs to respect @jvm* annotations
             .filterOutJvmSynthetic().map { it.withJvmName() }
+            .map { it.convertReceiverForJava() }
     }
 
     private val objectInstanceProperty: DProperty by lazy {

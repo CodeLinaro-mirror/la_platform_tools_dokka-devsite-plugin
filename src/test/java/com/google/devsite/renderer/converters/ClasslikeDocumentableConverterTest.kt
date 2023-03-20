@@ -2335,18 +2335,26 @@ internal class ClasslikeDocumentableConverterTest(
 
                 assertThat(extGetterDetail.data.name).isEqualTo("getBar")
                 val getterSignature = extGetterDetail.data.signature
-                assertThat(getterSignature.data.receiver!!.typeName()).isEqualTo("TestKt")
                 assertThat(getterSignature.data.parameters.single().typeName()).isEqualTo("Foo")
                 assertThat(getterSignature.data.parameters.single().data.name).isEqualTo("receiver")
 
                 assertThat(extSetterDetail.data.name).isEqualTo("setBar")
                 val setterSignature = extSetterDetail.data.signature
-                assertThat(setterSignature.data.receiver!!.typeName()).isEqualTo("TestKt")
                 val (param1, param2) = setterSignature.data.parameters.items(2)
                 assertThat(param1.typeName()).isEqualTo("Foo")
                 assertThat(param1.data.name).isEqualTo("receiver")
                 assertThat(param2.typeName()).isEqualTo("int")
                 assertThat(param2.data.name).isEqualTo("bar")
+
+                // When displayed as an extension function the receiver is needed, when displayed
+                // as a method of TestKt it isn't.
+                if (funPair == fooExtFunctions) {
+                    assertThat(getterSignature.data.receiver!!.typeName()).isEqualTo("TestKt")
+                    assertThat(setterSignature.data.receiver!!.typeName()).isEqualTo("TestKt")
+                } else {
+                    assertThat(getterSignature.data.receiver).isNull()
+                    assertThat(setterSignature.data.receiver).isNull()
+                }
             }
         }
 
@@ -2362,6 +2370,63 @@ internal class ClasslikeDocumentableConverterTest(
                 assertThat(extDeet.data.name).isEqualTo("bar")
                 assertThat(extDeet.data.signature.data.receiver!!.typeName()).isEqualTo("Foo")
             }
+        }
+    }
+
+    @Test
+    fun `Extension function defined inside classlike has correct receiver`() {
+        val foo = """
+            |object Foo {
+            |    @JvmStatic
+            |    fun String?.stringExtension() = Unit
+            |}
+        """.render().page().data.content.data
+
+        val extFun = foo.publicFunctionsDetails.item().data
+        val extSignature = extFun.signature.data
+        assertThat(extFun.name).isEqualTo("stringExtension")
+
+        javaOnly {
+            assertThat(extSignature.receiver).isNull()
+            val extParam = extSignature.parameters.single()
+            assertThat(extParam.typeName()).isEqualTo("String")
+            assertThat(extParam.nullable).isTrue()
+            assertThat(extParam.data.name).isEqualTo("receiver")
+        }
+        kotlinOnly {
+            val receiver = extSignature.receiver
+            assertThat(receiver).isNotNull()
+            assertThat(receiver!!.typeName()).isEqualTo("String")
+            assertThat(receiver.nullable).isTrue()
+            assertThat(extSignature.parameters).isEmpty()
+        }
+    }
+
+    @Test
+    fun `Extension property defined inside classlike has correct receiver`() {
+        val foo = """
+            |object Foo {
+            |    @JvmStatic
+            |    val String.stringExtension: Int
+            |        get() = 0
+            |}
+        """.render().page().data.content.data
+
+        javaOnly {
+            val extFun = foo.publicFunctionsDetails.item().data
+            val extSignature = extFun.signature.data
+            assertThat(extFun.name).isEqualTo("getStringExtension")
+
+            assertThat(extSignature.receiver).isNull()
+            val extParam = extSignature.parameters.single()
+            assertThat(extParam.typeName()).isEqualTo("String")
+            assertThat(extParam.data.name).isEqualTo("receiver")
+        }
+        kotlinOnly {
+            val extProp = foo.publicPropertiesDetails.item().data
+            val receiver = extProp.signature.data.receiver
+            assertThat(receiver).isNotNull()
+            assertThat(receiver!!.typeName()).isEqualTo("String")
         }
     }
 
