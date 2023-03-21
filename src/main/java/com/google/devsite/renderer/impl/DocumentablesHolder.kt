@@ -25,7 +25,6 @@ import com.google.devsite.renderer.converters.name
 import com.google.devsite.renderer.converters.nameForSyntheticClass
 import com.google.devsite.renderer.converters.packageName
 import com.google.devsite.renderer.converters.setUpAnalysis
-import com.google.devsite.renderer.converters.shouldNotBeDisplayed
 import com.google.devsite.renderer.converters.withJavaSynthetic
 import com.google.devsite.util.LibraryMetadata
 import kotlinx.coroutines.CoroutineScope
@@ -200,7 +199,7 @@ internal class DocumentablesHolder(
 
     suspend fun classlikesFor(dPackage: DPackage, displayLanguage: Language): List<DClasslike> {
         val classlikes = classlikes.getValue(dPackage.dri).await()
-            .filterNot { it.shouldNotBeDisplayed(displayLanguage) }
+            .filterNot { shouldNotBeDisplayed(it, displayLanguage) }
         val syntheticClasses = syntheticClasses.getValue(dPackage.dri).await()
         return if (displayLanguage == Language.JAVA) {
             classlikes
@@ -222,7 +221,7 @@ internal class DocumentablesHolder(
         // link to the companion object can be omitted. Named companion objects are presumably
         // intended to be viewable as first-class elements. Similar for companion objects which
         // inherit from another type.
-        return theseNestedClasslikes.filterNot { it.shouldNotBeDisplayed(displayLanguage) }
+        return theseNestedClasslikes.filterNot { shouldNotBeDisplayed(it, displayLanguage) }
     }
 
     suspend fun classesFor(dPackage: DPackage, displayLanguage: Language): List<DClass> {
@@ -442,14 +441,14 @@ internal class DocumentablesHolder(
         docs.mapNotNull { it.companion }.associateBy { it.dri }
 
     /** Computes the list of objects that are interesting in Kotlin */
-    private fun computeInterestingObjectsForKotlin(
+    private suspend fun computeInterestingObjectsForKotlin(
         allObjects: List<DObject>,
         companions: Set<DRI>
     ): List<DObject> {
 
         // Un-ordinary companions are companions, but also appear in the ToC.
         val (boringObjects, interestingObjects) =
-            allObjects.partition { it.shouldNotBeDisplayed(Language.KOTLIN) }
+            allObjects.partition { shouldNotBeDisplayed(it, Language.KOTLIN) }
         // Error-level enforcement that non-companion objects aren't named 'Companion'
         // Thus, we can elsewhere freely use `isOrdinaryCompanion` without checking companionhood.
         (boringObjects.map { it.dri } - companions).forEach {
@@ -461,4 +460,34 @@ internal class DocumentablesHolder(
     }
 
     fun isCompanion(dObject: DObject) = runBlocking { dObject.dri in allCompanions.await().keys }
+
+    /**
+     * Returns whether this DObject is an ordinary companion and is not significant enough to show
+     * on its own. This requires that it be not named, not inherit anything, and *not contain
+     * anything that is not hoisted onto the containing object* (extension functions and properties
+     * are not hoisted onto the containing object).
+     *
+     * This is a best-effort temporary approximation. Even as-Java, companions can be fully
+     * hoistable.
+     *
+     * This function can also be used on DObjects where it is unknown whether it is a companion at
+     * all. This works because we enforce non-companion objects being named 'Companion' as an error.
+     *
+     * Returns true: is both a companion and uninteresting
+     * Returns false: either is not a companion, or is interesting
+     */
+    private suspend fun DObject.isOrdinaryCompanion(): Boolean =
+        name == "Companion" &&
+            supertypes.all { it.value.isEmpty() } &&
+            children.none { it is DClasslike } &&
+            extensionFunctionsFor(this).isEmpty() &&
+            extensionPropertiesFor(this).isEmpty()
+
+    /**
+     * Determines whether the [classlike] should not be displayed in the given [displayLanguage],
+     * which is true for ordinary companion objects in Kotlin.
+     */
+    internal suspend fun shouldNotBeDisplayed(classlike: DClasslike, displayLanguage: Language) =
+        displayLanguage == Language.KOTLIN &&
+            classlike is DObject && classlike.isOrdinaryCompanion()
 }

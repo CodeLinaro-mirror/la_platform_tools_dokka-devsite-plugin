@@ -1875,6 +1875,39 @@ internal class ClasslikeDocumentableConverterTest(
         }
     }
 
+    @Test
+    fun `Companions with extension functions or properties are not boring`() {
+        val module = """
+            |class Foo {
+            |    companion object {}
+            |}
+            |class Bar {
+            |    companion object {}
+            |}
+            |fun Foo.Companion.extFun() = Unit
+            |val Bar.Companion.extBar: Int get() = 0
+        """.render()
+
+        val foo = module.page("Foo").data.content.data
+        val bar = module.page("Bar").data.content.data
+
+        assertThat(foo.nestedTypesSummary).hasSize(1)
+        assertThat(bar.nestedTypesSummary).hasSize(1)
+
+        val companions = module.pages("Companion")
+        val fooCompanion = companions.single { it.data.path.contains("Foo") }.data.content.data
+        val barCompanion = companions.single { it.data.path.contains("Bar") }.data.content.data
+
+        assertThat(fooCompanion.extensionFunctionsSummary).hasSize(1)
+        // Extension properties appear as accessors in Java, properties in Kotlin
+        javaOnly {
+            assertThat(barCompanion.extensionFunctionsSummary).hasSize(1)
+        }
+        kotlinOnly {
+            assertThat(barCompanion.extensionPropertiesSummary).hasSize(1)
+        }
+    }
+
     @Test // TODO: non-overridden inherited elements in companion objects are missing
     fun `companion objects that inherits still can have static forwarders`() {
         // Aka you can add the JvmStatic-ness in an override

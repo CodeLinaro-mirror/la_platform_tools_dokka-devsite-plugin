@@ -50,7 +50,7 @@ internal class RootDocumentableConverter(
     // TODO(KMP b/256171288)
     suspend fun classesIndexPage(): DevsitePage<ClassIndex> {
         val allClasses = docsHolder.allClasslikes().filterNot {
-            it.shouldNotBeDisplayed(displayLanguage)
+            docsHolder.shouldNotBeDisplayed(it, displayLanguage)
         }
         val alphabetizedClasses = allClasses.groupBy(::categorizeClasslikes)
         val componentClasses = alphabetizedClasses.mapValues { (_, nodes) ->

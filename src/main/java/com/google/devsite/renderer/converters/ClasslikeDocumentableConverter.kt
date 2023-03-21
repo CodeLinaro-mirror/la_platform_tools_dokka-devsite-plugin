@@ -1072,24 +1072,6 @@ internal abstract class ClasslikeDocumentableConverter(
 }
 
 /**
- * Returns whether this DObject is an ordinary companion and is not signifcant enough to show on its
- * own. This requires that it be not named, not inherit anything, and *not contain anything that is
- * not hoisted onto the containing object*.
- *
- * This is a best-effort temporary approximation. Even as-Java, companions can be fully hoistable.
- *
- * This function can also be used on DObjects where it is unknown whether it is a companion at all.
- * This works because we enforce non-companion objects being named 'Companion' as an error.
- *
- * Returns true: is both a companion and uninteresting
- * Returns false: either is not a companion, or is interesting
- */
-internal fun DObject.isOrdinaryCompanion(): Boolean =
-    name == "Companion" &&
-        supertypes.all { it.value.isEmpty() } &&
-        children.none { it is DClasslike }
-
-/**
  * Whether the [Documentable] as a child of a companion object would be documented on the containing
  * classlike of the companion for the given [displayLanguage].
  *
@@ -1101,9 +1083,6 @@ internal fun Documentable.isHoistedFromCompanion(displayLanguage: Language): Boo
         Language.JAVA -> (this is DFunction && this.isJavaStaticMethod()) ||
             (this is DProperty && this.objectPropertyHoistedInJava())
     }
-
-internal fun DClasslike.shouldNotBeDisplayed(displayLanguage: Language) =
-    displayLanguage == Language.KOTLIN && this is DObject && this.isOrdinaryCompanion()
 
 // an `actual` cannot narrow visibility, but can widen it TODO(b/262710702)
 private fun isPublic(element: Documentable) =
