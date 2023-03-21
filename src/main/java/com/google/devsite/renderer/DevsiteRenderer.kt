@@ -22,10 +22,7 @@ import com.google.devsite.renderer.impl.MetadataRenderer
 import com.google.devsite.renderer.impl.PackageRenderer
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import org.jetbrains.dokka.links.DRI
-import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DPackage
-import org.jetbrains.dokka.model.DProperty
 
 internal class DevsiteRenderer(
     private val rootFileRenderer: MetadataRenderer,
@@ -37,11 +34,8 @@ internal class DevsiteRenderer(
     suspend fun render() {
         writeRootMetadata()
 
-        val extensionFunctionsMapping = docsHolder.extensionFunctionMap(displayLanguage)
-        val extensionPropertiesMapping = docsHolder.extensionPropertyMap()
-
         for (dPackage in docsHolder.packages()) {
-            writePackage(dPackage, extensionFunctionsMapping, extensionPropertiesMapping)
+            writePackage(dPackage)
         }
     }
 
@@ -54,21 +48,14 @@ internal class DevsiteRenderer(
     }
 
     private suspend fun writePackage(
-        dPackage: DPackage,
-        extensionFunctionsMapping: Map<DRI, List<DFunction>>,
-        extensionPropertiesMapping: Map<DRI, List<DProperty>>
+        dPackage: DPackage
     ) = coroutineScope {
         launch { packageRenderer.writeIndex(dPackage) }
         launch { packageRenderer.writePackageSummary(dPackage) }
 
         for (clazz in docsHolder.classlikesFor(dPackage, displayLanguage)) {
             launch {
-                packageRenderer.writeClasslike(
-                    dPackage,
-                    clazz,
-                    extensionFunctionsMapping.getOrDefault(clazz.dri, emptyList()),
-                    extensionPropertiesMapping.getOrDefault(clazz.dri, emptyList()),
-                )
+                packageRenderer.writeClasslike(dPackage, clazz)
             }
         }
     }

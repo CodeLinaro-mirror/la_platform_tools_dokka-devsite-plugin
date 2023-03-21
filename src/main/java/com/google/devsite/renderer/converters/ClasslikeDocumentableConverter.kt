@@ -103,9 +103,7 @@ internal abstract class ClasslikeDocumentableConverter(
     protected val javadocConverter: DocTagConverter, // TODO(KMP b/254490320)
     protected val paramConverter: ParameterDocumentableConverter,
     private val annotationConverter: AnnotationDocumentableConverter,
-    private val metadataConverter: MetadataConverter,
-    private val classExtensionFunctions: List<DFunction> = emptyList(),
-    private val classExtensionProperties: List<DProperty> = emptyList()
+    private val metadataConverter: MetadataConverter
 ) {
     protected abstract val header: DefaultDevsitePlatformSelector?
     protected abstract val functionToSummaryConverter:
@@ -253,7 +251,7 @@ internal abstract class ClasslikeDocumentableConverter(
 
         // Note: getters and setters of extension properties are already included in
         // classExtensionFunctions from DocumentablesHolder.extensionFunctionMap
-        var extensionFunctions = classExtensionFunctions
+        var extensionFunctions = docsHolder.extensionFunctionsFor(classlike)
             // Sort by the class the extension function came from first, so they will be grouped
             // together in a logical way
             .sortedBy { nameForSyntheticClass(it) + it.name }
@@ -268,12 +266,7 @@ internal abstract class ClasslikeDocumentableConverter(
             async { functionsToSummary(extensionFunctionsTitle(), extensionFunctions) }
         val extensionFunctionsDetail = async { functionsToDetail(extensionFunctions) }
 
-        // Extension properties are only as-Java as accessors, so they count as extension functions
-        var extensionProperties = when (displayLanguage) {
-            Language.KOTLIN -> classExtensionProperties
-            Language.JAVA -> emptyList()
-        }
-        extensionProperties = extensionProperties
+        val extensionProperties = docsHolder.extensionPropertiesFor(classlike)
             // Sort by the class the extension property came from first, so they will be grouped
             // together in a logical way
             .sortedBy { nameForSyntheticClass(it) + it.name }

@@ -3132,8 +3132,6 @@ internal class ClasslikeDocumentableConverterTest(
         baseSourceLink: String? = null
     ): List<DevsitePage<Classlike>> {
         val (holder, provider) = holderAndProvider(this, baseSourceLink = baseSourceLink)
-        val extFunctionMap = runBlocking { holder.extensionFunctionMap(displayLanguage) }
-        val extPropertyMap = runBlocking { holder.extensionPropertyMap() }
         val metadataConverter = MetadataConverter(holder)
         val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
         val paramConverter =
@@ -3162,9 +3160,7 @@ internal class ClasslikeDocumentableConverterTest(
                 javadocConverter,
                 paramConverter,
                 annotationConverter,
-                metadataConverter,
-                extFunctionMap.getOrDefault(it.dri, emptyList()),
-                extPropertyMap.getOrDefault(it.dri, emptyList())
+                metadataConverter
             )
         }
         return runBlocking { converters.map { it.classlike() } }

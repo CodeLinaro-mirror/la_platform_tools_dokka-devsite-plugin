@@ -105,6 +105,8 @@ internal class DocumentablesHolder(
     private val exceptions = mutableMapOf<DRI, Deferred<List<DClass>>>()
     private val companions = mutableMapOf<DRI, Deferred<Map<DRI, DObject>>>()
     private val interestingKotlinObjects = mutableMapOf<DRI, Deferred<List<DObject>>>()
+    private val extensionFunctionMap = scope.async { computeExtensionFunctionMap() }
+    private val extensionPropertyMap = scope.async { computeExtensionPropertyMap() }
 
     private val allClasslikes: Deferred<List<DClasslike>>
     private val allCompanions: Deferred<Map<DRI, DObject>>
@@ -251,11 +253,17 @@ internal class DocumentablesHolder(
     suspend fun interestingObjectsFor(dPackage: DPackage) =
         interestingKotlinObjects.getValue(dPackage.dri).await()
 
+    suspend fun extensionFunctionsFor(dClasslike: DClasslike) =
+        extensionFunctionMap.await().getOrDefault(dClasslike.dri, emptyList())
+
+    suspend fun extensionPropertiesFor(dClasslike: DClasslike) =
+        extensionPropertyMap.await().getOrDefault(dClasslike.dri, emptyList())
+
     /**
      * Iterate through the all packages and create map of each class to its associated
      * extension functions.
      */
-    suspend fun extensionFunctionMap(displayLanguage: Language):
+    private suspend fun computeExtensionFunctionMap():
         HashMap<DRI, MutableList<DFunction>> {
         val extensionFunctionsMapping = HashMap<DRI, MutableList<DFunction>>()
         packages().forEach { dPackage ->
@@ -278,14 +286,17 @@ internal class DocumentablesHolder(
      * Iterate through the all packages and create map of each class to its associated
      * extension functions.
      */
-    suspend fun extensionPropertyMap(): HashMap<DRI, MutableList<DProperty>> {
+    private suspend fun computeExtensionPropertyMap(): HashMap<DRI, MutableList<DProperty>> {
         val extensionPropertiesMapping = HashMap<DRI, MutableList<DProperty>>()
-        packages().forEach { dPackage ->
-            dPackage.properties.forEach { property ->
-                property.addToMapping(
-                    property.receiver?.type?.driOrNull,
-                    extensionPropertiesMapping
-                )
+        // Extension properties are only as-Java as accessors, so they count as extension functions
+        if (displayLanguage == Language.KOTLIN) {
+            packages().forEach { dPackage ->
+                dPackage.properties.forEach { property ->
+                    property.addToMapping(
+                        property.receiver?.type?.driOrNull,
+                        extensionPropertiesMapping
+                    )
+                }
             }
         }
         return extensionPropertiesMapping

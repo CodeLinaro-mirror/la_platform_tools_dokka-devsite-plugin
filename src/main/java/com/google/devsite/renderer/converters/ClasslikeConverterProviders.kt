@@ -31,8 +31,6 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.model.DClasslike
-import org.jetbrains.dokka.model.DFunction
-import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.utilities.parallelForEach
 
 internal class NonKmpClasslikeConverter(
@@ -46,9 +44,7 @@ internal class NonKmpClasslikeConverter(
     javadocConverter: DocTagConverter,
     paramConverter: ParameterDocumentableConverter,
     annotationConverter: AnnotationDocumentableConverter,
-    metadataConverter: MetadataConverter,
-    classExtensionFunctions: List<DFunction> = emptyList(),
-    classExtensionProperties: List<DProperty> = emptyList()
+    metadataConverter: MetadataConverter
 ) : ClasslikeDocumentableConverter(
     displayLanguage,
     classlike,
@@ -60,9 +56,7 @@ internal class NonKmpClasslikeConverter(
     javadocConverter,
     paramConverter,
     annotationConverter,
-    metadataConverter,
-    classExtensionFunctions,
-    classExtensionProperties
+    metadataConverter
 ) {
     override val header: DefaultDevsitePlatformSelector? = null
     override val functionToSummaryConverter = functionConverter::summary
@@ -85,8 +79,6 @@ internal class KmpClasslikeConverter(
     paramConverter: ParameterDocumentableConverter,
     annotationConverter: AnnotationDocumentableConverter,
     metadataConverter: MetadataConverter,
-    classExtensionFunctions: List<DFunction> = emptyList(),
-    classExtensionProperties: List<DProperty> = emptyList(),
     platforms: List<Platform>
 ) : ClasslikeDocumentableConverter(
     displayLanguage,
@@ -99,9 +91,7 @@ internal class KmpClasslikeConverter(
     javadocConverter,
     paramConverter,
     annotationConverter,
-    metadataConverter,
-    classExtensionFunctions,
-    classExtensionProperties
+    metadataConverter
 ) {
     override val header = DefaultDevsitePlatformSelector(platforms)
     override val functionToSummaryConverter = functionConverter::summaryKmp

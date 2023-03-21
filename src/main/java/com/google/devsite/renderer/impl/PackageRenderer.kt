@@ -42,9 +42,7 @@ import kotlinx.html.stream.createHTML
 import org.jetbrains.dokka.Platform.jvm
 import org.jetbrains.dokka.base.renderers.OutputWriter
 import org.jetbrains.dokka.model.DClasslike
-import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DPackage
-import org.jetbrains.dokka.model.DProperty
 
 /** Renders docs for a single package, including the summary and each symbol. */
 internal class PackageRenderer(
@@ -113,9 +111,7 @@ internal class PackageRenderer(
 
     suspend fun writeClasslike(
         dPackage: DPackage,
-        dClasslike: DClasslike,
-        classExtensionFunctions: List<DFunction>,
-        classExtensionProperties: List<DProperty>
+        dClasslike: DClasslike
     ) {
         // Compose is "not kmp" but has expect/actuals; we need to deterministically use the expect
         // Because source jars are not KMP, we can't check `"common" in it.path`, so ban .***.kt
@@ -138,8 +134,6 @@ internal class PackageRenderer(
                 paramConverter,
                 annotationConverter,
                 metadataConverter,
-                classExtensionFunctions,
-                classExtensionProperties,
                 dPackage.getPlatforms()
             )
         } else
@@ -154,9 +148,7 @@ internal class PackageRenderer(
                 javadocConverter,
                 paramConverter,
                 annotationConverter,
-                metadataConverter,
-                classExtensionFunctions,
-                classExtensionProperties
+                metadataConverter
             )
         val page = converter.classlike()
         val classlike = createHTML().html {
