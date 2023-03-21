@@ -140,7 +140,7 @@ internal class DocumentablesHolder(
                     )
                 }
 
-                val classList = async { computeClasses(children.await()) }
+                val classList = async { computeClasses(combinedClasslikesList.await()) }
 
                 val enumList = async { computeEnums(children.await()) }
                 val interfaceList = async { computeInterfaces(children.await()) }
@@ -198,16 +198,8 @@ internal class DocumentablesHolder(
     suspend fun analysisMap(): Map<DokkaConfiguration.DokkaSourceSet, DokkaResolutionFacade> =
         analysisMap.await()
 
-    suspend fun classlikesFor(dPackage: DPackage, displayLanguage: Language): List<DClasslike> {
-        val classlikes = classlikes.getValue(dPackage.dri).await()
-            .filterNot { shouldNotBeDisplayed(it) }
-        val syntheticClasses = syntheticClasses.getValue(dPackage.dri).await()
-        return if (displayLanguage == Language.JAVA) {
-            classlikes
-        } else {
-            classlikes - syntheticClasses
-        }
-    }
+    suspend fun classlikesFor(dPackage: DPackage): List<DClasslike> =
+        classlikes.getValue(dPackage.dri).await()
 
     /**
      * Returns a classlike's nested classlikes.
@@ -220,15 +212,8 @@ internal class DocumentablesHolder(
         return theseNestedClasslikes.filterNot { shouldNotBeDisplayed(it) }
     }
 
-    suspend fun classesFor(dPackage: DPackage, displayLanguage: Language): List<DClass> {
-        val classes = classes.getValue(dPackage.dri).await()
-        val syntheticClasses = syntheticClasses.getValue(dPackage.dri).await()
-        return if (displayLanguage == Language.JAVA) {
-            (classes + syntheticClasses).sortedBy { "${it.name()} ${it.dri}" }
-        } else {
-            classes - syntheticClasses
-        }
-    }
+    suspend fun classesFor(dPackage: DPackage): List<DClass> =
+        classes.getValue(dPackage.dri).await()
 
     suspend fun enumsFor(dPackage: DPackage): List<DEnum> =
         enums.getValue(dPackage.dri).await()
@@ -336,12 +321,12 @@ internal class DocumentablesHolder(
     /** Returns all should-be-documented classlikes in this module. */
     private suspend fun computeClasslikes(module: DModule): List<DClasslike> {
         return computeClasslikes(
-            module.packages.flatMap { classlikesFor(it, Language.JAVA) }
-        ) // classlikesFor(JAVA) already contains synth
+            module.packages.flatMap { classlikesFor(it) }
+        ) // classlikesFor already contains synth for Java
     }
 
     /** Returns all classlikes among all given documentables. */
-    private fun computeClasslikes(
+    private suspend fun computeClasslikes(
         docs: List<Documentable>,
         syntheticClasses: Set<DClass> = emptySet()
     ): List<DClasslike> {
@@ -351,24 +336,23 @@ internal class DocumentablesHolder(
                     excludedRegex ->
                     excludedRegex.matches(thisClasslike.packageName())
                 }
-            }.sortedBy { "${it.name()} ${it.dri}" }
+            }.filterNot { shouldNotBeDisplayed(it) }
+            .sortedBy { "${it.name()} ${it.dri}" }
     }
 
-    private fun computeClasses(docs: List<Documentable>): List<DClass> {
-        return docs.filterIsInstance<DClass>().filterNot { it.isExceptionClass }
-            .filterNot { thisClass ->
-                excludedPackages.any {
-                    excludedRegex ->
-                    excludedRegex.matches(thisClass.packageName())
-                }
-            }.sortedBy { "${it.name()} ${it.dri}" }
-    }
+    /**
+     * Takes a sorted list of all classlikes and filters to the non-exception classes.
+     */
+    private fun computeClasses(classlikes: List<DClasslike>): List<DClass> =
+        classlikes.filterIsInstance<DClass>().filterNot { it.isExceptionClass }
 
     /** Computes the syntheticClasses from top level functions that are used to document Kotlin as
      * Java
      */
-    internal fun computeSyntheticClasses(dPackage: DPackage):
-        Set<DClass> {
+    internal fun computeSyntheticClasses(dPackage: DPackage): Set<DClass> {
+        // Synthetic classes don't exist in Kotlin, no reason to compute them
+        if (displayLanguage == Language.KOTLIN) return emptySet()
+
         // functions that are JvmSynthetic are not accessible from Java, so they should not appear
         // in the documentation
         val javaFunctions = dPackage.functions.filterOutJvmSynthetic()

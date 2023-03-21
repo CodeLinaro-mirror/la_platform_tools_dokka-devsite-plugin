@@ -73,7 +73,7 @@ internal abstract class PackageDocumentableConverter(
             docsToSummary(docsHolder.interfacesFor(dPackage))
         }
         val classes = async {
-            docsToSummary(docsHolder.classesFor(dPackage, displayLanguage))
+            docsToSummary(docsHolder.classesFor(dPackage))
         }
         val enums = async { docsToSummary(docsHolder.enumsFor(dPackage)) }
         val objects = async { docsToSummary(docsHolder.interestingObjectsFor(dPackage)) }

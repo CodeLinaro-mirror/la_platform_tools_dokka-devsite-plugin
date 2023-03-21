@@ -28,7 +28,6 @@ internal class DevsiteRenderer(
     private val rootFileRenderer: MetadataRenderer,
     private val packageRenderer: PackageRenderer,
     private val docsHolder: DocumentablesHolder,
-    private val displayLanguage: Language,
     private val devsiteConfiguration: DevsiteConfiguration,
 ) {
     suspend fun render() {
@@ -53,7 +52,7 @@ internal class DevsiteRenderer(
         launch { packageRenderer.writeIndex(dPackage) }
         launch { packageRenderer.writePackageSummary(dPackage) }
 
-        for (clazz in docsHolder.classlikesFor(dPackage, displayLanguage)) {
+        for (clazz in docsHolder.classlikesFor(dPackage)) {
             launch {
                 packageRenderer.writeClasslike(dPackage, clazz)
             }

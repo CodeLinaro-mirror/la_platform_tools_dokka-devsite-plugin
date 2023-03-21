@@ -157,7 +157,6 @@ internal class MultiLanguageRenderer(
                 metadataConverter
             ),
             holder,
-            language,
             devsiteConfiguration,
         ).render()
     }

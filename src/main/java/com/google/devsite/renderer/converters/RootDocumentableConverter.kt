@@ -139,7 +139,7 @@ internal class RootDocumentableConverter(
     ): Deferred<DefaultTocPackage> = async {
         val interfaces = docsHolder.interfacesFor(dPackage).map(::typeForToc)
         val objects = docsHolder.interestingObjectsFor(dPackage).map(::typeForToc)
-        val classes = docsHolder.classesFor(dPackage, displayLanguage).map(::typeForToc)
+        val classes = docsHolder.classesFor(dPackage).map(::typeForToc)
         val enums = docsHolder.enumsFor(dPackage).map(::typeForToc)
         val exceptions = docsHolder.exceptionsFor(dPackage).map(::typeForToc)
         val annotations = docsHolder.annotationsFor(dPackage).map(::typeForToc)

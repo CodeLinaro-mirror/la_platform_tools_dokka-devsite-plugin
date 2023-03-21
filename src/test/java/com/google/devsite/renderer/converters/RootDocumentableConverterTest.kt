@@ -436,6 +436,20 @@ internal class RootDocumentableConverterTest(
         assertThat(packageNames).containsExactly("a", "b")
     }
 
+    @Test
+    fun `Class summary only contains synthetic classes for Java display`() {
+        val classes = """
+            |fun foo(): Unit {}
+        """.render().indexPageForClasses().data.content.data.alphabetizedClasses
+        javaOnly {
+            // T is for TestKt
+            assertThat(classes).containsKey('T')
+        }
+        kotlinOnly {
+            assertThat(classes).isEmpty()
+        }
+    }
+
     private fun DModule.rootConverter(): RootDocumentableConverter {
         val (holder, provider) = holderAndProvider(this)
         val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)

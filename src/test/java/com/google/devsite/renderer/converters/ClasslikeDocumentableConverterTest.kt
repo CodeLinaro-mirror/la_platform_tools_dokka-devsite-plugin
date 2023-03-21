@@ -1601,7 +1601,7 @@ internal class ClasslikeDocumentableConverterTest(
 
     @Test
     fun `Top-level properties correctly interop to Java`() {
-        val testKt = """
+        val module = """
             |/** Some documentation **/
             |var topLevelRegularVar = 0
             |/** Some documentation **/
@@ -1611,9 +1611,10 @@ internal class ClasslikeDocumentableConverterTest(
             |/** Some documentation **/
             |lateinit var topLevelLateinitVar: String
             ||// @JvmStatic is not allowed in this context
-        """.render().page("TestKt").data.content.data
+        """.render()
 
         javaOnly {
+            val testKt = module.page("TestKt").data.content.data
             val functions = testKt.publicFunctionsSummary.data.items
             assertThat(functions.map { it.name() }).containsExactly(
                 "getTopLevelRegularVar", "setTopLevelRegularVar",
@@ -1639,7 +1640,7 @@ internal class ClasslikeDocumentableConverterTest(
 
     @Test
     fun `Synthetic classes for top-level functions in Java use @JvmName`() {
-        val testKt = """
+        val module = """
             |@JvmName("bar")
             |fun foo()
             |
@@ -1647,9 +1648,10 @@ internal class ClasslikeDocumentableConverterTest(
             |fun baz()
             |
             |fun apple()
-        """.render().page("TestKt").data.content.data
+        """.render()
 
         javaOnly {
+            val testKt = module.page("TestKt").data.content.data
             // also assert the alphabetical sort, after jvmname
             val names = testKt.publicFunctionsSummary.map { it.name() }
             assertThat(names).isEqualTo(listOf("aardvark", "apple", "bar"))
