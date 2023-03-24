@@ -131,8 +131,8 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a>&lt;Key,&nbsp;Value&gt;</code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html#setCoroutineScope(kotlinx.coroutines.CoroutineScope)">setCoroutineScope</a>(coroutineScope:&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>)</code></div>
-              <p>Set the <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code> that page loads should be launched within.</p>
+              <div><code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html#setCoroutineScope(kotlinx.coroutines.CoroutineScope)">setCoroutineScope</a>(coroutineScope:&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>)</code></div>
+              <p>Set the <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code> that page loads should be launched within.</p>
             </td>
           </tr>
           <tr>
@@ -376,9 +376,9 @@
       </div>
       <div class="api-item"><a name="setCoroutineScope-kotlinx.coroutines.CoroutineScope-"></a><a name="setcoroutinescope"></a>
         <h3 class="api-name" id="setCoroutineScope(kotlinx.coroutines.CoroutineScope)">setCoroutineScope</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html#setCoroutineScope(kotlinx.coroutines.CoroutineScope)">setCoroutineScope</a>(coroutineScope:&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>):&nbsp;<a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a>&lt;Key,&nbsp;Value&gt;</pre>
-        <p>Set the <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code> that page loads should be launched within. The set <code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html#setCoroutineScope(kotlinx.coroutines.CoroutineScope)">coroutineScope</a></code> allows a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> to cancel running load operations when the results are no longer needed - for example, when the containing activity is destroyed.</p>
-        <p>Defaults to <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-global-scope/index.html">GlobalScope</a></code>.</p>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html#setCoroutineScope(kotlinx.coroutines.CoroutineScope)">setCoroutineScope</a>(coroutineScope:&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>):&nbsp;<a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a>&lt;Key,&nbsp;Value&gt;</pre>
+        <p>Set the <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code> that page loads should be launched within. The set <code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html#setCoroutineScope(kotlinx.coroutines.CoroutineScope)">coroutineScope</a></code> allows a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> to cancel running load operations when the results are no longer needed - for example, when the containing activity is destroyed.</p>
+        <p>Defaults to <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-global-scope/index.html">GlobalScope</a></code>.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -392,7 +392,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>coroutineScope:&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code></td>
+                <td><code>coroutineScope:&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code></td>
                 <td></td>
               </tr>
             </tbody>
@@ -424,8 +424,8 @@
         <h3 class="api-name" id="setFetchExecutor(java.util.concurrent.Executor)">setFetchExecutor</h3>
         <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html#setFetchExecutor(java.util.concurrent.Executor)">setFetchExecutor</a>(fetchExecutor:&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a>):&nbsp;<a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a>&lt;Key,&nbsp;Value&gt;</pre>
         <p>Sets <code><a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code> used for background fetching of <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>s, and the pages within.</p>
-        <p>The library will wrap this as a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">kotlinx.coroutines.CoroutineDispatcher</a></code>.</p>
-        <p>If not set, defaults to a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-executor-coroutine-dispatcher/index.html">ExecutorCoroutineDispatcher</a></code> backed by <code><a href="/reference/kotlin/androidx/arch/core/executor/ArchTaskExecutor.html#getIOThreadExecutor()">ArchTaskExecutor.getIOThreadExecutor</a></code>.</p>
+        <p>The library will wrap this as a <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">kotlinx.coroutines.CoroutineDispatcher</a></code>.</p>
+        <p>If not set, defaults to a <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-executor-coroutine-dispatcher/index.html">ExecutorCoroutineDispatcher</a></code> backed by <code><a href="/reference/kotlin/androidx/arch/core/executor/ArchTaskExecutor.html#getIOThreadExecutor()">ArchTaskExecutor.getIOThreadExecutor</a></code>.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>

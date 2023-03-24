@@ -77,7 +77,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
     ): DokkaConfigurationImpl {
         sources.forEach { check(it.isDirectory) { "$it does not exist or is not a directory" } }
         val externalLinks = mapOf(
-            "coroutines" to "https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core",
+            "coroutines" to "https://kotlinlang.org/api/kotlinx.coroutines",
             "android" to "https://developer.android.com/reference",
             "guava" to "https://guava.dev/releases/18.0/api/docs/package-list",
             "kotlin" to "https://kotlinlang.org/api/latest/jvm/stdlib/"
