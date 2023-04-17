@@ -1641,6 +1641,18 @@ internal class DocTagConverterTest(
         assertThat(firstCodeBlock).doesNotContain("<code>")
     }
 
+    @Ignore // b/278255321; go/dokka-upstream-bug/2949
+    @Test
+    fun `Test @value tag`() {
+        val module = """
+            |/** An at-value tag: {@value VALUE_1}. */
+            |public enum Foo { VALUE_1, VALUE_2 }
+        """.render(java = true)
+        val documentation = module.documentation({ this.explicitClasslike("Foo") })
+        val description = (documentation.first() as DescriptionComponent).text()
+        assertThat(description).doesNotContain("{@value")
+    }
+
     private fun DModule.description(doc: DModule.() -> Documentable = ::smartDoc):
         DescriptionComponent {
         val (holder, provider) = holderAndProvider(this)
