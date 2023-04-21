@@ -14,7 +14,7 @@
     </p>
     <hr>
     <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutScope.html">LookaheadLayoutScope</a></code> provides a receiver scope for all (direct and indirect) child layouts in <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#LookaheadLayout(kotlin.Function1,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">LookaheadLayout</a></code>. In <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutScope.html">LookaheadLayoutScope</a></code>, the measurement and placement of any layout calculated in the lookahead pass can be observed via <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">Modifier.intermediateLayout</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutScope.html#(androidx.compose.ui.Modifier).onPlaced(kotlin.Function2)">Modifier.onPlaced</a></code> respectively.</p>
-    <pre class="prettyprint">
+    <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.core.Animatable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -186,7 +186,7 @@ LookaheadLayout(
         <h3 class="api-name" id="(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">intermediateLayout</h3>
         <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">intermediateLayout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;measure:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/MeasureScope.html">MeasureScope</a>.(measurable:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/Measurable.html">Measurable</a>, constraints:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>, lookaheadSize:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
         <p>Creates an intermediate layout based on target size of the child layout calculated in the lookahead. This allows the intermediate layout to morph the child layout after lookahead through <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">measure</a></code>, in which the size of the child layout calculated from the lookahead is provided. <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">intermediateLayout</a></code> does <em>not</em> participate in the lookahead. It is only invoked for retroactively changing the layout based on the lookahead before the layout is drawn.</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.core.Animatable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

@@ -41,7 +41,7 @@
         <p>This modifier animates its own size when its child modifier (or the child composable if it is already at the tail of the chain) changes size. This allows the parent modifier to observe a smooth size change, resulting in an overall continuous visual change.</p>
         <p>A <code><a href="/reference/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a></code> can be optionally specified for the size change animation. By default, <code><a href="/reference/androidx/compose/animation/core/package-summary.html#spring(kotlin.Float,kotlin.Float,kotlin.Any)">spring</a></code> will be used.</p>
         <p>An optional <code><a href="/reference/androidx/compose/animation/package-summary.html#(androidx.compose.ui.Modifier).animateContentSize(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function2)">finishedListener</a></code> can be supplied to get notified when the size change animation is finished. Since the content size change can be dynamic in many cases, both initial value and target value (i.e. final size) will be passed to the <code><a href="/reference/androidx/compose/animation/package-summary.html#(androidx.compose.ui.Modifier).animateContentSize(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function2)">finishedListener</a></code>. <b>Note:</b> if the animation is interrupted, the initial value will be the size at the point of interruption. This is intended to help determine the direction of the size change (i.e. expand or collapse in x and y dimensions).</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

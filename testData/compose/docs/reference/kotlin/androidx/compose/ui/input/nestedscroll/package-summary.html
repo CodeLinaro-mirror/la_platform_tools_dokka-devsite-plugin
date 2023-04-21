@@ -72,7 +72,7 @@
       <p>There are two ways to participate in the nested scroll: as a scrolling child by dispatching scrolling events via <code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html">NestedScrollDispatcher</a></code> to the nested scroll chain; and as a member of nested scroll chain by providing <code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></code>, which will be called when another nested scrolling child below dispatches scrolling events.</p>
       <p>It's a mandatory to participate as a <code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></code> in the chain, but scrolling events dispatch is optional since there are cases when element wants to participate in the nested scroll, but not a scrollable thing itself.</p>
       <p>Here's the collapsing toolbar example that participates in a chain, but doesn't dispatch:</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -134,7 +134,7 @@ Box(
 }</pre>
       <p>On the other side, dispatch via <code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html">NestedScrollDispatcher</a></code> is optional. It's needed if a component is able to receive and react to the drag/fling events and you want this components to be able to notify parents when scroll occurs, resulting in better overall coordination.</p>
       <p>Here's the example of the component that is draggable and dispatches nested scroll to participate in the nested scroll chain:</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState

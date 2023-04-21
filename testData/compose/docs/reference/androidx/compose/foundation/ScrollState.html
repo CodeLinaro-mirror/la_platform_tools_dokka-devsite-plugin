@@ -16,7 +16,7 @@
     <p>State of the scroll. Allows the developer to change the scroll position or get current state by calling methods on this object. To be hosted and passed to <code><a href="/reference/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).verticalScroll(androidx.compose.foundation.ScrollState,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean)">Modifier.verticalScroll</a></code> or <code><a href="/reference/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).horizontalScroll(androidx.compose.foundation.ScrollState,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean)">Modifier.horizontalScroll</a></code></p>
     <p>To create and automatically remember <code><a href="/reference/androidx/compose/foundation/ScrollState.html">ScrollState</a></code> with default parameters use <code><a href="/reference/androidx/compose/foundation/package-summary.html#rememberScrollState(kotlin.Int)">rememberScrollState</a></code>.</p>
     <p>Learn how to control the state of <code><a href="/reference/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).verticalScroll(androidx.compose.foundation.ScrollState,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean)">Modifier.verticalScroll</a></code> or <code><a href="/reference/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).horizontalScroll(androidx.compose.foundation.ScrollState,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean)">Modifier.horizontalScroll</a></code>:</p>
-    <pre class="prettyprint">
+    <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.horizontalScroll
@@ -313,7 +313,7 @@ Column {
         <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/foundation/ScrollState.html#getCanScrollBackward()">getCanScrollBackward</a>()</pre>
         <p>Whether this <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> can scroll backward (consume a negative delta). This is typically false if the scroll position is equal to its minimum value, and true otherwise.</p>
         <p>Note that <code>true</code> here does not imply that delta <em>will</em> be consumed - the ScrollableState may decide not to handle the incoming delta (such as if it is already being scrolled separately). Additionally, for backwards compatibility with previous versions of ScrollableState this value defaults to <code>true</code>.</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
@@ -364,7 +364,7 @@ Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontal
         <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/foundation/ScrollState.html#getCanScrollForward()">getCanScrollForward</a>()</pre>
         <p>Whether this <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> can scroll forward (consume a positive delta). This is typically false if the scroll position is equal to its maximum value, and true otherwise.</p>
         <p>Note that <code>true</code> here does not imply that delta <em>will</em> be consumed - the ScrollableState may decide not to handle the incoming delta (such as if it is already being scrolled separately). Additionally, for backwards compatibility with previous versions of ScrollableState this value defaults to <code>true</code>.</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn

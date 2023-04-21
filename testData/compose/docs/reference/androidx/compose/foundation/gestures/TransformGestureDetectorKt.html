@@ -75,7 +75,7 @@
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;<a href="/reference/androidx/compose/foundation/gestures/TransformGestureDetectorKt.html#(androidx.compose.ui.input.pointer.PointerEvent).calculateCentroid(kotlin.Boolean)">calculateCentroid</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerEvent.html">PointerEvent</a>&nbsp;receiver,&nbsp;boolean&nbsp;useCurrent)</pre>
         <p>Returns the centroid of all pointers that are down and were previously down. If no pointers are down, <code><a href="/reference/androidx/compose/ui/geometry/Offset.Companion.html#Unspecified()">Offset.Unspecified</a></code> is returned. If <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerEvent).calculateCentroid(kotlin.Boolean)">useCurrent</a></code> is <code>true</code>, the centroid of the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#position()">PointerInputChange.position</a></code> is returned and if <code>false</code>, the centroid of the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#previousPosition()">PointerInputChange.previousPosition</a></code> is returned. Only pointers that are down in both the previous and current state are used to calculate the centroid.</p>
         <p>Example Usage:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.gestures.calculateCentroid
 import androidx.compose.foundation.gestures.calculateCentroidSize
 import androidx.compose.foundation.gestures.awaitFirstDown
@@ -121,7 +121,7 @@ Box(
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/foundation/gestures/TransformGestureDetectorKt.html#(androidx.compose.ui.input.pointer.PointerEvent).calculateCentroidSize(kotlin.Boolean)">calculateCentroidSize</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerEvent.html">PointerEvent</a>&nbsp;receiver,&nbsp;boolean&nbsp;useCurrent)</pre>
         <p>Returns the average distance from the centroid for all pointers that are currently and were previously down. If no pointers are down, <code>0</code> is returned. If <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerEvent).calculateCentroidSize(kotlin.Boolean)">useCurrent</a></code> is <code>true</code>, the size of the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#position()">PointerInputChange.position</a></code> is returned and if <code>false</code>, the size of <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#previousPosition()">PointerInputChange.previousPosition</a></code> is returned. Only pointers that are down in both the previous and current state are used to calculate the centroid size.</p>
         <p>Example Usage:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.gestures.calculateCentroid
 import androidx.compose.foundation.gestures.calculateCentroidSize
 import androidx.compose.foundation.gestures.awaitFirstDown
@@ -167,7 +167,7 @@ Box(
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;<a href="/reference/androidx/compose/foundation/gestures/TransformGestureDetectorKt.html#(androidx.compose.ui.input.pointer.PointerEvent).calculatePan()">calculatePan</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerEvent.html">PointerEvent</a>&nbsp;receiver)</pre>
         <p>Returns the change in the centroid location between the previous and the current pointers that are down. Pointers that are newly down or raised are not considered in the centroid movement.</p>
         <p>Example Usage:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.calculatePan
 import androidx.compose.foundation.gestures.awaitFirstDown
@@ -207,7 +207,7 @@ Box(
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/foundation/gestures/TransformGestureDetectorKt.html#(androidx.compose.ui.input.pointer.PointerEvent).calculateRotation()">calculateRotation</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerEvent.html">PointerEvent</a>&nbsp;receiver)</pre>
         <p>Returns the rotation, in degrees, of the pointers between the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#previousPosition()">PointerInputChange.previousPosition</a></code> and <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#position()">PointerInputChange.position</a></code> states. Only the pointers that are down in both previous and current states are considered.</p>
         <p>Example Usage:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.calculateRotation
 import androidx.compose.foundation.gestures.awaitFirstDown
@@ -242,7 +242,7 @@ Box(
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/foundation/gestures/TransformGestureDetectorKt.html#(androidx.compose.ui.input.pointer.PointerEvent).calculateZoom()">calculateZoom</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerEvent.html">PointerEvent</a>&nbsp;receiver)</pre>
         <p>Uses the change of the centroid size between the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#previousPosition()">PointerInputChange.previousPosition</a></code> and <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#position()">PointerInputChange.position</a></code> to determine how much zoom was intended.</p>
         <p>Example Usage:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.calculateZoom
 import androidx.compose.foundation.gestures.awaitFirstDown
@@ -277,7 +277,7 @@ Box(
         <p>A gesture detector for rotation, panning, and zoom. Once touch slop has been reached, the user can use rotation, panning and zoom gestures. <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectTransformGestures(kotlin.Boolean,kotlin.Function4)">onGesture</a></code> will be called when any of the rotation, zoom or pan occurs, passing the rotation angle in degrees, zoom in scale factor and pan as an offset in pixels. Each of these changes is a difference between the previous call and the current gesture. This will consume all position changes after touch slop has been reached. <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectTransformGestures(kotlin.Boolean,kotlin.Function4)">onGesture</a></code> will also provide centroid of all the pointers that are down.</p>
         <p>If <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectTransformGestures(kotlin.Boolean,kotlin.Function4)">panZoomLock</a></code> is <code>true</code>, rotation is allowed only if touch slop is detected for rotation before pan or zoom motions. If not, pan and zoom gestures will be detected, but rotation gestures will not be. If <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerInputScope).detectTransformGestures(kotlin.Boolean,kotlin.Function4)">panZoomLock</a></code> is <code>false</code>, once touch slop is reached, all three gestures are detected.</p>
         <p>Example Usage:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.Box

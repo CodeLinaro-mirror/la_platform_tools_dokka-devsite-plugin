@@ -2570,7 +2570,7 @@ requestKey</code> using its <code><a href="/reference/kotlin/androidx/fragment/a
         <p>Called when a fragment is being created as part of a view layout inflation, typically from setting the content view of an activity. This may be called immediately after the fragment is created from a <code><a href="/reference/kotlin/androidx/fragment/app/FragmentContainerView.html">FragmentContainerView</a></code> in a layout file. Note this is <em>before</em> the fragment's <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onAttach(android.content.Context)">onAttach</a></code> has been called; all you should do here is parse the attributes and save them away. </p>
         <p>This is called <em>the first time</em> the fragment is inflated. If it is being inflated into a new instance with saved state, this method will not be called a second time for the restored state fragment.</p>
         <p>Here is a typical implementation of a fragment that can take parameters both through attributes supplied here as well from <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#getArguments()">getArguments</a></code>:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-java">
 public static class MyFragment extends Fragment {
     CharSequence mLabel;
 
@@ -2634,13 +2634,13 @@ public static class MyFragment extends Fragment {
 }
 </pre>
         <p>Note that parsing the XML attributes uses a &quot;styleable&quot; resource. The declaration for the styleable used here is:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-xml">
 &lt;declare-styleable name=&quot;FragmentArguments&quot;&gt;
     &lt;attr name=&quot;android:label&quot; /&gt;
 &lt;/declare-styleable&gt;
 </pre>
         <p>The fragment can then be declared within its activity's content layout through a tag like this:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-xml">
 &lt;androidx.fragment.app.FragmentContainerView
         class=&quot;com.example.android.supportv4.app.FragmentArgumentsSupport$MyFragment&quot;
         android:id=&quot;@+id/embedded&quot;
@@ -2649,7 +2649,7 @@ public static class MyFragment extends Fragment {
         android:label=&quot;@string/fragment_arguments_embedded&quot; /&gt;
 </pre>
         <p>This fragment can also be created dynamically from arguments given at runtime in the arguments Bundle; here is an example of doing so at creation of the containing activity:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-java">
 @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.fragment_arguments_support);

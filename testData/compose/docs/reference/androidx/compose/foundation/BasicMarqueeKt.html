@@ -85,7 +85,7 @@
           </li>
         </ul>
         <p>The animation only affects the drawing of the content, not its position. The offset returned by the <code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> of anything inside the marquee is undefined relative to anything outside the marquee, and may not match its drawn position on screen. This modifier also does not currently support content that accepts position-based input such as pointer events.</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.width
@@ -96,7 +96,7 @@ Column(Modifier.width(30.dp)) {
     Text(&quot;hello world&quot;, Modifier.basicMarquee())
 }</pre>
         <p>To only animate when the composable is focused, specify <code><a href="/reference/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).basicMarquee(kotlin.Int,androidx.compose.foundation.MarqueeAnimationMode,kotlin.Int,kotlin.Int,androidx.compose.foundation.MarqueeSpacing,androidx.compose.ui.unit.Dp)">animationMode</a></code> and make the composable focusable.</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
@@ -119,7 +119,7 @@ Column(Modifier.width(30.dp)) {
     )
 }</pre>
         <p>This modifier does not add any visual effects aside from scrolling, but you can add your own by placing modifiers before this one.</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.MarqueeSpacing
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.padding

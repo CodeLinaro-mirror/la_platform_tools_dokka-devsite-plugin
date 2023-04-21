@@ -21,7 +21,7 @@ import org.jetbrains.dokka.Platform
 import org.jetbrains.dokka.analysis.AnalysisEnvironment
 import org.jetbrains.dokka.analysis.DokkaMessageCollector
 import org.jetbrains.dokka.analysis.DokkaResolutionFacade
-import org.jetbrains.dokka.model.doc.CodeBlock
+import org.jetbrains.dokka.model.doc.Pre
 import org.jetbrains.dokka.model.doc.Text
 import org.jetbrains.dokka.plugability.DokkaContext
 import org.jetbrains.dokka.utilities.DokkaLogger
@@ -72,9 +72,9 @@ internal fun fqNameToPsiElement(
 internal fun processBody(psiElement: PsiElement): String {
     val text = processSampleBody(psiElement).trim { it == '\n' || it == '\r' }.trimEnd()
     val lines = text.split("\n")
-    val indent = lines.filter(String::isNotBlank).map {
+    val indent = lines.filter(String::isNotBlank).minOfOrNull {
         it.takeWhile(Char::isWhitespace).count()
-    }.minOrNull() ?: 0
+    } ?: 0
     return lines.joinToString("\n") { it.drop(indent) }
 }
 
@@ -170,11 +170,12 @@ internal fun setUpAnalysis(context: DokkaContext) = context.configuration.source
         }
     }
 
-internal fun convertTextToJavaSample(
+/** Resolves a javadoc `{@sample path/to/file.javaOrXml}`. Takes Text, returns <pre><code>. */
+internal fun convertTextToJavadocSample(
     block: Text,
     samples: Set<File>,
     logger: DokkaLogger
-): CodeBlock {
+): Pre {
     val sampleLine = block.body
         .trim().removePrefix("{").removeSuffix("}")
         // Upstream inserts "*"s on line breaks within the { }
@@ -195,8 +196,15 @@ internal fun convertTextToJavaSample(
         0 -> if (failOnMissingSamples) throw RuntimeException(
             "Unable to find the sample file $filePath in the samples directory " +
                 sampleFiles.map { it.path }.reduce { acc, s -> acc.commonPrefixWith(s) }
-        ) else CodeBlock()
-        1 -> CodeBlock(listOf(Text(extractCodeBlockFromFile(resolvedFile.single(), whatSamples))))
+        ) else Pre(emptyList())
+        1 -> {
+            // extractCodeBlockFromFile can only work with .java and .xml files
+            val fileExtension = resolvedFile.single().path.substringAfterLast(".")
+            Pre(
+                params = mapOf("class" to "prettyprint lang-$fileExtension"),
+                children = listOf(extractCodeBlockFromFile(resolvedFile.single(), whatSamples))
+            )
+        }
         else -> throw RuntimeException("Somehow, multiple files with path $filePath were found.")
     }
 }
@@ -210,12 +218,12 @@ private fun File.allFiles(): List<File> = if (this.isFile) listOf(this) else
  * Takes all lines between BEGIN_INCLUDE(block_to_take) and END_INCLUDE(block_to_take)
  * Reduces all indents to that of the first line
  */
-internal fun extractCodeBlockFromFile(sampleFile: File, blockToTake: String): String {
+internal fun extractCodeBlockFromFile(sampleFile: File, blockToTake: String): Text {
     var result = "\n"
     var inBlock = false
     var indentSize = -1
     sampleFile.readLines().forEach { line ->
-        if ("END_INCLUDE($blockToTake)" in line) return result
+        if ("END_INCLUDE($blockToTake)" in line) return Text(result)
         if (inBlock) {
             if (indentSize == -1) indentSize = indentSize(line)
             result += line.removePrefix(" ".repeat(indentSize)) + "\n"

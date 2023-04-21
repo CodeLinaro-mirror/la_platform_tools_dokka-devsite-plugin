@@ -46,7 +46,7 @@
         <h3 class="api-name" id="modifierElementOf(kotlin.Function0,kotlin.Function1)">modifierElementOf</h3>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;&lt;T&nbsp;extends&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a>&gt; <a href="/reference/androidx/compose/ui/node/ModifierNodeElementKt.html#modifierElementOf(kotlin.Function0,kotlin.Function1)">modifierElementOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;create,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/platform/InspectorInfo.html">InspectorInfo</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;definitions<br>)</pre>
         <p>A helpful API for constructing a <code><a href="/reference/androidx/compose/ui/node/ModifierNodeElement.html">ModifierNodeElement</a></code> corresponding to a particular <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> implementation. This overload is expected to be used for parameter-less Modifier factories. For Modifier factories with parameters, consider using the overload of this method which accepts a &quot;params&quot; and &quot;update&quot; parameter.</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.ui.node.modifierElementOf
 
 class Circle(var color: Color) : DrawModifierNode, Modifier.Node() {
@@ -63,7 +63,7 @@ fun Modifier.circle(color: Color) = this then modifierElementOf(
         properties[&quot;color&quot;] = color
     }
 )</pre>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.ui.node.modifierElementOf
 import androidx.compose.ui.semantics.SemanticsConfiguration
 import androidx.compose.ui.semantics.heading
@@ -135,7 +135,7 @@ fun Modifier.heading() = this then modifierElementOf(
         <h3 class="api-name" id="modifierElementOf(kotlin.Any,kotlin.Function0,kotlin.Function1,kotlin.Function1)">modifierElementOf</h3>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;&lt;T&nbsp;extends&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a>&gt; <a href="/reference/androidx/compose/ui/node/ModifierNodeElementKt.html#modifierElementOf(kotlin.Any,kotlin.Function0,kotlin.Function1,kotlin.Function1)">modifierElementOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;create,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;update,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/platform/InspectorInfo.html">InspectorInfo</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;definitions<br>)</pre>
         <p>A helpful API for constructing a <code><a href="/reference/androidx/compose/ui/node/ModifierNodeElement.html">ModifierNodeElement</a></code> corresponding to a particular <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> implementation.</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.ui.node.modifierElementOf
 
 class Circle(var color: Color) : DrawModifierNode, Modifier.Node() {
@@ -152,7 +152,7 @@ fun Modifier.circle(color: Color) = this then modifierElementOf(
         properties[&quot;color&quot;] = color
     }
 )</pre>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -184,7 +184,7 @@ fun Modifier.verticalPadding(padding: Dp) = this then modifierElementOf(
 Box(Modifier.background(Color.Gray).verticalPadding(50.dp)) {
     Box(Modifier.fillMaxSize().background(Color.DarkGray))
 }</pre>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.node.modifierElementOf
@@ -204,7 +204,7 @@ fun Modifier.circle(color: Color) = this then modifierElementOf(
     }
 )
 Box(Modifier.fillMaxSize().circle(Color.Blue))</pre>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.node.modifierElementOf
@@ -233,7 +233,7 @@ fun Modifier.logPosition(id: String) = this then modifierElementOf(
         properties[&quot;id&quot;] = id
     }
 )</pre>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.ui.node.modifierElementOf
 
 class SizeLoggerNode(var id: String) : LayoutAwareModifierNode, Modifier.Node() {
@@ -251,7 +251,7 @@ fun Modifier.logSize(id: String) = this then modifierElementOf(
         properties[&quot;id&quot;] = id
     }
 )</pre>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.ui.node.modifierElementOf
 
 class OnPointerEventNode(var callback: (PointerEvent) -&gt; Unit) :

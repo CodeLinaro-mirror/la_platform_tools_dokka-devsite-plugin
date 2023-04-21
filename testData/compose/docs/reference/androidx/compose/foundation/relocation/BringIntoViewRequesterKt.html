@@ -47,7 +47,7 @@
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/relocation/BringIntoViewRequester.html">BringIntoViewRequester</a>&nbsp;<a href="/reference/androidx/compose/foundation/relocation/BringIntoViewRequesterKt.html#BringIntoViewRequester()">BringIntoViewRequester</a>()</pre>
         <p>Create an instance of <code><a href="/reference/androidx/compose/foundation/relocation/BringIntoViewRequester.html">BringIntoViewRequester</a></code> that can be used with <code><a href="/reference/androidx/compose/foundation/relocation/package-summary.html#(androidx.compose.ui.Modifier).bringIntoViewRequester(androidx.compose.foundation.relocation.BringIntoViewRequester)">Modifier.bringIntoViewRequester</a></code>. A child can then call <code><a href="/reference/androidx/compose/foundation/relocation/BringIntoViewRequester.html#bringIntoView(androidx.compose.ui.geometry.Rect)">BringIntoViewRequester.bringIntoView</a></code> to send a request any scrollable parents so that they scroll to bring this item into view.</p>
         <p>Here is a sample where a composable is brought into view:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -82,7 +82,7 @@ Row(Modifier.horizontalScroll(rememberScrollState())) {
     }
 }</pre>
         <p>Here is a sample where a part of a composable is brought into view:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.border
 import androidx.compose.foundation.horizontalScroll
@@ -139,7 +139,7 @@ with(LocalDensity.current) {
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/foundation/relocation/BringIntoViewRequesterKt.html#(androidx.compose.ui.Modifier).bringIntoViewRequester(androidx.compose.foundation.relocation.BringIntoViewRequester)">bringIntoViewRequester</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/relocation/BringIntoViewRequester.html">BringIntoViewRequester</a>&nbsp;bringIntoViewRequester<br>)</pre>
         <p>Modifier that can be used to send <code><a href="/reference/androidx/compose/foundation/relocation/BringIntoViewRequester.html#bringIntoView(androidx.compose.ui.geometry.Rect)">bringIntoView</a></code> requests.</p>
         <p>The following example uses a <code>bringIntoViewRequester</code> to bring an item into the parent bounds. The example demonstrates how a composable can ask its parents to scroll so that the component using this modifier is brought into the bounds of all its parents.</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row

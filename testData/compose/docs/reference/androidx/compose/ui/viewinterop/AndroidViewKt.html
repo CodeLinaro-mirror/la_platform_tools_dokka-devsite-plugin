@@ -49,7 +49,7 @@
         <p><code><a href="/reference/androidx/compose/ui/viewinterop/package-summary.html#AndroidView(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)">AndroidView</a></code> is commonly needed for using Views that are infeasible to be reimplemented in Compose and there is no corresponding Compose API. Common examples for the moment are WebView, SurfaceView, AdView, etc.</p>
         <p><code><a href="/reference/androidx/compose/ui/viewinterop/package-summary.html#AndroidView(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)">AndroidView</a></code> will not clip its content to the layout bounds. Use <code><a href="https://developer.android.com/reference/android/view/View.html#setClipToOutline(kotlin.Boolean)">View.setClipToOutline</a></code> on the child View to clip the contents, if desired. Developers will likely want to do this with all subclasses of SurfaceView to keep its contents contained.</p>
         <p><code><a href="/reference/androidx/compose/ui/viewinterop/package-summary.html#AndroidView(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)">AndroidView</a></code> has nested scroll interop capabilities if the containing view has nested scroll enabled. This means this Composable can dispatch scroll deltas if it is placed inside a container that participates in nested scroll. For more information on how to enable nested scroll interop:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.gestures.rememberScrollableState
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
@@ -77,7 +77,7 @@ Box(
         }
     )
 }</pre>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import android.widget.TextView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

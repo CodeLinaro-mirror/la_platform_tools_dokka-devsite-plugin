@@ -270,7 +270,7 @@
         <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/foundation/lazy/grid/LazyGridState.html#getCanScrollBackward()">getCanScrollBackward</a>()</pre>
         <p>Whether this <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> can scroll backward (consume a negative delta). This is typically false if the scroll position is equal to its minimum value, and true otherwise.</p>
         <p>Note that <code>true</code> here does not imply that delta <em>will</em> be consumed - the ScrollableState may decide not to handle the incoming delta (such as if it is already being scrolled separately). Additionally, for backwards compatibility with previous versions of ScrollableState this value defaults to <code>true</code>.</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
@@ -321,7 +321,7 @@ Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontal
         <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/foundation/lazy/grid/LazyGridState.html#getCanScrollForward()">getCanScrollForward</a>()</pre>
         <p>Whether this <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> can scroll forward (consume a positive delta). This is typically false if the scroll position is equal to its maximum value, and true otherwise.</p>
         <p>Note that <code>true</code> here does not imply that delta <em>will</em> be consumed - the ScrollableState may decide not to handle the incoming delta (such as if it is already being scrolled separately). Additionally, for backwards compatibility with previous versions of ScrollableState this value defaults to <code>true</code>.</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
@@ -373,7 +373,7 @@ Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontal
         <p>The index of the first item that is visible.</p>
         <p>Note that this property is observable and if you use it in the composable function it will be recomposed on every change causing potential performance issues.</p>
         <p>If you want to run some side effects like sending an analytics event or updating a state based on this value consider using &quot;snapshotFlow&quot;:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.snapshotFlow
@@ -386,7 +386,7 @@ LaunchedEffect(gridState) {
         }
 }</pre>
         <p>If you need to use it in the composition then consider wrapping the calculation into a derived state in order to only have recompositions when the derived value changes:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
@@ -417,7 +417,7 @@ if (!isAtTop) {
         <p>The object of <code><a href="/reference/androidx/compose/foundation/lazy/grid/LazyGridLayoutInfo.html">LazyGridLayoutInfo</a></code> calculated during the last layout pass. For example, you can use it to calculate what items are currently visible.</p>
         <p>Note that this property is observable and is updated after every scroll or remeasure. If you use it in the composable function it will be recomposed on every change causing potential performance issues including infinity recomposition loop. Therefore, avoid using it in the composition.</p>
         <p>If you want to run some side effects like sending an analytics event or updating a state based on this value consider using &quot;snapshotFlow&quot;:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.snapshotFlow

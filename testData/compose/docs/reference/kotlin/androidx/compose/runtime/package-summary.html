@@ -1004,7 +1004,7 @@
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;E&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Applier.html">Applier</a>&lt;*&gt;&gt; <a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">ComposeNode</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;noinline&nbsp;factory:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T,<br>&nbsp;&nbsp;&nbsp;&nbsp;update:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> <a href="/reference/kotlin/androidx/compose/runtime/Updater.html">Updater</a>&lt;T&gt;.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Emits a node into the composition of type <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">T</a></code>. Nodes emitted inside of <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">content</a></code> will become children of the emitted node.</p>
       <p>This function will throw a runtime exception if <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">E</a></code> is not a subtype of the applier of the <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#currentComposer()">currentComposer</a></code>.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.Composition
 import androidx.compose.runtime.ComposeNode
 import androidx.compose.runtime.mutableStateOf
@@ -1144,7 +1144,7 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/ExplicitGroupsComposable.html">ExplicitGroupsComposable</a><br>inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;E&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Applier.html">Applier</a>&lt;*&gt;&gt; <a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">ComposeNode</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;noinline&nbsp;factory:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T,<br>&nbsp;&nbsp;&nbsp;&nbsp;update:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> <a href="/reference/kotlin/androidx/compose/runtime/Updater.html">Updater</a>&lt;T&gt;.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;noinline&nbsp;skippableUpdate:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/runtime/SkippableUpdater.html">SkippableUpdater</a>&lt;T&gt;.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Emits a node into the composition of type <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">T</a></code>. Nodes emitted inside of <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">content</a></code> will become children of the emitted node.</p>
       <p>This function will throw a runtime exception if <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">E</a></code> is not a subtype of the applier of the <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#currentComposer()">currentComposer</a></code>.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.Composition
 import androidx.compose.runtime.ComposeNode
 import androidx.compose.runtime.mutableStateOf
@@ -1294,7 +1294,7 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;E&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Applier.html">Applier</a>&lt;*&gt;&gt; <a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1)">ComposeNode</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;noinline&nbsp;factory:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T,<br>&nbsp;&nbsp;&nbsp;&nbsp;update:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> <a href="/reference/kotlin/androidx/compose/runtime/Updater.html">Updater</a>&lt;T&gt;.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Emits a node into the composition of type <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1)">T</a></code>.</p>
       <p>This function will throw a runtime exception if <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1)">E</a></code> is not a subtype of the applier of the <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#currentComposer()">currentComposer</a></code>.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.Composition
 import androidx.compose.runtime.ComposeNode
 import androidx.compose.runtime.mutableStateOf
@@ -1434,7 +1434,7 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#Composition(androidx.compose.runtime.Applier,androidx.compose.runtime.CompositionContext)">Composition</a>(applier:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Applier.html">Applier</a>&lt;*&gt;,&nbsp;parent:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/CompositionContext.html">CompositionContext</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Composition.html">Composition</a></pre>
       <p>This method is the way to initiate a composition. Optionally, a <code><a href="/reference/kotlin/androidx/compose/runtime/CompositionContext.html">parent</a></code> can be provided to make the composition behave as a sub-composition of the parent or a <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> can be provided.</p>
       <p>It is important to call <code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html#dispose()">Composition.dispose</a></code> this composer is no longer needed in order to release resources.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.Composition
 import androidx.compose.runtime.ComposeNode
 import androidx.compose.runtime.mutableStateOf
@@ -1567,7 +1567,7 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
       <h3 class="api-name" id="CompositionLocalProvider(androidx.compose.runtime.CompositionLocalContext,kotlin.Function0)">CompositionLocalProvider</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(androidx.compose.runtime.CompositionLocalContext,kotlin.Function0)">CompositionLocalProvider</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;context:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/CompositionLocalContext.html">CompositionLocalContext</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code> binds values to <code><a href="/reference/kotlin/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code>'s, provided by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(androidx.compose.runtime.CompositionLocalContext,kotlin.Function0)">context</a></code>. Reading the <code><a href="/reference/kotlin/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code> using <code><a href="/reference/kotlin/androidx/compose/runtime/CompositionLocal.html#current()">CompositionLocal.current</a></code> will return the value provided in values stored inside <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(androidx.compose.runtime.CompositionLocalContext,kotlin.Function0)">context</a></code> for all composable functions called directly or indirectly in the <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(androidx.compose.runtime.CompositionLocalContext,kotlin.Function0)">content</a></code> lambda.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.CompositionLocalProvider
 
 @Composable
@@ -1608,7 +1608,7 @@ fun App(user: User) {
       <h3 class="api-name" id="CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;vararg&nbsp;values:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ProvidedValue.html">ProvidedValue</a>&lt;*&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code> binds values to <code><a href="/reference/kotlin/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a></code> keys. Reading the <code><a href="/reference/kotlin/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code> using <code><a href="/reference/kotlin/androidx/compose/runtime/CompositionLocal.html#current()">CompositionLocal.current</a></code> will return the value provided in <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code>'s <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">values</a></code> parameter for all composable functions called directly or indirectly in the <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">content</a></code> lambda.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.CompositionLocalProvider
 
 @Composable
@@ -1655,7 +1655,7 @@ fun App(user: User) {
       <p>This method is a way to initiate a composition. Optionally, a <code><a href="/reference/kotlin/androidx/compose/runtime/CompositionContext.html">parent</a></code> can be provided to make the composition behave as a sub-composition of the parent or a <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> can be provided.</p>
       <p>A controlled composition allows direct control of the composition instead of it being controlled by the <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> passed ot the root composition.</p>
       <p>It is important to call <code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html#dispose()">Composition.dispose</a></code> this composer is no longer needed in order to release resources.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.Composition
 import androidx.compose.runtime.ComposeNode
 import androidx.compose.runtime.mutableStateOf
@@ -1798,7 +1798,7 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
         </li>
       </ul>
       <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#DisposableEffect(kotlin.Function1)">DisposableEffect</a></code> may be used to initialize or subscribe to a key and reinitialize when a different key is provided, performing cleanup for the old operation before initializing the new. For example:</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -1845,7 +1845,7 @@ fun UserProfile(userRepository: UserRepository, userRequest: UserDataRequest) {
         </li>
       </ul>
       <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#DisposableEffect(kotlin.Function1)">DisposableEffect</a></code> may be used to initialize or subscribe to a key and reinitialize when a different key is provided, performing cleanup for the old operation before initializing the new. For example:</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -1892,7 +1892,7 @@ fun UserProfile(userRepository: UserRepository, userRequest: UserDataRequest) {
         </li>
       </ul>
       <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#DisposableEffect(kotlin.Function1)">DisposableEffect</a></code> may be used to initialize or subscribe to a key and reinitialize when a different key is provided, performing cleanup for the old operation before initializing the new. For example:</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -1939,7 +1939,7 @@ fun UserProfile(userRepository: UserRepository, userRequest: UserDataRequest) {
         </li>
       </ul>
       <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#DisposableEffect(kotlin.Function1)">DisposableEffect</a></code> may be used to initialize or subscribe to a key and reinitialize when a different key is provided, performing cleanup for the old operation before initializing the new. For example:</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -2015,7 +2015,7 @@ fun UserProfile(userRepository: UserRepository, userRequest: UserDataRequest) {
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;E&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Applier.html">Applier</a>&lt;*&gt;&gt; <a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">ReusableComposeNode</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;noinline&nbsp;factory:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T,<br>&nbsp;&nbsp;&nbsp;&nbsp;update:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> <a href="/reference/kotlin/androidx/compose/runtime/Updater.html">Updater</a>&lt;T&gt;.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Emits a recyclable node into the composition of type <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">T</a></code>. Nodes emitted inside of <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">content</a></code> will become children of the emitted node.</p>
       <p>This function will throw a runtime exception if <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">E</a></code> is not a subtype of the applier of the <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#currentComposer()">currentComposer</a></code>.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.Composition
 import androidx.compose.runtime.ComposeNode
 import androidx.compose.runtime.mutableStateOf
@@ -2155,7 +2155,7 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/ExplicitGroupsComposable.html">ExplicitGroupsComposable</a><br>inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;E&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Applier.html">Applier</a>&lt;*&gt;&gt; <a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">ReusableComposeNode</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;noinline&nbsp;factory:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T,<br>&nbsp;&nbsp;&nbsp;&nbsp;update:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> <a href="/reference/kotlin/androidx/compose/runtime/Updater.html">Updater</a>&lt;T&gt;.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;noinline&nbsp;skippableUpdate:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/runtime/SkippableUpdater.html">SkippableUpdater</a>&lt;T&gt;.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Emits a recyclable node into the composition of type <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">T</a></code>. Nodes emitted inside of <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">content</a></code> will become children of the emitted node.</p>
       <p>This function will throw a runtime exception if <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">E</a></code> is not a subtype of the applier of the <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#currentComposer()">currentComposer</a></code>.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.Composition
 import androidx.compose.runtime.ComposeNode
 import androidx.compose.runtime.mutableStateOf
@@ -2305,7 +2305,7 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;E&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Applier.html">Applier</a>&lt;*&gt;&gt; <a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1)">ReusableComposeNode</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;noinline&nbsp;factory:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T,<br>&nbsp;&nbsp;&nbsp;&nbsp;update:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> <a href="/reference/kotlin/androidx/compose/runtime/Updater.html">Updater</a>&lt;T&gt;.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Emits a recyclable node into the composition of type <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1)">T</a></code>.</p>
       <p>This function will throw a runtime exception if <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1)">E</a></code> is not a subtype of the applier of the <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#currentComposer()">currentComposer</a></code>.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.Composition
 import androidx.compose.runtime.ComposeNode
 import androidx.compose.runtime.mutableStateOf
@@ -2569,7 +2569,7 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
       <h3 class="api-name" id="derivedStateOf(androidx.compose.runtime.SnapshotMutationPolicy,kotlin.Function0)">derivedStateOf</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#derivedStateOf(androidx.compose.runtime.SnapshotMutationPolicy,kotlin.Function0)">derivedStateOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;policy:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/SnapshotMutationPolicy.html">SnapshotMutationPolicy</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;calculation:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;T&gt;</pre>
       <p>Creates a <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> object whose <code><a href="/reference/kotlin/androidx/compose/runtime/State.html#value()">State.value</a></code> is the result of <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#derivedStateOf(androidx.compose.runtime.SnapshotMutationPolicy,kotlin.Function0)">calculation</a></code>. The result of calculation will be cached in such a way that calling <code><a href="/reference/kotlin/androidx/compose/runtime/State.html#value()">State.value</a></code> repeatedly will not cause <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#derivedStateOf(androidx.compose.runtime.SnapshotMutationPolicy,kotlin.Function0)">calculation</a></code> to be executed multiple times, but reading <code><a href="/reference/kotlin/androidx/compose/runtime/State.html#value()">State.value</a></code> will cause all <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> objects that got read during the <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#derivedStateOf(androidx.compose.runtime.SnapshotMutationPolicy,kotlin.Function0)">calculation</a></code> to be read in the current <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code>, meaning that this will correctly subscribe to the derived state objects if the value is being read in an observed context such as a <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.material.Text
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -2619,7 +2619,7 @@ import androidx.compose.runtime.remember
       <h3 class="api-name" id="derivedStateOf(kotlin.Function0)">derivedStateOf</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#derivedStateOf(kotlin.Function0)">derivedStateOf</a>(calculation:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T):&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;T&gt;</pre>
       <p>Creates a <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> object whose <code><a href="/reference/kotlin/androidx/compose/runtime/State.html#value()">State.value</a></code> is the result of <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#derivedStateOf(kotlin.Function0)">calculation</a></code>. The result of calculation will be cached in such a way that calling <code><a href="/reference/kotlin/androidx/compose/runtime/State.html#value()">State.value</a></code> repeatedly will not cause <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#derivedStateOf(kotlin.Function0)">calculation</a></code> to be executed multiple times, but reading <code><a href="/reference/kotlin/androidx/compose/runtime/State.html#value()">State.value</a></code> will cause all <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> objects that got read during the <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#derivedStateOf(kotlin.Function0)">calculation</a></code> to be read in the current <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code>, meaning that this will correctly subscribe to the derived state objects if the value is being read in an observed context such as a <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function. Derived states without mutation policy trigger updates on each dependency change. To avoid invalidation on update, provide suitable <code><a href="/reference/kotlin/androidx/compose/runtime/SnapshotMutationPolicy.html">SnapshotMutationPolicy</a></code> through <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#derivedStateOf(kotlin.Function0)">derivedStateOf</a></code> overload.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.material.Text
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -2671,7 +2671,7 @@ import androidx.compose.runtime.remember
       <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#key(kotlin.Array,kotlin.Function0)">key</a></code> is a utility composable that is used to &quot;group&quot; or &quot;key&quot; a block of execution inside of a composition. This is sometimes needed for correctness inside of control-flow that may cause a given composable invocation to execute more than once during composition.</p>
       <p>The value for a key <em>does not need to be globally unique</em>, and needs only be unique amongst the invocations of <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#key(kotlin.Array,kotlin.Function0)">key</a></code> <em>at that point</em> in composition.</p>
       <p>For instance, consider the following example:</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.key
 
 for (user in users) {
@@ -2684,7 +2684,7 @@ for (user in users.filter { isAdmin }) {
       <p>Even though there are users with the same id composed in both the top and the bottom loop, because they are different calls to <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#key(kotlin.Array,kotlin.Function0)">key</a></code>, there is no need to create compound keys.</p>
       <p>The key must be unique for each element in the collection, however, or children and local state might be reused in unintended ways.</p>
       <p>For instance, consider the following example:</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.key
 
 for ((child, parent) in relationships) {
@@ -2694,7 +2694,7 @@ for ((child, parent) in relationships) {
     }
 }</pre>
       <p>This example assumes that <code>parent.id</code> is a unique key for each item in the collection, but this is only true if it is fair to assume that a parent will only ever have a single child, which may not be the case.  Instead, it may be more correct to do the following:</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.key
 
 for ((child, parent) in relationships) {
@@ -2704,7 +2704,7 @@ for ((child, parent) in relationships) {
     }
 }</pre>
       <p>A compound key can be created by passing in multiple arguments:</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -2746,7 +2746,7 @@ for (element in elements) {
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#movableContentOf(kotlin.Function0)">movableContentOf</a>(content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Convert a lambda into one that moves the remembered state and nodes created in a previous call to the new location it is called.</p>
       <p>Tracking compositions can be used to produce a composable that moves its content between a row and a column based on a parameter, such as,</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.movableContentOf
@@ -2764,7 +2764,7 @@ if (vertical) {
     }
 }</pre>
       <p>Or they can be used to ensure the composition state tracks with a model as moves in the layout, such as,</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.movableContentOf
@@ -2837,7 +2837,7 @@ Row {
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;P&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#movableContentOf(kotlin.Function1)">movableContentOf</a>(content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> (P) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> (P) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Convert a lambda into one that moves the remembered state and nodes created in a previous call to the new location it is called.</p>
       <p>Tracking compositions can be used to produce a composable that moves its content between a row and a column based on a parameter, such as,</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.movableContentOf
@@ -2855,7 +2855,7 @@ if (vertical) {
     }
 }</pre>
       <p>Or they can be used to ensure the composition state tracks with a model as moves in the layout, such as,</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.movableContentOf
@@ -2928,7 +2928,7 @@ Row {
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;P1&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;P2&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#movableContentOf(kotlin.Function2)">movableContentOf</a>(content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> (P1, P2) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> (P1, P2) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Convert a lambda into one that moves the remembered state and nodes created in a previous call to the new location it is called.</p>
       <p>Tracking compositions can be used to produce a composable that moves its content between a row and a column based on a parameter, such as,</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.movableContentOf
@@ -2946,7 +2946,7 @@ if (vertical) {
     }
 }</pre>
       <p>Or they can be used to ensure the composition state tracks with a model as moves in the layout, such as,</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.movableContentOf
@@ -3019,7 +3019,7 @@ Row {
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;P1&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;P2&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;P3&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#movableContentOf(kotlin.Function3)">movableContentOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> (P1, P2, P3) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> (P1, P2, P3) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Convert a lambda into one that moves the remembered state and nodes created in a previous call to the new location it is called.</p>
       <p>Tracking compositions can be used to produce a composable that moves its content between a row and a column based on a parameter, such as,</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.movableContentOf
@@ -3037,7 +3037,7 @@ if (vertical) {
     }
 }</pre>
       <p>Or they can be used to ensure the composition state tracks with a model as moves in the layout, such as,</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.movableContentOf
@@ -3110,7 +3110,7 @@ Row {
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;P1&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;P2&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;P3&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;P4&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#movableContentOf(kotlin.Function4)">movableContentOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> (P1, P2, P3, P4) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> (P1, P2, P3, P4) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Convert a lambda into one that moves the remembered state and nodes created in a previous call to the new location it is called.</p>
       <p>Tracking compositions can be used to produce a composable that moves its content between a row and a column based on a parameter, such as,</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.movableContentOf
@@ -3128,7 +3128,7 @@ if (vertical) {
     }
 }</pre>
       <p>Or they can be used to ensure the composition state tracks with a model as moves in the layout, such as,</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.movableContentOf
@@ -3201,7 +3201,7 @@ Row {
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#movableContentWithReceiverOf(kotlin.Function1)">movableContentWithReceiverOf</a>(content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> R.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> R.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Convert a lambda with a receiver into one that moves the remembered state and nodes created in a previous call to the new location it is called.</p>
       <p>Tracking compositions can be used to produce a composable that moves its content between a row and a column based on a parameter, such as,</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.movableContentOf
@@ -3219,7 +3219,7 @@ if (vertical) {
     }
 }</pre>
       <p>Or they can be used to ensure the composition state tracks with a model as moves in the layout, such as,</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.movableContentOf
@@ -3292,7 +3292,7 @@ Row {
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;P&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#movableContentWithReceiverOf(kotlin.Function2)">movableContentWithReceiverOf</a>(content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> R.(P) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> R.(P) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Convert a lambda with a receiver into one that moves the remembered state and nodes created in a previous call to the new location it is called.</p>
       <p>Tracking compositions can be used to produce a composable that moves its content between a row and a column based on a parameter, such as,</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.movableContentOf
@@ -3310,7 +3310,7 @@ if (vertical) {
     }
 }</pre>
       <p>Or they can be used to ensure the composition state tracks with a model as moves in the layout, such as,</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.movableContentOf
@@ -3383,7 +3383,7 @@ Row {
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;P1&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;P2&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#movableContentWithReceiverOf(kotlin.Function3)">movableContentWithReceiverOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> R.(P1, P2) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> R.(P1, P2) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Convert a lambda with a receiver into one that moves the remembered state and nodes created in a previous call to the new location it is called.</p>
       <p>Tracking compositions can be used to produce a composable that moves its content between a row and a column based on a parameter, such as,</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.movableContentOf
@@ -3401,7 +3401,7 @@ if (vertical) {
     }
 }</pre>
       <p>Or they can be used to ensure the composition state tracks with a model as moves in the layout, such as,</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.movableContentOf
@@ -3474,7 +3474,7 @@ Row {
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;P1&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;P2&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;P3&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#movableContentWithReceiverOf(kotlin.Function4)">movableContentWithReceiverOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> R.(P1, P2, P3) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> R.(P1, P2, P3) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Convert a lambda with a receiver into one that moves the remembered state and nodes created in a previous call to the new location it is called.</p>
       <p>Tracking compositions can be used to produce a composable that moves its content between a row and a column based on a parameter, such as,</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.movableContentOf
@@ -3492,7 +3492,7 @@ if (vertical) {
     }
 }</pre>
       <p>Or they can be used to ensure the composition state tracks with a model as moves in the layout, such as,</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.movableContentOf
@@ -3564,7 +3564,7 @@ Row {
       <h3 class="api-name" id="mutableStateListOf()">mutableStateListOf</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#mutableStateListOf()">mutableStateListOf</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateList.html">SnapshotStateList</a>&lt;T&gt;</pre>
       <p>Create a instance of <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a></code><T> that is observable and can be snapshot.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Button
@@ -3669,7 +3669,7 @@ fun Names() {
       <h3 class="api-name" id="mutableStateMapOf()">mutableStateMapOf</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;K&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#mutableStateMapOf()">mutableStateMapOf</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateMap.html">SnapshotStateMap</a>&lt;K,&nbsp;V&gt;</pre>
       <p>Create a instance of <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a></code> that is observable and can be snapshot.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Button
@@ -3789,7 +3789,7 @@ fun NamesAndAges() {
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#mutableStateOf(kotlin.Any,androidx.compose.runtime.SnapshotMutationPolicy)">mutableStateOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;policy:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/SnapshotMutationPolicy.html">SnapshotMutationPolicy</a>&lt;T&gt; = structuralEqualityPolicy()<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a>&lt;T&gt;</pre>
       <p>Return a new <code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a></code> initialized with the passed in <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#mutableStateOf(kotlin.Any,androidx.compose.runtime.SnapshotMutationPolicy)">value</a></code></p>
       <p>The MutableState class is a single value holder whose reads and writes are observed by Compose. Additionally, writes to it are transacted as part of the <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code> system.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
@@ -3801,7 +3801,7 @@ Text(text = &quot;You clicked ${count.value} times&quot;)
 Button(onClick = { count.value++ }) {
     Text(&quot;Click me&quot;)
 }</pre>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
@@ -3813,7 +3813,7 @@ Text(text = &quot;You clicked $count times&quot;)
 Button(onClick = { setCount(count + 1) }) {
     Text(&quot;Click me&quot;)
 }</pre>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -3831,7 +3831,7 @@ fun observeUser(userId: Int): User? {
     }
     return user.value
 }</pre>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.foundation.text.BasicTextField
@@ -3925,7 +3925,7 @@ fun LoginScreen() {
       <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Any,kotlin.coroutines.SuspendFunction1)">producer</a></code> is launched when <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.coroutines.SuspendFunction1)">produceState</a></code> enters the composition and is cancelled when <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.coroutines.SuspendFunction1)">produceState</a></code> leaves the composition. If <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Any,kotlin.coroutines.SuspendFunction1)">key1</a></code>, <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Any,kotlin.coroutines.SuspendFunction1)">key2</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Any,kotlin.coroutines.SuspendFunction1)">key3</a></code> change, a running <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Any,kotlin.coroutines.SuspendFunction1)">producer</a></code> will be cancelled and re-launched for the new source. [producer should use <code><a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html#value()">ProduceStateScope.value</a></code> to set new values on the returned <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code>.</p>
       <p>The returned <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> conflates values; no change will be observable if <code><a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html#value()">ProduceStateScope.value</a></code> is used to set a value that is <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html">equal</a></code> to its old value, and observers may only see the latest value if several values are set in rapid succession.</p>
       <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.coroutines.SuspendFunction1)">produceState</a></code> may be used to observe either suspending or non-suspending sources of external data, for example:</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.produceState
 
@@ -3943,7 +3943,7 @@ when (val state = uiState) {
         }
     }
 }</pre>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.produceState
 
 val currentPerson by produceState&lt;Person?&gt;(null, viewModel) {
@@ -3963,7 +3963,7 @@ val currentPerson by produceState&lt;Person?&gt;(null, viewModel) {
       <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.coroutines.SuspendFunction1)">producer</a></code> is launched when <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.coroutines.SuspendFunction1)">produceState</a></code> enters the composition and is cancelled when <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.coroutines.SuspendFunction1)">produceState</a></code> leaves the composition. If <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.coroutines.SuspendFunction1)">key1</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.coroutines.SuspendFunction1)">key2</a></code> change, a running <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.coroutines.SuspendFunction1)">producer</a></code> will be cancelled and re-launched for the new source. <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.coroutines.SuspendFunction1)">producer</a></code> should use <code><a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html#value()">ProduceStateScope.value</a></code> to set new values on the returned <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code>.</p>
       <p>The returned <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> conflates values; no change will be observable if <code><a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html#value()">ProduceStateScope.value</a></code> is used to set a value that is <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html">equal</a></code> to its old value, and observers may only see the latest value if several values are set in rapid succession.</p>
       <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.coroutines.SuspendFunction1)">produceState</a></code> may be used to observe either suspending or non-suspending sources of external data, for example:</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.produceState
 
@@ -3981,7 +3981,7 @@ when (val state = uiState) {
         }
     }
 }</pre>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.produceState
 
 val currentPerson by produceState&lt;Person?&gt;(null, viewModel) {
@@ -4001,7 +4001,7 @@ val currentPerson by produceState&lt;Person?&gt;(null, viewModel) {
       <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.Any,kotlin.coroutines.SuspendFunction1)">producer</a></code> is launched when <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.coroutines.SuspendFunction1)">produceState</a></code> enters the composition and is cancelled when <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.coroutines.SuspendFunction1)">produceState</a></code> leaves the composition. If <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.Any,kotlin.coroutines.SuspendFunction1)">key1</a></code> changes, a running <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.Any,kotlin.coroutines.SuspendFunction1)">producer</a></code> will be cancelled and re-launched for the new source. <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.Any,kotlin.coroutines.SuspendFunction1)">producer</a></code> should use <code><a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html#value()">ProduceStateScope.value</a></code> to set new values on the returned <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code>.</p>
       <p>The returned <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> conflates values; no change will be observable if <code><a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html#value()">ProduceStateScope.value</a></code> is used to set a value that is <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html">equal</a></code> to its old value, and observers may only see the latest value if several values are set in rapid succession.</p>
       <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.coroutines.SuspendFunction1)">produceState</a></code> may be used to observe either suspending or non-suspending sources of external data, for example:</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.produceState
 
@@ -4019,7 +4019,7 @@ when (val state = uiState) {
         }
     }
 }</pre>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.produceState
 
 val currentPerson by produceState&lt;Person?&gt;(null, viewModel) {
@@ -4039,7 +4039,7 @@ val currentPerson by produceState&lt;Person?&gt;(null, viewModel) {
       <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.Array,kotlin.coroutines.SuspendFunction1)">producer</a></code> is launched when <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.coroutines.SuspendFunction1)">produceState</a></code> enters the composition and is cancelled when <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.coroutines.SuspendFunction1)">produceState</a></code> leaves the composition. If <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.Array,kotlin.coroutines.SuspendFunction1)">keys</a></code> change, a running <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.Array,kotlin.coroutines.SuspendFunction1)">producer</a></code> will be cancelled and re-launched for the new source. <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.Array,kotlin.coroutines.SuspendFunction1)">producer</a></code> should use <code><a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html#value()">ProduceStateScope.value</a></code> to set new values on the returned <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code>.</p>
       <p>The returned <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> conflates values; no change will be observable if <code><a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html#value()">ProduceStateScope.value</a></code> is used to set a value that is <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html">equal</a></code> to its old value, and observers may only see the latest value if several values are set in rapid succession.</p>
       <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.coroutines.SuspendFunction1)">produceState</a></code> may be used to observe either suspending or non-suspending sources of external data, for example:</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.produceState
 
@@ -4057,7 +4057,7 @@ when (val state = uiState) {
         }
     }
 }</pre>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.produceState
 
 val currentPerson by produceState&lt;Person?&gt;(null, viewModel) {
@@ -4077,7 +4077,7 @@ val currentPerson by produceState&lt;Person?&gt;(null, viewModel) {
       <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.coroutines.SuspendFunction1)">producer</a></code> is launched when <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.coroutines.SuspendFunction1)">produceState</a></code> enters the composition and is cancelled when <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.coroutines.SuspendFunction1)">produceState</a></code> leaves the composition. <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.coroutines.SuspendFunction1)">producer</a></code> should use <code><a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html#value()">ProduceStateScope.value</a></code> to set new values on the returned <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code>.</p>
       <p>The returned <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> conflates values; no change will be observable if <code><a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html#value()">ProduceStateScope.value</a></code> is used to set a value that is <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html">equal</a></code> to its old value, and observers may only see the latest value if several values are set in rapid succession.</p>
       <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.coroutines.SuspendFunction1)">produceState</a></code> may be used to observe either suspending or non-suspending sources of external data, for example:</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.produceState
 
@@ -4095,7 +4095,7 @@ when (val state = uiState) {
         }
     }
 }</pre>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.produceState
 
 val currentPerson by produceState&lt;Person?&gt;(null, viewModel) {
@@ -4158,7 +4158,7 @@ val currentPerson by produceState&lt;Person?&gt;(null, viewModel) {
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#rememberUpdatedState(kotlin.Any)">rememberUpdatedState</a>(newValue:&nbsp;T):&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;T&gt;</pre>
       <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">remember</a></code> a <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#rememberUpdatedState(kotlin.Any)">mutableStateOf</a></code> and update its value to <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#rememberUpdatedState(kotlin.Any)">newValue</a></code> on each recomposition of the <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#rememberUpdatedState(kotlin.Any)">rememberUpdatedState</a></code> call.</p>
       <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#rememberUpdatedState(kotlin.Any)">rememberUpdatedState</a></code> should be used when parameters or values computed during composition are referenced by a long-lived lambda or object expression. Recomposition will update the resulting <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> without recreating the long-lived lambda or object, allowing that object to persist without cancelling and resubscribing, or relaunching a long-lived operation that may be expensive or prohibitive to recreate and restart. This may be common when working with <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#DisposableEffect(kotlin.Function1)">DisposableEffect</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#LaunchedEffect(kotlin.coroutines.SuspendFunction1)">LaunchedEffect</a></code>, for example:</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.rememberUpdatedState
 
@@ -4180,7 +4180,7 @@ fun EventHandler(dispatcher: Dispatcher, onEvent: () -&gt; Unit) {
     }
 }</pre>
       <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#LaunchedEffect(kotlin.coroutines.SuspendFunction1)">LaunchedEffect</a></code>s often describe state machines that should not be reset and restarted if a parameter or event callback changes, but they should have the current value available when needed. For example:</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberUpdatedState
 
@@ -4206,7 +4206,7 @@ fun NotificationHost(state: NotificationState, onTimeout: (Notification) -&gt; U
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#snapshotFlow(kotlin.Function0)">snapshotFlow</a>(block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T):&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;T&gt;</pre>
       <p>Create a <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> from observable <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code> state. (e.g. state holders returned by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#mutableStateOf(kotlin.Any,androidx.compose.runtime.SnapshotMutationPolicy)">mutableStateOf</a></code>.)</p>
       <p><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#snapshotFlow(kotlin.Function0)">snapshotFlow</a></code> creates a <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> that runs <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#snapshotFlow(kotlin.Function0)">block</a></code> when collected and emits the result, recording any snapshot state that was accessed. While collection continues, if a new <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code> is applied that changes state accessed by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#snapshotFlow(kotlin.Function0)">block</a></code>, the flow will run <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#snapshotFlow(kotlin.Function0)">block</a></code> again, re-recording the snapshot state that was accessed. If the result of <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#snapshotFlow(kotlin.Function0)">block</a></code> is not <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html">equal to</a></code> the previous result, the flow will emit that new result. (This behavior is similar to that of <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/index.html">Flow.distinctUntilChanged</a></code>.) Collection will continue indefinitely unless it is explicitly cancelled or limited by the use of other <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> operators.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.snapshotFlow
 
@@ -4391,7 +4391,7 @@ Snapshot.withMutableSnapshot {
       <h3 class="api-name" id="(kotlinx.coroutines.flow.Flow).collectAsState(kotlin.Any,kotlin.coroutines.CoroutineContext)">collectAsState</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;R,&nbsp;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#(kotlinx.coroutines.flow.Flow).collectAsState(kotlin.Any,kotlin.coroutines.CoroutineContext)">collectAsState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;initial:&nbsp;R,<br>&nbsp;&nbsp;&nbsp;&nbsp;context:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a> = EmptyCoroutineContext<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;R&gt;</pre>
       <p>Collects values from this <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> and represents its latest value via <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code>. Every time there would be new value posted into the <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> the returned <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> will be updated causing recomposition of every <code><a href="/reference/kotlin/androidx/compose/runtime/State.html#value()">State.value</a></code> usage.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.material.Text
 import androidx.compose.runtime.collectAsState
 
@@ -4423,7 +4423,7 @@ Text(&quot;Value is $value&quot;)</pre>
       <h3 class="api-name" id="(kotlinx.coroutines.flow.StateFlow).collectAsState(kotlin.coroutines.CoroutineContext)">collectAsState</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/index.html">StateFlow</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#(kotlinx.coroutines.flow.StateFlow).collectAsState(kotlin.coroutines.CoroutineContext)">collectAsState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;context:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a> = EmptyCoroutineContext<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;T&gt;</pre>
       <p>Collects values from this <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/index.html">StateFlow</a></code> and represents its latest value via <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code>. The <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/value.html">StateFlow.value</a></code> is used as an initial value. Every time there would be new value posted into the <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/index.html">StateFlow</a></code> the returned <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> will be updated causing recomposition of every <code><a href="/reference/kotlin/androidx/compose/runtime/State.html#value()">State.value</a></code> usage.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.material.Text
 import androidx.compose.runtime.collectAsState
 
@@ -4455,7 +4455,7 @@ Text(&quot;Value is $value&quot;)</pre>
       <h3 class="api-name" id="(androidx.compose.runtime.State).getValue(kotlin.Any,kotlin.reflect.KProperty)">getValue</h3>
       <pre class="api-signature no-pretty-print">inline&nbsp;operator&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#(androidx.compose.runtime.State).getValue(kotlin.Any,kotlin.reflect.KProperty)">getValue</a>(thisObj:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;property:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property/index.html">KProperty</a>&lt;*&gt;):&nbsp;T</pre>
       <p>Permits property delegation of <code>val</code>s using <code>by</code> for <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code>.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Text
 
@@ -4475,7 +4475,7 @@ Row {
       <h3 class="api-name" id="(androidx.compose.runtime.MutableState).setValue(kotlin.Any,kotlin.reflect.KProperty,kotlin.Any)">setValue</h3>
       <pre class="api-signature no-pretty-print">inline&nbsp;operator&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#(androidx.compose.runtime.MutableState).setValue(kotlin.Any,kotlin.reflect.KProperty,kotlin.Any)">setValue</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;thisObj:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;property:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property/index.html">KProperty</a>&lt;*&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;T<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Permits property delegation of <code>var</code>s using <code>by</code> for <code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a></code>.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf

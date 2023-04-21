@@ -40,7 +40,7 @@
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/dokkatest/sampleAnnotation/dokkatest/samples/TabRowKt.html#TabRow(kotlin.Int,kotlin.String,kotlin.String,kotlin.String,kotlin.Function1,kotlin.Function0,kotlin.Function0)">TabRow</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;selectedTabIndex,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;backgroundColor,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;contentColor,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;indicator,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;divider,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;tabs<br>)</pre>
         <p>A TabRow contains a row of Tabs, and displays an indicator underneath the currently selected tab. A TabRow places its tabs evenly spaced along the entire row, with each tab taking up an equal amount of space. See ScrollableTabRow for a tab row that does not enforce equal size, and allows scrolling to tabs that do not fit on screen.</p>
         <p>A simple example with text tabs looks like:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
@@ -67,7 +67,7 @@ Column {
     )
 }</pre>
         <p>You can also provide your own custom tab, such as:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.TabRow
 import androidx.compose.material.Text
@@ -89,7 +89,7 @@ Column {
     )
 }</pre>
         <p>Where the custom tab itself could look like:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -119,7 +119,7 @@ Tab(selected, onClick) {
 }</pre>
         <p>As well as customizing the tab, you can also provide a custom <code><a href="/reference/dokkatest/sampleAnnotation/dokkatest/samples/package-summary.html#TabRow(kotlin.Int,kotlin.String,kotlin.String,kotlin.String,kotlin.Function1,kotlin.Function0,kotlin.Function0)">indicator</a></code>, to customize the indicator displayed for a tab. <code><a href="/reference/dokkatest/sampleAnnotation/dokkatest/samples/package-summary.html#TabRow(kotlin.Int,kotlin.String,kotlin.String,kotlin.String,kotlin.Function1,kotlin.Function0,kotlin.Function0)">indicator</a></code> will be placed to fill the entire TabRow, so it should internally take care of sizing and positioning the indicator to match changes to <code><a href="/reference/dokkatest/sampleAnnotation/dokkatest/samples/package-summary.html#TabRow(kotlin.Int,kotlin.String,kotlin.String,kotlin.String,kotlin.Function1,kotlin.Function0,kotlin.Function0)">selectedTabIndex</a></code>.</p>
         <p>For example, given an indicator that draws a rounded rectangle near the edges of the Tab:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
@@ -136,7 +136,7 @@ Box(
         .border(BorderStroke(2.dp, color), RoundedCornerShape(5.dp))
 )</pre>
         <p>We can reuse TabRowDefaults.tabIndicatorOffset and just provide this indicator, as we aren't changing how the size and position of the indicator changes between tabs:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
@@ -173,7 +173,7 @@ Column {
     )
 }</pre>
         <p>You may also want to use a custom transition, to allow you to dynamically change the appearance of the indicator as it animates between tabs, such as changing its color or size. <code><a href="/reference/dokkatest/sampleAnnotation/dokkatest/samples/package-summary.html#TabRow(kotlin.Int,kotlin.String,kotlin.String,kotlin.String,kotlin.Function1,kotlin.Function0,kotlin.Function0)">indicator</a></code> is stacked on top of the entire TabRow, so you just need to provide a custom transition that animates the offset of the indicator from the start of the TabRow. For example, take the following example that uses a transition to animate the offset, width, and color of the same FancyIndicator from before, also adding a physics based 'spring' effect to the indicator in the direction of motion:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.animateDp
 import androidx.compose.animation.core.spring
@@ -232,7 +232,7 @@ FancyIndicator(
         .width(indicatorEnd - indicatorStart)
 )</pre>
         <p>We can now just pass this indicator directly to TabRow:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow

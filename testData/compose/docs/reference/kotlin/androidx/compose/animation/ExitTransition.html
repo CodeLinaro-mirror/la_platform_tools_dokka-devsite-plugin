@@ -29,7 +29,7 @@
       </li>
     </ol>
     <p><code><a href="/reference/kotlin/androidx/compose/animation/ExitTransition.html#None()">ExitTransition.None</a></code> can be used when no exit transition is desired. Different <code><a href="/reference/kotlin/androidx/compose/animation/ExitTransition.html">ExitTransition</a></code>s can be combined using plus operator, for example:</p>
-    <pre class="prettyprint">
+    <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
@@ -204,7 +204,7 @@ AnimatedVisibility(
         <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/ExitTransition.html#None()">None</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/ExitTransition.html">ExitTransition</a></pre>
         <p>This can be used when no built-in <code><a href="/reference/kotlin/androidx/compose/animation/ExitTransition.html">ExitTransition</a></code> (i.e. fade/slide, etc) is desired for the <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String,kotlin.Function1)">AnimatedVisibility</a></code>, but rather the children are defining their own exit animation using the <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code> scope.</p>
         <p><b>Note:</b> If <code><a href="/reference/kotlin/androidx/compose/animation/ExitTransition.html#None()">None</a></code> is used, and nothing is animating in the Transition<EnterExitState> scope that <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String,kotlin.Function1)">AnimatedVisibility</a></code> provided, the content will be removed from <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String,kotlin.Function1)">AnimatedVisibility</a></code> right away.</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.tween
@@ -330,7 +330,7 @@ fun AnimateMainContent(mainContentVisible: MutableTransitionState&lt;Boolean&gt;
         <h3 class="api-name" id="plus(androidx.compose.animation.ExitTransition)">plus</h3>
         <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/ExitTransition.html#plus(androidx.compose.animation.ExitTransition)">plus</a>(exit:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/ExitTransition.html">ExitTransition</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/ExitTransition.html">ExitTransition</a></pre>
         <p>Combines different exit transitions. The order of the <code><a href="/reference/kotlin/androidx/compose/animation/ExitTransition.html">ExitTransition</a></code>s being combined does not matter, as these <code><a href="/reference/kotlin/androidx/compose/animation/ExitTransition.html">ExitTransition</a></code>s will start simultaneously. The order of applying transforms from these exit transitions (if defined) is: alpha and scale first, shrink or expand, then slide.</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn

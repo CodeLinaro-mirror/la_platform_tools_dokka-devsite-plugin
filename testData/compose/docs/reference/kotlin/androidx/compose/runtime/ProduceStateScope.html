@@ -132,7 +132,7 @@
         <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html#awaitDispose(kotlin.Function0)">awaitDispose</a>(onDispose:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-nothing.html">Nothing</a></pre>
         <p>Await the disposal of this producer whether it left the composition, the source changed, or an error occurred. Always runs <code><a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html#awaitDispose(kotlin.Function0)">onDispose</a></code> before resuming.</p>
         <p>This method is useful when configuring callback-based state producers that do not suspend, for example:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.produceState
 
 val currentPerson by produceState&lt;Person?&gt;(null, viewModel) {

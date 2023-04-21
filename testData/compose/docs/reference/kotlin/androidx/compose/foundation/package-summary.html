@@ -491,7 +491,7 @@
       <h3 class="api-name" id="Canvas(androidx.compose.ui.Modifier,kotlin.Function1)">Canvas</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#Canvas(androidx.compose.ui.Modifier,kotlin.Function1)">Canvas</a>(modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,&nbsp;onDraw:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Component that allow you to specify an area on the screen and perform canvas drawing on this area. You MUST specify size with modifier, whether with exact sizes via Modifier.size modifier, or relative to parent, via Modifier.fillMaxSize, <code><a href="/reference/kotlin/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).weight(kotlin.Float,kotlin.Boolean)">ColumnScope.weight</a></code>, etc. If parent wraps this child, only exact sizes must be specified.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.size
 import androidx.compose.ui.geometry.Offset
@@ -540,7 +540,7 @@ Canvas(modifier = Modifier.size(100.dp)) {
       <h3 class="api-name" id="Canvas(androidx.compose.ui.Modifier,kotlin.String,kotlin.Function1)">Canvas</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#Canvas(androidx.compose.ui.Modifier,kotlin.String,kotlin.Function1)">Canvas</a>(modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,&nbsp;contentDescription:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,&nbsp;onDraw:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Component that allow you to specify an area on the screen and perform canvas drawing on this area. You MUST specify size with modifier, whether with exact sizes via Modifier.size modifier, or relative to parent, via Modifier.fillMaxSize, <code><a href="/reference/kotlin/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).weight(kotlin.Float,kotlin.Boolean)">ColumnScope.weight</a></code>, etc. If parent wraps this child, only exact sizes must be specified.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.size
 import androidx.compose.ui.geometry.Offset
@@ -605,14 +605,14 @@ Canvas(
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/kotlin/androidx/compose/runtime/NonRestartableComposable.html">NonRestartableComposable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#Image(androidx.compose.ui.graphics.ImageBitmap,kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,androidx.compose.ui.layout.ContentScale,kotlin.Float,androidx.compose.ui.graphics.ColorFilter,androidx.compose.ui.graphics.FilterQuality)">Image</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;bitmap:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentDescription:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;alignment:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Alignment.html">Alignment</a> = Alignment.Center,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentScale:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a> = ContentScale.Fit,<br>&nbsp;&nbsp;&nbsp;&nbsp;alpha:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = DefaultAlpha,<br>&nbsp;&nbsp;&nbsp;&nbsp;colorFilter:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorFilter.html">ColorFilter</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;filterQuality:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/FilterQuality.html">FilterQuality</a> = DefaultFilterQuality<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>A composable that lays out and draws a given <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a></code>. This will attempt to size the composable according to the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a></code>'s given width and height. However, an optional <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code> parameter can be provided to adjust sizing or draw additional content (ex. background). Any unspecified dimension will leverage the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a></code>'s size as a minimum constraint.</p>
       <p>The following sample shows basic usage of an Image composable to position and draw an <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a></code> on screen</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.Image
 
 val ImageBitmap = createTestImage()
 // Lays out and draws an image sized to the dimensions of the ImageBitmap
 Image(bitmap = ImageBitmap, contentDescription = &quot;Localized description&quot;)</pre>
       <p>For use cases that require drawing a rectangular subset of the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a></code> consumers can use overload that consumes a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/painter/Painter.html">Painter</a></code> parameter shown in this sample</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.Image
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.unit.IntOffset
@@ -697,7 +697,7 @@ Image(
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#Image(androidx.compose.ui.graphics.painter.Painter,kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,androidx.compose.ui.layout.ContentScale,kotlin.Float,androidx.compose.ui.graphics.ColorFilter)">Image</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;painter:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/painter/Painter.html">Painter</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentDescription:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a> = Modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;alignment:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Alignment.html">Alignment</a> = Alignment.Center,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentScale:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/ContentScale.html">ContentScale</a> = ContentScale.Fit,<br>&nbsp;&nbsp;&nbsp;&nbsp;alpha:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = DefaultAlpha,<br>&nbsp;&nbsp;&nbsp;&nbsp;colorFilter:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/ColorFilter.html">ColorFilter</a>? = null<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Creates a composable that lays out and draws a given <code><a href="/reference/kotlin/androidx/compose/ui/graphics/painter/Painter.html">Painter</a></code>. This will attempt to size the composable according to the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/painter/Painter.html">Painter</a></code>'s intrinsic size. However, an optional <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code> parameter can be provided to adjust sizing or draw additional content (ex. background)</p>
       <p><b>NOTE</b> a Painter might not have an intrinsic size, so if no LayoutModifier is provided as part of the Modifier chain this might size the <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#Image(androidx.compose.ui.graphics.ImageBitmap,kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,androidx.compose.ui.layout.ContentScale,kotlin.Float,androidx.compose.ui.graphics.ColorFilter)">Image</a></code> composable to a width and height of zero and will not draw any content. This can happen for Painter implementations that always attempt to fill the bounds like <code><a href="/reference/kotlin/androidx/compose/ui/graphics/painter/ColorPainter.html">ColorPainter</a></code></p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.remember
@@ -903,7 +903,7 @@ Image(
       <p>This function should be used to help build responsive UIs that follow the system setting, to avoid harsh contrast changes when switching between applications.</p>
       <p>It is also recommended to provide user accessible overrides in your application, so users can choose to force an always-light or always-dark theme. To do this, you should provide the current theme value in a CompositionLocal or similar to components further down your hierarchy, only calling this effect once at the top level if no user override has been set. This also helps avoid multiple calls to this effect, which can be expensive as it queries system configuration.</p>
       <p>For example, to draw a white rectangle when in dark theme, and a black rectangle when in light theme:</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
@@ -941,7 +941,7 @@ Box {
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#rememberScrollState(kotlin.Int)">rememberScrollState</a>(initial:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 0):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/ScrollState.html">ScrollState</a></pre>
       <p>Create and <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">remember</a></code> the <code><a href="/reference/kotlin/androidx/compose/foundation/ScrollState.html">ScrollState</a></code> based on the currently appropriate scroll configuration to allow changing scroll position or observing scroll behavior.</p>
       <p>Learn how to control the state of <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).verticalScroll(androidx.compose.foundation.ScrollState,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean)">Modifier.verticalScroll</a></code> or <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).horizontalScroll(androidx.compose.foundation.ScrollState,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean)">Modifier.horizontalScroll</a></code>:</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.horizontalScroll
@@ -1023,7 +1023,7 @@ Column {
       <h3 class="api-name" id="(androidx.compose.ui.Modifier).background(androidx.compose.ui.graphics.Brush,androidx.compose.ui.graphics.Shape,kotlin.Float)">background</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).background(androidx.compose.ui.graphics.Brush,androidx.compose.ui.graphics.Shape,kotlin.Float)">background</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;brush:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Brush.html">Brush</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;shape:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Shape.html">Shape</a> = RectangleShape,<br>&nbsp;&nbsp;&nbsp;&nbsp;alpha:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = 1.0f<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
       <p>Draws <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).background(androidx.compose.ui.graphics.Brush,androidx.compose.ui.graphics.Shape,kotlin.Float)">shape</a></code> with <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).background(androidx.compose.ui.graphics.Brush,androidx.compose.ui.graphics.Shape,kotlin.Float)">brush</a></code> behind the content.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CutCornerShape
@@ -1077,7 +1077,7 @@ Text(
       <h3 class="api-name" id="(androidx.compose.ui.Modifier).background(androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Shape)">background</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).background(androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Shape)">background</a>(color:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,&nbsp;shape:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Shape.html">Shape</a> = RectangleShape):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
       <p>Draws <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).background(androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Shape)">shape</a></code> with a solid <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).background(androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Shape)">color</a></code> behind the content.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
@@ -1128,7 +1128,7 @@ Text(
         </li>
       </ul>
       <p>The animation only affects the drawing of the content, not its position. The offset returned by the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> of anything inside the marquee is undefined relative to anything outside the marquee, and may not match its drawn position on screen. This modifier also does not currently support content that accepts position-based input such as pointer events.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.width
@@ -1139,7 +1139,7 @@ Column(Modifier.width(30.dp)) {
     Text(&quot;hello world&quot;, Modifier.basicMarquee())
 }</pre>
       <p>To only animate when the composable is focused, specify <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).basicMarquee(kotlin.Int,androidx.compose.foundation.MarqueeAnimationMode,kotlin.Int,kotlin.Int,androidx.compose.foundation.MarqueeSpacing,androidx.compose.ui.unit.Dp)">animationMode</a></code> and make the composable focusable.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
@@ -1162,7 +1162,7 @@ Column(Modifier.width(30.dp)) {
     )
 }</pre>
       <p>This modifier does not add any visual effects aside from scrolling, but you can add your own by placing modifiers before this one.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.MarqueeSpacing
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.padding
@@ -1264,7 +1264,7 @@ Text(
       <h3 class="api-name" id="(androidx.compose.ui.Modifier).border(androidx.compose.foundation.BorderStroke,androidx.compose.ui.graphics.Shape)">border</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).border(androidx.compose.foundation.BorderStroke,androidx.compose.ui.graphics.Shape)">border</a>(border:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/BorderStroke.html">BorderStroke</a>,&nbsp;shape:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Shape.html">Shape</a> = RectangleShape):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
       <p>Modify element to add border with appearance specified with a <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).border(androidx.compose.foundation.BorderStroke,androidx.compose.ui.graphics.Shape)">border</a></code> and a <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).border(androidx.compose.foundation.BorderStroke,androidx.compose.ui.graphics.Shape)">shape</a></code> and clip it.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
@@ -1306,7 +1306,7 @@ Text(
       <h3 class="api-name" id="(androidx.compose.ui.Modifier).border(androidx.compose.ui.unit.Dp,androidx.compose.ui.graphics.Brush,androidx.compose.ui.graphics.Shape)">border</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).border(androidx.compose.ui.unit.Dp,androidx.compose.ui.graphics.Brush,androidx.compose.ui.graphics.Shape)">border</a>(width:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>,&nbsp;brush:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Brush.html">Brush</a>,&nbsp;shape:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Shape.html">Shape</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
       <p>Modify element to add border with appearance specified with a <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).border(androidx.compose.ui.unit.Dp,androidx.compose.ui.graphics.Brush,androidx.compose.ui.graphics.Shape)">width</a></code>, a <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).border(androidx.compose.ui.unit.Dp,androidx.compose.ui.graphics.Brush,androidx.compose.ui.graphics.Shape)">brush</a></code> and a <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).border(androidx.compose.ui.unit.Dp,androidx.compose.ui.graphics.Brush,androidx.compose.ui.graphics.Shape)">shape</a></code> and clip it.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
@@ -1361,7 +1361,7 @@ Text(
       <h3 class="api-name" id="(androidx.compose.ui.Modifier).border(androidx.compose.ui.unit.Dp,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Shape)">border</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).border(androidx.compose.ui.unit.Dp,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Shape)">border</a>(width:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>,&nbsp;color:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,&nbsp;shape:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Shape.html">Shape</a> = RectangleShape):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
       <p>Modify element to add border with appearance specified with a <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).border(androidx.compose.ui.unit.Dp,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Shape)">width</a></code>, a <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).border(androidx.compose.ui.unit.Dp,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Shape)">color</a></code> and a <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).border(androidx.compose.ui.unit.Dp,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Shape)">shape</a></code> and clip it.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.padding
@@ -1416,7 +1416,7 @@ Text(
       <p>Configure component to receive clicks via input or accessibility &quot;click&quot; event.</p>
       <p>Add this modifier to the element to make it clickable within its bounds and show an indication as specified in <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).clickable(androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.foundation.Indication,kotlin.Boolean,kotlin.String,androidx.compose.ui.semantics.Role,kotlin.Function0)">indication</a></code> parameter.</p>
       <p>If you need to support double click or long click alongside the single click, consider using <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).combinedClickable(kotlin.Boolean,kotlin.String,androidx.compose.ui.semantics.Role,kotlin.String,kotlin.Function0,kotlin.Function0,kotlin.Function0)">combinedClickable</a></code>.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.clickable
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
@@ -1484,7 +1484,7 @@ Text(text = count.value.toString(), modifier = Modifier.clickable { count.value 
       <p>Add this modifier to the element to make it clickable within its bounds and show a default indication when it's pressed.</p>
       <p>This version has no <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> or <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a></code> parameters, default indication from <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#LocalIndication()">LocalIndication</a></code> will be used. To specify <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> or <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a></code>, use another overload.</p>
       <p>If you need to support double click or long click alongside the single click, consider using <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).combinedClickable(kotlin.Boolean,kotlin.String,androidx.compose.ui.semantics.Role,kotlin.String,kotlin.Function0,kotlin.Function0,kotlin.Function0)">combinedClickable</a></code>.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.clickable
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
@@ -1566,7 +1566,7 @@ Text(text = count.value.toString(), modifier = Modifier.clickable { count.value 
       <p>Add this modifier to the element to make it clickable within its bounds.</p>
       <p>If you need only click handling, and no double or long clicks, consider using <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).clickable(kotlin.Boolean,kotlin.String,androidx.compose.ui.semantics.Role,kotlin.Function0)">clickable</a></code>.</p>
       <p>Add this modifier to the element to make it clickable within its bounds.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.clickable
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
@@ -1652,7 +1652,7 @@ Text(text = count.value.toString(), modifier = Modifier.clickable { count.value 
       <p>Add this modifier to the element to make it clickable within its bounds.</p>
       <p>If you need only click handling, and no double or long clicks, consider using <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).clickable(kotlin.Boolean,kotlin.String,androidx.compose.ui.semantics.Role,kotlin.Function0)">clickable</a></code></p>
       <p>This version has no <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> or <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a></code> parameters, default indication from <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#LocalIndication()">LocalIndication</a></code> will be used. To specify <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> or <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a></code>, use another overload.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.clickable
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
@@ -1775,7 +1775,7 @@ Text(text = count.value.toString(), modifier = Modifier.clickable { count.value 
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).focusGroup()">focusGroup</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
       <p>Creates a focus group or marks this component as a focus group. This means that when we move focus using the keyboard or programmatically using <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusManager.html#moveFocus(androidx.compose.ui.focus.FocusDirection)">FocusManager.moveFocus()</a></code>, the items within the focus group will be given a higher priority before focus moves to items outside the focus group.</p>
       <p>In the sample below, each column is a focus group, so pressing the tab key will move focus to all the buttons in column 1 before visiting column 2.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.focusGroup
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -1795,7 +1795,7 @@ Row {
     }
 }</pre>
       <p>Note: The focusable children of a focusable parent automatically form a focus group. This modifier is to be used when you want to create a focus group where the parent is not focusable. If you encounter a component that uses a <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).focusGroup()">focusGroup</a></code> internally, you can make it focusable by using a <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).focusable(kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource)">focusable</a></code> modifier. In the second sample here, the <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/package-summary.html#LazyRow(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyRow</a></code> is a focus group that is not itself focusable. But you can make it focusable by adding a <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).focusable(kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource)">focusable</a></code> modifier.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.focusable
@@ -1823,7 +1823,7 @@ LazyRow(
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).focusable(kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource)">focusable</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = true,<br>&nbsp;&nbsp;&nbsp;&nbsp;interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a>? = null<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
       <p>Configure component to be focusable via focus system or accessibility &quot;focus&quot; event.</p>
       <p>Add this modifier to the element to make it focusable within its bounds.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
@@ -1891,7 +1891,7 @@ Column {
       <h3 class="api-name" id="(androidx.compose.ui.Modifier).horizontalScroll(androidx.compose.foundation.ScrollState,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean)">horizontalScroll</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).horizontalScroll(androidx.compose.foundation.ScrollState,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean)">horizontalScroll</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/ScrollState.html">ScrollState</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = true,<br>&nbsp;&nbsp;&nbsp;&nbsp;flingBehavior:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/FlingBehavior.html">FlingBehavior</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;reverseScrolling:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
       <p>Modify element to allow to scroll horizontally when width of the content is bigger than max constraints allow.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
@@ -1972,7 +1972,7 @@ Box(
       <h3 class="api-name" id="(androidx.compose.ui.Modifier).hoverable(androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Boolean)">hoverable</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).hoverable(androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Boolean)">hoverable</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = true<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
       <p>Configure component to be hoverable via pointer enter/exit events.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.hoverable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -2028,7 +2028,7 @@ Box(
       <h3 class="api-name" id="(androidx.compose.ui.Modifier).indication(androidx.compose.foundation.interaction.InteractionSource,androidx.compose.foundation.Indication)">indication</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).indication(androidx.compose.foundation.interaction.InteractionSource,androidx.compose.foundation.Indication)">indication</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;indication:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a>?<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
       <p>Draws visual effects for this component when interactions occur.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -2098,7 +2098,7 @@ Column {
       <p>Shows a <code><a href="https://developer.android.com/reference/android/widget/Magnifier.html">Magnifier</a></code> widget that shows an enlarged version of the content at <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).magnifier(kotlin.Function1,kotlin.Function1,kotlin.Float,androidx.compose.foundation.MagnifierStyle,kotlin.Function1)">sourceCenter</a></code> relative to the current layout node.</p>
       <p>This function returns a no-op modifier on API levels below P (28), since the framework does not support the <code><a href="https://developer.android.com/reference/android/widget/Magnifier.html">Magnifier</a></code> widget on those levels. However, even on higher API levels, not all magnifier features are supported on all platforms. To check whether a given <code><a href="/reference/kotlin/androidx/compose/foundation/MagnifierStyle.html">MagnifierStyle</a></code> is supported by the current platform, check the <code><a href="/reference/kotlin/androidx/compose/foundation/MagnifierStyle.html#isSupported()">MagnifierStyle.isSupported</a></code> property.</p>
       <p>This function does not allow configuration of <code><a href="https://developer.android.com/reference/android/widget/Magnifier.Builder.html#setSourceBounds(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Int)">source bounds</a></code> since the magnifier widget does not support constraining to the bounds of composables.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.magnifier
@@ -2203,7 +2203,7 @@ if (!MagnifierStyle.Default.isSupported) {
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).overscroll(androidx.compose.foundation.OverscrollEffect)">overscroll</a>(overscrollEffect:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/OverscrollEffect.html">OverscrollEffect</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
       <p>Renders overscroll from the provided <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).overscroll(androidx.compose.foundation.OverscrollEffect)">overscrollEffect</a></code>.</p>
       <p>This modifier is a convenience method to call <code><a href="/reference/kotlin/androidx/compose/foundation/OverscrollEffect.html#effectModifier()">OverscrollEffect.effectModifier</a></code>, which renders the actual effect. Note that this modifier is only responsible for the visual part of overscroll - on its own it will not handle input events. In addition to using this modifier you also need to propagate events to the <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).overscroll(androidx.compose.foundation.OverscrollEffect)">overscrollEffect</a></code>, most commonly by using a <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).scrollable(androidx.compose.foundation.gestures.ScrollableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,androidx.compose.foundation.interaction.MutableInteractionSource)">androidx.compose.foundation.gestures.scrollable</a></code>.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
@@ -2348,7 +2348,7 @@ Box(
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).progressSemantics()">progressSemantics</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
       <p>Contains the <code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.Modifier).semantics(kotlin.Boolean,kotlin.Function1)">semantics</a></code> required for an indeterminate progress indicator, that represents the fact of the in-progress operation.</p>
       <p>If you need determinate progress 0.0 to 1.0, consider using overload with the progress parameter.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.progressSemantics
@@ -2362,7 +2362,7 @@ Box(Modifier.progressSemantics().background(color = Color.Cyan)) {
       <h3 class="api-name" id="(androidx.compose.ui.Modifier).progressSemantics(kotlin.Float,kotlin.ranges.ClosedFloatingPointRange,kotlin.Int)">progressSemantics</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).progressSemantics(kotlin.Float,kotlin.ranges.ClosedFloatingPointRange,kotlin.Int)">progressSemantics</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;valueRange:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-closed-floating-point-range/index.html">ClosedFloatingPointRange</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>&gt; = 0f..1f,<br>&nbsp;&nbsp;&nbsp;&nbsp;steps:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 0<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
       <p>Contains the <code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.Modifier).semantics(kotlin.Boolean,kotlin.Function1)">semantics</a></code> required for a determinate progress indicator or the progress part of a slider, that represents progress within <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).progressSemantics(kotlin.Float,kotlin.ranges.ClosedFloatingPointRange,kotlin.Int)">valueRange</a></code>. <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).progressSemantics(kotlin.Float,kotlin.ranges.ClosedFloatingPointRange,kotlin.Int)">value</a></code> outside of this range will be coerced into this range.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
@@ -2462,7 +2462,7 @@ Box(
       <h3 class="api-name" id="(androidx.compose.ui.Modifier).verticalScroll(androidx.compose.foundation.ScrollState,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean)">verticalScroll</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).verticalScroll(androidx.compose.foundation.ScrollState,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean)">verticalScroll</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/ScrollState.html">ScrollState</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = true,<br>&nbsp;&nbsp;&nbsp;&nbsp;flingBehavior:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/FlingBehavior.html">FlingBehavior</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;reverseScrolling:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
       <p>Modify element to allow to scroll vertically when height of the content is bigger than max constraints allow.</p>
-      <pre class="prettyprint">
+      <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth

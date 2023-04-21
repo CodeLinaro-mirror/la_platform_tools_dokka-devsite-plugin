@@ -14,7 +14,7 @@
     </p>
     <hr>
     <p>The <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code> is used in conjunction with <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusRequester(androidx.compose.ui.focus.FocusRequester)">Modifier.focusRequester</a></code> to send requests to change focus.</p>
-    <pre class="prettyprint">
+    <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
@@ -196,7 +196,7 @@ Box(
         <h3 class="api-name" id="createRefs()">createRefs</h3>
         <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html#createRefs()">createRefs</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.Companion.FocusRequesterFactory.html">FocusRequester.Companion.FocusRequesterFactory</a></pre>
         <p>Convenient way to create multiple <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code>s, which can to be used to request focus, or to specify a focus traversal order.</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -218,7 +218,7 @@ Column {
         <h3 class="api-name" id="Cancel()">Cancel</h3>
         <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html#Cancel()">Cancel</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></pre>
         <p>Cancelled <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusRequester(androidx.compose.ui.focus.FocusRequester)">focusRequester</a></code>, which when used in <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusProperties(kotlin.Function1)">Modifier.focusProperties</a></code> implies that we want to block focus search from proceeding in the specified <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusDirection.html">direction</a></code>.</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.ui.focus.focusProperties
@@ -260,7 +260,7 @@ Column {
         <p>Deny requests to clear focus.</p>
         <p>Use this function to send a request to capture focus. If a component captures focus, it will send a <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusState.html">FocusState</a></code> object to its associated <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).onFocusChanged(kotlin.Function1)">onFocusChanged</a></code> modifiers where <a href="">FocusState.isCaptured</a> == true.</p>
         <p>When a component is in a Captured state, all focus requests from other components are declined.</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.border
 import androidx.compose.material.TextField
 import androidx.compose.runtime.mutableStateOf
@@ -311,7 +311,7 @@ TextField(
         <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html#freeFocus()">freeFocus</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
         <p>Use this function to send a request to free focus when one of the components associated with this <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code> is in a Captured state. If a component frees focus, it will send a <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusState.html">FocusState</a></code> object to its associated <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).onFocusChanged(kotlin.Function1)">onFocusChanged</a></code> modifiers where <a href="">FocusState.isCaptured</a> == false.</p>
         <p>When a component is in a Captured state, all focus requests from other components are declined. .</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.border
 import androidx.compose.material.TextField
 import androidx.compose.runtime.mutableStateOf
@@ -361,7 +361,7 @@ TextField(
         <h3 class="api-name" id="requestFocus()">requestFocus</h3>
         <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html#requestFocus()">requestFocus</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
         <p>Use this function to request focus. If the system grants focus to a component associated with this <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code>, its <code><a href="/reference/kotlin/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).onFocusChanged(kotlin.Function1)">onFocusChanged</a></code> modifiers will receive a <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusState.html">FocusState</a></code> object where <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusState.html#isFocused()">FocusState.isFocused</a></code> is true.</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable

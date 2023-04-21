@@ -299,7 +299,12 @@ internal data class DefaultDescriptionComponent(
                 is Ul -> ul { renderUnorderedList(tag.children, state) }
                 HorizontalRule -> hr { renderTags(tag.children, state) }
                 is CodeInline -> code { renderTags(tag.children, state) }
-                is Pre, is CodeBlock -> pre("prettyprint") { renderTags(tag.children, state) }
+                // Turn CodeBlock into pre. TODO: guess codeblock-literal's language b/279184834
+                is Pre, is CodeBlock -> {
+                    pre((tag.params["class"] ?: "").addIfNotContained("prettyprint")) {
+                        renderTags(tag.children, state)
+                    }
+                }
                 is DocumentationLink -> code {
                     val url = data.pathProvider!!.forReference(tag.dri).url
                     // TODO: improve enforcement/warning for broken links in description b/192556649
@@ -481,3 +486,5 @@ internal data class DefaultDescriptionComponent(
         if (data.deprecation != null) data.deprecation + " " else "" +
             data.components.joinToString { it.toString() }
 }
+
+private fun String.addIfNotContained(addend: String) = if (addend in this) this else this + addend

@@ -77,7 +77,6 @@ import org.jetbrains.dokka.model.WithConstructors
 import org.jetbrains.dokka.model.WithGenerics
 import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.doc.Author
-import org.jetbrains.dokka.model.doc.CodeBlock
 import org.jetbrains.dokka.model.doc.Constructor
 import org.jetbrains.dokka.model.doc.CustomTagWrapper
 import org.jetbrains.dokka.model.doc.Deprecated
@@ -87,6 +86,7 @@ import org.jetbrains.dokka.model.doc.DocumentationLink
 import org.jetbrains.dokka.model.doc.NamedTagWrapper
 import org.jetbrains.dokka.model.doc.P
 import org.jetbrains.dokka.model.doc.Param
+import org.jetbrains.dokka.model.doc.Pre
 import org.jetbrains.dokka.model.doc.Property
 import org.jetbrains.dokka.model.doc.Receiver
 import org.jetbrains.dokka.model.doc.Return
@@ -555,7 +555,12 @@ internal class DocTagConverter(
                     val imports = processImports(psiElement)
                     val body = processBody(psiElement)
 
-                    components.add(CodeBlock(listOf(Text(imports + body))))
+                    components.add(
+                        Pre(
+                            params = mapOf("class" to "prettyprint lang-kotlin"),
+                            children = listOf(Text(imports + body))
+                        )
+                    )
                     components.addAll(it.children)
                 }
                 is Description, is NamedTagWrapper -> {
@@ -609,27 +614,28 @@ internal class DocTagConverter(
         components: MutableList<DocTag>,
         samples: Set<File>
     ) {
-        if ("@sample" !in root.text() || root.explicitlyBanLookingForSamples()) components.add(root)
-        else {
-            when (root) {
-                is Text -> {
-                    val parts = root.body.split("{", "}")
-                    for (part in parts) {
-                        if ("@sample" !in part) {
-                            if (part.isNotBlank()) components.add(Text(part.trim()))
-                        } else components.add(
-                            convertTextToJavaSample(Text(part.trim()), samples, docsHolder.logger)
-                        )
-                    }
+        if ("@sample" !in root.text() || root.explicitlyBanLookingForSamples()) {
+            components.add(root)
+            return
+        }
+        when (root) {
+            is Text -> {
+                val parts = root.body.split("{", "}")
+                for (part in parts) {
+                    if ("@sample" !in part) {
+                        if (part.isNotBlank()) components.add(Text(part.trim()))
+                    } else components.add(
+                        convertTextToJavadocSample(Text(part.trim()), samples, docsHolder.logger)
+                    )
                 }
-                is P -> {
-                    for (child in root.children) {
-                        recursivelyConsiderPsAndTextsForJavaSamples(child, components, samples)
-                    }
-                }
-                // Having non-text components on the same line as a samples is not supported
-                else -> throw RuntimeException("considered invalid type ${root::class} for sample")
             }
+            is P -> {
+                for (child in root.children) {
+                    recursivelyConsiderPsAndTextsForJavaSamples(child, components, samples)
+                }
+            }
+            // Having non-text components on the same line as a samples is not supported
+            else -> throw RuntimeException("considered invalid type ${root::class} for sample")
         }
     }
 

@@ -163,7 +163,7 @@
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#addLoadStateListener(kotlin.Function1)">addLoadStateListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
         <p>Add a <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> listener to observe the loading state of the current <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code>.</p>
         <p>As new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> generations are submitted and displayed, the listener will be notified to reflect the current <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code>.</p>
-        <pre class="prettyprint">val adapter = UserPagingAdapter()
+        <pre class="prettyprint lang-kotlin">val adapter = UserPagingAdapter()
 adapter.addLoadStateListener {
     // show a retry button outside the list when refresh hits an error
     retryButton.isVisible = it.refresh is LoadState.Error
@@ -351,7 +351,7 @@ adapter.addLoadStateListener {
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>&gt;&nbsp;<a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#getLoadStateFlow()">getLoadStateFlow</a>()</pre>
         <p>A hot <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> of <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> that emits a snapshot whenever the loading state of the current <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> changes.</p>
         <p>This flow is conflated, so it buffers the last update to <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> and immediately delivers the current load states on collection.</p>
-        <pre class="prettyprint">val adapter = UserPagingAdapter()
+        <pre class="prettyprint lang-kotlin">val adapter = UserPagingAdapter()
 lifecycleScope.launch {
     adapter.loadStateFlow
         .map { it.refresh }
@@ -439,7 +439,7 @@ lifecycleScope.launch {
         <p>Refresh the data presented by this <code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html">AsyncPagingDataDiffer</a></code>.</p>
         <p><code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#refresh()">refresh</a></code> triggers the creation of a new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> with a new instance of <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> to represent an updated snapshot of the backing dataset. If a <code><a href="/reference/androidx/paging/RemoteMediator.html">RemoteMediator</a></code> is set, calling <code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#refresh()">refresh</a></code> will also trigger a call to <code><a href="/reference/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">RemoteMediator.load</a></code> with <code><a href="/reference/androidx/paging/LoadType.html#REFRESH">LoadType</a></code> to allow <code><a href="/reference/androidx/paging/RemoteMediator.html">RemoteMediator</a></code> to check for updates to the dataset backing <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
         <p>Note: This API is intended for UI-driven refresh signals, such as swipe-to-refresh. Invalidation due repository-layer signals, such as DB-updates, should instead use <code><a href="/reference/androidx/paging/PagingSource.html#invalidate()">PagingSource.invalidate</a></code>.</p>
-        <pre class="prettyprint">class MyActivity : AppCompatActivity() {
+        <pre class="prettyprint lang-kotlin">class MyActivity : AppCompatActivity() {
     private lateinit var binding: MyActivityBinding
     private val pagingAdapter = UserPagingAdapter()
 

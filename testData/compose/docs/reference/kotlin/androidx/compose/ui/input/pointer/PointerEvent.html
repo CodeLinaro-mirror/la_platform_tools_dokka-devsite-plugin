@@ -186,7 +186,7 @@
         <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEvent.html">PointerEvent</a>.<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEvent.html#(androidx.compose.ui.input.pointer.PointerEvent).calculateCentroid(kotlin.Boolean)">calculateCentroid</a>(useCurrent:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = true):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
         <p>Returns the centroid of all pointers that are down and were previously down. If no pointers are down, <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html#Unspecified()">Offset.Unspecified</a></code> is returned. If <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerEvent).calculateCentroid(kotlin.Boolean)">useCurrent</a></code> is <code>true</code>, the centroid of the <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html#position()">PointerInputChange.position</a></code> is returned and if <code>false</code>, the centroid of the <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html#previousPosition()">PointerInputChange.previousPosition</a></code> is returned. Only pointers that are down in both the previous and current state are used to calculate the centroid.</p>
         <p>Example Usage:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.gestures.calculateCentroid
 import androidx.compose.foundation.gestures.calculateCentroidSize
 import androidx.compose.foundation.gestures.awaitFirstDown
@@ -232,7 +232,7 @@ Box(
         <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEvent.html">PointerEvent</a>.<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEvent.html#(androidx.compose.ui.input.pointer.PointerEvent).calculateCentroidSize(kotlin.Boolean)">calculateCentroidSize</a>(useCurrent:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = true):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
         <p>Returns the average distance from the centroid for all pointers that are currently and were previously down. If no pointers are down, <code>0</code> is returned. If <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.input.pointer.PointerEvent).calculateCentroidSize(kotlin.Boolean)">useCurrent</a></code> is <code>true</code>, the size of the <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html#position()">PointerInputChange.position</a></code> is returned and if <code>false</code>, the size of <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html#previousPosition()">PointerInputChange.previousPosition</a></code> is returned. Only pointers that are down in both the previous and current state are used to calculate the centroid size.</p>
         <p>Example Usage:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.gestures.calculateCentroid
 import androidx.compose.foundation.gestures.calculateCentroidSize
 import androidx.compose.foundation.gestures.awaitFirstDown
@@ -278,7 +278,7 @@ Box(
         <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEvent.html">PointerEvent</a>.<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEvent.html#(androidx.compose.ui.input.pointer.PointerEvent).calculatePan()">calculatePan</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
         <p>Returns the change in the centroid location between the previous and the current pointers that are down. Pointers that are newly down or raised are not considered in the centroid movement.</p>
         <p>Example Usage:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.calculatePan
 import androidx.compose.foundation.gestures.awaitFirstDown
@@ -318,7 +318,7 @@ Box(
         <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEvent.html">PointerEvent</a>.<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEvent.html#(androidx.compose.ui.input.pointer.PointerEvent).calculateRotation()">calculateRotation</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
         <p>Returns the rotation, in degrees, of the pointers between the <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html#previousPosition()">PointerInputChange.previousPosition</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html#position()">PointerInputChange.position</a></code> states. Only the pointers that are down in both previous and current states are considered.</p>
         <p>Example Usage:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.calculateRotation
 import androidx.compose.foundation.gestures.awaitFirstDown
@@ -353,7 +353,7 @@ Box(
         <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEvent.html">PointerEvent</a>.<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEvent.html#(androidx.compose.ui.input.pointer.PointerEvent).calculateZoom()">calculateZoom</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
         <p>Uses the change of the centroid size between the <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html#previousPosition()">PointerInputChange.previousPosition</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputChange.html#position()">PointerInputChange.position</a></code> to determine how much zoom was intended.</p>
         <p>Example Usage:</p>
-        <pre class="prettyprint">
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.calculateZoom
 import androidx.compose.foundation.gestures.awaitFirstDown

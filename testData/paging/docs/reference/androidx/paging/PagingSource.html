@@ -57,7 +57,7 @@
     <p>A <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> / <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> pair is a snapshot of the data set. A new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> / <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> must be created if an update occurs, such as a reorder, insert, delete, or content update occurs. A <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> must detect that it cannot continue loading its snapshot (for instance, when Database query notices a table being invalidated), and call <code><a href="/reference/androidx/paging/PagingSource.html#invalidate()">invalidate</a></code>. Then a new <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> / <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> pair would be created to represent data from the new state of the database query.</p>
     <h3> Presenting Data to UI</h3>
     <p>To present data loaded by a <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> to a <code>RecyclerView</code>, create an instance of <code><a href="/reference/androidx/paging/Pager.html">Pager</a></code>, which provides a stream of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> that you may collect from and submit to a <code><a href="/reference/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code>.</p>
-    <pre class="prettyprint">/**
+    <pre class="prettyprint lang-kotlin">/**
  * Sample page-keyed PagingSource, which uses Int page number to load pages.
  *
  * Loads Items from network requests via Retrofit to a backend service.
@@ -108,7 +108,7 @@ class MyPagingSource(
         }
     }
 }</pre>
-    <pre class="prettyprint">/**
+    <pre class="prettyprint lang-kotlin">/**
  * Sample item-keyed [PagingSource], which uses String tokens to load pages.
  *
  * Loads Items from network requests via Retrofit to a backend service.
