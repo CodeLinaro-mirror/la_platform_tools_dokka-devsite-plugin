@@ -75,6 +75,13 @@
             </td>
           </tr>
           <tr>
+            <td><code>java-static <a href="/reference/kotlin/androidx/lifecycle/LifecycleRegistry.html">LifecycleRegistry</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/annotation/VisibleForTesting.html">VisibleForTesting</a><br><a href="/reference/kotlin/androidx/lifecycle/LifecycleRegistry.html#createUnsafe(androidx.lifecycle.LifecycleOwner)">createUnsafe</a>(owner:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>)</code></div>
+              <p>Creates a new LifecycleRegistry for the given provider, that doesn't check that its methods are called on the threads other than main.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/lifecycle/LifecycleRegistry.html#getCurrentState()">getCurrentState</a>()</code></div>
@@ -179,6 +186,14 @@
             </tbody>
           </table>
         </div>
+      </div>
+      <div class="api-item"><a name="createUnsafe-androidx.lifecycle.LifecycleOwner-"></a><a name="createunsafe"></a>
+        <h3 class="api-name" id="createUnsafe(androidx.lifecycle.LifecycleOwner)">createUnsafe</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/VisibleForTesting.html">VisibleForTesting</a><br>java-static&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LifecycleRegistry.html#createUnsafe(androidx.lifecycle.LifecycleOwner)">createUnsafe</a>(owner:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>):&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LifecycleRegistry.html">LifecycleRegistry</a></pre>
+        <p>Creates a new LifecycleRegistry for the given provider, that doesn't check that its methods are called on the threads other than main. </p>
+        <p> LifecycleRegistry is not synchronized: if multiple threads access this <code>
+LifecycleRegistry</code>, it must be synchronized externally. </p>
+        <p> Another possible use-case for this method is JVM testing, when main thread is not present.</p>
       </div>
       <div class="api-item"><a name="getCurrentState--"></a><a name="getcurrentstate"></a>
         <h3 class="api-name" id="getCurrentState()">getCurrentState</h3>

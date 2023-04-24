@@ -18,7 +18,8 @@ package dokkatest.visibleForTesting
 
 import androidx.annotation.VisibleForTesting
 
-@VisibleForTesting
-class HiddenClass {
-    class TransitivelyHiddenInnerClass
+class ClassWithVisibleForTestingFunction {
+    @VisibleForTesting
+    fun TestingFunction() = Unit
+    fun visibleFunction() = Unit
 }
