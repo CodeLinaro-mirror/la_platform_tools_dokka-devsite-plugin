@@ -3256,6 +3256,31 @@ internal class ClasslikeDocumentableConverterTest(
         assertThat(foo.constantsSummary.map { it.name() }).containsExactly("publicNoGetter")
     }
 
+    @Ignore // b/279500397 go/dokka-upstream-bug/2992
+    @Test
+    fun `Can have two setters in Java`() {
+        var classlike = """
+            |public class HasTwoSettersAndNoPrivateBackingField {
+            |   public String setFoo(String foo) { return "Setter One"; }
+            |   public String setFoo(String foo, String anotherArg) { return "Setter Two"; }
+            |}
+        """.render(java = true).page("HasTwoSettersAndNoPrivateBackingField").data.content
+        var setListenerMethods =
+            classlike.data.publicFunctionsSummary.data.items.filter { it.name() == "setFoo" }
+        assertThat(setListenerMethods.size).isEqualTo(2)
+
+        classlike = """
+            |public class HasTwoSettersAndPrivateBackingField {
+            |   private String foo;
+            |   public String setFoo(String foo) { return "Setter One"; }
+            |   public String setFoo(String foo, String anotherArg) { return "Setter Two"; }
+            |}
+        """.render(java = true).page("HasTwoSettersAndPrivateBackingField").data.content
+        setListenerMethods =
+            classlike.data.publicFunctionsSummary.data.items.filter { it.name() == "setFoo" }
+        assertThat(setListenerMethods.size).isEqualTo(2)
+    }
+
     private fun DModule.page(
         name: String = "Foo",
         baseSourceLink: String? = null
