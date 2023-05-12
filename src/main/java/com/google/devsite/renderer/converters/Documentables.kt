@@ -454,6 +454,9 @@ fun Expression.getValue(): String? = when (this) {
  */
 fun DProperty.isPropertyInJava() = isJvmField() || isFromJava() || isLateinit()
 
+/** Used for when isPropertyInJava's isFromJava is inaccurate. Without accessors, it's a property */
+fun DProperty.hasAnAccessor() = getter != null || setter != null
+
 /**
  * Whether the property (belonging to an object) needs to be hoisted to the containing class in the
  * Java docs.

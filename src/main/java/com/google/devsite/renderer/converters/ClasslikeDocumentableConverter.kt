@@ -619,7 +619,10 @@ internal abstract class ClasslikeDocumentableConverter(
         }
 
         // Java documentation needs to respect @jvm* annotations
-        val properties = initialProperties.filterOutJvmSynthetic().filter { it.isPropertyInJava() }
+        val properties = initialProperties.filterOutJvmSynthetic().filter {
+            it.isPropertyInJava() ||
+                !it.hasAnAccessor() // Sometimes isFromJava and thus isPropertyInJava are incorrect.
+        }
 
         // Some symbols are moved from the companion object type to the enclosing class in java
         // Objects that are not top-level
@@ -1025,7 +1028,7 @@ internal abstract class ClasslikeDocumentableConverter(
         val allSymbols = when (displayLanguage) {
             Language.KOTLIN -> this.children
             Language.JAVA -> (this.children + this.properties.gettersAndSetters())
-                .filterNot { it is DProperty && !it.isPropertyInJava() }
+                .filterNot { it is DProperty && it.hasAnAccessor() && !it.isPropertyInJava() }
         }
         return allSymbols.filter { it.isInherited(supertypes) && !it.dri.isFromBaseClass() }
     }
