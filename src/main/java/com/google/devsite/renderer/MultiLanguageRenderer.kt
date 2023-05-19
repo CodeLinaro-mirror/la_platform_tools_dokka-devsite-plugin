@@ -135,7 +135,8 @@ internal class MultiLanguageRenderer(
             annotationConverter, metadataConverter
         )
         val propertyConverter = PropertyDocumentableConverter(
-            language, filePaths, javadocConverter, paramConverter, annotationConverter
+            language, filePaths, javadocConverter, paramConverter,
+            annotationConverter, metadataConverter
         )
         val enumConverter = EnumValueDocumentableConverter(
             language, filePaths, javadocConverter, paramConverter, annotationConverter

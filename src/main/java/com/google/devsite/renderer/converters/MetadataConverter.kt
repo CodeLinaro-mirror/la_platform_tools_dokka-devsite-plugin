@@ -23,6 +23,7 @@ import com.google.devsite.util.LibraryMetadata
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DFunction
+import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.DocumentableSource
 import org.jetbrains.dokka.model.WithSources
@@ -65,6 +66,21 @@ internal class MetadataConverter(
                 libraryMetadata = null,
                 sourceLinkUrl = null,
                 // TODO(b/264280616): display version metadata for functions
+                versionMetadata = null
+            )
+        )
+    }
+
+    /**
+     * Creates a metadata component for the [property].
+     */
+    fun getMetadataForProperty(property: DProperty): MetadataComponent {
+        return DefaultMetadataComponent(
+            MetadataComponent.Params(
+                // TODO(b/264828018): display artifact ID and source link for some properties
+                libraryMetadata = null,
+                sourceLinkUrl = null,
+                // TODO(b/281727318): display version metadata for properties
                 versionMetadata = null
             )
         )

@@ -361,7 +361,8 @@ internal abstract class ConverterTestBase(
             annotationConverter, metadataConverter
         )
         val propertyConverter = PropertyDocumentableConverter(
-            displayLanguage, provider, javadocConverter, paramConverter, annotationConverter
+            displayLanguage, provider, javadocConverter, paramConverter,
+            annotationConverter, metadataConverter
         )
 
         val converter =

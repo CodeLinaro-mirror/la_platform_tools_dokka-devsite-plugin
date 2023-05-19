@@ -45,7 +45,8 @@ internal class PropertyDocumentableConverter(
     private val pathProvider: FilePathProvider,
     private val javadocConverter: DocTagConverter,
     private val paramConverter: ParameterDocumentableConverter,
-    private val annotationConverter: AnnotationDocumentableConverter
+    private val annotationConverter: AnnotationDocumentableConverter,
+    private val metadataConverter: MetadataConverter
 ) {
 
     /** @return the property summary component */
@@ -161,7 +162,8 @@ internal class PropertyDocumentableConverter(
                 annotationComponents = annotationConverter.annotationComponents(
                     annotations = nonTypeAnnotations,
                     nullability = Nullability.DONT_CARE, // Propagates to return type instead
-                )
+                ),
+                metadataComponent = metadataConverter.getMetadataForProperty(property)
             )
         )
     }
@@ -206,7 +208,8 @@ internal class PropertyDocumentableConverter(
                     annotations = nonTypeAnnotations,
                     nullability = Nullability.DONT_CARE, // Propagates to return type instead
                 ),
-                platforms = DefaultPlatformComponent(property.sourceSets)
+                platforms = DefaultPlatformComponent(property.sourceSets),
+                metadataComponent = metadataConverter.getMetadataForProperty(property)
             )
         )
     }

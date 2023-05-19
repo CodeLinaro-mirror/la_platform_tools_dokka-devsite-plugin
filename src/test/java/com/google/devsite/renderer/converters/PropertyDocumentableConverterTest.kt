@@ -380,12 +380,14 @@ internal class PropertyDocumentableConverterTest(
             ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
         val docConverter =
             DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
+        val metadataConverter = MetadataConverter(holder)
         return PropertyDocumentableConverter(
             displayLanguage,
             provider,
             docConverter,
             paramConverter,
-            annotationConverter
+            annotationConverter,
+            metadataConverter
         )
     }
 
