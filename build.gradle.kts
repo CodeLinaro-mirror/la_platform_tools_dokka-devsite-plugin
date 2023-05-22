@@ -21,6 +21,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 defaultTasks = mutableListOf("test", "jar", "shadowJar", "ktlint", "publish")
 
 repositories {
+    maven("/Users/owengray/git-androidx/androidx-main/androidx-main/prebuilts/androidx/external")
     maven("../../prebuilts/androidx/external")
     maven("../../prebuilts/androidx/internal")
 }
@@ -28,7 +29,7 @@ repositories {
 group = "com.google.devsite"
 version = "1.3.1" // This is appended to archiveBaseName in the ShadowJar task.
 
-val dokkaVersion = "1.8.10-dev-203"
+val dokkaVersion = "1.8.20-dev-214"
 val kotlinVersion = "1.8.0"
 val jacksonVersion = "2.13.1"
 val coroutinesVersion = "1.6.3"

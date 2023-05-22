@@ -6,7 +6,6 @@ import com.google.devsite.testing.ConverterTestBase
 import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.doc.DocumentationNode
-import org.jetbrains.dokka.utilities.cast
 import org.junit.Ignore
 import org.junit.Test
 import org.jetbrains.dokka.model.doc.Throws as ThrowsTag
@@ -48,8 +47,7 @@ class DocTagsForCheckedExceptionsTest : BaseAbstractTest() {
             pluginOverrides = listOf(ConverterTestBase.NoopPlugin)
         ) {
             documentablesTransformationStage = { mod ->
-                val docs: DocumentationNode = mod.packages.single()
-                    .classlikes.single().cast<DClass>()
+                val docs: DocumentationNode = (mod.packages.single().classlikes.single() as DClass)
                     .functions.single()
                     .documentation.values.single()
 
@@ -80,8 +78,7 @@ class DocTagsForCheckedExceptionsTest : BaseAbstractTest() {
             pluginOverrides = listOf(ConverterTestBase.NoopPlugin)
         ) {
             documentablesTransformationStage = { mod ->
-                val docs: DocumentationNode = mod.packages.single()
-                    .classlikes.single().cast<DClass>()
+                val docs: DocumentationNode = (mod.packages.single().classlikes.single() as DClass)
                     .functions.single()
                     .documentation.values.single()
 
@@ -117,8 +114,7 @@ class DocTagsForCheckedExceptionsTest : BaseAbstractTest() {
             pluginOverrides = listOf(ConverterTestBase.NoopPlugin)
         ) {
             documentablesTransformationStage = { mod ->
-                val docs: DocumentationNode = mod.packages.single()
-                    .classlikes.single().cast<DClass>()
+                val docs: DocumentationNode = (mod.packages.single().classlikes.single() as DClass)
                     .functions.single()
                     .documentation.values.single()
 
@@ -156,8 +152,7 @@ class DocTagsForCheckedExceptionsTest : BaseAbstractTest() {
             pluginOverrides = listOf(ConverterTestBase.NoopPlugin)
         ) {
             documentablesTransformationStage = { mod ->
-                val docs: DocumentationNode = mod.packages.single()
-                    .classlikes.single().cast<DClass>()
+                val docs: DocumentationNode = (mod.packages.single().classlikes.single() as DClass)
                     .functions.single()
                     .documentation.values.single()
 
@@ -197,8 +192,7 @@ class DocTagsForCheckedExceptionsTest : BaseAbstractTest() {
             pluginOverrides = listOf(ConverterTestBase.NoopPlugin)
         ) {
             documentablesTransformationStage = { mod ->
-                val docs: DocumentationNode = mod.packages.single()
-                    .classlikes.first { it.name == "Impl" }.cast<DClass>()
+                val docs: DocumentationNode = (mod.packages.single().classlikes.single() as DClass)
                     .functions.single()
                     .documentation.values.single()
 
