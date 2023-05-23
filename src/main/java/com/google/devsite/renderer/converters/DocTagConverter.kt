@@ -98,7 +98,6 @@ import org.jetbrains.dokka.model.doc.TagWrapper
 import org.jetbrains.dokka.model.doc.Text
 import org.jetbrains.dokka.model.doc.Throws
 import org.jetbrains.dokka.model.doc.Version
-import org.jetbrains.dokka.utilities.cast
 import java.io.File
 
 /** Extracts the handwritten documentation from documentables into the correct components. */
@@ -689,8 +688,8 @@ internal class DocTagConverter(
             return javadocDeprecation
         }
 
-        val annotationDeprecationMessage = deprecationAnnotation?.params?.get("message")
-            ?.cast<StringValue>()?.value ?: return null
+        val annotationDeprecationMessage =
+            (deprecationAnnotation?.params?.get("message") as? StringValue)?.value ?: return null
         // Dokka makes message="foo" show up as "\"foo\"" since you typically want to show quotes
         // when rendering an annotation. Remove those outer quotes.
         val message = annotationDeprecationMessage.removeSurrounding("\"")

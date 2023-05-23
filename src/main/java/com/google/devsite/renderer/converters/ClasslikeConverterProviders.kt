@@ -29,9 +29,9 @@ import com.google.devsite.renderer.impl.paths.FilePathProvider
 import com.jetbrains.rd.util.concurrentMapOf
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.model.DClasslike
-import org.jetbrains.dokka.utilities.parallelForEach
 
 internal class NonKmpClasslikeConverter(
     displayLanguage: Language,
@@ -107,19 +107,23 @@ internal class KmpClasslikeConverter(
         var primarySignature: ClasslikeSignature? = null
         val primarySourceSet = classlike.getExpectOrCommonSourceSet()
 
-        (classlike.sourceSets).parallelForEach { sourceSet ->
-            // We must do this computation every time, because we don't know what will and what
-            // won't affect the signature until after we calculate it for each sourceSet
-            // E.g. the JVM sourceSet might have an `@JvmName` but otherwise have the same signature
-            // `@JvmName` doesn't affect displayed signature, so those should all be collapsed.
-            val sig = computeSignature(
-                classlike = classlike,
-                classGraph = docsHolder.classGraph(),
-                sourceSet = sourceSet,
-            )
-            if (sig !in signatures) signatures[sig] = mutableSetOf()
-            signatures[sig]!!.add(sourceSet)
-            if (sourceSet == primarySourceSet) primarySignature = sig
+        coroutineScope {
+            classlike.sourceSets.forEach { sourceSet ->
+                launch {
+                    // We must do this computation every time, because we don't know what will and what
+                    // won't affect the signature until after we calculate it for each sourceSet
+                    // E.g. the JVM sourceSet might have an `@JvmName` but otherwise have the same signature
+                    // `@JvmName` doesn't affect displayed signature, so those should all be collapsed.
+                    val sig = computeSignature(
+                        classlike = classlike,
+                        classGraph = docsHolder.classGraph(),
+                        sourceSet = sourceSet,
+                    )
+                    if (sig !in signatures) signatures[sig] = mutableSetOf()
+                    signatures[sig]!!.add(sourceSet)
+                    if (sourceSet == primarySourceSet) primarySignature = sig
+                }
+            }
         }
 
         val hierarchy = async { computeHierarchy() }

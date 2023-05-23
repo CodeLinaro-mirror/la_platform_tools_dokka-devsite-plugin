@@ -16,6 +16,8 @@
 
 package dokkatest.platform;
 
+import android.view.View;
+
 import java.io.BufferedWriter;
 import java.lang.annotation.*;
 import java.lang.reflect.AccessibleObject;
