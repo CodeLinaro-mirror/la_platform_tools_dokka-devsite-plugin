@@ -21,7 +21,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 defaultTasks = mutableListOf("test", "jar", "shadowJar", "ktlint", "publish")
 
 repositories {
-    maven("/Users/owengray/git-androidx/androidx-main/androidx-main/prebuilts/androidx/external")
     maven("../../prebuilts/androidx/external")
     maven("../../prebuilts/androidx/internal")
 }
