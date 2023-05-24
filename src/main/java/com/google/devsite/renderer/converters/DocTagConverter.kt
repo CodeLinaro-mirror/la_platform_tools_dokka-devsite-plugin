@@ -328,9 +328,11 @@ internal class DocTagConverter(
         val allOptions = mutableMapOf<String, ParameterComponent>()
         if (documentable is DFunction) {
             allOptions.putAll(
-                documentable.parameters.map {
+                documentable.parameters.mapNotNull {
                     val name = it.name!!
                     if (!tagged.contains(name)) {
+                        // Synthetic receiver params don't need @param documentation
+                        if (name == "receiver") return@mapNotNull null
                         docsHolder.logger.warn(
                             "Missing @param tag for parameter `$name` of function " +
                                 "${documentable.dri}"
