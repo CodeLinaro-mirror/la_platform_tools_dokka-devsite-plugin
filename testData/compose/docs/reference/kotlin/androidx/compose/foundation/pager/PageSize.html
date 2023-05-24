@@ -9,9 +9,18 @@
       <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/pager/Pager.kt+class:androidx.compose.foundation.pager.PageSize&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>PageSize</h1>
-    <p>
-      <pre>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>interface <a href="/reference/kotlin/androidx/compose/foundation/pager/PageSize.html">PageSize</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>interface <a href="/reference/kotlin/androidx/compose/foundation/pager/PageSize.html">PageSize</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
         <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/foundation/pager/PageSize.Fill.html">PageSize.Fill</a>, <a href="/reference/kotlin/androidx/compose/foundation/pager/PageSize.Fixed.html">PageSize.Fixed</a></div>
       </span>
@@ -41,7 +50,7 @@
       </div>
 </devsite-expandable>    </div>
     <hr>
-    <p>This is used to determine how Pages are laid out in <code><a href="/reference/kotlin/androidx/compose/foundation/pager/package-summary.html#Pager(androidx.compose.ui.Modifier,androidx.compose.foundation.pager.PagerState,kotlin.Int,androidx.compose.foundation.pager.PageSize,androidx.compose.ui.unit.Dp,androidx.compose.foundation.gestures.Orientation,kotlin.Int,androidx.compose.ui.Alignment.Vertical,androidx.compose.ui.Alignment.Horizontal,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.gestures.snapping.SnapFlingBehavior,kotlin.Boolean,kotlin.Boolean,kotlin.Function1,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function1)">Pager</a></code>. By changing the size of the pages one can change how many pages are shown.</p>
+    <p>This is used to determine how Pages are laid out in <code><a href="/reference/kotlin/androidx/compose/foundation/pager/package-summary.html#Pager(androidx.compose.ui.Modifier,androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.gestures.Orientation,androidx.compose.foundation.gestures.snapping.SnapFlingBehavior,kotlin.Boolean,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.foundation.pager.PageSize,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function1,androidx.compose.ui.Alignment.Horizontal,androidx.compose.ui.Alignment.Vertical,kotlin.Function2)">Pager</a></code>. By changing the size of the pages one can change how many pages are shown.</p>
     <p>Please refer to the sample to learn how to use this API.</p>
     <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
@@ -51,6 +60,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.Text
 
 // [PageSize] should be defined as a top level constant in order to avoid unnecessary re-
@@ -67,9 +77,10 @@ val CustomPageSize = object : PageSize {
     }
 }
 
+val state = rememberPagerState { 10 }
 HorizontalPager(
+    state = state,
     modifier = Modifier.fillMaxSize(),
-    pageCount = 10,
     pageSize = CustomPageSize
 ) { page -&gt;
     Box(
@@ -112,61 +123,71 @@ HorizontalPager(
       </table>
     </div>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public functions</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>.<a href="/reference/kotlin/androidx/compose/foundation/pager/PageSize.html#(androidx.compose.ui.unit.Density).calculateMainAxisPageSize(kotlin.Int,kotlin.Int)">calculateMainAxisPageSize</a>(availableSpace:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;pageSpacing:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
-              <p>Based on <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PageSize.html#(androidx.compose.ui.unit.Density).calculateMainAxisPageSize(kotlin.Int,kotlin.Int)">availableSpace</a></code> pick a size for the pages</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>.<a href="/reference/kotlin/androidx/compose/foundation/pager/PageSize.html#(androidx.compose.ui.unit.Density).calculateMainAxisPageSize(kotlin.Int,kotlin.Int)">calculateMainAxisPageSize</a>(availableSpace:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;pageSpacing:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                <p>Based on <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PageSize.html#(androidx.compose.ui.unit.Density).calculateMainAxisPageSize(kotlin.Int,kotlin.Int)">availableSpace</a></code> pick a size for the pages</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
-    <div class="list">
-      <h2>Public functions</h2>
-      <div class="api-item"><a name="(androidx.compose.ui.unit.Density).calculateMainAxisPageSize(kotlin.Int, kotlin.Int)"></a><a name="-androidx.compose.ui.unit.Density-.calculateMainAxisPageSize-kotlin.Int-kotlin.Int-"></a><a name="calculatemainaxispagesize"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.unit.Density).calculateMainAxisPageSize(kotlin.Int,kotlin.Int)">calculateMainAxisPageSize</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>.<a href="/reference/kotlin/androidx/compose/foundation/pager/PageSize.html#(androidx.compose.ui.unit.Density).calculateMainAxisPageSize(kotlin.Int,kotlin.Int)">calculateMainAxisPageSize</a>(availableSpace:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;pageSpacing:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
-        <p>Based on <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PageSize.html#(androidx.compose.ui.unit.Density).calculateMainAxisPageSize(kotlin.Int,kotlin.Int)">availableSpace</a></code> pick a size for the pages</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>availableSpace:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
-                <td>
-                  <p>The amount of space the pages in this Pager can use.</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>pageSpacing:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
-                <td>
-                  <p>The amount of space used to separate pages.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="(androidx.compose.ui.unit.Density).calculateMainAxisPageSize(kotlin.Int, kotlin.Int)"></a><a name="-androidx.compose.ui.unit.Density-.calculateMainAxisPageSize-kotlin.Int-kotlin.Int-"></a><a name="calculatemainaxispagesize"></a>
+          <h3 class="api-name" id="(androidx.compose.ui.unit.Density).calculateMainAxisPageSize(kotlin.Int,kotlin.Int)">calculateMainAxisPageSize</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>.<a href="/reference/kotlin/androidx/compose/foundation/pager/PageSize.html#(androidx.compose.ui.unit.Density).calculateMainAxisPageSize(kotlin.Int,kotlin.Int)">calculateMainAxisPageSize</a>(availableSpace:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;pageSpacing:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>Based on <code><a href="/reference/kotlin/androidx/compose/foundation/pager/PageSize.html#(androidx.compose.ui.unit.Density).calculateMainAxisPageSize(kotlin.Int,kotlin.Int)">availableSpace</a></code> pick a size for the pages</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>availableSpace:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                  <td>
+                    <p>The amount of space the pages in this Pager can use.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>pageSpacing:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                  <td>
+                    <p>The amount of space used to separate pages.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
+    </devsite-filter >
   </body>
 </html>

@@ -10,31 +10,11 @@
     </div>
     <h1>PagerState</h1>
     <p>
-      <pre>@<a href="/reference/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>public final class <a href="/reference/androidx/compose/foundation/pager/PagerState.html">PagerState</a> implements <a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></pre>
+      <pre>@<a href="/reference/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>public abstract class <a href="/reference/androidx/compose/foundation/pager/PagerState.html">PagerState</a> implements <a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></pre>
     </p>
     <hr>
-    <p>The state that can be used to control <code><a href="/reference/androidx/compose/foundation/pager/package-summary.html#VerticalPager(kotlin.Int,androidx.compose.ui.Modifier,androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.pager.PageSize,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.ui.Alignment.Horizontal,androidx.compose.foundation.gestures.snapping.SnapFlingBehavior,kotlin.Boolean,kotlin.Boolean,kotlin.Function1,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function1)">VerticalPager</a></code> and <code><a href="/reference/androidx/compose/foundation/pager/package-summary.html#HorizontalPager(kotlin.Int,androidx.compose.ui.Modifier,androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.pager.PageSize,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.snapping.SnapFlingBehavior,kotlin.Boolean,kotlin.Boolean,kotlin.Function1,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function1)">HorizontalPager</a></code></p>
+    <p>The state that can be used to control <code><a href="/reference/androidx/compose/foundation/pager/package-summary.html#VerticalPager(androidx.compose.foundation.pager.PagerState,androidx.compose.ui.Modifier,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.pager.PageSize,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.ui.Alignment.Horizontal,androidx.compose.foundation.gestures.snapping.SnapFlingBehavior,kotlin.Boolean,kotlin.Boolean,kotlin.Function1,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function2)">VerticalPager</a></code> and <code><a href="/reference/androidx/compose/foundation/pager/package-summary.html#HorizontalPager(androidx.compose.foundation.pager.PagerState,androidx.compose.ui.Modifier,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.pager.PageSize,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.snapping.SnapFlingBehavior,kotlin.Boolean,kotlin.Boolean,kotlin.Function1,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function2)">HorizontalPager</a></code></p>
     <h2>Summary</h2>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Nested types</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td>
-              <div><code>public static class <a href="/reference/androidx/compose/foundation/pager/PagerState.Companion.html">PagerState.Companion</a></code></div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <colgroup>
@@ -82,14 +62,14 @@
             </td>
           </tr>
           <tr>
-            <td><code>boolean</code></td>
+            <td><code>final boolean</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/foundation/pager/PagerState.html#getCanScrollBackward()">getCanScrollBackward</a>()</code></div>
               <p>Whether this <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> can scroll backward (consume a negative delta).</p>
             </td>
           </tr>
           <tr>
-            <td><code>boolean</code></td>
+            <td><code>final boolean</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/foundation/pager/PagerState.html#getCanScrollForward()">getCanScrollForward</a>()</code></div>
               <p>Whether this <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> can scroll forward (consume a positive delta).</p>
@@ -131,6 +111,20 @@
             </td>
           </tr>
           <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/pager/PagerState.html#getOffsetFractionForPage(kotlin.Int)">getOffsetFractionForPage</a>(int&nbsp;page)</code></div>
+              <p>An utility function to help to calculate a given page's offset.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/pager/PagerState.html#getPageCount()">getPageCount</a>()</code></div>
+              <p>The total amount of pages present in this pager</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>final int</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/foundation/pager/PagerState.html#getSettledPage()">getSettledPage</a>()</code></div>
@@ -141,7 +135,7 @@
             <td><code>final int</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/foundation/pager/PagerState.html#getTargetPage()">getTargetPage</a>()</code></div>
-              <p>The page this <code><a href="/reference/androidx/compose/foundation/pager/package-summary.html#Pager(androidx.compose.ui.Modifier,androidx.compose.foundation.pager.PagerState,kotlin.Int,androidx.compose.foundation.pager.PageSize,androidx.compose.ui.unit.Dp,androidx.compose.foundation.gestures.Orientation,kotlin.Int,androidx.compose.ui.Alignment.Vertical,androidx.compose.ui.Alignment.Horizontal,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.gestures.snapping.SnapFlingBehavior,kotlin.Boolean,kotlin.Boolean,kotlin.Function1,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function1)">Pager</a></code> intends to settle to.</p>
+              <p>The page this <code><a href="/reference/androidx/compose/foundation/pager/package-summary.html#Pager(androidx.compose.ui.Modifier,androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.gestures.Orientation,androidx.compose.foundation.gestures.snapping.SnapFlingBehavior,kotlin.Boolean,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.foundation.pager.PageSize,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function1,androidx.compose.ui.Alignment.Horizontal,androidx.compose.ui.Alignment.Vertical,kotlin.Function2)">Pager</a></code> intends to settle to.</p>
             </td>
           </tr>
           <tr>
@@ -218,17 +212,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material.Text
 import androidx.compose.material.Button
+import androidx.compose.material.Text
 import androidx.compose.runtime.rememberCoroutineScope
 
-val state = rememberPagerState()
+val state = rememberPagerState { 10 }
 val animationScope = rememberCoroutineScope()
 Column {
     HorizontalPager(
         modifier = Modifier.weight(0.7f),
-        state = state,
-        pageCount = 10
+        state = state
     ) { page -&gt;
         Box(
             modifier = Modifier
@@ -242,7 +235,11 @@ Column {
         }
     }
 
-    Box(modifier = Modifier.weight(0.3f).fillMaxWidth(), contentAlignment = Alignment.Center) {
+    Box(
+        modifier = Modifier
+            .weight(0.3f)
+            .fillMaxWidth(), contentAlignment = Alignment.Center
+    ) {
         Button(onClick = {
             animationScope.launch {
                 state.animateScrollToPage(state.currentPage + 1)
@@ -337,7 +334,7 @@ Column {
       </div>
       <div class="api-item"><a name="getCanScrollBackward--"></a><a name="getcanscrollbackward"></a>
         <h3 class="api-name" id="getCanScrollBackward()">getCanScrollBackward</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/foundation/pager/PagerState.html#getCanScrollBackward()">getCanScrollBackward</a>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/foundation/pager/PagerState.html#getCanScrollBackward()">getCanScrollBackward</a>()</pre>
         <p>Whether this <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> can scroll backward (consume a negative delta). This is typically false if the scroll position is equal to its minimum value, and true otherwise.</p>
         <p>Note that <code>true</code> here does not imply that delta <em>will</em> be consumed - the ScrollableState may decide not to handle the incoming delta (such as if it is already being scrolled separately). Additionally, for backwards compatibility with previous versions of ScrollableState this value defaults to <code>true</code>.</p>
         <pre class="prettyprint lang-kotlin">
@@ -388,7 +385,7 @@ Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontal
       </div>
       <div class="api-item"><a name="getCanScrollForward--"></a><a name="getcanscrollforward"></a>
         <h3 class="api-name" id="getCanScrollForward()">getCanScrollForward</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/foundation/pager/PagerState.html#getCanScrollForward()">getCanScrollForward</a>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/foundation/pager/PagerState.html#getCanScrollForward()">getCanScrollForward</a>()</pre>
         <p>Whether this <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> can scroll forward (consume a positive delta). This is typically false if the scroll position is equal to its maximum value, and true otherwise.</p>
         <p>Note that <code>true</code> here does not imply that delta <em>will</em> be consumed - the ScrollableState may decide not to handle the incoming delta (such as if it is already being scrolled separately). Additionally, for backwards compatibility with previous versions of ScrollableState this value defaults to <code>true</code>.</p>
         <pre class="prettyprint lang-kotlin">
@@ -454,12 +451,11 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.Text
 
-val pagerState = rememberPagerState()
+val pagerState = rememberPagerState { 10 }
 Column(modifier = Modifier.fillMaxSize()) {
     HorizontalPager(
         modifier = Modifier.weight(0.9f),
-        state = pagerState,
-        pageCount = 10
+        state = pagerState
     ) { page -&gt;
         Box(
             modifier = Modifier
@@ -472,9 +468,11 @@ Column(modifier = Modifier.fillMaxSize()) {
             Text(text = page.toString(), fontSize = 32.sp)
         }
     }
-    Column(modifier = Modifier
-        .weight(0.1f)
-        .fillMaxWidth()) {
+    Column(
+        modifier = Modifier
+            .weight(0.1f)
+            .fillMaxWidth()
+    ) {
         Text(text = &quot;Current Page: ${pagerState.currentPage}&quot;)
         Text(text = &quot;Target Page: ${pagerState.targetPage}&quot;)
         Text(text = &quot;Settled Page Offset: ${pagerState.settledPage}&quot;)
@@ -499,12 +497,11 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.Text
 
-val pagerState = rememberPagerState()
+val pagerState = rememberPagerState { 10 }
 Column(modifier = Modifier.fillMaxSize()) {
     HorizontalPager(
         modifier = Modifier.weight(0.9f),
-        state = pagerState,
-        pageCount = 10
+        state = pagerState
     ) { page -&gt;
         Box(
             modifier = Modifier
@@ -517,9 +514,11 @@ Column(modifier = Modifier.fillMaxSize()) {
             Text(text = page.toString(), fontSize = 32.sp)
         }
     }
-    Column(modifier = Modifier
-        .weight(0.1f)
-        .fillMaxWidth()) {
+    Column(
+        modifier = Modifier
+            .weight(0.1f)
+            .fillMaxWidth()
+    ) {
         Text(text = &quot;Current Page: ${pagerState.currentPage}&quot;)
         Text(text = &quot;Target Page: ${pagerState.targetPage}&quot;)
         Text(text = &quot;Settled Page Offset: ${pagerState.settledPage}&quot;)
@@ -541,6 +540,58 @@ Column(modifier = Modifier.fillMaxSize()) {
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>&nbsp;<a href="/reference/androidx/compose/foundation/pager/PagerState.html#getInteractionSource()">getInteractionSource</a>()</pre>
         <p><code><a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></code> that will be used to dispatch drag events when this list is being dragged. If you want to know whether the fling (or animated scroll) is in progress, use <code><a href="/reference/androidx/compose/foundation/pager/PagerState.html#isScrollInProgress()">isScrollInProgress</a></code>.</p>
       </div>
+      <div class="api-item"><a name="getOffsetFractionForPage-kotlin.Int-"></a><a name="getoffsetfractionforpage"></a>
+        <h3 class="api-name" id="getOffsetFractionForPage(kotlin.Int)">getOffsetFractionForPage</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/foundation/pager/PagerState.html#getOffsetFractionForPage(kotlin.Int)">getOffsetFractionForPage</a>(int&nbsp;page)</pre>
+        <p>An utility function to help to calculate a given page's offset. Since this is based off <code><a href="/reference/androidx/compose/foundation/pager/PagerState.html#currentPageOffsetFraction()">currentPageOffsetFraction</a></code> the same concept applies: a fraction offset that represents how far <code><a href="/reference/androidx/compose/foundation/pager/PagerState.html#getOffsetFractionForPage(kotlin.Int)">page</a></code> is from the settled position (represented by <code><a href="/reference/androidx/compose/foundation/pager/PagerState.html#currentPage()">currentPage</a></code> offset). The difference here is that <code><a href="/reference/androidx/compose/foundation/pager/PagerState.html#currentPageOffsetFraction()">currentPageOffsetFraction</a></code> is a value between -0.5 and 0.5 and the value calculate by this function can be larger than these numbers if <code><a href="/reference/androidx/compose/foundation/pager/PagerState.html#getOffsetFractionForPage(kotlin.Int)">page</a></code> is different than <code><a href="/reference/androidx/compose/foundation/pager/PagerState.html#currentPage()">currentPage</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int&nbsp;page</code></td>
+                <td>
+                  <p>The page to calculate the offset from. This should be between 0 and <code><a href="/reference/androidx/compose/foundation/pager/PagerState.html#pageCount()">pageCount</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>float</code></td>
+                <td>
+                  <p>The offset of <code><a href="/reference/androidx/compose/foundation/pager/PagerState.html#getOffsetFractionForPage(kotlin.Int)">page</a></code> with respect to <code><a href="/reference/androidx/compose/foundation/pager/PagerState.html#currentPage()">currentPage</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getPageCount--"></a><a name="getpagecount"></a>
+        <h3 class="api-name" id="getPageCount()">getPageCount</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;int&nbsp;<a href="/reference/androidx/compose/foundation/pager/PagerState.html#getPageCount()">getPageCount</a>()</pre>
+        <p>The total amount of pages present in this pager</p>
+      </div>
       <div class="api-item"><a name="getSettledPage--"></a><a name="getsettledpage"></a>
         <h3 class="api-name" id="getSettledPage()">getSettledPage</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/foundation/pager/PagerState.html#getSettledPage()">getSettledPage</a>()</pre>
@@ -558,12 +609,11 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.Text
 
-val pagerState = rememberPagerState()
+val pagerState = rememberPagerState { 10 }
 Column(modifier = Modifier.fillMaxSize()) {
     HorizontalPager(
         modifier = Modifier.weight(0.9f),
-        state = pagerState,
-        pageCount = 10
+        state = pagerState
     ) { page -&gt;
         Box(
             modifier = Modifier
@@ -576,9 +626,11 @@ Column(modifier = Modifier.fillMaxSize()) {
             Text(text = page.toString(), fontSize = 32.sp)
         }
     }
-    Column(modifier = Modifier
-        .weight(0.1f)
-        .fillMaxWidth()) {
+    Column(
+        modifier = Modifier
+            .weight(0.1f)
+            .fillMaxWidth()
+    ) {
         Text(text = &quot;Current Page: ${pagerState.currentPage}&quot;)
         Text(text = &quot;Target Page: ${pagerState.targetPage}&quot;)
         Text(text = &quot;Settled Page Offset: ${pagerState.settledPage}&quot;)
@@ -588,7 +640,7 @@ Column(modifier = Modifier.fillMaxSize()) {
       <div class="api-item"><a name="getTargetPage--"></a><a name="gettargetpage"></a>
         <h3 class="api-name" id="getTargetPage()">getTargetPage</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/foundation/pager/PagerState.html#getTargetPage()">getTargetPage</a>()</pre>
-        <p>The page this <code><a href="/reference/androidx/compose/foundation/pager/package-summary.html#Pager(androidx.compose.ui.Modifier,androidx.compose.foundation.pager.PagerState,kotlin.Int,androidx.compose.foundation.pager.PageSize,androidx.compose.ui.unit.Dp,androidx.compose.foundation.gestures.Orientation,kotlin.Int,androidx.compose.ui.Alignment.Vertical,androidx.compose.ui.Alignment.Horizontal,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.gestures.snapping.SnapFlingBehavior,kotlin.Boolean,kotlin.Boolean,kotlin.Function1,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function1)">Pager</a></code> intends to settle to. During fling or animated scroll (from <code><a href="/reference/androidx/compose/foundation/pager/PagerState.html#animateScrollToPage(kotlin.Int,kotlin.Float,androidx.compose.animation.core.AnimationSpec)">animateScrollToPage</a></code> this will represent the page this pager intends to settle to. When no scroll is ongoing, this will be equal to <code><a href="/reference/androidx/compose/foundation/pager/PagerState.html#currentPage()">currentPage</a></code>.</p>
+        <p>The page this <code><a href="/reference/androidx/compose/foundation/pager/package-summary.html#Pager(androidx.compose.ui.Modifier,androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.gestures.Orientation,androidx.compose.foundation.gestures.snapping.SnapFlingBehavior,kotlin.Boolean,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.foundation.pager.PageSize,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function1,androidx.compose.ui.Alignment.Horizontal,androidx.compose.ui.Alignment.Vertical,kotlin.Function2)">Pager</a></code> intends to settle to. During fling or animated scroll (from <code><a href="/reference/androidx/compose/foundation/pager/PagerState.html#animateScrollToPage(kotlin.Int,kotlin.Float,androidx.compose.animation.core.AnimationSpec)">animateScrollToPage</a></code> this will represent the page this pager intends to settle to. When no scroll is ongoing, this will be equal to <code><a href="/reference/androidx/compose/foundation/pager/PagerState.html#currentPage()">currentPage</a></code>.</p>
         <p>Please refer to the sample to learn how to use this API.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
@@ -602,12 +654,11 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.Text
 
-val pagerState = rememberPagerState()
+val pagerState = rememberPagerState { 10 }
 Column(modifier = Modifier.fillMaxSize()) {
     HorizontalPager(
         modifier = Modifier.weight(0.9f),
-        state = pagerState,
-        pageCount = 10
+        state = pagerState
     ) { page -&gt;
         Box(
             modifier = Modifier
@@ -620,9 +671,11 @@ Column(modifier = Modifier.fillMaxSize()) {
             Text(text = page.toString(), fontSize = 32.sp)
         }
     }
-    Column(modifier = Modifier
-        .weight(0.1f)
-        .fillMaxWidth()) {
+    Column(
+        modifier = Modifier
+            .weight(0.1f)
+            .fillMaxWidth()
+    ) {
         Text(text = &quot;Current Page: ${pagerState.currentPage}&quot;)
         Text(text = &quot;Target Page: ${pagerState.targetPage}&quot;)
         Text(text = &quot;Settled Page Offset: ${pagerState.settledPage}&quot;)
@@ -655,17 +708,16 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material.Text
 import androidx.compose.material.Button
+import androidx.compose.material.Text
 import androidx.compose.runtime.rememberCoroutineScope
 
-val state = rememberPagerState()
+val state = rememberPagerState { 10 }
 val scrollScope = rememberCoroutineScope()
 Column {
     HorizontalPager(
         modifier = Modifier.height(400.dp),
-        state = state,
-        pageCount = 10
+        state = state
     ) { page -&gt;
         Box(
             modifier = Modifier

@@ -619,11 +619,22 @@ internal fun Documentable.getExpectOrCommonSourceSet() =
     sourceSets.singleOrNull()
         ?: expectPresentInSet
         ?: sourceSets.singleOrNull { it.analysisPlatform == org.jetbrains.dokka.Platform.common }
-        ?: sourceSets.singleOrNull { it.displayName == "common" }
-        ?: sourceSets.singleOrNull { "common" in it.displayName }
+        ?: sourceSets.singleOrNull { it.displayName.equalsPossiblyWithMain("common") }
+        ?: sourceSets.singleOrNull { it.displayName.equalsIgnoreCase("jvmMain") }?.let {
+            println(
+                "WARNING: no common source set for ${this::class.simpleName} $dri! Falling back " +
+                    "to jvmMain sourceSet! This is only defensible if every sourceSet depends on" +
+                    "jvmMain! This is a bug in dackka: b/284107590"
+            )
+            it
+        }
         ?: throw RuntimeException(
             "Unable to determine the expect or common sourceSet for ${this::class.simpleName} $dri"
         )
+
+private fun String.equalsPossiblyWithMain(other: String) =
+    this.equalsIgnoreCase(other) || this.equalsIgnoreCase(other + "main")
+private fun String.equalsIgnoreCase(other: String) = this.uppercase() == other.uppercase()
 
 /**
  * Used in as-Java docs and when getting JVM-exclusive annotations.

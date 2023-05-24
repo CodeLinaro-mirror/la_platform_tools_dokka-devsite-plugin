@@ -9,9 +9,18 @@
       <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/material3/ColorScheme.kt+class:androidx.compose.material3.ColorScheme&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>ColorScheme</h1>
-    <p>
-      <pre>class <a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html">ColorScheme</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>class <a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html">ColorScheme</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <hr>
     <p>A color scheme holds all the named color parameters for a <code><a href="/reference/kotlin/androidx/compose/material3/MaterialTheme.html">MaterialTheme</a></code>.</p>
     <p>Color schemes are designed to be harmonious, ensure accessible text, and distinguish UI elements and surfaces from one another. There are two built-in baseline schemes, <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#lightColorScheme(androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">lightColorScheme</a></code> and a <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#darkColorScheme(androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">darkColorScheme</a></code>, that can be used as-is or customized.</p>
@@ -19,577 +28,766 @@
     <p>To learn more about colors, see <a href="https://m3.material.io/styles/color/overview">Material Design colors</a>.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public constructors</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#ColorScheme(androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">ColorScheme</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;primary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onPrimary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;primaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onPrimaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;inversePrimary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;secondary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSecondary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;secondaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSecondaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;tertiary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onTertiary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;tertiaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onTertiaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;background:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onBackground:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;surface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSurface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;surfaceVariant:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSurfaceVariant:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;surfaceTint:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;inverseSurface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;inverseOnSurface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;error:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onError:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;errorContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onErrorContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;outline:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;outlineVariant:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;scrim:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a><br>)</code></div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="93%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public constructors</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#ColorScheme(androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">ColorScheme</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;primary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onPrimary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;primaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onPrimaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;inversePrimary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;secondary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSecondary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;secondaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSecondaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;tertiary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onTertiary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;tertiaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onTertiaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;background:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onBackground:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;surface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSurface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;surfaceVariant:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSurfaceVariant:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;surfaceTint:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;inverseSurface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;inverseOnSurface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;error:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onError:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;errorContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onErrorContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;outline:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;outlineVariant:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;scrim:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a><br>)</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public functions</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html">ColorScheme</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#copy(androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;primary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onPrimary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;primaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onPrimaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;inversePrimary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;secondary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSecondary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;secondaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSecondaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;tertiary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onTertiary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;tertiaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onTertiaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;background:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onBackground:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;surface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSurface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;surfaceVariant:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSurfaceVariant:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;surfaceTint:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;inverseSurface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;inverseOnSurface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;error:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onError:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;errorContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onErrorContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;outline:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;outlineVariant:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;scrim:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a><br>)</code></div>
-              <p>Returns a copy of this ColorScheme, optionally overriding some of the values.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#toString()">toString</a>()</code></div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html">ColorScheme</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#copy(androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;primary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onPrimary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;primaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onPrimaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;inversePrimary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;secondary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSecondary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;secondaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSecondaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;tertiary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onTertiary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;tertiaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onTertiaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;background:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onBackground:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;surface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSurface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;surfaceVariant:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSurfaceVariant:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;surfaceTint:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;inverseSurface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;inverseOnSurface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;error:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onError:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;errorContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onErrorContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;outline:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;outlineVariant:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;scrim:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a><br>)</code></div>
+                <p>Returns a copy of this ColorScheme, optionally overriding some of the values.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#toString()">toString</a>()</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public properties</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#background()">background</a></code></div>
-              <p>The background color that appears behind scrollable content.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#error()">error</a></code></div>
-              <p>The error color is used to indicate errors in components, such as invalid text in a text field.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#errorContainer()">errorContainer</a></code></div>
-              <p>The preferred tonal color of error containers.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#inverseOnSurface()">inverseOnSurface</a></code></div>
-              <p>A color that contrasts well with <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#inverseSurface()">inverseSurface</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#inversePrimary()">inversePrimary</a></code></div>
-              <p>Color to be used as a &quot;primary&quot; color in places where the inverse color scheme is needed, such as the button on a SnackBar.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#inverseSurface()">inverseSurface</a></code></div>
-              <p>A color that contrasts sharply with <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.ui.Modifier).surface(androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.foundation.BorderStroke,androidx.compose.ui.unit.Dp)">surface</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onBackground()">onBackground</a></code></div>
-              <p>Color used for text and icons displayed on top of the background color.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onError()">onError</a></code></div>
-              <p>Color used for text and icons displayed on top of the error color.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onErrorContainer()">onErrorContainer</a></code></div>
-              <p>The color (and state variants) that should be used for content on top of <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#errorContainer()">errorContainer</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onPrimary()">onPrimary</a></code></div>
-              <p>Color used for text and icons displayed on top of the primary color.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onPrimaryContainer()">onPrimaryContainer</a></code></div>
-              <p>The color (and state variants) that should be used for content on top of <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#primaryContainer()">primaryContainer</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onSecondary()">onSecondary</a></code></div>
-              <p>Color used for text and icons displayed on top of the secondary color.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onSecondaryContainer()">onSecondaryContainer</a></code></div>
-              <p>The color (and state variants) that should be used for content on top of <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#secondaryContainer()">secondaryContainer</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onSurface()">onSurface</a></code></div>
-              <p>Color used for text and icons displayed on top of the surface color.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onSurfaceVariant()">onSurfaceVariant</a></code></div>
-              <p>The color (and state variants) that can be used for content on top of <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.ui.Modifier).surface(androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.foundation.BorderStroke,androidx.compose.ui.unit.Dp)">surface</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onTertiary()">onTertiary</a></code></div>
-              <p>Color used for text and icons displayed on top of the tertiary color.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onTertiaryContainer()">onTertiaryContainer</a></code></div>
-              <p>The color (and state variants) that should be used for content on top of <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#tertiaryContainer()">tertiaryContainer</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#outline()">outline</a></code></div>
-              <p>Subtle color used for boundaries.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#outlineVariant()">outlineVariant</a></code></div>
-              <p>Utility color used for boundaries for decorative elements when strong contrast is not required.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#primary()">primary</a></code></div>
-              <p>The primary color is the color displayed most frequently across your app’s screens and components.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#primaryContainer()">primaryContainer</a></code></div>
-              <p>The preferred tonal color of containers.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#scrim()">scrim</a></code></div>
-              <p>Color of a scrim that obscures content.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#secondary()">secondary</a></code></div>
-              <p>The secondary color provides more ways to accent and distinguish your product.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#secondaryContainer()">secondaryContainer</a></code></div>
-              <p>A tonal color to be used in containers.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#surface()">surface</a></code></div>
-              <p>The surface color that affect surfaces of components, such as cards, sheets, and menus.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#surfaceTint()">surfaceTint</a></code></div>
-              <p>This color will be used by components that apply tonal elevation and is applied on top of <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.ui.Modifier).surface(androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.foundation.BorderStroke,androidx.compose.ui.unit.Dp)">surface</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#surfaceVariant()">surfaceVariant</a></code></div>
-              <p>Another option for a color with similar uses of <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.ui.Modifier).surface(androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.foundation.BorderStroke,androidx.compose.ui.unit.Dp)">surface</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#tertiary()">tertiary</a></code></div>
-              <p>The tertiary color that can be used to balance primary and secondary colors, or bring heightened attention to an element such as an input field.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#tertiaryContainer()">tertiaryContainer</a></code></div>
-              <p>A tonal color to be used in containers.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#background()">background</a></code></div>
+                <p>The background color that appears behind scrollable content.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#error()">error</a></code></div>
+                <p>The error color is used to indicate errors in components, such as invalid text in a text field.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#errorContainer()">errorContainer</a></code></div>
+                <p>The preferred tonal color of error containers.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#inverseOnSurface()">inverseOnSurface</a></code></div>
+                <p>A color that contrasts well with <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#inverseSurface()">inverseSurface</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#inversePrimary()">inversePrimary</a></code></div>
+                <p>Color to be used as a &quot;primary&quot; color in places where the inverse color scheme is needed, such as the button on a SnackBar.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#inverseSurface()">inverseSurface</a></code></div>
+                <p>A color that contrasts sharply with <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.ui.Modifier).surface(androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.foundation.BorderStroke,androidx.compose.ui.unit.Dp)">surface</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onBackground()">onBackground</a></code></div>
+                <p>Color used for text and icons displayed on top of the background color.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onError()">onError</a></code></div>
+                <p>Color used for text and icons displayed on top of the error color.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onErrorContainer()">onErrorContainer</a></code></div>
+                <p>The color (and state variants) that should be used for content on top of <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#errorContainer()">errorContainer</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onPrimary()">onPrimary</a></code></div>
+                <p>Color used for text and icons displayed on top of the primary color.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onPrimaryContainer()">onPrimaryContainer</a></code></div>
+                <p>The color (and state variants) that should be used for content on top of <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#primaryContainer()">primaryContainer</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onSecondary()">onSecondary</a></code></div>
+                <p>Color used for text and icons displayed on top of the secondary color.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onSecondaryContainer()">onSecondaryContainer</a></code></div>
+                <p>The color (and state variants) that should be used for content on top of <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#secondaryContainer()">secondaryContainer</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onSurface()">onSurface</a></code></div>
+                <p>Color used for text and icons displayed on top of the surface color.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onSurfaceVariant()">onSurfaceVariant</a></code></div>
+                <p>The color (and state variants) that can be used for content on top of <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.ui.Modifier).surface(androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.foundation.BorderStroke,androidx.compose.ui.unit.Dp)">surface</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onTertiary()">onTertiary</a></code></div>
+                <p>Color used for text and icons displayed on top of the tertiary color.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onTertiaryContainer()">onTertiaryContainer</a></code></div>
+                <p>The color (and state variants) that should be used for content on top of <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#tertiaryContainer()">tertiaryContainer</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#outline()">outline</a></code></div>
+                <p>Subtle color used for boundaries.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#outlineVariant()">outlineVariant</a></code></div>
+                <p>Utility color used for boundaries for decorative elements when strong contrast is not required.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#primary()">primary</a></code></div>
+                <p>The primary color is the color displayed most frequently across your app’s screens and components.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#primaryContainer()">primaryContainer</a></code></div>
+                <p>The preferred tonal color of containers.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#scrim()">scrim</a></code></div>
+                <p>Color of a scrim that obscures content.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#secondary()">secondary</a></code></div>
+                <p>The secondary color provides more ways to accent and distinguish your product.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#secondaryContainer()">secondaryContainer</a></code></div>
+                <p>A tonal color to be used in containers.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#surface()">surface</a></code></div>
+                <p>The surface color that affect surfaces of components, such as cards, sheets, and menus.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#surfaceTint()">surfaceTint</a></code></div>
+                <p>This color will be used by components that apply tonal elevation and is applied on top of <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.ui.Modifier).surface(androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.foundation.BorderStroke,androidx.compose.ui.unit.Dp)">surface</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#surfaceVariant()">surfaceVariant</a></code></div>
+                <p>Another option for a color with similar uses of <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.ui.Modifier).surface(androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.foundation.BorderStroke,androidx.compose.ui.unit.Dp)">surface</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#tertiary()">tertiary</a></code></div>
+                <p>The tertiary color that can be used to balance primary and secondary colors, or bring heightened attention to an element such as an input field.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#tertiaryContainer()">tertiaryContainer</a></code></div>
+                <p>A tonal color to be used in containers.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Extension functions</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html">ColorScheme</a>.<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#(androidx.compose.material3.ColorScheme).contentColorFor(androidx.compose.ui.graphics.Color)">contentColorFor</a>(backgroundColor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>)</code></div>
-              <p>The Material color system contains pairs of colors that are typically used for the background and content color inside a component.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html">ColorScheme</a>.<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#(androidx.compose.material3.ColorScheme).surfaceColorAtElevation(androidx.compose.ui.unit.Dp)">surfaceColorAtElevation</a>(elevation:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>)</code></div>
-              <p>Computes the surface tonal color at different elevation levels e.g. surface1 through surface5.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Extension functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html">ColorScheme</a>.<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#(androidx.compose.material3.ColorScheme).contentColorFor(androidx.compose.ui.graphics.Color)">contentColorFor</a>(backgroundColor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>)</code></div>
+                <p>The Material color system contains pairs of colors that are typically used for the background and content color inside a component.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html">ColorScheme</a>.<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#(androidx.compose.material3.ColorScheme).surfaceColorAtElevation(androidx.compose.ui.unit.Dp)">surfaceColorAtElevation</a>(elevation:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>)</code></div>
+                <p>Computes the surface tonal color at different elevation levels e.g. surface1 through surface5.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
-    <div class="list">
-      <h2>Public constructors</h2>
-      <div class="api-item"><a name="ColorScheme(androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color)"></a><a name="ColorScheme-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-"></a><a name="colorscheme"></a>
-        <h3 class="api-name" id="ColorScheme(androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">ColorScheme</h3>
-        <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#ColorScheme(androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">ColorScheme</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;primary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onPrimary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;primaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onPrimaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;inversePrimary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;secondary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSecondary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;secondaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSecondaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;tertiary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onTertiary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;tertiaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onTertiaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;background:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onBackground:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;surface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSurface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;surfaceVariant:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSurfaceVariant:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;surfaceTint:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;inverseSurface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;inverseOnSurface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;error:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onError:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;errorContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onErrorContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;outline:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;outlineVariant:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;scrim:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a><br>)</pre>
-      </div>
-    </div>
-    <div class="list">
-      <h2>Public functions</h2>
-      <div class="api-item"><a name="copy(androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color)"></a><a name="copy-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-"></a><a name="copy"></a>
-        <h3 class="api-name" id="copy(androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">copy</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#copy(androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;primary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.primary,<br>&nbsp;&nbsp;&nbsp;&nbsp;onPrimary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.onPrimary,<br>&nbsp;&nbsp;&nbsp;&nbsp;primaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.primaryContainer,<br>&nbsp;&nbsp;&nbsp;&nbsp;onPrimaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.onPrimaryContainer,<br>&nbsp;&nbsp;&nbsp;&nbsp;inversePrimary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.inversePrimary,<br>&nbsp;&nbsp;&nbsp;&nbsp;secondary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.secondary,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSecondary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.onSecondary,<br>&nbsp;&nbsp;&nbsp;&nbsp;secondaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.secondaryContainer,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSecondaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.onSecondaryContainer,<br>&nbsp;&nbsp;&nbsp;&nbsp;tertiary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.tertiary,<br>&nbsp;&nbsp;&nbsp;&nbsp;onTertiary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.onTertiary,<br>&nbsp;&nbsp;&nbsp;&nbsp;tertiaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.tertiaryContainer,<br>&nbsp;&nbsp;&nbsp;&nbsp;onTertiaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.onTertiaryContainer,<br>&nbsp;&nbsp;&nbsp;&nbsp;background:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.background,<br>&nbsp;&nbsp;&nbsp;&nbsp;onBackground:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.onBackground,<br>&nbsp;&nbsp;&nbsp;&nbsp;surface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.surface,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSurface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.onSurface,<br>&nbsp;&nbsp;&nbsp;&nbsp;surfaceVariant:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.surfaceVariant,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSurfaceVariant:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.onSurfaceVariant,<br>&nbsp;&nbsp;&nbsp;&nbsp;surfaceTint:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.surfaceTint,<br>&nbsp;&nbsp;&nbsp;&nbsp;inverseSurface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.inverseSurface,<br>&nbsp;&nbsp;&nbsp;&nbsp;inverseOnSurface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.inverseOnSurface,<br>&nbsp;&nbsp;&nbsp;&nbsp;error:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.error,<br>&nbsp;&nbsp;&nbsp;&nbsp;onError:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.onError,<br>&nbsp;&nbsp;&nbsp;&nbsp;errorContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.errorContainer,<br>&nbsp;&nbsp;&nbsp;&nbsp;onErrorContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.onErrorContainer,<br>&nbsp;&nbsp;&nbsp;&nbsp;outline:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.outline,<br>&nbsp;&nbsp;&nbsp;&nbsp;outlineVariant:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.outlineVariant,<br>&nbsp;&nbsp;&nbsp;&nbsp;scrim:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.scrim<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html">ColorScheme</a></pre>
-        <p>Returns a copy of this ColorScheme, optionally overriding some of the values.</p>
-      </div>
-      <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
-        <h3 class="api-name" id="toString()">toString</h3>
-        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#toString()">toString</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></pre>
-      </div>
-    </div>
-    <div class="list">
-      <h2>Public properties</h2>
-      <div class="api-item"><a name="getBackground()"></a><a name="setBackground()"></a><a name="getBackground--"></a><a name="setBackground--"></a>
-        <h3 class="api-name" id="background()">background</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#background()">background</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>The background color that appears behind scrollable content.</p>
-      </div>
-      <div class="api-item"><a name="getError()"></a><a name="setError()"></a><a name="getError--"></a><a name="setError--"></a>
-        <h3 class="api-name" id="error()">error</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#error()">error</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>The error color is used to indicate errors in components, such as invalid text in a text field.</p>
-      </div>
-      <div class="api-item"><a name="getErrorContainer()"></a><a name="setErrorContainer()"></a><a name="getErrorContainer--"></a><a name="setErrorContainer--"></a>
-        <h3 class="api-name" id="errorContainer()">errorContainer</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#errorContainer()">errorContainer</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>The preferred tonal color of error containers.</p>
-      </div>
-      <div class="api-item"><a name="getInverseOnSurface()"></a><a name="setInverseOnSurface()"></a><a name="getInverseOnSurface--"></a><a name="setInverseOnSurface--"></a>
-        <h3 class="api-name" id="inverseOnSurface()">inverseOnSurface</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#inverseOnSurface()">inverseOnSurface</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>A color that contrasts well with <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#inverseSurface()">inverseSurface</a></code>. Useful for content that sits on top of containers that are <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#inverseSurface()">inverseSurface</a></code>.</p>
-      </div>
-      <div class="api-item"><a name="getInversePrimary()"></a><a name="setInversePrimary()"></a><a name="getInversePrimary--"></a><a name="setInversePrimary--"></a>
-        <h3 class="api-name" id="inversePrimary()">inversePrimary</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#inversePrimary()">inversePrimary</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>Color to be used as a &quot;primary&quot; color in places where the inverse color scheme is needed, such as the button on a SnackBar.</p>
-      </div>
-      <div class="api-item"><a name="getInverseSurface()"></a><a name="setInverseSurface()"></a><a name="getInverseSurface--"></a><a name="setInverseSurface--"></a>
-        <h3 class="api-name" id="inverseSurface()">inverseSurface</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#inverseSurface()">inverseSurface</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>A color that contrasts sharply with <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.ui.Modifier).surface(androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.foundation.BorderStroke,androidx.compose.ui.unit.Dp)">surface</a></code>. Useful for surfaces that sit on top of other surfaces with <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.ui.Modifier).surface(androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.foundation.BorderStroke,androidx.compose.ui.unit.Dp)">surface</a></code> color.</p>
-      </div>
-      <div class="api-item"><a name="getOnBackground()"></a><a name="setOnBackground()"></a><a name="getOnBackground--"></a><a name="setOnBackground--"></a>
-        <h3 class="api-name" id="onBackground()">onBackground</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onBackground()">onBackground</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>Color used for text and icons displayed on top of the background color.</p>
-      </div>
-      <div class="api-item"><a name="getOnError()"></a><a name="setOnError()"></a><a name="getOnError--"></a><a name="setOnError--"></a>
-        <h3 class="api-name" id="onError()">onError</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onError()">onError</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>Color used for text and icons displayed on top of the error color.</p>
-      </div>
-      <div class="api-item"><a name="getOnErrorContainer()"></a><a name="setOnErrorContainer()"></a><a name="getOnErrorContainer--"></a><a name="setOnErrorContainer--"></a>
-        <h3 class="api-name" id="onErrorContainer()">onErrorContainer</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onErrorContainer()">onErrorContainer</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>The color (and state variants) that should be used for content on top of <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#errorContainer()">errorContainer</a></code>.</p>
-      </div>
-      <div class="api-item"><a name="getOnPrimary()"></a><a name="setOnPrimary()"></a><a name="getOnPrimary--"></a><a name="setOnPrimary--"></a>
-        <h3 class="api-name" id="onPrimary()">onPrimary</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onPrimary()">onPrimary</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>Color used for text and icons displayed on top of the primary color.</p>
-      </div>
-      <div class="api-item"><a name="getOnPrimaryContainer()"></a><a name="setOnPrimaryContainer()"></a><a name="getOnPrimaryContainer--"></a><a name="setOnPrimaryContainer--"></a>
-        <h3 class="api-name" id="onPrimaryContainer()">onPrimaryContainer</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onPrimaryContainer()">onPrimaryContainer</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>The color (and state variants) that should be used for content on top of <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#primaryContainer()">primaryContainer</a></code>.</p>
-      </div>
-      <div class="api-item"><a name="getOnSecondary()"></a><a name="setOnSecondary()"></a><a name="getOnSecondary--"></a><a name="setOnSecondary--"></a>
-        <h3 class="api-name" id="onSecondary()">onSecondary</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onSecondary()">onSecondary</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>Color used for text and icons displayed on top of the secondary color.</p>
-      </div>
-      <div class="api-item"><a name="getOnSecondaryContainer()"></a><a name="setOnSecondaryContainer()"></a><a name="getOnSecondaryContainer--"></a><a name="setOnSecondaryContainer--"></a>
-        <h3 class="api-name" id="onSecondaryContainer()">onSecondaryContainer</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onSecondaryContainer()">onSecondaryContainer</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>The color (and state variants) that should be used for content on top of <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#secondaryContainer()">secondaryContainer</a></code>.</p>
-      </div>
-      <div class="api-item"><a name="getOnSurface()"></a><a name="setOnSurface()"></a><a name="getOnSurface--"></a><a name="setOnSurface--"></a>
-        <h3 class="api-name" id="onSurface()">onSurface</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onSurface()">onSurface</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>Color used for text and icons displayed on top of the surface color.</p>
-      </div>
-      <div class="api-item"><a name="getOnSurfaceVariant()"></a><a name="setOnSurfaceVariant()"></a><a name="getOnSurfaceVariant--"></a><a name="setOnSurfaceVariant--"></a>
-        <h3 class="api-name" id="onSurfaceVariant()">onSurfaceVariant</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onSurfaceVariant()">onSurfaceVariant</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>The color (and state variants) that can be used for content on top of <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.ui.Modifier).surface(androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.foundation.BorderStroke,androidx.compose.ui.unit.Dp)">surface</a></code>.</p>
-      </div>
-      <div class="api-item"><a name="getOnTertiary()"></a><a name="setOnTertiary()"></a><a name="getOnTertiary--"></a><a name="setOnTertiary--"></a>
-        <h3 class="api-name" id="onTertiary()">onTertiary</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onTertiary()">onTertiary</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>Color used for text and icons displayed on top of the tertiary color.</p>
-      </div>
-      <div class="api-item"><a name="getOnTertiaryContainer()"></a><a name="setOnTertiaryContainer()"></a><a name="getOnTertiaryContainer--"></a><a name="setOnTertiaryContainer--"></a>
-        <h3 class="api-name" id="onTertiaryContainer()">onTertiaryContainer</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onTertiaryContainer()">onTertiaryContainer</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>The color (and state variants) that should be used for content on top of <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#tertiaryContainer()">tertiaryContainer</a></code>.</p>
-      </div>
-      <div class="api-item"><a name="getOutline()"></a><a name="setOutline()"></a><a name="getOutline--"></a><a name="setOutline--"></a>
-        <h3 class="api-name" id="outline()">outline</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#outline()">outline</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>Subtle color used for boundaries. Outline color role adds contrast for accessibility purposes.</p>
-      </div>
-      <div class="api-item"><a name="getOutlineVariant()"></a><a name="setOutlineVariant()"></a><a name="getOutlineVariant--"></a><a name="setOutlineVariant--"></a>
-        <h3 class="api-name" id="outlineVariant()">outlineVariant</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#outlineVariant()">outlineVariant</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>Utility color used for boundaries for decorative elements when strong contrast is not required.</p>
-      </div>
-      <div class="api-item"><a name="getPrimary()"></a><a name="setPrimary()"></a><a name="getPrimary--"></a><a name="setPrimary--"></a>
-        <h3 class="api-name" id="primary()">primary</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#primary()">primary</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>The primary color is the color displayed most frequently across your app’s screens and components.</p>
-      </div>
-      <div class="api-item"><a name="getPrimaryContainer()"></a><a name="setPrimaryContainer()"></a><a name="getPrimaryContainer--"></a><a name="setPrimaryContainer--"></a>
-        <h3 class="api-name" id="primaryContainer()">primaryContainer</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#primaryContainer()">primaryContainer</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>The preferred tonal color of containers.</p>
-      </div>
-      <div class="api-item"><a name="getScrim()"></a><a name="setScrim()"></a><a name="getScrim--"></a><a name="setScrim--"></a>
-        <h3 class="api-name" id="scrim()">scrim</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#scrim()">scrim</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>Color of a scrim that obscures content.</p>
-      </div>
-      <div class="api-item"><a name="getSecondary()"></a><a name="setSecondary()"></a><a name="getSecondary--"></a><a name="setSecondary--"></a>
-        <h3 class="api-name" id="secondary()">secondary</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#secondary()">secondary</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>The secondary color provides more ways to accent and distinguish your product. Secondary colors are best for:</p>
-        <ul>
-          <li>
-            <p>Floating action buttons</p>
-          </li>
-          <li>
-            <p>Selection controls, like checkboxes and radio buttons</p>
-          </li>
-          <li>
-            <p>Highlighting selected text</p>
-          </li>
-          <li>
-            <p>Links and headlines</p>
-          </li>
-        </ul>
-      </div>
-      <div class="api-item"><a name="getSecondaryContainer()"></a><a name="setSecondaryContainer()"></a><a name="getSecondaryContainer--"></a><a name="setSecondaryContainer--"></a>
-        <h3 class="api-name" id="secondaryContainer()">secondaryContainer</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#secondaryContainer()">secondaryContainer</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>A tonal color to be used in containers.</p>
-      </div>
-      <div class="api-item"><a name="getSurface()"></a><a name="setSurface()"></a><a name="getSurface--"></a><a name="setSurface--"></a>
-        <h3 class="api-name" id="surface()">surface</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#surface()">surface</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>The surface color that affect surfaces of components, such as cards, sheets, and menus.</p>
-      </div>
-      <div class="api-item"><a name="getSurfaceTint()"></a><a name="setSurfaceTint()"></a><a name="getSurfaceTint--"></a><a name="setSurfaceTint--"></a>
-        <h3 class="api-name" id="surfaceTint()">surfaceTint</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#surfaceTint()">surfaceTint</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>This color will be used by components that apply tonal elevation and is applied on top of <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.ui.Modifier).surface(androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.foundation.BorderStroke,androidx.compose.ui.unit.Dp)">surface</a></code>. The higher the elevation the more this color is used.</p>
-      </div>
-      <div class="api-item"><a name="getSurfaceVariant()"></a><a name="setSurfaceVariant()"></a><a name="getSurfaceVariant--"></a><a name="setSurfaceVariant--"></a>
-        <h3 class="api-name" id="surfaceVariant()">surfaceVariant</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#surfaceVariant()">surfaceVariant</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>Another option for a color with similar uses of <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.ui.Modifier).surface(androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.foundation.BorderStroke,androidx.compose.ui.unit.Dp)">surface</a></code>.</p>
-      </div>
-      <div class="api-item"><a name="getTertiary()"></a><a name="setTertiary()"></a><a name="getTertiary--"></a><a name="setTertiary--"></a>
-        <h3 class="api-name" id="tertiary()">tertiary</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#tertiary()">tertiary</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>The tertiary color that can be used to balance primary and secondary colors, or bring heightened attention to an element such as an input field.</p>
-      </div>
-      <div class="api-item"><a name="getTertiaryContainer()"></a><a name="setTertiaryContainer()"></a><a name="getTertiaryContainer--"></a><a name="setTertiaryContainer--"></a>
-        <h3 class="api-name" id="tertiaryContainer()">tertiaryContainer</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#tertiaryContainer()">tertiaryContainer</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>A tonal color to be used in containers.</p>
-      </div>
-    </div>
-    <div class="list">
-      <h2>Extension functions</h2>
-      <div class="api-item"><a name="-androidx.compose.material3.ColorScheme-.contentColorFor-androidx.compose.ui.graphics.Color-"></a><a name="contentcolorfor"></a>
-        <h3 class="api-name" id="(androidx.compose.material3.ColorScheme).contentColorFor(androidx.compose.ui.graphics.Color)">contentColorFor</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html">ColorScheme</a>.<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#(androidx.compose.material3.ColorScheme).contentColorFor(androidx.compose.ui.graphics.Color)">contentColorFor</a>(backgroundColor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>The Material color system contains pairs of colors that are typically used for the background and content color inside a component. For example, a <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#Button(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.graphics.Shape,androidx.compose.material3.ButtonColors,androidx.compose.material3.ButtonElevation,androidx.compose.foundation.BorderStroke,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function1)">Button</a></code> typically uses <code>primary</code> for its background, and <code>onPrimary</code> for the color of its content (usually text or iconography).</p>
-        <p>This function tries to match the provided <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.material3.ColorScheme).contentColorFor(androidx.compose.ui.graphics.Color)">backgroundColor</a></code> to a 'background' color in this <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html">ColorScheme</a></code>, and then will return the corresponding color used for content. For example, when <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.material3.ColorScheme).contentColorFor(androidx.compose.ui.graphics.Color)">backgroundColor</a></code> is <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#primary()">ColorScheme.primary</a></code>, this will return <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onPrimary()">ColorScheme.onPrimary</a></code>.</p>
-        <p>If <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.material3.ColorScheme).contentColorFor(androidx.compose.ui.graphics.Color)">backgroundColor</a></code> does not match a background color in the theme, this will return <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#Unspecified()">Color.Unspecified</a></code>.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Returns</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-                <td>
-                  <p>the matching content color for <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.material3.ColorScheme).contentColorFor(androidx.compose.ui.graphics.Color)">backgroundColor</a></code>. If <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.material3.ColorScheme).contentColorFor(androidx.compose.ui.graphics.Color)">backgroundColor</a></code> is not present in the theme's <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html">ColorScheme</a></code>, then returns <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#Unspecified()">Color.Unspecified</a></code>.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.material3.ColorScheme).contentColorFor(androidx.compose.ui.graphics.Color)">contentColorFor</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public constructors</h2>
+        <div class="api-item"><a name="ColorScheme(androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color)"></a><a name="ColorScheme-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-"></a><a name="colorscheme"></a>
+          <h3 class="api-name" id="ColorScheme(androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">ColorScheme</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#ColorScheme(androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">ColorScheme</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;primary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onPrimary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;primaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onPrimaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;inversePrimary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;secondary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSecondary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;secondaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSecondaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;tertiary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onTertiary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;tertiaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onTertiaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;background:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onBackground:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;surface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSurface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;surfaceVariant:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSurfaceVariant:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;surfaceTint:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;inverseSurface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;inverseOnSurface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;error:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onError:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;errorContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onErrorContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;outline:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;outlineVariant:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;scrim:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a><br>)</pre>
         </div>
       </div>
-      <div class="api-item"><a name="-androidx.compose.material3.ColorScheme-.surfaceColorAtElevation-androidx.compose.ui.unit.Dp-"></a><a name="surfacecoloratelevation"></a>
-        <h3 class="api-name" id="(androidx.compose.material3.ColorScheme).surfaceColorAtElevation(androidx.compose.ui.unit.Dp)">surfaceColorAtElevation</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html">ColorScheme</a>.<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#(androidx.compose.material3.ColorScheme).surfaceColorAtElevation(androidx.compose.ui.unit.Dp)">surfaceColorAtElevation</a>(elevation:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
-        <p>Computes the surface tonal color at different elevation levels e.g. surface1 through surface5.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>elevation:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
-                <td>
-                  <p>Elevation value used to compute alpha of the color overlay layer.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="copy(androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Color)"></a><a name="copy-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Color-"></a><a name="copy"></a>
+          <h3 class="api-name" id="copy(androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">copy</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#copy(androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;primary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.primary,<br>&nbsp;&nbsp;&nbsp;&nbsp;onPrimary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.onPrimary,<br>&nbsp;&nbsp;&nbsp;&nbsp;primaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.primaryContainer,<br>&nbsp;&nbsp;&nbsp;&nbsp;onPrimaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.onPrimaryContainer,<br>&nbsp;&nbsp;&nbsp;&nbsp;inversePrimary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.inversePrimary,<br>&nbsp;&nbsp;&nbsp;&nbsp;secondary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.secondary,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSecondary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.onSecondary,<br>&nbsp;&nbsp;&nbsp;&nbsp;secondaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.secondaryContainer,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSecondaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.onSecondaryContainer,<br>&nbsp;&nbsp;&nbsp;&nbsp;tertiary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.tertiary,<br>&nbsp;&nbsp;&nbsp;&nbsp;onTertiary:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.onTertiary,<br>&nbsp;&nbsp;&nbsp;&nbsp;tertiaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.tertiaryContainer,<br>&nbsp;&nbsp;&nbsp;&nbsp;onTertiaryContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.onTertiaryContainer,<br>&nbsp;&nbsp;&nbsp;&nbsp;background:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.background,<br>&nbsp;&nbsp;&nbsp;&nbsp;onBackground:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.onBackground,<br>&nbsp;&nbsp;&nbsp;&nbsp;surface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.surface,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSurface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.onSurface,<br>&nbsp;&nbsp;&nbsp;&nbsp;surfaceVariant:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.surfaceVariant,<br>&nbsp;&nbsp;&nbsp;&nbsp;onSurfaceVariant:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.onSurfaceVariant,<br>&nbsp;&nbsp;&nbsp;&nbsp;surfaceTint:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.surfaceTint,<br>&nbsp;&nbsp;&nbsp;&nbsp;inverseSurface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.inverseSurface,<br>&nbsp;&nbsp;&nbsp;&nbsp;inverseOnSurface:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.inverseOnSurface,<br>&nbsp;&nbsp;&nbsp;&nbsp;error:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.error,<br>&nbsp;&nbsp;&nbsp;&nbsp;onError:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.onError,<br>&nbsp;&nbsp;&nbsp;&nbsp;errorContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.errorContainer,<br>&nbsp;&nbsp;&nbsp;&nbsp;onErrorContainer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.onErrorContainer,<br>&nbsp;&nbsp;&nbsp;&nbsp;outline:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.outline,<br>&nbsp;&nbsp;&nbsp;&nbsp;outlineVariant:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.outlineVariant,<br>&nbsp;&nbsp;&nbsp;&nbsp;scrim:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = this.scrim<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html">ColorScheme</a></pre>
+          <p>Returns a copy of this ColorScheme, optionally overriding some of the values.</p>
         </div>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Returns</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
-                <td>
-                  <p>the <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#surface()">ColorScheme.surface</a></code> color with an alpha of the <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#surfaceTint()">ColorScheme.surfaceTint</a></code> color overlaid on top of it.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+          <h3 class="api-name" id="toString()">toString</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#toString()">toString</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></pre>
         </div>
       </div>
-    </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getBackground()"></a><a name="setBackground()"></a><a name="getBackground--"></a><a name="setBackground--"></a>
+          <h3 class="api-name" id="background()">background</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#background()">background</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>The background color that appears behind scrollable content.</p>
+        </div>
+        <div class="api-item"><a name="getError()"></a><a name="setError()"></a><a name="getError--"></a><a name="setError--"></a>
+          <h3 class="api-name" id="error()">error</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#error()">error</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>The error color is used to indicate errors in components, such as invalid text in a text field.</p>
+        </div>
+        <div class="api-item"><a name="getErrorContainer()"></a><a name="setErrorContainer()"></a><a name="getErrorContainer--"></a><a name="setErrorContainer--"></a>
+          <h3 class="api-name" id="errorContainer()">errorContainer</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#errorContainer()">errorContainer</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>The preferred tonal color of error containers.</p>
+        </div>
+        <div class="api-item"><a name="getInverseOnSurface()"></a><a name="setInverseOnSurface()"></a><a name="getInverseOnSurface--"></a><a name="setInverseOnSurface--"></a>
+          <h3 class="api-name" id="inverseOnSurface()">inverseOnSurface</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#inverseOnSurface()">inverseOnSurface</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>A color that contrasts well with <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#inverseSurface()">inverseSurface</a></code>. Useful for content that sits on top of containers that are <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#inverseSurface()">inverseSurface</a></code>.</p>
+        </div>
+        <div class="api-item"><a name="getInversePrimary()"></a><a name="setInversePrimary()"></a><a name="getInversePrimary--"></a><a name="setInversePrimary--"></a>
+          <h3 class="api-name" id="inversePrimary()">inversePrimary</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#inversePrimary()">inversePrimary</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>Color to be used as a &quot;primary&quot; color in places where the inverse color scheme is needed, such as the button on a SnackBar.</p>
+        </div>
+        <div class="api-item"><a name="getInverseSurface()"></a><a name="setInverseSurface()"></a><a name="getInverseSurface--"></a><a name="setInverseSurface--"></a>
+          <h3 class="api-name" id="inverseSurface()">inverseSurface</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#inverseSurface()">inverseSurface</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>A color that contrasts sharply with <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.ui.Modifier).surface(androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.foundation.BorderStroke,androidx.compose.ui.unit.Dp)">surface</a></code>. Useful for surfaces that sit on top of other surfaces with <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.ui.Modifier).surface(androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.foundation.BorderStroke,androidx.compose.ui.unit.Dp)">surface</a></code> color.</p>
+        </div>
+        <div class="api-item"><a name="getOnBackground()"></a><a name="setOnBackground()"></a><a name="getOnBackground--"></a><a name="setOnBackground--"></a>
+          <h3 class="api-name" id="onBackground()">onBackground</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onBackground()">onBackground</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>Color used for text and icons displayed on top of the background color.</p>
+        </div>
+        <div class="api-item"><a name="getOnError()"></a><a name="setOnError()"></a><a name="getOnError--"></a><a name="setOnError--"></a>
+          <h3 class="api-name" id="onError()">onError</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onError()">onError</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>Color used for text and icons displayed on top of the error color.</p>
+        </div>
+        <div class="api-item"><a name="getOnErrorContainer()"></a><a name="setOnErrorContainer()"></a><a name="getOnErrorContainer--"></a><a name="setOnErrorContainer--"></a>
+          <h3 class="api-name" id="onErrorContainer()">onErrorContainer</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onErrorContainer()">onErrorContainer</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>The color (and state variants) that should be used for content on top of <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#errorContainer()">errorContainer</a></code>.</p>
+        </div>
+        <div class="api-item"><a name="getOnPrimary()"></a><a name="setOnPrimary()"></a><a name="getOnPrimary--"></a><a name="setOnPrimary--"></a>
+          <h3 class="api-name" id="onPrimary()">onPrimary</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onPrimary()">onPrimary</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>Color used for text and icons displayed on top of the primary color.</p>
+        </div>
+        <div class="api-item"><a name="getOnPrimaryContainer()"></a><a name="setOnPrimaryContainer()"></a><a name="getOnPrimaryContainer--"></a><a name="setOnPrimaryContainer--"></a>
+          <h3 class="api-name" id="onPrimaryContainer()">onPrimaryContainer</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onPrimaryContainer()">onPrimaryContainer</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>The color (and state variants) that should be used for content on top of <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#primaryContainer()">primaryContainer</a></code>.</p>
+        </div>
+        <div class="api-item"><a name="getOnSecondary()"></a><a name="setOnSecondary()"></a><a name="getOnSecondary--"></a><a name="setOnSecondary--"></a>
+          <h3 class="api-name" id="onSecondary()">onSecondary</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onSecondary()">onSecondary</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>Color used for text and icons displayed on top of the secondary color.</p>
+        </div>
+        <div class="api-item"><a name="getOnSecondaryContainer()"></a><a name="setOnSecondaryContainer()"></a><a name="getOnSecondaryContainer--"></a><a name="setOnSecondaryContainer--"></a>
+          <h3 class="api-name" id="onSecondaryContainer()">onSecondaryContainer</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onSecondaryContainer()">onSecondaryContainer</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>The color (and state variants) that should be used for content on top of <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#secondaryContainer()">secondaryContainer</a></code>.</p>
+        </div>
+        <div class="api-item"><a name="getOnSurface()"></a><a name="setOnSurface()"></a><a name="getOnSurface--"></a><a name="setOnSurface--"></a>
+          <h3 class="api-name" id="onSurface()">onSurface</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onSurface()">onSurface</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>Color used for text and icons displayed on top of the surface color.</p>
+        </div>
+        <div class="api-item"><a name="getOnSurfaceVariant()"></a><a name="setOnSurfaceVariant()"></a><a name="getOnSurfaceVariant--"></a><a name="setOnSurfaceVariant--"></a>
+          <h3 class="api-name" id="onSurfaceVariant()">onSurfaceVariant</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onSurfaceVariant()">onSurfaceVariant</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>The color (and state variants) that can be used for content on top of <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.ui.Modifier).surface(androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.foundation.BorderStroke,androidx.compose.ui.unit.Dp)">surface</a></code>.</p>
+        </div>
+        <div class="api-item"><a name="getOnTertiary()"></a><a name="setOnTertiary()"></a><a name="getOnTertiary--"></a><a name="setOnTertiary--"></a>
+          <h3 class="api-name" id="onTertiary()">onTertiary</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onTertiary()">onTertiary</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>Color used for text and icons displayed on top of the tertiary color.</p>
+        </div>
+        <div class="api-item"><a name="getOnTertiaryContainer()"></a><a name="setOnTertiaryContainer()"></a><a name="getOnTertiaryContainer--"></a><a name="setOnTertiaryContainer--"></a>
+          <h3 class="api-name" id="onTertiaryContainer()">onTertiaryContainer</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onTertiaryContainer()">onTertiaryContainer</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>The color (and state variants) that should be used for content on top of <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#tertiaryContainer()">tertiaryContainer</a></code>.</p>
+        </div>
+        <div class="api-item"><a name="getOutline()"></a><a name="setOutline()"></a><a name="getOutline--"></a><a name="setOutline--"></a>
+          <h3 class="api-name" id="outline()">outline</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#outline()">outline</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>Subtle color used for boundaries. Outline color role adds contrast for accessibility purposes.</p>
+        </div>
+        <div class="api-item"><a name="getOutlineVariant()"></a><a name="setOutlineVariant()"></a><a name="getOutlineVariant--"></a><a name="setOutlineVariant--"></a>
+          <h3 class="api-name" id="outlineVariant()">outlineVariant</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#outlineVariant()">outlineVariant</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>Utility color used for boundaries for decorative elements when strong contrast is not required.</p>
+        </div>
+        <div class="api-item"><a name="getPrimary()"></a><a name="setPrimary()"></a><a name="getPrimary--"></a><a name="setPrimary--"></a>
+          <h3 class="api-name" id="primary()">primary</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#primary()">primary</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>The primary color is the color displayed most frequently across your app’s screens and components.</p>
+        </div>
+        <div class="api-item"><a name="getPrimaryContainer()"></a><a name="setPrimaryContainer()"></a><a name="getPrimaryContainer--"></a><a name="setPrimaryContainer--"></a>
+          <h3 class="api-name" id="primaryContainer()">primaryContainer</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#primaryContainer()">primaryContainer</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>The preferred tonal color of containers.</p>
+        </div>
+        <div class="api-item"><a name="getScrim()"></a><a name="setScrim()"></a><a name="getScrim--"></a><a name="setScrim--"></a>
+          <h3 class="api-name" id="scrim()">scrim</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#scrim()">scrim</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>Color of a scrim that obscures content.</p>
+        </div>
+        <div class="api-item"><a name="getSecondary()"></a><a name="setSecondary()"></a><a name="getSecondary--"></a><a name="setSecondary--"></a>
+          <h3 class="api-name" id="secondary()">secondary</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#secondary()">secondary</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>The secondary color provides more ways to accent and distinguish your product. Secondary colors are best for:</p>
+          <ul>
+            <li>
+              <p>Floating action buttons</p>
+            </li>
+            <li>
+              <p>Selection controls, like checkboxes and radio buttons</p>
+            </li>
+            <li>
+              <p>Highlighting selected text</p>
+            </li>
+            <li>
+              <p>Links and headlines</p>
+            </li>
+          </ul>
+        </div>
+        <div class="api-item"><a name="getSecondaryContainer()"></a><a name="setSecondaryContainer()"></a><a name="getSecondaryContainer--"></a><a name="setSecondaryContainer--"></a>
+          <h3 class="api-name" id="secondaryContainer()">secondaryContainer</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#secondaryContainer()">secondaryContainer</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>A tonal color to be used in containers.</p>
+        </div>
+        <div class="api-item"><a name="getSurface()"></a><a name="setSurface()"></a><a name="getSurface--"></a><a name="setSurface--"></a>
+          <h3 class="api-name" id="surface()">surface</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#surface()">surface</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>The surface color that affect surfaces of components, such as cards, sheets, and menus.</p>
+        </div>
+        <div class="api-item"><a name="getSurfaceTint()"></a><a name="setSurfaceTint()"></a><a name="getSurfaceTint--"></a><a name="setSurfaceTint--"></a>
+          <h3 class="api-name" id="surfaceTint()">surfaceTint</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#surfaceTint()">surfaceTint</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>This color will be used by components that apply tonal elevation and is applied on top of <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.ui.Modifier).surface(androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.foundation.BorderStroke,androidx.compose.ui.unit.Dp)">surface</a></code>. The higher the elevation the more this color is used.</p>
+        </div>
+        <div class="api-item"><a name="getSurfaceVariant()"></a><a name="setSurfaceVariant()"></a><a name="getSurfaceVariant--"></a><a name="setSurfaceVariant--"></a>
+          <h3 class="api-name" id="surfaceVariant()">surfaceVariant</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#surfaceVariant()">surfaceVariant</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>Another option for a color with similar uses of <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.ui.Modifier).surface(androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.foundation.BorderStroke,androidx.compose.ui.unit.Dp)">surface</a></code>.</p>
+        </div>
+        <div class="api-item"><a name="getTertiary()"></a><a name="setTertiary()"></a><a name="getTertiary--"></a><a name="setTertiary--"></a>
+          <h3 class="api-name" id="tertiary()">tertiary</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#tertiary()">tertiary</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>The tertiary color that can be used to balance primary and secondary colors, or bring heightened attention to an element such as an input field.</p>
+        </div>
+        <div class="api-item"><a name="getTertiaryContainer()"></a><a name="setTertiaryContainer()"></a><a name="getTertiaryContainer--"></a><a name="setTertiaryContainer--"></a>
+          <h3 class="api-name" id="tertiaryContainer()">tertiaryContainer</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#tertiaryContainer()">tertiaryContainer</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>A tonal color to be used in containers.</p>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Extension functions</h2>
+        <div class="api-item"><a name="-androidx.compose.material3.ColorScheme-.contentColorFor-androidx.compose.ui.graphics.Color-"></a><a name="contentcolorfor"></a>
+          <h3 class="api-name" id="(androidx.compose.material3.ColorScheme).contentColorFor(androidx.compose.ui.graphics.Color)">contentColorFor</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html">ColorScheme</a>.<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#(androidx.compose.material3.ColorScheme).contentColorFor(androidx.compose.ui.graphics.Color)">contentColorFor</a>(backgroundColor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>The Material color system contains pairs of colors that are typically used for the background and content color inside a component. For example, a <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#Button(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.graphics.Shape,androidx.compose.material3.ButtonColors,androidx.compose.material3.ButtonElevation,androidx.compose.foundation.BorderStroke,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function1)">Button</a></code> typically uses <code>primary</code> for its background, and <code>onPrimary</code> for the color of its content (usually text or iconography).</p>
+          <p>This function tries to match the provided <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.material3.ColorScheme).contentColorFor(androidx.compose.ui.graphics.Color)">backgroundColor</a></code> to a 'background' color in this <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html">ColorScheme</a></code>, and then will return the corresponding color used for content. For example, when <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.material3.ColorScheme).contentColorFor(androidx.compose.ui.graphics.Color)">backgroundColor</a></code> is <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#primary()">ColorScheme.primary</a></code>, this will return <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#onPrimary()">ColorScheme.onPrimary</a></code>.</p>
+          <p>If <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.material3.ColorScheme).contentColorFor(androidx.compose.ui.graphics.Color)">backgroundColor</a></code> does not match a background color in the theme, this will return <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#Unspecified()">Color.Unspecified</a></code>.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Returns</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+                  <td>
+                    <p>the matching content color for <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.material3.ColorScheme).contentColorFor(androidx.compose.ui.graphics.Color)">backgroundColor</a></code>. If <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.material3.ColorScheme).contentColorFor(androidx.compose.ui.graphics.Color)">backgroundColor</a></code> is not present in the theme's <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html">ColorScheme</a></code>, then returns <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#Unspecified()">Color.Unspecified</a></code>.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.material3.ColorScheme).contentColorFor(androidx.compose.ui.graphics.Color)">contentColorFor</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="-androidx.compose.material3.ColorScheme-.surfaceColorAtElevation-androidx.compose.ui.unit.Dp-"></a><a name="surfacecoloratelevation"></a>
+          <h3 class="api-name" id="(androidx.compose.material3.ColorScheme).surfaceColorAtElevation(androidx.compose.ui.unit.Dp)">surfaceColorAtElevation</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html">ColorScheme</a>.<a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#(androidx.compose.material3.ColorScheme).surfaceColorAtElevation(androidx.compose.ui.unit.Dp)">surfaceColorAtElevation</a>(elevation:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></pre>
+          <p>Computes the surface tonal color at different elevation levels e.g. surface1 through surface5.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>elevation:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+                  <td>
+                    <p>Elevation value used to compute alpha of the color overlay layer.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Returns</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
+                  <td>
+                    <p>the <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#surface()">ColorScheme.surface</a></code> color with an alpha of the <code><a href="/reference/kotlin/androidx/compose/material3/ColorScheme.html#surfaceTint()">ColorScheme.surfaceTint</a></code> color overlaid on top of it.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </devsite-filter >
   </body>
 </html>

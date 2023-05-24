@@ -6,56 +6,186 @@
   </head>
   <body>
     <div id="metadata-info-block">
-      <div id="source-link"><a href="https://cs.android.com/search?q=file:-text/androidx/compose/ui/text/style/TextMotion.kt+class:androidx.compose.ui.text.style.TextMotion&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/text/style/TextMotion.+class:androidx.compose.ui.text.style.TextMotion&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>TextMotion</h1>
-    <p>
-      <pre>@<a href="/reference/kotlin/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>class <a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html">TextMotion</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>@<a href="/reference/kotlin/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>class <a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html">TextMotion</a></pre>
+          </li>
+          <li>
+            <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+            <!--platform-Android/JVM-->
+            <pre>class <a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html">TextMotion</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <hr>
     <p>Defines ways to render and place glyphs to provide readability and smooth animations for text.</p>
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.material.Text
+import androidx.compose.ui.graphics.graphicsLayer
+
+val infiniteTransition = rememberInfiniteTransition()
+val scale by infiniteTransition.animateFloat(
+    initialValue = 1f,
+    targetValue = 8f,
+    animationSpec = infiniteRepeatable(tween(1000), RepeatMode.Reverse)
+)
+
+Text(
+    text = &quot;Hello&quot;,
+    modifier = Modifier
+        .graphicsLayer {
+            scaleX = scale
+            scaleY = scale
+            transformOrigin = TransformOrigin.Center
+        },
+    // Text composable does not take TextMotion as a parameter.
+    // Provide it via style argument but make sure that we are copying from current theme
+    style = LocalTextStyle.current.copy(textMotion = TextMotion.Animated)
+)</pre>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public companion properties</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html">TextMotion</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html#Animated()">Animated</a></code></div>
-              <p>Text is rendered for maximum linearity which provides smooth animations for text.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html">TextMotion</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html#Static()">Static</a></code></div>
-              <p>Optimizes glyph shaping, placement, and overall rendering for maximum readability.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public companion properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html">TextMotion</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html#Animated()">Animated</a></code></div>
+                <p>Text is rendered for maximum linearity which provides smooth animations for text.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All-->
+                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+                <!--platform-Android/JVM--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html">TextMotion</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html#Static()">Static</a></code></div>
+                <p>Optimizes glyph shaping, placement, and overall rendering for maximum readability.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All-->
+                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+                <!--platform-Android/JVM--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
-    <div class="list">
-      <h2>Public companion properties</h2>
-      <div class="api-item"><a name="getAnimated()"></a><a name="setAnimated()"></a><a name="getAnimated--"></a><a name="setAnimated--"></a>
-        <h3 class="api-name" id="Animated()">Animated</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html#Animated()">Animated</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html">TextMotion</a></pre>
-        <p>Text is rendered for maximum linearity which provides smooth animations for text. Trade-off is the readability of the text on some low DPI devices, which still should not be a major concern. Use this <code><a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html">TextMotion</a></code> if you are planning to scale, translate, or rotate text.</p>
-      </div>
-      <div class="api-item"><a name="getStatic()"></a><a name="setStatic()"></a><a name="getStatic--"></a><a name="setStatic--"></a>
-        <h3 class="api-name" id="Static()">Static</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html#Static()">Static</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html">TextMotion</a></pre>
-        <p>Optimizes glyph shaping, placement, and overall rendering for maximum readability. Intended for text that is not animated. This is the default <code><a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html">TextMotion</a></code>.</p>
-      </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>open&nbsp;operator <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html#equals(kotlin.Any)">equals</a>(other:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?)</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+                <!--platform-Android/JVM--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html#hashCode()">hashCode</a>()</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+                <!--platform-Android/JVM--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html#toString()">toString</a>()</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+                <!--platform-Android/JVM--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public companion properties</h2>
+        <div class="api-item"><a name="getAnimated()"></a><a name="setAnimated()"></a><a name="getAnimated--"></a><a name="setAnimated--"></a>
+          <h3 class="api-name" id="Animated()">Animated</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All--><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+          <!--platform-Android/JVM-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html#Animated()">Animated</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html">TextMotion</a></pre>
+          <p>Text is rendered for maximum linearity which provides smooth animations for text. Trade-off is the readability of the text on some low DPI devices, which still should not be a major concern. Use this <code><a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html">TextMotion</a></code> if you are planning to scale, translate, or rotate text.</p>
+        </div>
+        <div class="api-item"><a name="getStatic()"></a><a name="setStatic()"></a><a name="getStatic--"></a><a name="setStatic--"></a>
+          <h3 class="api-name" id="Static()">Static</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All--><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+          <!--platform-Android/JVM-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html#Static()">Static</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html">TextMotion</a></pre>
+          <p>Optimizes glyph shaping, placement, and overall rendering for maximum readability. Intended for text that is not animated. This is the default <code><a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html">TextMotion</a></code>.</p>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="equals-kotlin.Any-"></a><a name="equals"></a>
+          <h3 class="api-name" id="equals(kotlin.Any)">equals</h3>
+<span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+          <!--platform-Android/JVM-->
+          <pre class="api-signature no-pretty-print">open&nbsp;operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html#equals(kotlin.Any)">equals</a>(other:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        </div>
+        <div class="api-item"><a name="hashCode--"></a><a name="hashcode"></a>
+          <h3 class="api-name" id="hashCode()">hashCode</h3>
+<span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+          <!--platform-Android/JVM-->
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html#hashCode()">hashCode</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        </div>
+        <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+          <h3 class="api-name" id="toString()">toString</h3>
+<span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+          <!--platform-Android/JVM-->
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/style/TextMotion.html#toString()">toString</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></pre>
+        </div>
+      </div>
+    </devsite-filter >
   </body>
 </html>

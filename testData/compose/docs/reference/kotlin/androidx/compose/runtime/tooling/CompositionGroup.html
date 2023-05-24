@@ -9,75 +9,108 @@
       <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/runtime/tooling/CompositionData.kt+class:androidx.compose.runtime.tooling.CompositionGroup&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>CompositionGroup</h1>
-    <p>
-      <pre>interface <a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html">CompositionGroup</a> : <a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionData.html">CompositionData</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>@<a href="/reference/kotlin/androidx/compose/runtime/internal/JvmDefaultWithCompatibility.html">JvmDefaultWithCompatibility</a><br>interface <a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html">CompositionGroup</a> : <a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionData.html">CompositionData</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <hr>
     <p><code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html">CompositionGroup</a></code> is a group of data slots tracked independently by composition. These groups correspond to flow control branches (such as if statements and function calls) as well as emitting of a node to the tree.</p>
     <p>This interface is not intended to be used directly and is provided to allow the tools API to have access to data tracked during composition. The tools API should be used instead which provides a more usable interpretation of the slot table.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public properties</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html">Iterable</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#data()">data</a></code></div>
-              <p>The data stored in the slot table for this group.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#groupSize()">groupSize</a></code></div>
-              <p>The total number of groups, including itself, that this group contains.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#identity()">identity</a></code></div>
-              <p>A value that identifies a Group independently of movement caused by recompositions.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#key()">key</a></code></div>
-              <p>A value used to identify the group within its siblings and is typically a compiler generated integer but can be an object if the <code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#key()">key</a></code> composable is used.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#node()">node</a></code></div>
-              <p>If the group represents a node this returns a non-null value which is the node that was emitted for the group.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#slotsSize()">slotsSize</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#sourceInfo()">sourceInfo</a></code></div>
-              <p>Information recorded by the compiler to help tooling identify the source that generated the group.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html">Iterable</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#data()">data</a></code></div>
+                <p>The data stored in the slot table for this group.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#groupSize()">groupSize</a></code></div>
+                <p>The total number of groups, including itself, that this group contains.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#identity()">identity</a></code></div>
+                <p>A value that identifies a Group independently of movement caused by recompositions.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#key()">key</a></code></div>
+                <p>A value used to identify the group within its siblings and is typically a compiler generated integer but can be an object if the <code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#key()">key</a></code> composable is used.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#node()">node</a></code></div>
+                <p>If the group represents a node this returns a non-null value which is the node that was emitted for the group.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#slotsSize()">slotsSize</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#sourceInfo()">sourceInfo</a></code></div>
+                <p>Information recorded by the compiler to help tooling identify the source that generated the group.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive" id="inhmethods">
@@ -90,21 +123,27 @@
           <tr>
             <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionData.html">androidx.compose.runtime.tooling.CompositionData</a></span>
               <div class="devsite-table-wrapper">
-                <table class="responsive">
-                  <colgroup>
-                    <col width="40%">
-                    <col>
-                  </colgroup>
-                  <tbody class="list">
-                    <tr>
-                      <td><code>open <a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html">CompositionGroup</a>?</code></td>
-                      <td>
-                        <div><code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionData.html#find(kotlin.Any)">find</a>(identityToFind:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)</code></div>
-                        <p>Find a sub-group by identity.</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html">CompositionGroup</a>?</code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionData.html#find(kotlin.Any)">find</a>(identityToFind:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)</code></div>
+                          <p>Find a sub-group by identity.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
               </div>
 </devsite-expandable>            </td>
           </tr>
@@ -122,70 +161,95 @@
           <tr>
             <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionData.html">androidx.compose.runtime.tooling.CompositionData</a></span>
               <div class="devsite-table-wrapper">
-                <table class="responsive">
-                  <colgroup>
-                    <col width="40%">
-                    <col>
-                  </colgroup>
-                  <tbody class="list">
-                    <tr>
-                      <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html">Iterable</a>&lt;<a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html">CompositionGroup</a>&gt;</code></td>
-                      <td>
-                        <div><code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionData.html#compositionGroups()">compositionGroups</a></code></div>
-                        <p>Iterate the composition data in the group.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-                      <td>
-                        <div><code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionData.html#isEmpty()">isEmpty</a></code></div>
-                        <p>Returns true if no composition data has been collected.</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html">Iterable</a>&lt;<a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html">CompositionGroup</a>&gt;</code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionData.html#compositionGroups()">compositionGroups</a></code></div>
+                          <p>Iterate the composition data in the group.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionData.html#isEmpty()">isEmpty</a></code></div>
+                          <p>Returns true if no composition data has been collected.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
               </div>
 </devsite-expandable>            </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="list">
-      <h2>Public properties</h2>
-      <div class="api-item"><a name="getData()"></a><a name="setData()"></a><a name="getData--"></a><a name="setData--"></a>
-        <h3 class="api-name" id="data()">data</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#data()">data</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html">Iterable</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</pre>
-        <p>The data stored in the slot table for this group. This information includes the values stored for parameters that are checked for change, any value passed as a parameter for <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">androidx.compose.runtime.remember</a></code> and the last value returned by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">androidx.compose.runtime.remember</a></code>, etc.</p>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getData()"></a><a name="setData()"></a><a name="getData--"></a><a name="setData--"></a>
+          <h3 class="api-name" id="data()">data</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#data()">data</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html">Iterable</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</pre>
+          <p>The data stored in the slot table for this group. This information includes the values stored for parameters that are checked for change, any value passed as a parameter for <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">androidx.compose.runtime.remember</a></code> and the last value returned by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">androidx.compose.runtime.remember</a></code>, etc.</p>
+        </div>
+        <div class="api-item"><a name="getGroupSize()"></a><a name="setGroupSize()"></a><a name="getGroupSize--"></a><a name="setGroupSize--"></a>
+          <h3 class="api-name" id="groupSize()">groupSize</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#groupSize()">groupSize</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The total number of groups, including itself, that this group contains.</p>
+        </div>
+        <div class="api-item"><a name="getIdentity()"></a><a name="setIdentity()"></a><a name="getIdentity--"></a><a name="setIdentity--"></a>
+          <h3 class="api-name" id="identity()">identity</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#identity()">identity</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?</pre>
+          <p>A value that identifies a Group independently of movement caused by recompositions.</p>
+        </div>
+        <div class="api-item"><a name="getKey()"></a><a name="setKey()"></a><a name="getKey--"></a><a name="setKey--"></a>
+          <h3 class="api-name" id="key()">key</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#key()">key</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a></pre>
+          <p>A value used to identify the group within its siblings and is typically a compiler generated integer but can be an object if the <code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#key()">key</a></code> composable is used.</p>
+        </div>
+        <div class="api-item"><a name="getNode()"></a><a name="setNode()"></a><a name="getNode--"></a><a name="setNode--"></a>
+          <h3 class="api-name" id="node()">node</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#node()">node</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?</pre>
+          <p>If the group represents a node this returns a non-null value which is the node that was emitted for the group.</p>
+        </div>
+        <div class="api-item"><a name="getSlotsSize()"></a><a name="setSlotsSize()"></a><a name="getSlotsSize--"></a><a name="setSlotsSize--"></a>
+          <h3 class="api-name" id="slotsSize()">slotsSize</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#slotsSize()">slotsSize</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        </div>
+        <div class="api-item"><a name="getSourceInfo()"></a><a name="setSourceInfo()"></a><a name="getSourceInfo--"></a><a name="setSourceInfo--"></a>
+          <h3 class="api-name" id="sourceInfo()">sourceInfo</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#sourceInfo()">sourceInfo</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?</pre>
+          <p>Information recorded by the compiler to help tooling identify the source that generated the group. The format of this string is internal and is interpreted by the tools API which translates this information into source file name and offsets.</p>
+        </div>
       </div>
-      <div class="api-item"><a name="getGroupSize()"></a><a name="setGroupSize()"></a><a name="getGroupSize--"></a><a name="setGroupSize--"></a>
-        <h3 class="api-name" id="groupSize()">groupSize</h3>
-        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#groupSize()">groupSize</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
-        <p>The total number of groups, including itself, that this group contains.</p>
-      </div>
-      <div class="api-item"><a name="getIdentity()"></a><a name="setIdentity()"></a><a name="getIdentity--"></a><a name="setIdentity--"></a>
-        <h3 class="api-name" id="identity()">identity</h3>
-        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#identity()">identity</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?</pre>
-        <p>A value that identifies a Group independently of movement caused by recompositions.</p>
-      </div>
-      <div class="api-item"><a name="getKey()"></a><a name="setKey()"></a><a name="getKey--"></a><a name="setKey--"></a>
-        <h3 class="api-name" id="key()">key</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#key()">key</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a></pre>
-        <p>A value used to identify the group within its siblings and is typically a compiler generated integer but can be an object if the <code><a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#key()">key</a></code> composable is used.</p>
-      </div>
-      <div class="api-item"><a name="getNode()"></a><a name="setNode()"></a><a name="getNode--"></a><a name="setNode--"></a>
-        <h3 class="api-name" id="node()">node</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#node()">node</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?</pre>
-        <p>If the group represents a node this returns a non-null value which is the node that was emitted for the group.</p>
-      </div>
-      <div class="api-item"><a name="getSlotsSize()"></a><a name="setSlotsSize()"></a><a name="getSlotsSize--"></a><a name="setSlotsSize--"></a>
-        <h3 class="api-name" id="slotsSize()">slotsSize</h3>
-        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#slotsSize()">slotsSize</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
-      </div>
-      <div class="api-item"><a name="getSourceInfo()"></a><a name="setSourceInfo()"></a><a name="getSourceInfo--"></a><a name="setSourceInfo--"></a>
-        <h3 class="api-name" id="sourceInfo()">sourceInfo</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/tooling/CompositionGroup.html#sourceInfo()">sourceInfo</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?</pre>
-        <p>Information recorded by the compiler to help tooling identify the source that generated the group. The format of this string is internal and is interpreted by the tools API which translates this information into source file name and offsets.</p>
-      </div>
-    </div>
+    </devsite-filter >
   </body>
 </html>

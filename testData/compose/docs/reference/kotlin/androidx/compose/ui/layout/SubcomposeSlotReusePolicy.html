@@ -9,9 +9,18 @@
       <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/layout/SubcomposeLayout.kt+class:androidx.compose.ui.layout.SubcomposeSlotReusePolicy&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>SubcomposeSlotReusePolicy</h1>
-    <p>
-      <pre>interface <a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.html">SubcomposeSlotReusePolicy</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>interface <a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.html">SubcomposeSlotReusePolicy</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <hr>
     <p>This policy allows <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#SubcomposeLayout(androidx.compose.ui.Modifier,kotlin.Function2)">SubcomposeLayout</a></code> to retain some of slots which we were used but not used anymore instead of disposing them. Next time when you try to compose a new slot instead of creating a completely new slot the layout would reuse the kept slot. This allows to do less work especially if the slot contents are similar.</p>
     <h2>Summary</h2>
@@ -37,46 +46,61 @@
       </table>
     </div>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public functions</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.html#areCompatible(kotlin.Any,kotlin.Any)">areCompatible</a>(slotId:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;reusableSlotId:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?)</code></div>
-              <p>Returns true if the content previously composed with <code><a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.html#areCompatible(kotlin.Any,kotlin.Any)">reusableSlotId</a></code> is compatible with the content which is going to be composed for <code><a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.html#areCompatible(kotlin.Any,kotlin.Any)">slotId</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.html#getSlotsToRetain(androidx.compose.ui.layout.SubcomposeSlotReusePolicy.SlotIdsSet)">getSlotsToRetain</a>(slotIds:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.SlotIdsSet.html">SubcomposeSlotReusePolicy.SlotIdsSet</a>)</code></div>
-              <p>This function will be called with <code><a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.html#getSlotsToRetain(androidx.compose.ui.layout.SubcomposeSlotReusePolicy.SlotIdsSet)">slotIds</a></code> set populated with the slot ids available to reuse.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.html#areCompatible(kotlin.Any,kotlin.Any)">areCompatible</a>(slotId:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;reusableSlotId:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?)</code></div>
+                <p>Returns true if the content previously composed with <code><a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.html#areCompatible(kotlin.Any,kotlin.Any)">reusableSlotId</a></code> is compatible with the content which is going to be composed for <code><a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.html#areCompatible(kotlin.Any,kotlin.Any)">slotId</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.html#getSlotsToRetain(androidx.compose.ui.layout.SubcomposeSlotReusePolicy.SlotIdsSet)">getSlotsToRetain</a>(slotIds:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.SlotIdsSet.html">SubcomposeSlotReusePolicy.SlotIdsSet</a>)</code></div>
+                <p>This function will be called with <code><a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.html#getSlotsToRetain(androidx.compose.ui.layout.SubcomposeSlotReusePolicy.SlotIdsSet)">slotIds</a></code> set populated with the slot ids available to reuse.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
-    <div class="list">
-      <h2>Public functions</h2>
-      <div class="api-item"><a name="areCompatible(kotlin.Any, kotlin.Any)"></a><a name="areCompatible-kotlin.Any-kotlin.Any-"></a><a name="arecompatible"></a>
-        <h3 class="api-name" id="areCompatible(kotlin.Any,kotlin.Any)">areCompatible</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.html#areCompatible(kotlin.Any,kotlin.Any)">areCompatible</a>(slotId:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;reusableSlotId:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
-        <p>Returns true if the content previously composed with <code><a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.html#areCompatible(kotlin.Any,kotlin.Any)">reusableSlotId</a></code> is compatible with the content which is going to be composed for <code><a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.html#areCompatible(kotlin.Any,kotlin.Any)">slotId</a></code>. Slots could be considered incompatible if they display completely different types of the UI.</p>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="areCompatible(kotlin.Any, kotlin.Any)"></a><a name="areCompatible-kotlin.Any-kotlin.Any-"></a><a name="arecompatible"></a>
+          <h3 class="api-name" id="areCompatible(kotlin.Any,kotlin.Any)">areCompatible</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.html#areCompatible(kotlin.Any,kotlin.Any)">areCompatible</a>(slotId:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;reusableSlotId:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>Returns true if the content previously composed with <code><a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.html#areCompatible(kotlin.Any,kotlin.Any)">reusableSlotId</a></code> is compatible with the content which is going to be composed for <code><a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.html#areCompatible(kotlin.Any,kotlin.Any)">slotId</a></code>. Slots could be considered incompatible if they display completely different types of the UI.</p>
+        </div>
+        <div class="api-item"><a name="getSlotsToRetain-androidx.compose.ui.layout.SubcomposeSlotReusePolicy.SlotIdsSet-"></a><a name="getslotstoretain"></a>
+          <h3 class="api-name" id="getSlotsToRetain(androidx.compose.ui.layout.SubcomposeSlotReusePolicy.SlotIdsSet)">getSlotsToRetain</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.html#getSlotsToRetain(androidx.compose.ui.layout.SubcomposeSlotReusePolicy.SlotIdsSet)">getSlotsToRetain</a>(slotIds:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.SlotIdsSet.html">SubcomposeSlotReusePolicy.SlotIdsSet</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>This function will be called with <code><a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.html#getSlotsToRetain(androidx.compose.ui.layout.SubcomposeSlotReusePolicy.SlotIdsSet)">slotIds</a></code> set populated with the slot ids available to reuse. In the implementation you can remove slots you don't want to retain.</p>
+        </div>
       </div>
-      <div class="api-item"><a name="getSlotsToRetain-androidx.compose.ui.layout.SubcomposeSlotReusePolicy.SlotIdsSet-"></a><a name="getslotstoretain"></a>
-        <h3 class="api-name" id="getSlotsToRetain(androidx.compose.ui.layout.SubcomposeSlotReusePolicy.SlotIdsSet)">getSlotsToRetain</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.html#getSlotsToRetain(androidx.compose.ui.layout.SubcomposeSlotReusePolicy.SlotIdsSet)">getSlotsToRetain</a>(slotIds:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.SlotIdsSet.html">SubcomposeSlotReusePolicy.SlotIdsSet</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>This function will be called with <code><a href="/reference/kotlin/androidx/compose/ui/layout/SubcomposeSlotReusePolicy.html#getSlotsToRetain(androidx.compose.ui.layout.SubcomposeSlotReusePolicy.SlotIdsSet)">slotIds</a></code> set populated with the slot ids available to reuse. In the implementation you can remove slots you don't want to retain.</p>
-      </div>
-    </div>
+    </devsite-filter >
   </body>
 </html>

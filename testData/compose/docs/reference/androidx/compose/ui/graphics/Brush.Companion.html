@@ -6,7 +6,7 @@
   </head>
   <body>
     <div id="metadata-info-block">
-      <div id="source-link"><a href="https://cs.android.com/search?q=file:-graphics/androidx/compose/ui/graphics/Brush.kt+class:androidx.compose.ui.graphics.Brush.Companion&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/graphics/Brush.kt+class:androidx.compose.ui.graphics.Brush.Companion&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>Brush.Companion</h1>
     <p>
@@ -107,6 +107,13 @@
         <p>Creates a horizontal gradient with the given colors dispersed at the provided offset defined in the colorstop pair.</p>
         <p>Ex:</p>
         <pre class="prettyprint"> Brush.horizontalGradient(<br>     0.0f to Color.Red,<br>     0.3f to Color.Green,<br>     1.0f to Color.Blue,<br>     startX = 0.0f,<br>     endX = 100.0f<br>)</pre>
+        <pre class="prettyprint lang-kotlin">Brush.horizontalGradient(
+    0.0f to Color.Red,
+    0.3f to Color.Green,
+    1.0f to Color.Blue,
+    startX = 0.0f,
+    endX = 100.0f
+)</pre>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -186,6 +193,11 @@ Column(modifier = Modifier.fillMaxSize().wrapContentSize()) {
         <p>Creates a horizontal gradient with the given colors evenly dispersed within the gradient</p>
         <p>Ex:</p>
         <pre class="prettyprint"> Brush.horizontalGradient(<br>     listOf(Color.Red, Color.Green, Color.Blue),<br>     startX = 10.0f,<br>     endX = 20.0f<br>)</pre>
+        <pre class="prettyprint lang-kotlin">Brush.horizontalGradient(
+    listOf(Color.Red, Color.Green, Color.Blue),
+    startX = 10.0f,
+    endX = 20.0f
+)</pre>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -264,6 +276,49 @@ Column(modifier = Modifier.fillMaxSize().wrapContentSize()) {
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Brush.html">Brush</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/Brush.Companion.html#linearGradient(kotlin.Array,androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,androidx.compose.ui.graphics.TileMode)">linearGradient</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&gt;&nbsp;colorStops,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;start,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;end,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/TileMode.html">TileMode</a>&nbsp;tileMode<br>)</pre>
         <p>Creates a linear gradient with the provided colors along the given start and end coordinates. The colors are dispersed at the provided offset defined in the colorstop pair.</p>
         <pre class="prettyprint"> Brush.linearGradient(<br>     0.0f to Color.Red,<br>     0.3f to Color.Green,<br>     1.0f to Color.Blue,<br>     start = Offset(0.0f, 50.0f),<br>     end = Offset(0.0f, 100.0f)<br>)</pre>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.geometry.Offset
+
+Brush.linearGradient(
+    0.0f to Color.Red,
+    0.3f to Color.Green,
+    1.0f to Color.Blue,
+    start = Offset(0.0f, 50.0f),
+    end = Offset(0.0f, 100.0f)
+)</pre>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
+
+Column(modifier = Modifier.fillMaxSize().wrapContentSize()) {
+
+    // Create a linear gradient that shows red in the top left corner
+    // and blue in the bottom right corner
+    val linear = Brush.linearGradient(listOf(Color.Red, Color.Blue))
+
+    Box(modifier = Modifier.size(120.dp).background(linear))
+
+    Spacer(modifier = Modifier.size(20.dp))
+
+    // Create a radial gradient centered about the drawing area that is green on
+    // the outer
+    // edge of the circle and magenta towards the center of the circle
+    val radial = Brush.radialGradient(listOf(Color.Green, Color.Magenta))
+    Box(modifier = Modifier.size(120.dp).background(radial))
+
+    Spacer(modifier = Modifier.size(20.dp))
+
+    // Create a radial gradient centered about the drawing area that is green on
+    // the outer
+    // edge of the circle and magenta towards the center of the circle
+    val sweep = Brush.sweepGradient(listOf(Color.Cyan, Color.Magenta))
+    Box(modifier = Modifier.size(120.dp).background(sweep))
+}</pre>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -303,31 +358,20 @@ Column(modifier = Modifier.fillMaxSize().wrapContentSize()) {
             </tbody>
           </table>
         </div>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/androidx/compose/ui/graphics/samples/GradientBrushSample.html">GradientBrushSample</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
       </div>
       <div class="api-item"><a name="linearGradient(kotlin.collections.List, androidx.compose.ui.geometry.Offset, androidx.compose.ui.geometry.Offset, androidx.compose.ui.graphics.TileMode)"></a><a name="linearGradient-kotlin.collections.List-androidx.compose.ui.geometry.Offset-androidx.compose.ui.geometry.Offset-androidx.compose.ui.graphics.TileMode-"></a><a name="lineargradient"></a>
         <h3 class="api-name" id="linearGradient(kotlin.collections.List,androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,androidx.compose.ui.graphics.TileMode)">linearGradient</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Brush.html">Brush</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/Brush.Companion.html#linearGradient(kotlin.collections.List,androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,androidx.compose.ui.graphics.TileMode)">linearGradient</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&gt;&nbsp;colors,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;start,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;end,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/TileMode.html">TileMode</a>&nbsp;tileMode<br>)</pre>
         <p>Creates a linear gradient with the provided colors along the given start and end coordinates. The colors are</p>
-        <pre class="prettyprint"> Brush.linearGradient(<br>     listOf(Color.Red, Color.Green, Color.Blue),<br>     start = Offset(0.0f, 50.0f)<br>     end = Offset(0.0f, 100.0f)<br>)</pre>
+        <pre class="prettyprint"> Brush.linearGradient(<br>     listOf(Color.Red, Color.Green, Color.Blue),<br>     start = Offset(0.0f, 50.0f),<br>     end = Offset(0.0f, 100.0f)<br>)</pre>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.geometry.Offset
+
+Brush.linearGradient(
+    listOf(Color.Red, Color.Green, Color.Blue),
+    start = Offset(0.0f, 50.0f),
+    end = Offset(0.0f, 100.0f)
+)</pre>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -407,6 +451,19 @@ Column(modifier = Modifier.fillMaxSize().wrapContentSize()) {
         <p>Creates a radial gradient with the given colors at the provided offset defined in the colorstop pair.</p>
         <pre class="prettyprint">Brush.radialGradient(<br>     0.0f to Color.Red,<br>     0.3f to Color.Green,<br>     1.0f to Color.Blue,<br>     center = Offset(side1 / 2.0f, side2 / 2.0f),<br>     radius = side1 / 2.0f,<br>     tileMode = TileMode.Repeated<br>)</pre>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.geometry.Offset
+
+val side1 = 100
+val side2 = 200
+Brush.radialGradient(
+    0.0f to Color.Red,
+    0.3f to Color.Green,
+    1.0f to Color.Blue,
+    center = Offset(side1 / 2.0f, side2 / 2.0f),
+    radius = side1 / 2.0f,
+    tileMode = TileMode.Repeated
+)</pre>
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -483,7 +540,18 @@ Column(modifier = Modifier.fillMaxSize().wrapContentSize()) {
         <h3 class="api-name" id="radialGradient(kotlin.collections.List,androidx.compose.ui.geometry.Offset,kotlin.Float,androidx.compose.ui.graphics.TileMode)">radialGradient</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Brush.html">Brush</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/Brush.Companion.html#radialGradient(kotlin.collections.List,androidx.compose.ui.geometry.Offset,kotlin.Float,androidx.compose.ui.graphics.TileMode)">radialGradient</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&gt;&nbsp;colors,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;center,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;radius,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/TileMode.html">TileMode</a>&nbsp;tileMode<br>)</pre>
         <p>Creates a radial gradient with the given colors evenly dispersed within the gradient</p>
-        <pre class="prettyprint">Brush.radialGradient(<br>     listOf(Color.Red, Color.Green, Color.Blue),<br>     centerX = side1 / 2.0f,<br>     centerY = side2 / 2.0f,<br>     radius = side1 / 2.0f,<br>     tileMode = TileMode.Repeated<br>)</pre>
+        <pre class="prettyprint">Brush.radialGradient(<br>     listOf(Color.Red, Color.Green, Color.Blue),<br>     center = Offset(side1 / 2.0f, side2 / 2.0f),<br>     radius = side1 / 2.0f,<br>     tileMode = TileMode.Repeated<br>)</pre>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.geometry.Offset
+
+val side1 = 100
+val side2 = 200
+Brush.radialGradient(
+    listOf(Color.Red, Color.Green, Color.Blue),
+    center = Offset(side1 / 2.0f, side2 / 2.0f),
+    radius = side1 / 2.0f,
+    tileMode = TileMode.Repeated
+)</pre>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -564,6 +632,15 @@ Column(modifier = Modifier.fillMaxSize().wrapContentSize()) {
         <p>Ex:</p>
         <pre class="prettyprint"> Brush.sweepGradient(<br>     0.0f to Color.Red,<br>     0.3f to Color.Green,<br>     1.0f to Color.Blue,<br>     center = Offset(0.0f, 100.0f)<br>)</pre>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.geometry.Offset
+
+Brush.sweepGradient(
+    0.0f to Color.Red,
+    0.3f to Color.Green,
+    1.0f to Color.Blue,
+    center = Offset(0.0f, 100.0f)
+)</pre>
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -631,6 +708,13 @@ Column(modifier = Modifier.fillMaxSize().wrapContentSize()) {
         <p>Ex:</p>
         <pre class="prettyprint"> Brush.sweepGradient(<br>     listOf(Color.Red, Color.Green, Color.Blue),<br>     center = Offset(10.0f, 20.0f)<br>)</pre>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.geometry.Offset
+
+Brush.sweepGradient(
+    listOf(Color.Red, Color.Green, Color.Blue),
+    center = Offset(10.0f, 20.0f)
+)</pre>
+        <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -697,6 +781,13 @@ Column(modifier = Modifier.fillMaxSize().wrapContentSize()) {
         <p>Creates a vertical gradient with the given colors at the provided offset defined in the Pair<Float, Color></p>
         <p>Ex:</p>
         <pre class="prettyprint"> Brush.verticalGradient(<br>     0.1f to Color.Red,<br>     0.3f to Color.Green,<br>     0.5f to Color.Blue,<br>     startY = 0.0f,<br>     endY = 100.0f<br>)</pre>
+        <pre class="prettyprint lang-kotlin">Brush.verticalGradient(
+    0.1f to Color.Red,
+    0.3f to Color.Green,
+    0.5f to Color.Blue,
+    startY = 0.0f,
+    endY = 100.0f
+)</pre>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -775,6 +866,11 @@ Column(modifier = Modifier.fillMaxSize().wrapContentSize()) {
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Brush.html">Brush</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/Brush.Companion.html#verticalGradient(kotlin.collections.List,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.TileMode)">verticalGradient</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&gt;&nbsp;colors,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;startY,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;endY,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/TileMode.html">TileMode</a>&nbsp;tileMode<br>)</pre>
         <p>Creates a vertical gradient with the given colors evenly dispersed within the gradient Ex:</p>
         <pre class="prettyprint"> Brush.verticalGradient(<br>     listOf(Color.Red, Color.Green, Color.Blue),<br>     startY = 0.0f,<br>     endY = 100.0f<br>)</pre>
+        <pre class="prettyprint lang-kotlin">Brush.verticalGradient(
+    listOf(Color.Red, Color.Green, Color.Blue),
+    startY = 0.0f,
+    endY = 100.0f
+)</pre>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

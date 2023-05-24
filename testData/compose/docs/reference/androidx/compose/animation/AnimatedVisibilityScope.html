@@ -10,8 +10,30 @@
     </div>
     <h1>AnimatedVisibilityScope</h1>
     <p>
-      <pre>public interface <a href="/reference/androidx/compose/animation/AnimatedVisibilityScope.html">AnimatedVisibilityScope</a></pre>
+      <pre>@<a href="/reference/androidx/compose/animation/internal/JvmDefaultWithCompatibility.html">JvmDefaultWithCompatibility</a><br>public interface <a href="/reference/androidx/compose/animation/AnimatedVisibilityScope.html">AnimatedVisibilityScope</a></pre>
     </p>
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
+        <div class="showalways" id="subclasses-direct"><a href="/reference/androidx/compose/animation/AnimatedContentScope.html">AnimatedContentScope</a></div>
+      </span>
+      <div id="subclasses-direct-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/animation/AnimatedContentScope.html">AnimatedContentScope</a></code></td>
+                <td>
+                  <p>Receiver scope for content lambda for AnimatedContent.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
     <hr>
     <p>This is the scope for the content of <code><a href="/reference/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String,kotlin.Function1)">AnimatedVisibility</a></code>. In this scope, direct and indirect children of <code><a href="/reference/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String,kotlin.Function1)">AnimatedVisibility</a></code> will be able to define their own enter/exit transitions using the built-in options via <code><a href="/reference/androidx/compose/animation/AnimatedVisibilityScope.html#(androidx.compose.ui.Modifier).animateEnterExit(androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String)">Modifier.animateEnterExit</a></code>. They will also be able define custom enter/exit animations using the <code><a href="/reference/androidx/compose/animation/AnimatedVisibilityScope.html#transition()">transition</a></code> object. <code><a href="/reference/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String,kotlin.Function1)">AnimatedVisibility</a></code> will ensure both custom and built-in enter/exit animations finish before it considers itself idle, and subsequently removes its content in the case of exit.</p>
     <p><b>Note:</b> Custom enter/exit animations that are created <em>independent</em> of the <code><a href="/reference/androidx/compose/animation/AnimatedVisibilityScope.html#transition()">AnimatedVisibilityScope.transition</a></code> will have no guarantee to finish when exiting, as <code><a href="/reference/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String,kotlin.Function1)">AnimatedVisibility</a></code> would have no visibility of such animations.</p>

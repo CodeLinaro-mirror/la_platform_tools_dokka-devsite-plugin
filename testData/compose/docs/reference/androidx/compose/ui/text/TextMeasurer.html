@@ -6,11 +6,11 @@
   </head>
   <body>
     <div id="metadata-info-block">
-      <div id="source-link"><a href="https://cs.android.com/search?q=file:-text/androidx/compose/ui/text/TextMeasurer.kt+class:androidx.compose.ui.text.TextMeasurer&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/text/TextMeasurer.kt+class:androidx.compose.ui.text.TextMeasurer&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>TextMeasurer</h1>
     <p>
-      <pre>@<a href="/reference/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>public final class <a href="/reference/androidx/compose/ui/text/TextMeasurer.html">TextMeasurer</a></pre>
+      <pre>public final class <a href="/reference/androidx/compose/ui/text/TextMeasurer.html">TextMeasurer</a></pre>
     </p>
     <hr>
     <p>TextMeasurer is responsible for measuring a text in its entirety so that it's ready to be drawn.</p>
@@ -125,6 +125,24 @@
         <p>Most parameters for text affect the final text layout. One pixel change in <code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html#measure(kotlin.String,androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,androidx.compose.ui.unit.Constraints,androidx.compose.ui.unit.LayoutDirection,androidx.compose.ui.unit.Density,androidx.compose.ui.text.font.FontFamily.Resolver,kotlin.Boolean)">constraints</a></code> boundaries can displace a word to another line which would cause a chain reaction that completely changes how text is rendered.</p>
         <p>On the other hand, some attributes only play a role when drawing the created text layout. For example text layout can be created completely in black color but we can apply <code><a href="/reference/androidx/compose/ui/text/TextStyle.html#color()">TextStyle.color</a></code> later in draw phase. This also means that animating text color shouldn't invalidate text layout.</p>
         <p>Thus, <code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html#textLayoutCache()">textLayoutCache</a></code> helps in the process of converting a set of text layout inputs to a text layout while ignoring non-layout-affecting attributes. Iterative calls that use the same input parameters should benefit from substantial performance improvements.</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.Constraints
+
+textMeasurer.measure(
+    text = &quot;Hello, World&quot;,
+    style = TextStyle(
+        color = Color.Red,
+        fontSize = 16.sp,
+        fontFamily = FontFamily.Cursive
+    ),
+    constraints = Constraints(
+        minWidth = 400,
+        maxWidth = 400,
+        minHeight = 200,
+        maxHeight = 400
+    )
+)</pre>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -209,6 +227,24 @@
         <p>Most parameters for text affect the final text layout. One pixel change in <code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html#measure(androidx.compose.ui.text.AnnotatedString,androidx.compose.ui.text.TextStyle,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,kotlin.collections.List,androidx.compose.ui.unit.Constraints,androidx.compose.ui.unit.LayoutDirection,androidx.compose.ui.unit.Density,androidx.compose.ui.text.font.FontFamily.Resolver,kotlin.Boolean)">constraints</a></code> boundaries can displace a word to another line which would cause a chain reaction that completely changes how text is rendered.</p>
         <p>On the other hand, some attributes only play a role when drawing the created text layout. For example text layout can be created completely in black color but we can apply <code><a href="/reference/androidx/compose/ui/text/TextStyle.html#color()">TextStyle.color</a></code> later in draw phase. This also means that animating text color shouldn't invalidate text layout.</p>
         <p>Thus, <code><a href="/reference/androidx/compose/ui/text/TextMeasurer.html#textLayoutCache()">textLayoutCache</a></code> helps in the process of converting a set of text layout inputs to a text layout while ignoring non-layout-affecting attributes. Iterative calls that use the same input parameters should benefit from substantial performance improvements.</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
+
+textMeasurer.measure(
+    text = buildAnnotatedString {
+        append(&quot;Hello, &quot;)
+        withStyle(SpanStyle(color = Color.Blue)) {
+            append(&quot;World!&quot;)
+        }
+    },
+    style = TextStyle(
+        fontSize = 16.sp,
+        fontFamily = FontFamily.Monospace
+    )
+)</pre>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>

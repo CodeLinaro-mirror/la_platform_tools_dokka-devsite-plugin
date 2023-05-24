@@ -13,7 +13,7 @@
       <pre>public fun interface <a href="/reference/androidx/compose/ui/layout/PinnableContainer.PinnedHandle.html">PinnableContainer.PinnedHandle</a></pre>
     </p>
     <hr>
-    <p>This is an object returned by <code><a href="/reference/androidx/compose/ui/layout/PinnableContainer.html#pin()">pin</a></code> which allows to unpin the content.</p>
+    <p>This is an object returned by <code><a href="/reference/androidx/compose/ui/layout/PinnableContainer.html#pin()">pin</a></code> which allows to release the pinning.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -30,8 +30,8 @@
           <tr>
             <td><code>abstract void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/layout/PinnableContainer.PinnedHandle.html#unpin()">unpin</a>()</code></div>
-              <p>Unpin the container associated with this handle.</p>
+              <div><code><a href="/reference/androidx/compose/ui/layout/PinnableContainer.PinnedHandle.html#release()">release</a>()</code></div>
+              <p>Releases the pin.</p>
             </td>
           </tr>
         </tbody>
@@ -39,10 +39,11 @@
     </div>
     <div class="list">
       <h2>Public methods</h2>
-      <div class="api-item"><a name="unpin--"></a><a name="unpin"></a>
-        <h3 class="api-name" id="unpin()">unpin</h3>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/layout/PinnableContainer.PinnedHandle.html#unpin()">unpin</a>()</pre>
-        <p>Unpin the container associated with this handle.</p>
+      <div class="api-item"><a name="release--"></a><a name="release"></a>
+        <h3 class="api-name" id="release()">release</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/layout/PinnableContainer.PinnedHandle.html#release()">release</a>()</pre>
+        <p>Releases the pin.</p>
+        <p>For example, if this <code><a href="/reference/androidx/compose/ui/layout/PinnableContainer.html">PinnableContainer</a></code> is an item of lazy list releasing the pinning will allow lazy list to stop composing the item when it is not visible.</p>
       </div>
     </div>
   </body>

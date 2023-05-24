@@ -9,106 +9,125 @@
       <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/platform/AccessibilityManager.kt+class:androidx.compose.ui.platform.AccessibilityManager&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>AccessibilityManager</h1>
-    <p>
-      <pre>interface <a href="/reference/kotlin/androidx/compose/ui/platform/AccessibilityManager.html">AccessibilityManager</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>@<a href="/reference/kotlin/androidx/compose/ui/internal/JvmDefaultWithCompatibility.html">JvmDefaultWithCompatibility</a><br>interface <a href="/reference/kotlin/androidx/compose/ui/platform/AccessibilityManager.html">AccessibilityManager</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <hr>
     <p>Interface for managing accessibility.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public functions</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/AccessibilityManager.html#calculateRecommendedTimeoutMillis(kotlin.Long,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">calculateRecommendedTimeoutMillis</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;originalTimeoutMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;containsIcons:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;containsText:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;containsControls:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><br>)</code></div>
-              <p>Calculate the recommended timeout for changes to the UI needed by this user.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/platform/AccessibilityManager.html#calculateRecommendedTimeoutMillis(kotlin.Long,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">calculateRecommendedTimeoutMillis</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;originalTimeoutMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;containsIcons:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;containsText:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;containsControls:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><br>)</code></div>
+                <p>Calculate the recommended timeout for changes to the UI needed by this user.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
-    <div class="list">
-      <h2>Public functions</h2>
-      <div class="api-item"><a name="calculateRecommendedTimeoutMillis(kotlin.Long, kotlin.Boolean, kotlin.Boolean, kotlin.Boolean)"></a><a name="calculateRecommendedTimeoutMillis-kotlin.Long-kotlin.Boolean-kotlin.Boolean-kotlin.Boolean-"></a><a name="calculaterecommendedtimeoutmillis"></a>
-        <h3 class="api-name" id="calculateRecommendedTimeoutMillis(kotlin.Long,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">calculateRecommendedTimeoutMillis</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/AccessibilityManager.html#calculateRecommendedTimeoutMillis(kotlin.Long,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">calculateRecommendedTimeoutMillis</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;originalTimeoutMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;containsIcons:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false,<br>&nbsp;&nbsp;&nbsp;&nbsp;containsText:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false,<br>&nbsp;&nbsp;&nbsp;&nbsp;containsControls:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></pre>
-        <p>Calculate the recommended timeout for changes to the UI needed by this user. Controls should remain on the screen for at least this long to give users time to react. Some users may need extra time to review the controls, or to reach them, or to activate assistive technology to activate the controls automatically.</p>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="calculateRecommendedTimeoutMillis(kotlin.Long, kotlin.Boolean, kotlin.Boolean, kotlin.Boolean)"></a><a name="calculateRecommendedTimeoutMillis-kotlin.Long-kotlin.Boolean-kotlin.Boolean-kotlin.Boolean-"></a><a name="calculaterecommendedtimeoutmillis"></a>
+          <h3 class="api-name" id="calculateRecommendedTimeoutMillis(kotlin.Long,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">calculateRecommendedTimeoutMillis</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/AccessibilityManager.html#calculateRecommendedTimeoutMillis(kotlin.Long,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">calculateRecommendedTimeoutMillis</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;originalTimeoutMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;containsIcons:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false,<br>&nbsp;&nbsp;&nbsp;&nbsp;containsText:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false,<br>&nbsp;&nbsp;&nbsp;&nbsp;containsControls:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></pre>
+          <p>Calculate the recommended timeout for changes to the UI needed by this user. Controls should remain on the screen for at least this long to give users time to react. Some users may need extra time to review the controls, or to reach them, or to activate assistive technology to activate the controls automatically.</p>
 <p>
 Use the boolean parameters to indicate contents of UI. For example, set [containsIcons]
 and [containsText] to true for message notification which contains icons and text, or set
 [containsText] and [containsControls] to true for button dialog which contains text and
 button controls.
-<p/>        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>originalTimeoutMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
-                <td>
-                  <p>The timeout appropriate for users with no accessibility needs in milliseconds.</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>containsIcons:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
-                <td>
-                  <p>The contents of UI contain icons.</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>containsText:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
-                <td>
-                  <p>The contents of UI contain text.</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>containsControls:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
-                <td>
-                  <p>The contents of UI contain controls.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Returns</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
-                <td>
-                  <p>The recommended UI timeout for the current user in milliseconds.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+<p/>          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>originalTimeoutMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
+                  <td>
+                    <p>The timeout appropriate for users with no accessibility needs in milliseconds.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>containsIcons:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+                  <td>
+                    <p>The contents of UI contain icons.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>containsText:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+                  <td>
+                    <p>The contents of UI contain text.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>containsControls:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+                  <td>
+                    <p>The contents of UI contain controls.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Returns</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
+                  <td>
+                    <p>The recommended UI timeout for the current user in milliseconds.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
+    </devsite-filter >
   </body>
 </html>

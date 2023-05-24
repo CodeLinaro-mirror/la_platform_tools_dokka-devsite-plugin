@@ -26,8 +26,22 @@
           <tr>
             <td><code>static&nbsp;final void</code></td>
             <td>
-              <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/node/DelegatableNodeKt.html#(androidx.compose.ui.node.DelegatableNode).invalidateSubtree()">invalidateSubtree</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;receiver)</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/node/DelegatableNodeKt.html#(androidx.compose.ui.node.DelegatableNode).invalidateSubtree()">invalidateSubtree</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;receiver)</code></div>
               <p>Invalidates the subtree of this layout, including layout, drawing, parent data, etc.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/node/DelegatableNodeKt.html#(androidx.compose.ui.node.DelegatableNode).requireDensity()">requireDensity</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;receiver)</code></div>
+              <p>Returns the current <code><a href="/reference/androidx/compose/ui/unit/Density.html">Density</a></code> of the LayoutNode that this <code><a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></code> is attached to.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/node/DelegatableNodeKt.html#(androidx.compose.ui.node.DelegatableNode).requireLayoutDirection()">requireLayoutDirection</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;receiver)</code></div>
+              <p>Returns the current <code><a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code> of the LayoutNode that this <code><a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></code> is attached to.</p>
             </td>
           </tr>
         </tbody>
@@ -37,9 +51,19 @@
       <h2>Public methods</h2>
       <div class="api-item"><a name="-androidx.compose.ui.node.DelegatableNode-.invalidateSubtree--"></a><a name="invalidatesubtree"></a>
         <h3 class="api-name" id="(androidx.compose.ui.node.DelegatableNode).invalidateSubtree()">invalidateSubtree</h3>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/node/DelegatableNodeKt.html#(androidx.compose.ui.node.DelegatableNode).invalidateSubtree()">invalidateSubtree</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;receiver)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/node/DelegatableNodeKt.html#(androidx.compose.ui.node.DelegatableNode).invalidateSubtree()">invalidateSubtree</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;receiver)</pre>
         <p>Invalidates the subtree of this layout, including layout, drawing, parent data, etc.</p>
         <p>Calling this method can be a relatively expensive operation as it will cause the entire subtree to relayout and redraw instead of just parts that are otherwise invalidated. Its use should be limited to structural changes.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.node.DelegatableNode-.requireDensity--"></a><a name="requiredensity"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.node.DelegatableNode).requireDensity()">requireDensity</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a>&nbsp;<a href="/reference/androidx/compose/ui/node/DelegatableNodeKt.html#(androidx.compose.ui.node.DelegatableNode).requireDensity()">requireDensity</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;receiver)</pre>
+        <p>Returns the current <code><a href="/reference/androidx/compose/ui/unit/Density.html">Density</a></code> of the LayoutNode that this <code><a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></code> is attached to. If the node is not attached, this function will throw an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.node.DelegatableNode-.requireLayoutDirection--"></a><a name="requirelayoutdirection"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.node.DelegatableNode).requireLayoutDirection()">requireLayoutDirection</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>&nbsp;<a href="/reference/androidx/compose/ui/node/DelegatableNodeKt.html#(androidx.compose.ui.node.DelegatableNode).requireLayoutDirection()">requireLayoutDirection</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;receiver)</pre>
+        <p>Returns the current <code><a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code> of the LayoutNode that this <code><a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></code> is attached to. If the node is not attached, this function will throw an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code>.</p>
       </div>
     </div>
   </body>

@@ -9,11 +9,20 @@
       <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/runtime/SnapshotState.kt+class:androidx.compose.runtime.MutableState&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>MutableState</h1>
-    <p>
-      <pre>interface <a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; : <a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>interface <a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; : <a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
-        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html">ProduceStateScope</a>, <a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotMutableState.html">SnapshotMutableState</a></div>
+        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/runtime/MutableDoubleState.html">MutableDoubleState</a>, <a href="/reference/kotlin/androidx/compose/runtime/MutableFloatState.html">MutableFloatState</a>, <a href="/reference/kotlin/androidx/compose/runtime/MutableIntState.html">MutableIntState</a>, <a href="/reference/kotlin/androidx/compose/runtime/MutableLongState.html">MutableLongState</a>, <a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html">ProduceStateScope</a>, <a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotMutableState.html">SnapshotMutableState</a></div>
       </span>
       <div id="subclasses-direct-summary">
         <div class="devsite-table-wrapper">
@@ -23,6 +32,30 @@
               <col>
             </colgroup>
             <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/runtime/MutableDoubleState.html">MutableDoubleState</a></code></td>
+                <td>
+                  <p>A value holder where reads to the <code><a href="/reference/kotlin/androidx/compose/runtime/MutableDoubleState.html#doubleValue()">doubleValue</a></code> property during the execution of a <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function cause the current <code><a href="/reference/kotlin/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> to subscribe to changes of that value.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/runtime/MutableFloatState.html">MutableFloatState</a></code></td>
+                <td>
+                  <p>A value holder where reads to the <code><a href="/reference/kotlin/androidx/compose/runtime/MutableFloatState.html#floatValue()">floatValue</a></code> property during the execution of a <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function cause the current <code><a href="/reference/kotlin/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> to subscribe to changes of that value.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/runtime/MutableIntState.html">MutableIntState</a></code></td>
+                <td>
+                  <p>A value holder where reads to the <code><a href="/reference/kotlin/androidx/compose/runtime/MutableIntState.html#intValue()">intValue</a></code> property during the execution of a <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function cause the current <code><a href="/reference/kotlin/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> to subscribe to changes of that value.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/runtime/MutableLongState.html">MutableLongState</a></code></td>
+                <td>
+                  <p>A value holder where reads to the <code><a href="/reference/kotlin/androidx/compose/runtime/MutableLongState.html#longValue()">longValue</a></code> property during the execution of a <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function cause the current <code><a href="/reference/kotlin/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> to subscribe to changes of that value.</p>
+                </td>
+              </tr>
               <tr>
                 <td><code><a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html">ProduceStateScope</a></code></td>
                 <td>
@@ -67,100 +100,134 @@
     </div>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public functions</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>operator T</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#component1()">component1</a>()</code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code>operator (T) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#component2()">component2</a>()</code></div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>operator T</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#component1()">component1</a>()</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>operator (T) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#component2()">component2</a>()</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public properties</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>T</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#value()">value</a></code></div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>T</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#value()">value</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Extension functions</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>inline&nbsp;operator <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#(androidx.compose.runtime.MutableState).setValue(kotlin.Any,kotlin.reflect.KProperty,kotlin.Any)">setValue</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;thisObj:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;property:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property/index.html">KProperty</a>&lt;*&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;T<br>)</code></div>
-              <p>Permits property delegation of <code>var</code>s using <code>by</code> for <code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a></code>.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Extension functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>inline&nbsp;operator <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#(androidx.compose.runtime.MutableState).setValue(kotlin.Any,kotlin.reflect.KProperty,kotlin.Any)">setValue</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;thisObj:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;property:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property/index.html">KProperty</a>&lt;*&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;T<br>)</code></div>
+                <p>Permits property delegation of <code>var</code>s using <code>by</code> for <code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
-    <div class="list">
-      <h2>Public functions</h2>
-      <div class="api-item"><a name="component1--"></a><a name="component1"></a>
-        <h3 class="api-name" id="component1()">component1</h3>
-        <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#component1()">component1</a>():&nbsp;T</pre>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="component1--"></a><a name="component1"></a>
+          <h3 class="api-name" id="component1()">component1</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#component1()">component1</a>():&nbsp;T</pre>
+        </div>
+        <div class="api-item"><a name="component2--"></a><a name="component2"></a>
+          <h3 class="api-name" id="component2()">component2</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#component2()">component2</a>():&nbsp;(T) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        </div>
       </div>
-      <div class="api-item"><a name="component2--"></a><a name="component2"></a>
-        <h3 class="api-name" id="component2()">component2</h3>
-        <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#component2()">component2</a>():&nbsp;(T) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getValue()"></a><a name="setValue()"></a><a name="getValue--"></a><a name="setValue--"></a>
+          <h3 class="api-name" id="value()">value</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">var&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#value()">value</a>:&nbsp;T</pre>
+        </div>
       </div>
-    </div>
-    <div class="list">
-      <h2>Public properties</h2>
-      <div class="api-item"><a name="getValue()"></a><a name="setValue()"></a><a name="getValue--"></a><a name="setValue--"></a>
-        <h3 class="api-name" id="value()">value</h3>
-        <pre class="api-signature no-pretty-print">var&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#value()">value</a>:&nbsp;T</pre>
-      </div>
-    </div>
-    <div class="list">
-      <h2>Extension functions</h2>
-      <div class="api-item"><a name="(androidx.compose.runtime.MutableState).setValue(kotlin.Any, kotlin.reflect.KProperty, kotlin.Any)"></a><a name="-androidx.compose.runtime.MutableState-.setValue-kotlin.Any-kotlin.reflect.KProperty-kotlin.Any-"></a><a name="setvalue"></a>
-        <h3 class="api-name" id="(androidx.compose.runtime.MutableState).setValue(kotlin.Any,kotlin.reflect.KProperty,kotlin.Any)">setValue</h3>
-        <pre class="api-signature no-pretty-print">inline&nbsp;operator&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#(androidx.compose.runtime.MutableState).setValue(kotlin.Any,kotlin.reflect.KProperty,kotlin.Any)">setValue</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;thisObj:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;property:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property/index.html">KProperty</a>&lt;*&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;T<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Permits property delegation of <code>var</code>s using <code>by</code> for <code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a></code>.</p>
-        <pre class="prettyprint lang-kotlin">
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Extension functions</h2>
+        <div class="api-item"><a name="(androidx.compose.runtime.MutableState).setValue(kotlin.Any, kotlin.reflect.KProperty, kotlin.Any)"></a><a name="-androidx.compose.runtime.MutableState-.setValue-kotlin.Any-kotlin.reflect.KProperty-kotlin.Any-"></a><a name="setvalue"></a>
+          <h3 class="api-name" id="(androidx.compose.runtime.MutableState).setValue(kotlin.Any,kotlin.reflect.KProperty,kotlin.Any)">setValue</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">inline&nbsp;operator&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#(androidx.compose.runtime.MutableState).setValue(kotlin.Any,kotlin.reflect.KProperty,kotlin.Any)">setValue</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;thisObj:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;property:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property/index.html">KProperty</a>&lt;*&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;T<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Permits property delegation of <code>var</code>s using <code>by</code> for <code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a></code>.</p>
+          <pre class="prettyprint lang-kotlin">
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
@@ -172,7 +239,8 @@ Text(text = &quot;You clicked $count times&quot;)
 Button(onClick = { count = count + 1 }) {
     Text(&quot;Click me&quot;)
 }</pre>
+        </div>
       </div>
-    </div>
+    </devsite-filter >
   </body>
 </html>

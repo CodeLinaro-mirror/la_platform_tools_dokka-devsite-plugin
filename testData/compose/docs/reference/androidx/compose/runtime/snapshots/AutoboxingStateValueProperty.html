@@ -1,0 +1,78 @@
+<html devsite="true">
+  <head>
+    <title>AutoboxingStateValueProperty</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/runtime/snapshots/AutoboxingStateValueProperty.kt+class:androidx.compose.runtime.snapshots.AutoboxingStateValueProperty&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>AutoboxingStateValueProperty</h1>
+    <p>
+      <pre>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-retention/index.html">Retention</a>(value&nbsp;=&nbsp;AnnotationRetention.BINARY)<br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-target/index.html">Target</a>(allowedTargets&nbsp;=&nbsp;[AnnotationTarget.PROPERTY])<br>public annotation <a href="/reference/androidx/compose/runtime/snapshots/AutoboxingStateValueProperty.html">AutoboxingStateValueProperty</a></pre>
+    </p>
+    <hr>
+    <p>This annotation designates that a property on a State class will autobox when it is read from or assigned to. This is helpful for state APIs like IntState, which define an alternative value property that does not box while maintaining compatibility with the generic State API.</p>
+    <p>Whenever a property that is annotated with <code>AutoboxingStateValueProperty</code> is accessed in code, it will be flagged with a warning and will suggest using an alternative, non-boxing property instead.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/snapshots/AutoboxingStateValueProperty.html#AutoboxingStateValueProperty(kotlin.String)">AutoboxingStateValueProperty</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;preferredPropertyName)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/snapshots/AutoboxingStateValueProperty.html#getPreferredPropertyName()">getPreferredPropertyName</a>()</code></div>
+              <p>An alternative, non-boxing property that can be used instead of the annotated property.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="AutoboxingStateValueProperty-kotlin.String-"></a><a name="autoboxingstatevalueproperty"></a>
+        <h3 class="api-name" id="AutoboxingStateValueProperty(kotlin.String)">AutoboxingStateValueProperty</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/AutoboxingStateValueProperty.html#AutoboxingStateValueProperty(kotlin.String)">AutoboxingStateValueProperty</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;preferredPropertyName)</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="getPreferredPropertyName--"></a><a name="getpreferredpropertyname"></a>
+        <h3 class="api-name" id="getPreferredPropertyName()">getPreferredPropertyName</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/AutoboxingStateValueProperty.html#getPreferredPropertyName()">getPreferredPropertyName</a>()</pre>
+        <p>An alternative, non-boxing property that can be used instead of the annotated property. The property indicated in this property should contain the exact same value as the annotated property and should be observed in Compose in the same way, meaning that the designated replacement property can serve as a drop-in replacement to the annotated property.</p>
+        <p>This property name will be used for suggesting quick fixes. It must match the suggested property name exactly, including its case.</p>
+      </div>
+    </div>
+  </body>
+</html>

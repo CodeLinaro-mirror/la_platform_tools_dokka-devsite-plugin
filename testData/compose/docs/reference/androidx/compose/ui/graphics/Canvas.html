@@ -6,11 +6,11 @@
   </head>
   <body>
     <div id="metadata-info-block">
-      <div id="source-link"><a href="https://cs.android.com/search?q=file:-graphics/androidx/compose/ui/graphics/Canvas.kt+class:androidx.compose.ui.graphics.Canvas&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/graphics/Canvas.kt+class:androidx.compose.ui.graphics.Canvas&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>Canvas</h1>
     <p>
-      <pre>public interface <a href="/reference/androidx/compose/ui/graphics/Canvas.html">Canvas</a></pre>
+      <pre>@<a href="/reference/androidx/compose/ui/graphics/internal/JvmDefaultWithCompatibility.html">JvmDefaultWithCompatibility</a><br>public interface <a href="/reference/androidx/compose/ui/graphics/Canvas.html">Canvas</a></pre>
     </p>
     <hr>
     <h2>Summary</h2>
@@ -251,14 +251,7 @@
         </thead>
         <tbody class="list">
           <tr>
-            <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/graphics/Canvas.html">Canvas</a></code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/graphics/AndroidCanvasKt.html">AndroidCanvasKt</a>.<a href="/reference/androidx/compose/ui/graphics/Canvas.html#(androidx.compose.ui.graphics.Canvas).getNativeCanvas()">getNativeCanvas</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Canvas.html">Canvas</a>&nbsp;receiver)</code></div>
-              <p>Return an instance of the native primitive that implements the Canvas interface</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/graphics/Canvas.html">Canvas</a></code></td>
+            <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/NativeCanvas.html">NativeCanvas</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/graphics/CanvasKt.html">CanvasKt</a>.<a href="/reference/androidx/compose/ui/graphics/Canvas.html#(androidx.compose.ui.graphics.Canvas).getNativeCanvas()">getNativeCanvas</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Canvas.html">Canvas</a>&nbsp;receiver)</code></div>
               <p>Return an instance of the native primitive that implements the Canvas interface</p>
@@ -363,6 +356,12 @@
                   <p>Bottom bound of the clip region</p>
                 </td>
               </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/ClipOp.html">ClipOp</a>&nbsp;clipOp</code></td>
+                <td>
+                  <p>Clipping operation to conduct on the given bounds, defaults to <code><a href="/reference/androidx/compose/ui/graphics/ClipOp.Companion.html#Intersect()">ClipOp.Intersect</a></code></p>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -458,7 +457,13 @@
               <tr>
                 <td><code>boolean&nbsp;useCenter</code></td>
                 <td>
-                  <p>Flag indicating whether or not to include the center of the oval in the arc, and close it if it is being stroked. This will draw a wedge.</p>
+                  <p>Flag indicating whether or not to include the center of the oval in the</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Paint.html">Paint</a>&nbsp;paint</code></td>
+                <td>
+                  <p>Paint used to draw the arc. arc, and close it if it is being stroked. This will draw a wedge.</p>
                 </td>
               </tr>
             </tbody>
@@ -836,13 +841,8 @@
     <div class="list">
       <h2>Extension functions</h2>
       <div class="api-item"><a name="-androidx.compose.ui.graphics.Canvas-.getNativeCanvas--"></a><a name="getnativecanvas"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.graphics.Canvas).getNativeCanvas()">AndroidCanvasKt.getNativeCanvas</h3>
-        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/graphics/Canvas.html">Canvas</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/AndroidCanvasKt.html">AndroidCanvasKt</a>.<a href="/reference/androidx/compose/ui/graphics/Canvas.html#(androidx.compose.ui.graphics.Canvas).getNativeCanvas()">getNativeCanvas</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Canvas.html">Canvas</a>&nbsp;receiver)</pre>
-        <p>Return an instance of the native primitive that implements the Canvas interface</p>
-      </div>
-      <div class="api-item"><a name="-androidx.compose.ui.graphics.Canvas-.getNativeCanvas--"></a><a name="getnativecanvas"></a>
         <h3 class="api-name" id="(androidx.compose.ui.graphics.Canvas).getNativeCanvas()">CanvasKt.getNativeCanvas</h3>
-        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/graphics/Canvas.html">Canvas</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/CanvasKt.html">CanvasKt</a>.<a href="/reference/androidx/compose/ui/graphics/Canvas.html#(androidx.compose.ui.graphics.Canvas).getNativeCanvas()">getNativeCanvas</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Canvas.html">Canvas</a>&nbsp;receiver)</pre>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/NativeCanvas.html">NativeCanvas</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/CanvasKt.html">CanvasKt</a>.<a href="/reference/androidx/compose/ui/graphics/Canvas.html#(androidx.compose.ui.graphics.Canvas).getNativeCanvas()">getNativeCanvas</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Canvas.html">Canvas</a>&nbsp;receiver)</pre>
         <p>Return an instance of the native primitive that implements the Canvas interface</p>
       </div>
       <div class="api-item"><a name="(androidx.compose.ui.graphics.Canvas).rotate(kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="-androidx.compose.ui.graphics.Canvas-.rotate-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="rotate"></a>

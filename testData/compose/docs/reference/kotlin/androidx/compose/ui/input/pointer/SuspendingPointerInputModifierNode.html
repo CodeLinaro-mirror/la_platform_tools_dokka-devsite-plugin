@@ -1,0 +1,235 @@
+<html devsite="true">
+  <head>
+    <title>SuspendingPointerInputModifierNode</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/input/pointer/SuspendingPointerInputFilter.kt+class:androidx.compose.ui.input.pointer.SuspendingPointerInputModifierNode&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>SuspendingPointerInputModifierNode</h1>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>interface <a href="/reference/kotlin/androidx/compose/ui/input/pointer/SuspendingPointerInputModifierNode.html">SuspendingPointerInputModifierNode</a> : <a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
+    <hr>
+    <p>Extends <code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a></code> with a handler to execute asynchronously when an event occurs and a function to reset that handler (cancels the existing coroutine and essentially resets the handler's execution). Note: The handler still executes lazily, meaning nothing will be done until a new event comes in.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/SuspendingPointerInputModifierNode.html#resetPointerInputHandler()">resetPointerInputHandler</a>()</code></div>
+                <p>Resets the underlying coroutine used to run the handler for input pointer events.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>suspend&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputScope.html">PointerInputScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/SuspendingPointerInputModifierNode.html#pointerInputHandler()">pointerInputHandler</a></code></div>
+                <p>Handler for pointer input events.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html">androidx.compose.ui.node.PointerInputModifierNode</a></span>
+              <div class="devsite-table-wrapper">
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html#interceptOutOfBoundsChildEvents()">interceptOutOfBoundsChildEvents</a>()</code></div>
+                          <p>Intercept pointer input that children receive even if the pointer is out of bounds.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html#onCancelPointerInput()">onCancelPointerInput</a>()</code></div>
+                          <p>Invoked to notify the handler that no more calls to <code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a></code> will be made, until at least new pointers exist.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html#onDensityChange()">onDensityChange</a>()</code></div>
+                          <p>Invoked when the density (pixels per inch for the screen) changes.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html#onPointerEvent(androidx.compose.ui.input.pointer.PointerEvent,androidx.compose.ui.input.pointer.PointerEventPass,androidx.compose.ui.unit.IntSize)">onPointerEvent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;pointerEvent:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEvent.html">PointerEvent</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;pass:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerEventPass.html">PointerEventPass</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;bounds:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a><br>)</code></div>
+                          <p>Invoked when pointers that previously hit this <code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a></code> have changed.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html#onViewConfigurationChange()">onViewConfigurationChange</a>()</code></div>
+                          <p>Invoked when the view configuration (touch slop size, minimum touch target, tap timing) changes which means the composable UI the pointer input block is tied to has changed and the new UI might impact the location of pointer input events (x and y).</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html#sharePointerInputWithSiblings()">sharePointerInputWithSiblings</a>()</code></div>
+                          <p>If <code>false</code>, then this <code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a></code> will not allow siblings under it to respond to events.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">androidx.compose.ui.node.DelegatableNode</a></span>
+              <div class="devsite-table-wrapper">
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html#node()">node</a></code></div>
+                          <p>A reference of the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that holds this node's position in the node hierarchy.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="resetPointerInputHandler--"></a><a name="resetpointerinputhandler"></a>
+          <h3 class="api-name" id="resetPointerInputHandler()">resetPointerInputHandler</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/SuspendingPointerInputModifierNode.html#resetPointerInputHandler()">resetPointerInputHandler</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Resets the underlying coroutine used to run the handler for input pointer events. This should be called whenever a large change has been made that forces the gesture detection to be completely invalid.</p>
+          <p>For example, if <code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/SuspendingPointerInputModifierNode.html#pointerInputHandler()">pointerInputHandler</a></code> has different modes for detecting a gesture (long press, double click, etc.), and by switching the modes, any currently-running gestures are no longer valid.</p>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getPointerInputHandler()"></a><a name="setPointerInputHandler()"></a><a name="getPointerInputHandler--"></a><a name="setPointerInputHandler--"></a>
+          <h3 class="api-name" id="pointerInputHandler()">pointerInputHandler</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">var&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/SuspendingPointerInputModifierNode.html#pointerInputHandler()">pointerInputHandler</a>:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/pointer/PointerInputScope.html">PointerInputScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Handler for pointer input events. When changed, any previously executing pointerInputHandler will be canceled.</p>
+        </div>
+      </div>
+    </devsite-filter >
+  </body>
+</html>

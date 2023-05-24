@@ -10,7 +10,7 @@
     </div>
     <h1>SemanticsModifierNode</h1>
     <p>
-      <pre>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public interface <a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html">SemanticsModifierNode</a> extends <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></pre>
+      <pre>public interface <a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html">SemanticsModifierNode</a> extends <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></pre>
     </p>
     <hr>
     <p>A <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that adds semantics key/value for use in testing, accessibility, and similar use cases.</p>
@@ -29,10 +29,24 @@
         </thead>
         <tbody class="list">
           <tr>
-            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html">SemanticsConfiguration</a></code></td>
+            <td><code>abstract void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html#getSemanticsConfiguration()">getSemanticsConfiguration</a>()</code></div>
-              <p>The SemanticsConfiguration holds substantive data, especially a list of key/value pairs such as (label -> &quot;buttonName&quot;).</p>
+              <div><code><a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).applySemantics()">applySemantics</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyReceiver.html">SemanticsPropertyReceiver</a>&nbsp;receiver)</code></div>
+              <p>Add semantics key/value pairs to the layout node, for use in testing, accessibility, etc.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html#getShouldClearDescendantSemantics()">getShouldClearDescendantSemantics</a>()</code></div>
+              <p>Clears the semantics of all the descendant nodes and sets new semantics.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html#getShouldMergeDescendantSemantics()">getShouldMergeDescendantSemantics</a>()</code></div>
+              <p>Whether the semantic information provided by this node and its descendants should be treated as one logical entity.</p>
             </td>
           </tr>
         </tbody>
@@ -51,15 +65,9 @@
         </thead>
         <tbody class="list">
           <tr>
-            <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html">SemanticsConfiguration</a></code></td>
-            <td>
-              <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/node/SemanticsModifierNodeKt.html">SemanticsModifierNodeKt</a>.<a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html#(androidx.compose.ui.node.SemanticsModifierNode).collapsedSemanticsConfiguration()">collapsedSemanticsConfiguration</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html">SemanticsModifierNode</a>&nbsp;receiver<br>)</code></div>
-            </td>
-          </tr>
-          <tr>
             <td><code>default&nbsp;final void</code></td>
             <td>
-              <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/node/SemanticsModifierNodeKt.html">SemanticsModifierNodeKt</a>.<a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html#(androidx.compose.ui.node.SemanticsModifierNode).invalidateSemantics()">invalidateSemantics</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html">SemanticsModifierNode</a>&nbsp;receiver<br>)</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/node/SemanticsModifierNodeKt.html">SemanticsModifierNodeKt</a>.<a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html#(androidx.compose.ui.node.SemanticsModifierNode).invalidateSemantics()">invalidateSemantics</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html">SemanticsModifierNode</a>&nbsp;receiver<br>)</code></div>
             </td>
           </tr>
         </tbody>
@@ -99,21 +107,33 @@
     </div>
     <div class="list">
       <h2>Public methods</h2>
-      <div class="api-item"><a name="getSemanticsConfiguration--"></a><a name="getsemanticsconfiguration"></a>
-        <h3 class="api-name" id="getSemanticsConfiguration()">getSemanticsConfiguration</h3>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html">SemanticsConfiguration</a>&nbsp;<a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html#getSemanticsConfiguration()">getSemanticsConfiguration</a>()</pre>
-        <p>The SemanticsConfiguration holds substantive data, especially a list of key/value pairs such as (label -> &quot;buttonName&quot;).</p>
+      <div class="api-item"><a name="-androidx.compose.ui.semantics.SemanticsPropertyReceiver-.applySemantics--"></a><a name="applysemantics"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.semantics.SemanticsPropertyReceiver).applySemantics()">applySemantics</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).applySemantics()">applySemantics</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyReceiver.html">SemanticsPropertyReceiver</a>&nbsp;receiver)</pre>
+        <p>Add semantics key/value pairs to the layout node, for use in testing, accessibility, etc.</p>
+        <p>The <code><a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyReceiver.html">SemanticsPropertyReceiver</a></code> provides &quot;key = value&quot;-style setters for any <code><a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a></code>. Additionally, chaining multiple semantics modifiers is also a supported style.</p>
+        <p>The resulting semantics produce two <code><a href="/reference/androidx/compose/ui/semantics/SemanticsNode.html">SemanticsNode</a></code> trees:</p>
+        <p>The &quot;unmerged tree&quot; rooted at <code><a href="/reference/androidx/compose/ui/semantics/SemanticsOwner.html#unmergedRootSemanticsNode()">SemanticsOwner.unmergedRootSemanticsNode</a></code> has one <code><a href="/reference/androidx/compose/ui/semantics/SemanticsNode.html">SemanticsNode</a></code> per layout node which has any <code><a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html">SemanticsModifierNode</a></code> on it.  This <code><a href="/reference/androidx/compose/ui/semantics/SemanticsNode.html">SemanticsNode</a></code> contains all the properties set in all the <code><a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html">SemanticsModifierNode</a></code>s on that node.</p>
+        <p>The &quot;merged tree&quot; rooted at <code><a href="/reference/androidx/compose/ui/semantics/SemanticsOwner.html#rootSemanticsNode()">SemanticsOwner.rootSemanticsNode</a></code> has equal-or-fewer nodes: it simplifies the structure based on <code><a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html#shouldMergeDescendantSemantics()">shouldMergeDescendantSemantics</a></code> and <code><a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html#shouldClearDescendantSemantics()">shouldClearDescendantSemantics</a></code>.  For most purposes (especially accessibility, or the testing of accessibility), the merged semantics tree should be used.</p>
+      </div>
+      <div class="api-item"><a name="getShouldClearDescendantSemantics--"></a><a name="getshouldcleardescendantsemantics"></a>
+        <h3 class="api-name" id="getShouldClearDescendantSemantics()">getShouldClearDescendantSemantics</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html#getShouldClearDescendantSemantics()">getShouldClearDescendantSemantics</a>()</pre>
+        <p>Clears the semantics of all the descendant nodes and sets new semantics.</p>
+        <p>In the merged semantics tree, this clears the semantic information provided by the node's descendants (but not those of the layout node itself, if any) In the unmerged tree, the semantics node is marked with &quot;<code><a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#isClearingSemantics()">SemanticsConfiguration.isClearingSemantics</a></code>&quot;, but nothing is actually cleared.</p>
+        <p>Compose's default semantics provide baseline usability for screen-readers, but this can be used to provide a more polished screen-reader experience: for example, clearing the semantics of a group of tiny buttons, and setting equivalent actions on the card containing them.</p>
+      </div>
+      <div class="api-item"><a name="getShouldMergeDescendantSemantics--"></a><a name="getshouldmergedescendantsemantics"></a>
+        <h3 class="api-name" id="getShouldMergeDescendantSemantics()">getShouldMergeDescendantSemantics</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html#getShouldMergeDescendantSemantics()">getShouldMergeDescendantSemantics</a>()</pre>
+        <p>Whether the semantic information provided by this node and its descendants should be treated as one logical entity. Most commonly set on screen-reader-focusable items such as buttons or form fields. In the merged semantics tree, all descendant nodes (except those themselves marked <code><a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html#shouldMergeDescendantSemantics()">shouldMergeDescendantSemantics</a></code>) will disappear from the tree, and their properties will get merged into the parent's configuration (using a merging algorithm that varies based on the type of property -- for example, text properties will get concatenated, separated by commas). In the unmerged semantics tree, the node is simply marked with <code><a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html#isMergingSemanticsOfDescendants()">SemanticsConfiguration.isMergingSemanticsOfDescendants</a></code>.</p>
       </div>
     </div>
     <div class="list">
       <h2>Extension functions</h2>
-      <div class="api-item"><a name="-androidx.compose.ui.node.SemanticsModifierNode-.collapsedSemanticsConfiguration--"></a><a name="collapsedsemanticsconfiguration"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.node.SemanticsModifierNode).collapsedSemanticsConfiguration()">SemanticsModifierNodeKt.collapsedSemanticsConfiguration</h3>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsConfiguration.html">SemanticsConfiguration</a>&nbsp;<a href="/reference/androidx/compose/ui/node/SemanticsModifierNodeKt.html">SemanticsModifierNodeKt</a>.<a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html#(androidx.compose.ui.node.SemanticsModifierNode).collapsedSemanticsConfiguration()">collapsedSemanticsConfiguration</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html">SemanticsModifierNode</a>&nbsp;receiver<br>)</pre>
-      </div>
       <div class="api-item"><a name="-androidx.compose.ui.node.SemanticsModifierNode-.invalidateSemantics--"></a><a name="invalidatesemantics"></a>
         <h3 class="api-name" id="(androidx.compose.ui.node.SemanticsModifierNode).invalidateSemantics()">SemanticsModifierNodeKt.invalidateSemantics</h3>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/node/SemanticsModifierNodeKt.html">SemanticsModifierNodeKt</a>.<a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html#(androidx.compose.ui.node.SemanticsModifierNode).invalidateSemantics()">invalidateSemantics</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html">SemanticsModifierNode</a>&nbsp;receiver<br>)</pre>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/node/SemanticsModifierNodeKt.html">SemanticsModifierNodeKt</a>.<a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html#(androidx.compose.ui.node.SemanticsModifierNode).invalidateSemantics()">invalidateSemantics</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/SemanticsModifierNode.html">SemanticsModifierNode</a>&nbsp;receiver<br>)</pre>
       </div>
     </div>
   </body>

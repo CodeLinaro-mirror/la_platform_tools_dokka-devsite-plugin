@@ -10,30 +10,8 @@
     </div>
     <h1>LayoutModifierNode</h1>
     <p>
-      <pre>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public interface <a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a> extends <a href="/reference/androidx/compose/ui/layout/Remeasurement.html">Remeasurement</a>, <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></pre>
+      <pre>public interface <a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a> extends <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></pre>
     </p>
-    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
-        <div class="showalways" id="subclasses-direct"><a href="/reference/androidx/compose/ui/node/IntermediateLayoutModifierNode.html">IntermediateLayoutModifierNode</a></div>
-      </span>
-      <div id="subclasses-direct-summary">
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/androidx/compose/ui/node/IntermediateLayoutModifierNode.html">IntermediateLayoutModifierNode</a></code></td>
-                <td>
-                  <p>IntermediateLayoutModifier is a <code><a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a></code> that will be skipped when looking ahead.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-</devsite-expandable>    </div>
     <hr>
     <p>A <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that changes how its wrapped content is measured and laid out. It has the same measurement and layout functionality as the <code><a href="/reference/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">androidx.compose.ui.layout.Layout</a></code> component, while wrapping exactly one layout due to it being a modifier. In contrast, the <code><a href="/reference/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">androidx.compose.ui.layout.Layout</a></code> component is used to define the layout behavior of multiple children.</p>
     <p>This is the <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">androidx.compose.ui.Modifier.Node</a></code> equivalent of <code><a href="/reference/androidx/compose/ui/layout/LayoutModifier.html">androidx.compose.ui.layout.LayoutModifier</a></code></p>
@@ -42,7 +20,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.layout.layout
-import androidx.compose.ui.node.modifierElementOf
 import androidx.compose.ui.unit.offset
 
 class VerticalPadding(var padding: Dp) : LayoutModifierNode, Modifier.Node() {
@@ -57,15 +34,19 @@ class VerticalPadding(var padding: Dp) : LayoutModifierNode, Modifier.Node() {
         }
     }
 }
-fun Modifier.verticalPadding(padding: Dp) = this then modifierElementOf(
-    key = padding,
-    create = { VerticalPadding(padding) },
-    update = { it.padding = padding },
-    definitions = {
+data class VerticalPaddingElement(
+    val padding: Dp
+) : ModifierNodeElement&lt;VerticalPadding&gt;() {
+    override fun create() = VerticalPadding(padding)
+    override fun update(node: VerticalPadding) {
+        node.padding = padding
+    }
+    override fun InspectorInfo.inspectableProperties() {
         name = &quot;verticalPadding&quot;
         properties[&quot;padding&quot;] = padding
     }
-)
+}
+fun Modifier.verticalPadding(padding: Dp) = this then VerticalPaddingElement(padding)
 Box(Modifier.background(Color.Gray).verticalPadding(50.dp)) {
     Box(Modifier.fillMaxSize().background(Color.DarkGray))
 }</pre>
@@ -101,13 +82,6 @@ Box(Modifier.background(Color.Gray).verticalPadding(50.dp)) {
           </tr>
         </thead>
         <tbody class="list">
-          <tr>
-            <td><code>default void</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html#forceRemeasure()">forceRemeasure</a>()</code></div>
-              <p>Performs the node remeasuring synchronously even if the node was not marked as needs remeasure before.</p>
-            </td>
-          </tr>
           <tr>
             <td><code>default int</code></td>
             <td>
@@ -161,22 +135,29 @@ Box(Modifier.background(Color.Gray).verticalPadding(50.dp)) {
           <tr>
             <td><code>default&nbsp;final void</code></td>
             <td>
-              <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/node/LayoutModifierNodeKt.html">LayoutModifierNodeKt</a>.<a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html#(androidx.compose.ui.node.LayoutModifierNode).invalidateLayer()">invalidateLayer</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a>&nbsp;receiver<br>)</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/node/LayoutModifierNodeKt.html">LayoutModifierNodeKt</a>.<a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html#(androidx.compose.ui.node.LayoutModifierNode).invalidateLayer()">invalidateLayer</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a>&nbsp;receiver<br>)</code></div>
               <p>This will invalidate the current node's layer, and ensure that the layer is redrawn for the next frame.</p>
             </td>
           </tr>
           <tr>
             <td><code>default&nbsp;final void</code></td>
             <td>
-              <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/node/LayoutModifierNodeKt.html">LayoutModifierNodeKt</a>.<a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html#(androidx.compose.ui.node.LayoutModifierNode).invalidateLayout()">invalidateLayout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a>&nbsp;receiver<br>)</code></div>
-              <p>This will invalidate the current node's layout pass, and ensure that relayout of this node will happen for the next frame.</p>
+              <div><code><a href="/reference/androidx/compose/ui/node/LayoutModifierNodeKt.html">LayoutModifierNodeKt</a>.<a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html#(androidx.compose.ui.node.LayoutModifierNode).invalidateMeasurement()">invalidateMeasurement</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a>&nbsp;receiver<br>)</code></div>
+              <p>This invalidates the current node's measure result, and ensures that a re-measurement (the measurement block rerun) of this node will happen for the next frame.</p>
             </td>
           </tr>
           <tr>
             <td><code>default&nbsp;final void</code></td>
             <td>
-              <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/node/LayoutModifierNodeKt.html">LayoutModifierNodeKt</a>.<a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html#(androidx.compose.ui.node.LayoutModifierNode).invalidateMeasurements()">invalidateMeasurements</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a>&nbsp;receiver<br>)</code></div>
-              <p>This invalidates the current node's measure result, and ensures that a remeasurement of this node will happen for the next frame.</p>
+              <div><code><a href="/reference/androidx/compose/ui/node/LayoutModifierNodeKt.html">LayoutModifierNodeKt</a>.<a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html#(androidx.compose.ui.node.LayoutModifierNode).invalidatePlacement()">invalidatePlacement</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a>&nbsp;receiver<br>)</code></div>
+              <p>This will invalidate the current node's placement result, and ensure that relayout (the placement block rerun) of this node will happen for the next frame .</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/node/LayoutModifierNodeKt.html">LayoutModifierNodeKt</a>.<a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html#(androidx.compose.ui.node.LayoutModifierNode).remeasureSync()">remeasureSync</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a>&nbsp;receiver<br>)</code></div>
+              <p>Performs the node remeasuring synchronously even if the node was not marked as needs remeasure before.</p>
             </td>
           </tr>
         </tbody>
@@ -216,11 +197,6 @@ Box(Modifier.background(Color.Gray).verticalPadding(50.dp)) {
     </div>
     <div class="list">
       <h2>Public methods</h2>
-      <div class="api-item"><a name="forceRemeasure--"></a><a name="forceremeasure"></a>
-        <h3 class="api-name" id="forceRemeasure()">forceRemeasure</h3>
-        <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html#forceRemeasure()">forceRemeasure</a>()</pre>
-        <p>Performs the node remeasuring synchronously even if the node was not marked as needs remeasure before. Useful for cases like when during scrolling you need to re-execute the measure block to consume the scroll offset and remeasure your children in a blocking way.</p>
-      </div>
       <div class="api-item"><a name="(androidx.compose.ui.layout.IntrinsicMeasureScope).maxIntrinsicHeight(androidx.compose.ui.layout.IntrinsicMeasurable, kotlin.Int)"></a><a name="-androidx.compose.ui.layout.IntrinsicMeasureScope-.maxIntrinsicHeight-androidx.compose.ui.layout.IntrinsicMeasurable-kotlin.Int-"></a><a name="maxintrinsicheight"></a>
         <h3 class="api-name" id="(androidx.compose.ui.layout.IntrinsicMeasureScope).maxIntrinsicHeight(androidx.compose.ui.layout.IntrinsicMeasurable,kotlin.Int)">maxIntrinsicHeight</h3>
         <pre class="api-signature no-pretty-print">default&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html#(androidx.compose.ui.layout.IntrinsicMeasureScope).maxIntrinsicHeight(androidx.compose.ui.layout.IntrinsicMeasurable,kotlin.Int)">maxIntrinsicHeight</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/IntrinsicMeasureScope.html">IntrinsicMeasureScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/IntrinsicMeasurable.html">IntrinsicMeasurable</a>&nbsp;measurable,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;width<br>)</pre>
@@ -252,18 +228,23 @@ Box(Modifier.background(Color.Gray).verticalPadding(50.dp)) {
       <h2>Extension functions</h2>
       <div class="api-item"><a name="-androidx.compose.ui.node.LayoutModifierNode-.invalidateLayer--"></a><a name="invalidatelayer"></a>
         <h3 class="api-name" id="(androidx.compose.ui.node.LayoutModifierNode).invalidateLayer()">LayoutModifierNodeKt.invalidateLayer</h3>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/node/LayoutModifierNodeKt.html">LayoutModifierNodeKt</a>.<a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html#(androidx.compose.ui.node.LayoutModifierNode).invalidateLayer()">invalidateLayer</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a>&nbsp;receiver<br>)</pre>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/node/LayoutModifierNodeKt.html">LayoutModifierNodeKt</a>.<a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html#(androidx.compose.ui.node.LayoutModifierNode).invalidateLayer()">invalidateLayer</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a>&nbsp;receiver<br>)</pre>
         <p>This will invalidate the current node's layer, and ensure that the layer is redrawn for the next frame.</p>
       </div>
-      <div class="api-item"><a name="-androidx.compose.ui.node.LayoutModifierNode-.invalidateLayout--"></a><a name="invalidatelayout"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.node.LayoutModifierNode).invalidateLayout()">LayoutModifierNodeKt.invalidateLayout</h3>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/node/LayoutModifierNodeKt.html">LayoutModifierNodeKt</a>.<a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html#(androidx.compose.ui.node.LayoutModifierNode).invalidateLayout()">invalidateLayout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a>&nbsp;receiver<br>)</pre>
-        <p>This will invalidate the current node's layout pass, and ensure that relayout of this node will happen for the next frame.</p>
+      <div class="api-item"><a name="-androidx.compose.ui.node.LayoutModifierNode-.invalidateMeasurement--"></a><a name="invalidatemeasurement"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.node.LayoutModifierNode).invalidateMeasurement()">LayoutModifierNodeKt.invalidateMeasurement</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/node/LayoutModifierNodeKt.html">LayoutModifierNodeKt</a>.<a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html#(androidx.compose.ui.node.LayoutModifierNode).invalidateMeasurement()">invalidateMeasurement</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a>&nbsp;receiver<br>)</pre>
+        <p>This invalidates the current node's measure result, and ensures that a re-measurement (the measurement block rerun) of this node will happen for the next frame.</p>
       </div>
-      <div class="api-item"><a name="-androidx.compose.ui.node.LayoutModifierNode-.invalidateMeasurements--"></a><a name="invalidatemeasurements"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.node.LayoutModifierNode).invalidateMeasurements()">LayoutModifierNodeKt.invalidateMeasurements</h3>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/node/LayoutModifierNodeKt.html">LayoutModifierNodeKt</a>.<a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html#(androidx.compose.ui.node.LayoutModifierNode).invalidateMeasurements()">invalidateMeasurements</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a>&nbsp;receiver<br>)</pre>
-        <p>This invalidates the current node's measure result, and ensures that a remeasurement of this node will happen for the next frame.</p>
+      <div class="api-item"><a name="-androidx.compose.ui.node.LayoutModifierNode-.invalidatePlacement--"></a><a name="invalidateplacement"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.node.LayoutModifierNode).invalidatePlacement()">LayoutModifierNodeKt.invalidatePlacement</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/node/LayoutModifierNodeKt.html">LayoutModifierNodeKt</a>.<a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html#(androidx.compose.ui.node.LayoutModifierNode).invalidatePlacement()">invalidatePlacement</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a>&nbsp;receiver<br>)</pre>
+        <p>This will invalidate the current node's placement result, and ensure that relayout (the placement block rerun) of this node will happen for the next frame .</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.ui.node.LayoutModifierNode-.remeasureSync--"></a><a name="remeasuresync"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.node.LayoutModifierNode).remeasureSync()">LayoutModifierNodeKt.remeasureSync</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/node/LayoutModifierNodeKt.html">LayoutModifierNodeKt</a>.<a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html#(androidx.compose.ui.node.LayoutModifierNode).remeasureSync()">remeasureSync</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a>&nbsp;receiver<br>)</pre>
+        <p>Performs the node remeasuring synchronously even if the node was not marked as needs remeasure before. Useful for cases like when during scrolling you need to re-execute the measure block to consume the scroll offset and remeasure your children in a blocking way.</p>
       </div>
     </div>
   </body>

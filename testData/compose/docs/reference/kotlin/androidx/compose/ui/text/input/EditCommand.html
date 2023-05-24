@@ -6,12 +6,21 @@
   </head>
   <body>
     <div id="metadata-info-block">
-      <div id="source-link"><a href="https://cs.android.com/search?q=file:-text/androidx/compose/ui/text/input/EditCommand.kt+class:androidx.compose.ui.text.input.EditCommand&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/text/input/EditCommand.kt+class:androidx.compose.ui.text.input.EditCommand&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>EditCommand</h1>
-    <p>
-      <pre>interface <a href="/reference/kotlin/androidx/compose/ui/text/input/EditCommand.html">EditCommand</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>interface <a href="/reference/kotlin/androidx/compose/ui/text/input/EditCommand.html">EditCommand</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
         <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/ui/text/input/BackspaceCommand.html">BackspaceCommand</a>, <a href="/reference/kotlin/androidx/compose/ui/text/input/CommitTextCommand.html">CommitTextCommand</a>, <a href="/reference/kotlin/androidx/compose/ui/text/input/DeleteAllCommand.html">DeleteAllCommand</a>, <a href="/reference/kotlin/androidx/compose/ui/text/input/DeleteSurroundingTextCommand.html">DeleteSurroundingTextCommand</a>, <a href="/reference/kotlin/androidx/compose/ui/text/input/DeleteSurroundingTextInCodePointsCommand.html">DeleteSurroundingTextInCodePointsCommand</a>, <a href="/reference/kotlin/androidx/compose/ui/text/input/FinishComposingTextCommand.html">FinishComposingTextCommand</a>, <a href="/reference/kotlin/androidx/compose/ui/text/input/MoveCursorCommand.html">MoveCursorCommand</a>, <a href="/reference/kotlin/androidx/compose/ui/text/input/SetComposingRegionCommand.html">SetComposingRegionCommand</a>, <a href="/reference/kotlin/androidx/compose/ui/text/input/SetComposingTextCommand.html">SetComposingTextCommand</a>, <a href="/reference/kotlin/androidx/compose/ui/text/input/SetSelectionCommand.html">SetSelectionCommand</a></div>
       </span>
@@ -92,34 +101,44 @@
     <p><code><a href="/reference/kotlin/androidx/compose/ui/text/input/EditCommand.html">EditCommand</a></code> is a command representation for the platform IME API function calls. The commands from the IME as function calls are translated into command pattern and used by <code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#startInput(androidx.compose.ui.text.input.TextFieldValue,androidx.compose.ui.text.input.ImeOptions,kotlin.Function1,kotlin.Function1)">TextInputService.startInput</a></code>. For example, as a result of commit text function call by IME <code><a href="/reference/kotlin/androidx/compose/ui/text/input/CommitTextCommand.html">CommitTextCommand</a></code> is created.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public functions</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/input/EditCommand.html#applyTo(androidx.compose.ui.text.input.EditingBuffer)">applyTo</a>(buffer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/EditingBuffer.html">EditingBuffer</a>)</code></div>
-              <p>Apply the command on the editing buffer.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/text/input/EditCommand.html#applyTo(androidx.compose.ui.text.input.EditingBuffer)">applyTo</a>(buffer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/EditingBuffer.html">EditingBuffer</a>)</code></div>
+                <p>Apply the command on the editing buffer.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
-    <div class="list">
-      <h2>Public functions</h2>
-      <div class="api-item"><a name="applyTo-androidx.compose.ui.text.input.EditingBuffer-"></a><a name="applyto"></a>
-        <h3 class="api-name" id="applyTo(androidx.compose.ui.text.input.EditingBuffer)">applyTo</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/EditCommand.html#applyTo(androidx.compose.ui.text.input.EditingBuffer)">applyTo</a>(buffer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/EditingBuffer.html">EditingBuffer</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Apply the command on the editing buffer.</p>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="applyTo-androidx.compose.ui.text.input.EditingBuffer-"></a><a name="applyto"></a>
+          <h3 class="api-name" id="applyTo(androidx.compose.ui.text.input.EditingBuffer)">applyTo</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/EditCommand.html#applyTo(androidx.compose.ui.text.input.EditingBuffer)">applyTo</a>(buffer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/EditingBuffer.html">EditingBuffer</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Apply the command on the editing buffer.</p>
+        </div>
       </div>
-    </div>
+    </devsite-filter >
   </body>
 </html>

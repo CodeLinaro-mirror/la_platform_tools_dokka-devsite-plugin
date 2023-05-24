@@ -6,13 +6,92 @@
   </head>
   <body>
     <div id="metadata-info-block">
-      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridDsl.kt+class:androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridItemScope&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridItemScope.kt+class:androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridItemScope&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>LazyStaggeredGridItemScope</h1>
-    <p>
-      <pre>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>interface <a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridItemScope.html">LazyStaggeredGridItemScope</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>@<a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridScopeMarker.html">LazyStaggeredGridScopeMarker</a><br>interface <a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridItemScope.html">LazyStaggeredGridItemScope</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <hr>
     <p>Receiver scope for itemContent in <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridScope.html#item(kotlin.Any,kotlin.Any,androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan,kotlin.Function1)">LazyStaggeredGridScope.item</a></code></p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridItemScope.html#(androidx.compose.ui.Modifier).animateItemPlacement(androidx.compose.animation.core.FiniteAnimationSpec)">animateItemPlacement</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/unit/IntOffset.html">IntOffset</a>&gt;<br>)</code></div>
+                <p>This modifier animates the item placement within the grid.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="-androidx.compose.ui.Modifier-.animateItemPlacement-androidx.compose.animation.core.FiniteAnimationSpec-"></a><a name="animateitemplacement"></a>
+          <h3 class="api-name" id="(androidx.compose.ui.Modifier).animateItemPlacement(androidx.compose.animation.core.FiniteAnimationSpec)">animateItemPlacement</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridItemScope.html#(androidx.compose.ui.Modifier).animateItemPlacement(androidx.compose.animation.core.FiniteAnimationSpec)">animateItemPlacement</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/unit/IntOffset.html">IntOffset</a>&gt; = spring(
+            stiffness = Spring.StiffnessMediumLow,
+            visibilityThreshold = IntOffset.VisibilityThreshold
+        )<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
+          <p>This modifier animates the item placement within the grid.</p>
+          <p>When you scroll backward staggered grids could move already visible items in order to correct the accumulated errors in previous item size estimations. This modifier can animate such moves.</p>
+          <p>Aside from that when you provide a key via <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridScope.html#item(kotlin.Any,kotlin.Any,androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan,kotlin.Function1)">LazyStaggeredGridScope.item</a></code> / <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridScope.html#items(kotlin.Int,kotlin.Function1,kotlin.Function1,kotlin.Function1,kotlin.Function2)">LazyStaggeredGridScope.items</a></code> this modifier will enable item reordering animations.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/unit/IntOffset.html">IntOffset</a>&gt; = spring(
+            stiffness = Spring.StiffnessMediumLow,
+            visibilityThreshold = IntOffset.VisibilityThreshold
+        )</code></td>
+                  <td>
+                    <p>a finite animation that will be used to animate the item placement.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </devsite-filter >
   </body>
 </html>

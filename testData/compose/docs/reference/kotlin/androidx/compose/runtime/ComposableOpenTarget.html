@@ -9,91 +9,119 @@
       <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/runtime/ComposableOpenTarget.kt+class:androidx.compose.runtime.ComposableOpenTarget&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>ComposableOpenTarget</h1>
-    <p>
-      <pre>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-retention/index.html">Retention</a>(value&nbsp;=&nbsp;AnnotationRetention.BINARY)<br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-target/index.html">Target</a>(allowedTargets&nbsp;=&nbsp;[AnnotationTarget.FUNCTION,&nbsp;AnnotationTarget.PROPERTY_GETTER,&nbsp;AnnotationTarget.TYPE,&nbsp;AnnotationTarget.TYPE_PARAMETER])<br>annotation <a href="/reference/kotlin/androidx/compose/runtime/ComposableOpenTarget.html">ComposableOpenTarget</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-retention/index.html">Retention</a>(value&nbsp;=&nbsp;AnnotationRetention.BINARY)<br>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-target/index.html">Target</a>(allowedTargets&nbsp;=&nbsp;[AnnotationTarget.FUNCTION,&nbsp;AnnotationTarget.PROPERTY_GETTER,&nbsp;AnnotationTarget.TYPE,&nbsp;AnnotationTarget.TYPE_PARAMETER])<br>annotation <a href="/reference/kotlin/androidx/compose/runtime/ComposableOpenTarget.html">ComposableOpenTarget</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <hr>
     <p>The <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> declares that it doesn't expect a particular applier. See <code><a href="/reference/kotlin/androidx/compose/runtime/ComposableTarget.html">ComposableTarget</a></code> for more details on what appliers a <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function expects.</p>
     <p>In a <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function, all the open composable appliers with the same applier index must have the same name.. <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code>, for example, can use <code><a href="/reference/kotlin/androidx/compose/runtime/ComposableOpenTarget.html">ComposableOpenTarget</a></code> to declare that its content parameter must have the same applier as it receives, since it calls the content parameter directly, but it could be any applier. <code><a href="/reference/kotlin/androidx/compose/runtime/ComposableOpenTarget.html">ComposableOpenTarget</a></code>, in this way, works like an open type parameter for the type of applier used by the implied composer parameter.</p>
     <p>Th <code><a href="/reference/kotlin/androidx/compose/runtime/ComposableOpenTarget.html">ComposableOpenTarget</a></code> is unlikely to be required explicitly as it is inferred automatically by the Compose compiler plugin. See <code><a href="/reference/kotlin/androidx/compose/runtime/ComposableTarget.html">ComposableTarget</a></code> for more details on how attributes are inferred.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public constructors</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/ComposableOpenTarget.html#ComposableOpenTarget(kotlin.Int)">ComposableOpenTarget</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="93%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public constructors</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/ComposableOpenTarget.html#ComposableOpenTarget(kotlin.Int)">ComposableOpenTarget</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public properties</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/ComposableOpenTarget.html#index()">index</a></code></div>
-              <p>The index of the open applier parameter.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/ComposableOpenTarget.html#index()">index</a></code></div>
+                <p>The index of the open applier parameter.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
-    <div class="list">
-      <h2>Public constructors</h2>
-      <div class="api-item"><a name="ComposableOpenTarget-kotlin.Int-"></a><a name="composableopentarget"></a>
-        <h3 class="api-name" id="ComposableOpenTarget(kotlin.Int)">ComposableOpenTarget</h3>
-        <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/runtime/ComposableOpenTarget.html#ComposableOpenTarget(kotlin.Int)">ComposableOpenTarget</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
-                <td>
-                  <p>The index of the open applier parameter. All open appliers with the same non-negative index in the same declaration must have the same name. All negative indexes are considered anonymous and can match any applier. If the <code><a href="/reference/kotlin/androidx/compose/runtime/ComposableOpenTarget.html#&lt;init&gt;(kotlin.Int)">index</a></code> is only used once in a declaration it can also match any applier but it is recommended to use a negative index instead or just leave the annotation off as a missing annotation is equivalent to an anonymous applier.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public constructors</h2>
+        <div class="api-item"><a name="ComposableOpenTarget-kotlin.Int-"></a><a name="composableopentarget"></a>
+          <h3 class="api-name" id="ComposableOpenTarget(kotlin.Int)">ComposableOpenTarget</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/runtime/ComposableOpenTarget.html#ComposableOpenTarget(kotlin.Int)">ComposableOpenTarget</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                  <td>
+                    <p>The index of the open applier parameter. All open appliers with the same non-negative index in the same declaration must have the same name. All negative indexes are considered anonymous and can match any applier. If the <code><a href="/reference/kotlin/androidx/compose/runtime/ComposableOpenTarget.html#&lt;init&gt;(kotlin.Int)">index</a></code> is only used once in a declaration it can also match any applier but it is recommended to use a negative index instead or just leave the annotation off as a missing annotation is equivalent to an anonymous applier.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="list">
-      <h2>Public properties</h2>
-      <div class="api-item"><a name="getIndex()"></a><a name="setIndex()"></a><a name="getIndex--"></a><a name="setIndex--"></a>
-        <h3 class="api-name" id="index()">index</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ComposableOpenTarget.html#index()">index</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
-        <p>The index of the open applier parameter. All open appliers with the same non-negative index in the same declaration must have the same name. All negative indexes are considered anonymous and can match any applier. If the <code><a href="/reference/kotlin/androidx/compose/runtime/ComposableOpenTarget.html#index()">index</a></code> is only used once in a declaration it can also match any applier but it is recommended to use a negative index instead or just leave the annotation off as a missing annotation is equivalent to an anonymous applier.</p>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getIndex()"></a><a name="setIndex()"></a><a name="getIndex--"></a><a name="setIndex--"></a>
+          <h3 class="api-name" id="index()">index</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ComposableOpenTarget.html#index()">index</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The index of the open applier parameter. All open appliers with the same non-negative index in the same declaration must have the same name. All negative indexes are considered anonymous and can match any applier. If the <code><a href="/reference/kotlin/androidx/compose/runtime/ComposableOpenTarget.html#index()">index</a></code> is only used once in a declaration it can also match any applier but it is recommended to use a negative index instead or just leave the annotation off as a missing annotation is equivalent to an anonymous applier.</p>
+        </div>
       </div>
-    </div>
+    </devsite-filter >
   </body>
 </html>

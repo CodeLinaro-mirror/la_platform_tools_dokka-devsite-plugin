@@ -6,69 +6,98 @@
   </head>
   <body>
     <div id="metadata-info-block">
-      <div id="source-link"><a href="https://cs.android.com/search?q=file:-graphics/androidx/compose/ui/graphics/drawscope/DrawContext.kt+class:androidx.compose.ui.graphics.drawscope.DrawContext&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/graphics/drawscope/DrawContext.kt+class:androidx.compose.ui.graphics.drawscope.DrawContext&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>DrawContext</h1>
-    <p>
-      <pre>interface <a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawContext.html">DrawContext</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>interface <a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawContext.html">DrawContext</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <hr>
     <p>Object that provides the dependencies to support a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a></code> drawing environment. Namely this provides the drawing bounds represented as a size as well as the target <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Canvas.html">Canvas</a></code> to issue drawing commands into. Additionally the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawContext.html">DrawContext</a></code> handles updating <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Canvas.html">Canvas</a></code> state during transformations and updating the size of the drawing bounds that may occur during these transformations.</p>
     <p>This exposes necessary internal state to the implementation of the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a></code> in order to support inline scoped transformation calls without allowing consumers of <code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a></code> to modify state directly thus maintaining the stateless API surface</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public properties</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Canvas.html">Canvas</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawContext.html#canvas()">canvas</a></code></div>
-              <p>The target canvas to issue drawing commands</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawContext.html#size()">size</a></code></div>
-              <p>The current size of the drawing environment</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html">DrawTransform</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawContext.html#transform()">transform</a></code></div>
-              <p>The controller for issuing transformations to the drawing environment</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/Canvas.html">Canvas</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawContext.html#canvas()">canvas</a></code></div>
+                <p>The target canvas to issue drawing commands</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawContext.html#size()">size</a></code></div>
+                <p>The current size of the drawing environment</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html">DrawTransform</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawContext.html#transform()">transform</a></code></div>
+                <p>The controller for issuing transformations to the drawing environment</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
-    <div class="list">
-      <h2>Public properties</h2>
-      <div class="api-item"><a name="getCanvas()"></a><a name="setCanvas()"></a><a name="getCanvas--"></a><a name="setCanvas--"></a>
-        <h3 class="api-name" id="canvas()">canvas</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawContext.html#canvas()">canvas</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Canvas.html">Canvas</a></pre>
-        <p>The target canvas to issue drawing commands</p>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getCanvas()"></a><a name="setCanvas()"></a><a name="getCanvas--"></a><a name="setCanvas--"></a>
+          <h3 class="api-name" id="canvas()">canvas</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawContext.html#canvas()">canvas</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Canvas.html">Canvas</a></pre>
+          <p>The target canvas to issue drawing commands</p>
+        </div>
+        <div class="api-item"><a name="getSize()"></a><a name="setSize()"></a><a name="getSize--"></a><a name="setSize--"></a>
+          <h3 class="api-name" id="size()">size</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">var&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawContext.html#size()">size</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></pre>
+          <p>The current size of the drawing environment</p>
+        </div>
+        <div class="api-item"><a name="getTransform()"></a><a name="setTransform()"></a><a name="getTransform--"></a><a name="setTransform--"></a>
+          <h3 class="api-name" id="transform()">transform</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawContext.html#transform()">transform</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html">DrawTransform</a></pre>
+          <p>The controller for issuing transformations to the drawing environment</p>
+        </div>
       </div>
-      <div class="api-item"><a name="getSize()"></a><a name="setSize()"></a><a name="getSize--"></a><a name="setSize--"></a>
-        <h3 class="api-name" id="size()">size</h3>
-        <pre class="api-signature no-pretty-print">var&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawContext.html#size()">size</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></pre>
-        <p>The current size of the drawing environment</p>
-      </div>
-      <div class="api-item"><a name="getTransform()"></a><a name="setTransform()"></a><a name="getTransform--"></a><a name="setTransform--"></a>
-        <h3 class="api-name" id="transform()">transform</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawContext.html#transform()">transform</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawTransform.html">DrawTransform</a></pre>
-        <p>The controller for issuing transformations to the drawing environment</p>
-      </div>
-    </div>
+    </devsite-filter >
   </body>
 </html>

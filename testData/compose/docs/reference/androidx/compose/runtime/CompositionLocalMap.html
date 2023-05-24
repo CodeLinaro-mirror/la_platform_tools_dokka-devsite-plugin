@@ -1,0 +1,71 @@
+<html devsite="true">
+  <head>
+    <title>CompositionLocalMap</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/runtime/CompositionLocalMap.kt+class:androidx.compose.runtime.CompositionLocalMap&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>CompositionLocalMap</h1>
+    <p>
+      <pre>public interface <a href="/reference/androidx/compose/runtime/CompositionLocalMap.html">CompositionLocalMap</a></pre>
+    </p>
+    <hr>
+    <p>A read-only, immutable snapshot of the <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocals</a></code> that are set at a specific position in the composition hierarchy.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>public static class <a href="/reference/androidx/compose/runtime/CompositionLocalMap.Companion.html">CompositionLocalMap.Companion</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/CompositionLocalMap.html#get(androidx.compose.runtime.CompositionLocal)">get</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;key)</code></div>
+              <p>Returns the value of the provided <code><a href="/reference/androidx/compose/runtime/CompositionLocalMap.html#get(androidx.compose.runtime.CompositionLocal)">composition local</a></code> at the position in the composition hierarchy represented by this <code><a href="/reference/androidx/compose/runtime/CompositionLocalMap.html">CompositionLocalMap</a></code> instance.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="get-androidx.compose.runtime.CompositionLocal-"></a><a name="get"></a>
+        <h3 class="api-name" id="get(androidx.compose.runtime.CompositionLocal)">get</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/CompositionLocalMap.html#get(androidx.compose.runtime.CompositionLocal)">get</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;key)</pre>
+        <p>Returns the value of the provided <code><a href="/reference/androidx/compose/runtime/CompositionLocalMap.html#get(androidx.compose.runtime.CompositionLocal)">composition local</a></code> at the position in the composition hierarchy represented by this <code><a href="/reference/androidx/compose/runtime/CompositionLocalMap.html">CompositionLocalMap</a></code> instance. If the provided <code><a href="/reference/androidx/compose/runtime/CompositionLocalMap.html#get(androidx.compose.runtime.CompositionLocal)">key</a></code> is not set at this point in the hierarchy, its default value will be used.</p>
+        <p>For <code><a href="/reference/androidx/compose/runtime/package-summary.html#compositionLocalOf(androidx.compose.runtime.SnapshotMutationPolicy,kotlin.Function0)">non-static CompositionLocals</a></code>, this function will return the latest value of the CompositionLocal, which might change over time across the same instance of the CompositionLocalMap. Reads done in this way are not tracked in the snapshot system.</p>
+        <p>For <code><a href="/reference/androidx/compose/runtime/package-summary.html#staticCompositionLocalOf(kotlin.Function0)">static CompositionLocals</a></code>, this function returns the value at the time of creation of the CompositionLocalMap. When a static CompositionLocal is reassigned, the entire composition hierarchy is recomposed and a new CompositionLocalMap is created with the updated value of the static CompositionLocal.</p>
+      </div>
+    </div>
+  </body>
+</html>

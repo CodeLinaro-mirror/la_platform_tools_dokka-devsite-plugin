@@ -1,0 +1,715 @@
+<html devsite="true">
+  <head>
+    <title>SemanticsNodeInteractionsProvider</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/test/SemanticsNodeInteractionsProvider.kt+class:androidx.compose.ui.test.SemanticsNodeInteractionsProvider&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>SemanticsNodeInteractionsProvider</h1>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>@<a href="/reference/kotlin/androidx/compose/ui/test/internal/JvmDefaultWithCompatibility.html">JvmDefaultWithCompatibility</a><br>interface <a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html">SemanticsNodeInteractionsProvider</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
+        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/ui/test/junit4/ComposeTestRule.html">ComposeTestRule</a>, <a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html">ComposeUiTest</a></div>
+      </span>
+      <div id="subclasses-direct-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/test/junit4/ComposeTestRule.html">ComposeTestRule</a></code></td>
+                <td>
+                  <p>A <code><a href="/reference/kotlin/org/junit/rules/TestRule.html">TestRule</a></code> that allows you to test and control composables and applications using Compose.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html">ComposeUiTest</a></code></td>
+                <td>
+                  <p>A test environment that allows you to test and control composables, either in isolation or in applications.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known indirect subclasses
+        <div class="showalways" id="subclasses-indirect"><a href="/reference/kotlin/androidx/compose/ui/test/junit4/AndroidComposeTestRule.html">AndroidComposeTestRule</a>, <a href="/reference/kotlin/androidx/compose/ui/test/AndroidComposeUiTest.html">AndroidComposeUiTest</a>, <a href="/reference/kotlin/androidx/compose/ui/test/junit4/ComposeContentTestRule.html">ComposeContentTestRule</a></div>
+      </span>
+      <div id="subclasses-indirect-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/test/junit4/AndroidComposeTestRule.html">AndroidComposeTestRule</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/test/AndroidComposeUiTest.html">AndroidComposeUiTest</a></code></td>
+                <td>
+                  <p>Variant of <code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html">ComposeUiTest</a></code> for when you want to have access to the current <code><a href="/reference/kotlin/androidx/compose/ui/test/AndroidComposeUiTest.html#activity()">activity</a></code> of type <code><a href="/reference/kotlin/androidx/compose/ui/test/AndroidComposeUiTest.html">A</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/test/junit4/ComposeContentTestRule.html">ComposeContentTestRule</a></code></td>
+                <td>
+                  <p>A <code><a href="/reference/kotlin/androidx/compose/ui/test/junit4/ComposeTestRule.html">ComposeTestRule</a></code> that allows you to set content without the necessity to provide a host for the content.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
+    <hr>
+    <p>Provides the main entry point into testing.</p>
+    <p>Typically implemented by a test rule.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#onAllNodes(androidx.compose.ui.test.SemanticsMatcher,kotlin.Boolean)">onAllNodes</a>(matcher:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a>,&nbsp;useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>)</code></div>
+                <p>Finds all semantics nodes that match the given condition.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#onNode(androidx.compose.ui.test.SemanticsMatcher,kotlin.Boolean)">onNode</a>(matcher:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a>,&nbsp;useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>)</code></div>
+                <p>Finds a semantics node that matches the given condition.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Extension functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html">SemanticsNodeInteractionsProvider</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onAllNodesWithContentDescription(kotlin.String,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">onAllNodesWithContentDescription</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;substring:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;ignoreCase:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><br>)</code></div>
+                <p>Finds all semantics nodes with the given label as ContentDescription.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html">SemanticsNodeInteractionsProvider</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onAllNodesWithTag(kotlin.String,kotlin.Boolean)">onAllNodesWithTag</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;testTag:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><br>)</code></div>
+                <p>Finds all semantics nodes identified by the given tag.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html">SemanticsNodeInteractionsProvider</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onAllNodesWithText(kotlin.String,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">onAllNodesWithText</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;text:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;substring:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;ignoreCase:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><br>)</code></div>
+                <p>Finds all semantics nodes with the given text.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html">SemanticsNodeInteractionsProvider</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onNodeWithContentDescription(kotlin.String,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">onNodeWithContentDescription</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;substring:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;ignoreCase:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><br>)</code></div>
+                <p>Finds a semantics node with the given contentDescription.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html">SemanticsNodeInteractionsProvider</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onNodeWithTag(kotlin.String,kotlin.Boolean)">onNodeWithTag</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;testTag:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><br>)</code></div>
+                <p>Finds a semantics node identified by the given tag.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html">SemanticsNodeInteractionsProvider</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onNodeWithText(kotlin.String,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">onNodeWithText</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;text:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;substring:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;ignoreCase:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><br>)</code></div>
+                <p>Finds a semantics node with the given text.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html">SemanticsNodeInteractionsProvider</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onRoot(kotlin.Boolean)">onRoot</a>(useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>)</code></div>
+                <p>Finds the root semantics node of the Compose tree.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="onAllNodes(androidx.compose.ui.test.SemanticsMatcher, kotlin.Boolean)"></a><a name="onAllNodes-androidx.compose.ui.test.SemanticsMatcher-kotlin.Boolean-"></a><a name="onallnodes"></a>
+          <h3 class="api-name" id="onAllNodes(androidx.compose.ui.test.SemanticsMatcher,kotlin.Boolean)">onAllNodes</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#onAllNodes(androidx.compose.ui.test.SemanticsMatcher,kotlin.Boolean)">onAllNodes</a>(matcher:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a>,&nbsp;useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a></pre>
+          <p>Finds all semantics nodes that match the given condition.</p>
+          <p>If you are working with elements that are not supposed to occur multiple times use <code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#onNode(androidx.compose.ui.test.SemanticsMatcher,kotlin.Boolean)">onNode</a></code> instead.</p>
+          <p>For usage patterns and semantics concepts see <code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></code></p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>matcher:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a></code></td>
+                  <td>
+                    <p>Matcher used for filtering.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+                  <td>
+                    <p>Find within merged composables like Buttons.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#onNode(androidx.compose.ui.test.SemanticsMatcher,kotlin.Boolean)">onNode</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="onNode(androidx.compose.ui.test.SemanticsMatcher, kotlin.Boolean)"></a><a name="onNode-androidx.compose.ui.test.SemanticsMatcher-kotlin.Boolean-"></a><a name="onnode"></a>
+          <h3 class="api-name" id="onNode(androidx.compose.ui.test.SemanticsMatcher,kotlin.Boolean)">onNode</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#onNode(androidx.compose.ui.test.SemanticsMatcher,kotlin.Boolean)">onNode</a>(matcher:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a>,&nbsp;useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></pre>
+          <p>Finds a semantics node that matches the given condition.</p>
+          <p>Any subsequent operation on its result will expect exactly one element found (unless <code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html#assertDoesNotExist()">SemanticsNodeInteraction.assertDoesNotExist</a></code> is used) and will throw <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-assertion-error/index.html">AssertionError</a></code> if none or more than one element is found.</p>
+          <p>For usage patterns and semantics concepts see <code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></code></p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>matcher:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a></code></td>
+                  <td>
+                    <p>Matcher used for filtering</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+                  <td>
+                    <p>Find within merged composables like Buttons.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#onAllNodes(androidx.compose.ui.test.SemanticsMatcher,kotlin.Boolean)">onAllNodes</a></code></td>
+                  <td>
+                    <p>to work with multiple elements</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Extension functions</h2>
+        <div class="api-item"><a name="(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onAllNodesWithContentDescription(kotlin.String, kotlin.Boolean, kotlin.Boolean, kotlin.Boolean)"></a><a name="-androidx.compose.ui.test.SemanticsNodeInteractionsProvider-.onAllNodesWithContentDescription-kotlin.String-kotlin.Boolean-kotlin.Boolean-kotlin.Boolean-"></a><a name="onallnodeswithcontentdescription"></a>
+          <h3 class="api-name" id="(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onAllNodesWithContentDescription(kotlin.String,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">onAllNodesWithContentDescription</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html">SemanticsNodeInteractionsProvider</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onAllNodesWithContentDescription(kotlin.String,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">onAllNodesWithContentDescription</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;substring:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false,<br>&nbsp;&nbsp;&nbsp;&nbsp;ignoreCase:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false,<br>&nbsp;&nbsp;&nbsp;&nbsp;useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a></pre>
+          <p>Finds all semantics nodes with the given label as ContentDescription.</p>
+          <p>For usage patterns and semantics concepts see <code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></code></p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>substring:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+                  <td>
+                    <p>Whether to use substring matching.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>ignoreCase:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+                  <td>
+                    <p>Whether case should be ignored.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+                  <td>
+                    <p>Find within merged composables like Buttons.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#onAllNodes(androidx.compose.ui.test.SemanticsMatcher,kotlin.Boolean)">onAllNodes</a></code></td>
+                  <td>
+                    <p>for general find method.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onAllNodesWithTag(kotlin.String, kotlin.Boolean)"></a><a name="-androidx.compose.ui.test.SemanticsNodeInteractionsProvider-.onAllNodesWithTag-kotlin.String-kotlin.Boolean-"></a><a name="onallnodeswithtag"></a>
+          <h3 class="api-name" id="(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onAllNodesWithTag(kotlin.String,kotlin.Boolean)">onAllNodesWithTag</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html">SemanticsNodeInteractionsProvider</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onAllNodesWithTag(kotlin.String,kotlin.Boolean)">onAllNodesWithTag</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;testTag:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a></pre>
+          <p>Finds all semantics nodes identified by the given tag.</p>
+          <p>For usage patterns and semantics concepts see <code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></code></p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+                  <td>
+                    <p>Find within merged composables like Buttons.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#onAllNodes(androidx.compose.ui.test.SemanticsMatcher,kotlin.Boolean)">onAllNodes</a></code></td>
+                  <td>
+                    <p>for general find method.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onAllNodesWithText(kotlin.String, kotlin.Boolean, kotlin.Boolean, kotlin.Boolean)"></a><a name="-androidx.compose.ui.test.SemanticsNodeInteractionsProvider-.onAllNodesWithText-kotlin.String-kotlin.Boolean-kotlin.Boolean-kotlin.Boolean-"></a><a name="onallnodeswithtext"></a>
+          <h3 class="api-name" id="(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onAllNodesWithText(kotlin.String,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">onAllNodesWithText</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html">SemanticsNodeInteractionsProvider</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onAllNodesWithText(kotlin.String,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">onAllNodesWithText</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;text:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;substring:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false,<br>&nbsp;&nbsp;&nbsp;&nbsp;ignoreCase:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false,<br>&nbsp;&nbsp;&nbsp;&nbsp;useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a></pre>
+          <p>Finds all semantics nodes with the given text.</p>
+          <p>For usage patterns and semantics concepts see <code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></code></p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>substring:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+                  <td>
+                    <p>Whether to use substring matching.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>ignoreCase:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+                  <td>
+                    <p>Whether case should be ignored.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+                  <td>
+                    <p>Find within merged composables like Buttons.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#onAllNodes(androidx.compose.ui.test.SemanticsMatcher,kotlin.Boolean)">onAllNodes</a></code></td>
+                  <td>
+                    <p>for general find method.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onNodeWithContentDescription(kotlin.String, kotlin.Boolean, kotlin.Boolean, kotlin.Boolean)"></a><a name="-androidx.compose.ui.test.SemanticsNodeInteractionsProvider-.onNodeWithContentDescription-kotlin.String-kotlin.Boolean-kotlin.Boolean-kotlin.Boolean-"></a><a name="onnodewithcontentdescription"></a>
+          <h3 class="api-name" id="(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onNodeWithContentDescription(kotlin.String,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">onNodeWithContentDescription</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html">SemanticsNodeInteractionsProvider</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onNodeWithContentDescription(kotlin.String,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">onNodeWithContentDescription</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;substring:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false,<br>&nbsp;&nbsp;&nbsp;&nbsp;ignoreCase:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false,<br>&nbsp;&nbsp;&nbsp;&nbsp;useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></pre>
+          <p>Finds a semantics node with the given contentDescription.</p>
+          <p>For usage patterns and semantics concepts see <code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></code></p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>substring:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+                  <td>
+                    <p>Whether to use substring matching.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>ignoreCase:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+                  <td>
+                    <p>Whether case should be ignored.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+                  <td>
+                    <p>Find within merged composables like Buttons.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#onNode(androidx.compose.ui.test.SemanticsMatcher,kotlin.Boolean)">onNode</a></code></td>
+                  <td>
+                    <p>for general find method.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onNodeWithTag(kotlin.String, kotlin.Boolean)"></a><a name="-androidx.compose.ui.test.SemanticsNodeInteractionsProvider-.onNodeWithTag-kotlin.String-kotlin.Boolean-"></a><a name="onnodewithtag"></a>
+          <h3 class="api-name" id="(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onNodeWithTag(kotlin.String,kotlin.Boolean)">onNodeWithTag</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html">SemanticsNodeInteractionsProvider</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onNodeWithTag(kotlin.String,kotlin.Boolean)">onNodeWithTag</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;testTag:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></pre>
+          <p>Finds a semantics node identified by the given tag.</p>
+          <p>For usage patterns and semantics concepts see <code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></code></p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+                  <td>
+                    <p>Find within merged composables like Buttons.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#onNode(androidx.compose.ui.test.SemanticsMatcher,kotlin.Boolean)">onNode</a></code></td>
+                  <td>
+                    <p>for general find method.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onNodeWithText(kotlin.String, kotlin.Boolean, kotlin.Boolean, kotlin.Boolean)"></a><a name="-androidx.compose.ui.test.SemanticsNodeInteractionsProvider-.onNodeWithText-kotlin.String-kotlin.Boolean-kotlin.Boolean-kotlin.Boolean-"></a><a name="onnodewithtext"></a>
+          <h3 class="api-name" id="(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onNodeWithText(kotlin.String,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">onNodeWithText</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html">SemanticsNodeInteractionsProvider</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onNodeWithText(kotlin.String,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">onNodeWithText</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;text:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;substring:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false,<br>&nbsp;&nbsp;&nbsp;&nbsp;ignoreCase:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false,<br>&nbsp;&nbsp;&nbsp;&nbsp;useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></pre>
+          <p>Finds a semantics node with the given text.</p>
+          <p>For usage patterns and semantics concepts see <code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></code></p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>substring:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+                  <td>
+                    <p>Whether to use substring matching.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>ignoreCase:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+                  <td>
+                    <p>Whether case should be ignored.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+                  <td>
+                    <p>Find within merged composables like Buttons.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#onNode(androidx.compose.ui.test.SemanticsMatcher,kotlin.Boolean)">onNode</a></code></td>
+                  <td>
+                    <p>for general find method.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="-androidx.compose.ui.test.SemanticsNodeInteractionsProvider-.onRoot-kotlin.Boolean-"></a><a name="onroot"></a>
+          <h3 class="api-name" id="(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onRoot(kotlin.Boolean)">onRoot</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html">SemanticsNodeInteractionsProvider</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onRoot(kotlin.Boolean)">onRoot</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></pre>
+          <p>Finds the root semantics node of the Compose tree.</p>
+          <p>Useful for example for screenshot tests of the entire scene.</p>
+          <p>For usage patterns and semantics concepts see <code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></code></p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+                  <td>
+                    <p>Find within merged composables like Buttons.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </devsite-filter >
+  </body>
+</html>

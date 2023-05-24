@@ -1,0 +1,69 @@
+<html devsite="true">
+  <head>
+    <title>PlatformTextInput</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/text/input/PlatformTextInputAdapter.kt+class:androidx.compose.ui.text.input.PlatformTextInput&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>PlatformTextInput</h1>
+    <p>
+      <pre>@<a href="/reference/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>public interface <a href="/reference/androidx/compose/ui/text/input/PlatformTextInput.html">PlatformTextInput</a></pre>
+    </p>
+    <hr>
+    <p>Represents the text input plugin system to instances of <code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInputAdapter.html">PlatformTextInputAdapter</a></code>, and provides methods that allow adapters to interact with it. Instances are passed to PlatformTextInputPlugin.createAdapter.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInput.html#releaseInputFocus()">releaseInputFocus</a>()</code></div>
+              <p>If this adapter currently holds input focus, tells the platform that it is no longer handling input.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInput.html#requestInputFocus()">requestInputFocus</a>()</code></div>
+              <p>Requests that the platform input be connected to this receiver until either:</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="releaseInputFocus--"></a><a name="releaseinputfocus"></a>
+        <h3 class="api-name" id="releaseInputFocus()">releaseInputFocus</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/text/input/PlatformTextInput.html#releaseInputFocus()">releaseInputFocus</a>()</pre>
+        <p>If this adapter currently holds input focus, tells the platform that it is no longer handling input. If this adapter does not hold input focus, does nothing.</p>
+      </div>
+      <div class="api-item"><a name="requestInputFocus--"></a><a name="requestinputfocus"></a>
+        <h3 class="api-name" id="requestInputFocus()">requestInputFocus</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/text/input/PlatformTextInput.html#requestInputFocus()">requestInputFocus</a>()</pre>
+        <p>Requests that the platform input be connected to this receiver until either:</p>
+        <ul>
+          <li>
+            <p><code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInput.html#releaseInputFocus()">releaseInputFocus</a></code> is called, or</p>
+          </li>
+          <li>
+            <p>another adapter calls <code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInput.html#requestInputFocus()">requestInputFocus</a></code>.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

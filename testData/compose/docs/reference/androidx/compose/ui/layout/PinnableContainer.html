@@ -13,8 +13,28 @@
       <pre>public interface <a href="/reference/androidx/compose/ui/layout/PinnableContainer.html">PinnableContainer</a></pre>
     </p>
     <hr>
-    <p>Represents a container which can be pinned by some of its parents.</p>
-    <p>For example in lists which only compose visible items it means this item will be kept composed even when it will be scrolled out of the view.</p>
+    <p>Represents a container which can be pinned when the content of this container is important.</p>
+    <p>For example, each item of lazy list represents one <code><a href="/reference/androidx/compose/ui/layout/PinnableContainer.html">PinnableContainer</a></code>, and if this container is pinned, this item will not be disposed when scrolled out of the viewport.</p>
+    <p>Pinning a currently focused item so the focus is not lost is one of the examples when this functionality can be useful.</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">See also</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/layout/package-summary.html#LocalPinnableContainer()">LocalPinnableContainer</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -31,7 +51,7 @@
           <tr>
             <td>
               <div><code>public fun interface <a href="/reference/androidx/compose/ui/layout/PinnableContainer.PinnedHandle.html">PinnableContainer.PinnedHandle</a></code></div>
-              <p>This is an object returned by <code><a href="/reference/androidx/compose/ui/layout/PinnableContainer.html#pin()">pin</a></code> which allows to unpin the content.</p>
+              <p>This is an object returned by <code><a href="/reference/androidx/compose/ui/layout/PinnableContainer.html#pin()">pin</a></code> which allows to release the pinning.</p>
             </td>
           </tr>
         </tbody>
@@ -53,7 +73,7 @@
             <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/PinnableContainer.PinnedHandle.html">PinnableContainer.PinnedHandle</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/layout/PinnableContainer.html#pin()">pin</a>()</code></div>
-              <p>Pin the current container when its content needs to be kept alive, for example when it has focus or user is interacting with it in some other way.</p>
+              <p>Allows to pin this container when the associated content is considered important.</p>
             </td>
           </tr>
         </tbody>
@@ -64,8 +84,9 @@
       <div class="api-item"><a name="pin--"></a><a name="pin"></a>
         <h3 class="api-name" id="pin()">pin</h3>
         <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/PinnableContainer.PinnedHandle.html">PinnableContainer.PinnedHandle</a>&nbsp;<a href="/reference/androidx/compose/ui/layout/PinnableContainer.html#pin()">pin</a>()</pre>
-        <p>Pin the current container when its content needs to be kept alive, for example when it has focus or user is interacting with it in some other way.</p>
-        <p>Don't forget to call <code><a href="/reference/androidx/compose/ui/layout/PinnableContainer.PinnedHandle.html#unpin()">PinnedHandle.unpin</a></code> when this content is not needed anymore.</p>
+        <p>Allows to pin this container when the associated content is considered important.</p>
+        <p>For example, if this <code><a href="/reference/androidx/compose/ui/layout/PinnableContainer.html">PinnableContainer</a></code> is an item of lazy list pinning will mean this item will not be disposed when scrolled out of the viewport.</p>
+        <p>Don't forget to call <code><a href="/reference/androidx/compose/ui/layout/PinnableContainer.PinnedHandle.html#release()">PinnedHandle.release</a></code> when this content is not important anymore.</p>
       </div>
     </div>
   </body>

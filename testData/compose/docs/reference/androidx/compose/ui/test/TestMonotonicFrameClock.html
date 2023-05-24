@@ -1,0 +1,260 @@
+<html devsite="true">
+  <head>
+    <title>TestMonotonicFrameClock</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/test/TestMonotonicFrameClock.jvm.kt+class:androidx.compose.ui.test.TestMonotonicFrameClock&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>TestMonotonicFrameClock</h1>
+    <p>
+      <pre>@<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-experimental-coroutines-api/index.html">ExperimentalCoroutinesApi</a><br>@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>public final class <a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html">TestMonotonicFrameClock</a> implements <a href="/reference/androidx/compose/runtime/MonotonicFrameClock.html">MonotonicFrameClock</a></pre>
+    </p>
+    <hr>
+    <p>A <code><a href="/reference/androidx/compose/runtime/MonotonicFrameClock.html">MonotonicFrameClock</a></code> with a time source controlled by a <code>kotlinx-coroutines-test</code> TestCoroutineScheduler. This frame clock may be used to consistently drive time under controlled tests.</p>
+    <p>Calls to <code><a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> will schedule an upcoming frame <code><a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html#frameDelayNanos()">frameDelayNanos</a></code> nanoseconds in the future by launching into <code><a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html#coroutineScope()">coroutineScope</a></code> if such a frame has not yet been scheduled. The current frame time for <code><a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> is provided by <code><a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html#delayController()">delayController</a></code>. It is strongly suggested that <code><a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html#coroutineScope()">coroutineScope</a></code> contain the test dispatcher controlled by <code><a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html#delayController()">delayController</a></code>.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html#TestMonotonicFrameClock(kotlinx.coroutines.CoroutineScope,kotlin.Long,kotlin.Function1)">TestMonotonicFrameClock</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>&nbsp;coroutineScope,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;frameDelayNanos,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onPerformTraversals<br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-continuation-interceptor/index.html">ContinuationInterceptor</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br><a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html#getContinuationInterceptor()">getContinuationInterceptor</a>()</code></div>
+              <p>A <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a></code> that will defer continuation resumptions requested within <code><a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> calls to until after the frame callbacks have finished running.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final long</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html#getFrameDelayNanos()">getFrameDelayNanos</a>()</code></div>
+              <p>The number of nanoseconds to <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/index.html">delay</a></code> between executing frames.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html#getHasAwaiters()">getHasAwaiters</a>()</code></div>
+              <p>Returns whether there are any awaiters on this clock.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R</code></td>
+            <td>
+              <div><code>&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;onFrame<br>)</code></div>
+              <p>Schedules <code><a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">onFrame</a></code> to be ran on the next &quot;fake&quot; frame, and schedules the task to actually perform that frame if it hasn't already been scheduled.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final long</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br><a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClockKt.html">TestMonotonicFrameClockKt</a>.<a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html#(androidx.compose.ui.test.TestMonotonicFrameClock).getFrameDelayMillis()">getFrameDelayMillis</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html">TestMonotonicFrameClock</a>&nbsp;receiver<br>)</code></div>
+              <p>The frame delay time for the <code><a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html">TestMonotonicFrameClock</a></code> in milliseconds.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">kotlin.coroutines.CoroutineContext</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code></td>
+                      <td>
+                        <div><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/plus.html">plus</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>&nbsp;context)</code></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/index.html">kotlin.coroutines.CoroutineContext.Element</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R</code></td>
+                      <td>
+                        <div><code>&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/fold.html">fold</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;initial,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/index.html">CoroutineContext.Element</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;operation<br>)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>E</code></td>
+                      <td>
+                        <div><code>&lt;E&nbsp;extends&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/index.html">CoroutineContext.Element</a>&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/get.html">get</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-key.html">CoroutineContext.Key</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E&gt;&nbsp;key<br>)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code></td>
+                      <td>
+                        <div><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/minus-key.html">minusKey</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-key.html">CoroutineContext.Key</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;key)</code></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/runtime/MonotonicFrameClock.html">androidx.compose.runtime.MonotonicFrameClock</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-key.html">CoroutineContext.Key</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/runtime/MonotonicFrameClock.html#getKey()">getKey</a>()</code></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="TestMonotonicFrameClock(kotlinx.coroutines.CoroutineScope, kotlin.Long, kotlin.Function1)"></a><a name="TestMonotonicFrameClock-kotlinx.coroutines.CoroutineScope-kotlin.Long-kotlin.Function1-"></a><a name="testmonotonicframeclock"></a>
+        <h3 class="api-name" id="TestMonotonicFrameClock(kotlinx.coroutines.CoroutineScope,kotlin.Long,kotlin.Function1)">TestMonotonicFrameClock</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html#TestMonotonicFrameClock(kotlinx.coroutines.CoroutineScope,kotlin.Long,kotlin.Function1)">TestMonotonicFrameClock</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>&nbsp;coroutineScope,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;frameDelayNanos,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onPerformTraversals<br>)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>&nbsp;coroutineScope</code></td>
+                <td>
+                  <p>The <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code> used to simulate the main thread and schedule frames on. It must contain a TestCoroutineScheduler.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>long&nbsp;frameDelayNanos</code></td>
+                <td>
+                  <p>The number of nanoseconds to <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/index.html">delay</a></code> between executing frames.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onPerformTraversals</code></td>
+                <td>
+                  <p>Called with the frame time of the frame that was just executed, after running all <code>withFrameNanos</code> callbacks, but before resuming their callers' continuations. Any continuations resumed while running frame callbacks or <code><a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html#&lt;init&gt;(kotlinx.coroutines.CoroutineScope,kotlin.Long,kotlin.Function1)">onPerformTraversals</a></code> will not be dispatched until after <code><a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html#&lt;init&gt;(kotlinx.coroutines.CoroutineScope,kotlin.Long,kotlin.Function1)">onPerformTraversals</a></code> finishes. If <code><a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html#&lt;init&gt;(kotlinx.coroutines.CoroutineScope,kotlin.Long,kotlin.Function1)">onPerformTraversals</a></code> throws, all <code>withFrameNanos</code> callers will be cancelled.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="getContinuationInterceptor--"></a><a name="getcontinuationinterceptor"></a>
+        <h3 class="api-name" id="getContinuationInterceptor()">getContinuationInterceptor</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-continuation-interceptor/index.html">ContinuationInterceptor</a>&nbsp;<a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html#getContinuationInterceptor()">getContinuationInterceptor</a>()</pre>
+        <p>A <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a></code> that will defer continuation resumptions requested within <code><a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> calls to until after the frame callbacks have finished running. Resumptions will then be dispatched before resuming the continuations from the <code><a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> calls themselves.</p>
+      </div>
+      <div class="api-item"><a name="getFrameDelayNanos--"></a><a name="getframedelaynanos"></a>
+        <h3 class="api-name" id="getFrameDelayNanos()">getFrameDelayNanos</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;long&nbsp;<a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html#getFrameDelayNanos()">getFrameDelayNanos</a>()</pre>
+        <p>The number of nanoseconds to <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/index.html">delay</a></code> between executing frames.</p>
+      </div>
+      <div class="api-item"><a name="getHasAwaiters--"></a><a name="gethasawaiters"></a>
+        <h3 class="api-name" id="getHasAwaiters()">getHasAwaiters</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html#getHasAwaiters()">getHasAwaiters</a>()</pre>
+        <p>Returns whether there are any awaiters on this clock.</p>
+      </div>
+      <div class="api-item"><a name="withFrameNanos-kotlin.Function1-"></a><a name="withframenanos"></a>
+        <h3 class="api-name" id="withFrameNanos(kotlin.Function1)">withFrameNanos</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;onFrame<br>)</pre>
+        <p>Schedules <code><a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">onFrame</a></code> to be ran on the next &quot;fake&quot; frame, and schedules the task to actually perform that frame if it hasn't already been scheduled.</p>
+        <p>Instead of waiting for a vsync message to perform the next frame, it simply calls the coroutine <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/index.html">delay</a></code> function for the test frame time <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TestMonotonicFrameClock).frameDelayMillis()">frameDelayMillis</a></code> (which the underlying test coroutine scheduler will actually complete immediately without waiting), and then run all scheduled tasks.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.test.TestMonotonicFrameClock-.getFrameDelayMillis--"></a><a name="getframedelaymillis"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.test.TestMonotonicFrameClock).getFrameDelayMillis()">TestMonotonicFrameClockKt.getFrameDelayMillis</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>public&nbsp;final&nbsp;long&nbsp;<a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClockKt.html">TestMonotonicFrameClockKt</a>.<a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html#(androidx.compose.ui.test.TestMonotonicFrameClock).getFrameDelayMillis()">getFrameDelayMillis</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html">TestMonotonicFrameClock</a>&nbsp;receiver<br>)</pre>
+        <p>The frame delay time for the <code><a href="/reference/androidx/compose/ui/test/TestMonotonicFrameClock.html">TestMonotonicFrameClock</a></code> in milliseconds.</p>
+      </div>
+    </div>
+  </body>
+</html>

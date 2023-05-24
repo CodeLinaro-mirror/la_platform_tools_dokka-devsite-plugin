@@ -60,7 +60,9 @@ import androidx.compose.material.Text
 
 Text(
     &quot;Text with  square border&quot;,
-    modifier = Modifier.border(4.dp, Color.Magenta).padding(10.dp)
+    modifier = Modifier
+        .border(4.dp, Color.Magenta)
+        .padding(10.dp)
 )</pre>
         <p>()</p>
         <div class="devsite-table-wrapper">
@@ -108,9 +110,110 @@ val gradientBrush = Brush.horizontalGradient(
 )
 Text(
     &quot;Text with gradient border&quot;,
-    modifier = Modifier.border(width = 2.dp, brush = gradientBrush, shape = CircleShape)
+    modifier = Modifier
+        .border(width = 2.dp, brush = gradientBrush, shape = CircleShape)
         .padding(10.dp)
 )</pre>
+        <p>()</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+
+val widthRange = (1..10)
+var width by remember { mutableStateOf((widthRange.random()).dp) }
+
+val shapes = remember {
+    listOf(CutCornerShape(8.dp), CircleShape, RoundedCornerShape(20))
+}
+var selectedShape by remember { mutableStateOf(shapes.random()) }
+
+val colors = listOf(
+    Color.Black,
+    Color.DarkGray,
+    Color.Gray,
+    Color.LightGray,
+    Color.White,
+    Color.Red,
+    Color.Blue,
+    Color.Green,
+    Color.Yellow,
+    Color.Cyan,
+    Color.Magenta
+)
+var gradientBrush by remember {
+    mutableStateOf(
+        Brush.horizontalGradient(
+            colors = listOf(colors.random(), colors.random(), colors.random()),
+            startX = 0.0f,
+            endX = 500.0f,
+            tileMode = TileMode.Repeated
+        )
+    )
+}
+
+Column(Modifier.padding(2.dp)) {
+    Text(text = &quot;Update border with buttons&quot;)
+    Row {
+        Button(
+            modifier = Modifier.width(60.dp),
+            onClick = {
+
+                width = (widthRange.random()).dp
+            }
+        ) {
+            Text(
+                fontSize = 8.sp,
+                text = &quot;width&quot;
+            )
+        }
+        Button(
+            modifier = Modifier.width(60.dp),
+            onClick = {
+                gradientBrush = Brush.horizontalGradient(
+                    colors = listOf(colors.random(), colors.random(), colors.random()),
+                    startX = 0.0f,
+                    endX = 500.0f,
+                    tileMode = TileMode.Repeated
+                )
+            }
+        ) {
+            Text(
+                fontSize = 8.sp,
+                text = &quot;brush&quot;
+            )
+        }
+        Button(
+            modifier = Modifier.width(60.dp),
+            onClick = {
+                selectedShape = shapes.random()
+            }
+        ) {
+            Text(
+                fontSize = 8.sp,
+                text = &quot;shape&quot;
+            )
+        }
+    }
+    Text(
+        &quot;Dynamic border&quot;,
+        modifier = Modifier
+            .border(
+                width = width,
+                brush = gradientBrush,
+                shape = selectedShape
+            )
+            .padding(10.dp)
+    )
+}</pre>
         <p>()</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -159,10 +262,12 @@ import androidx.compose.material.Text
 
 Text(
     &quot;Text with gradient border&quot;,
-    modifier = Modifier.border(
-        border = BorderStroke(2.dp, Color.Blue),
-        shape = CutCornerShape(8.dp)
-    ).padding(10.dp)
+    modifier = Modifier
+        .border(
+            border = BorderStroke(2.dp, Color.Blue),
+            shape = CutCornerShape(8.dp)
+        )
+        .padding(10.dp)
 )</pre>
         <p>()</p>
         <div class="devsite-table-wrapper">

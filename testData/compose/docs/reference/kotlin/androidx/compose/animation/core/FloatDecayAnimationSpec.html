@@ -6,12 +6,21 @@
   </head>
   <body>
     <div id="metadata-info-block">
-      <div id="source-link"><a href="https://cs.android.com/search?q=file:-core/androidx/compose/animation/core/FloatDecayAnimationSpec.kt+class:androidx.compose.animation.core.FloatDecayAnimationSpec&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/animation/core/FloatDecayAnimationSpec.kt+class:androidx.compose.animation.core.FloatDecayAnimationSpec&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>FloatDecayAnimationSpec</h1>
-    <p>
-      <pre>interface <a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html">FloatDecayAnimationSpec</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>interface <a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html">FloatDecayAnimationSpec</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
         <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/animation/core/FloatExponentialDecaySpec.html">FloatExponentialDecaySpec</a>, <a href="/reference/kotlin/androidx/compose/animation/SplineBasedFloatDecayAnimationSpec.html">SplineBasedFloatDecayAnimationSpec</a></div>
       </span>
@@ -44,250 +53,295 @@
     <p>This animation interface is intended to be stateless, just like Animation<T>. But unlike Animation<T>, DecayAnimation does not have an end value defined. The end value is a result of the animation rather than an input.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public functions</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html#getDurationNanos(kotlin.Float,kotlin.Float)">getDurationNanos</a>(initialValue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
-              <p>Returns the duration of the decay animation, in nanoseconds.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html#getTargetValue(kotlin.Float,kotlin.Float)">getTargetValue</a>(initialValue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
-              <p>Returns the target value of the animation based on the starting condition of the animation ( i.e. start value and start velocity).</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html#getValueFromNanos(kotlin.Long,kotlin.Float,kotlin.Float)">getValueFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a><br>)</code></div>
-              <p>Returns the value of the animation at the given time.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html#getVelocityFromNanos(kotlin.Long,kotlin.Float,kotlin.Float)">getVelocityFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a><br>)</code></div>
-              <p>Returns the velocity of the animation at the given time.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html#getDurationNanos(kotlin.Float,kotlin.Float)">getDurationNanos</a>(initialValue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <p>Returns the duration of the decay animation, in nanoseconds.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html#getTargetValue(kotlin.Float,kotlin.Float)">getTargetValue</a>(initialValue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <p>Returns the target value of the animation based on the starting condition of the animation ( i.e. start value and start velocity).</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html#getValueFromNanos(kotlin.Long,kotlin.Float,kotlin.Float)">getValueFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a><br>)</code></div>
+                <p>Returns the value of the animation at the given time.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html#getVelocityFromNanos(kotlin.Long,kotlin.Float,kotlin.Float)">getVelocityFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a><br>)</code></div>
+                <p>Returns the velocity of the animation at the given time.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public properties</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html#absVelocityThreshold()">absVelocityThreshold</a></code></div>
-              <p>This is the absolute value of a velocity threshold, below which the animation is considered finished.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html#absVelocityThreshold()">absVelocityThreshold</a></code></div>
+                <p>This is the absolute value of a velocity threshold, below which the animation is considered finished.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Extension functions</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;T&gt;</code></td>
-            <td>
-              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html">FloatDecayAnimationSpec</a>.<a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html#(androidx.compose.animation.core.FloatDecayAnimationSpec).generateDecayAnimationSpec()">generateDecayAnimationSpec</a>()</code></div>
-              <p>Creates a <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a></code> from a <code><a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html">FloatDecayAnimationSpec</a></code> by applying the given <code><a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html">FloatDecayAnimationSpec</a></code> on every dimension of the <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> that <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.FloatDecayAnimationSpec).generateDecayAnimationSpec()">T</a></code> converts to.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Extension functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;T&gt;</code></td>
+              <td>
+                <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html">FloatDecayAnimationSpec</a>.<a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html#(androidx.compose.animation.core.FloatDecayAnimationSpec).generateDecayAnimationSpec()">generateDecayAnimationSpec</a>()</code></div>
+                <p>Creates a <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a></code> from a <code><a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html">FloatDecayAnimationSpec</a></code> by applying the given <code><a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html">FloatDecayAnimationSpec</a></code> on every dimension of the <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> that <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.FloatDecayAnimationSpec).generateDecayAnimationSpec()">T</a></code> converts to.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
-    <div class="list">
-      <h2>Public functions</h2>
-      <div class="api-item"><a name="getDurationNanos(kotlin.Float, kotlin.Float)"></a><a name="getDurationNanos-kotlin.Float-kotlin.Float-"></a><a name="getdurationnanos"></a>
-        <h3 class="api-name" id="getDurationNanos(kotlin.Float,kotlin.Float)">getDurationNanos</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html#getDurationNanos(kotlin.Float,kotlin.Float)">getDurationNanos</a>(initialValue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></pre>
-        <p>Returns the duration of the decay animation, in nanoseconds.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>initialValue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
-                <td>
-                  <p>start value of the animation</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
-                <td>
-                  <p>start velocity of the animation</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="getDurationNanos(kotlin.Float, kotlin.Float)"></a><a name="getDurationNanos-kotlin.Float-kotlin.Float-"></a><a name="getdurationnanos"></a>
+          <h3 class="api-name" id="getDurationNanos(kotlin.Float,kotlin.Float)">getDurationNanos</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html#getDurationNanos(kotlin.Float,kotlin.Float)">getDurationNanos</a>(initialValue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></pre>
+          <p>Returns the duration of the decay animation, in nanoseconds.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>initialValue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>start value of the animation</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>start velocity of the animation</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getTargetValue(kotlin.Float, kotlin.Float)"></a><a name="getTargetValue-kotlin.Float-kotlin.Float-"></a><a name="gettargetvalue"></a>
+          <h3 class="api-name" id="getTargetValue(kotlin.Float,kotlin.Float)">getTargetValue</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html#getTargetValue(kotlin.Float,kotlin.Float)">getTargetValue</a>(initialValue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+          <p>Returns the target value of the animation based on the starting condition of the animation ( i.e. start value and start velocity).</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>initialValue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The start value of the animation</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The start velocity of the animation</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getValueFromNanos(kotlin.Long, kotlin.Float, kotlin.Float)"></a><a name="getValueFromNanos-kotlin.Long-kotlin.Float-kotlin.Float-"></a><a name="getvaluefromnanos"></a>
+          <h3 class="api-name" id="getValueFromNanos(kotlin.Long,kotlin.Float,kotlin.Float)">getValueFromNanos</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html#getValueFromNanos(kotlin.Long,kotlin.Float,kotlin.Float)">getValueFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+          <p>Returns the value of the animation at the given time.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
+                  <td>
+                    <p>The time elapsed in milliseconds since the start of the animation</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>initialValue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The start value of the animation</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The start velocity of the animation</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getVelocityFromNanos(kotlin.Long, kotlin.Float, kotlin.Float)"></a><a name="getVelocityFromNanos-kotlin.Long-kotlin.Float-kotlin.Float-"></a><a name="getvelocityfromnanos"></a>
+          <h3 class="api-name" id="getVelocityFromNanos(kotlin.Long,kotlin.Float,kotlin.Float)">getVelocityFromNanos</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html#getVelocityFromNanos(kotlin.Long,kotlin.Float,kotlin.Float)">getVelocityFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+          <p>Returns the velocity of the animation at the given time.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
+                  <td>
+                    <p>The time elapsed in milliseconds since the start of the animation</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>initialValue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The start value of the animation</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>The start velocity of the animation</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-      <div class="api-item"><a name="getTargetValue(kotlin.Float, kotlin.Float)"></a><a name="getTargetValue-kotlin.Float-kotlin.Float-"></a><a name="gettargetvalue"></a>
-        <h3 class="api-name" id="getTargetValue(kotlin.Float,kotlin.Float)">getTargetValue</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html#getTargetValue(kotlin.Float,kotlin.Float)">getTargetValue</a>(initialValue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
-        <p>Returns the target value of the animation based on the starting condition of the animation ( i.e. start value and start velocity).</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>initialValue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
-                <td>
-                  <p>The start value of the animation</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
-                <td>
-                  <p>The start velocity of the animation</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getAbsVelocityThreshold()"></a><a name="setAbsVelocityThreshold()"></a><a name="getAbsVelocityThreshold--"></a><a name="setAbsVelocityThreshold--"></a>
+          <h3 class="api-name" id="absVelocityThreshold()">absVelocityThreshold</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html#absVelocityThreshold()">absVelocityThreshold</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+          <p>This is the absolute value of a velocity threshold, below which the animation is considered finished.</p>
         </div>
       </div>
-      <div class="api-item"><a name="getValueFromNanos(kotlin.Long, kotlin.Float, kotlin.Float)"></a><a name="getValueFromNanos-kotlin.Long-kotlin.Float-kotlin.Float-"></a><a name="getvaluefromnanos"></a>
-        <h3 class="api-name" id="getValueFromNanos(kotlin.Long,kotlin.Float,kotlin.Float)">getValueFromNanos</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html#getValueFromNanos(kotlin.Long,kotlin.Float,kotlin.Float)">getValueFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
-        <p>Returns the value of the animation at the given time.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
-                <td>
-                  <p>The time elapsed in milliseconds since the start of the animation</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>initialValue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
-                <td>
-                  <p>The start value of the animation</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
-                <td>
-                  <p>The start velocity of the animation</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Extension functions</h2>
+        <div class="api-item"><a name="-androidx.compose.animation.core.FloatDecayAnimationSpec-.generateDecayAnimationSpec--"></a><a name="generatedecayanimationspec"></a>
+          <h3 class="api-name" id="(androidx.compose.animation.core.FloatDecayAnimationSpec).generateDecayAnimationSpec()">generateDecayAnimationSpec</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html">FloatDecayAnimationSpec</a>.<a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html#(androidx.compose.animation.core.FloatDecayAnimationSpec).generateDecayAnimationSpec()">generateDecayAnimationSpec</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;T&gt;</pre>
+          <p>Creates a <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a></code> from a <code><a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html">FloatDecayAnimationSpec</a></code> by applying the given <code><a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html">FloatDecayAnimationSpec</a></code> on every dimension of the <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> that <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.FloatDecayAnimationSpec).generateDecayAnimationSpec()">T</a></code> converts to.</p>
         </div>
       </div>
-      <div class="api-item"><a name="getVelocityFromNanos(kotlin.Long, kotlin.Float, kotlin.Float)"></a><a name="getVelocityFromNanos-kotlin.Long-kotlin.Float-kotlin.Float-"></a><a name="getvelocityfromnanos"></a>
-        <h3 class="api-name" id="getVelocityFromNanos(kotlin.Long,kotlin.Float,kotlin.Float)">getVelocityFromNanos</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html#getVelocityFromNanos(kotlin.Long,kotlin.Float,kotlin.Float)">getVelocityFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
-        <p>Returns the velocity of the animation at the given time.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
-                <td>
-                  <p>The time elapsed in milliseconds since the start of the animation</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>initialValue:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
-                <td>
-                  <p>The start value of the animation</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
-                <td>
-                  <p>The start velocity of the animation</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-    <div class="list">
-      <h2>Public properties</h2>
-      <div class="api-item"><a name="getAbsVelocityThreshold()"></a><a name="setAbsVelocityThreshold()"></a><a name="getAbsVelocityThreshold--"></a><a name="setAbsVelocityThreshold--"></a>
-        <h3 class="api-name" id="absVelocityThreshold()">absVelocityThreshold</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html#absVelocityThreshold()">absVelocityThreshold</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
-        <p>This is the absolute value of a velocity threshold, below which the animation is considered finished.</p>
-      </div>
-    </div>
-    <div class="list">
-      <h2>Extension functions</h2>
-      <div class="api-item"><a name="-androidx.compose.animation.core.FloatDecayAnimationSpec-.generateDecayAnimationSpec--"></a><a name="generatedecayanimationspec"></a>
-        <h3 class="api-name" id="(androidx.compose.animation.core.FloatDecayAnimationSpec).generateDecayAnimationSpec()">generateDecayAnimationSpec</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html">FloatDecayAnimationSpec</a>.<a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html#(androidx.compose.animation.core.FloatDecayAnimationSpec).generateDecayAnimationSpec()">generateDecayAnimationSpec</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;T&gt;</pre>
-        <p>Creates a <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a></code> from a <code><a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html">FloatDecayAnimationSpec</a></code> by applying the given <code><a href="/reference/kotlin/androidx/compose/animation/core/FloatDecayAnimationSpec.html">FloatDecayAnimationSpec</a></code> on every dimension of the <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> that <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.FloatDecayAnimationSpec).generateDecayAnimationSpec()">T</a></code> converts to.</p>
-      </div>
-    </div>
+    </devsite-filter >
   </body>
 </html>

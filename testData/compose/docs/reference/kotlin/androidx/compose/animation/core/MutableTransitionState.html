@@ -6,12 +6,21 @@
   </head>
   <body>
     <div id="metadata-info-block">
-      <div id="source-link"><a href="https://cs.android.com/search?q=file:-core/androidx/compose/animation/core/Transition.kt+class:androidx.compose.animation.core.MutableTransitionState&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/animation/core/Transition.kt+class:androidx.compose.animation.core.MutableTransitionState&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>MutableTransitionState</h1>
-    <p>
-      <pre>class <a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a>&lt;S&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>class <a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a>&lt;S&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <hr>
     <p>MutableTransitionState contains two fields: <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code>. <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a></code> is initialized to the provided initialState, and can only be mutated by a <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code>. <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code> is also initialized to initialState. It can be mutated to alter the course of a transition animation that is created with the <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a></code> using <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(kotlin.Any,kotlin.String)">updateTransition</a></code>. Both <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code> are backed by a <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> object.</p>
     <pre class="prettyprint lang-kotlin">
@@ -89,81 +98,107 @@ fun PoppingInCard() {
     </div>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public constructors</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td>
-              <div><code>&lt;S&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#MutableTransitionState(kotlin.Any)">MutableTransitionState</a>(initialState:&nbsp;S)</code></div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="93%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public constructors</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td>
+                <div><code>&lt;S&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#MutableTransitionState(kotlin.Any)">MutableTransitionState</a>(initialState:&nbsp;S)</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public properties</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>S</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a></code></div>
-              <p>Current state of the transition.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#isIdle()">isIdle</a></code></div>
-              <p><code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#isIdle()">isIdle</a></code> returns whether the transition has finished running.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>S</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code></div>
-              <p>Target state of the transition.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>S</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a></code></div>
+                <p>Current state of the transition.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#isIdle()">isIdle</a></code></div>
+                <p><code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#isIdle()">isIdle</a></code> returns whether the transition has finished running.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>S</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code></div>
+                <p>Target state of the transition.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
-    <div class="list">
-      <h2>Public constructors</h2>
-      <div class="api-item"><a name="MutableTransitionState-kotlin.Any-"></a><a name="mutabletransitionstate"></a>
-        <h3 class="api-name" id="MutableTransitionState(kotlin.Any)">MutableTransitionState</h3>
-        <pre class="api-signature no-pretty-print">&lt;S&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#MutableTransitionState(kotlin.Any)">MutableTransitionState</a>(initialState:&nbsp;S)</pre>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public constructors</h2>
+        <div class="api-item"><a name="MutableTransitionState-kotlin.Any-"></a><a name="mutabletransitionstate"></a>
+          <h3 class="api-name" id="MutableTransitionState(kotlin.Any)">MutableTransitionState</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">&lt;S&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#MutableTransitionState(kotlin.Any)">MutableTransitionState</a>(initialState:&nbsp;S)</pre>
+        </div>
       </div>
-    </div>
-    <div class="list">
-      <h2>Public properties</h2>
-      <div class="api-item"><a name="getCurrentState()"></a><a name="setCurrentState()"></a><a name="getCurrentState--"></a><a name="setCurrentState--"></a>
-        <h3 class="api-name" id="currentState()">currentState</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a>:&nbsp;S</pre>
-        <p>Current state of the transition. <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a></code> is initialized to the initialState that the <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a></code> is constructed with.</p>
-        <p>It will be updated by the Transition that is created with this <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a></code> when the transition arrives at a new state.</p>
-      </div>
-      <div class="api-item"><a name="getIsIdle()"></a><a name="setIsIdle()"></a><a name="getIsIdle--"></a><a name="setIsIdle--"></a>
-        <h3 class="api-name" id="isIdle()">isIdle</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#isIdle()">isIdle</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
-        <p><code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#isIdle()">isIdle</a></code> returns whether the transition has finished running. This will return false once the <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code> has been set to a different value than <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a></code>.</p>
-        <pre class="prettyprint lang-kotlin">
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getCurrentState()"></a><a name="setCurrentState()"></a><a name="getCurrentState--"></a><a name="setCurrentState--"></a>
+          <h3 class="api-name" id="currentState()">currentState</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a>:&nbsp;S</pre>
+          <p>Current state of the transition. <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a></code> is initialized to the initialState that the <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a></code> is constructed with.</p>
+          <p>It will be updated by the Transition that is created with this <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a></code> when the transition arrives at a new state.</p>
+        </div>
+        <div class="api-item"><a name="getIsIdle()"></a><a name="setIsIdle()"></a><a name="getIsIdle--"></a><a name="setIsIdle--"></a>
+          <h3 class="api-name" id="isIdle()">isIdle</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#isIdle()">isIdle</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p><code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#isIdle()">isIdle</a></code> returns whether the transition has finished running. This will return false once the <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code> has been set to a different value than <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a></code>.</p>
+          <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.animateDp
@@ -212,13 +247,16 @@ fun ItemsSample(selectedId: Int) {
         }
     }
 }</pre>
+        </div>
+        <div class="api-item"><a name="getTargetState()"></a><a name="setTargetState()"></a><a name="getTargetState--"></a><a name="setTargetState--"></a>
+          <h3 class="api-name" id="targetState()">targetState</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">var&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a>:&nbsp;S</pre>
+          <p>Target state of the transition. <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code> is initialized to the initialState that the <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a></code> is constructed with.</p>
+          <p>It can be updated to a new state at any time. When that happens, the <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code> that is created with this <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a></code> will update its <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html#targetState()">Transition.targetState</a></code> to the same and subsequently starts a transition animation to animate from the current values to the new target.</p>
+        </div>
       </div>
-      <div class="api-item"><a name="getTargetState()"></a><a name="setTargetState()"></a><a name="getTargetState--"></a><a name="setTargetState--"></a>
-        <h3 class="api-name" id="targetState()">targetState</h3>
-        <pre class="api-signature no-pretty-print">var&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a>:&nbsp;S</pre>
-        <p>Target state of the transition. <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code> is initialized to the initialState that the <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a></code> is constructed with.</p>
-        <p>It can be updated to a new state at any time. When that happens, the <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code> that is created with this <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a></code> will update its <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html#targetState()">Transition.targetState</a></code> to the same and subsequently starts a transition animation to animate from the current values to the new target.</p>
-      </div>
-    </div>
+    </devsite-filter >
   </body>
 </html>

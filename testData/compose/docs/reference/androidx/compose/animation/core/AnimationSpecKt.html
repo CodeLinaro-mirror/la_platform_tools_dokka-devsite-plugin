@@ -85,8 +85,8 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.ui.graphics.graphicsLayer
 
 // This is an infinite progress indicator with 3 pulsing dots that grow and shrink.
@@ -170,6 +170,28 @@ Row {
         <h3 class="api-name" id="keyframes(kotlin.Function1)">keyframes</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/KeyframesSpec.html">KeyframesSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/animation/core/AnimationSpecKt.html#keyframes(kotlin.Function1)">keyframes</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">KeyframesSpec.KeyframesSpecConfig</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;init<br>)</pre>
         <p>Creates a <code><a href="/reference/androidx/compose/animation/core/KeyframesSpec.html">KeyframesSpec</a></code> animation, initialized with <code><a href="/reference/androidx/compose/animation/core/package-summary.html#keyframes(kotlin.Function1)">init</a></code>. For example:</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.keyframes
+
+keyframes {
+    0f at 0 // ms  // Optional
+    0.4f at 75 // ms
+    0.4f at 225 // ms
+    0f at 375 // ms  // Optional
+    durationMillis = 375
+}</pre>
+        <p>Keyframes can also be associated with a particular <code><a href="/reference/androidx/compose/animation/core/Easing.html">Easing</a></code> function:</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.keyframes
+
+// Use FastOutSlowInEasing for the interval from 0 to 50 ms, and LinearOutSlowInEasing for the
+// time between 50 and 100ms
+keyframes&lt;Float&gt; {
+    durationMillis = 100
+    0f at 0 with FastOutSlowInEasing
+    1.5f at 50 with LinearOutSlowInEasing
+    1f at 100
+}</pre>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>

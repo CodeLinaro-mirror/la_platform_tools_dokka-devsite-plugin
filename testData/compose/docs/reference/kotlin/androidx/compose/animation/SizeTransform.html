@@ -9,9 +9,18 @@
       <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/animation/AnimatedContent.kt+class:androidx.compose.animation.SizeTransform&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>SizeTransform</h1>
-    <p>
-      <pre>@<a href="/reference/kotlin/androidx/compose/animation/ExperimentalAnimationApi.html">ExperimentalAnimationApi</a><br>interface <a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html">SizeTransform</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>interface <a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html">SizeTransform</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <hr>
     <p><code><a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html">SizeTransform</a></code> defines how to transform from one size to another when the size of the content changes. When <code><a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#clip()">clip</a></code> is true, the content will be clipped to the animation size. <code><a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#createAnimationSpec(androidx.compose.ui.unit.IntSize,androidx.compose.ui.unit.IntSize)">createAnimationSpec</a></code> specifies the animation spec for the size animation based on the initial and target size.</p>
     <pre class="prettyprint lang-kotlin">
@@ -55,64 +64,84 @@ val transitionSpec: AnimatedContentScope&lt;CartState&gt;.() -&gt; ContentTransf
     }</pre>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public functions</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#createAnimationSpec(androidx.compose.ui.unit.IntSize,androidx.compose.ui.unit.IntSize)">createAnimationSpec</a>(initialSize:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a>,&nbsp;targetSize:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a>)</code></div>
-              <p>This allows <code><a href="/reference/kotlin/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a></code> to be defined based on the <code><a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#createAnimationSpec(androidx.compose.ui.unit.IntSize,androidx.compose.ui.unit.IntSize)">initialSize</a></code> before the size animation and the <code><a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#createAnimationSpec(androidx.compose.ui.unit.IntSize,androidx.compose.ui.unit.IntSize)">targetSize</a></code> of the animation.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#createAnimationSpec(androidx.compose.ui.unit.IntSize,androidx.compose.ui.unit.IntSize)">createAnimationSpec</a>(initialSize:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a>,&nbsp;targetSize:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a>)</code></div>
+                <p>This allows <code><a href="/reference/kotlin/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a></code> to be defined based on the <code><a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#createAnimationSpec(androidx.compose.ui.unit.IntSize,androidx.compose.ui.unit.IntSize)">initialSize</a></code> before the size animation and the <code><a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#createAnimationSpec(androidx.compose.ui.unit.IntSize,androidx.compose.ui.unit.IntSize)">targetSize</a></code> of the animation.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public properties</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#clip()">clip</a></code></div>
-              <p>Whether the content should be clipped using the animated size.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#clip()">clip</a></code></div>
+                <p>Whether the content should be clipped using the animated size.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
-    <div class="list">
-      <h2>Public functions</h2>
-      <div class="api-item"><a name="createAnimationSpec(androidx.compose.ui.unit.IntSize, androidx.compose.ui.unit.IntSize)"></a><a name="createAnimationSpec-androidx.compose.ui.unit.IntSize-androidx.compose.ui.unit.IntSize-"></a><a name="createanimationspec"></a>
-        <h3 class="api-name" id="createAnimationSpec(androidx.compose.ui.unit.IntSize,androidx.compose.ui.unit.IntSize)">createAnimationSpec</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#createAnimationSpec(androidx.compose.ui.unit.IntSize,androidx.compose.ui.unit.IntSize)">createAnimationSpec</a>(initialSize:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a>,&nbsp;targetSize:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a>&gt;</pre>
-        <p>This allows <code><a href="/reference/kotlin/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a></code> to be defined based on the <code><a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#createAnimationSpec(androidx.compose.ui.unit.IntSize,androidx.compose.ui.unit.IntSize)">initialSize</a></code> before the size animation and the <code><a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#createAnimationSpec(androidx.compose.ui.unit.IntSize,androidx.compose.ui.unit.IntSize)">targetSize</a></code> of the animation.</p>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="createAnimationSpec(androidx.compose.ui.unit.IntSize, androidx.compose.ui.unit.IntSize)"></a><a name="createAnimationSpec-androidx.compose.ui.unit.IntSize-androidx.compose.ui.unit.IntSize-"></a><a name="createanimationspec"></a>
+          <h3 class="api-name" id="createAnimationSpec(androidx.compose.ui.unit.IntSize,androidx.compose.ui.unit.IntSize)">createAnimationSpec</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#createAnimationSpec(androidx.compose.ui.unit.IntSize,androidx.compose.ui.unit.IntSize)">createAnimationSpec</a>(initialSize:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a>,&nbsp;targetSize:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a>&gt;</pre>
+          <p>This allows <code><a href="/reference/kotlin/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a></code> to be defined based on the <code><a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#createAnimationSpec(androidx.compose.ui.unit.IntSize,androidx.compose.ui.unit.IntSize)">initialSize</a></code> before the size animation and the <code><a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#createAnimationSpec(androidx.compose.ui.unit.IntSize,androidx.compose.ui.unit.IntSize)">targetSize</a></code> of the animation.</p>
+        </div>
       </div>
-    </div>
-    <div class="list">
-      <h2>Public properties</h2>
-      <div class="api-item"><a name="getClip()"></a><a name="setClip()"></a><a name="getClip--"></a><a name="setClip--"></a>
-        <h3 class="api-name" id="clip()">clip</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#clip()">clip</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
-        <p>Whether the content should be clipped using the animated size.</p>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getClip()"></a><a name="setClip()"></a><a name="getClip--"></a><a name="setClip--"></a>
+          <h3 class="api-name" id="clip()">clip</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#clip()">clip</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>Whether the content should be clipped using the animated size.</p>
+        </div>
       </div>
-    </div>
+    </devsite-filter >
   </body>
 </html>

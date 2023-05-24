@@ -1,0 +1,121 @@
+<html devsite="true">
+  <head>
+    <title>PlatformTextInputPluginRegistry</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/text/input/PlatformTextInputAdapter.kt+class:androidx.compose.ui.text.input.PlatformTextInputPluginRegistry&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>PlatformTextInputPluginRegistry</h1>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>@<a href="/reference/kotlin/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>interface <a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputPluginRegistry.html">PlatformTextInputPluginRegistry</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
+        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputPluginRegistryImpl.html">PlatformTextInputPluginRegistryImpl</a></div>
+      </span>
+      <div id="subclasses-direct-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputPluginRegistryImpl.html">PlatformTextInputPluginRegistryImpl</a></code></td>
+                <td>
+                  <p>Implementation of <code><a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputPluginRegistry.html">PlatformTextInputPluginRegistry</a></code> that manages a map of adapters to cached services and allows retrieval of the first active one.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
+    <hr>
+    <p>The entry point to the text input plugin API.</p>
+    <p>This is a low-level API for code that talks directly to the platform input method framework (i.e. <code>InputMethodManager</code>). Higher-level text input APIs in the Foundation library are more appropriate for most cases. <em><b>The only time a new service type and adapter should be defined is if you are building your own text input system from scratch, including your own <code>TextField</code> composables.</b></em></p>
+    <p>It is expected that the total number of adapters for a given registry will be only one in most cases, or two in rare cases where an entirely separate text input system – from platform IME client to <code>TextField</code> composables – is being used in the same composition.</p>
+    <p>See <code><a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputPluginRegistry.html#rememberAdapter(androidx.compose.ui.text.input.PlatformTextInputPlugin)">rememberAdapter</a></code> for more information.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>T</code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputAdapter.html">PlatformTextInputAdapter</a>&gt; <a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputPluginRegistry.html#rememberAdapter(androidx.compose.ui.text.input.PlatformTextInputPlugin)">rememberAdapter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;plugin:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputPlugin.html">PlatformTextInputPlugin</a>&lt;T&gt;<br>)</code></div>
+                <p>Returns an instance of the <code><a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputAdapter.html">PlatformTextInputAdapter</a></code> type <code><a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputPluginRegistry.html#rememberAdapter(androidx.compose.ui.text.input.PlatformTextInputPlugin)">T</a></code> specified by <code><a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputPluginRegistry.html#rememberAdapter(androidx.compose.ui.text.input.PlatformTextInputPlugin)">plugin</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="rememberAdapter-androidx.compose.ui.text.input.PlatformTextInputPlugin-"></a><a name="rememberadapter"></a>
+          <h3 class="api-name" id="rememberAdapter(androidx.compose.ui.text.input.PlatformTextInputPlugin)">rememberAdapter</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputAdapter.html">PlatformTextInputAdapter</a>&gt; <a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputPluginRegistry.html#rememberAdapter(androidx.compose.ui.text.input.PlatformTextInputPlugin)">rememberAdapter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;plugin:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputPlugin.html">PlatformTextInputPlugin</a>&lt;T&gt;<br>):&nbsp;T</pre>
+          <p>Returns an instance of the <code><a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputAdapter.html">PlatformTextInputAdapter</a></code> type <code><a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputPluginRegistry.html#rememberAdapter(androidx.compose.ui.text.input.PlatformTextInputPlugin)">T</a></code> specified by <code><a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputPluginRegistry.html#rememberAdapter(androidx.compose.ui.text.input.PlatformTextInputPlugin)">plugin</a></code>.</p>
+          <p>The returned adapter instance will be shared by all callers of this method passing the same <code><a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputPluginRegistry.html#rememberAdapter(androidx.compose.ui.text.input.PlatformTextInputPlugin)">plugin</a></code> object. The adapter will be created when the first call is made, then cached and returned by every subsequent call in the same or subsequent compositions. When there are no longer any calls to this method for a given plugin, the adapter instance will be PlatformTextInputAdapter.onDisposed.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputAdapter.html">PlatformTextInputAdapter</a>&gt;</code></td>
+                  <td>
+                    <p>The type of <code><a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputAdapter.html">PlatformTextInputAdapter</a></code> that <code><a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputPluginRegistry.html#rememberAdapter(androidx.compose.ui.text.input.PlatformTextInputPlugin)">plugin</a></code> creates.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>plugin:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputPlugin.html">PlatformTextInputPlugin</a>&lt;T&gt;</code></td>
+                  <td>
+                    <p>The factory for adapters and the key into the cache of those adapters.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </devsite-filter >
+  </body>
+</html>

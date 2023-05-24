@@ -1,0 +1,1507 @@
+<html devsite="true">
+  <head>
+    <title>TouchInjectionScope</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/test/TouchInjectionScope.kt+class:androidx.compose.ui.test.TouchInjectionScope&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>TouchInjectionScope</h1>
+    <p>
+      <pre>@<a href="/reference/androidx/compose/ui/test/internal/JvmDefaultWithCompatibility.html">JvmDefaultWithCompatibility</a><br>public interface <a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a> extends <a href="/reference/androidx/compose/ui/test/InjectionScope.html">InjectionScope</a></pre>
+    </p>
+    <hr>
+    <p>The receiver scope of the touch input injection lambda from <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performTouchInput(kotlin.Function1)">performTouchInput</a></code>.</p>
+    <p>The functions in <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a></code> can roughly be divided into two groups: full gestures and individual touch events. The individual touch events are: <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#down(kotlin.Int,androidx.compose.ui.geometry.Offset)">down</a></code>, <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#move(kotlin.Long)">move</a></code> and friends, <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#up(kotlin.Int)">up</a></code>, <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#cancel(kotlin.Long)">cancel</a></code> and <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#advanceEventTime(kotlin.Long)">advanceEventTime</a></code>. Full gestures are all the other functions, like <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).click(androidx.compose.ui.geometry.Offset)">click</a></code>, <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">doubleClick</a></code>, <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipe(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">swipe</a></code>, etc. These are built on top of the individual events and serve as a good example on how you can build your own full gesture functions.</p>
+    <p>A touch gesture is started with a <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#down(kotlin.Int,androidx.compose.ui.geometry.Offset)">down</a></code> event, followed by a sequence of <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#move(kotlin.Long)">move</a></code> events and finally an <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#up(kotlin.Int)">up</a></code> event, optionally combined with more sets of <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#down(kotlin.Int,androidx.compose.ui.geometry.Offset)">down</a></code> and <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#up(kotlin.Int)">up</a></code> events for multi-touch gestures. Most methods accept a pointerId to specify which pointer (finger) the event applies to. Movement can be expressed absolutely with <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveTo(kotlin.Int,androidx.compose.ui.geometry.Offset,kotlin.Long)">moveTo</a></code> and <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#updatePointerTo(kotlin.Int,androidx.compose.ui.geometry.Offset)">updatePointerTo</a></code>, or relative to the current pointer position with <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveBy(kotlin.Int,androidx.compose.ui.geometry.Offset,kotlin.Long)">moveBy</a></code> and <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#updatePointerBy(kotlin.Int,androidx.compose.ui.geometry.Offset)">updatePointerBy</a></code>. The <code>moveTo/By</code> methods enqueue an event immediately, while the <code>updatePointerTo/By</code> methods don't. This allows you to update the position of multiple pointers in a single <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#move(kotlin.Long)">move</a></code> event for multi-touch gestures. Touch gestures can be cancelled with <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#cancel(kotlin.Long)">cancel</a></code>. All events, regardless the method used, will always contain the current position of <em>all</em> pointers.</p>
+    <p>The entire event injection state is shared between all <code>perform.*Input</code> methods, meaning you can continue an unfinished touch gesture in a subsequent invocation of <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performTouchInput(kotlin.Function1)">performTouchInput</a></code> or <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performMultiModalInput(kotlin.Function1)">performMultiModalInput</a></code>. Note however that while the pointer positions are retained across invocation of <code>perform.*Input</code> methods, they are always manipulated in the current node's local coordinate system. That means that two subsequent invocations of <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performTouchInput(kotlin.Function1)">performTouchInput</a></code> on different nodes will report a different <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#currentPosition(kotlin.Int)">currentPosition</a></code>, even though it is actually the same position on the screen.</p>
+    <p>All events sent by these methods are batched together and sent as a whole after <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performTouchInput(kotlin.Function1)">performTouchInput</a></code> has executed its code block. Because gestures don't have to be defined all in the same <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performTouchInput(kotlin.Function1)">performTouchInput</a></code> block, keep in mind that while the gesture is not complete, all code you execute in between these blocks will be executed while imaginary fingers are actively touching the screen. The events sent as part of the same batch will not be interrupted by recomposition, however, if a gesture spans multiple <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performTouchInput(kotlin.Function1)">performTouchInput</a></code> blocks it is important to remember that recomposition, layout and drawing could take place during the gesture, which may lead to events being injected into a moving target. As pointer positions are manipulated in the current node's local coordinate system, this could lead to issues caused by the fact that part of the gesture will take effect before the rest of the events have been enqueued.</p>
+    <p>Example of performing a click:</p>
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.test.click
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performTouchInput
+
+composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
+    .performTouchInput { click() }</pre>
+    <p>Example of performing a swipe up:</p>
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.test.swipeUp
+
+composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
+    .performTouchInput { swipeUp() }</pre>
+    <p>Example of performing an L-shaped gesture:</p>
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performTouchInput
+
+composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
+    .performTouchInput {
+        down(topLeft)
+        moveTo(topLeft + percentOffset(0f, .1f))
+        moveTo(topLeft + percentOffset(0f, .2f))
+        moveTo(topLeft + percentOffset(0f, .3f))
+        moveTo(topLeft + percentOffset(0f, .4f))
+        moveTo(centerLeft)
+        moveTo(centerLeft + percentOffset(.1f, 0f))
+        moveTo(centerLeft + percentOffset(.2f, 0f))
+        moveTo(centerLeft + percentOffset(.3f, 0f))
+        moveTo(centerLeft + percentOffset(.4f, 0f))
+        moveTo(center)
+        up()
+    }</pre>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">See also</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/test/InjectionScope.html">InjectionScope</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#cancel(kotlin.Long)">cancel</a>(long&nbsp;delayMillis)</code></div>
+              <p>Sends a cancel event <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#cancel(kotlin.Long)">delayMillis</a></code> after the last sent event to cancel the current gesture.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#currentPosition(kotlin.Int)">currentPosition</a>(int&nbsp;pointerId)</code></div>
+              <p>Returns the current position of the given <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#currentPosition(kotlin.Int)">pointerId</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#down(androidx.compose.ui.geometry.Offset)">down</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position)</code></div>
+              <p>Sends a down event for the default pointer at <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#down(androidx.compose.ui.geometry.Offset)">position</a></code> on the associated node.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#down(kotlin.Int,androidx.compose.ui.geometry.Offset)">down</a>(int&nbsp;pointerId,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position)</code></div>
+              <p>Sends a down event for the pointer with the given <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#down(kotlin.Int,androidx.compose.ui.geometry.Offset)">pointerId</a></code> at <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#down(kotlin.Int,androidx.compose.ui.geometry.Offset)">position</a></code> on the associated node.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#move(kotlin.Long)">move</a>(long&nbsp;delayMillis)</code></div>
+              <p>Sends a move event <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#move(kotlin.Long)">delayMillis</a></code> after the last sent event without updating any of the pointer positions.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveBy(androidx.compose.ui.geometry.Offset,kotlin.Long)">moveBy</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;delta,&nbsp;long&nbsp;delayMillis)</code></div>
+              <p>Sends a move event <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveBy(androidx.compose.ui.geometry.Offset,kotlin.Long)">delayMillis</a></code> after the last sent event on the associated node, with the position of the default pointer moved by the given <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveBy(androidx.compose.ui.geometry.Offset,kotlin.Long)">delta</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveBy(kotlin.Int,androidx.compose.ui.geometry.Offset,kotlin.Long)">moveBy</a>(int&nbsp;pointerId,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;delta,&nbsp;long&nbsp;delayMillis)</code></div>
+              <p>Sends a move event <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveBy(kotlin.Int,androidx.compose.ui.geometry.Offset,kotlin.Long)">delayMillis</a></code> after the last sent event on the associated node, with the position of the pointer with the given <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveBy(kotlin.Int,androidx.compose.ui.geometry.Offset,kotlin.Long)">pointerId</a></code> moved by the given <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveBy(kotlin.Int,androidx.compose.ui.geometry.Offset,kotlin.Long)">delta</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">moveTo</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position,&nbsp;long&nbsp;delayMillis)</code></div>
+              <p>Sends a move event <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">delayMillis</a></code> after the last sent event on the associated node, with the position of the default pointer updated to <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveTo(kotlin.Int,androidx.compose.ui.geometry.Offset,kotlin.Long)">moveTo</a>(int&nbsp;pointerId,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position,&nbsp;long&nbsp;delayMillis)</code></div>
+              <p>Sends a move event <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveTo(kotlin.Int,androidx.compose.ui.geometry.Offset,kotlin.Long)">delayMillis</a></code> after the last sent event on the associated node, with the position of the pointer with the given <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveTo(kotlin.Int,androidx.compose.ui.geometry.Offset,kotlin.Long)">pointerId</a></code> updated to <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveTo(kotlin.Int,androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default void</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistory(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">moveWithHistory</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>&gt;&nbsp;relativeHistoricalTimes,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&gt;&nbsp;historicalCoordinates,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;delayMillis<br>)</code></div>
+              <p>Sends a move event <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistory(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">delayMillis</a></code> after the last sent event without updating any of the pointer positions.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistoryMultiPointer(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">moveWithHistoryMultiPointer</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>&gt;&nbsp;relativeHistoricalTimes,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&gt;&gt;&nbsp;historicalCoordinates,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;delayMillis<br>)</code></div>
+              <p>Sends a move event <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistoryMultiPointer(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">delayMillis</a></code> after the last sent event without updating any of the pointer positions.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#up(kotlin.Int)">up</a>(int&nbsp;pointerId)</code></div>
+              <p>Sends an up event for the pointer with the given <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#up(kotlin.Int)">pointerId</a></code>, or the default pointer if <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#up(kotlin.Int)">pointerId</a></code> is omitted, on the associated node.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#updatePointerBy(kotlin.Int,androidx.compose.ui.geometry.Offset)">updatePointerBy</a>(int&nbsp;pointerId,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;delta)</code></div>
+              <p>Updates the position of the pointer with the given <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#updatePointerBy(kotlin.Int,androidx.compose.ui.geometry.Offset)">pointerId</a></code> by the given <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#updatePointerBy(kotlin.Int,androidx.compose.ui.geometry.Offset)">delta</a></code>, but does not send a move event.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#updatePointerTo(kotlin.Int,androidx.compose.ui.geometry.Offset)">updatePointerTo</a>(int&nbsp;pointerId,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position)</code></div>
+              <p>Updates the position of the pointer with the given <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#updatePointerTo(kotlin.Int,androidx.compose.ui.geometry.Offset)">pointerId</a></code> to the given <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#updatePointerTo(kotlin.Int,androidx.compose.ui.geometry.Offset)">position</a></code>, but does not send a move event.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>default&nbsp;final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/TouchInjectionScopeKt.html">TouchInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).click(androidx.compose.ui.geometry.Offset)">click</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position<br>)</code></div>
+              <p>Performs a click gesture (aka a tap) on the associated node.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/TouchInjectionScopeKt.html">TouchInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">doubleClick</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;delayMillis<br>)</code></div>
+              <p>Performs a double click gesture (aka a double tap) on the associated node.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/TouchInjectionScopeKt.html">TouchInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).longClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">longClick</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;durationMillis<br>)</code></div>
+              <p>Performs a long click gesture (aka a long press) on the associated node.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final void</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br><a href="/reference/androidx/compose/ui/test/TouchInjectionScopeKt.html">TouchInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).multiTouchSwipe(kotlin.collections.List,kotlin.Long,kotlin.collections.List)">multiTouchSwipe</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&gt;&gt;&nbsp;curves,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;durationMillis,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>&gt;&nbsp;keyTimes<br>)</code></div>
+              <p>Performs a multi touch swipe gesture on the associated node.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/TouchInjectionScopeKt.html">TouchInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).pinch(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">pinch</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;start0,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;end0,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;start1,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;end1,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;durationMillis<br>)</code></div>
+              <p>Performs a pinch gesture on the associated node.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/TouchInjectionScopeKt.html">TouchInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).swipe(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">swipe</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;start,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;end,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;durationMillis<br>)</code></div>
+              <p>Performs a swipe gesture on the associated node.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/TouchInjectionScopeKt.html">TouchInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).swipe(kotlin.Function1,kotlin.Long,kotlin.collections.List)">swipe</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&gt;&nbsp;curve,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;durationMillis,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>&gt;&nbsp;keyTimes<br>)</code></div>
+              <p>Performs a swipe gesture on the associated node.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/TouchInjectionScopeKt.html">TouchInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).swipeDown(kotlin.Float,kotlin.Float,kotlin.Long)">swipeDown</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;startY,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;endY,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;durationMillis<br>)</code></div>
+              <p>Performs a swipe down gesture along <code>x = [centerX]</code> of the associated node, from <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeDown(kotlin.Float,kotlin.Float,kotlin.Long)">startY</a></code> till <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeDown(kotlin.Float,kotlin.Float,kotlin.Long)">endY</a></code>, taking <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeDown(kotlin.Float,kotlin.Float,kotlin.Long)">durationMillis</a></code> milliseconds.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/TouchInjectionScopeKt.html">TouchInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).swipeLeft(kotlin.Float,kotlin.Float,kotlin.Long)">swipeLeft</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;startX,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;endX,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;durationMillis<br>)</code></div>
+              <p>Performs a swipe left gesture along <code>y = [centerY]</code> of the associated node, from <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeLeft(kotlin.Float,kotlin.Float,kotlin.Long)">startX</a></code> till <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeLeft(kotlin.Float,kotlin.Float,kotlin.Long)">endX</a></code>, taking <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeLeft(kotlin.Float,kotlin.Float,kotlin.Long)">durationMillis</a></code> milliseconds.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/TouchInjectionScopeKt.html">TouchInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).swipeRight(kotlin.Float,kotlin.Float,kotlin.Long)">swipeRight</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;startX,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;endX,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;durationMillis<br>)</code></div>
+              <p>Performs a swipe right gesture along <code>y = [centerY]</code> of the associated node, from <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeRight(kotlin.Float,kotlin.Float,kotlin.Long)">startX</a></code> till <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeRight(kotlin.Float,kotlin.Float,kotlin.Long)">endX</a></code>, taking <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeRight(kotlin.Float,kotlin.Float,kotlin.Long)">durationMillis</a></code> milliseconds.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/TouchInjectionScopeKt.html">TouchInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).swipeUp(kotlin.Float,kotlin.Float,kotlin.Long)">swipeUp</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;startY,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;endY,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;durationMillis<br>)</code></div>
+              <p>Performs a swipe up gesture along <code>x = [centerX]</code> of the associated node, from <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeUp(kotlin.Float,kotlin.Float,kotlin.Long)">startY</a></code> till <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeUp(kotlin.Float,kotlin.Float,kotlin.Long)">endY</a></code>, taking <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeUp(kotlin.Float,kotlin.Float,kotlin.Long)">durationMillis</a></code> milliseconds.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/TouchInjectionScopeKt.html">TouchInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).swipeWithVelocity(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Float,kotlin.Long)">swipeWithVelocity</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;start,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;end,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;endVelocity,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;durationMillis<br>)</code></div>
+              <p>Performs a swipe gesture on the associated node such that it ends with the given <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeWithVelocity(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Float,kotlin.Long)">endVelocity</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/ui/unit/Density.html">androidx.compose.ui.unit.Density</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>abstract float</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/Density.html#getDensity()">getDensity</a>()</code></div>
+                        <p>The logical density of the display.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract float</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/Density.html#getFontScale()">getFontScale</a>()</code></div>
+                        <p>Current user preference for the scaling factor for fonts.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default int</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).roundToPx()">roundToPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
+                        <p>Convert <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code> to <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code> by rounding</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default int</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).roundToPx()">roundToPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
+                        <p>Convert Sp to <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code> by rounding</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toDp()">toDp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
+                        <p>Convert Sp to <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Int).toDp()">toDp</a>(int&nbsp;receiver)</code></div>
+                        <p>Convert an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code> pixel value to <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Float).toDp()">toDp</a>(float&nbsp;receiver)</code></div>
+                        <p>Convert a <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code> pixel value to a Dp</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/DpSize.html">DpSize</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.geometry.Size).toDpSize()">toDpSize</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;receiver)</code></div>
+                        <p>Convert a <code><a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code> to a <code><a href="/reference/androidx/compose/ui/unit/DpSize.html">DpSize</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default float</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toPx()">toPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
+                        <p>Convert <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code> to pixels.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default float</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toPx()">toPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
+                        <p>Convert Sp to pixels.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.DpRect).toRect()">toRect</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/DpRect.html">DpRect</a>&nbsp;receiver)</code></div>
+                        <p>Convert a <code><a href="/reference/androidx/compose/ui/unit/DpRect.html">DpRect</a></code> to a <code><a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.DpSize).toSize()">toSize</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/DpSize.html">DpSize</a>&nbsp;receiver)</code></div>
+                        <p>Convert a <code><a href="/reference/androidx/compose/ui/unit/DpSize.html">DpSize</a></code> to a <code><a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toSp()">toSp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
+                        <p>Convert <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code> to Sp.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Int).toSp()">toSp</a>(int&nbsp;receiver)</code></div>
+                        <p>Convert an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code> pixel value to Sp.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Float).toSp()">toSp</a>(float&nbsp;receiver)</code></div>
+                        <p>Convert a <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code> pixel value to a Sp</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/ui/test/InjectionScope.html">androidx.compose.ui.test.InjectionScope</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>abstract void</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#advanceEventTime(kotlin.Long)">advanceEventTime</a>(long&nbsp;durationMillis)</code></div>
+                        <p>Adds the given <code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#advanceEventTime(kotlin.Long)">durationMillis</a></code> to the current event time, delaying the next event by that time.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default float</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#getBottom()">getBottom</a>()</code></div>
+                        <p>The y-coordinate for the bottom of the node we're interacting with in px, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#getBottomCenter()">getBottomCenter</a>()</code></div>
+                        <p>The center of the bottom edge of the node we're interacting with, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#getBottomLeft()">getBottomLeft</a>()</code></div>
+                        <p>The bottom left corner of the node we're interacting with, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#getBottomRight()">getBottomRight</a>()</code></div>
+                        <p>The bottom right corner of the node we're interacting with, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#getCenter()">getCenter</a>()</code></div>
+                        <p>The center of the node we're interacting with, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#getCenterLeft()">getCenterLeft</a>()</code></div>
+                        <p>The center of the left edge of the node we're interacting with, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#getCenterRight()">getCenterRight</a>()</code></div>
+                        <p>The center of the right edge of the node we're interacting with, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default float</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#getCenterX()">getCenterX</a>()</code></div>
+                        <p>The x-coordinate for the center of the node we're interacting with in px, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default float</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#getCenterY()">getCenterY</a>()</code></div>
+                        <p>The y-coordinate for the center of the node we're interacting with in px, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default long</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#getEventPeriodMillis()">getEventPeriodMillis</a>()</code></div>
+                        <p>The default time between two successive events.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default int</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#getHeight()">getHeight</a>()</code></div>
+                        <p>The height of the node in px.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default float</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#getLeft()">getLeft</a>()</code></div>
+                        <p>The x-coordinate for the left edge of the node we're interacting with in px, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default float</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#getRight()">getRight</a>()</code></div>
+                        <p>The x-coordinate for the right edge of the node we're interacting with in px, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default float</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#getTop()">getTop</a>()</code></div>
+                        <p>The y-coordinate for the bottom of the node we're interacting with in px, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#getTopCenter()">getTopCenter</a>()</code></div>
+                        <p>The center of the top edge of the node we're interacting with, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#getTopLeft()">getTopLeft</a>()</code></div>
+                        <p>The top left corner of the node we're interacting with, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#getTopRight()">getTopRight</a>()</code></div>
+                        <p>The top right corner of the node we're interacting with, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html">ViewConfiguration</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#getViewConfiguration()">getViewConfiguration</a>()</code></div>
+                        <p>The <code><a href="/reference/androidx/compose/ui/platform/ViewConfiguration.html">ViewConfiguration</a></code> in use by the <code><a href="/reference/androidx/compose/ui/semantics/SemanticsNode.html">SemanticsNode</a></code> from the <code><a href="/reference/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></code> on which the input injection method is called.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#getVisibleSize()">getVisibleSize</a>()</code></div>
+                        <p>The size of the visible part of the node we're interacting with in px, i.e. its clipped bounds.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default int</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#getWidth()">getWidth</a>()</code></div>
+                        <p>The width of the node in px.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#percentOffset(kotlin.Float,kotlin.Float)">percentOffset</a>(float&nbsp;x,&nbsp;float&nbsp;y)</code></div>
+                        <p>Creates an <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> relative to the size of the node we're interacting with.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="cancel-kotlin.Long-"></a><a name="cancel"></a>
+        <h3 class="api-name" id="cancel(kotlin.Long)">cancel</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#cancel(kotlin.Long)">cancel</a>(long&nbsp;delayMillis)</pre>
+        <p>Sends a cancel event <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#cancel(kotlin.Long)">delayMillis</a></code> after the last sent event to cancel the current gesture. The cancel event contains the current position of all active pointers.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>long&nbsp;delayMillis</code></td>
+                <td>
+                  <p>The time between the last sent event and this event. <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="currentPosition-kotlin.Int-"></a><a name="currentposition"></a>
+        <h3 class="api-name" id="currentPosition(kotlin.Int)">currentPosition</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;<a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#currentPosition(kotlin.Int)">currentPosition</a>(int&nbsp;pointerId)</pre>
+        <p>Returns the current position of the given <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#currentPosition(kotlin.Int)">pointerId</a></code>. The default <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#currentPosition(kotlin.Int)">pointerId</a></code> is 0. The position is returned in the local coordinate system of the node with which we're interacting. (0, 0) is the top left corner of the node.</p>
+      </div>
+      <div class="api-item"><a name="down-androidx.compose.ui.geometry.Offset-"></a><a name="down"></a>
+        <h3 class="api-name" id="down(androidx.compose.ui.geometry.Offset)">down</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#down(androidx.compose.ui.geometry.Offset)">down</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position)</pre>
+        <p>Sends a down event for the default pointer at <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#down(androidx.compose.ui.geometry.Offset)">position</a></code> on the associated node. The <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#down(androidx.compose.ui.geometry.Offset)">position</a></code> is in the node's local coordinate system, where (0, 0) is the top left corner of the node. The default pointer has <code>pointerId = 0</code>.</p>
+        <p>If no pointers are down yet, this will start a new touch gesture. If a gesture is already in progress, this event is sent at the same timestamp as the last event. If the default pointer is already down, an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">IllegalArgumentException</a></code> will be thrown.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position</code></td>
+                <td>
+                  <p>The position of the down event, in the node's local coordinate system</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="down(kotlin.Int, androidx.compose.ui.geometry.Offset)"></a><a name="down-kotlin.Int-androidx.compose.ui.geometry.Offset-"></a><a name="down"></a>
+        <h3 class="api-name" id="down(kotlin.Int,androidx.compose.ui.geometry.Offset)">down</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#down(kotlin.Int,androidx.compose.ui.geometry.Offset)">down</a>(int&nbsp;pointerId,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position)</pre>
+        <p>Sends a down event for the pointer with the given <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#down(kotlin.Int,androidx.compose.ui.geometry.Offset)">pointerId</a></code> at <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#down(kotlin.Int,androidx.compose.ui.geometry.Offset)">position</a></code> on the associated node. The <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#down(kotlin.Int,androidx.compose.ui.geometry.Offset)">position</a></code> is in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+        <p>If no pointers are down yet, this will start a new touch gesture. If a gesture is already in progress, this event is sent at the same timestamp as the last event. If the given pointer is already down, an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">IllegalArgumentException</a></code> will be thrown.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int&nbsp;pointerId</code></td>
+                <td>
+                  <p>The id of the pointer, can be any number not yet in use by another pointer</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position</code></td>
+                <td>
+                  <p>The position of the down event, in the node's local coordinate system</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="move-kotlin.Long-"></a><a name="move"></a>
+        <h3 class="api-name" id="move(kotlin.Long)">move</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#move(kotlin.Long)">move</a>(long&nbsp;delayMillis)</pre>
+        <p>Sends a move event <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#move(kotlin.Long)">delayMillis</a></code> after the last sent event without updating any of the pointer positions. This can be useful when batching movement of multiple pointers together, which can be done with <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#updatePointerTo(kotlin.Int,androidx.compose.ui.geometry.Offset)">updatePointerTo</a></code> and <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#updatePointerBy(kotlin.Int,androidx.compose.ui.geometry.Offset)">updatePointerBy</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>long&nbsp;delayMillis</code></td>
+                <td>
+                  <p>The time between the last sent event and this event. <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="moveBy(androidx.compose.ui.geometry.Offset, kotlin.Long)"></a><a name="moveBy-androidx.compose.ui.geometry.Offset-kotlin.Long-"></a><a name="moveby"></a>
+        <h3 class="api-name" id="moveBy(androidx.compose.ui.geometry.Offset,kotlin.Long)">moveBy</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveBy(androidx.compose.ui.geometry.Offset,kotlin.Long)">moveBy</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;delta,&nbsp;long&nbsp;delayMillis)</pre>
+        <p>Sends a move event <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveBy(androidx.compose.ui.geometry.Offset,kotlin.Long)">delayMillis</a></code> after the last sent event on the associated node, with the position of the default pointer moved by the given <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveBy(androidx.compose.ui.geometry.Offset,kotlin.Long)">delta</a></code>. The default pointer has <code>pointerId = 0</code>.</p>
+        <p>If the pointer is not yet down, an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">IllegalArgumentException</a></code> will be thrown.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;delta</code></td>
+                <td>
+                  <p>The position for this move event, relative to the current position of the pointer. For example, `delta = Offset(10.px, -10.px) will add 10.px to the pointer's x-position, and subtract 10.px from the pointer's y-position.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>long&nbsp;delayMillis</code></td>
+                <td>
+                  <p>The time between the last sent event and this event. <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="moveBy(kotlin.Int, androidx.compose.ui.geometry.Offset, kotlin.Long)"></a><a name="moveBy-kotlin.Int-androidx.compose.ui.geometry.Offset-kotlin.Long-"></a><a name="moveby"></a>
+        <h3 class="api-name" id="moveBy(kotlin.Int,androidx.compose.ui.geometry.Offset,kotlin.Long)">moveBy</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveBy(kotlin.Int,androidx.compose.ui.geometry.Offset,kotlin.Long)">moveBy</a>(int&nbsp;pointerId,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;delta,&nbsp;long&nbsp;delayMillis)</pre>
+        <p>Sends a move event <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveBy(kotlin.Int,androidx.compose.ui.geometry.Offset,kotlin.Long)">delayMillis</a></code> after the last sent event on the associated node, with the position of the pointer with the given <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveBy(kotlin.Int,androidx.compose.ui.geometry.Offset,kotlin.Long)">pointerId</a></code> moved by the given <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveBy(kotlin.Int,androidx.compose.ui.geometry.Offset,kotlin.Long)">delta</a></code>.</p>
+        <p>If the pointer is not yet down, an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">IllegalArgumentException</a></code> will be thrown.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int&nbsp;pointerId</code></td>
+                <td>
+                  <p>The id of the pointer to move, as supplied in <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#down(kotlin.Int,androidx.compose.ui.geometry.Offset)">down</a></code></p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;delta</code></td>
+                <td>
+                  <p>The position for this move event, relative to the current position of the pointer. For example, `delta = Offset(10.px, -10.px) will add 10.px to the pointer's x-position, and subtract 10.px from the pointer's y-position.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>long&nbsp;delayMillis</code></td>
+                <td>
+                  <p>The time between the last sent event and this event. <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="moveTo(androidx.compose.ui.geometry.Offset, kotlin.Long)"></a><a name="moveTo-androidx.compose.ui.geometry.Offset-kotlin.Long-"></a><a name="moveto"></a>
+        <h3 class="api-name" id="moveTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">moveTo</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">moveTo</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position,&nbsp;long&nbsp;delayMillis)</pre>
+        <p>Sends a move event <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">delayMillis</a></code> after the last sent event on the associated node, with the position of the default pointer updated to <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code>. The <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code> is in the node's local coordinate system, where (0, 0) is the top left corner of the node. The default pointer has <code>pointerId = 0</code>.</p>
+        <p>If the default pointer is not yet down, an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">IllegalArgumentException</a></code> will be thrown.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position</code></td>
+                <td>
+                  <p>The new position of the pointer, in the node's local coordinate system</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>long&nbsp;delayMillis</code></td>
+                <td>
+                  <p>The time between the last sent event and this event. <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="moveTo(kotlin.Int, androidx.compose.ui.geometry.Offset, kotlin.Long)"></a><a name="moveTo-kotlin.Int-androidx.compose.ui.geometry.Offset-kotlin.Long-"></a><a name="moveto"></a>
+        <h3 class="api-name" id="moveTo(kotlin.Int,androidx.compose.ui.geometry.Offset,kotlin.Long)">moveTo</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveTo(kotlin.Int,androidx.compose.ui.geometry.Offset,kotlin.Long)">moveTo</a>(int&nbsp;pointerId,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position,&nbsp;long&nbsp;delayMillis)</pre>
+        <p>Sends a move event <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveTo(kotlin.Int,androidx.compose.ui.geometry.Offset,kotlin.Long)">delayMillis</a></code> after the last sent event on the associated node, with the position of the pointer with the given <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveTo(kotlin.Int,androidx.compose.ui.geometry.Offset,kotlin.Long)">pointerId</a></code> updated to <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveTo(kotlin.Int,androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code>. The <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveTo(kotlin.Int,androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code> is in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+        <p>If the pointer is not yet down, an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">IllegalArgumentException</a></code> will be thrown.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int&nbsp;pointerId</code></td>
+                <td>
+                  <p>The id of the pointer to move, as supplied in <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#down(kotlin.Int,androidx.compose.ui.geometry.Offset)">down</a></code></p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position</code></td>
+                <td>
+                  <p>The new position of the pointer, in the node's local coordinate system</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>long&nbsp;delayMillis</code></td>
+                <td>
+                  <p>The time between the last sent event and this event. <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="moveWithHistory(kotlin.collections.List, kotlin.collections.List, kotlin.Long)"></a><a name="moveWithHistory-kotlin.collections.List-kotlin.collections.List-kotlin.Long-"></a><a name="movewithhistory"></a>
+        <h3 class="api-name" id="moveWithHistory(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">moveWithHistory</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistory(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">moveWithHistory</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>&gt;&nbsp;relativeHistoricalTimes,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&gt;&nbsp;historicalCoordinates,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;delayMillis<br>)</pre>
+        <p>Sends a move event <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistory(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">delayMillis</a></code> after the last sent event without updating any of the pointer positions.</p>
+        <p>This overload is a convenience method for the common case where the gesture only has one pointer.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>&gt;&nbsp;relativeHistoricalTimes</code></td>
+                <td>
+                  <p>Time of each historical event, as a millisecond relative to the time the actual event is sent. For example, -10L means 10ms earlier.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&gt;&nbsp;historicalCoordinates</code></td>
+                <td>
+                  <p>Coordinates of each historical event, in the same coordinate space as <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveTo(kotlin.Int,androidx.compose.ui.geometry.Offset,kotlin.Long)">moveTo</a></code>. The list must have the same size as <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistory(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">relativeHistoricalTimes</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>long&nbsp;delayMillis</code></td>
+                <td>
+                  <p>The time between the last sent event and this event. <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="moveWithHistoryMultiPointer(kotlin.collections.List, kotlin.collections.List, kotlin.Long)"></a><a name="moveWithHistoryMultiPointer-kotlin.collections.List-kotlin.collections.List-kotlin.Long-"></a><a name="movewithhistorymultipointer"></a>
+        <h3 class="api-name" id="moveWithHistoryMultiPointer(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">moveWithHistoryMultiPointer</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistoryMultiPointer(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">moveWithHistoryMultiPointer</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>&gt;&nbsp;relativeHistoricalTimes,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&gt;&gt;&nbsp;historicalCoordinates,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;delayMillis<br>)</pre>
+        <p>Sends a move event <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistoryMultiPointer(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">delayMillis</a></code> after the last sent event without updating any of the pointer positions.</p>
+        <p>This overload supports gestures with multiple pointers.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>&gt;&nbsp;relativeHistoricalTimes</code></td>
+                <td>
+                  <p>Time of each historical event, as a millisecond relative to the time the actual event is sent. For example, -10L means 10ms earlier.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&gt;&gt;&nbsp;historicalCoordinates</code></td>
+                <td>
+                  <p>Coordinates of each historical event, in the same coordinate space as <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveTo(kotlin.Int,androidx.compose.ui.geometry.Offset,kotlin.Long)">moveTo</a></code>. The outer list must have the same size as the number of pointers in the event, and each inner list must have the same size as <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#moveWithHistoryMultiPointer(kotlin.collections.List,kotlin.collections.List,kotlin.Long)">relativeHistoricalTimes</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>long&nbsp;delayMillis</code></td>
+                <td>
+                  <p>The time between the last sent event and this event. <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="up-kotlin.Int-"></a><a name="up"></a>
+        <h3 class="api-name" id="up(kotlin.Int)">up</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#up(kotlin.Int)">up</a>(int&nbsp;pointerId)</pre>
+        <p>Sends an up event for the pointer with the given <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#up(kotlin.Int)">pointerId</a></code>, or the default pointer if <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#up(kotlin.Int)">pointerId</a></code> is omitted, on the associated node.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int&nbsp;pointerId</code></td>
+                <td>
+                  <p>The id of the pointer to lift up, as supplied in <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#down(kotlin.Int,androidx.compose.ui.geometry.Offset)">down</a></code></p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="updatePointerBy(kotlin.Int, androidx.compose.ui.geometry.Offset)"></a><a name="updatePointerBy-kotlin.Int-androidx.compose.ui.geometry.Offset-"></a><a name="updatepointerby"></a>
+        <h3 class="api-name" id="updatePointerBy(kotlin.Int,androidx.compose.ui.geometry.Offset)">updatePointerBy</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#updatePointerBy(kotlin.Int,androidx.compose.ui.geometry.Offset)">updatePointerBy</a>(int&nbsp;pointerId,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;delta)</pre>
+        <p>Updates the position of the pointer with the given <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#updatePointerBy(kotlin.Int,androidx.compose.ui.geometry.Offset)">pointerId</a></code> by the given <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#updatePointerBy(kotlin.Int,androidx.compose.ui.geometry.Offset)">delta</a></code>, but does not send a move event. The move event can be sent with <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#move(kotlin.Long)">move</a></code>.</p>
+        <p>If the pointer is not yet down, an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">IllegalArgumentException</a></code> will be thrown.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int&nbsp;pointerId</code></td>
+                <td>
+                  <p>The id of the pointer to move, as supplied in <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#down(kotlin.Int,androidx.compose.ui.geometry.Offset)">down</a></code></p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;delta</code></td>
+                <td>
+                  <p>The position for this move event, relative to the last sent position of the pointer. For example, `delta = Offset(10.px, -10.px) will add 10.px to the pointer's x-position, and subtract 10.px from the pointer's y-position.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="updatePointerTo(kotlin.Int, androidx.compose.ui.geometry.Offset)"></a><a name="updatePointerTo-kotlin.Int-androidx.compose.ui.geometry.Offset-"></a><a name="updatepointerto"></a>
+        <h3 class="api-name" id="updatePointerTo(kotlin.Int,androidx.compose.ui.geometry.Offset)">updatePointerTo</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#updatePointerTo(kotlin.Int,androidx.compose.ui.geometry.Offset)">updatePointerTo</a>(int&nbsp;pointerId,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position)</pre>
+        <p>Updates the position of the pointer with the given <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#updatePointerTo(kotlin.Int,androidx.compose.ui.geometry.Offset)">pointerId</a></code> to the given <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#updatePointerTo(kotlin.Int,androidx.compose.ui.geometry.Offset)">position</a></code>, but does not send a move event. The move event can be sent with <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#move(kotlin.Long)">move</a></code>. The <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#updatePointerTo(kotlin.Int,androidx.compose.ui.geometry.Offset)">position</a></code> is in the node's local coordinate system, where (0.px, 0.px) is the top left corner of the node.</p>
+        <p>If the pointer is not yet down, an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">IllegalArgumentException</a></code> will be thrown.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int&nbsp;pointerId</code></td>
+                <td>
+                  <p>The id of the pointer to move, as supplied in <code><a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#down(kotlin.Int,androidx.compose.ui.geometry.Offset)">down</a></code></p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position</code></td>
+                <td>
+                  <p>The new position of the pointer, in the node's local coordinate system</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.test.TouchInjectionScope-.click-androidx.compose.ui.geometry.Offset-"></a><a name="click"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.test.TouchInjectionScope).click(androidx.compose.ui.geometry.Offset)">TouchInjectionScopeKt.click</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScopeKt.html">TouchInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).click(androidx.compose.ui.geometry.Offset)">click</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position<br>)</pre>
+        <p>Performs a click gesture (aka a tap) on the associated node.</p>
+        <p>The click is done at the given <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).click(androidx.compose.ui.geometry.Offset)">position</a></code>, or in the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).center()">center</a></code> if the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).click(androidx.compose.ui.geometry.Offset)">position</a></code> is omitted. The <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).click(androidx.compose.ui.geometry.Offset)">position</a></code> is in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position</code></td>
+                <td>
+                  <p>The position where to click, in the node's local coordinate system. If omitted, the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).center()">center</a></code> of the node will be used.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.test.TouchInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset, kotlin.Long)"></a><a name="-androidx.compose.ui.test.TouchInjectionScope-.doubleClick-androidx.compose.ui.geometry.Offset-kotlin.Long-"></a><a name="doubleclick"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.test.TouchInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">TouchInjectionScopeKt.doubleClick</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScopeKt.html">TouchInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">doubleClick</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;delayMillis<br>)</pre>
+        <p>Performs a double click gesture (aka a double tap) on the associated node.</p>
+        <p>The double click is done at the given <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code> or in the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).center()">center</a></code> if the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code> is omitted. By default, the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">delayMillis</a></code> between the first and the second click is half way in between the minimum and maximum required delay for a double click. The <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code> is in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position</code></td>
+                <td>
+                  <p>The position of the double click, in the node's local coordinate system. If omitted, the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).center()">center</a></code> position will be used.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>long&nbsp;delayMillis</code></td>
+                <td>
+                  <p>The time between the up event of the first click and the down event of the second click</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.test.TouchInjectionScope).longClick(androidx.compose.ui.geometry.Offset, kotlin.Long)"></a><a name="-androidx.compose.ui.test.TouchInjectionScope-.longClick-androidx.compose.ui.geometry.Offset-kotlin.Long-"></a><a name="longclick"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.test.TouchInjectionScope).longClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">TouchInjectionScopeKt.longClick</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScopeKt.html">TouchInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).longClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">longClick</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;durationMillis<br>)</pre>
+        <p>Performs a long click gesture (aka a long press) on the associated node.</p>
+        <p>The long click is done at the given <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).longClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code>, or in the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).center()">center</a></code> if the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).longClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code> is omitted. By default, the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).longClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">durationMillis</a></code> of the press is 100ms longer than the minimum required duration for a long press. The <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).longClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code> is in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position</code></td>
+                <td>
+                  <p>The position of the long click, in the node's local coordinate system. If omitted, the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).center()">center</a></code> of the node will be used.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>long&nbsp;durationMillis</code></td>
+                <td>
+                  <p>The time between the down and the up event</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.test.TouchInjectionScope).multiTouchSwipe(kotlin.collections.List, kotlin.Long, kotlin.collections.List)"></a><a name="-androidx.compose.ui.test.TouchInjectionScope-.multiTouchSwipe-kotlin.collections.List-kotlin.Long-kotlin.collections.List-"></a><a name="multitouchswipe"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.test.TouchInjectionScope).multiTouchSwipe(kotlin.collections.List,kotlin.Long,kotlin.collections.List)">TouchInjectionScopeKt.multiTouchSwipe</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScopeKt.html">TouchInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).multiTouchSwipe(kotlin.collections.List,kotlin.Long,kotlin.collections.List)">multiTouchSwipe</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&gt;&gt;&nbsp;curves,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;durationMillis,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>&gt;&nbsp;keyTimes<br>)</pre>
+        <p>Performs a multi touch swipe gesture on the associated node.</p>
+        <p>Each pointer follows <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).multiTouchSwipe(kotlin.collections.List,kotlin.Long,kotlin.collections.List)">curves</a></code>[i] from 0 till <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).multiTouchSwipe(kotlin.collections.List,kotlin.Long,kotlin.collections.List)">durationMillis</a></code>. Sampling of an event is forced at all times defined in <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).multiTouchSwipe(kotlin.collections.List,kotlin.Long,kotlin.collections.List)">keyTimes</a></code>. The time between events is kept as close to <code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> as possible, given the constraints. The coordinates are in the node's local coordinate system, where (0, 0) is the top left corner of the node. The default duration is 200 milliseconds.</p>
+        <p>Will stay experimental until support has been added to start and end each pointer at different times.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&gt;&gt;&nbsp;curves</code></td>
+                <td>
+                  <p>The functions that define the position of the gesture over time</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>long&nbsp;durationMillis</code></td>
+                <td>
+                  <p>The duration of the gesture</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>&gt;&nbsp;keyTimes</code></td>
+                <td>
+                  <p>An optional list of timestamps in milliseconds at which a move event must be sampled</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.test.TouchInjectionScope).pinch(androidx.compose.ui.geometry.Offset, androidx.compose.ui.geometry.Offset, androidx.compose.ui.geometry.Offset, androidx.compose.ui.geometry.Offset, kotlin.Long)"></a><a name="-androidx.compose.ui.test.TouchInjectionScope-.pinch-androidx.compose.ui.geometry.Offset-androidx.compose.ui.geometry.Offset-androidx.compose.ui.geometry.Offset-androidx.compose.ui.geometry.Offset-kotlin.Long-"></a><a name="pinch"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.test.TouchInjectionScope).pinch(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">TouchInjectionScopeKt.pinch</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScopeKt.html">TouchInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).pinch(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">pinch</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;start0,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;end0,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;start1,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;end1,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;durationMillis<br>)</pre>
+        <p>Performs a pinch gesture on the associated node.</p>
+        <p>For each pair of start and end <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code>s, the motion events are linearly interpolated. The coordinates are in the node's local coordinate system where (0, 0) is the top left corner of the node. The default duration is 400 milliseconds.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;start0</code></td>
+                <td>
+                  <p>The start position of the first gesture in the node's local coordinate system</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;end0</code></td>
+                <td>
+                  <p>The end position of the first gesture in the node's local coordinate system</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;start1</code></td>
+                <td>
+                  <p>The start position of the second gesture in the node's local coordinate system</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;end1</code></td>
+                <td>
+                  <p>The end position of the second gesture in the node's local coordinate system</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>long&nbsp;durationMillis</code></td>
+                <td>
+                  <p>the duration of the gesture</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.test.TouchInjectionScope).swipe(androidx.compose.ui.geometry.Offset, androidx.compose.ui.geometry.Offset, kotlin.Long)"></a><a name="-androidx.compose.ui.test.TouchInjectionScope-.swipe-androidx.compose.ui.geometry.Offset-androidx.compose.ui.geometry.Offset-kotlin.Long-"></a><a name="swipe"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.test.TouchInjectionScope).swipe(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">TouchInjectionScopeKt.swipe</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScopeKt.html">TouchInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).swipe(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">swipe</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;start,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;end,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;durationMillis<br>)</pre>
+        <p>Performs a swipe gesture on the associated node.</p>
+        <p>The motion events are linearly interpolated between <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipe(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">start</a></code> and <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipe(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">end</a></code>. The coordinates are in the node's local coordinate system, where (0, 0) is the top left corner of the node. The default duration is 200 milliseconds.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;start</code></td>
+                <td>
+                  <p>The start position of the gesture, in the node's local coordinate system</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;end</code></td>
+                <td>
+                  <p>The end position of the gesture, in the node's local coordinate system</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>long&nbsp;durationMillis</code></td>
+                <td>
+                  <p>The duration of the gesture</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.test.TouchInjectionScope).swipe(kotlin.Function1, kotlin.Long, kotlin.collections.List)"></a><a name="-androidx.compose.ui.test.TouchInjectionScope-.swipe-kotlin.Function1-kotlin.Long-kotlin.collections.List-"></a><a name="swipe"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.test.TouchInjectionScope).swipe(kotlin.Function1,kotlin.Long,kotlin.collections.List)">TouchInjectionScopeKt.swipe</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScopeKt.html">TouchInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).swipe(kotlin.Function1,kotlin.Long,kotlin.collections.List)">swipe</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&gt;&nbsp;curve,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;durationMillis,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>&gt;&nbsp;keyTimes<br>)</pre>
+        <p>Performs a swipe gesture on the associated node.</p>
+        <p>The swipe follows the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipe(kotlin.Function1,kotlin.Long,kotlin.collections.List)">curve</a></code> from 0 till <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipe(kotlin.Function1,kotlin.Long,kotlin.collections.List)">durationMillis</a></code>. Will force sampling of an event at all times defined in <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipe(kotlin.Function1,kotlin.Long,kotlin.collections.List)">keyTimes</a></code>. The time between events is kept as close to <code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> as possible, given the constraints. The coordinates are in the node's local coordinate system, where (0, 0) is the top left corner of the node. The default duration is 200 milliseconds.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&gt;&nbsp;curve</code></td>
+                <td>
+                  <p>The function that defines the position of the gesture over time</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>long&nbsp;durationMillis</code></td>
+                <td>
+                  <p>The duration of the gesture</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>&gt;&nbsp;keyTimes</code></td>
+                <td>
+                  <p>An optional list of timestamps in milliseconds at which a move event must be sampled</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.test.TouchInjectionScope).swipeDown(kotlin.Float, kotlin.Float, kotlin.Long)"></a><a name="-androidx.compose.ui.test.TouchInjectionScope-.swipeDown-kotlin.Float-kotlin.Float-kotlin.Long-"></a><a name="swipedown"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.test.TouchInjectionScope).swipeDown(kotlin.Float,kotlin.Float,kotlin.Long)">TouchInjectionScopeKt.swipeDown</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScopeKt.html">TouchInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).swipeDown(kotlin.Float,kotlin.Float,kotlin.Long)">swipeDown</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;startY,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;endY,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;durationMillis<br>)</pre>
+        <p>Performs a swipe down gesture along <code>x = [centerX]</code> of the associated node, from <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeDown(kotlin.Float,kotlin.Float,kotlin.Long)">startY</a></code> till <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeDown(kotlin.Float,kotlin.Float,kotlin.Long)">endY</a></code>, taking <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeDown(kotlin.Float,kotlin.Float,kotlin.Long)">durationMillis</a></code> milliseconds.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>float&nbsp;startY</code></td>
+                <td>
+                  <p>The y-coordinate of the start of the swipe. Must be less than or equal to the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeDown(kotlin.Float,kotlin.Float,kotlin.Long)">endY</a></code>. By default the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).top()">top</a></code> of the node.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>float&nbsp;endY</code></td>
+                <td>
+                  <p>The y-coordinate of the end of the swipe. Must be greater than or equal to the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeDown(kotlin.Float,kotlin.Float,kotlin.Long)">startY</a></code>. By default the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).bottom()">bottom</a></code> of the node.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>long&nbsp;durationMillis</code></td>
+                <td>
+                  <p>The duration of the swipe. By default 200 milliseconds.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.test.TouchInjectionScope).swipeLeft(kotlin.Float, kotlin.Float, kotlin.Long)"></a><a name="-androidx.compose.ui.test.TouchInjectionScope-.swipeLeft-kotlin.Float-kotlin.Float-kotlin.Long-"></a><a name="swipeleft"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.test.TouchInjectionScope).swipeLeft(kotlin.Float,kotlin.Float,kotlin.Long)">TouchInjectionScopeKt.swipeLeft</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScopeKt.html">TouchInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).swipeLeft(kotlin.Float,kotlin.Float,kotlin.Long)">swipeLeft</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;startX,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;endX,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;durationMillis<br>)</pre>
+        <p>Performs a swipe left gesture along <code>y = [centerY]</code> of the associated node, from <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeLeft(kotlin.Float,kotlin.Float,kotlin.Long)">startX</a></code> till <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeLeft(kotlin.Float,kotlin.Float,kotlin.Long)">endX</a></code>, taking <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeLeft(kotlin.Float,kotlin.Float,kotlin.Long)">durationMillis</a></code> milliseconds.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>float&nbsp;startX</code></td>
+                <td>
+                  <p>The x-coordinate of the start of the swipe. Must be greater than or equal to the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeLeft(kotlin.Float,kotlin.Float,kotlin.Long)">endX</a></code>. By default the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).right()">right</a></code> of the node.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>float&nbsp;endX</code></td>
+                <td>
+                  <p>The x-coordinate of the end of the swipe. Must be less than or equal to the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeLeft(kotlin.Float,kotlin.Float,kotlin.Long)">startX</a></code>. By default the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).left()">left</a></code> of the node.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>long&nbsp;durationMillis</code></td>
+                <td>
+                  <p>The duration of the swipe. By default 200 milliseconds.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.test.TouchInjectionScope).swipeRight(kotlin.Float, kotlin.Float, kotlin.Long)"></a><a name="-androidx.compose.ui.test.TouchInjectionScope-.swipeRight-kotlin.Float-kotlin.Float-kotlin.Long-"></a><a name="swiperight"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.test.TouchInjectionScope).swipeRight(kotlin.Float,kotlin.Float,kotlin.Long)">TouchInjectionScopeKt.swipeRight</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScopeKt.html">TouchInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).swipeRight(kotlin.Float,kotlin.Float,kotlin.Long)">swipeRight</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;startX,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;endX,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;durationMillis<br>)</pre>
+        <p>Performs a swipe right gesture along <code>y = [centerY]</code> of the associated node, from <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeRight(kotlin.Float,kotlin.Float,kotlin.Long)">startX</a></code> till <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeRight(kotlin.Float,kotlin.Float,kotlin.Long)">endX</a></code>, taking <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeRight(kotlin.Float,kotlin.Float,kotlin.Long)">durationMillis</a></code> milliseconds.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>float&nbsp;startX</code></td>
+                <td>
+                  <p>The x-coordinate of the start of the swipe. Must be less than or equal to the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeRight(kotlin.Float,kotlin.Float,kotlin.Long)">endX</a></code>. By default the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).left()">left</a></code> of the node.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>float&nbsp;endX</code></td>
+                <td>
+                  <p>The x-coordinate of the end of the swipe. Must be greater than or equal to the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeRight(kotlin.Float,kotlin.Float,kotlin.Long)">startX</a></code>. By default the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).right()">right</a></code> of the node.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>long&nbsp;durationMillis</code></td>
+                <td>
+                  <p>The duration of the swipe. By default 200 milliseconds.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.test.TouchInjectionScope).swipeUp(kotlin.Float, kotlin.Float, kotlin.Long)"></a><a name="-androidx.compose.ui.test.TouchInjectionScope-.swipeUp-kotlin.Float-kotlin.Float-kotlin.Long-"></a><a name="swipeup"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.test.TouchInjectionScope).swipeUp(kotlin.Float,kotlin.Float,kotlin.Long)">TouchInjectionScopeKt.swipeUp</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScopeKt.html">TouchInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).swipeUp(kotlin.Float,kotlin.Float,kotlin.Long)">swipeUp</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;startY,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;endY,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;durationMillis<br>)</pre>
+        <p>Performs a swipe up gesture along <code>x = [centerX]</code> of the associated node, from <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeUp(kotlin.Float,kotlin.Float,kotlin.Long)">startY</a></code> till <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeUp(kotlin.Float,kotlin.Float,kotlin.Long)">endY</a></code>, taking <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeUp(kotlin.Float,kotlin.Float,kotlin.Long)">durationMillis</a></code> milliseconds.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>float&nbsp;startY</code></td>
+                <td>
+                  <p>The y-coordinate of the start of the swipe. Must be greater than or equal to the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeUp(kotlin.Float,kotlin.Float,kotlin.Long)">endY</a></code>. By default the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).bottom()">bottom</a></code> of the node.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>float&nbsp;endY</code></td>
+                <td>
+                  <p>The y-coordinate of the end of the swipe. Must be less than or equal to the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeUp(kotlin.Float,kotlin.Float,kotlin.Long)">startY</a></code>. By default the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).top()">top</a></code> of the node.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>long&nbsp;durationMillis</code></td>
+                <td>
+                  <p>The duration of the swipe. By default 200 milliseconds.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.test.TouchInjectionScope).swipeWithVelocity(androidx.compose.ui.geometry.Offset, androidx.compose.ui.geometry.Offset, kotlin.Float, kotlin.Long)"></a><a name="-androidx.compose.ui.test.TouchInjectionScope-.swipeWithVelocity-androidx.compose.ui.geometry.Offset-androidx.compose.ui.geometry.Offset-kotlin.Float-kotlin.Long-"></a><a name="swipewithvelocity"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.test.TouchInjectionScope).swipeWithVelocity(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Float,kotlin.Long)">TouchInjectionScopeKt.swipeWithVelocity</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/TouchInjectionScopeKt.html">TouchInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).swipeWithVelocity(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Float,kotlin.Long)">swipeWithVelocity</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;start,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;end,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;endVelocity,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;durationMillis<br>)</pre>
+        <p>Performs a swipe gesture on the associated node such that it ends with the given <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeWithVelocity(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Float,kotlin.Long)">endVelocity</a></code>.</p>
+        <p>The swipe will go through <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeWithVelocity(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Float,kotlin.Long)">start</a></code> at t=0 and through <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeWithVelocity(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Float,kotlin.Long)">end</a></code> at t=<code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeWithVelocity(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Float,kotlin.Long)">durationMillis</a></code>. In between, the swipe will go monotonically from <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeWithVelocity(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Float,kotlin.Long)">start</a></code> and <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipeWithVelocity(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Float,kotlin.Long)">end</a></code>, but not strictly. Due to imprecision, no guarantees can be made for the actual velocity at the end of the gesture, but generally it is within 0.1 of the desired velocity.</p>
+        <p>When a swipe cannot be created that results in the desired velocity (because the input is too restrictive), an exception will be thrown with suggestions to fix the input.</p>
+        <p>The coordinates are in the node's local coordinate system, where (0, 0) is the top left corner of the node. The default duration is calculated such that a feasible swipe can be created that ends in the given velocity.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;start</code></td>
+                <td>
+                  <p>The start position of the gesture, in the node's local coordinate system</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;end</code></td>
+                <td>
+                  <p>The end position of the gesture, in the node's local coordinate system</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>float&nbsp;endVelocity</code></td>
+                <td>
+                  <p>The velocity of the gesture at the moment it ends in px/second. Must be positive.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>long&nbsp;durationMillis</code></td>
+                <td>
+                  <p>The duration of the gesture in milliseconds. Must be long enough that at least 3 input events are generated, which happens with a duration of 40ms or more. If omitted, a duration is calculated such that a valid swipe with velocity can be created.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">kotlin.IllegalArgumentException</a>&nbsp;kotlin.IllegalArgumentException</code></td>
+                <td>
+                  <p>When no swipe can be generated that will result in the desired velocity. The error message will suggest changes to the input parameters such that a swipe will become feasible.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

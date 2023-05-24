@@ -1,0 +1,109 @@
+<html devsite="true">
+  <head>
+    <title>StateRestorationTester</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/test/junit4/StateRestorationTester.android.kt+class:androidx.compose.ui.test.junit4.StateRestorationTester&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>StateRestorationTester</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/test/junit4/StateRestorationTester.html">StateRestorationTester</a></pre>
+    </p>
+    <hr>
+    <p>Helps to test the state restoration for your Composable component.</p>
+    <p>Instead of calling <code><a href="/reference/androidx/compose/ui/test/junit4/ComposeContentTestRule.html#setContent(kotlin.Function0)">ComposeContentTestRule.setContent</a></code> you need to use <code><a href="/reference/androidx/compose/ui/test/junit4/StateRestorationTester.html#setContent(kotlin.Function0)">setContent</a></code> on this object, then change your state so there is some change to be restored, then execute <code><a href="/reference/androidx/compose/ui/test/junit4/StateRestorationTester.html#emulateSavedInstanceStateRestore()">emulateSavedInstanceStateRestore</a></code> and assert your state is restored properly.</p>
+    <p>Note that this tests only the restoration of the local state of the composable you passed to <code><a href="/reference/androidx/compose/ui/test/junit4/StateRestorationTester.html#setContent(kotlin.Function0)">setContent</a></code> and useful for testing <code><a href="/reference/androidx/compose/runtime/saveable/package-summary.html#rememberSaveable(kotlin.Array,androidx.compose.runtime.saveable.Saver,kotlin.String,kotlin.Function0)">androidx.compose.runtime.saveable.rememberSaveable</a></code> integration. It is not testing the integration with any other life cycles or Activity callbacks.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/junit4/StateRestorationTester.html#StateRestorationTester(androidx.compose.ui.test.junit4.ComposeContentTestRule)">StateRestorationTester</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/junit4/ComposeContentTestRule.html">ComposeContentTestRule</a>&nbsp;composeTestRule)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/junit4/StateRestorationTester.html#emulateSavedInstanceStateRestore()">emulateSavedInstanceStateRestore</a>()</code></div>
+              <p>Saves all the state stored via savedInstanceState or rememberSaveable, disposes current composition, and composes again the content passed to <code><a href="/reference/androidx/compose/ui/test/junit4/StateRestorationTester.html#setContent(kotlin.Function0)">setContent</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/junit4/StateRestorationTester.html#setContent(kotlin.Function0)">setContent</a>(@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;composable)</code></div>
+              <p>This functions is a direct replacement for <code><a href="/reference/androidx/compose/ui/test/junit4/ComposeContentTestRule.html#setContent(kotlin.Function0)">ComposeContentTestRule.setContent</a></code> if you are going to use <code><a href="/reference/androidx/compose/ui/test/junit4/StateRestorationTester.html#emulateSavedInstanceStateRestore()">emulateSavedInstanceStateRestore</a></code> in the test.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="StateRestorationTester-androidx.compose.ui.test.junit4.ComposeContentTestRule-"></a><a name="staterestorationtester"></a>
+        <h3 class="api-name" id="StateRestorationTester(androidx.compose.ui.test.junit4.ComposeContentTestRule)">StateRestorationTester</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/test/junit4/StateRestorationTester.html#StateRestorationTester(androidx.compose.ui.test.junit4.ComposeContentTestRule)">StateRestorationTester</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/junit4/ComposeContentTestRule.html">ComposeContentTestRule</a>&nbsp;composeTestRule)</pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="emulateSavedInstanceStateRestore--"></a><a name="emulatesavedinstancestaterestore"></a>
+        <h3 class="api-name" id="emulateSavedInstanceStateRestore()">emulateSavedInstanceStateRestore</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/junit4/StateRestorationTester.html#emulateSavedInstanceStateRestore()">emulateSavedInstanceStateRestore</a>()</pre>
+        <p>Saves all the state stored via savedInstanceState or rememberSaveable, disposes current composition, and composes again the content passed to <code><a href="/reference/androidx/compose/ui/test/junit4/StateRestorationTester.html#setContent(kotlin.Function0)">setContent</a></code>. Allows to test how your component behaves when the state restoration is happening. Note that the state stored via regular state() or remember() will be lost.</p>
+      </div>
+      <div class="api-item"><a name="setContent-kotlin.Function0-"></a><a name="setcontent"></a>
+        <h3 class="api-name" id="setContent(kotlin.Function0)">setContent</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/junit4/StateRestorationTester.html#setContent(kotlin.Function0)">setContent</a>(@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;composable)</pre>
+        <p>This functions is a direct replacement for <code><a href="/reference/androidx/compose/ui/test/junit4/ComposeContentTestRule.html#setContent(kotlin.Function0)">ComposeContentTestRule.setContent</a></code> if you are going to use <code><a href="/reference/androidx/compose/ui/test/junit4/StateRestorationTester.html#emulateSavedInstanceStateRestore()">emulateSavedInstanceStateRestore</a></code> in the test.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/test/junit4/ComposeContentTestRule.html#setContent(kotlin.Function0)">setContent</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

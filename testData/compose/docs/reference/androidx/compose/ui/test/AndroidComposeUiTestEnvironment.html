@@ -1,0 +1,166 @@
+<html devsite="true">
+  <head>
+    <title>AndroidComposeUiTestEnvironment</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/test/ComposeUiTest.android.kt+class:androidx.compose.ui.test.AndroidComposeUiTestEnvironment&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>AndroidComposeUiTestEnvironment</h1>
+    <p>
+      <pre>@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>public abstract class <a href="/reference/androidx/compose/ui/test/AndroidComposeUiTestEnvironment.html">AndroidComposeUiTestEnvironment</a>&lt;A&nbsp;extends&nbsp;<a href="/reference/androidx/activity/ComponentActivity.html">ComponentActivity</a>&gt;</pre>
+    </p>
+    <hr>
+    <p>A test environment that can <code><a href="/reference/androidx/compose/ui/test/AndroidComposeUiTestEnvironment.html#runTest(kotlin.Function1)">run tests</a></code> using the <code><a href="/reference/androidx/compose/ui/test/AndroidComposeUiTestEnvironment.html#test()">test receiver scope</a></code>. Note that some of the properties and methods on <code><a href="/reference/androidx/compose/ui/test/AndroidComposeUiTestEnvironment.html#test()">test</a></code> will only work during the call to <code><a href="/reference/androidx/compose/ui/test/AndroidComposeUiTestEnvironment.html#runTest(kotlin.Function1)">runTest</a></code>, as they require that the environment has been set up.</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">Parameters</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>&lt;A&nbsp;extends&nbsp;<a href="/reference/androidx/activity/ComponentActivity.html">ComponentActivity</a>&gt;</code></td>
+            <td>
+              <p>The Activity type to be interacted with, which typically (but not necessarily) is the activity that was launched and hosts the Compose content.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>&lt;A&nbsp;extends&nbsp;<a href="/reference/androidx/activity/ComponentActivity.html">ComponentActivity</a>&gt; <a href="/reference/androidx/compose/ui/test/AndroidComposeUiTestEnvironment.html#AndroidComposeUiTestEnvironment(kotlin.coroutines.CoroutineContext)">AndroidComposeUiTestEnvironment</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>&nbsp;effectContext<br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/AndroidComposeUiTest.html">AndroidComposeUiTest</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> A&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/AndroidComposeUiTestEnvironment.html#getTest()">getTest</a>()</code></div>
+              <p>The receiver scope of the test passed to <code><a href="/reference/androidx/compose/ui/test/AndroidComposeUiTestEnvironment.html#runTest(kotlin.Function1)">runTest</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R</code></td>
+            <td>
+              <div><code>&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/test/AndroidComposeUiTestEnvironment.html#runTest(kotlin.Function1)">runTest</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/AndroidComposeUiTest.html">AndroidComposeUiTest</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> A&gt;,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;block<br>)</code></div>
+              <p>Runs the given <code><a href="/reference/androidx/compose/ui/test/AndroidComposeUiTestEnvironment.html#runTest(kotlin.Function1)">block</a></code>, setting up all test hooks before running the test and tearing them down after running the test.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Protected methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract A</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/test/AndroidComposeUiTestEnvironment.html#getActivity()">getActivity</a>()</code></div>
+              <p>Returns the current host activity of type <code><a href="/reference/androidx/compose/ui/test/AndroidComposeUiTestEnvironment.html">A</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="AndroidComposeUiTestEnvironment-kotlin.coroutines.CoroutineContext-"></a><a name="androidcomposeuitestenvironment"></a>
+        <h3 class="api-name" id="AndroidComposeUiTestEnvironment(kotlin.coroutines.CoroutineContext)">AndroidComposeUiTestEnvironment</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;&lt;A&nbsp;extends&nbsp;<a href="/reference/androidx/activity/ComponentActivity.html">ComponentActivity</a>&gt; <a href="/reference/androidx/compose/ui/test/AndroidComposeUiTestEnvironment.html#AndroidComposeUiTestEnvironment(kotlin.coroutines.CoroutineContext)">AndroidComposeUiTestEnvironment</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>&nbsp;effectContext<br>)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>&lt;A&nbsp;extends&nbsp;<a href="/reference/androidx/activity/ComponentActivity.html">ComponentActivity</a>&gt;</code></td>
+                <td>
+                  <p>The Activity type to be interacted with, which typically (but not necessarily) is the activity that was launched and hosts the Compose content.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>&nbsp;effectContext</code></td>
+                <td>
+                  <p>The <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code> used to run the composition. The context for <code>LaunchedEffect</code>s and <code>rememberCoroutineScope</code> will be derived from this context.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="getTest--"></a><a name="gettest"></a>
+        <h3 class="api-name" id="getTest()">getTest</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/AndroidComposeUiTest.html">AndroidComposeUiTest</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> A&gt;&nbsp;<a href="/reference/androidx/compose/ui/test/AndroidComposeUiTestEnvironment.html#getTest()">getTest</a>()</pre>
+        <p>The receiver scope of the test passed to <code><a href="/reference/androidx/compose/ui/test/AndroidComposeUiTestEnvironment.html#runTest(kotlin.Function1)">runTest</a></code>. Note that some of the properties and methods will only work during the call to <code><a href="/reference/androidx/compose/ui/test/AndroidComposeUiTestEnvironment.html#runTest(kotlin.Function1)">runTest</a></code>, as they require that the environment has been set up.</p>
+      </div>
+      <div class="api-item"><a name="runTest-kotlin.Function1-"></a><a name="runtest"></a>
+        <h3 class="api-name" id="runTest(kotlin.Function1)">runTest</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/test/AndroidComposeUiTestEnvironment.html#runTest(kotlin.Function1)">runTest</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/AndroidComposeUiTest.html">AndroidComposeUiTest</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> A&gt;,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;block<br>)</pre>
+        <p>Runs the given <code><a href="/reference/androidx/compose/ui/test/AndroidComposeUiTestEnvironment.html#runTest(kotlin.Function1)">block</a></code>, setting up all test hooks before running the test and tearing them down after running the test.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Protected methods</h2>
+      <div class="api-item"><a name="getActivity--"></a><a name="getactivity"></a>
+        <h3 class="api-name" id="getActivity()">getActivity</h3>
+        <pre class="api-signature no-pretty-print">protected&nbsp;abstract&nbsp;A&nbsp;<a href="/reference/androidx/compose/ui/test/AndroidComposeUiTestEnvironment.html#getActivity()">getActivity</a>()</pre>
+        <p>Returns the current host activity of type <code><a href="/reference/androidx/compose/ui/test/AndroidComposeUiTestEnvironment.html">A</a></code>. If no such activity is available, for example if you've navigated to a different activity and the original host has now been destroyed, this will return <code>null</code>.</p>
+      </div>
+    </div>
+  </body>
+</html>

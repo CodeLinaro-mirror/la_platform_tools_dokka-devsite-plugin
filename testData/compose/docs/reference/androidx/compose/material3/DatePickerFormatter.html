@@ -1,0 +1,121 @@
+<html devsite="true">
+  <head>
+    <title>DatePickerFormatter</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/material3/DatePicker.kt+class:androidx.compose.material3.DatePickerFormatter&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>DatePickerFormatter</h1>
+    <p>
+      <pre>@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br>public interface <a href="/reference/androidx/compose/material3/DatePickerFormatter.html">DatePickerFormatter</a></pre>
+    </p>
+    <hr>
+    <p>A date formatter interface used by <code><a href="/reference/androidx/compose/material3/package-summary.html#DatePicker(androidx.compose.material3.DatePickerState,androidx.compose.ui.Modifier,androidx.compose.material3.DatePickerFormatter,kotlin.Function0,kotlin.Function0,kotlin.Boolean,androidx.compose.material3.DatePickerColors)">DatePicker</a></code>.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/material3/DatePickerFormatter.html#formatDate(kotlin.Long,[Error type: Unresolved type for Locale],kotlin.Boolean)">formatDate</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>&nbsp;dateMillis,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a>&nbsp;locale,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;forContentDescription<br>)</code></div>
+              <p>Format a given <code><a href="/reference/androidx/compose/material3/DatePickerFormatter.html#formatDate(kotlin.Long,[Error type: Unresolved type for Locale],kotlin.Boolean)">dateMillis</a></code> to a string representation of the date (i.e.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/material3/DatePickerFormatter.html#formatMonthYear(kotlin.Long,[Error type: Unresolved type for Locale])">formatMonthYear</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>&nbsp;monthMillis,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a>&nbsp;locale<br>)</code></div>
+              <p>Format a given <code><a href="/reference/androidx/compose/material3/DatePickerFormatter.html#formatMonthYear(kotlin.Long,[Error type: Unresolved type for Locale])">monthMillis</a></code> to a string representation of the month and the year (i.e.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="formatDate(kotlin.Long, [Error type: Unresolved type for Locale], kotlin.Boolean)"></a><a name="formatDate-kotlin.Long-[Error type: Unresolved type for Locale]-kotlin.Boolean-"></a><a name="formatdate"></a>
+        <h3 class="api-name" id="formatDate(kotlin.Long,[Error type: Unresolved type for Locale],kotlin.Boolean)">formatDate</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/material3/DatePickerFormatter.html#formatDate(kotlin.Long,[Error type: Unresolved type for Locale],kotlin.Boolean)">formatDate</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>&nbsp;dateMillis,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a>&nbsp;locale,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;forContentDescription<br>)</pre>
+        <p>Format a given <code><a href="/reference/androidx/compose/material3/DatePickerFormatter.html#formatDate(kotlin.Long,[Error type: Unresolved type for Locale],kotlin.Boolean)">dateMillis</a></code> to a string representation of the date (i.e. Mar 27, 2021).</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>&nbsp;dateMillis</code></td>
+                <td>
+                  <p>timestamp in <em>UTC</em> milliseconds from the epoch that represents the date</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a>&nbsp;locale</code></td>
+                <td>
+                  <p>a Locale to use when formatting the date</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>boolean&nbsp;forContentDescription</code></td>
+                <td>
+                  <p>indicates that the requested formatting is for content description. In these cases, the output may include a more descriptive wording that will be passed to a screen readers.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="formatMonthYear(kotlin.Long, [Error type: Unresolved type for Locale])"></a><a name="formatMonthYear-kotlin.Long-[Error type: Unresolved type for Locale]-"></a><a name="formatmonthyear"></a>
+        <h3 class="api-name" id="formatMonthYear(kotlin.Long,[Error type: Unresolved type for Locale])">formatMonthYear</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/material3/DatePickerFormatter.html#formatMonthYear(kotlin.Long,[Error type: Unresolved type for Locale])">formatMonthYear</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>&nbsp;monthMillis,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a>&nbsp;locale<br>)</pre>
+        <p>Format a given <code><a href="/reference/androidx/compose/material3/DatePickerFormatter.html#formatMonthYear(kotlin.Long,[Error type: Unresolved type for Locale])">monthMillis</a></code> to a string representation of the month and the year (i.e. January 2023).</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>&nbsp;monthMillis</code></td>
+                <td>
+                  <p>timestamp in <em>UTC</em> milliseconds from the epoch that represents the month</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a>&nbsp;locale</code></td>
+                <td>
+                  <p>a Locale to use when formatting the month and year</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

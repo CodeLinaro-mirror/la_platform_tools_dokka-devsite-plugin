@@ -38,6 +38,12 @@
               <p>Receiver scope for <code><a href="/reference/androidx/compose/ui/input/pointer/package-summary.html#(androidx.compose.ui.Modifier).pointerInput(kotlin.coroutines.SuspendFunction1)">Modifier.pointerInput</a></code> that permits <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputScope.html#awaitPointerEventScope(kotlin.coroutines.SuspendFunction1)">handling pointer input</a></code>.</p>
             </td>
           </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/input/pointer/SuspendingPointerInputModifierNode.html">SuspendingPointerInputModifierNode</a></code></td>
+            <td>
+              <p>Extends <code><a href="/reference/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a></code> with a handler to execute asynchronously when an event occurs and a function to reset that handler (cancels the existing coroutine and essentially resets the handler's execution).</p>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -82,14 +88,14 @@
             </td>
           </tr>
           <tr>
-            <td><code><a href="/reference/androidx/compose/ui/input/pointer/PointerEvent.html">PointerEvent</a></code></td>
-            <td>
-              <p>Describes a pointer input change event that has occurred at a particular point in time.</p>
-            </td>
-          </tr>
-          <tr>
             <td><code><a href="/reference/androidx/compose/ui/input/pointer/PointerEventKt.html">PointerEventKt</a></code></td>
             <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/input/pointer/PointerEventTimeoutCancellationException.html">PointerEventTimeoutCancellationException</a></code></td>
+            <td>
+              <p>An exception thrown from <code><a href="/reference/androidx/compose/ui/input/pointer/AwaitPointerEventScope.html#withTimeout(kotlin.Long,kotlin.coroutines.SuspendFunction1)">AwaitPointerEventScope.withTimeout</a></code> when the execution time of the coroutine is too long.</p>
+            </td>
           </tr>
           <tr>
             <td><code><a href="/reference/androidx/compose/ui/input/pointer/PointerEventType.html">PointerEventType</a></code></td>
@@ -174,23 +180,6 @@
             <td><code><a href="/reference/androidx/compose/ui/input/pointer/PointerEventPass.html">PointerEventPass</a></code></td>
             <td>
               <p>The enumeration of passes where <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code> traverses up and down the UI tree.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <h2>Exceptions</h2>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="/reference/androidx/compose/ui/input/pointer/PointerEventTimeoutCancellationException.html">PointerEventTimeoutCancellationException</a></code></td>
-            <td>
-              <p>An exception thrown from <code><a href="/reference/androidx/compose/ui/input/pointer/AwaitPointerEventScope.html#withTimeout(kotlin.Long,kotlin.coroutines.SuspendFunction1)">AwaitPointerEventScope.withTimeout</a></code> when the execution time of the coroutine is too long.</p>
             </td>
           </tr>
         </tbody>

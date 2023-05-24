@@ -14,6 +14,7 @@
     </p>
     <hr>
     <p>A mutable value holder where reads to the <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotMutableState.html#value()">value</a></code> property during the execution of a <code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> function, the current <code><a href="/reference/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> will be subscribed to changes of that value. When the <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotMutableState.html#value()">value</a></code> property is written to and changed, a recomposition of any subscribed <code><a href="/reference/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code>s will be scheduled. Writes to it are transacted as part of the <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code> system.</p>
+    <p>In general for correctness: Anything that is mutable, that is read during composition or written to during composition, should be a <code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotMutableState.html">SnapshotMutableState</a></code>.</p>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <colgroup>

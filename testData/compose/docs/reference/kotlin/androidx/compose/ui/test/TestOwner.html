@@ -1,0 +1,150 @@
+<html devsite="true">
+  <head>
+    <title>TestOwner</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/test/TestOwner.kt+class:androidx.compose.ui.test.TestOwner&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>TestOwner</h1>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>@<a href="/reference/kotlin/androidx/compose/ui/test/InternalTestApi.html">InternalTestApi</a><br>interface <a href="/reference/kotlin/androidx/compose/ui/test/TestOwner.html">TestOwner</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
+    <hr>
+    <p>Provides necessary services to facilitate testing.</p>
+    <p>This is typically implemented by entities like test rule.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/node/RootForTest.html">RootForTest</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/TestOwner.html#getRoots(kotlin.Boolean)">getRoots</a>(atLeastOneRootExpected:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>)</code></div>
+                <p>Collects all <code><a href="/reference/kotlin/androidx/compose/ui/node/RootForTest.html">RootForTest</a></code>s from all compose hierarchies.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>T</code></td>
+              <td>
+                <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/ui/test/TestOwner.html#runOnUiThread(kotlin.Function0)">runOnUiThread</a>(action:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T)</code></div>
+                <p>Runs the given <code><a href="/reference/kotlin/androidx/compose/ui/test/TestOwner.html#runOnUiThread(kotlin.Function0)">action</a></code> on the ui thread.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html">MainTestClock</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/TestOwner.html#mainClock()">mainClock</a></code></div>
+                <p>Clock that drives frames and recompositions in compose tests.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="getRoots-kotlin.Boolean-"></a><a name="getroots"></a>
+          <h3 class="api-name" id="getRoots(kotlin.Boolean)">getRoots</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/TestOwner.html#getRoots(kotlin.Boolean)">getRoots</a>(atLeastOneRootExpected:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/node/RootForTest.html">RootForTest</a>&gt;</pre>
+          <p>Collects all <code><a href="/reference/kotlin/androidx/compose/ui/node/RootForTest.html">RootForTest</a></code>s from all compose hierarchies.</p>
+          <p>This is a blocking call. Returns only after compose is idle.</p>
+          <p>Can crash in case it hits time out. This is not supposed to be handled as it surfaces only in incorrect tests.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>atLeastOneRootExpected:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                  <td>
+                    <p>Whether the caller expects that at least one compose root is present in the tested app. This affects synchronization efforts / timeouts of this API.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="runOnUiThread-kotlin.Function0-"></a><a name="runonuithread"></a>
+          <h3 class="api-name" id="runOnUiThread(kotlin.Function0)">runOnUiThread</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/ui/test/TestOwner.html#runOnUiThread(kotlin.Function0)">runOnUiThread</a>(action:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T):&nbsp;T</pre>
+          <p>Runs the given <code><a href="/reference/kotlin/androidx/compose/ui/test/TestOwner.html#runOnUiThread(kotlin.Function0)">action</a></code> on the ui thread.</p>
+          <p>This is a blocking call.</p>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getMainClock()"></a><a name="setMainClock()"></a><a name="getMainClock--"></a><a name="setMainClock--"></a>
+          <h3 class="api-name" id="mainClock()">mainClock</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/TestOwner.html#mainClock()">mainClock</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html">MainTestClock</a></pre>
+          <p>Clock that drives frames and recompositions in compose tests.</p>
+        </div>
+      </div>
+    </devsite-filter >
+  </body>
+</html>

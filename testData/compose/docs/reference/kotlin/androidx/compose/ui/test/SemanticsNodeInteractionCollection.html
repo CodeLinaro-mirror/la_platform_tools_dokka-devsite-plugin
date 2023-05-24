@@ -1,0 +1,552 @@
+<html devsite="true">
+  <head>
+    <title>SemanticsNodeInteractionCollection</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/test/SemanticsNodeInteraction.kt+class:androidx.compose.ui.test.SemanticsNodeInteractionCollection&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>SemanticsNodeInteractionCollection</h1>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>class <a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
+    <hr>
+    <p>Represents a collection of semantics nodes and the path to fetch them from the semantics tree. One can interact with these nodes by performing assertions such as <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).assertCountEquals(kotlin.Int)">assertCountEquals</a></code>, or navigate to other nodes such as <code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#get(kotlin.Int)">get</a></code>.</p>
+    <p>An instance of <code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a></code> can be obtained from <code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionsProvider.html#onAllNodes(androidx.compose.ui.test.SemanticsMatcher,kotlin.Boolean)">onAllNodes</a></code> and convenience methods that use a specific filter, such as <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteractionsProvider).onAllNodesWithText(kotlin.String,kotlin.Boolean,kotlin.Boolean,kotlin.Boolean)">onAllNodesWithText</a></code>.</p>
+    <p>For example, here is how you verify that there are exactly two clickable items:</p>
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.test.assertCountEquals
+import androidx.compose.ui.test.hasClickAction
+
+composeTestRule.onAllNodes(hasClickAction())
+    .assertCountEquals(2)</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="93%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public constructors</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#SemanticsNodeInteractionCollection(androidx.compose.ui.test.TestContext,kotlin.Boolean,androidx.compose.ui.test.SemanticsMatcher)">SemanticsNodeInteractionCollection</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;testContext:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/TestContext.html">TestContext</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;matcher:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a><br>)</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#SemanticsNodeInteractionCollection(androidx.compose.ui.test.TestContext,kotlin.Boolean,androidx.compose.ui.test.SemanticsSelector)">SemanticsNodeInteractionCollection</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;testContext:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/TestContext.html">TestContext</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;selector:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsSelector.html">SemanticsSelector</a><br>)</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsNode.html">SemanticsNode</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#fetchSemanticsNodes(kotlin.Boolean,kotlin.String)">fetchSemanticsNodes</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;atLeastOneRootRequired:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;errorMessageOnFail:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?<br>)</code></div>
+                <p>Returns the semantics nodes captured by this object.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>operator <a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#get(kotlin.Int)">get</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                <p>Retrieve node at the given index of this collection.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Extension functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).assertAll(androidx.compose.ui.test.SemanticsMatcher)">assertAll</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;matcher:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a><br>)</code></div>
+                <p>Asserts that all the nodes in this collection satisfy the given <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).assertAll(androidx.compose.ui.test.SemanticsMatcher)">matcher</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).assertAny(androidx.compose.ui.test.SemanticsMatcher)">assertAny</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;matcher:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a><br>)</code></div>
+                <p>Asserts that this collection contains at least one element that satisfies the given <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).assertAny(androidx.compose.ui.test.SemanticsMatcher)">matcher</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).assertCountEquals(kotlin.Int)">assertCountEquals</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;expectedSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><br>)</code></div>
+                <p>Asserts that this collection of nodes is equal to the given <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).assertCountEquals(kotlin.Int)">expectedSize</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).printToLog(kotlin.String,kotlin.Int)">printToLog</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;tag:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;maxDepth:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><br>)</code></div>
+                <p>Prints all the semantics nodes information into logs (as debug level).</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).printToString(kotlin.Int)">printToString</a>(maxDepth:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                <p>Prints all the semantics nodes information it holds into string.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).filter(androidx.compose.ui.test.SemanticsMatcher)">filter</a>(matcher:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a>)</code></div>
+                <p>Returns all the nodes matching the given <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).filter(androidx.compose.ui.test.SemanticsMatcher)">matcher</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).filterToOne(androidx.compose.ui.test.SemanticsMatcher)">filterToOne</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;matcher:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a><br>)</code></div>
+                <p>Expects to return exactly one node matching the given <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).filterToOne(androidx.compose.ui.test.SemanticsMatcher)">matcher</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).onFirst()">onFirst</a>()</code></div>
+                <p>Returns the first node in this collection.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).onLast()">onLast</a>()</code></div>
+                <p>Returns the last node in this collection.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public constructors</h2>
+        <div class="api-item"><a name="SemanticsNodeInteractionCollection(androidx.compose.ui.test.TestContext, kotlin.Boolean, androidx.compose.ui.test.SemanticsMatcher)"></a><a name="SemanticsNodeInteractionCollection-androidx.compose.ui.test.TestContext-kotlin.Boolean-androidx.compose.ui.test.SemanticsMatcher-"></a><a name="semanticsnodeinteractioncollection"></a>
+          <h3 class="api-name" id="SemanticsNodeInteractionCollection(androidx.compose.ui.test.TestContext,kotlin.Boolean,androidx.compose.ui.test.SemanticsMatcher)">SemanticsNodeInteractionCollection</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#SemanticsNodeInteractionCollection(androidx.compose.ui.test.TestContext,kotlin.Boolean,androidx.compose.ui.test.SemanticsMatcher)">SemanticsNodeInteractionCollection</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;testContext:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/TestContext.html">TestContext</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;matcher:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a><br>)</pre>
+        </div>
+        <div class="api-item"><a name="SemanticsNodeInteractionCollection(androidx.compose.ui.test.TestContext, kotlin.Boolean, androidx.compose.ui.test.SemanticsSelector)"></a><a name="SemanticsNodeInteractionCollection-androidx.compose.ui.test.TestContext-kotlin.Boolean-androidx.compose.ui.test.SemanticsSelector-"></a><a name="semanticsnodeinteractioncollection"></a>
+          <h3 class="api-name" id="SemanticsNodeInteractionCollection(androidx.compose.ui.test.TestContext,kotlin.Boolean,androidx.compose.ui.test.SemanticsSelector)">SemanticsNodeInteractionCollection</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#SemanticsNodeInteractionCollection(androidx.compose.ui.test.TestContext,kotlin.Boolean,androidx.compose.ui.test.SemanticsSelector)">SemanticsNodeInteractionCollection</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;testContext:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/TestContext.html">TestContext</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;useUnmergedTree:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;selector:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsSelector.html">SemanticsSelector</a><br>)</pre>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="fetchSemanticsNodes(kotlin.Boolean, kotlin.String)"></a><a name="fetchSemanticsNodes-kotlin.Boolean-kotlin.String-"></a><a name="fetchsemanticsnodes"></a>
+          <h3 class="api-name" id="fetchSemanticsNodes(kotlin.Boolean,kotlin.String)">fetchSemanticsNodes</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#fetchSemanticsNodes(kotlin.Boolean,kotlin.String)">fetchSemanticsNodes</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;atLeastOneRootRequired:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = true,<br>&nbsp;&nbsp;&nbsp;&nbsp;errorMessageOnFail:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>? = null<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsNode.html">SemanticsNode</a>&gt;</pre>
+          <p>Returns the semantics nodes captured by this object.</p>
+          <p>Note: Accessing this object involves synchronization with your UI. If you are accessing this multiple times in one atomic operation, it is better to cache the result instead of calling this API multiple times.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>atLeastOneRootRequired:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = true</code></td>
+                  <td>
+                    <p>Whether to throw an error in case there is no compose content in the current test app.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>errorMessageOnFail:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>? = null</code></td>
+                  <td>
+                    <p>Custom error message to append when this fails to retrieve the nodes.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="get-kotlin.Int-"></a><a name="get"></a>
+          <h3 class="api-name" id="get(kotlin.Int)">get</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#get(kotlin.Int)">get</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></pre>
+          <p>Retrieve node at the given index of this collection.</p>
+          <p>Any subsequent operation on its result will expect exactly one element found (unless <code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html#assertDoesNotExist()">SemanticsNodeInteraction.assertDoesNotExist</a></code> is used) and will throw <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-assertion-error/index.html">AssertionError</a></code> if none or more than one element is found.</p>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Extension functions</h2>
+        <div class="api-item"><a name="-androidx.compose.ui.test.SemanticsNodeInteractionCollection-.assertAll-androidx.compose.ui.test.SemanticsMatcher-"></a><a name="assertall"></a>
+          <h3 class="api-name" id="(androidx.compose.ui.test.SemanticsNodeInteractionCollection).assertAll(androidx.compose.ui.test.SemanticsMatcher)">assertAll</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).assertAll(androidx.compose.ui.test.SemanticsMatcher)">assertAll</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;matcher:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a></pre>
+          <p>Asserts that all the nodes in this collection satisfy the given <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).assertAll(androidx.compose.ui.test.SemanticsMatcher)">matcher</a></code>.</p>
+          <p>This passes also for empty collections.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>matcher:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a></code></td>
+                  <td>
+                    <p>Matcher that has to be satisfied by all the nodes in the collection.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Throws</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>kotlin.AssertionError:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-assertion-error/index.html">kotlin.AssertionError</a></code></td>
+                  <td>
+                    <p>if the collection contains at least one element that does not satisfy the given matcher.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="-androidx.compose.ui.test.SemanticsNodeInteractionCollection-.assertAny-androidx.compose.ui.test.SemanticsMatcher-"></a><a name="assertany"></a>
+          <h3 class="api-name" id="(androidx.compose.ui.test.SemanticsNodeInteractionCollection).assertAny(androidx.compose.ui.test.SemanticsMatcher)">assertAny</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).assertAny(androidx.compose.ui.test.SemanticsMatcher)">assertAny</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;matcher:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a></pre>
+          <p>Asserts that this collection contains at least one element that satisfies the given <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).assertAny(androidx.compose.ui.test.SemanticsMatcher)">matcher</a></code>.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>matcher:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a></code></td>
+                  <td>
+                    <p>Matcher that has to be satisfied by at least one of the nodes in the collection.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Throws</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>kotlin.AssertionError:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-assertion-error/index.html">kotlin.AssertionError</a></code></td>
+                  <td>
+                    <p>if not at least one matching node was node.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="-androidx.compose.ui.test.SemanticsNodeInteractionCollection-.assertCountEquals-kotlin.Int-"></a><a name="assertcountequals"></a>
+          <h3 class="api-name" id="(androidx.compose.ui.test.SemanticsNodeInteractionCollection).assertCountEquals(kotlin.Int)">assertCountEquals</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).assertCountEquals(kotlin.Int)">assertCountEquals</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;expectedSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a></pre>
+          <p>Asserts that this collection of nodes is equal to the given <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).assertCountEquals(kotlin.Int)">expectedSize</a></code>.</p>
+          <p>Provides a detailed error message on failure.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Throws</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>kotlin.AssertionError:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-assertion-error/index.html">kotlin.AssertionError</a></code></td>
+                  <td>
+                    <p>if the size is not equal to <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).assertCountEquals(kotlin.Int)">expectedSize</a></code></p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="(androidx.compose.ui.test.SemanticsNodeInteractionCollection).printToLog(kotlin.String, kotlin.Int)"></a><a name="-androidx.compose.ui.test.SemanticsNodeInteractionCollection-.printToLog-kotlin.String-kotlin.Int-"></a><a name="printtolog"></a>
+          <h3 class="api-name" id="(androidx.compose.ui.test.SemanticsNodeInteractionCollection).printToLog(kotlin.String,kotlin.Int)">printToLog</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).printToLog(kotlin.String,kotlin.Int)">printToLog</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;tag:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;maxDepth:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 0<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Prints all the semantics nodes information into logs (as debug level).</p>
+          <p>By default this does not print nodes sub-hierarchies. This can be changed by setting a custom max depth in <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).printToLog(kotlin.String,kotlin.Int)">maxDepth</a></code>.</p>
+          <p>Note that this will fetch the latest snapshot of nodes it sees in the hierarchy for the IDs it collected before. So the output can change over time if the tree changes.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>tag:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></code></td>
+                  <td>
+                    <p>The tag to be used in the log messages. Must not be negative.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>maxDepth:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 0</code></td>
+                  <td>
+                    <p>Max depth of the nodes in hierarchy to print. Zero will print nodes in this collection only.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="-androidx.compose.ui.test.SemanticsNodeInteractionCollection-.printToString-kotlin.Int-"></a><a name="printtostring"></a>
+          <h3 class="api-name" id="(androidx.compose.ui.test.SemanticsNodeInteractionCollection).printToString(kotlin.Int)">printToString</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).printToString(kotlin.Int)">printToString</a>(maxDepth:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 0):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></pre>
+          <p>Prints all the semantics nodes information it holds into string.</p>
+          <p>By default this does not print nodes sub-hierarchies. This can be changed by setting a custom max depth in <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).printToString(kotlin.Int)">maxDepth</a></code>.</p>
+          <p>Note that this will fetch the latest snapshot of nodes it sees in the hierarchy for the IDs it collected before. So the output can change over time if the tree changes.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>maxDepth:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 0</code></td>
+                  <td>
+                    <p>Max depth of the nodes in hierarchy to print. Zero will print nodes in this collection only. Must not be negative.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="-androidx.compose.ui.test.SemanticsNodeInteractionCollection-.filter-androidx.compose.ui.test.SemanticsMatcher-"></a><a name="filter"></a>
+          <h3 class="api-name" id="(androidx.compose.ui.test.SemanticsNodeInteractionCollection).filter(androidx.compose.ui.test.SemanticsMatcher)">filter</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).filter(androidx.compose.ui.test.SemanticsMatcher)">filter</a>(matcher:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a></pre>
+          <p>Returns all the nodes matching the given <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).filter(androidx.compose.ui.test.SemanticsMatcher)">matcher</a></code>.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>matcher:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a></code></td>
+                  <td>
+                    <p>Matcher to use for the filtering.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="-androidx.compose.ui.test.SemanticsNodeInteractionCollection-.filterToOne-androidx.compose.ui.test.SemanticsMatcher-"></a><a name="filtertoone"></a>
+          <h3 class="api-name" id="(androidx.compose.ui.test.SemanticsNodeInteractionCollection).filterToOne(androidx.compose.ui.test.SemanticsMatcher)">filterToOne</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).filterToOne(androidx.compose.ui.test.SemanticsMatcher)">filterToOne</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;matcher:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></pre>
+          <p>Expects to return exactly one node matching the given <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).filterToOne(androidx.compose.ui.test.SemanticsMatcher)">matcher</a></code>.</p>
+          <p>Any subsequent operation on its result will expect exactly one element found (unless <code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html#assertDoesNotExist()">SemanticsNodeInteraction.assertDoesNotExist</a></code> is used) and will throw <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-assertion-error/index.html">AssertionError</a></code> if no element is found.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>matcher:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a></code></td>
+                  <td>
+                    <p>Matcher to use for the filtering.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="-androidx.compose.ui.test.SemanticsNodeInteractionCollection-.onFirst--"></a><a name="onfirst"></a>
+          <h3 class="api-name" id="(androidx.compose.ui.test.SemanticsNodeInteractionCollection).onFirst()">onFirst</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).onFirst()">onFirst</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></pre>
+          <p>Returns the first node in this collection.</p>
+          <p>Any subsequent operation on its result will expect exactly one element found (unless <code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html#assertDoesNotExist()">SemanticsNodeInteraction.assertDoesNotExist</a></code> is used) and will throw <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-assertion-error/index.html">AssertionError</a></code> if no element is found.</p>
+        </div>
+        <div class="api-item"><a name="-androidx.compose.ui.test.SemanticsNodeInteractionCollection-.onLast--"></a><a name="onlast"></a>
+          <h3 class="api-name" id="(androidx.compose.ui.test.SemanticsNodeInteractionCollection).onLast()">onLast</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html">SemanticsNodeInteractionCollection</a>.<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteractionCollection.html#(androidx.compose.ui.test.SemanticsNodeInteractionCollection).onLast()">onLast</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></pre>
+          <p>Returns the last node in this collection.</p>
+          <p>Any subsequent operation on its result will expect exactly one element found (unless <code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html#assertDoesNotExist()">SemanticsNodeInteraction.assertDoesNotExist</a></code> is used) and will throw <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-assertion-error/index.html">AssertionError</a></code> if no element is found.</p>
+        </div>
+      </div>
+    </devsite-filter >
+  </body>
+</html>

@@ -1,0 +1,113 @@
+<html devsite="true">
+  <head>
+    <title>CompositionLocalConsumerModifierNodeKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>CompositionLocalConsumerModifierNodeKt</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/node/CompositionLocalConsumerModifierNodeKt.html">CompositionLocalConsumerModifierNodeKt</a></pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/node/CompositionLocalConsumerModifierNodeKt.html#(androidx.compose.ui.node.CompositionLocalConsumerModifierNode).currentValueOf(androidx.compose.runtime.CompositionLocal)">currentValueOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/CompositionLocalConsumerModifierNode.html">CompositionLocalConsumerModifierNode</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;local<br>)</code></div>
+              <p>Returns the current value of <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.CompositionLocalConsumerModifierNode).currentValueOf(androidx.compose.runtime.CompositionLocal)">local</a></code> at the position in the composition hierarchy of this modifier's attached layout node.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.node.CompositionLocalConsumerModifierNode-.currentValueOf-androidx.compose.runtime.CompositionLocal-"></a><a name="currentvalueof"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.node.CompositionLocalConsumerModifierNode).currentValueOf(androidx.compose.runtime.CompositionLocal)">currentValueOf</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/node/CompositionLocalConsumerModifierNodeKt.html#(androidx.compose.ui.node.CompositionLocalConsumerModifierNode).currentValueOf(androidx.compose.runtime.CompositionLocal)">currentValueOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/CompositionLocalConsumerModifierNode.html">CompositionLocalConsumerModifierNode</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;local<br>)</pre>
+        <p>Returns the current value of <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.CompositionLocalConsumerModifierNode).currentValueOf(androidx.compose.runtime.CompositionLocal)">local</a></code> at the position in the composition hierarchy of this modifier's attached layout node.</p>
+        <p>Unlike <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html#current()">CompositionLocal.current</a></code>, reads via this function are not automatically tracked by Compose. Modifiers are not able to recompose in the same way that a Composable can, and therefore can't receive updates arbitrarily for a CompositionLocal.</p>
+        <p>Because CompositionLocals may change arbitrarily, it is strongly recommended to ensure that the composition local is observed instead of being read once. If you call <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.CompositionLocalConsumerModifierNode).currentValueOf(androidx.compose.runtime.CompositionLocal)">currentValueOf</a></code> inside of a modifier callback like <code><a href="/reference/androidx/compose/ui/node/LayoutModifierNode.html#(androidx.compose.ui.layout.MeasureScope).measure(androidx.compose.ui.layout.Measurable,androidx.compose.ui.unit.Constraints)">LayoutModifierNode.measure</a></code> or <code><a href="/reference/androidx/compose/ui/node/DrawModifierNode.html#(androidx.compose.ui.graphics.drawscope.ContentDrawScope).draw()">DrawModifierNode.draw</a></code>, then Compose will track the CompositionLocal read. This happens automatically, because these Compose UI phases take place in a snapshot observer that tracks which states are read. If the value of the CompositionLocal changes, and it was read inside of the measure or draw phase, then that phase will automatically be invalidated.</p>
+        <p>For all other reads of a CompositionLocal, this function will <b>not</b> notify you when the value of the local changes. <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> classes that also implement <code><a href="/reference/androidx/compose/ui/node/ObserverModifierNode.html">ObserverModifierNode</a></code> may observe CompositionLocals arbitrarily by performing the lookup in an <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.Modifier.Node).observeReads(kotlin.Function0)">observeReads</a></code> block. To continue observing values of the CompositionLocal, it must be read again in an <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.Modifier.Node).observeReads(kotlin.Function0)">observeReads</a></code> block during or after the <code><a href="/reference/androidx/compose/ui/node/ObserverModifierNode.html#onObservedReadsChanged()">ObserverModifierNode.onObservedReadsChanged</a></code> callback is invoked. See below for an example of how to implement this observation pattern.</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.ui.node.currentValueOf
+import androidx.compose.ui.node.observeReads
+
+val LocalValue = compositionLocalOf { &quot;abc123&quot; }
+class ValueObserverModifierNode : Modifier.Node(),
+    CompositionLocalConsumerModifierNode, ObserverModifierNode {
+    private var observedValue: String? = null
+    override fun onAttach() {
+        onObservedReadsChanged()
+    }
+    override fun onDetach() {
+        observedValue = null
+    }
+    override fun onObservedReadsChanged() {
+        observeReads {
+            observedValue = currentValueOf(LocalValue)
+            // Do something with the new value
+        }
+    }
+}</pre>
+        <p>This function will fail with an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code> if you attempt to read a CompositionLocal before the node is <code><a href="/reference/androidx/compose/ui/Modifier.Node.html#onAttach()">attached</a></code> or after the node is <code><a href="/reference/androidx/compose/ui/Modifier.Node.html#onDetach()">detached</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;local</code></td>
+                <td>
+                  <p>The CompositionLocal to get the current value of</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+                <td>
+                  <p>The value provided by the nearest <code><a href="/reference/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code> component that invokes, directly or indirectly, the composable function that this modifier is attached to. If <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.CompositionLocalConsumerModifierNode).currentValueOf(androidx.compose.runtime.CompositionLocal)">local</a></code> was never provided, its default value will be returned instead.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

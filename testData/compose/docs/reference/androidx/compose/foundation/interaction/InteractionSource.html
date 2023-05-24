@@ -40,11 +40,11 @@
     <p>For simple cases where you are interested in the binary state of an <code><a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>, such as whether a component is pressed or not, you can use <code><a href="/reference/androidx/compose/foundation/interaction/package-summary.html#(androidx.compose.foundation.interaction.InteractionSource).collectIsPressedAsState()">InteractionSource.collectIsPressedAsState</a></code> and other extension functions that subscribe and return a <code><a href="/reference/androidx/compose/runtime/State.html">Boolean</a></code> representing whether the component is in this state or not.</p>
     <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Box
@@ -105,16 +105,16 @@ Box(
     }
 }</pre>
     <p>For more complex cases, such as when building an <code><a href="/reference/androidx/compose/foundation/Indication.html">androidx.compose.foundation.Indication</a></code>, the order of the events can change how a component / indication should be drawn. For example, if a component is being dragged and then becomes focused, the most recent <code><a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code> is <code><a href="/reference/androidx/compose/foundation/interaction/FocusInteraction.Focus.html">FocusInteraction.Focus</a></code>, so the component should appear in a focused state to signal this event to the user.</p>
-    <p>InteractionSource exposes <code><a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html#interactions()">interactions</a></code> to support these use cases - a <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> representing the stream of all emitted <code><a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s. This also provides more information, such as the press position of <code><a href="/reference/androidx/compose/foundation/interaction/PressInteraction.Press.html">PressInteraction.Press</a></code>, so you can show an effect at the specific point the component was pressed, and whether the press was <code><a href="/reference/androidx/compose/foundation/interaction/PressInteraction.Release.html">PressInteraction.Release</a></code> or <code><a href="/reference/androidx/compose/foundation/interaction/PressInteraction.Cancel.html">PressInteraction.Cancel</a></code>, for cases when a component should behave differently if the press was released normally or interrupted by another gesture.</p>
-    <p>You can collect from <code><a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html#interactions()">interactions</a></code> as you would with any other <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code>:</p>
+    <p>InteractionSource exposes <code><a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html#interactions()">interactions</a></code> to support these use cases - a Flow representing the stream of all emitted <code><a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s. This also provides more information, such as the press position of <code><a href="/reference/androidx/compose/foundation/interaction/PressInteraction.Press.html">PressInteraction.Press</a></code>, so you can show an effect at the specific point the component was pressed, and whether the press was <code><a href="/reference/androidx/compose/foundation/interaction/PressInteraction.Release.html">PressInteraction.Release</a></code> or <code><a href="/reference/androidx/compose/foundation/interaction/PressInteraction.Cancel.html">PressInteraction.Cancel</a></code>, for cases when a component should behave differently if the press was released normally or interrupted by another gesture.</p>
+    <p>You can collect from <code><a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html#interactions()">interactions</a></code> as you would with any other Flow:</p>
     <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.indication
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -259,10 +259,10 @@ Column(
         </thead>
         <tbody class="list">
           <tr>
-            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a>&gt;</code></td>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a>&gt;</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html#getInteractions()">getInteractions</a>()</code></div>
-              <p><code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> representing the stream of all <code><a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s emitted through this <code><a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></code>.</p>
+              <p>Flow representing the stream of all <code><a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s emitted through this <code><a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></code>.</p>
             </td>
           </tr>
         </tbody>
@@ -315,16 +315,16 @@ Column(
       <h2>Public methods</h2>
       <div class="api-item"><a name="getInteractions--"></a><a name="getinteractions"></a>
         <h3 class="api-name" id="getInteractions()">getInteractions</h3>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a>&gt;&nbsp;<a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html#getInteractions()">getInteractions</a>()</pre>
-        <p><code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> representing the stream of all <code><a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s emitted through this <code><a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></code>. This can be used to see <code><a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s emitted in order, and with additional metadata, such as the press position for <code><a href="/reference/androidx/compose/foundation/interaction/PressInteraction.Press.html">PressInteraction.Press</a></code>.</p>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a>&gt;&nbsp;<a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html#getInteractions()">getInteractions</a>()</pre>
+        <p>Flow representing the stream of all <code><a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s emitted through this <code><a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></code>. This can be used to see <code><a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s emitted in order, and with additional metadata, such as the press position for <code><a href="/reference/androidx/compose/foundation/interaction/PressInteraction.Press.html">PressInteraction.Press</a></code>.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.indication
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
