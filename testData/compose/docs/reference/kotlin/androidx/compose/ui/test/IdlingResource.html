@@ -1,0 +1,111 @@
+<html devsite="true">
+  <head>
+    <title>IdlingResource</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/test/IdlingResource.kt+class:androidx.compose.ui.test.IdlingResource&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>IdlingResource</h1>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>@<a href="/reference/kotlin/androidx/compose/ui/test/internal/JvmDefaultWithCompatibility.html">JvmDefaultWithCompatibility</a><br>interface <a href="/reference/kotlin/androidx/compose/ui/test/IdlingResource.html">IdlingResource</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
+    <hr>
+    <p>Represents a resource of an application under test which can cause asynchronous background work to happen during test execution (e.g. an http request in response to a button click).</p>
+    <p>By default, all interactions from the test with the compose tree (finding nodes, performing gestures, making assertions) will be synchronized with pending work in Compose's internals (such as applying state changes, recomposing, measuring, etc). This ensures that the UI is in a stable state when the interactions are performed, so that e.g. no pending recompositions are still scheduled that could potentially change the UI. However, any asynchronous work that is not done through one of Compose's mechanisms won't be included in the default synchronization. For such work, test authors can create an <code><a href="/reference/kotlin/androidx/compose/ui/test/IdlingResource.html">IdlingResource</a></code> and register it into the test with androidx.compose.ui.test.junit4.ComposeTestRule
+.registerIdlingResource, and the interaction will wait for that resource to become idle prior to performing it.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/IdlingResource.html#getDiagnosticMessageIfBusy()">getDiagnosticMessageIfBusy</a>()</code></div>
+                <p>Returns diagnostics that explain why the idling resource is busy, or <code>null</code> if the resource is not busy.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/IdlingResource.html#isIdleNow()">isIdleNow</a></code></div>
+                <p>Whether or not the <code><a href="/reference/kotlin/androidx/compose/ui/test/IdlingResource.html">IdlingResource</a></code> is idle when reading this value.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="getDiagnosticMessageIfBusy--"></a><a name="getdiagnosticmessageifbusy"></a>
+          <h3 class="api-name" id="getDiagnosticMessageIfBusy()">getDiagnosticMessageIfBusy</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/IdlingResource.html#getDiagnosticMessageIfBusy()">getDiagnosticMessageIfBusy</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?</pre>
+          <p>Returns diagnostics that explain why the idling resource is busy, or <code>null</code> if the resource is not busy. Default implementation returns <code>null</code>.</p>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getIsIdleNow()"></a><a name="setIsIdleNow()"></a><a name="getIsIdleNow--"></a><a name="setIsIdleNow--"></a>
+          <h3 class="api-name" id="isIdleNow()">isIdleNow</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/IdlingResource.html#isIdleNow()">isIdleNow</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>Whether or not the <code><a href="/reference/kotlin/androidx/compose/ui/test/IdlingResource.html">IdlingResource</a></code> is idle when reading this value. This should always be called from the main thread, which is why it should be lightweight and fast.</p>
+          <p>If one idling resource returns <code>false</code>, the synchronization system will keep polling all idling resources until they are all idle.</p>
+        </div>
+      </div>
+    </devsite-filter >
+  </body>
+</html>

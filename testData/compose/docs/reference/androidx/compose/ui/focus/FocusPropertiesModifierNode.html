@@ -10,10 +10,10 @@
     </div>
     <h1>FocusPropertiesModifierNode</h1>
     <p>
-      <pre>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public interface <a href="/reference/androidx/compose/ui/focus/FocusPropertiesModifierNode.html">FocusPropertiesModifierNode</a> extends <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></pre>
+      <pre>public interface <a href="/reference/androidx/compose/ui/focus/FocusPropertiesModifierNode.html">FocusPropertiesModifierNode</a> extends <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></pre>
     </p>
     <hr>
-    <p>Implement this interface create a modifier node that can be used to modify the focus properties of the associated <code><a href="/reference/androidx/compose/ui/focus/FocusTargetModifierNode.html">FocusTargetModifierNode</a></code>.</p>
+    <p>Implement this interface create a modifier node that can be used to modify the focus properties of the associated <code><a href="/reference/androidx/compose/ui/focus/FocusTargetNode.html">FocusTargetNode</a></code>.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -30,8 +30,29 @@
           <tr>
             <td><code>abstract void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/focus/FocusPropertiesModifierNode.html#modifyFocusProperties(androidx.compose.ui.focus.FocusProperties)">modifyFocusProperties</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/focus/FocusProperties.html">FocusProperties</a>&nbsp;focusProperties)</code></div>
-              <p>A parent can modify the focus properties associated with the nearest <code><a href="/reference/androidx/compose/ui/focus/FocusTargetModifierNode.html">FocusTargetModifierNode</a></code> child node.</p>
+              <div><code><a href="/reference/androidx/compose/ui/focus/FocusPropertiesModifierNode.html#applyFocusProperties(androidx.compose.ui.focus.FocusProperties)">applyFocusProperties</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/focus/FocusProperties.html">FocusProperties</a>&nbsp;focusProperties)</code></div>
+              <p>A parent can modify the focus properties associated with the nearest <code><a href="/reference/androidx/compose/ui/focus/FocusTargetNode.html">FocusTargetNode</a></code> child node.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>default&nbsp;final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/focus/FocusPropertiesModifierNodeKt.html">FocusPropertiesModifierNodeKt</a>.<a href="/reference/androidx/compose/ui/focus/FocusPropertiesModifierNode.html#(androidx.compose.ui.focus.FocusPropertiesModifierNode).invalidateFocusProperties()">invalidateFocusProperties</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/focus/FocusPropertiesModifierNode.html">FocusPropertiesModifierNode</a>&nbsp;receiver<br>)</code></div>
             </td>
           </tr>
         </tbody>
@@ -71,10 +92,17 @@
     </div>
     <div class="list">
       <h2>Public methods</h2>
-      <div class="api-item"><a name="modifyFocusProperties-androidx.compose.ui.focus.FocusProperties-"></a><a name="modifyfocusproperties"></a>
-        <h3 class="api-name" id="modifyFocusProperties(androidx.compose.ui.focus.FocusProperties)">modifyFocusProperties</h3>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/focus/FocusPropertiesModifierNode.html#modifyFocusProperties(androidx.compose.ui.focus.FocusProperties)">modifyFocusProperties</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/focus/FocusProperties.html">FocusProperties</a>&nbsp;focusProperties)</pre>
-        <p>A parent can modify the focus properties associated with the nearest <code><a href="/reference/androidx/compose/ui/focus/FocusTargetModifierNode.html">FocusTargetModifierNode</a></code> child node. If a <code><a href="/reference/androidx/compose/ui/focus/FocusTargetModifierNode.html">FocusTargetModifierNode</a></code> has multiple parent <code><a href="/reference/androidx/compose/ui/focus/FocusPropertiesModifierNode.html">FocusPropertiesModifierNode</a></code>s, properties set by a parent higher up in the hierarchy overwrite properties set by those that are lower in the hierarchy.</p>
+      <div class="api-item"><a name="applyFocusProperties-androidx.compose.ui.focus.FocusProperties-"></a><a name="applyfocusproperties"></a>
+        <h3 class="api-name" id="applyFocusProperties(androidx.compose.ui.focus.FocusProperties)">applyFocusProperties</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/focus/FocusPropertiesModifierNode.html#applyFocusProperties(androidx.compose.ui.focus.FocusProperties)">applyFocusProperties</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/focus/FocusProperties.html">FocusProperties</a>&nbsp;focusProperties)</pre>
+        <p>A parent can modify the focus properties associated with the nearest <code><a href="/reference/androidx/compose/ui/focus/FocusTargetNode.html">FocusTargetNode</a></code> child node. If a <code><a href="/reference/androidx/compose/ui/focus/FocusTargetNode.html">FocusTargetNode</a></code> has multiple parent <code><a href="/reference/androidx/compose/ui/focus/FocusPropertiesModifierNode.html">FocusPropertiesModifierNode</a></code>s, properties set by a parent higher up in the hierarchy overwrite properties set by those that are lower in the hierarchy.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.compose.ui.focus.FocusPropertiesModifierNode-.invalidateFocusProperties--"></a><a name="invalidatefocusproperties"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.focus.FocusPropertiesModifierNode).invalidateFocusProperties()">FocusPropertiesModifierNodeKt.invalidateFocusProperties</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/focus/FocusPropertiesModifierNodeKt.html">FocusPropertiesModifierNodeKt</a>.<a href="/reference/androidx/compose/ui/focus/FocusPropertiesModifierNode.html#(androidx.compose.ui.focus.FocusPropertiesModifierNode).invalidateFocusProperties()">invalidateFocusProperties</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/focus/FocusPropertiesModifierNode.html">FocusPropertiesModifierNode</a>&nbsp;receiver<br>)</pre>
       </div>
     </div>
   </body>

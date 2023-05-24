@@ -184,6 +184,94 @@ Box(
         <h3 class="api-name" id="applyToFling(androidx.compose.ui.unit.Velocity,kotlin.coroutines.SuspendFunction1)">applyToFling</h3>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/foundation/OverscrollEffect.html#applyToFling(androidx.compose.ui.unit.Velocity,kotlin.coroutines.SuspendFunction1)">applyToFling</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Velocity.html">Velocity</a>&nbsp;velocity,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-suspend-function1/index.html">SuspendFunction1</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Velocity.html">Velocity</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Velocity.html">Velocity</a>&gt;&nbsp;performFling<br>)</pre>
         <p>Applies overscroll to <code><a href="/reference/androidx/compose/foundation/OverscrollEffect.html#applyToFling(androidx.compose.ui.unit.Velocity,kotlin.coroutines.SuspendFunction1)">performFling</a></code>. <code><a href="/reference/androidx/compose/foundation/OverscrollEffect.html#applyToFling(androidx.compose.ui.unit.Velocity,kotlin.coroutines.SuspendFunction1)">performFling</a></code> should represent a fling (the release of a drag or scroll), and returns the amount of <code><a href="/reference/androidx/compose/ui/unit/Velocity.html">Velocity</a></code> consumed, so in simple cases the amount of overscroll to show should be equal to <code>velocity - performFling(velocity)</code>. The OverscrollEffect can optionally consume some <code><a href="/reference/androidx/compose/ui/unit/Velocity.html">Velocity</a></code> before calling <code><a href="/reference/androidx/compose/foundation/OverscrollEffect.html#applyToFling(androidx.compose.ui.unit.Velocity,kotlin.coroutines.SuspendFunction1)">performFling</a></code>, such as to release any existing tension. The implementation <em>must</em> call <code><a href="/reference/androidx/compose/foundation/OverscrollEffect.html#applyToFling(androidx.compose.ui.unit.Velocity,kotlin.coroutines.SuspendFunction1)">performFling</a></code> exactly once.</p>
+        <p>For example, assume we want to apply overscroll to a custom component that isn't using <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).scrollable(androidx.compose.foundation.gestures.ScrollableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,androidx.compose.foundation.interaction.MutableInteractionSource)">androidx.compose.foundation.gestures.scrollable</a></code>. Here is a simple example of a component using <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).draggable(androidx.compose.foundation.gestures.DraggableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Boolean,kotlin.coroutines.SuspendFunction2,kotlin.coroutines.SuspendFunction2,kotlin.Boolean)">androidx.compose.foundation.gestures.draggable</a></code> instead:</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.gestures.draggable
+import androidx.compose.foundation.gestures.rememberDraggableState
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+
+var dragPosition by remember { mutableStateOf(0f) }
+val minPosition = -1000f
+val maxPosition = 1000f
+
+val draggableState = rememberDraggableState { delta -&gt;
+    val newPosition = (dragPosition + delta).coerceIn(minPosition, maxPosition)
+    dragPosition = newPosition
+}
+
+Box(
+    Modifier
+        .size(100.dp)
+        .draggable(draggableState, orientation = Orientation.Horizontal),
+    contentAlignment = Alignment.Center
+) {
+    Text(&quot;Drag position $dragPosition&quot;)
+}</pre>
+        <p>To apply overscroll, we decorate the existing logic with applyToScroll, and return the amount of delta we have consumed when updating the drag position. We then call applyToFling using the velocity provided by onDragStopped.</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.gestures.draggable
+import androidx.compose.foundation.gestures.rememberDraggableState
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.overscroll
+import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.unit.Velocity
+
+var dragPosition by remember { mutableStateOf(0f) }
+val minPosition = -1000f
+val maxPosition = 1000f
+
+val overscrollEffect = ScrollableDefaults.overscrollEffect()
+
+val draggableState = rememberDraggableState { delta -&gt;
+    // Horizontal, so convert the delta to a horizontal offset
+    val deltaAsOffset = Offset(delta, 0f)
+    // Wrap the original logic inside applyToScroll
+    overscrollEffect.applyToScroll(deltaAsOffset, NestedScrollSource.Drag) { remainingOffset -&gt;
+        val remainingDelta = remainingOffset.x
+        val newPosition = (dragPosition + remainingDelta).coerceIn(minPosition, maxPosition)
+        // Calculate how much delta we have consumed
+        val consumed = newPosition - dragPosition
+        dragPosition = newPosition
+        // Return how much offset we consumed, so that we can show overscroll for what is left
+        Offset(consumed, 0f)
+    }
+}
+
+Box(
+    Modifier
+        // Draw overscroll on the box
+        .overscroll(overscrollEffect)
+        .size(100.dp)
+        .draggable(
+            draggableState,
+            orientation = Orientation.Horizontal,
+            onDragStopped = {
+                overscrollEffect.applyToFling(Velocity(it, 0f)) { velocity -&gt;
+                    if (dragPosition == minPosition || dragPosition == maxPosition) {
+                        // If we are at the min / max bound, give overscroll all of the velocity
+                        Velocity.Zero
+                    } else {
+                        // If we aren't at the min / max bound, consume all of the velocity so
+                        // overscroll won't show. Normally in this case something like
+                        // Modifier.scrollable would use the velocity to update the scroll state
+                        // with a fling animation, but just do nothing to keep this simpler.
+                        velocity
+                    }
+                }
+            }
+        ),
+    contentAlignment = Alignment.Center
+) {
+    Text(&quot;Drag position $dragPosition&quot;)
+}</pre>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -216,6 +304,94 @@ Box(
         <h3 class="api-name" id="applyToScroll(androidx.compose.ui.geometry.Offset,androidx.compose.ui.input.nestedscroll.NestedScrollSource,kotlin.Function1)">applyToScroll</h3>
         <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;<a href="/reference/androidx/compose/foundation/OverscrollEffect.html#applyToScroll(androidx.compose.ui.geometry.Offset,androidx.compose.ui.input.nestedscroll.NestedScrollSource,kotlin.Function1)">applyToScroll</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;delta,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollSource.html">NestedScrollSource</a>&nbsp;source,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&gt;&nbsp;performScroll<br>)</pre>
         <p>Applies overscroll to <code><a href="/reference/androidx/compose/foundation/OverscrollEffect.html#applyToScroll(androidx.compose.ui.geometry.Offset,androidx.compose.ui.input.nestedscroll.NestedScrollSource,kotlin.Function1)">performScroll</a></code>. <code><a href="/reference/androidx/compose/foundation/OverscrollEffect.html#applyToScroll(androidx.compose.ui.geometry.Offset,androidx.compose.ui.input.nestedscroll.NestedScrollSource,kotlin.Function1)">performScroll</a></code> should represent a drag / scroll, and returns the amount of delta consumed, so in simple cases the amount of overscroll to show should be equal to <code>delta - performScroll(delta)</code>. The OverscrollEffect can optionally consume some delta before calling <code><a href="/reference/androidx/compose/foundation/OverscrollEffect.html#applyToScroll(androidx.compose.ui.geometry.Offset,androidx.compose.ui.input.nestedscroll.NestedScrollSource,kotlin.Function1)">performScroll</a></code>, such as to release any existing tension. The implementation <em>must</em> call <code><a href="/reference/androidx/compose/foundation/OverscrollEffect.html#applyToScroll(androidx.compose.ui.geometry.Offset,androidx.compose.ui.input.nestedscroll.NestedScrollSource,kotlin.Function1)">performScroll</a></code> exactly once. This function should return the sum of all the delta that was consumed during this operation - both by the overscroll and <code><a href="/reference/androidx/compose/foundation/OverscrollEffect.html#applyToScroll(androidx.compose.ui.geometry.Offset,androidx.compose.ui.input.nestedscroll.NestedScrollSource,kotlin.Function1)">performScroll</a></code>.</p>
+        <p>For example, assume we want to apply overscroll to a custom component that isn't using <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).scrollable(androidx.compose.foundation.gestures.ScrollableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,androidx.compose.foundation.interaction.MutableInteractionSource)">androidx.compose.foundation.gestures.scrollable</a></code>. Here is a simple example of a component using <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).draggable(androidx.compose.foundation.gestures.DraggableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Boolean,kotlin.coroutines.SuspendFunction2,kotlin.coroutines.SuspendFunction2,kotlin.Boolean)">androidx.compose.foundation.gestures.draggable</a></code> instead:</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.gestures.draggable
+import androidx.compose.foundation.gestures.rememberDraggableState
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+
+var dragPosition by remember { mutableStateOf(0f) }
+val minPosition = -1000f
+val maxPosition = 1000f
+
+val draggableState = rememberDraggableState { delta -&gt;
+    val newPosition = (dragPosition + delta).coerceIn(minPosition, maxPosition)
+    dragPosition = newPosition
+}
+
+Box(
+    Modifier
+        .size(100.dp)
+        .draggable(draggableState, orientation = Orientation.Horizontal),
+    contentAlignment = Alignment.Center
+) {
+    Text(&quot;Drag position $dragPosition&quot;)
+}</pre>
+        <p>To apply overscroll, we need to decorate the existing logic with applyToScroll, and return the amount of delta we have consumed when updating the drag position. Note that we also need to call applyToFling - this is used as an end signal for overscroll so that effects can correctly reset after any animations, when the gesture has stopped.</p>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.gestures.draggable
+import androidx.compose.foundation.gestures.rememberDraggableState
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.overscroll
+import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.unit.Velocity
+
+var dragPosition by remember { mutableStateOf(0f) }
+val minPosition = -1000f
+val maxPosition = 1000f
+
+val overscrollEffect = ScrollableDefaults.overscrollEffect()
+
+val draggableState = rememberDraggableState { delta -&gt;
+    // Horizontal, so convert the delta to a horizontal offset
+    val deltaAsOffset = Offset(delta, 0f)
+    // Wrap the original logic inside applyToScroll
+    overscrollEffect.applyToScroll(deltaAsOffset, NestedScrollSource.Drag) { remainingOffset -&gt;
+        val remainingDelta = remainingOffset.x
+        val newPosition = (dragPosition + remainingDelta).coerceIn(minPosition, maxPosition)
+        // Calculate how much delta we have consumed
+        val consumed = newPosition - dragPosition
+        dragPosition = newPosition
+        // Return how much offset we consumed, so that we can show overscroll for what is left
+        Offset(consumed, 0f)
+    }
+}
+
+Box(
+    Modifier
+        // Draw overscroll on the box
+        .overscroll(overscrollEffect)
+        .size(100.dp)
+        .draggable(
+            draggableState,
+            orientation = Orientation.Horizontal,
+            onDragStopped = {
+                overscrollEffect.applyToFling(Velocity(it, 0f)) { velocity -&gt;
+                    if (dragPosition == minPosition || dragPosition == maxPosition) {
+                        // If we are at the min / max bound, give overscroll all of the velocity
+                        Velocity.Zero
+                    } else {
+                        // If we aren't at the min / max bound, consume all of the velocity so
+                        // overscroll won't show. Normally in this case something like
+                        // Modifier.scrollable would use the velocity to update the scroll state
+                        // with a fling animation, but just do nothing to keep this simpler.
+                        velocity
+                    }
+                }
+            }
+        ),
+    contentAlignment = Alignment.Center
+) {
+    Text(&quot;Drag position $dragPosition&quot;)
+}</pre>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>

@@ -1,0 +1,355 @@
+<html devsite="true">
+  <head>
+    <title>MainTestClock</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/test/MainTestClock.kt+class:androidx.compose.ui.test.MainTestClock&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>MainTestClock</h1>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>@<a href="/reference/kotlin/androidx/compose/ui/test/internal/JvmDefaultWithCompatibility.html">JvmDefaultWithCompatibility</a><br>interface <a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html">MainTestClock</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
+    <hr>
+    <p>The clock that drives <code><a href="/reference/kotlin/androidx/compose/runtime/MonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">frames</a></code>, <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">recompositions</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#LaunchedEffect(kotlin.coroutines.SuspendFunction1)">launched effects</a></code> in compose tests.</p>
+    <p>This clock is ultimately responsible for driving all recompositions, all subscribers to <code><a href="/reference/kotlin/androidx/compose/runtime/MonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> (all compose animations) and all coroutines launched with <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#LaunchedEffect(kotlin.coroutines.SuspendFunction1)">LaunchedEffect</a></code> (for example gesture detection). It is important to realize that if this clock does not tick, recomposition will not happen and animations are frozen. Equally important to realize is that measure, layout and draw passes are <em>not</em> driven by this clock. Instead, they are driven by the event loop of the platform, for example the Choreographer on Android. That means that forwarding this clock will <em>not</em> perform a measure, layout or draw pass, and vice versa, when this clock is paused measure, layout and draw passes can still occur.</p>
+    <p>Therefore, when setting <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#autoAdvance()">autoAdvance</a></code> to <code>false</code> and taking control over this clock, there are several things to realize:</p>
+    <ul>
+      <li>
+        <p>Recomposition can only happen when a frame is produced by this clock, with one exception: the initial composition when calling setContent happens immediately.</p>
+      </li>
+      <li>
+        <p>Callers of <code><a href="/reference/kotlin/androidx/compose/runtime/MonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> can only get a frame time when a frame is produced by this clock.</p>
+      </li>
+      <li>
+        <p>If there is both a pending recomposition and an animation awaiting a <code><a href="/reference/kotlin/androidx/compose/runtime/MonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">frame time</a></code>, ticking this clock will <em>first</em> send the new frame time to the animation, and <em>then</em> perform recomposition. Any state changes made by the animation will be seen by the recomposition.</p>
+      </li>
+      <li>
+        <p>Because animations receive their <code><a href="/reference/kotlin/androidx/compose/runtime/MonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">frame time</a></code> <em>before</em> recomposition, an animation will not get its start time in the first frame after kicking it off by toggling a state variable. For example, with a frame time of 16ms; when you call <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeBy(kotlin.Long,kotlin.Boolean)">advanceTimeBy(32)</a></code> after you toggled a state variable to kick off an animation, the animation's play time will still be at 0ms. The first frame is produced when the clock has advanced 16ms and will run a recomposition. During that recomposition the animation will be scheduled to start. When the clock has advanced another 16ms, the animation gets its first frame time and initialize the play time to <code>t=0</code>.</p>
+      </li>
+      <li>
+        <p>Because animations request the next <code><a href="/reference/kotlin/androidx/compose/runtime/MonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">frame</a></code> during the current frame, calling <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeBy(kotlin.Long,kotlin.Boolean)">advanceTimeBy(160)</a></code> while an animation is running will produce 10 frames of 16ms rather than 1 frame of 160ms (assuming a frame time of 16ms). Measure, layout and draw will not happen in between these frames. Be aware that some animations, like a slideIn or slideOut animation, are set up during a layout pass. If you start such an animation and advance time by two frames or more without allowing for a layout pass to happen, it will end immediately because it will be started before it is set up. For example, here you see how you can control a slide out animation:</p>
+      </li>
+    </ul>
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.test.onNodeWithTag
+
+@Test
+fun testSlideOut() {
+    var showBox by mutableStateOf(true)
+
+    composeTestRule.setContent {
+        AnimatedVisibility(
+            visible = showBox,
+            exit = slideOutHorizontally(tween(3000)) { -it }
+        ) {
+            Box(Modifier.size(100.dp).testTag(&quot;box&quot;)) {}
+        }
+    }
+
+    // Take control of the clock
+    composeTestRule.mainClock.autoAdvance = false
+    composeTestRule.onNodeWithTag(&quot;box&quot;).assertExists()
+    // Start hiding the box
+    showBox = false
+
+    // Trigger recomposition
+    composeTestRule.mainClock.advanceTimeByFrame()
+    // Await layout pass to set up animation
+    composeTestRule.waitForIdle()
+    // Give animation a start time
+    composeTestRule.mainClock.advanceTimeByFrame()
+
+    // Advance clock by first half the animation duration
+    composeTestRule.mainClock.advanceTimeBy(1500)
+    composeTestRule.onNodeWithTag(&quot;box&quot;).assertExists()
+
+    // Advance clock by second half the animation duration
+    composeTestRule.mainClock.advanceTimeBy(1500)
+    composeTestRule.onNodeWithTag(&quot;box&quot;).assertDoesNotExist()
+}</pre>
+    <ul>
+      <li>
+        <p>After modifying a state variable, recomposition needs to happen to reflect the new state in the UI. Advancing the clock by <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeByFrame()">one frame</a></code> will commit the changes and run exactly one recomposition.</p>
+      </li>
+      <li>
+        <p>If, after any call to <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeBy(kotlin.Long,kotlin.Boolean)">advanceTimeBy</a></code>, you want to assert anything related to layout positions (e.g. <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).assertWidthIsEqualTo(androidx.compose.ui.unit.Dp)">assertWidthIsEqualTo</a></code>) or rendering (e.g. captureToImage), you will need a call to androidx.compose.ui.test.junit4.ComposeTestRule.waitForIdle or androidx.compose.ui.test.junit4.ComposeTestRule.runOnIdle to make sure that any triggered measure, layout or draw pass has been completed.</p>
+      </li>
+      <li>
+        <p>If you change a state variable that is not read during composition, but for example during layout or draw, calling <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeBy(kotlin.Long,kotlin.Boolean)">advanceTimeBy</a></code> will not produce the desired update to the UI. Use androidx.compose.ui.test.junit4.ComposeTestRule.waitForIdle for such cases.</p>
+      </li>
+      <li>
+        <p>kotlinx.coroutines.delay <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#LaunchedEffect(kotlin.coroutines.SuspendFunction1)">LaunchedEffect</a></code>s are resumed on their scheduled time. That means that code like <code>repeat(2) { delay(1000) }</code> will complete with a single call to <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeBy(kotlin.Long,kotlin.Boolean)">advanceTimeBy(2000)</a></code>.</p>
+      </li>
+      <li>
+        <p>After modifying a state variable, the modified <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">snapshot</a></code> must be <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#sendApplyNotifications()">committed</a></code> before the compositions that read that variable are invalidated. This is currently not done by the test harness, but by a platform dependent implementation. On Android, for example, a message is posted on the main thread to call <code>sendApplyNotifications</code> when a state variable is written (which conveniently runs before <code>advanceTimeByFrame</code> on Android), which means that if the variable is written during a call to <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeBy(kotlin.Long,kotlin.Boolean)">advanceTimeBy</a></code>, the composition will only be invalidated after <code>advanceTimeBy</code> has finished, regardless of the time by which you advanced the clock. You may call <code>sendApplyNotifications</code> manually after modifying a state variable to invalidate the composition and force a recomposition within 16ms of the current clock time. For example, here you see how to use <code>sendApplyNotifications</code> and <code>advanceTimeBy</code>:</p>
+      </li>
+    </ul>
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.Text
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.test.onNodeWithText
+
+@Test
+fun testControlClock() {
+    var toggle by mutableStateOf(false)
+
+    composeTestRule.setContent {
+        var count by remember { mutableStateOf(0) }
+        DisposableEffect(toggle) {
+            count++
+            // Apply the change to `count` in the snapshot:
+            Snapshot.sendApplyNotifications()
+            // Note: we apply the snapshot manually here for illustration purposes. In general
+            // we recommended against doing this in production code.
+            onDispose {}
+        }
+        Text(&quot;Effect ran $count time(s), toggle is $toggle&quot;)
+    }
+
+    // Check initial state
+    composeTestRule.onNodeWithText(&quot;Effect ran 1 time(s), toggle is false&quot;).assertExists()
+    // Take control of the clock
+    composeTestRule.mainClock.autoAdvance = false
+
+    // Change the `toggle` state variable
+    toggle = true
+    // Apply the change to `toggle` in the snapshot:
+    Snapshot.sendApplyNotifications()
+
+    // Recomposition hasn't yet happened:
+    composeTestRule.onNodeWithText(&quot;Effect ran 1 time(s), toggle is false&quot;).assertExists()
+    // Forward the clock by 2 frames: 1 for `toggle` and then 1 for `count`
+    composeTestRule.mainClock.advanceTimeBy(32)
+    // UI now fully reflects the new state
+    composeTestRule.onNodeWithText(&quot;Effect ran 2 time(s), toggle is true&quot;).assertExists()
+}</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeBy(kotlin.Long,kotlin.Boolean)">advanceTimeBy</a>(milliseconds:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,&nbsp;ignoreFrameDuration:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>)</code></div>
+                <p>Advances the clock by the given <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeBy(kotlin.Long,kotlin.Boolean)">duration</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeByFrame()">advanceTimeByFrame</a>()</code></div>
+                <p><code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeBy(kotlin.Long,kotlin.Boolean)">Advances</a></code> the main clock by the duration of one frame.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeUntil(kotlin.Long,kotlin.Function0)">advanceTimeUntil</a>(timeoutMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,&nbsp;condition:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>)</code></div>
+                <p>Advances the clock in increments of a <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeByFrame()">single frame</a></code> until the given <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeUntil(kotlin.Long,kotlin.Function0)">condition</a></code> is satisfied.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#autoAdvance()">autoAdvance</a></code></div>
+                <p>Whether the clock should be advanced by the testing framework while awaiting idleness in order to process any pending work that is driven by this clock.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#currentTime()">currentTime</a></code></div>
+                <p>The current time of this clock in milliseconds.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="advanceTimeBy(kotlin.Long, kotlin.Boolean)"></a><a name="advanceTimeBy-kotlin.Long-kotlin.Boolean-"></a><a name="advancetimeby"></a>
+          <h3 class="api-name" id="advanceTimeBy(kotlin.Long,kotlin.Boolean)">advanceTimeBy</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeBy(kotlin.Long,kotlin.Boolean)">advanceTimeBy</a>(milliseconds:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,&nbsp;ignoreFrameDuration:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Advances the clock by the given <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeBy(kotlin.Long,kotlin.Boolean)">duration</a></code>. The duration is rounded up to the nearest multiple of the frame duration by default to always produce the same number of frames regardless of the current time of the clock. Use <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeBy(kotlin.Long,kotlin.Boolean)">ignoreFrameDuration</a></code> to disable this behavior. The frame duration is platform dependent. For example, on a JVM (Android and Desktop) it is 16ms. Note that if <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeBy(kotlin.Long,kotlin.Boolean)">ignoreFrameDuration</a></code> is true, the last few milliseconds that are advanced might not be observed by anyone, since most processes are only triggered when a frame is produced.</p>
+          <p>When using this method to advance the time by several frames in one invocation, measure, layout and draw passes will not happen in between the produced frames. Multiple frames are in general only produced when an animation is running. See <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html">MainTestClock</a></code> for a more in depth explanation of the behavior of your test when controlling the clock.</p>
+          <p>It is recommended to set <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#autoAdvance()">autoAdvance</a></code> to false when using this method, but it is not strictly necessary. When <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#autoAdvance()">autoAdvance</a></code> is true, using this method may or may not speed up your test.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>milliseconds:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
+                  <td>
+                    <p>The minimal duration to advance the main clock by. Will be rounded up to the nearest frame duration, unless <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeBy(kotlin.Long,kotlin.Boolean)">ignoreFrameDuration</a></code> is <code>true</code>.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>ignoreFrameDuration:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+                  <td>
+                    <p>Whether to avoid rounding up the <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeBy(kotlin.Long,kotlin.Boolean)">milliseconds</a></code> to the nearest multiple of the frame duration. <code>false</code> by default.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="advanceTimeByFrame--"></a><a name="advancetimebyframe"></a>
+          <h3 class="api-name" id="advanceTimeByFrame()">advanceTimeByFrame</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeByFrame()">advanceTimeByFrame</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p><code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeBy(kotlin.Long,kotlin.Boolean)">Advances</a></code> the main clock by the duration of one frame.</p>
+        </div>
+        <div class="api-item"><a name="advanceTimeUntil(kotlin.Long, kotlin.Function0)"></a><a name="advanceTimeUntil-kotlin.Long-kotlin.Function0-"></a><a name="advancetimeuntil"></a>
+          <h3 class="api-name" id="advanceTimeUntil(kotlin.Long,kotlin.Function0)">advanceTimeUntil</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeUntil(kotlin.Long,kotlin.Function0)">advanceTimeUntil</a>(timeoutMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,&nbsp;condition:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Advances the clock in increments of a <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeByFrame()">single frame</a></code> until the given <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeUntil(kotlin.Long,kotlin.Function0)">condition</a></code> is satisfied.</p>
+          <p>Note that the condition should only rely on things that are driven by this clock. Measure, layout and draw passes will not happen in between advancements of the clock while waiting for the condition to become true. If your condition relies on the result of measure, layout or draw, use androidx.compose.ui.test.junit4.ComposeTestRule.waitUntil instead.</p>
+          <p>See <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html">MainTestClock</a></code> for a thorough explanation of what is and what isn't going to happen as a result of a call to <code>advanceTimeBy</code>.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>timeoutMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
+                  <td>
+                    <p>The time after which this method throws an exception if the given condition is not satisfied. This is the simulated time not the wall clock or cpu time.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Throws</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>androidx.compose.ui.test.ComposeTimeoutException:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/ComposeTimeoutException.html">androidx.compose.ui.test.ComposeTimeoutException</a></code></td>
+                  <td>
+                    <p>the condition is not satisfied after <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#advanceTimeUntil(kotlin.Long,kotlin.Function0)">timeoutMillis</a></code>.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getAutoAdvance()"></a><a name="setAutoAdvance()"></a><a name="getAutoAdvance--"></a><a name="setAutoAdvance--"></a>
+          <h3 class="api-name" id="autoAdvance()">autoAdvance</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">var&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#autoAdvance()">autoAdvance</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>Whether the clock should be advanced by the testing framework while awaiting idleness in order to process any pending work that is driven by this clock. This ensures that when the app is androidx.compose.ui.test.junit4.ComposeTestRule.waitForIdle, there are no more pending recompositions or ongoing animations.</p>
+          <p>If <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#autoAdvance()">autoAdvance</a></code> is false, the clock is not advanced while awaiting idleness. Moreover, having pending recompositions or animations is not taken as a sign of pending work (non-idleness) when awaiting idleness, as waiting for a longer time will not make them happen. Note that pending measure, layout or draw passes will still be awaited when awaiting idleness and having <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#autoAdvance()">autoAdvance</a></code> set to false, as those passes are not driven by this clock.</p>
+          <p>By default this is true.</p>
+        </div>
+        <div class="api-item"><a name="getCurrentTime()"></a><a name="setCurrentTime()"></a><a name="getCurrentTime--"></a><a name="setCurrentTime--"></a>
+          <h3 class="api-name" id="currentTime()">currentTime</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#currentTime()">currentTime</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></pre>
+          <p>The current time of this clock in milliseconds.</p>
+        </div>
+      </div>
+    </devsite-filter >
+  </body>
+</html>

@@ -1,0 +1,206 @@
+<html devsite="true">
+  <head>
+    <title>PlatformTextInputPluginRegistryImpl</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/text/input/PlatformTextInputAdapter.kt+class:androidx.compose.ui.text.input.PlatformTextInputPluginRegistryImpl&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>PlatformTextInputPluginRegistryImpl</h1>
+    <p>
+      <pre>@<a href="/reference/androidx/compose/ui/text/InternalTextApi.html">InternalTextApi</a><br>public final class <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPluginRegistryImpl.html">PlatformTextInputPluginRegistryImpl</a> implements <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPluginRegistry.html">PlatformTextInputPluginRegistry</a></pre>
+    </p>
+    <hr>
+    <p>Implementation of <code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPluginRegistry.html">PlatformTextInputPluginRegistry</a></code> that manages a map of adapters to cached services and allows retrieval of the first active one.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/text/InternalTextApi.html">InternalTextApi</a><br>public final class <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPluginRegistryImpl.AdapterHandle.html">PlatformTextInputPluginRegistryImpl.AdapterHandle</a>&lt;T&nbsp;extends&nbsp;<a href="/reference/androidx/compose/ui/text/input/PlatformTextInputAdapter.html">PlatformTextInputAdapter</a>&gt;</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPluginRegistryImpl.html#PlatformTextInputPluginRegistryImpl(kotlin.Function2)">PlatformTextInputPluginRegistryImpl</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPlugin.html">PlatformTextInputPlugin</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/PlatformTextInput.html">PlatformTextInput</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputAdapter.html">PlatformTextInputAdapter</a>&gt;&nbsp;factory<br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>final <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputAdapter.html">PlatformTextInputAdapter</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPluginRegistryImpl.html#getFocusedAdapter()">getFocusedAdapter</a>()</code></div>
+              <p>Returns the currently-focused adapter, or null if no adapter is focused.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPluginRegistryImpl.AdapterHandle.html">PlatformTextInputPluginRegistryImpl.AdapterHandle</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/ui/text/InternalTextApi.html">InternalTextApi</a><br>&lt;T&nbsp;extends&nbsp;<a href="/reference/androidx/compose/ui/text/input/PlatformTextInputAdapter.html">PlatformTextInputAdapter</a>&gt; <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPluginRegistryImpl.html#getOrCreateAdapter(androidx.compose.ui.text.input.PlatformTextInputPlugin)">getOrCreateAdapter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPlugin.html">PlatformTextInputPlugin</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;plugin<br>)</code></div>
+              <p>Returns the text input service <code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPluginRegistryImpl.html#getOrCreateAdapter(androidx.compose.ui.text.input.PlatformTextInputPlugin)">T</a></code> managed by <code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPluginRegistryImpl.html#getOrCreateAdapter(androidx.compose.ui.text.input.PlatformTextInputPlugin)">plugin</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>&lt;T&nbsp;extends&nbsp;<a href="/reference/androidx/compose/ui/text/input/PlatformTextInputAdapter.html">PlatformTextInputAdapter</a>&gt; <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPluginRegistryImpl.html#rememberAdapter(androidx.compose.ui.text.input.PlatformTextInputPlugin)">rememberAdapter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPlugin.html">PlatformTextInputPlugin</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;plugin<br>)</code></div>
+              <p>Returns an instance of the <code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInputAdapter.html">PlatformTextInputAdapter</a></code> type <code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPluginRegistryImpl.html#rememberAdapter(androidx.compose.ui.text.input.PlatformTextInputPlugin)">T</a></code> specified by <code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPluginRegistryImpl.html#rememberAdapter(androidx.compose.ui.text.input.PlatformTextInputPlugin)">plugin</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="PlatformTextInputPluginRegistryImpl-kotlin.Function2-"></a><a name="platformtextinputpluginregistryimpl"></a>
+        <h3 class="api-name" id="PlatformTextInputPluginRegistryImpl(kotlin.Function2)">PlatformTextInputPluginRegistryImpl</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPluginRegistryImpl.html#PlatformTextInputPluginRegistryImpl(kotlin.Function2)">PlatformTextInputPluginRegistryImpl</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPlugin.html">PlatformTextInputPlugin</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/PlatformTextInput.html">PlatformTextInput</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputAdapter.html">PlatformTextInputAdapter</a>&gt;&nbsp;factory<br>)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPlugin.html">PlatformTextInputPlugin</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/PlatformTextInput.html">PlatformTextInput</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputAdapter.html">PlatformTextInputAdapter</a>&gt;&nbsp;factory</code></td>
+                <td>
+                  <p>A platform-specific function that invokes the appropriate <code>create</code> method on a <code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInputAdapter.html">PlatformTextInputAdapter</a></code> to return a service.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="getFocusedAdapter--"></a><a name="getfocusedadapter"></a>
+        <h3 class="api-name" id="getFocusedAdapter()">getFocusedAdapter</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/compose/ui/text/input/PlatformTextInputAdapter.html">PlatformTextInputAdapter</a>&nbsp;<a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPluginRegistryImpl.html#getFocusedAdapter()">getFocusedAdapter</a>()</pre>
+        <p>Returns the currently-focused adapter, or null if no adapter is focused.</p>
+        <p>An adapter can request input focus by calling <code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInput.html#requestInputFocus()">PlatformTextInput.requestInputFocus</a></code>. It will keep input focus until either:</p>
+        <ol>
+          <li>
+            <p>It calls <code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInput.html#releaseInputFocus()">PlatformTextInput.releaseInputFocus</a></code>, or</p>
+          </li>
+          <li>
+            <p>Another adapter calls <code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInput.html#requestInputFocus()">PlatformTextInput.requestInputFocus</a></code>.</p>
+          </li>
+        </ol>
+      </div>
+      <div class="api-item"><a name="getOrCreateAdapter-androidx.compose.ui.text.input.PlatformTextInputPlugin-"></a><a name="getorcreateadapter"></a>
+        <h3 class="api-name" id="getOrCreateAdapter(androidx.compose.ui.text.input.PlatformTextInputPlugin)">getOrCreateAdapter</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/text/InternalTextApi.html">InternalTextApi</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPluginRegistryImpl.AdapterHandle.html">PlatformTextInputPluginRegistryImpl.AdapterHandle</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;&lt;T&nbsp;extends&nbsp;<a href="/reference/androidx/compose/ui/text/input/PlatformTextInputAdapter.html">PlatformTextInputAdapter</a>&gt; <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPluginRegistryImpl.html#getOrCreateAdapter(androidx.compose.ui.text.input.PlatformTextInputPlugin)">getOrCreateAdapter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPlugin.html">PlatformTextInputPlugin</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;plugin<br>)</pre>
+        <p>Returns the text input service <code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPluginRegistryImpl.html#getOrCreateAdapter(androidx.compose.ui.text.input.PlatformTextInputPlugin)">T</a></code> managed by <code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPluginRegistryImpl.html#getOrCreateAdapter(androidx.compose.ui.text.input.PlatformTextInputPlugin)">plugin</a></code>.</p>
+        <p>The first time this method is called for a given <code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInputAdapter.html">PlatformTextInputAdapter</a></code>, the adapter's platform-specific factory method is called to instantiate the service. The service is then added to the cache and returned. Subsequent calls passing the same adapter, over the entire lifetime of this service provider, will return the same service instance. It is expected that adapters will be singleton objects, and in most apps there will only ever be one or maybe two input adapters in use, since each input adapter represents an entire text input subsystem.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>&lt;T&nbsp;extends&nbsp;<a href="/reference/androidx/compose/ui/text/input/PlatformTextInputAdapter.html">PlatformTextInputAdapter</a>&gt;</code></td>
+                <td>
+                  <p>The type of the <code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInputAdapter.html">PlatformTextInputAdapter</a></code> that <code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPluginRegistryImpl.html#getOrCreateAdapter(androidx.compose.ui.text.input.PlatformTextInputPlugin)">plugin</a></code> creates.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPlugin.html">PlatformTextInputPlugin</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;plugin</code></td>
+                <td>
+                  <p>The factory for service objects and the key into the cache of those objects.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="rememberAdapter-androidx.compose.ui.text.input.PlatformTextInputPlugin-"></a><a name="rememberadapter"></a>
+        <h3 class="api-name" id="rememberAdapter(androidx.compose.ui.text.input.PlatformTextInputPlugin)">rememberAdapter</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="/reference/androidx/compose/ui/text/input/PlatformTextInputAdapter.html">PlatformTextInputAdapter</a>&gt; <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPluginRegistryImpl.html#rememberAdapter(androidx.compose.ui.text.input.PlatformTextInputPlugin)">rememberAdapter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPlugin.html">PlatformTextInputPlugin</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;plugin<br>)</pre>
+        <p>Returns an instance of the <code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInputAdapter.html">PlatformTextInputAdapter</a></code> type <code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPluginRegistryImpl.html#rememberAdapter(androidx.compose.ui.text.input.PlatformTextInputPlugin)">T</a></code> specified by <code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPluginRegistryImpl.html#rememberAdapter(androidx.compose.ui.text.input.PlatformTextInputPlugin)">plugin</a></code>.</p>
+        <p>The returned adapter instance will be shared by all callers of this method passing the same <code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPluginRegistryImpl.html#rememberAdapter(androidx.compose.ui.text.input.PlatformTextInputPlugin)">plugin</a></code> object. The adapter will be created when the first call is made, then cached and returned by every subsequent call in the same or subsequent compositions. When there are no longer any calls to this method for a given plugin, the adapter instance will be PlatformTextInputAdapter.onDisposed.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>&lt;T&nbsp;extends&nbsp;<a href="/reference/androidx/compose/ui/text/input/PlatformTextInputAdapter.html">PlatformTextInputAdapter</a>&gt;</code></td>
+                <td>
+                  <p>The type of <code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInputAdapter.html">PlatformTextInputAdapter</a></code> that <code><a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPluginRegistryImpl.html#rememberAdapter(androidx.compose.ui.text.input.PlatformTextInputPlugin)">plugin</a></code> creates.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/input/PlatformTextInputPlugin.html">PlatformTextInputPlugin</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;plugin</code></td>
+                <td>
+                  <p>The factory for adapters and the key into the cache of those adapters.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -6,7 +6,7 @@
   </head>
   <body>
     <div id="metadata-info-block">
-      <div id="source-link"><a href="https://cs.android.com/search?q=file:-text/androidx/compose/ui/text/font/AndroidFont.kt+class:androidx.compose.ui.text.font.AndroidFont&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/text/font/AndroidFont.kt+class:androidx.compose.ui.text.font.AndroidFont&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>AndroidFont</h1>
     <p>
@@ -120,6 +120,7 @@
             <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontVariation.Settings.html">FontVariation.Settings</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/text/font/AndroidFont.html#getVariationSettings()">getVariationSettings</a>()</code></div>
+              <p>The settings that will be applied to this font, if supported by the font.</p>
             </td>
           </tr>
         </tbody>
@@ -218,6 +219,10 @@
       <div class="api-item"><a name="getVariationSettings--"></a><a name="getvariationsettings"></a>
         <h3 class="api-name" id="getVariationSettings()">getVariationSettings</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/FontVariation.Settings.html">FontVariation.Settings</a>&nbsp;<a href="/reference/androidx/compose/ui/text/font/AndroidFont.html#getVariationSettings()">getVariationSettings</a>()</pre>
+        <p>The settings that will be applied to this font, if supported by the font.</p>
+        <p>If the font does not support a <code><a href="/reference/androidx/compose/ui/text/font/FontVariation.Setting.html">FontVariation.Setting</a></code>, it has no effect.</p>
+        <p>Subclasses are required to apply these variation settings during font loading path on appropriate API levels, for example by using <code><a href="https://developer.android.com/reference/android/graphics/Typeface.Builder.html#setFontVariationSettings(kotlin.String)">Typeface.Builder.setFontVariationSettings</a></code>.</p>
+        <p>Subclasses may safely apply all variation settings without querying the font file. Android will ignore any unsupported axis.</p>
       </div>
     </div>
   </body>

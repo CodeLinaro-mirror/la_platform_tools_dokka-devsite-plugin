@@ -41,7 +41,7 @@
       </div>
 </devsite-expandable>    </div>
     <hr>
-    <p>This is used to determine how Pages are laid out in <code><a href="/reference/androidx/compose/foundation/pager/package-summary.html#Pager(androidx.compose.ui.Modifier,androidx.compose.foundation.pager.PagerState,kotlin.Int,androidx.compose.foundation.pager.PageSize,androidx.compose.ui.unit.Dp,androidx.compose.foundation.gestures.Orientation,kotlin.Int,androidx.compose.ui.Alignment.Vertical,androidx.compose.ui.Alignment.Horizontal,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.gestures.snapping.SnapFlingBehavior,kotlin.Boolean,kotlin.Boolean,kotlin.Function1,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function1)">Pager</a></code>. By changing the size of the pages one can change how many pages are shown.</p>
+    <p>This is used to determine how Pages are laid out in <code><a href="/reference/androidx/compose/foundation/pager/package-summary.html#Pager(androidx.compose.ui.Modifier,androidx.compose.foundation.pager.PagerState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.gestures.Orientation,androidx.compose.foundation.gestures.snapping.SnapFlingBehavior,kotlin.Boolean,kotlin.Int,androidx.compose.ui.unit.Dp,androidx.compose.foundation.pager.PageSize,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.Function1,androidx.compose.ui.Alignment.Horizontal,androidx.compose.ui.Alignment.Vertical,kotlin.Function2)">Pager</a></code>. By changing the size of the pages one can change how many pages are shown.</p>
     <p>Please refer to the sample to learn how to use this API.</p>
     <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
@@ -51,6 +51,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.Text
 
 // [PageSize] should be defined as a top level constant in order to avoid unnecessary re-
@@ -67,9 +68,10 @@ val CustomPageSize = object : PageSize {
     }
 }
 
+val state = rememberPagerState { 10 }
 HorizontalPager(
+    state = state,
     modifier = Modifier.fillMaxSize(),
-    pageCount = 10,
     pageSize = CustomPageSize
 ) { page -&gt;
     Box(

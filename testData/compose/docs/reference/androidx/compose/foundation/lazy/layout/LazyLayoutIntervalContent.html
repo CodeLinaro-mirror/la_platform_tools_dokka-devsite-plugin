@@ -6,15 +6,56 @@
   </head>
   <body>
     <div id="metadata-info-block">
-      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.kt+class:androidx.compose.foundation.lazy.layout.LazyLayoutIntervalContent&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.kt+class:androidx.compose.foundation.lazy.layout.LazyLayoutIntervalContent&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>LazyLayoutIntervalContent</h1>
     <p>
-      <pre>@<a href="/reference/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>public interface <a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.html">LazyLayoutIntervalContent</a></pre>
+      <pre>@<a href="/reference/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>public abstract class <a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.html">LazyLayoutIntervalContent</a>&lt;Interval&nbsp;extends&nbsp;<a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.Interval.html">LazyLayoutIntervalContent.Interval</a>&gt;</pre>
     </p>
     <hr>
-    <p>Common content holder to back interval-based <code>item</code> DSL of lazy layouts.</p>
+    <p>Common parts backing the interval-based content of lazy layout defined through <code>item</code> DSL.</p>
     <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>@<a href="/reference/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>public interface <a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.Interval.html">LazyLayoutIntervalContent.Interval</a></code></div>
+              <p>Common content of individual intervals in <code>item</code> DSL of lazy layouts.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>&lt;Interval&nbsp;extends&nbsp;<a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.Interval.html">LazyLayoutIntervalContent.Interval</a>&gt; <a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.html#LazyLayoutIntervalContent()">LazyLayoutIntervalContent</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <colgroup>
@@ -28,33 +69,74 @@
         </thead>
         <tbody class="list">
           <tr>
-            <td><code>default Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;</code></td>
+            <td><code>final <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a></code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.html#getKey()">getKey</a>()</code></div>
-              <p>Returns item key based on a local index for the current interval.</p>
+              <div><code><a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.html#getContentType(kotlin.Int)">getContentType</a>(int&nbsp;index)</code></div>
+              <p>Returns content type based on a global index.</p>
             </td>
           </tr>
           <tr>
-            <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>,&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;</code></td>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/lazy/layout/IntervalList.html">IntervalList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Interval&gt;</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.html#getType()">getType</a>()</code></div>
-              <p>Returns item type based on a local index for the current interval.</p>
+              <div><code><a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.html#getIntervals()">getIntervals</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.html#getItemCount()">getItemCount</a>()</code></div>
+              <p>The total amount of items in all the intervals.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.html#getKey(kotlin.Int)">getKey</a>(int&nbsp;index)</code></div>
+              <p>Returns item key based on a global index.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.html#withInterval(kotlin.Int,kotlin.Function2)">withInterval</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;globalIndex,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> content,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;block<br>)</code></div>
+              <p>Runs a <code><a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.html#withInterval(kotlin.Int,kotlin.Function2)">block</a></code> on the content of the interval associated with the provided <code><a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.html#withInterval(kotlin.Int,kotlin.Function2)">globalIndex</a></code> with providing a local index in the given interval.</p>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="list">
-      <h2>Public methods</h2>
-      <div class="api-item"><a name="getKey--"></a><a name="getkey"></a>
-        <h3 class="api-name" id="getKey()">getKey</h3>
-        <pre class="api-signature no-pretty-print">default&nbsp;Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;<a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.html#getKey()">getKey</a>()</pre>
-        <p>Returns item key based on a local index for the current interval.</p>
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="LazyLayoutIntervalContent--"></a><a name="lazylayoutintervalcontent"></a>
+        <h3 class="api-name" id="LazyLayoutIntervalContent()">LazyLayoutIntervalContent</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;&lt;Interval&nbsp;extends&nbsp;<a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.Interval.html">LazyLayoutIntervalContent.Interval</a>&gt; <a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.html#LazyLayoutIntervalContent()">LazyLayoutIntervalContent</a>()</pre>
       </div>
-      <div class="api-item"><a name="getType--"></a><a name="gettype"></a>
-        <h3 class="api-name" id="getType()">getType</h3>
-        <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>,&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;<a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.html#getType()">getType</a>()</pre>
-        <p>Returns item type based on a local index for the current interval.</p>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="getContentType-kotlin.Int-"></a><a name="getcontenttype"></a>
+        <h3 class="api-name" id="getContentType(kotlin.Int)">getContentType</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;<a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.html#getContentType(kotlin.Int)">getContentType</a>(int&nbsp;index)</pre>
+        <p>Returns content type based on a global index.</p>
+      </div>
+      <div class="api-item"><a name="getIntervals--"></a><a name="getintervals"></a>
+        <h3 class="api-name" id="getIntervals()">getIntervals</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/lazy/layout/IntervalList.html">IntervalList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Interval&gt;&nbsp;<a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.html#getIntervals()">getIntervals</a>()</pre>
+      </div>
+      <div class="api-item"><a name="getItemCount--"></a><a name="getitemcount"></a>
+        <h3 class="api-name" id="getItemCount()">getItemCount</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.html#getItemCount()">getItemCount</a>()</pre>
+        <p>The total amount of items in all the intervals.</p>
+      </div>
+      <div class="api-item"><a name="getKey-kotlin.Int-"></a><a name="getkey"></a>
+        <h3 class="api-name" id="getKey(kotlin.Int)">getKey</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;<a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.html#getKey(kotlin.Int)">getKey</a>(int&nbsp;index)</pre>
+        <p>Returns item key based on a global index.</p>
+      </div>
+      <div class="api-item"><a name="withInterval(kotlin.Int, kotlin.Function2)"></a><a name="withInterval-kotlin.Int-kotlin.Function2-"></a><a name="withinterval"></a>
+        <h3 class="api-name" id="withInterval(kotlin.Int,kotlin.Function2)">withInterval</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.html#withInterval(kotlin.Int,kotlin.Function2)">withInterval</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;globalIndex,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> content,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;block<br>)</pre>
+        <p>Runs a <code><a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.html#withInterval(kotlin.Int,kotlin.Function2)">block</a></code> on the content of the interval associated with the provided <code><a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.html#withInterval(kotlin.Int,kotlin.Function2)">globalIndex</a></code> with providing a local index in the given interval.</p>
       </div>
     </div>
   </body>

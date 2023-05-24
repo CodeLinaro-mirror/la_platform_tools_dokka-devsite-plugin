@@ -6,176 +6,246 @@
   </head>
   <body>
     <h1>androidx.compose.ui.modifier</h1>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
     <h2>Interfaces</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalConsumer.html">ModifierLocalConsumer</a></code></td>
-            <td>
-              <p>A Modifier that can be used to consume <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code>s that were provided by other modifiers to the left of this modifier, or above this modifier in the layout tree.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalNode.html">ModifierLocalNode</a></code></td>
-            <td>
-              <p>A <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">androidx.compose.ui.Modifier.Node</a></code> that is capable of consuming and providing <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code> values.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalProvider.html">ModifierLocalProvider</a></code></td>
-            <td>
-              <p>A Modifier that can be used to provide <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code>s that can be read by other modifiers to the right of this modifier, or modifiers that are children of the layout node that this modifier is attached to.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalReadScope.html">ModifierLocalReadScope</a></code></td>
-            <td>
-              <p>This scope gives us access to modifier locals that are provided by other modifiers to the left of this modifier, or above this modifier in the layout tree.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalConsumer.html">ModifierLocalConsumer</a></code></td>
+              <td>
+                <p>A Modifier that can be used to consume <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code>s that were provided by other modifiers to the left of this modifier, or above this modifier in the layout tree.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalModifierNode.html">ModifierLocalModifierNode</a></code></td>
+              <td>
+                <p>A <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">androidx.compose.ui.Modifier.Node</a></code> that is capable of consuming and providing <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code> values.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalProvider.html">ModifierLocalProvider</a></code></td>
+              <td>
+                <p>A Modifier that can be used to provide <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code>s that can be read by other modifiers to the right of this modifier, or modifiers that are children of the layout node that this modifier is attached to.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalReadScope.html">ModifierLocalReadScope</a></code></td>
+              <td>
+                <p>This scope gives us access to modifier locals that are provided by other modifiers to the left of this modifier, or above this modifier in the layout tree.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <h2>Classes</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code></td>
-            <td>
-              <p><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code>s provide a means of inter-modifier communication.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></code></td>
-            <td>
-              <p>An opaque key-value holder of <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code>s to be used with <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalNode.html">ModifierLocalNode</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ProvidableModifierLocal.html">ProvidableModifierLocal</a></code></td>
-            <td>
-              <p><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ProvidableModifierLocal.html">ProvidableModifierLocal</a></code>s are <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code>s that can be used to provide values using a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalProvider.html">ModifierLocalProvider</a></code>.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code></td>
+              <td>
+                <p><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code>s provide a means of inter-modifier communication.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></code></td>
+              <td>
+                <p>An opaque key-value holder of <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code>s to be used with <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalModifierNode.html">ModifierLocalModifierNode</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ProvidableModifierLocal.html">ProvidableModifierLocal</a></code></td>
+              <td>
+                <p><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ProvidableModifierLocal.html">ProvidableModifierLocal</a></code>s are <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code>s that can be used to provide values using a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalProvider.html">ModifierLocalProvider</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <h2>Top-level functions summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></code></td>
-            <td>
-              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#modifierLocalMapOf()">modifierLocalMapOf</a>()</code></div>
-              <p>Creates an empty <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></code></p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></code></td>
-            <td>
-              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#modifierLocalMapOf(androidx.compose.ui.modifier.ModifierLocal)">modifierLocalMapOf</a>(key:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a>&lt;T&gt;)</code></div>
-              <p>Creates a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></code> with a single key and value initialized to null.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></code></td>
-            <td>
-              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#modifierLocalMapOf(kotlin.Array)">modifierLocalMapOf</a>(vararg&nbsp;keys:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a>&lt;*&gt;)</code></div>
-              <p>Creates a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></code> with several keys, all initialized with values of null</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></code></td>
-            <td>
-              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#modifierLocalMapOf(kotlin.Array)">modifierLocalMapOf</a>(vararg&nbsp;entries:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a>&lt;*&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;)</code></div>
-              <p>Creates a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></code> with multiple keys and values.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></code></td>
-            <td>
-              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#modifierLocalMapOf(kotlin.Pair)">modifierLocalMapOf</a>(entry:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a>&lt;T&gt;,&nbsp;T&gt;)</code></div>
-              <p>Creates a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></code> with a single key and value.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ProvidableModifierLocal.html">ProvidableModifierLocal</a>&lt;T&gt;</code></td>
-            <td>
-              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#modifierLocalOf(kotlin.Function0)">modifierLocalOf</a>(defaultFactory:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T)</code></div>
-              <p>Creates a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ProvidableModifierLocal.html">ProvidableModifierLocal</a></code> and specifies a default factory.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#modifierLocalMapOf()">modifierLocalMapOf</a>()</code></div>
+                <p>Creates an empty <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></code></p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></code></td>
+              <td>
+                <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#modifierLocalMapOf(androidx.compose.ui.modifier.ModifierLocal)">modifierLocalMapOf</a>(key:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a>&lt;T&gt;)</code></div>
+                <p>Creates a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></code> with a single key and value initialized to null.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#modifierLocalMapOf(kotlin.Array)">modifierLocalMapOf</a>(vararg&nbsp;keys:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a>&lt;*&gt;)</code></div>
+                <p>Creates a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></code> with several keys, all initialized with values of null</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#modifierLocalMapOf(kotlin.Array)">modifierLocalMapOf</a>(vararg&nbsp;entries:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a>&lt;*&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;)</code></div>
+                <p>Creates a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></code> with multiple keys and values.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></code></td>
+              <td>
+                <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#modifierLocalMapOf(kotlin.Pair)">modifierLocalMapOf</a>(entry:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a>&lt;T&gt;,&nbsp;T&gt;)</code></div>
+                <p>Creates a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></code> with a single key and value.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ProvidableModifierLocal.html">ProvidableModifierLocal</a>&lt;T&gt;</code></td>
+              <td>
+                <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#modifierLocalOf(kotlin.Function0)">modifierLocalOf</a>(defaultFactory:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T)</code></div>
+                <p>Creates a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ProvidableModifierLocal.html">ProvidableModifierLocal</a></code> and specifies a default factory.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <h2>Extension functions summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
-            <td>
-              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#(androidx.compose.ui.Modifier).modifierLocalConsumer(kotlin.Function1)">modifierLocalConsumer</a>(consumer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalReadScope.html">ModifierLocalReadScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
-              <p>A Modifier that can be used to consume <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code>s that were provided by other modifiers to the left of this modifier, or above this modifier in the layout tree.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
-            <td>
-              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#(androidx.compose.ui.Modifier).modifierLocalProvider(androidx.compose.ui.modifier.ProvidableModifierLocal,kotlin.Function0)">modifierLocalProvider</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;key:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/ProvidableModifierLocal.html">ProvidableModifierLocal</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T<br>)</code></div>
-              <p>A Modifier that can be used to provide <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code>s that can be read by other modifiers to the right of this modifier, or modifiers that are children of the layout node that this modifier is attached to.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#(androidx.compose.ui.Modifier).modifierLocalConsumer(kotlin.Function1)">modifierLocalConsumer</a>(consumer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalReadScope.html">ModifierLocalReadScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+                <p>A Modifier that can be used to consume <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code>s that were provided by other modifiers to the left of this modifier, or above this modifier in the layout tree.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#(androidx.compose.ui.Modifier).modifierLocalProvider(androidx.compose.ui.modifier.ProvidableModifierLocal,kotlin.Function0)">modifierLocalProvider</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;key:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/ProvidableModifierLocal.html">ProvidableModifierLocal</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T<br>)</code></div>
+                <p>A Modifier that can be used to provide <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code>s that can be read by other modifiers to the right of this modifier, or modifiers that are children of the layout node that this modifier is attached to.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <h2>Top-level functions</h2>
     <div class="api-item"><a name="modifierLocalMapOf--"></a><a name="modifierlocalmapof"></a>
       <h3 class="api-name" id="modifierLocalMapOf()">modifierLocalMapOf</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#modifierLocalMapOf()">modifierLocalMapOf</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></pre>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+      <!--platform-Common/All-->
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#modifierLocalMapOf()">modifierLocalMapOf</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></pre>
       <p>Creates an empty <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></code></p>
     </div>
     <div class="api-item"><a name="modifierLocalMapOf-androidx.compose.ui.modifier.ModifierLocal-"></a><a name="modifierlocalmapof"></a>
       <h3 class="api-name" id="modifierLocalMapOf(androidx.compose.ui.modifier.ModifierLocal)">modifierLocalMapOf</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#modifierLocalMapOf(androidx.compose.ui.modifier.ModifierLocal)">modifierLocalMapOf</a>(key:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a>&lt;T&gt;):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></pre>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+      <!--platform-Common/All-->
+      <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#modifierLocalMapOf(androidx.compose.ui.modifier.ModifierLocal)">modifierLocalMapOf</a>(key:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a>&lt;T&gt;):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></pre>
       <p>Creates a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></code> with a single key and value initialized to null.</p>
     </div>
     <div class="api-item"><a name="modifierLocalMapOf-kotlin.Array-"></a><a name="modifierlocalmapof"></a>
       <h3 class="api-name" id="modifierLocalMapOf(kotlin.Array)">modifierLocalMapOf</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#modifierLocalMapOf(kotlin.Array)">modifierLocalMapOf</a>(vararg&nbsp;keys:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a>&lt;*&gt;):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></pre>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+      <!--platform-Common/All-->
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#modifierLocalMapOf(kotlin.Array)">modifierLocalMapOf</a>(vararg&nbsp;keys:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a>&lt;*&gt;):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></pre>
       <p>Creates a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></code> with several keys, all initialized with values of null</p>
     </div>
     <div class="api-item"><a name="modifierLocalMapOf-kotlin.Array-"></a><a name="modifierlocalmapof"></a>
       <h3 class="api-name" id="modifierLocalMapOf(kotlin.Array)">modifierLocalMapOf</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#modifierLocalMapOf(kotlin.Array)">modifierLocalMapOf</a>(vararg&nbsp;entries:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a>&lt;*&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></pre>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+      <!--platform-Common/All-->
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#modifierLocalMapOf(kotlin.Array)">modifierLocalMapOf</a>(vararg&nbsp;entries:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a>&lt;*&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></pre>
       <p>Creates a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></code> with multiple keys and values. The provided <code><a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#modifierLocalMapOf(kotlin.Array)">entries</a></code> should have each item's Pair::first be the <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code> key, and the Pair::second be the corresponding value.</p>
     </div>
     <div class="api-item"><a name="modifierLocalMapOf-kotlin.Pair-"></a><a name="modifierlocalmapof"></a>
       <h3 class="api-name" id="modifierLocalMapOf(kotlin.Pair)">modifierLocalMapOf</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#modifierLocalMapOf(kotlin.Pair)">modifierLocalMapOf</a>(entry:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a>&lt;T&gt;,&nbsp;T&gt;):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></pre>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+      <!--platform-Common/All-->
+      <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#modifierLocalMapOf(kotlin.Pair)">modifierLocalMapOf</a>(entry:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a>&lt;T&gt;,&nbsp;T&gt;):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></pre>
       <p>Creates a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a></code> with a single key and value. The provided <code><a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#modifierLocalMapOf(kotlin.Pair)">entry</a></code> should have Pair::first be the <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code> key, and the Pair::second be the corresponding value.</p>
     </div>
     <div class="api-item"><a name="modifierLocalOf-kotlin.Function0-"></a><a name="modifierlocalof"></a>
       <h3 class="api-name" id="modifierLocalOf(kotlin.Function0)">modifierLocalOf</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+      <!--platform-Common/All-->
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#modifierLocalOf(kotlin.Function0)">modifierLocalOf</a>(defaultFactory:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/ProvidableModifierLocal.html">ProvidableModifierLocal</a>&lt;T&gt;</pre>
       <p>Creates a <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ProvidableModifierLocal.html">ProvidableModifierLocal</a></code> and specifies a default factory.</p>
       <pre class="prettyprint lang-kotlin">
@@ -185,8 +255,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.composed
 import androidx.compose.ui.modifier.modifierLocalConsumer
-import androidx.compose.ui.modifier.modifierLocalProvider
 import androidx.compose.ui.modifier.modifierLocalOf
+import androidx.compose.ui.modifier.modifierLocalProvider
 
 // Define the type of data.
 val ModifierLocalMessage = modifierLocalOf { &quot;Unknown&quot; }
@@ -212,8 +282,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.composed
 import androidx.compose.ui.modifier.modifierLocalConsumer
-import androidx.compose.ui.modifier.modifierLocalProvider
 import androidx.compose.ui.modifier.modifierLocalOf
+import androidx.compose.ui.modifier.modifierLocalProvider
 
 class Sender(val onMessageReceived: (String) -&gt; Unit) {
     fun sendMessage(message: String) {
@@ -247,8 +317,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.modifier.modifierLocalConsumer
-import androidx.compose.ui.modifier.modifierLocalProvider
 import androidx.compose.ui.modifier.modifierLocalOf
+import androidx.compose.ui.modifier.modifierLocalProvider
 
 // Define the type of data.
 val ModifierLocalMessage = modifierLocalOf { &quot;Unknown&quot; }
@@ -272,8 +342,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.modifier.modifierLocalConsumer
-import androidx.compose.ui.modifier.modifierLocalProvider
 import androidx.compose.ui.modifier.modifierLocalOf
+import androidx.compose.ui.modifier.modifierLocalProvider
 
 class Sender(val onMessageReceived: (String) -&gt; Unit) {
     fun sendMessage(message: String) {
@@ -358,11 +428,15 @@ Box(
     <h2>Extension functions</h2>
     <div class="api-item"><a name="-androidx.compose.ui.Modifier-.modifierLocalConsumer-kotlin.Function1-"></a><a name="modifierlocalconsumer"></a>
       <h3 class="api-name" id="(androidx.compose.ui.Modifier).modifierLocalConsumer(kotlin.Function1)">modifierLocalConsumer</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+      <!--platform-Common/All-->
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#(androidx.compose.ui.Modifier).modifierLocalConsumer(kotlin.Function1)">modifierLocalConsumer</a>(consumer:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalReadScope.html">ModifierLocalReadScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
       <p>A Modifier that can be used to consume <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code>s that were provided by other modifiers to the left of this modifier, or above this modifier in the layout tree.</p>
     </div>
     <div class="api-item"><a name="(androidx.compose.ui.Modifier).modifierLocalProvider(androidx.compose.ui.modifier.ProvidableModifierLocal, kotlin.Function0)"></a><a name="-androidx.compose.ui.Modifier-.modifierLocalProvider-androidx.compose.ui.modifier.ProvidableModifierLocal-kotlin.Function0-"></a><a name="modifierlocalprovider"></a>
       <h3 class="api-name" id="(androidx.compose.ui.Modifier).modifierLocalProvider(androidx.compose.ui.modifier.ProvidableModifierLocal,kotlin.Function0)">modifierLocalProvider</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+      <!--platform-Common/All-->
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/ui/modifier/package-summary.html#(androidx.compose.ui.Modifier).modifierLocalProvider(androidx.compose.ui.modifier.ProvidableModifierLocal,kotlin.Function0)">modifierLocalProvider</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;key:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/modifier/ProvidableModifierLocal.html">ProvidableModifierLocal</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
       <p>A Modifier that can be used to provide <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code>s that can be read by other modifiers to the right of this modifier, or modifiers that are children of the layout node that this modifier is attached to.</p>
     </div>

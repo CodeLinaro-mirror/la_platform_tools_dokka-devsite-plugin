@@ -1,0 +1,425 @@
+<html devsite="true">
+  <head>
+    <title>IntermediateMeasureScope</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/layout/LookaheadScope.kt+class:androidx.compose.ui.layout.IntermediateMeasureScope&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>IntermediateMeasureScope</h1>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>interface <a href="/reference/kotlin/androidx/compose/ui/layout/IntermediateMeasureScope.html">IntermediateMeasureScope</a> : <a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a>, <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureScope.html">MeasureScope</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
+    <hr>
+    <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/IntermediateMeasureScope.html">IntermediateMeasureScope</a></code> provides access to lookahead results to allow <code><a href="/reference/kotlin/androidx/compose/ui/layout/IntermediateMeasureScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">intermediateLayout</a></code> to leverage lookahead results to define intermediate measurements and placements to gradually converge with lookahead.</p>
+    <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/IntermediateMeasureScope.html#lookaheadSize()">IntermediateMeasureScope.lookaheadSize</a></code> provides the target size of the layout. <code><a href="/reference/kotlin/androidx/compose/ui/layout/IntermediateMeasureScope.html">IntermediateMeasureScope</a></code> is also a <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a></code>, thus allowing layouts to read their <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code> during placement using <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).toLookaheadCoordinates()">LookaheadScope.toLookaheadCoordinates</a></code>, as well as the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code> of the closest lookahead scope via <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.Placeable.PlacementScope).lookaheadScopeCoordinates()">LookaheadScope.lookaheadScopeCoordinates</a></code>. By knowing the target size and position, layout adjustments such as animations can be defined in <code><a href="/reference/kotlin/androidx/compose/ui/layout/IntermediateMeasureScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">intermediateLayout</a></code> to morph the layout gradually in both size and position to arrive at its precalculated bounds.</p>
+    <p>Note that <code><a href="/reference/kotlin/androidx/compose/ui/layout/IntermediateMeasureScope.html">IntermediateMeasureScope</a></code> is the closest lookahead scope in the tree. This <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a></code> enables convenient query of the layout's relative position to the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a></code>. Hence it becomes straightforward to animate position relative to the closest scope, which usually yields a natural looking animation, unless there are specific UX requirements to change position relative to a particular <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a></code>.</p>
+    <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/IntermediateMeasureScope.html">IntermediateMeasureScope</a></code> is a CoroutineScope, as a convenient scope for all the coroutine-based intermediate changes (e.g. animations) to be launched from.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/IntermediateMeasureScope.html#lookaheadSize()">lookaheadSize</a></code></div>
+                <p>Indicates the target size of the <code><a href="/reference/kotlin/androidx/compose/ui/layout/IntermediateMeasureScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">intermediateLayout</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">androidx.compose.ui.unit.Density</a></span>
+              <div class="devsite-table-wrapper">
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).roundToPx()">roundToPx</a>()</code></div>
+                          <p>Convert <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code> to <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code> by rounding</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).roundToPx()">roundToPx</a>()</code></div>
+                          <p>Convert Sp to <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code> by rounding</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toDp()">toDp</a>()</code></div>
+                          <p>Convert Sp to <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+                        <td>
+                          <div><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(kotlin.Int).toDp()">toDp</a>()</code></div>
+                          <p>Convert an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code> pixel value to <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+                        <td>
+                          <div><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(kotlin.Float).toDp()">toDp</a>()</code></div>
+                          <p>Convert a <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code> pixel value to a Dp</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/DpSize.html">DpSize</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.geometry.Size).toDpSize()">toDpSize</a>()</code></div>
+                          <p>Convert a <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code> to a <code><a href="/reference/kotlin/androidx/compose/ui/unit/DpSize.html">DpSize</a></code>.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toPx()">toPx</a>()</code></div>
+                          <p>Convert <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code> to pixels.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toPx()">toPx</a>()</code></div>
+                          <p>Convert Sp to pixels.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/DpRect.html">DpRect</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.DpRect).toRect()">toRect</a>()</code></div>
+                          <p>Convert a <code><a href="/reference/kotlin/androidx/compose/ui/unit/DpRect.html">DpRect</a></code> to a <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code>.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/DpSize.html">DpSize</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.DpSize).toSize()">toSize</a>()</code></div>
+                          <p>Convert a <code><a href="/reference/kotlin/androidx/compose/ui/unit/DpSize.html">DpSize</a></code> to a <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code>.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toSp()">toSp</a>()</code></div>
+                          <p>Convert <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code> to Sp.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
+                        <td>
+                          <div><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(kotlin.Int).toSp()">toSp</a>()</code></div>
+                          <p>Convert an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code> pixel value to Sp.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
+                        <td>
+                          <div><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(kotlin.Float).toSp()">toSp</a>()</code></div>
+                          <p>Convert a <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code> pixel value to a Sp</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html">androidx.compose.ui.layout.LookaheadScope</a></span>
+              <div class="devsite-table-wrapper">
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<span><del><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">intermediateLayout</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;measure:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/MeasureScope.html">MeasureScope</a>.(measurable:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/Measurable.html">Measurable</a>, constraints:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>, lookaheadSize:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a><br>)</code></div>
+                          <p><strong>This function is deprecated.</strong> </p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).localLookaheadPositionOf(androidx.compose.ui.layout.LayoutCoordinates)">localLookaheadPositionOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;coordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a><br>)</code></div>
+                          <p>Calculates the localPosition in the Lookahead coordinate space.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<span><del><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.Modifier).onPlaced(kotlin.Function2)">onPlaced</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onPlaced:&nbsp;(lookaheadScopeCoordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a>, layoutCoordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+                          <p><strong>This function is deprecated.</strong> onPlaced in LookaheadLayoutScope has been deprecated.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).toLookaheadCoordinates()">toLookaheadCoordinates</a>()</code></div>
+                          <p>Converts a <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> into a <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> in the Lookahead coordinates space.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureScope.html">androidx.compose.ui.layout.MeasureScope</a></span>
+              <div class="devsite-table-wrapper">
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasureScope.html#layout(kotlin.Int,kotlin.Int,kotlin.collections.Map,kotlin.Function1)">layout</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;height:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;alignmentLines:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/layout/AlignmentLine.html">AlignmentLine</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;placementBlock:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.PlacementScope.html">Placeable.PlacementScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+                          <p>Sets the size and alignment lines of the measured layout, as well as the positioning block that defines the children positioning logic.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">androidx.compose.ui.unit.Density</a></span>
+              <div class="devsite-table-wrapper">
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#density()">density</a></code></div>
+                          <p>The logical density of the display.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#fontScale()">fontScale</a></code></div>
+                          <p>Current user preference for the scaling factor for fonts.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasureScope.html">androidx.compose.ui.layout.IntrinsicMeasureScope</a></span>
+              <div class="devsite-table-wrapper">
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                        <td>
+                          <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasureScope.html#isLookingAhead()">isLookingAhead</a></code></div>
+                          <p>This indicates whether the ongoing measurement is for lookahead pass.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code><a href="/reference/kotlin/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/IntrinsicMeasureScope.html#layoutDirection()">layoutDirection</a></code></div>
+                          <p>The <code><a href="/reference/kotlin/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code> of the <code>Layout</code> or <code>LayoutModifier</code> using the measure scope to measure their children.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html">androidx.compose.ui.layout.LookaheadScope</a></span>
+              <div class="devsite-table-wrapper">
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.PlacementScope.html">Placeable.PlacementScope</a>.<a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.Placeable.PlacementScope).lookaheadScopeCoordinates()">lookaheadScopeCoordinates</a></code></div>
+                          <p>Returns the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> of the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a></code>.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getLookaheadSize()"></a><a name="setLookaheadSize()"></a><a name="getLookaheadSize--"></a><a name="setLookaheadSize--"></a>
+          <h3 class="api-name" id="lookaheadSize()">lookaheadSize</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/IntermediateMeasureScope.html#lookaheadSize()">lookaheadSize</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a></pre>
+          <p>Indicates the target size of the <code><a href="/reference/kotlin/androidx/compose/ui/layout/IntermediateMeasureScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">intermediateLayout</a></code>.</p>
+        </div>
+      </div>
+    </devsite-filter >
+  </body>
+</html>

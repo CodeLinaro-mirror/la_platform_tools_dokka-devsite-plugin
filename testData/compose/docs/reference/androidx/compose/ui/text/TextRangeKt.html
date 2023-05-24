@@ -38,6 +38,13 @@
             </td>
           </tr>
           <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/text/TextRangeKt.html#(androidx.compose.ui.text.TextRange).coerceIn(kotlin.Int,kotlin.Int)">coerceIn</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a>&nbsp;receiver,&nbsp;int&nbsp;minimumValue,&nbsp;int&nbsp;maximumValue)</code></div>
+              <p>Ensures that <code><a href="/reference/androidx/compose/ui/text/TextRange.html#start()">TextRange.start</a></code> and <code><a href="/reference/androidx/compose/ui/text/TextRange.html#end()">TextRange.end</a></code> values lies in the specified range <code><a href="/reference/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.TextRange).coerceIn(kotlin.Int,kotlin.Int)">minimumValue</a></code> and <code><a href="/reference/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.TextRange).coerceIn(kotlin.Int,kotlin.Int)">maximumValue</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/text/TextRangeKt.html#(kotlin.CharSequence).substring(androidx.compose.ui.text.TextRange)">substring</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/CharSequence.html">CharSequence</a>&nbsp;receiver,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a>&nbsp;range)</code></div>
@@ -79,6 +86,46 @@
                 <td><code>int&nbsp;end</code></td>
                 <td>
                   <p>the exclusive end offset of the range. Must be non-negative, otherwise an exception will be thrown.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="(androidx.compose.ui.text.TextRange).coerceIn(kotlin.Int, kotlin.Int)"></a><a name="-androidx.compose.ui.text.TextRange-.coerceIn-kotlin.Int-kotlin.Int-"></a><a name="coercein"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.text.TextRange).coerceIn(kotlin.Int,kotlin.Int)">coerceIn</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a>&nbsp;<a href="/reference/androidx/compose/ui/text/TextRangeKt.html#(androidx.compose.ui.text.TextRange).coerceIn(kotlin.Int,kotlin.Int)">coerceIn</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/TextRange.html">TextRange</a>&nbsp;receiver,&nbsp;int&nbsp;minimumValue,&nbsp;int&nbsp;maximumValue)</pre>
+        <p>Ensures that <code><a href="/reference/androidx/compose/ui/text/TextRange.html#start()">TextRange.start</a></code> and <code><a href="/reference/androidx/compose/ui/text/TextRange.html#end()">TextRange.end</a></code> values lies in the specified range <code><a href="/reference/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.TextRange).coerceIn(kotlin.Int,kotlin.Int)">minimumValue</a></code> and <code><a href="/reference/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.TextRange).coerceIn(kotlin.Int,kotlin.Int)">maximumValue</a></code>. For each <code><a href="/reference/androidx/compose/ui/text/TextRange.html#start()">TextRange.start</a></code> and <code><a href="/reference/androidx/compose/ui/text/TextRange.html#end()">TextRange.end</a></code> values:</p>
+        <ul>
+          <li>
+            <p>if value is smaller than <code><a href="/reference/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.TextRange).coerceIn(kotlin.Int,kotlin.Int)">minimumValue</a></code>, value is replaced by <code><a href="/reference/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.TextRange).coerceIn(kotlin.Int,kotlin.Int)">minimumValue</a></code></p>
+          </li>
+          <li>
+            <p>if value is greater than <code><a href="/reference/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.TextRange).coerceIn(kotlin.Int,kotlin.Int)">maximumValue</a></code>, value is replaced by <code><a href="/reference/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.TextRange).coerceIn(kotlin.Int,kotlin.Int)">maximumValue</a></code></p>
+          </li>
+        </ul>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>int&nbsp;minimumValue</code></td>
+                <td>
+                  <p>the minimum value that <code><a href="/reference/androidx/compose/ui/text/TextRange.html#start()">TextRange.start</a></code> or <code><a href="/reference/androidx/compose/ui/text/TextRange.html#end()">TextRange.end</a></code> can be.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>int&nbsp;maximumValue</code></td>
+                <td>
+                  <p>the exclusive maximum value that <code><a href="/reference/androidx/compose/ui/text/TextRange.html#start()">TextRange.start</a></code> or <code><a href="/reference/androidx/compose/ui/text/TextRange.html#end()">TextRange.end</a></code> can be.</p>
                 </td>
               </tr>
             </tbody>

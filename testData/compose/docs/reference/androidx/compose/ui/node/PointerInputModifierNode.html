@@ -10,15 +10,34 @@
     </div>
     <h1>PointerInputModifierNode</h1>
     <p>
-      <pre>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public interface <a href="/reference/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a> extends <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></pre>
+      <pre>public interface <a href="/reference/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a> extends <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></pre>
     </p>
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
+        <div class="showalways" id="subclasses-direct"><a href="/reference/androidx/compose/ui/input/pointer/SuspendingPointerInputModifierNode.html">SuspendingPointerInputModifierNode</a></div>
+      </span>
+      <div id="subclasses-direct-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/input/pointer/SuspendingPointerInputModifierNode.html">SuspendingPointerInputModifierNode</a></code></td>
+                <td>
+                  <p>Extends <code><a href="/reference/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a></code> with a handler to execute asynchronously when an event occurs and a function to reset that handler (cancels the existing coroutine and essentially resets the handler's execution).</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
     <hr>
     <p>A <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">androidx.compose.ui.Modifier.Node</a></code> that receives <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code>s, interprets them, and consumes the aspects of the changes that it is react to such that other <code><a href="/reference/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a></code>s don't also react to them.</p>
-    <p>This is the <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">androidx.compose.ui.Modifier.Node</a></code> equivalent of <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputModifier.html">androidx.compose.ui.input.pointer.PointerInputModifier</a></code></p>
-    <pre class="prettyprint lang-kotlin">
-import androidx.compose.ui.node.modifierElementOf
-
-class OnPointerEventNode(var callback: (PointerEvent) -&gt; Unit) :
+    <p>This is the <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">androidx.compose.ui.Modifier.Node</a></code> equivalent of <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputFilter.html">androidx.compose.ui.input.pointer.PointerInputFilter</a></code>.</p>
+    <pre class="prettyprint lang-kotlin">class OnPointerEventNode(var callback: (PointerEvent) -&gt; Unit) :
     PointerInputModifierNode, Modifier.Node() {
     override fun onPointerEvent(
         pointerEvent: PointerEvent,
@@ -35,15 +54,22 @@ class OnPointerEventNode(var callback: (PointerEvent) -&gt; Unit) :
     }
 }
 
-fun Modifier.onPointerEvent(callback: (PointerEvent) -&gt; Unit) = this then modifierElementOf(
-    key = callback,
-    create = { OnPointerEventNode(callback) },
-    update = { it.callback = callback },
-    definitions = {
+data class PointerInputElement(
+    val callback: (PointerEvent) -&gt; Unit
+) : ModifierNodeElement&lt;OnPointerEventNode&gt;() {
+    override fun create() = OnPointerEventNode(callback)
+    override fun update(node: OnPointerEventNode) {
+        node.callback = callback
+    }
+
+    override fun InspectorInfo.inspectableProperties() {
         name = &quot;onPointerEvent&quot;
         properties[&quot;callback&quot;] = callback
     }
-)</pre>
+}
+
+fun Modifier.onPointerEvent(callback: (PointerEvent) -&gt; Unit) =
+    this then PointerInputElement(callback)</pre>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -72,10 +98,24 @@ fun Modifier.onPointerEvent(callback: (PointerEvent) -&gt; Unit) = this then mod
             </td>
           </tr>
           <tr>
+            <td><code>default void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/node/PointerInputModifierNode.html#onDensityChange()">onDensityChange</a>()</code></div>
+              <p>Invoked when the density (pixels per inch for the screen) changes.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>abstract void</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/node/PointerInputModifierNode.html#onPointerEvent(androidx.compose.ui.input.pointer.PointerEvent,androidx.compose.ui.input.pointer.PointerEventPass,androidx.compose.ui.unit.IntSize)">onPointerEvent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerEvent.html">PointerEvent</a>&nbsp;pointerEvent,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerEventPass.html">PointerEventPass</a>&nbsp;pass,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a>&nbsp;bounds<br>)</code></div>
               <p>Invoked when pointers that previously hit this <code><a href="/reference/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a></code> have changed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/node/PointerInputModifierNode.html#onViewConfigurationChange()">onViewConfigurationChange</a>()</code></div>
+              <p>Invoked when the view configuration (touch slop size, minimum touch target, tap timing) changes which means the composable UI the pointer input block is tied to has changed and the new UI might impact the location of pointer input events (x and y).</p>
             </td>
           </tr>
           <tr>
@@ -144,6 +184,14 @@ fun Modifier.onPointerEvent(callback: (PointerEvent) -&gt; Unit) = this then mod
           </li>
         </ol>
       </div>
+      <div class="api-item"><a name="onDensityChange--"></a><a name="ondensitychange"></a>
+        <h3 class="api-name" id="onDensityChange()">onDensityChange</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/node/PointerInputModifierNode.html#onDensityChange()">onDensityChange</a>()</pre>
+        <p>Invoked when the density (pixels per inch for the screen) changes. This can impact the location of pointer input events (x and y) and can affect things like touch slop detection.</p>
+        <p>Developers will need to restart the gesture detection handling pointer input in order for the event locations to remain accurate.</p>
+        <p>The default implementation will do that by calling <code><a href="/reference/androidx/compose/ui/node/PointerInputModifierNode.html#onCancelPointerInput()">onCancelPointerInput</a></code>.</p>
+        <p><code><a href="/reference/androidx/compose/ui/input/pointer/SuspendingPointerInputModifierNode.html">SuspendingPointerInputModifierNode</a></code> offers a more specific interface to allow only cancelling the coroutine for more control. See <code><a href="/reference/androidx/compose/ui/input/pointer/SuspendingPointerInputModifierNodeImpl.html">SuspendingPointerInputModifierNodeImpl</a></code> for a concrete example.</p>
+      </div>
       <div class="api-item"><a name="onPointerEvent(androidx.compose.ui.input.pointer.PointerEvent, androidx.compose.ui.input.pointer.PointerEventPass, androidx.compose.ui.unit.IntSize)"></a><a name="onPointerEvent-androidx.compose.ui.input.pointer.PointerEvent-androidx.compose.ui.input.pointer.PointerEventPass-androidx.compose.ui.unit.IntSize-"></a><a name="onpointerevent"></a>
         <h3 class="api-name" id="onPointerEvent(androidx.compose.ui.input.pointer.PointerEvent,androidx.compose.ui.input.pointer.PointerEventPass,androidx.compose.ui.unit.IntSize)">onPointerEvent</h3>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/node/PointerInputModifierNode.html#onPointerEvent(androidx.compose.ui.input.pointer.PointerEvent,androidx.compose.ui.input.pointer.PointerEventPass,androidx.compose.ui.unit.IntSize)">onPointerEvent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerEvent.html">PointerEvent</a>&nbsp;pointerEvent,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerEventPass.html">PointerEventPass</a>&nbsp;pass,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a>&nbsp;bounds<br>)</pre>
@@ -204,6 +252,14 @@ fun Modifier.onPointerEvent(callback: (PointerEvent) -&gt; Unit) = this then mod
             </tbody>
           </table>
         </div>
+      </div>
+      <div class="api-item"><a name="onViewConfigurationChange--"></a><a name="onviewconfigurationchange"></a>
+        <h3 class="api-name" id="onViewConfigurationChange()">onViewConfigurationChange</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/node/PointerInputModifierNode.html#onViewConfigurationChange()">onViewConfigurationChange</a>()</pre>
+        <p>Invoked when the view configuration (touch slop size, minimum touch target, tap timing) changes which means the composable UI the pointer input block is tied to has changed and the new UI might impact the location of pointer input events (x and y).</p>
+        <p>Developers will need to restart the gesture detection that handles pointer input in order for the events locations to remain accurate.</p>
+        <p>The default implementation will do that by calling <code><a href="/reference/androidx/compose/ui/node/PointerInputModifierNode.html#onCancelPointerInput()">onCancelPointerInput</a></code>.</p>
+        <p><code><a href="/reference/androidx/compose/ui/input/pointer/SuspendingPointerInputModifierNode.html">SuspendingPointerInputModifierNode</a></code> offers a more specific interface to allow only cancelling the coroutine for more control. See <code><a href="/reference/androidx/compose/ui/input/pointer/SuspendingPointerInputModifierNodeImpl.html">SuspendingPointerInputModifierNodeImpl</a></code> for a concrete example.</p>
       </div>
       <div class="api-item"><a name="sharePointerInputWithSiblings--"></a><a name="sharepointerinputwithsiblings"></a>
         <h3 class="api-name" id="sharePointerInputWithSiblings()">sharePointerInputWithSiblings</h3>

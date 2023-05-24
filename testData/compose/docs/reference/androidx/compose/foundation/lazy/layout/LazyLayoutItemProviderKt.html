@@ -24,20 +24,6 @@
         </thead>
         <tbody class="list">
           <tr>
-            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html">LazyLayoutItemProvider</a></code></td>
-            <td>
-              <div><code>@<a href="/reference/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProviderKt.html#DelegatingLazyLayoutItemProvider(androidx.compose.runtime.State)">DelegatingLazyLayoutItemProvider</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html">LazyLayoutItemProvider</a>&gt;&nbsp;delegate<br>)</code></div>
-              <p>Delegating version of <code><a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html">LazyLayoutItemProvider</a></code>, abstracting internal <code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> access.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html">LazyLayoutItemProvider</a></code></td>
-            <td>
-              <div><code>@<a href="/reference/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>&lt;T&nbsp;extends&nbsp;<a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.html">LazyLayoutIntervalContent</a>&gt; <a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProviderKt.html#LazyLayoutItemProvider(androidx.compose.foundation.lazy.layout.IntervalList,kotlin.ranges.IntRange,kotlin.Function2)">LazyLayoutItemProvider</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/lazy/layout/IntervalList.html">IntervalList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;intervals,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-int-range/index.html">IntRange</a>&nbsp;nearestItemsRange,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/lazy/layout/IntervalList.Interval.html">IntervalList.Interval</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;itemContent<br>)</code></div>
-              <p>Default implementation of <code><a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html">LazyLayoutItemProvider</a></code> shared by lazy layout implementations.</p>
-            </td>
-          </tr>
-          <tr>
             <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a></code></td>
             <td>
               <div><code>@<a href="/reference/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProviderKt.html#getDefaultLazyLayoutKey(kotlin.Int)">getDefaultLazyLayoutKey</a>(int&nbsp;index)</code></div>
@@ -49,70 +35,6 @@
     </div>
     <div class="list">
       <h2>Public methods</h2>
-      <div class="api-item"><a name="DelegatingLazyLayoutItemProvider-androidx.compose.runtime.State-"></a><a name="delegatinglazylayoutitemprovider"></a>
-        <h3 class="api-name" id="DelegatingLazyLayoutItemProvider(androidx.compose.runtime.State)">DelegatingLazyLayoutItemProvider</h3>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html">LazyLayoutItemProvider</a>&nbsp;<a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProviderKt.html#DelegatingLazyLayoutItemProvider(androidx.compose.runtime.State)">DelegatingLazyLayoutItemProvider</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html">LazyLayoutItemProvider</a>&gt;&nbsp;delegate<br>)</pre>
-        <p>Delegating version of <code><a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html">LazyLayoutItemProvider</a></code>, abstracting internal <code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> access. This way, passing <code><a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html">LazyLayoutItemProvider</a></code> will not trigger recomposition unless its methods are called within composable functions.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html">LazyLayoutItemProvider</a>&gt;&nbsp;delegate</code></td>
-                <td>
-                  <p><code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> to delegate <code><a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html">LazyLayoutItemProvider</a></code> functionality to.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="LazyLayoutItemProvider(androidx.compose.foundation.lazy.layout.IntervalList, kotlin.ranges.IntRange, kotlin.Function2)"></a><a name="LazyLayoutItemProvider-androidx.compose.foundation.lazy.layout.IntervalList-kotlin.ranges.IntRange-kotlin.Function2-"></a><a name="lazylayoutitemprovider"></a>
-        <h3 class="api-name" id="LazyLayoutItemProvider(androidx.compose.foundation.lazy.layout.IntervalList,kotlin.ranges.IntRange,kotlin.Function2)">LazyLayoutItemProvider</h3>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html">LazyLayoutItemProvider</a>&nbsp;&lt;T&nbsp;extends&nbsp;<a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.html">LazyLayoutIntervalContent</a>&gt; <a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProviderKt.html#LazyLayoutItemProvider(androidx.compose.foundation.lazy.layout.IntervalList,kotlin.ranges.IntRange,kotlin.Function2)">LazyLayoutItemProvider</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/lazy/layout/IntervalList.html">IntervalList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;intervals,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-int-range/index.html">IntRange</a>&nbsp;nearestItemsRange,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/lazy/layout/IntervalList.Interval.html">IntervalList.Interval</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;itemContent<br>)</pre>
-        <p>Default implementation of <code><a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProvider.html">LazyLayoutItemProvider</a></code> shared by lazy layout implementations.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/lazy/layout/IntervalList.html">IntervalList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;intervals</code></td>
-                <td>
-                  <p><code><a href="/reference/androidx/compose/foundation/lazy/layout/IntervalList.html">IntervalList</a></code> of <code><a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutIntervalContent.html">LazyLayoutIntervalContent</a></code> defined by lazy list DSL</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-int-range/index.html">IntRange</a>&nbsp;nearestItemsRange</code></td>
-                <td>
-                  <p>range of indices considered near current viewport</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/lazy/layout/IntervalList.Interval.html">IntervalList.Interval</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;itemContent</code></td>
-                <td>
-                  <p>composable content based on the index in the list.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
       <div class="api-item"><a name="getDefaultLazyLayoutKey-kotlin.Int-"></a><a name="getdefaultlazylayoutkey"></a>
         <h3 class="api-name" id="getDefaultLazyLayoutKey(kotlin.Int)">getDefaultLazyLayoutKey</h3>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;<a href="/reference/androidx/compose/foundation/lazy/layout/LazyLayoutItemProviderKt.html#getDefaultLazyLayoutKey(kotlin.Int)">getDefaultLazyLayoutKey</a>(int&nbsp;index)</pre>

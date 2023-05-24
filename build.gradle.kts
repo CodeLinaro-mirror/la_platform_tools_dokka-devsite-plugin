@@ -21,7 +21,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 defaultTasks = mutableListOf("test", "jar", "shadowJar", "ktlint", "publish")
 
 repositories {
-    maven("/Users/owengray/git-androidx/androidx-main/androidx-main/prebuilts/androidx/external")
     maven("../../prebuilts/androidx/external")
     maven("../../prebuilts/androidx/internal")
 }
@@ -138,8 +137,8 @@ testDataSourcesKmp.setResolveSources(isKmp = true)
 
 val lifecycleVersion = "2.5.1"
 val collectionsVersion = "1.3.0-alpha02"
-val composeVersion = "1.4.0-alpha05"
-val composeMaterial3Version = "1.1.0-alpha03"
+val composeVersion = "1.5.0-beta01"
+val composeMaterial3Version = "1.2.0-alpha02"
 dependencies {
     testDataImpl("io.reactivex.rxjava3:rxjava:3.0.0")
     testDataImpl("io.reactivex.rxjava2:rxjava:2.2.9")
@@ -261,21 +260,24 @@ dependencies {
     testDataSources("androidx.paging:paging-compose:1.0.0-alpha16")
 
     // Compose is KMP, but they don't publish KMP source jars
-    testDataSources("androidx.compose.animation:animation:$composeVersion")
-    testDataSources("androidx.compose.animation:animation-core:$composeVersion")
-    testDataSources("androidx.compose.animation:animation-graphics:$composeVersion")
-    testDataSources("androidx.compose.foundation:foundation:$composeVersion")
-    testDataSources("androidx.compose.foundation:foundation-layout:$composeVersion")
-    testDataSources("androidx.compose.material3:material3:$composeMaterial3Version")
-    testDataSources("androidx.compose.material3:material3-window-size-class:$composeMaterial3Version")
-    testDataSources("androidx.compose.runtime:runtime:$composeVersion")
-    testDataSources("androidx.compose.ui:ui:$composeVersion")
-    testDataSources("androidx.compose.ui:ui-geometry:$composeVersion")
-    testDataSources("androidx.compose.ui:ui-graphics:$composeVersion")
-    testDataSources("androidx.compose.ui:ui-text:$composeVersion")
-    testDataSources("androidx.compose.ui:ui-tooling-preview:$composeVersion")
-    testDataSources("androidx.compose.ui:ui-unit:$composeVersion")
-    testDataSources("androidx.compose.ui:ui-util:$composeVersion")
+    testDataSourcesKmp("androidx.compose.animation:animation:$composeVersion")
+    testDataSourcesKmp("androidx.compose.animation:animation-core:$composeVersion")
+    testDataSourcesKmp("androidx.compose.animation:animation-graphics:$composeVersion")
+    testDataSourcesKmp("androidx.compose.foundation:foundation:$composeVersion")
+    testDataSourcesKmp("androidx.compose.foundation:foundation-layout:$composeVersion")
+    testDataSourcesKmp("androidx.compose.material3:material3:$composeMaterial3Version")
+    testDataSourcesKmp("androidx.compose.material3:material3-window-size-class:$composeMaterial3Version")
+    testDataSourcesKmp("androidx.compose.runtime:runtime:$composeVersion")
+    testDataSourcesKmp("androidx.compose.ui:ui:$composeVersion")
+    testDataSourcesKmp("androidx.compose.ui:ui-geometry:$composeVersion")
+    testDataSourcesKmp("androidx.compose.ui:ui-graphics:$composeVersion")
+    testDataSourcesKmp("androidx.compose.ui:ui-test:$composeVersion")
+    testDataSourcesKmp("androidx.compose.ui:ui-test-junit4:$composeVersion")
+    testDataSourcesKmp("androidx.compose.ui:ui-text:$composeVersion")
+    testDataSourcesKmp("androidx.compose.ui:ui-tooling:$composeVersion")
+    testDataSourcesKmp("androidx.compose.ui:ui-tooling-preview:$composeVersion")
+    testDataSourcesKmp("androidx.compose.ui:ui-unit:$composeVersion")
+    testDataSourcesKmp("androidx.compose.ui:ui-util:$composeVersion")
 
     testDataSourcesKmp("androidx.collection:collection:$collectionsVersion")
     testDataSourcesKmp("androidx.datastore:datastore-core:1.1.0-alpha01")

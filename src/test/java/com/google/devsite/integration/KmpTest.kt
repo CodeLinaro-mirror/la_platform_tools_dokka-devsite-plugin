@@ -66,6 +66,23 @@ class KmpTest : IntegrationTestBase() {
         )
     }
 
+    @Test
+    fun `Validate prod AndroidX compose prebuilts`() {
+        validatePrebuilts(
+            testName = "compose",
+            artifactNames = listOf(
+                "animation", "animation-core", "animation-graphics",
+                "foundation", "foundation-layout",
+                "material3", "material3-window-size-class",
+                "runtime",
+                "ui", "ui-geometry", "ui-graphics", "ui-text", "ui-unit", "ui-util",
+                "ui-tooling", "ui-tooling-preview",
+                "ui-test", "ui-test-junit4"
+            ),
+            samples = true
+        )
+    }
+
     private var squashAndroid = true
 
     /** For when a test uses source outside of `./testData/` */
@@ -84,6 +101,7 @@ class KmpTest : IntegrationTestBase() {
         ) = sourceSet {
             this.name = name
             this.displayName = displayName
+            samples = if ("ommon" in name) samplesLocations else emptyList()
             sourceRoots = sourcesOfPlatform.map { it.absolutePath }
             classpath = classpathFromFile("testData/classpath.txt")
             externalDocumentationLinks = externalLinks

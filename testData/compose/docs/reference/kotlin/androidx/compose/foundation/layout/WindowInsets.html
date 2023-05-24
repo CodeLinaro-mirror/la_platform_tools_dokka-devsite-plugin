@@ -6,12 +6,21 @@
   </head>
   <body>
     <div id="metadata-info-block">
-      <div id="source-link"><a href="https://cs.android.com/search?q=file:-layout/androidx/compose/foundation/layout/WindowInsets.kt+class:androidx.compose.foundation.layout.WindowInsets&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/layout/WindowInsets.kt+class:androidx.compose.foundation.layout.WindowInsets&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>WindowInsets</h1>
-    <p>
-      <pre>interface <a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>interface <a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
         <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/foundation/layout/MutableWindowInsets.html">MutableWindowInsets</a></div>
       </span>
@@ -35,7 +44,7 @@
       </div>
 </devsite-expandable>    </div>
     <hr>
-    <p>A representation of window insets that tracks access to enable recomposition, relayout, and redrawing when values change. These values should not be read during composition to avoid doing composition for every frame of an animation. Use methods like <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsPadding(kotlin.Function1,kotlin.Function1)">Modifier.windowInsetsPadding</a></code>, <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).systemBarsPadding()">Modifier.systemBarsPadding</a></code>, and <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsTopHeight(androidx.compose.foundation.layout.WindowInsets)">Modifier.windowInsetsTopHeight</a></code> for Modifiers that will not cause recomposition when values change.</p>
+    <p>A representation of window insets that tracks access to enable recomposition, relayout, and redrawing when values change. These values should not be read during composition to avoid doing composition for every frame of an animation. Use methods like <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets)">Modifier.windowInsetsPadding</a></code>, Modifier.systemBarsPadding, and <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsTopHeight(androidx.compose.foundation.layout.WindowInsets)">Modifier.windowInsetsTopHeight</a></code> for Modifiers that will not cause recomposition when values change.</p>
     <p>Use the <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.Companion.html">WindowInsets.Companion</a></code> extensions to retrieve <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> for the current window.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
@@ -59,140 +68,191 @@
       </table>
     </div>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public functions</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getBottom(androidx.compose.ui.unit.Density)">getBottom</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>)</code></div>
-              <p>The space, in pixels, at the bottom of the window that the inset represents.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getLeft(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection)">getLeft</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>,&nbsp;layoutDirection:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>)</code></div>
-              <p>The space, in pixels, at the left of the window that the inset represents.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getRight(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection)">getRight</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>,&nbsp;layoutDirection:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>)</code></div>
-              <p>The space, in pixels, at the right of the window that the inset represents.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getTop(androidx.compose.ui.unit.Density)">getTop</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>)</code></div>
-              <p>The space, in pixels, at the top of the window that the inset represents.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getBottom(androidx.compose.ui.unit.Density)">getBottom</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>)</code></div>
+                <p>The space, in pixels, at the bottom of the window that the inset represents.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getLeft(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection)">getLeft</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>,&nbsp;layoutDirection:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>)</code></div>
+                <p>The space, in pixels, at the left of the window that the inset represents.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getRight(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection)">getRight</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>,&nbsp;layoutDirection:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>)</code></div>
+                <p>The space, in pixels, at the right of the window that the inset represents.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getTop(androidx.compose.ui.unit.Density)">getTop</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>)</code></div>
+                <p>The space, in pixels, at the top of the window that the inset represents.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Extension functions</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#(androidx.compose.foundation.layout.WindowInsets).add(androidx.compose.foundation.layout.WindowInsets)">add</a>(insets:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>)</code></div>
-              <p>Returns a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> that has values of this, added to the values of <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets).add(androidx.compose.foundation.layout.WindowInsets)">insets</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/foundation/layout/PaddingValues.html">PaddingValues</a></code></td>
-            <td>
-              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#(androidx.compose.foundation.layout.WindowInsets).asPaddingValues()">asPaddingValues</a>()</code></div>
-              <p>Convert a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> to a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/PaddingValues.html">PaddingValues</a></code> and uses <code><a href="/reference/kotlin/androidx/compose/ui/platform/package-summary.html#LocalDensity()">LocalDensity</a></code> for DP to pixel conversion.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/foundation/layout/PaddingValues.html">PaddingValues</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#(androidx.compose.foundation.layout.WindowInsets).asPaddingValues(androidx.compose.ui.unit.Density)">asPaddingValues</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>)</code></div>
-              <p>Convert a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> to a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/PaddingValues.html">PaddingValues</a></code> and uses <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets).asPaddingValues(androidx.compose.ui.unit.Density)">density</a></code> for DP to pixel conversion.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#(androidx.compose.foundation.layout.WindowInsets).exclude(androidx.compose.foundation.layout.WindowInsets)">exclude</a>(insets:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>)</code></div>
-              <p>Returns the values in this <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> that are not also in <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets).exclude(androidx.compose.foundation.layout.WindowInsets)">insets</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#(androidx.compose.foundation.layout.WindowInsets).only(androidx.compose.foundation.layout.WindowInsetsSides)">only</a>(sides:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsetsSides.html">WindowInsetsSides</a>)</code></div>
-              <p>Returns a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> that eliminates all dimensions except the ones that are enabled.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#(androidx.compose.foundation.layout.WindowInsets).union(androidx.compose.foundation.layout.WindowInsets)">union</a>(insets:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>)</code></div>
-              <p>Returns a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> that has the maximum values of this <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> and <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets).union(androidx.compose.foundation.layout.WindowInsets)">insets</a></code>.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Extension functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#(androidx.compose.foundation.layout.WindowInsets).add(androidx.compose.foundation.layout.WindowInsets)">add</a>(insets:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>)</code></div>
+                <p>Returns a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> that has values of this, added to the values of <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets).add(androidx.compose.foundation.layout.WindowInsets)">insets</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/layout/PaddingValues.html">PaddingValues</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#(androidx.compose.foundation.layout.WindowInsets).asPaddingValues()">asPaddingValues</a>()</code></div>
+                <p>Convert a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> to a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/PaddingValues.html">PaddingValues</a></code> and uses <code><a href="/reference/kotlin/androidx/compose/ui/platform/package-summary.html#LocalDensity()">LocalDensity</a></code> for DP to pixel conversion.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/layout/PaddingValues.html">PaddingValues</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#(androidx.compose.foundation.layout.WindowInsets).asPaddingValues(androidx.compose.ui.unit.Density)">asPaddingValues</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>)</code></div>
+                <p>Convert a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> to a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/PaddingValues.html">PaddingValues</a></code> and uses <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets).asPaddingValues(androidx.compose.ui.unit.Density)">density</a></code> for DP to pixel conversion.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#(androidx.compose.foundation.layout.WindowInsets).exclude(androidx.compose.foundation.layout.WindowInsets)">exclude</a>(insets:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>)</code></div>
+                <p>Returns the values in this <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> that are not also in <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets).exclude(androidx.compose.foundation.layout.WindowInsets)">insets</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#(androidx.compose.foundation.layout.WindowInsets).only(androidx.compose.foundation.layout.WindowInsetsSides)">only</a>(sides:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsetsSides.html">WindowInsetsSides</a>)</code></div>
+                <p>Returns a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> that eliminates all dimensions except the ones that are enabled.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#(androidx.compose.foundation.layout.WindowInsets).union(androidx.compose.foundation.layout.WindowInsets)">union</a>(insets:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>)</code></div>
+                <p>Returns a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> that has the maximum values of this <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> and <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets).union(androidx.compose.foundation.layout.WindowInsets)">insets</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
-    <div class="list">
-      <h2>Public functions</h2>
-      <div class="api-item"><a name="getBottom-androidx.compose.ui.unit.Density-"></a><a name="getbottom"></a>
-        <h3 class="api-name" id="getBottom(androidx.compose.ui.unit.Density)">getBottom</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getBottom(androidx.compose.ui.unit.Density)">getBottom</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
-        <p>The space, in pixels, at the bottom of the window that the inset represents.</p>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="getBottom-androidx.compose.ui.unit.Density-"></a><a name="getbottom"></a>
+          <h3 class="api-name" id="getBottom(androidx.compose.ui.unit.Density)">getBottom</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getBottom(androidx.compose.ui.unit.Density)">getBottom</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The space, in pixels, at the bottom of the window that the inset represents.</p>
+        </div>
+        <div class="api-item"><a name="getLeft(androidx.compose.ui.unit.Density, androidx.compose.ui.unit.LayoutDirection)"></a><a name="getLeft-androidx.compose.ui.unit.Density-androidx.compose.ui.unit.LayoutDirection-"></a><a name="getleft"></a>
+          <h3 class="api-name" id="getLeft(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection)">getLeft</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getLeft(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection)">getLeft</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>,&nbsp;layoutDirection:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The space, in pixels, at the left of the window that the inset represents.</p>
+        </div>
+        <div class="api-item"><a name="getRight(androidx.compose.ui.unit.Density, androidx.compose.ui.unit.LayoutDirection)"></a><a name="getRight-androidx.compose.ui.unit.Density-androidx.compose.ui.unit.LayoutDirection-"></a><a name="getright"></a>
+          <h3 class="api-name" id="getRight(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection)">getRight</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getRight(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection)">getRight</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>,&nbsp;layoutDirection:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The space, in pixels, at the right of the window that the inset represents.</p>
+        </div>
+        <div class="api-item"><a name="getTop-androidx.compose.ui.unit.Density-"></a><a name="gettop"></a>
+          <h3 class="api-name" id="getTop(androidx.compose.ui.unit.Density)">getTop</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getTop(androidx.compose.ui.unit.Density)">getTop</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The space, in pixels, at the top of the window that the inset represents.</p>
+        </div>
       </div>
-      <div class="api-item"><a name="getLeft(androidx.compose.ui.unit.Density, androidx.compose.ui.unit.LayoutDirection)"></a><a name="getLeft-androidx.compose.ui.unit.Density-androidx.compose.ui.unit.LayoutDirection-"></a><a name="getleft"></a>
-        <h3 class="api-name" id="getLeft(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection)">getLeft</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getLeft(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection)">getLeft</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>,&nbsp;layoutDirection:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
-        <p>The space, in pixels, at the left of the window that the inset represents.</p>
-      </div>
-      <div class="api-item"><a name="getRight(androidx.compose.ui.unit.Density, androidx.compose.ui.unit.LayoutDirection)"></a><a name="getRight-androidx.compose.ui.unit.Density-androidx.compose.ui.unit.LayoutDirection-"></a><a name="getright"></a>
-        <h3 class="api-name" id="getRight(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection)">getRight</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getRight(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection)">getRight</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>,&nbsp;layoutDirection:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
-        <p>The space, in pixels, at the right of the window that the inset represents.</p>
-      </div>
-      <div class="api-item"><a name="getTop-androidx.compose.ui.unit.Density-"></a><a name="gettop"></a>
-        <h3 class="api-name" id="getTop(androidx.compose.ui.unit.Density)">getTop</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getTop(androidx.compose.ui.unit.Density)">getTop</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
-        <p>The space, in pixels, at the top of the window that the inset represents.</p>
-      </div>
-    </div>
-    <div class="list">
-      <h2>Extension functions</h2>
-      <div class="api-item"><a name="-androidx.compose.foundation.layout.WindowInsets-.add-androidx.compose.foundation.layout.WindowInsets-"></a><a name="add"></a>
-        <h3 class="api-name" id="(androidx.compose.foundation.layout.WindowInsets).add(androidx.compose.foundation.layout.WindowInsets)">add</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#(androidx.compose.foundation.layout.WindowInsets).add(androidx.compose.foundation.layout.WindowInsets)">add</a>(insets:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></pre>
-        <p>Returns a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> that has values of this, added to the values of <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets).add(androidx.compose.foundation.layout.WindowInsets)">insets</a></code>. For example, if this has a top of 10 and insets has a top of 5, the returned <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> will have a top of 15.</p>
-      </div>
-      <div class="api-item"><a name="-androidx.compose.foundation.layout.WindowInsets-.asPaddingValues--"></a><a name="aspaddingvalues"></a>
-        <h3 class="api-name" id="(androidx.compose.foundation.layout.WindowInsets).asPaddingValues()">asPaddingValues</h3>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#(androidx.compose.foundation.layout.WindowInsets).asPaddingValues()">asPaddingValues</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/PaddingValues.html">PaddingValues</a></pre>
-        <p>Convert a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> to a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/PaddingValues.html">PaddingValues</a></code> and uses <code><a href="/reference/kotlin/androidx/compose/ui/platform/package-summary.html#LocalDensity()">LocalDensity</a></code> for DP to pixel conversion. <code><a href="/reference/kotlin/androidx/compose/foundation/layout/PaddingValues.html">PaddingValues</a></code> can be passed to some containers to pad internal content so that it doesn't overlap the insets when fully scrolled. Ensure that the insets are <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumed</a></code> after the padding is applied if insets are to be used further down the hierarchy.</p>
-        <pre class="prettyprint lang-kotlin">
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Extension functions</h2>
+        <div class="api-item"><a name="-androidx.compose.foundation.layout.WindowInsets-.add-androidx.compose.foundation.layout.WindowInsets-"></a><a name="add"></a>
+          <h3 class="api-name" id="(androidx.compose.foundation.layout.WindowInsets).add(androidx.compose.foundation.layout.WindowInsets)">add</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#(androidx.compose.foundation.layout.WindowInsets).add(androidx.compose.foundation.layout.WindowInsets)">add</a>(insets:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></pre>
+          <p>Returns a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> that has values of this, added to the values of <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets).add(androidx.compose.foundation.layout.WindowInsets)">insets</a></code>. For example, if this has a top of 10 and insets has a top of 5, the returned <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> will have a top of 15.</p>
+        </div>
+        <div class="api-item"><a name="-androidx.compose.foundation.layout.WindowInsets-.asPaddingValues--"></a><a name="aspaddingvalues"></a>
+          <h3 class="api-name" id="(androidx.compose.foundation.layout.WindowInsets).asPaddingValues()">asPaddingValues</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#(androidx.compose.foundation.layout.WindowInsets).asPaddingValues()">asPaddingValues</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/PaddingValues.html">PaddingValues</a></pre>
+          <p>Convert a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> to a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/PaddingValues.html">PaddingValues</a></code> and uses <code><a href="/reference/kotlin/androidx/compose/ui/platform/package-summary.html#LocalDensity()">LocalDensity</a></code> for DP to pixel conversion. <code><a href="/reference/kotlin/androidx/compose/foundation/layout/PaddingValues.html">PaddingValues</a></code> can be passed to some containers to pad internal content so that it doesn't overlap the insets when fully scrolled. Ensure that the insets are <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumed</a></code> after the padding is applied if insets are to be used further down the hierarchy.</p>
+          <pre class="prettyprint lang-kotlin">
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
@@ -210,12 +270,14 @@ class SampleActivity : ComponentActivity() {
         }
     }
 }</pre>
-      </div>
-      <div class="api-item"><a name="-androidx.compose.foundation.layout.WindowInsets-.asPaddingValues-androidx.compose.ui.unit.Density-"></a><a name="aspaddingvalues"></a>
-        <h3 class="api-name" id="(androidx.compose.foundation.layout.WindowInsets).asPaddingValues(androidx.compose.ui.unit.Density)">asPaddingValues</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#(androidx.compose.foundation.layout.WindowInsets).asPaddingValues(androidx.compose.ui.unit.Density)">asPaddingValues</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/PaddingValues.html">PaddingValues</a></pre>
-        <p>Convert a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> to a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/PaddingValues.html">PaddingValues</a></code> and uses <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets).asPaddingValues(androidx.compose.ui.unit.Density)">density</a></code> for DP to pixel conversion. <code><a href="/reference/kotlin/androidx/compose/foundation/layout/PaddingValues.html">PaddingValues</a></code> can be passed to some containers to pad internal content so that it doesn't overlap the insets when fully scrolled. Ensure that the insets are <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumed</a></code> after the padding is applied if insets are to be used further down the hierarchy.</p>
-        <pre class="prettyprint lang-kotlin">
+        </div>
+        <div class="api-item"><a name="-androidx.compose.foundation.layout.WindowInsets-.asPaddingValues-androidx.compose.ui.unit.Density-"></a><a name="aspaddingvalues"></a>
+          <h3 class="api-name" id="(androidx.compose.foundation.layout.WindowInsets).asPaddingValues(androidx.compose.ui.unit.Density)">asPaddingValues</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#(androidx.compose.foundation.layout.WindowInsets).asPaddingValues(androidx.compose.ui.unit.Density)">asPaddingValues</a>(density:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/PaddingValues.html">PaddingValues</a></pre>
+          <p>Convert a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> to a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/PaddingValues.html">PaddingValues</a></code> and uses <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets).asPaddingValues(androidx.compose.ui.unit.Density)">density</a></code> for DP to pixel conversion. <code><a href="/reference/kotlin/androidx/compose/foundation/layout/PaddingValues.html">PaddingValues</a></code> can be passed to some containers to pad internal content so that it doesn't overlap the insets when fully scrolled. Ensure that the insets are <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumed</a></code> after the padding is applied if insets are to be used further down the hierarchy.</p>
+          <pre class="prettyprint lang-kotlin">
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
@@ -233,23 +295,30 @@ class SampleActivity : ComponentActivity() {
         }
     }
 }</pre>
+        </div>
+        <div class="api-item"><a name="-androidx.compose.foundation.layout.WindowInsets-.exclude-androidx.compose.foundation.layout.WindowInsets-"></a><a name="exclude"></a>
+          <h3 class="api-name" id="(androidx.compose.foundation.layout.WindowInsets).exclude(androidx.compose.foundation.layout.WindowInsets)">exclude</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#(androidx.compose.foundation.layout.WindowInsets).exclude(androidx.compose.foundation.layout.WindowInsets)">exclude</a>(insets:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></pre>
+          <p>Returns the values in this <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> that are not also in <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets).exclude(androidx.compose.foundation.layout.WindowInsets)">insets</a></code>. For example, if this <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> has a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getTop(androidx.compose.ui.unit.Density)">WindowInsets.getTop</a></code> value of <code>10</code> and <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets).exclude(androidx.compose.foundation.layout.WindowInsets)">insets</a></code> has a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getTop(androidx.compose.ui.unit.Density)">WindowInsets.getTop</a></code> value of <code>8</code>, the returned <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> will have a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getTop(androidx.compose.ui.unit.Density)">WindowInsets.getTop</a></code> value of <code>2</code>.</p>
+          <p>Negative values are never returned. For example if <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets).exclude(androidx.compose.foundation.layout.WindowInsets)">insets</a></code> has a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getTop(androidx.compose.ui.unit.Density)">WindowInsets.getTop</a></code> of <code>10</code> and this has a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getTop(androidx.compose.ui.unit.Density)">WindowInsets.getTop</a></code> of <code>0</code>, the returned <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> will have a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getTop(androidx.compose.ui.unit.Density)">WindowInsets.getTop</a></code> value of <code>0</code>.</p>
+        </div>
+        <div class="api-item"><a name="-androidx.compose.foundation.layout.WindowInsets-.only-androidx.compose.foundation.layout.WindowInsetsSides-"></a><a name="only"></a>
+          <h3 class="api-name" id="(androidx.compose.foundation.layout.WindowInsets).only(androidx.compose.foundation.layout.WindowInsetsSides)">only</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#(androidx.compose.foundation.layout.WindowInsets).only(androidx.compose.foundation.layout.WindowInsetsSides)">only</a>(sides:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsetsSides.html">WindowInsetsSides</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></pre>
+          <p>Returns a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> that eliminates all dimensions except the ones that are enabled. For example, to have a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> at the bottom of the screen, pass <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsetsSides.html#Bottom()">WindowInsetsSides.Bottom</a></code>.</p>
+        </div>
+        <div class="api-item"><a name="-androidx.compose.foundation.layout.WindowInsets-.union-androidx.compose.foundation.layout.WindowInsets-"></a><a name="union"></a>
+          <h3 class="api-name" id="(androidx.compose.foundation.layout.WindowInsets).union(androidx.compose.foundation.layout.WindowInsets)">union</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#(androidx.compose.foundation.layout.WindowInsets).union(androidx.compose.foundation.layout.WindowInsets)">union</a>(insets:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></pre>
+          <p>Returns a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> that has the maximum values of this <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> and <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets).union(androidx.compose.foundation.layout.WindowInsets)">insets</a></code>.</p>
+        </div>
       </div>
-      <div class="api-item"><a name="-androidx.compose.foundation.layout.WindowInsets-.exclude-androidx.compose.foundation.layout.WindowInsets-"></a><a name="exclude"></a>
-        <h3 class="api-name" id="(androidx.compose.foundation.layout.WindowInsets).exclude(androidx.compose.foundation.layout.WindowInsets)">exclude</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#(androidx.compose.foundation.layout.WindowInsets).exclude(androidx.compose.foundation.layout.WindowInsets)">exclude</a>(insets:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></pre>
-        <p>Returns the values in this <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> that are not also in <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets).exclude(androidx.compose.foundation.layout.WindowInsets)">insets</a></code>. For example, if this <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> has a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getTop(androidx.compose.ui.unit.Density)">WindowInsets.getTop</a></code> value of <code>10</code> and <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets).exclude(androidx.compose.foundation.layout.WindowInsets)">insets</a></code> has a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getTop(androidx.compose.ui.unit.Density)">WindowInsets.getTop</a></code> value of <code>8</code>, the returned <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> will have a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getTop(androidx.compose.ui.unit.Density)">WindowInsets.getTop</a></code> value of <code>2</code>.</p>
-        <p>Negative values are never returned. For example if <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets).exclude(androidx.compose.foundation.layout.WindowInsets)">insets</a></code> has a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getTop(androidx.compose.ui.unit.Density)">WindowInsets.getTop</a></code> of <code>10</code> and this has a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getTop(androidx.compose.ui.unit.Density)">WindowInsets.getTop</a></code> of <code>0</code>, the returned <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> will have a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#getTop(androidx.compose.ui.unit.Density)">WindowInsets.getTop</a></code> value of <code>0</code>.</p>
-      </div>
-      <div class="api-item"><a name="-androidx.compose.foundation.layout.WindowInsets-.only-androidx.compose.foundation.layout.WindowInsetsSides-"></a><a name="only"></a>
-        <h3 class="api-name" id="(androidx.compose.foundation.layout.WindowInsets).only(androidx.compose.foundation.layout.WindowInsetsSides)">only</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#(androidx.compose.foundation.layout.WindowInsets).only(androidx.compose.foundation.layout.WindowInsetsSides)">only</a>(sides:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsetsSides.html">WindowInsetsSides</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></pre>
-        <p>Returns a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> that eliminates all dimensions except the ones that are enabled. For example, to have a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> at the bottom of the screen, pass <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsetsSides.html#Bottom()">WindowInsetsSides.Bottom</a></code>.</p>
-      </div>
-      <div class="api-item"><a name="-androidx.compose.foundation.layout.WindowInsets-.union-androidx.compose.foundation.layout.WindowInsets-"></a><a name="union"></a>
-        <h3 class="api-name" id="(androidx.compose.foundation.layout.WindowInsets).union(androidx.compose.foundation.layout.WindowInsets)">union</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>.<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html#(androidx.compose.foundation.layout.WindowInsets).union(androidx.compose.foundation.layout.WindowInsets)">union</a>(insets:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></pre>
-        <p>Returns a <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> that has the maximum values of this <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> and <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets).union(androidx.compose.foundation.layout.WindowInsets)">insets</a></code>.</p>
-      </div>
-    </div>
+    </devsite-filter >
   </body>
 </html>

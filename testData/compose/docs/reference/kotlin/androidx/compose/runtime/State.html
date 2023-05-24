@@ -9,11 +9,20 @@
       <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/runtime/SnapshotState.kt+class:androidx.compose.runtime.State&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>State</h1>
-    <p>
-      <pre>interface <a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>interface <a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
-        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a>, <a href="/reference/kotlin/androidx/compose/animation/core/InfiniteTransition.TransitionAnimationState.html">InfiniteTransition.TransitionAnimationState</a>, <a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a>, <a href="/reference/kotlin/androidx/compose/animation/core/Transition.TransitionAnimationState.html">Transition.TransitionAnimationState</a></div>
+        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a>, <a href="/reference/kotlin/androidx/compose/runtime/DoubleState.html">DoubleState</a>, <a href="/reference/kotlin/androidx/compose/runtime/FloatState.html">FloatState</a>, <a href="/reference/kotlin/androidx/compose/animation/core/InfiniteTransition.TransitionAnimationState.html">InfiniteTransition.TransitionAnimationState</a>, <a href="/reference/kotlin/androidx/compose/runtime/IntState.html">IntState</a>, <a href="/reference/kotlin/androidx/compose/runtime/LongState.html">LongState</a>, <a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a>, <a href="/reference/kotlin/androidx/compose/ui/tooling/animation/ToolingState.html">ToolingState</a>, <a href="/reference/kotlin/androidx/compose/animation/core/Transition.TransitionAnimationState.html">Transition.TransitionAnimationState</a></div>
       </span>
       <div id="subclasses-direct-summary">
         <div class="devsite-table-wrapper">
@@ -30,15 +39,45 @@
                 </td>
               </tr>
               <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/runtime/DoubleState.html">DoubleState</a></code></td>
+                <td>
+                  <p>A value holder where reads to the <code><a href="/reference/kotlin/androidx/compose/runtime/DoubleState.html#doubleValue()">doubleValue</a></code> property during the execution of a <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function cause the current <code><a href="/reference/kotlin/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> to subscribe to changes of that value.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/runtime/FloatState.html">FloatState</a></code></td>
+                <td>
+                  <p>A value holder where reads to the <code><a href="/reference/kotlin/androidx/compose/runtime/FloatState.html#floatValue()">floatValue</a></code> property during the execution of a <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function cause the current <code><a href="/reference/kotlin/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> to subscribe to changes of that value.</p>
+                </td>
+              </tr>
+              <tr>
                 <td><code><a href="/reference/kotlin/androidx/compose/animation/core/InfiniteTransition.TransitionAnimationState.html">InfiniteTransition.TransitionAnimationState</a></code></td>
                 <td>
                   <p>Each animation created using <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#(androidx.compose.animation.core.Transition).animateColor(kotlin.Function1,kotlin.String,kotlin.Function1)">InfiniteTransition.animateColor</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.InfiniteTransition).animateFloat(kotlin.Float,kotlin.Float,androidx.compose.animation.core.InfiniteRepeatableSpec,kotlin.String)">InfiniteTransition.animateFloat</a></code>, or <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.InfiniteTransition).animateValue(kotlin.Any,kotlin.Any,androidx.compose.animation.core.TwoWayConverter,androidx.compose.animation.core.InfiniteRepeatableSpec,kotlin.String)">InfiniteTransition.animateValue</a></code> is represented as a <code><a href="/reference/kotlin/androidx/compose/animation/core/InfiniteTransition.TransitionAnimationState.html">TransitionAnimationState</a></code> in <code><a href="/reference/kotlin/androidx/compose/animation/core/InfiniteTransition.html">InfiniteTransition</a></code>.</p>
                 </td>
               </tr>
               <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/runtime/IntState.html">IntState</a></code></td>
+                <td>
+                  <p>A value holder where reads to the <code><a href="/reference/kotlin/androidx/compose/runtime/IntState.html#intValue()">intValue</a></code> property during the execution of a <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function cause the current <code><a href="/reference/kotlin/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> to subscribe to changes of that value.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/runtime/LongState.html">LongState</a></code></td>
+                <td>
+                  <p>A value holder where reads to the <code><a href="/reference/kotlin/androidx/compose/runtime/LongState.html#longValue()">longValue</a></code> property during the execution of a <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function cause the current <code><a href="/reference/kotlin/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> to subscribe to changes of that value.</p>
+                </td>
+              </tr>
+              <tr>
                 <td><code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a></code></td>
                 <td>
                   <p>A mutable value holder where reads to the <code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#value()">value</a></code> property during the execution of a <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function, the current <code><a href="/reference/kotlin/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> will be subscribed to changes of that value.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/tooling/animation/ToolingState.html">ToolingState</a></code></td>
+                <td>
+                  <p>Tooling can override <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#mutableStateOf(kotlin.Any,androidx.compose.runtime.SnapshotMutationPolicy)">mutableStateOf</a></code> in <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> with <code><a href="/reference/kotlin/androidx/compose/ui/tooling/animation/ToolingState.html">ToolingState</a></code>.</p>
                 </td>
               </tr>
               <tr>
@@ -53,7 +92,7 @@
       </div>
 </devsite-expandable>    </div>
     <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known indirect subclasses
-        <div class="showalways" id="subclasses-indirect"><a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html">ProduceStateScope</a>, <a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotMutableState.html">SnapshotMutableState</a></div>
+        <div class="showalways" id="subclasses-indirect"><a href="/reference/kotlin/androidx/compose/runtime/MutableDoubleState.html">MutableDoubleState</a>, <a href="/reference/kotlin/androidx/compose/runtime/MutableFloatState.html">MutableFloatState</a>, <a href="/reference/kotlin/androidx/compose/runtime/MutableIntState.html">MutableIntState</a>, <a href="/reference/kotlin/androidx/compose/runtime/MutableLongState.html">MutableLongState</a>, <a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html">ProduceStateScope</a>, <a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotMutableState.html">SnapshotMutableState</a></div>
       </span>
       <div id="subclasses-indirect-summary">
         <div class="devsite-table-wrapper">
@@ -63,6 +102,30 @@
               <col>
             </colgroup>
             <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/runtime/MutableDoubleState.html">MutableDoubleState</a></code></td>
+                <td>
+                  <p>A value holder where reads to the <code><a href="/reference/kotlin/androidx/compose/runtime/MutableDoubleState.html#doubleValue()">doubleValue</a></code> property during the execution of a <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function cause the current <code><a href="/reference/kotlin/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> to subscribe to changes of that value.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/runtime/MutableFloatState.html">MutableFloatState</a></code></td>
+                <td>
+                  <p>A value holder where reads to the <code><a href="/reference/kotlin/androidx/compose/runtime/MutableFloatState.html#floatValue()">floatValue</a></code> property during the execution of a <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function cause the current <code><a href="/reference/kotlin/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> to subscribe to changes of that value.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/runtime/MutableIntState.html">MutableIntState</a></code></td>
+                <td>
+                  <p>A value holder where reads to the <code><a href="/reference/kotlin/androidx/compose/runtime/MutableIntState.html#intValue()">intValue</a></code> property during the execution of a <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function cause the current <code><a href="/reference/kotlin/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> to subscribe to changes of that value.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/runtime/MutableLongState.html">MutableLongState</a></code></td>
+                <td>
+                  <p>A value holder where reads to the <code><a href="/reference/kotlin/androidx/compose/runtime/MutableLongState.html#longValue()">longValue</a></code> property during the execution of a <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function cause the current <code><a href="/reference/kotlin/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> to subscribe to changes of that value.</p>
+                </td>
+              </tr>
               <tr>
                 <td><code><a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html">ProduceStateScope</a></code></td>
                 <td>
@@ -107,62 +170,153 @@
     </div>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public properties</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>T</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/State.html#value()">value</a></code></div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>T</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/State.html#value()">value</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Extension functions</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>inline&nbsp;operator T</code></td>
-            <td>
-              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/runtime/State.html#(androidx.compose.runtime.State).getValue(kotlin.Any,kotlin.reflect.KProperty)">getValue</a>(thisObj:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;property:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property/index.html">KProperty</a>&lt;*&gt;)</code></div>
-              <p>Permits property delegation of <code>val</code>s using <code>by</code> for <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code>.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Extension functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/runtime/DoubleState.html">DoubleState</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a>&gt;.<a href="/reference/kotlin/androidx/compose/runtime/State.html#(androidx.compose.runtime.State).asDoubleState()">asDoubleState</a>()</code></div>
+                <p>Converts a <code>State&lt;Double&gt;</code> (as in, a <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> of boxed <code>Double</code>s) into a primitive-backed <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/runtime/FloatState.html">FloatState</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>&gt;.<a href="/reference/kotlin/androidx/compose/runtime/State.html#(androidx.compose.runtime.State).asFloatState()">asFloatState</a>()</code></div>
+                <p>Converts a <code>State&lt;Float&gt;</code> (as in, a <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> of boxed <code>Float</code>s) into a primitive-backed <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/runtime/IntState.html">IntState</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>&gt;.<a href="/reference/kotlin/androidx/compose/runtime/State.html#(androidx.compose.runtime.State).asIntState()">asIntState</a>()</code></div>
+                <p>Converts a <code>State&lt;Int&gt;</code> (as in, a <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> of boxed <code>Int</code>s) into a primitive-backed <code><a href="/reference/kotlin/androidx/compose/runtime/IntState.html">IntState</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/runtime/LongState.html">LongState</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>&gt;.<a href="/reference/kotlin/androidx/compose/runtime/State.html#(androidx.compose.runtime.State).asLongState()">asLongState</a>()</code></div>
+                <p>Converts a <code>State&lt;Long&gt;</code> (as in, a <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> of boxed <code>Long</code>s) into a primitive-backed <code><a href="/reference/kotlin/androidx/compose/runtime/LongState.html">LongState</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>inline&nbsp;operator T</code></td>
+              <td>
+                <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/runtime/State.html#(androidx.compose.runtime.State).getValue(kotlin.Any,kotlin.reflect.KProperty)">getValue</a>(thisObj:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;property:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property/index.html">KProperty</a>&lt;*&gt;)</code></div>
+                <p>Permits property delegation of <code>val</code>s using <code>by</code> for <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
-    <div class="list">
-      <h2>Public properties</h2>
-      <div class="api-item"><a name="getValue()"></a><a name="setValue()"></a><a name="getValue--"></a><a name="setValue--"></a>
-        <h3 class="api-name" id="value()">value</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/State.html#value()">value</a>:&nbsp;T</pre>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getValue()"></a><a name="setValue()"></a><a name="getValue--"></a><a name="setValue--"></a>
+          <h3 class="api-name" id="value()">value</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/State.html#value()">value</a>:&nbsp;T</pre>
+        </div>
       </div>
-    </div>
-    <div class="list">
-      <h2>Extension functions</h2>
-      <div class="api-item"><a name="(androidx.compose.runtime.State).getValue(kotlin.Any, kotlin.reflect.KProperty)"></a><a name="-androidx.compose.runtime.State-.getValue-kotlin.Any-kotlin.reflect.KProperty-"></a><a name="getvalue"></a>
-        <h3 class="api-name" id="(androidx.compose.runtime.State).getValue(kotlin.Any,kotlin.reflect.KProperty)">getValue</h3>
-        <pre class="api-signature no-pretty-print">inline&nbsp;operator&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/runtime/State.html#(androidx.compose.runtime.State).getValue(kotlin.Any,kotlin.reflect.KProperty)">getValue</a>(thisObj:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;property:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property/index.html">KProperty</a>&lt;*&gt;):&nbsp;T</pre>
-        <p>Permits property delegation of <code>val</code>s using <code>by</code> for <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code>.</p>
-        <pre class="prettyprint lang-kotlin">
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Extension functions</h2>
+        <div class="api-item"><a name="-androidx.compose.runtime.State-.asDoubleState--"></a><a name="asdoublestate"></a>
+          <h3 class="api-name" id="(androidx.compose.runtime.State).asDoubleState()">asDoubleState</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a>&gt;.<a href="/reference/kotlin/androidx/compose/runtime/State.html#(androidx.compose.runtime.State).asDoubleState()">asDoubleState</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/DoubleState.html">DoubleState</a></pre>
+          <p>Converts a <code>State&lt;Double&gt;</code> (as in, a <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> of boxed <code>Double</code>s) into a primitive-backed <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></code>. The state will be automatically unboxed to the required primitive type. The returned state is read-only. The returned state will mirror the values of the base state and apply updates in the same way as the receiver defines.</p>
+          <p>On the JVM, this conversion does not avoid the autoboxing that <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></code> attempts to escape, but instead is intended to allow interoperability between components that use either representation of a state of type <code>Double</code>.</p>
+        </div>
+        <div class="api-item"><a name="-androidx.compose.runtime.State-.asFloatState--"></a><a name="asfloatstate"></a>
+          <h3 class="api-name" id="(androidx.compose.runtime.State).asFloatState()">asFloatState</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>&gt;.<a href="/reference/kotlin/androidx/compose/runtime/State.html#(androidx.compose.runtime.State).asFloatState()">asFloatState</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/FloatState.html">FloatState</a></pre>
+          <p>Converts a <code>State&lt;Float&gt;</code> (as in, a <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> of boxed <code>Float</code>s) into a primitive-backed <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code>. The state will be automatically unboxed to the required primitive type. The returned state is read-only. The returned state will mirror the values of the base state and apply updates in the same way as the receiver defines.</p>
+          <p>On the JVM, this conversion does not avoid the autoboxing that <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code> attempts to escape, but instead is intended to allow interoperability between components that use either representation of a state of type <code>Float</code>.</p>
+        </div>
+        <div class="api-item"><a name="-androidx.compose.runtime.State-.asIntState--"></a><a name="asintstate"></a>
+          <h3 class="api-name" id="(androidx.compose.runtime.State).asIntState()">asIntState</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>&gt;.<a href="/reference/kotlin/androidx/compose/runtime/State.html#(androidx.compose.runtime.State).asIntState()">asIntState</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/IntState.html">IntState</a></pre>
+          <p>Converts a <code>State&lt;Int&gt;</code> (as in, a <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> of boxed <code>Int</code>s) into a primitive-backed <code><a href="/reference/kotlin/androidx/compose/runtime/IntState.html">IntState</a></code>. The state will be automatically unboxed to the required primitive type. The returned state is read-only. The returned state will mirror the values of the base state and apply updates in the same way as the receiver defines.</p>
+          <p>On the JVM, this conversion does not avoid the autoboxing that <code><a href="/reference/kotlin/androidx/compose/runtime/IntState.html">IntState</a></code> attempts to escape, but instead is intended to allow interoperability between components that use either representation of a state of type <code>Int</code>.</p>
+        </div>
+        <div class="api-item"><a name="-androidx.compose.runtime.State-.asLongState--"></a><a name="aslongstate"></a>
+          <h3 class="api-name" id="(androidx.compose.runtime.State).asLongState()">asLongState</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>&gt;.<a href="/reference/kotlin/androidx/compose/runtime/State.html#(androidx.compose.runtime.State).asLongState()">asLongState</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/LongState.html">LongState</a></pre>
+          <p>Converts a <code>State&lt;Long&gt;</code> (as in, a <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> of boxed <code>Long</code>s) into a primitive-backed <code><a href="/reference/kotlin/androidx/compose/runtime/LongState.html">LongState</a></code>. The state will be automatically unboxed to the required primitive type. The returned state is read-only. The returned state will mirror the values of the base state and apply updates in the same way as the receiver defines.</p>
+          <p>On the JVM, this conversion does not avoid the autoboxing that <code><a href="/reference/kotlin/androidx/compose/runtime/LongState.html">LongState</a></code> attempts to escape, but instead is intended to allow interoperability between components that use either representation of a state of type <code>Long</code>.</p>
+        </div>
+        <div class="api-item"><a name="(androidx.compose.runtime.State).getValue(kotlin.Any, kotlin.reflect.KProperty)"></a><a name="-androidx.compose.runtime.State-.getValue-kotlin.Any-kotlin.reflect.KProperty-"></a><a name="getvalue"></a>
+          <h3 class="api-name" id="(androidx.compose.runtime.State).getValue(kotlin.Any,kotlin.reflect.KProperty)">getValue</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">inline&nbsp;operator&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/runtime/State.html#(androidx.compose.runtime.State).getValue(kotlin.Any,kotlin.reflect.KProperty)">getValue</a>(thisObj:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;property:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property/index.html">KProperty</a>&lt;*&gt;):&nbsp;T</pre>
+          <p>Permits property delegation of <code>val</code>s using <code>by</code> for <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code>.</p>
+          <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Text
 
@@ -177,7 +331,8 @@ Row {
     // This scope will recompose when currentValue changes
     Text(&quot;Data: $currentValue&quot;)
 }</pre>
+        </div>
       </div>
-    </div>
+    </devsite-filter >
   </body>
 </html>

@@ -39,6 +39,12 @@
             </td>
           </tr>
           <tr>
+            <td><code><a href="/reference/androidx/compose/ui/layout/IntermediateMeasureScope.html">IntermediateMeasureScope</a></code></td>
+            <td>
+              <p><code><a href="/reference/androidx/compose/ui/layout/IntermediateMeasureScope.html">IntermediateMeasureScope</a></code> provides access to lookahead results to allow <code><a href="/reference/androidx/compose/ui/layout/IntermediateMeasureScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">intermediateLayout</a></code> to leverage lookahead results to define intermediate measurements and placements to gradually converge with lookahead.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code><a href="/reference/androidx/compose/ui/layout/IntrinsicMeasurable.html">IntrinsicMeasurable</a></code></td>
             <td>
               <p>A part of the composition that can be measured.</p>
@@ -77,13 +83,19 @@
           <tr>
             <td><code><a href="/reference/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code></td>
             <td>
-              <p><code><a href="/reference/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code> interface holds layout coordinates from both the lookahead calculation and the post-lookahead layout pass.</p>
+              <p><strong>This interface is deprecated.</strong> LookaheadLayoutCoordinates class has been removed. localLookaheadPositionOfcan be achieved in LookaheadScope using LayoutCoordinates.localLookaheadPositionOf(LayoutCoordinates) function.</p>
             </td>
           </tr>
           <tr>
             <td><code><a href="/reference/androidx/compose/ui/layout/LookaheadLayoutScope.html">LookaheadLayoutScope</a></code></td>
             <td>
-              <p><code><a href="/reference/androidx/compose/ui/layout/LookaheadLayoutScope.html">LookaheadLayoutScope</a></code> provides a receiver scope for all (direct and indirect) child layouts in <code><a href="/reference/androidx/compose/ui/layout/package-summary.html#LookaheadLayout(kotlin.Function1,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">LookaheadLayout</a></code>.</p>
+              <p><strong>This interface is deprecated.</strong> LookaheadLayoutScope has been renamed to LookaheadScope</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a></code></td>
+            <td>
+              <p><code><a href="/reference/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a></code> provides a receiver scope for all (direct and indirect) child layouts in <code><a href="/reference/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -149,13 +161,13 @@
           <tr>
             <td><code><a href="/reference/androidx/compose/ui/layout/PinnableContainer.html">PinnableContainer</a></code></td>
             <td>
-              <p>Represents a container which can be pinned by some of its parents.</p>
+              <p>Represents a container which can be pinned when the content of this container is important.</p>
             </td>
           </tr>
           <tr>
             <td><code><a href="/reference/androidx/compose/ui/layout/PinnableContainer.PinnedHandle.html">PinnableContainer.PinnedHandle</a></code></td>
             <td>
-              <p>This is an object returned by <code><a href="/reference/androidx/compose/ui/layout/PinnableContainer.html#pin()">pin</a></code> which allows to unpin the content.</p>
+              <p>This is an object returned by <code><a href="/reference/androidx/compose/ui/layout/PinnableContainer.html#pin()">pin</a></code> which allows to release the pinning.</p>
             </td>
           </tr>
           <tr>
@@ -174,6 +186,12 @@
             <td><code><a href="/reference/androidx/compose/ui/layout/RemeasurementModifier.html">RemeasurementModifier</a></code></td>
             <td>
               <p>A <code><a href="/reference/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a></code> that provides a <code><a href="/reference/androidx/compose/ui/layout/Remeasurement.html">Remeasurement</a></code> object associated with the layout node the modifier is applied to.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/compose/ui/layout/SubcomposeIntermediateMeasureScope.html">SubcomposeIntermediateMeasureScope</a></code></td>
+            <td>
+              <p><code><a href="/reference/androidx/compose/ui/layout/SubcomposeIntermediateMeasureScope.html">SubcomposeIntermediateMeasureScope</a></code> is the receiver scope for the intermediate measurer policy that gets invoked during the intermediate measure pass.</p>
             </td>
           </tr>
           <tr>
@@ -254,7 +272,7 @@
             <td></td>
           </tr>
           <tr>
-            <td><code><a href="/reference/androidx/compose/ui/layout/LookaheadLayoutKt.html">LookaheadLayoutKt</a></code></td>
+            <td><code><a href="/reference/androidx/compose/ui/layout/LookaheadScopeKt.html">LookaheadScopeKt</a></code></td>
             <td></td>
           </tr>
           <tr>

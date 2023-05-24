@@ -9,9 +9,18 @@
       <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/gestures/FlingBehavior.kt+class:androidx.compose.foundation.gestures.FlingBehavior&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>FlingBehavior</h1>
-    <p>
-      <pre>interface <a href="/reference/kotlin/androidx/compose/foundation/gestures/FlingBehavior.html">FlingBehavior</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>interface <a href="/reference/kotlin/androidx/compose/foundation/gestures/FlingBehavior.html">FlingBehavior</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
         <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/foundation/gestures/snapping/SnapFlingBehavior.html">SnapFlingBehavior</a></div>
       </span>
@@ -39,78 +48,88 @@
     <p>When drag has ended with velocity in <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).scrollable(androidx.compose.foundation.gestures.ScrollableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,androidx.compose.foundation.interaction.MutableInteractionSource)">scrollable</a></code>, <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/FlingBehavior.html#(androidx.compose.foundation.gestures.ScrollScope).performFling(kotlin.Float)">performFling</a></code> is invoked to perform fling animation and update state via <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html#scrollBy(kotlin.Float)">ScrollScope.scrollBy</a></code></p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public functions</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>suspend <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html">ScrollScope</a>.<a href="/reference/kotlin/androidx/compose/foundation/gestures/FlingBehavior.html#(androidx.compose.foundation.gestures.ScrollScope).performFling(kotlin.Float)">performFling</a>(initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
-              <p>Perform settling via fling animation with given velocity and suspend until fling has finished.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>suspend <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html">ScrollScope</a>.<a href="/reference/kotlin/androidx/compose/foundation/gestures/FlingBehavior.html#(androidx.compose.foundation.gestures.ScrollScope).performFling(kotlin.Float)">performFling</a>(initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <p>Perform settling via fling animation with given velocity and suspend until fling has finished.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
-    <div class="list">
-      <h2>Public functions</h2>
-      <div class="api-item"><a name="-androidx.compose.foundation.gestures.ScrollScope-.performFling-kotlin.Float-"></a><a name="performfling"></a>
-        <h3 class="api-name" id="(androidx.compose.foundation.gestures.ScrollScope).performFling(kotlin.Float)">performFling</h3>
-        <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html">ScrollScope</a>.<a href="/reference/kotlin/androidx/compose/foundation/gestures/FlingBehavior.html#(androidx.compose.foundation.gestures.ScrollScope).performFling(kotlin.Float)">performFling</a>(initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
-        <p>Perform settling via fling animation with given velocity and suspend until fling has finished.</p>
-        <p>This functions is called with <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html">ScrollScope</a></code> to drive the state change of the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">androidx.compose.foundation.gestures.ScrollableState</a></code> via <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html#scrollBy(kotlin.Float)">ScrollScope.scrollBy</a></code>.</p>
-        <p>This function must return correct velocity left after it is finished flinging in order to guarantee proper nested scroll support.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
-                <td>
-                  <p>velocity available for fling in the orientation specified in <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).scrollable(androidx.compose.foundation.gestures.ScrollableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,androidx.compose.foundation.interaction.MutableInteractionSource)">androidx.compose.foundation.gestures.scrollable</a></code> that invoked this method.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Returns</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
-                <td>
-                  <p>remaining velocity after fling operation has ended</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="-androidx.compose.foundation.gestures.ScrollScope-.performFling-kotlin.Float-"></a><a name="performfling"></a>
+          <h3 class="api-name" id="(androidx.compose.foundation.gestures.ScrollScope).performFling(kotlin.Float)">performFling</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html">ScrollScope</a>.<a href="/reference/kotlin/androidx/compose/foundation/gestures/FlingBehavior.html#(androidx.compose.foundation.gestures.ScrollScope).performFling(kotlin.Float)">performFling</a>(initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+          <p>Perform settling via fling animation with given velocity and suspend until fling has finished.</p>
+          <p>This functions is called with <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html">ScrollScope</a></code> to drive the state change of the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">androidx.compose.foundation.gestures.ScrollableState</a></code> via <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html#scrollBy(kotlin.Float)">ScrollScope.scrollBy</a></code>.</p>
+          <p>This function must return correct velocity left after it is finished flinging in order to guarantee proper nested scroll support.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>initialVelocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>velocity available for fling in the orientation specified in <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).scrollable(androidx.compose.foundation.gestures.ScrollableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,androidx.compose.foundation.interaction.MutableInteractionSource)">androidx.compose.foundation.gestures.scrollable</a></code> that invoked this method.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Returns</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                  <td>
+                    <p>remaining velocity after fling operation has ended</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
+    </devsite-filter >
   </body>
 </html>

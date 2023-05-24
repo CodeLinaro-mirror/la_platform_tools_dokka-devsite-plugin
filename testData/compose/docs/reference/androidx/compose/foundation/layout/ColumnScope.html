@@ -6,12 +6,34 @@
   </head>
   <body>
     <div id="metadata-info-block">
-      <div id="source-link"><a href="https://cs.android.com/search?q=file:-layout/androidx/compose/foundation/layout/Column.kt+class:androidx.compose.foundation.layout.ColumnScope&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/layout/Column.kt+class:androidx.compose.foundation.layout.ColumnScope&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>ColumnScope</h1>
     <p>
-      <pre>@<a href="/reference/androidx/compose/foundation/layout/LayoutScopeMarker.html">LayoutScopeMarker</a><br>public interface <a href="/reference/androidx/compose/foundation/layout/ColumnScope.html">ColumnScope</a></pre>
+      <pre>@<a href="/reference/androidx/compose/foundation/layout/LayoutScopeMarker.html">LayoutScopeMarker</a><br>@<a href="/reference/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a><br>public interface <a href="/reference/androidx/compose/foundation/layout/ColumnScope.html">ColumnScope</a></pre>
     </p>
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
+        <div class="showalways" id="subclasses-direct"><a href="/reference/androidx/compose/foundation/layout/FlowColumnScope.html">FlowColumnScope</a></div>
+      </span>
+      <div id="subclasses-direct-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/foundation/layout/FlowColumnScope.html">FlowColumnScope</a></code></td>
+                <td>
+                  <p>Scope for the children of <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#FlowColumn(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.foundation.layout.Arrangement.Horizontal,kotlin.Int,kotlin.Function1)">FlowColumn</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
     <hr>
     <p>Scope for the children of <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#Column(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,kotlin.Function1)">Column</a></code>.</p>
     <h2>Summary</h2>
@@ -95,8 +117,8 @@
         <p>Align the element horizontally within the <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#Column(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,kotlin.Function1)">Column</a></code>. This alignment will have priority over the <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#Column(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,kotlin.Function1)">Column</a></code>'s <code>horizontalAlignment</code> parameter.</p>
         <p>Example usage:</p>
         <pre class="prettyprint lang-kotlin">
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
@@ -135,8 +157,8 @@ Column(Modifier.fillMaxWidth()) {
         <p>Position the element horizontally such that its <code><a href="/reference/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).alignBy(androidx.compose.ui.layout.VerticalAlignmentLine)">alignmentLine</a></code> aligns with sibling elements also configured to <code><a href="/reference/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).alignBy(androidx.compose.ui.layout.VerticalAlignmentLine)">alignBy</a></code>. <code><a href="/reference/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).alignBy(androidx.compose.ui.layout.VerticalAlignmentLine)">alignBy</a></code> is a form of <code><a href="/reference/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).align(androidx.compose.ui.Alignment.Horizontal)">align</a></code>, so both modifiers will not work together if specified for the same layout. Within a <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#Column(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,kotlin.Function1)">Column</a></code>, all components with <code><a href="/reference/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).alignBy(androidx.compose.ui.layout.VerticalAlignmentLine)">alignBy</a></code> will align horizontally using the specified <code><a href="/reference/androidx/compose/ui/layout/VerticalAlignmentLine.html">VerticalAlignmentLine</a></code>s or values provided using the other <code><a href="/reference/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).alignBy(androidx.compose.ui.layout.VerticalAlignmentLine)">alignBy</a></code> overload, forming a sibling group. At least one element of the sibling group will be placed as it had <code><a href="/reference/androidx/compose/ui/Alignment.Companion.html#Start()">Alignment.Start</a></code> align in <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#Column(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,kotlin.Function1)">Column</a></code>, and the alignment of the other siblings will be then determined such that the alignment lines coincide. Note that if only one element in a <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#Column(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,kotlin.Function1)">Column</a></code> has the <code><a href="/reference/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).alignBy(androidx.compose.ui.layout.VerticalAlignmentLine)">alignBy</a></code> modifier specified the element will be positioned as if it had <code><a href="/reference/androidx/compose/ui/Alignment.Companion.html#Start()">Alignment.Start</a></code> align.</p>
         <p>Example usage:</p>
         <pre class="prettyprint lang-kotlin">
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
 import androidx.compose.ui.layout.Layout
@@ -193,8 +215,8 @@ Column {
         <p>Position the element horizontally such that the alignment line for the content as determined by <code><a href="/reference/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).alignBy(kotlin.Function1)">alignmentLineBlock</a></code> aligns with sibling elements also configured to <code><a href="/reference/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).alignBy(androidx.compose.ui.layout.VerticalAlignmentLine)">alignBy</a></code>. <code><a href="/reference/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).alignBy(androidx.compose.ui.layout.VerticalAlignmentLine)">alignBy</a></code> is a form of <code><a href="/reference/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).align(androidx.compose.ui.Alignment.Horizontal)">align</a></code>, so both modifiers will not work together if specified for the same layout. Within a <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#Column(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,kotlin.Function1)">Column</a></code>, all components with <code><a href="/reference/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).alignBy(androidx.compose.ui.layout.VerticalAlignmentLine)">alignBy</a></code> will align horizontally using the specified <code><a href="/reference/androidx/compose/ui/layout/VerticalAlignmentLine.html">VerticalAlignmentLine</a></code>s or values obtained from <code><a href="/reference/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).alignBy(kotlin.Function1)">alignmentLineBlock</a></code>, forming a sibling group. At least one element of the sibling group will be placed as it had <code><a href="/reference/androidx/compose/ui/Alignment.Companion.html#Start()">Alignment.Start</a></code> align in <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#Column(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,kotlin.Function1)">Column</a></code>, and the alignment of the other siblings will be then determined such that the alignment lines coincide. Note that if only one element in a <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#Column(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,kotlin.Function1)">Column</a></code> has the <code><a href="/reference/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).alignBy(androidx.compose.ui.layout.VerticalAlignmentLine)">alignBy</a></code> modifier specified the element will be positioned as if it had <code><a href="/reference/androidx/compose/ui/Alignment.Companion.html#Start()">Alignment.Start</a></code> align.</p>
         <p>Example usage:</p>
         <pre class="prettyprint lang-kotlin">
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
 
@@ -222,9 +244,10 @@ Column {
         <h3 class="api-name" id="(androidx.compose.ui.Modifier).weight(kotlin.Float,kotlin.Boolean)">weight</h3>
         <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).weight(kotlin.Float,kotlin.Boolean)">weight</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,&nbsp;float&nbsp;weight,&nbsp;boolean&nbsp;fill)</pre>
         <p>Size the element's height proportional to its <code><a href="/reference/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).weight(kotlin.Float,kotlin.Boolean)">weight</a></code> relative to other weighted sibling elements in the <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#Column(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,kotlin.Function1)">Column</a></code>. The parent will divide the vertical space remaining after measuring unweighted child elements and distribute it according to this weight. When <code><a href="/reference/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).weight(kotlin.Float,kotlin.Boolean)">fill</a></code> is true, the element will be forced to occupy the whole height allocated to it. Otherwise, the element is allowed to be smaller - this will result in <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#Column(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,kotlin.Function1)">Column</a></code> being smaller, as the unused allocated height will not be redistributed to other siblings.</p>
+        <p>In a <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#FlowColumn(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.foundation.layout.Arrangement.Horizontal,kotlin.Int,kotlin.Function1)">FlowColumn</a></code>, when a weight is applied to an item, the item is scaled based on the number of weighted items that fall on the column it was placed in.</p>
         <pre class="prettyprint lang-kotlin">
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width

@@ -1,0 +1,108 @@
+<html devsite="true">
+  <head>
+    <title>ToolingState</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/tooling/animation/ToolingState.kt+class:androidx.compose.ui.tooling.animation.ToolingState&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>ToolingState</h1>
+    <p>
+      <pre>public final class <a href="/reference/androidx/compose/ui/tooling/animation/ToolingState.html">ToolingState</a>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; implements <a href="/reference/androidx/compose/runtime/State.html">State</a></pre>
+    </p>
+    <hr>
+    <p>Tooling can override <code><a href="/reference/androidx/compose/runtime/package-summary.html#mutableStateOf(kotlin.Any,androidx.compose.runtime.SnapshotMutationPolicy)">mutableStateOf</a></code> in <code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> with <code><a href="/reference/androidx/compose/ui/tooling/animation/ToolingState.html">ToolingState</a></code>. <code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> should declare a state, which could be private:</p>
+    <pre class="prettyprint">val toolingOverride = remember { mutableStateOf<State<T>?>(null) }</pre>
+    <p>Tooling overrides <code>toolingOverride</code> with</p>
+    <pre class="prettyprint">toolingOverride.value = ToolingState(default)</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/tooling/animation/ToolingState.html#ToolingState(kotlin.Any)">ToolingState</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;default)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/tooling/animation/ToolingState.html#getValue()">getValue</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/tooling/animation/ToolingState.html#setValue(kotlin.Any)">setValue</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;value)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="ToolingState-kotlin.Any-"></a><a name="toolingstate"></a>
+        <h3 class="api-name" id="ToolingState(kotlin.Any)">ToolingState</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/tooling/animation/ToolingState.html#ToolingState(kotlin.Any)">ToolingState</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;default)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;default</code></td>
+                <td>
+                  <p>default value</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="getValue--"></a><a name="getvalue"></a>
+        <h3 class="api-name" id="getValue()">getValue</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;<a href="/reference/androidx/compose/ui/tooling/animation/ToolingState.html#getValue()">getValue</a>()</pre>
+      </div>
+      <div class="api-item"><a name="setValue-kotlin.Any-"></a><a name="setvalue"></a>
+        <h3 class="api-name" id="setValue(kotlin.Any)">setValue</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/tooling/animation/ToolingState.html#setValue(kotlin.Any)">setValue</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;value)</pre>
+      </div>
+    </div>
+  </body>
+</html>

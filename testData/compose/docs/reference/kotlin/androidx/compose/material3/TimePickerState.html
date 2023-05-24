@@ -1,0 +1,286 @@
+<html devsite="true">
+  <head>
+    <title>TimePickerState</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/material3/TimePicker.kt+class:androidx.compose.material3.TimePickerState&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>TimePickerState</h1>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>@<a href="/reference/kotlin/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br>class <a href="/reference/kotlin/androidx/compose/material3/TimePickerState.html">TimePickerState</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
+    <hr>
+    <p>A class to handle state changes in a <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TimePicker(androidx.compose.material3.TimePickerState,androidx.compose.ui.Modifier,androidx.compose.material3.TimePickerColors,androidx.compose.material3.TimePickerLayoutType)">TimePicker</a></code></p>
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Box
+import androidx.compose.material3.Button
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
+import androidx.compose.material3.TimePicker
+import androidx.compose.material3.rememberTimePickerState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+
+var showTimePicker by remember { mutableStateOf(false) }
+val state = rememberTimePickerState()
+val formatter = remember { SimpleDateFormat(&quot;hh:mm a&quot;, Locale.getDefault()) }
+val snackState = remember { SnackbarHostState() }
+val snackScope = rememberCoroutineScope()
+
+Box(propagateMinConstraints = false) {
+    Button(
+        modifier = Modifier.align(Alignment.Center),
+        onClick = { showTimePicker = true }
+    ) { Text(&quot;Set Time&quot;) }
+    SnackbarHost(hostState = snackState)
+}
+
+if (showTimePicker) {
+    TimePickerDialog(
+        onCancel = { showTimePicker = false },
+        onConfirm = {
+            val cal = Calendar.getInstance()
+            cal.set(Calendar.HOUR_OF_DAY, state.hour)
+            cal.set(Calendar.MINUTE, state.minute)
+            cal.isLenient = false
+            snackScope.launch {
+                snackState.showSnackbar(&quot;Entered time: ${formatter.format(cal.time)}&quot;)
+            }
+            showTimePicker = false
+        },
+    ) {
+        TimePicker(state = state)
+    }
+}</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public companion functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a>&lt;<a href="/reference/kotlin/androidx/compose/material3/TimePickerState.html">TimePickerState</a>,&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/TimePickerState.html#Saver()">Saver</a>()</code></div>
+                <p>The default <code><a href="/reference/kotlin/androidx/compose/material3/TimePickerState.html#Saver()">Saver</a></code> implementation for <code><a href="/reference/kotlin/androidx/compose/material3/TimePickerState.html">TimePickerState</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="93%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public constructors</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/TimePickerState.html#TimePickerState(kotlin.Int,kotlin.Int,kotlin.Boolean)">TimePickerState</a>(initialHour:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;initialMinute:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;is24Hour:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>)</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>suspend <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/TimePickerState.html#settle()">settle</a>()</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/TimePickerState.html#hour()">hour</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/TimePickerState.html#is24hour()">is24hour</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/TimePickerState.html#minute()">minute</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public companion functions</h2>
+        <div class="api-item"><a name="Saver--"></a><a name="saver"></a>
+          <h3 class="api-name" id="Saver()">Saver</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/TimePickerState.html#Saver()">Saver</a>():&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a>&lt;<a href="/reference/kotlin/androidx/compose/material3/TimePickerState.html">TimePickerState</a>,&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a>&gt;</pre>
+          <p>The default <code><a href="/reference/kotlin/androidx/compose/material3/TimePickerState.html#Saver()">Saver</a></code> implementation for <code><a href="/reference/kotlin/androidx/compose/material3/TimePickerState.html">TimePickerState</a></code>.</p>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public constructors</h2>
+        <div class="api-item"><a name="TimePickerState(kotlin.Int, kotlin.Int, kotlin.Boolean)"></a><a name="TimePickerState-kotlin.Int-kotlin.Int-kotlin.Boolean-"></a><a name="timepickerstate"></a>
+          <h3 class="api-name" id="TimePickerState(kotlin.Int,kotlin.Int,kotlin.Boolean)">TimePickerState</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/material3/TimePickerState.html#TimePickerState(kotlin.Int,kotlin.Int,kotlin.Boolean)">TimePickerState</a>(initialHour:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;initialMinute:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;is24Hour:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>)</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>initialHour:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                  <td>
+                    <p>starting hour for this state, will be displayed in the time picker when launched Ranges from 0 to 23</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>initialMinute:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                  <td>
+                    <p>starting minute for this state, will be displayed in the time picker when launched. Ranges from 0 to 59</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>is24Hour:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                  <td>
+                    <p>The format for this time picker <code>false</code> for 12 hour format with an AM/PM toggle or <code>true</code> for 24 hour format without toggle.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="settle--"></a><a name="settle"></a>
+          <h3 class="api-name" id="settle()">settle</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/TimePickerState.html#settle()">settle</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getHour()"></a><a name="setHour()"></a><a name="getHour--"></a><a name="setHour--"></a>
+          <h3 class="api-name" id="hour()">hour</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/TimePickerState.html#hour()">hour</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        </div>
+        <div class="api-item"><a name="getIs24hour()"></a><a name="setIs24hour()"></a><a name="getIs24hour--"></a><a name="setIs24hour--"></a>
+          <h3 class="api-name" id="is24hour()">is24hour</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/TimePickerState.html#is24hour()">is24hour</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        </div>
+        <div class="api-item"><a name="getMinute()"></a><a name="setMinute()"></a><a name="getMinute--"></a><a name="setMinute--"></a>
+          <h3 class="api-name" id="minute()">minute</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/TimePickerState.html#minute()">minute</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        </div>
+      </div>
+    </devsite-filter >
+  </body>
+</html>

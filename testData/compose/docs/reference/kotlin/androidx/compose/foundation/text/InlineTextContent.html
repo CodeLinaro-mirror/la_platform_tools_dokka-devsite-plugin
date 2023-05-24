@@ -9,9 +9,18 @@
       <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/text/InlineTextContent.kt+class:androidx.compose.foundation.text.InlineTextContent&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>InlineTextContent</h1>
-    <p>
-      <pre>class <a href="/reference/kotlin/androidx/compose/foundation/text/InlineTextContent.html">InlineTextContent</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>class <a href="/reference/kotlin/androidx/compose/foundation/text/InlineTextContent.html">InlineTextContent</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <hr>
     <p>A data class that stores a composable to be inserted into the text layout.</p>
     <p>Different from a regular composable, a <code><a href="/reference/kotlin/androidx/compose/ui/text/Placeholder.html">Placeholder</a></code> is also needed for text layout to reserve space. In this <code><a href="/reference/kotlin/androidx/compose/foundation/text/InlineTextContent.html#placeholder()">placeholder</a></code>, the size of the content and how it will be aligned within the text line is defined. When the children composable is measured, its size given in <code><a href="/reference/kotlin/androidx/compose/ui/text/Placeholder.html#width()">Placeholder.width</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/text/Placeholder.html#height()">Placeholder.height</a></code> will be converted into <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">androidx.compose.ui.unit.Constraints</a></code> and passed through <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">androidx.compose.ui.layout.Layout</a></code>.</p>
@@ -68,7 +77,7 @@ BasicText(text = text, inlineContent = inlineContent)</pre>
         </thead>
         <tbody class="list">
           <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/package-summary.html#BasicText(kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.text.TextStyle,kotlin.Function1,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,kotlin.Int)">BasicText</a></code></td>
+            <td><code><a href="/reference/kotlin/androidx/compose/foundation/text/package-summary.html#BasicText(kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.text.TextStyle,kotlin.Function1,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,kotlin.Int,androidx.compose.ui.graphics.ColorProducer)">BasicText</a></code></td>
             <td></td>
           </tr>
           <tr>
@@ -80,92 +89,116 @@ BasicText(text = text, inlineContent = inlineContent)</pre>
     </div>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public constructors</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/foundation/text/InlineTextContent.html#InlineTextContent(androidx.compose.ui.text.Placeholder,kotlin.Function1)">InlineTextContent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;placeholder:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Placeholder.html">Placeholder</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;children:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> (<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="93%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public constructors</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/text/InlineTextContent.html#InlineTextContent(androidx.compose.ui.text.Placeholder,kotlin.Function1)">InlineTextContent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;placeholder:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Placeholder.html">Placeholder</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;children:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> (<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public properties</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> (<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/foundation/text/InlineTextContent.html#children()">children</a></code></div>
-              <p>The composable to be inserted into the text layout.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/text/Placeholder.html">Placeholder</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/foundation/text/InlineTextContent.html#placeholder()">placeholder</a></code></div>
-              <p>The setting object that defines the size and vertical alignment of this composable in the text line.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> (<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/text/InlineTextContent.html#children()">children</a></code></div>
+                <p>The composable to be inserted into the text layout.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/text/Placeholder.html">Placeholder</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/text/InlineTextContent.html#placeholder()">placeholder</a></code></div>
+                <p>The setting object that defines the size and vertical alignment of this composable in the text line.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
-    <div class="list">
-      <h2>Public constructors</h2>
-      <div class="api-item"><a name="InlineTextContent(androidx.compose.ui.text.Placeholder, kotlin.Function1)"></a><a name="InlineTextContent-androidx.compose.ui.text.Placeholder-kotlin.Function1-"></a><a name="inlinetextcontent"></a>
-        <h3 class="api-name" id="InlineTextContent(androidx.compose.ui.text.Placeholder,kotlin.Function1)">InlineTextContent</h3>
-        <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/foundation/text/InlineTextContent.html#InlineTextContent(androidx.compose.ui.text.Placeholder,kotlin.Function1)">InlineTextContent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;placeholder:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Placeholder.html">Placeholder</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;children:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> (<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>)</pre>
-      </div>
-    </div>
-    <div class="list">
-      <h2>Public properties</h2>
-      <div class="api-item"><a name="getChildren()"></a><a name="setChildren()"></a><a name="getChildren--"></a><a name="setChildren--"></a>
-        <h3 class="api-name" id="children()">children</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/InlineTextContent.html#children()">children</a>:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> (<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>The composable to be inserted into the text layout. The string parameter passed to it will the alternateText given to <code><a href="/reference/kotlin/androidx/compose/foundation/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).appendInlineContent(kotlin.String,kotlin.String)">appendInlineContent</a></code>.</p>
-      </div>
-      <div class="api-item"><a name="getPlaceholder()"></a><a name="setPlaceholder()"></a><a name="getPlaceholder--"></a><a name="setPlaceholder--"></a>
-        <h3 class="api-name" id="placeholder()">placeholder</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/InlineTextContent.html#placeholder()">placeholder</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Placeholder.html">Placeholder</a></pre>
-        <p>The setting object that defines the size and vertical alignment of this composable in the text line. This is different from the measure of Layout</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/text/Placeholder.html">Placeholder</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public constructors</h2>
+        <div class="api-item"><a name="InlineTextContent(androidx.compose.ui.text.Placeholder, kotlin.Function1)"></a><a name="InlineTextContent-androidx.compose.ui.text.Placeholder-kotlin.Function1-"></a><a name="inlinetextcontent"></a>
+          <h3 class="api-name" id="InlineTextContent(androidx.compose.ui.text.Placeholder,kotlin.Function1)">InlineTextContent</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/foundation/text/InlineTextContent.html#InlineTextContent(androidx.compose.ui.text.Placeholder,kotlin.Function1)">InlineTextContent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;placeholder:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Placeholder.html">Placeholder</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;children:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> (<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>)</pre>
         </div>
       </div>
-    </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getChildren()"></a><a name="setChildren()"></a><a name="getChildren--"></a><a name="setChildren--"></a>
+          <h3 class="api-name" id="children()">children</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/InlineTextContent.html#children()">children</a>:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> (<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>The composable to be inserted into the text layout. The string parameter passed to it will the alternateText given to <code><a href="/reference/kotlin/androidx/compose/foundation/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).appendInlineContent(kotlin.String,kotlin.String)">appendInlineContent</a></code>.</p>
+        </div>
+        <div class="api-item"><a name="getPlaceholder()"></a><a name="setPlaceholder()"></a><a name="getPlaceholder--"></a><a name="setPlaceholder--"></a>
+          <h3 class="api-name" id="placeholder()">placeholder</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/text/InlineTextContent.html#placeholder()">placeholder</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/Placeholder.html">Placeholder</a></pre>
+          <p>The setting object that defines the size and vertical alignment of this composable in the text line. This is different from the measure of Layout</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/text/Placeholder.html">Placeholder</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </devsite-filter >
   </body>
 </html>

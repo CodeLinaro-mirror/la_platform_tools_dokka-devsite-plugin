@@ -6,174 +6,217 @@
   </head>
   <body>
     <div id="metadata-info-block">
-      <div id="source-link"><a href="https://cs.android.com/search?q=file:-text/androidx/compose/ui/text/input/TextInputService.kt+class:androidx.compose.ui.text.input.TextInputService&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/text/input/TextInputService.kt+class:androidx.compose.ui.text.input.TextInputService&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>TextInputService</h1>
-    <p>
-      <pre>open class <a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html">TextInputService</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>open class <a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html">TextInputService</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <hr>
     <p>Handles communication with the IME. Informs about the IME changes via <code><a href="/reference/kotlin/androidx/compose/ui/text/input/EditCommand.html">EditCommand</a></code>s and provides utilities for working with software keyboard.</p>
     <p>This class is responsible for ensuring there is only one open <code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputSession.html">TextInputSession</a></code> which will interact with software keyboards. Start new a TextInputSession by calling <code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#startInput(androidx.compose.ui.text.input.TextFieldValue,androidx.compose.ui.text.input.ImeOptions,kotlin.Function1,kotlin.Function1)">startInput</a></code> and close it with <code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#stopInput(androidx.compose.ui.text.input.TextInputSession)">stopInput</a></code>.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public constructors</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#TextInputService(androidx.compose.ui.text.input.PlatformTextInputService)">TextInputService</a>(platformTextInputService:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputService.html">PlatformTextInputService</a>)</code></div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="93%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public constructors</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#TextInputService(androidx.compose.ui.text.input.PlatformTextInputService)">TextInputService</a>(platformTextInputService:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputService.html">PlatformTextInputService</a>)</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public functions</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><span><del><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#hideSoftwareKeyboard()">hideSoftwareKeyboard</a></del></span>()</code></div>
-              <p><strong>This function is deprecated.</strong> Use SoftwareKeyboardController.hide or TextInputSession.hideSoftwareKeyboard instead.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><span><del><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#showSoftwareKeyboard()">showSoftwareKeyboard</a></del></span>()</code></div>
-              <p><strong>This function is deprecated.</strong> Use SoftwareKeyboardController.show or TextInputSession.showSoftwareKeyboard instead.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>open <a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputSession.html">TextInputSession</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#startInput(androidx.compose.ui.text.input.TextFieldValue,androidx.compose.ui.text.input.ImeOptions,kotlin.Function1,kotlin.Function1)">startInput</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/TextFieldValue.html">TextFieldValue</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;imeOptions:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/ImeOptions.html">ImeOptions</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onEditCommand:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/text/input/EditCommand.html">EditCommand</a>&gt;) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onImeActionPerformed:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
-              <p>Start text input session for given client.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#stopInput(androidx.compose.ui.text.input.TextInputSession)">stopInput</a>(session:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputSession.html">TextInputSession</a>)</code></div>
-              <p>Stop text input session.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><span><del><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#hideSoftwareKeyboard()">hideSoftwareKeyboard</a></del></span>()</code></div>
+                <p><strong>This function is deprecated.</strong> Use SoftwareKeyboardController.hide or TextInputSession.hideSoftwareKeyboard instead.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><span><del><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#showSoftwareKeyboard()">showSoftwareKeyboard</a></del></span>()</code></div>
+                <p><strong>This function is deprecated.</strong> Use SoftwareKeyboardController.show or TextInputSession.showSoftwareKeyboard instead.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputSession.html">TextInputSession</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#startInput(androidx.compose.ui.text.input.TextFieldValue,androidx.compose.ui.text.input.ImeOptions,kotlin.Function1,kotlin.Function1)">startInput</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/TextFieldValue.html">TextFieldValue</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;imeOptions:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/ImeOptions.html">ImeOptions</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onEditCommand:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/text/input/EditCommand.html">EditCommand</a>&gt;) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onImeActionPerformed:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+                <p>Start text input session for given client.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#stopInput(androidx.compose.ui.text.input.TextInputSession)">stopInput</a>(session:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputSession.html">TextInputSession</a>)</code></div>
+                <p>Stop text input session.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
-    <div class="list">
-      <h2>Public constructors</h2>
-      <div class="api-item"><a name="TextInputService-androidx.compose.ui.text.input.PlatformTextInputService-"></a><a name="textinputservice"></a>
-        <h3 class="api-name" id="TextInputService(androidx.compose.ui.text.input.PlatformTextInputService)">TextInputService</h3>
-        <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#TextInputService(androidx.compose.ui.text.input.PlatformTextInputService)">TextInputService</a>(platformTextInputService:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputService.html">PlatformTextInputService</a>)</pre>
-      </div>
-    </div>
-    <div class="list">
-      <h2>Public functions</h2>
-      <div class="api-item"><a name="hideSoftwareKeyboard--"></a><a name="hidesoftwarekeyboard"></a>
-        <h3 class="api-name" id="hideSoftwareKeyboard()">hideSoftwareKeyboard</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<span><del><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#hideSoftwareKeyboard()">hideSoftwareKeyboard</a></del></span>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <aside class="caution"><strong>This function is deprecated.</strong><br>Use SoftwareKeyboardController.hide or TextInputSession.hideSoftwareKeyboard instead.</aside>
-        <p>Hide onscreen keyboard.</p>
-      </div>
-      <div class="api-item"><a name="showSoftwareKeyboard--"></a><a name="showsoftwarekeyboard"></a>
-        <h3 class="api-name" id="showSoftwareKeyboard()">showSoftwareKeyboard</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<span><del><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#showSoftwareKeyboard()">showSoftwareKeyboard</a></del></span>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <aside class="caution"><strong>This function is deprecated.</strong><br>Use SoftwareKeyboardController.show or TextInputSession.showSoftwareKeyboard instead.</aside>
-        <p>Request showing onscreen keyboard.</p>
-        <p>This call will be ignored if there is not an open <code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputSession.html">TextInputSession</a></code>, as it means there is nothing that will accept typed input. The most common way to open a TextInputSession is to set the focus to an editable text composable.</p>
-        <p>There is no guarantee that the keyboard will be shown. The software keyboard or system service may silently ignore this request.</p>
-      </div>
-      <div class="api-item"><a name="startInput(androidx.compose.ui.text.input.TextFieldValue, androidx.compose.ui.text.input.ImeOptions, kotlin.Function1, kotlin.Function1)"></a><a name="startInput-androidx.compose.ui.text.input.TextFieldValue-androidx.compose.ui.text.input.ImeOptions-kotlin.Function1-kotlin.Function1-"></a><a name="startinput"></a>
-        <h3 class="api-name" id="startInput(androidx.compose.ui.text.input.TextFieldValue,androidx.compose.ui.text.input.ImeOptions,kotlin.Function1,kotlin.Function1)">startInput</h3>
-        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#startInput(androidx.compose.ui.text.input.TextFieldValue,androidx.compose.ui.text.input.ImeOptions,kotlin.Function1,kotlin.Function1)">startInput</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/TextFieldValue.html">TextFieldValue</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;imeOptions:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/ImeOptions.html">ImeOptions</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onEditCommand:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/text/input/EditCommand.html">EditCommand</a>&gt;) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onImeActionPerformed:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputSession.html">TextInputSession</a></pre>
-        <p>Start text input session for given client.</p>
-        <p>If there is a previous <code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputSession.html">TextInputSession</a></code> open, it will immediately be closed by this call to <code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#startInput(androidx.compose.ui.text.input.TextFieldValue,androidx.compose.ui.text.input.ImeOptions,kotlin.Function1,kotlin.Function1)">startInput</a></code>.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>value:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/TextFieldValue.html">TextFieldValue</a></code></td>
-                <td>
-                  <p>initial <code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextFieldValue.html">TextFieldValue</a></code></p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>imeOptions:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/ImeOptions.html">ImeOptions</a></code></td>
-                <td>
-                  <p>IME configuration</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>onEditCommand:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/text/input/EditCommand.html">EditCommand</a>&gt;) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-                <td>
-                  <p>callback to inform about changes requested by IME</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>onImeActionPerformed:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-                <td>
-                  <p>callback to inform if an IME action such as <code><a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html#Done()">ImeAction.Done</a></code> etc occurred.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public constructors</h2>
+        <div class="api-item"><a name="TextInputService-androidx.compose.ui.text.input.PlatformTextInputService-"></a><a name="textinputservice"></a>
+          <h3 class="api-name" id="TextInputService(androidx.compose.ui.text.input.PlatformTextInputService)">TextInputService</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#TextInputService(androidx.compose.ui.text.input.PlatformTextInputService)">TextInputService</a>(platformTextInputService:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/PlatformTextInputService.html">PlatformTextInputService</a>)</pre>
         </div>
       </div>
-      <div class="api-item"><a name="stopInput-androidx.compose.ui.text.input.TextInputSession-"></a><a name="stopinput"></a>
-        <h3 class="api-name" id="stopInput(androidx.compose.ui.text.input.TextInputSession)">stopInput</h3>
-        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#stopInput(androidx.compose.ui.text.input.TextInputSession)">stopInput</a>(session:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputSession.html">TextInputSession</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Stop text input session.</p>
-        <p>If the <code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#stopInput(androidx.compose.ui.text.input.TextInputSession)">session</a></code> is not the currently open session, no action will occur.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>session:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputSession.html">TextInputSession</a></code></td>
-                <td>
-                  <p>the session returned by <code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#startInput(androidx.compose.ui.text.input.TextFieldValue,androidx.compose.ui.text.input.ImeOptions,kotlin.Function1,kotlin.Function1)">startInput</a></code> call.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="hideSoftwareKeyboard--"></a><a name="hidesoftwarekeyboard"></a>
+          <h3 class="api-name" id="hideSoftwareKeyboard()">hideSoftwareKeyboard</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<span><del><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#hideSoftwareKeyboard()">hideSoftwareKeyboard</a></del></span>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <aside class="caution"><strong>This function is deprecated.</strong><br>Use SoftwareKeyboardController.hide or TextInputSession.hideSoftwareKeyboard instead.</aside>
+          <p>Hide onscreen keyboard.</p>
+        </div>
+        <div class="api-item"><a name="showSoftwareKeyboard--"></a><a name="showsoftwarekeyboard"></a>
+          <h3 class="api-name" id="showSoftwareKeyboard()">showSoftwareKeyboard</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<span><del><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#showSoftwareKeyboard()">showSoftwareKeyboard</a></del></span>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <aside class="caution"><strong>This function is deprecated.</strong><br>Use SoftwareKeyboardController.show or TextInputSession.showSoftwareKeyboard instead.</aside>
+          <p>Request showing onscreen keyboard.</p>
+          <p>This call will be ignored if there is not an open <code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputSession.html">TextInputSession</a></code>, as it means there is nothing that will accept typed input. The most common way to open a TextInputSession is to set the focus to an editable text composable.</p>
+          <p>There is no guarantee that the keyboard will be shown. The software keyboard or system service may silently ignore this request.</p>
+        </div>
+        <div class="api-item"><a name="startInput(androidx.compose.ui.text.input.TextFieldValue, androidx.compose.ui.text.input.ImeOptions, kotlin.Function1, kotlin.Function1)"></a><a name="startInput-androidx.compose.ui.text.input.TextFieldValue-androidx.compose.ui.text.input.ImeOptions-kotlin.Function1-kotlin.Function1-"></a><a name="startinput"></a>
+          <h3 class="api-name" id="startInput(androidx.compose.ui.text.input.TextFieldValue,androidx.compose.ui.text.input.ImeOptions,kotlin.Function1,kotlin.Function1)">startInput</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#startInput(androidx.compose.ui.text.input.TextFieldValue,androidx.compose.ui.text.input.ImeOptions,kotlin.Function1,kotlin.Function1)">startInput</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/TextFieldValue.html">TextFieldValue</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;imeOptions:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/ImeOptions.html">ImeOptions</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onEditCommand:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/text/input/EditCommand.html">EditCommand</a>&gt;) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;onImeActionPerformed:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputSession.html">TextInputSession</a></pre>
+          <p>Start text input session for given client.</p>
+          <p>If there is a previous <code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputSession.html">TextInputSession</a></code> open, it will immediately be closed by this call to <code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#startInput(androidx.compose.ui.text.input.TextFieldValue,androidx.compose.ui.text.input.ImeOptions,kotlin.Function1,kotlin.Function1)">startInput</a></code>.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>value:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/TextFieldValue.html">TextFieldValue</a></code></td>
+                  <td>
+                    <p>initial <code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextFieldValue.html">TextFieldValue</a></code></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>imeOptions:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/ImeOptions.html">ImeOptions</a></code></td>
+                  <td>
+                    <p>IME configuration</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>onEditCommand:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/text/input/EditCommand.html">EditCommand</a>&gt;) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                  <td>
+                    <p>callback to inform about changes requested by IME</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>onImeActionPerformed:&nbsp;(<a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                  <td>
+                    <p>callback to inform if an IME action such as <code><a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html#Done()">ImeAction.Done</a></code> etc occurred.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="stopInput-androidx.compose.ui.text.input.TextInputSession-"></a><a name="stopinput"></a>
+          <h3 class="api-name" id="stopInput(androidx.compose.ui.text.input.TextInputSession)">stopInput</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#stopInput(androidx.compose.ui.text.input.TextInputSession)">stopInput</a>(session:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputSession.html">TextInputSession</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Stop text input session.</p>
+          <p>If the <code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#stopInput(androidx.compose.ui.text.input.TextInputSession)">session</a></code> is not the currently open session, no action will occur.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>session:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputSession.html">TextInputSession</a></code></td>
+                  <td>
+                    <p>the session returned by <code><a href="/reference/kotlin/androidx/compose/ui/text/input/TextInputService.html#startInput(androidx.compose.ui.text.input.TextFieldValue,androidx.compose.ui.text.input.ImeOptions,kotlin.Function1,kotlin.Function1)">startInput</a></code> call.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
+    </devsite-filter >
   </body>
 </html>

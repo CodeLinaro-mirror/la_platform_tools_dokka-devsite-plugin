@@ -9,189 +9,252 @@
       <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/runtime/snapshots/SnapshotStateObserver.kt+class:androidx.compose.runtime.snapshots.SnapshotStateObserver&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>SnapshotStateObserver</h1>
-    <p>
-      <pre>class <a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html">SnapshotStateObserver</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>class <a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html">SnapshotStateObserver</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <hr>
     <p>Helper class to efficiently observe snapshot state reads. See <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">observeReads</a></code> for more details.</p>
     <p>NOTE: This class is not thread-safe, so implementations should not reuse observer between different threads to avoid race conditions.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public constructors</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#SnapshotStateObserver(kotlin.Function1)">SnapshotStateObserver</a>(onChangedExecutor:&nbsp;(callback:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="93%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public constructors</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#SnapshotStateObserver(kotlin.Function1)">SnapshotStateObserver</a>(onChangedExecutor:&nbsp;(callback:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public functions</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clear()">clear</a>()</code></div>
-              <p>Remove all observations.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clear(kotlin.Any)">clear</a>(scope:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)</code></div>
-              <p>Clears all state read observations for a given <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clear(kotlin.Any)">scope</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clearIf(kotlin.Function1)">clearIf</a>(predicate:&nbsp;(scope:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>)</code></div>
-              <p>Remove observations using <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clearIf(kotlin.Function1)">predicate</a></code> to identify scopes to be removed.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code>@<a href="/reference/kotlin/org/jetbrains/annotations/TestOnly.html">TestOnly</a><br><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#notifyChanges(kotlin.collections.Set,androidx.compose.runtime.snapshots.Snapshot)">notifyChanges</a>(changes:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;,&nbsp;snapshot:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>)</code></div>
-              <p>This method is only used for testing.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">observeReads</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;scope:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;onValueChangedForScope:&nbsp;(T) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
-              <p>Executes <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">block</a></code>, observing state object reads during its execution.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#start()">start</a>()</code></div>
-              <p>Starts watching for state commits.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#stop()">stop</a>()</code></div>
-              <p>Stops watching for state commits.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><span><del><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#withNoObservations(kotlin.Function0)">withNoObservations</a></del></span>(block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
-              <p><strong>This function is deprecated.</strong> Replace with Snapshot.withoutReadObservation()</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clear()">clear</a>()</code></div>
+                <p>Remove all observations.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clear(kotlin.Any)">clear</a>(scope:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)</code></div>
+                <p>Clears all state read observations for a given <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clear(kotlin.Any)">scope</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clearIf(kotlin.Function1)">clearIf</a>(predicate:&nbsp;(scope:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>)</code></div>
+                <p>Remove observations using <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clearIf(kotlin.Function1)">predicate</a></code> to identify scopes to be removed.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/TestOnly.html">TestOnly</a><br><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#notifyChanges(kotlin.collections.Set,androidx.compose.runtime.snapshots.Snapshot)">notifyChanges</a>(changes:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;,&nbsp;snapshot:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>)</code></div>
+                <p>This method is only used for testing.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">observeReads</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;scope:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;onValueChangedForScope:&nbsp;(T) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+                <p>Executes <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">block</a></code>, observing state object reads during its execution.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#start()">start</a>()</code></div>
+                <p>Starts watching for state commits.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#stop()">stop</a>()</code></div>
+                <p>Stops watching for state commits.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><span><del><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#withNoObservations(kotlin.Function0)">withNoObservations</a></del></span>(block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+                <p><strong>This function is deprecated.</strong> Replace with Snapshot.withoutReadObservation()</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
-    <div class="list">
-      <h2>Public constructors</h2>
-      <div class="api-item"><a name="SnapshotStateObserver-kotlin.Function1-"></a><a name="snapshotstateobserver"></a>
-        <h3 class="api-name" id="SnapshotStateObserver(kotlin.Function1)">SnapshotStateObserver</h3>
-        <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#SnapshotStateObserver(kotlin.Function1)">SnapshotStateObserver</a>(onChangedExecutor:&nbsp;(callback:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</pre>
-      </div>
-    </div>
-    <div class="list">
-      <h2>Public functions</h2>
-      <div class="api-item"><a name="clear--"></a><a name="clear"></a>
-        <h3 class="api-name" id="clear()">clear</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clear()">clear</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Remove all observations.</p>
-      </div>
-      <div class="api-item"><a name="clear-kotlin.Any-"></a><a name="clear"></a>
-        <h3 class="api-name" id="clear(kotlin.Any)">clear</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clear(kotlin.Any)">clear</a>(scope:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Clears all state read observations for a given <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clear(kotlin.Any)">scope</a></code>. This clears values for all <code>onValueChangedForScope</code> callbacks passed in <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">observeReads</a></code>.</p>
-      </div>
-      <div class="api-item"><a name="clearIf-kotlin.Function1-"></a><a name="clearif"></a>
-        <h3 class="api-name" id="clearIf(kotlin.Function1)">clearIf</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clearIf(kotlin.Function1)">clearIf</a>(predicate:&nbsp;(scope:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Remove observations using <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clearIf(kotlin.Function1)">predicate</a></code> to identify scopes to be removed. This is used when a scope is no longer in the hierarchy and should not receive any callbacks.</p>
-      </div>
-      <div class="api-item"><a name="notifyChanges(kotlin.collections.Set, androidx.compose.runtime.snapshots.Snapshot)"></a><a name="notifyChanges-kotlin.collections.Set-androidx.compose.runtime.snapshots.Snapshot-"></a><a name="notifychanges"></a>
-        <h3 class="api-name" id="notifyChanges(kotlin.collections.Set,androidx.compose.runtime.snapshots.Snapshot)">notifyChanges</h3>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/org/jetbrains/annotations/TestOnly.html">TestOnly</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#notifyChanges(kotlin.collections.Set,androidx.compose.runtime.snapshots.Snapshot)">notifyChanges</a>(changes:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;,&nbsp;snapshot:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>This method is only used for testing. It notifies that <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#notifyChanges(kotlin.collections.Set,androidx.compose.runtime.snapshots.Snapshot)">changes</a></code> have been made on <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#notifyChanges(kotlin.collections.Set,androidx.compose.runtime.snapshots.Snapshot)">snapshot</a></code>.</p>
-      </div>
-      <div class="api-item"><a name="observeReads(kotlin.Any, kotlin.Function1, kotlin.Function0)"></a><a name="observeReads-kotlin.Any-kotlin.Function1-kotlin.Function0-"></a><a name="observereads"></a>
-        <h3 class="api-name" id="observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">observeReads</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">observeReads</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;scope:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;onValueChangedForScope:&nbsp;(T) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Executes <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">block</a></code>, observing state object reads during its execution.</p>
-        <p>The <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">scope</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">onValueChangedForScope</a></code> are associated with any values that are read so that when those values change, <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">onValueChangedForScope</a></code> will be called with the <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">scope</a></code> parameter.</p>
-        <p>Observation can be paused with <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#withoutReadObservation(kotlin.Function0)">Snapshot.withoutReadObservation</a></code>.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>scope:&nbsp;T</code></td>
-                <td>
-                  <p>value associated with the observed scope.</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>onValueChangedForScope:&nbsp;(T) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-                <td>
-                  <p>is called with the <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">scope</a></code> when value read within <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">block</a></code> has been changed. For repeated observations, it is more performant to pass the same instance of the callback, as <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observedScopeMaps()">observedScopeMaps</a></code> grows with each new callback instance.</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-                <td>
-                  <p>to observe reads within.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public constructors</h2>
+        <div class="api-item"><a name="SnapshotStateObserver-kotlin.Function1-"></a><a name="snapshotstateobserver"></a>
+          <h3 class="api-name" id="SnapshotStateObserver(kotlin.Function1)">SnapshotStateObserver</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#SnapshotStateObserver(kotlin.Function1)">SnapshotStateObserver</a>(onChangedExecutor:&nbsp;(callback:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</pre>
         </div>
       </div>
-      <div class="api-item"><a name="start--"></a><a name="start"></a>
-        <h3 class="api-name" id="start()">start</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#start()">start</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Starts watching for state commits.</p>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="clear--"></a><a name="clear"></a>
+          <h3 class="api-name" id="clear()">clear</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clear()">clear</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Remove all observations.</p>
+        </div>
+        <div class="api-item"><a name="clear-kotlin.Any-"></a><a name="clear"></a>
+          <h3 class="api-name" id="clear(kotlin.Any)">clear</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clear(kotlin.Any)">clear</a>(scope:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Clears all state read observations for a given <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clear(kotlin.Any)">scope</a></code>. This clears values for all <code>onValueChangedForScope</code> callbacks passed in <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">observeReads</a></code>.</p>
+        </div>
+        <div class="api-item"><a name="clearIf-kotlin.Function1-"></a><a name="clearif"></a>
+          <h3 class="api-name" id="clearIf(kotlin.Function1)">clearIf</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clearIf(kotlin.Function1)">clearIf</a>(predicate:&nbsp;(scope:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Remove observations using <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#clearIf(kotlin.Function1)">predicate</a></code> to identify scopes to be removed. This is used when a scope is no longer in the hierarchy and should not receive any callbacks.</p>
+        </div>
+        <div class="api-item"><a name="notifyChanges(kotlin.collections.Set, androidx.compose.runtime.snapshots.Snapshot)"></a><a name="notifyChanges-kotlin.collections.Set-androidx.compose.runtime.snapshots.Snapshot-"></a><a name="notifychanges"></a>
+          <h3 class="api-name" id="notifyChanges(kotlin.collections.Set,androidx.compose.runtime.snapshots.Snapshot)">notifyChanges</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/TestOnly.html">TestOnly</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#notifyChanges(kotlin.collections.Set,androidx.compose.runtime.snapshots.Snapshot)">notifyChanges</a>(changes:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;,&nbsp;snapshot:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>This method is only used for testing. It notifies that <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#notifyChanges(kotlin.collections.Set,androidx.compose.runtime.snapshots.Snapshot)">changes</a></code> have been made on <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#notifyChanges(kotlin.collections.Set,androidx.compose.runtime.snapshots.Snapshot)">snapshot</a></code>.</p>
+        </div>
+        <div class="api-item"><a name="observeReads(kotlin.Any, kotlin.Function1, kotlin.Function0)"></a><a name="observeReads-kotlin.Any-kotlin.Function1-kotlin.Function0-"></a><a name="observereads"></a>
+          <h3 class="api-name" id="observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">observeReads</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">observeReads</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;scope:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;onValueChangedForScope:&nbsp;(T) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Executes <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">block</a></code>, observing state object reads during its execution.</p>
+          <p>The <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">scope</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">onValueChangedForScope</a></code> are associated with any values that are read so that when those values change, <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">onValueChangedForScope</a></code> will be called with the <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">scope</a></code> parameter.</p>
+          <p>Observation can be paused with <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#withoutReadObservation(kotlin.Function0)">Snapshot.withoutReadObservation</a></code>.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>scope:&nbsp;T</code></td>
+                  <td>
+                    <p>value associated with the observed scope.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>onValueChangedForScope:&nbsp;(T) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                  <td>
+                    <p>is called with the <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">scope</a></code> when value read within <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">block</a></code> has been changed. For repeated observations, it is more performant to pass the same instance of the callback, as <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observedScopeMaps()">observedScopeMaps</a></code> grows with each new callback instance.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                  <td>
+                    <p>to observe reads within.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="start--"></a><a name="start"></a>
+          <h3 class="api-name" id="start()">start</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#start()">start</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Starts watching for state commits.</p>
+        </div>
+        <div class="api-item"><a name="stop--"></a><a name="stop"></a>
+          <h3 class="api-name" id="stop()">stop</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#stop()">stop</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Stops watching for state commits.</p>
+        </div>
+        <div class="api-item"><a name="withNoObservations-kotlin.Function0-"></a><a name="withnoobservations"></a>
+          <h3 class="api-name" id="withNoObservations(kotlin.Function0)">withNoObservations</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<span><del><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#withNoObservations(kotlin.Function0)">withNoObservations</a></del></span>(block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <aside class="caution"><strong>This function is deprecated.</strong><br>Replace with Snapshot.withoutReadObservation()</aside>
+          <p>Stops observing state object reads while executing <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#withNoObservations(kotlin.Function0)">block</a></code>. State object reads may be restarted by calling <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">observeReads</a></code> inside <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#withNoObservations(kotlin.Function0)">block</a></code>.</p>
+        </div>
       </div>
-      <div class="api-item"><a name="stop--"></a><a name="stop"></a>
-        <h3 class="api-name" id="stop()">stop</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#stop()">stop</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Stops watching for state commits.</p>
-      </div>
-      <div class="api-item"><a name="withNoObservations-kotlin.Function0-"></a><a name="withnoobservations"></a>
-        <h3 class="api-name" id="withNoObservations(kotlin.Function0)">withNoObservations</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<span><del><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#withNoObservations(kotlin.Function0)">withNoObservations</a></del></span>(block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <aside class="caution"><strong>This function is deprecated.</strong><br>Replace with Snapshot.withoutReadObservation()</aside>
-        <p>Stops observing state object reads while executing <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#withNoObservations(kotlin.Function0)">block</a></code>. State object reads may be restarted by calling <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#observeReads(kotlin.Any,kotlin.Function1,kotlin.Function0)">observeReads</a></code> inside <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html#withNoObservations(kotlin.Function0)">block</a></code>.</p>
-      </div>
-    </div>
+    </devsite-filter >
   </body>
 </html>

@@ -9,9 +9,18 @@
       <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/runtime/Composition.kt+class:androidx.compose.runtime.ControlledComposition&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>ControlledComposition</h1>
-    <p>
-      <pre>interface <a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html">ControlledComposition</a> : <a href="/reference/kotlin/androidx/compose/runtime/Composition.html">Composition</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>interface <a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html">ControlledComposition</a> : <a href="/reference/kotlin/androidx/compose/runtime/Composition.html">Composition</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <hr>
     <p>A controlled composition is a <code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html">Composition</a></code> that can be directly controlled by the caller.</p>
     <p>This is the interface used by the <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> to control how and when a composition is invalidated and subsequently recomposed.</p>
@@ -37,175 +46,238 @@
     </div>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public functions</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a>()</code></div>
-              <p>Apply the changes calculated during <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#setContent(kotlin.Function0)">setContent</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyLateChanges()">applyLateChanges</a>()</code></div>
-              <p>Apply change that must occur after the main bulk of changes have been applied.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#changesApplied()">changesApplied</a>()</code></div>
-              <p>Call when all changes, including late changes, have been applied.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a>(content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
-              <p>Called by the parent composition in response to calling <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#setContent(kotlin.Function0)">setContent</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>R</code></td>
-            <td>
-              <div><code>&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#delegateInvalidations(androidx.compose.runtime.ControlledComposition,kotlin.Int,kotlin.Function0)">delegateInvalidations</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;to:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html">ControlledComposition</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;groupIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> R<br>)</code></div>
-              <p>Temporarily delegate all invalidations sent to this composition to the <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#delegateInvalidations(androidx.compose.runtime.ControlledComposition,kotlin.Int,kotlin.Function0)">to</a></code> composition.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#disposeUnusedMovableContent(androidx.compose.runtime.MovableContentState)">disposeUnusedMovableContent</a>(state:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MovableContentState.html">MovableContentState</a>)</code></div>
-              <p>Dispose the value state that is no longer needed.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#insertMovableContent(kotlin.collections.List)">insertMovableContent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;references:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a>&lt;<a href="/reference/kotlin/androidx/compose/runtime/MovableContentStateReference.html">MovableContentStateReference</a>,&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MovableContentStateReference.html">MovableContentStateReference</a>?&gt;&gt;<br>)</code></div>
-              <p>Insert the given list of movable content with their paired state in potentially a different composition.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#invalidateAll()">invalidateAll</a>()</code></div>
-              <p>Invalidate all invalidation scopes.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#observesAnyOf(kotlin.collections.Set)">observesAnyOf</a>(values:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;)</code></div>
-              <p>Returns true if any of the object instances in <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#observesAnyOf(kotlin.collections.Set)">values</a></code> is observed by this composition.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#prepareCompose(kotlin.Function0)">prepareCompose</a>(block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
-              <p>Execute <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#prepareCompose(kotlin.Function0)">block</a></code> with <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#isComposing()">isComposing</a></code> set temporarily to <code>true</code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a>()</code></div>
-              <p>Recompose the composition to calculate any changes necessary to the composition state and the tree maintained by the applier.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recordModificationsOf(kotlin.collections.Set)">recordModificationsOf</a>(values:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;)</code></div>
-              <p>Record the values that were modified after the last call to <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code> or from the initial call to <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recordReadOf(kotlin.Any)">recordReadOf</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)</code></div>
-              <p>Record that <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recordReadOf(kotlin.Any)">value</a></code> has been read.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recordWriteOf(kotlin.Any)">recordWriteOf</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)</code></div>
-              <p>Record that <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recordWriteOf(kotlin.Any)">value</a></code> has been modified.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#verifyConsistent()">verifyConsistent</a>()</code></div>
-              <p>Throws an exception if the internal state of the composer has been corrupted and is no longer consistent.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a>()</code></div>
+                <p>Apply the changes calculated during <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#setContent(kotlin.Function0)">setContent</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyLateChanges()">applyLateChanges</a>()</code></div>
+                <p>Apply change that must occur after the main bulk of changes have been applied.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#changesApplied()">changesApplied</a>()</code></div>
+                <p>Call when all changes, including late changes, have been applied.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a>(content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+                <p>Called by the parent composition in response to calling <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#setContent(kotlin.Function0)">setContent</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>R</code></td>
+              <td>
+                <div><code>&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#delegateInvalidations(androidx.compose.runtime.ControlledComposition,kotlin.Int,kotlin.Function0)">delegateInvalidations</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;to:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html">ControlledComposition</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;groupIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> R<br>)</code></div>
+                <p>Temporarily delegate all invalidations sent to this composition to the <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#delegateInvalidations(androidx.compose.runtime.ControlledComposition,kotlin.Int,kotlin.Function0)">to</a></code> composition.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#disposeUnusedMovableContent(androidx.compose.runtime.MovableContentState)">disposeUnusedMovableContent</a>(state:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MovableContentState.html">MovableContentState</a>)</code></div>
+                <p>Dispose the value state that is no longer needed.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#insertMovableContent(kotlin.collections.List)">insertMovableContent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;references:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a>&lt;<a href="/reference/kotlin/androidx/compose/runtime/MovableContentStateReference.html">MovableContentStateReference</a>,&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MovableContentStateReference.html">MovableContentStateReference</a>?&gt;&gt;<br>)</code></div>
+                <p>Insert the given list of movable content with their paired state in potentially a different composition.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#invalidateAll()">invalidateAll</a>()</code></div>
+                <p>Invalidate all invalidation scopes.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#observesAnyOf(kotlin.collections.Set)">observesAnyOf</a>(values:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;)</code></div>
+                <p>Returns true if any of the object instances in <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#observesAnyOf(kotlin.collections.Set)">values</a></code> is observed by this composition.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#prepareCompose(kotlin.Function0)">prepareCompose</a>(block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+                <p>Execute <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#prepareCompose(kotlin.Function0)">block</a></code> with <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#isComposing()">isComposing</a></code> set temporarily to <code>true</code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a>()</code></div>
+                <p>Recompose the composition to calculate any changes necessary to the composition state and the tree maintained by the applier.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recordModificationsOf(kotlin.collections.Set)">recordModificationsOf</a>(values:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;)</code></div>
+                <p>Record the values that were modified after the last call to <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code> or from the initial call to <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recordReadOf(kotlin.Any)">recordReadOf</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)</code></div>
+                <p>Record that <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recordReadOf(kotlin.Any)">value</a></code> has been read.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recordWriteOf(kotlin.Any)">recordWriteOf</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)</code></div>
+                <p>Record that <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recordWriteOf(kotlin.Any)">value</a></code> has been modified.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#verifyConsistent()">verifyConsistent</a>()</code></div>
+                <p>Throws an exception if the internal state of the composer has been corrupted and is no longer consistent.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public properties</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#hasPendingChanges()">hasPendingChanges</a></code></div>
-              <p>True after <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code> has been called and <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a></code> is expected as the next call.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#isComposing()">isComposing</a></code></div>
-              <p>True if the composition is actively compositing such as when actively in a call to <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code>.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#hasPendingChanges()">hasPendingChanges</a></code></div>
+                <p>True after <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code> has been called and <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a></code> is expected as the next call.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#isComposing()">isComposing</a></code></div>
+                <p>True if the composition is actively compositing such as when actively in a call to <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Extension properties</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code></td>
-            <td>
-              <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/ExperimentalComposeApi.html">ExperimentalComposeApi</a><br><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html">ControlledComposition</a>.<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#(androidx.compose.runtime.ControlledComposition).recomposeCoroutineContext()">recomposeCoroutineContext</a></code></div>
-              <p>The <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code> that should be used to perform concurrent recompositions of this <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html">ControlledComposition</a></code> when used in an environment supporting concurrent composition.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Extension properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/ExperimentalComposeApi.html">ExperimentalComposeApi</a><br><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html">ControlledComposition</a>.<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#(androidx.compose.runtime.ControlledComposition).recomposeCoroutineContext()">recomposeCoroutineContext</a></code></div>
+                <p>The <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code> that should be used to perform concurrent recompositions of this <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html">ControlledComposition</a></code> when used in an environment supporting concurrent composition.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive" id="inhmethods">
@@ -218,28 +290,37 @@
           <tr>
             <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/runtime/Composition.html">androidx.compose.runtime.Composition</a></span>
               <div class="devsite-table-wrapper">
-                <table class="responsive">
-                  <colgroup>
-                    <col width="40%">
-                    <col>
-                  </colgroup>
-                  <tbody class="list">
-                    <tr>
-                      <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-                      <td>
-                        <div><code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html#dispose()">dispose</a>()</code></div>
-                        <p>Clear the hierarchy that was created from the composition and release resources allocated for composition.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-                      <td>
-                        <div><code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html#setContent(kotlin.Function0)">setContent</a>(content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
-                        <p>Update the composition with the content described by the <code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html#setContent(kotlin.Function0)">content</a></code> composable.</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html#dispose()">dispose</a>()</code></div>
+                          <p>Clear the hierarchy that was created from the composition and release resources allocated for composition.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html#setContent(kotlin.Function0)">setContent</a>(content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+                          <p>Update the composition with the content described by the <code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html#setContent(kotlin.Function0)">content</a></code> composable.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
               </div>
 </devsite-expandable>            </td>
           </tr>
@@ -257,217 +338,268 @@
           <tr>
             <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/runtime/Composition.html">androidx.compose.runtime.Composition</a></span>
               <div class="devsite-table-wrapper">
-                <table class="responsive">
-                  <colgroup>
-                    <col width="40%">
-                    <col>
-                  </colgroup>
-                  <tbody class="list">
-                    <tr>
-                      <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-                      <td>
-                        <div><code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html#hasInvalidations()">hasInvalidations</a></code></div>
-                        <p>Returns true if any pending invalidations have been scheduled.</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-                      <td>
-                        <div><code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html#isDisposed()">isDisposed</a></code></div>
-                        <p>True if <code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html#dispose()">dispose</a></code> has been called.</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html#hasInvalidations()">hasInvalidations</a></code></div>
+                          <p>Returns true if any pending invalidations have been scheduled.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html#isDisposed()">isDisposed</a></code></div>
+                          <p>True if <code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html#dispose()">dispose</a></code> has been called.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
               </div>
 </devsite-expandable>            </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="list">
-      <h2>Public functions</h2>
-      <div class="api-item"><a name="applyChanges--"></a><a name="applychanges"></a>
-        <h3 class="api-name" id="applyChanges()">applyChanges</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Apply the changes calculated during <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#setContent(kotlin.Function0)">setContent</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code>. If an exception is thrown by <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a></code> the composition is irreparably damaged and should be <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#dispose()">dispose</a></code>d.</p>
-      </div>
-      <div class="api-item"><a name="applyLateChanges--"></a><a name="applylatechanges"></a>
-        <h3 class="api-name" id="applyLateChanges()">applyLateChanges</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyLateChanges()">applyLateChanges</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Apply change that must occur after the main bulk of changes have been applied. Late changes are the result of inserting movable content and it must be performed after <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a></code> because, for content that have moved must be inserted only after it has been removed from the previous location. All deletes must be executed before inserts. To ensure this, all deletes are performed in <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a></code> and all inserts are performed in <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyLateChanges()">applyLateChanges</a></code>.</p>
-      </div>
-      <div class="api-item"><a name="changesApplied--"></a><a name="changesapplied"></a>
-        <h3 class="api-name" id="changesApplied()">changesApplied</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#changesApplied()">changesApplied</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Call when all changes, including late changes, have been applied. This signals to the composition that any transitory composition state can now be discarded. This is advisory only and a controlled composition will execute correctly when this is not called.</p>
-      </div>
-      <div class="api-item"><a name="composeContent-kotlin.Function0-"></a><a name="composecontent"></a>
-        <h3 class="api-name" id="composeContent(kotlin.Function0)">composeContent</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a>(content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Called by the parent composition in response to calling <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#setContent(kotlin.Function0)">setContent</a></code>. After this method the changes should be calculated but not yet applied. DO NOT call this method directly if this is interface is controlled by a <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code>, either use <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#setContent(kotlin.Function0)">setContent</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#composeInitial(androidx.compose.runtime.ControlledComposition,kotlin.Function0)">Recomposer.composeInitial</a></code> instead.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-                <td>
-                  <p>A composable function that describes the tree.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="applyChanges--"></a><a name="applychanges"></a>
+          <h3 class="api-name" id="applyChanges()">applyChanges</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Apply the changes calculated during <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#setContent(kotlin.Function0)">setContent</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code>. If an exception is thrown by <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a></code> the composition is irreparably damaged and should be <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#dispose()">dispose</a></code>d.</p>
+        </div>
+        <div class="api-item"><a name="applyLateChanges--"></a><a name="applylatechanges"></a>
+          <h3 class="api-name" id="applyLateChanges()">applyLateChanges</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyLateChanges()">applyLateChanges</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Apply change that must occur after the main bulk of changes have been applied. Late changes are the result of inserting movable content and it must be performed after <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a></code> because, for content that have moved must be inserted only after it has been removed from the previous location. All deletes must be executed before inserts. To ensure this, all deletes are performed in <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a></code> and all inserts are performed in <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyLateChanges()">applyLateChanges</a></code>.</p>
+        </div>
+        <div class="api-item"><a name="changesApplied--"></a><a name="changesapplied"></a>
+          <h3 class="api-name" id="changesApplied()">changesApplied</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#changesApplied()">changesApplied</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Call when all changes, including late changes, have been applied. This signals to the composition that any transitory composition state can now be discarded. This is advisory only and a controlled composition will execute correctly when this is not called.</p>
+        </div>
+        <div class="api-item"><a name="composeContent-kotlin.Function0-"></a><a name="composecontent"></a>
+          <h3 class="api-name" id="composeContent(kotlin.Function0)">composeContent</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a>(content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Called by the parent composition in response to calling <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#setContent(kotlin.Function0)">setContent</a></code>. After this method the changes should be calculated but not yet applied. DO NOT call this method directly if this is interface is controlled by a <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code>, either use <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#setContent(kotlin.Function0)">setContent</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#composeInitial(androidx.compose.runtime.ControlledComposition,kotlin.Function0)">Recomposer.composeInitial</a></code> instead.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                  <td>
+                    <p>A composable function that describes the tree.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="delegateInvalidations(androidx.compose.runtime.ControlledComposition, kotlin.Int, kotlin.Function0)"></a><a name="delegateInvalidations-androidx.compose.runtime.ControlledComposition-kotlin.Int-kotlin.Function0-"></a><a name="delegateinvalidations"></a>
+          <h3 class="api-name" id="delegateInvalidations(androidx.compose.runtime.ControlledComposition,kotlin.Int,kotlin.Function0)">delegateInvalidations</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#delegateInvalidations(androidx.compose.runtime.ControlledComposition,kotlin.Int,kotlin.Function0)">delegateInvalidations</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;to:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html">ControlledComposition</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;groupIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> R<br>):&nbsp;R</pre>
+          <p>Temporarily delegate all invalidations sent to this composition to the <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#delegateInvalidations(androidx.compose.runtime.ControlledComposition,kotlin.Int,kotlin.Function0)">to</a></code> composition. This is used when movable content moves between compositions. The recompose scopes are not redirected until after the move occurs during <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyLateChanges()">applyLateChanges</a></code>. This is used to compose as if the scopes have already been changed.</p>
+        </div>
+        <div class="api-item"><a name="disposeUnusedMovableContent-androidx.compose.runtime.MovableContentState-"></a><a name="disposeunusedmovablecontent"></a>
+          <h3 class="api-name" id="disposeUnusedMovableContent(androidx.compose.runtime.MovableContentState)">disposeUnusedMovableContent</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#disposeUnusedMovableContent(androidx.compose.runtime.MovableContentState)">disposeUnusedMovableContent</a>(state:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MovableContentState.html">MovableContentState</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Dispose the value state that is no longer needed.</p>
+        </div>
+        <div class="api-item"><a name="insertMovableContent-kotlin.collections.List-"></a><a name="insertmovablecontent"></a>
+          <h3 class="api-name" id="insertMovableContent(kotlin.collections.List)">insertMovableContent</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#insertMovableContent(kotlin.collections.List)">insertMovableContent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;references:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a>&lt;<a href="/reference/kotlin/androidx/compose/runtime/MovableContentStateReference.html">MovableContentStateReference</a>,&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MovableContentStateReference.html">MovableContentStateReference</a>?&gt;&gt;<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Insert the given list of movable content with their paired state in potentially a different composition. If the second part of the pair is null then the movable content should be inserted as new. If second part of the pair has a value then the state should be moved into the referenced location and then recomposed there.</p>
+        </div>
+        <div class="api-item"><a name="invalidateAll--"></a><a name="invalidateall"></a>
+          <h3 class="api-name" id="invalidateAll()">invalidateAll</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#invalidateAll()">invalidateAll</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Invalidate all invalidation scopes. This is called, for example, by <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> when the Recomposer becomes active after a previous period of inactivity, potentially missing more granular invalidations.</p>
+        </div>
+        <div class="api-item"><a name="observesAnyOf-kotlin.collections.Set-"></a><a name="observesanyof"></a>
+          <h3 class="api-name" id="observesAnyOf(kotlin.collections.Set)">observesAnyOf</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#observesAnyOf(kotlin.collections.Set)">observesAnyOf</a>(values:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>Returns true if any of the object instances in <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#observesAnyOf(kotlin.collections.Set)">values</a></code> is observed by this composition. This allows detecting if values changed by a previous composition will potentially affect this composition.</p>
+        </div>
+        <div class="api-item"><a name="prepareCompose-kotlin.Function0-"></a><a name="preparecompose"></a>
+          <h3 class="api-name" id="prepareCompose(kotlin.Function0)">prepareCompose</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#prepareCompose(kotlin.Function0)">prepareCompose</a>(block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Execute <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#prepareCompose(kotlin.Function0)">block</a></code> with <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#isComposing()">isComposing</a></code> set temporarily to <code>true</code>. This allows treating invalidations reported during <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#prepareCompose(kotlin.Function0)">prepareCompose</a></code> as if they happened while composing to avoid double invalidations when propagating changes from a parent composition while before composing the child composition.</p>
+        </div>
+        <div class="api-item"><a name="recompose--"></a><a name="recompose"></a>
+          <h3 class="api-name" id="recompose()">recompose</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>Recompose the composition to calculate any changes necessary to the composition state and the tree maintained by the applier. No changes have been made yet. Changes calculated will be applied when <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a></code> is called.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Returns</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                  <td>
+                    <p>returns <code>true</code> if any changes are pending and <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a></code> should be called.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="recordModificationsOf-kotlin.collections.Set-"></a><a name="recordmodificationsof"></a>
+          <h3 class="api-name" id="recordModificationsOf(kotlin.collections.Set)">recordModificationsOf</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recordModificationsOf(kotlin.collections.Set)">recordModificationsOf</a>(values:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Record the values that were modified after the last call to <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code> or from the initial call to <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a></code>. This should be called before <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code> is called to record which parts of the composition need to be recomposed.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>values:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;</code></td>
+                  <td>
+                    <p>the set of values that have changed since the last composition.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="recordReadOf-kotlin.Any-"></a><a name="recordreadof"></a>
+          <h3 class="api-name" id="recordReadOf(kotlin.Any)">recordReadOf</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recordReadOf(kotlin.Any)">recordReadOf</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Record that <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recordReadOf(kotlin.Any)">value</a></code> has been read. This is used primarily by the <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> to inform the composer when the a <code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a></code> instance has been read implying it should be observed for changes.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a></code></td>
+                  <td>
+                    <p>the instance from which a property was read</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="recordWriteOf-kotlin.Any-"></a><a name="recordwriteof"></a>
+          <h3 class="api-name" id="recordWriteOf(kotlin.Any)">recordWriteOf</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recordWriteOf(kotlin.Any)">recordWriteOf</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Record that <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recordWriteOf(kotlin.Any)">value</a></code> has been modified. This is used primarily by the <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> to inform the composer when the a <code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a></code> instance been change by a composable function.</p>
+        </div>
+        <div class="api-item"><a name="verifyConsistent--"></a><a name="verifyconsistent"></a>
+          <h3 class="api-name" id="verifyConsistent()">verifyConsistent</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#verifyConsistent()">verifyConsistent</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Throws an exception if the internal state of the composer has been corrupted and is no longer consistent. Used in testing the composer itself.</p>
         </div>
       </div>
-      <div class="api-item"><a name="delegateInvalidations(androidx.compose.runtime.ControlledComposition, kotlin.Int, kotlin.Function0)"></a><a name="delegateInvalidations-androidx.compose.runtime.ControlledComposition-kotlin.Int-kotlin.Function0-"></a><a name="delegateinvalidations"></a>
-        <h3 class="api-name" id="delegateInvalidations(androidx.compose.runtime.ControlledComposition,kotlin.Int,kotlin.Function0)">delegateInvalidations</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#delegateInvalidations(androidx.compose.runtime.ControlledComposition,kotlin.Int,kotlin.Function0)">delegateInvalidations</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;to:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html">ControlledComposition</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;groupIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> R<br>):&nbsp;R</pre>
-        <p>Temporarily delegate all invalidations sent to this composition to the <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#delegateInvalidations(androidx.compose.runtime.ControlledComposition,kotlin.Int,kotlin.Function0)">to</a></code> composition. This is used when movable content moves between compositions. The recompose scopes are not redirected until after the move occurs during <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyLateChanges()">applyLateChanges</a></code>. This is used to compose as if the scopes have already been changed.</p>
-      </div>
-      <div class="api-item"><a name="disposeUnusedMovableContent-androidx.compose.runtime.MovableContentState-"></a><a name="disposeunusedmovablecontent"></a>
-        <h3 class="api-name" id="disposeUnusedMovableContent(androidx.compose.runtime.MovableContentState)">disposeUnusedMovableContent</h3>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#disposeUnusedMovableContent(androidx.compose.runtime.MovableContentState)">disposeUnusedMovableContent</a>(state:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MovableContentState.html">MovableContentState</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Dispose the value state that is no longer needed.</p>
-      </div>
-      <div class="api-item"><a name="insertMovableContent-kotlin.collections.List-"></a><a name="insertmovablecontent"></a>
-        <h3 class="api-name" id="insertMovableContent(kotlin.collections.List)">insertMovableContent</h3>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#insertMovableContent(kotlin.collections.List)">insertMovableContent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;references:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a>&lt;<a href="/reference/kotlin/androidx/compose/runtime/MovableContentStateReference.html">MovableContentStateReference</a>,&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MovableContentStateReference.html">MovableContentStateReference</a>?&gt;&gt;<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Insert the given list of movable content with their paired state in potentially a different composition. If the second part of the pair is null then the movable content should be inserted as new. If second part of the pair has a value then the state should be moved into the referenced location and then recomposed there.</p>
-      </div>
-      <div class="api-item"><a name="invalidateAll--"></a><a name="invalidateall"></a>
-        <h3 class="api-name" id="invalidateAll()">invalidateAll</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#invalidateAll()">invalidateAll</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Invalidate all invalidation scopes. This is called, for example, by <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> when the Recomposer becomes active after a previous period of inactivity, potentially missing more granular invalidations.</p>
-      </div>
-      <div class="api-item"><a name="observesAnyOf-kotlin.collections.Set-"></a><a name="observesanyof"></a>
-        <h3 class="api-name" id="observesAnyOf(kotlin.collections.Set)">observesAnyOf</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#observesAnyOf(kotlin.collections.Set)">observesAnyOf</a>(values:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
-        <p>Returns true if any of the object instances in <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#observesAnyOf(kotlin.collections.Set)">values</a></code> is observed by this composition. This allows detecting if values changed by a previous composition will potentially affect this composition.</p>
-      </div>
-      <div class="api-item"><a name="prepareCompose-kotlin.Function0-"></a><a name="preparecompose"></a>
-        <h3 class="api-name" id="prepareCompose(kotlin.Function0)">prepareCompose</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#prepareCompose(kotlin.Function0)">prepareCompose</a>(block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Execute <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#prepareCompose(kotlin.Function0)">block</a></code> with <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#isComposing()">isComposing</a></code> set temporarily to <code>true</code>. This allows treating invalidations reported during <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#prepareCompose(kotlin.Function0)">prepareCompose</a></code> as if they happened while composing to avoid double invalidations when propagating changes from a parent composition while before composing the child composition.</p>
-      </div>
-      <div class="api-item"><a name="recompose--"></a><a name="recompose"></a>
-        <h3 class="api-name" id="recompose()">recompose</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
-        <p>Recompose the composition to calculate any changes necessary to the composition state and the tree maintained by the applier. No changes have been made yet. Changes calculated will be applied when <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a></code> is called.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Returns</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-                <td>
-                  <p>returns <code>true</code> if any changes are pending and <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a></code> should be called.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getHasPendingChanges()"></a><a name="setHasPendingChanges()"></a><a name="getHasPendingChanges--"></a><a name="setHasPendingChanges--"></a>
+          <h3 class="api-name" id="hasPendingChanges()">hasPendingChanges</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#hasPendingChanges()">hasPendingChanges</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>True after <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code> has been called and <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a></code> is expected as the next call. An exception will be throw in <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code> is called while there are pending from the previous composition pending to be applied.</p>
+        </div>
+        <div class="api-item"><a name="getIsComposing()"></a><a name="setIsComposing()"></a><a name="getIsComposing--"></a><a name="setIsComposing--"></a>
+          <h3 class="api-name" id="isComposing()">isComposing</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#isComposing()">isComposing</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>True if the composition is actively compositing such as when actively in a call to <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code>.</p>
         </div>
       </div>
-      <div class="api-item"><a name="recordModificationsOf-kotlin.collections.Set-"></a><a name="recordmodificationsof"></a>
-        <h3 class="api-name" id="recordModificationsOf(kotlin.collections.Set)">recordModificationsOf</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recordModificationsOf(kotlin.collections.Set)">recordModificationsOf</a>(values:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Record the values that were modified after the last call to <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code> or from the initial call to <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a></code>. This should be called before <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code> is called to record which parts of the composition need to be recomposed.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>values:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;</code></td>
-                <td>
-                  <p>the set of values that have changed since the last composition.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Extension properties</h2>
+        <div class="api-item"><a name="(androidx.compose.runtime.ControlledComposition).getRecomposeCoroutineContext()"></a><a name="(androidx.compose.runtime.ControlledComposition).setRecomposeCoroutineContext()"></a><a name="-androidx.compose.runtime.ControlledComposition-.getRecomposeCoroutineContext--"></a><a name="-androidx.compose.runtime.ControlledComposition-.setRecomposeCoroutineContext--"></a>
+          <h3 class="api-name" id="(androidx.compose.runtime.ControlledComposition).recomposeCoroutineContext()">recomposeCoroutineContext</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/ExperimentalComposeApi.html">ExperimentalComposeApi</a><br>val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html">ControlledComposition</a>.<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#(androidx.compose.runtime.ControlledComposition).recomposeCoroutineContext()">recomposeCoroutineContext</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></pre>
+          <p>The <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code> that should be used to perform concurrent recompositions of this <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html">ControlledComposition</a></code> when used in an environment supporting concurrent composition.</p>
+          <p>See <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#runRecomposeConcurrentlyAndApplyChanges(kotlin.coroutines.CoroutineContext)">Recomposer.runRecomposeConcurrentlyAndApplyChanges</a></code> as an example of configuring such an environment.</p>
         </div>
       </div>
-      <div class="api-item"><a name="recordReadOf-kotlin.Any-"></a><a name="recordreadof"></a>
-        <h3 class="api-name" id="recordReadOf(kotlin.Any)">recordReadOf</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recordReadOf(kotlin.Any)">recordReadOf</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Record that <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recordReadOf(kotlin.Any)">value</a></code> has been read. This is used primarily by the <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> to inform the composer when the a <code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a></code> instance has been read implying it should be observed for changes.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a></code></td>
-                <td>
-                  <p>the instance from which a property was read</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="recordWriteOf-kotlin.Any-"></a><a name="recordwriteof"></a>
-        <h3 class="api-name" id="recordWriteOf(kotlin.Any)">recordWriteOf</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recordWriteOf(kotlin.Any)">recordWriteOf</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Record that <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recordWriteOf(kotlin.Any)">value</a></code> has been modified. This is used primarily by the <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> to inform the composer when the a <code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a></code> instance been change by a composable function.</p>
-      </div>
-      <div class="api-item"><a name="verifyConsistent--"></a><a name="verifyconsistent"></a>
-        <h3 class="api-name" id="verifyConsistent()">verifyConsistent</h3>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#verifyConsistent()">verifyConsistent</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Throws an exception if the internal state of the composer has been corrupted and is no longer consistent. Used in testing the composer itself.</p>
-      </div>
-    </div>
-    <div class="list">
-      <h2>Public properties</h2>
-      <div class="api-item"><a name="getHasPendingChanges()"></a><a name="setHasPendingChanges()"></a><a name="getHasPendingChanges--"></a><a name="setHasPendingChanges--"></a>
-        <h3 class="api-name" id="hasPendingChanges()">hasPendingChanges</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#hasPendingChanges()">hasPendingChanges</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
-        <p>True after <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code> has been called and <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a></code> is expected as the next call. An exception will be throw in <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code> is called while there are pending from the previous composition pending to be applied.</p>
-      </div>
-      <div class="api-item"><a name="getIsComposing()"></a><a name="setIsComposing()"></a><a name="getIsComposing--"></a><a name="setIsComposing--"></a>
-        <h3 class="api-name" id="isComposing()">isComposing</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#isComposing()">isComposing</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
-        <p>True if the composition is actively compositing such as when actively in a call to <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code>.</p>
-      </div>
-    </div>
-    <div class="list">
-      <h2>Extension properties</h2>
-      <div class="api-item"><a name="(androidx.compose.runtime.ControlledComposition).getRecomposeCoroutineContext()"></a><a name="(androidx.compose.runtime.ControlledComposition).setRecomposeCoroutineContext()"></a><a name="-androidx.compose.runtime.ControlledComposition-.getRecomposeCoroutineContext--"></a><a name="-androidx.compose.runtime.ControlledComposition-.setRecomposeCoroutineContext--"></a>
-        <h3 class="api-name" id="(androidx.compose.runtime.ControlledComposition).recomposeCoroutineContext()">recomposeCoroutineContext</h3>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/ExperimentalComposeApi.html">ExperimentalComposeApi</a><br>val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html">ControlledComposition</a>.<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#(androidx.compose.runtime.ControlledComposition).recomposeCoroutineContext()">recomposeCoroutineContext</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></pre>
-        <p>The <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code> that should be used to perform concurrent recompositions of this <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html">ControlledComposition</a></code> when used in an environment supporting concurrent composition.</p>
-        <p>See <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#runRecomposeConcurrentlyAndApplyChanges(kotlin.coroutines.CoroutineContext)">Recomposer.runRecomposeConcurrentlyAndApplyChanges</a></code> as an example of configuring such an environment.</p>
-      </div>
-    </div>
+    </devsite-filter >
   </body>
 </html>

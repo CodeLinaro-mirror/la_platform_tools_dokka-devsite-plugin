@@ -1,0 +1,218 @@
+<html devsite="true">
+  <head>
+    <title>DatePickerState</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/material3/DatePicker.kt+class:androidx.compose.material3.DatePickerState&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>DatePickerState</h1>
+    <p>
+      <pre>@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br>public interface <a href="/reference/androidx/compose/material3/DatePickerState.html">DatePickerState</a></pre>
+    </p>
+    <hr>
+    <p>A state object that can be hoisted to observe the date picker state. See <code><a href="/reference/androidx/compose/material3/package-summary.html#rememberDatePickerState(kotlin.Long,kotlin.Long,kotlin.ranges.IntRange,androidx.compose.material3.DisplayMode,androidx.compose.material3.SelectableDates)">rememberDatePickerState</a></code>.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/DisplayMode.html">DisplayMode</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/material3/DatePickerState.html#getDisplayMode()">getDisplayMode</a>()</code></div>
+              <p>A <code><a href="/reference/androidx/compose/material3/DisplayMode.html">DisplayMode</a></code> that represents the current UI mode (i.e. picker or input).</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract long</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/material3/DatePickerState.html#getDisplayedMonthMillis()">getDisplayedMonthMillis</a>()</code></div>
+              <p>A timestamp that represents the currently displayed month <em>start</em> date in <em>UTC</em> milliseconds from the epoch.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/SelectableDates.html">SelectableDates</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/material3/DatePickerState.html#getSelectableDates()">getSelectableDates</a>()</code></div>
+              <p>A <code><a href="/reference/androidx/compose/material3/SelectableDates.html">SelectableDates</a></code> that is consulted to check if a date is allowed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/material3/DatePickerState.html#getSelectedDateMillis()">getSelectedDateMillis</a>()</code></div>
+              <p>A timestamp that represents the selected date <em>start</em> of the day in <em>UTC</em> milliseconds from the epoch.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-int-range/index.html">IntRange</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/material3/DatePickerState.html#getYearRange()">getYearRange</a>()</code></div>
+              <p>An <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-int-range/index.html">IntRange</a></code> that holds the year range that the date picker will be limited to.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/material3/DatePickerState.html#setDisplayMode(androidx.compose.material3.DisplayMode)">setDisplayMode</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/DisplayMode.html">DisplayMode</a>&nbsp;displayMode)</code></div>
+              <p>A <code><a href="/reference/androidx/compose/material3/DisplayMode.html">DisplayMode</a></code> that represents the current UI mode (i.e. picker or input).</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/material3/DatePickerState.html#setDisplayedMonthMillis(kotlin.Long)">setDisplayedMonthMillis</a>(long&nbsp;displayedMonthMillis)</code></div>
+              <p>A timestamp that represents the currently displayed month <em>start</em> date in <em>UTC</em> milliseconds from the epoch.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/material3/DatePickerState.html#setSelectedDateMillis(kotlin.Long)">setSelectedDateMillis</a>(<a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>&nbsp;selectedDateMillis)</code></div>
+              <p>A timestamp that represents the selected date <em>start</em> of the day in <em>UTC</em> milliseconds from the epoch.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="getDisplayMode--"></a><a name="getdisplaymode"></a>
+        <h3 class="api-name" id="getDisplayMode()">getDisplayMode</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/DisplayMode.html">DisplayMode</a>&nbsp;<a href="/reference/androidx/compose/material3/DatePickerState.html#getDisplayMode()">getDisplayMode</a>()</pre>
+        <p>A <code><a href="/reference/androidx/compose/material3/DisplayMode.html">DisplayMode</a></code> that represents the current UI mode (i.e. picker or input).</p>
+      </div>
+      <div class="api-item"><a name="getDisplayedMonthMillis--"></a><a name="getdisplayedmonthmillis"></a>
+        <h3 class="api-name" id="getDisplayedMonthMillis()">getDisplayedMonthMillis</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;long&nbsp;<a href="/reference/androidx/compose/material3/DatePickerState.html#getDisplayedMonthMillis()">getDisplayedMonthMillis</a>()</pre>
+        <p>A timestamp that represents the currently displayed month <em>start</em> date in <em>UTC</em> milliseconds from the epoch.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">kotlin.IllegalArgumentException</a>&nbsp;kotlin.IllegalArgumentException</code></td>
+                <td>
+                  <p>in case the value is set with a timestamp that does not fall within the <code><a href="/reference/androidx/compose/material3/DatePickerState.html#yearRange()">yearRange</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getSelectableDates--"></a><a name="getselectabledates"></a>
+        <h3 class="api-name" id="getSelectableDates()">getSelectableDates</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/SelectableDates.html">SelectableDates</a>&nbsp;<a href="/reference/androidx/compose/material3/DatePickerState.html#getSelectableDates()">getSelectableDates</a>()</pre>
+        <p>A <code><a href="/reference/androidx/compose/material3/SelectableDates.html">SelectableDates</a></code> that is consulted to check if a date is allowed.</p>
+        <p>In case a date is not allowed to be selected, it will appear disabled in the UI.</p>
+      </div>
+      <div class="api-item"><a name="getSelectedDateMillis--"></a><a name="getselecteddatemillis"></a>
+        <h3 class="api-name" id="getSelectedDateMillis()">getSelectedDateMillis</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;<a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>&nbsp;<a href="/reference/androidx/compose/material3/DatePickerState.html#getSelectedDateMillis()">getSelectedDateMillis</a>()</pre>
+        <p>A timestamp that represents the selected date <em>start</em> of the day in <em>UTC</em> milliseconds from the epoch.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">kotlin.IllegalArgumentException</a>&nbsp;kotlin.IllegalArgumentException</code></td>
+                <td>
+                  <p>in case the value is set with a timestamp that does not fall within the <code><a href="/reference/androidx/compose/material3/DatePickerState.html#yearRange()">yearRange</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getYearRange--"></a><a name="getyearrange"></a>
+        <h3 class="api-name" id="getYearRange()">getYearRange</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-int-range/index.html">IntRange</a>&nbsp;<a href="/reference/androidx/compose/material3/DatePickerState.html#getYearRange()">getYearRange</a>()</pre>
+        <p>An <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-int-range/index.html">IntRange</a></code> that holds the year range that the date picker will be limited to.</p>
+      </div>
+      <div class="api-item"><a name="setDisplayMode-androidx.compose.material3.DisplayMode-"></a><a name="setdisplaymode"></a>
+        <h3 class="api-name" id="setDisplayMode(androidx.compose.material3.DisplayMode)">setDisplayMode</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/material3/DatePickerState.html#setDisplayMode(androidx.compose.material3.DisplayMode)">setDisplayMode</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/DisplayMode.html">DisplayMode</a>&nbsp;displayMode)</pre>
+        <p>A <code><a href="/reference/androidx/compose/material3/DisplayMode.html">DisplayMode</a></code> that represents the current UI mode (i.e. picker or input).</p>
+      </div>
+      <div class="api-item"><a name="setDisplayedMonthMillis-kotlin.Long-"></a><a name="setdisplayedmonthmillis"></a>
+        <h3 class="api-name" id="setDisplayedMonthMillis(kotlin.Long)">setDisplayedMonthMillis</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/material3/DatePickerState.html#setDisplayedMonthMillis(kotlin.Long)">setDisplayedMonthMillis</a>(long&nbsp;displayedMonthMillis)</pre>
+        <p>A timestamp that represents the currently displayed month <em>start</em> date in <em>UTC</em> milliseconds from the epoch.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">kotlin.IllegalArgumentException</a>&nbsp;kotlin.IllegalArgumentException</code></td>
+                <td>
+                  <p>in case the value is set with a timestamp that does not fall within the <code><a href="/reference/androidx/compose/material3/DatePickerState.html#yearRange()">yearRange</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="setSelectedDateMillis-kotlin.Long-"></a><a name="setselecteddatemillis"></a>
+        <h3 class="api-name" id="setSelectedDateMillis(kotlin.Long)">setSelectedDateMillis</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/material3/DatePickerState.html#setSelectedDateMillis(kotlin.Long)">setSelectedDateMillis</a>(<a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>&nbsp;selectedDateMillis)</pre>
+        <p>A timestamp that represents the selected date <em>start</em> of the day in <em>UTC</em> milliseconds from the epoch.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">kotlin.IllegalArgumentException</a>&nbsp;kotlin.IllegalArgumentException</code></td>
+                <td>
+                  <p>in case the value is set with a timestamp that does not fall within the <code><a href="/reference/androidx/compose/material3/DatePickerState.html#yearRange()">yearRange</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

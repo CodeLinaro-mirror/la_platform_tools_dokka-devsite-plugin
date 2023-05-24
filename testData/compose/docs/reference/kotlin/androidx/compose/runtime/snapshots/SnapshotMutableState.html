@@ -9,11 +9,21 @@
       <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/runtime/snapshots/SnapshotMutableState.kt+class:androidx.compose.runtime.snapshots.SnapshotMutableState&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>SnapshotMutableState</h1>
-    <p>
-      <pre>interface <a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotMutableState.html">SnapshotMutableState</a>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; : <a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>interface <a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotMutableState.html">SnapshotMutableState</a>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; : <a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <hr>
     <p>A mutable value holder where reads to the <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotMutableState.html#value()">value</a></code> property during the execution of a <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function, the current <code><a href="/reference/kotlin/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> will be subscribed to changes of that value. When the <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotMutableState.html#value()">value</a></code> property is written to and changed, a recomposition of any subscribed <code><a href="/reference/kotlin/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code>s will be scheduled. Writes to it are transacted as part of the <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code> system.</p>
+    <p>In general for correctness: Anything that is mutable, that is read during composition or written to during composition, should be a <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotMutableState.html">SnapshotMutableState</a></code>.</p>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <colgroup>
@@ -43,26 +53,32 @@
     </div>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public properties</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/runtime/SnapshotMutationPolicy.html">SnapshotMutationPolicy</a>&lt;T&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotMutableState.html#policy()">policy</a></code></div>
-              <p>A policy to control how changes are handled in a mutable snapshot.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/runtime/SnapshotMutationPolicy.html">SnapshotMutationPolicy</a>&lt;T&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotMutableState.html#policy()">policy</a></code></div>
+                <p>A policy to control how changes are handled in a mutable snapshot.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive" id="inhmethods">
@@ -75,26 +91,35 @@
           <tr>
             <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">androidx.compose.runtime.MutableState</a></span>
               <div class="devsite-table-wrapper">
-                <table class="responsive">
-                  <colgroup>
-                    <col width="40%">
-                    <col>
-                  </colgroup>
-                  <tbody class="list">
-                    <tr>
-                      <td><code>operator T</code></td>
-                      <td>
-                        <div><code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#component1()">component1</a>()</code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>operator (T) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-                      <td>
-                        <div><code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#component2()">component2</a>()</code></div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code>operator T</code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#component1()">component1</a>()</code></div>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>operator (T) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#component2()">component2</a>()</code></div>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
               </div>
 </devsite-expandable>            </td>
           </tr>
@@ -112,33 +137,43 @@
           <tr>
             <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">androidx.compose.runtime.MutableState</a></span>
               <div class="devsite-table-wrapper">
-                <table class="responsive">
-                  <colgroup>
-                    <col width="40%">
-                    <col>
-                  </colgroup>
-                  <tbody class="list">
-                    <tr>
-                      <td><code>T</code></td>
-                      <td>
-                        <div><code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#value()">value</a></code></div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code>T</code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#value()">value</a></code></div>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
               </div>
 </devsite-expandable>            </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="list">
-      <h2>Public properties</h2>
-      <div class="api-item"><a name="getPolicy()"></a><a name="setPolicy()"></a><a name="getPolicy--"></a><a name="setPolicy--"></a>
-        <h3 class="api-name" id="policy()">policy</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotMutableState.html#policy()">policy</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/SnapshotMutationPolicy.html">SnapshotMutationPolicy</a>&lt;T&gt;</pre>
-        <p>A policy to control how changes are handled in a mutable snapshot.</p>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getPolicy()"></a><a name="setPolicy()"></a><a name="getPolicy--"></a><a name="setPolicy--"></a>
+          <h3 class="api-name" id="policy()">policy</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotMutableState.html#policy()">policy</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/SnapshotMutationPolicy.html">SnapshotMutationPolicy</a>&lt;T&gt;</pre>
+          <p>A policy to control how changes are handled in a mutable snapshot.</p>
+        </div>
       </div>
-    </div>
+    </devsite-filter >
   </body>
 </html>

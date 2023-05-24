@@ -169,7 +169,8 @@
           <tr>
             <td><code>abstract void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/runtime/Composer.html#disableSourceInformation()">disableSourceInformation</a>()</code></div>
+              <div><code>@<a href="/reference/androidx/compose/runtime/TestOnly.html">TestOnly</a><br><a href="/reference/androidx/compose/runtime/Composer.html#disableSourceInformation()">disableSourceInformation</a>()</code></div>
+              <p>Disable the collection of source information, that may introduce groups to store the source information, in order to be able to more accurately calculate the actual number of groups a composable function generates in a release build.</p>
             </td>
           </tr>
           <tr>
@@ -245,14 +246,14 @@
           <tr>
             <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code></td>
             <td>
-              <div><code>@<a href="/reference/org/jetbrains/annotations/TestOnly.html">TestOnly</a><br><a href="/reference/androidx/compose/runtime/Composer.html#getApplyCoroutineContext()">getApplyCoroutineContext</a>()</code></div>
+              <div><code>@<a href="/reference/androidx/compose/runtime/TestOnly.html">TestOnly</a><br><a href="/reference/androidx/compose/runtime/Composer.html#getApplyCoroutineContext()">getApplyCoroutineContext</a>()</code></div>
               <p>A Compose internal function.</p>
             </td>
           </tr>
           <tr>
             <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/ControlledComposition.html">ControlledComposition</a></code></td>
             <td>
-              <div><code>@<a href="/reference/org/jetbrains/annotations/TestOnly.html">TestOnly</a><br><a href="/reference/androidx/compose/runtime/Composer.html#getComposition()">getComposition</a>()</code></div>
+              <div><code>@<a href="/reference/androidx/compose/runtime/TestOnly.html">TestOnly</a><br><a href="/reference/androidx/compose/runtime/Composer.html#getComposition()">getComposition</a>()</code></div>
               <p>The composition that is used to control this composer.</p>
             </td>
           </tr>
@@ -268,6 +269,13 @@
             <td>
               <div><code><a href="/reference/androidx/compose/runtime/Composer.html#getCompoundKeyHash()">getCompoundKeyHash</a>()</code></div>
               <p>A Compose internal property.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/CompositionLocalMap.html">CompositionLocalMap</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/Composer.html#getCurrentCompositionLocalMap()">getCurrentCompositionLocalMap</a>()</code></div>
+              <p>Returns the active set of CompositionLocals at the current position in the composition hierarchy.</p>
             </td>
           </tr>
           <tr>
@@ -477,7 +485,7 @@
           <tr>
             <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/runtime/ComposedModifierKt.html">ComposedModifierKt</a>.<a href="/reference/androidx/compose/runtime/Composer.html#(androidx.compose.runtime.Composer).materialize(androidx.compose.ui.Modifier)">materialize</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Composer.html">Composer</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier<br>)</code></div>
+              <div><code>@<a href="/reference/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a><br><a href="/reference/androidx/compose/runtime/ComposedModifierKt.html">ComposedModifierKt</a>.<a href="/reference/androidx/compose/runtime/Composer.html#(androidx.compose.runtime.Composer).materialize(androidx.compose.ui.Modifier)">materialize</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Composer.html">Composer</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier<br>)</code></div>
               <p>Materialize any instance-specific <code><a href="/reference/androidx/compose/ui/package-summary.html#(androidx.compose.ui.Modifier).composed(kotlin.Function1,kotlin.Function1)">composed modifiers</a></code> for applying to a raw tree node.</p>
             </td>
           </tr>
@@ -1095,7 +1103,9 @@
       </div>
       <div class="api-item"><a name="disableSourceInformation--"></a><a name="disablesourceinformation"></a>
         <h3 class="api-name" id="disableSourceInformation()">disableSourceInformation</h3>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Composer.html#disableSourceInformation()">disableSourceInformation</a>()</pre>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/TestOnly.html">TestOnly</a><br>abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Composer.html#disableSourceInformation()">disableSourceInformation</a>()</pre>
+        <p>Disable the collection of source information, that may introduce groups to store the source information, in order to be able to more accurately calculate the actual number of groups a composable function generates in a release build.</p>
+        <p>This function is only safe to call in a test and will produce incorrect composition results if called on a composer not under test.</p>
       </div>
       <div class="api-item"><a name="enableReusing--"></a><a name="enablereusing"></a>
         <h3 class="api-name" id="enableReusing()">enableReusing</h3>
@@ -1236,13 +1246,13 @@
       </div>
       <div class="api-item"><a name="getApplyCoroutineContext--"></a><a name="getapplycoroutinecontext"></a>
         <h3 class="api-name" id="getApplyCoroutineContext()">getApplyCoroutineContext</h3>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/org/jetbrains/annotations/TestOnly.html">TestOnly</a><br>abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>&nbsp;<a href="/reference/androidx/compose/runtime/Composer.html#getApplyCoroutineContext()">getApplyCoroutineContext</a>()</pre>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/TestOnly.html">TestOnly</a><br>abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>&nbsp;<a href="/reference/androidx/compose/runtime/Composer.html#getApplyCoroutineContext()">getApplyCoroutineContext</a>()</pre>
         <p>A Compose internal function. DO NOT call directly.</p>
         <p>The coroutine context for the composition. This is used, for example, to implement <code><a href="/reference/androidx/compose/runtime/package-summary.html#LaunchedEffect(kotlin.coroutines.SuspendFunction1)">LaunchedEffect</a></code>. This context is managed by the <code><a href="/reference/androidx/compose/runtime/Recomposer.html">Recomposer</a></code>.</p>
       </div>
       <div class="api-item"><a name="getComposition--"></a><a name="getcomposition"></a>
         <h3 class="api-name" id="getComposition()">getComposition</h3>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/org/jetbrains/annotations/TestOnly.html">TestOnly</a><br>abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/ControlledComposition.html">ControlledComposition</a>&nbsp;<a href="/reference/androidx/compose/runtime/Composer.html#getComposition()">getComposition</a>()</pre>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/TestOnly.html">TestOnly</a><br>abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/ControlledComposition.html">ControlledComposition</a>&nbsp;<a href="/reference/androidx/compose/runtime/Composer.html#getComposition()">getComposition</a>()</pre>
         <p>The composition that is used to control this composer.</p>
       </div>
       <div class="api-item"><a name="getCompositionData--"></a><a name="getcompositiondata"></a>
@@ -1257,6 +1267,21 @@
         <p>A Compose internal property. DO NOT call directly. Use <code><a href="/reference/androidx/compose/runtime/package-summary.html#currentCompositeKeyHash()">currentCompositeKeyHash</a></code> instead.</p>
         <p>This a hash value used to coordinate map externally stored state to the composition. For example, this is used by saved instance state to preserve state across activity lifetime boundaries.</p>
         <p>This value is not likely to be unique but is not guaranteed unique. There are known cases, such as for loops without a <code><a href="/reference/androidx/compose/runtime/package-summary.html#key(kotlin.Array,kotlin.Function0)">key</a></code>, where the runtime does not have enough information to make the compound key hash unique.</p>
+      </div>
+      <div class="api-item"><a name="getCurrentCompositionLocalMap--"></a><a name="getcurrentcompositionlocalmap"></a>
+        <h3 class="api-name" id="getCurrentCompositionLocalMap()">getCurrentCompositionLocalMap</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/CompositionLocalMap.html">CompositionLocalMap</a>&nbsp;<a href="/reference/androidx/compose/runtime/Composer.html#getCurrentCompositionLocalMap()">getCurrentCompositionLocalMap</a>()</pre>
+        <p>Returns the active set of CompositionLocals at the current position in the composition hierarchy. This is a lower level API that can be used to export and access CompositionLocal values outside of Composition.</p>
+        <p>This API does not track reads of CompositionLocals and does not automatically dispatch new values to previous readers when the value of a CompositionLocal changes. To use this API as intended, you must set up observation manually. This means:</p>
+        <ul>
+          <li>
+            <p>For <code><a href="/reference/androidx/compose/runtime/package-summary.html#compositionLocalOf(androidx.compose.runtime.SnapshotMutationPolicy,kotlin.Function0)">non-static CompositionLocals</a></code>, composables reading this map need to observe the snapshot state for CompositionLocals being read to be notified when their values in this map change.</p>
+          </li>
+          <li>
+            <p>For <code><a href="/reference/androidx/compose/runtime/package-summary.html#staticCompositionLocalOf(kotlin.Function0)">static CompositionLocals</a></code>, all composables including the composable reading this map will be recomposed and you will need to re-obtain this map to get the latest values.</p>
+          </li>
+        </ul>
+        <p>Most applications shouldn't use this API directly, and should instead use <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html#current()">CompositionLocal.current</a></code>.</p>
       </div>
       <div class="api-item"><a name="getCurrentMarker--"></a><a name="getcurrentmarker"></a>
         <h3 class="api-name" id="getCurrentMarker()">getCurrentMarker</h3>
@@ -1717,7 +1742,7 @@
       <h2>Extension functions</h2>
       <div class="api-item"><a name="-androidx.compose.runtime.Composer-.materialize-androidx.compose.ui.Modifier-"></a><a name="materialize"></a>
         <h3 class="api-name" id="(androidx.compose.runtime.Composer).materialize(androidx.compose.ui.Modifier)">ComposedModifierKt.materialize</h3>
-        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/runtime/ComposedModifierKt.html">ComposedModifierKt</a>.<a href="/reference/androidx/compose/runtime/Composer.html#(androidx.compose.runtime.Composer).materialize(androidx.compose.ui.Modifier)">materialize</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Composer.html">Composer</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier<br>)</pre>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a><br>default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/runtime/ComposedModifierKt.html">ComposedModifierKt</a>.<a href="/reference/androidx/compose/runtime/Composer.html#(androidx.compose.runtime.Composer).materialize(androidx.compose.ui.Modifier)">materialize</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Composer.html">Composer</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;modifier<br>)</pre>
         <p>Materialize any instance-specific <code><a href="/reference/androidx/compose/ui/package-summary.html#(androidx.compose.ui.Modifier).composed(kotlin.Function1,kotlin.Function1)">composed modifiers</a></code> for applying to a raw tree node. Call right before setting the returned modifier on an emitted node. You almost certainly do not need to call this function directly.</p>
       </div>
       <div class="api-item"><a name="(androidx.compose.runtime.Composer).cache(kotlin.Boolean, kotlin.Function0)"></a><a name="-androidx.compose.runtime.Composer-.cache-kotlin.Boolean-kotlin.Function0-"></a><a name="cache"></a>

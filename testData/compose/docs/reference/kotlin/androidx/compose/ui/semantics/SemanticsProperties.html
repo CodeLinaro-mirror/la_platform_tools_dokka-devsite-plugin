@@ -9,844 +9,1068 @@
       <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/semantics/SemanticsProperties.kt+class:androidx.compose.ui.semantics.SemanticsProperties&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>SemanticsProperties</h1>
-    <p>
-      <pre>object <a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html">SemanticsProperties</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>object <a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html">SemanticsProperties</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <hr>
     <p>General semantics properties, mainly used for accessibility and testing.</p>
     <p>Each of these is intended to be set by the respective SemanticsPropertyReceiver extension instead of used directly.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public properties</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/CollectionInfo.html">CollectionInfo</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#CollectionInfo()">CollectionInfo</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/CollectionItemInfo.html">CollectionItemInfo</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#CollectionItemInfo()">CollectionItemInfo</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#ContentDescription()">ContentDescription</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Disabled()">Disabled</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#EditableText()">EditableText</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Error()">Error</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Focused()">Focused</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Heading()">Heading</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/ScrollAxisRange.html">ScrollAxisRange</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#HorizontalScrollAxisRange()">HorizontalScrollAxisRange</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#ImeAction()">ImeAction</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#IndexForKey()">IndexForKey</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</code></td>
-            <td>
-              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#InvisibleToUser()">InvisibleToUser</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#IsContainer()">IsContainer</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#IsDialog()">IsDialog</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#IsPopup()">IsPopup</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/LiveRegionMode.html">LiveRegionMode</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#LiveRegion()">LiveRegion</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#PaneTitle()">PaneTitle</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Password()">Password</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/ProgressBarRangeInfo.html">ProgressBarRangeInfo</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#ProgressBarRangeInfo()">ProgressBarRangeInfo</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/Role.html">Role</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Role()">Role</a></code></div>
-              <p>The type of user interface element.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#SelectableGroup()">SelectableGroup</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Selected()">Selected</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#StateDescription()">StateDescription</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#TestTag()">TestTag</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&gt;&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Text()">Text</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/text/TextRange.html">TextRange</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#TextSelectionRange()">TextSelectionRange</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/state/ToggleableState.html">ToggleableState</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#ToggleableState()">ToggleableState</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/ScrollAxisRange.html">ScrollAxisRange</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#VerticalScrollAxisRange()">VerticalScrollAxisRange</a></code></div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/CollectionInfo.html">CollectionInfo</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#CollectionInfo()">CollectionInfo</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/CollectionItemInfo.html">CollectionItemInfo</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#CollectionItemInfo()">CollectionItemInfo</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#ContentDescription()">ContentDescription</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Disabled()">Disabled</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#EditableText()">EditableText</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Error()">Error</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Focused()">Focused</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Heading()">Heading</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/ScrollAxisRange.html">ScrollAxisRange</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#HorizontalScrollAxisRange()">HorizontalScrollAxisRange</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#ImeAction()">ImeAction</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#IndexForKey()">IndexForKey</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#InvisibleToUser()">InvisibleToUser</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#IsContainer()">IsContainer</a></code></div>
+                <p><strong>This property is deprecated.</strong> Use `isTraversalGroup` instead.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#IsDialog()">IsDialog</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#IsPopup()">IsPopup</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#IsTraversalGroup()">IsTraversalGroup</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/LiveRegionMode.html">LiveRegionMode</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#LiveRegion()">LiveRegion</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#PaneTitle()">PaneTitle</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Password()">Password</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/ProgressBarRangeInfo.html">ProgressBarRangeInfo</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#ProgressBarRangeInfo()">ProgressBarRangeInfo</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/Role.html">Role</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Role()">Role</a></code></div>
+                <p>The type of user interface element.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#SelectableGroup()">SelectableGroup</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Selected()">Selected</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#StateDescription()">StateDescription</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#TestTag()">TestTag</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&gt;&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Text()">Text</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/text/TextRange.html">TextRange</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#TextSelectionRange()">TextSelectionRange</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/state/ToggleableState.html">ToggleableState</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#ToggleableState()">ToggleableState</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#TraversalIndex()">TraversalIndex</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/ScrollAxisRange.html">ScrollAxisRange</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#VerticalScrollAxisRange()">VerticalScrollAxisRange</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
-    <div class="list">
-      <h2>Public properties</h2>
-      <div class="api-item"><a name="getCollectionInfo()"></a><a name="setCollectionInfo()"></a><a name="getCollectionInfo--"></a><a name="setCollectionInfo--"></a>
-        <h3 class="api-name" id="CollectionInfo()">CollectionInfo</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#CollectionInfo()">CollectionInfo</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/CollectionInfo.html">CollectionInfo</a>&gt;</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).collectionInfo()">collectionInfo</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getCollectionInfo()"></a><a name="setCollectionInfo()"></a><a name="getCollectionInfo--"></a><a name="setCollectionInfo--"></a>
+          <h3 class="api-name" id="CollectionInfo()">CollectionInfo</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#CollectionInfo()">CollectionInfo</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/CollectionInfo.html">CollectionInfo</a>&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).collectionInfo()">collectionInfo</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getCollectionItemInfo()"></a><a name="setCollectionItemInfo()"></a><a name="getCollectionItemInfo--"></a><a name="setCollectionItemInfo--"></a>
+          <h3 class="api-name" id="CollectionItemInfo()">CollectionItemInfo</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#CollectionItemInfo()">CollectionItemInfo</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/CollectionItemInfo.html">CollectionItemInfo</a>&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).collectionItemInfo()">collectionItemInfo</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getContentDescription()"></a><a name="setContentDescription()"></a><a name="getContentDescription--"></a><a name="setContentDescription--"></a>
+          <h3 class="api-name" id="ContentDescription()">ContentDescription</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#ContentDescription()">ContentDescription</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).contentDescription()">contentDescription</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getDisabled()"></a><a name="setDisabled()"></a><a name="getDisabled--"></a><a name="setDisabled--"></a>
+          <h3 class="api-name" id="Disabled()">Disabled</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Disabled()">Disabled</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).disabled()">disabled</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getEditableText()"></a><a name="setEditableText()"></a><a name="getEditableText--"></a><a name="setEditableText--"></a>
+          <h3 class="api-name" id="EditableText()">EditableText</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#EditableText()">EditableText</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).editableText()">editableText</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getError()"></a><a name="setError()"></a><a name="getError--"></a><a name="setError--"></a>
+          <h3 class="api-name" id="Error()">Error</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Error()">Error</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).error(kotlin.String)">error</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getFocused()"></a><a name="setFocused()"></a><a name="getFocused--"></a><a name="setFocused--"></a>
+          <h3 class="api-name" id="Focused()">Focused</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Focused()">Focused</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).focused()">focused</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getHeading()"></a><a name="setHeading()"></a><a name="getHeading--"></a><a name="setHeading--"></a>
+          <h3 class="api-name" id="Heading()">Heading</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Heading()">Heading</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).heading()">heading</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getHorizontalScrollAxisRange()"></a><a name="setHorizontalScrollAxisRange()"></a><a name="getHorizontalScrollAxisRange--"></a><a name="setHorizontalScrollAxisRange--"></a>
+          <h3 class="api-name" id="HorizontalScrollAxisRange()">HorizontalScrollAxisRange</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#HorizontalScrollAxisRange()">HorizontalScrollAxisRange</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/ScrollAxisRange.html">ScrollAxisRange</a>&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).horizontalScrollAxisRange()">horizontalScrollAxisRange</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getImeAction()"></a><a name="setImeAction()"></a><a name="getImeAction--"></a><a name="setImeAction--"></a>
+          <h3 class="api-name" id="ImeAction()">ImeAction</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#ImeAction()">ImeAction</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a>&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).imeAction()">imeAction</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getIndexForKey()"></a><a name="setIndexForKey()"></a><a name="getIndexForKey--"></a><a name="setIndexForKey--"></a>
+          <h3 class="api-name" id="IndexForKey()">IndexForKey</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#IndexForKey()">IndexForKey</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).indexForKey(kotlin.Function1)">indexForKey</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getInvisibleToUser()"></a><a name="setInvisibleToUser()"></a><a name="getInvisibleToUser--"></a><a name="setInvisibleToUser--"></a>
+          <h3 class="api-name" id="InvisibleToUser()">InvisibleToUser</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#InvisibleToUser()">InvisibleToUser</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).invisibleToUser()">invisibleToUser</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getIsContainer()"></a><a name="setIsContainer()"></a><a name="getIsContainer--"></a><a name="setIsContainer--"></a>
+          <h3 class="api-name" id="IsContainer()">IsContainer</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#IsContainer()">IsContainer</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;</pre>
+          <aside class="caution"><strong>This property is deprecated.</strong><br>Use `isTraversalGroup` instead.</aside>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).isContainer()">isContainer</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getIsDialog()"></a><a name="setIsDialog()"></a><a name="getIsDialog--"></a><a name="setIsDialog--"></a>
+          <h3 class="api-name" id="IsDialog()">IsDialog</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#IsDialog()">IsDialog</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).dialog()">dialog</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getIsPopup()"></a><a name="setIsPopup()"></a><a name="getIsPopup--"></a><a name="setIsPopup--"></a>
+          <h3 class="api-name" id="IsPopup()">IsPopup</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#IsPopup()">IsPopup</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).popup()">popup</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getIsTraversalGroup()"></a><a name="setIsTraversalGroup()"></a><a name="getIsTraversalGroup--"></a><a name="setIsTraversalGroup--"></a>
+          <h3 class="api-name" id="IsTraversalGroup()">IsTraversalGroup</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#IsTraversalGroup()">IsTraversalGroup</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).isTraversalGroup()">isTraversalGroup</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getLiveRegion()"></a><a name="setLiveRegion()"></a><a name="getLiveRegion--"></a><a name="setLiveRegion--"></a>
+          <h3 class="api-name" id="LiveRegion()">LiveRegion</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#LiveRegion()">LiveRegion</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/LiveRegionMode.html">LiveRegionMode</a>&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).liveRegion()">liveRegion</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getPaneTitle()"></a><a name="setPaneTitle()"></a><a name="getPaneTitle--"></a><a name="setPaneTitle--"></a>
+          <h3 class="api-name" id="PaneTitle()">PaneTitle</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#PaneTitle()">PaneTitle</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).paneTitle()">paneTitle</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getPassword()"></a><a name="setPassword()"></a><a name="getPassword--"></a><a name="setPassword--"></a>
+          <h3 class="api-name" id="Password()">Password</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Password()">Password</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).password()">password</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getProgressBarRangeInfo()"></a><a name="setProgressBarRangeInfo()"></a><a name="getProgressBarRangeInfo--"></a><a name="setProgressBarRangeInfo--"></a>
+          <h3 class="api-name" id="ProgressBarRangeInfo()">ProgressBarRangeInfo</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#ProgressBarRangeInfo()">ProgressBarRangeInfo</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/ProgressBarRangeInfo.html">ProgressBarRangeInfo</a>&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).progressBarRangeInfo()">progressBarRangeInfo</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getRole()"></a><a name="setRole()"></a><a name="getRole--"></a><a name="setRole--"></a>
+          <h3 class="api-name" id="Role()">Role</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Role()">Role</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/Role.html">Role</a>&gt;</pre>
+          <p>The type of user interface element. Accessibility services might use this to describe the element or do customizations. Most roles can be automatically resolved by the semantics properties of this element. But some elements with subtle differences need an exact role. If an exact role is not listed in <code><a href="/reference/kotlin/androidx/compose/ui/semantics/Role.html">Role</a></code>, this property should not be set and the framework will automatically resolve it.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).role()">role</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getSelectableGroup()"></a><a name="setSelectableGroup()"></a><a name="getSelectableGroup--"></a><a name="setSelectableGroup--"></a>
+          <h3 class="api-name" id="SelectableGroup()">SelectableGroup</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#SelectableGroup()">SelectableGroup</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).selectableGroup()">selectableGroup</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getSelected()"></a><a name="setSelected()"></a><a name="getSelected--"></a><a name="setSelected--"></a>
+          <h3 class="api-name" id="Selected()">Selected</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Selected()">Selected</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).selected()">selected</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getStateDescription()"></a><a name="setStateDescription()"></a><a name="getStateDescription--"></a><a name="setStateDescription--"></a>
+          <h3 class="api-name" id="StateDescription()">StateDescription</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#StateDescription()">StateDescription</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).stateDescription()">stateDescription</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getTestTag()"></a><a name="setTestTag()"></a><a name="getTestTag--"></a><a name="setTestTag--"></a>
+          <h3 class="api-name" id="TestTag()">TestTag</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#TestTag()">TestTag</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).testTag()">testTag</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getText()"></a><a name="setText()"></a><a name="getText--"></a><a name="setText--"></a>
+          <h3 class="api-name" id="Text()">Text</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Text()">Text</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&gt;&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).text()">text</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getTextSelectionRange()"></a><a name="setTextSelectionRange()"></a><a name="getTextSelectionRange--"></a><a name="setTextSelectionRange--"></a>
+          <h3 class="api-name" id="TextSelectionRange()">TextSelectionRange</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#TextSelectionRange()">TextSelectionRange</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/text/TextRange.html">TextRange</a>&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).textSelectionRange()">textSelectionRange</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getToggleableState()"></a><a name="setToggleableState()"></a><a name="getToggleableState--"></a><a name="setToggleableState--"></a>
+          <h3 class="api-name" id="ToggleableState()">ToggleableState</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#ToggleableState()">ToggleableState</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/state/ToggleableState.html">ToggleableState</a>&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).toggleableState()">toggleableState</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getTraversalIndex()"></a><a name="setTraversalIndex()"></a><a name="getTraversalIndex--"></a><a name="setTraversalIndex--"></a>
+          <h3 class="api-name" id="TraversalIndex()">TraversalIndex</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#TraversalIndex()">TraversalIndex</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).traversalIndex()">traversalIndex</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getVerticalScrollAxisRange()"></a><a name="setVerticalScrollAxisRange()"></a><a name="getVerticalScrollAxisRange--"></a><a name="setVerticalScrollAxisRange--"></a>
+          <h3 class="api-name" id="VerticalScrollAxisRange()">VerticalScrollAxisRange</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#VerticalScrollAxisRange()">VerticalScrollAxisRange</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/ScrollAxisRange.html">ScrollAxisRange</a>&gt;</pre>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).verticalScrollAxisRange()">verticalScrollAxisRange</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-      <div class="api-item"><a name="getCollectionItemInfo()"></a><a name="setCollectionItemInfo()"></a><a name="getCollectionItemInfo--"></a><a name="setCollectionItemInfo--"></a>
-        <h3 class="api-name" id="CollectionItemInfo()">CollectionItemInfo</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#CollectionItemInfo()">CollectionItemInfo</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/CollectionItemInfo.html">CollectionItemInfo</a>&gt;</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).collectionItemInfo()">collectionItemInfo</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getContentDescription()"></a><a name="setContentDescription()"></a><a name="getContentDescription--"></a><a name="setContentDescription--"></a>
-        <h3 class="api-name" id="ContentDescription()">ContentDescription</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#ContentDescription()">ContentDescription</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;&gt;</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).contentDescription()">contentDescription</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getDisabled()"></a><a name="setDisabled()"></a><a name="getDisabled--"></a><a name="setDisabled--"></a>
-        <h3 class="api-name" id="Disabled()">Disabled</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Disabled()">Disabled</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).disabled()">disabled</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getEditableText()"></a><a name="setEditableText()"></a><a name="getEditableText--"></a><a name="setEditableText--"></a>
-        <h3 class="api-name" id="EditableText()">EditableText</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#EditableText()">EditableText</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&gt;</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).editableText()">editableText</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getError()"></a><a name="setError()"></a><a name="getError--"></a><a name="setError--"></a>
-        <h3 class="api-name" id="Error()">Error</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Error()">Error</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).error(kotlin.String)">error</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getFocused()"></a><a name="setFocused()"></a><a name="getFocused--"></a><a name="setFocused--"></a>
-        <h3 class="api-name" id="Focused()">Focused</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Focused()">Focused</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).focused()">focused</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getHeading()"></a><a name="setHeading()"></a><a name="getHeading--"></a><a name="setHeading--"></a>
-        <h3 class="api-name" id="Heading()">Heading</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Heading()">Heading</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).heading()">heading</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getHorizontalScrollAxisRange()"></a><a name="setHorizontalScrollAxisRange()"></a><a name="getHorizontalScrollAxisRange--"></a><a name="setHorizontalScrollAxisRange--"></a>
-        <h3 class="api-name" id="HorizontalScrollAxisRange()">HorizontalScrollAxisRange</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#HorizontalScrollAxisRange()">HorizontalScrollAxisRange</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/ScrollAxisRange.html">ScrollAxisRange</a>&gt;</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).horizontalScrollAxisRange()">horizontalScrollAxisRange</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getImeAction()"></a><a name="setImeAction()"></a><a name="getImeAction--"></a><a name="setImeAction--"></a>
-        <h3 class="api-name" id="ImeAction()">ImeAction</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#ImeAction()">ImeAction</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/text/input/ImeAction.html">ImeAction</a>&gt;</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).imeAction()">imeAction</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getIndexForKey()"></a><a name="setIndexForKey()"></a><a name="getIndexForKey--"></a><a name="setIndexForKey--"></a>
-        <h3 class="api-name" id="IndexForKey()">IndexForKey</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#IndexForKey()">IndexForKey</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>&gt;</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).indexForKey(kotlin.Function1)">indexForKey</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getInvisibleToUser()"></a><a name="setInvisibleToUser()"></a><a name="getInvisibleToUser--"></a><a name="setInvisibleToUser--"></a>
-        <h3 class="api-name" id="InvisibleToUser()">InvisibleToUser</h3>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#InvisibleToUser()">InvisibleToUser</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).invisibleToUser()">invisibleToUser</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getIsContainer()"></a><a name="setIsContainer()"></a><a name="getIsContainer--"></a><a name="setIsContainer--"></a>
-        <h3 class="api-name" id="IsContainer()">IsContainer</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#IsContainer()">IsContainer</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).isContainer()">isContainer</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getIsDialog()"></a><a name="setIsDialog()"></a><a name="getIsDialog--"></a><a name="setIsDialog--"></a>
-        <h3 class="api-name" id="IsDialog()">IsDialog</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#IsDialog()">IsDialog</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).dialog()">dialog</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getIsPopup()"></a><a name="setIsPopup()"></a><a name="getIsPopup--"></a><a name="setIsPopup--"></a>
-        <h3 class="api-name" id="IsPopup()">IsPopup</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#IsPopup()">IsPopup</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).popup()">popup</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getLiveRegion()"></a><a name="setLiveRegion()"></a><a name="getLiveRegion--"></a><a name="setLiveRegion--"></a>
-        <h3 class="api-name" id="LiveRegion()">LiveRegion</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#LiveRegion()">LiveRegion</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/LiveRegionMode.html">LiveRegionMode</a>&gt;</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).liveRegion()">liveRegion</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getPaneTitle()"></a><a name="setPaneTitle()"></a><a name="getPaneTitle--"></a><a name="setPaneTitle--"></a>
-        <h3 class="api-name" id="PaneTitle()">PaneTitle</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#PaneTitle()">PaneTitle</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).paneTitle()">paneTitle</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getPassword()"></a><a name="setPassword()"></a><a name="getPassword--"></a><a name="setPassword--"></a>
-        <h3 class="api-name" id="Password()">Password</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Password()">Password</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).password()">password</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getProgressBarRangeInfo()"></a><a name="setProgressBarRangeInfo()"></a><a name="getProgressBarRangeInfo--"></a><a name="setProgressBarRangeInfo--"></a>
-        <h3 class="api-name" id="ProgressBarRangeInfo()">ProgressBarRangeInfo</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#ProgressBarRangeInfo()">ProgressBarRangeInfo</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/ProgressBarRangeInfo.html">ProgressBarRangeInfo</a>&gt;</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).progressBarRangeInfo()">progressBarRangeInfo</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getRole()"></a><a name="setRole()"></a><a name="getRole--"></a><a name="setRole--"></a>
-        <h3 class="api-name" id="Role()">Role</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Role()">Role</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/Role.html">Role</a>&gt;</pre>
-        <p>The type of user interface element. Accessibility services might use this to describe the element or do customizations. Most roles can be automatically resolved by the semantics properties of this element. But some elements with subtle differences need an exact role. If an exact role is not listed in <code><a href="/reference/kotlin/androidx/compose/ui/semantics/Role.html">Role</a></code>, this property should not be set and the framework will automatically resolve it.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).role()">role</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getSelectableGroup()"></a><a name="setSelectableGroup()"></a><a name="getSelectableGroup--"></a><a name="setSelectableGroup--"></a>
-        <h3 class="api-name" id="SelectableGroup()">SelectableGroup</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#SelectableGroup()">SelectableGroup</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).selectableGroup()">selectableGroup</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getSelected()"></a><a name="setSelected()"></a><a name="getSelected--"></a><a name="setSelected--"></a>
-        <h3 class="api-name" id="Selected()">Selected</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Selected()">Selected</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).selected()">selected</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getStateDescription()"></a><a name="setStateDescription()"></a><a name="getStateDescription--"></a><a name="setStateDescription--"></a>
-        <h3 class="api-name" id="StateDescription()">StateDescription</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#StateDescription()">StateDescription</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).stateDescription()">stateDescription</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getTestTag()"></a><a name="setTestTag()"></a><a name="getTestTag--"></a><a name="setTestTag--"></a>
-        <h3 class="api-name" id="TestTag()">TestTag</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#TestTag()">TestTag</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).testTag()">testTag</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getText()"></a><a name="setText()"></a><a name="getText--"></a><a name="setText--"></a>
-        <h3 class="api-name" id="Text()">Text</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#Text()">Text</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&gt;&gt;</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).text()">text</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getTextSelectionRange()"></a><a name="setTextSelectionRange()"></a><a name="getTextSelectionRange--"></a><a name="setTextSelectionRange--"></a>
-        <h3 class="api-name" id="TextSelectionRange()">TextSelectionRange</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#TextSelectionRange()">TextSelectionRange</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/text/TextRange.html">TextRange</a>&gt;</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).textSelectionRange()">textSelectionRange</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getToggleableState()"></a><a name="setToggleableState()"></a><a name="getToggleableState--"></a><a name="setToggleableState--"></a>
-        <h3 class="api-name" id="ToggleableState()">ToggleableState</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#ToggleableState()">ToggleableState</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/state/ToggleableState.html">ToggleableState</a>&gt;</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).toggleableState()">toggleableState</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="getVerticalScrollAxisRange()"></a><a name="setVerticalScrollAxisRange()"></a><a name="getVerticalScrollAxisRange--"></a><a name="setVerticalScrollAxisRange--"></a>
-        <h3 class="api-name" id="VerticalScrollAxisRange()">VerticalScrollAxisRange</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsProperties.html#VerticalScrollAxisRange()">VerticalScrollAxisRange</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/semantics/ScrollAxisRange.html">ScrollAxisRange</a>&gt;</pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).verticalScrollAxisRange()">verticalScrollAxisRange</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+    </devsite-filter >
   </body>
 </html>

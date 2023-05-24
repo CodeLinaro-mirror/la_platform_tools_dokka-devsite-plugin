@@ -10,10 +10,10 @@
     </div>
     <h1>SliderPositions</h1>
     <p>
-      <pre>@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br>public final class <a href="/reference/androidx/compose/material3/SliderPositions.html">SliderPositions</a></pre>
+      <pre>public final class <a href="/reference/androidx/compose/material3/SliderPositions.html">SliderPositions</a></pre>
     </p>
     <hr>
-    <p>Class that holds information about <code><a href="/reference/androidx/compose/material3/package-summary.html#Slider(kotlin.Float,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.ranges.ClosedFloatingPointRange,kotlin.Int,kotlin.Function0,androidx.compose.material3.SliderColors,androidx.compose.foundation.interaction.MutableInteractionSource)">Slider</a></code>'s active track and fractional positions where the discrete ticks should be drawn on the track.</p>
+    <p>Class that holds information about <code><a href="/reference/androidx/compose/material3/package-summary.html#Slider(kotlin.Float,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.ranges.ClosedFloatingPointRange,kotlin.Int,kotlin.Function0,androidx.compose.material3.SliderColors,androidx.compose.foundation.interaction.MutableInteractionSource)">Slider</a></code>'s and <code><a href="/reference/androidx/compose/material3/package-summary.html#RangeSlider(kotlin.ranges.ClosedFloatingPointRange,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.ranges.ClosedFloatingPointRange,kotlin.Int,kotlin.Function0,androidx.compose.material3.SliderColors)">RangeSlider</a></code>'s active track and fractional positions where the discrete ticks should be drawn on the track.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -29,7 +29,7 @@
         <tbody class="list">
           <tr>
             <td>
-              <div><code><a href="/reference/androidx/compose/material3/SliderPositions.html#SliderPositions(kotlin.Float,kotlin.FloatArray)">SliderPositions</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;initialPositionFraction,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> float[]&nbsp;initialTickFractions<br>)</code></div>
+              <div><code><a href="/reference/androidx/compose/material3/SliderPositions.html#SliderPositions(kotlin.ranges.ClosedFloatingPointRange,kotlin.FloatArray)">SliderPositions</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-closed-floating-point-range/index.html">ClosedFloatingPointRange</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;&nbsp;initialActiveRange,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> float[]&nbsp;initialTickFractions<br>)</code></div>
             </td>
           </tr>
         </tbody>
@@ -54,10 +54,10 @@
             </td>
           </tr>
           <tr>
-            <td><code>final float</code></td>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-closed-floating-point-range/index.html">ClosedFloatingPointRange</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/material3/SliderPositions.html#getPositionFraction()">getPositionFraction</a>()</code></div>
-              <p><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code> within the range 0f, 1f that indicates the current position of the thumb as a fraction of the entire track.</p>
+              <div><code><a href="/reference/androidx/compose/material3/SliderPositions.html#getActiveRange()">getActiveRange</a>()</code></div>
+              <p><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-closed-floating-point-range/index.html">ClosedFloatingPointRange</a></code> that indicates the current active range for the start to thumb for a <code><a href="/reference/androidx/compose/material3/package-summary.html#Slider(kotlin.Float,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.ranges.ClosedFloatingPointRange,kotlin.Int,kotlin.Function0,androidx.compose.material3.SliderColors,androidx.compose.foundation.interaction.MutableInteractionSource)">Slider</a></code> and start thumb to end thumb for a <code><a href="/reference/androidx/compose/material3/package-summary.html#RangeSlider(kotlin.ranges.ClosedFloatingPointRange,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.ranges.ClosedFloatingPointRange,kotlin.Int,kotlin.Function0,androidx.compose.material3.SliderColors)">RangeSlider</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -78,9 +78,9 @@
     </div>
     <div class="list">
       <h2>Public constructors</h2>
-      <div class="api-item"><a name="SliderPositions(kotlin.Float, kotlin.FloatArray)"></a><a name="SliderPositions-kotlin.Float-kotlin.FloatArray-"></a><a name="sliderpositions"></a>
-        <h3 class="api-name" id="SliderPositions(kotlin.Float,kotlin.FloatArray)">SliderPositions</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/material3/SliderPositions.html#SliderPositions(kotlin.Float,kotlin.FloatArray)">SliderPositions</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;initialPositionFraction,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> float[]&nbsp;initialTickFractions<br>)</pre>
+      <div class="api-item"><a name="SliderPositions(kotlin.ranges.ClosedFloatingPointRange, kotlin.FloatArray)"></a><a name="SliderPositions-kotlin.ranges.ClosedFloatingPointRange-kotlin.FloatArray-"></a><a name="sliderpositions"></a>
+        <h3 class="api-name" id="SliderPositions(kotlin.ranges.ClosedFloatingPointRange,kotlin.FloatArray)">SliderPositions</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/material3/SliderPositions.html#SliderPositions(kotlin.ranges.ClosedFloatingPointRange,kotlin.FloatArray)">SliderPositions</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-closed-floating-point-range/index.html">ClosedFloatingPointRange</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;&nbsp;initialActiveRange,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> float[]&nbsp;initialTickFractions<br>)</pre>
       </div>
     </div>
     <div class="list">
@@ -89,10 +89,10 @@
         <h3 class="api-name" id="equals(kotlin.Any)">equals</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/material3/SliderPositions.html#equals(kotlin.Any)">equals</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;other)</pre>
       </div>
-      <div class="api-item"><a name="getPositionFraction--"></a><a name="getpositionfraction"></a>
-        <h3 class="api-name" id="getPositionFraction()">getPositionFraction</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/material3/SliderPositions.html#getPositionFraction()">getPositionFraction</a>()</pre>
-        <p><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code> within the range 0f, 1f that indicates the current position of the thumb as a fraction of the entire track.</p>
+      <div class="api-item"><a name="getActiveRange--"></a><a name="getactiverange"></a>
+        <h3 class="api-name" id="getActiveRange()">getActiveRange</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-closed-floating-point-range/index.html">ClosedFloatingPointRange</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;&nbsp;<a href="/reference/androidx/compose/material3/SliderPositions.html#getActiveRange()">getActiveRange</a>()</pre>
+        <p><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-closed-floating-point-range/index.html">ClosedFloatingPointRange</a></code> that indicates the current active range for the start to thumb for a <code><a href="/reference/androidx/compose/material3/package-summary.html#Slider(kotlin.Float,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.ranges.ClosedFloatingPointRange,kotlin.Int,kotlin.Function0,androidx.compose.material3.SliderColors,androidx.compose.foundation.interaction.MutableInteractionSource)">Slider</a></code> and start thumb to end thumb for a <code><a href="/reference/androidx/compose/material3/package-summary.html#RangeSlider(kotlin.ranges.ClosedFloatingPointRange,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.ranges.ClosedFloatingPointRange,kotlin.Int,kotlin.Function0,androidx.compose.material3.SliderColors)">RangeSlider</a></code>.</p>
       </div>
       <div class="api-item"><a name="getTickFractions--"></a><a name="gettickfractions"></a>
         <h3 class="api-name" id="getTickFractions()">getTickFractions</h3>

@@ -9,41 +9,61 @@
       <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/layout/PinnableContainer.kt+class:androidx.compose.ui.layout.PinnableContainer.PinnedHandle&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>PinnableContainer.PinnedHandle</h1>
-    <p>
-      <pre>fun interface <a href="/reference/kotlin/androidx/compose/ui/layout/PinnableContainer.PinnedHandle.html">PinnableContainer.PinnedHandle</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>fun interface <a href="/reference/kotlin/androidx/compose/ui/layout/PinnableContainer.PinnedHandle.html">PinnableContainer.PinnedHandle</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <hr>
-    <p>This is an object returned by <code><a href="/reference/kotlin/androidx/compose/ui/layout/PinnableContainer.html#pin()">pin</a></code> which allows to unpin the content.</p>
+    <p>This is an object returned by <code><a href="/reference/kotlin/androidx/compose/ui/layout/PinnableContainer.html#pin()">pin</a></code> which allows to release the pinning.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public functions</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/PinnableContainer.PinnedHandle.html#unpin()">unpin</a>()</code></div>
-              <p>Unpin the container associated with this handle.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/layout/PinnableContainer.PinnedHandle.html#release()">release</a>()</code></div>
+                <p>Releases the pin.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
-    <div class="list">
-      <h2>Public functions</h2>
-      <div class="api-item"><a name="unpin--"></a><a name="unpin"></a>
-        <h3 class="api-name" id="unpin()">unpin</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/PinnableContainer.PinnedHandle.html#unpin()">unpin</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Unpin the container associated with this handle.</p>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="release--"></a><a name="release"></a>
+          <h3 class="api-name" id="release()">release</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/PinnableContainer.PinnedHandle.html#release()">release</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Releases the pin.</p>
+          <p>For example, if this <code><a href="/reference/kotlin/androidx/compose/ui/layout/PinnableContainer.html">PinnableContainer</a></code> is an item of lazy list releasing the pinning will allow lazy list to stop composing the item when it is not visible.</p>
+        </div>
       </div>
-    </div>
+    </devsite-filter >
   </body>
 </html>

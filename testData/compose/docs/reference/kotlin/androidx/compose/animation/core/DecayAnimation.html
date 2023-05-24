@@ -6,12 +6,21 @@
   </head>
   <body>
     <div id="metadata-info-block">
-      <div id="source-link"><a href="https://cs.android.com/search?q=file:-core/androidx/compose/animation/core/Animation.kt+class:androidx.compose.animation.core.DecayAnimation&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/animation/core/Animation.kt+class:androidx.compose.animation.core.DecayAnimation&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>DecayAnimation</h1>
-    <p>
-      <pre>class <a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; : <a href="/reference/kotlin/androidx/compose/animation/core/Animation.html">Animation</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>class <a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; : <a href="/reference/kotlin/androidx/compose/animation/core/Animation.html">Animation</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <hr>
     <p><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code> is an animation that slows down from <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#initialVelocityVector()">initialVelocityVector</a></code> as time goes on. <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code> is stateless, and it does not have any concept of lifecycle. It serves as an animation calculation engine that supports convenient query of value/velocity given a play time. To achieve that, <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code> stores all the animation related information: <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#initialValue()">initialValue</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#initialVelocityVector()">initialVelocityVector</a></code>, decay animation spec, <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#typeConverter()">typeConverter</a></code>.</p>
     <p><b>Note</b>: Unless there's a need to control the timing manually, it's generally recommended to use higher level animation APIs that build on top <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code>, such as <code><a href="/reference/kotlin/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">Animatable.animateDecay</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateDecay(androidx.compose.animation.core.DecayAnimationSpec,kotlin.Boolean,kotlin.Function1)">AnimationState.animateDecay</a></code>, etc.</p>
@@ -40,120 +49,161 @@
     </div>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public constructors</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td>
-              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#DecayAnimation(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,kotlin.Any)">DecayAnimation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;typeConverter:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;T<br>)</code></div>
-              <p><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code> is an animation that slows down from <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#&lt;init&gt;(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,kotlin.Any)">initialVelocity</a></code> as time goes on.</p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#DecayAnimation(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,androidx.compose.animation.core.AnimationVector)">DecayAnimation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;typeConverter:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocityVector:&nbsp;V<br>)</code></div>
-              <p><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code> is an animation that slows down from <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#&lt;init&gt;(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,androidx.compose.animation.core.AnimationVector)">initialVelocityVector</a></code> as time goes on.</p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#DecayAnimation(androidx.compose.animation.core.VectorizedDecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,androidx.compose.animation.core.AnimationVector)">DecayAnimation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDecayAnimationSpec.html">VectorizedDecayAnimationSpec</a>&lt;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;typeConverter:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocityVector:&nbsp;V<br>)</code></div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="93%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public constructors</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td>
+                <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#DecayAnimation(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,kotlin.Any)">DecayAnimation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;typeConverter:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;T<br>)</code></div>
+                <p><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code> is an animation that slows down from <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#&lt;init&gt;(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,kotlin.Any)">initialVelocity</a></code> as time goes on.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td>
+                <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#DecayAnimation(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,androidx.compose.animation.core.AnimationVector)">DecayAnimation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;typeConverter:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocityVector:&nbsp;V<br>)</code></div>
+                <p><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code> is an animation that slows down from <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#&lt;init&gt;(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,androidx.compose.animation.core.AnimationVector)">initialVelocityVector</a></code> as time goes on.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td>
+                <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#DecayAnimation(androidx.compose.animation.core.VectorizedDecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,androidx.compose.animation.core.AnimationVector)">DecayAnimation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDecayAnimationSpec.html">VectorizedDecayAnimationSpec</a>&lt;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;typeConverter:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocityVector:&nbsp;V<br>)</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public functions</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>open T</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#getValueFromNanos(kotlin.Long)">getValueFromNanos</a>(playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>)</code></div>
-              <p>Returns the value of the animation at the given play time.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>open V</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#getVelocityVectorFromNanos(kotlin.Long)">getVelocityVectorFromNanos</a>(playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>)</code></div>
-              <p>Returns the velocity (in <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> form) of the animation at the given play time.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>open T</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#getValueFromNanos(kotlin.Long)">getValueFromNanos</a>(playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>)</code></div>
+                <p>Returns the value of the animation at the given play time.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open V</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#getVelocityVectorFromNanos(kotlin.Long)">getVelocityVectorFromNanos</a>(playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>)</code></div>
+                <p>Returns the velocity (in <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> form) of the animation at the given play time.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public properties</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#durationNanos()">durationNanos</a></code></div>
-              <p>This amount of time in nanoseconds that the animation will run before it finishes</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>T</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#initialValue()">initialValue</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code>V</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#initialVelocityVector()">initialVelocityVector</a></code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#isInfinite()">isInfinite</a></code></div>
-              <p>Whether or not the <code><a href="/reference/kotlin/androidx/compose/animation/core/Animation.html">Animation</a></code> represents an infinite animation.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>open T</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#targetValue()">targetValue</a></code></div>
-              <p>This is the value that the <code><a href="/reference/kotlin/androidx/compose/animation/core/Animation.html">Animation</a></code> will reach when it finishes uninterrupted.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>open <a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#typeConverter()">typeConverter</a></code></div>
-              <p>The <code><a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a></code> that will be used to convert value/velocity from any arbitrary data type to <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code>.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#durationNanos()">durationNanos</a></code></div>
+                <p>This amount of time in nanoseconds that the animation will run before it finishes</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>T</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#initialValue()">initialValue</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>V</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#initialVelocityVector()">initialVelocityVector</a></code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#isInfinite()">isInfinite</a></code></div>
+                <p>Whether or not the <code><a href="/reference/kotlin/androidx/compose/animation/core/Animation.html">Animation</a></code> represents an infinite animation.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open T</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#targetValue()">targetValue</a></code></div>
+                <p>This is the value that the <code><a href="/reference/kotlin/androidx/compose/animation/core/Animation.html">Animation</a></code> will reach when it finishes uninterrupted.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#typeConverter()">typeConverter</a></code></div>
+                <p>The <code><a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a></code> that will be used to convert value/velocity from any arbitrary data type to <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive" id="inhmethods">
@@ -166,255 +216,289 @@
           <tr>
             <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/animation/core/Animation.html">androidx.compose.animation.core.Animation</a></span>
               <div class="devsite-table-wrapper">
-                <table class="responsive">
-                  <colgroup>
-                    <col width="40%">
-                    <col>
-                  </colgroup>
-                  <tbody class="list">
-                    <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-                      <td>
-                        <div><code><a href="/reference/kotlin/androidx/compose/animation/core/Animation.html#isFinishedFromNanos(kotlin.Long)">isFinishedFromNanos</a>(playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>)</code></div>
-                        <p>Returns whether the animation is finished at the given play time.</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/animation/core/Animation.html#isFinishedFromNanos(kotlin.Long)">isFinishedFromNanos</a>(playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>)</code></div>
+                          <p>Returns whether the animation is finished at the given play time.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
               </div>
 </devsite-expandable>            </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="list">
-      <h2>Public constructors</h2>
-      <div class="api-item"><a name="DecayAnimation(androidx.compose.animation.core.DecayAnimationSpec, androidx.compose.animation.core.TwoWayConverter, kotlin.Any, kotlin.Any)"></a><a name="DecayAnimation-androidx.compose.animation.core.DecayAnimationSpec-androidx.compose.animation.core.TwoWayConverter-kotlin.Any-kotlin.Any-"></a><a name="decayanimation"></a>
-        <h3 class="api-name" id="DecayAnimation(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,kotlin.Any)">DecayAnimation</h3>
-        <pre class="api-signature no-pretty-print">&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#DecayAnimation(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,kotlin.Any)">DecayAnimation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;typeConverter:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;T<br>)</pre>
-        <p><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code> is an animation that slows down from <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#&lt;init&gt;(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,kotlin.Any)">initialVelocity</a></code> as time goes on. <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code> is stateless, and it does not have any concept of lifecycle. It serves as an animation calculation engine that supports convenient query of value/velocity given a play time. To achieve that, <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code> stores all the animation related information: <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#&lt;init&gt;(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,kotlin.Any)">initialValue</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#&lt;init&gt;(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,kotlin.Any)">initialVelocity</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#&lt;init&gt;(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,kotlin.Any)">animationSpec</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#&lt;init&gt;(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,kotlin.Any)">typeConverter</a></code>.</p>
-        <p><b>Note</b>: Unless there's a need to control the timing manually, it's generally recommended to use higher level animation APIs that build on top <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code>, such as <code><a href="/reference/kotlin/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">Animatable.animateDecay</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateDecay(androidx.compose.animation.core.DecayAnimationSpec,kotlin.Boolean,kotlin.Function1)">AnimationState.animateDecay</a></code>, etc.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;T&gt;</code></td>
-                <td>
-                  <p>Decay animation spec that defines the slow-down curve of the animation</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>typeConverter:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;</code></td>
-                <td>
-                  <p>Type converter to convert the type <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">T</a></code> from and to <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code></p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>initialValue:&nbsp;T</code></td>
-                <td>
-                  <p>The starting value of the animation</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>initialVelocity:&nbsp;T</code></td>
-                <td>
-                  <p>The starting velocity of the animation</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public constructors</h2>
+        <div class="api-item"><a name="DecayAnimation(androidx.compose.animation.core.DecayAnimationSpec, androidx.compose.animation.core.TwoWayConverter, kotlin.Any, kotlin.Any)"></a><a name="DecayAnimation-androidx.compose.animation.core.DecayAnimationSpec-androidx.compose.animation.core.TwoWayConverter-kotlin.Any-kotlin.Any-"></a><a name="decayanimation"></a>
+          <h3 class="api-name" id="DecayAnimation(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,kotlin.Any)">DecayAnimation</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#DecayAnimation(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,kotlin.Any)">DecayAnimation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;typeConverter:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;T<br>)</pre>
+          <p><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code> is an animation that slows down from <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#&lt;init&gt;(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,kotlin.Any)">initialVelocity</a></code> as time goes on. <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code> is stateless, and it does not have any concept of lifecycle. It serves as an animation calculation engine that supports convenient query of value/velocity given a play time. To achieve that, <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code> stores all the animation related information: <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#&lt;init&gt;(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,kotlin.Any)">initialValue</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#&lt;init&gt;(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,kotlin.Any)">initialVelocity</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#&lt;init&gt;(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,kotlin.Any)">animationSpec</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#&lt;init&gt;(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,kotlin.Any)">typeConverter</a></code>.</p>
+          <p><b>Note</b>: Unless there's a need to control the timing manually, it's generally recommended to use higher level animation APIs that build on top <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code>, such as <code><a href="/reference/kotlin/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">Animatable.animateDecay</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateDecay(androidx.compose.animation.core.DecayAnimationSpec,kotlin.Boolean,kotlin.Function1)">AnimationState.animateDecay</a></code>, etc.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;T&gt;</code></td>
+                  <td>
+                    <p>Decay animation spec that defines the slow-down curve of the animation</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>typeConverter:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;</code></td>
+                  <td>
+                    <p>Type converter to convert the type <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">T</a></code> from and to <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>initialValue:&nbsp;T</code></td>
+                  <td>
+                    <p>The starting value of the animation</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>initialVelocity:&nbsp;T</code></td>
+                  <td>
+                    <p>The starting velocity of the animation</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">animateDecay</a></code></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateDecay(androidx.compose.animation.core.DecayAnimationSpec,kotlin.Boolean,kotlin.Function1)">animateDecay</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">animateDecay</a></code></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateDecay(androidx.compose.animation.core.DecayAnimationSpec,kotlin.Boolean,kotlin.Function1)">animateDecay</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="api-item"><a name="DecayAnimation(androidx.compose.animation.core.DecayAnimationSpec, androidx.compose.animation.core.TwoWayConverter, kotlin.Any, androidx.compose.animation.core.AnimationVector)"></a><a name="DecayAnimation-androidx.compose.animation.core.DecayAnimationSpec-androidx.compose.animation.core.TwoWayConverter-kotlin.Any-androidx.compose.animation.core.AnimationVector-"></a><a name="decayanimation"></a>
+          <h3 class="api-name" id="DecayAnimation(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,androidx.compose.animation.core.AnimationVector)">DecayAnimation</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#DecayAnimation(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,androidx.compose.animation.core.AnimationVector)">DecayAnimation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;typeConverter:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocityVector:&nbsp;V<br>)</pre>
+          <p><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code> is an animation that slows down from <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#&lt;init&gt;(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,androidx.compose.animation.core.AnimationVector)">initialVelocityVector</a></code> as time goes on. <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code> is stateless, and it does not have any concept of lifecycle. It serves as an animation calculation engine that supports convenient query of value/velocity given a play time. To achieve that, <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code> stores all the animation related information: <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#&lt;init&gt;(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,androidx.compose.animation.core.AnimationVector)">initialValue</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#&lt;init&gt;(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,androidx.compose.animation.core.AnimationVector)">initialVelocityVector</a></code>, decay animation spec, <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#&lt;init&gt;(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,androidx.compose.animation.core.AnimationVector)">typeConverter</a></code>.</p>
+          <p><b>Note</b>: Unless there's a need to control the timing manually, it's generally recommended to use higher level animation APIs that build on top <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code>, such as <code><a href="/reference/kotlin/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">Animatable.animateDecay</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateDecay(androidx.compose.animation.core.DecayAnimationSpec,kotlin.Boolean,kotlin.Function1)">AnimationState.animateDecay</a></code>, etc.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;T&gt;</code></td>
+                  <td>
+                    <p>Decay animation spec that defines the slow-down curve of the animation</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>typeConverter:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;</code></td>
+                  <td>
+                    <p>Type converter to convert the type <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">T</a></code> from and to <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>initialValue:&nbsp;T</code></td>
+                  <td>
+                    <p>The starting value of the animation</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>initialVelocityVector:&nbsp;V</code></td>
+                  <td>
+                    <p>The starting velocity of the animation in <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> form</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">animateDecay</a></code></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateDecay(androidx.compose.animation.core.DecayAnimationSpec,kotlin.Boolean,kotlin.Function1)">animateDecay</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
-      <div class="api-item"><a name="DecayAnimation(androidx.compose.animation.core.DecayAnimationSpec, androidx.compose.animation.core.TwoWayConverter, kotlin.Any, androidx.compose.animation.core.AnimationVector)"></a><a name="DecayAnimation-androidx.compose.animation.core.DecayAnimationSpec-androidx.compose.animation.core.TwoWayConverter-kotlin.Any-androidx.compose.animation.core.AnimationVector-"></a><a name="decayanimation"></a>
-        <h3 class="api-name" id="DecayAnimation(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,androidx.compose.animation.core.AnimationVector)">DecayAnimation</h3>
-        <pre class="api-signature no-pretty-print">&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#DecayAnimation(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,androidx.compose.animation.core.AnimationVector)">DecayAnimation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;typeConverter:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocityVector:&nbsp;V<br>)</pre>
-        <p><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code> is an animation that slows down from <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#&lt;init&gt;(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,androidx.compose.animation.core.AnimationVector)">initialVelocityVector</a></code> as time goes on. <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code> is stateless, and it does not have any concept of lifecycle. It serves as an animation calculation engine that supports convenient query of value/velocity given a play time. To achieve that, <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code> stores all the animation related information: <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#&lt;init&gt;(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,androidx.compose.animation.core.AnimationVector)">initialValue</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#&lt;init&gt;(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,androidx.compose.animation.core.AnimationVector)">initialVelocityVector</a></code>, decay animation spec, <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#&lt;init&gt;(androidx.compose.animation.core.DecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,androidx.compose.animation.core.AnimationVector)">typeConverter</a></code>.</p>
-        <p><b>Note</b>: Unless there's a need to control the timing manually, it's generally recommended to use higher level animation APIs that build on top <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code>, such as <code><a href="/reference/kotlin/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">Animatable.animateDecay</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateDecay(androidx.compose.animation.core.DecayAnimationSpec,kotlin.Boolean,kotlin.Function1)">AnimationState.animateDecay</a></code>, etc.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;T&gt;</code></td>
-                <td>
-                  <p>Decay animation spec that defines the slow-down curve of the animation</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>typeConverter:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;</code></td>
-                <td>
-                  <p>Type converter to convert the type <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">T</a></code> from and to <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code></p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>initialValue:&nbsp;T</code></td>
-                <td>
-                  <p>The starting value of the animation</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>initialVelocityVector:&nbsp;V</code></td>
-                <td>
-                  <p>The starting velocity of the animation in <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> form</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">animateDecay</a></code></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateDecay(androidx.compose.animation.core.DecayAnimationSpec,kotlin.Boolean,kotlin.Function1)">animateDecay</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="DecayAnimation(androidx.compose.animation.core.VectorizedDecayAnimationSpec, androidx.compose.animation.core.TwoWayConverter, kotlin.Any, androidx.compose.animation.core.AnimationVector)"></a><a name="DecayAnimation-androidx.compose.animation.core.VectorizedDecayAnimationSpec-androidx.compose.animation.core.TwoWayConverter-kotlin.Any-androidx.compose.animation.core.AnimationVector-"></a><a name="decayanimation"></a>
-        <h3 class="api-name" id="DecayAnimation(androidx.compose.animation.core.VectorizedDecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,androidx.compose.animation.core.AnimationVector)">DecayAnimation</h3>
-        <pre class="api-signature no-pretty-print">&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#DecayAnimation(androidx.compose.animation.core.VectorizedDecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,androidx.compose.animation.core.AnimationVector)">DecayAnimation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDecayAnimationSpec.html">VectorizedDecayAnimationSpec</a>&lt;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;typeConverter:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocityVector:&nbsp;V<br>)</pre>
-      </div>
-    </div>
-    <div class="list">
-      <h2>Public functions</h2>
-      <div class="api-item"><a name="getValueFromNanos-kotlin.Long-"></a><a name="getvaluefromnanos"></a>
-        <h3 class="api-name" id="getValueFromNanos(kotlin.Long)">getValueFromNanos</h3>
-        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#getValueFromNanos(kotlin.Long)">getValueFromNanos</a>(playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>):&nbsp;T</pre>
-        <p>Returns the value of the animation at the given play time.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
-                <td>
-                  <p>the play time that is used to determine the value of the animation.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="api-item"><a name="DecayAnimation(androidx.compose.animation.core.VectorizedDecayAnimationSpec, androidx.compose.animation.core.TwoWayConverter, kotlin.Any, androidx.compose.animation.core.AnimationVector)"></a><a name="DecayAnimation-androidx.compose.animation.core.VectorizedDecayAnimationSpec-androidx.compose.animation.core.TwoWayConverter-kotlin.Any-androidx.compose.animation.core.AnimationVector-"></a><a name="decayanimation"></a>
+          <h3 class="api-name" id="DecayAnimation(androidx.compose.animation.core.VectorizedDecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,androidx.compose.animation.core.AnimationVector)">DecayAnimation</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#DecayAnimation(androidx.compose.animation.core.VectorizedDecayAnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,androidx.compose.animation.core.AnimationVector)">DecayAnimation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDecayAnimationSpec.html">VectorizedDecayAnimationSpec</a>&lt;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;typeConverter:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocityVector:&nbsp;V<br>)</pre>
         </div>
       </div>
-      <div class="api-item"><a name="getVelocityVectorFromNanos-kotlin.Long-"></a><a name="getvelocityvectorfromnanos"></a>
-        <h3 class="api-name" id="getVelocityVectorFromNanos(kotlin.Long)">getVelocityVectorFromNanos</h3>
-        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#getVelocityVectorFromNanos(kotlin.Long)">getVelocityVectorFromNanos</a>(playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>):&nbsp;V</pre>
-        <p>Returns the velocity (in <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> form) of the animation at the given play time.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
-                <td>
-                  <p>the play time that is used to calculate the velocity of the animation.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="getValueFromNanos-kotlin.Long-"></a><a name="getvaluefromnanos"></a>
+          <h3 class="api-name" id="getValueFromNanos(kotlin.Long)">getValueFromNanos</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#getValueFromNanos(kotlin.Long)">getValueFromNanos</a>(playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>):&nbsp;T</pre>
+          <p>Returns the value of the animation at the given play time.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
+                  <td>
+                    <p>the play time that is used to determine the value of the animation.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="getVelocityVectorFromNanos-kotlin.Long-"></a><a name="getvelocityvectorfromnanos"></a>
+          <h3 class="api-name" id="getVelocityVectorFromNanos(kotlin.Long)">getVelocityVectorFromNanos</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#getVelocityVectorFromNanos(kotlin.Long)">getVelocityVectorFromNanos</a>(playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>):&nbsp;V</pre>
+          <p>Returns the velocity (in <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> form) of the animation at the given play time.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
+                  <td>
+                    <p>the play time that is used to calculate the velocity of the animation.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="list">
-      <h2>Public properties</h2>
-      <div class="api-item"><a name="getDurationNanos()"></a><a name="setDurationNanos()"></a><a name="getDurationNanos--"></a><a name="setDurationNanos--"></a>
-        <h3 class="api-name" id="durationNanos()">durationNanos</h3>
-        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#durationNanos()">durationNanos</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></pre>
-        <p>This amount of time in nanoseconds that the animation will run before it finishes</p>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getDurationNanos()"></a><a name="setDurationNanos()"></a><a name="getDurationNanos--"></a><a name="setDurationNanos--"></a>
+          <h3 class="api-name" id="durationNanos()">durationNanos</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#durationNanos()">durationNanos</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></pre>
+          <p>This amount of time in nanoseconds that the animation will run before it finishes</p>
+        </div>
+        <div class="api-item"><a name="getInitialValue()"></a><a name="setInitialValue()"></a><a name="getInitialValue--"></a><a name="setInitialValue--"></a>
+          <h3 class="api-name" id="initialValue()">initialValue</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#initialValue()">initialValue</a>:&nbsp;T</pre>
+        </div>
+        <div class="api-item"><a name="getInitialVelocityVector()"></a><a name="setInitialVelocityVector()"></a><a name="getInitialVelocityVector--"></a><a name="setInitialVelocityVector--"></a>
+          <h3 class="api-name" id="initialVelocityVector()">initialVelocityVector</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#initialVelocityVector()">initialVelocityVector</a>:&nbsp;V</pre>
+        </div>
+        <div class="api-item"><a name="getIsInfinite()"></a><a name="setIsInfinite()"></a><a name="getIsInfinite--"></a><a name="setIsInfinite--"></a>
+          <h3 class="api-name" id="isInfinite()">isInfinite</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#isInfinite()">isInfinite</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>Whether or not the <code><a href="/reference/kotlin/androidx/compose/animation/core/Animation.html">Animation</a></code> represents an infinite animation. That is, one that will not finish by itself, one that needs an external action to stop. For examples, an indeterminate progress bar, which will only stop when it is removed from the composition.</p>
+        </div>
+        <div class="api-item"><a name="getTargetValue()"></a><a name="setTargetValue()"></a><a name="getTargetValue--"></a><a name="setTargetValue--"></a>
+          <h3 class="api-name" id="targetValue()">targetValue</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#targetValue()">targetValue</a>:&nbsp;T</pre>
+          <p>This is the value that the <code><a href="/reference/kotlin/androidx/compose/animation/core/Animation.html">Animation</a></code> will reach when it finishes uninterrupted.</p>
+        </div>
+        <div class="api-item"><a name="getTypeConverter()"></a><a name="setTypeConverter()"></a><a name="getTypeConverter--"></a><a name="setTypeConverter--"></a>
+          <h3 class="api-name" id="typeConverter()">typeConverter</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#typeConverter()">typeConverter</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;</pre>
+          <p>The <code><a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a></code> that will be used to convert value/velocity from any arbitrary data type to <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code>. This makes it possible to animate different dimensions of the data object independently (e.g. x/y dimensions of the position data).</p>
+        </div>
       </div>
-      <div class="api-item"><a name="getInitialValue()"></a><a name="setInitialValue()"></a><a name="getInitialValue--"></a><a name="setInitialValue--"></a>
-        <h3 class="api-name" id="initialValue()">initialValue</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#initialValue()">initialValue</a>:&nbsp;T</pre>
-      </div>
-      <div class="api-item"><a name="getInitialVelocityVector()"></a><a name="setInitialVelocityVector()"></a><a name="getInitialVelocityVector--"></a><a name="setInitialVelocityVector--"></a>
-        <h3 class="api-name" id="initialVelocityVector()">initialVelocityVector</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#initialVelocityVector()">initialVelocityVector</a>:&nbsp;V</pre>
-      </div>
-      <div class="api-item"><a name="getIsInfinite()"></a><a name="setIsInfinite()"></a><a name="getIsInfinite--"></a><a name="setIsInfinite--"></a>
-        <h3 class="api-name" id="isInfinite()">isInfinite</h3>
-        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#isInfinite()">isInfinite</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
-        <p>Whether or not the <code><a href="/reference/kotlin/androidx/compose/animation/core/Animation.html">Animation</a></code> represents an infinite animation. That is, one that will not finish by itself, one that needs an external action to stop. For examples, an indeterminate progress bar, which will only stop when it is removed from the composition.</p>
-      </div>
-      <div class="api-item"><a name="getTargetValue()"></a><a name="setTargetValue()"></a><a name="getTargetValue--"></a><a name="setTargetValue--"></a>
-        <h3 class="api-name" id="targetValue()">targetValue</h3>
-        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#targetValue()">targetValue</a>:&nbsp;T</pre>
-        <p>This is the value that the <code><a href="/reference/kotlin/androidx/compose/animation/core/Animation.html">Animation</a></code> will reach when it finishes uninterrupted.</p>
-      </div>
-      <div class="api-item"><a name="getTypeConverter()"></a><a name="setTypeConverter()"></a><a name="getTypeConverter--"></a><a name="setTypeConverter--"></a>
-        <h3 class="api-name" id="typeConverter()">typeConverter</h3>
-        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html#typeConverter()">typeConverter</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;</pre>
-        <p>The <code><a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a></code> that will be used to convert value/velocity from any arbitrary data type to <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code>. This makes it possible to animate different dimensions of the data object independently (e.g. x/y dimensions of the position data).</p>
-      </div>
-    </div>
+    </devsite-filter >
   </body>
 </html>

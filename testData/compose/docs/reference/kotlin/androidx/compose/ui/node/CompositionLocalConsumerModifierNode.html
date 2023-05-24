@@ -1,0 +1,225 @@
+<html devsite="true">
+  <head>
+    <title>CompositionLocalConsumerModifierNode</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/node/CompositionLocalConsumerModifierNode.kt+class:androidx.compose.ui.node.CompositionLocalConsumerModifierNode&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>CompositionLocalConsumerModifierNode</h1>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>interface <a href="/reference/kotlin/androidx/compose/ui/node/CompositionLocalConsumerModifierNode.html">CompositionLocalConsumerModifierNode</a> : <a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
+    <hr>
+    <p>Implementing this interface allows your <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> subclass to read <code><a href="/reference/kotlin/androidx/compose/runtime/CompositionLocal.html">CompositionLocals</a></code> via the <code><a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.CompositionLocalConsumerModifierNode).currentValueOf(androidx.compose.runtime.CompositionLocal)">currentValueOf</a></code> function. The values of each CompositionLocal will be resolved based on the context of the layout node that the modifier is attached to, meaning that the modifier will see the same values of each CompositionLocal as its corresponding layout node.</p>
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Box
+import androidx.compose.material.Text
+import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.ui.node.currentValueOf
+
+val localBackgroundColor = compositionLocalOf { Color.White }
+class BackgroundColor : Modifier.Node(), DrawModifierNode,
+    CompositionLocalConsumerModifierNode {
+    override fun ContentDrawScope.draw() {
+        val backgroundColor = currentValueOf(localBackgroundColor)
+        drawRect(backgroundColor)
+        drawContent()
+    }
+}
+val backgroundColorElement = object : ModifierNodeElement&lt;BackgroundColor&gt;() {
+    override fun create() = BackgroundColor()
+    override fun update(node: BackgroundColor) {}
+    override fun hashCode() = System.identityHashCode(this)
+    override fun equals(other: Any?) = (other === this)
+    override fun InspectorInfo.inspectableProperties() {
+        name = &quot;backgroundColor&quot;
+    }
+}
+fun Modifier.backgroundColor() = this then backgroundColorElement
+Box(Modifier.backgroundColor()) {
+    Text(&quot;Hello, world!&quot;)
+}</pre>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%">See also</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Extension functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>T</code></td>
+              <td>
+                <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/ui/node/CompositionLocalConsumerModifierNode.html">CompositionLocalConsumerModifierNode</a>.<a href="/reference/kotlin/androidx/compose/ui/node/CompositionLocalConsumerModifierNode.html#(androidx.compose.ui.node.CompositionLocalConsumerModifierNode).currentValueOf(androidx.compose.runtime.CompositionLocal)">currentValueOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;local:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a>&lt;T&gt;<br>)</code></div>
+                <p>Returns the current value of <code><a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.CompositionLocalConsumerModifierNode).currentValueOf(androidx.compose.runtime.CompositionLocal)">local</a></code> at the position in the composition hierarchy of this modifier's attached layout node.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">androidx.compose.ui.node.DelegatableNode</a></span>
+              <div class="devsite-table-wrapper">
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html#node()">node</a></code></div>
+                          <p>A reference of the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that holds this node's position in the node hierarchy.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Extension functions</h2>
+        <div class="api-item"><a name="-androidx.compose.ui.node.CompositionLocalConsumerModifierNode-.currentValueOf-androidx.compose.runtime.CompositionLocal-"></a><a name="currentvalueof"></a>
+          <h3 class="api-name" id="(androidx.compose.ui.node.CompositionLocalConsumerModifierNode).currentValueOf(androidx.compose.runtime.CompositionLocal)">currentValueOf</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/ui/node/CompositionLocalConsumerModifierNode.html">CompositionLocalConsumerModifierNode</a>.<a href="/reference/kotlin/androidx/compose/ui/node/CompositionLocalConsumerModifierNode.html#(androidx.compose.ui.node.CompositionLocalConsumerModifierNode).currentValueOf(androidx.compose.runtime.CompositionLocal)">currentValueOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;local:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a>&lt;T&gt;<br>):&nbsp;T</pre>
+          <p>Returns the current value of <code><a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.CompositionLocalConsumerModifierNode).currentValueOf(androidx.compose.runtime.CompositionLocal)">local</a></code> at the position in the composition hierarchy of this modifier's attached layout node.</p>
+          <p>Unlike <code><a href="/reference/kotlin/androidx/compose/runtime/CompositionLocal.html#current()">CompositionLocal.current</a></code>, reads via this function are not automatically tracked by Compose. Modifiers are not able to recompose in the same way that a Composable can, and therefore can't receive updates arbitrarily for a CompositionLocal.</p>
+          <p>Because CompositionLocals may change arbitrarily, it is strongly recommended to ensure that the composition local is observed instead of being read once. If you call <code><a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.CompositionLocalConsumerModifierNode).currentValueOf(androidx.compose.runtime.CompositionLocal)">currentValueOf</a></code> inside of a modifier callback like <code><a href="/reference/kotlin/androidx/compose/ui/node/LayoutModifierNode.html#(androidx.compose.ui.layout.MeasureScope).measure(androidx.compose.ui.layout.Measurable,androidx.compose.ui.unit.Constraints)">LayoutModifierNode.measure</a></code> or <code><a href="/reference/kotlin/androidx/compose/ui/node/DrawModifierNode.html#(androidx.compose.ui.graphics.drawscope.ContentDrawScope).draw()">DrawModifierNode.draw</a></code>, then Compose will track the CompositionLocal read. This happens automatically, because these Compose UI phases take place in a snapshot observer that tracks which states are read. If the value of the CompositionLocal changes, and it was read inside of the measure or draw phase, then that phase will automatically be invalidated.</p>
+          <p>For all other reads of a CompositionLocal, this function will <b>not</b> notify you when the value of the local changes. <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> classes that also implement <code><a href="/reference/kotlin/androidx/compose/ui/node/ObserverModifierNode.html">ObserverModifierNode</a></code> may observe CompositionLocals arbitrarily by performing the lookup in an <code><a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.Modifier.Node).observeReads(kotlin.Function0)">observeReads</a></code> block. To continue observing values of the CompositionLocal, it must be read again in an <code><a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.Modifier.Node).observeReads(kotlin.Function0)">observeReads</a></code> block during or after the <code><a href="/reference/kotlin/androidx/compose/ui/node/ObserverModifierNode.html#onObservedReadsChanged()">ObserverModifierNode.onObservedReadsChanged</a></code> callback is invoked. See below for an example of how to implement this observation pattern.</p>
+          <pre class="prettyprint lang-kotlin">
+import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.ui.node.currentValueOf
+import androidx.compose.ui.node.observeReads
+
+val LocalValue = compositionLocalOf { &quot;abc123&quot; }
+class ValueObserverModifierNode : Modifier.Node(),
+    CompositionLocalConsumerModifierNode, ObserverModifierNode {
+    private var observedValue: String? = null
+    override fun onAttach() {
+        onObservedReadsChanged()
+    }
+    override fun onDetach() {
+        observedValue = null
+    }
+    override fun onObservedReadsChanged() {
+        observeReads {
+            observedValue = currentValueOf(LocalValue)
+            // Do something with the new value
+        }
+    }
+}</pre>
+          <p>This function will fail with an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code> if you attempt to read a CompositionLocal before the node is <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html#onAttach()">attached</a></code> or after the node is <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html#onDetach()">detached</a></code>.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>local:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a>&lt;T&gt;</code></td>
+                  <td>
+                    <p>The CompositionLocal to get the current value of</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Returns</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>T</code></td>
+                  <td>
+                    <p>The value provided by the nearest <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code> component that invokes, directly or indirectly, the composable function that this modifier is attached to. If <code><a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.CompositionLocalConsumerModifierNode).currentValueOf(androidx.compose.runtime.CompositionLocal)">local</a></code> was never provided, its default value will be returned instead.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </devsite-filter >
+  </body>
+</html>

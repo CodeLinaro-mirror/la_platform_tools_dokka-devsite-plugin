@@ -6,12 +6,21 @@
   </head>
   <body>
     <div id="metadata-info-block">
-      <div id="source-link"><a href="https://cs.android.com/search?q=file:-graphics/androidx/compose/ui/graphics/RenderEffect.kt+class:androidx.compose.ui.graphics.RenderEffect&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/graphics/+class:androidx.compose.ui.graphics.RenderEffect&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>RenderEffect</h1>
-    <p>
-      <pre>sealed class <a href="/reference/kotlin/androidx/compose/ui/graphics/RenderEffect.html">RenderEffect</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>sealed class <a href="/reference/kotlin/androidx/compose/ui/graphics/RenderEffect.html">RenderEffect</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
         <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/ui/graphics/BlurEffect.html">BlurEffect</a>, <a href="/reference/kotlin/androidx/compose/ui/graphics/OffsetEffect.html">OffsetEffect</a></div>
       </span>
@@ -44,62 +53,153 @@
     <p>Intermediate rendering step used to render drawing commands with a corresponding visual effect. A <code><a href="/reference/kotlin/androidx/compose/ui/graphics/RenderEffect.html">RenderEffect</a></code> can be configured on a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/GraphicsLayerScope.html">GraphicsLayerScope</a></code> and will be applied when drawn.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Protected constructors</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/RenderEffect.html#RenderEffect()">RenderEffect</a>()</code></div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="93%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Protected constructors</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/RenderEffect.html#RenderEffect()">RenderEffect</a>()</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+                <!--platform-Android/JVM--></td>
+            </tr>
+            <tr>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/RenderEffect.html#RenderEffect()">RenderEffect</a>()</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public functions</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/RenderEffect.html#isSupported()">isSupported</a>()</code></div>
-              <p>Capability query to determine if the particular platform supports the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/RenderEffect.html">RenderEffect</a></code>.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://developer.android.com/reference/android/graphics/RenderEffect.html">RenderEffect</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/annotation/RequiresApi.html">RequiresApi</a><br><a href="/reference/kotlin/androidx/compose/ui/graphics/RenderEffect.html#asAndroidRenderEffect()">asAndroidRenderEffect</a>()</code></div>
+                <p>Obtain a <code><a href="https://developer.android.com/reference/android/graphics/RenderEffect.html">android.graphics.RenderEffect</a></code> from the compose <code><a href="/reference/kotlin/androidx/compose/ui/graphics/RenderEffect.html">RenderEffect</a></code></p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+                <!--platform-Android/JVM--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/RenderEffect.html#isSupported()">isSupported</a>()</code></div>
+                <p>Capability query to determine if the particular platform supports the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/RenderEffect.html">RenderEffect</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All-->
+                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+                <!--platform-Android/JVM--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
-    <div class="list">
-      <h2>Protected constructors</h2>
-      <div class="api-item"><a name="RenderEffect--"></a><a name="rendereffect"></a>
-        <h3 class="api-name" id="RenderEffect()">RenderEffect</h3>
-        <pre class="api-signature no-pretty-print">protected&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/RenderEffect.html#RenderEffect()">RenderEffect</a>()</pre>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Protected functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>abstract <a href="https://developer.android.com/reference/android/graphics/RenderEffect.html">RenderEffect</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/annotation/RequiresApi.html">RequiresApi</a><br><a href="/reference/kotlin/androidx/compose/ui/graphics/RenderEffect.html#createRenderEffect()">createRenderEffect</a>()</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+                <!--platform-Android/JVM--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Protected constructors</h2>
+        <div class="api-item"><a name="RenderEffect--"></a><a name="rendereffect"></a>
+          <h3 class="api-name" id="RenderEffect()">RenderEffect</h3>
+<span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+          <!--platform-Android/JVM-->
+          <pre class="api-signature no-pretty-print">protected&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/RenderEffect.html#RenderEffect()">RenderEffect</a>()</pre>
+        </div>
+        <div class="api-item"><a name="RenderEffect--"></a><a name="rendereffect"></a>
+          <h3 class="api-name" id="RenderEffect()">RenderEffect</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">protected&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/RenderEffect.html#RenderEffect()">RenderEffect</a>()</pre>
+        </div>
       </div>
-    </div>
-    <div class="list">
-      <h2>Public functions</h2>
-      <div class="api-item"><a name="isSupported--"></a><a name="issupported"></a>
-        <h3 class="api-name" id="isSupported()">isSupported</h3>
-        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/RenderEffect.html#isSupported()">isSupported</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
-        <p>Capability query to determine if the particular platform supports the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/RenderEffect.html">RenderEffect</a></code>. Not all platforms support all render effects.</p>
-        <p>Note RenderEffect is only supported on Android 12 and above. Attempts to use RenderEffect on older Android versions will be ignored.</p>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="asAndroidRenderEffect--"></a><a name="asandroidrendereffect"></a>
+          <h3 class="api-name" id="asAndroidRenderEffect()">asAndroidRenderEffect</h3>
+<span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+          <!--platform-Android/JVM-->
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/RequiresApi.html">RequiresApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/RenderEffect.html#asAndroidRenderEffect()">asAndroidRenderEffect</a>():&nbsp;<a href="https://developer.android.com/reference/android/graphics/RenderEffect.html">RenderEffect</a></pre>
+          <p>Obtain a <code><a href="https://developer.android.com/reference/android/graphics/RenderEffect.html">android.graphics.RenderEffect</a></code> from the compose <code><a href="/reference/kotlin/androidx/compose/ui/graphics/RenderEffect.html">RenderEffect</a></code></p>
+        </div>
+        <div class="api-item"><a name="isSupported--"></a><a name="issupported"></a>
+          <h3 class="api-name" id="isSupported()">isSupported</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All--><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+          <!--platform-Android/JVM-->
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/RenderEffect.html#isSupported()">isSupported</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>Capability query to determine if the particular platform supports the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/RenderEffect.html">RenderEffect</a></code>. Not all platforms support all render effects.</p>
+          <p>Note RenderEffect is only supported on Android 12 and above. Attempts to use RenderEffect on older Android versions will be ignored.</p>
+        </div>
       </div>
-    </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Protected functions</h2>
+        <div class="api-item"><a name="createRenderEffect--"></a><a name="createrendereffect"></a>
+          <h3 class="api-name" id="createRenderEffect()">createRenderEffect</h3>
+<span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+          <!--platform-Android/JVM-->
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/RequiresApi.html">RequiresApi</a><br>protected&nbsp;abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/RenderEffect.html#createRenderEffect()">createRenderEffect</a>():&nbsp;<a href="https://developer.android.com/reference/android/graphics/RenderEffect.html">RenderEffect</a></pre>
+        </div>
+      </div>
+    </devsite-filter >
   </body>
 </html>

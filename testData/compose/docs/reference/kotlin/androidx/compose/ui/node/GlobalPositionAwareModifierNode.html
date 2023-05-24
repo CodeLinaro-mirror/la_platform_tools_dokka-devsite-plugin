@@ -9,20 +9,29 @@
       <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/node/GlobalPositionAwareModifierNode.kt+class:androidx.compose.ui.node.GlobalPositionAwareModifierNode&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>GlobalPositionAwareModifierNode</h1>
-    <p>
-      <pre>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>interface <a href="/reference/kotlin/androidx/compose/ui/node/GlobalPositionAwareModifierNode.html">GlobalPositionAwareModifierNode</a> : <a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>interface <a href="/reference/kotlin/androidx/compose/ui/node/GlobalPositionAwareModifierNode.html">GlobalPositionAwareModifierNode</a> : <a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <hr>
     <p>A <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">androidx.compose.ui.Modifier.Node</a></code> whose <code><a href="/reference/kotlin/androidx/compose/ui/node/GlobalPositionAwareModifierNode.html#onGloballyPositioned(androidx.compose.ui.layout.LayoutCoordinates)">onGloballyPositioned</a></code> is called with the final LayoutCoordinates of the Layout when the global position of the content may have changed. Note that it will be called after a composition when the coordinates are finalized.</p>
     <p>This is the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">androidx.compose.ui.Modifier.Node</a></code> equivalent of <code><a href="/reference/kotlin/androidx/compose/ui/layout/OnGloballyPositionedModifier.html">androidx.compose.ui.layout.OnGloballyPositionedModifier</a></code></p>
     <p>Usage example:</p>
     <pre class="prettyprint lang-kotlin">
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
-import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.layout.positionInWindow
 
 Column(
@@ -45,7 +54,6 @@ Column(
     <pre class="prettyprint lang-kotlin">
 import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.layout.positionInWindow
-import androidx.compose.ui.node.modifierElementOf
 
 class PositionLoggerNode(var id: String) : GlobalPositionAwareModifierNode, Modifier.Node() {
     override fun onGloballyPositioned(coordinates: LayoutCoordinates) {
@@ -62,15 +70,18 @@ class PositionLoggerNode(var id: String) : GlobalPositionAwareModifierNode, Modi
     }
 }
 
-fun Modifier.logPosition(id: String) = this then modifierElementOf(
-    key = id,
-    create = { PositionLoggerNode(id) },
-    update = { it.id = id },
-    definitions = {
+data class PositionLoggerElement(val id: String) : ModifierNodeElement&lt;PositionLoggerNode&gt;() {
+    override fun create() = PositionLoggerNode(id)
+    override fun update(node: PositionLoggerNode) {
+        node.id = id
+    }
+    override fun InspectorInfo.inspectableProperties() {
         name = &quot;logPosition&quot;
         properties[&quot;id&quot;] = id
     }
-)</pre>
+}
+
+fun Modifier.logPosition(id: String) = this then PositionLoggerElement(id)</pre>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <colgroup>
@@ -92,26 +103,32 @@ fun Modifier.logPosition(id: String) = this then modifierElementOf(
     </div>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public functions</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/node/GlobalPositionAwareModifierNode.html#onGloballyPositioned(androidx.compose.ui.layout.LayoutCoordinates)">onGloballyPositioned</a>(coordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>)</code></div>
-              <p>Called with the final LayoutCoordinates of the Layout after measuring.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/node/GlobalPositionAwareModifierNode.html#onGloballyPositioned(androidx.compose.ui.layout.LayoutCoordinates)">onGloballyPositioned</a>(coordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>)</code></div>
+                <p>Called with the final LayoutCoordinates of the Layout after measuring.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive" id="inhmethods">
@@ -124,34 +141,44 @@ fun Modifier.logPosition(id: String) = this then modifierElementOf(
           <tr>
             <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">androidx.compose.ui.node.DelegatableNode</a></span>
               <div class="devsite-table-wrapper">
-                <table class="responsive">
-                  <colgroup>
-                    <col width="40%">
-                    <col>
-                  </colgroup>
-                  <tbody class="list">
-                    <tr>
-                      <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code></td>
-                      <td>
-                        <div><code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html#node()">node</a></code></div>
-                        <p>A reference of the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that holds this node's position in the node hierarchy.</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html#node()">node</a></code></div>
+                          <p>A reference of the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that holds this node's position in the node hierarchy.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
               </div>
 </devsite-expandable>            </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="list">
-      <h2>Public functions</h2>
-      <div class="api-item"><a name="onGloballyPositioned-androidx.compose.ui.layout.LayoutCoordinates-"></a><a name="ongloballypositioned"></a>
-        <h3 class="api-name" id="onGloballyPositioned(androidx.compose.ui.layout.LayoutCoordinates)">onGloballyPositioned</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/GlobalPositionAwareModifierNode.html#onGloballyPositioned(androidx.compose.ui.layout.LayoutCoordinates)">onGloballyPositioned</a>(coordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Called with the final LayoutCoordinates of the Layout after measuring. Note that it will be called after a composition when the coordinates are finalized. The position in the modifier chain makes no difference in either the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> argument or when the <code><a href="/reference/kotlin/androidx/compose/ui/node/GlobalPositionAwareModifierNode.html#onGloballyPositioned(androidx.compose.ui.layout.LayoutCoordinates)">onGloballyPositioned</a></code> is called.</p>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="onGloballyPositioned-androidx.compose.ui.layout.LayoutCoordinates-"></a><a name="ongloballypositioned"></a>
+          <h3 class="api-name" id="onGloballyPositioned(androidx.compose.ui.layout.LayoutCoordinates)">onGloballyPositioned</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/GlobalPositionAwareModifierNode.html#onGloballyPositioned(androidx.compose.ui.layout.LayoutCoordinates)">onGloballyPositioned</a>(coordinates:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Called with the final LayoutCoordinates of the Layout after measuring. Note that it will be called after a composition when the coordinates are finalized. The position in the modifier chain makes no difference in either the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> argument or when the <code><a href="/reference/kotlin/androidx/compose/ui/node/GlobalPositionAwareModifierNode.html#onGloballyPositioned(androidx.compose.ui.layout.LayoutCoordinates)">onGloballyPositioned</a></code> is called.</p>
+        </div>
       </div>
-    </div>
+    </devsite-filter >
   </body>
 </html>

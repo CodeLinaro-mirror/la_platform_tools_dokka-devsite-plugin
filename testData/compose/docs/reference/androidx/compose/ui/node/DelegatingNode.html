@@ -10,7 +10,7 @@
     </div>
     <h1>DelegatingNode</h1>
     <p>
-      <pre>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public abstract class <a href="/reference/androidx/compose/ui/node/DelegatingNode.html">DelegatingNode</a> extends <a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></pre>
+      <pre>public abstract class <a href="/reference/androidx/compose/ui/node/DelegatingNode.html">DelegatingNode</a> extends <a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></pre>
     </p>
     <div class="devsite-table-wrapper">
       <table class="jd-inheritance-table">
@@ -34,7 +34,6 @@
     <p>A <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> which is able to delegate work to other <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> instances.</p>
     <p>This can be useful to compose multiple node implementations into one.</p>
     <pre class="prettyprint lang-kotlin">
-import androidx.compose.ui.semantics.SemanticsConfiguration
 import androidx.compose.ui.semantics.onClick
 
 class TapGestureNode(var onTap: () -&gt; Unit) : PointerInputModifierNode, Modifier.Node() {
@@ -56,7 +55,7 @@ class TapGestureWithClickSemantics(onTap: () -&gt; Unit) :
         get() = gesture.onTap
         set(value) { gesture.onTap = value }
 
-    val gesture = delegated { TapGestureNode(onTap) }
+    val gesture = delegate(TapGestureNode(onTap))
 
     override fun onPointerEvent(
         pointerEvent: PointerEvent,
@@ -70,13 +69,144 @@ class TapGestureWithClickSemantics(onTap: () -&gt; Unit) :
         gesture.onCancelPointerInput()
     }
 
-    override val semanticsConfiguration: SemanticsConfiguration = SemanticsConfiguration()
-        .apply {
-            onClick {
-                gesture.onTap()
-                true
-            }
+    override fun SemanticsPropertyReceiver.applySemantics() {
+        onClick {
+            gesture.onTap()
+            true
         }
+    }
+}</pre>
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.semantics.onClick
+
+class TapGestureNode(var onTap: () -&gt; Unit) : PointerInputModifierNode, Modifier.Node() {
+    override fun onPointerEvent(
+        pointerEvent: PointerEvent,
+        pass: PointerEventPass,
+        bounds: IntSize
+    ) {
+        // ...
+    }
+
+    override fun onCancelPointerInput() {
+        // ...
+    }
+}
+
+class TapSemanticsNode(var onTap: () -&gt; Unit) : SemanticsModifierNode, Modifier.Node() {
+    override fun SemanticsPropertyReceiver.applySemantics() {
+        onClick {
+            onTap()
+            true
+        }
+    }
+}
+class TapGestureWithClickSemantics(onTap: () -&gt; Unit) : DelegatingNode() {
+    var onTap: () -&gt; Unit
+        get() = gesture.onTap
+        set(value) {
+            gesture.onTap = value
+            semantics.onTap = value
+        }
+
+    val gesture = delegate(TapGestureNode(onTap))
+    val semantics = delegate(TapSemanticsNode(onTap))
+}</pre>
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.semantics.onClick
+
+class ExpensivePositionHandlingOnPointerEvents : PointerInputModifierNode, DelegatingNode() {
+
+    val globalAwareNode = object : GlobalPositionAwareModifierNode, Modifier.Node() {
+        override fun onGloballyPositioned(coordinates: LayoutCoordinates) {
+            // ...
+        }
+    }
+
+    override fun onPointerEvent(
+        pointerEvent: PointerEvent,
+        pass: PointerEventPass,
+        bounds: IntSize
+    ) {
+        // wait until first pointer event to start listening to global
+        // position
+        if (!globalAwareNode.isAttached) {
+            delegate(globalAwareNode)
+        }
+        // normal input processing
+    }
+
+    override fun onCancelPointerInput() {
+        // ...
+    }
+}
+
+class TapGestureNode(var onTap: () -&gt; Unit) : PointerInputModifierNode, Modifier.Node() {
+    override fun onPointerEvent(
+        pointerEvent: PointerEvent,
+        pass: PointerEventPass,
+        bounds: IntSize
+    ) {
+        // ...
+    }
+
+    override fun onCancelPointerInput() {
+        // ...
+    }
+}
+
+class TapSemanticsNode(var onTap: () -&gt; Unit) : SemanticsModifierNode, Modifier.Node() {
+    override fun SemanticsPropertyReceiver.applySemantics() {
+        onClick {
+            onTap()
+            true
+        }
+    }
+}
+class TapGestureWithClickSemantics(onTap: () -&gt; Unit) : DelegatingNode() {
+    var onTap: () -&gt; Unit
+        get() = gesture.onTap
+        set(value) {
+            gesture.onTap = value
+            semantics.onTap = value
+        }
+
+    val gesture = delegate(TapGestureNode(onTap))
+    val semantics = delegate(TapSemanticsNode(onTap))
+}</pre>
+    <pre class="prettyprint lang-kotlin">class MyModifierNode(global: Boolean) : DelegatingNode() {
+    val globalAwareNode = object : GlobalPositionAwareModifierNode, Modifier.Node() {
+        override fun onGloballyPositioned(coordinates: LayoutCoordinates) {
+            // ...
+        }
+    }.also {
+        if (global) delegate(it)
+    }
+    var global: Boolean = global
+        set(value) {
+            if (global &amp;&amp; !value) {
+                undelegate(globalAwareNode)
+            } else if (!global &amp;&amp; value) {
+                delegate(globalAwareNode)
+            }
+            field = value
+        }
+}</pre>
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.node.requireLayoutDirection
+
+class MyModifierNode : DelegatingNode() {
+    val globalAwareNode = object : GlobalPositionAwareModifierNode, Modifier.Node() {
+        override fun onGloballyPositioned(coordinates: LayoutCoordinates) {
+            // ...
+        }
+    }
+    override fun onAttach() {
+        // one can conditionally delegate in attach, for instance if certain conditions are met
+        if (requireLayoutDirection() == LayoutDirection.Rtl) {
+            delegate(globalAwareNode)
+        }
+    }
 }</pre>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -126,29 +256,22 @@ class TapGestureWithClickSemantics(onTap: () -&gt; Unit) :
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public methods</h3></th>
+            <th colspan="100%"><h3>Protected methods</h3></th>
           </tr>
         </thead>
         <tbody class="list">
           <tr>
             <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
             <td>
-              <div><code>&lt;T&nbsp;extends&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a>&gt; <a href="/reference/androidx/compose/ui/node/DelegatingNode.html#delegated(kotlin.Function0)">delegated</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;fn)</code></div>
-              <p>In order to properly delegate work to another <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code>, the delegated instance must be created and returned inside of a <code><a href="/reference/androidx/compose/ui/node/DelegatingNode.html#delegated(kotlin.Function0)">delegated</a></code> call.</p>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&gt; <a href="/reference/androidx/compose/ui/node/DelegatingNode.html#delegate(androidx.compose.ui.node.DelegatableNode)">delegate</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;delegatableNode)</code></div>
+              <p>In order to properly delegate work to another <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code>, the delegated instance must be created and returned inside of a <code><a href="/reference/androidx/compose/ui/node/DelegatingNode.html#delegate(androidx.compose.ui.node.DelegatableNode)">delegate</a></code> call.</p>
             </td>
           </tr>
           <tr>
-            <td><code>void</code></td>
+            <td><code>final void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/node/DelegatingNode.html#onAttach()">onAttach</a>()</code></div>
-              <p>When called, <code>node</code> is guaranteed to be non-null.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>void</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/ui/node/DelegatingNode.html#onDetach()">onDetach</a>()</code></div>
-              <p>This should be called right before the node gets removed from the list, so you should still be able to traverse inside of this method.</p>
+              <div><code><a href="/reference/androidx/compose/ui/node/DelegatingNode.html#undelegate(androidx.compose.ui.node.DelegatableNode)">undelegate</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;instance)</code></div>
+              <p>This function expects a node which was passed in to <code><a href="/reference/androidx/compose/ui/node/DelegatingNode.html#delegate(androidx.compose.ui.node.DelegatableNode)">delegate</a></code> for this node, and is currently being delegated to to be passed in as <code><a href="/reference/androidx/compose/ui/node/DelegatingNode.html#undelegate(androidx.compose.ui.node.DelegatableNode)">instance</a></code>.</p>
             </td>
           </tr>
         </tbody>
@@ -172,6 +295,13 @@ class TapGestureWithClickSemantics(onTap: () -&gt; Unit) :
                   </colgroup>
                   <tbody class="list">
                     <tr>
+                      <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/Modifier.Node.html#getCoroutineScope()">getCoroutineScope</a>()</code></div>
+                        <p>A CoroutineScope that can be used to launch tasks that should run while the node is attached.</p>
+                      </td>
+                    </tr>
+                    <tr>
                       <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code></td>
                       <td>
                         <div><code><a href="/reference/androidx/compose/ui/Modifier.Node.html#getNode()">getNode</a>()</code></div>
@@ -179,16 +309,44 @@ class TapGestureWithClickSemantics(onTap: () -&gt; Unit) :
                       </td>
                     </tr>
                     <tr>
+                      <td><code>boolean</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/Modifier.Node.html#getShouldAutoInvalidate()">getShouldAutoInvalidate</a>()</code></div>
+                        <p>If this property returns <code>true</code>, then nodes will be automatically invalidated after the modifier update completes (For example, if the returned Node is a <code><a href="/reference/androidx/compose/ui/node/DrawModifierNode.html">DrawModifierNode</a></code>, its <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.DrawModifierNode).invalidateDraw()">DrawModifierNode.invalidateDraw</a></code> function will be invoked automatically as part of auto invalidation).</p>
+                      </td>
+                    </tr>
+                    <tr>
                       <td><code>final boolean</code></td>
                       <td>
                         <div><code><a href="/reference/androidx/compose/ui/Modifier.Node.html#getIsAttached()">isAttached</a>()</code></div>
-                        <p>Indicates that the node is attached and part of the tree.</p>
+                        <p>Indicates that the node is attached to a <code><a href="/reference/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">androidx.compose.ui.layout.Layout</a></code> which is part of the UI tree.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>void</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/Modifier.Node.html#onAttach()">onAttach</a>()</code></div>
+                        <p>Called when the node is attached to a <code><a href="/reference/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">androidx.compose.ui.layout.Layout</a></code> which is part of the UI tree.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>void</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/Modifier.Node.html#onDetach()">onDetach</a>()</code></div>
+                        <p>Called when the node is not attached to a <code><a href="/reference/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">androidx.compose.ui.layout.Layout</a></code> which is not a part of the UI tree anymore.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>void</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/ui/Modifier.Node.html#onReset()">onReset</a>()</code></div>
+                        <p>Called when the node is about to be moved to a pool of layouts ready to be reused.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/Modifier.Node.html#sideEffect(kotlin.Function0)">sideEffect</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;effect)</code></div>
+                        <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/Modifier.Node.html#sideEffect(kotlin.Function0)">sideEffect</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;effect)</code></div>
                         <p>This can be called to register <code><a href="/reference/androidx/compose/ui/Modifier.Node.html#sideEffect(kotlin.Function0)">effect</a></code> as a function to be executed after all of the changes to the tree are applied.</p>
                       </td>
                     </tr>
@@ -208,23 +366,19 @@ class TapGestureWithClickSemantics(onTap: () -&gt; Unit) :
       </div>
     </div>
     <div class="list">
-      <h2>Public methods</h2>
-      <div class="api-item"><a name="delegated-kotlin.Function0-"></a><a name="delegated"></a>
-        <h3 class="api-name" id="delegated(kotlin.Function0)">delegated</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a>&gt; <a href="/reference/androidx/compose/ui/node/DelegatingNode.html#delegated(kotlin.Function0)">delegated</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;fn)</pre>
-        <p>In order to properly delegate work to another <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code>, the delegated instance must be created and returned inside of a <code><a href="/reference/androidx/compose/ui/node/DelegatingNode.html#delegated(kotlin.Function0)">delegated</a></code> call. Doing this will ensure that the created node instance follows all of the right lifecycles and is properly discoverable in this position of the node tree.</p>
-        <p>By using <code><a href="/reference/androidx/compose/ui/node/DelegatingNode.html#delegated(kotlin.Function0)">delegated</a></code>, the <code><a href="/reference/androidx/compose/ui/node/DelegatingNode.html#delegated(kotlin.Function0)">fn</a></code> parameter is executed synchronously, and the result is returned from this function for immediate use.</p>
-        <p>This method can be called from within an <code>init</code> block, however the returned delegated node will not be attached until the delegating node is attached. If <code><a href="/reference/androidx/compose/ui/node/DelegatingNode.html#delegated(kotlin.Function0)">delegated</a></code> is called after the delegating node is already attached, the returned delegated node will be attached.</p>
+      <h2>Protected methods</h2>
+      <div class="api-item"><a name="delegate-androidx.compose.ui.node.DelegatableNode-"></a><a name="delegate"></a>
+        <h3 class="api-name" id="delegate(androidx.compose.ui.node.DelegatableNode)">delegate</h3>
+        <pre class="api-signature no-pretty-print">protected&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&gt; <a href="/reference/androidx/compose/ui/node/DelegatingNode.html#delegate(androidx.compose.ui.node.DelegatableNode)">delegate</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;delegatableNode)</pre>
+        <p>In order to properly delegate work to another <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code>, the delegated instance must be created and returned inside of a <code><a href="/reference/androidx/compose/ui/node/DelegatingNode.html#delegate(androidx.compose.ui.node.DelegatableNode)">delegate</a></code> call. Doing this will ensure that the created node instance follows all of the right lifecycles and is properly discoverable in this position of the node tree.</p>
+        <p>By using <code><a href="/reference/androidx/compose/ui/node/DelegatingNode.html#delegate(androidx.compose.ui.node.DelegatableNode)">delegate</a></code>, the <code><a href="/reference/androidx/compose/ui/node/DelegatingNode.html#delegate(androidx.compose.ui.node.DelegatableNode)">delegatableNode</a></code> parameter is returned from this function for convenience.</p>
+        <p>This method can be called from within an <code>init</code> block, however the returned delegated node will not be attached until the delegating node is attached. If <code><a href="/reference/androidx/compose/ui/node/DelegatingNode.html#delegate(androidx.compose.ui.node.DelegatableNode)">delegate</a></code> is called after the delegating node is already attached, the returned delegated node will be attached.</p>
       </div>
-      <div class="api-item"><a name="onAttach--"></a><a name="onattach"></a>
-        <h3 class="api-name" id="onAttach()">onAttach</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/node/DelegatingNode.html#onAttach()">onAttach</a>()</pre>
-        <p>When called, <code>node</code> is guaranteed to be non-null. You can call sideEffect, coroutineScope, etc.</p>
-      </div>
-      <div class="api-item"><a name="onDetach--"></a><a name="ondetach"></a>
-        <h3 class="api-name" id="onDetach()">onDetach</h3>
-        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/node/DelegatingNode.html#onDetach()">onDetach</a>()</pre>
-        <p>This should be called right before the node gets removed from the list, so you should still be able to traverse inside of this method. Ideally we would not allow you to trigger side effects here.</p>
+      <div class="api-item"><a name="undelegate-androidx.compose.ui.node.DelegatableNode-"></a><a name="undelegate"></a>
+        <h3 class="api-name" id="undelegate(androidx.compose.ui.node.DelegatableNode)">undelegate</h3>
+        <pre class="api-signature no-pretty-print">protected&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/node/DelegatingNode.html#undelegate(androidx.compose.ui.node.DelegatableNode)">undelegate</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;instance)</pre>
+        <p>This function expects a node which was passed in to <code><a href="/reference/androidx/compose/ui/node/DelegatingNode.html#delegate(androidx.compose.ui.node.DelegatableNode)">delegate</a></code> for this node, and is currently being delegated to to be passed in as <code><a href="/reference/androidx/compose/ui/node/DelegatingNode.html#undelegate(androidx.compose.ui.node.DelegatableNode)">instance</a></code>. After this function returns, the node will no longer be attached, and will not be an active delegate of this node.</p>
+        <p>If <code><a href="/reference/androidx/compose/ui/node/DelegatingNode.html#undelegate(androidx.compose.ui.node.DelegatableNode)">instance</a></code> is not an active delegate of this node, this function will throw an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code>.</p>
       </div>
     </div>
   </body>

@@ -61,7 +61,8 @@ internal fun fqNameToPsiElement(
         descriptor,
         null,
         functionName.split(".")
-    ).firstOrNull() ?: throw RuntimeException("Unresolved function $functionName in @sample")
+    ).firstOrNull()
+        ?: throw RuntimeException("Unresolved function $functionName in @sample")
     return DescriptorToSourceUtils.descriptorToDeclaration(symbol)
 }
 

@@ -6,12 +6,21 @@
   </head>
   <body>
     <div id="metadata-info-block">
-      <div id="source-link"><a href="https://cs.android.com/search?q=file:-text/androidx/compose/ui/text/font/AndroidFont.kt+class:androidx.compose.ui.text.font.AndroidFont.TypefaceLoader&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/text/font/AndroidFont.kt+class:androidx.compose.ui.text.font.AndroidFont.TypefaceLoader&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>AndroidFont.TypefaceLoader</h1>
-    <p>
-      <pre>interface <a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.TypefaceLoader.html">AndroidFont.TypefaceLoader</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+            <!--platform-Android/JVM-->
+            <pre>interface <a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.TypefaceLoader.html">AndroidFont.TypefaceLoader</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <hr>
     <p>Loader for loading an <code><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a></code> and producing an <code><a href="https://developer.android.com/reference/android/graphics/Typeface.html">android.graphics.Typeface</a></code>.</p>
     <p>This interface is not intended to be used by application developers for text display. To load a typeface for display use <code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontFamily.Resolver.html">FontFamily.Resolver</a></code>.</p>
@@ -33,149 +42,164 @@
     <p>Implementers of custom font resources should try to ensure that their implementations are usable in the context of Compose Previews, which don't provide access to the full Android runtime. If not possible, it is advised to document the behavior in Compose Preview.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public functions</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>suspend <a href="https://developer.android.com/reference/android/graphics/Typeface.html">Typeface</a>?</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.TypefaceLoader.html#awaitLoad(android.content.Context,androidx.compose.ui.text.font.AndroidFont)">awaitLoad</a>(context:&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html">Context</a>,&nbsp;font:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a>)</code></div>
-              <p>Asynchronously load the font, from either local or remote sources such that it will cause text reflow when loading completes.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://developer.android.com/reference/android/graphics/Typeface.html">Typeface</a>?</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.TypefaceLoader.html#loadBlocking(android.content.Context,androidx.compose.ui.text.font.AndroidFont)">loadBlocking</a>(context:&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html">Context</a>,&nbsp;font:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a>)</code></div>
-              <p>Immediately load the font in a blocking manner such that it will be available this frame.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>suspend <a href="https://developer.android.com/reference/android/graphics/Typeface.html">Typeface</a>?</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.TypefaceLoader.html#awaitLoad(android.content.Context,androidx.compose.ui.text.font.AndroidFont)">awaitLoad</a>(context:&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html">Context</a>,&nbsp;font:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a>)</code></div>
+                <p>Asynchronously load the font, from either local or remote sources such that it will cause text reflow when loading completes.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+                <!--platform-Android/JVM--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://developer.android.com/reference/android/graphics/Typeface.html">Typeface</a>?</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.TypefaceLoader.html#loadBlocking(android.content.Context,androidx.compose.ui.text.font.AndroidFont)">loadBlocking</a>(context:&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html">Context</a>,&nbsp;font:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a>)</code></div>
+                <p>Immediately load the font in a blocking manner such that it will be available this frame.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></div>
+                <!--platform-Android/JVM--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
-    <div class="list">
-      <h2>Public functions</h2>
-      <div class="api-item"><a name="awaitLoad(android.content.Context, androidx.compose.ui.text.font.AndroidFont)"></a><a name="awaitLoad-android.content.Context-androidx.compose.ui.text.font.AndroidFont-"></a><a name="awaitload"></a>
-        <h3 class="api-name" id="awaitLoad(android.content.Context,androidx.compose.ui.text.font.AndroidFont)">awaitLoad</h3>
-        <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.TypefaceLoader.html#awaitLoad(android.content.Context,androidx.compose.ui.text.font.AndroidFont)">awaitLoad</a>(context:&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html">Context</a>,&nbsp;font:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a>):&nbsp;<a href="https://developer.android.com/reference/android/graphics/Typeface.html">Typeface</a>?</pre>
-        <p>Asynchronously load the font, from either local or remote sources such that it will cause text reflow when loading completes.</p>
-        <p>This method will be called on a UI-critical thread, and should not block the thread for font loading from sources slower than the local filesystem. More expensive loads should dispatch to an appropriate thread.</p>
-        <p>This method is always called in a timeout context and must return it's final value within 15 seconds. If the Typeface is not resolved within 15 seconds, the async load is cancelled and considered a permanent failure. Implementations should use structured concurrency to cooperatively cancel work.</p>
-        <p>Compose does not know what resources are required to satisfy a font load. Subclasses implementing <code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontLoadingStrategy.html#Async()">FontLoadingStrategy.Async</a></code> behavior should ensure requests are de-duped for the same resource.</p>
-        <p>It is possible for <code><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.TypefaceLoader.html#awaitLoad(android.content.Context,androidx.compose.ui.text.font.AndroidFont)">awaitLoad</a></code> to be called for the same instance of <code><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a></code> in parallel. Implementations should support parallel concurrent loads, or de-dup.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>context:&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html">Context</a></code></td>
-                <td>
-                  <p>current Android context for loading the font</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>font:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a></code></td>
-                <td>
-                  <p>the font to load which contains this loader as <code><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html#typefaceLoader()">AndroidFont.typefaceLoader</a></code></p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="awaitLoad(android.content.Context, androidx.compose.ui.text.font.AndroidFont)"></a><a name="awaitLoad-android.content.Context-androidx.compose.ui.text.font.AndroidFont-"></a><a name="awaitload"></a>
+          <h3 class="api-name" id="awaitLoad(android.content.Context,androidx.compose.ui.text.font.AndroidFont)">awaitLoad</h3>
+<span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+          <!--platform-Android/JVM-->
+          <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.TypefaceLoader.html#awaitLoad(android.content.Context,androidx.compose.ui.text.font.AndroidFont)">awaitLoad</a>(context:&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html">Context</a>,&nbsp;font:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a>):&nbsp;<a href="https://developer.android.com/reference/android/graphics/Typeface.html">Typeface</a>?</pre>
+          <p>Asynchronously load the font, from either local or remote sources such that it will cause text reflow when loading completes.</p>
+          <p>This method will be called on a UI-critical thread, and should not block the thread for font loading from sources slower than the local filesystem. More expensive loads should dispatch to an appropriate thread.</p>
+          <p>This method is always called in a timeout context and must return it's final value within 15 seconds. If the Typeface is not resolved within 15 seconds, the async load is cancelled and considered a permanent failure. Implementations should use structured concurrency to cooperatively cancel work.</p>
+          <p>Compose does not know what resources are required to satisfy a font load. Subclasses implementing <code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontLoadingStrategy.html#Async()">FontLoadingStrategy.Async</a></code> behavior should ensure requests are de-duped for the same resource.</p>
+          <p>It is possible for <code><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.TypefaceLoader.html#awaitLoad(android.content.Context,androidx.compose.ui.text.font.AndroidFont)">awaitLoad</a></code> to be called for the same instance of <code><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a></code> in parallel. Implementations should support parallel concurrent loads, or de-dup.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>context:&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html">Context</a></code></td>
+                  <td>
+                    <p>current Android context for loading the font</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>font:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a></code></td>
+                  <td>
+                    <p>the font to load which contains this loader as <code><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html#typefaceLoader()">AndroidFont.typefaceLoader</a></code></p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Returns</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="https://developer.android.com/reference/android/graphics/Typeface.html">Typeface</a>?</code></td>
+                  <td>
+                    <p><code><a href="https://developer.android.com/reference/android/graphics/Typeface.html">android.graphics.Typeface</a></code> for loaded font, or null if not available</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Returns</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="https://developer.android.com/reference/android/graphics/Typeface.html">Typeface</a>?</code></td>
-                <td>
-                  <p><code><a href="https://developer.android.com/reference/android/graphics/Typeface.html">android.graphics.Typeface</a></code> for loaded font, or null if not available</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="api-item"><a name="loadBlocking(android.content.Context, androidx.compose.ui.text.font.AndroidFont)"></a><a name="loadBlocking-android.content.Context-androidx.compose.ui.text.font.AndroidFont-"></a><a name="loadblocking"></a>
+          <h3 class="api-name" id="loadBlocking(android.content.Context,androidx.compose.ui.text.font.AndroidFont)">loadBlocking</h3>
+<span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+          <!--platform-Android/JVM-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.TypefaceLoader.html#loadBlocking(android.content.Context,androidx.compose.ui.text.font.AndroidFont)">loadBlocking</a>(context:&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html">Context</a>,&nbsp;font:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a>):&nbsp;<a href="https://developer.android.com/reference/android/graphics/Typeface.html">Typeface</a>?</pre>
+          <p>Immediately load the font in a blocking manner such that it will be available this frame.</p>
+          <p>This method will be called on a UI-critical thread, however it has been determined that this font is required for the current frame. This method is allowed to perform small amounts of I/O to load a font file from disk.</p>
+          <p>This method should never perform expensive I/O operations, such as loading from a remote source. If expensive operations are required to complete the font, this method may choose to throw. Note that this method will never be called for fonts with <code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontLoadingStrategy.html#Async()">FontLoadingStrategy.Async</a></code>.</p>
+          <p>It is possible for <code><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.TypefaceLoader.html#loadBlocking(android.content.Context,androidx.compose.ui.text.font.AndroidFont)">loadBlocking</a></code> to be called for the same instance of <code><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a></code> in parallel. Implementations should support parallel concurrent loads, or de-dup.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>context:&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html">Context</a></code></td>
+                  <td>
+                    <p>current Android context for loading the font</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>font:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a></code></td>
+                  <td>
+                    <p>the font to load which contains this loader as <code><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html#typefaceLoader()">AndroidFont.typefaceLoader</a></code></p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Returns</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="https://developer.android.com/reference/android/graphics/Typeface.html">Typeface</a>?</code></td>
+                  <td>
+                    <p><code><a href="https://developer.android.com/reference/android/graphics/Typeface.html">android.graphics.Typeface</a></code> for loaded font, or null if the font fails to load</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-      <div class="api-item"><a name="loadBlocking(android.content.Context, androidx.compose.ui.text.font.AndroidFont)"></a><a name="loadBlocking-android.content.Context-androidx.compose.ui.text.font.AndroidFont-"></a><a name="loadblocking"></a>
-        <h3 class="api-name" id="loadBlocking(android.content.Context,androidx.compose.ui.text.font.AndroidFont)">loadBlocking</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.TypefaceLoader.html#loadBlocking(android.content.Context,androidx.compose.ui.text.font.AndroidFont)">loadBlocking</a>(context:&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html">Context</a>,&nbsp;font:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a>):&nbsp;<a href="https://developer.android.com/reference/android/graphics/Typeface.html">Typeface</a>?</pre>
-        <p>Immediately load the font in a blocking manner such that it will be available this frame.</p>
-        <p>This method will be called on a UI-critical thread, however it has been determined that this font is required for the current frame. This method is allowed to perform small amounts of I/O to load a font file from disk.</p>
-        <p>This method should never perform expensive I/O operations, such as loading from a remote source. If expensive operations are required to complete the font, this method may choose to throw. Note that this method will never be called for fonts with <code><a href="/reference/kotlin/androidx/compose/ui/text/font/FontLoadingStrategy.html#Async()">FontLoadingStrategy.Async</a></code>.</p>
-        <p>It is possible for <code><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.TypefaceLoader.html#loadBlocking(android.content.Context,androidx.compose.ui.text.font.AndroidFont)">loadBlocking</a></code> to be called for the same instance of <code><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a></code> in parallel. Implementations should support parallel concurrent loads, or de-dup.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>context:&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html">Context</a></code></td>
-                <td>
-                  <p>current Android context for loading the font</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code>font:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a></code></td>
-                <td>
-                  <p>the font to load which contains this loader as <code><a href="/reference/kotlin/androidx/compose/ui/text/font/AndroidFont.html#typefaceLoader()">AndroidFont.typefaceLoader</a></code></p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Returns</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="https://developer.android.com/reference/android/graphics/Typeface.html">Typeface</a>?</code></td>
-                <td>
-                  <p><code><a href="https://developer.android.com/reference/android/graphics/Typeface.html">android.graphics.Typeface</a></code> for loaded font, or null if the font fails to load</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+    </devsite-filter >
   </body>
 </html>

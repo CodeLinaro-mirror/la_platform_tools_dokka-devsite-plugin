@@ -545,9 +545,18 @@ internal class DocTagConverter(
                     // TODO(KMP) we currently have no plan to provide KMP samples b/181224204
                     val sourceSet = this.getExpectOrCommonSourceSet()
 
-                    val facade = analysisMap[sourceSet] ?: throw RuntimeException(
-                        "Cannot resolve facade: ${sourceSet.sourceSetID} for $this"
-                    )
+                    val facade = analysisMap[sourceSet]
+                        ?: analysisMap[analysisMap.keys.singleOrNull()]?.let {
+                            println(
+                                "WARNING: no common sourceSet for $this, falling back to " +
+                                    ".single() when resolving @sample $dri. b/284107590"
+                            )
+                            it
+                        }
+                        ?: if (failOnMissingSamples) throw RuntimeException(
+                            "Cannot resolve facade: ${sourceSet.sourceSetID} for $this"
+                        ) else return@forEach
+
                     val psiElement = fqNameToPsiElement(facade, dri)
                         ?: throw RuntimeException("Cannot find PsiElement corresponding to $dri")
 

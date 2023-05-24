@@ -9,9 +9,18 @@
       <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/runtime/Composer.kt+class:androidx.compose.runtime.Updater&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>Updater</h1>
-    <p>
-      <pre>value class <a href="/reference/kotlin/androidx/compose/runtime/Updater.html">Updater</a>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>@<a href="/reference/kotlin/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a><br>value class <a href="/reference/kotlin/androidx/compose/runtime/Updater.html">Updater</a>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <hr>
     <p>A helper receiver scope class used by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1)">ComposeNode</a></code> to help write code to initialized and update a node.</p>
     <div class="devsite-table-wrapper">
@@ -35,224 +44,268 @@
     </div>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public constructors</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td>
-              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/Updater.html#Updater(androidx.compose.runtime.Composer)">Updater</a>(composer:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Composer.html">Composer</a>)</code></div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="93%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public constructors</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td>
+                <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/Updater.html#Updater(androidx.compose.runtime.Composer)">Updater</a>(composer:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Composer.html">Composer</a>)</code></div>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public functions</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#init(kotlin.Function1)">init</a>(block:&nbsp;T.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
-              <p>Initialize emitted node.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#reconcile(kotlin.Function1)">reconcile</a>(block:&nbsp;T.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
-              <p>Reconcile the node to the current state.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>inline <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Int,kotlin.Function2)">set</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;noinline&nbsp;block:&nbsp;T.(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
-              <p>Set the value property of the emitted node.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code>&lt;V&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Any,kotlin.Function2)">set</a>(value:&nbsp;V,&nbsp;block:&nbsp;T.(value) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
-              <p>Set the value property of the emitted node.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>inline <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Int,kotlin.Function2)">update</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;noinline&nbsp;block:&nbsp;T.(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
-              <p>Update the value of a property of the emitted node.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code>&lt;V&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Any,kotlin.Function2)">update</a>(value:&nbsp;V,&nbsp;block:&nbsp;T.(value) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
-              <p>Update the value of a property of the emitted node.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#init(kotlin.Function1)">init</a>(block:&nbsp;T.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+                <p>Initialize emitted node.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#reconcile(kotlin.Function1)">reconcile</a>(block:&nbsp;T.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+                <p>Reconcile the node to the current state.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>inline <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Int,kotlin.Function2)">set</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;noinline&nbsp;block:&nbsp;T.(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+                <p>Set the value property of the emitted node.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code>&lt;V&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Any,kotlin.Function2)">set</a>(value:&nbsp;V,&nbsp;block:&nbsp;T.(value) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+                <p>Set the value property of the emitted node.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>inline <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Int,kotlin.Function2)">update</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;noinline&nbsp;block:&nbsp;T.(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+                <p>Update the value of a property of the emitted node.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code>&lt;V&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Any,kotlin.Function2)">update</a>(value:&nbsp;V,&nbsp;block:&nbsp;T.(value) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+                <p>Update the value of a property of the emitted node.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
-    <div class="list">
-      <h2>Public constructors</h2>
-      <div class="api-item"><a name="Updater-androidx.compose.runtime.Composer-"></a><a name="updater"></a>
-        <h3 class="api-name" id="Updater(androidx.compose.runtime.Composer)">Updater</h3>
-        <pre class="api-signature no-pretty-print">&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/Updater.html#Updater(androidx.compose.runtime.Composer)">Updater</a>(composer:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Composer.html">Composer</a>)</pre>
-      </div>
-    </div>
-    <div class="list">
-      <h2>Public functions</h2>
-      <div class="api-item"><a name="init-kotlin.Function1-"></a><a name="init"></a>
-        <h3 class="api-name" id="init(kotlin.Function1)">init</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Updater.html#init(kotlin.Function1)">init</a>(block:&nbsp;T.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Initialize emitted node.</p>
-        <p>Schedule <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#init(kotlin.Function1)">block</a></code> to be executed after the node is created.</p>
-        <p>This is only executed once. The can be used to call a method or set a value on a node instance that is required to be set after one or more other properties have been set.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#reconcile(kotlin.Function1)">reconcile</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public constructors</h2>
+        <div class="api-item"><a name="Updater-androidx.compose.runtime.Composer-"></a><a name="updater"></a>
+          <h3 class="api-name" id="Updater(androidx.compose.runtime.Composer)">Updater</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/Updater.html#Updater(androidx.compose.runtime.Composer)">Updater</a>(composer:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Composer.html">Composer</a>)</pre>
         </div>
       </div>
-      <div class="api-item"><a name="reconcile-kotlin.Function1-"></a><a name="reconcile"></a>
-        <h3 class="api-name" id="reconcile(kotlin.Function1)">reconcile</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Updater.html#reconcile(kotlin.Function1)">reconcile</a>(block:&nbsp;T.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Reconcile the node to the current state.</p>
-        <p>This is used when <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Int,kotlin.Function2)">set</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Int,kotlin.Function2)">update</a></code> are insufficient to update the state of the node based on changes passed to the function calling <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1)">ComposeNode</a></code>.</p>
-        <p>Schedules <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#reconcile(kotlin.Function1)">block</a></code> to execute. As this unconditionally schedules <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#reconcile(kotlin.Function1)">block</a></code> to executed it might be executed unnecessarily as no effort is taken to ensure it only executes when the values <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#reconcile(kotlin.Function1)">block</a></code> captures have changed. It is highly recommended that <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Int,kotlin.Function2)">set</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Int,kotlin.Function2)">update</a></code> be used instead as they will only schedule their blocks to executed when the value passed to them has changed.</p>
-      </div>
-      <div class="api-item"><a name="set(kotlin.Int, kotlin.Function2)"></a><a name="set-kotlin.Int-kotlin.Function2-"></a><a name="set"></a>
-        <h3 class="api-name" id="set(kotlin.Int,kotlin.Function2)">set</h3>
-        <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Int,kotlin.Function2)">set</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;noinline&nbsp;block:&nbsp;T.(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Set the value property of the emitted node.</p>
-        <p>Schedules <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Int,kotlin.Function2)">block</a></code> to be run when the node is first created or when <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Int,kotlin.Function2)">value</a></code> is different than the previous composition.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Int,kotlin.Function2)">update</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="init-kotlin.Function1-"></a><a name="init"></a>
+          <h3 class="api-name" id="init(kotlin.Function1)">init</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Updater.html#init(kotlin.Function1)">init</a>(block:&nbsp;T.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Initialize emitted node.</p>
+          <p>Schedule <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#init(kotlin.Function1)">block</a></code> to be executed after the node is created.</p>
+          <p>This is only executed once. The can be used to call a method or set a value on a node instance that is required to be set after one or more other properties have been set.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#reconcile(kotlin.Function1)">reconcile</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="reconcile-kotlin.Function1-"></a><a name="reconcile"></a>
+          <h3 class="api-name" id="reconcile(kotlin.Function1)">reconcile</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Updater.html#reconcile(kotlin.Function1)">reconcile</a>(block:&nbsp;T.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Reconcile the node to the current state.</p>
+          <p>This is used when <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Int,kotlin.Function2)">set</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Int,kotlin.Function2)">update</a></code> are insufficient to update the state of the node based on changes passed to the function calling <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1)">ComposeNode</a></code>.</p>
+          <p>Schedules <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#reconcile(kotlin.Function1)">block</a></code> to execute. As this unconditionally schedules <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#reconcile(kotlin.Function1)">block</a></code> to executed it might be executed unnecessarily as no effort is taken to ensure it only executes when the values <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#reconcile(kotlin.Function1)">block</a></code> captures have changed. It is highly recommended that <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Int,kotlin.Function2)">set</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Int,kotlin.Function2)">update</a></code> be used instead as they will only schedule their blocks to executed when the value passed to them has changed.</p>
+        </div>
+        <div class="api-item"><a name="set(kotlin.Int, kotlin.Function2)"></a><a name="set-kotlin.Int-kotlin.Function2-"></a><a name="set"></a>
+          <h3 class="api-name" id="set(kotlin.Int,kotlin.Function2)">set</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Int,kotlin.Function2)">set</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;noinline&nbsp;block:&nbsp;T.(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Set the value property of the emitted node.</p>
+          <p>Schedules <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Int,kotlin.Function2)">block</a></code> to be run when the node is first created or when <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Int,kotlin.Function2)">value</a></code> is different than the previous composition.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Int,kotlin.Function2)">update</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="set(kotlin.Any, kotlin.Function2)"></a><a name="set-kotlin.Any-kotlin.Function2-"></a><a name="set"></a>
+          <h3 class="api-name" id="set(kotlin.Any,kotlin.Function2)">set</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;&lt;V&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Any,kotlin.Function2)">set</a>(value:&nbsp;V,&nbsp;block:&nbsp;T.(value) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Set the value property of the emitted node.</p>
+          <p>Schedules <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Any,kotlin.Function2)">block</a></code> to be run when the node is first created or when <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Any,kotlin.Function2)">value</a></code> is different than the previous composition.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Int,kotlin.Function2)">update</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="update(kotlin.Int, kotlin.Function2)"></a><a name="update-kotlin.Int-kotlin.Function2-"></a><a name="update"></a>
+          <h3 class="api-name" id="update(kotlin.Int,kotlin.Function2)">update</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Int,kotlin.Function2)">update</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;noinline&nbsp;block:&nbsp;T.(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Update the value of a property of the emitted node.</p>
+          <p>Schedules <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Int,kotlin.Function2)">block</a></code> to be run when <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Int,kotlin.Function2)">value</a></code> is different than the previous composition. It is different than <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Int,kotlin.Function2)">set</a></code> in that it does not run when the node is created. This is used when initial value set by the <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1)">ComposeNode</a></code> in the constructor callback already has the correct value. For example, use [update} when <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Int,kotlin.Function2)">value</a></code> is passed into of the classes constructor parameters.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Int,kotlin.Function2)">set</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="update(kotlin.Any, kotlin.Function2)"></a><a name="update-kotlin.Any-kotlin.Function2-"></a><a name="update"></a>
+          <h3 class="api-name" id="update(kotlin.Any,kotlin.Function2)">update</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;&lt;V&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Any,kotlin.Function2)">update</a>(value:&nbsp;V,&nbsp;block:&nbsp;T.(value) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Update the value of a property of the emitted node.</p>
+          <p>Schedules <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Any,kotlin.Function2)">block</a></code> to be run when <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Any,kotlin.Function2)">value</a></code> is different than the previous composition. It is different than <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Int,kotlin.Function2)">set</a></code> in that it does not run when the node is created. This is used when initial value set by the <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1)">ComposeNode</a></code> in the constructor callback already has the correct value. For example, use [update} when <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Any,kotlin.Function2)">value</a></code> is passed into of the classes constructor parameters.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Int,kotlin.Function2)">set</a></code></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-      <div class="api-item"><a name="set(kotlin.Any, kotlin.Function2)"></a><a name="set-kotlin.Any-kotlin.Function2-"></a><a name="set"></a>
-        <h3 class="api-name" id="set(kotlin.Any,kotlin.Function2)">set</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;&lt;V&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Any,kotlin.Function2)">set</a>(value:&nbsp;V,&nbsp;block:&nbsp;T.(value) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Set the value property of the emitted node.</p>
-        <p>Schedules <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Any,kotlin.Function2)">block</a></code> to be run when the node is first created or when <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Any,kotlin.Function2)">value</a></code> is different than the previous composition.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Int,kotlin.Function2)">update</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="update(kotlin.Int, kotlin.Function2)"></a><a name="update-kotlin.Int-kotlin.Function2-"></a><a name="update"></a>
-        <h3 class="api-name" id="update(kotlin.Int,kotlin.Function2)">update</h3>
-        <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Int,kotlin.Function2)">update</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;noinline&nbsp;block:&nbsp;T.(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Update the value of a property of the emitted node.</p>
-        <p>Schedules <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Int,kotlin.Function2)">block</a></code> to be run when <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Int,kotlin.Function2)">value</a></code> is different than the previous composition. It is different than <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Int,kotlin.Function2)">set</a></code> in that it does not run when the node is created. This is used when initial value set by the <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1)">ComposeNode</a></code> in the constructor callback already has the correct value. For example, use [update} when <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Int,kotlin.Function2)">value</a></code> is passed into of the classes constructor parameters.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Int,kotlin.Function2)">set</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="update(kotlin.Any, kotlin.Function2)"></a><a name="update-kotlin.Any-kotlin.Function2-"></a><a name="update"></a>
-        <h3 class="api-name" id="update(kotlin.Any,kotlin.Function2)">update</h3>
-        <pre class="api-signature no-pretty-print">fun&nbsp;&lt;V&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Any,kotlin.Function2)">update</a>(value:&nbsp;V,&nbsp;block:&nbsp;T.(value) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Update the value of a property of the emitted node.</p>
-        <p>Schedules <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Any,kotlin.Function2)">block</a></code> to be run when <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Any,kotlin.Function2)">value</a></code> is different than the previous composition. It is different than <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Int,kotlin.Function2)">set</a></code> in that it does not run when the node is created. This is used when initial value set by the <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1)">ComposeNode</a></code> in the constructor callback already has the correct value. For example, use [update} when <code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#update(kotlin.Any,kotlin.Function2)">value</a></code> is passed into of the classes constructor parameters.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/runtime/Updater.html#set(kotlin.Int,kotlin.Function2)">set</a></code></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+    </devsite-filter >
   </body>
 </html>

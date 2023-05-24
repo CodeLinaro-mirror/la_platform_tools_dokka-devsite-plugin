@@ -6,11 +6,11 @@
   </head>
   <body>
     <div id="metadata-info-block">
-      <div id="source-link"><a href="https://cs.android.com/search?q=file:-graphics/androidx/compose/ui/graphics/Path.kt+class:androidx.compose.ui.graphics.Path&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/graphics/Path.kt+class:androidx.compose.ui.graphics.Path&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>Path</h1>
     <p>
-      <pre>public interface <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></pre>
+      <pre>@<a href="/reference/androidx/compose/ui/graphics/internal/JvmDefaultWithCompatibility.html">JvmDefaultWithCompatibility</a><br>public interface <a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></pre>
     </p>
     <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
         <div class="showalways" id="subclasses-direct"><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html">AndroidPath</a></div>
@@ -228,10 +228,24 @@
             </td>
           </tr>
           <tr>
+            <td><code>default void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Path.html#rewind()">rewind</a>()</code></div>
+              <p>Rewinds the path: clears any lines and curves from the path but keeps the internal data structure for faster reuse.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>abstract void</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/graphics/Path.html#setFillType(androidx.compose.ui.graphics.PathFillType)">setFillType</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/PathFillType.html">PathFillType</a>&nbsp;fillType)</code></div>
               <p>Determines how the interior of this path is calculated.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/Path.html#transform(androidx.compose.ui.graphics.Matrix)">transform</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Matrix.html">Matrix</a>&nbsp;matrix)</code></div>
+              <p>Transform the points in this path by the provided matrix</p>
             </td>
           </tr>
           <tr>
@@ -468,11 +482,21 @@
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/Path.html#reset()">reset</a>()</pre>
         <p>Clears the <code><a href="/reference/androidx/compose/ui/graphics/Path.html">Path</a></code> object of all subpaths, returning it to the same state it had when it was created. The <em>current point</em> is reset to the origin. This does NOT change the fill-type setting.</p>
       </div>
+      <div class="api-item"><a name="rewind--"></a><a name="rewind"></a>
+        <h3 class="api-name" id="rewind()">rewind</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/Path.html#rewind()">rewind</a>()</pre>
+        <p>Rewinds the path: clears any lines and curves from the path but keeps the internal data structure for faster reuse.</p>
+      </div>
       <div class="api-item"><a name="setFillType-androidx.compose.ui.graphics.PathFillType-"></a><a name="setfilltype"></a>
         <h3 class="api-name" id="setFillType(androidx.compose.ui.graphics.PathFillType)">setFillType</h3>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/Path.html#setFillType(androidx.compose.ui.graphics.PathFillType)">setFillType</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/PathFillType.html">PathFillType</a>&nbsp;fillType)</pre>
         <p>Determines how the interior of this path is calculated.</p>
         <p>Defaults to the non-zero winding rule, <code><a href="/reference/androidx/compose/ui/graphics/PathFillType.Companion.html#NonZero()">PathFillType.NonZero</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="transform-androidx.compose.ui.graphics.Matrix-"></a><a name="transform"></a>
+        <h3 class="api-name" id="transform(androidx.compose.ui.graphics.Matrix)">transform</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/Path.html#transform(androidx.compose.ui.graphics.Matrix)">transform</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Matrix.html">Matrix</a>&nbsp;matrix)</pre>
+        <p>Transform the points in this path by the provided matrix</p>
       </div>
       <div class="api-item"><a name="translate-androidx.compose.ui.geometry.Offset-"></a><a name="translate"></a>
         <h3 class="api-name" id="translate(androidx.compose.ui.geometry.Offset)">translate</h3>

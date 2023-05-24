@@ -9,140 +9,216 @@
       <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/foundation/lazy/LazyListLayoutInfo.kt+class:androidx.compose.foundation.lazy.LazyListLayoutInfo&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>LazyListLayoutInfo</h1>
-    <p>
-      <pre>interface <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html">LazyListLayoutInfo</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>@<a href="/reference/kotlin/androidx/compose/foundation/internal/JvmDefaultWithCompatibility.html">JvmDefaultWithCompatibility</a><br>interface <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html">LazyListLayoutInfo</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <hr>
     <p>Contains useful information about the currently displayed layout state of lazy lists like <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/package-summary.html#LazyColumn(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyColumn</a></code> or <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/package-summary.html#LazyRow(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyRow</a></code>. For example you can get the list of currently displayed item.</p>
     <p>Use <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#layoutInfo()">LazyListState.layoutInfo</a></code> to retrieve this</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public properties</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#afterContentPadding()">afterContentPadding</a></code></div>
-              <p>The content padding in pixels applied after the last item in the direction of scrolling.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#beforeContentPadding()">beforeContentPadding</a></code></div>
-              <p>The content padding in pixels applied before the first item in the direction of scrolling.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>open <a href="/reference/kotlin/androidx/compose/foundation/gestures/Orientation.html">Orientation</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#orientation()">orientation</a></code></div>
-              <p>The orientation of the lazy list.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#reverseLayout()">reverseLayout</a></code></div>
-              <p>True if the direction of scrolling and layout is reversed.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#totalItemsCount()">totalItemsCount</a></code></div>
-              <p>The total count of items passed to <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/package-summary.html#LazyColumn(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyColumn</a></code> or <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/package-summary.html#LazyRow(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyRow</a></code>.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#viewportEndOffset()">viewportEndOffset</a></code></div>
-              <p>The end offset of the layout's viewport in pixels.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#viewportSize()">viewportSize</a></code></div>
-              <p>The size of the viewport in pixels.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#viewportStartOffset()">viewportStartOffset</a></code></div>
-              <p>The start offset of the layout's viewport in pixels.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListItemInfo.html">LazyListItemInfo</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#visibleItemsInfo()">visibleItemsInfo</a></code></div>
-              <p>The list of <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListItemInfo.html">LazyListItemInfo</a></code> representing all the currently visible items.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#afterContentPadding()">afterContentPadding</a></code></div>
+                <p>The content padding in pixels applied after the last item in the direction of scrolling.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#beforeContentPadding()">beforeContentPadding</a></code></div>
+                <p>The content padding in pixels applied before the first item in the direction of scrolling.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#mainAxisItemSpacing()">mainAxisItemSpacing</a></code></div>
+                <p>The spacing between items in the direction of scrolling.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="/reference/kotlin/androidx/compose/foundation/gestures/Orientation.html">Orientation</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#orientation()">orientation</a></code></div>
+                <p>The orientation of the lazy list.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#reverseLayout()">reverseLayout</a></code></div>
+                <p>True if the direction of scrolling and layout is reversed.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#totalItemsCount()">totalItemsCount</a></code></div>
+                <p>The total count of items passed to <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/package-summary.html#LazyColumn(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyColumn</a></code> or <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/package-summary.html#LazyRow(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyRow</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#viewportEndOffset()">viewportEndOffset</a></code></div>
+                <p>The end offset of the layout's viewport in pixels.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#viewportSize()">viewportSize</a></code></div>
+                <p>The size of the viewport in pixels.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#viewportStartOffset()">viewportStartOffset</a></code></div>
+                <p>The start offset of the layout's viewport in pixels.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListItemInfo.html">LazyListItemInfo</a>&gt;</code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#visibleItemsInfo()">visibleItemsInfo</a></code></div>
+                <p>The list of <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListItemInfo.html">LazyListItemInfo</a></code> representing all the currently visible items.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
-    <div class="list">
-      <h2>Public properties</h2>
-      <div class="api-item"><a name="getAfterContentPadding()"></a><a name="setAfterContentPadding()"></a><a name="getAfterContentPadding--"></a><a name="setAfterContentPadding--"></a>
-        <h3 class="api-name" id="afterContentPadding()">afterContentPadding</h3>
-        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#afterContentPadding()">afterContentPadding</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
-        <p>The content padding in pixels applied after the last item in the direction of scrolling. For example it is a bottom content padding for LazyColumn with reverseLayout set to false.</p>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getAfterContentPadding()"></a><a name="setAfterContentPadding()"></a><a name="getAfterContentPadding--"></a><a name="setAfterContentPadding--"></a>
+          <h3 class="api-name" id="afterContentPadding()">afterContentPadding</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#afterContentPadding()">afterContentPadding</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The content padding in pixels applied after the last item in the direction of scrolling. For example it is a bottom content padding for LazyColumn with reverseLayout set to false.</p>
+        </div>
+        <div class="api-item"><a name="getBeforeContentPadding()"></a><a name="setBeforeContentPadding()"></a><a name="getBeforeContentPadding--"></a><a name="setBeforeContentPadding--"></a>
+          <h3 class="api-name" id="beforeContentPadding()">beforeContentPadding</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#beforeContentPadding()">beforeContentPadding</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The content padding in pixels applied before the first item in the direction of scrolling. For example it is a top content padding for LazyColumn with reverseLayout set to false.</p>
+        </div>
+        <div class="api-item"><a name="getMainAxisItemSpacing()"></a><a name="setMainAxisItemSpacing()"></a><a name="getMainAxisItemSpacing--"></a><a name="setMainAxisItemSpacing--"></a>
+          <h3 class="api-name" id="mainAxisItemSpacing()">mainAxisItemSpacing</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#mainAxisItemSpacing()">mainAxisItemSpacing</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The spacing between items in the direction of scrolling.</p>
+        </div>
+        <div class="api-item"><a name="getOrientation()"></a><a name="setOrientation()"></a><a name="getOrientation--"></a><a name="setOrientation--"></a>
+          <h3 class="api-name" id="orientation()">orientation</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#orientation()">orientation</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/Orientation.html">Orientation</a></pre>
+          <p>The orientation of the lazy list.</p>
+        </div>
+        <div class="api-item"><a name="getReverseLayout()"></a><a name="setReverseLayout()"></a><a name="getReverseLayout--"></a><a name="setReverseLayout--"></a>
+          <h3 class="api-name" id="reverseLayout()">reverseLayout</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#reverseLayout()">reverseLayout</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>True if the direction of scrolling and layout is reversed.</p>
+        </div>
+        <div class="api-item"><a name="getTotalItemsCount()"></a><a name="setTotalItemsCount()"></a><a name="getTotalItemsCount--"></a><a name="setTotalItemsCount--"></a>
+          <h3 class="api-name" id="totalItemsCount()">totalItemsCount</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#totalItemsCount()">totalItemsCount</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The total count of items passed to <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/package-summary.html#LazyColumn(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyColumn</a></code> or <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/package-summary.html#LazyRow(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyRow</a></code>.</p>
+        </div>
+        <div class="api-item"><a name="getViewportEndOffset()"></a><a name="setViewportEndOffset()"></a><a name="getViewportEndOffset--"></a><a name="setViewportEndOffset--"></a>
+          <h3 class="api-name" id="viewportEndOffset()">viewportEndOffset</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#viewportEndOffset()">viewportEndOffset</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The end offset of the layout's viewport in pixels. You can think of it as a maximum offset which would be visible. It is the size of the lazy list layout minus <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#beforeContentPadding()">beforeContentPadding</a></code>.</p>
+          <p>You can use it to understand what items from <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#visibleItemsInfo()">visibleItemsInfo</a></code> are fully visible.</p>
+        </div>
+        <div class="api-item"><a name="getViewportSize()"></a><a name="setViewportSize()"></a><a name="getViewportSize--"></a><a name="setViewportSize--"></a>
+          <h3 class="api-name" id="viewportSize()">viewportSize</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#viewportSize()">viewportSize</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a></pre>
+          <p>The size of the viewport in pixels. It is the lazy list layout size including all the content paddings.</p>
+        </div>
+        <div class="api-item"><a name="getViewportStartOffset()"></a><a name="setViewportStartOffset()"></a><a name="getViewportStartOffset--"></a><a name="setViewportStartOffset--"></a>
+          <h3 class="api-name" id="viewportStartOffset()">viewportStartOffset</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#viewportStartOffset()">viewportStartOffset</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The start offset of the layout's viewport in pixels. You can think of it as a minimum offset which would be visible. Usually it is 0, but it can be negative if non-zero <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#beforeContentPadding()">beforeContentPadding</a></code> was applied as the content displayed in the content padding area is still visible.</p>
+          <p>You can use it to understand what items from <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#visibleItemsInfo()">visibleItemsInfo</a></code> are fully visible.</p>
+        </div>
+        <div class="api-item"><a name="getVisibleItemsInfo()"></a><a name="setVisibleItemsInfo()"></a><a name="getVisibleItemsInfo--"></a><a name="setVisibleItemsInfo--"></a>
+          <h3 class="api-name" id="visibleItemsInfo()">visibleItemsInfo</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#visibleItemsInfo()">visibleItemsInfo</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListItemInfo.html">LazyListItemInfo</a>&gt;</pre>
+          <p>The list of <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListItemInfo.html">LazyListItemInfo</a></code> representing all the currently visible items.</p>
+        </div>
       </div>
-      <div class="api-item"><a name="getBeforeContentPadding()"></a><a name="setBeforeContentPadding()"></a><a name="getBeforeContentPadding--"></a><a name="setBeforeContentPadding--"></a>
-        <h3 class="api-name" id="beforeContentPadding()">beforeContentPadding</h3>
-        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#beforeContentPadding()">beforeContentPadding</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
-        <p>The content padding in pixels applied before the first item in the direction of scrolling. For example it is a top content padding for LazyColumn with reverseLayout set to false.</p>
-      </div>
-      <div class="api-item"><a name="getOrientation()"></a><a name="setOrientation()"></a><a name="getOrientation--"></a><a name="setOrientation--"></a>
-        <h3 class="api-name" id="orientation()">orientation</h3>
-        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#orientation()">orientation</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/Orientation.html">Orientation</a></pre>
-        <p>The orientation of the lazy list.</p>
-      </div>
-      <div class="api-item"><a name="getReverseLayout()"></a><a name="setReverseLayout()"></a><a name="getReverseLayout--"></a><a name="setReverseLayout--"></a>
-        <h3 class="api-name" id="reverseLayout()">reverseLayout</h3>
-        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#reverseLayout()">reverseLayout</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
-        <p>True if the direction of scrolling and layout is reversed.</p>
-      </div>
-      <div class="api-item"><a name="getTotalItemsCount()"></a><a name="setTotalItemsCount()"></a><a name="getTotalItemsCount--"></a><a name="setTotalItemsCount--"></a>
-        <h3 class="api-name" id="totalItemsCount()">totalItemsCount</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#totalItemsCount()">totalItemsCount</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
-        <p>The total count of items passed to <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/package-summary.html#LazyColumn(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyColumn</a></code> or <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/package-summary.html#LazyRow(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Boolean,kotlin.Function1)">LazyRow</a></code>.</p>
-      </div>
-      <div class="api-item"><a name="getViewportEndOffset()"></a><a name="setViewportEndOffset()"></a><a name="getViewportEndOffset--"></a><a name="setViewportEndOffset--"></a>
-        <h3 class="api-name" id="viewportEndOffset()">viewportEndOffset</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#viewportEndOffset()">viewportEndOffset</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
-        <p>The end offset of the layout's viewport in pixels. You can think of it as a maximum offset which would be visible. It is the size of the lazy list layout minus <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#beforeContentPadding()">beforeContentPadding</a></code>.</p>
-        <p>You can use it to understand what items from <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#visibleItemsInfo()">visibleItemsInfo</a></code> are fully visible.</p>
-      </div>
-      <div class="api-item"><a name="getViewportSize()"></a><a name="setViewportSize()"></a><a name="getViewportSize--"></a><a name="setViewportSize--"></a>
-        <h3 class="api-name" id="viewportSize()">viewportSize</h3>
-        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#viewportSize()">viewportSize</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a></pre>
-        <p>The size of the viewport in pixels. It is the lazy list layout size including all the content paddings.</p>
-      </div>
-      <div class="api-item"><a name="getViewportStartOffset()"></a><a name="setViewportStartOffset()"></a><a name="getViewportStartOffset--"></a><a name="setViewportStartOffset--"></a>
-        <h3 class="api-name" id="viewportStartOffset()">viewportStartOffset</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#viewportStartOffset()">viewportStartOffset</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
-        <p>The start offset of the layout's viewport in pixels. You can think of it as a minimum offset which would be visible. Usually it is 0, but it can be negative if non-zero <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#beforeContentPadding()">beforeContentPadding</a></code> was applied as the content displayed in the content padding area is still visible.</p>
-        <p>You can use it to understand what items from <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#visibleItemsInfo()">visibleItemsInfo</a></code> are fully visible.</p>
-      </div>
-      <div class="api-item"><a name="getVisibleItemsInfo()"></a><a name="setVisibleItemsInfo()"></a><a name="getVisibleItemsInfo--"></a><a name="setVisibleItemsInfo--"></a>
-        <h3 class="api-name" id="visibleItemsInfo()">visibleItemsInfo</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html#visibleItemsInfo()">visibleItemsInfo</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListItemInfo.html">LazyListItemInfo</a>&gt;</pre>
-        <p>The list of <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListItemInfo.html">LazyListItemInfo</a></code> representing all the currently visible items.</p>
-      </div>
-    </div>
+    </devsite-filter >
   </body>
 </html>

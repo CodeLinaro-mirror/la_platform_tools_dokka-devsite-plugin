@@ -9,11 +9,20 @@
       <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/node/DelegatableNode.kt+class:androidx.compose.ui.node.DelegatableNode&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
     </div>
     <h1>DelegatableNode</h1>
-    <p>
-      <pre>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>interface <a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></pre>
-    </p>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>interface <a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
     <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
-        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/ui/node/DrawModifierNode.html">DrawModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/focus/FocusEventModifierNode.html">FocusEventModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/focus/FocusPropertiesModifierNode.html">FocusPropertiesModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequesterModifierNode.html">FocusRequesterModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/node/GlobalPositionAwareModifierNode.html">GlobalPositionAwareModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/input/key/KeyInputModifierNode.html">KeyInputModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/node/LayoutAwareModifierNode.html">LayoutAwareModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a>, <a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalNode.html">ModifierLocalNode</a>, <a href="/reference/kotlin/androidx/compose/ui/node/ObserverNode.html">ObserverNode</a>, <a href="/reference/kotlin/androidx/compose/ui/node/ParentDataModifierNode.html">ParentDataModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/input/rotary/RotaryInputModifierNode.html">RotaryInputModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/node/SemanticsModifierNode.html">SemanticsModifierNode</a></div>
+        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/ui/node/CompositionLocalConsumerModifierNode.html">CompositionLocalConsumerModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/node/DrawModifierNode.html">DrawModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/focus/FocusEventModifierNode.html">FocusEventModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/focus/FocusPropertiesModifierNode.html">FocusPropertiesModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequesterModifierNode.html">FocusRequesterModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/node/GlobalPositionAwareModifierNode.html">GlobalPositionAwareModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/input/key/KeyInputModifierNode.html">KeyInputModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/node/LayoutAwareModifierNode.html">LayoutAwareModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a>, <a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalModifierNode.html">ModifierLocalModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/node/ObserverModifierNode.html">ObserverModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/node/ParentDataModifierNode.html">ParentDataModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/input/rotary/RotaryInputModifierNode.html">RotaryInputModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/node/SemanticsModifierNode.html">SemanticsModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/input/key/SoftKeyboardInterceptionModifierNode.html">SoftKeyboardInterceptionModifierNode</a></div>
       </span>
       <div id="subclasses-direct-summary">
         <div class="devsite-table-wrapper">
@@ -24,6 +33,12 @@
             </colgroup>
             <tbody class="list">
               <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/node/CompositionLocalConsumerModifierNode.html">CompositionLocalConsumerModifierNode</a></code></td>
+                <td>
+                  <p>Implementing this interface allows your <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> subclass to read <code><a href="/reference/kotlin/androidx/compose/runtime/CompositionLocal.html">CompositionLocals</a></code> via the <code><a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.CompositionLocalConsumerModifierNode).currentValueOf(androidx.compose.runtime.CompositionLocal)">currentValueOf</a></code> function.</p>
+                </td>
+              </tr>
+              <tr>
                 <td><code><a href="/reference/kotlin/androidx/compose/ui/node/DrawModifierNode.html">DrawModifierNode</a></code></td>
                 <td>
                   <p>A <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that draws into the space of the layout.</p>
@@ -32,19 +47,19 @@
               <tr>
                 <td><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusEventModifierNode.html">FocusEventModifierNode</a></code></td>
                 <td>
-                  <p>Implement this interface create a modifier node that can be used to observe focus state changes to a <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusTargetModifierNode.html">FocusTargetModifierNode</a></code> down the hierarchy.</p>
+                  <p>Implement this interface create a modifier node that can be used to observe focus state changes to a <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusTargetNode.html">FocusTargetNode</a></code> down the hierarchy.</p>
                 </td>
               </tr>
               <tr>
                 <td><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusPropertiesModifierNode.html">FocusPropertiesModifierNode</a></code></td>
                 <td>
-                  <p>Implement this interface create a modifier node that can be used to modify the focus properties of the associated <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusTargetModifierNode.html">FocusTargetModifierNode</a></code>.</p>
+                  <p>Implement this interface create a modifier node that can be used to modify the focus properties of the associated <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusTargetNode.html">FocusTargetNode</a></code>.</p>
                 </td>
               </tr>
               <tr>
                 <td><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusRequesterModifierNode.html">FocusRequesterModifierNode</a></code></td>
                 <td>
-                  <p>Implement this interface to create a modifier node that can be used to request changes in the focus state of a <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusTargetModifierNode.html">FocusTargetModifierNode</a></code> down the hierarchy.</p>
+                  <p>Implement this interface to create a modifier node that can be used to request changes in the focus state of a <code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusTargetNode.html">FocusTargetNode</a></code> down the hierarchy.</p>
                 </td>
               </tr>
               <tr>
@@ -78,15 +93,15 @@
                 </td>
               </tr>
               <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalNode.html">ModifierLocalNode</a></code></td>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocalModifierNode.html">ModifierLocalModifierNode</a></code></td>
                 <td>
                   <p>A <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">androidx.compose.ui.Modifier.Node</a></code> that is capable of consuming and providing <code><a href="/reference/kotlin/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code> values.</p>
                 </td>
               </tr>
               <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/node/ObserverNode.html">ObserverNode</a></code></td>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/node/ObserverModifierNode.html">ObserverModifierNode</a></code></td>
                 <td>
-                  <p><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code>s that implement ObserverNode can provide their own implementation of <code><a href="/reference/kotlin/androidx/compose/ui/node/ObserverNode.html#onObservedReadsChanged()">onObservedReadsChanged</a></code> that will be called whenever the value of read object has changed.</p>
+                  <p><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code>s that implement ObserverNode can provide their own implementation of <code><a href="/reference/kotlin/androidx/compose/ui/node/ObserverModifierNode.html#onObservedReadsChanged()">onObservedReadsChanged</a></code> that will be called whenever the value of read object has changed.</p>
                 </td>
               </tr>
               <tr>
@@ -113,13 +128,19 @@
                   <p>A <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that adds semantics key/value for use in testing, accessibility, and similar use cases.</p>
                 </td>
               </tr>
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/input/key/SoftKeyboardInterceptionModifierNode.html">SoftKeyboardInterceptionModifierNode</a></code></td>
+                <td>
+                  <p>Implement this interface to create a <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that can intercept hardware Key events before they are sent to the software keyboard.</p>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
       </div>
 </devsite-expandable>    </div>
     <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known indirect subclasses
-        <div class="showalways" id="subclasses-indirect"><a href="/reference/kotlin/androidx/compose/ui/node/DelegatingNode.html">DelegatingNode</a>, <a href="/reference/kotlin/androidx/compose/ui/focus/FocusTargetModifierNode.html">FocusTargetModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/node/IntermediateLayoutModifierNode.html">IntermediateLayoutModifierNode</a></div>
+        <div class="showalways" id="subclasses-indirect"><a href="/reference/kotlin/androidx/compose/ui/node/CacheDrawModifierNode.html">CacheDrawModifierNode</a>, <a href="/reference/kotlin/androidx/compose/ui/node/DelegatingNode.html">DelegatingNode</a>, <a href="/reference/kotlin/androidx/compose/ui/focus/FocusTargetNode.html">FocusTargetNode</a>, <a href="/reference/kotlin/androidx/compose/ui/input/pointer/SuspendingPointerInputModifierNode.html">SuspendingPointerInputModifierNode</a></div>
       </span>
       <div id="subclasses-indirect-summary">
         <div class="devsite-table-wrapper">
@@ -130,21 +151,27 @@
             </colgroup>
             <tbody class="list">
               <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/node/CacheDrawModifierNode.html">CacheDrawModifierNode</a></code></td>
+                <td>
+                  <p>Expands on the <code><a href="/reference/kotlin/androidx/compose/ui/node/DrawModifierNode.html">androidx.compose.ui.node.DrawModifierNode</a></code> by adding the ability to invalidate the draw cache for changes in things like shapes and bitmaps (see Modifier.border for a usage examples).</p>
+                </td>
+              </tr>
+              <tr>
                 <td><code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatingNode.html">DelegatingNode</a></code></td>
                 <td>
                   <p>A <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> which is able to delegate work to other <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> instances.</p>
                 </td>
               </tr>
               <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusTargetModifierNode.html">FocusTargetModifierNode</a></code></td>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusTargetNode.html">FocusTargetNode</a></code></td>
                 <td>
                   <p>This modifier node can be used to create a modifier that makes a component focusable.</p>
                 </td>
               </tr>
               <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/node/IntermediateLayoutModifierNode.html">IntermediateLayoutModifierNode</a></code></td>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/input/pointer/SuspendingPointerInputModifierNode.html">SuspendingPointerInputModifierNode</a></code></td>
                 <td>
-                  <p>IntermediateLayoutModifier is a <code><a href="/reference/kotlin/androidx/compose/ui/node/LayoutModifierNode.html">LayoutModifierNode</a></code> that will be skipped when looking ahead.</p>
+                  <p>Extends <code><a href="/reference/kotlin/androidx/compose/ui/node/PointerInputModifierNode.html">PointerInputModifierNode</a></code> with a handler to execute asynchronously when an event occurs and a function to reset that handler (cancels the existing coroutine and essentially resets the handler's execution).</p>
                 </td>
               </tr>
             </tbody>
@@ -171,7 +198,7 @@
             <td></td>
           </tr>
           <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatingNode.html#delegated(kotlin.Function0)">delegated</a></code></td>
+            <td><code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatingNode.html#delegate(androidx.compose.ui.node.DelegatableNode)">delegate</a></code></td>
             <td></td>
           </tr>
         </tbody>
@@ -179,65 +206,119 @@
     </div>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Public properties</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html#node()">node</a></code></div>
-              <p>A reference of the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that holds this node's position in the node hierarchy.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html#node()">node</a></code></div>
+                <p>A reference of the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that holds this node's position in the node hierarchy.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
     <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <colgroup>
-          <col width="40%">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="100%"><h3>Extension functions</h3></th>
-          </tr>
-        </thead>
-        <tbody class="list">
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-            <td>
-              <div><code>@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>.<a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html#(androidx.compose.ui.node.DelegatableNode).invalidateSubtree()">invalidateSubtree</a>()</code></div>
-              <p>Invalidates the subtree of this layout, including layout, drawing, parent data, etc.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Extension functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>.<a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html#(androidx.compose.ui.node.DelegatableNode).invalidateSubtree()">invalidateSubtree</a>()</code></div>
+                <p>Invalidates the subtree of this layout, including layout, drawing, parent data, etc.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>.<a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html#(androidx.compose.ui.node.DelegatableNode).requireDensity()">requireDensity</a>()</code></div>
+                <p>Returns the current <code><a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a></code> of the LayoutNode that this <code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></code> is attached to.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>.<a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html#(androidx.compose.ui.node.DelegatableNode).requireLayoutDirection()">requireLayoutDirection</a>()</code></div>
+                <p>Returns the current <code><a href="/reference/kotlin/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code> of the LayoutNode that this <code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></code> is attached to.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
     </div>
-    <div class="list">
-      <h2>Public properties</h2>
-      <div class="api-item"><a name="getNode()"></a><a name="setNode()"></a><a name="getNode--"></a><a name="setNode--"></a>
-        <h3 class="api-name" id="node()">node</h3>
-        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html#node()">node</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></pre>
-        <p>A reference of the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that holds this node's position in the node hierarchy. If the node is a delegate of another node, this will point to that node. Otherwise, this will point to itself.</p>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getNode()"></a><a name="setNode()"></a><a name="getNode--"></a><a name="setNode--"></a>
+          <h3 class="api-name" id="node()">node</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html#node()">node</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></pre>
+          <p>A reference of the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> that holds this node's position in the node hierarchy. If the node is a delegate of another node, this will point to that node. Otherwise, this will point to itself.</p>
+        </div>
       </div>
-    </div>
-    <div class="list">
-      <h2>Extension functions</h2>
-      <div class="api-item"><a name="-androidx.compose.ui.node.DelegatableNode-.invalidateSubtree--"></a><a name="invalidatesubtree"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.node.DelegatableNode).invalidateSubtree()">invalidateSubtree</h3>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>.<a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html#(androidx.compose.ui.node.DelegatableNode).invalidateSubtree()">invalidateSubtree</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Invalidates the subtree of this layout, including layout, drawing, parent data, etc.</p>
-        <p>Calling this method can be a relatively expensive operation as it will cause the entire subtree to relayout and redraw instead of just parts that are otherwise invalidated. Its use should be limited to structural changes.</p>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Extension functions</h2>
+        <div class="api-item"><a name="-androidx.compose.ui.node.DelegatableNode-.invalidateSubtree--"></a><a name="invalidatesubtree"></a>
+          <h3 class="api-name" id="(androidx.compose.ui.node.DelegatableNode).invalidateSubtree()">invalidateSubtree</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>.<a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html#(androidx.compose.ui.node.DelegatableNode).invalidateSubtree()">invalidateSubtree</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Invalidates the subtree of this layout, including layout, drawing, parent data, etc.</p>
+          <p>Calling this method can be a relatively expensive operation as it will cause the entire subtree to relayout and redraw instead of just parts that are otherwise invalidated. Its use should be limited to structural changes.</p>
+        </div>
+        <div class="api-item"><a name="-androidx.compose.ui.node.DelegatableNode-.requireDensity--"></a><a name="requiredensity"></a>
+          <h3 class="api-name" id="(androidx.compose.ui.node.DelegatableNode).requireDensity()">requireDensity</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>.<a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html#(androidx.compose.ui.node.DelegatableNode).requireDensity()">requireDensity</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a></pre>
+          <p>Returns the current <code><a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a></code> of the LayoutNode that this <code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></code> is attached to. If the node is not attached, this function will throw an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code>.</p>
+        </div>
+        <div class="api-item"><a name="-androidx.compose.ui.node.DelegatableNode-.requireLayoutDirection--"></a><a name="requirelayoutdirection"></a>
+          <h3 class="api-name" id="(androidx.compose.ui.node.DelegatableNode).requireLayoutDirection()">requireLayoutDirection</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>.<a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html#(androidx.compose.ui.node.DelegatableNode).requireLayoutDirection()">requireLayoutDirection</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></pre>
+          <p>Returns the current <code><a href="/reference/kotlin/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code> of the LayoutNode that this <code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a></code> is attached to. If the node is not attached, this function will throw an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code>.</p>
+        </div>
       </div>
-    </div>
+    </devsite-filter >
   </body>
 </html>

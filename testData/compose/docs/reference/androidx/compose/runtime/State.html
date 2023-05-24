@@ -13,7 +13,7 @@
       <pre>public interface <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;</pre>
     </p>
     <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
-        <div class="showalways" id="subclasses-direct"><a href="/reference/androidx/compose/animation/core/AnimationState.html">AnimationState</a>, <a href="/reference/androidx/compose/animation/core/InfiniteTransition.TransitionAnimationState.html">InfiniteTransition.TransitionAnimationState</a>, <a href="/reference/androidx/compose/runtime/MutableState.html">MutableState</a>, <a href="/reference/androidx/compose/animation/core/Transition.TransitionAnimationState.html">Transition.TransitionAnimationState</a></div>
+        <div class="showalways" id="subclasses-direct"><a href="/reference/androidx/compose/animation/core/AnimationState.html">AnimationState</a>, <a href="/reference/androidx/compose/runtime/DoubleState.html">DoubleState</a>, <a href="/reference/androidx/compose/runtime/FloatState.html">FloatState</a>, <a href="/reference/androidx/compose/animation/core/InfiniteTransition.TransitionAnimationState.html">InfiniteTransition.TransitionAnimationState</a>, <a href="/reference/androidx/compose/runtime/IntState.html">IntState</a>, <a href="/reference/androidx/compose/runtime/LongState.html">LongState</a>, <a href="/reference/androidx/compose/runtime/MutableState.html">MutableState</a>, <a href="/reference/androidx/compose/ui/tooling/animation/ToolingState.html">ToolingState</a>, <a href="/reference/androidx/compose/animation/core/Transition.TransitionAnimationState.html">Transition.TransitionAnimationState</a></div>
       </span>
       <div id="subclasses-direct-summary">
         <div class="devsite-table-wrapper">
@@ -30,15 +30,45 @@
                 </td>
               </tr>
               <tr>
+                <td><code><a href="/reference/androidx/compose/runtime/DoubleState.html">DoubleState</a></code></td>
+                <td>
+                  <p>A value holder where reads to the <code><a href="/reference/androidx/compose/runtime/DoubleState.html#doubleValue()">doubleValue</a></code> property during the execution of a <code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> function cause the current <code><a href="/reference/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> to subscribe to changes of that value.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/runtime/FloatState.html">FloatState</a></code></td>
+                <td>
+                  <p>A value holder where reads to the <code><a href="/reference/androidx/compose/runtime/FloatState.html#floatValue()">floatValue</a></code> property during the execution of a <code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> function cause the current <code><a href="/reference/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> to subscribe to changes of that value.</p>
+                </td>
+              </tr>
+              <tr>
                 <td><code><a href="/reference/androidx/compose/animation/core/InfiniteTransition.TransitionAnimationState.html">InfiniteTransition.TransitionAnimationState</a></code></td>
                 <td>
                   <p>Each animation created using <code><a href="/reference/androidx/compose/animation/package-summary.html#(androidx.compose.animation.core.Transition).animateColor(kotlin.Function1,kotlin.String,kotlin.Function1)">InfiniteTransition.animateColor</a></code>, <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.InfiniteTransition).animateFloat(kotlin.Float,kotlin.Float,androidx.compose.animation.core.InfiniteRepeatableSpec,kotlin.String)">InfiniteTransition.animateFloat</a></code>, or <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.InfiniteTransition).animateValue(kotlin.Any,kotlin.Any,androidx.compose.animation.core.TwoWayConverter,androidx.compose.animation.core.InfiniteRepeatableSpec,kotlin.String)">InfiniteTransition.animateValue</a></code> is represented as a <code><a href="/reference/androidx/compose/animation/core/InfiniteTransition.TransitionAnimationState.html">TransitionAnimationState</a></code> in <code><a href="/reference/androidx/compose/animation/core/InfiniteTransition.html">InfiniteTransition</a></code>.</p>
                 </td>
               </tr>
               <tr>
+                <td><code><a href="/reference/androidx/compose/runtime/IntState.html">IntState</a></code></td>
+                <td>
+                  <p>A value holder where reads to the <code><a href="/reference/androidx/compose/runtime/IntState.html#intValue()">intValue</a></code> property during the execution of a <code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> function cause the current <code><a href="/reference/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> to subscribe to changes of that value.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/runtime/LongState.html">LongState</a></code></td>
+                <td>
+                  <p>A value holder where reads to the <code><a href="/reference/androidx/compose/runtime/LongState.html#longValue()">longValue</a></code> property during the execution of a <code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> function cause the current <code><a href="/reference/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> to subscribe to changes of that value.</p>
+                </td>
+              </tr>
+              <tr>
                 <td><code><a href="/reference/androidx/compose/runtime/MutableState.html">MutableState</a></code></td>
                 <td>
                   <p>A mutable value holder where reads to the <code><a href="/reference/androidx/compose/runtime/MutableState.html#value()">value</a></code> property during the execution of a <code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> function, the current <code><a href="/reference/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> will be subscribed to changes of that value.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/tooling/animation/ToolingState.html">ToolingState</a></code></td>
+                <td>
+                  <p>Tooling can override <code><a href="/reference/androidx/compose/runtime/package-summary.html#mutableStateOf(kotlin.Any,androidx.compose.runtime.SnapshotMutationPolicy)">mutableStateOf</a></code> in <code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> with <code><a href="/reference/androidx/compose/ui/tooling/animation/ToolingState.html">ToolingState</a></code>.</p>
                 </td>
               </tr>
               <tr>
@@ -53,7 +83,7 @@
       </div>
 </devsite-expandable>    </div>
     <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known indirect subclasses
-        <div class="showalways" id="subclasses-indirect"><a href="/reference/androidx/compose/runtime/ProduceStateScope.html">ProduceStateScope</a>, <a href="/reference/androidx/compose/runtime/snapshots/SnapshotMutableState.html">SnapshotMutableState</a></div>
+        <div class="showalways" id="subclasses-indirect"><a href="/reference/androidx/compose/runtime/MutableDoubleState.html">MutableDoubleState</a>, <a href="/reference/androidx/compose/runtime/MutableFloatState.html">MutableFloatState</a>, <a href="/reference/androidx/compose/runtime/MutableIntState.html">MutableIntState</a>, <a href="/reference/androidx/compose/runtime/MutableLongState.html">MutableLongState</a>, <a href="/reference/androidx/compose/runtime/ProduceStateScope.html">ProduceStateScope</a>, <a href="/reference/androidx/compose/runtime/snapshots/SnapshotMutableState.html">SnapshotMutableState</a></div>
       </span>
       <div id="subclasses-indirect-summary">
         <div class="devsite-table-wrapper">
@@ -63,6 +93,30 @@
               <col>
             </colgroup>
             <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/runtime/MutableDoubleState.html">MutableDoubleState</a></code></td>
+                <td>
+                  <p>A value holder where reads to the <code><a href="/reference/androidx/compose/runtime/MutableDoubleState.html#doubleValue()">doubleValue</a></code> property during the execution of a <code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> function cause the current <code><a href="/reference/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> to subscribe to changes of that value.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/runtime/MutableFloatState.html">MutableFloatState</a></code></td>
+                <td>
+                  <p>A value holder where reads to the <code><a href="/reference/androidx/compose/runtime/MutableFloatState.html#floatValue()">floatValue</a></code> property during the execution of a <code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> function cause the current <code><a href="/reference/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> to subscribe to changes of that value.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/runtime/MutableIntState.html">MutableIntState</a></code></td>
+                <td>
+                  <p>A value holder where reads to the <code><a href="/reference/androidx/compose/runtime/MutableIntState.html#intValue()">intValue</a></code> property during the execution of a <code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> function cause the current <code><a href="/reference/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> to subscribe to changes of that value.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/runtime/MutableLongState.html">MutableLongState</a></code></td>
+                <td>
+                  <p>A value holder where reads to the <code><a href="/reference/androidx/compose/runtime/MutableLongState.html#longValue()">longValue</a></code> property during the execution of a <code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> function cause the current <code><a href="/reference/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> to subscribe to changes of that value.</p>
+                </td>
+              </tr>
               <tr>
                 <td><code><a href="/reference/androidx/compose/runtime/ProduceStateScope.html">ProduceStateScope</a></code></td>
                 <td>
@@ -140,6 +194,34 @@
         </thead>
         <tbody class="list">
           <tr>
+            <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/DoubleState.html">DoubleState</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/SnapshotStateExtensionsKt.html">SnapshotStateExtensionsKt</a>.<a href="/reference/androidx/compose/runtime/State.html#(androidx.compose.runtime.State).asDoubleState()">asDoubleState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Double.html">Double</a>&gt;&nbsp;receiver<br>)</code></div>
+              <p>Converts a <code>State&lt;Double&gt;</code> (as in, a <code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> of boxed <code>Double</code>s) into a primitive-backed <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/FloatState.html">FloatState</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/SnapshotStateExtensionsKt.html">SnapshotStateExtensionsKt</a>.<a href="/reference/androidx/compose/runtime/State.html#(androidx.compose.runtime.State).asFloatState()">asFloatState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;&nbsp;receiver<br>)</code></div>
+              <p>Converts a <code>State&lt;Float&gt;</code> (as in, a <code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> of boxed <code>Float</code>s) into a primitive-backed <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/IntState.html">IntState</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/SnapshotStateExtensionsKt.html">SnapshotStateExtensionsKt</a>.<a href="/reference/androidx/compose/runtime/State.html#(androidx.compose.runtime.State).asIntState()">asIntState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>&gt;&nbsp;receiver<br>)</code></div>
+              <p>Converts a <code>State&lt;Int&gt;</code> (as in, a <code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> of boxed <code>Int</code>s) into a primitive-backed <code><a href="/reference/androidx/compose/runtime/IntState.html">IntState</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/LongState.html">LongState</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/SnapshotStateExtensionsKt.html">SnapshotStateExtensionsKt</a>.<a href="/reference/androidx/compose/runtime/State.html#(androidx.compose.runtime.State).asLongState()">asLongState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>&gt;&nbsp;receiver<br>)</code></div>
+              <p>Converts a <code>State&lt;Long&gt;</code> (as in, a <code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> of boxed <code>Long</code>s) into a primitive-backed <code><a href="/reference/androidx/compose/runtime/LongState.html">LongState</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>default&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
             <td>
               <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/SnapshotStateKt.html">SnapshotStateKt</a>.<a href="/reference/androidx/compose/runtime/State.html#(androidx.compose.runtime.State).getValue(kotlin.Any,kotlin.reflect.KProperty)">getValue</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;thisObj,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property/index.html">KProperty</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;property<br>)</code></div>
@@ -158,6 +240,30 @@
     </div>
     <div class="list">
       <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.compose.runtime.State-.asDoubleState--"></a><a name="asdoublestate"></a>
+        <h3 class="api-name" id="(androidx.compose.runtime.State).asDoubleState()">SnapshotStateExtensionsKt.asDoubleState</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/DoubleState.html">DoubleState</a>&nbsp;<a href="/reference/androidx/compose/runtime/SnapshotStateExtensionsKt.html">SnapshotStateExtensionsKt</a>.<a href="/reference/androidx/compose/runtime/State.html#(androidx.compose.runtime.State).asDoubleState()">asDoubleState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Double.html">Double</a>&gt;&nbsp;receiver<br>)</pre>
+        <p>Converts a <code>State&lt;Double&gt;</code> (as in, a <code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> of boxed <code>Double</code>s) into a primitive-backed <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></code>. The state will be automatically unboxed to the required primitive type. The returned state is read-only. The returned state will mirror the values of the base state and apply updates in the same way as the receiver defines.</p>
+        <p>On the JVM, this conversion does not avoid the autoboxing that <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></code> attempts to escape, but instead is intended to allow interoperability between components that use either representation of a state of type <code>Double</code>.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.runtime.State-.asFloatState--"></a><a name="asfloatstate"></a>
+        <h3 class="api-name" id="(androidx.compose.runtime.State).asFloatState()">SnapshotStateExtensionsKt.asFloatState</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/FloatState.html">FloatState</a>&nbsp;<a href="/reference/androidx/compose/runtime/SnapshotStateExtensionsKt.html">SnapshotStateExtensionsKt</a>.<a href="/reference/androidx/compose/runtime/State.html#(androidx.compose.runtime.State).asFloatState()">asFloatState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;&nbsp;receiver<br>)</pre>
+        <p>Converts a <code>State&lt;Float&gt;</code> (as in, a <code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> of boxed <code>Float</code>s) into a primitive-backed <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code>. The state will be automatically unboxed to the required primitive type. The returned state is read-only. The returned state will mirror the values of the base state and apply updates in the same way as the receiver defines.</p>
+        <p>On the JVM, this conversion does not avoid the autoboxing that <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code> attempts to escape, but instead is intended to allow interoperability between components that use either representation of a state of type <code>Float</code>.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.runtime.State-.asIntState--"></a><a name="asintstate"></a>
+        <h3 class="api-name" id="(androidx.compose.runtime.State).asIntState()">SnapshotStateExtensionsKt.asIntState</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/IntState.html">IntState</a>&nbsp;<a href="/reference/androidx/compose/runtime/SnapshotStateExtensionsKt.html">SnapshotStateExtensionsKt</a>.<a href="/reference/androidx/compose/runtime/State.html#(androidx.compose.runtime.State).asIntState()">asIntState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a>&gt;&nbsp;receiver<br>)</pre>
+        <p>Converts a <code>State&lt;Int&gt;</code> (as in, a <code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> of boxed <code>Int</code>s) into a primitive-backed <code><a href="/reference/androidx/compose/runtime/IntState.html">IntState</a></code>. The state will be automatically unboxed to the required primitive type. The returned state is read-only. The returned state will mirror the values of the base state and apply updates in the same way as the receiver defines.</p>
+        <p>On the JVM, this conversion does not avoid the autoboxing that <code><a href="/reference/androidx/compose/runtime/IntState.html">IntState</a></code> attempts to escape, but instead is intended to allow interoperability between components that use either representation of a state of type <code>Int</code>.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.runtime.State-.asLongState--"></a><a name="aslongstate"></a>
+        <h3 class="api-name" id="(androidx.compose.runtime.State).asLongState()">SnapshotStateExtensionsKt.asLongState</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/LongState.html">LongState</a>&nbsp;<a href="/reference/androidx/compose/runtime/SnapshotStateExtensionsKt.html">SnapshotStateExtensionsKt</a>.<a href="/reference/androidx/compose/runtime/State.html#(androidx.compose.runtime.State).asLongState()">asLongState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>&gt;&nbsp;receiver<br>)</pre>
+        <p>Converts a <code>State&lt;Long&gt;</code> (as in, a <code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> of boxed <code>Long</code>s) into a primitive-backed <code><a href="/reference/androidx/compose/runtime/LongState.html">LongState</a></code>. The state will be automatically unboxed to the required primitive type. The returned state is read-only. The returned state will mirror the values of the base state and apply updates in the same way as the receiver defines.</p>
+        <p>On the JVM, this conversion does not avoid the autoboxing that <code><a href="/reference/androidx/compose/runtime/LongState.html">LongState</a></code> attempts to escape, but instead is intended to allow interoperability between components that use either representation of a state of type <code>Long</code>.</p>
+      </div>
       <div class="api-item"><a name="(androidx.compose.runtime.State).getValue(kotlin.Any, kotlin.reflect.KProperty)"></a><a name="-androidx.compose.runtime.State-.getValue-kotlin.Any-kotlin.reflect.KProperty-"></a><a name="getvalue"></a>
         <h3 class="api-name" id="(androidx.compose.runtime.State).getValue(kotlin.Any,kotlin.reflect.KProperty)">SnapshotStateKt.getValue</h3>
         <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/SnapshotStateKt.html">SnapshotStateKt</a>.<a href="/reference/androidx/compose/runtime/State.html#(androidx.compose.runtime.State).getValue(kotlin.Any,kotlin.reflect.KProperty)">getValue</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;thisObj,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property/index.html">KProperty</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;property<br>)</pre>

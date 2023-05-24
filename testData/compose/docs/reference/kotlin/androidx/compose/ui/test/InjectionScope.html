@@ -1,0 +1,711 @@
+<html devsite="true">
+  <head>
+    <title>InjectionScope</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/ui/test/InjectionScope.kt+class:androidx.compose.ui.test.InjectionScope&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+    </div>
+    <h1>InjectionScope</h1>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>@<a href="/reference/kotlin/androidx/compose/ui/test/internal/JvmDefaultWithCompatibility.html">JvmDefaultWithCompatibility</a><br>interface <a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html">InjectionScope</a> : <a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
+        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/ui/test/KeyInjectionScope.html">KeyInjectionScope</a>, <a href="/reference/kotlin/androidx/compose/ui/test/MouseInjectionScope.html">MouseInjectionScope</a>, <a href="/reference/kotlin/androidx/compose/ui/test/MultiModalInjectionScope.html">MultiModalInjectionScope</a>, <a href="/reference/kotlin/androidx/compose/ui/test/RotaryInjectionScope.html">RotaryInjectionScope</a>, <a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a></div>
+      </span>
+      <div id="subclasses-direct-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/test/KeyInjectionScope.html">KeyInjectionScope</a></code></td>
+                <td>
+                  <p>The receiver scope of the key input injection lambda from <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performKeyInput(kotlin.Function1)">performKeyInput</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/test/MouseInjectionScope.html">MouseInjectionScope</a></code></td>
+                <td>
+                  <p>The receiver scope of the mouse input injection lambda from <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performMouseInput(kotlin.Function1)">performMouseInput</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/test/MultiModalInjectionScope.html">MultiModalInjectionScope</a></code></td>
+                <td>
+                  <p>The receiver scope of the multi-modal input injection lambda from <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performMultiModalInput(kotlin.Function1)">performMultiModalInput</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/test/RotaryInjectionScope.html">RotaryInjectionScope</a></code></td>
+                <td>
+                  <p>The receiver scope of rotary input injection lambda from <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performRotaryScrollInput(kotlin.Function1)">performRotaryScrollInput</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a></code></td>
+                <td>
+                  <p>The receiver scope of the touch input injection lambda from <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performTouchInput(kotlin.Function1)">performTouchInput</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
+    <hr>
+    <p>The receiver scope of all input injection lambdas offered in <code>ui-test</code>, such as <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performTouchInput(kotlin.Function1)">performTouchInput</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performMouseInput(kotlin.Function1)">performMouseInput</a></code>.</p>
+    <p>This scope offers several properties that allow you to get <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">coordinates</a></code> within the node you're interacting on, like the <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#topLeft()">topLeft</a></code> corner, its <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#center()">center</a></code>, or some percentage of the size (<code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#percentOffset(kotlin.Float,kotlin.Float)">percentOffset</a></code>).</p>
+    <p>All positional properties are expressed in pixels. <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html">InjectionScope</a></code> implements <code><a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a></code> so you can convert between px and dp as you wish. The density used is taken from the <code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsNode.html">SemanticsNode</a></code> from the <code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></code> on which the input injection method is called.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#advanceEventTime(kotlin.Long)">advanceEventTime</a>(durationMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>)</code></div>
+                <p>Adds the given <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#advanceEventTime(kotlin.Long)">durationMillis</a></code> to the current event time, delaying the next event by that time.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#percentOffset(kotlin.Float,kotlin.Float)">percentOffset</a>(x:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;y:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+                <p>Creates an <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code> relative to the size of the node we're interacting with.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#bottom()">bottom</a></code></div>
+                <p>The y-coordinate for the bottom of the node we're interacting with in px, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#bottomCenter()">bottomCenter</a></code></div>
+                <p>The center of the bottom edge of the node we're interacting with, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#bottomLeft()">bottomLeft</a></code></div>
+                <p>The bottom left corner of the node we're interacting with, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#bottomRight()">bottomRight</a></code></div>
+                <p>The bottom right corner of the node we're interacting with, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#center()">center</a></code></div>
+                <p>The center of the node we're interacting with, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#centerLeft()">centerLeft</a></code></div>
+                <p>The center of the left edge of the node we're interacting with, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#centerRight()">centerRight</a></code></div>
+                <p>The center of the right edge of the node we're interacting with, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#centerX()">centerX</a></code></div>
+                <p>The x-coordinate for the center of the node we're interacting with in px, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#centerY()">centerY</a></code></div>
+                <p>The y-coordinate for the center of the node we're interacting with in px, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code></div>
+                <p>The default time between two successive events.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#height()">height</a></code></div>
+                <p>The height of the node in px.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#left()">left</a></code></div>
+                <p>The x-coordinate for the left edge of the node we're interacting with in px, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#right()">right</a></code></div>
+                <p>The x-coordinate for the right edge of the node we're interacting with in px, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#top()">top</a></code></div>
+                <p>The y-coordinate for the bottom of the node we're interacting with in px, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#topCenter()">topCenter</a></code></div>
+                <p>The center of the top edge of the node we're interacting with, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#topLeft()">topLeft</a></code></div>
+                <p>The top left corner of the node we're interacting with, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#topRight()">topRight</a></code></div>
+                <p>The top right corner of the node we're interacting with, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/platform/ViewConfiguration.html">ViewConfiguration</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#viewConfiguration()">viewConfiguration</a></code></div>
+                <p>The <code><a href="/reference/kotlin/androidx/compose/ui/platform/ViewConfiguration.html">ViewConfiguration</a></code> in use by the <code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsNode.html">SemanticsNode</a></code> from the <code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></code> on which the input injection method is called.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#visibleSize()">visibleSize</a></code></div>
+                <p>The size of the visible part of the node we're interacting with in px, i.e. its clipped bounds.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#width()">width</a></code></div>
+                <p>The width of the node in px.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">androidx.compose.ui.unit.Density</a></span>
+              <div class="devsite-table-wrapper">
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).roundToPx()">roundToPx</a>()</code></div>
+                          <p>Convert <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code> to <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code> by rounding</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).roundToPx()">roundToPx</a>()</code></div>
+                          <p>Convert Sp to <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code> by rounding</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toDp()">toDp</a>()</code></div>
+                          <p>Convert Sp to <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+                        <td>
+                          <div><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(kotlin.Int).toDp()">toDp</a>()</code></div>
+                          <p>Convert an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code> pixel value to <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+                        <td>
+                          <div><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(kotlin.Float).toDp()">toDp</a>()</code></div>
+                          <p>Convert a <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code> pixel value to a Dp</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/DpSize.html">DpSize</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.geometry.Size).toDpSize()">toDpSize</a>()</code></div>
+                          <p>Convert a <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code> to a <code><a href="/reference/kotlin/androidx/compose/ui/unit/DpSize.html">DpSize</a></code>.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toPx()">toPx</a>()</code></div>
+                          <p>Convert <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code> to pixels.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toPx()">toPx</a>()</code></div>
+                          <p>Convert Sp to pixels.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/DpRect.html">DpRect</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.DpRect).toRect()">toRect</a>()</code></div>
+                          <p>Convert a <code><a href="/reference/kotlin/androidx/compose/ui/unit/DpRect.html">DpRect</a></code> to a <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code>.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/DpSize.html">DpSize</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.DpSize).toSize()">toSize</a>()</code></div>
+                          <p>Convert a <code><a href="/reference/kotlin/androidx/compose/ui/unit/DpSize.html">DpSize</a></code> to a <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Size.html">Size</a></code>.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toSp()">toSp</a>()</code></div>
+                          <p>Convert <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code> to Sp.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
+                        <td>
+                          <div><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(kotlin.Int).toSp()">toSp</a>()</code></div>
+                          <p>Convert an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code> pixel value to Sp.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code>open <a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
+                        <td>
+                          <div><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#(kotlin.Float).toSp()">toSp</a>()</code></div>
+                          <p>Convert a <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code> pixel value to a Sp</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">androidx.compose.ui.unit.Density</a></span>
+              <div class="devsite-table-wrapper">
+                <devsite-filter  select-el-container-id="platform">
+                  <table class="fixed">
+                    <colgroup>
+                      <col width="35%">
+                      <col width="58%">
+                      <col>
+                    </colgroup>
+                    <tbody class="list">
+                      <tr>
+                        <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#density()">density</a></code></div>
+                          <p>The logical density of the display.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                      <tr>
+                        <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                        <td>
+                          <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Density.html#fontScale()">fontScale</a></code></div>
+                          <p>Current user preference for the scaling factor for fonts.</p>
+                        </td>
+                        <td>
+                          <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                          <!--platform-Common/All--></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </devsite-filter >
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public functions</h2>
+        <div class="api-item"><a name="advanceEventTime-kotlin.Long-"></a><a name="advanceeventtime"></a>
+          <h3 class="api-name" id="advanceEventTime(kotlin.Long)">advanceEventTime</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#advanceEventTime(kotlin.Long)">advanceEventTime</a>(durationMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a> = eventPeriodMillis):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Adds the given <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#advanceEventTime(kotlin.Long)">durationMillis</a></code> to the current event time, delaying the next event by that time.</p>
+        </div>
+        <div class="api-item"><a name="percentOffset(kotlin.Float, kotlin.Float)"></a><a name="percentOffset-kotlin.Float-kotlin.Float-"></a><a name="percentoffset"></a>
+          <h3 class="api-name" id="percentOffset(kotlin.Float,kotlin.Float)">percentOffset</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#percentOffset(kotlin.Float,kotlin.Float)">percentOffset</a>(x:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = 0.0f,&nbsp;y:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = 0.0f):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+          <p>Creates an <code><a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code> relative to the size of the node we're interacting with. <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#percentOffset(kotlin.Float,kotlin.Float)">x</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#percentOffset(kotlin.Float,kotlin.Float)">y</a></code> are fractions of the <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#width()">width</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#height()">height</a></code>, between <code>-1</code> and <code>1</code>.</p>
+          <p>Note that <code>percentOffset(1f, 1f) != bottomRight</code>, see <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#right()">right</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#bottom()">bottom</a></code>.</p>
+          <p>For example: <code>percentOffset(.5f, .5f)</code> is the same as the <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#center()">center</a></code>; <code>centerLeft + percentOffset(.1f, 0f)</code> is a point 10% inward from the middle of the left edge; and <code>bottomRight - percentOffset(.2f, .1f)</code> is a point 20% to the left and 10% to the top of the bottom right corner.</p>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2>Public properties</h2>
+        <div class="api-item"><a name="getBottom()"></a><a name="setBottom()"></a><a name="getBottom--"></a><a name="setBottom--"></a>
+          <h3 class="api-name" id="bottom()">bottom</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#bottom()">bottom</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+          <p>The y-coordinate for the bottom of the node we're interacting with in px, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+          <p>Note that, unless <code>height == 0</code>, <code>bottom != height</code>. In particular, <code>bottom == height - 1f</code>, because pixels are 0-based. If <code>height == 0</code>, <code>bottom == 0</code> too.</p>
+        </div>
+        <div class="api-item"><a name="getBottomCenter()"></a><a name="setBottomCenter()"></a><a name="getBottomCenter--"></a><a name="setBottomCenter--"></a>
+          <h3 class="api-name" id="bottomCenter()">bottomCenter</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#bottomCenter()">bottomCenter</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+          <p>The center of the bottom edge of the node we're interacting with, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+          <p>Note that <code>bottomCenter.y != height</code>, see <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#bottom()">bottom</a></code>.</p>
+        </div>
+        <div class="api-item"><a name="getBottomLeft()"></a><a name="setBottomLeft()"></a><a name="getBottomLeft--"></a><a name="setBottomLeft--"></a>
+          <h3 class="api-name" id="bottomLeft()">bottomLeft</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#bottomLeft()">bottomLeft</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+          <p>The bottom left corner of the node we're interacting with, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+          <p>Note that <code>bottomLeft.y != height</code>, see <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#bottom()">bottom</a></code>.</p>
+        </div>
+        <div class="api-item"><a name="getBottomRight()"></a><a name="setBottomRight()"></a><a name="getBottomRight--"></a><a name="setBottomRight--"></a>
+          <h3 class="api-name" id="bottomRight()">bottomRight</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#bottomRight()">bottomRight</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+          <p>The bottom right corner of the node we're interacting with, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+          <p>Note that <code>bottomRight.x != width</code> and <code>bottomRight.y != height</code>, see <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#right()">right</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#bottom()">bottom</a></code>.</p>
+        </div>
+        <div class="api-item"><a name="getCenter()"></a><a name="setCenter()"></a><a name="getCenter--"></a><a name="setCenter--"></a>
+          <h3 class="api-name" id="center()">center</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#center()">center</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+          <p>The center of the node we're interacting with, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+        </div>
+        <div class="api-item"><a name="getCenterLeft()"></a><a name="setCenterLeft()"></a><a name="getCenterLeft--"></a><a name="setCenterLeft--"></a>
+          <h3 class="api-name" id="centerLeft()">centerLeft</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#centerLeft()">centerLeft</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+          <p>The center of the left edge of the node we're interacting with, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+        </div>
+        <div class="api-item"><a name="getCenterRight()"></a><a name="setCenterRight()"></a><a name="getCenterRight--"></a><a name="setCenterRight--"></a>
+          <h3 class="api-name" id="centerRight()">centerRight</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#centerRight()">centerRight</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+          <p>The center of the right edge of the node we're interacting with, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+          <p>Note that <code>centerRight.x != width</code>, see <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#right()">right</a></code>.</p>
+        </div>
+        <div class="api-item"><a name="getCenterX()"></a><a name="setCenterX()"></a><a name="getCenterX--"></a><a name="setCenterX--"></a>
+          <h3 class="api-name" id="centerX()">centerX</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#centerX()">centerX</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+          <p>The x-coordinate for the center of the node we're interacting with in px, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+        </div>
+        <div class="api-item"><a name="getCenterY()"></a><a name="setCenterY()"></a><a name="getCenterY--"></a><a name="setCenterY--"></a>
+          <h3 class="api-name" id="centerY()">centerY</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#centerY()">centerY</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+          <p>The y-coordinate for the center of the node we're interacting with in px, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+        </div>
+        <div class="api-item"><a name="getEventPeriodMillis()"></a><a name="setEventPeriodMillis()"></a><a name="getEventPeriodMillis--"></a><a name="setEventPeriodMillis--"></a>
+          <h3 class="api-name" id="eventPeriodMillis()">eventPeriodMillis</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></pre>
+          <p>The default time between two successive events.</p>
+        </div>
+        <div class="api-item"><a name="getHeight()"></a><a name="setHeight()"></a><a name="getHeight--"></a><a name="setHeight--"></a>
+          <h3 class="api-name" id="height()">height</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#height()">height</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The height of the node in px. Shorthand for <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#visibleSize()">visibleSize.height</a></code>.</p>
+        </div>
+        <div class="api-item"><a name="getLeft()"></a><a name="setLeft()"></a><a name="getLeft--"></a><a name="setLeft--"></a>
+          <h3 class="api-name" id="left()">left</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#left()">left</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+          <p>The x-coordinate for the left edge of the node we're interacting with in px, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+        </div>
+        <div class="api-item"><a name="getRight()"></a><a name="setRight()"></a><a name="getRight--"></a><a name="setRight--"></a>
+          <h3 class="api-name" id="right()">right</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#right()">right</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+          <p>The x-coordinate for the right edge of the node we're interacting with in px, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+          <p>Note that, unless <code>width == 0</code>, <code>right != width</code>. In particular, <code>right == width - 1f</code>, because pixels are 0-based. If <code>width == 0</code>, <code>right == 0</code> too.</p>
+        </div>
+        <div class="api-item"><a name="getTop()"></a><a name="setTop()"></a><a name="getTop--"></a><a name="setTop--"></a>
+          <h3 class="api-name" id="top()">top</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#top()">top</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+          <p>The y-coordinate for the bottom of the node we're interacting with in px, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+        </div>
+        <div class="api-item"><a name="getTopCenter()"></a><a name="setTopCenter()"></a><a name="getTopCenter--"></a><a name="setTopCenter--"></a>
+          <h3 class="api-name" id="topCenter()">topCenter</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#topCenter()">topCenter</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+          <p>The center of the top edge of the node we're interacting with, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+        </div>
+        <div class="api-item"><a name="getTopLeft()"></a><a name="setTopLeft()"></a><a name="getTopLeft--"></a><a name="setTopLeft--"></a>
+          <h3 class="api-name" id="topLeft()">topLeft</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#topLeft()">topLeft</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+          <p>The top left corner of the node we're interacting with, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+        </div>
+        <div class="api-item"><a name="getTopRight()"></a><a name="setTopRight()"></a><a name="getTopRight--"></a><a name="setTopRight--"></a>
+          <h3 class="api-name" id="topRight()">topRight</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#topRight()">topRight</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></pre>
+          <p>The top right corner of the node we're interacting with, in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
+          <p>Note that <code>topRight.x != width</code>, see <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#right()">right</a></code>.</p>
+        </div>
+        <div class="api-item"><a name="getViewConfiguration()"></a><a name="setViewConfiguration()"></a><a name="getViewConfiguration--"></a><a name="setViewConfiguration--"></a>
+          <h3 class="api-name" id="viewConfiguration()">viewConfiguration</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#viewConfiguration()">viewConfiguration</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/ViewConfiguration.html">ViewConfiguration</a></pre>
+          <p>The <code><a href="/reference/kotlin/androidx/compose/ui/platform/ViewConfiguration.html">ViewConfiguration</a></code> in use by the <code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsNode.html">SemanticsNode</a></code> from the <code><a href="/reference/kotlin/androidx/compose/ui/test/SemanticsNodeInteraction.html">SemanticsNodeInteraction</a></code> on which the input injection method is called.</p>
+        </div>
+        <div class="api-item"><a name="getVisibleSize()"></a><a name="setVisibleSize()"></a><a name="getVisibleSize--"></a><a name="setVisibleSize--"></a>
+          <h3 class="api-name" id="visibleSize()">visibleSize</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#visibleSize()">visibleSize</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a></pre>
+          <p>The size of the visible part of the node we're interacting with in px, i.e. its clipped bounds.</p>
+        </div>
+        <div class="api-item"><a name="getWidth()"></a><a name="setWidth()"></a><a name="getWidth--"></a><a name="setWidth--"></a>
+          <h3 class="api-name" id="width()">width</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#width()">width</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <p>The width of the node in px. Shorthand for <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#visibleSize()">visibleSize.width</a></code>.</p>
+        </div>
+      </div>
+    </devsite-filter >
+  </body>
+</html>

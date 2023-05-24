@@ -94,23 +94,6 @@ class BasicTest : IntegrationTestBase() {
         )
     }
 
-    // Is not KMP because Compose doesn't publish KMP source jars
-    @Test
-    fun `Validate prod AndroidX compose prebuilts`() {
-        validatePrebuilts(
-            testName = "compose",
-            artifactNames = listOf(
-                "animation", "animation-core", "animation-graphics",
-                "foundation", "foundation-layout",
-                "material3", "material3-window-size-class",
-                "runtime",
-                "ui", "ui-geometry", "ui-graphics", "ui-text", "ui-unit", "ui-util",
-                "ui-tooling-preview"
-            ),
-            samples = true
-        )
-    }
-
     @Test
     fun `Validate @sample`() {
         validateDirectory(
