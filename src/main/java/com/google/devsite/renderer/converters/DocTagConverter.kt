@@ -550,7 +550,7 @@ internal class DocTagConverter(
                     val facade = analysisMap[sourceSet]
                         ?: analysisMap[analysisMap.keys.singleOrNull()]?.let {
                             println(
-                                "WARNING: no common sourceSet for $this, falling back to " +
+                                "WARNING: no common sourceSet for ${this.dri}, falling back to " +
                                     ".single() when resolving @sample $dri. b/284107590"
                             )
                             it
