@@ -623,8 +623,16 @@ internal fun Documentable.getExpectOrCommonSourceSet() =
         ?: sourceSets.singleOrNull { it.displayName.equalsIgnoreCase("jvmMain") }?.let {
             println(
                 "WARNING: no common source set for ${this::class.simpleName} $dri! Falling back " +
-                    "to jvmMain sourceSet! This is only defensible if every sourceSet depends on" +
-                    "jvmMain! This is a bug in dackka: b/284107590"
+                    "to jvmMain sourceSet! This is only defensible if every usable sourceSet " +
+                    "depends on jvmMain! This is a bug in dackka: b/284107590"
+            )
+            it
+        }
+        ?: sourceSets.singleOrNull { it.displayName.equalsIgnoreCase("androidMain") }?.let {
+            println(
+                "WARNING: no common or jvm source set for ${this::class.simpleName} $dri! Falling" +
+                    " back to androidMain sourceSet! This is only defensible if every usable " +
+                    "sourceSet depends on androidMain! This is a bug in dackka: b/284107590"
             )
             it
         }
