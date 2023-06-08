@@ -1062,7 +1062,7 @@ internal class DocTagConverterTest(
             val throwsDescText =
                 throwsDescription.data.components.single().children.single() as Text
 
-            assertThat(throwsTypeAsParam.data.name).isEqualTo(expectedDRI)
+            assertThat(throwsTypeAsParam.data.name).isEqualTo("")
             assertThat(throwsTypeAsLink.data.name).contains(expectedDRI)
             assertThat(throwsTypeAsLink.data.url).isEqualTo(expectedURL)
             assertThat(throwsDescText.body).isEqualTo("if it fails")
@@ -1134,12 +1134,12 @@ internal class DocTagConverterTest(
         assertThat(outputStreamCaptor.toString()).isEmpty()
 
         for (throws in listOf(throwsBad1, throwsBad2, throwsBad3)) {
-            assertThat(throws.name()).isEqualTo("IllegalStateException")
+            assertThat(throws.name()).isEqualTo("")
             assertThat(throws.data.title.typeName()).isEqualTo("IllegalStateException")
             assertThat(throws.data.title.link().url).isEqualTo("")
         }
         for (throws in listOf(throwsBad4, throwsBad5)) {
-            assertThat(throws.name()).isEqualTo("IOException")
+            assertThat(throws.name()).isEqualTo("")
             assertThat(throws.data.title.typeName()).isEqualTo("IOException")
             assertThat(throws.data.title.link().url).isEqualTo("")
         }
@@ -1156,7 +1156,7 @@ internal class DocTagConverterTest(
 
         assertThat(throwsFine1.data.description.text())
             .isEqualTo("but this one is actually fine, it turns out")
-        assertThat(throwsFine1.name()).isEqualTo("kotlin.IllegalStateException")
+        assertThat(throwsFine1.name()).isEqualTo("")
         assertThat(throwsFine1.data.title.typeName()).isEqualTo("kotlin.IllegalStateException")
         assertThat(throwsFine1.data.title.link().url).isEqualTo(
             "https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/" +
@@ -1183,7 +1183,7 @@ internal class DocTagConverterTest(
         val throwsTypeAsLink = throwsTypeAsParam.data.type.data.type
         val throwsDescription = throwsSummary.item().data.description
 
-        assertThat(throwsTypeAsParam.data.name).isEqualTo(expectedDRI)
+        assertThat(throwsTypeAsParam.data.name).isEqualTo("")
         assertThat(throwsTypeAsLink.data.name).contains(expectedDRI)
         assertThat(throwsTypeAsLink.data.url).isEqualTo(expectedURL)
         assertThat(throwsDescription.data.components).isEmpty()

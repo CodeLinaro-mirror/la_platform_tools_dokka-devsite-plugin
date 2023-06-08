@@ -502,7 +502,7 @@ internal class DocTagConverter(
 
         return DefaultParameterComponent(
             ParameterComponent.Params(
-                name = name,
+                name = "",
                 type = DefaultTypeProjectionComponent(
                     TypeProjectionComponent.Params(
                         type = link,
