@@ -41,6 +41,8 @@ import org.jetbrains.dokka.plugability.ConfigurableBlock
  * those in [excludedPackages]. Defaults to an empty list.
  * @param libraryMetadataFilename The location of the JSON file containing the library metadata.
  * Optional, if not specified, library metadata will not be displayed.
+ * @param versionMetadataFilenames The location of the JSON file(s) containing the library API
+ * version metadata. Optional, if not specified, library API version metadata will not be displayed.
  * @param includedHeadTagsPathJava A path to a file to include in the `<head>` section of each
  * generated HTML page for the Java docs. See the
  * [devsite docs](https://developers.google.com/devsite/reference/templatetags/include)
@@ -75,6 +77,7 @@ data class DevsiteConfiguration(
     val excludedPackagesForJava: List<String>?,
     val excludedPackagesForKotlin: List<String>?,
     val libraryMetadataFilename: String?,
+    val versionMetadataFilenames: List<String>?,
     val includedHeadTagsPathJava: String? = "_shared/_reference-head-tags.html",
     val includedHeadTagsPathKotlin: String? = "_shared/_reference-head-tags.html",
     val packagePrefixToRemoveInToc: String?,

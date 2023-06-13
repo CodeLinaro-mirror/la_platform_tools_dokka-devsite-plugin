@@ -224,6 +224,7 @@ internal abstract class ConverterTestBase(
                     excludedPackagesForJava = null,
                     excludedPackagesForKotlin = null,
                     libraryMetadataFilename = null,
+                    versionMetadataFilenames = null,
                     javaDocsPath = "",
                     kotlinDocsPath = "kotlin",
                     packagePrefixToRemoveInToc = null,

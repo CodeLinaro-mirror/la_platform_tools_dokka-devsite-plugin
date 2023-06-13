@@ -17,6 +17,7 @@
 package com.google.devsite.renderer
 
 import com.google.devsite.DevsiteConfiguration
+import com.google.devsite.components.impl.DefaultVersionMetadataComponent
 import com.google.devsite.renderer.converters.AnnotationDocumentableConverter
 import com.google.devsite.renderer.converters.DocTagConverter
 import com.google.devsite.renderer.converters.EnumValueDocumentableConverter
@@ -30,6 +31,7 @@ import com.google.devsite.renderer.impl.PackageRenderer
 import com.google.devsite.renderer.impl.paths.DefaultExternalDokkaLocationProvider
 import com.google.devsite.renderer.impl.paths.DevsiteFilePathProvider
 import com.google.devsite.renderer.impl.paths.ExternalDokkaLocationProvider
+import com.google.devsite.util.JsonApiMetadata
 import com.google.devsite.util.JsonLibraryMetadata
 import com.google.devsite.util.LibraryMetadata
 import kotlinx.coroutines.Dispatchers
@@ -63,6 +65,20 @@ internal class MultiLanguageRenderer(
                 devsiteConfiguration.libraryMetadataFilename.orEmpty()
             )
             val fileMetadataMap = LibraryMetadata.convertJsonMetadataToFileMap(libraryMetadataArray)
+
+            /**
+             * API version metadata is passed in via a list of files. Process each file and merge
+             * the results into a single HashMap.
+             */
+            val versionMetadataMap = hashMapOf<String, Pair<String, String?>>()
+            devsiteConfiguration.versionMetadataFilenames?.forEach { versionMetadataFilename ->
+                val versionMetadataArray = JsonApiMetadata.getMetadataFromFile(
+                    versionMetadataFilename
+                )
+                versionMetadataMap += DefaultVersionMetadataComponent
+                    .convertJsonApiMetadataToVersionMap(versionMetadataArray)
+            }
+
             val jHolder = DocumentablesHolder(
                 displayLanguage = Language.JAVA,
                 module = module,
@@ -71,6 +87,7 @@ internal class MultiLanguageRenderer(
                 externalDocumentablesProvider = externalDocumentablesProvider,
                 excludedPackages = devsiteConfiguration.computedExcludedPackagesForJava,
                 fileMetadataMap = fileMetadataMap,
+                versionMetadataMap = versionMetadataMap,
                 baseSourceLink = devsiteConfiguration.baseSourceLink,
                 annotationsNotToDisplay = devsiteConfiguration.allAnnotationsNotToDisplayJava
             )
@@ -82,6 +99,7 @@ internal class MultiLanguageRenderer(
                 externalDocumentablesProvider = externalDocumentablesProvider,
                 excludedPackages = devsiteConfiguration.computedExcludedPackagesForKotlin,
                 fileMetadataMap = fileMetadataMap,
+                versionMetadataMap = versionMetadataMap,
                 baseSourceLink = devsiteConfiguration.baseSourceLink,
                 annotationsNotToDisplay = devsiteConfiguration.allAnnotationsNotToDisplayKotlin
             )
