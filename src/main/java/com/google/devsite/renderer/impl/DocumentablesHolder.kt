@@ -88,6 +88,7 @@ internal class DocumentablesHolder(
     // TODO(handle packages with no common or JVM targets, as-Java. b/265948930)
     private val excludedPackages: Set<Regex> = emptySet(),
     val fileMetadataMap: Map<String, LibraryMetadata> = emptyMap(),
+    val versionMetadataMap: Map<String, Pair<String, String?>> = emptyMap(),
     val baseSourceLink: String? = null,
     val annotationsNotToDisplay: Set<String> = emptySet(),
 ) {

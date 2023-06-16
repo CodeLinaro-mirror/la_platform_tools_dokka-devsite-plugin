@@ -18,6 +18,7 @@ package com.google.devsite.components.impl
 
 import com.google.devsite.components.Link
 import com.google.devsite.components.symbols.VersionMetadataComponent
+import com.google.devsite.util.JsonApiMetadata
 import kotlinx.html.FlowContent
 import kotlinx.html.div
 import kotlinx.html.id
@@ -68,6 +69,24 @@ internal data class DefaultVersionMetadataComponent(
                 deprecatedIn = deprecatedIn?.let { createVersionLinkFromBase(it, baseUrl) }
             )
         )
+
+        /**
+         * Generate mapping of each class to its API metadata
+         */
+        fun convertJsonApiMetadataToVersionMap(
+            apiMetadataList: List<JsonApiMetadata>
+        ): Map<String, Pair<String, String?>> {
+            val versionMetadataMap = hashMapOf<String, Pair<String, String?>>()
+            apiMetadataList.forEach { jsonApiMetadata ->
+                versionMetadataMap[jsonApiMetadata.clazz] =
+                    Pair(jsonApiMetadata.addedIn, jsonApiMetadata.deprecatedIn)
+
+                // TODO: also process methods (b/264280616) and fields (b/281727318). This will
+                // probably require the return to change from Pair to something more structured
+            }
+
+            return versionMetadataMap
+        }
 
         private fun createVersionLinkFromBase(version: String, baseUrl: String?) =
             DefaultLink(

@@ -111,6 +111,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
                         excludedPackagesForJava = null,
                         excludedPackagesForKotlin = null,
                         libraryMetadataFilename = null,
+                        versionMetadataFilenames = null,
                         javaDocsPath = javaDocsPath,
                         kotlinDocsPath = kotlinDocsPath,
                         includedHeadTagsPathJava = includedHeadTagsPathJava,

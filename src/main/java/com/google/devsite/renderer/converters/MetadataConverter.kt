@@ -17,7 +17,9 @@
 package com.google.devsite.renderer.converters
 
 import com.google.devsite.components.impl.DefaultMetadataComponent
+import com.google.devsite.components.impl.DefaultVersionMetadataComponent
 import com.google.devsite.components.symbols.MetadataComponent
+import com.google.devsite.components.symbols.VersionMetadataComponent
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.util.LibraryMetadata
 import org.jetbrains.dokka.DokkaConfiguration
@@ -43,15 +45,17 @@ internal class MetadataConverter(
     fun getMetadataForClasslike(classlike: DClasslike): MetadataComponent? {
         val entries = classlike.getSourceEntries() ?: return null
         val paths = entries.map { it.getSourceFilePath() }
-        val jsonLibraryMetadata = classlike.findMatchingLibraryMetadata(paths)
+        val libraryMetadata = classlike.findMatchingLibraryMetadata(paths)
         val sourceUrl = classlike.createLinkToSource(paths)
+        val versionMetadata = classlike.findMatchingVersionMetadata(
+            libraryMetadata?.releaseNotesUrl
+        )
 
         return DefaultMetadataComponent(
             MetadataComponent.Params(
-                libraryMetadata = jsonLibraryMetadata,
+                libraryMetadata = libraryMetadata,
                 sourceLinkUrl = sourceUrl,
-                // TODO(b/264280671): display version metadata for classes
-                versionMetadata = null
+                versionMetadata = versionMetadata
             )
         )
     }
@@ -101,6 +105,26 @@ internal class MetadataConverter(
         val path = paths.single()
 
         return docsHolder.fileMetadataMap[path]
+    }
+
+    /**
+     * Query the API version metadata Map to find a [VersionMetadataComponent] that matches the
+     * current class being processed and append a release URL.  Otherwise, return null.
+     */
+    private fun Documentable.findMatchingVersionMetadata(
+        releaseNotesUrl: String?
+    ): VersionMetadataComponent? {
+        val versionPair: Pair<String, String?>? = docsHolder.versionMetadataMap[dri.fullName]
+
+        return if (versionPair == null) {
+            null
+        } else {
+            DefaultVersionMetadataComponent.createVersionMetadataWithBaseUrl(
+                versionPair.first,
+                versionPair.second,
+                releaseNotesUrl
+            )
+        }
     }
 
     /**
