@@ -31,8 +31,8 @@ import com.google.devsite.renderer.impl.PackageRenderer
 import com.google.devsite.renderer.impl.paths.DefaultExternalDokkaLocationProvider
 import com.google.devsite.renderer.impl.paths.DevsiteFilePathProvider
 import com.google.devsite.renderer.impl.paths.ExternalDokkaLocationProvider
-import com.google.devsite.util.JsonApiMetadata
 import com.google.devsite.util.JsonLibraryMetadata
+import com.google.devsite.util.JsonVersionMetadata
 import com.google.devsite.util.LibraryMetadata
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -72,11 +72,11 @@ internal class MultiLanguageRenderer(
              */
             val versionMetadataMap = hashMapOf<String, Pair<String, String?>>()
             devsiteConfiguration.versionMetadataFilenames?.forEach { versionMetadataFilename ->
-                val versionMetadataArray = JsonApiMetadata.getMetadataFromFile(
+                val versionMetadataArray = JsonVersionMetadata.getMetadataFromFile(
                     versionMetadataFilename
                 )
                 versionMetadataMap += DefaultVersionMetadataComponent
-                    .convertJsonApiMetadataToVersionMap(versionMetadataArray)
+                    .convertJsonVersionMetadataToVersionMap(versionMetadataArray)
             }
 
             val jHolder = DocumentablesHolder(

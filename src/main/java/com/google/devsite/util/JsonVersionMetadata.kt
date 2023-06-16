@@ -26,13 +26,13 @@ import java.io.FileNotFoundException
 import java.io.IOException
 
 /**
- * Data class to store API metadata.
+ * Data class to store and represent API version metadata parsed from JSON
  *
  * Each field has a defined [JsonProperty] to prevent bugs in case a field is renamed (which could
  * result in the Json parser not finding the new field name).
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class JsonApiMetadata(
+data class JsonVersionMetadata(
 
     @JsonProperty("class")
     val clazz: String,
@@ -44,16 +44,16 @@ data class JsonApiMetadata(
     val deprecatedIn: String? = null,
 
     @JsonProperty("methods")
-    val methods: List<JsonApiMetadataMethod> = emptyList(),
+    val methods: List<JsonVersionMetadataMethod> = emptyList(),
 
     @JsonProperty("fields")
-    val fields: List<JsonApiMetadataField> = emptyList(),
+    val fields: List<JsonVersionMetadataField> = emptyList(),
 ) {
 
     /**
      * Nested data class to store API method metadata
      */
-    data class JsonApiMetadataMethod(
+    data class JsonVersionMetadataMethod(
         @JsonProperty("method")
         var method: String,
 
@@ -67,7 +67,7 @@ data class JsonApiMetadata(
     /**
      * Nested data class to store API field metadata
      */
-    data class JsonApiMetadataField(
+    data class JsonVersionMetadataField(
         @JsonProperty("field")
         var field: String,
 
@@ -79,7 +79,7 @@ data class JsonApiMetadata(
     )
 
     companion object {
-        fun getMetadataFromFile(filename: String): List<JsonApiMetadata> {
+        fun getMetadataFromFile(filename: String): List<JsonVersionMetadata> {
             if (filename.isEmpty()) {
                 return emptyList()
             }

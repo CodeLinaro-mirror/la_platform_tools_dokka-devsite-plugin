@@ -23,7 +23,7 @@ import org.junit.rules.TemporaryFolder
 import java.io.FileNotFoundException
 import java.io.IOException
 
-class JsonApiMetadataTest {
+class JsonVersionMetadataTest {
 
     @JvmField
     @Rule
@@ -31,14 +31,14 @@ class JsonApiMetadataTest {
 
     @Test
     fun `getMetadataFromFile with empty string filename`() {
-        val actual = JsonApiMetadata.getMetadataFromFile("")
-        val expected = emptyList<JsonApiMetadata>()
+        val actual = JsonVersionMetadata.getMetadataFromFile("")
+        val expected = emptyList<JsonVersionMetadata>()
         assertThat(actual).isEqualTo(expected)
     }
 
     @Test(expected = FileNotFoundException::class)
     fun `getMetadataFromFile with missing file throws FileNotFoundException`() {
-        JsonApiMetadata.getMetadataFromFile("NotAnActualFile.json")
+        JsonVersionMetadata.getMetadataFromFile("NotAnActualFile.json")
     }
 
     @Test(expected = IOException::class)
@@ -102,33 +102,33 @@ class JsonApiMetadataTest {
         val file = folder.newFile("LibraryMetadata.json")
         file.writeText(json)
 
-        val metadata = JsonApiMetadata.getMetadataFromFile(file.toString())
+        val metadata = JsonVersionMetadata.getMetadataFromFile(file.toString())
         assertThat(metadata.size).isEqualTo(2)
 
-        val apiMetadata = metadata.first()
-        assertThat(apiMetadata.clazz).isEqualTo("androidx.fragment.foo")
-        assertThat(apiMetadata.addedIn).isEqualTo("1.0.0")
-        assertThat(apiMetadata.deprecatedIn).isEqualTo("1.1.0")
+        val versionMetadata = metadata.first()
+        assertThat(versionMetadata.clazz).isEqualTo("androidx.fragment.foo")
+        assertThat(versionMetadata.addedIn).isEqualTo("1.0.0")
+        assertThat(versionMetadata.deprecatedIn).isEqualTo("1.1.0")
 
-        assertThat(apiMetadata.methods.size).isEqualTo(2)
+        assertThat(versionMetadata.methods.size).isEqualTo(2)
 
-        val methodsFoo = apiMetadata.methods[0]
+        val methodsFoo = versionMetadata.methods[0]
         assertThat(methodsFoo.method).isEqualTo("isFoo()")
         assertThat(methodsFoo.addedIn).isEqualTo("1.0.0")
         assertThat(methodsFoo.deprecatedIn).isEqualTo("1.1.0")
 
-        val methodsBar = apiMetadata.methods[1]
+        val methodsBar = versionMetadata.methods[1]
         assertThat(methodsBar.method).isEqualTo("isBar()")
         assertThat(methodsBar.addedIn).isEqualTo("1.0.1")
 
-        assertThat(apiMetadata.fields.size).isEqualTo(2)
+        assertThat(versionMetadata.fields.size).isEqualTo(2)
 
-        val fieldsFoo = apiMetadata.fields[0]
+        val fieldsFoo = versionMetadata.fields[0]
         assertThat(fieldsFoo.field).isEqualTo("FIELD_FOO")
         assertThat(fieldsFoo.addedIn).isEqualTo("1.0.0")
         assertThat(fieldsFoo.deprecatedIn).isEqualTo("1.1.0")
 
-        val fieldsBar = apiMetadata.fields[1]
+        val fieldsBar = versionMetadata.fields[1]
         assertThat(fieldsBar.field).isEqualTo("FIELD_BAR")
         assertThat(fieldsBar.addedIn).isEqualTo("1.0.1")
     }
@@ -149,7 +149,7 @@ class JsonApiMetadataTest {
         file.writeText(json)
 
         // This should not throw an exception
-        JsonApiMetadata.getMetadataFromFile(file.toString())
+        JsonVersionMetadata.getMetadataFromFile(file.toString())
     }
 
     @Test
@@ -182,15 +182,15 @@ class JsonApiMetadataTest {
         val file = folder.newFile("LibraryMetadata.json")
         file.writeText(json)
 
-        val metadata = JsonApiMetadata.getMetadataFromFile(file.toString())
-        val apiMetadata = metadata.first()
+        val metadata = JsonVersionMetadata.getMetadataFromFile(file.toString())
+        val versionMetadata = metadata.first()
 
         // Top level - deprecatedIn returns null by default
-        assertThat(apiMetadata.deprecatedIn).isNull()
+        assertThat(versionMetadata.deprecatedIn).isNull()
 
         // methods and fields return emptyList() by default
-        assertThat(apiMetadata.methods).isEmpty()
-        assertThat(apiMetadata.fields).isEmpty()
+        assertThat(versionMetadata.methods).isEmpty()
+        assertThat(versionMetadata.fields).isEmpty()
 
         // Methods - deprecatedIn returns null by default
         assertThat(metadata[1].methods.first().deprecatedIn).isNull()
