@@ -306,13 +306,21 @@ internal fun DFunction.matches(other: DFunction): Boolean =
         this.jvmName() == other.jvmName()
 
 /**
- * [Comparator] which sorts [DFunction] by name, then number of params, and then params names if
- * necessary.
+ * [Comparator] which sorts [DFunction] by name, then number of params, params names, and then
+ * source sets if necessary.
  */
 fun functionSignatureComparator(): Comparator<DFunction> = compareBy(
     { it.name },
     { it.parameters.size },
-    { it.signatureAsString() }
+    { it.signatureAsString() },
+    { it.sourceSets.joinToString { it.displayName } }
+)
+
+/** [Comparator] intended for [Documentables] known to be name-unique in single-platform. */
+fun simpleDocumentableComparator(): Comparator<Documentable> = compareBy(
+    { it.name },
+    { it.dri.toString() },
+    { it.sourceSets.joinToString { it.displayName } }
 )
 
 private fun DFunction.signatureAsString() =

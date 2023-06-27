@@ -249,5 +249,8 @@ public actual open class FooSparseArray<E>
     public open fun jvmOnlyMethod(key: Long, value: E): Unit {
 
     }
-
 }
+
+fun functionThatExistsInMultipleSourceSetsButNotCommon(foo: String) = 5
+fun functionWithSameNameInMultipleSourceSetsButDifferentParams(fooJVM: String) = -5
+

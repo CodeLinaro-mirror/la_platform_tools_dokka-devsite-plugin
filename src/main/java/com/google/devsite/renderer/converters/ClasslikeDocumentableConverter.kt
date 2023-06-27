@@ -125,7 +125,8 @@ internal abstract class ClasslikeDocumentableConverter(
             classlike.companionFunctionsAndProperties()
         val companionFunctions = unsortedCompanionFunctions
             .sortedWith(functionSignatureComparator())
-        val companionProperties = unsortedCompanionProperties.sortedBy { it.name }
+        val companionProperties = unsortedCompanionProperties
+            .sortedWith(simpleDocumentableComparator())
 
         val (initialFunctions, initialProperties) = classlike.nonInheritedTypes()
         val inheritedAll = classlike.inheritedTypes(classlike.supertypesForDisplayLanguage())
@@ -133,9 +134,10 @@ internal abstract class ClasslikeDocumentableConverter(
         val declaredFunctions = computeDeclaredFunctions(initialFunctions, companionFunctions)
             .sortedWith(functionSignatureComparator())
         val declaredProperties = computeDeclaredProperties(initialProperties, companionProperties)
-            .sortedBy { it.name }
+            .sortedWith(simpleDocumentableComparator())
 
-        val enumValues = (classlike as? DEnum)?.entries.orEmpty().sortedBy { it.name }
+        val enumValues = (classlike as? DEnum)?.entries.orEmpty()
+            .sortedWith(simpleDocumentableComparator())
 
         val allConstructors = (classlike as? WithConstructors)?.constructors.orEmpty()
             .sortedWith(functionSignatureComparator())
@@ -254,7 +256,10 @@ internal abstract class ClasslikeDocumentableConverter(
         var extensionFunctions = docsHolder.extensionFunctionsFor(classlike)
             // Sort by the class the extension function came from first, so they will be grouped
             // together in a logical way
-            .sortedBy { nameForSyntheticClass(it) + it.name }
+            .sortedWith(
+                compareBy<DFunction> { nameForSyntheticClass(it) }
+                    .then(functionSignatureComparator())
+            )
             // Convert DRIs to this class so link from summary to detail will stay on class page
             .map { it.withDRIOfClass(classlike) }
         if (displayLanguage == Language.JAVA) {
@@ -269,7 +274,10 @@ internal abstract class ClasslikeDocumentableConverter(
         val extensionProperties = docsHolder.extensionPropertiesFor(classlike)
             // Sort by the class the extension property came from first, so they will be grouped
             // together in a logical way
-            .sortedBy { nameForSyntheticClass(it) + it.name }
+            .sortedWith(
+                compareBy<DProperty> { nameForSyntheticClass(it) }
+                    .then(simpleDocumentableComparator())
+            )
             // Convert DRIs to this class so link from summary to detail will stay on class page
             .map { it.withDRIOfClass(classlike) }
         val extensionPropertiesSummary =
@@ -870,7 +878,7 @@ internal abstract class ClasslikeDocumentableConverter(
                 }
 
         val (consts, properties) = symbols.filterIsInstance<DProperty>()
-            .sortedBy { "${it.name} ${it.dri}" }
+            .sortedWith(simpleDocumentableComparator())
             .partition { it.isConstant() }
 
         val constsSummary = consts.takeIf { it.isNotEmpty() }
@@ -898,6 +906,8 @@ internal abstract class ClasslikeDocumentableConverter(
         }
 
         // val category = groupBy { it.driInheritedFrom() ?: it.dri.parent }
+        // TODO: this is sorting classes--what if you have the same-named class in two sourceSets?
+        // Addressing this will likely require fixing b/247079868
         val category = groupBy { it.dri.parent }
             .toSortedMap(compareBy { it.classNames + " " + it.fullName })
             .entries.associate { (k, v) -> createInheritedSymbolsList(k, v) }

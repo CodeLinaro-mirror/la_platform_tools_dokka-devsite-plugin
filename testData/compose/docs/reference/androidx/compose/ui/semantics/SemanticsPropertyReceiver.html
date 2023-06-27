@@ -556,15 +556,15 @@
           <tr>
             <td><code>default&nbsp;final void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/semantics/SemanticsPropertiesKt.html">SemanticsPropertiesKt</a>.<a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyReceiver.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).setText(kotlin.String,kotlin.Function1)">setText</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyReceiver.html">SemanticsPropertyReceiver</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;label,<br>&nbsp;&nbsp;&nbsp;&nbsp;Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;action<br>)</code></div>
-              <p>Action to set the text contents of this node.</p>
+              <div><code><a href="/reference/androidx/compose/ui/semantics/SemanticsPropertiesKt.html">SemanticsPropertiesKt</a>.<a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyReceiver.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).setText(androidx.compose.ui.text.AnnotatedString)">setText</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyReceiver.html">SemanticsPropertyReceiver</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&nbsp;text<br>)</code></div>
+              <p>Text of the semantics node.</p>
             </td>
           </tr>
           <tr>
             <td><code>default&nbsp;final void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/semantics/SemanticsPropertiesKt.html">SemanticsPropertiesKt</a>.<a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyReceiver.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).setText(androidx.compose.ui.text.AnnotatedString)">setText</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyReceiver.html">SemanticsPropertyReceiver</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&nbsp;text<br>)</code></div>
-              <p>Text of the semantics node.</p>
+              <div><code><a href="/reference/androidx/compose/ui/semantics/SemanticsPropertiesKt.html">SemanticsPropertiesKt</a>.<a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyReceiver.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).setText(kotlin.String,kotlin.Function1)">setText</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyReceiver.html">SemanticsPropertyReceiver</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;label,<br>&nbsp;&nbsp;&nbsp;&nbsp;Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;action<br>)</code></div>
+              <p>Action to set the text contents of this node.</p>
             </td>
           </tr>
           <tr>
@@ -1863,6 +1863,30 @@
         <p>testTags are also provided in AccessibilityNodeInfo.extras under key &quot;androidx.compose.ui.semantics.testTag&quot;. However, when using UIAutomator or on Android 7 and below, extras are not available, so a more backwards-compatible way of making testTags available to accessibility-tree-based integration tests is sometimes needed. resource-id was the most natural property to repurpose for this.</p>
         <p>This property applies to a semantics subtree. For example, if it's set to true on the root semantics node of the app (and no child nodes set it back to false), then every testTag will be mapped.</p>
       </div>
+      <div class="api-item"><a name="-androidx.compose.ui.semantics.SemanticsPropertyReceiver-.setText-androidx.compose.ui.text.AnnotatedString-"></a><a name="settext"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.semantics.SemanticsPropertyReceiver).setText(androidx.compose.ui.text.AnnotatedString)">SemanticsPropertiesKt.setText</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/semantics/SemanticsPropertiesKt.html">SemanticsPropertiesKt</a>.<a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyReceiver.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).setText(androidx.compose.ui.text.AnnotatedString)">setText</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyReceiver.html">SemanticsPropertyReceiver</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&nbsp;text<br>)</pre>
+        <p>Text of the semantics node. It must be real text instead of developer-set content description.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).editableText()">editableText</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="api-item"><a name="(androidx.compose.ui.semantics.SemanticsPropertyReceiver).setText(kotlin.String, kotlin.Function1)"></a><a name="-androidx.compose.ui.semantics.SemanticsPropertyReceiver-.setText-kotlin.String-kotlin.Function1-"></a><a name="settext"></a>
         <h3 class="api-name" id="(androidx.compose.ui.semantics.SemanticsPropertyReceiver).setText(kotlin.String,kotlin.Function1)">SemanticsPropertiesKt.setText</h3>
         <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/semantics/SemanticsPropertiesKt.html">SemanticsPropertiesKt</a>.<a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyReceiver.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).setText(kotlin.String,kotlin.Function1)">setText</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyReceiver.html">SemanticsPropertyReceiver</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;label,<br>&nbsp;&nbsp;&nbsp;&nbsp;Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;action<br>)</pre>
@@ -1891,30 +1915,6 @@
                 <td>
                   <p>Action to be performed when <code><a href="/reference/androidx/compose/ui/semantics/SemanticsActions.html#SetText()">SemanticsActions.SetText</a></code> is called.</p>
                 </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="api-item"><a name="-androidx.compose.ui.semantics.SemanticsPropertyReceiver-.setText-androidx.compose.ui.text.AnnotatedString-"></a><a name="settext"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.semantics.SemanticsPropertyReceiver).setText(androidx.compose.ui.text.AnnotatedString)">SemanticsPropertiesKt.setText</h3>
-        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/semantics/SemanticsPropertiesKt.html">SemanticsPropertiesKt</a>.<a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyReceiver.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).setText(androidx.compose.ui.text.AnnotatedString)">setText</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/semantics/SemanticsPropertyReceiver.html">SemanticsPropertyReceiver</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a>&nbsp;text<br>)</pre>
-        <p>Text of the semantics node. It must be real text instead of developer-set content description.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">See also</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).editableText()">editableText</a></code></td>
-                <td></td>
               </tr>
             </tbody>
           </table>
