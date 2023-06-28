@@ -308,7 +308,7 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
             <tr>
               <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>.<a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).swipe(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">swipe</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;start:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;end:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;durationMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><br>)</code></div>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>.<a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).swipe(kotlin.Function1,kotlin.Long,kotlin.collections.List)">swipe</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;curve:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;durationMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;keyTimes:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>&gt;<br>)</code></div>
                 <p>Performs a swipe gesture on the associated node.</p>
               </td>
               <td>
@@ -318,7 +318,7 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
             <tr>
               <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>.<a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).swipe(kotlin.Function1,kotlin.Long,kotlin.collections.List)">swipe</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;curve:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;durationMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;keyTimes:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>&gt;<br>)</code></div>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>.<a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).swipe(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">swipe</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;start:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;end:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;durationMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><br>)</code></div>
                 <p>Performs a swipe gesture on the associated node.</p>
               </td>
               <td>
@@ -1500,47 +1500,6 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
             </table>
           </div>
         </div>
-        <div class="api-item"><a name="(androidx.compose.ui.test.TouchInjectionScope).swipe(androidx.compose.ui.geometry.Offset, androidx.compose.ui.geometry.Offset, kotlin.Long)"></a><a name="-androidx.compose.ui.test.TouchInjectionScope-.swipe-androidx.compose.ui.geometry.Offset-androidx.compose.ui.geometry.Offset-kotlin.Long-"></a><a name="swipe"></a>
-          <h3 class="api-name" id="(androidx.compose.ui.test.TouchInjectionScope).swipe(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">swipe</h3>
-<span class="kotlin-platform" data-title="Common/All">Cmn</span>
-          <!--platform-Common/All-->
-          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>.<a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).swipe(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">swipe</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;start:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;end:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;durationMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a> = 200<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-          <p>Performs a swipe gesture on the associated node.</p>
-          <p>The motion events are linearly interpolated between <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipe(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">start</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipe(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">end</a></code>. The coordinates are in the node's local coordinate system, where (0, 0) is the top left corner of the node. The default duration is 200 milliseconds.</p>
-          <div class="devsite-table-wrapper">
-            <table class="responsive">
-              <colgroup>
-                <col width="40%">
-                <col>
-              </colgroup>
-              <thead>
-                <tr>
-                  <th colspan="100%">Parameters</th>
-                </tr>
-              </thead>
-              <tbody class="list">
-                <tr>
-                  <td><code>start:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
-                  <td>
-                    <p>The start position of the gesture, in the node's local coordinate system</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td><code>end:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
-                  <td>
-                    <p>The end position of the gesture, in the node's local coordinate system</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td><code>durationMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a> = 200</code></td>
-                  <td>
-                    <p>The duration of the gesture</p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
         <div class="api-item"><a name="(androidx.compose.ui.test.TouchInjectionScope).swipe(kotlin.Function1, kotlin.Long, kotlin.collections.List)"></a><a name="-androidx.compose.ui.test.TouchInjectionScope-.swipe-kotlin.Function1-kotlin.Long-kotlin.collections.List-"></a><a name="swipe"></a>
           <h3 class="api-name" id="(androidx.compose.ui.test.TouchInjectionScope).swipe(kotlin.Function1,kotlin.Long,kotlin.collections.List)">swipe</h3>
 <span class="kotlin-platform" data-title="Common/All">Cmn</span>
@@ -1576,6 +1535,47 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
                   <td><code>keyTimes:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>&gt; = emptyList()</code></td>
                   <td>
                     <p>An optional list of timestamps in milliseconds at which a move event must be sampled</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="api-item"><a name="(androidx.compose.ui.test.TouchInjectionScope).swipe(androidx.compose.ui.geometry.Offset, androidx.compose.ui.geometry.Offset, kotlin.Long)"></a><a name="-androidx.compose.ui.test.TouchInjectionScope-.swipe-androidx.compose.ui.geometry.Offset-androidx.compose.ui.geometry.Offset-kotlin.Long-"></a><a name="swipe"></a>
+          <h3 class="api-name" id="(androidx.compose.ui.test.TouchInjectionScope).swipe(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">swipe</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a>.<a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#(androidx.compose.ui.test.TouchInjectionScope).swipe(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">swipe</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;start:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;end:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;durationMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a> = 200<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Performs a swipe gesture on the associated node.</p>
+          <p>The motion events are linearly interpolated between <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipe(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">start</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipe(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">end</a></code>. The coordinates are in the node's local coordinate system, where (0, 0) is the top left corner of the node. The default duration is 200 milliseconds.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>start:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+                  <td>
+                    <p>The start position of the gesture, in the node's local coordinate system</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>end:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
+                  <td>
+                    <p>The end position of the gesture, in the node's local coordinate system</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>durationMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a> = 200</code></td>
+                  <td>
+                    <p>The duration of the gesture</p>
                   </td>
                 </tr>
               </tbody>
