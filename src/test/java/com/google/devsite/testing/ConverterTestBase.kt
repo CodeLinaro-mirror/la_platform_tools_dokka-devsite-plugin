@@ -254,7 +254,8 @@ internal abstract class ConverterTestBase(
     internal fun holderAndProvider(
         module: DModule,
         baseSourceLink: String? = null,
-        hiddenAnnotations: Set<String> = emptySet()
+        hiddenAnnotations: Set<String> = emptySet(),
+        versionMetadataMap: Map<String, Pair<String, String?>> = emptyMap(),
     ): Pair<DocumentablesHolder, FilePathProvider> {
         val holder = runBlocking {
             DocumentablesHolder(
@@ -264,7 +265,8 @@ internal abstract class ConverterTestBase(
                 context = context,
                 externalDocumentablesProvider = externalDocumentablesProvider,
                 baseSourceLink = baseSourceLink,
-                annotationsNotToDisplay = hiddenAnnotations
+                annotationsNotToDisplay = hiddenAnnotations,
+                versionMetadataMap = versionMetadataMap,
             )
         }
         val classGraph = runBlocking { holder.classGraph() }
