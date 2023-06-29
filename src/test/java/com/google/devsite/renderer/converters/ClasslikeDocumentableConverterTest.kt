@@ -3133,6 +3133,46 @@ internal class ClasslikeDocumentableConverterTest(
     }
 
     @Test
+    fun `API version with both addedIn and deprecatedIn is generated correctly`() {
+        val versionNumbers = Pair(
+            "1.2.3", // added in
+            "2.3.4" // deprecated in
+        )
+        val page = """
+            |class Foo
+        """.render().page(versionMetadataMap = mapOf("androidx.example.Foo" to versionNumbers))
+
+        val metadataComponent = page.data.metadataComponent
+        assertThat(metadataComponent).isNotNull()
+
+        val link = metadataComponent!!.data.versionMetadata
+        assertThat(link).isNotNull()
+
+        assertThat(link!!.data.addedIn?.data?.name).isEqualTo("1.2.3")
+        assertThat(link.data.deprecatedIn?.data?.name).isEqualTo("2.3.4")
+    }
+
+    @Test
+    fun `API version with only addedIn is generated correctly`() {
+        val versionNumbers = Pair(
+            "1.2.3", // added in
+            null // no deprecated in
+        )
+        val page = """
+            |class Foo
+        """.render().page(versionMetadataMap = mapOf("androidx.example.Foo" to versionNumbers))
+
+        val metadataComponent = page.data.metadataComponent
+        assertThat(metadataComponent).isNotNull()
+
+        val link = metadataComponent!!.data.versionMetadata
+        assertThat(link).isNotNull()
+
+        assertThat(link!!.data.addedIn?.data?.name).isEqualTo("1.2.3")
+        assertThat(link.data.deprecatedIn).isNull()
+    }
+
+    @Test
     fun `Constants in companion object appear properly in page`() {
         // Note: this code is from gms dtdi
         val page = """
@@ -3320,21 +3360,37 @@ internal class ClasslikeDocumentableConverterTest(
 
     private fun DModule.page(
         name: String = "Foo",
-        baseSourceLink: String? = null
+        baseSourceLink: String? = null,
+        versionMetadataMap: Map<String, Pair<String, String?>> = emptyMap(),
     ): DevsitePage<Classlike> {
         val classlike = explicitClasslikes(name).single()
-        return page(baseSourceLink = baseSourceLink) { classlike }
+        return page(
+            baseSourceLink = baseSourceLink,
+            versionMetadataMap = versionMetadataMap,
+        ) { classlike }
     }
 
-    private fun DModule.page(baseSourceLink: String? = null, name: DModule.() -> DClasslike) =
-        pages(listOf(name()), baseSourceLink = baseSourceLink).single()
+    private fun DModule.page(
+        baseSourceLink: String? = null,
+        versionMetadataMap: Map<String, Pair<String, String?>> = emptyMap(),
+        name: DModule.() -> DClasslike,
+    ) = pages(
+        classlikes = listOf(name()),
+        baseSourceLink = baseSourceLink,
+        versionMetadataMap = versionMetadataMap,
+    ).single()
 
     @JvmName("pagesForClasslikes")
     private fun DModule.pages(
         classlikes: List<DClasslike>,
-        baseSourceLink: String? = null
+        baseSourceLink: String? = null,
+        versionMetadataMap: Map<String, Pair<String, String?>> = emptyMap(),
     ): List<DevsitePage<Classlike>> {
-        val (holder, provider) = holderAndProvider(this, baseSourceLink = baseSourceLink)
+        val (holder, provider) = holderAndProvider(
+            module = this,
+            baseSourceLink = baseSourceLink,
+            versionMetadataMap = versionMetadataMap,
+        )
         val metadataConverter = MetadataConverter(holder)
         val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
         val paramConverter =
