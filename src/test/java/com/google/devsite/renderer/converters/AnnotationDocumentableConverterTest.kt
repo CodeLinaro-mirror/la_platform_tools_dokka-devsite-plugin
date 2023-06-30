@@ -29,7 +29,7 @@ import com.google.devsite.renderer.converters.testing.isAtNullable
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.testing.ConverterTestBase
 import org.jetbrains.dokka.model.DModule
-import org.jetbrains.dokka.model.properties.WithExtraProperties
+import org.jetbrains.dokka.model.Documentable
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -420,7 +420,7 @@ internal class AnnotationDocumentableConverterTest(
     }
 
     private fun DModule.annotationComponents(
-        element: WithExtraProperties<*>,
+        element: Documentable,
         nullability: Nullability = Nullability.DONT_CARE,
         hiddenAnnotations: Set<String> = emptySet()
     ): List<AnnotationComponent> =

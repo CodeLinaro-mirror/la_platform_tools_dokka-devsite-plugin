@@ -89,7 +89,7 @@ internal class RootDocumentableConverter(
             SummaryList.Params(
                 items = packages
                     .filter { it.name != "[root]" } // this synthetic package has broken self-links
-                    .map { javadocConverter.summaryForDocumentable(it) }
+                    .map { javadocConverter.summaryForDocumentable(it, showAnnotations = false) }
             )
         )
 

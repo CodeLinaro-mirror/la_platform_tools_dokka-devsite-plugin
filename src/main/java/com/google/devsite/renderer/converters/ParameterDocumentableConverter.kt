@@ -90,7 +90,7 @@ internal class ParameterDocumentableConverter(
     ): ParameterComponent = when (displayLanguage) {
         Language.JAVA -> {
             val (propagatedAnnotations, retainedAnnotations) =
-                param.annotations(param.getExpectOrCommonSourceSet())
+                param.annotations(parent.getExpectOrCommonSourceSet())
                     .partition { it.belongsOnReturnType() }
             val nullability =
                 param.type.getNullability(
@@ -104,7 +104,7 @@ internal class ParameterDocumentableConverter(
                     type = componentForProjection(
                         projection = param.type,
                         isJavaSource = isFromJava,
-                        sourceSet = param.getExpectOrCommonSourceSet(),
+                        sourceSet = parent.getExpectOrCommonSourceSet(),
                         propagatedAnnotations = propagatedAnnotations,
                         propagatedNullability = nullability
                     ),
@@ -131,6 +131,8 @@ internal class ParameterDocumentableConverter(
                 ?.expression?.get(param.getExpectOrCommonSourceSet())?.takeUnless { isSummary }
             componentForKotlinParameter(
                 param = param,
+                isFromJava = isFromJava,
+                parent = parent,
                 defaultValue = defaultValueExpression?.getValue(),
                 modifiers = param.getExtraModifiers(parent.getExpectOrCommonSourceSet())
                     .modifiersFor(
@@ -142,8 +144,7 @@ internal class ParameterDocumentableConverter(
                             isSummary = false
                         )
                     ),
-                annotations = param.annotations(param.getExpectOrCommonSourceSet()),
-                isFromJava = isFromJava
+                annotations = param.annotations(parent.getExpectOrCommonSourceSet()),
             )
         }
     }
@@ -152,6 +153,7 @@ internal class ParameterDocumentableConverter(
     private fun componentForKotlinParameter(
         param: DParameter,
         isFromJava: Boolean,
+        parent: Documentable,
         defaultValue: String? = null,
         modifiers: Modifiers = EmptyModifiers,
         annotations: List<Annotation> = emptyList()
@@ -161,7 +163,7 @@ internal class ParameterDocumentableConverter(
         val primaryType = componentForProjection(
             projection = projKotlin,
             isJavaSource = isFromJava,
-            sourceSet = param.getExpectOrCommonSourceSet(),
+            sourceSet = parent.getExpectOrCommonSourceSet(),
             propagatedAnnotations = annotations.filter { it.belongsOnReturnType() }
         )
 

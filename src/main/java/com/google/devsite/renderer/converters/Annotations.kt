@@ -95,16 +95,17 @@ private fun Bound.annotations(sourceSet: DokkaConfiguration.DokkaSourceSet?): Li
         is DefinitelyNonNullable -> this.inner.annotations(sourceSet).filter { it != AT_NULLABLE }
     }
 
-internal fun WithExtraProperties<*>.allAnnotations() =
-    extra.allOfType<Annotations>().flatMap { annotations ->
-        annotations.directAnnotations.values
-    }.flatten()
+/** @return all annotations on this element, in any sourceSet, including file-level ones */
+internal fun Documentable.allAnnotations() =
+    (this as? WithExtraProperties<*>)?.extra?.allOfType<Annotations>()?.flatMap { annotations ->
+        annotations.directAnnotations.flatMap { it.value } +
+            annotations.fileLevelAnnotations.flatMap { it.value }
+    } ?: emptyList()
 
 // TODO(KMP per-sourceset variance of deprecation status b/262711247)
-internal fun Documentable.deprecationAnnotation() = annotations(getExpectOrCommonSourceSet())
-    .deprecationAnnotation()
+internal fun Documentable.deprecationAnnotation() = allAnnotations().deprecationAnnotation()
 internal fun List<Annotation>.deprecationAnnotation() =
-    filter { it.isDeprecated() }.strictSingleOrNull()
+    toSet().filter { it.isDeprecated() }.strictSingleOrNull()
 
 /**
  * All existing WithSources are WithExtraProperties, and fileLevelAnnotations require sources.
@@ -118,7 +119,9 @@ where T : WithSources, T : Documentable =
     }
 
 /** @return true if the `@Deprecated` annotation is present, false otherwise */
-internal fun Annotation.isDeprecated(): Boolean = dri.classNames == "Deprecated"
+internal fun Annotation.isDeprecated(): Boolean = dri == deprecatedDri || dri == javaDeprecatedDri
+internal val deprecatedDri = DRI(packageName = "kotlin", classNames = "Deprecated")
+internal val javaDeprecatedDri = DRI(packageName = "java.lang", classNames = "Deprecated")
 
 internal fun Annotation.belongsOnReturnType() =
     dri.classNames in NULLABILITY_ANNOTATION_NAMES || dri.classNames?.shouldBeTypebound() ?: false

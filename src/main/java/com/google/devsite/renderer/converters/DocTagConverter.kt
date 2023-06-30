@@ -863,23 +863,23 @@ internal class DocTagConverter(
         documentable: Documentable,
         showAnnotations: Boolean = false
     ): TableRowSummaryItem<Link, DescriptionComponent> {
-        val annotations = documentable.annotations(documentable.getExpectOrCommonSourceSet())
         val link = if (documentable is DTypeAlias) // typealiases have no pages
             DefaultUnlink(Link.Params(documentable.name, ""))
         else pathProvider.linkForReference(documentable.dri)
+        val maybeAnnotatedLink = if (showAnnotations) {
+            DefaultAnnotatedLink(
+                AnnotatedLink.Params(
+                    annotations = annotationConverter.annotationComponents(
+                        documentable.annotations(documentable.getExpectOrCommonSourceSet()),
+                        nullability = Nullability.DONT_CARE, // Not useful for these cases
+                    ),
+                    link = link
+                )
+            )
+        } else link
         return DefaultTableRowSummaryItem(
             TableRowSummaryItem.Params(
-                title = if (showAnnotations) {
-                    DefaultAnnotatedLink(
-                        AnnotatedLink.Params(
-                            annotations = annotationConverter.annotationComponents(
-                                annotations = annotations,
-                                nullability = Nullability.DONT_CARE, // Not useful for these cases
-                            ),
-                            link = link
-                        )
-                    )
-                } else link,
+                title = maybeAnnotatedLink,
                 description = summaryDescription(
                     documentable,
                     documentable.deprecationAnnotation()
