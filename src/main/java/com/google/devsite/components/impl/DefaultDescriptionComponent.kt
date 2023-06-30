@@ -17,6 +17,7 @@
 package com.google.devsite.components.impl
 
 import com.google.devsite.components.DescriptionComponent
+import kotlinx.html.DIV
 import kotlinx.html.DL
 import kotlinx.html.FlowContent
 import kotlinx.html.OL
@@ -35,16 +36,9 @@ import kotlinx.html.caption
 import kotlinx.html.code
 import kotlinx.html.dd
 import kotlinx.html.del
-import kotlinx.html.div
 import kotlinx.html.dl
 import kotlinx.html.dt
 import kotlinx.html.em
-import kotlinx.html.h1
-import kotlinx.html.h2
-import kotlinx.html.h3
-import kotlinx.html.h4
-import kotlinx.html.h5
-import kotlinx.html.h6
 import kotlinx.html.hr
 import kotlinx.html.htmlVar
 import kotlinx.html.img
@@ -57,7 +51,6 @@ import kotlinx.html.stream.createHTML
 import kotlinx.html.strong
 import kotlinx.html.sub
 import kotlinx.html.sup
-import kotlinx.html.table
 import kotlinx.html.tbody
 import kotlinx.html.td
 import kotlinx.html.tfoot
@@ -66,6 +59,7 @@ import kotlinx.html.thead
 import kotlinx.html.tr
 import kotlinx.html.ul
 import kotlinx.html.unsafe
+import kotlinx.html.visit
 import org.jetbrains.dokka.model.doc.A
 import org.jetbrains.dokka.model.doc.B
 import org.jetbrains.dokka.model.doc.Big
@@ -281,20 +275,26 @@ internal data class DefaultDescriptionComponent(
                 is A -> a(link) { renderTags(tag.children, state) }
                 is B, is Strong -> b { renderTags(tag.children, state) }
                 Br -> br { renderTags(tag.children, state) }
-                is H1 -> h1 { renderTags(tag.children, state) }
-                is H2 -> h2 { renderTags(tag.children, state) }
-                is H3 -> h3 { renderTags(tag.children, state) }
-                is H4 -> h4 { renderTags(tag.children, state) }
-                is H5 -> h5 { renderTags(tag.children, state) }
-                is H6 -> h6 { renderTags(tag.children, state) }
+                is H1 -> kotlinx.html.H1(tag.params, consumer)
+                    .visit { renderTags(tag.children, state) }
+                is H2 -> kotlinx.html.H2(tag.params, consumer)
+                    .visit { renderTags(tag.children, state) }
+                is H3 -> kotlinx.html.H3(tag.params, consumer)
+                    .visit { renderTags(tag.children, state) }
+                is H4 -> kotlinx.html.H4(tag.params, consumer)
+                    .visit { renderTags(tag.children, state) }
+                is H5 -> kotlinx.html.H5(tag.params, consumer)
+                    .visit { renderTags(tag.children, state) }
+                is H6 -> kotlinx.html.H6(tag.params, consumer)
+                    .visit { renderTags(tag.children, state) }
                 is I, is Em -> em { renderTags(tag.children, state) }
-                is Div -> div { renderTags(tag.children, state) }
+                is Div -> DIV(tag.params, consumer).visit { renderTags(tag.children, state) }
                 is Dl -> dl { renderDescriptionList(tag.children, state) }
                 is Span -> span { renderTags(tag.children, state) }
                 is Strikethrough -> del { renderTags(tag.children, state) }
                 is Sub -> sub { renderTags(tag.children, state) }
                 is Sup -> sup { renderTags(tag.children, state) }
-                is Table -> table { renderTable(tag.children, state) }
+                is Table -> TABLE(tag.params, consumer).visit { renderTable(tag.children, state) }
                 is Ol -> ol { renderOrderedList(tag.children, state) }
                 is Ul -> ul { renderUnorderedList(tag.children, state) }
                 HorizontalRule -> hr { renderTags(tag.children, state) }

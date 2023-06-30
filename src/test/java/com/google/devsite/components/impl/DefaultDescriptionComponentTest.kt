@@ -1095,6 +1095,27 @@ public void onCreate() {
         )
     }
 
+    @Test
+    fun `Heading renders with correct attributes`() {
+        val component = """
+            |/** <h2 id="sample-formats">Fields relevant to sample formats</h2> */
+            |class Foo
+        """.render().description()
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<body>
+  <p><h2 id="sample-formats">Fields relevant to sample formats</h2></p>
+</body>
+            """.trim()
+        )
+    }
+
     private fun DModule.description(
         summary: Boolean = false,
         deprecation: String? = null
