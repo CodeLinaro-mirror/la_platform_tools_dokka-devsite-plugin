@@ -40,6 +40,7 @@ import org.jetbrains.dokka.model.DEnumEntry
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DObject
+import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.DParameter
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.DTypeAlias
@@ -628,24 +629,13 @@ internal fun Documentable.getExpectOrCommonSourceSet() =
         ?: expectPresentInSet
         ?: sourceSets.singleOrNull { it.analysisPlatform == org.jetbrains.dokka.Platform.common }
         ?: sourceSets.singleOrNull { it.displayName.equalsPossiblyWithMain("common") }
-        ?: sourceSets.singleOrNull { it.displayName.equalsIgnoreCase("jvmMain") }?.let {
-            println(
-                "WARNING: no common source set for ${this::class.simpleName} $dri! Falling back " +
-                    "to jvmMain sourceSet! This is only defensible if every usable sourceSet " +
-                    "depends on jvmMain! This is a bug in dackka: b/284107590"
-            )
-            it
-        }
-        ?: sourceSets.singleOrNull { it.displayName.equalsIgnoreCase("androidMain") }?.let {
-            println(
-                "WARNING: no common or jvm source set for ${this::class.simpleName} $dri! Falling" +
-                    " back to androidMain sourceSet! This is only defensible if every usable " +
-                    "sourceSet depends on androidMain! This is a bug in dackka: b/284107590"
-            )
-            it
+        ?: (this as? DPackage).let { // b/254490320. The one case we expect to see this is package
+            // descriptions. Below is a weak fallback for libraries with no common sourceSet.
+            sourceSets.singleOrNull { it.displayName.equalsIgnoreCase("jvmMain") }
+                ?: sourceSets.singleOrNull { it.displayName.equalsIgnoreCase("androidMain") }
         }
         ?: throw RuntimeException(
-            "Unable to determine the expect or common sourceSet for ${this::class.simpleName} $dri"
+            "Unable to determine expect or common sourceSet for ${this::class.simpleName} $dri"
         )
 
 private fun String.equalsPossiblyWithMain(other: String) =
