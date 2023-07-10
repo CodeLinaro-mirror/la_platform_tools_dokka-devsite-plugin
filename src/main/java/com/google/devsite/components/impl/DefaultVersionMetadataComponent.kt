@@ -18,6 +18,7 @@ package com.google.devsite.components.impl
 
 import com.google.devsite.components.Link
 import com.google.devsite.components.symbols.VersionMetadataComponent
+import com.google.devsite.util.ClassVersionMetadata
 import com.google.devsite.util.JsonVersionMetadata
 import kotlinx.html.FlowContent
 import kotlinx.html.div
@@ -75,14 +76,17 @@ internal data class DefaultVersionMetadataComponent(
          */
         fun convertJsonVersionMetadataToVersionMap(
             versionMetadataList: List<JsonVersionMetadata>
-        ): Map<String, Pair<String, String?>> {
-            val versionMetadataMap = hashMapOf<String, Pair<String, String?>>()
+        ): Map<String, ClassVersionMetadata> {
+            val versionMetadataMap = hashMapOf<String, ClassVersionMetadata>()
             versionMetadataList.forEach { versionMetadata ->
                 versionMetadataMap[versionMetadata.clazz] =
-                    Pair(versionMetadata.addedIn, versionMetadata.deprecatedIn)
+                    ClassVersionMetadata(
+                        className = versionMetadata.clazz,
+                        addedIn = versionMetadata.addedIn,
+                        deprecatedIn = versionMetadata.deprecatedIn
+                    )
 
-                // TODO: also process methods (b/264280616) and fields (b/281727318). This will
-                // probably require the return to change from Pair to something more structured
+                // TODO: also process methods (b/264280616) and fields (b/281727318)
             }
 
             return versionMetadataMap

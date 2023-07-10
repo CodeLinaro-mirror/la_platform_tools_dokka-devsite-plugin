@@ -47,6 +47,7 @@ import com.google.devsite.renderer.converters.testing.text
 import com.google.devsite.renderer.converters.testing.title
 import com.google.devsite.renderer.converters.testing.typeName
 import com.google.devsite.testing.ConverterTestBase
+import com.google.devsite.util.ClassVersionMetadata
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
@@ -3134,13 +3135,14 @@ internal class ClasslikeDocumentableConverterTest(
 
     @Test
     fun `API version with both addedIn and deprecatedIn is generated correctly`() {
-        val versionNumbers = Pair(
-            "1.2.3", // added in
-            "2.3.4" // deprecated in
+        val metadata = ClassVersionMetadata(
+            className = "androidx.example.Foo",
+            addedIn = "1.2.3",
+            deprecatedIn = "2.3.4"
         )
         val page = """
             |class Foo
-        """.render().page(versionMetadataMap = mapOf("androidx.example.Foo" to versionNumbers))
+        """.render().page(versionMetadataMap = mapOf("androidx.example.Foo" to metadata))
 
         val metadataComponent = page.data.metadataComponent
         assertThat(metadataComponent).isNotNull()
@@ -3154,13 +3156,14 @@ internal class ClasslikeDocumentableConverterTest(
 
     @Test
     fun `API version with only addedIn is generated correctly`() {
-        val versionNumbers = Pair(
-            "1.2.3", // added in
-            null // no deprecated in
+        val metadata = ClassVersionMetadata(
+            className = "androidx.example.Foo",
+            addedIn = "1.2.3",
+            deprecatedIn = null
         )
         val page = """
             |class Foo
-        """.render().page(versionMetadataMap = mapOf("androidx.example.Foo" to versionNumbers))
+        """.render().page(versionMetadataMap = mapOf("androidx.example.Foo" to metadata))
 
         val metadataComponent = page.data.metadataComponent
         assertThat(metadataComponent).isNotNull()
@@ -3361,7 +3364,7 @@ internal class ClasslikeDocumentableConverterTest(
     private fun DModule.page(
         name: String = "Foo",
         baseSourceLink: String? = null,
-        versionMetadataMap: Map<String, Pair<String, String?>> = emptyMap(),
+        versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap(),
     ): DevsitePage<Classlike> {
         val classlike = explicitClasslikes(name).single()
         return page(
@@ -3372,7 +3375,7 @@ internal class ClasslikeDocumentableConverterTest(
 
     private fun DModule.page(
         baseSourceLink: String? = null,
-        versionMetadataMap: Map<String, Pair<String, String?>> = emptyMap(),
+        versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap(),
         name: DModule.() -> DClasslike,
     ) = pages(
         classlikes = listOf(name()),
@@ -3384,7 +3387,7 @@ internal class ClasslikeDocumentableConverterTest(
     private fun DModule.pages(
         classlikes: List<DClasslike>,
         baseSourceLink: String? = null,
-        versionMetadataMap: Map<String, Pair<String, String?>> = emptyMap(),
+        versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap(),
     ): List<DevsitePage<Classlike>> {
         val (holder, provider) = holderAndProvider(
             module = this,

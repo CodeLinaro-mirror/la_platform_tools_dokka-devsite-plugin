@@ -31,6 +31,7 @@ import com.google.devsite.renderer.impl.PackageRenderer
 import com.google.devsite.renderer.impl.paths.DefaultExternalDokkaLocationProvider
 import com.google.devsite.renderer.impl.paths.DevsiteFilePathProvider
 import com.google.devsite.renderer.impl.paths.ExternalDokkaLocationProvider
+import com.google.devsite.util.ClassVersionMetadata
 import com.google.devsite.util.JsonLibraryMetadata
 import com.google.devsite.util.JsonVersionMetadata
 import com.google.devsite.util.LibraryMetadata
@@ -70,7 +71,7 @@ internal class MultiLanguageRenderer(
              * API version metadata is passed in via a list of files. Process each file and merge
              * the results into a single HashMap.
              */
-            val versionMetadataMap = hashMapOf<String, Pair<String, String?>>()
+            val versionMetadataMap = hashMapOf<String, ClassVersionMetadata>()
             devsiteConfiguration.versionMetadataFilenames?.forEach { versionMetadataFilename ->
                 val versionMetadataArray = JsonVersionMetadata.getMetadataFromFile(
                     versionMetadataFilename

@@ -27,6 +27,7 @@ import com.google.devsite.renderer.converters.nameForSyntheticClass
 import com.google.devsite.renderer.converters.packageName
 import com.google.devsite.renderer.converters.setUpAnalysis
 import com.google.devsite.renderer.converters.withJavaSynthetic
+import com.google.devsite.util.ClassVersionMetadata
 import com.google.devsite.util.LibraryMetadata
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
@@ -88,7 +89,7 @@ internal class DocumentablesHolder(
     // TODO(handle packages with no common or JVM targets, as-Java. b/265948930)
     private val excludedPackages: Set<Regex> = emptySet(),
     val fileMetadataMap: Map<String, LibraryMetadata> = emptyMap(),
-    val versionMetadataMap: Map<String, Pair<String, String?>> = emptyMap(),
+    val versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap(),
     val baseSourceLink: String? = null,
     val annotationsNotToDisplay: Set<String> = emptySet(),
 ) {

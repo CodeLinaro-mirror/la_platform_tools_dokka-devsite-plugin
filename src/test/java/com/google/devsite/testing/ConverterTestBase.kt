@@ -44,6 +44,7 @@ import com.google.devsite.renderer.impl.paths.DefaultExternalDokkaLocationProvid
 import com.google.devsite.renderer.impl.paths.DevsiteFilePathProvider
 import com.google.devsite.renderer.impl.paths.ExternalDokkaLocationProvider
 import com.google.devsite.renderer.impl.paths.FilePathProvider
+import com.google.devsite.util.ClassVersionMetadata
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.CoreExtensions
 import org.jetbrains.dokka.DokkaConfiguration
@@ -255,7 +256,7 @@ internal abstract class ConverterTestBase(
         module: DModule,
         baseSourceLink: String? = null,
         hiddenAnnotations: Set<String> = emptySet(),
-        versionMetadataMap: Map<String, Pair<String, String?>> = emptyMap(),
+        versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap(),
     ): Pair<DocumentablesHolder, FilePathProvider> {
         val holder = runBlocking {
             DocumentablesHolder(

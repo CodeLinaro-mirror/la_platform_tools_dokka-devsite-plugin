@@ -114,14 +114,14 @@ internal class MetadataConverter(
     private fun Documentable.findMatchingVersionMetadata(
         releaseNotesUrl: String?
     ): VersionMetadataComponent? {
-        val versionPair: Pair<String, String?>? = docsHolder.versionMetadataMap[dri.fullName]
+        val classVersionMetadata = docsHolder.versionMetadataMap[dri.fullName]
 
-        return if (versionPair == null) {
+        return if (classVersionMetadata == null) {
             null
         } else {
             DefaultVersionMetadataComponent.createVersionMetadataWithBaseUrl(
-                versionPair.first,
-                versionPair.second,
+                classVersionMetadata.addedIn,
+                classVersionMetadata.deprecatedIn,
                 releaseNotesUrl
             )
         }
