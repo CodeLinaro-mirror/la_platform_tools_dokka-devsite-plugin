@@ -84,9 +84,11 @@ internal data class DefaultVersionMetadataComponent(
                         className = versionMetadata.clazz,
                         addedIn = versionMetadata.addedIn,
                         deprecatedIn = versionMetadata.deprecatedIn
-                    )
+                    ).apply {
+                        addMethodMetadata(versionMetadata.methods)
+                    }
 
-                // TODO: also process methods (b/264280616) and fields (b/281727318)
+                // TODO: also process fields (b/281727318)
             }
 
             return versionMetadataMap

@@ -16,8 +16,38 @@
 
 package com.google.devsite.util
 
+/**
+ * Data class to store the version metadata associated with a Class
+ */
 data class ClassVersionMetadata(
     val className: String,
     val addedIn: String,
     val deprecatedIn: String? = null,
-)
+    val methodVersions: Map<String, MethodVersionMetadata> = emptyMap(),
+) {
+    /**
+     * Converts JSON version metadata for methods into a map
+     */
+    fun addMethodMetadata(
+        jsonVersionMetadataMethods: List<JsonVersionMetadata.JsonVersionMetadataMethod>
+    ) {
+        val versionMetadataMap = hashMapOf<String, MethodVersionMetadata>()
+
+        jsonVersionMetadataMethods.forEach { jsonVersionMetadataMethod ->
+            versionMetadataMap[jsonVersionMetadataMethod.method] = MethodVersionMetadata(
+                methodName = jsonVersionMetadataMethod.method,
+                addedIn = jsonVersionMetadataMethod.addedIn,
+                deprecatedIn = jsonVersionMetadataMethod.deprecatedIn,
+            )
+        }
+    }
+
+    /**
+     * Data class to store the version metadata associated with a method
+     */
+    data class MethodVersionMetadata(
+        val methodName: String,
+        val addedIn: String,
+        val deprecatedIn: String? = null,
+    )
+}

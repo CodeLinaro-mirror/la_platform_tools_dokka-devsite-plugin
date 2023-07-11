@@ -3134,7 +3134,7 @@ internal class ClasslikeDocumentableConverterTest(
     }
 
     @Test
-    fun `API version with both addedIn and deprecatedIn is generated correctly`() {
+    fun `API version for a Class with both addedIn and deprecatedIn is generated correctly`() {
         val metadata = ClassVersionMetadata(
             className = "androidx.example.Foo",
             addedIn = "1.2.3",
@@ -3155,7 +3155,7 @@ internal class ClasslikeDocumentableConverterTest(
     }
 
     @Test
-    fun `API version with only addedIn is generated correctly`() {
+    fun `API version for a Class with only addedIn is generated correctly`() {
         val metadata = ClassVersionMetadata(
             className = "androidx.example.Foo",
             addedIn = "1.2.3",
