@@ -24,6 +24,7 @@ import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.startsWithAnyOf
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.analysis.PsiDocumentableSource
+import org.jetbrains.dokka.base.signatures.KotlinSignatureUtils.driOrNull
 import org.jetbrains.dokka.base.transformers.documentables.isException
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.PointingToDeclaration
@@ -55,7 +56,6 @@ import org.jetbrains.dokka.model.KotlinVisibility
 import org.jetbrains.dokka.model.Modifier
 import org.jetbrains.dokka.model.SourceSetDependent
 import org.jetbrains.dokka.model.StringConstant
-import org.jetbrains.dokka.model.TypeConstructor
 import org.jetbrains.dokka.model.UnresolvedBound
 import org.jetbrains.dokka.model.Visibility
 import org.jetbrains.dokka.model.WithAbstraction
@@ -327,9 +327,12 @@ fun simpleDocumentableComparator(): Comparator<Documentable> = compareBy(
 private fun DFunction.signatureAsString() =
     "$name(${parameters.joinToString(separator = ", ") { it.paramAsString() }})"
 
+/** Turn a parameter into a string. Used in sorting functions. */
 private fun DParameter.paramAsString() =
-    "${name ?: ""}: " +
-        "${(type as? UnresolvedBound)?.name ?: (type as? TypeConstructor)?.dri?.classNames}"
+    (name ?: "") + ( // Sorting criterion roughly matches rendered text
+        (type as? UnresolvedBound)?.name // driOrNull doesn't handle UnresolvedBound, sadly.
+            ?: type.driOrNull?.let { "${it.classNames} $it" } // by classname, then full dri
+        )
 
 /**
  * Returns the value of the @JvmName for this function if one exists or null
