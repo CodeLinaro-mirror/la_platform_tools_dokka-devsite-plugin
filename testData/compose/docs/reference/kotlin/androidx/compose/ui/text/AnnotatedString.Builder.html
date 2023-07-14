@@ -181,20 +181,20 @@ buildAnnotatedString {
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
-              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td><code>open <a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a></code></td>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#append(kotlin.String)">append</a>(text:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>)</code></div>
-                <p>Appends the given <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></code> to this <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">Builder</a></code>.</p>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#append(kotlin.CharSequence)">append</a>(text:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char-sequence/index.html">CharSequence</a>?)</code></div>
+                <p>Appends <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#append(kotlin.CharSequence)">text</a></code> to this <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">Builder</a></code> if non-null, and returns this <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">Builder</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
-              <td><code>open <a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a></code></td>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#append(kotlin.CharSequence)">append</a>(text:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char-sequence/index.html">CharSequence</a>?)</code></div>
-                <p>Appends <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#append(kotlin.CharSequence)">text</a></code> to this <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">Builder</a></code> if non-null, and returns this <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">Builder</a></code>.</p>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#append(kotlin.String)">append</a>(text:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>)</code></div>
+                <p>Appends the given <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></code> to this <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">Builder</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -795,6 +795,14 @@ buildAnnotatedString {
             </table>
           </div>
         </div>
+        <div class="api-item"><a name="append-kotlin.CharSequence-"></a><a name="append"></a>
+          <h3 class="api-name" id="append(kotlin.CharSequence)">append</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#append(kotlin.CharSequence)">append</a>(text:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char-sequence/index.html">CharSequence</a>?):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a></pre>
+          <p>Appends <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#append(kotlin.CharSequence)">text</a></code> to this <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">Builder</a></code> if non-null, and returns this <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">Builder</a></code>.</p>
+          <p>If <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#append(kotlin.CharSequence)">text</a></code> is an <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code>, all spans and annotations will be copied over as well. No other subtypes of <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char-sequence/index.html">CharSequence</a></code> will be treated specially. For example, any platform-specific types, such as <code>SpannedString</code> on Android, will only have their text copied and any other information held in the sequence, such as Android <code>Span</code>s, will be dropped.</p>
+        </div>
         <div class="api-item"><a name="append-kotlin.String-"></a><a name="append"></a>
           <h3 class="api-name" id="append(kotlin.String)">append</h3>
 <span class="kotlin-platform" data-title="Common/All">Cmn</span>
@@ -822,14 +830,6 @@ buildAnnotatedString {
               </tbody>
             </table>
           </div>
-        </div>
-        <div class="api-item"><a name="append-kotlin.CharSequence-"></a><a name="append"></a>
-          <h3 class="api-name" id="append(kotlin.CharSequence)">append</h3>
-<span class="kotlin-platform" data-title="Common/All">Cmn</span>
-          <!--platform-Common/All-->
-          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#append(kotlin.CharSequence)">append</a>(text:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char-sequence/index.html">CharSequence</a>?):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a></pre>
-          <p>Appends <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#append(kotlin.CharSequence)">text</a></code> to this <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">Builder</a></code> if non-null, and returns this <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">Builder</a></code>.</p>
-          <p>If <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#append(kotlin.CharSequence)">text</a></code> is an <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code>, all spans and annotations will be copied over as well. No other subtypes of <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char-sequence/index.html">CharSequence</a></code> will be treated specially. For example, any platform-specific types, such as <code>SpannedString</code> on Android, will only have their text copied and any other information held in the sequence, such as Android <code>Span</code>s, will be dropped.</p>
         </div>
         <div class="api-item"><a name="append(androidx.compose.ui.text.AnnotatedString, kotlin.Int, kotlin.Int)"></a><a name="append-androidx.compose.ui.text.AnnotatedString-kotlin.Int-kotlin.Int-"></a><a name="append"></a>
           <h3 class="api-name" id="append(androidx.compose.ui.text.AnnotatedString,kotlin.Int,kotlin.Int)">append</h3>

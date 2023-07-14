@@ -115,6 +115,16 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#changed(kotlin.Any)">changed</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?)</code></div>
+                <p>A Compose compiler plugin API.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
               <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
               <td>
                 <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#changed(kotlin.Boolean)">changed</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>)</code></div>
@@ -188,16 +198,6 @@
               <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
               <td>
                 <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#changed(kotlin.Short)">changed</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a>)</code></div>
-                <p>A Compose compiler plugin API.</p>
-              </td>
-              <td>
-                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
-                <!--platform-Common/All--></td>
-            </tr>
-            <tr>
-              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-              <td>
-                <div><code>@<a href="/reference/kotlin/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#changed(kotlin.Any)">changed</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?)</code></div>
                 <p>A Compose compiler plugin API.</p>
               </td>
               <td>
@@ -824,6 +824,56 @@
           <p>A Compose internal function. DO NOT call directly.</p>
           <p>Build a composition context that can be used to created a subcomposition. A composition reference is used to communicate information from this composition to the subcompositions such as the all the <code><a href="/reference/kotlin/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code>s provided at the point the reference is created.</p>
         </div>
+        <div class="api-item"><a name="changed-kotlin.Any-"></a><a name="changed"></a>
+          <h3 class="api-name" id="changed(kotlin.Any)">changed</h3>
+<span class="kotlin-platform" data-title="Common/All">Cmn</span>
+          <!--platform-Common/All-->
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Composer.html#changed(kotlin.Any)">changed</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>A Compose compiler plugin API. DO NOT call directly.</p>
+          <p>Check <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#changed(kotlin.Any)">value</a></code> is different than the value used in the previous composition. This is used, for example, to check parameter values to determine if they have changed.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Parameters</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code>value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?</code></td>
+                  <td>
+                    <p>the value to check</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">Returns</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                  <td>
+                    <p><code>true</code> if the value if <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#equals(kotlin.Any)">equals</a></code> of the previous value returns <code>false</code> when passed <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#changed(kotlin.Any)">value</a></code>.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
         <div class="api-item"><a name="changed-kotlin.Boolean-"></a><a name="changed"></a>
           <h3 class="api-name" id="changed(kotlin.Boolean)">changed</h3>
 <span class="kotlin-platform" data-title="Common/All">Cmn</span>
@@ -1226,56 +1276,6 @@
                   <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
                   <td>
                     <p><code>true</code> if the value if <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#equals(kotlin.Any)">equals</a></code> of the previous value returns <code>false</code> when passed <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#changed(kotlin.Short)">value</a></code>.</p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="api-item"><a name="changed-kotlin.Any-"></a><a name="changed"></a>
-          <h3 class="api-name" id="changed(kotlin.Any)">changed</h3>
-<span class="kotlin-platform" data-title="Common/All">Cmn</span>
-          <!--platform-Common/All-->
-          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Composer.html#changed(kotlin.Any)">changed</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
-          <p>A Compose compiler plugin API. DO NOT call directly.</p>
-          <p>Check <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#changed(kotlin.Any)">value</a></code> is different than the value used in the previous composition. This is used, for example, to check parameter values to determine if they have changed.</p>
-          <div class="devsite-table-wrapper">
-            <table class="responsive">
-              <colgroup>
-                <col width="40%">
-                <col>
-              </colgroup>
-              <thead>
-                <tr>
-                  <th colspan="100%">Parameters</th>
-                </tr>
-              </thead>
-              <tbody class="list">
-                <tr>
-                  <td><code>value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?</code></td>
-                  <td>
-                    <p>the value to check</p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="devsite-table-wrapper">
-            <table class="responsive">
-              <colgroup>
-                <col width="40%">
-                <col>
-              </colgroup>
-              <thead>
-                <tr>
-                  <th colspan="100%">Returns</th>
-                </tr>
-              </thead>
-              <tbody class="list">
-                <tr>
-                  <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-                  <td>
-                    <p><code>true</code> if the value if <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#equals(kotlin.Any)">equals</a></code> of the previous value returns <code>false</code> when passed <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html#changed(kotlin.Any)">value</a></code>.</p>
                   </td>
                 </tr>
               </tbody>
