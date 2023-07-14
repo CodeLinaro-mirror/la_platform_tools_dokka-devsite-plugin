@@ -20,8 +20,10 @@ import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.pages.DevsitePage
 import kotlinx.html.HTML
 import kotlinx.html.body
+import kotlinx.html.div
 import kotlinx.html.h1
 import kotlinx.html.head
+import kotlinx.html.id
 import kotlinx.html.title
 import kotlinx.html.unsafe
 
@@ -39,8 +41,24 @@ internal data class DefaultDevsitePage<T : ContextFreeComponent>(
         }
 
         body {
-            data.metadataComponent?.render(this)
-            h1 { +data.title }
+            div {
+                // CSS id declared in internal codebase (cl/548038546)
+                id = "header-block"
+
+                // Devsite appends a tooltip element to h1 declarations, so a div is needed here to
+                // group the h1 and tooltip elements together for Flexbox usage. Otherwise, Flexbox
+                // will split up the h1, tooltip, and metadata elements equally into thirds.
+                div {
+                    h1 { +data.title }
+                }
+                data.metadataComponent?.render(this)
+            }
+
+            // This placeholder div will be replaced with the language switcher via the
+            // development/referenceDocs/switcher.py script in AndroidX source.
+            // (Note: b/194329328 tracks moving the logic from the switcher.py script into Dackka)
+            div { id = "refdoc-switcher-placeholder" }
+
             data.content.render(this)
         }
     }

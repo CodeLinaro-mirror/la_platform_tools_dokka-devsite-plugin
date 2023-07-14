@@ -29,8 +29,8 @@ internal data class DefaultMetadataComponent(
     override fun render(into: FlowContent): Unit = into.run {
         // Only renders the div when there will be something inside it
         if (!data.isEmpty) {
-            // CSS ids are declared in internal codebase (cl/475581680)
             div {
+                // CSS id declared in internal codebase (cl/485657528)
                 id = "metadata-info-block"
                 data.libraryMetadata?.let {
                     div {
