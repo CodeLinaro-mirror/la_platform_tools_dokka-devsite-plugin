@@ -77,13 +77,15 @@ internal class MetadataConverter(
      * Creates a metadata component for the [property].
      */
     fun getMetadataForProperty(property: DProperty): MetadataComponent {
+        val versionMetadata = property.findMatchingVersionMetadata(releaseNotesUrl = null)
+        // TODO(b/281727318): if the property has no metadata, try finding metadata for the getter
+
         return DefaultMetadataComponent(
             MetadataComponent.Params(
                 // TODO(b/264828018): display artifact ID and source link for some properties
                 libraryMetadata = null,
                 sourceLinkUrl = null,
-                // TODO(b/281727318): display version metadata for properties
-                versionMetadata = null
+                versionMetadata = versionMetadata
             )
         )
     }
@@ -109,7 +111,7 @@ internal class MetadataConverter(
      * Query the API version metadata Map to find a [VersionMetadataComponent] that matches the
      * current class being processed and append a release URL.  Otherwise, return null.
      */
-    private fun Documentable.findMatchingVersionMetadata(
+    private fun DClasslike.findMatchingVersionMetadata(
         releaseNotesUrl: String?
     ): VersionMetadataComponent? {
         val classVersionMetadata = docsHolder.versionMetadataMap[dri.fullName]
@@ -120,6 +122,23 @@ internal class MetadataConverter(
             DefaultVersionMetadataComponent.createVersionMetadataWithBaseUrl(
                 classVersionMetadata.addedIn,
                 classVersionMetadata.deprecatedIn,
+                releaseNotesUrl
+            )
+        }
+    }
+
+    private fun DProperty.findMatchingVersionMetadata(
+        releaseNotesUrl: String?
+    ): VersionMetadataComponent? {
+        // TODO(b/281727318): handle top-level properties for kotlin display (will need synthetic
+        // class name
+        val classVersionMetadata = docsHolder.versionMetadataMap[dri.fullName]
+        val propertyVersionMetadata = classVersionMetadata?.fieldVersions?.get(name)
+
+        return propertyVersionMetadata?.let {
+            DefaultVersionMetadataComponent.createVersionMetadataWithBaseUrl(
+                it.addedIn,
+                it.deprecatedIn,
                 releaseNotesUrl
             )
         }

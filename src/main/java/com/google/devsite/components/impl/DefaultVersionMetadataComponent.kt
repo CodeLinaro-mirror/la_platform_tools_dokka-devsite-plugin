@@ -20,6 +20,7 @@ import com.google.devsite.components.Link
 import com.google.devsite.components.symbols.VersionMetadataComponent
 import com.google.devsite.util.ClassVersionMetadata
 import com.google.devsite.util.JsonVersionMetadata
+import com.google.devsite.util.createFieldVersionMetadata
 import kotlinx.html.FlowContent
 import kotlinx.html.div
 import kotlinx.html.id
@@ -83,12 +84,11 @@ internal data class DefaultVersionMetadataComponent(
                     ClassVersionMetadata(
                         className = versionMetadata.clazz,
                         addedIn = versionMetadata.addedIn,
-                        deprecatedIn = versionMetadata.deprecatedIn
+                        deprecatedIn = versionMetadata.deprecatedIn,
+                        fieldVersions = createFieldVersionMetadata(versionMetadata.fields)
                     ).apply {
                         addMethodMetadata(versionMetadata.methods)
                     }
-
-                // TODO: also process fields (b/281727318)
             }
 
             return versionMetadataMap

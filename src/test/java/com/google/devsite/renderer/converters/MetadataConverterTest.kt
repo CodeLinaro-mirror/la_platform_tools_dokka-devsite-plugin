@@ -32,7 +32,7 @@ import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
 internal class MetadataConverterTest(
-    displayLanguage: Language
+    private val displayLanguage: Language
 ) : ConverterTestBase(displayLanguage) {
     @Test
     fun `Source links are generated correctly`() {
@@ -142,12 +142,47 @@ internal class MetadataConverterTest(
         }
     }
 
+    @Test
+    fun `API version for a const property is generated correctly`() {
+        val metadata = ClassVersionMetadata(
+            className = "androidx.example.Foo",
+            addedIn = "1.0.0",
+            fieldVersions = mapOf(
+                "foo" to ClassVersionMetadata.FieldVersionMetadata(
+                    fieldName = "foo",
+                    addedIn = "1.2.3",
+                    deprecatedIn = "2.3.4"
+                )
+            )
+        )
+        val metadataComponent = """
+            |class Foo {
+            |    const val foo = 3
+            |}
+        """.render().metadataForProperty(
+            versionMetadataMap = mapOf("androidx.example.Foo" to metadata)
+        )
+
+        val link = metadataComponent.data.versionMetadata
+        assertThat(link).isNotNull()
+
+        assertThat(link!!.data.addedIn?.data?.name).isEqualTo("1.2.3")
+        assertThat(link.data.deprecatedIn?.data?.name).isEqualTo("2.3.4")
+    }
+
     private fun DModule.metadataForClasslike(
         name: String = "Foo",
         baseSourceLink: String? = null,
         versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap()
     ): MetadataComponent =
         metadata(classlike(name)!!, baseSourceLink, versionMetadataMap)
+
+    private fun DModule.metadataForProperty(
+        name: String = "foo",
+        baseSourceLink: String? = null,
+        versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap()
+    ): MetadataComponent =
+        metadata(property(name)!!, baseSourceLink, versionMetadataMap)
 
     private fun DModule.metadata(
         documentable: Documentable,
