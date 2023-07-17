@@ -38,15 +38,13 @@ internal class MetadataConverter(
     private val docsHolder: DocumentablesHolder
 ) {
     /**
-     * Creates a metadata component for the classlike. If [getSourceEntries] returns null for the
-     * classlike, this will also return null as the source entry is needed to create both the
-     * library metadata and the source link.
+     * Creates a metadata component for the classlike.
      */
     fun getMetadataForClasslike(classlike: DClasslike): MetadataComponent? {
-        val entries = classlike.getSourceEntries() ?: return null
-        val paths = entries.map { it.getSourceFilePath() }
-        val libraryMetadata = classlike.findMatchingLibraryMetadata(paths)
-        val sourceUrl = classlike.createLinkToSource(paths)
+        val entries = classlike.getSourceEntries()
+        val paths = entries?.map { it.getSourceFilePath() }
+        val libraryMetadata = paths?.let { classlike.findMatchingLibraryMetadata(it) }
+        val sourceUrl = paths?.let { classlike.createLinkToSource(it) }
         val versionMetadata = classlike.findMatchingVersionMetadata(
             libraryMetadata?.releaseNotesUrl
         )
