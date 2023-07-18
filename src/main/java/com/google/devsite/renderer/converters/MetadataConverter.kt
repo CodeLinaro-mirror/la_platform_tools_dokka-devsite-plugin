@@ -40,7 +40,7 @@ internal class MetadataConverter(
     /**
      * Creates a metadata component for the classlike.
      */
-    fun getMetadataForClasslike(classlike: DClasslike): MetadataComponent? {
+    fun getMetadataForClasslike(classlike: DClasslike): MetadataComponent {
         val entries = classlike.getSourceEntries()
         val paths = entries?.map { it.getSourceFilePath() }
         val libraryMetadata = paths?.let { classlike.findMatchingLibraryMetadata(it) }
