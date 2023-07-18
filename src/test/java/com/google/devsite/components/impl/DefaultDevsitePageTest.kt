@@ -55,7 +55,12 @@ class DefaultDevsitePageTest {
 {% include "_shared/_reference-head-tags.html" %}
   </head>
   <body>
-    <h1>Page Title</h1>
+    <div id="header-block">
+      <div>
+        <h1>Page Title</h1>
+      </div>
+    </div>
+    <div id="refdoc-switcher-placeholder"></div>
     <div>noop</div>
   </body>
 </html>
@@ -91,7 +96,12 @@ class DefaultDevsitePageTest {
 {% include "_shared/_reference-head-tags.html" %}
   </head>
   <body>
-    <h1>Page Title</h1>
+    <div id="header-block">
+      <div>
+        <h1>Page Title</h1>
+      </div>
+    </div>
+    <div id="refdoc-switcher-placeholder"></div>
     <div>noop</div>
   </body>
 </html>
@@ -144,15 +154,20 @@ class DefaultDevsitePageTest {
 {% include "_shared/_reference-head-tags.html" %}
   </head>
   <body>
-    <div id="metadata-info-block">
-      <div id="maven-coordinates">Artifact: <a href="https://d.android.com">android.x:artifact</a></div>
-      <div id="source-link"><a href="https://cs.android.com" class="external">View Source</a></div>
-      <div id="version-metadata">
-        <div id="added-in">Added in <a href="https://developer.android.com/jetpack/androidx/releases/fragment#1.5.4">1.5.4</a></div>
-        <div id="deprecated-in">Deprecated in <a href="https://developer.android.com/jetpack/androidx/releases/fragment#1.6.0-alpha04">1.6.0-alpha04</a></div>
+    <div id="header-block">
+      <div>
+        <h1>Page Title</h1>
+      </div>
+      <div id="metadata-info-block">
+        <div id="maven-coordinates">Artifact: <a href="https://d.android.com">android.x:artifact</a></div>
+        <div id="source-link"><a href="https://cs.android.com" class="external">View Source</a></div>
+        <div id="version-metadata">
+          <div id="added-in">Added in <a href="https://developer.android.com/jetpack/androidx/releases/fragment#1.5.4">1.5.4</a></div>
+          <div id="deprecated-in">Deprecated in <a href="https://developer.android.com/jetpack/androidx/releases/fragment#1.6.0-alpha04">1.6.0-alpha04</a></div>
+        </div>
       </div>
     </div>
-    <h1>Page Title</h1>
+    <div id="refdoc-switcher-placeholder"></div>
     <div>noop</div>
   </body>
 </html>
@@ -200,10 +215,15 @@ class DefaultDevsitePageTest {
 {% include "_shared/_reference-head-tags.html" %}
   </head>
   <body>
-    <div id="metadata-info-block">
-      <div id="maven-coordinates">Artifact: android.x:artifact</div>
+    <div id="header-block">
+      <div>
+        <h1>Page Title</h1>
+      </div>
+      <div id="metadata-info-block">
+        <div id="maven-coordinates">Artifact: android.x:artifact</div>
+      </div>
     </div>
-    <h1>Page Title</h1>
+    <div id="refdoc-switcher-placeholder"></div>
     <div>noop</div>
   </body>
 </html>
@@ -238,7 +258,12 @@ class DefaultDevsitePageTest {
 {% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
   </head>
   <body>
-    <h1>Page Title</h1>
+    <div id="header-block">
+      <div>
+        <h1>Page Title</h1>
+      </div>
+    </div>
+    <div id="refdoc-switcher-placeholder"></div>
     <div>noop</div>
   </body>
 </html>
@@ -274,7 +299,12 @@ class DefaultDevsitePageTest {
 {% include "en/docs/reference/android/_reference-head-tags.html" %}
   </head>
   <body>
-    <h1>Page Title</h1>
+    <div id="header-block">
+      <div>
+        <h1>Page Title</h1>
+      </div>
+    </div>
+    <div id="refdoc-switcher-placeholder"></div>
     <div>noop</div>
   </body>
 </html>
