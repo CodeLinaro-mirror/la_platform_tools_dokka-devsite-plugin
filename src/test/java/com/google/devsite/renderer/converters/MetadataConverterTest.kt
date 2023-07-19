@@ -80,11 +80,11 @@ internal class MetadataConverterTest(
             versionMetadataMap = mapOf("androidx.example.Foo" to metadata)
         )
 
-        val link = metadataComponent.data.versionMetadata
-        assertThat(link).isNotNull()
+        val versionMetadata = metadataComponent.data.versionMetadata
+        assertThat(versionMetadata).isNotNull()
 
-        assertThat(link!!.data.addedIn?.data?.name).isEqualTo("1.2.3")
-        assertThat(link.data.deprecatedIn?.data?.name).isEqualTo("2.3.4")
+        assertThat(versionMetadata!!.data.addedIn?.data?.name).isEqualTo("1.2.3")
+        assertThat(versionMetadata.data.deprecatedIn?.data?.name).isEqualTo("2.3.4")
     }
 
     @Test
@@ -100,11 +100,11 @@ internal class MetadataConverterTest(
             versionMetadataMap = mapOf("androidx.example.Foo" to metadata)
         )
 
-        val link = metadataComponent.data.versionMetadata
-        assertThat(link).isNotNull()
+        val versionMetadata = metadataComponent.data.versionMetadata
+        assertThat(versionMetadata).isNotNull()
 
-        assertThat(link!!.data.addedIn?.data?.name).isEqualTo("1.2.3")
-        assertThat(link.data.deprecatedIn).isNull()
+        assertThat(versionMetadata!!.data.addedIn?.data?.name).isEqualTo("1.2.3")
+        assertThat(versionMetadata.data.deprecatedIn).isNull()
     }
 
     @Test
@@ -129,11 +129,11 @@ internal class MetadataConverterTest(
             versionMetadataMap = mapOf("androidx.example.Foo" to metadata)
         )
 
-        val link = metadataComponent.data.versionMetadata
-        assertThat(link).isNotNull()
+        val versionMetadata = metadataComponent.data.versionMetadata
+        assertThat(versionMetadata).isNotNull()
 
-        assertThat(link!!.data.addedIn?.data?.name).isEqualTo("1.2.3")
-        assertThat(link.data.deprecatedIn?.data?.name).isEqualTo("2.3.4")
+        assertThat(versionMetadata!!.data.addedIn?.data?.name).isEqualTo("1.2.3")
+        assertThat(versionMetadata.data.deprecatedIn?.data?.name).isEqualTo("2.3.4")
     }
 
     @Test
@@ -175,12 +175,42 @@ internal class MetadataConverterTest(
                 name = "TestKt",
                 versionMetadataMap = metadataMap
             )
-            val link = metadataComponent.data.versionMetadata
-            assertThat(link).isNotNull()
+            val versionMetadata = metadataComponent.data.versionMetadata
+            assertThat(versionMetadata).isNotNull()
 
-            assertThat(link!!.data.addedIn?.data?.name).isEqualTo("1.2.3")
-            assertThat(link.data.deprecatedIn).isNull()
+            assertThat(versionMetadata!!.data.addedIn?.data?.name).isEqualTo("1.2.3")
+            assertThat(versionMetadata.data.deprecatedIn).isNull()
         }
+    }
+
+    @Test
+    fun `API version for a regular property is generated correctly`() {
+        // Regular properties are represented by their accessors in the metadata
+        val metadata = mapOf(
+            "androidx.example.Foo" to ClassVersionMetadata(
+                className = "androidx.example.Foo",
+                addedIn = "1.0.0",
+                methodVersions = mapOf(
+                    "getFoo()" to ClassVersionMetadata.MethodVersionMetadata(
+                        methodName = "getFoo()",
+                        addedIn = "1.2.3",
+                        deprecatedIn = "2.3.4"
+                    )
+                )
+            )
+        )
+        val module = """
+            |class Foo {
+            |    val foo = 3
+            |}
+        """.render()
+
+        val metadataComponent = module.metadataForProperty(versionMetadataMap = metadata)
+        val versionMetadata = metadataComponent.data.versionMetadata
+        assertThat(versionMetadata).isNotNull()
+
+        assertThat(versionMetadata!!.data.addedIn?.data?.name).isEqualTo("1.2.3")
+        assertThat(versionMetadata.data.deprecatedIn?.data?.name).isEqualTo("2.3.4")
     }
 
     @Test
@@ -204,11 +234,11 @@ internal class MetadataConverterTest(
             versionMetadataMap = mapOf("androidx.example.Foo" to metadata)
         )
 
-        val link = metadataComponent.data.versionMetadata
-        assertThat(link).isNotNull()
+        val versionMetadata = metadataComponent.data.versionMetadata
+        assertThat(versionMetadata).isNotNull()
 
-        assertThat(link!!.data.addedIn?.data?.name).isEqualTo("1.2.3")
-        assertThat(link.data.deprecatedIn?.data?.name).isEqualTo("2.3.4")
+        assertThat(versionMetadata!!.data.addedIn?.data?.name).isEqualTo("1.2.3")
+        assertThat(versionMetadata.data.deprecatedIn?.data?.name).isEqualTo("2.3.4")
     }
 
     private fun DModule.metadataForClasslike(

@@ -148,6 +148,12 @@ internal class MetadataConverter(
         }
     }
 
+    /**
+     * Query the API version metadata map to find a [VersionMetadataComponent] that matches the
+     * current property being processed and append a release URL.  Otherwise, return null.
+     * Many properties will be represented in the version metadata map by their accessors, so this
+     * looks for metadata of the getter if metadata can't be found for the property itself.
+     */
     private fun DProperty.findMatchingVersionMetadata(
         releaseNotesUrl: String?
     ): VersionMetadataComponent? {
@@ -162,7 +168,7 @@ internal class MetadataConverter(
                 it.deprecatedIn,
                 releaseNotesUrl
             )
-        }
+        } ?: getter?.findMatchingVersionMetadata(releaseNotesUrl)
     }
 
     /**
