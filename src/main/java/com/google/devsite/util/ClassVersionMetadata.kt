@@ -26,22 +26,6 @@ data class ClassVersionMetadata(
     val methodVersions: Map<String, MethodVersionMetadata> = emptyMap(),
     val fieldVersions: Map<String, FieldVersionMetadata> = emptyMap()
 ) {
-    /**
-     * Converts JSON version metadata for methods into a map
-     */
-    fun addMethodMetadata(
-        jsonVersionMetadataMethods: List<JsonVersionMetadata.JsonVersionMetadataMethod>
-    ) {
-        val versionMetadataMap = hashMapOf<String, MethodVersionMetadata>()
-
-        jsonVersionMetadataMethods.forEach { jsonVersionMetadataMethod ->
-            versionMetadataMap[jsonVersionMetadataMethod.method] = MethodVersionMetadata(
-                methodName = jsonVersionMetadataMethod.method,
-                addedIn = jsonVersionMetadataMethod.addedIn,
-                deprecatedIn = jsonVersionMetadataMethod.deprecatedIn,
-            )
-        }
-    }
 
     /**
      * Data class to store the version metadata associated with a method
@@ -76,6 +60,26 @@ fun createFieldVersionMetadata(
                 fieldName = jsonVersionMetadataField.field,
                 addedIn = jsonVersionMetadataField.addedIn,
                 deprecatedIn = jsonVersionMetadataField.deprecatedIn,
+            )
+    }
+
+    return versionMetadataMap
+}
+
+/**
+ * Converts JSON version metadata for methods into a map
+ */
+fun createMethodVersionMetadata(
+    jsonVersionMetadataMethods: List<JsonVersionMetadata.JsonVersionMetadataMethod>
+): Map<String, ClassVersionMetadata.MethodVersionMetadata> {
+    val versionMetadataMap = hashMapOf<String, ClassVersionMetadata.MethodVersionMetadata>()
+
+    jsonVersionMetadataMethods.forEach { jsonVersionMetadataMethod ->
+        versionMetadataMap[jsonVersionMetadataMethod.method] =
+            ClassVersionMetadata.MethodVersionMetadata(
+                methodName = jsonVersionMetadataMethod.method,
+                addedIn = jsonVersionMetadataMethod.addedIn,
+                deprecatedIn = jsonVersionMetadataMethod.deprecatedIn,
             )
     }
 

@@ -108,6 +108,47 @@ internal class MetadataConverterTest(
     }
 
     @Test
+    fun `API version for a method is generated correctly`() {
+        val metadata = ClassVersionMetadata(
+            className = "androidx.example.Foo",
+            addedIn = "1.2.3",
+            methodVersions = mapOf(
+                "bar()" to ClassVersionMetadata.MethodVersionMetadata(
+                    methodName = "bar()",
+                    addedIn = "1.2.3",
+                    deprecatedIn = "2.3.4"
+                )
+            )
+        )
+        val metadataComponent = """
+            |class Foo {
+            |    fun bar() {}
+            |}
+        """.render().metadataForMethod(
+            name = "bar",
+            versionMetadataMap = mapOf("androidx.example.Foo" to metadata)
+        )
+
+        val link = metadataComponent.data.versionMetadata
+        assertThat(link).isNotNull()
+
+        assertThat(link!!.data.addedIn?.data?.name).isEqualTo("1.2.3")
+        assertThat(link.data.deprecatedIn?.data?.name).isEqualTo("2.3.4")
+    }
+
+    @Test
+    fun `apiSinceMethodSignature formats method to match apiSince metadata string`() {
+        val fun1 = """
+            |class Foo {
+            |    fun bar() {}
+            |}
+        """.render().functions()!!.first()
+        assertThat(MetadataConverter.apiSinceMethodSignature(fun1)).isEqualTo("bar()")
+
+        // TODO: add more test cases
+    }
+
+    @Test
     fun `API version for a synthetic class is generated correctly`() {
         val module = """
             |fun topLevelFun(): Unit {}
@@ -176,6 +217,13 @@ internal class MetadataConverterTest(
         versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap()
     ): MetadataComponent =
         metadata(classlike(name)!!, baseSourceLink, versionMetadataMap)
+
+    private fun DModule.metadataForMethod(
+        name: String = "bar",
+        baseSourceLink: String? = null,
+        versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap()
+    ): MetadataComponent =
+        metadata(function(name)!!, baseSourceLink, versionMetadataMap)
 
     private fun DModule.metadataForProperty(
         name: String = "foo",

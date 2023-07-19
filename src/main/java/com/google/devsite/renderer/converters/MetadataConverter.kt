@@ -16,6 +16,7 @@
 
 package com.google.devsite.renderer.converters
 
+import com.google.common.annotations.VisibleForTesting
 import com.google.devsite.components.impl.DefaultMetadataComponent
 import com.google.devsite.components.impl.DefaultVersionMetadataComponent
 import com.google.devsite.components.symbols.MetadataComponent
@@ -62,13 +63,14 @@ internal class MetadataConverter(
      * Creates a metadata component for the [function].
      */
     fun getMetadataForFunction(function: DFunction): MetadataComponent {
+        val versionMetadata = function.findMatchingVersionMetadata(releaseNotesUrl = null)
+
         return DefaultMetadataComponent(
             MetadataComponent.Params(
                 // TODO(b/264828018): display artifact ID and source link for some functions
                 libraryMetadata = null,
                 sourceLinkUrl = null,
-                // TODO(b/264280616): display version metadata for functions
-                versionMetadata = null
+                versionMetadata = versionMetadata
             )
         )
     }
@@ -116,12 +118,31 @@ internal class MetadataConverter(
     ): VersionMetadataComponent? {
         val classVersionMetadata = docsHolder.versionMetadataMap[dri.fullName]
 
-        return if (classVersionMetadata == null) {
-            null
-        } else {
+        return classVersionMetadata?.let {
             DefaultVersionMetadataComponent.createVersionMetadataWithBaseUrl(
-                classVersionMetadata.addedIn,
-                classVersionMetadata.deprecatedIn,
+                it.addedIn,
+                it.deprecatedIn,
+                releaseNotesUrl
+            )
+        }
+    }
+
+    /**
+     * Query the API version metadata Map to find a [VersionMetadataComponent] that matches the
+     * current function being processed and append a release URL.  Otherwise, return null.
+     */
+    private fun DFunction.findMatchingVersionMetadata(
+        releaseNotesUrl: String?
+    ): VersionMetadataComponent? {
+        val classVersionMetadata = docsHolder.versionMetadataMap[dri.fullName]
+        val methodVersionMetadata = classVersionMetadata?.methodVersions?.get(
+            apiSinceMethodSignature(this)
+        )
+
+        return methodVersionMetadata?.let {
+            DefaultVersionMetadataComponent.createVersionMetadataWithBaseUrl(
+                it.addedIn,
+                it.deprecatedIn,
                 releaseNotesUrl
             )
         }
@@ -183,6 +204,17 @@ internal class MetadataConverter(
         // Reduce the list of paths to a single path by taking the common prefix of all of them.
         val path = paths.reduce { currPrefix, nextPath -> currPrefix.commonPrefixWith(nextPath) }
         return docsHolder.baseSourceLink?.format(path, dri.fullName)
+    }
+
+    companion object {
+
+        /**
+         * Converts a method signature to a string that matches the formatting in the apiSince JSON
+         */
+        @VisibleForTesting
+        fun apiSinceMethodSignature(function: DFunction): String {
+            return "${function.name}()"
+        }
     }
 }
 
