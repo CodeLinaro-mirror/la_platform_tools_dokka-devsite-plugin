@@ -11,6 +11,9 @@
       </div>
       <div id="metadata-info-block">
         <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/fragment/app/FragmentManager.java+class:androidx.fragment.app.FragmentManager&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+        <div id="version-metadata">
+          <div id="added-in">Added in 1.1.0</div>
+        </div>
       </div>
     </div>
     <div id="refdoc-switcher-placeholder"></div>
@@ -395,6 +398,11 @@
     <div class="list">
       <h2>Constants</h2>
       <div class="api-item"><a name="getPOP_BACK_STACK_INCLUSIVE()"></a><a name="setPOP_BACK_STACK_INCLUSIVE()"></a><a name="getPOP_BACK_STACK_INCLUSIVE--"></a><a name="setPOP_BACK_STACK_INCLUSIVE--"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.1.0</div>
+          </div>
+        </div>
         <h3 class="api-name" id="POP_BACK_STACK_INCLUSIVE()">POP_BACK_STACK_INCLUSIVE</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#POP_BACK_STACK_INCLUSIVE()">POP_BACK_STACK_INCLUSIVE</a> = 1</pre>
         <p>Flag for <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(java.lang.String,int)">popBackStack</a></code> and <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(int,int)">popBackStack</a></code>: If set, and the name or ID of a back stack entry has been supplied, then all matching entries will be consumed until one that doesn't match is found or the bottom of the stack is reached. Otherwise, all entries up to but not including that entry will be removed.</p>
@@ -403,6 +411,11 @@
     <div class="list">
       <h2>Public constructors</h2>
       <div class="api-item"><a name="FragmentManager--"></a><a name="fragmentmanager"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.1.0</div>
+          </div>
+        </div>
         <h3 class="api-name" id="FragmentManager()">FragmentManager</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#FragmentManager()">FragmentManager</a>()</pre>
       </div>
@@ -410,6 +423,11 @@
     <div class="list">
       <h2>Public methods</h2>
       <div class="api-item"><a name="addFragmentOnAttachListener-androidx.fragment.app.FragmentOnAttachListener-"></a><a name="addfragmentonattachlistener"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.3.0</div>
+          </div>
+        </div>
         <h3 class="api-name" id="addFragmentOnAttachListener(androidx.fragment.app.FragmentOnAttachListener)">addFragmentOnAttachListener</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#addFragmentOnAttachListener(androidx.fragment.app.FragmentOnAttachListener)">addFragmentOnAttachListener</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/FragmentOnAttachListener.html">FragmentOnAttachListener</a>&nbsp;listener)</pre>
         <p>Add a <code><a href="/reference/androidx/fragment/app/FragmentOnAttachListener.html">FragmentOnAttachListener</a></code> that should receive a call to <code><a href="/reference/androidx/fragment/app/FragmentOnAttachListener.html#onAttachFragment(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onAttachFragment</a></code> when a new Fragment is attached to this FragmentManager.</p>
@@ -436,17 +454,32 @@
         </div>
       </div>
       <div class="api-item"><a name="addOnBackStackChangedListener-androidx.fragment.app.FragmentManager.OnBackStackChangedListener-"></a><a name="addonbackstackchangedlistener"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.1.0</div>
+          </div>
+        </div>
         <h3 class="api-name" id="addOnBackStackChangedListener(androidx.fragment.app.FragmentManager.OnBackStackChangedListener)">addOnBackStackChangedListener</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#addOnBackStackChangedListener(androidx.fragment.app.FragmentManager.OnBackStackChangedListener)">addOnBackStackChangedListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/FragmentManager.OnBackStackChangedListener.html">FragmentManager.OnBackStackChangedListener</a>&nbsp;listener<br>)</pre>
         <p>Add a new listener for changes to the fragment back stack.</p>
       </div>
       <div class="api-item"><a name="beginTransaction--"></a><a name="begintransaction"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.1.0</div>
+          </div>
+        </div>
         <h3 class="api-name" id="beginTransaction()">beginTransaction</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/FragmentTransaction.html">FragmentTransaction</a>&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#beginTransaction()">beginTransaction</a>()</pre>
         <p>Start a series of edit operations on the Fragments associated with this FragmentManager. </p>
         <p>Note: A fragment transaction can only be created/committed prior to an activity saving its state. If you try to commit a transaction after FragmentActivity.onSaveInstanceState() (and prior to a following <code><a href="/reference/androidx/fragment/app/FragmentActivity.html#onStart()">FragmentActivity.onStart</a></code> or <code><a href="/reference/androidx/fragment/app/FragmentActivity.html#onResume()">FragmentActivity.onResume()</a></code>, you will get an error. This is because the framework takes care of saving your current fragments in the state, and if changes are made after the state is saved then they will be lost.</p>
       </div>
       <div class="api-item"><a name="clearBackStack-java.lang.String-"></a><a name="clearbackstack"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.4.0</div>
+          </div>
+        </div>
         <h3 class="api-name" id="clearBackStack(java.lang.String)">clearBackStack</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#clearBackStack(java.lang.String)">clearBackStack</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;name)</pre>
         <p>Clears the back stack previously saved via <code><a href="/reference/androidx/fragment/app/FragmentManager.html#saveBackStack(java.lang.String)">saveBackStack</a></code>. This will result in all of the transactions that made up that back stack to be thrown away, thus destroying any fragments that were added through those transactions. All state of those fragments will be cleared as part of this process. If no state was previously saved with the given name, this operation does nothing. </p>
@@ -474,6 +507,11 @@
         </div>
       </div>
       <div class="api-item"><a name="clearFragmentResult-java.lang.String-"></a><a name="clearfragmentresult"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.7.0-alpha02</div>
+          </div>
+        </div>
         <h3 class="api-name" id="clearFragmentResult(java.lang.String)">clearFragmentResult</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#clearFragmentResult(java.lang.String)">clearFragmentResult</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;requestKey)</pre>
         <p>Clears the stored result for the given requestKey. This clears any result that was previously set via <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResult(java.lang.String,android.os.Bundle)">setFragmentResult</a></code> that hasn't yet been delivered to a <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code>.</p>
@@ -500,6 +538,11 @@
         </div>
       </div>
       <div class="api-item"><a name="clearFragmentResultListener-java.lang.String-"></a><a name="clearfragmentresultlistener"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.7.0-alpha02</div>
+          </div>
+        </div>
         <h3 class="api-name" id="clearFragmentResultListener(java.lang.String)">clearFragmentResultListener</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#clearFragmentResultListener(java.lang.String)">clearFragmentResultListener</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;requestKey)</pre>
         <p>Clears the stored <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> for the given requestKey. This clears any <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> that was previously set via <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a></code>.</p>
@@ -597,6 +640,11 @@
         </div>
       </div>
       <div class="api-item"><a name="executePendingTransactions--"></a><a name="executependingtransactions"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.1.0</div>
+          </div>
+        </div>
         <h3 class="api-name" id="executePendingTransactions()">executePendingTransactions</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#executePendingTransactions()">executePendingTransactions</a>()</pre>
         <p>After a <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html">FragmentTransaction</a></code> is committed with <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html#commit()">FragmentTransaction.commit()</a></code>, it is scheduled to be executed asynchronously on the process's main thread. If you want to immediately executing any such pending operations, you can call this function (only from the main thread) to do so. Note that all callbacks and other related behavior will be done from within this call, so be careful about where this is called from. </p>
@@ -719,6 +767,11 @@
         </div>
       </div>
       <div class="api-item"><a name="findFragmentByTag-java.lang.String-"></a><a name="findfragmentbytag"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.1.0</div>
+          </div>
+        </div>
         <h3 class="api-name" id="findFragmentByTag(java.lang.String)">findFragmentByTag</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#findFragmentByTag(java.lang.String)">findFragmentByTag</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;tag)</pre>
         <p>Finds a fragment that was identified by the given tag either when inflated from XML or as supplied when added in a transaction. This first searches through fragments that are currently added to the manager's activity; if no such fragment is found, then all fragments currently on the back stack are searched. </p>
@@ -772,11 +825,21 @@
         <p>Return the BackStackEntry at index <var>index</var> in the back stack; entries start index 0 being the bottom of the stack.</p>
       </div>
       <div class="api-item"><a name="getBackStackEntryCount--"></a><a name="getbackstackentrycount"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.1.0</div>
+          </div>
+        </div>
         <h3 class="api-name" id="getBackStackEntryCount()">getBackStackEntryCount</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#getBackStackEntryCount()">getBackStackEntryCount</a>()</pre>
         <p>Return the number of entries currently in the back stack.</p>
       </div>
       <div class="api-item"><a name="getFragment(android.os.Bundle, java.lang.String)"></a><a name="getFragment-android.os.Bundle-java.lang.String-"></a><a name="getfragment"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.1.0</div>
+          </div>
+        </div>
         <h3 class="api-name" id="getFragment(android.os.Bundle,java.lang.String)">getFragment</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#getFragment(android.os.Bundle,java.lang.String)">getFragment</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>&nbsp;bundle,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;key)</pre>
         <p>Retrieve the current Fragment instance for a reference previously placed with <code><a href="/reference/androidx/fragment/app/FragmentManager.html#putFragment(android.os.Bundle,java.lang.String,androidx.fragment.app.Fragment)">putFragment</a></code>.</p>
@@ -830,6 +893,11 @@
         </div>
       </div>
       <div class="api-item"><a name="getFragmentFactory--"></a><a name="getfragmentfactory"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.1.0</div>
+          </div>
+        </div>
         <h3 class="api-name" id="getFragmentFactory()">getFragmentFactory</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/FragmentFactory.html">FragmentFactory</a>&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#getFragmentFactory()">getFragmentFactory</a>()</pre>
         <p>Gets the current <code><a href="/reference/androidx/fragment/app/FragmentFactory.html">FragmentFactory</a></code> used to instantiate new Fragment instances. </p>
@@ -857,6 +925,11 @@
         </div>
       </div>
       <div class="api-item"><a name="getFragments--"></a><a name="getfragments"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.1.0</div>
+          </div>
+        </div>
         <h3 class="api-name" id="getFragments()">getFragments</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&gt;&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#getFragments()">getFragments</a>()</pre>
         <p>Get a list of all fragments that are currently added to the FragmentManager. This may include those that are hidden as well as those that are shown. This will not include any fragments only in the back stack, or fragments that are detached or removed. </p>
@@ -884,6 +957,11 @@
         </div>
       </div>
       <div class="api-item"><a name="getPrimaryNavigationFragment--"></a><a name="getprimarynavigationfragment"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.1.0</div>
+          </div>
+        </div>
         <h3 class="api-name" id="getPrimaryNavigationFragment()">getPrimaryNavigationFragment</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#getPrimaryNavigationFragment()">getPrimaryNavigationFragment</a>()</pre>
         <p>Return the currently active primary navigation fragment for this FragmentManager. The primary navigation fragment is set by fragment transactions using <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html#setPrimaryNavigationFragment(androidx.fragment.app.Fragment)">setPrimaryNavigationFragment</a></code>. </p>
@@ -911,16 +989,31 @@
         </div>
       </div>
       <div class="api-item"><a name="getStrictModePolicy--"></a><a name="getstrictmodepolicy"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.4.0</div>
+          </div>
+        </div>
         <h3 class="api-name" id="getStrictModePolicy()">getStrictModePolicy</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.html">FragmentStrictMode.Policy</a>&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#getStrictModePolicy()">getStrictModePolicy</a>()</pre>
         <p>Returns the current policy for this FragmentManager. If no policy is set, returns null.</p>
       </div>
       <div class="api-item"><a name="isDestroyed--"></a><a name="isdestroyed"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.1.0</div>
+          </div>
+        </div>
         <h3 class="api-name" id="isDestroyed()">isDestroyed</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#isDestroyed()">isDestroyed</a>()</pre>
         <p>Returns true if the final <code><a href="https://developer.android.com/reference/android/app/Activity.html#onDestroy()">Activity.onDestroy()</a></code> call has been made on the FragmentManager's Activity, so this instance is now dead.</p>
       </div>
       <div class="api-item"><a name="isStateSaved--"></a><a name="isstatesaved"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.1.0</div>
+          </div>
+        </div>
         <h3 class="api-name" id="isStateSaved()">isStateSaved</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#isStateSaved()">isStateSaved</a>()</pre>
         <p>Returns <code>true</code> if the FragmentManager's state has already been saved by its host. Any operations that would change saved state should not be performed if this method returns true. For example, any popBackStack() method, such as <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStackImmediate()">popBackStackImmediate</a></code> or any FragmentTransaction using <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html#commit()">commit</a></code> instead of <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html#commitAllowingStateLoss()">commitAllowingStateLoss</a></code> will change the state and will result in an error.</p>
@@ -947,6 +1040,11 @@
         </div>
       </div>
       <div class="api-item"><a name="popBackStack--"></a><a name="popbackstack"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.1.0</div>
+          </div>
+        </div>
         <h3 class="api-name" id="popBackStack()">popBackStack</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack()">popBackStack</a>()</pre>
         <p>Pop the top state off the back stack. This function is asynchronous -- it enqueues the request to pop, but the action will not be performed until the application returns to its event loop.</p>
@@ -1016,6 +1114,11 @@
         </div>
       </div>
       <div class="api-item"><a name="popBackStackImmediate--"></a><a name="popbackstackimmediate"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.1.0</div>
+          </div>
+        </div>
         <h3 class="api-name" id="popBackStackImmediate()">popBackStackImmediate</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStackImmediate()">popBackStackImmediate</a>()</pre>
         <p>Like <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack()">popBackStack</a></code>, but performs the operation immediately inside of the call. This is like calling <code><a href="/reference/androidx/fragment/app/FragmentManager.html#executePendingTransactions()">executePendingTransactions</a></code> afterwards without forcing the start of postponed Transactions.</p>
@@ -1094,6 +1197,11 @@
         </div>
       </div>
       <div class="api-item"><a name="putFragment(android.os.Bundle, java.lang.String, androidx.fragment.app.Fragment)"></a><a name="putFragment-android.os.Bundle-java.lang.String-androidx.fragment.app.Fragment-"></a><a name="putfragment"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.1.0</div>
+          </div>
+        </div>
         <h3 class="api-name" id="putFragment(android.os.Bundle,java.lang.String,androidx.fragment.app.Fragment)">putFragment</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#putFragment(android.os.Bundle,java.lang.String,androidx.fragment.app.Fragment)">putFragment</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>&nbsp;bundle,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;key,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;fragment<br>)</pre>
         <p>Put a reference to a fragment in a Bundle. This Bundle can be persisted as saved state, and when later restoring <code><a href="/reference/androidx/fragment/app/FragmentManager.html#getFragment(android.os.Bundle,java.lang.String)">getFragment</a></code> will return the current instance of the same fragment.</p>
@@ -1164,6 +1272,11 @@
         </div>
       </div>
       <div class="api-item"><a name="removeFragmentOnAttachListener-androidx.fragment.app.FragmentOnAttachListener-"></a><a name="removefragmentonattachlistener"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.3.0</div>
+          </div>
+        </div>
         <h3 class="api-name" id="removeFragmentOnAttachListener(androidx.fragment.app.FragmentOnAttachListener)">removeFragmentOnAttachListener</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#removeFragmentOnAttachListener(androidx.fragment.app.FragmentOnAttachListener)">removeFragmentOnAttachListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/FragmentOnAttachListener.html">FragmentOnAttachListener</a>&nbsp;listener<br>)</pre>
         <p>Remove a <code><a href="/reference/androidx/fragment/app/FragmentOnAttachListener.html">FragmentOnAttachListener</a></code> that was previously added via <code><a href="/reference/androidx/fragment/app/FragmentManager.html#addFragmentOnAttachListener(androidx.fragment.app.FragmentOnAttachListener)">addFragmentOnAttachListener</a></code>. It will no longer get called when a new Fragment is attached.</p>
@@ -1190,11 +1303,21 @@
         </div>
       </div>
       <div class="api-item"><a name="removeOnBackStackChangedListener-androidx.fragment.app.FragmentManager.OnBackStackChangedListener-"></a><a name="removeonbackstackchangedlistener"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.1.0</div>
+          </div>
+        </div>
         <h3 class="api-name" id="removeOnBackStackChangedListener(androidx.fragment.app.FragmentManager.OnBackStackChangedListener)">removeOnBackStackChangedListener</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#removeOnBackStackChangedListener(androidx.fragment.app.FragmentManager.OnBackStackChangedListener)">removeOnBackStackChangedListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/FragmentManager.OnBackStackChangedListener.html">FragmentManager.OnBackStackChangedListener</a>&nbsp;listener<br>)</pre>
         <p>Remove a listener that was previously added with <code><a href="/reference/androidx/fragment/app/FragmentManager.html#addOnBackStackChangedListener(androidx.fragment.app.FragmentManager.OnBackStackChangedListener)">addOnBackStackChangedListener</a></code>.</p>
       </div>
       <div class="api-item"><a name="restoreBackStack-java.lang.String-"></a><a name="restorebackstack"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.4.0</div>
+          </div>
+        </div>
         <h3 class="api-name" id="restoreBackStack(java.lang.String)">restoreBackStack</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#restoreBackStack(java.lang.String)">restoreBackStack</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;name)</pre>
         <p>Restores the back stack previously saved via <code><a href="/reference/androidx/fragment/app/FragmentManager.html#saveBackStack(java.lang.String)">saveBackStack</a></code>. This will result in all of the transactions that made up that back stack to be re-executed, thus re-adding any fragments that were added through those transactions. All state of those fragments will be restored as part of this process. If no state was previously saved with the given name, this operation does nothing. </p>
@@ -1222,6 +1345,11 @@
         </div>
       </div>
       <div class="api-item"><a name="saveBackStack-java.lang.String-"></a><a name="savebackstack"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.4.0</div>
+          </div>
+        </div>
         <h3 class="api-name" id="saveBackStack(java.lang.String)">saveBackStack</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#saveBackStack(java.lang.String)">saveBackStack</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;name)</pre>
         <p>Save the back stack. While this functions similarly to <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(java.lang.String,int)">popBackStack</a></code>, it <b>does not</b> throw away the state of any fragments that were added through those transactions. Instead, the back stack that is saved by this method can later be restored with its state in tact. </p>
@@ -1249,6 +1377,11 @@
         </div>
       </div>
       <div class="api-item"><a name="saveFragmentInstanceState-androidx.fragment.app.Fragment-"></a><a name="savefragmentinstancestate"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.1.0</div>
+          </div>
+        </div>
         <h3 class="api-name" id="saveFragmentInstanceState(androidx.fragment.app.Fragment)">saveFragmentInstanceState</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="/reference/androidx/fragment/app/Fragment.SavedState.html">Fragment.SavedState</a>&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#saveFragmentInstanceState(androidx.fragment.app.Fragment)">saveFragmentInstanceState</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;fragment)</pre>
         <p>Save the current instance state of the given Fragment. This can be used later when creating a new instance of the Fragment and adding it to the fragment manager, to have it create itself to match the current state returned here. Note that there are limits on how this can be used: </p>
@@ -1301,6 +1434,11 @@
         </div>
       </div>
       <div class="api-item"><a name="setFragmentFactory-androidx.fragment.app.FragmentFactory-"></a><a name="setfragmentfactory"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.1.0</div>
+          </div>
+        </div>
         <h3 class="api-name" id="setFragmentFactory(androidx.fragment.app.FragmentFactory)">setFragmentFactory</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#setFragmentFactory(androidx.fragment.app.FragmentFactory)">setFragmentFactory</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/FragmentFactory.html">FragmentFactory</a>&nbsp;fragmentFactory)</pre>
         <p>Set a <code><a href="/reference/androidx/fragment/app/FragmentFactory.html">FragmentFactory</a></code> for this FragmentManager that will be used to create new Fragment instances from this point onward. </p>
@@ -1347,6 +1485,11 @@
         </div>
       </div>
       <div class="api-item"><a name="setFragmentResult(java.lang.String, android.os.Bundle)"></a><a name="setFragmentResult-java.lang.String-android.os.Bundle-"></a><a name="setfragmentresult"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.7.0-alpha02</div>
+          </div>
+        </div>
         <h3 class="api-name" id="setFragmentResult(java.lang.String,android.os.Bundle)">setFragmentResult</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#setFragmentResult(java.lang.String,android.os.Bundle)">setFragmentResult</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;requestKey,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>&nbsp;result)</pre>
         <p>Sets the given result for the requestKey. This result will be delivered to a <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> that is called given to <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a></code> with the same requestKey. If no <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> with the same key is set or the Lifecycle associated with the listener is not at least <code><a href="/reference/androidx/lifecycle/Lifecycle.State.STARTED.html">STARTED</a></code>, the result is stored until one becomes available, or <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#clearFragmentResult(java.lang.String)">clearFragmentResult</a></code> is called with the same requestKey.</p>
@@ -1379,6 +1522,11 @@
         </div>
       </div>
       <div class="api-item"><a name="setFragmentResultListener(java.lang.String, androidx.lifecycle.LifecycleOwner, androidx.fragment.app.FragmentResultListener)"></a><a name="setFragmentResultListener-java.lang.String-androidx.lifecycle.LifecycleOwner-androidx.fragment.app.FragmentResultListener-"></a><a name="setfragmentresultlistener"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.7.0-alpha02</div>
+          </div>
+        </div>
         <h3 class="api-name" id="setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;requestKey,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;lifecycleOwner,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a>&nbsp;listener<br>)</pre>
         <p>Sets the <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> for a given requestKey. Once the given <code><a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code> is at least in the <code><a href="/reference/androidx/lifecycle/Lifecycle.State.STARTED.html">STARTED</a></code> state, any results set by <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResult(java.lang.String,android.os.Bundle)">setFragmentResult</a></code> using the same requestKey will be delivered to the <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html#onFragmentResult(java.lang.String,android.os.Bundle)">callback</a></code>. The callback will remain active until the LifecycleOwner reaches the <code><a href="/reference/androidx/lifecycle/Lifecycle.State.DESTROYED.html">DESTROYED</a></code> state or <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#clearFragmentResultListener(java.lang.String)">clearFragmentResultListener</a></code> is called with the same requestKey.</p>
@@ -1417,6 +1565,11 @@
         </div>
       </div>
       <div class="api-item"><a name="setStrictModePolicy-androidx.fragment.app.strictmode.FragmentStrictMode.Policy-"></a><a name="setstrictmodepolicy"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.4.0</div>
+          </div>
+        </div>
         <h3 class="api-name" id="setStrictModePolicy(androidx.fragment.app.strictmode.FragmentStrictMode.Policy)">setStrictModePolicy</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#setStrictModePolicy(androidx.fragment.app.strictmode.FragmentStrictMode.Policy)">setStrictModePolicy</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.html">FragmentStrictMode.Policy</a>&nbsp;policy)</pre>
         <p>Sets the policy for what actions should be detected, as well as the penalty if such actions occur. The <code><a href="/reference/androidx/fragment/app/Fragment.html#getChildFragmentManager()">child FragmentManager</a></code> of all Fragments in this FragmentManager will also use this policy if one is not explicitly set. Pass null to clear the policy.</p>
@@ -1443,10 +1596,20 @@
         </div>
       </div>
       <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.7.0-alpha02</div>
+          </div>
+        </div>
         <h3 class="api-name" id="toString()">toString</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#toString()">toString</a>()</pre>
       </div>
       <div class="api-item"><a name="unregisterFragmentLifecycleCallbacks-androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks-"></a><a name="unregisterfragmentlifecyclecallbacks"></a>
+        <div id="metadata-info-block">
+          <div id="version-metadata">
+            <div id="added-in">Added in 1.1.0</div>
+          </div>
+        </div>
         <h3 class="api-name" id="unregisterFragmentLifecycleCallbacks(androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks)">unregisterFragmentLifecycleCallbacks</h3>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#unregisterFragmentLifecycleCallbacks(androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks)">unregisterFragmentLifecycleCallbacks</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html">FragmentManager.FragmentLifecycleCallbacks</a>&nbsp;cb<br>)</pre>
         <p>Unregisters a previously registered <code><a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html">FragmentLifecycleCallbacks</a></code>. If the callback was not previously registered this call has no effect. All registered callbacks will be automatically unregistered when this FragmentManager is destroyed.</p>

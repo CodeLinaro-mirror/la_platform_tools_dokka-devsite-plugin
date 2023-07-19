@@ -73,7 +73,8 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         kotlinDocsPath: String?,
         includedHeadTagsPathJava: String? = "_shared/_reference-head-tags.html",
         includedHeadTagsPathKotlin: String? = "_shared/_reference-head-tags.html",
-        useAndroidxBaseSourceLink: Boolean = false
+        useAndroidxBaseSourceLink: Boolean = false,
+        versionMetadataFilesnames: List<String>? = null
     ): DokkaConfigurationImpl {
         sources.forEach { check(it.isDirectory) { "$it does not exist or is not a directory" } }
         val externalLinks = mapOf(
@@ -111,7 +112,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
                         excludedPackagesForJava = null,
                         excludedPackagesForKotlin = null,
                         libraryMetadataFilename = null,
-                        versionMetadataFilenames = null,
+                        versionMetadataFilenames = versionMetadataFilesnames,
                         javaDocsPath = javaDocsPath,
                         kotlinDocsPath = kotlinDocsPath,
                         includedHeadTagsPathJava = includedHeadTagsPathJava,
@@ -359,10 +360,18 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         artifactNames: List<String>,
         samples: Boolean = false,
         includeFiles: List<String> = emptyList(),
-        useAndroidxBaseSourceLink: Boolean = true
+        useAndroidxBaseSourceLink: Boolean = true,
+        versionMetadata: Boolean = false
     ) {
         val outputBaseDir = "testData/$testName/docs"
         val samplesBaseDir = "testData/$testName/samples"
+
+        val versionMetadataBaseDir = "testData/$testName/versionMetadata"
+        val versionMetadataFiles = if (versionMetadata) {
+            File(versionMetadataBaseDir).listFiles()?.map { it.absolutePath }
+        } else {
+            null
+        }
 
         val configuration = makeExternalConfiguration(
             artifactNames.map { File("build/explodedSources/$it/").absoluteFile },
@@ -372,7 +381,8 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             projectPath = "androidx",
             javaDocsPath = "",
             kotlinDocsPath = "kotlin",
-            useAndroidxBaseSourceLink = useAndroidxBaseSourceLink
+            useAndroidxBaseSourceLink = useAndroidxBaseSourceLink,
+            versionMetadataFilesnames = versionMetadataFiles
         )
 
         val writerPlugin = TestOutputWriterPlugin()

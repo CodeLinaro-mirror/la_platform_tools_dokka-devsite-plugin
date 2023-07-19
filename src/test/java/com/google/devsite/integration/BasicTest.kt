@@ -44,7 +44,8 @@ class BasicTest : IntegrationTestBase() {
         validatePrebuilts(
             testName = "fragment",
             artifactNames = listOf("fragment"),
-            samples = true
+            samples = true,
+            versionMetadata = true
         )
     }
 
