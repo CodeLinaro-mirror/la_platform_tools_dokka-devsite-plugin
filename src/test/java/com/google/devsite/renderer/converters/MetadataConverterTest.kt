@@ -26,6 +26,7 @@ import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -105,6 +106,107 @@ internal class MetadataConverterTest(
 
         assertThat(versionMetadata!!.data.addedIn?.data?.name).isEqualTo("1.2.3")
         assertThat(versionMetadata.data.deprecatedIn).isNull()
+    }
+
+    @Test
+    fun `API version for companion is generated correctly`() {
+        // Companions appear in the metadata as both a class and a field of the containing class
+        val metadata = mapOf(
+            "androidx.example.Foo" to ClassVersionMetadata(
+                className = "androidx.example.Foo",
+                addedIn = "1.2.3",
+                fieldVersions = mapOf(
+                    "Companion" to ClassVersionMetadata.FieldVersionMetadata(
+                        fieldName = "Companion",
+                        addedIn = "1.2.3"
+                    )
+                )
+            ),
+            "androidx.example.Foo.Companion" to ClassVersionMetadata(
+                className = "androidx.example.Foo.Companion",
+                addedIn = "1.2.3",
+                methodVersions = mapOf(
+                    "bar()" to ClassVersionMetadata.MethodVersionMetadata(
+                        methodName = "bar()",
+                        addedIn = "1.2.3"
+                    ),
+                    "getFoo()" to ClassVersionMetadata.MethodVersionMetadata(
+                        methodName = "getFoo()",
+                        addedIn = "1.2.3"
+                    ),
+                )
+            )
+        )
+        val module = """
+            |class Foo {
+            |    companion object {
+            |        val foo = 3
+            |        fun bar(): Unit {}
+            |    }
+            |}
+        """.render()
+
+        val companion = module.classlike("Companion")!!
+        val property = companion.properties.single()
+        val function = companion.functions.single()
+
+        val metadataComponents = listOf(
+            module.metadata(companion, versionMetadataMap = metadata),
+            module.metadata(property, versionMetadataMap = metadata),
+            module.metadata(function, versionMetadataMap = metadata)
+        )
+
+        for (metadataComponent in metadataComponents) {
+            val versionMetadata = metadataComponent.data.versionMetadata
+            assertThat(versionMetadata).isNotNull()
+
+            assertThat(versionMetadata!!.data.addedIn?.data?.name).isEqualTo("1.2.3")
+            assertThat(versionMetadata.data.deprecatedIn).isNull()
+        }
+    }
+
+    @Ignore("b/292106855")
+    @Test
+    fun `API version for @JvmName items is generated correctly`() {
+        val metadata = mapOf(
+            "androidx.example.Foo" to ClassVersionMetadata(
+                className = "androidx.example.Foo",
+                addedIn = "1.2.3",
+                methodVersions = mapOf(
+                    "renamedMethod()" to ClassVersionMetadata.MethodVersionMetadata(
+                        methodName = "renamedMethod()",
+                        addedIn = "1.2.3"
+                    ),
+                    "renamedGetter()" to ClassVersionMetadata.MethodVersionMetadata(
+                        methodName = "renamedGetter()",
+                        addedIn = "1.2.3"
+                    )
+                )
+            )
+        )
+        val module = """
+            |class Foo {
+            |    @JvmName("renamedMethod")
+            |    fun originalMethod(): Unit {}
+            |
+            |    @get:JvmName("renamedGetter")
+            |    val originalProperty = 3
+            |}
+        """.render()
+
+        // Dackka's version of these methods won't be renamed
+        val metadataComponents = listOf(
+            module.metadataForMethod("originalMethod", versionMetadataMap = metadata),
+            module.metadataForProperty("originalProperty", versionMetadataMap = metadata)
+        )
+
+        for (metadataComponent in metadataComponents) {
+            val versionMetadata = metadataComponent.data.versionMetadata
+            assertThat(versionMetadata).isNotNull()
+
+            assertThat(versionMetadata!!.data.addedIn?.data?.name).isEqualTo("1.2.3")
+            assertThat(versionMetadata.data.deprecatedIn).isNull()
+        }
     }
 
     @Test
@@ -257,6 +359,49 @@ internal class MetadataConverterTest(
 
         assertThat(versionMetadata!!.data.addedIn?.data?.name).isEqualTo("1.2.3")
         assertThat(versionMetadata.data.deprecatedIn?.data?.name).isEqualTo("2.3.4")
+    }
+
+    @Ignore
+    @Test
+    fun `API versions for extension functions and properties are generated correctly`() {
+        // Extension functions/properties will appear as functions with receivers
+        val metadata = mapOf(
+            "androidx.example.TestKt" to ClassVersionMetadata(
+                className = "androidx.example.TestKt",
+                addedIn = "1.2.3",
+                methodVersions = mapOf(
+                    "extensionFun(androidx.example.Foo)" to
+                        ClassVersionMetadata.MethodVersionMetadata(
+                            methodName = "extensionFun(androidx.example.Foo)",
+                            addedIn = "1.2.3"
+                        ),
+                    "getExtensionVal(androidx.example.Foo)" to
+                        ClassVersionMetadata.MethodVersionMetadata(
+                            methodName = "foo",
+                            addedIn = "1.2.3"
+                        )
+                )
+            )
+        )
+        val module = """
+            |class Foo
+            |
+            |fun Foo.extensionFun(): Unit {}
+            |val Foo.extensionVal: Int get() = 2
+        """.render()
+
+        val metadataComponents = listOf(
+            module.metadataForMethod("extensionFun", versionMetadataMap = metadata),
+            module.metadataForProperty("extensionVal", versionMetadataMap = metadata)
+        )
+
+        for (metadataComponent in metadataComponents) {
+            val versionMetadata = metadataComponent.data.versionMetadata
+            assertThat(versionMetadata).isNotNull()
+
+            assertThat(versionMetadata!!.data.addedIn?.data?.name).isEqualTo("1.2.3")
+            assertThat(versionMetadata.data.deprecatedIn).isNull()
+        }
     }
 
     private fun DModule.metadataForClasslike(
