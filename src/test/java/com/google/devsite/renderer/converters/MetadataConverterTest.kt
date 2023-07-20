@@ -165,7 +165,6 @@ internal class MetadataConverterTest(
         }
     }
 
-    @Ignore("b/292106855")
     @Test
     fun `API version for @JvmName items is generated correctly`() {
         val metadata = mapOf(

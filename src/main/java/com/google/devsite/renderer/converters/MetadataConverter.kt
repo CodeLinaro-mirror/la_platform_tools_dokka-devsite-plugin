@@ -220,6 +220,9 @@ internal class MetadataConverter(
          */
         @VisibleForTesting
         fun apiSinceMethodSignature(function: DFunction): String {
+            // The metadata uses the Java API, so use the JvmName if it exists
+            val functionName = function.jvmName() ?: function.name
+
             val paramTypes = function.parameters.mapNotNull { param ->
 
                 // possiblyAsJava() is needed here as Metalava generates a Java view of types
@@ -231,7 +234,7 @@ internal class MetadataConverter(
                 }
             }.joinToString(",")
 
-            return "${function.name}($paramTypes)"
+            return "$functionName($paramTypes)"
         }
     }
 }
