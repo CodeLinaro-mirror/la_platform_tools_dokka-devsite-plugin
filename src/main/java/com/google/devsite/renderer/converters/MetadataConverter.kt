@@ -135,7 +135,7 @@ internal class MetadataConverter(
     private fun DFunction.findMatchingVersionMetadata(
         releaseNotesUrl: String?
     ): VersionMetadataComponent? {
-        val classVersionMetadata = docsHolder.versionMetadataMap[dri.fullName]
+        val classVersionMetadata = docsHolder.versionMetadataMap[containingClassName()]
         val methodVersionMetadata = classVersionMetadata?.methodVersions?.get(
             apiSinceMethodSignature(this)
         )
@@ -158,9 +158,7 @@ internal class MetadataConverter(
     private fun DProperty.findMatchingVersionMetadata(
         releaseNotesUrl: String?
     ): VersionMetadataComponent? {
-        // TODO(b/281727318): handle top-level properties for kotlin display (will need synthetic
-        // class name
-        val classVersionMetadata = docsHolder.versionMetadataMap[dri.fullName]
+        val classVersionMetadata = docsHolder.versionMetadataMap[containingClassName()]
         val propertyVersionMetadata = classVersionMetadata?.fieldVersions?.get(name)
 
         return propertyVersionMetadata?.let {
@@ -171,6 +169,14 @@ internal class MetadataConverter(
             )
         } ?: getter?.findMatchingVersionMetadata(releaseNotesUrl)
     }
+
+    /**
+     * Constructs the fully-qualified name for the containing class of the [Documentable] in the
+     * Java view of the API. This means if the [Documentable] is a top-level function or property,
+     * a synthetic class name is used.
+     */
+    private fun <T> T.containingClassName(): String where T : WithSources, T : Documentable =
+        "${dri.packageName}.${dri.classNames ?: nameForSyntheticClass(this)}"
 
     /**
      * Finds the source entries associated with the classlike. Returns null and logs a warning
