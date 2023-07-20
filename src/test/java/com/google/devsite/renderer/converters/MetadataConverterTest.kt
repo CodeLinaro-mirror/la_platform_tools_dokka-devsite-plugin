@@ -137,15 +137,33 @@ internal class MetadataConverterTest(
     }
 
     @Test
-    fun `apiSinceMethodSignature formats method to match apiSince metadata string`() {
-        val fun1 = """
+    fun `apiSinceMethodSignature formats Java method to match apiSince metadata string`() {
+        val functions = """
+            |public class Foo {
+            |    public void bar() {}
+            |    public void bar(String param1) {}
+            |}
+        """.render(java = true).functions()!!
+        assertThat(MetadataConverter.apiSinceMethodSignature(functions[0])).isEqualTo("bar()")
+        assertThat(MetadataConverter.apiSinceMethodSignature(functions[1]))
+            .isEqualTo("bar(java.lang.String)")
+
+        // TODO (b/292023516): add more test cases
+    }
+
+    @Test
+    fun `apiSinceMethodSignature formats Kotlin function to match apiSince metadata string`() {
+        val functions = """
             |class Foo {
             |    fun bar() {}
+            |    fun bar(param1: String) {}
             |}
-        """.render().functions()!!.first()
-        assertThat(MetadataConverter.apiSinceMethodSignature(fun1)).isEqualTo("bar()")
+        """.render().functions()!!
+        assertThat(MetadataConverter.apiSinceMethodSignature(functions[0])).isEqualTo("bar()")
+        assertThat(MetadataConverter.apiSinceMethodSignature(functions[1]))
+            .isEqualTo("bar(kotlin.String)")
 
-        // TODO: add more test cases
+        // TODO (b/292023516): add more test cases
     }
 
     @Test

@@ -24,6 +24,7 @@ import com.google.devsite.components.symbols.VersionMetadataComponent
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.util.LibraryMetadata
 import org.jetbrains.dokka.DokkaConfiguration
+import org.jetbrains.dokka.base.signatures.KotlinSignatureUtils.driOrNull
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DProperty
@@ -219,7 +220,13 @@ internal class MetadataConverter(
          */
         @VisibleForTesting
         fun apiSinceMethodSignature(function: DFunction): String {
-            return "${function.name}()"
+            val paramTypes = function.parameters.mapNotNull { param ->
+                param.type.driOrNull?.let {
+                    "${it.packageName}.${it.classNames}"
+                }
+            }.joinToString(",")
+
+            return "${function.name}($paramTypes)"
         }
     }
 }
