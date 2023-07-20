@@ -26,7 +26,6 @@ import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -372,7 +371,6 @@ internal class MetadataConverterTest(
         assertThat(versionMetadata.data.deprecatedIn?.data?.name).isEqualTo("2.3.4")
     }
 
-    @Ignore
     @Test
     fun `API versions for extension functions and properties are generated correctly`() {
         // Extension functions/properties will appear as functions with receivers

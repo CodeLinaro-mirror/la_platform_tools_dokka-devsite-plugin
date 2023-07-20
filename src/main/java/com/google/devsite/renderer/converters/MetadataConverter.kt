@@ -229,8 +229,14 @@ internal class MetadataConverter(
             // The metadata uses the Java API, so use the JvmName if it exists
             val functionName = function.jvmName() ?: function.name
 
-            val paramTypes = function.parameters.mapNotNull { param ->
+            // The metadata uses the Java API, move the receiver to a parameter
+            val parameters = if (function.receiver != null) {
+                function.convertReceiverForJava().parameters
+            } else {
+                function.parameters
+            }
 
+            val paramTypes = parameters.mapNotNull { param ->
                 // possiblyAsJava() is needed here as Metalava generates a Java view of types
                 //
                 // Example: both java.lang.String and kotlin.String are represented as
