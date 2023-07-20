@@ -219,6 +219,52 @@ internal class DocTagConverterTest(
         }
     }
 
+    /**
+     * In particular, this is testing "i.e. UppercaseLetter".
+     */
+    @Test
+    fun `More tests for ie based on androidx biometric`() {
+        val module = """
+            |public class BiometricManager {
+            |   public interface Authenticators {
+            |       /**
+            |        * The non-biometric credential used to secure the device (i.e. PIN, pattern, or password).
+            |        * This should typically only be used in combination with a biometric auth type, such as
+            |        * {@link #BIOMETRIC_WEAK}.
+            |        */
+            |       int DEVICE_CREDENTIAL = 1 << 15;
+            |   }
+            |}
+        """.render(java = true)
+
+        val summary = module.description(doc = { this.property(name = "DEVICE_CREDENTIAL")!! })
+        assertThat(summary.data.summary).isTrue()
+        assertThat(summary.render()).isEqualTo(
+            """
+<body>
+  <p>The non-biometric credential used to secure the device (i.e. PIN, pattern, or password).</p>
+</body>
+            """.trim()
+        )
+
+        val detail = module.documentation(doc = { this.property(name = "DEVICE_CREDENTIAL")!! })
+            .item() as DescriptionComponent
+        assertThat(detail.data.summary).isFalse()
+        assertThat(detail.render()).isEqualTo(
+            """
+<body>
+  <p>The non-biometric credential used to secure the device (i.e. PIN, pattern, or password). This should typically only be used in combination with a biometric auth type, such as BIOMETRIC_WEAK.</p>
+</body>
+        """.trim()
+        )
+
+        val dComponents = detail.data.components
+        val sComponents = summary.data.components
+        for (components in listOf(dComponents, sComponents)) {
+            assertThat(components.size).isEqualTo(1)
+        }
+    }
+
     @Test // b/192714584
     fun `th tag can be nested in a tr tag (with a thead tag)`() {
         val module = """

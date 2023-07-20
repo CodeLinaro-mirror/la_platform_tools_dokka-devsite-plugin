@@ -214,9 +214,9 @@ internal data class DefaultDescriptionComponent(
      * Uses similar criteria to the above function.
      */
     private fun String.containsSentenceBreakAt(index: Int): Boolean {
+        if (doesntEnd.any { this.subSequence(0, index + 1).endsWith(it) }) return false
         if (periodSpaceCapital.matchesAt(this, index)) return true
         if (!periodSpaceNonLowercase.matchesAt(this, index)) return false
-        if (doesntEnd.any { this.subSequence(0, index + 1).endsWith(it) }) return false
         return true
     }
 

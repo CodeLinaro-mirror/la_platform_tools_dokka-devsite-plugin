@@ -59,6 +59,7 @@ import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DModule
+import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.pages.ModulePageNode
 import org.jetbrains.dokka.pages.RootPageNode
 import org.jetbrains.dokka.plugability.DokkaContext
@@ -129,11 +130,16 @@ internal abstract class ConverterTestBase(
             ?: classlike()?.functions?.ifEmpty { null }
             ?: classlike()?.classlikes?.single()?.functions // Go down another layer for java
 
-    protected fun DModule.property(name: String? = null) =
+    protected fun DModule.property(name: String? = "foo") =
         packages.single().properties.singleOrNull { it.name == name }
-            ?: classlike()?.properties?.singleOrNull { it.name == name }
+            ?: classlike()?.property(name)
             ?: packages.single().properties.singleOrNull()
-            ?: classlike()?.properties?.singleOrNull()
+
+    private fun DClasslike.property(name: String? = "foo"): DProperty? =
+        properties.singleOrNull { it.name == name }
+            ?: classlikes.map { it.property(name) }.firstOrNull()
+            ?: properties.singleOrNull()
+            ?: classlikes.flatMap { it.properties }.singleOrNull()
 
     protected fun DModule.properties() =
         packages.single().properties.ifEmpty { null }
