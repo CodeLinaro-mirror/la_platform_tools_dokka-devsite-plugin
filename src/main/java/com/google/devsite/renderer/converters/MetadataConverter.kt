@@ -221,7 +221,12 @@ internal class MetadataConverter(
         @VisibleForTesting
         fun apiSinceMethodSignature(function: DFunction): String {
             val paramTypes = function.parameters.mapNotNull { param ->
-                param.type.driOrNull?.let {
+
+                // possiblyAsJava() is needed here as Metalava generates a Java view of types
+                //
+                // Example: both java.lang.String and kotlin.String are represented as
+                // java.lang.String
+                param.type.driOrNull?.possiblyAsJava()?.let {
                     "${it.packageName}.${it.classNames}"
                 }
             }.joinToString(",")

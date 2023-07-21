@@ -161,7 +161,7 @@ internal class MetadataConverterTest(
         """.render().functions()!!
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[0])).isEqualTo("bar()")
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[1]))
-            .isEqualTo("bar(kotlin.String)")
+            .isEqualTo("bar(java.lang.String)")
 
         // TODO (b/292023516): add more test cases
     }
