@@ -366,21 +366,33 @@ class MyModifierNode : DelegatingNode() {
     <div class="list">
       <h2>Public constructors</h2>
       <div class="api-item"><a name="DelegatingNode--"></a><a name="delegatingnode"></a>
-        <h3 class="api-name" id="DelegatingNode()">DelegatingNode</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="DelegatingNode()">DelegatingNode</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/node/DelegatingNode.html#DelegatingNode()">DelegatingNode</a>()</pre>
       </div>
     </div>
     <div class="list">
       <h2>Protected methods</h2>
       <div class="api-item"><a name="delegate-androidx.compose.ui.node.DelegatableNode-"></a><a name="delegate"></a>
-        <h3 class="api-name" id="delegate(androidx.compose.ui.node.DelegatableNode)">delegate</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="delegate(androidx.compose.ui.node.DelegatableNode)">delegate</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">protected&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&gt; <a href="/reference/androidx/compose/ui/node/DelegatingNode.html#delegate(androidx.compose.ui.node.DelegatableNode)">delegate</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;delegatableNode)</pre>
         <p>In order to properly delegate work to another <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code>, the delegated instance must be created and returned inside of a <code><a href="/reference/androidx/compose/ui/node/DelegatingNode.html#delegate(androidx.compose.ui.node.DelegatableNode)">delegate</a></code> call. Doing this will ensure that the created node instance follows all of the right lifecycles and is properly discoverable in this position of the node tree.</p>
         <p>By using <code><a href="/reference/androidx/compose/ui/node/DelegatingNode.html#delegate(androidx.compose.ui.node.DelegatableNode)">delegate</a></code>, the <code><a href="/reference/androidx/compose/ui/node/DelegatingNode.html#delegate(androidx.compose.ui.node.DelegatableNode)">delegatableNode</a></code> parameter is returned from this function for convenience.</p>
         <p>This method can be called from within an <code>init</code> block, however the returned delegated node will not be attached until the delegating node is attached. If <code><a href="/reference/androidx/compose/ui/node/DelegatingNode.html#delegate(androidx.compose.ui.node.DelegatableNode)">delegate</a></code> is called after the delegating node is already attached, the returned delegated node will be attached.</p>
       </div>
       <div class="api-item"><a name="undelegate-androidx.compose.ui.node.DelegatableNode-"></a><a name="undelegate"></a>
-        <h3 class="api-name" id="undelegate(androidx.compose.ui.node.DelegatableNode)">undelegate</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="undelegate(androidx.compose.ui.node.DelegatableNode)">undelegate</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">protected&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/node/DelegatingNode.html#undelegate(androidx.compose.ui.node.DelegatableNode)">undelegate</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/node/DelegatableNode.html">DelegatableNode</a>&nbsp;instance)</pre>
         <p>This function expects a node which was passed in to <code><a href="/reference/androidx/compose/ui/node/DelegatingNode.html#delegate(androidx.compose.ui.node.DelegatableNode)">delegate</a></code> for this node, and is currently being delegated to to be passed in as <code><a href="/reference/androidx/compose/ui/node/DelegatingNode.html#undelegate(androidx.compose.ui.node.DelegatableNode)">instance</a></code>. After this function returns, the node will no longer be attached, and will not be an active delegate of this node.</p>
         <p>If <code><a href="/reference/androidx/compose/ui/node/DelegatingNode.html#undelegate(androidx.compose.ui.node.DelegatableNode)">instance</a></code> is not an active delegate of this node, this function will throw an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code>.</p>

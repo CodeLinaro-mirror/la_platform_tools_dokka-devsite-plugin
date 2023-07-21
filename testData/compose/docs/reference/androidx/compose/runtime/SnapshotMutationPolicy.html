@@ -88,12 +88,20 @@ try {
     <div class="list">
       <h2>Public methods</h2>
       <div class="api-item"><a name="equivalent(kotlin.Any, kotlin.Any)"></a><a name="equivalent-kotlin.Any-kotlin.Any-"></a><a name="equivalent"></a>
-        <h3 class="api-name" id="equivalent(kotlin.Any,kotlin.Any)">equivalent</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="equivalent(kotlin.Any,kotlin.Any)">equivalent</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/SnapshotMutationPolicy.html#equivalent(kotlin.Any,kotlin.Any)">equivalent</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;a,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;b)</pre>
         <p>Determine if setting a state value's are equivalent and should be treated as equal. If <code><a href="/reference/androidx/compose/runtime/SnapshotMutationPolicy.html#equivalent(kotlin.Any,kotlin.Any)">equivalent</a></code> returns <code>true</code> the new value is not considered a change.</p>
       </div>
       <div class="api-item"><a name="merge(kotlin.Any, kotlin.Any, kotlin.Any)"></a><a name="merge-kotlin.Any-kotlin.Any-kotlin.Any-"></a><a name="merge"></a>
-        <h3 class="api-name" id="merge(kotlin.Any,kotlin.Any,kotlin.Any)">merge</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="merge(kotlin.Any,kotlin.Any,kotlin.Any)">merge</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">default&nbsp;T&nbsp;<a href="/reference/androidx/compose/runtime/SnapshotMutationPolicy.html#merge(kotlin.Any,kotlin.Any,kotlin.Any)">merge</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;previous,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;current,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;applied)</pre>
         <p>Merge conflicting changes in snapshots. This is only called if <code><a href="/reference/androidx/compose/runtime/SnapshotMutationPolicy.html#merge(kotlin.Any,kotlin.Any,kotlin.Any)">current</a></code> and <code><a href="/reference/androidx/compose/runtime/SnapshotMutationPolicy.html#merge(kotlin.Any,kotlin.Any,kotlin.Any)">applied</a></code> are not <code><a href="/reference/androidx/compose/runtime/SnapshotMutationPolicy.html#equivalent(kotlin.Any,kotlin.Any)">equivalent</a></code>. If a valid merged value can be calculated then it should be returned.</p>
         <p>For example, if the state object holds an immutable data class with multiple fields, and <code><a href="/reference/androidx/compose/runtime/SnapshotMutationPolicy.html#merge(kotlin.Any,kotlin.Any,kotlin.Any)">applied</a></code> has changed fields that are unmodified by <code><a href="/reference/androidx/compose/runtime/SnapshotMutationPolicy.html#merge(kotlin.Any,kotlin.Any,kotlin.Any)">current</a></code> it might be valid to return a new copy of the data class that combines that changes from both <code><a href="/reference/androidx/compose/runtime/SnapshotMutationPolicy.html#merge(kotlin.Any,kotlin.Any,kotlin.Any)">current</a></code> and <code><a href="/reference/androidx/compose/runtime/SnapshotMutationPolicy.html#merge(kotlin.Any,kotlin.Any,kotlin.Any)">applied</a></code> allowing a snapshot to apply that would have otherwise failed.</p>

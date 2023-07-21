@@ -167,7 +167,11 @@
     <div class="list">
       <h2>Public methods</h2>
       <div class="api-item"><a name="-androidx.compose.ui.Modifier-.captionBarPadding--"></a><a name="captionbarpadding"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.Modifier).captionBarPadding()">captionBarPadding</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.Modifier).captionBarPadding()">captionBarPadding</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/foundation/layout/WindowInsetsPaddingKt.html#(androidx.compose.ui.Modifier).captionBarPadding()">captionBarPadding</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver)</pre>
         <p>Adds padding to accommodate the <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets.Companion).captionBar()">caption bar</a></code> insets.</p>
         <p>Any insets consumed by other insets padding modifiers or <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</a></code> on a parent layout will be excluded from the padding. <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets.Companion).captionBar()">WindowInsets.Companion.captionBar</a></code> will be <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumed</a></code> for child layouts as well.</p>
@@ -191,7 +195,11 @@ class SampleActivity : ComponentActivity() {
 }</pre>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.Modifier-.consumeWindowInsets-androidx.compose.foundation.layout.WindowInsets-"></a><a name="consumewindowinsets"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/foundation/layout/WindowInsetsPaddingKt.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>&nbsp;insets<br>)</pre>
         <p>Consume insets that haven't been consumed yet by other insets Modifiers similar to <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets)">windowInsetsPadding</a></code> without adding any padding.</p>
         <p>This can be useful when content offsets are provided by <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets).asPaddingValues()">WindowInsets.asPaddingValues</a></code>. This should be used further down the hierarchy than the <code><a href="/reference/androidx/compose/foundation/layout/PaddingValues.html">PaddingValues</a></code> is used so that the values aren't consumed before the padding is added.</p>
@@ -217,7 +225,11 @@ class SampleActivity : ComponentActivity() {
 }</pre>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.Modifier-.consumeWindowInsets-androidx.compose.foundation.layout.PaddingValues-"></a><a name="consumewindowinsets"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.PaddingValues)">consumeWindowInsets</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.PaddingValues)">consumeWindowInsets</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/foundation/layout/ExperimentalLayoutApi.html">ExperimentalLayoutApi</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/foundation/layout/WindowInsetsPaddingKt.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.PaddingValues)">consumeWindowInsets</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/layout/PaddingValues.html">PaddingValues</a>&nbsp;paddingValues<br>)</pre>
         <p>Consume <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.PaddingValues)">paddingValues</a></code> as insets as if the padding was added irrespective of insets. Layouts further down the hierarchy that use <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets)">windowInsetsPadding</a></code>, safeContentPadding, and other insets padding Modifiers won't pad for the values that <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.PaddingValues)">paddingValues</a></code> provides. This can be useful when content offsets are provided by layout rather than <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets)">windowInsetsPadding</a></code> modifiers.</p>
         <p>This method consumes all of <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.PaddingValues)">paddingValues</a></code> in addition to whatever has been consumed by other <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets)">windowInsetsPadding</a></code> modifiers by ancestors. <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</a></code> accepting a <code><a href="/reference/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> argument ensures that its insets are consumed and doesn't consume more if they have already been consumed by ancestors.</p>
@@ -248,17 +260,29 @@ class SampleActivity : ComponentActivity() {
 }</pre>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.Modifier-.consumedWindowInsets-androidx.compose.foundation.layout.WindowInsets-"></a><a name="consumedwindowinsets"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.Modifier).consumedWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumedWindowInsets</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.Modifier).consumedWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumedWindowInsets</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/foundation/layout/ExperimentalLayoutApi.html">ExperimentalLayoutApi</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<span><del><a href="/reference/androidx/compose/foundation/layout/WindowInsetsPaddingKt.html#(androidx.compose.ui.Modifier).consumedWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumedWindowInsets</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>&nbsp;insets<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>Use consumeWindowInsets</aside>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.Modifier-.consumedWindowInsets-androidx.compose.foundation.layout.PaddingValues-"></a><a name="consumedwindowinsets"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.Modifier).consumedWindowInsets(androidx.compose.foundation.layout.PaddingValues)">consumedWindowInsets</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.Modifier).consumedWindowInsets(androidx.compose.foundation.layout.PaddingValues)">consumedWindowInsets</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/foundation/layout/ExperimentalLayoutApi.html">ExperimentalLayoutApi</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<span><del><a href="/reference/androidx/compose/foundation/layout/WindowInsetsPaddingKt.html#(androidx.compose.ui.Modifier).consumedWindowInsets(androidx.compose.foundation.layout.PaddingValues)">consumedWindowInsets</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/layout/PaddingValues.html">PaddingValues</a>&nbsp;paddingValues<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>Use consumeWindowInsets</aside>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.Modifier-.displayCutoutPadding--"></a><a name="displaycutoutpadding"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.Modifier).displayCutoutPadding()">displayCutoutPadding</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.Modifier).displayCutoutPadding()">displayCutoutPadding</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/foundation/layout/WindowInsetsPaddingKt.html#(androidx.compose.ui.Modifier).displayCutoutPadding()">displayCutoutPadding</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver)</pre>
         <p>Adds padding to accommodate the <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets.Companion).displayCutout()">display cutout</a></code>.</p>
         <p>Any insets consumed by other insets padding modifiers or <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</a></code> on a parent layout will be excluded from the padding. <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets.Companion).displayCutout()">WindowInsets.Companion.displayCutout</a></code> will be <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumed</a></code> for child layouts as well.</p>
@@ -292,7 +316,11 @@ class SampleActivity : ComponentActivity() {
 }</pre>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.Modifier-.imePadding--"></a><a name="imepadding"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.Modifier).imePadding()">imePadding</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.Modifier).imePadding()">imePadding</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/foundation/layout/WindowInsetsPaddingKt.html#(androidx.compose.ui.Modifier).imePadding()">imePadding</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver)</pre>
         <p>Adds padding to accommodate the <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets.Companion).ime()">ime</a></code> insets.</p>
         <p>Any insets consumed by other insets padding modifiers or <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</a></code> on a parent layout will be excluded from the padding. <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets.Companion).ime()">WindowInsets.Companion.ime</a></code> will be <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumed</a></code> for child layouts as well.</p>
@@ -323,7 +351,11 @@ class SampleActivity : ComponentActivity() {
 }</pre>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.Modifier-.mandatorySystemGesturesPadding--"></a><a name="mandatorysystemgesturespadding"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.Modifier).mandatorySystemGesturesPadding()">mandatorySystemGesturesPadding</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.Modifier).mandatorySystemGesturesPadding()">mandatorySystemGesturesPadding</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/foundation/layout/WindowInsetsPaddingKt.html#(androidx.compose.ui.Modifier).mandatorySystemGesturesPadding()">mandatorySystemGesturesPadding</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver)</pre>
         <p>Adds padding to accommodate the <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets.Companion).mandatorySystemGestures()">mandatory system gestures</a></code> insets.</p>
         <p>Any insets consumed by other insets padding modifiers or <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</a></code> on a parent layout will be excluded from the padding. <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets.Companion).mandatorySystemGestures()">WindowInsets.Companion.mandatorySystemGestures</a></code> will be <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumed</a></code> for child layouts as well.</p>
@@ -359,7 +391,11 @@ class SampleActivity : ComponentActivity() {
 }</pre>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.Modifier-.navigationBarsPadding--"></a><a name="navigationbarspadding"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.Modifier).navigationBarsPadding()">navigationBarsPadding</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.Modifier).navigationBarsPadding()">navigationBarsPadding</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/foundation/layout/WindowInsetsPaddingKt.html#(androidx.compose.ui.Modifier).navigationBarsPadding()">navigationBarsPadding</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver)</pre>
         <p>Adds padding to accommodate the <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets.Companion).navigationBars()">navigation bars</a></code> insets.</p>
         <p>Any insets consumed by other insets padding modifiers or <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</a></code> on a parent layout will be excluded from the padding. <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets.Companion).navigationBars()">WindowInsets.Companion.navigationBars</a></code> will be <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumed</a></code> for child layouts as well.</p>
@@ -393,7 +429,11 @@ class SampleActivity : ComponentActivity() {
 }</pre>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.Modifier-.onConsumedWindowInsetsChanged-kotlin.Function1-"></a><a name="onconsumedwindowinsetschanged"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.Modifier).onConsumedWindowInsetsChanged(kotlin.Function1)">onConsumedWindowInsetsChanged</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.Modifier).onConsumedWindowInsetsChanged(kotlin.Function1)">onConsumedWindowInsetsChanged</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/foundation/layout/WindowInsetsPaddingKt.html#(androidx.compose.ui.Modifier).onConsumedWindowInsetsChanged(kotlin.Function1)">onConsumedWindowInsetsChanged</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</pre>
         <p>Calls <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).onConsumedWindowInsetsChanged(kotlin.Function1)">block</a></code> with the <code><a href="/reference/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> that have been consumed, either by <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</a></code> or one of the padding Modifiers, such as imePadding.</p>
         <pre class="prettyprint lang-kotlin">
@@ -429,7 +469,11 @@ class SampleActivity : ComponentActivity() {
 }</pre>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.Modifier-.safeContentPadding--"></a><a name="safecontentpadding"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.Modifier).safeContentPadding()">safeContentPadding</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.Modifier).safeContentPadding()">safeContentPadding</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/foundation/layout/WindowInsetsPaddingKt.html#(androidx.compose.ui.Modifier).safeContentPadding()">safeContentPadding</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver)</pre>
         <p>Adds padding to accommodate the <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets.Companion).safeContent()">safe content</a></code> insets.</p>
         <p>Any insets consumed by other insets padding modifiers or <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</a></code> on a parent layout will be excluded from the padding. <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets.Companion).safeContent()">WindowInsets.Companion.safeContent</a></code> will be <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumed</a></code> for child layouts as well.</p>
@@ -466,7 +510,11 @@ class SampleActivity : ComponentActivity() {
 }</pre>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.Modifier-.safeDrawingPadding--"></a><a name="safedrawingpadding"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.Modifier).safeDrawingPadding()">safeDrawingPadding</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.Modifier).safeDrawingPadding()">safeDrawingPadding</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/foundation/layout/WindowInsetsPaddingKt.html#(androidx.compose.ui.Modifier).safeDrawingPadding()">safeDrawingPadding</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver)</pre>
         <p>Adds padding to accommodate the <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets.Companion).safeDrawing()">safe drawing</a></code> insets.</p>
         <p>Any insets consumed by other insets padding modifiers or <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</a></code> on a parent layout will be excluded from the padding. <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets.Companion).safeDrawing()">WindowInsets.Companion.safeDrawing</a></code> will be <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumed</a></code> for child layouts as well.</p>
@@ -502,7 +550,11 @@ class SampleActivity : ComponentActivity() {
 }</pre>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.Modifier-.safeGesturesPadding--"></a><a name="safegesturespadding"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.Modifier).safeGesturesPadding()">safeGesturesPadding</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.Modifier).safeGesturesPadding()">safeGesturesPadding</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/foundation/layout/WindowInsetsPaddingKt.html#(androidx.compose.ui.Modifier).safeGesturesPadding()">safeGesturesPadding</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver)</pre>
         <p>Adds padding to accommodate the <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets.Companion).safeGestures()">safe gestures</a></code> insets.</p>
         <p>Any insets consumed by other insets padding modifiers or <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</a></code> on a parent layout will be excluded from the padding. <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets.Companion).safeGestures()">WindowInsets.Companion.safeGestures</a></code> will be <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumed</a></code> for child layouts as well.</p>
@@ -538,7 +590,11 @@ class SampleActivity : ComponentActivity() {
 }</pre>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.Modifier-.statusBarsPadding--"></a><a name="statusbarspadding"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.Modifier).statusBarsPadding()">statusBarsPadding</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.Modifier).statusBarsPadding()">statusBarsPadding</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/foundation/layout/WindowInsetsPaddingKt.html#(androidx.compose.ui.Modifier).statusBarsPadding()">statusBarsPadding</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver)</pre>
         <p>Adds padding to accommodate the <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets.Companion).statusBars()">status bars</a></code> insets.</p>
         <p>Any insets consumed by other insets padding modifiers or <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</a></code> on a parent layout will be excluded from the padding. <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets.Companion).statusBars()">WindowInsets.Companion.statusBars</a></code> will be <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumed</a></code> for child layouts as well.</p>
@@ -572,7 +628,11 @@ class SampleActivity : ComponentActivity() {
 }</pre>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.Modifier-.systemBarsPadding--"></a><a name="systembarspadding"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.Modifier).systemBarsPadding()">systemBarsPadding</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.Modifier).systemBarsPadding()">systemBarsPadding</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/foundation/layout/WindowInsetsPaddingKt.html#(androidx.compose.ui.Modifier).systemBarsPadding()">systemBarsPadding</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver)</pre>
         <p>Adds padding to accommodate the <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets.Companion).systemBars()">system bars</a></code> insets.</p>
         <p>Any insets consumed by other insets padding modifiers or <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</a></code> on a parent layout will be excluded from the padding. <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets.Companion).systemBars()">WindowInsets.Companion.systemBars</a></code> will be <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumed</a></code> for child layouts as well.</p>
@@ -596,7 +656,11 @@ class SampleActivity : ComponentActivity() {
 }</pre>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.Modifier-.systemGesturesPadding--"></a><a name="systemgesturespadding"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.Modifier).systemGesturesPadding()">systemGesturesPadding</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.Modifier).systemGesturesPadding()">systemGesturesPadding</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/foundation/layout/WindowInsetsPaddingKt.html#(androidx.compose.ui.Modifier).systemGesturesPadding()">systemGesturesPadding</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver)</pre>
         <p>Adds padding to accommodate the <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets.Companion).systemGestures()">system gestures</a></code> insets.</p>
         <p>Any insets consumed by other insets padding modifiers or <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</a></code> on a parent layout will be excluded from the padding. <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets.Companion).systemGestures()">WindowInsets.Companion.systemGestures</a></code> will be <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumed</a></code> for child layouts as well.</p>
@@ -632,7 +696,11 @@ class SampleActivity : ComponentActivity() {
 }</pre>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.Modifier-.waterfallPadding--"></a><a name="waterfallpadding"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.Modifier).waterfallPadding()">waterfallPadding</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.Modifier).waterfallPadding()">waterfallPadding</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/foundation/layout/WindowInsetsPaddingKt.html#(androidx.compose.ui.Modifier).waterfallPadding()">waterfallPadding</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver)</pre>
         <p>Adds padding to accommodate the <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets.Companion).waterfall()">waterfall</a></code> insets.</p>
         <p>Any insets consumed by other insets padding modifiers or <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</a></code> on a parent layout will be excluded from the padding. <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets.Companion).waterfall()">WindowInsets.Companion.waterfall</a></code> will be <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumed</a></code> for child layouts as well.</p>
@@ -667,7 +735,11 @@ class SampleActivity : ComponentActivity() {
 }</pre>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.Modifier-.windowInsetsPadding-androidx.compose.foundation.layout.WindowInsets-"></a><a name="windowinsetspadding"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.Modifier).windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets)">windowInsetsPadding</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.Modifier).windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets)">windowInsetsPadding</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/foundation/layout/WindowInsetsPaddingKt.html#(androidx.compose.ui.Modifier).windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets)">windowInsetsPadding</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>&nbsp;insets<br>)</pre>
         <p>Adds padding so that the content doesn't enter <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets)">insets</a></code> space.</p>
         <p>Any insets consumed by other insets padding modifiers or <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</a></code> on a parent layout will be excluded from <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets)">insets</a></code>. <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets)">insets</a></code> will be <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumed</a></code> for child layouts as well.</p>
@@ -717,7 +789,11 @@ class SampleActivity : ComponentActivity() {
         </div>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.Modifier-.withConsumedWindowInsets-kotlin.Function1-"></a><a name="withconsumedwindowinsets"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.Modifier).withConsumedWindowInsets(kotlin.Function1)">withConsumedWindowInsets</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.Modifier).withConsumedWindowInsets(kotlin.Function1)">withConsumedWindowInsets</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/foundation/layout/ExperimentalLayoutApi.html">ExperimentalLayoutApi</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<span><del><a href="/reference/androidx/compose/foundation/layout/WindowInsetsPaddingKt.html#(androidx.compose.ui.Modifier).withConsumedWindowInsets(kotlin.Function1)">withConsumedWindowInsets</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>Use onConsumedWindowInsetsChanged</aside>
       </div>

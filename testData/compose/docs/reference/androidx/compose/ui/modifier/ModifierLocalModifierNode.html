@@ -189,12 +189,20 @@ fun Modifier.provideLogger(logger: Logger) = this then ProvideLoggerElement(logg
     <div class="list">
       <h2>Public methods</h2>
       <div class="api-item"><a name="-androidx.compose.ui.modifier.ModifierLocal-.getCurrent--"></a><a name="getcurrent"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.modifier.ModifierLocal).getCurrent()">getCurrent</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.modifier.ModifierLocal).getCurrent()">getCurrent</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;<a href="/reference/androidx/compose/ui/modifier/ModifierLocalModifierNode.html#(androidx.compose.ui.modifier.ModifierLocal).getCurrent()">getCurrent</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver)</pre>
         <p>Read a <code><a href="/reference/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code> that was provided by other modifiers to the left of this modifier, or above this modifier in the layout tree.</p>
       </div>
       <div class="api-item"><a name="getProvidedValues--"></a><a name="getprovidedvalues"></a>
-        <h3 class="api-name" id="getProvidedValues()">getProvidedValues</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getProvidedValues()">getProvidedValues</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/modifier/ModifierLocalMap.html">ModifierLocalMap</a>&nbsp;<a href="/reference/androidx/compose/ui/modifier/ModifierLocalModifierNode.html#getProvidedValues()">getProvidedValues</a>()</pre>
         <p>The map of provided ModifierLocal <-> value pairs that this node is providing. This value must be overridden if you are going to provide any values. It should be overridden as a field-backed property initialized with values for all of the keys that it will ever possibly provide.</p>
         <p>By default, this property will be set to an empty map, which means that this node will only consume <code><a href="/reference/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code>s and will not provide any new values.</p>
@@ -224,7 +232,11 @@ fun Modifier.provideLogger(logger: Logger) = this then ProvideLoggerElement(logg
         </div>
       </div>
       <div class="api-item"><a name="provide(androidx.compose.ui.modifier.ModifierLocal, kotlin.Any)"></a><a name="provide-androidx.compose.ui.modifier.ModifierLocal-kotlin.Any-"></a><a name="provide"></a>
-        <h3 class="api-name" id="provide(androidx.compose.ui.modifier.ModifierLocal,kotlin.Any)">provide</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="provide(androidx.compose.ui.modifier.ModifierLocal,kotlin.Any)">provide</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/modifier/ModifierLocalModifierNode.html#provide(androidx.compose.ui.modifier.ModifierLocal,kotlin.Any)">provide</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;value)</pre>
         <p>This method will cause this node to provide a new <code><a href="/reference/androidx/compose/ui/modifier/ModifierLocalModifierNode.html#provide(androidx.compose.ui.modifier.ModifierLocal,kotlin.Any)">value</a></code> for <code><a href="/reference/androidx/compose/ui/modifier/ModifierLocalModifierNode.html#provide(androidx.compose.ui.modifier.ModifierLocal,kotlin.Any)">key</a></code>. This can be called at any time on the UI thread, but in order to use this API, <code><a href="/reference/androidx/compose/ui/modifier/ModifierLocalModifierNode.html#providedValues()">providedValues</a></code> must be implemented and <code><a href="/reference/androidx/compose/ui/modifier/ModifierLocalModifierNode.html#provide(androidx.compose.ui.modifier.ModifierLocal,kotlin.Any)">key</a></code> must be a key that was included in it.</p>
         <p>By providing this new value, any <code><a href="/reference/androidx/compose/ui/modifier/ModifierLocalModifierNode.html">ModifierLocalModifierNode</a></code> below it in the tree will read this <code><a href="/reference/androidx/compose/ui/modifier/ModifierLocalModifierNode.html#provide(androidx.compose.ui.modifier.ModifierLocal,kotlin.Any)">value</a></code> when reading <code><a href="/reference/androidx/compose/ui/modifier/ModifierLocalModifierNode.html#(androidx.compose.ui.modifier.ModifierLocal).current()">current</a></code>, until another <code><a href="/reference/androidx/compose/ui/modifier/ModifierLocalModifierNode.html">ModifierLocalModifierNode</a></code> provides a value for the same <code><a href="/reference/androidx/compose/ui/modifier/ModifierLocalModifierNode.html#provide(androidx.compose.ui.modifier.ModifierLocal,kotlin.Any)">key</a></code>, however, consuming <code><a href="/reference/androidx/compose/ui/modifier/ModifierLocalModifierNode.html">ModifierLocalModifierNode</a></code>s will NOT be notified that a new value was provided.</p>

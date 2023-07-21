@@ -95,7 +95,11 @@
     <div class="list">
       <h2>Public constructors</h2>
       <div class="api-item"><a name="LoadInitialCallback--"></a><a name="loadinitialcallback"></a>
-        <h3 class="api-name" id="LoadInitialCallback()">LoadInitialCallback</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="LoadInitialCallback()">LoadInitialCallback</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/paging/PositionalDataSource.LoadInitialCallback.html#LoadInitialCallback()">LoadInitialCallback</a>()</pre>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -123,7 +127,11 @@
     <div class="list">
       <h2>Public methods</h2>
       <div class="api-item"><a name="onResult(kotlin.collections.List, kotlin.Int)"></a><a name="onResult-kotlin.collections.List-kotlin.Int-"></a><a name="onresult"></a>
-        <h3 class="api-name" id="onResult(kotlin.collections.List,kotlin.Int)">onResult</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="onResult(kotlin.collections.List,kotlin.Int)">onResult</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;void&nbsp;<a href="/reference/androidx/paging/PositionalDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int)">onResult</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;data,&nbsp;int&nbsp;position)</pre>
         <p>Called to pass initial load state from a DataSource without total count, when placeholders aren't requested.</p>
         <p><b>Note:</b> This method can only be called when placeholders are disabled (i.e., <code><a href="/reference/androidx/paging/PositionalDataSource.LoadInitialParams.html#placeholdersEnabled()">LoadInitialParams.placeholdersEnabled</a></code> is <code>false</code>).</p>
@@ -157,7 +165,11 @@
         </div>
       </div>
       <div class="api-item"><a name="onResult(kotlin.collections.List, kotlin.Int, kotlin.Int)"></a><a name="onResult-kotlin.collections.List-kotlin.Int-kotlin.Int-"></a><a name="onresult"></a>
-        <h3 class="api-name" id="onResult(kotlin.collections.List,kotlin.Int,kotlin.Int)">onResult</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="onResult(kotlin.collections.List,kotlin.Int,kotlin.Int)">onResult</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;void&nbsp;<a href="/reference/androidx/paging/PositionalDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int)">onResult</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;data,&nbsp;int&nbsp;position,&nbsp;int&nbsp;totalCount)</pre>
         <p>Called to pass initial load state from a DataSource.</p>
         <p>Call this method from <code><a href="/reference/androidx/paging/PositionalDataSource.html#loadInitial(androidx.paging.PositionalDataSource.LoadInitialParams)">loadInitial</a></code> function to return data, and inform how many placeholders should be shown before and after. If counting is cheap compute (for example, if a network load returns the information regardless), it's recommended to pass the total size to the totalCount parameter. If placeholders are not requested (when <code><a href="/reference/androidx/paging/PositionalDataSource.LoadInitialParams.html#placeholdersEnabled()">LoadInitialParams.placeholdersEnabled</a></code> is false), you can instead call <code><a href="/reference/androidx/paging/PositionalDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int)">onResult</a></code>.</p>

@@ -265,14 +265,22 @@ liveData1</code> and remove it as a source. </p>
     <div class="list">
       <h2>Public constructors</h2>
       <div class="api-item"><a name="MediatorLiveData--"></a><a name="mediatorlivedata"></a>
-        <h3 class="api-name" id="MediatorLiveData()">MediatorLiveData</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="MediatorLiveData()">MediatorLiveData</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/lifecycle/MediatorLiveData.html#MediatorLiveData()">MediatorLiveData</a>()</pre>
       </div>
     </div>
     <div class="list">
       <h2>Public functions</h2>
       <div class="api-item"><a name="addSource(androidx.lifecycle.LiveData&lt;S&gt;, androidx.lifecycle.Observer&lt;? super S&gt;)"></a><a name="addSource-androidx.lifecycle.LiveData&lt;S&gt;-androidx.lifecycle.Observer&lt;? super S&gt;-"></a><a name="addsource"></a>
-        <h3 class="api-name" id="addSource(androidx.lifecycle.LiveData&lt;S&gt;,androidx.lifecycle.Observer&lt;? super S&gt;)">addSource</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="addSource(androidx.lifecycle.LiveData&lt;S&gt;,androidx.lifecycle.Observer&lt;? super S&gt;)">addSource</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>fun&nbsp;&lt;S&gt; <a href="/reference/kotlin/androidx/lifecycle/MediatorLiveData.html#addSource(androidx.lifecycle.LiveData&lt;S&gt;,androidx.lifecycle.Observer&lt;? super S&gt;)">addSource</a>(source:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a>&lt;S!&gt;,&nbsp;onChanged:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Observer.html">Observer</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>!&gt;):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
         <p>Starts to listen the given <code>source</code> LiveData, <code>onChanged</code> observer will be called when <code>source</code> value was changed. </p>
         <p><code>onChanged</code> callback will be called only when this <code>MediatorLiveData</code> is active. </p>
@@ -312,7 +320,11 @@ liveData1</code> and remove it as a source. </p>
         </div>
       </div>
       <div class="api-item"><a name="removeSource-androidx.lifecycle.LiveData&lt;S&gt;-"></a><a name="removesource"></a>
-        <h3 class="api-name" id="removeSource(androidx.lifecycle.LiveData&lt;S&gt;)">removeSource</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="removeSource(androidx.lifecycle.LiveData&lt;S&gt;)">removeSource</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>fun&nbsp;&lt;S&gt; <a href="/reference/kotlin/androidx/lifecycle/MediatorLiveData.html#removeSource(androidx.lifecycle.LiveData&lt;S&gt;)">removeSource</a>(toRemote:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a>&lt;S!&gt;):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
         <p>Stops to listen the given <code>LiveData</code>.</p>
         <div class="devsite-table-wrapper">
@@ -347,13 +359,21 @@ liveData1</code> and remove it as a source. </p>
     <div class="list">
       <h2>Protected functions</h2>
       <div class="api-item"><a name="onActive--"></a><a name="onactive"></a>
-        <h3 class="api-name" id="onActive()">onActive</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="onActive()">onActive</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/CallSuper.html">CallSuper</a><br>protected&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/MediatorLiveData.html#onActive()">onActive</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
         <p>Called when the number of active observers change from 0 to 1. </p>
         <p> This callback can be used to know that this LiveData is being used thus should be kept up to date.</p>
       </div>
       <div class="api-item"><a name="onInactive--"></a><a name="oninactive"></a>
-        <h3 class="api-name" id="onInactive()">onInactive</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="onInactive()">onInactive</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/CallSuper.html">CallSuper</a><br>protected&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/MediatorLiveData.html#onInactive()">onInactive</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
         <p>Called when the number of active observers change from 1 to 0. </p>
         <p> This does not mean that there are no observers left, there may still be observers but their lifecycle states aren't <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#STARTED">STARTED</a></code> or <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#RESUMED">RESUMED</a></code> (like an Activity in the back stack). </p>

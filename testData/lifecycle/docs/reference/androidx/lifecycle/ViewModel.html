@@ -190,13 +190,21 @@
     <div class="list">
       <h2>Public constructors</h2>
       <div class="api-item"><a name="ViewModel--"></a><a name="viewmodel"></a>
-        <h3 class="api-name" id="ViewModel()">ViewModel</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="ViewModel()">ViewModel</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/lifecycle/ViewModel.html#ViewModel()">ViewModel</a>()</pre>
         <p>Construct a new ViewModel instance. </p>
         <p> You should <b>never</b> manually construct a ViewModel outside of a <code><a href="/reference/androidx/lifecycle/ViewModelProvider.Factory.html">ViewModelProvider.Factory</a></code>.</p>
       </div>
       <div class="api-item"><a name="ViewModel-java.io.Closeable...-"></a><a name="viewmodel"></a>
-        <h3 class="api-name" id="ViewModel(java.io.Closeable...)">ViewModel</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="ViewModel(java.io.Closeable...)">ViewModel</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/lifecycle/ViewModel.html#ViewModel(java.io.Closeable...)">ViewModel</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Closeable[]&nbsp;closeables)</pre>
         <p>Construct a new ViewModel instance. Any <code><a href="https://developer.android.com/reference/java/io/Closeable.html">Closeable</a></code> objects provided here will be closed directly before <code><a href="/reference/androidx/lifecycle/ViewModel.html#onCleared()">onCleared</a></code> is called. </p>
         <p> You should <b>never</b> manually construct a ViewModel outside of a <code><a href="/reference/androidx/lifecycle/ViewModelProvider.Factory.html">ViewModelProvider.Factory</a></code>.</p>
@@ -205,7 +213,11 @@
     <div class="list">
       <h2>Public methods</h2>
       <div class="api-item"><a name="addCloseable-java.io.Closeable-"></a><a name="addcloseable"></a>
-        <h3 class="api-name" id="addCloseable(java.io.Closeable)">addCloseable</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="addCloseable(java.io.Closeable)">addCloseable</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/lifecycle/ViewModel.html#addCloseable(java.io.Closeable)">addCloseable</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/io/Closeable.html">Closeable</a>&nbsp;closeable)</pre>
         <p>Add a new <code><a href="https://developer.android.com/reference/java/io/Closeable.html">Closeable</a></code> object that will be closed directly before <code><a href="/reference/androidx/lifecycle/ViewModel.html#onCleared()">onCleared</a></code> is called.</p>
         <div class="devsite-table-wrapper">
@@ -234,7 +246,11 @@
     <div class="list">
       <h2>Protected methods</h2>
       <div class="api-item"><a name="onCleared--"></a><a name="oncleared"></a>
-        <h3 class="api-name" id="onCleared()">onCleared</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="onCleared()">onCleared</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">protected&nbsp;void&nbsp;<a href="/reference/androidx/lifecycle/ViewModel.html#onCleared()">onCleared</a>()</pre>
         <p>This method will be called when this ViewModel is no longer used and will be destroyed. </p>
         <p> It is useful when ViewModel observes some data and you need to clear this subscription to prevent a leak of this ViewModel.</p>
@@ -243,7 +259,11 @@
     <div class="list">
       <h2>Extension functions</h2>
       <div class="api-item"><a name="-androidx.lifecycle.ViewModel-.getViewModelScope--"></a><a name="getviewmodelscope"></a>
-        <h3 class="api-name" id="(androidx.lifecycle.ViewModel).getViewModelScope()">ViewModelKt.getViewModelScope</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.lifecycle.ViewModel).getViewModelScope()">ViewModelKt.getViewModelScope</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>&nbsp;<a href="/reference/androidx/lifecycle/ViewModelKt.html">ViewModelKt</a>.<a href="/reference/androidx/lifecycle/ViewModel.html#(androidx.lifecycle.ViewModel).getViewModelScope()">getViewModelScope</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/ViewModel.html">ViewModel</a>&nbsp;receiver)</pre>
         <p><code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code> tied to this <code><a href="/reference/androidx/lifecycle/ViewModel.html">ViewModel</a></code>. This scope will be canceled when ViewModel will be cleared, i.e <code><a href="/reference/androidx/lifecycle/ViewModel.html#onCleared()">ViewModel.onCleared</a></code> is called</p>
         <p>This scope is bound to <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-main-coroutine-dispatcher/immediate.html">Dispatchers.Main.immediate</a></code></p>

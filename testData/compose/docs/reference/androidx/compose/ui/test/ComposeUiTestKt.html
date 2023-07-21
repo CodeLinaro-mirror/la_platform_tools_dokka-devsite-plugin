@@ -97,7 +97,11 @@
     <div class="list">
       <h2>Public methods</h2>
       <div class="api-item"><a name="AndroidComposeUiTestEnvironment(kotlin.coroutines.CoroutineContext, kotlin.Function0)"></a><a name="AndroidComposeUiTestEnvironment-kotlin.coroutines.CoroutineContext-kotlin.Function0-"></a><a name="androidcomposeuitestenvironment"></a>
-        <h3 class="api-name" id="AndroidComposeUiTestEnvironment(kotlin.coroutines.CoroutineContext,kotlin.Function0)">AndroidComposeUiTestEnvironment</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="AndroidComposeUiTestEnvironment(kotlin.coroutines.CoroutineContext,kotlin.Function0)">AndroidComposeUiTestEnvironment</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/AndroidComposeUiTestEnvironment.html">AndroidComposeUiTestEnvironment</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> A&gt;&nbsp;&lt;A&nbsp;extends&nbsp;<a href="/reference/androidx/activity/ComponentActivity.html">ComponentActivity</a>&gt; <a href="/reference/androidx/compose/ui/test/ComposeUiTestKt.html#AndroidComposeUiTestEnvironment(kotlin.coroutines.CoroutineContext,kotlin.Function0)">AndroidComposeUiTestEnvironment</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>&nbsp;effectContext,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;A&gt;&nbsp;activityProvider<br>)</pre>
         <p>Creates an <code><a href="/reference/androidx/compose/ui/test/AndroidComposeUiTestEnvironment.html">AndroidComposeUiTestEnvironment</a></code> that retrieves the <code><a href="/reference/androidx/compose/ui/test/AndroidComposeUiTest.html#activity()">host Activity</a></code> by delegating to the given <code><a href="/reference/androidx/compose/ui/test/package-summary.html#AndroidComposeUiTestEnvironment(kotlin.coroutines.CoroutineContext,kotlin.Function0)">activityProvider</a></code>. Use this if you need to launch an Activity in a way that is not compatible with any of the existing <code><a href="/reference/androidx/compose/ui/test/package-summary.html#runComposeUiTest(kotlin.coroutines.CoroutineContext,kotlin.Function1)">runComposeUiTest</a></code>, <code><a href="/reference/androidx/compose/ui/test/package-summary.html#runAndroidComposeUiTest(kotlin.coroutines.CoroutineContext,kotlin.Function1)">runAndroidComposeUiTest</a></code>, or <code><a href="/reference/androidx/compose/ui/test/package-summary.html#runEmptyComposeUiTest(kotlin.Function1)">runEmptyComposeUiTest</a></code> methods.</p>
         <p>Valid use cases include, but are not limited to, creating your own JUnit test rule that implements <code><a href="/reference/androidx/compose/ui/test/AndroidComposeUiTest.html">AndroidComposeUiTest</a></code> by delegating to <code><a href="/reference/androidx/compose/ui/test/AndroidComposeUiTestEnvironment.html#test()">AndroidComposeUiTestEnvironment.test</a></code>. See <code><a href="/reference/androidx/compose/ui/test/junit4/AndroidComposeTestRule.html">AndroidComposeTestRule</a></code> for a reference implementation.</p>
@@ -138,7 +142,11 @@
         </div>
       </div>
       <div class="api-item"><a name="runAndroidComposeUiTest(kotlin.coroutines.CoroutineContext, kotlin.Function1)"></a><a name="runAndroidComposeUiTest-kotlin.coroutines.CoroutineContext-kotlin.Function1-"></a><a name="runandroidcomposeuitest"></a>
-        <h3 class="api-name" id="runAndroidComposeUiTest(kotlin.coroutines.CoroutineContext,kotlin.Function1)">runAndroidComposeUiTest</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="runAndroidComposeUiTest(kotlin.coroutines.CoroutineContext,kotlin.Function1)">runAndroidComposeUiTest</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;&lt;A&nbsp;extends&nbsp;<a href="/reference/androidx/activity/ComponentActivity.html">ComponentActivity</a>&gt; <a href="/reference/androidx/compose/ui/test/ComposeUiTestKt.html#runAndroidComposeUiTest(kotlin.coroutines.CoroutineContext,kotlin.Function1)">runAndroidComposeUiTest</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>&nbsp;effectContext,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/AndroidComposeUiTest.html">AndroidComposeUiTest</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> A&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</pre>
         <p>Variant of <code><a href="/reference/androidx/compose/ui/test/package-summary.html#runComposeUiTest(kotlin.coroutines.CoroutineContext,kotlin.Function1)">runComposeUiTest</a></code> that allows you to specify which Activity should be launched. Be aware that if the Activity androidx.activity.compose.setContent during its launch, you cannot use <code><a href="/reference/androidx/compose/ui/test/ComposeUiTest.html#setContent(kotlin.Function0)">setContent</a></code> on the ComposeUiTest anymore as this would override the content and can lead to subtle bugs.</p>
         <div class="devsite-table-wrapper">
@@ -176,7 +184,11 @@
         </div>
       </div>
       <div class="api-item"><a name="runAndroidComposeUiTest(java.lang.Class, kotlin.coroutines.CoroutineContext, kotlin.Function1)"></a><a name="runAndroidComposeUiTest-java.lang.Class-kotlin.coroutines.CoroutineContext-kotlin.Function1-"></a><a name="runandroidcomposeuitest"></a>
-        <h3 class="api-name" id="runAndroidComposeUiTest(java.lang.Class,kotlin.coroutines.CoroutineContext,kotlin.Function1)">runAndroidComposeUiTest</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="runAndroidComposeUiTest(java.lang.Class,kotlin.coroutines.CoroutineContext,kotlin.Function1)">runAndroidComposeUiTest</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;&lt;A&nbsp;extends&nbsp;<a href="/reference/androidx/activity/ComponentActivity.html">ComponentActivity</a>&gt; <a href="/reference/androidx/compose/ui/test/ComposeUiTestKt.html#runAndroidComposeUiTest(java.lang.Class,kotlin.coroutines.CoroutineContext,kotlin.Function1)">runAndroidComposeUiTest</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> A&gt;&nbsp;activityClass,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>&nbsp;effectContext,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/AndroidComposeUiTest.html">AndroidComposeUiTest</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> A&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</pre>
         <p>Variant of <code><a href="/reference/androidx/compose/ui/test/package-summary.html#runComposeUiTest(kotlin.coroutines.CoroutineContext,kotlin.Function1)">runComposeUiTest</a></code> that allows you to specify which Activity should be launched. Be aware that if the Activity androidx.activity.compose.setContent during its launch, you cannot use <code><a href="/reference/androidx/compose/ui/test/ComposeUiTest.html#setContent(kotlin.Function0)">setContent</a></code> on the ComposeUiTest anymore as this would override the content and can lead to subtle bugs.</p>
         <div class="devsite-table-wrapper">
@@ -220,7 +232,11 @@
         </div>
       </div>
       <div class="api-item"><a name="runComposeUiTest(kotlin.coroutines.CoroutineContext, kotlin.Function1)"></a><a name="runComposeUiTest-kotlin.coroutines.CoroutineContext-kotlin.Function1-"></a><a name="runcomposeuitest"></a>
-        <h3 class="api-name" id="runComposeUiTest(kotlin.coroutines.CoroutineContext,kotlin.Function1)">runComposeUiTest</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="runComposeUiTest(kotlin.coroutines.CoroutineContext,kotlin.Function1)">runComposeUiTest</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/ComposeUiTestKt.html#runComposeUiTest(kotlin.coroutines.CoroutineContext,kotlin.Function1)">runComposeUiTest</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>&nbsp;effectContext,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/ComposeUiTest.html">ComposeUiTest</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</pre>
         <p>Sets up the test environment, runs the given <code><a href="/reference/androidx/compose/ui/test/package-summary.html#runComposeUiTest(kotlin.coroutines.CoroutineContext,kotlin.Function1)">test</a></code> and then tears down the test environment. Use the methods on <code><a href="/reference/androidx/compose/ui/test/ComposeUiTest.html">ComposeUiTest</a></code> in the test to find Compose content and make assertions on it. If you need access to platform specific elements (such as the Activity on Android), use one of the platform specific variants of this method, e.g. runAndroidComposeUiTest on Android.</p>
         <p>Implementations of this method will launch a Compose host (such as an Activity on Android) for you. If your test needs to launch its own host, use a platform specific variant that doesn't launch anything for you (if available), e.g. runEmptyComposeUiTest on Android. Always make sure that the Compose content is set during execution of the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#runComposeUiTest(kotlin.coroutines.CoroutineContext,kotlin.Function1)">test lambda</a></code> so the test framework is aware of the content. Whether you need to launch the host from within the test lambda as well depends on the platform.</p>
@@ -254,13 +270,21 @@
         </div>
       </div>
       <div class="api-item"><a name="runEmptyComposeUiTest-kotlin.Function1-"></a><a name="runemptycomposeuitest"></a>
-        <h3 class="api-name" id="runEmptyComposeUiTest(kotlin.Function1)">runEmptyComposeUiTest</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="runEmptyComposeUiTest(kotlin.Function1)">runEmptyComposeUiTest</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/ComposeUiTestKt.html#runEmptyComposeUiTest(kotlin.Function1)">runEmptyComposeUiTest</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/ComposeUiTest.html">ComposeUiTest</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</pre>
         <p>Variant of <code><a href="/reference/androidx/compose/ui/test/package-summary.html#runComposeUiTest(kotlin.coroutines.CoroutineContext,kotlin.Function1)">runComposeUiTest</a></code> that does not launch an Activity to host Compose content in and thus acts as an &quot;empty shell&quot;. Use this if you need to have control over the timing and method of launching the Activity, for example when you want to launch it with a custom Intent, or if you have a complex test setup.</p>
         <p>When using this method, calling <code><a href="/reference/androidx/compose/ui/test/ComposeUiTest.html#setContent(kotlin.Function0)">ComposeUiTest.setContent</a></code> will throw an IllegalStateException. Instead, you'll have to set the content in the Activity that you have launched yourself, either directly on the Activity or on an <code><a href="/reference/androidx/compose/ui/platform/AbstractComposeView.html">androidx.compose.ui.platform.AbstractComposeView</a></code>. You will need to do this from within the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#runEmptyComposeUiTest(kotlin.Function1)">test lambda</a></code>, or the test framework will not be able to find the content.</p>
       </div>
       <div class="api-item"><a name="(androidx.compose.ui.test.ComposeUiTest).waitUntilAtLeastOneExists(androidx.compose.ui.test.SemanticsMatcher, kotlin.Long)"></a><a name="-androidx.compose.ui.test.ComposeUiTest-.waitUntilAtLeastOneExists-androidx.compose.ui.test.SemanticsMatcher-kotlin.Long-"></a><a name="waituntilatleastoneexists"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.test.ComposeUiTest).waitUntilAtLeastOneExists(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">waitUntilAtLeastOneExists</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.test.ComposeUiTest).waitUntilAtLeastOneExists(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">waitUntilAtLeastOneExists</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/ComposeUiTestKt.html#(androidx.compose.ui.test.ComposeUiTest).waitUntilAtLeastOneExists(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">waitUntilAtLeastOneExists</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/ComposeUiTest.html">ComposeUiTest</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a>&nbsp;matcher,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;timeoutMillis<br>)</pre>
         <p>Blocks until at least one node matches the given <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.ComposeUiTest).waitUntilAtLeastOneExists(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">matcher</a></code>.</p>
         <div class="devsite-table-wrapper">
@@ -332,7 +356,11 @@
         </div>
       </div>
       <div class="api-item"><a name="(androidx.compose.ui.test.ComposeUiTest).waitUntilDoesNotExist(androidx.compose.ui.test.SemanticsMatcher, kotlin.Long)"></a><a name="-androidx.compose.ui.test.ComposeUiTest-.waitUntilDoesNotExist-androidx.compose.ui.test.SemanticsMatcher-kotlin.Long-"></a><a name="waituntildoesnotexist"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.test.ComposeUiTest).waitUntilDoesNotExist(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">waitUntilDoesNotExist</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.test.ComposeUiTest).waitUntilDoesNotExist(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">waitUntilDoesNotExist</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/ComposeUiTestKt.html#(androidx.compose.ui.test.ComposeUiTest).waitUntilDoesNotExist(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">waitUntilDoesNotExist</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/ComposeUiTest.html">ComposeUiTest</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a>&nbsp;matcher,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;timeoutMillis<br>)</pre>
         <p>Blocks until no nodes match the given <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.ComposeUiTest).waitUntilDoesNotExist(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">matcher</a></code>.</p>
         <div class="devsite-table-wrapper">
@@ -404,7 +432,11 @@
         </div>
       </div>
       <div class="api-item"><a name="(androidx.compose.ui.test.ComposeUiTest).waitUntilExactlyOneExists(androidx.compose.ui.test.SemanticsMatcher, kotlin.Long)"></a><a name="-androidx.compose.ui.test.ComposeUiTest-.waitUntilExactlyOneExists-androidx.compose.ui.test.SemanticsMatcher-kotlin.Long-"></a><a name="waituntilexactlyoneexists"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.test.ComposeUiTest).waitUntilExactlyOneExists(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">waitUntilExactlyOneExists</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.test.ComposeUiTest).waitUntilExactlyOneExists(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">waitUntilExactlyOneExists</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/ComposeUiTestKt.html#(androidx.compose.ui.test.ComposeUiTest).waitUntilExactlyOneExists(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">waitUntilExactlyOneExists</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/ComposeUiTest.html">ComposeUiTest</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a>&nbsp;matcher,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;timeoutMillis<br>)</pre>
         <p>Blocks until exactly one node matches the given <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.ComposeUiTest).waitUntilExactlyOneExists(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">matcher</a></code>.</p>
         <div class="devsite-table-wrapper">
@@ -476,7 +508,11 @@
         </div>
       </div>
       <div class="api-item"><a name="(androidx.compose.ui.test.ComposeUiTest).waitUntilNodeCount(androidx.compose.ui.test.SemanticsMatcher, kotlin.Int, kotlin.Long)"></a><a name="-androidx.compose.ui.test.ComposeUiTest-.waitUntilNodeCount-androidx.compose.ui.test.SemanticsMatcher-kotlin.Int-kotlin.Long-"></a><a name="waituntilnodecount"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.test.ComposeUiTest).waitUntilNodeCount(androidx.compose.ui.test.SemanticsMatcher,kotlin.Int,kotlin.Long)">waitUntilNodeCount</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.test.ComposeUiTest).waitUntilNodeCount(androidx.compose.ui.test.SemanticsMatcher,kotlin.Int,kotlin.Long)">waitUntilNodeCount</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/ComposeUiTestKt.html#(androidx.compose.ui.test.ComposeUiTest).waitUntilNodeCount(androidx.compose.ui.test.SemanticsMatcher,kotlin.Int,kotlin.Long)">waitUntilNodeCount</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/ComposeUiTest.html">ComposeUiTest</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a>&nbsp;matcher,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;count,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;timeoutMillis<br>)</pre>
         <p>Blocks until the number of nodes matching the given <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.ComposeUiTest).waitUntilNodeCount(androidx.compose.ui.test.SemanticsMatcher,kotlin.Int,kotlin.Long)">matcher</a></code> is equal to the given <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.ComposeUiTest).waitUntilNodeCount(androidx.compose.ui.test.SemanticsMatcher,kotlin.Int,kotlin.Long)">count</a></code>.</p>
         <div class="devsite-table-wrapper">

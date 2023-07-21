@@ -136,12 +136,20 @@
     <div class="list">
       <h2>Public methods</h2>
       <div class="api-item"><a name="getColorSpace--"></a><a name="getcolorspace"></a>
-        <h3 class="api-name" id="getColorSpace()">getColorSpace</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getColorSpace()">getColorSpace</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/ImageBitmap.html#getColorSpace()">getColorSpace</a>()</pre>
         <p>ColorSpace the Image renders in</p>
       </div>
       <div class="api-item"><a name="getConfig--"></a><a name="getconfig"></a>
-        <h3 class="api-name" id="getConfig()">getConfig</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getConfig()">getConfig</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/ImageBitmapConfig.html">ImageBitmapConfig</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/ImageBitmap.html#getConfig()">getConfig</a>()</pre>
         <p>Returns the current configuration of this Image, either:</p>
         <div class="devsite-table-wrapper">
@@ -177,27 +185,47 @@
         </div>
       </div>
       <div class="api-item"><a name="getHasAlpha--"></a><a name="gethasalpha"></a>
-        <h3 class="api-name" id="getHasAlpha()">getHasAlpha</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getHasAlpha()">getHasAlpha</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/ImageBitmap.html#getHasAlpha()">getHasAlpha</a>()</pre>
         <p>Determines whether or not the ImageBitmap contains an alpha channel</p>
       </div>
       <div class="api-item"><a name="getHeight--"></a><a name="getheight"></a>
-        <h3 class="api-name" id="getHeight()">getHeight</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getHeight()">getHeight</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/graphics/ImageBitmap.html#getHeight()">getHeight</a>()</pre>
         <p>The number of image pixels along the ImageBitmap's vertical axis.</p>
       </div>
       <div class="api-item"><a name="getWidth--"></a><a name="getwidth"></a>
-        <h3 class="api-name" id="getWidth()">getWidth</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getWidth()">getWidth</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/graphics/ImageBitmap.html#getWidth()">getWidth</a>()</pre>
         <p>The number of image pixels along the ImageBitmap's horizontal axis.</p>
       </div>
       <div class="api-item"><a name="prepareToDraw--"></a><a name="preparetodraw"></a>
-        <h3 class="api-name" id="prepareToDraw()">prepareToDraw</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="prepareToDraw()">prepareToDraw</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/ImageBitmap.html#prepareToDraw()">prepareToDraw</a>()</pre>
         <p>Builds caches associated with the ImageBitmap that are used for drawing it. This method can be used as a signal to upload textures to the GPU to eventually be rendered</p>
       </div>
       <div class="api-item"><a name="readPixels(kotlin.IntArray, kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Int)"></a><a name="readPixels-kotlin.IntArray-kotlin.Int-kotlin.Int-kotlin.Int-kotlin.Int-kotlin.Int-kotlin.Int-"></a><a name="readpixels"></a>
-        <h3 class="api-name" id="readPixels(kotlin.IntArray,kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">readPixels</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="readPixels(kotlin.IntArray,kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">readPixels</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/ImageBitmap.html#readPixels(kotlin.IntArray,kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">readPixels</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> int[]&nbsp;buffer,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;startX,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;startY,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;width,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;height,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;bufferOffset,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;stride<br>)</pre>
         <p>Copies the pixel data within the ImageBitmap into the given array. Each value is represented as ARGB values packed into an Int. The stride parameter allows the caller to allow for gaps in the returned pixels array between rows. For normal packed, results, the stride value is equivalent to the width of the <code><a href="/reference/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a></code>. The returned colors are non-premultiplied ARGB values in the <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#Srgb()">ColorSpaces.Srgb</a></code> color space.</p>
         <p>Note this method can block so it is recommended to not invoke this method in performance critical code paths</p>
@@ -295,7 +323,11 @@ for (x in 0 until pixelmap.width) {
     <div class="list">
       <h2>Extension functions</h2>
       <div class="api-item"><a name="-androidx.compose.ui.graphics.ImageBitmap-.asAndroidBitmap--"></a><a name="asandroidbitmap"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.graphics.ImageBitmap).asAndroidBitmap()">AndroidImageBitmapKt.asAndroidBitmap</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.graphics.ImageBitmap).asAndroidBitmap()">AndroidImageBitmapKt.asAndroidBitmap</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/graphics/Bitmap.html">Bitmap</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/AndroidImageBitmapKt.html">AndroidImageBitmapKt</a>.<a href="/reference/androidx/compose/ui/graphics/ImageBitmap.html#(androidx.compose.ui.graphics.ImageBitmap).asAndroidBitmap()">asAndroidBitmap</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a>&nbsp;receiver)</pre>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -320,7 +352,11 @@ for (x in 0 until pixelmap.width) {
         </div>
       </div>
       <div class="api-item"><a name="(androidx.compose.ui.graphics.ImageBitmap).toPixelMap(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Int, kotlin.IntArray, kotlin.Int, kotlin.Int)"></a><a name="-androidx.compose.ui.graphics.ImageBitmap-.toPixelMap-kotlin.Int-kotlin.Int-kotlin.Int-kotlin.Int-kotlin.IntArray-kotlin.Int-kotlin.Int-"></a><a name="topixelmap"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.graphics.ImageBitmap).toPixelMap(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int,kotlin.IntArray,kotlin.Int,kotlin.Int)">ImageBitmapKt.toPixelMap</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.graphics.ImageBitmap).toPixelMap(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int,kotlin.IntArray,kotlin.Int,kotlin.Int)">ImageBitmapKt.toPixelMap</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/PixelMap.html">PixelMap</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/ImageBitmapKt.html">ImageBitmapKt</a>.<a href="/reference/androidx/compose/ui/graphics/ImageBitmap.html#(androidx.compose.ui.graphics.ImageBitmap).toPixelMap(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int,kotlin.IntArray,kotlin.Int,kotlin.Int)">toPixelMap</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;startX,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;startY,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;width,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;height,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> int[]&nbsp;buffer,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;bufferOffset,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;stride<br>)</pre>
         <p>Convenience method to extract pixel information from the given ImageBitmap into a <code><a href="/reference/androidx/compose/ui/graphics/PixelMap.html">PixelMap</a></code> that supports for querying pixel information based on</p>
         <p>Note this method can block so it is recommended to not invoke this method in performance critical code paths</p>

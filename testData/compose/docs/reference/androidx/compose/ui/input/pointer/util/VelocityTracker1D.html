@@ -88,7 +88,11 @@
     <div class="list">
       <h2>Public constructors</h2>
       <div class="api-item"><a name="VelocityTracker1D-kotlin.Boolean-"></a><a name="velocitytracker1d"></a>
-        <h3 class="api-name" id="VelocityTracker1D(kotlin.Boolean)">VelocityTracker1D</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="VelocityTracker1D(kotlin.Boolean)">VelocityTracker1D</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/util/VelocityTracker1D.html#VelocityTracker1D(kotlin.Boolean)">VelocityTracker1D</a>(boolean&nbsp;isDataDifferential)</pre>
         <p>Constructor to create a new velocity tracker. It allows to specify whether or not the tracker should consider the data ponits provided via <code><a href="/reference/androidx/compose/ui/input/pointer/util/VelocityTracker1D.html#addDataPoint(kotlin.Long,kotlin.Float)">addDataPoint</a></code> as differential or non-differential.</p>
         <p>Differential data ponits represent change in displacement. For instance, differential data points of 2, -1, 5 represent: the object moved by &quot;2&quot; units, then by &quot;-1&quot; units, then by &quot;5&quot; units. An example use case for differential data points is when tracking velocity for an object whose displacements (or change in positions) over time are known.</p>
@@ -119,23 +123,39 @@
     <div class="list">
       <h2>Public methods</h2>
       <div class="api-item"><a name="addDataPoint(kotlin.Long, kotlin.Float)"></a><a name="addDataPoint-kotlin.Long-kotlin.Float-"></a><a name="adddatapoint"></a>
-        <h3 class="api-name" id="addDataPoint(kotlin.Long,kotlin.Float)">addDataPoint</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="addDataPoint(kotlin.Long,kotlin.Float)">addDataPoint</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/util/VelocityTracker1D.html#addDataPoint(kotlin.Long,kotlin.Float)">addDataPoint</a>(long&nbsp;timeMillis,&nbsp;float&nbsp;dataPoint)</pre>
         <p>Adds a data point for velocity calculation at a given time, <code><a href="/reference/androidx/compose/ui/input/pointer/util/VelocityTracker1D.html#addDataPoint(kotlin.Long,kotlin.Float)">timeMillis</a></code>. The data ponit represents an amount of a change in position (for differential data points), or an absolute position (for non-differential data points). Whether or not the tracker handles differential data points is decided by <code><a href="/reference/androidx/compose/ui/input/pointer/util/VelocityTracker1D.html#isDataDifferential()">isDataDifferential</a></code>, which is set once and finally during the construction of the tracker.</p>
         <p>Use the same units for the data points provided. For example, having some data points in <code>cm</code> and some in <code>m</code> will result in incorrect velocity calculations, as this method (and the tracker) has no knowledge of the units used.</p>
       </div>
       <div class="api-item"><a name="calculateVelocity--"></a><a name="calculatevelocity"></a>
-        <h3 class="api-name" id="calculateVelocity()">calculateVelocity</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="calculateVelocity()">calculateVelocity</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/util/VelocityTracker1D.html#calculateVelocity()">calculateVelocity</a>()</pre>
         <p>Computes the estimated velocity at the time of the last provided data point. The units of velocity will be <code>units/second</code>, where <code>units</code> is the units of the data points provided via <code><a href="/reference/androidx/compose/ui/input/pointer/util/VelocityTracker1D.html#addDataPoint(kotlin.Long,kotlin.Float)">addDataPoint</a></code>.</p>
         <p>This can be expensive. Only call this when you need the velocity.</p>
       </div>
       <div class="api-item"><a name="getIsDataDifferential--"></a><a name="getisdatadifferential"></a>
-        <h3 class="api-name" id="getIsDataDifferential()">isDataDifferential</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getIsDataDifferential()">isDataDifferential</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/util/VelocityTracker1D.html#getIsDataDifferential()">isDataDifferential</a>()</pre>
       </div>
       <div class="api-item"><a name="resetTracking--"></a><a name="resettracking"></a>
-        <h3 class="api-name" id="resetTracking()">resetTracking</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="resetTracking()">resetTracking</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/util/VelocityTracker1D.html#resetTracking()">resetTracking</a>()</pre>
         <p>Clears data points added by <code><a href="/reference/androidx/compose/ui/input/pointer/util/VelocityTracker1D.html#addDataPoint(kotlin.Long,kotlin.Float)">addDataPoint</a></code>.</p>
       </div>

@@ -57,7 +57,11 @@ class DefaultSymbolDetailTest {
             """
 <div>
   <div class="api-item">
-    <h3 class="api-name">foo</h3>
+    <div class="api-name-block">
+      <div>
+        <h3>foo</h3>
+      </div>
+    </div>
     <pre class="api-signature no-pretty-print">void&nbsp;foo()</pre>
   </div>
 </div>
@@ -88,7 +92,11 @@ class DefaultSymbolDetailTest {
             """
 <div>
   <div class="api-item">
-    <h3 class="api-name">foo</h3>
+    <div class="api-name-block">
+      <div>
+        <h3>foo</h3>
+      </div>
+    </div>
     <pre class="api-signature no-pretty-print">fun&nbsp;foo():&nbsp;Unit</pre>
   </div>
 </div>
@@ -119,7 +127,11 @@ class DefaultSymbolDetailTest {
             """
 <div>
   <div class="api-item">
-    <h3 class="api-name">foo</h3>
+    <div class="api-name-block">
+      <div>
+        <h3>foo</h3>
+      </div>
+    </div>
     <pre class="api-signature no-pretty-print">val&nbsp;foo:&nbsp;Unit</pre>
   </div>
 </div>
@@ -150,7 +162,11 @@ class DefaultSymbolDetailTest {
             """
 <div>
   <div class="api-item">
-    <h3 class="api-name">MyClass</h3>
+    <div class="api-name-block">
+      <div>
+        <h3>MyClass</h3>
+      </div>
+    </div>
     <pre class="api-signature no-pretty-print">MyClass()</pre>
   </div>
 </div>
@@ -181,7 +197,11 @@ class DefaultSymbolDetailTest {
             """
 <div>
   <div class="api-item">
-    <h3 class="api-name">MyClass</h3>
+    <div class="api-name-block">
+      <div>
+        <h3>MyClass</h3>
+      </div>
+    </div>
     <pre class="api-signature no-pretty-print">MyClass()</pre>
   </div>
 </div>
@@ -216,7 +236,11 @@ class DefaultSymbolDetailTest {
             """
 <div>
   <div class="api-item">
-    <h3 class="api-name">foo</h3>
+    <div class="api-name-block">
+      <div>
+        <h3>foo</h3>
+      </div>
+    </div>
     <pre class="api-signature no-pretty-print">@Foo<br>@Bar<br>void&nbsp;foo()</pre>
   </div>
 </div>
@@ -248,7 +272,11 @@ class DefaultSymbolDetailTest {
             """
 <div>
   <div class="api-item">
-    <h3 class="api-name">foo</h3>
+    <div class="api-name-block">
+      <div>
+        <h3>foo</h3>
+      </div>
+    </div>
     <pre class="api-signature no-pretty-print">protected&nbsp;abstract&nbsp;void&nbsp;foo()</pre>
   </div>
 </div>
@@ -280,7 +308,11 @@ class DefaultSymbolDetailTest {
             """
 <div>
   <div class="api-item">
-    <h3 class="api-name">foo</h3>
+    <div class="api-name-block">
+      <div>
+        <h3>foo</h3>
+      </div>
+    </div>
     <pre class="api-signature no-pretty-print">protected&nbsp;abstract&nbsp;fun&nbsp;foo():&nbsp;Unit</pre>
   </div>
 </div>
@@ -311,7 +343,11 @@ class DefaultSymbolDetailTest {
             """
 <div>
   <div class="api-item"><a name="foo(a, b)"></a><a name="foo-a-b-"></a>
-    <h3 class="api-name" id="foo(a,b)">foo</h3>
+    <div class="api-name-block">
+      <div>
+        <h3 id="foo(a,b)">foo</h3>
+      </div>
+    </div>
     <pre class="api-signature no-pretty-print">void&nbsp;foo()</pre>
   </div>
 </div>
@@ -342,7 +378,11 @@ class DefaultSymbolDetailTest {
             """
 <div>
   <div class="api-item">
-    <h3 class="api-name">foo</h3>
+    <div class="api-name-block">
+      <div>
+        <h3>foo</h3>
+      </div>
+    </div>
     <pre class="api-signature no-pretty-print">void&nbsp;foo()</pre>
     <div>noop</div>
     <div>noop</div>
@@ -376,7 +416,11 @@ class DefaultSymbolDetailTest {
             """
 <div>
   <div class="api-item">
-    <h3 class="api-name">MyClassKt.foo</h3>
+    <div class="api-name-block">
+      <div>
+        <h3>MyClassKt.foo</h3>
+      </div>
+    </div>
     <pre class="api-signature no-pretty-print">void&nbsp;foo()</pre>
   </div>
 </div>
@@ -424,15 +468,19 @@ class DefaultSymbolDetailTest {
             """
 <div>
   <div class="api-item">
-    <div id="metadata-info-block">
-      <div id="maven-coordinates">Artifact: <a href="https://d.android.com">testGroup:testArtifactId</a></div>
-      <div id="source-link"><a href="https://cs.android.com" class="external">View Source</a></div>
-      <div id="version-metadata">
-        <div id="added-in">Added in API Level 8</div>
-        <div id="deprecated-in">Deprecated in API Level 12</div>
+    <div class="api-name-block">
+      <div>
+        <h3>foo</h3>
+      </div>
+      <div id="metadata-info-block">
+        <div id="maven-coordinates">Artifact: <a href="https://d.android.com">testGroup:testArtifactId</a></div>
+        <div id="source-link"><a href="https://cs.android.com" class="external">View Source</a></div>
+        <div id="version-metadata">
+          <div id="added-in">Added in API Level 8</div>
+          <div id="deprecated-in">Deprecated in API Level 12</div>
+        </div>
       </div>
     </div>
-    <h3 class="api-name">foo</h3>
     <pre class="api-signature no-pretty-print">void&nbsp;foo()</pre>
   </div>
 </div>

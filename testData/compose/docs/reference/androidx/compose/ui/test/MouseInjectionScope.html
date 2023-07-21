@@ -546,7 +546,11 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
     <div class="list">
       <h2>Public methods</h2>
       <div class="api-item"><a name="cancel-kotlin.Long-"></a><a name="cancel"></a>
-        <h3 class="api-name" id="cancel(kotlin.Long)">cancel</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="cancel(kotlin.Long)">cancel</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#cancel(kotlin.Long)">cancel</a>(long&nbsp;delayMillis)</pre>
         <p>Sends a cancel event <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#cancel(kotlin.Long)">delayMillis</a></code> after the last sent event to cancel a stream of mouse events with pressed mouse buttons. All buttons will be released as a result. A mouse cancel event can only be sent when mouse buttons are pressed.</p>
         <div class="devsite-table-wrapper">
@@ -572,7 +576,11 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
         </div>
       </div>
       <div class="api-item"><a name="enter(androidx.compose.ui.geometry.Offset, kotlin.Long)"></a><a name="enter-androidx.compose.ui.geometry.Offset-kotlin.Long-"></a><a name="enter"></a>
-        <h3 class="api-name" id="enter(androidx.compose.ui.geometry.Offset,kotlin.Long)">enter</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="enter(androidx.compose.ui.geometry.Offset,kotlin.Long)">enter</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#enter(androidx.compose.ui.geometry.Offset,kotlin.Long)">enter</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position,&nbsp;long&nbsp;delayMillis)</pre>
         <p>Sends a hover enter event at the given <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#enter(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code>, <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#enter(androidx.compose.ui.geometry.Offset,kotlin.Long)">delayMillis</a></code> after the last sent event.</p>
         <p>Note that it is discouraged to manually send a hover enter event followed by a <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#moveTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">moveTo</a></code> event. <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#moveTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">moveTo</a></code> does this for you automatically, making sure the event times of the two events are in sync. Only use this method for special scenarios where the hover enter event is not sent as a side effect of another event.</p>
@@ -607,7 +615,11 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
         </div>
       </div>
       <div class="api-item"><a name="exit(androidx.compose.ui.geometry.Offset, kotlin.Long)"></a><a name="exit-androidx.compose.ui.geometry.Offset-kotlin.Long-"></a><a name="exit"></a>
-        <h3 class="api-name" id="exit(androidx.compose.ui.geometry.Offset,kotlin.Long)">exit</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="exit(androidx.compose.ui.geometry.Offset,kotlin.Long)">exit</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#exit(androidx.compose.ui.geometry.Offset,kotlin.Long)">exit</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position,&nbsp;long&nbsp;delayMillis)</pre>
         <p>Sends a hover exit event at the given <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#exit(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code>, <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#exit(androidx.compose.ui.geometry.Offset,kotlin.Long)">delayMillis</a></code> after the last sent event.</p>
         <p>Note that it is discouraged to manually send a hover exit event followed by a <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#moveTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">moveTo</a></code> that is outside the boundaries of the Compose root or <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#press(androidx.compose.ui.test.MouseButton)">press</a></code>ing a button. These methods do this for you automatically, making sure the event times of the two events are in sync. Only use this method for special scenarios where the hover exit event is not sent as a side effect of another event.</p>
@@ -642,12 +654,20 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
         </div>
       </div>
       <div class="api-item"><a name="getCurrentPosition--"></a><a name="getcurrentposition"></a>
-        <h3 class="api-name" id="getCurrentPosition()">getCurrentPosition</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getCurrentPosition()">getCurrentPosition</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;<a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#getCurrentPosition()">getCurrentPosition</a>()</pre>
         <p>Returns the current position of the mouse. The position is returned in the local coordinate system of the node with which we're interacting. (0, 0) is the top left corner of the node. If none of the move or updatePointer methods have been used yet, the mouse's position will be (0, 0) in the Compose host's coordinate system, which will be <code>-[topLeft]</code> in the node's local coordinate system.</p>
       </div>
       <div class="api-item"><a name="moveBy(androidx.compose.ui.geometry.Offset, kotlin.Long)"></a><a name="moveBy-androidx.compose.ui.geometry.Offset-kotlin.Long-"></a><a name="moveby"></a>
-        <h3 class="api-name" id="moveBy(androidx.compose.ui.geometry.Offset,kotlin.Long)">moveBy</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="moveBy(androidx.compose.ui.geometry.Offset,kotlin.Long)">moveBy</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#moveBy(androidx.compose.ui.geometry.Offset,kotlin.Long)">moveBy</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;delta,&nbsp;long&nbsp;delayMillis)</pre>
         <p>Sends a move event <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#moveBy(androidx.compose.ui.geometry.Offset,kotlin.Long)">delayMillis</a></code> after the last sent event on the associated node, with the position of the mouse moved by the given <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#moveBy(androidx.compose.ui.geometry.Offset,kotlin.Long)">delta</a></code>.</p>
         <p>If no mouse buttons are pressed, a hover event will be sent instead of a move event. If the mouse wasn't hovering yet, a hover enter event is sent as well.</p>
@@ -680,7 +700,11 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
         </div>
       </div>
       <div class="api-item"><a name="moveTo(androidx.compose.ui.geometry.Offset, kotlin.Long)"></a><a name="moveTo-androidx.compose.ui.geometry.Offset-kotlin.Long-"></a><a name="moveto"></a>
-        <h3 class="api-name" id="moveTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">moveTo</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="moveTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">moveTo</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#moveTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">moveTo</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position,&nbsp;long&nbsp;delayMillis)</pre>
         <p>Sends a move event <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#moveTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">delayMillis</a></code> after the last sent event on the associated node, with the position of the mouse updated to <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#moveTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code>. The <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#moveTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code> is in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
         <p>If no mouse buttons are pressed, a hover event will be sent instead of a move event. If the mouse wasn't hovering yet, a hover enter event is sent as well.</p>
@@ -713,7 +737,11 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
         </div>
       </div>
       <div class="api-item"><a name="press-androidx.compose.ui.test.MouseButton-"></a><a name="press"></a>
-        <h3 class="api-name" id="press(androidx.compose.ui.test.MouseButton)">press</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="press(androidx.compose.ui.test.MouseButton)">press</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#press(androidx.compose.ui.test.MouseButton)">press</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/MouseButton.html">MouseButton</a>&nbsp;button)</pre>
         <p>Sends a down and button pressed event for the given <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#press(androidx.compose.ui.test.MouseButton)">button</a></code> on the associated node. When no buttons were down yet, this will exit hovering mode before the button is pressed. All events will be sent at the current event time.</p>
         <p>Throws an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code> if the <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#press(androidx.compose.ui.test.MouseButton)">button</a></code> is already pressed.</p>
@@ -740,7 +768,11 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
         </div>
       </div>
       <div class="api-item"><a name="release-androidx.compose.ui.test.MouseButton-"></a><a name="release"></a>
-        <h3 class="api-name" id="release(androidx.compose.ui.test.MouseButton)">release</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="release(androidx.compose.ui.test.MouseButton)">release</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#release(androidx.compose.ui.test.MouseButton)">release</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/MouseButton.html">MouseButton</a>&nbsp;button)</pre>
         <p>Sends a button released and up event for the given <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#release(androidx.compose.ui.test.MouseButton)">button</a></code> on the associated node. If this was the last button to be released, the mouse will enter hovering mode and send an accompanying mouse move event after the button has been released. All events will be sent at the current event time.</p>
         <p>Throws an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code> if the <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#release(androidx.compose.ui.test.MouseButton)">button</a></code> is not pressed.</p>
@@ -767,7 +799,11 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
         </div>
       </div>
       <div class="api-item"><a name="scroll(kotlin.Float, androidx.compose.ui.test.ScrollWheel)"></a><a name="scroll-kotlin.Float-androidx.compose.ui.test.ScrollWheel-"></a><a name="scroll"></a>
-        <h3 class="api-name" id="scroll(kotlin.Float,androidx.compose.ui.test.ScrollWheel)">scroll</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="scroll(kotlin.Float,androidx.compose.ui.test.ScrollWheel)">scroll</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#scroll(kotlin.Float,androidx.compose.ui.test.ScrollWheel)">scroll</a>(float&nbsp;delta,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/ScrollWheel.html">ScrollWheel</a>&nbsp;scrollWheel)</pre>
         <p>Sends a scroll event with the given <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#scroll(kotlin.Float,androidx.compose.ui.test.ScrollWheel)">delta</a></code> on the given <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#scroll(kotlin.Float,androidx.compose.ui.test.ScrollWheel)">scrollWheel</a></code>. The event will be sent at the current event time. Negative <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#scroll(kotlin.Float,androidx.compose.ui.test.ScrollWheel)">delta</a></code> values correspond to rotating the scroll wheel leftward or upward, positive values correspond to rotating the scroll wheel rightward or downward.</p>
         <div class="devsite-table-wrapper">
@@ -799,7 +835,11 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
         </div>
       </div>
       <div class="api-item"><a name="updatePointerBy-androidx.compose.ui.geometry.Offset-"></a><a name="updatepointerby"></a>
-        <h3 class="api-name" id="updatePointerBy(androidx.compose.ui.geometry.Offset)">updatePointerBy</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="updatePointerBy(androidx.compose.ui.geometry.Offset)">updatePointerBy</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#updatePointerBy(androidx.compose.ui.geometry.Offset)">updatePointerBy</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;delta)</pre>
         <p>Updates the position of the mouse by the given <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#updatePointerBy(androidx.compose.ui.geometry.Offset)">delta</a></code>, but does not send a move or hover event. This can be useful to adjust the mouse position before sending for example a <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#press(androidx.compose.ui.test.MouseButton)">press</a></code> event.</p>
         <div class="devsite-table-wrapper">
@@ -825,7 +865,11 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
         </div>
       </div>
       <div class="api-item"><a name="updatePointerTo-androidx.compose.ui.geometry.Offset-"></a><a name="updatepointerto"></a>
-        <h3 class="api-name" id="updatePointerTo(androidx.compose.ui.geometry.Offset)">updatePointerTo</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="updatePointerTo(androidx.compose.ui.geometry.Offset)">updatePointerTo</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#updatePointerTo(androidx.compose.ui.geometry.Offset)">updatePointerTo</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position)</pre>
         <p>Updates the position of the mouse to the given <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#updatePointerTo(androidx.compose.ui.geometry.Offset)">position</a></code>, but does not send a move or hover event. This can be useful to adjust the mouse position before sending for example a <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#press(androidx.compose.ui.test.MouseButton)">press</a></code> event. The <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#updatePointerTo(androidx.compose.ui.geometry.Offset)">position</a></code> is in the node's local coordinate system, where (0.px, 0.px) is the top left corner of the node.</p>
         <div class="devsite-table-wrapper">
@@ -854,7 +898,11 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
     <div class="list">
       <h2>Extension functions</h2>
       <div class="api-item"><a name="(androidx.compose.ui.test.MouseInjectionScope).animateAlong(kotlin.Function1, kotlin.Long)"></a><a name="-androidx.compose.ui.test.MouseInjectionScope-.animateAlong-kotlin.Function1-kotlin.Long-"></a><a name="animatealong"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.test.MouseInjectionScope).animateAlong(kotlin.Function1,kotlin.Long)">MouseInjectionScopeKt.animateAlong</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.test.MouseInjectionScope).animateAlong(kotlin.Function1,kotlin.Long)">MouseInjectionScopeKt.animateAlong</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/MouseInjectionScopeKt.html">MouseInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#(androidx.compose.ui.test.MouseInjectionScope).animateAlong(kotlin.Function1,kotlin.Long)">animateAlong</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html">MouseInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&gt;&nbsp;curve,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;durationMillis<br>)</pre>
         <p>Move the mouse along the given <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).animateAlong(kotlin.Function1,kotlin.Long)">curve</a></code>, sending a stream of move events to get an animated path of <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).animateAlong(kotlin.Function1,kotlin.Long)">durationMillis</a></code> milliseconds. The mouse will initially be moved to the start of the path, <code>curve(0)</code>, if it is not already there. The positions defined by the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).animateAlong(kotlin.Function1,kotlin.Long)">curve</a></code> are in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
         <div class="devsite-table-wrapper">
@@ -886,7 +934,11 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
         </div>
       </div>
       <div class="api-item"><a name="(androidx.compose.ui.test.MouseInjectionScope).animateBy(androidx.compose.ui.geometry.Offset, kotlin.Long)"></a><a name="-androidx.compose.ui.test.MouseInjectionScope-.animateBy-androidx.compose.ui.geometry.Offset-kotlin.Long-"></a><a name="animateby"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.test.MouseInjectionScope).animateBy(androidx.compose.ui.geometry.Offset,kotlin.Long)">MouseInjectionScopeKt.animateBy</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.test.MouseInjectionScope).animateBy(androidx.compose.ui.geometry.Offset,kotlin.Long)">MouseInjectionScopeKt.animateBy</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/MouseInjectionScopeKt.html">MouseInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#(androidx.compose.ui.test.MouseInjectionScope).animateBy(androidx.compose.ui.geometry.Offset,kotlin.Long)">animateBy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html">MouseInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;delta,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;durationMillis<br>)</pre>
         <p>Move the mouse from the <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#currentPosition()">current position</a></code> by the given <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).animateBy(androidx.compose.ui.geometry.Offset,kotlin.Long)">delta</a></code>, sending a stream of move events to get an animated path of <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).animateBy(androidx.compose.ui.geometry.Offset,kotlin.Long)">durationMillis</a></code> milliseconds.</p>
         <div class="devsite-table-wrapper">
@@ -918,7 +970,11 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
         </div>
       </div>
       <div class="api-item"><a name="(androidx.compose.ui.test.MouseInjectionScope).animateTo(androidx.compose.ui.geometry.Offset, kotlin.Long)"></a><a name="-androidx.compose.ui.test.MouseInjectionScope-.animateTo-androidx.compose.ui.geometry.Offset-kotlin.Long-"></a><a name="animateto"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.test.MouseInjectionScope).animateTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">MouseInjectionScopeKt.animateTo</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.test.MouseInjectionScope).animateTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">MouseInjectionScopeKt.animateTo</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/MouseInjectionScopeKt.html">MouseInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#(androidx.compose.ui.test.MouseInjectionScope).animateTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">animateTo</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html">MouseInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;durationMillis<br>)</pre>
         <p>Move the mouse from the <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#currentPosition()">current position</a></code> to the given <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).animateTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code>, sending a stream of move events to get an animated path of <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).animateTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">durationMillis</a></code> milliseconds. <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.GestureScope).moveTo(kotlin.Int,androidx.compose.ui.geometry.Offset)">Move</a></code> the mouse to the desired start position if you want to start from a different position. The <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).animateTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">position</a></code> is in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
         <div class="devsite-table-wrapper">
@@ -950,7 +1006,11 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
         </div>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.test.MouseInjectionScope-.click-androidx.compose.ui.geometry.Offset-"></a><a name="click"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.test.MouseInjectionScope).click(androidx.compose.ui.geometry.Offset)">MouseInjectionScopeKt.click</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.test.MouseInjectionScope).click(androidx.compose.ui.geometry.Offset)">MouseInjectionScopeKt.click</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/MouseInjectionScopeKt.html">MouseInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#(androidx.compose.ui.test.MouseInjectionScope).click(androidx.compose.ui.geometry.Offset)">click</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html">MouseInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position<br>)</pre>
         <p>Click on <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).click(androidx.compose.ui.geometry.Offset)">position</a></code>, or on the current mouse position if <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).click(androidx.compose.ui.geometry.Offset)">position</a></code> is <code><a href="/reference/androidx/compose/ui/geometry/Offset.Companion.html#Unspecified()">unspecified</a></code>. The <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).click(androidx.compose.ui.geometry.Offset)">position</a></code> is in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
         <div class="devsite-table-wrapper">
@@ -976,7 +1036,11 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
         </div>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.test.MouseInjectionScope-.doubleClick-androidx.compose.ui.geometry.Offset-"></a><a name="doubleclick"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.test.MouseInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset)">MouseInjectionScopeKt.doubleClick</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.test.MouseInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset)">MouseInjectionScopeKt.doubleClick</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/MouseInjectionScopeKt.html">MouseInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#(androidx.compose.ui.test.MouseInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset)">doubleClick</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html">MouseInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position<br>)</pre>
         <p>Double-click on <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset)">position</a></code>, or on the current mouse position if <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset)">position</a></code> is <code><a href="/reference/androidx/compose/ui/geometry/Offset.Companion.html#Unspecified()">unspecified</a></code>. The <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset)">position</a></code> is in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
         <div class="devsite-table-wrapper">
@@ -1002,7 +1066,11 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
         </div>
       </div>
       <div class="api-item"><a name="(androidx.compose.ui.test.MouseInjectionScope).dragAndDrop(androidx.compose.ui.geometry.Offset, androidx.compose.ui.geometry.Offset, kotlin.Long)"></a><a name="-androidx.compose.ui.test.MouseInjectionScope-.dragAndDrop-androidx.compose.ui.geometry.Offset-androidx.compose.ui.geometry.Offset-kotlin.Long-"></a><a name="draganddrop"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.test.MouseInjectionScope).dragAndDrop(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">MouseInjectionScopeKt.dragAndDrop</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.test.MouseInjectionScope).dragAndDrop(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">MouseInjectionScopeKt.dragAndDrop</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/MouseInjectionScopeKt.html">MouseInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#(androidx.compose.ui.test.MouseInjectionScope).dragAndDrop(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">dragAndDrop</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html">MouseInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;start,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;end,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;durationMillis<br>)</pre>
         <p>Drag and drop something from <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).dragAndDrop(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">start</a></code> to <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).dragAndDrop(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">end</a></code> in <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).dragAndDrop(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">durationMillis</a></code> milliseconds. This gesture uses the primary mouse button to drag with, and does not reset any mouse buttons prior to starting the gesture. The mouse position is <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#updatePointerTo(androidx.compose.ui.geometry.Offset)">updated</a></code> to the start position before starting the gesture. The positions defined by the <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).dragAndDrop(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">start</a></code> and <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).dragAndDrop(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">end</a></code> are in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
         <div class="devsite-table-wrapper">
@@ -1040,7 +1108,11 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
         </div>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.test.MouseInjectionScope-.longClick-androidx.compose.ui.geometry.Offset-"></a><a name="longclick"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.test.MouseInjectionScope).longClick(androidx.compose.ui.geometry.Offset)">MouseInjectionScopeKt.longClick</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.test.MouseInjectionScope).longClick(androidx.compose.ui.geometry.Offset)">MouseInjectionScopeKt.longClick</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/MouseInjectionScopeKt.html">MouseInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#(androidx.compose.ui.test.MouseInjectionScope).longClick(androidx.compose.ui.geometry.Offset)">longClick</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html">MouseInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position<br>)</pre>
         <p>Long-click on <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).longClick(androidx.compose.ui.geometry.Offset)">position</a></code>, or on the current mouse position if <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).longClick(androidx.compose.ui.geometry.Offset)">position</a></code> is <code><a href="/reference/androidx/compose/ui/geometry/Offset.Companion.html#Unspecified()">unspecified</a></code>. The <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).longClick(androidx.compose.ui.geometry.Offset)">position</a></code> is in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
         <div class="devsite-table-wrapper">
@@ -1066,7 +1138,11 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
         </div>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.test.MouseInjectionScope-.rightClick-androidx.compose.ui.geometry.Offset-"></a><a name="rightclick"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.test.MouseInjectionScope).rightClick(androidx.compose.ui.geometry.Offset)">MouseInjectionScopeKt.rightClick</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.test.MouseInjectionScope).rightClick(androidx.compose.ui.geometry.Offset)">MouseInjectionScopeKt.rightClick</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/MouseInjectionScopeKt.html">MouseInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#(androidx.compose.ui.test.MouseInjectionScope).rightClick(androidx.compose.ui.geometry.Offset)">rightClick</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html">MouseInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position<br>)</pre>
         <p>Secondary-click on <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).rightClick(androidx.compose.ui.geometry.Offset)">position</a></code>, or on the current mouse position if <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).rightClick(androidx.compose.ui.geometry.Offset)">position</a></code> is <code><a href="/reference/androidx/compose/ui/geometry/Offset.Companion.html#Unspecified()">unspecified</a></code>. While the secondary mouse button is not necessarily the right mouse button (e.g. on left-handed mice), this method is still called <code>rightClick</code> for it's widespread use. The <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).rightClick(androidx.compose.ui.geometry.Offset)">position</a></code> is in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
         <div class="devsite-table-wrapper">
@@ -1092,7 +1168,11 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
         </div>
       </div>
       <div class="api-item"><a name="(androidx.compose.ui.test.MouseInjectionScope).smoothScroll(kotlin.Float, kotlin.Long, androidx.compose.ui.test.ScrollWheel)"></a><a name="-androidx.compose.ui.test.MouseInjectionScope-.smoothScroll-kotlin.Float-kotlin.Long-androidx.compose.ui.test.ScrollWheel-"></a><a name="smoothscroll"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.test.MouseInjectionScope).smoothScroll(kotlin.Float,kotlin.Long,androidx.compose.ui.test.ScrollWheel)">MouseInjectionScopeKt.smoothScroll</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.test.MouseInjectionScope).smoothScroll(kotlin.Float,kotlin.Long,androidx.compose.ui.test.ScrollWheel)">MouseInjectionScopeKt.smoothScroll</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/MouseInjectionScopeKt.html">MouseInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#(androidx.compose.ui.test.MouseInjectionScope).smoothScroll(kotlin.Float,kotlin.Long,androidx.compose.ui.test.ScrollWheel)">smoothScroll</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html">MouseInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;scrollAmount,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;durationMillis,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/ScrollWheel.html">ScrollWheel</a>&nbsp;scrollWheel<br>)</pre>
         <p>Rotate the mouse's <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).smoothScroll(kotlin.Float,kotlin.Long,androidx.compose.ui.test.ScrollWheel)">scrollWheel</a></code> by the given <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).smoothScroll(kotlin.Float,kotlin.Long,androidx.compose.ui.test.ScrollWheel)">scrollAmount</a></code>. The total scroll delta is linearly smoothed out over a stream of scroll events with roughly the <code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#eventPeriodMillis()">InjectionScope.eventPeriodMillis</a></code> between each scroll event. Negative <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).smoothScroll(kotlin.Float,kotlin.Long,androidx.compose.ui.test.ScrollWheel)">scrollAmount</a></code> values correspond to rotating the scroll wheel leftward or downward, positive values correspond to rotating the scroll wheel rightward or upward.</p>
         <div class="devsite-table-wrapper">
@@ -1130,7 +1210,11 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
         </div>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.test.MouseInjectionScope-.tripleClick-androidx.compose.ui.geometry.Offset-"></a><a name="tripleclick"></a>
-        <h3 class="api-name" id="(androidx.compose.ui.test.MouseInjectionScope).tripleClick(androidx.compose.ui.geometry.Offset)">MouseInjectionScopeKt.tripleClick</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.ui.test.MouseInjectionScope).tripleClick(androidx.compose.ui.geometry.Offset)">MouseInjectionScopeKt.tripleClick</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>default&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/MouseInjectionScopeKt.html">MouseInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#(androidx.compose.ui.test.MouseInjectionScope).tripleClick(androidx.compose.ui.geometry.Offset)">tripleClick</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html">MouseInjectionScope</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;position<br>)</pre>
         <p>Triple-click on <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).tripleClick(androidx.compose.ui.geometry.Offset)">position</a></code>, or on the current mouse position if <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).tripleClick(androidx.compose.ui.geometry.Offset)">position</a></code> is <code><a href="/reference/androidx/compose/ui/geometry/Offset.Companion.html#Unspecified()">unspecified</a></code>. The <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).tripleClick(androidx.compose.ui.geometry.Offset)">position</a></code> is in the node's local coordinate system, where (0, 0) is the top left corner of the node.</p>
         <div class="devsite-table-wrapper">
