@@ -567,147 +567,6 @@ internal class ParameterDocumentableConverter(
         else -> this as TypeConstructor
     }
 
-    /**
-     * Runs through the tree of types, converting Kotlin primitives like Int, Boolean, etc. to their
-     * Java counterparts. This is tricky because:
-     *
-     * - Ints and Chars are Integer and Character in Java (sigh)
-     * - Nullable Kotlin primitives always have to be converted to their boxed types (since you
-     *   can't return a null primitive in Java)
-     * - Anything in a generic also has to be boxed
-     * - Unit aka void can appear in lists and must therefore only be converted to void for return
-     *   types
-     * - NOTE: cases get weird for Unit? and Array<Unit>. We try to treat Unit? as Unit, but we
-     *   consider both mistakes in source. Behavior on such cases is not guaranteed.
-     */
-    private fun Projection.rewriteKotlinPrimitivesForJava(
-        isReturnType: Boolean = false,
-        mustBoxPrimitive: Boolean = false
-    ): Projection = when (this) {
-        // TypeParameter: `public <T> void baroo(T[] derp)`.
-        is FunctionalTypeConstructor, is GenericTypeConstructor -> {
-            val typeConstructor = this as TypeConstructor
-            val isStdlib = dri.packageName == "kotlin"
-            val className = dri.classNames.orEmpty()
-            val innerProjections = projections.map {
-                // Generics can't be true primitives in Java. Don't propagate return type.
-                it.rewriteKotlinPrimitivesForJava(isReturnType = false, mustBoxPrimitive = true)
-            }
-
-            if (isReturnType && (isStdlib && className == "Unit")) {
-                Void
-            } else if (isStdlib && className in kotlinPrimitives) {
-                if (mustBoxPrimitive) {
-                    when (className) {
-                        "Char" -> typeConstructor.copy(DRI("java.lang", "Character"))
-                        "Int" -> typeConstructor.copy(DRI("java.lang", "Integer"))
-                        else -> typeConstructor.copy(DRI("java.lang", className))
-                    }
-                } else {
-                    PrimitiveJavaType(className.lowercase(Locale.getDefault()))
-                }
-                // kotlin.IntArray -> int[]
-            } else if (isStdlib && className in kotlinPrimitiveArrays) {
-                PrimitiveJavaType(
-                    className.removeSuffix("Array").lowercase(Locale.getDefault()) + "[]"
-                )
-            } else if (isStdlib && className == "Array") when (innerProjections.singleOrNull()) {
-                // kotlin.Array<Object> -> Object[]
-                is JavaObject -> PrimitiveJavaType("Object[]")
-                // Other Array<Something> -> Something[]; Array<T> -> T[]; Array<() -> Unit> -> ugh
-                is TypeConstructor, is TypeParameter, is TypeAliased, is UnresolvedBound,
-                is Nullable, is DefinitelyNonNullable ->
-                    // We can't represent mid-nest nullability; pretend it's not
-                    PrimitiveJavaType("${innerProjections.single().name()}[]")
-                // kotlin.Array<int> -> int[]
-                is PrimitiveJavaType ->
-                    PrimitiveJavaType((innerProjections.single() as PrimitiveJavaType).name + "[]")
-                // Should not be done in the first place
-                Void -> TODO()
-                Dynamic -> TODO()
-                Star -> TODO()
-                is Variance<*> -> TODO()
-                null -> TODO()
-            } else {
-                typeConstructor.copy(projections = innerProjections, dri = dri.possiblyAsJava())
-            }
-        }
-        // Nullable types and variances can't be true primitives in Java, and can't be `void`
-        is Nullable -> {
-            val newInner = inner.rewriteKotlinPrimitivesForJava(
-                isReturnType = false,
-                mustBoxPrimitive = true
-            )
-            if (newInner is Void) Void // Special handling for `Unit?` being treated as `Unit`
-            else this.copy(inner = newInner as Bound)
-        }
-        // Strip out Variance wrappers because Java doesn't care
-        is Variance<*> -> inner.rewriteKotlinPrimitivesForJava(
-            isReturnType = false,
-            mustBoxPrimitive = true
-        )
-        is DefinitelyNonNullable -> this.copy(
-            inner = inner.rewriteKotlinPrimitivesForJava(
-                isReturnType = false,
-                mustBoxPrimitive = true
-            ) as Bound
-        )
-        // Typealiases don't cancel the argument propagation because they're cosmetic-only
-        is TypeAliased -> this.copy(
-            inner = inner.rewriteKotlinPrimitivesForJava(
-                isReturnType = isReturnType,
-                mustBoxPrimitive = mustBoxPrimitive
-            ) as Bound
-        )
-        // <T> is T in both Java and Kotlin
-        is TypeParameter -> this
-        // Already Java, nothing to do
-        is PrimitiveJavaType, is JavaObject, Void -> this
-        // Not things that get converted to Java
-        Dynamic, Star -> this
-        // Nothing we can do
-        is UnresolvedBound -> this
-    }
-
-    private fun Projection.name(): String = when (this) {
-        is TypeParameter -> name
-        is GenericTypeConstructor -> dri.classNames.orEmpty()
-        is Nullable -> inner.name()
-        is DefinitelyNonNullable -> inner.name()
-        is TypeAliased -> inner.name()
-        is UnresolvedBound -> name
-        is Variance<*> -> inner.name()
-        is PrimitiveJavaType -> name
-        Void -> "void"
-        Star -> "*"
-        is JavaObject -> "Object"
-        is FunctionalTypeConstructor ->
-            """${dri.classNames!!}(${projections.joinToString(", ") { it.name() }})"""
-        Dynamic -> throw RuntimeException("Invalid State: trying to get name of a Dynamic")
-    }
-
-    // `copy` is defined for data classes. TypeConstructor is a sealed class whose only subclasses
-    // GenericTypeConstructor and FunctionalTypeConstructor are data classes, so we can hoist `copy`
-    private fun TypeConstructor.copy(
-        dri: DRI = this.dri,
-        projections: List<Projection> = this.projections
-    ): Projection =
-        when (this) {
-            is GenericTypeConstructor -> this.copy(dri, projections)
-            is FunctionalTypeConstructor -> this.copy(dri, projections)
-        }
-
-    // `copy` is defined for data classes. Variance is a sealed class whose only subclasses
-    // Covariance, Contravariance, and Invariance are data classes, so we can hoist `copy`
-    private fun Variance<*>.copy(
-        inner: Bound = this.inner
-    ): Projection =
-        when (this) {
-            is Covariance -> this.copy(inner)
-            is Contravariance -> this.copy(inner)
-            is Invariance -> this.copy(inner)
-        }
-
     internal companion object {
         val kotlinPrimitives = listOf(
             "Boolean", "Byte", "Char", "Short", "Int", "Long", "Float", "Double"
@@ -746,6 +605,151 @@ internal class ParameterDocumentableConverter(
         )
 
         private val toKotlinTypeMemo = ConcurrentHashMap<Projection, Projection>()
+
+        /**
+         * Runs through the tree of types, converting Kotlin primitives like Int, Boolean, etc. to
+         * their Java counterparts. This is tricky because:
+         *
+         * - Ints and Chars are Integer and Character in Java (sigh)
+         * - Nullable Kotlin primitives always have to be converted to their boxed types (since you
+         *   can't return a null primitive in Java)
+         * - Anything in a generic also has to be boxed
+         * - Unit aka void can appear in lists and must therefore only be converted to void for
+         *   return types
+         * - NOTE: cases get weird for Unit? and Array<Unit>. We try to treat Unit? as Unit, but we
+         *   consider both mistakes in source. Behavior on such cases is not guaranteed.
+         */
+        internal fun Projection.rewriteKotlinPrimitivesForJava(
+            isReturnType: Boolean = false,
+            mustBoxPrimitive: Boolean = false
+        ): Projection = when (this) {
+            // TypeParameter: `public <T> void baroo(T[] derp)`.
+            is FunctionalTypeConstructor, is GenericTypeConstructor -> {
+                val typeConstructor = this as TypeConstructor
+                val isStdlib = dri.packageName == "kotlin"
+                val className = dri.classNames.orEmpty()
+                val innerProjections = projections.map {
+                    // Generics can't be true primitives in Java. Don't propagate return type.
+                    it.rewriteKotlinPrimitivesForJava(isReturnType = false, mustBoxPrimitive = true)
+                }
+
+                if (isReturnType && (isStdlib && className == "Unit")) {
+                    Void
+                } else if (isStdlib && className in kotlinPrimitives) {
+                    if (mustBoxPrimitive) {
+                        when (className) {
+                            "Char" -> typeConstructor.copy(DRI("java.lang", "Character"))
+                            "Int" -> typeConstructor.copy(DRI("java.lang", "Integer"))
+                            else -> typeConstructor.copy(DRI("java.lang", className))
+                        }
+                    } else {
+                        PrimitiveJavaType(className.lowercase(Locale.getDefault()))
+                    }
+                    // kotlin.IntArray -> int[]
+                } else if (isStdlib && className in kotlinPrimitiveArrays) {
+                    PrimitiveJavaType(
+                        className.removeSuffix("Array").lowercase(Locale.getDefault()) + "[]"
+                    )
+                } else if (isStdlib && className == "Array") {
+                    when (innerProjections.singleOrNull()) {
+                        // kotlin.Array<Object> -> Object[]
+                        is JavaObject -> PrimitiveJavaType("Object[]")
+                        // Other Array<Something> -> Something[]; Array<T> -> T[]; Array<() -> Unit> -> ugh
+                        is TypeConstructor, is TypeParameter, is TypeAliased, is UnresolvedBound,
+                        is Nullable, is DefinitelyNonNullable ->
+                            // We can't represent mid-nest nullability; pretend it's not
+                            PrimitiveJavaType("${innerProjections.single().name()}[]")
+                        // kotlin.Array<int> -> int[]
+                        is PrimitiveJavaType ->
+                            PrimitiveJavaType(
+                                (innerProjections.single() as PrimitiveJavaType).name + "[]"
+                            )
+                        // Should not be done in the first place
+                        Void -> TODO()
+                        Dynamic -> TODO()
+                        Star -> TODO()
+                        is Variance<*> -> TODO()
+                        null -> TODO()
+                    }
+                } else {
+                    typeConstructor.copy(projections = innerProjections, dri = dri.possiblyAsJava())
+                }
+            }
+            // Nullable types and variances can't be true primitives in Java, and can't be `void`
+            is Nullable -> {
+                val newInner = inner.rewriteKotlinPrimitivesForJava(
+                    isReturnType = false,
+                    mustBoxPrimitive = true
+                )
+                if (newInner is Void) Void // Special handling for `Unit?` being treated as `Unit`
+                else this.copy(inner = newInner as Bound)
+            }
+            // Strip out Variance wrappers because Java doesn't care
+            is Variance<*> -> inner.rewriteKotlinPrimitivesForJava(
+                isReturnType = false,
+                mustBoxPrimitive = true
+            )
+            is DefinitelyNonNullable -> this.copy(
+                inner = inner.rewriteKotlinPrimitivesForJava(
+                    isReturnType = false,
+                    mustBoxPrimitive = true
+                ) as Bound
+            )
+            // Typealiases don't cancel the argument propagation because they're cosmetic-only
+            is TypeAliased -> this.copy(
+                inner = inner.rewriteKotlinPrimitivesForJava(
+                    isReturnType = isReturnType,
+                    mustBoxPrimitive = mustBoxPrimitive
+                ) as Bound
+            )
+            // <T> is T in both Java and Kotlin
+            is TypeParameter -> this
+            // Already Java, nothing to do
+            is PrimitiveJavaType, is JavaObject, Void -> this
+            // Not things that get converted to Java
+            Dynamic, Star -> this
+            // Nothing we can do
+            is UnresolvedBound -> this
+        }
+
+        private fun Projection.name(): String = when (this) {
+            is TypeParameter -> name
+            is GenericTypeConstructor -> dri.classNames.orEmpty()
+            is Nullable -> inner.name()
+            is DefinitelyNonNullable -> inner.name()
+            is TypeAliased -> inner.name()
+            is UnresolvedBound -> name
+            is Variance<*> -> inner.name()
+            is PrimitiveJavaType -> name
+            Void -> "void"
+            Star -> "*"
+            is JavaObject -> "Object"
+            is FunctionalTypeConstructor ->
+                """${dri.classNames!!}(${projections.joinToString(", ") { it.name() }})"""
+            Dynamic -> throw RuntimeException("Invalid State: trying to get name of a Dynamic")
+        }
+
+        // `copy` is defined for data classes. TypeConstructor is a sealed class whose only subclasses
+        // GenericTypeConstructor and FunctionalTypeConstructor are data classes, so we can hoist `copy`
+        private fun TypeConstructor.copy(
+            dri: DRI = this.dri,
+            projections: List<Projection> = this.projections
+        ): Projection =
+            when (this) {
+                is GenericTypeConstructor -> this.copy(dri, projections)
+                is FunctionalTypeConstructor -> this.copy(dri, projections)
+            }
+
+        // `copy` is defined for data classes. Variance is a sealed class whose only subclasses
+        // Covariance, Contravariance, and Invariance are data classes, so we can hoist `copy`
+        private fun Variance<*>.copy(
+            inner: Bound = this.inner
+        ): Projection =
+            when (this) {
+                is Covariance -> this.copy(inner)
+                is Contravariance -> this.copy(inner)
+                is Invariance -> this.copy(inner)
+            }
     }
 }
 
