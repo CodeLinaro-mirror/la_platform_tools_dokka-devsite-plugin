@@ -237,31 +237,34 @@ internal class MetadataConverterTest(
     }
 
     @Test
-    fun `apiSinceMethodSignature formats Java method to match apiSince metadata string`() {
-        val functions = """
-            |public class Foo {
-            |    public void bar() {}
-            |    public void bar(String param1) {}
+    fun `apiSinceMethodSignature formats methods to match apiSince metadata string`() {
+        val functionsJ = """
+            |public class Foo<T> {
+            |    public void bar01() {}
+            |    public void bar02(String param1) {}
+            |    public void bar03(Object param1) {}
+            |    public void bar04(T param1) {}
             |}
         """.render(java = true).functions()!!
-        assertThat(MetadataConverter.apiSinceMethodSignature(functions[0])).isEqualTo("bar()")
-        assertThat(MetadataConverter.apiSinceMethodSignature(functions[1]))
-            .isEqualTo("bar(java.lang.String)")
-
-        // TODO (b/292023516): add more test cases
-    }
-
-    @Test
-    fun `apiSinceMethodSignature formats Kotlin function to match apiSince metadata string`() {
-        val functions = """
-            |class Foo {
-            |    fun bar() {}
-            |    fun bar(param1: String) {}
+        val functionsK = """
+            |class Foo<T> {
+            |    fun bar01() {}
+            |    fun bar02(param1: String) {}
+            |    fun bar03(param1: Any) {}
+            |    fun bar04(param1: T) {}
             |}
         """.render().functions()!!
-        assertThat(MetadataConverter.apiSinceMethodSignature(functions[0])).isEqualTo("bar()")
-        assertThat(MetadataConverter.apiSinceMethodSignature(functions[1]))
-            .isEqualTo("bar(java.lang.String)")
+
+        for (functions in listOf(functionsJ, functionsK)) {
+            assertThat(MetadataConverter.apiSinceMethodSignature(functions[0]))
+                .isEqualTo("bar01()")
+            assertThat(MetadataConverter.apiSinceMethodSignature(functions[1]))
+                .isEqualTo("bar02(java.lang.String)")
+            assertThat(MetadataConverter.apiSinceMethodSignature(functions[2]))
+                .isEqualTo("bar03(java.lang.Object)")
+            assertThat(MetadataConverter.apiSinceMethodSignature(functions[3]))
+                .isEqualTo("bar04(T)")
+        }
 
         // TODO (b/292023516): add more test cases
     }
