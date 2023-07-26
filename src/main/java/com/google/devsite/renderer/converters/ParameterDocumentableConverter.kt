@@ -622,7 +622,8 @@ internal class ParameterDocumentableConverter(
         internal fun Projection.rewriteKotlinPrimitivesForJava(
             isReturnType: Boolean = false,
             mustBoxPrimitive: Boolean = false,
-            useQualifiedTypes: Boolean = false
+            useQualifiedTypes: Boolean = false,
+            removeVariance: Boolean = true
         ): Projection = when (this) {
             // TypeParameter: `public <T> void baroo(T[] derp)`.
             is FunctionalTypeConstructor, is GenericTypeConstructor -> {
@@ -634,7 +635,8 @@ internal class ParameterDocumentableConverter(
                     it.rewriteKotlinPrimitivesForJava(
                         isReturnType = false,
                         mustBoxPrimitive = true,
-                        useQualifiedTypes = useQualifiedTypes
+                        useQualifiedTypes = useQualifiedTypes,
+                        removeVariance = removeVariance
                     )
                 }
 
@@ -667,22 +669,35 @@ internal class ParameterDocumentableConverter(
                 val newInner = inner.rewriteKotlinPrimitivesForJava(
                     isReturnType = false,
                     mustBoxPrimitive = true,
-                    useQualifiedTypes = useQualifiedTypes
+                    useQualifiedTypes = useQualifiedTypes,
+                    removeVariance = removeVariance
                 )
                 if (newInner is Void) Void // Special handling for `Unit?` being treated as `Unit`
                 else this.copy(inner = newInner as Bound)
             }
-            // Strip out Variance wrappers because Java doesn't care
-            is Variance<*> -> inner.rewriteKotlinPrimitivesForJava(
-                isReturnType = false,
-                mustBoxPrimitive = true,
-                useQualifiedTypes = useQualifiedTypes
-            )
+            // Optionally strip out Variance wrappers -- not stripping them when creating the
+            // component for a type causes an integration test failure with an additional annotation
+            // being displayed within a lambda parameter type, but they need to not be stripped for
+            // version metadata. TODO(b/293587222): look into this
+            is Variance<*> -> {
+                val inner = inner.rewriteKotlinPrimitivesForJava(
+                    isReturnType = false,
+                    mustBoxPrimitive = true,
+                    useQualifiedTypes = useQualifiedTypes,
+                    removeVariance = removeVariance
+                )
+                if (removeVariance) {
+                    inner
+                } else {
+                    this.copy(inner as Bound)
+                }
+            }
             is DefinitelyNonNullable -> this.copy(
                 inner = inner.rewriteKotlinPrimitivesForJava(
                     isReturnType = false,
                     mustBoxPrimitive = true,
-                    useQualifiedTypes = useQualifiedTypes
+                    useQualifiedTypes = useQualifiedTypes,
+                    removeVariance = removeVariance
                 ) as Bound
             )
             // Typealiases don't cancel the argument propagation because they're cosmetic-only
@@ -690,7 +705,8 @@ internal class ParameterDocumentableConverter(
                 inner = inner.rewriteKotlinPrimitivesForJava(
                     isReturnType = isReturnType,
                     mustBoxPrimitive = mustBoxPrimitive,
-                    useQualifiedTypes = useQualifiedTypes
+                    useQualifiedTypes = useQualifiedTypes,
+                    removeVariance = removeVariance
                 ) as Bound
             )
             // <T> is T in both Java and Kotlin
