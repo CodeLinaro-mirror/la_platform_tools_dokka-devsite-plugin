@@ -30,6 +30,7 @@ import org.jetbrains.dokka.model.Covariance
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DProperty
+import org.jetbrains.dokka.model.DTypeParameter
 import org.jetbrains.dokka.model.DefinitelyNonNullable
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.DocumentableSource
@@ -245,6 +246,12 @@ internal class MetadataConverter(
             // The metadata uses the Java API, so use the JvmName if it exists
             val functionName = function.jvmName() ?: function.name
 
+            val generics = if (function.generics.isEmpty()) {
+                ""
+            } else {
+                "<" + function.generics.joinToString(", ") { it.metalavaName() } + ">"
+            }
+
             // The metadata uses the Java API, move the receiver to a parameter
             val parameters = if (function.receiver != null) {
                 function.convertReceiverForJava().parameters
@@ -258,7 +265,7 @@ internal class MetadataConverter(
                 ).metalavaName()
             }
 
-            return "$functionName($paramTypes)"
+            return "$functionName$generics($paramTypes)"
         }
 
         /**
@@ -299,6 +306,23 @@ internal class MetadataConverter(
             // possiblyAsJava() is needed here as Metalava generates a Java view of types
             is FunctionalTypeConstructor -> dri.possiblyAsJava().fullName
             Dynamic -> throw RuntimeException("Invalid State: trying to get name of a Dynamic")
+        }
+
+        /**
+         * Converts the [DTypeParameter] to its Java-style type name, which is what is used in the
+         * apiSince metadata.
+         */
+        private fun DTypeParameter.metalavaName(): String {
+            val boundsNames = bounds.map { it.metalavaName() }
+                // `extends java.lang.Object` is redundant and not included in the metadata
+                // Filtering by if `it !is JavaObject` doesn't work because the `JavaObject` may
+                // be nested in a different `Projection`
+                .filter { it != "java.lang.Object" }
+            val bounds = if (boundsNames.isEmpty()) { "" } else {
+                // This is always "extends", even if the bound represents an interface
+                " extends " + boundsNames.joinToString(" & ")
+            }
+            return name + bounds
         }
     }
 }
