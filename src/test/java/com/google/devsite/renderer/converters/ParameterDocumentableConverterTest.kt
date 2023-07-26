@@ -347,6 +347,27 @@ internal class ParameterDocumentableConverterTest(
     }
 
     @Test
+    fun `Array of nullable integers is rendered correctly`() {
+        val param = """
+            |fun foo(a: Array<Int?>) = Unit
+        """.render().param("a")
+
+        assertThat(param.nullable).isFalse()
+        val type = param.data.type.data
+
+        javaOnly {
+            assertThat(type.type.data.name).isEqualTo("Integer[]")
+        }
+        kotlinOnly {
+            assertThat(type.type.data.name).isEqualTo("Array")
+            assertThat(type.generics).hasSize(1)
+            val generic = type.generics.single()
+            assertThat(generic.nullable).isTrue()
+            assertThat(generic.data.type.data.name).isEqualTo("Int")
+        }
+    }
+
+    @Test
     fun `Nullability on parameters is rendered correctly in 4x Kotlin and Java`() {
         val functionK = """
             |fun foo(a: String, b: String?) // Cannot write platform types `String!` in source code

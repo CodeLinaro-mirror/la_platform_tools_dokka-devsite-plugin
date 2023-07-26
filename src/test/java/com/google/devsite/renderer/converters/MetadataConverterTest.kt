@@ -244,6 +244,7 @@ internal class MetadataConverterTest(
             |    public void bar02(String param1) {}
             |    public void bar03(Object param1) {}
             |    public void bar04(T param1) {}
+            |    public void bar05(int param1) {}
             |}
         """.render(java = true).functions()!!
         val functionsK = """
@@ -252,6 +253,7 @@ internal class MetadataConverterTest(
             |    fun bar02(param1: String) {}
             |    fun bar03(param1: Any) {}
             |    fun bar04(param1: T) {}
+            |    fun bar05(param1: Int) {}
             |}
         """.render().functions()!!
 
@@ -264,9 +266,50 @@ internal class MetadataConverterTest(
                 .isEqualTo("bar03(java.lang.Object)")
             assertThat(MetadataConverter.apiSinceMethodSignature(functions[3]))
                 .isEqualTo("bar04(T)")
+            assertThat(MetadataConverter.apiSinceMethodSignature(functions[4]))
+                .isEqualTo("bar05(int)")
         }
 
         // TODO (b/292023516): add more test cases
+    }
+
+    @Test
+    fun `apiSinceMethodSignature formats methods with array params to match metadata string`() {
+        val functionsJ = """
+            |public class Foo {
+            |    public void bar01(String[] param1) {}
+            |    public void bar02(int[] param1) {}
+            |    public void bar03(Object[] param1) {}
+            |    public void bar04(Integer[] param1) {}
+            |    public void bar05(int[][] param1) {}
+            |    public void bar06(String[][] param1) {}
+            |}
+        """.render(java = true).functions()!!
+        val functionsK = """
+            |class Foo {
+            |    fun bar01(param1: Array<String>) {}
+            |    fun bar02(param1: IntArray) {}
+            |    fun bar03(param1: Array<Any>) {}
+            |    fun bar04(param1: Array<Int?>) {}
+            |    fun bar05(param1: Array<IntArray>) {}
+            |    fun bar06(param1: Array<Array<String>>) {}
+            |}
+        """.render().functions()!!
+
+        for (functions in listOf(functionsJ, functionsK)) {
+            assertThat(MetadataConverter.apiSinceMethodSignature(functions[0]))
+                .isEqualTo("bar01(java.lang.String[])")
+            assertThat(MetadataConverter.apiSinceMethodSignature(functions[1]))
+                .isEqualTo("bar02(int[])")
+            assertThat(MetadataConverter.apiSinceMethodSignature(functions[2]))
+                .isEqualTo("bar03(java.lang.Object[])")
+            assertThat(MetadataConverter.apiSinceMethodSignature(functions[3]))
+                .isEqualTo("bar04(java.lang.Integer[])")
+            assertThat(MetadataConverter.apiSinceMethodSignature(functions[4]))
+                .isEqualTo("bar05(int[][])")
+            assertThat(MetadataConverter.apiSinceMethodSignature(functions[5]))
+                .isEqualTo("bar06(java.lang.String[][])")
+        }
     }
 
     @Test

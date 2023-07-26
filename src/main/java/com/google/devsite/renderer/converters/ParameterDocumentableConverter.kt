@@ -621,7 +621,8 @@ internal class ParameterDocumentableConverter(
          */
         internal fun Projection.rewriteKotlinPrimitivesForJava(
             isReturnType: Boolean = false,
-            mustBoxPrimitive: Boolean = false
+            mustBoxPrimitive: Boolean = false,
+            useQualifiedTypes: Boolean = false
         ): Projection = when (this) {
             // TypeParameter: `public <T> void baroo(T[] derp)`.
             is FunctionalTypeConstructor, is GenericTypeConstructor -> {
@@ -630,7 +631,11 @@ internal class ParameterDocumentableConverter(
                 val className = dri.classNames.orEmpty()
                 val innerProjections = projections.map {
                     // Generics can't be true primitives in Java. Don't propagate return type.
-                    it.rewriteKotlinPrimitivesForJava(isReturnType = false, mustBoxPrimitive = true)
+                    it.rewriteKotlinPrimitivesForJava(
+                        isReturnType = false,
+                        mustBoxPrimitive = true,
+                        useQualifiedTypes = useQualifiedTypes
+                    )
                 }
 
                 if (isReturnType && (isStdlib && className == "Unit")) {
@@ -651,26 +656,8 @@ internal class ParameterDocumentableConverter(
                         className.removeSuffix("Array").lowercase(Locale.getDefault()) + "[]"
                     )
                 } else if (isStdlib && className == "Array") {
-                    when (innerProjections.singleOrNull()) {
-                        // kotlin.Array<Object> -> Object[]
-                        is JavaObject -> PrimitiveJavaType("Object[]")
-                        // Other Array<Something> -> Something[]; Array<T> -> T[]; Array<() -> Unit> -> ugh
-                        is TypeConstructor, is TypeParameter, is TypeAliased, is UnresolvedBound,
-                        is Nullable, is DefinitelyNonNullable ->
-                            // We can't represent mid-nest nullability; pretend it's not
-                            PrimitiveJavaType("${innerProjections.single().name()}[]")
-                        // kotlin.Array<int> -> int[]
-                        is PrimitiveJavaType ->
-                            PrimitiveJavaType(
-                                (innerProjections.single() as PrimitiveJavaType).name + "[]"
-                            )
-                        // Should not be done in the first place
-                        Void -> TODO()
-                        Dynamic -> TODO()
-                        Star -> TODO()
-                        is Variance<*> -> TODO()
-                        null -> TODO()
-                    }
+                    val name = innerProjections.single().nameForJavaArray(useQualifiedTypes)
+                    PrimitiveJavaType("$name[]")
                 } else {
                     typeConstructor.copy(projections = innerProjections, dri = dri.possiblyAsJava())
                 }
@@ -679,7 +666,8 @@ internal class ParameterDocumentableConverter(
             is Nullable -> {
                 val newInner = inner.rewriteKotlinPrimitivesForJava(
                     isReturnType = false,
-                    mustBoxPrimitive = true
+                    mustBoxPrimitive = true,
+                    useQualifiedTypes = useQualifiedTypes
                 )
                 if (newInner is Void) Void // Special handling for `Unit?` being treated as `Unit`
                 else this.copy(inner = newInner as Bound)
@@ -687,19 +675,22 @@ internal class ParameterDocumentableConverter(
             // Strip out Variance wrappers because Java doesn't care
             is Variance<*> -> inner.rewriteKotlinPrimitivesForJava(
                 isReturnType = false,
-                mustBoxPrimitive = true
+                mustBoxPrimitive = true,
+                useQualifiedTypes = useQualifiedTypes
             )
             is DefinitelyNonNullable -> this.copy(
                 inner = inner.rewriteKotlinPrimitivesForJava(
                     isReturnType = false,
-                    mustBoxPrimitive = true
+                    mustBoxPrimitive = true,
+                    useQualifiedTypes = useQualifiedTypes
                 ) as Bound
             )
             // Typealiases don't cancel the argument propagation because they're cosmetic-only
             is TypeAliased -> this.copy(
                 inner = inner.rewriteKotlinPrimitivesForJava(
                     isReturnType = isReturnType,
-                    mustBoxPrimitive = mustBoxPrimitive
+                    mustBoxPrimitive = mustBoxPrimitive,
+                    useQualifiedTypes = useQualifiedTypes
                 ) as Bound
             )
             // <T> is T in both Java and Kotlin
@@ -712,20 +703,35 @@ internal class ParameterDocumentableConverter(
             is UnresolvedBound -> this
         }
 
-        private fun Projection.name(): String = when (this) {
+        /**
+         * Generates the name for the [Projection] for use as the type of a primitive java array.
+         * Uses fully qualified names (e.g. "java.lang.Object") if [useQualifiedTypes] is `true`,
+         * otherwise just uses class names (e.g. "Object").
+         */
+        private fun Projection.nameForJavaArray(useQualifiedTypes: Boolean): String = when (this) {
             is TypeParameter -> name
-            is GenericTypeConstructor -> dri.classNames.orEmpty()
-            is Nullable -> inner.name()
-            is DefinitelyNonNullable -> inner.name()
-            is TypeAliased -> inner.name()
+            is GenericTypeConstructor -> if (useQualifiedTypes) {
+                dri.fullName
+            } else {
+                dri.classNames.orEmpty()
+            }
+            is Nullable -> inner.nameForJavaArray(useQualifiedTypes)
+            is DefinitelyNonNullable -> inner.nameForJavaArray(useQualifiedTypes)
+            is TypeAliased -> inner.nameForJavaArray(useQualifiedTypes)
             is UnresolvedBound -> name
-            is Variance<*> -> inner.name()
+            is Variance<*> -> inner.nameForJavaArray(useQualifiedTypes)
             is PrimitiveJavaType -> name
             Void -> "void"
             Star -> "*"
-            is JavaObject -> "Object"
-            is FunctionalTypeConstructor ->
-                """${dri.classNames!!}(${projections.joinToString(", ") { it.name() }})"""
+            is JavaObject -> if (useQualifiedTypes) "java.lang.Object" else "Object"
+            is FunctionalTypeConstructor -> {
+                val name = if (useQualifiedTypes) dri.fullName else dri.classNames.orEmpty()
+                // TODO(b/293329555): fix lambda array case
+                val projections = projections.joinToString(", ") {
+                    it.nameForJavaArray(useQualifiedTypes)
+                }
+                """$name($projections)"""
+            }
             Dynamic -> throw RuntimeException("Invalid State: trying to get name of a Dynamic")
         }
 
