@@ -260,9 +260,15 @@ internal class MetadataConverter(
             }
 
             val paramTypes = parameters.joinToString(",") { param ->
-                param.type.rewriteKotlinPrimitivesForJava(
+                val basicTypeName = param.type.rewriteKotlinPrimitivesForJava(
                     useQualifiedTypes = true, removeVariance = false
                 ).metalavaName()
+
+                // Kotlin varargs are separate from the type representation
+                val modifiers = param.modifiers(param.getExpectOrCommonSourceSet())
+                val additional = if (modifiers.contains("vararg")) "..." else ""
+
+                "$basicTypeName$additional"
             }
 
             return "$functionName$generics($paramTypes)"

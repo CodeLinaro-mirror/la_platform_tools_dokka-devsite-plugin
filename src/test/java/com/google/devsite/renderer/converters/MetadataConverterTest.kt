@@ -245,6 +245,7 @@ internal class MetadataConverterTest(
             |    public void bar03(Object param1) {}
             |    public void bar04(T param1) {}
             |    public void bar05(int param1) {}
+            |    public void bar06(String... param1) {}
             |}
         """.render(java = true).functions()!!
         val functionsK = """
@@ -254,6 +255,7 @@ internal class MetadataConverterTest(
             |    fun bar03(param1: Any) {}
             |    fun bar04(param1: T) {}
             |    fun bar05(param1: Int) {}
+            |    fun bar06(vararg param1: String) {}
             |}
         """.render().functions()!!
 
@@ -268,6 +270,11 @@ internal class MetadataConverterTest(
                 .isEqualTo("bar04(T)")
             assertThat(MetadataConverter.apiSinceMethodSignature(functions[4]))
                 .isEqualTo("bar05(int)")
+            // TODO(b/293340652): this should work for Java too
+            if (functions == functionsK) {
+                assertThat(MetadataConverter.apiSinceMethodSignature(functions[5]))
+                    .isEqualTo("bar06(java.lang.String...)")
+            }
         }
 
         // TODO (b/292023516): add more test cases
