@@ -309,9 +309,32 @@ internal class MetadataConverter(
             Void -> "void"
             Star -> "?"
             is JavaObject -> "java.lang.Object"
-            // possiblyAsJava() is needed here as Metalava generates a Java view of types
-            is FunctionalTypeConstructor -> dri.possiblyAsJava().fullName
+            is FunctionalTypeConstructor -> functionalTypeMetalavaName()
             Dynamic -> throw RuntimeException("Invalid State: trying to get name of a Dynamic")
+        }
+
+        /**
+         * Converts the [FunctionalTypeConstructor] to its Java-style type name, which is what is
+         * used in the apiSince metadata.
+         */
+        private fun FunctionalTypeConstructor.functionalTypeMetalavaName(): String {
+            val paramNames = projections.dropLast(1).map {
+                val name = it.metalavaName()
+                // Non-object param types appear as contravariance in the metadata, while
+                // object params just appear as Object
+                if (it is Invariance<*> && name != "java.lang.Object") {
+                    "? super $name"
+                } else {
+                    name
+                }
+            }
+            val returnName = projections.last().metalavaName().let {
+                // An object return type appears in the metadata as "?"
+                if (it == "java.lang.Object") "?" else it
+            }
+            val nested = (paramNames + returnName).joinToString(",")
+
+            return "${dri.fullName}<$nested>"
         }
 
         /**
