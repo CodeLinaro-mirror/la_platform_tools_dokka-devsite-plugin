@@ -259,19 +259,27 @@ internal class MetadataConverter(
                 function.parameters
             }
 
-            val paramTypes = parameters.joinToString(",") { param ->
+            val paramTypes = parameters.map { param ->
                 val basicTypeName = param.type.rewriteKotlinPrimitivesForJava(
                     useQualifiedTypes = true, removeVariance = false
                 ).metalavaName()
 
                 // Kotlin varargs are separate from the type representation
+                // The other parameter modifier that impacts the signature is `suspend`, which is
+                // handled in [FunctionalTypeConstructor.functionalTypeMetalavaName()]
                 val modifiers = param.modifiers(param.getExpectOrCommonSourceSet())
                 val additional = if (modifiers.contains("vararg")) "..." else ""
 
                 "$basicTypeName$additional"
+            }.toMutableList()
+
+            // `suspend` functions have a continuation arg in the Java API that does not appear in
+            // the Kotlin representation. Other function modifiers do not impact the Java signature
+            if (function.modifiers(function.getExpectOrCommonSourceSet()).contains("suspend")) {
+                paramTypes += "kotlin.coroutines.Continuation<? super kotlin.Unit>"
             }
 
-            return "$functionName$generics($paramTypes)"
+            return """$functionName$generics(${paramTypes.joinToString(",")})"""
         }
 
         /**
@@ -318,23 +326,39 @@ internal class MetadataConverter(
          * used in the apiSince metadata.
          */
         private fun FunctionalTypeConstructor.functionalTypeMetalavaName(): String {
+            // `suspend` function types appear as `kotlin.coroutines.SuspendFunction<N>` in the
+            // model, but in the Java signature as `kotlin.jvm.functions.Function<N+1>`
+            val typeName = if (isSuspendable) {
+                val num = dri.classNames!!.substringAfter("SuspendFunction").toInt() + 1
+                "kotlin.jvm.functions.Function$num"
+            } else {
+                dri.fullName
+            }
+
             val paramNames = projections.dropLast(1).map {
                 val name = it.metalavaName()
                 // Non-object param types appear as contravariance in the metadata, while
-                // object params just appear as Object
-                if (it is Invariance<*> && name != "java.lang.Object") {
+                // object params just appear as Object -- except for in `suspend` functions, where
+                // `? super Object` does show up.
+                if (it is Invariance<*> && (name != "java.lang.Object" || isSuspendable)) {
                     "? super $name"
                 } else {
                     name
                 }
             }
             val returnName = projections.last().metalavaName().let {
-                // An object return type appears in the metadata as "?"
-                if (it == "java.lang.Object") "?" else it
+                if (isSuspendable) {
+                    // `suspend` functions have their return types wrapped in a Continuation, and
+                    // an extra `?` added at the end of the list of generics
+                    "? super kotlin.coroutines.Continuation<? super $it>,?"
+                } else {
+                    // An object return type appears in the metadata as "?"
+                    if (it == "java.lang.Object") "?" else it
+                }
             }
             val nested = (paramNames + returnName).joinToString(",")
 
-            return "${dri.fullName}<$nested>"
+            return "$typeName<$nested>"
         }
 
         /**

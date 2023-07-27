@@ -276,8 +276,6 @@ internal class MetadataConverterTest(
                     .isEqualTo("bar06(java.lang.String...)")
             }
         }
-
-        // TODO (b/292023516): add more test cases
     }
 
     @Test
@@ -427,6 +425,89 @@ internal class MetadataConverterTest(
             .isEqualTo("bar06(kotlin.jvm.functions.Function0<java.lang.String>)")
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[6]))
             .isEqualTo("bar07(kotlin.jvm.functions.Function0<kotlin.Unit>)")
+    }
+
+    @Test
+    fun `apiSinceMethodSignature formats suspend params to match apiSince metadata string`() {
+        val functions = """
+            |class Foo {
+            |    fun bar01(param: suspend (String) -> String) {}
+            |    fun bar02(param: suspend (Any) -> String) {}
+            |    fun bar03(param: suspend (String) -> Any) {}
+            |    fun bar04(param: suspend () -> String) {}
+            |    fun bar05(param: suspend (String, Int) -> String) {}
+            |    fun bar06(param: suspend (String) -> Unit) {}
+            |    fun bar07(param: suspend () -> Unit) {}
+            |}
+        """.render().functions()!!
+
+        assertThat(MetadataConverter.apiSinceMethodSignature(functions[0]))
+            .isEqualTo(
+                "bar01(kotlin.jvm.functions.Function2<? super java.lang.String," +
+                    "? super kotlin.coroutines.Continuation<? super java.lang.String>,?>)"
+            )
+        assertThat(MetadataConverter.apiSinceMethodSignature(functions[1]))
+            .isEqualTo(
+                "bar02(kotlin.jvm.functions.Function2<? super java.lang.Object," +
+                    "? super kotlin.coroutines.Continuation<? super java.lang.String>,?>)"
+            )
+        assertThat(MetadataConverter.apiSinceMethodSignature(functions[2]))
+            .isEqualTo(
+                "bar03(kotlin.jvm.functions.Function2<? super java.lang.String," +
+                    "? super kotlin.coroutines.Continuation<? super java.lang.Object>,?>)"
+            )
+        assertThat(MetadataConverter.apiSinceMethodSignature(functions[3]))
+            .isEqualTo(
+                "bar04(kotlin.jvm.functions.Function1<" +
+                    "? super kotlin.coroutines.Continuation<? super java.lang.String>,?>)"
+            )
+        assertThat(MetadataConverter.apiSinceMethodSignature(functions[4]))
+            .isEqualTo(
+                "bar05(kotlin.jvm.functions.Function3<? super java.lang.String," +
+                    "? super java.lang.Integer," +
+                    "? super kotlin.coroutines.Continuation<? super java.lang.String>,?>)"
+            )
+
+        assertThat(MetadataConverter.apiSinceMethodSignature(functions[5]))
+            .isEqualTo(
+                "bar06(kotlin.jvm.functions.Function2<? super java.lang.String," +
+                    "? super kotlin.coroutines.Continuation<? super kotlin.Unit>,?>)"
+            )
+        assertThat(MetadataConverter.apiSinceMethodSignature(functions[6]))
+            .isEqualTo(
+                "bar07(kotlin.jvm.functions.Function1<" +
+                    "? super kotlin.coroutines.Continuation<? super kotlin.Unit>,?>)"
+            )
+    }
+
+    @Test
+    fun `apiSinceMethodSignature formats suspend function to match apiSince metadata string`() {
+        val functions = """
+            |class Foo {
+            |    suspend fun bar01() {}
+            |    suspend fun bar02(param: String) {}
+            |    suspend fun bar03(param: (String) -> String) {}
+            |    suspend fun bar04(param: suspend (String) -> String) {}
+            |}
+        """.render().functions()!!
+
+        assertThat(MetadataConverter.apiSinceMethodSignature(functions[0]))
+            .isEqualTo("bar01(kotlin.coroutines.Continuation<? super kotlin.Unit>)")
+        assertThat(MetadataConverter.apiSinceMethodSignature(functions[1]))
+            .isEqualTo(
+                "bar02(java.lang.String,kotlin.coroutines.Continuation<? super kotlin.Unit>)"
+            )
+        assertThat(MetadataConverter.apiSinceMethodSignature(functions[2]))
+            .isEqualTo(
+                "bar03(kotlin.jvm.functions.Function1<? super java.lang.String," +
+                    "java.lang.String>,kotlin.coroutines.Continuation<? super kotlin.Unit>)"
+            )
+        assertThat(MetadataConverter.apiSinceMethodSignature(functions[3]))
+            .isEqualTo(
+                "bar04(kotlin.jvm.functions.Function2<? super java.lang.String," +
+                    "? super kotlin.coroutines.Continuation<? super java.lang.String>,?>," +
+                    "kotlin.coroutines.Continuation<? super kotlin.Unit>)"
+            )
     }
 
     @Test
