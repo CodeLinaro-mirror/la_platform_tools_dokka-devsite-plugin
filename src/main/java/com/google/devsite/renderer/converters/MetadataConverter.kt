@@ -268,7 +268,7 @@ internal class MetadataConverter(
 
             val paramTypes = parameters.map { param ->
                 val basicTypeName = param.type.rewriteKotlinPrimitivesForJava(
-                    useQualifiedTypes = true, removeVariance = false
+                    useQualifiedTypes = true
                 ).metalavaName()
 
                 // Kotlin varargs are separate from the type representation
