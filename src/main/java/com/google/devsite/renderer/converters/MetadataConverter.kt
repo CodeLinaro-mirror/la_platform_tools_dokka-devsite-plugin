@@ -346,14 +346,28 @@ internal class MetadataConverter(
                     name
                 }
             }
-            val returnName = projections.last().metalavaName().let {
-                if (isSuspendable) {
-                    // `suspend` functions have their return types wrapped in a Continuation, and
-                    // an extra `?` added at the end of the list of generics
-                    "? super kotlin.coroutines.Continuation<? super $it>,?"
-                } else {
-                    // An object return type appears in the metadata as "?"
-                    if (it == "java.lang.Object") "?" else it
+            val returnName = projections.last().let { type ->
+                type.metalavaName().let { name ->
+                    if (isSuspendable) {
+                        // `suspend` functions have their return types wrapped in a Continuation, and
+                        // an extra `?` added at the end of the list of generics
+                        "? super kotlin.coroutines.Continuation<? super $name>,?"
+                    } else if (name == "java.lang.Object") {
+                        // An object return type appears in the metadata as "?"
+                        "?"
+                    } else {
+                        val innerType = (type as? Invariance<*>)?.inner?.unwrapNullability()
+                        if (
+                            innerType is PrimitiveJavaType ||
+                            (innerType is GenericTypeConstructor && innerType.projections.isEmpty())
+                        ) {
+                            // Simple types appear as-is in the metadata, more complex types include
+                            // "? extends" first
+                            name
+                        } else {
+                            "? extends $name"
+                        }
+                    }
                 }
             }
             val nested = (paramNames + returnName).joinToString(",")
@@ -377,6 +391,17 @@ internal class MetadataConverter(
             }
             return name + bounds
         }
+
+        /**
+         * Remove an outer nullability wrapper from the [Projection], if one exists.
+         * Does not recur into nested projections.
+         */
+        private fun Projection.unwrapNullability(): Projection =
+            when (this) {
+                is Nullable -> inner
+                is DefinitelyNonNullable -> inner
+                else -> this
+            }
     }
 }
 

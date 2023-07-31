@@ -401,6 +401,7 @@ internal class MetadataConverterTest(
             |    fun bar05(param: (String) -> Unit) {}
             |    fun bar06(param: () -> String) {}
             |    fun bar07(param: () -> Unit) {}
+            |    fun bar08(param: (List<String>) -> Unit) {}
             |}
         """.render().functions()!!
 
@@ -425,6 +426,64 @@ internal class MetadataConverterTest(
             .isEqualTo("bar06(kotlin.jvm.functions.Function0<java.lang.String>)")
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[6]))
             .isEqualTo("bar07(kotlin.jvm.functions.Function0<kotlin.Unit>)")
+        assertThat(MetadataConverter.apiSinceMethodSignature(functions[7]))
+            .isEqualTo(
+                "bar08(kotlin.jvm.functions.Function1<" +
+                    "? super java.util.List<java.lang.String>,kotlin.Unit>)"
+            )
+    }
+
+    @Test
+    fun `apiSinceMethodSignature formats lambda returns to match metadata string`() {
+        val functions = """
+            |class Foo {
+            |   fun bar01(param: () -> String) {}
+            |   fun bar02(param: () -> String?) {}
+            |   fun bar03(param: () -> List<Integer>) {}
+            |   fun bar04(param: () -> List<String>) {}
+            |   fun bar05(param: () -> Map<String, Integer>) {}
+            |   fun bar06(param: () -> Int) {}
+            |   fun bar07(param: () -> IntArray) {}
+            |   fun bar08(param: () -> Array<String>) {}
+            |   fun bar09(param: () -> Array<String>) {}
+            |   fun bar10(param: () -> ((String) -> String)) {}
+            |   fun <E> bar11(param: () -> E) {}
+            |}
+        """.render().functions()!!
+
+        assertThat(MetadataConverter.apiSinceMethodSignature(functions[0]))
+            .isEqualTo("bar01(kotlin.jvm.functions.Function0<java.lang.String>)")
+        assertThat(MetadataConverter.apiSinceMethodSignature(functions[1]))
+            .isEqualTo("bar02(kotlin.jvm.functions.Function0<java.lang.String>)")
+        assertThat(MetadataConverter.apiSinceMethodSignature(functions[2]))
+            .isEqualTo(
+                "bar03(kotlin.jvm.functions.Function0<? extends " +
+                    "java.util.List<java.lang.Integer>>)"
+            )
+        assertThat(MetadataConverter.apiSinceMethodSignature(functions[3]))
+            .isEqualTo(
+                "bar04(kotlin.jvm.functions.Function0<? extends java.util.List<java.lang.String>>)"
+            )
+        assertThat(MetadataConverter.apiSinceMethodSignature(functions[4]))
+            .isEqualTo(
+                "bar05(kotlin.jvm.functions.Function0<? extends " +
+                    "java.util.Map<java.lang.String,java.lang.Integer>>)"
+            )
+        assertThat(MetadataConverter.apiSinceMethodSignature(functions[5]))
+            .isEqualTo("bar06(kotlin.jvm.functions.Function0<java.lang.Integer>)")
+        assertThat(MetadataConverter.apiSinceMethodSignature(functions[6]))
+            .isEqualTo("bar07(kotlin.jvm.functions.Function0<int[]>)")
+        assertThat(MetadataConverter.apiSinceMethodSignature(functions[7]))
+            .isEqualTo("bar08(kotlin.jvm.functions.Function0<java.lang.String[]>)")
+        assertThat(MetadataConverter.apiSinceMethodSignature(functions[8]))
+            .isEqualTo("bar09(kotlin.jvm.functions.Function0<java.lang.String[]>)")
+        assertThat(MetadataConverter.apiSinceMethodSignature(functions[9]))
+            .isEqualTo(
+                "bar10(kotlin.jvm.functions.Function0<? extends " +
+                    "kotlin.jvm.functions.Function1<? super java.lang.String,java.lang.String>>)"
+            )
+        assertThat(MetadataConverter.apiSinceMethodSignature(functions[10]))
+            .isEqualTo("bar11<E>(kotlin.jvm.functions.Function0<? extends E>)")
     }
 
     @Test
@@ -632,7 +691,12 @@ internal class MetadataConverterTest(
                         ClassVersionMetadata.MethodVersionMetadata(
                             methodName = "foo",
                             addedIn = "1.2.3"
-                        )
+                        ),
+                    "listExtensionFun(java.util.List<java.lang.String>)" to
+                        ClassVersionMetadata.MethodVersionMetadata(
+                            methodName = "listExtensionFun(java.util.List<java.lang.String>)",
+                            addedIn = "1.2.3"
+                        ),
                 )
             )
         )
@@ -641,11 +705,13 @@ internal class MetadataConverterTest(
             |
             |fun Foo.extensionFun(): Unit {}
             |val Foo.extensionVal: Int get() = 2
+            |fun List<String>.listExtensionFun() {}
         """.render()
 
         val metadataComponents = listOf(
             module.metadataForMethod("extensionFun", versionMetadataMap = metadata),
-            module.metadataForProperty("extensionVal", versionMetadataMap = metadata)
+            module.metadataForProperty("extensionVal", versionMetadataMap = metadata),
+            module.metadataForMethod("listExtensionFun", versionMetadataMap = metadata)
         )
 
         for (metadataComponent in metadataComponents) {
