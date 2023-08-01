@@ -60,7 +60,11 @@
     <div class="list">
       <h2>Public functions</h2>
       <div class="api-item"><a name="distinctUntilChanged-androidx.lifecycle.LiveData&lt;X&gt;-"></a><a name="distinctuntilchanged"></a>
-        <h3 class="api-name" id="distinctUntilChanged(androidx.lifecycle.LiveData&lt;X&gt;)">distinctUntilChanged</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="distinctUntilChanged(androidx.lifecycle.LiveData&lt;X&gt;)">distinctUntilChanged</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>java-static&nbsp;fun&nbsp;&lt;X&gt; <a href="/reference/kotlin/androidx/lifecycle/Transformations.html#distinctUntilChanged(androidx.lifecycle.LiveData&lt;X&gt;)">distinctUntilChanged</a>(source:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a>&lt;X!&gt;):&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a>&lt;X!&gt;</pre>
         <p>Creates a new <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code> object that does not emit a value until the source LiveData value has been changed. The value is considered changed if <code>equals()</code> yields <code>false</code>.</p>
         <div class="devsite-table-wrapper">
@@ -113,7 +117,11 @@
         </div>
       </div>
       <div class="api-item"><a name="map(androidx.lifecycle.LiveData&lt;X&gt;, androidx.arch.core.util.Function&lt;X,Y&gt;)"></a><a name="map-androidx.lifecycle.LiveData&lt;X&gt;-androidx.arch.core.util.Function&lt;X,Y&gt;-"></a><a name="map"></a>
-        <h3 class="api-name" id="map(androidx.lifecycle.LiveData&lt;X&gt;,androidx.arch.core.util.Function&lt;X,Y&gt;)">map</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="map(androidx.lifecycle.LiveData&lt;X&gt;,androidx.arch.core.util.Function&lt;X,Y&gt;)">map</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>java-static&nbsp;fun&nbsp;&lt;X,&nbsp;Y&gt; <a href="/reference/kotlin/androidx/lifecycle/Transformations.html#map(androidx.lifecycle.LiveData&lt;X&gt;,androidx.arch.core.util.Function&lt;X,Y&gt;)">map</a>(source:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a>&lt;X!&gt;,&nbsp;mapFunction:&nbsp;<a href="/reference/kotlin/androidx/arch/core/util/Function.html">Function</a>&lt;X!,&nbsp;Y!&gt;):&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a>&lt;Y!&gt;</pre>
         <p>Returns a <code>LiveData</code> mapped from the input <code>source</code><code>LiveData</code> by applying <code>mapFunction</code> to each value set on <code>source</code>. </p>
         <p> This method is analogous to <code><a href="/reference/kotlin/io/reactivex/Observable.html#map(io.reactivex.functions.Function&lt;? super T,? extends R&gt;)">map</a></code>. </p>
@@ -188,7 +196,11 @@ LiveData&lt;String&gt; userFullNameLiveData =
         </div>
       </div>
       <div class="api-item"><a name="switchMap(androidx.lifecycle.LiveData&lt;X&gt;, androidx.arch.core.util.Function&lt;X,androidx.lifecycle.LiveData&lt;Y&gt;&gt;)"></a><a name="switchMap-androidx.lifecycle.LiveData&lt;X&gt;-androidx.arch.core.util.Function&lt;X,androidx.lifecycle.LiveData&lt;Y&gt;&gt;-"></a><a name="switchmap"></a>
-        <h3 class="api-name" id="switchMap(androidx.lifecycle.LiveData&lt;X&gt;,androidx.arch.core.util.Function&lt;X,androidx.lifecycle.LiveData&lt;Y&gt;&gt;)">switchMap</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="switchMap(androidx.lifecycle.LiveData&lt;X&gt;,androidx.arch.core.util.Function&lt;X,androidx.lifecycle.LiveData&lt;Y&gt;&gt;)">switchMap</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>java-static&nbsp;fun&nbsp;&lt;X,&nbsp;Y&gt; <a href="/reference/kotlin/androidx/lifecycle/Transformations.html#switchMap(androidx.lifecycle.LiveData&lt;X&gt;,androidx.arch.core.util.Function&lt;X,androidx.lifecycle.LiveData&lt;Y&gt;&gt;)">switchMap</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;source:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a>&lt;X!&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;switchMapFunction:&nbsp;<a href="/reference/kotlin/androidx/arch/core/util/Function.html">Function</a>&lt;X!,&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a>&lt;Y!&gt;!&gt;<br>):&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a>&lt;Y!&gt;</pre>
         <p>Returns a <code>LiveData</code> mapped from the input <code>source</code><code>LiveData</code> by applying <code>switchMapFunction</code> to each value set on <code>source</code>. </p>
         <p> The returned <code>LiveData</code> delegates to the most recent <code>LiveData</code> created by calling <code>switchMapFunction</code> with the most recent value set to <code>source</code>, without changing the reference. In this way, <code>switchMapFunction</code> can change the 'backing' <code>LiveData</code> transparently to any observer registered to the <code>LiveData</code> returned by <code>switchMap()</code>. </p>

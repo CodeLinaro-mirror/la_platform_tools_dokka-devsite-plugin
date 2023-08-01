@@ -62,12 +62,20 @@
     <div class="list">
       <h2>Public methods</h2>
       <div class="api-item"><a name="-kotlin.coroutines.CoroutineContext-.getMonotonicFrameClock--"></a><a name="getmonotonicframeclock"></a>
-        <h3 class="api-name" id="(kotlin.coroutines.CoroutineContext).getMonotonicFrameClock()">getMonotonicFrameClock</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(kotlin.coroutines.CoroutineContext).getMonotonicFrameClock()">getMonotonicFrameClock</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/MonotonicFrameClock.html">MonotonicFrameClock</a>&nbsp;<a href="/reference/androidx/compose/runtime/MonotonicFrameClockKt.html#(kotlin.coroutines.CoroutineContext).getMonotonicFrameClock()">getMonotonicFrameClock</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>&nbsp;receiver)</pre>
         <p>Returns the <code><a href="/reference/androidx/compose/runtime/MonotonicFrameClock.html">MonotonicFrameClock</a></code> for this <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code> or throws <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code> if one is not present.</p>
       </div>
       <div class="api-item"><a name="withFrameMillis-kotlin.Function1-"></a><a name="withframemillis"></a>
-        <h3 class="api-name" id="withFrameMillis(kotlin.Function1)">withFrameMillis</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="withFrameMillis(kotlin.Function1)">withFrameMillis</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/MonotonicFrameClockKt.html#withFrameMillis(kotlin.Function1)">withFrameMillis</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;onFrame<br>)</pre>
         <p>Suspends until a new frame is requested, immediately invokes <code><a href="/reference/androidx/compose/runtime/package-summary.html#withFrameMillis(kotlin.Function1)">onFrame</a></code> with the frame time in milliseconds in the calling context of frame dispatch, then resumes with the result from <code><a href="/reference/androidx/compose/runtime/package-summary.html#withFrameMillis(kotlin.Function1)">onFrame</a></code>.</p>
         <p><code>frameTimeMillis</code> should be used when calculating animation time deltas from frame to frame as it may be normalized to the target time for the frame, not necessarily a direct, &quot;now&quot; value.</p>
@@ -75,14 +83,22 @@
         <p>This function will invoke <code><a href="/reference/androidx/compose/runtime/MonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">MonotonicFrameClock.withFrameNanos</a></code> using the calling <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code>'s <code><a href="/reference/androidx/compose/runtime/MonotonicFrameClock.html">MonotonicFrameClock</a></code> and will throw an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code> if one is not present in the <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code>.</p>
       </div>
       <div class="api-item"><a name="-androidx.compose.runtime.MonotonicFrameClock-.withFrameMillis-kotlin.Function1-"></a><a name="withframemillis"></a>
-        <h3 class="api-name" id="(androidx.compose.runtime.MonotonicFrameClock).withFrameMillis(kotlin.Function1)">withFrameMillis</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.compose.runtime.MonotonicFrameClock).withFrameMillis(kotlin.Function1)">withFrameMillis</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/MonotonicFrameClockKt.html#(androidx.compose.runtime.MonotonicFrameClock).withFrameMillis(kotlin.Function1)">withFrameMillis</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/MonotonicFrameClock.html">MonotonicFrameClock</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;onFrame<br>)</pre>
         <p>Suspends until a new frame is requested, immediately invokes <code><a href="/reference/androidx/compose/runtime/package-summary.html#(androidx.compose.runtime.MonotonicFrameClock).withFrameMillis(kotlin.Function1)">onFrame</a></code> with the frame time in milliseconds in the calling context of frame dispatch, then resumes with the result from <code><a href="/reference/androidx/compose/runtime/package-summary.html#(androidx.compose.runtime.MonotonicFrameClock).withFrameMillis(kotlin.Function1)">onFrame</a></code>.</p>
         <p><code>frameTimeMillis</code> should be used when calculating animation time deltas from frame to frame as it may be normalized to the target time for the frame, not necessarily a direct, &quot;now&quot; value.</p>
         <p>The time base of the value provided by <code><a href="/reference/androidx/compose/runtime/package-summary.html#(androidx.compose.runtime.MonotonicFrameClock).withFrameMillis(kotlin.Function1)">MonotonicFrameClock.withFrameMillis</a></code> is implementation defined. Time values provided are monotonically increasing; after a call to <code><a href="/reference/androidx/compose/runtime/package-summary.html#(androidx.compose.runtime.MonotonicFrameClock).withFrameMillis(kotlin.Function1)">withFrameMillis</a></code> completes it must not provide a smaller value for a subsequent call.</p>
       </div>
       <div class="api-item"><a name="withFrameNanos-kotlin.Function1-"></a><a name="withframenanos"></a>
-        <h3 class="api-name" id="withFrameNanos(kotlin.Function1)">withFrameNanos</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="withFrameNanos(kotlin.Function1)">withFrameNanos</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/MonotonicFrameClockKt.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;onFrame<br>)</pre>
         <p>Suspends until a new frame is requested, immediately invokes <code><a href="/reference/androidx/compose/runtime/package-summary.html#withFrameNanos(kotlin.Function1)">onFrame</a></code> with the frame time in nanoseconds in the calling context of frame dispatch, then resumes with the result from <code><a href="/reference/androidx/compose/runtime/package-summary.html#withFrameNanos(kotlin.Function1)">onFrame</a></code>.</p>
         <p><code>frameTimeNanos</code> should be used when calculating animation time deltas from frame to frame as it may be normalized to the target time for the frame, not necessarily a direct, &quot;now&quot; value.</p>

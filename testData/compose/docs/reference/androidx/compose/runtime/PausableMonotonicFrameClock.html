@@ -171,29 +171,49 @@
     <div class="list">
       <h2>Public constructors</h2>
       <div class="api-item"><a name="PausableMonotonicFrameClock-androidx.compose.runtime.MonotonicFrameClock-"></a><a name="pausablemonotonicframeclock"></a>
-        <h3 class="api-name" id="PausableMonotonicFrameClock(androidx.compose.runtime.MonotonicFrameClock)">PausableMonotonicFrameClock</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="PausableMonotonicFrameClock(androidx.compose.runtime.MonotonicFrameClock)">PausableMonotonicFrameClock</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/runtime/PausableMonotonicFrameClock.html#PausableMonotonicFrameClock(androidx.compose.runtime.MonotonicFrameClock)">PausableMonotonicFrameClock</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/MonotonicFrameClock.html">MonotonicFrameClock</a>&nbsp;frameClock)</pre>
       </div>
     </div>
     <div class="list">
       <h2>Public methods</h2>
       <div class="api-item"><a name="getIsPaused--"></a><a name="getispaused"></a>
-        <h3 class="api-name" id="getIsPaused()">isPaused</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getIsPaused()">isPaused</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/PausableMonotonicFrameClock.html#getIsPaused()">isPaused</a>()</pre>
         <p><code>true</code> if this clock is currently <code><a href="/reference/androidx/compose/runtime/PausableMonotonicFrameClock.html#pause()">paused</a></code> or <code>false</code> if this clock is currently <code><a href="/reference/androidx/compose/runtime/PausableMonotonicFrameClock.html#resume()">resumed</a></code>. A PausableMonotonicFrameClock is not paused at construction time.</p>
       </div>
       <div class="api-item"><a name="pause--"></a><a name="pause"></a>
-        <h3 class="api-name" id="pause()">pause</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="pause()">pause</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/PausableMonotonicFrameClock.html#pause()">pause</a>()</pre>
         <p>Pause the generation of frames. Pausing a clock that is already paused has no effect. While the clock is paused any calls to <code><a href="/reference/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> will suspend until the clock is resumed before delegating to the wrapped <code><a href="/reference/androidx/compose/runtime/PausableMonotonicFrameClock.html#frameClock()">frameClock</a></code>'s <code><a href="/reference/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> method. Call <code><a href="/reference/androidx/compose/runtime/PausableMonotonicFrameClock.html#resume()">resume</a></code> to resume generating frames.</p>
       </div>
       <div class="api-item"><a name="resume--"></a><a name="resume"></a>
-        <h3 class="api-name" id="resume()">resume</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="resume()">resume</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/PausableMonotonicFrameClock.html#resume()">resume</a>()</pre>
         <p>Resume the generation of frames. Any queued calls to <code><a href="/reference/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> will resume and delegate to the wrapped <code><a href="/reference/androidx/compose/runtime/PausableMonotonicFrameClock.html#frameClock()">frameClock</a></code>'s <code><a href="/reference/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> method.</p>
       </div>
       <div class="api-item"><a name="withFrameNanos-kotlin.Function1-"></a><a name="withframenanos"></a>
-        <h3 class="api-name" id="withFrameNanos(kotlin.Function1)">withFrameNanos</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="withFrameNanos(kotlin.Function1)">withFrameNanos</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Long.html">Long</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;onFrame<br>)</pre>
         <p>Suspends until a new frame is requested, immediately invokes <code><a href="/reference/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">onFrame</a></code> with the frame time in nanoseconds in the calling context of frame dispatch, then resumes with the result from <code><a href="/reference/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">onFrame</a></code>.</p>
         <p><code>frameTimeNanos</code> should be used when calculating animation time deltas from frame to frame as it may be normalized to the target time for the frame, not necessarily a direct, &quot;now&quot; value.</p>

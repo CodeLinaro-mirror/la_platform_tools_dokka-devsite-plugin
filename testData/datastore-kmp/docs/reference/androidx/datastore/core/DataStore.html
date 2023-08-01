@@ -76,7 +76,11 @@
     <div class="list">
       <h2>Public methods</h2>
       <div class="api-item"><a name="getData--"></a><a name="getdata"></a>
-        <h3 class="api-name" id="getData()">getData</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getData()">getData</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;<a href="/reference/androidx/datastore/core/DataStore.html#getData()">getData</a>()</pre>
         <p>Provides efficient, cached (when possible) access to the latest durably persisted state. The flow will always either emit a value or throw an exception encountered when attempting to read from disk. If an exception is encountered, collecting again will attempt to read the data again.</p>
         <p>Do not layer a cache on top of this API: it will be be impossible to guarantee consistency. Instead, use data.first() to access a single snapshot.</p>
@@ -124,7 +128,11 @@
         </div>
       </div>
       <div class="api-item"><a name="updateData-kotlin.coroutines.SuspendFunction1-"></a><a name="updatedata"></a>
-        <h3 class="api-name" id="updateData(kotlin.coroutines.SuspendFunction1)">updateData</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="updateData(kotlin.coroutines.SuspendFunction1)">updateData</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;<a href="/reference/androidx/datastore/core/DataStore.html#updateData(kotlin.coroutines.SuspendFunction1)">updateData</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-suspend-function1/index.html">SuspendFunction1</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> t,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;transform)</pre>
         <p>Updates the data transactionally in an atomic read-modify-write operation. All operations are serialized, and the transform itself is a coroutine so it can perform heavy work such as RPCs.</p>
         <p>The coroutine completes when the data has been persisted durably to disk (after which <code><a href="/reference/androidx/datastore/core/DataStore.html#data()">data</a></code> will reflect the update). If the transform or write to disk fails, the transaction is aborted and an exception is thrown.</p>

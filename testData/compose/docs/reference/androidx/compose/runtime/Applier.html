@@ -256,27 +256,47 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
     <div class="list">
       <h2>Public methods</h2>
       <div class="api-item"><a name="clear--"></a><a name="clear"></a>
-        <h3 class="api-name" id="clear()">clear</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="clear()">clear</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#clear()">clear</a>()</pre>
         <p>Move to the root and remove all nodes from the root, preparing both this <code><a href="/reference/androidx/compose/runtime/Applier.html">Applier</a></code> and its root to be used as the target of a new composition in the future.</p>
       </div>
       <div class="api-item"><a name="down-kotlin.Any-"></a><a name="down"></a>
-        <h3 class="api-name" id="down(kotlin.Any)">down</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="down(kotlin.Any)">down</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#down(kotlin.Any)">down</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> N&nbsp;node)</pre>
         <p>Indicates that the applier is getting traversed &quot;down&quot; the tree. When this gets called, <code><a href="/reference/androidx/compose/runtime/Applier.html#down(kotlin.Any)">node</a></code> is expected to be a child of <code><a href="/reference/androidx/compose/runtime/Applier.html#current()">current</a></code>, and after this operation, <code><a href="/reference/androidx/compose/runtime/Applier.html#down(kotlin.Any)">node</a></code> is expected to be the new <code><a href="/reference/androidx/compose/runtime/Applier.html#current()">current</a></code>.</p>
       </div>
       <div class="api-item"><a name="getCurrent--"></a><a name="getcurrent"></a>
-        <h3 class="api-name" id="getCurrent()">getCurrent</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getCurrent()">getCurrent</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> N&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#getCurrent()">getCurrent</a>()</pre>
         <p>The node that operations will be applied on at any given time. It is expected that the value of this property will change as <code><a href="/reference/androidx/compose/runtime/Applier.html#down(kotlin.Any)">down</a></code> and <code><a href="/reference/androidx/compose/runtime/Applier.html#up()">up</a></code> are called.</p>
       </div>
       <div class="api-item"><a name="insertBottomUp(kotlin.Int, kotlin.Any)"></a><a name="insertBottomUp-kotlin.Int-kotlin.Any-"></a><a name="insertbottomup"></a>
-        <h3 class="api-name" id="insertBottomUp(kotlin.Int,kotlin.Any)">insertBottomUp</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="insertBottomUp(kotlin.Int,kotlin.Any)">insertBottomUp</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#insertBottomUp(kotlin.Int,kotlin.Any)">insertBottomUp</a>(int&nbsp;index,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> N&nbsp;instance)</pre>
         <p>Indicates that <code><a href="/reference/androidx/compose/runtime/Applier.html#insertBottomUp(kotlin.Int,kotlin.Any)">instance</a></code> should be inserted as a child of <code><a href="/reference/androidx/compose/runtime/Applier.html#current()">current</a></code> at <code><a href="/reference/androidx/compose/runtime/Applier.html#insertBottomUp(kotlin.Int,kotlin.Any)">index</a></code>. An applier should insert the node into the tree either in <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">insertTopDown</a></code> or <code><a href="/reference/androidx/compose/runtime/Applier.html#insertBottomUp(kotlin.Int,kotlin.Any)">insertBottomUp</a></code>, not both. See the description of <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">insertTopDown</a></code> to which describes when to implement <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">insertTopDown</a></code> and when to use <code><a href="/reference/androidx/compose/runtime/Applier.html#insertBottomUp(kotlin.Int,kotlin.Any)">insertBottomUp</a></code>.</p>
       </div>
       <div class="api-item"><a name="insertTopDown(kotlin.Int, kotlin.Any)"></a><a name="insertTopDown-kotlin.Int-kotlin.Any-"></a><a name="inserttopdown"></a>
-        <h3 class="api-name" id="insertTopDown(kotlin.Int,kotlin.Any)">insertTopDown</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="insertTopDown(kotlin.Int,kotlin.Any)">insertTopDown</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">insertTopDown</a>(int&nbsp;index,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> N&nbsp;instance)</pre>
         <p>Indicates that <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">instance</a></code> should be inserted as a child to <code><a href="/reference/androidx/compose/runtime/Applier.html#current()">current</a></code> at <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">index</a></code>. An applier should insert the node into the tree either in <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">insertTopDown</a></code> or <code><a href="/reference/androidx/compose/runtime/Applier.html#insertBottomUp(kotlin.Int,kotlin.Any)">insertBottomUp</a></code>, not both.</p>
         <p>The <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">insertTopDown</a></code> method is called before the children of <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">instance</a></code> have been created and inserted into it. <code><a href="/reference/androidx/compose/runtime/Applier.html#insertBottomUp(kotlin.Int,kotlin.Any)">insertBottomUp</a></code> is called after all children have been created and inserted.</p>
@@ -341,28 +361,48 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
         <p>which exponential to the number of nodes inserted.</p>
       </div>
       <div class="api-item"><a name="move(kotlin.Int, kotlin.Int, kotlin.Int)"></a><a name="move-kotlin.Int-kotlin.Int-kotlin.Int-"></a><a name="move"></a>
-        <h3 class="api-name" id="move(kotlin.Int,kotlin.Int,kotlin.Int)">move</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="move(kotlin.Int,kotlin.Int,kotlin.Int)">move</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#move(kotlin.Int,kotlin.Int,kotlin.Int)">move</a>(int&nbsp;from,&nbsp;int&nbsp;to,&nbsp;int&nbsp;count)</pre>
         <p>Indicates that <code><a href="/reference/androidx/compose/runtime/Applier.html#move(kotlin.Int,kotlin.Int,kotlin.Int)">count</a></code> children of <code><a href="/reference/androidx/compose/runtime/Applier.html#current()">current</a></code> should be moved from index <code><a href="/reference/androidx/compose/runtime/Applier.html#move(kotlin.Int,kotlin.Int,kotlin.Int)">from</a></code> to index <code><a href="/reference/androidx/compose/runtime/Applier.html#move(kotlin.Int,kotlin.Int,kotlin.Int)">to</a></code>.</p>
         <p>The <code><a href="/reference/androidx/compose/runtime/Applier.html#move(kotlin.Int,kotlin.Int,kotlin.Int)">to</a></code> index is relative to the position before the change, so, for example, to move an element at position 1 to after the element at position 2, <code><a href="/reference/androidx/compose/runtime/Applier.html#move(kotlin.Int,kotlin.Int,kotlin.Int)">from</a></code> should be <code>1</code> and <code><a href="/reference/androidx/compose/runtime/Applier.html#move(kotlin.Int,kotlin.Int,kotlin.Int)">to</a></code> should be <code>3</code>. If the elements were A B C D E, calling <code>move(1, 3, 1)</code> would result in the elements being reordered to A C B D E.</p>
       </div>
       <div class="api-item"><a name="onBeginChanges--"></a><a name="onbeginchanges"></a>
-        <h3 class="api-name" id="onBeginChanges()">onBeginChanges</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="onBeginChanges()">onBeginChanges</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#onBeginChanges()">onBeginChanges</a>()</pre>
         <p>Called when the <code><a href="/reference/androidx/compose/runtime/Composer.html">Composer</a></code> is about to begin applying changes using this applier. <code><a href="/reference/androidx/compose/runtime/Applier.html#onEndChanges()">onEndChanges</a></code> will be called when changes are complete.</p>
       </div>
       <div class="api-item"><a name="onEndChanges--"></a><a name="onendchanges"></a>
-        <h3 class="api-name" id="onEndChanges()">onEndChanges</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="onEndChanges()">onEndChanges</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#onEndChanges()">onEndChanges</a>()</pre>
         <p>Called when the <code><a href="/reference/androidx/compose/runtime/Composer.html">Composer</a></code> is finished applying changes using this applier. A call to <code><a href="/reference/androidx/compose/runtime/Applier.html#onBeginChanges()">onBeginChanges</a></code> will always precede a call to <code><a href="/reference/androidx/compose/runtime/Applier.html#onEndChanges()">onEndChanges</a></code>.</p>
       </div>
       <div class="api-item"><a name="remove(kotlin.Int, kotlin.Int)"></a><a name="remove-kotlin.Int-kotlin.Int-"></a><a name="remove"></a>
-        <h3 class="api-name" id="remove(kotlin.Int,kotlin.Int)">remove</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="remove(kotlin.Int,kotlin.Int)">remove</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#remove(kotlin.Int,kotlin.Int)">remove</a>(int&nbsp;index,&nbsp;int&nbsp;count)</pre>
         <p>Indicates that the children of <code><a href="/reference/androidx/compose/runtime/Applier.html#current()">current</a></code> from <code><a href="/reference/androidx/compose/runtime/Applier.html#remove(kotlin.Int,kotlin.Int)">index</a></code> to <code><a href="/reference/androidx/compose/runtime/Applier.html#remove(kotlin.Int,kotlin.Int)">index</a></code> + <code><a href="/reference/androidx/compose/runtime/Applier.html#remove(kotlin.Int,kotlin.Int)">count</a></code> should be removed.</p>
       </div>
       <div class="api-item"><a name="up--"></a><a name="up"></a>
-        <h3 class="api-name" id="up()">up</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="up()">up</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#up()">up</a>()</pre>
         <p>Indicates that the applier is getting traversed &quot;up&quot; the tree. After this operation completes, the <code><a href="/reference/androidx/compose/runtime/Applier.html#current()">current</a></code> should return the &quot;parent&quot; of the <code><a href="/reference/androidx/compose/runtime/Applier.html#current()">current</a></code> node at the beginning of this operation.</p>
       </div>

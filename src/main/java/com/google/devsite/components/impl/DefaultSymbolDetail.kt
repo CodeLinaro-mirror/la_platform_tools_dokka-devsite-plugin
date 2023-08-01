@@ -40,15 +40,22 @@ internal data class DefaultSymbolDetail<T : SymbolSignature>(
             a { attributes["name"] = anchor }
         }
 
-        data.metadataComponent?.render(this)
+        // CSS is declared in internal codebase (cl/552578388)
+        div("api-name-block") {
 
-        h3("api-name") {
-            data.anchors.firstOrNull()?.let { attributes["id"] = it }
-            if (data.displayLanguage == Language.JAVA && data.extFunctionClass != null) {
-                +data.extFunctionClass!!
-                +"."
+            // Wrap the h3 element in a div in case devsite modifies h3 elements in the future.
+            // This preserves the Flexbox spacing between h3 and the metadata component container.
+            div {
+                h3 {
+                    data.anchors.firstOrNull()?.let { attributes["id"] = it }
+                    if (data.displayLanguage == Language.JAVA && data.extFunctionClass != null) {
+                        +data.extFunctionClass!!
+                        +"."
+                    }
+                    +data.name
+                }
             }
-            +data.name
+            data.metadataComponent?.render(this)
         }
         pre("api-signature no-pretty-print") {
             data.annotationComponents.render(into, ShouldBreak.YES, separator = "")

@@ -350,7 +350,11 @@ class MyPagingSource(
     <div class="list">
       <h2>Public constructors</h2>
       <div class="api-item"><a name="PagingSource--"></a><a name="pagingsource"></a>
-        <h3 class="api-name" id="PagingSource()">PagingSource</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="PagingSource()">PagingSource</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;&lt;Key&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;Value&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/paging/PagingSource.html#PagingSource()">PagingSource</a>()</pre>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -384,12 +388,20 @@ class MyPagingSource(
     <div class="list">
       <h2>Public methods</h2>
       <div class="api-item"><a name="getInvalid--"></a><a name="getinvalid"></a>
-        <h3 class="api-name" id="getInvalid()">getInvalid</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getInvalid()">getInvalid</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/paging/PagingSource.html#getInvalid()">getInvalid</a>()</pre>
         <p>Whether this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> has been invalidated, which should happen when the data this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> represents changes since it was first instantiated.</p>
       </div>
       <div class="api-item"><a name="getJumpingSupported--"></a><a name="getjumpingsupported"></a>
-        <h3 class="api-name" id="getJumpingSupported()">getJumpingSupported</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getJumpingSupported()">getJumpingSupported</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/paging/PagingSource.html#getJumpingSupported()">getJumpingSupported</a>()</pre>
         <p><code>true</code> if this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> supports jumping, <code>false</code> otherwise.</p>
         <p>Override this to <code>true</code> if pseudo-fast scrolling via jumps is supported.</p>
@@ -416,12 +428,20 @@ class MyPagingSource(
         </div>
       </div>
       <div class="api-item"><a name="getKeyReuseSupported--"></a><a name="getkeyreusesupported"></a>
-        <h3 class="api-name" id="getKeyReuseSupported()">getKeyReuseSupported</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getKeyReuseSupported()">getKeyReuseSupported</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/paging/PagingSource.html#getKeyReuseSupported()">getKeyReuseSupported</a>()</pre>
         <p><code>true</code> if this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> expects to re-use keys to load distinct pages without a call to <code><a href="/reference/androidx/paging/PagingSource.html#invalidate()">invalidate</a></code>, <code>false</code> otherwise.</p>
       </div>
       <div class="api-item"><a name="getRefreshKey-androidx.paging.PagingState-"></a><a name="getrefreshkey"></a>
-        <h3 class="api-name" id="getRefreshKey(androidx.paging.PagingState)">getRefreshKey</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getRefreshKey(androidx.paging.PagingState)">getRefreshKey</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;Key&nbsp;<a href="/reference/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">getRefreshKey</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingState.html">PagingState</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;state)</pre>
         <p>Provide a <code><a href="/reference/androidx/paging/PagingSource.html">Key</a></code> used for the initial <code><a href="/reference/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a></code> for the next <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> due to invalidation of this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>. The <code><a href="/reference/androidx/paging/PagingSource.html">Key</a></code> is provided to <code><a href="/reference/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a></code> via <code><a href="/reference/androidx/paging/PagingSource.LoadParams.html#key()">LoadParams.key</a></code>.</p>
         <p>The <code><a href="/reference/androidx/paging/PagingSource.html">Key</a></code> returned by this method should cause <code><a href="/reference/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a></code> to load enough items to fill the viewport <em>around</em> the last accessed position, allowing the next generation to transparently animate in. The last accessed position can be retrieved via <code><a href="/reference/androidx/paging/PagingState.html#anchorPosition()">state.anchorPosition</a></code>, which is typically the <em>top-most</em> or <em>bottom-most</em> item in the viewport due to access being triggered by binding items as they scroll into view.</p>
@@ -471,19 +491,31 @@ class MyPagingSource(
         </div>
       </div>
       <div class="api-item"><a name="invalidate--"></a><a name="invalidate"></a>
-        <h3 class="api-name" id="invalidate()">invalidate</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="invalidate()">invalidate</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingSource.html#invalidate()">invalidate</a>()</pre>
         <p>Signal the <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> to stop loading.</p>
         <p>This method is idempotent. i.e., If <code><a href="/reference/androidx/paging/PagingSource.html#invalidate()">invalidate</a></code> has already been called, subsequent calls to this method should have no effect.</p>
       </div>
       <div class="api-item"><a name="load-androidx.paging.PagingSource.LoadParams-"></a><a name="load"></a>
-        <h3 class="api-name" id="load(androidx.paging.PagingSource.LoadParams)">load</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="load(androidx.paging.PagingSource.LoadParams)">load</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingSource.LoadResult.html">PagingSource.LoadResult</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;<a href="/reference/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingSource.LoadParams.html">PagingSource.LoadParams</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key&gt;&nbsp;params)</pre>
         <p>Loading API for <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
         <p>Implement this method to trigger your async load (e.g. from database or network).</p>
       </div>
       <div class="api-item"><a name="registerInvalidatedCallback-kotlin.Function0-"></a><a name="registerinvalidatedcallback"></a>
-        <h3 class="api-name" id="registerInvalidatedCallback(kotlin.Function0)">registerInvalidatedCallback</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="registerInvalidatedCallback(kotlin.Function0)">registerInvalidatedCallback</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingSource.html#registerInvalidatedCallback(kotlin.Function0)">registerInvalidatedCallback</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onInvalidatedCallback<br>)</pre>
         <p>Add a callback to invoke when the <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> is first invalidated.</p>
         <p>Once invalidated, a <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> will not become valid again.</p>
@@ -512,7 +544,11 @@ class MyPagingSource(
         </div>
       </div>
       <div class="api-item"><a name="unregisterInvalidatedCallback-kotlin.Function0-"></a><a name="unregisterinvalidatedcallback"></a>
-        <h3 class="api-name" id="unregisterInvalidatedCallback(kotlin.Function0)">unregisterInvalidatedCallback</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="unregisterInvalidatedCallback(kotlin.Function0)">unregisterInvalidatedCallback</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingSource.html#unregisterInvalidatedCallback(kotlin.Function0)">unregisterInvalidatedCallback</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onInvalidatedCallback<br>)</pre>
         <p>Remove a previously added invalidate callback.</p>
         <div class="devsite-table-wrapper">

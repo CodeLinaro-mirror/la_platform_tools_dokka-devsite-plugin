@@ -60,13 +60,21 @@
     <div class="list">
       <h2>Public methods</h2>
       <div class="api-item"><a name="cleanUp--"></a><a name="cleanup"></a>
-        <h3 class="api-name" id="cleanUp()">cleanUp</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="cleanUp()">cleanUp</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/datastore/core/DataMigration.html#cleanUp()">cleanUp</a>()</pre>
         <p>Clean up any old state/data that was migrated into the DataStore. This will not be called if the migration fails. If cleanUp throws an exception, the exception will be propagated back to the DataStore call that triggered the migration and future calls to DataStore will result in DataMigrations being attempted again. This method may be run multiple times when any failure is encountered.</p>
         <p>This is useful for cleaning up files or data outside of DataStore and accessing any data from DataStore directly from inside this function will result in deadlock, since DataStore doesn't return data until all migrations complete.</p>
       </div>
       <div class="api-item"><a name="migrate-kotlin.Any-"></a><a name="migrate"></a>
-        <h3 class="api-name" id="migrate(kotlin.Any)">migrate</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="migrate(kotlin.Any)">migrate</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;<a href="/reference/androidx/datastore/core/DataMigration.html#migrate(kotlin.Any)">migrate</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;currentData)</pre>
         <p>Perform the migration. Implementations should be idempotent since this may be called multiple times. If migrate fails, DataStore will not commit any data to disk, cleanUp will not be called, and the exception will be propagated back to the DataStore call that triggered the migration. Future calls to DataStore will result in DataMigrations being attempted again. This method may be run multiple times when any failure is encountered.</p>
         <p>Note that this will always be called before a call to <code><a href="/reference/androidx/datastore/core/DataMigration.html#cleanUp()">cleanUp</a></code>.</p>
@@ -115,7 +123,11 @@
         </div>
       </div>
       <div class="api-item"><a name="shouldMigrate-kotlin.Any-"></a><a name="shouldmigrate"></a>
-        <h3 class="api-name" id="shouldMigrate(kotlin.Any)">shouldMigrate</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="shouldMigrate(kotlin.Any)">shouldMigrate</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/datastore/core/DataMigration.html#shouldMigrate(kotlin.Any)">shouldMigrate</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;currentData)</pre>
         <p>Return whether this migration needs to be performed. If this returns false, no migration or cleanup will occur. Apps should do the cheapest possible check to determine if this migration should run, since this will be called every time the DataStore is initialized. This method may be run multiple times when any failure is encountered.</p>
         <p>Note that this will always be called before each call to <code><a href="/reference/androidx/datastore/core/DataMigration.html#migrate(kotlin.Any)">migrate</a></code>.</p>

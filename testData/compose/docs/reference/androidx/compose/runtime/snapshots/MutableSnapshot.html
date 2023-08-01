@@ -199,7 +199,11 @@
     <div class="list">
       <h2>Public methods</h2>
       <div class="api-item"><a name="apply--"></a><a name="apply"></a>
-        <h3 class="api-name" id="apply()">apply</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="apply()">apply</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/SnapshotApplyResult.html">SnapshotApplyResult</a>&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">apply</a>()</pre>
         <p>Apply the changes made to state objects in this snapshot to the global state, or to the parent snapshot if this is a nested mutable snapshot.</p>
         <p>Once this method returns all changes made to this snapshot are atomically visible as the global state of the state object or to the parent snapshot.</p>
@@ -207,39 +211,67 @@
         <p>Leaving a snapshot active could cause hard to diagnose memory leaks values are maintained by state objects for unneeded snapshots. Take care to always call <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#dispose()">dispose</a></code> on any snapshot.</p>
       </div>
       <div class="api-item"><a name="dispose--"></a><a name="dispose"></a>
-        <h3 class="api-name" id="dispose()">dispose</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="dispose()">dispose</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#dispose()">dispose</a>()</pre>
         <p>Dispose the snapshot. Neglecting to dispose a snapshot will result in difficult to diagnose memory leaks as it indirectly causes all state objects to maintain its value for the un-disposed snapshot.</p>
       </div>
       <div class="api-item"><a name="getReadOnly--"></a><a name="getreadonly"></a>
-        <h3 class="api-name" id="getReadOnly()">getReadOnly</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getReadOnly()">getReadOnly</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#getReadOnly()">getReadOnly</a>()</pre>
         <p>True if any change to a state object in this snapshot will throw.</p>
       </div>
       <div class="api-item"><a name="getRoot--"></a><a name="getroot"></a>
-        <h3 class="api-name" id="getRoot()">getRoot</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getRoot()">getRoot</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#getRoot()">getRoot</a>()</pre>
         <p>The root snapshot for this snapshot. For non-nested snapshots this is always <code>this</code>. For nested snapshot it is the parent's <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#root()">root</a></code>.</p>
       </div>
       <div class="api-item"><a name="hasPendingChanges--"></a><a name="haspendingchanges"></a>
-        <h3 class="api-name" id="hasPendingChanges()">hasPendingChanges</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="hasPendingChanges()">hasPendingChanges</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#hasPendingChanges()">hasPendingChanges</a>()</pre>
         <p>Whether there are any pending changes in this snapshot. These changes are not visible until the snapshot is applied.</p>
       </div>
       <div class="api-item"><a name="setModified-androidx.compose.runtime.collection.IdentityArraySet-"></a><a name="setmodified"></a>
-        <h3 class="api-name" id="setModified(androidx.compose.runtime.collection.IdentityArraySet)">setModified</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="setModified(androidx.compose.runtime.collection.IdentityArraySet)">setModified</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#setModified(androidx.compose.runtime.collection.IdentityArraySet)">setModified</a>(<a href="/reference/androidx/compose/runtime/collection/IdentityArraySet.html">IdentityArraySet</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/StateObject.html">StateObject</a>&gt;&nbsp;modified)</pre>
         <p>The set of state objects that have been modified in this snapshot.</p>
       </div>
       <div class="api-item"><a name="takeNestedMutableSnapshot(kotlin.Function1, kotlin.Function1)"></a><a name="takeNestedMutableSnapshot-kotlin.Function1-kotlin.Function1-"></a><a name="takenestedmutablesnapshot"></a>
-        <h3 class="api-name" id="takeNestedMutableSnapshot(kotlin.Function1,kotlin.Function1)">takeNestedMutableSnapshot</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="takeNestedMutableSnapshot(kotlin.Function1,kotlin.Function1)">takeNestedMutableSnapshot</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html">MutableSnapshot</a>&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#takeNestedMutableSnapshot(kotlin.Function1,kotlin.Function1)">takeNestedMutableSnapshot</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;readObserver,<br>&nbsp;&nbsp;&nbsp;&nbsp;Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;writeObserver<br>)</pre>
         <p>Take a mutable snapshot of the state values in this snapshot. Entering this snapshot by calling <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#enter(kotlin.Function0)">enter</a></code> allows state objects to be modified that are not visible to the this, the parent snapshot, until the <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">apply</a></code> is called.</p>
         <p>Applying a nested snapshot, by calling <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">apply</a></code>, applies its change to, this, the parent snapshot. For a change to be visible globally, all the parent snapshots need to be applied until the root snapshot is applied to the global state.</p>
         <p>All nested snapshots need to be disposed by calling <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#dispose()">dispose</a></code> before resources associated with this snapshot can be collected. Nested active snapshots are still valid after the parent has been disposed but calling <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">apply</a></code> will fail.</p>
       </div>
       <div class="api-item"><a name="takeNestedSnapshot-kotlin.Function1-"></a><a name="takenestedsnapshot"></a>
-        <h3 class="api-name" id="takeNestedSnapshot(kotlin.Function1)">takeNestedSnapshot</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="takeNestedSnapshot(kotlin.Function1)">takeNestedSnapshot</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#takeNestedSnapshot(kotlin.Function1)">takeNestedSnapshot</a>(Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;readObserver)</pre>
         <p>Take a snapshot of the state values in this snapshot. The resulting <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code> is read-only. All nested snapshots need to be disposed by calling <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#dispose()">dispose</a></code> before resources associated with this snapshot can be collected. Nested snapshots are still valid after the parent has been disposed.</p>
       </div>

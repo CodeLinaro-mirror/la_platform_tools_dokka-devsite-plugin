@@ -69,7 +69,11 @@
     <div class="list">
       <h2>Public methods</h2>
       <div class="api-item"><a name="awaitLoad(android.content.Context, androidx.compose.ui.text.font.AndroidFont)"></a><a name="awaitLoad-android.content.Context-androidx.compose.ui.text.font.AndroidFont-"></a><a name="awaitload"></a>
-        <h3 class="api-name" id="awaitLoad(android.content.Context,androidx.compose.ui.text.font.AndroidFont)">awaitLoad</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="awaitLoad(android.content.Context,androidx.compose.ui.text.font.AndroidFont)">awaitLoad</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;<a href="https://developer.android.com/reference/android/graphics/Typeface.html">Typeface</a>&nbsp;<a href="/reference/androidx/compose/ui/text/font/AndroidFont.TypefaceLoader.html#awaitLoad(android.content.Context,androidx.compose.ui.text.font.AndroidFont)">awaitLoad</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/content/Context.html">Context</a>&nbsp;context,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a>&nbsp;font)</pre>
         <p>Asynchronously load the font, from either local or remote sources such that it will cause text reflow when loading completes.</p>
         <p>This method will be called on a UI-critical thread, and should not block the thread for font loading from sources slower than the local filesystem. More expensive loads should dispatch to an appropriate thread.</p>
@@ -126,7 +130,11 @@
         </div>
       </div>
       <div class="api-item"><a name="loadBlocking(android.content.Context, androidx.compose.ui.text.font.AndroidFont)"></a><a name="loadBlocking-android.content.Context-androidx.compose.ui.text.font.AndroidFont-"></a><a name="loadblocking"></a>
-        <h3 class="api-name" id="loadBlocking(android.content.Context,androidx.compose.ui.text.font.AndroidFont)">loadBlocking</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="loadBlocking(android.content.Context,androidx.compose.ui.text.font.AndroidFont)">loadBlocking</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;<a href="https://developer.android.com/reference/android/graphics/Typeface.html">Typeface</a>&nbsp;<a href="/reference/androidx/compose/ui/text/font/AndroidFont.TypefaceLoader.html#loadBlocking(android.content.Context,androidx.compose.ui.text.font.AndroidFont)">loadBlocking</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/content/Context.html">Context</a>&nbsp;context,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/text/font/AndroidFont.html">AndroidFont</a>&nbsp;font)</pre>
         <p>Immediately load the font in a blocking manner such that it will be available this frame.</p>
         <p>This method will be called on a UI-critical thread, however it has been determined that this font is required for the current frame. This method is allowed to perform small amounts of I/O to load a font file from disk.</p>

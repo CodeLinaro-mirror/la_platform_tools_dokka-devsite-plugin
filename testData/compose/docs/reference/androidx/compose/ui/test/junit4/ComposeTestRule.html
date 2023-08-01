@@ -233,46 +233,78 @@
     <div class="list">
       <h2>Public methods</h2>
       <div class="api-item"><a name="awaitIdle--"></a><a name="awaitidle"></a>
-        <h3 class="api-name" id="awaitIdle()">awaitIdle</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="awaitIdle()">awaitIdle</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/junit4/ComposeTestRule.html#awaitIdle()">awaitIdle</a>()</pre>
         <p>Suspends until compose is idle. Compose is idle if there are no pending compositions, no pending changes that could lead to another composition, and no pending draw calls.</p>
         <p>In case the main clock auto advancement is enabled (by default is) this will also keep advancing the clock until it is idle (meaning there are no recompositions, animations, etc. pending). If not, this will wait only for other idling resources.</p>
       </div>
       <div class="api-item"><a name="getDensity--"></a><a name="getdensity"></a>
-        <h3 class="api-name" id="getDensity()">getDensity</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getDensity()">getDensity</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Density.html">Density</a>&nbsp;<a href="/reference/androidx/compose/ui/test/junit4/ComposeTestRule.html#getDensity()">getDensity</a>()</pre>
         <p>Current device screen's density.</p>
       </div>
       <div class="api-item"><a name="getMainClock--"></a><a name="getmainclock"></a>
-        <h3 class="api-name" id="getMainClock()">getMainClock</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getMainClock()">getMainClock</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/MainTestClock.html">MainTestClock</a>&nbsp;<a href="/reference/androidx/compose/ui/test/junit4/ComposeTestRule.html#getMainClock()">getMainClock</a>()</pre>
         <p>Clock that drives frames and recompositions in compose tests.</p>
       </div>
       <div class="api-item"><a name="registerIdlingResource-androidx.compose.ui.test.IdlingResource-"></a><a name="registeridlingresource"></a>
-        <h3 class="api-name" id="registerIdlingResource(androidx.compose.ui.test.IdlingResource)">registerIdlingResource</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="registerIdlingResource(androidx.compose.ui.test.IdlingResource)">registerIdlingResource</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/junit4/ComposeTestRule.html#registerIdlingResource(androidx.compose.ui.test.IdlingResource)">registerIdlingResource</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/IdlingResource.html">IdlingResource</a>&nbsp;idlingResource)</pre>
         <p>Registers an <code><a href="/reference/androidx/compose/ui/test/IdlingResource.html">IdlingResource</a></code> in this test.</p>
       </div>
       <div class="api-item"><a name="runOnIdle-kotlin.Function0-"></a><a name="runonidle"></a>
-        <h3 class="api-name" id="runOnIdle(kotlin.Function0)">runOnIdle</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="runOnIdle(kotlin.Function0)">runOnIdle</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/test/junit4/ComposeTestRule.html#runOnIdle(kotlin.Function0)">runOnIdle</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;action)</pre>
         <p>Executes the given action in the same way as <code><a href="/reference/androidx/compose/ui/test/junit4/ComposeTestRule.html#runOnUiThread(kotlin.Function0)">runOnUiThread</a></code> but also makes sure Compose is idle before executing it. This is great place for doing your assertions on shared variables.</p>
         <p>This method is blocking until the action is complete.</p>
         <p>In case the main clock auto advancement is enabled (by default is) this will also keep advancing the clock until it is idle (meaning there are no recompositions, animations, etc. pending). If not, this will wait only for other idling resources.</p>
       </div>
       <div class="api-item"><a name="runOnUiThread-kotlin.Function0-"></a><a name="runonuithread"></a>
-        <h3 class="api-name" id="runOnUiThread(kotlin.Function0)">runOnUiThread</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="runOnUiThread(kotlin.Function0)">runOnUiThread</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/ui/test/junit4/ComposeTestRule.html#runOnUiThread(kotlin.Function0)">runOnUiThread</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;action)</pre>
         <p>Runs the given action on the UI thread.</p>
         <p>This method is blocking until the action is complete.</p>
       </div>
       <div class="api-item"><a name="unregisterIdlingResource-androidx.compose.ui.test.IdlingResource-"></a><a name="unregisteridlingresource"></a>
-        <h3 class="api-name" id="unregisterIdlingResource(androidx.compose.ui.test.IdlingResource)">unregisterIdlingResource</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="unregisterIdlingResource(androidx.compose.ui.test.IdlingResource)">unregisterIdlingResource</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/junit4/ComposeTestRule.html#unregisterIdlingResource(androidx.compose.ui.test.IdlingResource)">unregisterIdlingResource</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/IdlingResource.html">IdlingResource</a>&nbsp;idlingResource)</pre>
         <p>Unregisters an <code><a href="/reference/androidx/compose/ui/test/IdlingResource.html">IdlingResource</a></code> from this test.</p>
       </div>
       <div class="api-item"><a name="waitForIdle--"></a><a name="waitforidle"></a>
-        <h3 class="api-name" id="waitForIdle()">waitForIdle</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="waitForIdle()">waitForIdle</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/junit4/ComposeTestRule.html#waitForIdle()">waitForIdle</a>()</pre>
         <p>Waits for compose to be idle.</p>
         <p>This is a blocking call. Returns only after compose is idle.</p>
@@ -280,7 +312,11 @@
         <p>Can crash in case there is a time out. This is not supposed to be handled as it surfaces only in incorrect tests.</p>
       </div>
       <div class="api-item"><a name="waitUntil(kotlin.Long, kotlin.Function0)"></a><a name="waitUntil-kotlin.Long-kotlin.Function0-"></a><a name="waituntil"></a>
-        <h3 class="api-name" id="waitUntil(kotlin.Long,kotlin.Function0)">waitUntil</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="waitUntil(kotlin.Long,kotlin.Function0)">waitUntil</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/junit4/ComposeTestRule.html#waitUntil(kotlin.Long,kotlin.Function0)">waitUntil</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;timeoutMillis,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;condition<br>)</pre>
         <p>Blocks until the given condition is satisfied.</p>
         <p>In case the main clock auto advancement is enabled (by default is), this will also keep advancing the clock on a frame by frame basis and yield for other async work at the end of each frame. If the advancement of the main clock is not enabled this will work as a countdown latch without any other advancements.</p>
@@ -336,7 +372,11 @@
         </div>
       </div>
       <div class="api-item"><a name="waitUntilAtLeastOneExists(androidx.compose.ui.test.SemanticsMatcher, kotlin.Long)"></a><a name="waitUntilAtLeastOneExists-androidx.compose.ui.test.SemanticsMatcher-kotlin.Long-"></a><a name="waituntilatleastoneexists"></a>
-        <h3 class="api-name" id="waitUntilAtLeastOneExists(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">waitUntilAtLeastOneExists</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="waitUntilAtLeastOneExists(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">waitUntilAtLeastOneExists</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/junit4/ComposeTestRule.html#waitUntilAtLeastOneExists(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">waitUntilAtLeastOneExists</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a>&nbsp;matcher,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;timeoutMillis<br>)</pre>
         <p>Blocks until at least one node matches the given <code><a href="/reference/androidx/compose/ui/test/junit4/ComposeTestRule.html#waitUntilAtLeastOneExists(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">matcher</a></code>.</p>
         <div class="devsite-table-wrapper">
@@ -408,7 +448,11 @@
         </div>
       </div>
       <div class="api-item"><a name="waitUntilDoesNotExist(androidx.compose.ui.test.SemanticsMatcher, kotlin.Long)"></a><a name="waitUntilDoesNotExist-androidx.compose.ui.test.SemanticsMatcher-kotlin.Long-"></a><a name="waituntildoesnotexist"></a>
-        <h3 class="api-name" id="waitUntilDoesNotExist(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">waitUntilDoesNotExist</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="waitUntilDoesNotExist(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">waitUntilDoesNotExist</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/junit4/ComposeTestRule.html#waitUntilDoesNotExist(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">waitUntilDoesNotExist</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a>&nbsp;matcher,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;timeoutMillis<br>)</pre>
         <p>Blocks until no nodes match the given <code><a href="/reference/androidx/compose/ui/test/junit4/ComposeTestRule.html#waitUntilDoesNotExist(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">matcher</a></code>.</p>
         <div class="devsite-table-wrapper">
@@ -480,7 +524,11 @@
         </div>
       </div>
       <div class="api-item"><a name="waitUntilExactlyOneExists(androidx.compose.ui.test.SemanticsMatcher, kotlin.Long)"></a><a name="waitUntilExactlyOneExists-androidx.compose.ui.test.SemanticsMatcher-kotlin.Long-"></a><a name="waituntilexactlyoneexists"></a>
-        <h3 class="api-name" id="waitUntilExactlyOneExists(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">waitUntilExactlyOneExists</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="waitUntilExactlyOneExists(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">waitUntilExactlyOneExists</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/junit4/ComposeTestRule.html#waitUntilExactlyOneExists(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">waitUntilExactlyOneExists</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a>&nbsp;matcher,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;timeoutMillis<br>)</pre>
         <p>Blocks until exactly one node matches the given <code><a href="/reference/androidx/compose/ui/test/junit4/ComposeTestRule.html#waitUntilExactlyOneExists(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">matcher</a></code>.</p>
         <div class="devsite-table-wrapper">
@@ -552,7 +600,11 @@
         </div>
       </div>
       <div class="api-item"><a name="waitUntilNodeCount(androidx.compose.ui.test.SemanticsMatcher, kotlin.Int, kotlin.Long)"></a><a name="waitUntilNodeCount-androidx.compose.ui.test.SemanticsMatcher-kotlin.Int-kotlin.Long-"></a><a name="waituntilnodecount"></a>
-        <h3 class="api-name" id="waitUntilNodeCount(androidx.compose.ui.test.SemanticsMatcher,kotlin.Int,kotlin.Long)">waitUntilNodeCount</h3>
+        <div class="api-name-block">
+          <div>
+            <h3 id="waitUntilNodeCount(androidx.compose.ui.test.SemanticsMatcher,kotlin.Int,kotlin.Long)">waitUntilNodeCount</h3>
+          </div>
+        </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/junit4/ComposeTestRule.html#waitUntilNodeCount(androidx.compose.ui.test.SemanticsMatcher,kotlin.Int,kotlin.Long)">waitUntilNodeCount</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a>&nbsp;matcher,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;count,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;timeoutMillis<br>)</pre>
         <p>Blocks until the number of nodes matching the given <code><a href="/reference/androidx/compose/ui/test/junit4/ComposeTestRule.html#waitUntilNodeCount(androidx.compose.ui.test.SemanticsMatcher,kotlin.Int,kotlin.Long)">matcher</a></code> is equal to the given <code><a href="/reference/androidx/compose/ui/test/junit4/ComposeTestRule.html#waitUntilNodeCount(androidx.compose.ui.test.SemanticsMatcher,kotlin.Int,kotlin.Long)">count</a></code>.</p>
         <div class="devsite-table-wrapper">
