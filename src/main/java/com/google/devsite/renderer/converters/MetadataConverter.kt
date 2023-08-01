@@ -60,8 +60,7 @@ internal class MetadataConverter(
      * Creates a metadata component for the classlike.
      */
     fun getMetadataForClasslike(classlike: DClasslike): MetadataComponent {
-        val entries = classlike.getSourceEntries()
-        val paths = entries?.map { it.getSourceFilePath() }
+        val paths = classlike.getSourceFilePaths()
         val libraryMetadata = paths?.let { classlike.findMatchingLibraryMetadata(it) }
         val sourceUrl = paths?.let { classlike.createLinkToSource(it) }
         val versionMetadata = classlike.findMatchingVersionMetadata(
@@ -81,7 +80,9 @@ internal class MetadataConverter(
      * Creates a metadata component for the [function].
      */
     fun getMetadataForFunction(function: DFunction): MetadataComponent {
-        val versionMetadata = function.findMatchingVersionMetadata(releaseNotesUrl = null)
+        val paths = function.getSourceFilePaths()
+        val libraryMetadata = paths?.let { function.findMatchingLibraryMetadata(it) }
+        val versionMetadata = function.findMatchingVersionMetadata(libraryMetadata?.releaseNotesUrl)
 
         return DefaultMetadataComponent(
             MetadataComponent.Params(
@@ -97,8 +98,9 @@ internal class MetadataConverter(
      * Creates a metadata component for the [property].
      */
     fun getMetadataForProperty(property: DProperty): MetadataComponent {
-        val versionMetadata = property.findMatchingVersionMetadata(releaseNotesUrl = null)
-        // TODO(b/281727318): if the property has no metadata, try finding metadata for the getter
+        val paths = property.getSourceFilePaths()
+        val libraryMetadata = paths?.let { property.findMatchingLibraryMetadata(it) }
+        val versionMetadata = property.findMatchingVersionMetadata(libraryMetadata?.releaseNotesUrl)
 
         return DefaultMetadataComponent(
             MetadataComponent.Params(
@@ -196,31 +198,36 @@ internal class MetadataConverter(
         "${dri.packageName}.${dri.classNames ?: nameForSyntheticClass(this)}"
 
     /**
-     * Finds the source entries associated with the classlike. Returns null and logs a warning
-     * if there are no source entries.
+     * Finds the filepaths associated with the documentable's source entries. Returns null and logs
+     * a warning if there are no source entries.
      */
-    private fun <T> T.getSourceEntries(): Set<SourceEntry>?
+    private fun <T> T.getSourceFilePaths(): List<String>?
         where T : WithSources, T : Documentable {
         if (sources.isEmpty()) {
             docsHolder.logger.warn("Sources for $name is empty")
             return null
         }
 
-        return sources.entries
+        val paths = sources.entries.mapNotNull { it.getSourceFilePath() }
+        if (paths.isEmpty()) return null
+        return paths
     }
 
     /**
-     * Get the source file path from the [SourceEntry] relative to the root of the source directory.
+     * Get the source file path from the [SourceEntry] relative to the root of the source directory,
+     * if possible.
      *
      * For example - this would return "androidx/paging/compose/LazyPagingItems.kt" if the path was
      * "/location/to/root/of/source/files/androidx/paging/compose/LazyPagingItems.kt".
      */
-    private fun SourceEntry.getSourceFilePath(): String {
+    private fun SourceEntry.getSourceFilePath(): String? {
         val sourceRoots = key.sourceRoots.map { it.toString() }
         val fullFilePath = value.path
         // Find the source root that the file path starts with, so it can be trimmed off.
-        // This assumes the full file path always begins with one of the source roots.
-        val relevantSourceRoot = sourceRoots.first { fullFilePath.startsWith(it) }
+        // This assumes the full file path always begins with one of the source roots, if it doesn't
+        // the entry may be from an external source and this returns null.
+        val relevantSourceRoot = sourceRoots.firstOrNull { fullFilePath.startsWith(it) }
+            ?: return null
         val filePath = fullFilePath.substringAfter(relevantSourceRoot)
         return filePath.removePrefix("/")
     }

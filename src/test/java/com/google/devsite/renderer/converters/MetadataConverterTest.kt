@@ -21,6 +21,7 @@ import com.google.devsite.components.symbols.MetadataComponent
 import com.google.devsite.renderer.Language
 import com.google.devsite.testing.ConverterTestBase
 import com.google.devsite.util.ClassVersionMetadata
+import com.google.devsite.util.LibraryMetadata
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DModule
@@ -723,36 +724,105 @@ internal class MetadataConverterTest(
         }
     }
 
+    @Test
+    fun `Version metadata links to release notes`() {
+        val libraryMetadataMap = mapOf(
+            "kotlin/androidx/example/Test.kt" to LibraryMetadata(
+                groupId = "androidx.example",
+                artifactId = "example",
+                releaseNotesUrl = "https://d.android.com/release/example",
+            )
+        )
+        val versionMetadataMap = mapOf(
+            "androidx.example.Foo" to ClassVersionMetadata(
+                className = "androidx.example.Foo",
+                addedIn = "1.2.3",
+                deprecatedIn = "2.3.4",
+                methodVersions = mapOf(
+                    "bar()" to ClassVersionMetadata.MethodVersionMetadata(
+                        methodName = "bar()",
+                        addedIn = "1.2.3",
+                        deprecatedIn = "2.3.4"
+                    )
+                ),
+                fieldVersions = mapOf(
+                    "foo" to ClassVersionMetadata.FieldVersionMetadata(
+                        fieldName = "foo",
+                        addedIn = "1.2.3",
+                        deprecatedIn = "2.3.4"
+                    )
+                )
+            )
+        )
+
+        val module = """
+            |class Foo {
+            |    const val foo = 3
+            |    fun bar() {}
+            |}
+        """.render()
+        val metadataComponents = listOf(
+            module.metadataForClasslike(
+                versionMetadataMap = versionMetadataMap, fileMetadataMap = libraryMetadataMap
+            ),
+            module.metadataForProperty(
+                versionMetadataMap = versionMetadataMap, fileMetadataMap = libraryMetadataMap
+            ),
+            module.metadataForMethod(
+                versionMetadataMap = versionMetadataMap, fileMetadataMap = libraryMetadataMap
+            ),
+        )
+
+        for (metadataComponent in metadataComponents) {
+            val versionMetadata = metadataComponent.data.versionMetadata
+            assertThat(versionMetadata).isNotNull()
+
+            val addedIn = versionMetadata!!.data.addedIn
+            assertThat(addedIn?.data?.name).isEqualTo("1.2.3")
+            assertThat(addedIn?.data?.url).isEqualTo("https://d.android.com/release/example#1.2.3")
+
+            val deprecatedIn = versionMetadata.data.deprecatedIn
+            assertThat(deprecatedIn?.data?.name).isEqualTo("2.3.4")
+            assertThat(deprecatedIn?.data?.url)
+                .isEqualTo("https://d.android.com/release/example#2.3.4")
+        }
+    }
+
     private fun DModule.metadataForClasslike(
         name: String = "Foo",
         baseSourceLink: String? = null,
-        versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap()
+        versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap(),
+        fileMetadataMap: Map<String, LibraryMetadata> = emptyMap(),
     ): MetadataComponent =
-        metadata(classlike(name)!!, baseSourceLink, versionMetadataMap)
+        metadata(classlike(name)!!, baseSourceLink, versionMetadataMap, fileMetadataMap)
 
     private fun DModule.metadataForMethod(
         name: String = "bar",
         baseSourceLink: String? = null,
-        versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap()
+        versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap(),
+        fileMetadataMap: Map<String, LibraryMetadata> = emptyMap(),
     ): MetadataComponent =
-        metadata(function(name)!!, baseSourceLink, versionMetadataMap)
+        metadata(function(name)!!, baseSourceLink, versionMetadataMap, fileMetadataMap)
 
     private fun DModule.metadataForProperty(
         name: String = "foo",
         baseSourceLink: String? = null,
-        versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap()
+        versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap(),
+        fileMetadataMap: Map<String, LibraryMetadata> = emptyMap(),
     ): MetadataComponent =
-        metadata(property(name)!!, baseSourceLink, versionMetadataMap)
+        metadata(property(name)!!, baseSourceLink, versionMetadataMap, fileMetadataMap)
 
     private fun DModule.metadata(
         documentable: Documentable,
         baseSourceLink: String? = null,
-        versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap()
+        versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap(),
+        fileMetadataMap: Map<String, LibraryMetadata> = emptyMap(),
     ): MetadataComponent {
         val (holder, _) = holderAndProvider(
             module = this,
             baseSourceLink = baseSourceLink,
             versionMetadataMap = versionMetadataMap,
+            fileMetadataMap = fileMetadataMap
         )
         val metadataConverter = MetadataConverter(holder)
 

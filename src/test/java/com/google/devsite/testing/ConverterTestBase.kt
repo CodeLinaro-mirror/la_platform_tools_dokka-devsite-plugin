@@ -45,6 +45,7 @@ import com.google.devsite.renderer.impl.paths.DevsiteFilePathProvider
 import com.google.devsite.renderer.impl.paths.ExternalDokkaLocationProvider
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import com.google.devsite.util.ClassVersionMetadata
+import com.google.devsite.util.LibraryMetadata
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.CoreExtensions
 import org.jetbrains.dokka.DokkaConfiguration
@@ -263,6 +264,7 @@ internal abstract class ConverterTestBase(
         baseSourceLink: String? = null,
         hiddenAnnotations: Set<String> = emptySet(),
         versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap(),
+        fileMetadataMap: Map<String, LibraryMetadata> = emptyMap(),
     ): Pair<DocumentablesHolder, FilePathProvider> {
         val holder = runBlocking {
             DocumentablesHolder(
@@ -274,6 +276,7 @@ internal abstract class ConverterTestBase(
                 baseSourceLink = baseSourceLink,
                 annotationsNotToDisplay = hiddenAnnotations,
                 versionMetadataMap = versionMetadataMap,
+                fileMetadataMap = fileMetadataMap,
             )
         }
         val classGraph = runBlocking { holder.classGraph() }
