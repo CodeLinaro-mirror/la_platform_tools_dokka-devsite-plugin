@@ -281,9 +281,15 @@
       <div class="list">
         <h2>Public constructors</h2>
         <div class="api-item"><a name="TestMonotonicFrameClock(kotlinx.coroutines.CoroutineScope, kotlin.Long, kotlin.Function1)"></a><a name="TestMonotonicFrameClock-kotlinx.coroutines.CoroutineScope-kotlin.Long-kotlin.Function1-"></a><a name="testmonotonicframeclock"></a>
-          <h3 class="api-name" id="TestMonotonicFrameClock(kotlinx.coroutines.CoroutineScope,kotlin.Long,kotlin.Function1)">TestMonotonicFrameClock</h3>
-<span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
-          <!--platform-Android/JVM-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="TestMonotonicFrameClock(kotlinx.coroutines.CoroutineScope,kotlin.Long,kotlin.Function1)">TestMonotonicFrameClock</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+                <!--platform-Android/JVM--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/ui/test/TestMonotonicFrameClock.html#TestMonotonicFrameClock(kotlinx.coroutines.CoroutineScope,kotlin.Long,kotlin.Function1)">TestMonotonicFrameClock</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;coroutineScope:&nbsp;<a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;frameDelayNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a> = DefaultFrameDelay,<br>&nbsp;&nbsp;&nbsp;&nbsp;onPerformTraversals:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> = {}<br>)</pre>
           <div class="devsite-table-wrapper">
             <table class="responsive">
@@ -325,9 +331,15 @@
       <div class="list">
         <h2>Public functions</h2>
         <div class="api-item"><a name="withFrameNanos-kotlin.Function1-"></a><a name="withframenanos"></a>
-          <h3 class="api-name" id="withFrameNanos(kotlin.Function1)">withFrameNanos</h3>
-<span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
-          <!--platform-Android/JVM-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="withFrameNanos(kotlin.Function1)">withFrameNanos</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+                <!--platform-Android/JVM--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">open&nbsp;suspend&nbsp;fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/ui/test/TestMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a>(onFrame:&nbsp;(frameTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>) <span style="white-space: nowrap;">-&gt;</span> R):&nbsp;R</pre>
           <p>Schedules <code><a href="/reference/kotlin/androidx/compose/ui/test/TestMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">onFrame</a></code> to be ran on the next &quot;fake&quot; frame, and schedules the task to actually perform that frame if it hasn't already been scheduled.</p>
           <p>Instead of waiting for a vsync message to perform the next frame, it simply calls the coroutine <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/index.html">delay</a></code> function for the test frame time <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TestMonotonicFrameClock).frameDelayMillis()">frameDelayMillis</a></code> (which the underlying test coroutine scheduler will actually complete immediately without waiting), and then run all scheduled tasks.</p>
@@ -338,23 +350,41 @@
       <div class="list">
         <h2>Public properties</h2>
         <div class="api-item"><a name="getContinuationInterceptor()"></a><a name="setContinuationInterceptor()"></a><a name="getContinuationInterceptor--"></a><a name="setContinuationInterceptor--"></a>
-          <h3 class="api-name" id="continuationInterceptor()">continuationInterceptor</h3>
-<span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
-          <!--platform-Android/JVM-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="continuationInterceptor()">continuationInterceptor</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+                <!--platform-Android/JVM--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/TestMonotonicFrameClock.html#continuationInterceptor()">continuationInterceptor</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-continuation-interceptor/index.html">ContinuationInterceptor</a></pre>
           <p>A <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a></code> that will defer continuation resumptions requested within <code><a href="/reference/kotlin/androidx/compose/ui/test/TestMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> calls to until after the frame callbacks have finished running. Resumptions will then be dispatched before resuming the continuations from the <code><a href="/reference/kotlin/androidx/compose/ui/test/TestMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> calls themselves.</p>
         </div>
         <div class="api-item"><a name="getFrameDelayNanos()"></a><a name="setFrameDelayNanos()"></a><a name="getFrameDelayNanos--"></a><a name="setFrameDelayNanos--"></a>
-          <h3 class="api-name" id="frameDelayNanos()">frameDelayNanos</h3>
-<span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
-          <!--platform-Android/JVM-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="frameDelayNanos()">frameDelayNanos</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+                <!--platform-Android/JVM--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/TestMonotonicFrameClock.html#frameDelayNanos()">frameDelayNanos</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></pre>
           <p>The number of nanoseconds to <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/index.html">delay</a></code> between executing frames.</p>
         </div>
         <div class="api-item"><a name="getHasAwaiters()"></a><a name="setHasAwaiters()"></a><a name="getHasAwaiters--"></a><a name="setHasAwaiters--"></a>
-          <h3 class="api-name" id="hasAwaiters()">hasAwaiters</h3>
-<span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
-          <!--platform-Android/JVM-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="hasAwaiters()">hasAwaiters</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+                <!--platform-Android/JVM--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/TestMonotonicFrameClock.html#hasAwaiters()">hasAwaiters</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
           <p>Returns whether there are any awaiters on this clock.</p>
         </div>
@@ -364,9 +394,15 @@
       <div class="list">
         <h2>Extension properties</h2>
         <div class="api-item"><a name="(androidx.compose.ui.test.TestMonotonicFrameClock).getFrameDelayMillis()"></a><a name="(androidx.compose.ui.test.TestMonotonicFrameClock).setFrameDelayMillis()"></a><a name="-androidx.compose.ui.test.TestMonotonicFrameClock-.getFrameDelayMillis--"></a><a name="-androidx.compose.ui.test.TestMonotonicFrameClock-.setFrameDelayMillis--"></a>
-          <h3 class="api-name" id="(androidx.compose.ui.test.TestMonotonicFrameClock).frameDelayMillis()">frameDelayMillis</h3>
-<span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
-          <!--platform-Android/JVM-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="(androidx.compose.ui.test.TestMonotonicFrameClock).frameDelayMillis()">frameDelayMillis</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+                <!--platform-Android/JVM--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/TestMonotonicFrameClock.html">TestMonotonicFrameClock</a>.<a href="/reference/kotlin/androidx/compose/ui/test/TestMonotonicFrameClock.html#(androidx.compose.ui.test.TestMonotonicFrameClock).frameDelayMillis()">frameDelayMillis</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></pre>
           <p>The frame delay time for the <code><a href="/reference/kotlin/androidx/compose/ui/test/TestMonotonicFrameClock.html">TestMonotonicFrameClock</a></code> in milliseconds.</p>
         </div>

@@ -340,45 +340,75 @@
       <div class="list">
         <h2>Public functions</h2>
         <div class="api-item"><a name="awaitIdle--"></a><a name="awaitidle"></a>
-          <h3 class="api-name" id="awaitIdle()">awaitIdle</h3>
-<span class="kotlin-platform" data-title="Common/All">Cmn</span>
-          <!--platform-Common/All--><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
-          <!--platform-Android/JVM-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="awaitIdle()">awaitIdle</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+                <!--platform-Android/JVM--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#awaitIdle()">awaitIdle</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>Suspends until compose is idle. If <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#autoAdvance()">auto advancement</a></code> is enabled on the <code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#mainClock()">mainClock</a></code>, this method will actively advance the clock to process any pending composition, invalidation and animation. If auto advancement is not enabled, the clock will not be advanced actively which usually means that the Compose UI appears to be frozen. This is ideal for testing animations in a deterministic way. In either case, this method will wait for all <code><a href="/reference/kotlin/androidx/compose/ui/test/IdlingResource.html">IdlingResource</a></code>s to become idle.</p>
           <p>Note that some processes are driven by the host operating system and will therefore still execute when auto advancement is disabled. For example, on Android measure, layout and draw can still happen if the host view is invalidated by other parts of the View hierarchy.</p>
         </div>
         <div class="api-item"><a name="registerIdlingResource-androidx.compose.ui.test.IdlingResource-"></a><a name="registeridlingresource"></a>
-          <h3 class="api-name" id="registerIdlingResource(androidx.compose.ui.test.IdlingResource)">registerIdlingResource</h3>
-<span class="kotlin-platform" data-title="Common/All">Cmn</span>
-          <!--platform-Common/All--><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
-          <!--platform-Android/JVM-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="registerIdlingResource(androidx.compose.ui.test.IdlingResource)">registerIdlingResource</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+                <!--platform-Android/JVM--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#registerIdlingResource(androidx.compose.ui.test.IdlingResource)">registerIdlingResource</a>(idlingResource:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/IdlingResource.html">IdlingResource</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>Registers an <code><a href="/reference/kotlin/androidx/compose/ui/test/IdlingResource.html">IdlingResource</a></code> in this test.</p>
         </div>
         <div class="api-item"><a name="runOnIdle-kotlin.Function0-"></a><a name="runonidle"></a>
-          <h3 class="api-name" id="runOnIdle(kotlin.Function0)">runOnIdle</h3>
-<span class="kotlin-platform" data-title="Common/All">Cmn</span>
-          <!--platform-Common/All--><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
-          <!--platform-Android/JVM-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="runOnIdle(kotlin.Function0)">runOnIdle</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+                <!--platform-Android/JVM--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#runOnIdle(kotlin.Function0)">runOnIdle</a>(action:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T):&nbsp;T</pre>
           <p>Executes the given <code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#runOnIdle(kotlin.Function0)">action</a></code> in the same way as <code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#runOnUiThread(kotlin.Function0)">runOnUiThread</a></code> but <code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitForIdle()">waits</a></code> until the app is idle before executing the action. This is the recommended way of doing your assertions on shared variables.</p>
           <p>This method blocks until the action is complete.</p>
         </div>
         <div class="api-item"><a name="runOnUiThread-kotlin.Function0-"></a><a name="runonuithread"></a>
-          <h3 class="api-name" id="runOnUiThread(kotlin.Function0)">runOnUiThread</h3>
-<span class="kotlin-platform" data-title="Common/All">Cmn</span>
-          <!--platform-Common/All--><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
-          <!--platform-Android/JVM-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="runOnUiThread(kotlin.Function0)">runOnUiThread</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+                <!--platform-Android/JVM--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#runOnUiThread(kotlin.Function0)">runOnUiThread</a>(action:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T):&nbsp;T</pre>
           <p>Runs the given <code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#runOnUiThread(kotlin.Function0)">action</a></code> on the UI thread.</p>
           <p>This method blocks until the action is complete.</p>
         </div>
         <div class="api-item"><a name="setContent-kotlin.Function0-"></a><a name="setcontent"></a>
-          <h3 class="api-name" id="setContent(kotlin.Function0)">setContent</h3>
-<span class="kotlin-platform" data-title="Common/All">Cmn</span>
-          <!--platform-Common/All--><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
-          <!--platform-Android/JVM-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="setContent(kotlin.Function0)">setContent</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+                <!--platform-Android/JVM--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#setContent(kotlin.Function0)">setContent</a>(composable:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>Sets the given <code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#setContent(kotlin.Function0)">composable</a></code> as the content to be tested. This should be called exactly once per test.</p>
           <div class="devsite-table-wrapper">
@@ -404,27 +434,45 @@
           </div>
         </div>
         <div class="api-item"><a name="unregisterIdlingResource-androidx.compose.ui.test.IdlingResource-"></a><a name="unregisteridlingresource"></a>
-          <h3 class="api-name" id="unregisterIdlingResource(androidx.compose.ui.test.IdlingResource)">unregisterIdlingResource</h3>
-<span class="kotlin-platform" data-title="Common/All">Cmn</span>
-          <!--platform-Common/All--><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
-          <!--platform-Android/JVM-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="unregisterIdlingResource(androidx.compose.ui.test.IdlingResource)">unregisterIdlingResource</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+                <!--platform-Android/JVM--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#unregisterIdlingResource(androidx.compose.ui.test.IdlingResource)">unregisterIdlingResource</a>(idlingResource:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/IdlingResource.html">IdlingResource</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>Unregisters an <code><a href="/reference/kotlin/androidx/compose/ui/test/IdlingResource.html">IdlingResource</a></code> from this test.</p>
         </div>
         <div class="api-item"><a name="waitForIdle--"></a><a name="waitforidle"></a>
-          <h3 class="api-name" id="waitForIdle()">waitForIdle</h3>
-<span class="kotlin-platform" data-title="Common/All">Cmn</span>
-          <!--platform-Common/All--><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
-          <!--platform-Android/JVM-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="waitForIdle()">waitForIdle</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+                <!--platform-Android/JVM--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitForIdle()">waitForIdle</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>Waits for compose to be idle. If <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#autoAdvance()">auto advancement</a></code> is enabled on the <code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#mainClock()">mainClock</a></code>, this method will actively advance the clock to process any pending composition, invalidation and animation. If auto advancement is not enabled, the clock will not be advanced actively which usually means that the Compose UI appears to be frozen. This is ideal for testing animations in a deterministic way. In either case, this method will wait for all <code><a href="/reference/kotlin/androidx/compose/ui/test/IdlingResource.html">IdlingResource</a></code>s to become idle.</p>
           <p>Note that some processes are driven by the host operating system and will therefore still execute when auto advancement is disabled. For example, on Android measure, layout and draw can still happen if the host view is invalidated by other parts of the View hierarchy.</p>
         </div>
         <div class="api-item"><a name="waitUntil(kotlin.Long, kotlin.Function0)"></a><a name="waitUntil-kotlin.Long-kotlin.Function0-"></a><a name="waituntil"></a>
-          <h3 class="api-name" id="waitUntil(kotlin.Long,kotlin.Function0)">waitUntil</h3>
-<span class="kotlin-platform" data-title="Common/All">Cmn</span>
-          <!--platform-Common/All--><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
-          <!--platform-Android/JVM-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="waitUntil(kotlin.Long,kotlin.Function0)">waitUntil</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+                <!--platform-Android/JVM--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitUntil(kotlin.Long,kotlin.Function0)">waitUntil</a>(timeoutMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,&nbsp;condition:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>Blocks until the given <code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#waitUntil(kotlin.Long,kotlin.Function0)">condition</a></code> is satisfied.</p>
           <p>If <code><a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html#autoAdvance()">auto advancement</a></code> is enabled on the <code><a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#mainClock()">mainClock</a></code>, this method will actively advance the clock to process any pending composition, invalidation and animation. If auto advancement is not enabled, the clock will not be advanced actively which usually means that the Compose UI appears to be frozen. This is ideal for testing animations in a deterministic way. In either case, this method will wait for all <code><a href="/reference/kotlin/androidx/compose/ui/test/IdlingResource.html">IdlingResource</a></code>s to become idle.</p>
@@ -485,18 +533,30 @@
       <div class="list">
         <h2>Public properties</h2>
         <div class="api-item"><a name="getDensity()"></a><a name="setDensity()"></a><a name="getDensity--"></a><a name="setDensity--"></a>
-          <h3 class="api-name" id="density()">density</h3>
-<span class="kotlin-platform" data-title="Common/All">Cmn</span>
-          <!--platform-Common/All--><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
-          <!--platform-Android/JVM-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="density()">density</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+                <!--platform-Android/JVM--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#density()">density</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Density.html">Density</a></pre>
           <p>Current device screen's density. Note that it is technically possible for a Compose hierarchy to define a different density for a certain subtree. Try to use <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutInfo.html#density()">LayoutInfo.density</a></code> where possible, which can be obtained from <code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsNode.html#layoutInfo()">SemanticsNode.layoutInfo</a></code>.</p>
         </div>
         <div class="api-item"><a name="getMainClock()"></a><a name="setMainClock()"></a><a name="getMainClock--"></a><a name="setMainClock--"></a>
-          <h3 class="api-name" id="mainClock()">mainClock</h3>
-<span class="kotlin-platform" data-title="Common/All">Cmn</span>
-          <!--platform-Common/All--><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
-          <!--platform-Android/JVM-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="mainClock()">mainClock</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+                <!--platform-Android/JVM--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#mainClock()">mainClock</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/MainTestClock.html">MainTestClock</a></pre>
           <p>Clock that drives frames and recompositions in compose tests.</p>
         </div>
@@ -506,9 +566,15 @@
       <div class="list">
         <h2>Extension functions</h2>
         <div class="api-item"><a name="(androidx.compose.ui.test.ComposeUiTest).waitUntilAtLeastOneExists(androidx.compose.ui.test.SemanticsMatcher, kotlin.Long)"></a><a name="-androidx.compose.ui.test.ComposeUiTest-.waitUntilAtLeastOneExists-androidx.compose.ui.test.SemanticsMatcher-kotlin.Long-"></a><a name="waituntilatleastoneexists"></a>
-          <h3 class="api-name" id="(androidx.compose.ui.test.ComposeUiTest).waitUntilAtLeastOneExists(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">waitUntilAtLeastOneExists</h3>
-<span class="kotlin-platform" data-title="Common/All">Cmn</span>
-          <!--platform-Common/All-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="(androidx.compose.ui.test.ComposeUiTest).waitUntilAtLeastOneExists(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">waitUntilAtLeastOneExists</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html">ComposeUiTest</a>.<a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#(androidx.compose.ui.test.ComposeUiTest).waitUntilAtLeastOneExists(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">waitUntilAtLeastOneExists</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;matcher:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;timeoutMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>Blocks until at least one node matches the given <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.ComposeUiTest).waitUntilAtLeastOneExists(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">matcher</a></code>.</p>
           <div class="devsite-table-wrapper">
@@ -580,9 +646,15 @@
           </div>
         </div>
         <div class="api-item"><a name="(androidx.compose.ui.test.ComposeUiTest).waitUntilDoesNotExist(androidx.compose.ui.test.SemanticsMatcher, kotlin.Long)"></a><a name="-androidx.compose.ui.test.ComposeUiTest-.waitUntilDoesNotExist-androidx.compose.ui.test.SemanticsMatcher-kotlin.Long-"></a><a name="waituntildoesnotexist"></a>
-          <h3 class="api-name" id="(androidx.compose.ui.test.ComposeUiTest).waitUntilDoesNotExist(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">waitUntilDoesNotExist</h3>
-<span class="kotlin-platform" data-title="Common/All">Cmn</span>
-          <!--platform-Common/All-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="(androidx.compose.ui.test.ComposeUiTest).waitUntilDoesNotExist(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">waitUntilDoesNotExist</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html">ComposeUiTest</a>.<a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#(androidx.compose.ui.test.ComposeUiTest).waitUntilDoesNotExist(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">waitUntilDoesNotExist</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;matcher:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;timeoutMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>Blocks until no nodes match the given <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.ComposeUiTest).waitUntilDoesNotExist(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">matcher</a></code>.</p>
           <div class="devsite-table-wrapper">
@@ -654,9 +726,15 @@
           </div>
         </div>
         <div class="api-item"><a name="(androidx.compose.ui.test.ComposeUiTest).waitUntilExactlyOneExists(androidx.compose.ui.test.SemanticsMatcher, kotlin.Long)"></a><a name="-androidx.compose.ui.test.ComposeUiTest-.waitUntilExactlyOneExists-androidx.compose.ui.test.SemanticsMatcher-kotlin.Long-"></a><a name="waituntilexactlyoneexists"></a>
-          <h3 class="api-name" id="(androidx.compose.ui.test.ComposeUiTest).waitUntilExactlyOneExists(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">waitUntilExactlyOneExists</h3>
-<span class="kotlin-platform" data-title="Common/All">Cmn</span>
-          <!--platform-Common/All-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="(androidx.compose.ui.test.ComposeUiTest).waitUntilExactlyOneExists(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">waitUntilExactlyOneExists</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html">ComposeUiTest</a>.<a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#(androidx.compose.ui.test.ComposeUiTest).waitUntilExactlyOneExists(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">waitUntilExactlyOneExists</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;matcher:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;timeoutMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>Blocks until exactly one node matches the given <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.ComposeUiTest).waitUntilExactlyOneExists(androidx.compose.ui.test.SemanticsMatcher,kotlin.Long)">matcher</a></code>.</p>
           <div class="devsite-table-wrapper">
@@ -728,9 +806,15 @@
           </div>
         </div>
         <div class="api-item"><a name="(androidx.compose.ui.test.ComposeUiTest).waitUntilNodeCount(androidx.compose.ui.test.SemanticsMatcher, kotlin.Int, kotlin.Long)"></a><a name="-androidx.compose.ui.test.ComposeUiTest-.waitUntilNodeCount-androidx.compose.ui.test.SemanticsMatcher-kotlin.Int-kotlin.Long-"></a><a name="waituntilnodecount"></a>
-          <h3 class="api-name" id="(androidx.compose.ui.test.ComposeUiTest).waitUntilNodeCount(androidx.compose.ui.test.SemanticsMatcher,kotlin.Int,kotlin.Long)">waitUntilNodeCount</h3>
-<span class="kotlin-platform" data-title="Common/All">Cmn</span>
-          <!--platform-Common/All-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="(androidx.compose.ui.test.ComposeUiTest).waitUntilNodeCount(androidx.compose.ui.test.SemanticsMatcher,kotlin.Int,kotlin.Long)">waitUntilNodeCount</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/test/ExperimentalTestApi.html">ExperimentalTestApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html">ComposeUiTest</a>.<a href="/reference/kotlin/androidx/compose/ui/test/ComposeUiTest.html#(androidx.compose.ui.test.ComposeUiTest).waitUntilNodeCount(androidx.compose.ui.test.SemanticsMatcher,kotlin.Int,kotlin.Long)">waitUntilNodeCount</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;matcher:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/test/SemanticsMatcher.html">SemanticsMatcher</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;count:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;timeoutMillis:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>Blocks until the number of nodes matching the given <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.ComposeUiTest).waitUntilNodeCount(androidx.compose.ui.test.SemanticsMatcher,kotlin.Int,kotlin.Long)">matcher</a></code> is equal to the given <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.ComposeUiTest).waitUntilNodeCount(androidx.compose.ui.test.SemanticsMatcher,kotlin.Int,kotlin.Long)">count</a></code>.</p>
           <div class="devsite-table-wrapper">

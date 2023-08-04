@@ -89,9 +89,15 @@
       <div class="list">
         <h2>Public companion properties</h2>
         <div class="api-item"><a name="getLifecycleAware()"></a><a name="setLifecycleAware()"></a><a name="getLifecycleAware--"></a><a name="setLifecycleAware--"></a>
-          <h3 class="api-name" id="LifecycleAware()">LifecycleAware</h3>
-<span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
-          <!--platform-Android/JVM-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="LifecycleAware()">LifecycleAware</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+                <!--platform-Android/JVM--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/WindowRecomposerFactory.Companion.html#LifecycleAware()">LifecycleAware</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/WindowRecomposerFactory.html">WindowRecomposerFactory</a></pre>
           <p>A <code><a href="/reference/kotlin/androidx/compose/ui/platform/WindowRecomposerFactory.html">WindowRecomposerFactory</a></code> that creates <b>lifecycle-aware</b> <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code>s.</p>
           <p>Returned <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code>s will be bound to the <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code> returned by <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(android.view.View).findViewTreeLifecycleOwner()">findViewTreeLifecycleOwner</a></code> registered at the <code><a href="https://developer.android.com/reference/android/view/View.html#getRootView()">root</a></code> of the view hierarchy and run <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#runRecomposeAndApplyChanges()">recomposition</a></code> and composition effects on the <code><a href="/reference/kotlin/androidx/compose/ui/platform/AndroidUiDispatcher.html#CurrentThread()">AndroidUiDispatcher.CurrentThread</a></code> for the window's UI thread. The associated <code><a href="/reference/kotlin/androidx/compose/runtime/MonotonicFrameClock.html">MonotonicFrameClock</a></code> will only produce frames when the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> is at least <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.STARTED.html">Lifecycle.State.STARTED</a></code>, causing animations and other uses of <code><a href="/reference/kotlin/androidx/compose/runtime/MonotonicFrameClock.html">MonotonicFrameClock</a></code> APIs to suspend until a <b>visible</b> frame will be produced.</p>
@@ -102,9 +108,15 @@
       <div class="list">
         <h2>Public functions</h2>
         <div class="api-item"><a name="createRecomposer-android.view.View-"></a><a name="createrecomposer"></a>
-          <h3 class="api-name" id="createRecomposer(android.view.View)">createRecomposer</h3>
-<span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
-          <!--platform-Android/JVM-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="createRecomposer(android.view.View)">createRecomposer</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Android/JVM"><span class="material-symbols-outlined">android</span></span>
+                <!--platform-Android/JVM--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/platform/WindowRecomposerFactory.html#createRecomposer(android.view.View)">createRecomposer</a>(windowRootView:&nbsp;<a href="https://developer.android.com/reference/android/view/View.html">View</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></pre>
           <p>Get a <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> for the window where <code><a href="/reference/kotlin/androidx/compose/ui/platform/WindowRecomposerFactory.html#createRecomposer(android.view.View)">windowRootView</a></code> is at the root of the window's <code><a href="https://developer.android.com/reference/android/view/View.html">View</a></code> hierarchy. The factory is responsible for establishing a policy for <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#cancel()">shutting down</a></code> the returned <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code>. <code><a href="/reference/kotlin/androidx/compose/ui/platform/WindowRecomposerFactory.html#createRecomposer(android.view.View)">windowRootView</a></code> will hold a hard reference to the returned <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> until it <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#join()">joins</a></code> after shutting down.</p>
         </div>

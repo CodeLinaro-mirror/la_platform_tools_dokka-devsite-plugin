@@ -40,17 +40,29 @@ internal data class DefaultKmpSymbolDetail<T : SymbolSignature>(
             a { attributes["name"] = anchor }
         }
 
-        data.metadataComponent?.render(this)
+        // CSS is declared in internal codebase (cl/553846444)
+        div("api-name-block") {
 
-        h3("api-name") {
-            data.anchors.firstOrNull()?.let { attributes["id"] = it }
-            if (data.displayLanguage == Language.JAVA && data.extFunctionClass != null) {
-                +data.extFunctionClass
-                +"."
+            // Wrap the h3 element in a div in case devsite modifies h3 elements in the future.
+            // This preserves the Flexbox spacing between h3 and the container for the platform
+            // icons and the metadata component container.
+            div {
+                h3 {
+                    data.anchors.firstOrNull()?.let { attributes["id"] = it }
+                    if (data.displayLanguage == Language.JAVA && data.extFunctionClass != null) {
+                        +data.extFunctionClass
+                        +"."
+                    }
+                    +data.name
+                }
             }
-            +data.name
+            div("api-name-platform-and-metadata") {
+                div("api-name-platform-icons") {
+                    data.platforms.renderForDetail(into)
+                }
+                data.metadataComponent?.render(this)
+            }
         }
-        data.platforms.renderForDetail(into)
         pre("api-signature no-pretty-print") {
             data.annotationComponents.render(into, ShouldBreak.YES, separator = "")
             data.modifiers.render(this, terminator = { +Entities.nbsp })

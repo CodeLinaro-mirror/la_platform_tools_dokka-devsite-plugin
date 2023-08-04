@@ -254,9 +254,15 @@
       <div class="list">
         <h2>Public constructors</h2>
         <div class="api-item"><a name="BroadcastFrameClock-kotlin.Function0-"></a><a name="broadcastframeclock"></a>
-          <h3 class="api-name" id="BroadcastFrameClock(kotlin.Function0)">BroadcastFrameClock</h3>
-<span class="kotlin-platform" data-title="Common/All">Cmn</span>
-          <!--platform-Common/All-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="BroadcastFrameClock(kotlin.Function0)">BroadcastFrameClock</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/runtime/BroadcastFrameClock.html#BroadcastFrameClock(kotlin.Function0)">BroadcastFrameClock</a>(onNewAwaiters:&nbsp;(() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)? = null)</pre>
         </div>
       </div>
@@ -265,23 +271,41 @@
       <div class="list">
         <h2>Public functions</h2>
         <div class="api-item"><a name="cancel-[Error type: Unresolved type for CancellationException]-"></a><a name="cancel"></a>
-          <h3 class="api-name" id="cancel([Error type: Unresolved type for CancellationException])">cancel</h3>
-<span class="kotlin-platform" data-title="Common/All">Cmn</span>
-          <!--platform-Common/All-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="cancel([Error type: Unresolved type for CancellationException])">cancel</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/BroadcastFrameClock.html#cancel([Error type: Unresolved type for CancellationException])">cancel</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;cancellationException:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a> = CancellationException(&quot;clock cancelled&quot;)<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>Permanently cancel this <code><a href="/reference/kotlin/androidx/compose/runtime/BroadcastFrameClock.html">BroadcastFrameClock</a></code> and cancel all current and future awaiters with <code><a href="/reference/kotlin/androidx/compose/runtime/BroadcastFrameClock.html#cancel([Error type: Unresolved type for CancellationException])">cancellationException</a></code>.</p>
         </div>
         <div class="api-item"><a name="sendFrame-kotlin.Long-"></a><a name="sendframe"></a>
-          <h3 class="api-name" id="sendFrame(kotlin.Long)">sendFrame</h3>
-<span class="kotlin-platform" data-title="Common/All">Cmn</span>
-          <!--platform-Common/All-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="sendFrame(kotlin.Long)">sendFrame</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/BroadcastFrameClock.html#sendFrame(kotlin.Long)">sendFrame</a>(timeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>Send a frame for time <code><a href="/reference/kotlin/androidx/compose/runtime/BroadcastFrameClock.html#sendFrame(kotlin.Long)">timeNanos</a></code> to all current callers of <code><a href="/reference/kotlin/androidx/compose/runtime/BroadcastFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code>. The <code>onFrame</code> callback for each caller is invoked synchronously during the call to <code><a href="/reference/kotlin/androidx/compose/runtime/BroadcastFrameClock.html#sendFrame(kotlin.Long)">sendFrame</a></code>.</p>
         </div>
         <div class="api-item"><a name="withFrameNanos-kotlin.Function1-"></a><a name="withframenanos"></a>
-          <h3 class="api-name" id="withFrameNanos(kotlin.Function1)">withFrameNanos</h3>
-<span class="kotlin-platform" data-title="Common/All">Cmn</span>
-          <!--platform-Common/All-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="withFrameNanos(kotlin.Function1)">withFrameNanos</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">open&nbsp;suspend&nbsp;fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/BroadcastFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a>(onFrame:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>) <span style="white-space: nowrap;">-&gt;</span> R):&nbsp;R</pre>
           <p>Suspends until a new frame is requested, immediately invokes <code><a href="/reference/kotlin/androidx/compose/runtime/BroadcastFrameClock.html#withFrameNanos(kotlin.Function1)">onFrame</a></code> with the frame time in nanoseconds in the calling context of frame dispatch, then resumes with the result from <code><a href="/reference/kotlin/androidx/compose/runtime/BroadcastFrameClock.html#withFrameNanos(kotlin.Function1)">onFrame</a></code>.</p>
           <p><code>frameTimeNanos</code> should be used when calculating animation time deltas from frame to frame as it may be normalized to the target time for the frame, not necessarily a direct, &quot;now&quot; value.</p>
@@ -293,9 +317,15 @@
       <div class="list">
         <h2>Public properties</h2>
         <div class="api-item"><a name="getHasAwaiters()"></a><a name="setHasAwaiters()"></a><a name="getHasAwaiters--"></a><a name="setHasAwaiters--"></a>
-          <h3 class="api-name" id="hasAwaiters()">hasAwaiters</h3>
-<span class="kotlin-platform" data-title="Common/All">Cmn</span>
-          <!--platform-Common/All-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="hasAwaiters()">hasAwaiters</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/BroadcastFrameClock.html#hasAwaiters()">hasAwaiters</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
           <p><code>true</code> if there are any callers of <code><a href="/reference/kotlin/androidx/compose/runtime/BroadcastFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> awaiting to run for a pending frame.</p>
         </div>

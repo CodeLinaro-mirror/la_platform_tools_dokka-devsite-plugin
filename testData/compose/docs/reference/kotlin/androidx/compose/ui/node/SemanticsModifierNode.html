@@ -165,9 +165,15 @@
       <div class="list">
         <h2>Public functions</h2>
         <div class="api-item"><a name="-androidx.compose.ui.semantics.SemanticsPropertyReceiver-.applySemantics--"></a><a name="applysemantics"></a>
-          <h3 class="api-name" id="(androidx.compose.ui.semantics.SemanticsPropertyReceiver).applySemantics()">applySemantics</h3>
-<span class="kotlin-platform" data-title="Common/All">Cmn</span>
-          <!--platform-Common/All-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="(androidx.compose.ui.semantics.SemanticsPropertyReceiver).applySemantics()">applySemantics</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyReceiver.html">SemanticsPropertyReceiver</a>.<a href="/reference/kotlin/androidx/compose/ui/node/SemanticsModifierNode.html#(androidx.compose.ui.semantics.SemanticsPropertyReceiver).applySemantics()">applySemantics</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>Add semantics key/value pairs to the layout node, for use in testing, accessibility, etc.</p>
           <p>The <code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyReceiver.html">SemanticsPropertyReceiver</a></code> provides &quot;key = value&quot;-style setters for any <code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsPropertyKey.html">SemanticsPropertyKey</a></code>. Additionally, chaining multiple semantics modifiers is also a supported style.</p>
@@ -181,18 +187,30 @@
       <div class="list">
         <h2>Public properties</h2>
         <div class="api-item"><a name="getShouldClearDescendantSemantics()"></a><a name="setShouldClearDescendantSemantics()"></a><a name="getShouldClearDescendantSemantics--"></a><a name="setShouldClearDescendantSemantics--"></a>
-          <h3 class="api-name" id="shouldClearDescendantSemantics()">shouldClearDescendantSemantics</h3>
-<span class="kotlin-platform" data-title="Common/All">Cmn</span>
-          <!--platform-Common/All-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="shouldClearDescendantSemantics()">shouldClearDescendantSemantics</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/SemanticsModifierNode.html#shouldClearDescendantSemantics()">shouldClearDescendantSemantics</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
           <p>Clears the semantics of all the descendant nodes and sets new semantics.</p>
           <p>In the merged semantics tree, this clears the semantic information provided by the node's descendants (but not those of the layout node itself, if any) In the unmerged tree, the semantics node is marked with &quot;<code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsConfiguration.html#isClearingSemantics()">SemanticsConfiguration.isClearingSemantics</a></code>&quot;, but nothing is actually cleared.</p>
           <p>Compose's default semantics provide baseline usability for screen-readers, but this can be used to provide a more polished screen-reader experience: for example, clearing the semantics of a group of tiny buttons, and setting equivalent actions on the card containing them.</p>
         </div>
         <div class="api-item"><a name="getShouldMergeDescendantSemantics()"></a><a name="setShouldMergeDescendantSemantics()"></a><a name="getShouldMergeDescendantSemantics--"></a><a name="setShouldMergeDescendantSemantics--"></a>
-          <h3 class="api-name" id="shouldMergeDescendantSemantics()">shouldMergeDescendantSemantics</h3>
-<span class="kotlin-platform" data-title="Common/All">Cmn</span>
-          <!--platform-Common/All-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="shouldMergeDescendantSemantics()">shouldMergeDescendantSemantics</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/SemanticsModifierNode.html#shouldMergeDescendantSemantics()">shouldMergeDescendantSemantics</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
           <p>Whether the semantic information provided by this node and its descendants should be treated as one logical entity. Most commonly set on screen-reader-focusable items such as buttons or form fields. In the merged semantics tree, all descendant nodes (except those themselves marked <code><a href="/reference/kotlin/androidx/compose/ui/node/SemanticsModifierNode.html#shouldMergeDescendantSemantics()">shouldMergeDescendantSemantics</a></code>) will disappear from the tree, and their properties will get merged into the parent's configuration (using a merging algorithm that varies based on the type of property -- for example, text properties will get concatenated, separated by commas). In the unmerged semantics tree, the node is simply marked with <code><a href="/reference/kotlin/androidx/compose/ui/semantics/SemanticsConfiguration.html#isMergingSemanticsOfDescendants()">SemanticsConfiguration.isMergingSemanticsOfDescendants</a></code>.</p>
         </div>
@@ -202,9 +220,15 @@
       <div class="list">
         <h2>Extension functions</h2>
         <div class="api-item"><a name="-androidx.compose.ui.node.SemanticsModifierNode-.invalidateSemantics--"></a><a name="invalidatesemantics"></a>
-          <h3 class="api-name" id="(androidx.compose.ui.node.SemanticsModifierNode).invalidateSemantics()">invalidateSemantics</h3>
-<span class="kotlin-platform" data-title="Common/All">Cmn</span>
-          <!--platform-Common/All-->
+          <div class="api-name-block">
+            <div>
+              <h3 id="(androidx.compose.ui.node.SemanticsModifierNode).invalidateSemantics()">invalidateSemantics</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/node/SemanticsModifierNode.html">SemanticsModifierNode</a>.<a href="/reference/kotlin/androidx/compose/ui/node/SemanticsModifierNode.html#(androidx.compose.ui.node.SemanticsModifierNode).invalidateSemantics()">invalidateSemantics</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
         </div>
       </div>
