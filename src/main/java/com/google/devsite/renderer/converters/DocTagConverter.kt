@@ -287,7 +287,7 @@ internal class DocTagConverter(
                 is DClasslike -> {
                     logComponentNotFoundWarning(
                         componentType = "@property",
-                        components = tags.names().toSet()
+                        invalidComponents = tags.names().toSet()
                             .subtract(documentable.properties.map { it.name }.toSet()),
                         containingComponent = documentable
                     )
@@ -303,16 +303,17 @@ internal class DocTagConverter(
 
     private fun logComponentNotFoundWarning(
         componentType: String,
-        components: Iterable<String>,
+        invalidComponents: Iterable<String>,
         containingComponent: Documentable
     ) {
-        if (components.none()) return
-        val warning = "Unable to find what is referred to by" +
-            components.joinToString { "\n\t$componentType $it" } +
-            "\nin ${containingComponent::class.simpleName} ${containingComponent.name}" +
-            "\nDid you make a typo? Are you trying to refer to something not visible to users? " +
-            containingComponent.getErrorLocation()
-        docsHolder.logger.warn(warning)
+        invalidComponents.forEach { invalidComponent ->
+            docsHolder.logger.warn(
+                "Unable to find what is referred to by \"$componentType $invalidComponent\" in " +
+                    "${containingComponent::class.simpleName} ${containingComponent.name}. Did " +
+                    "you make a typo? Are you trying to refer to something not visible to users? " +
+                    containingComponent.getErrorLocation()
+            )
+        }
     }
 
     private fun params(

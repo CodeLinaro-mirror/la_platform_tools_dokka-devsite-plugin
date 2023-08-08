@@ -659,11 +659,11 @@ internal class DocTagConverterTest(
         | */
         |class Foo { }
         """.render().documentation() // for type params and property params
-        val expected = "WARN: Unable to find what is referred to by" +
-            "\n\t@param NOT_A_REAL_PARAM" +
-            "\nin DClass Foo" +
-            "\nDid you make a typo? Are you trying to refer to something not visible to users?"
+        val expected = "WARN: Unable to find what is referred to by \"@param NOT_A_REAL_PARAM\" " +
+            "in DClass Foo. Did you make a typo? Are you trying to refer to something not visible" +
+            " to users? in declaration of Foo in file "
         assertThat(outputStreamCaptor.toString()).contains(expected)
+        assertThat(outputStreamCaptor.toString()).contains("Test.kt at line 4.")
         System.setOut(standardOut)
         assertFails { // for @param in the wrong place
             """
@@ -686,11 +686,11 @@ internal class DocTagConverterTest(
         | */
         |class Foo(NOT_A_REAL_PROPERTY: String) { }
         """.render().documentation()
-        var expected = "WARN: Unable to find what is referred to by" +
-            "\n\t@property NOT_A_REAL_PROPERTY" +
-            "\nin DClass Foo" +
-            "\nDid you make a typo? Are you trying to refer to something not visible to users?"
+        var expected = "WARN: Unable to find what is referred to by " +
+            "\"@property NOT_A_REAL_PROPERTY\" in DClass Foo. Did you make a typo? Are you trying" +
+            " to refer to something not visible to users? in declaration of Foo in file"
         assertThat(outputStreamCaptor.toString()).contains(expected)
+        assertThat(outputStreamCaptor.toString()).contains("Test.kt at line 4.")
         System.setOut(PrintStream(outputStreamCaptor))
         """
         |/**
@@ -698,11 +698,11 @@ internal class DocTagConverterTest(
         | */
         |class Foo() { }
         """.render().documentation()
-        expected = "WARN: Unable to find what is referred to by" +
-            "\n\t@property NO_PROPERTIES_HERE" +
-            "\nin DClass Foo" +
-            "\nDid you make a typo? Are you trying to refer to something not visible to users?"
+        expected = "WARN: Unable to find what is referred to by \"@property NO_PROPERTIES_HERE\" " +
+            "in DClass Foo. Did you make a typo? Are you trying to refer to something not visible" +
+            " to users? in declaration of Foo in file "
         assertThat(outputStreamCaptor.toString()).contains(expected)
+        assertThat(outputStreamCaptor.toString()).contains("Test.kt at line 4.")
         assertFails {
             """
             |class Foo() {
