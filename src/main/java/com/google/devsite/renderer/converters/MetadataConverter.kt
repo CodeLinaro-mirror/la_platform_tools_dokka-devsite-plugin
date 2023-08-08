@@ -117,14 +117,13 @@ internal class MetadataConverter(
      * current class being processed.  Otherwise, return null.
      */
     private fun Documentable.findMatchingLibraryMetadata(paths: List<String>): LibraryMetadata? {
-        if (paths.size > 1) {
-            docsHolder.logger.warn(
-                "Multiple sources exist for $name. Artifact ID metadata will not be " +
-                    "displayed"
-            )
-            return null
+        val path = if (paths.size > 1) {
+            // If there are multiple paths, this is probably KMP and the paths end in ".kt",
+            // ".jvm.kt", ".native.kt", etc. Pick out the ".kt" path.
+            paths.singleOrNull { it.indexOf(".") == it.lastIndexOf(".") }
+        } else {
+            paths.single()
         }
-        val path = paths.single()
 
         return docsHolder.fileMetadataMap[path]
     }
