@@ -192,7 +192,7 @@ internal class DocTagConverter(
                         documentable.getExpectOrCommonSourceSet()
                     )
                     is Return -> returnType(tags as List<Return>, checkNotNull(returnType))
-                    is Throws -> throws(tags as List<Throws>)
+                    is Throws -> throws(tags as List<Throws>, documentable)
                     is See -> see(tags as List<See>)
                     is Sample -> null // Samples are handled in the description
                     is Property ->
@@ -445,11 +445,11 @@ internal class DocTagConverter(
         )
     }
 
-    private fun throws(tags: List<Throws>): DocsSummaryList {
+    private fun throws(tags: List<Throws>, parent: Documentable): DocsSummaryList {
         val params = tags.map { tag ->
             DefaultTableRowSummaryItem(
                 TableRowSummaryItem.Params(
-                    title = throwsToParameterComponent(tag),
+                    title = throwsToParameterComponent(tag, parent),
                     description = description(tag)
                 )
             )
@@ -465,7 +465,8 @@ internal class DocTagConverter(
 
     private fun String.firstWord() = substring(0, indexOfFirst { it == ' ' })
 
-    private fun throwsToParameterComponent(throws: Throws): ParameterComponent {
+    private fun throwsToParameterComponent(throws: Throws, parent: Documentable):
+        ParameterComponent {
         var name = throws.name
         var dri: DRI? = throws.exceptionAddress
         if (throws.name in listOf("a", "an")) {
@@ -473,7 +474,7 @@ internal class DocTagConverter(
                 "WARNING: do not use '${throws.name}' before the exception type in an @throws" +
                     " statement. This is against jdoc spec, will be an error in the next version " +
                     "of dackka, and your exception is not being linked and looks bad. " +
-                    "This was observed in $throws."
+                    "This was observed in $throws in ${parent.getErrorLocation()}"
             )
             name = throws.text().firstWord()
             dri = null
@@ -482,7 +483,8 @@ internal class DocTagConverter(
                 "WARNING: do not {@link the exception type in an @throws statement. @throws state" +
                     "ments are automatically linked. Manually java-linking them is against jdoc s" +
                     "pec, will be an error in the next version of dackka, and breaks linking beha" +
-                    "vior causing them to actually *not* be linked. This was observed in $throws."
+                    "vior causing them to actually *not* be linked. This was observed in $throws" +
+                    " in ${parent.getErrorLocation()}"
             )
             name = name.removePrefix("{@link ").removeSuffix("}")
             dri = null
@@ -492,8 +494,8 @@ internal class DocTagConverter(
                     "the containing file does not import? Is docs inherited to an un-documented " +
                     "override function, but the exception class is not in scope in the inheriting" +
                     " class? The general fix for these is to fully qualify the exception name, " +
-                    " e.g.`@throws java.io.IOException under some conditions. This was observed" +
-                    " in $throws.`"
+                    " e.g.`@throws java.io.IOException under some conditions`. This was observed" +
+                    " in $throws in ${parent.getErrorLocation()}"
             )
             dri = null
         }
