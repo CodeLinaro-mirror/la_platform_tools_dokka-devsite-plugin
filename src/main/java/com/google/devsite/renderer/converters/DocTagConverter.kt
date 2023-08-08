@@ -193,7 +193,7 @@ internal class DocTagConverter(
                     )
                     is Return -> returnType(tags as List<Return>, checkNotNull(returnType))
                     is Throws -> throws(tags as List<Throws>, documentable)
-                    is See -> see(tags as List<See>)
+                    is See -> see(tags as List<See>, documentable)
                     is Sample -> null // Samples are handled in the description
                     is Property ->
                         throw RuntimeException("Should have been consumed in description!")
@@ -517,11 +517,11 @@ internal class DocTagConverter(
         )
     }
 
-    private fun see(tags: List<See>): LinkDescriptionSummaryList {
+    private fun see(tags: List<See>, parent: Documentable): LinkDescriptionSummaryList {
         val params = tags.map { tag ->
             DefaultTableRowSummaryItem(
                 TableRowSummaryItem.Params(
-                    title = tag.toLink(),
+                    title = tag.toLink(parent),
                     description = description(tag)
                 )
             )
@@ -751,7 +751,7 @@ internal class DocTagConverter(
      * a developer writes which could either be a fully qualified reference or just the URL
      * fragment.
      */
-    private fun See.toLink(): Link {
+    private fun See.toLink(parent: Documentable): Link {
         val address = address
         if (address != null) {
             return pathProvider.linkForReference(address)
@@ -766,16 +766,18 @@ internal class DocTagConverter(
         return if (segments.size == 1) {
             val (packageName, typeName) = typeToPackageNameAndType(segments.single())
             if (typeName.isEmpty()) {
-                println("WARN: Failed to resolve `@see $name`!")
+                var message = "WARN: Failed to resolve `@see $name`!"
                 // Maybe the link is `package.Class.aFunction` instead of `package.Class#aFunction`?
                 val last = name.substringAfterLast(".")
                 val rest = name.substringBeforeLast(".")
                 if (last.firstOrNull()?.isLowerCase() == true && rest.any { it.isUpperCase() }) {
-                    println("Did you mean $rest#$last?")
+                    message += " Did you mean $rest#$last?"
                     val (packageN, typeN) = typeToPackageNameAndType(rest)
                     val url = pathProvider.forType(packageN, typeN)
                     DefaultLink(Link.Params(typeN, "$url#$last"))
                 }
+                message += " In " + parent.getErrorLocation()
+                print(message)
                 DefaultLink(Link.Params(name, url = ""))
             } else if (packageName.isEmpty()) {
                 // This is a same-package type link, though we sadly can't prove it's correct
