@@ -204,8 +204,10 @@ internal data class DefaultDescriptionComponent(
         if (tagIndex + 1 < tags.size && tags[tagIndex + 1] !is Text) return true
         // If the next tag is a Text that begins with a lower case, the sentence has not ended.
         if (followingText[0] in 'a'..'z') return false
-        println("WARN: you have a strange period in these docs that may or may not end a sentence")
-        println(tags.text())
+        data.docsHolder?.logger?.warn(
+            "You have a strange period in these docs that may or may not end a sentence: " +
+                tags.text()
+        )
         return true // This should never happen--it would require period-space-something-weird
     }
 

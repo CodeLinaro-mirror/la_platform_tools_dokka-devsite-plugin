@@ -3307,7 +3307,7 @@ internal class ClasslikeDocumentableConverterTest(
         val javadocConverter =
             DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
         val functionConverter = FunctionDocumentableConverter(
-            displayLanguage, provider, javadocConverter, paramConverter,
+            displayLanguage, provider, holder, javadocConverter, paramConverter,
             annotationConverter, metadataConverter
         )
         val propertyConverter = PropertyDocumentableConverter(

@@ -1160,13 +1160,13 @@ internal class DocTagConverterTest(
         """.render()
 
         val throwsBad1 = moduleJ1.throwsTable().item()
-        assertThat(outputStreamCaptor.toString()).contains("WARNING: do not {@link the exception")
+        assertThat(outputStreamCaptor.toString()).contains("WARN: Do not {@link the exception")
         outputStreamCaptor.reset()
         val throwsBad2 = moduleJ2.throwsTable().item()
-        assertThat(outputStreamCaptor.toString()).contains("WARNING: do not use 'a' before")
+        assertThat(outputStreamCaptor.toString()).contains("WARN: Do not use 'a' before")
         outputStreamCaptor.reset()
         val throwsBad3 = moduleK1.throwsTable().item()
-        assertThat(outputStreamCaptor.toString()).contains("WARNING: do not use 'an' before")
+        assertThat(outputStreamCaptor.toString()).contains("WARN: Do not use 'an' before")
         outputStreamCaptor.reset()
         val throwsBad4 = moduleJ3.throwsTable().item()
         assertThat(outputStreamCaptor.toString())
@@ -1504,7 +1504,7 @@ internal class DocTagConverterTest(
             DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
         val functionConverter =
             FunctionDocumentableConverter(
-                displayLanguage, provider, javadocConverter, paramConverter,
+                displayLanguage, provider, holder, javadocConverter, paramConverter,
                 annotationConverter, metadataConverter
             )
         val propertyConverter =
@@ -1543,7 +1543,7 @@ internal class DocTagConverterTest(
             metadataConverter
         )
         val documentedClass2 = runBlocking { classConverter2.classlike() }
-        assertThat(outputStreamCaptor.toString()).doesNotContain("WARNING")
+        assertThat(outputStreamCaptor.toString()).doesNotContain("WARN")
         System.setOut(standardOut)
     }
 

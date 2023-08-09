@@ -31,7 +31,8 @@ internal interface SymbolSummary<T : SymbolSignature> : DescriptionComponent {
         pathProvider = description.guarded?.data?.pathProvider,
         components = description.guarded?.data?.components ?: emptyList(),
         summary = description.guarded?.data?.summary ?: true,
-        deprecation = description.guarded?.data?.deprecation
+        deprecation = description.guarded?.data?.deprecation,
+        docsHolder = description.guarded?.data?.docsHolder
     )
 }
 // We can't directly access e.g. description.data.pathProvider, because attempting to throws for

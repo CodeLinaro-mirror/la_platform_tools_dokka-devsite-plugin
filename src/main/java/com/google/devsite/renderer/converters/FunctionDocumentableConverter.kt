@@ -38,6 +38,7 @@ import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.KmpTableRowSummaryItem
 import com.google.devsite.components.table.TableRowSummaryItem
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.model.DFunction
 import java.util.Locale
@@ -46,6 +47,7 @@ import java.util.Locale
 internal class FunctionDocumentableConverter(
     private val displayLanguage: Language,
     private val pathProvider: FilePathProvider,
+    private val docsHolder: DocumentablesHolder,
     private val javadocConverter: DocTagConverter,
     private val paramConverter: ParameterDocumentableConverter,
     private val annotationConverter: AnnotationDocumentableConverter,
@@ -217,7 +219,7 @@ internal class FunctionDocumentableConverter(
         // So far I've only seen this in unit tests where we use the wrong entry point into
         // FunctionDocumentableConverter, but it's possible it could happen in other ways.
         if (function.isConstructor != (kind == SymbolDetail.SymbolKind.CONSTRUCTOR)) {
-            println("WARNING: constructor ${function.dri} is not being parsed correctly")
+            docsHolder.logger.warn("Constructor ${function.dri} is not being parsed correctly")
         }
 
         return DefaultSymbolDetail(
@@ -270,7 +272,7 @@ internal class FunctionDocumentableConverter(
         // So far I've only seen this in unit tests where we use the wrong entry point into
         // FunctionDocumentableConverter, but it's possible it could happen in other ways.
         if (function.isConstructor != (kind == SymbolDetail.SymbolKind.CONSTRUCTOR)) {
-            println("WARNING: constructor ${function.dri} is not being parsed correctly")
+            docsHolder.logger.warn("Constructor ${function.dri} is not being parsed correctly")
         }
 
         return DefaultKmpSymbolDetail(

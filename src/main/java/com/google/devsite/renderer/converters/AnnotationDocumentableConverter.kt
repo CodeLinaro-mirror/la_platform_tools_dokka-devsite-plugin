@@ -58,16 +58,16 @@ internal class AnnotationDocumentableConverter(
         val injectedAnnotations = mutableListOf<Annotations.Annotation?>()
         if (annotations.any { it.isBadNonNull }) {
             injectedAnnotations.add(AT_NON_NULL) // Bad ones get filtered out later
-            println(
-                "WARN: Use @androidx.annotation.NonNull, not " +
+            docsHolder.logger.warn(
+                "Use @androidx.annotation.NonNull, not " +
                     "@${annotations.first{it.isBadNonNull}.dri}"
             )
             assert(nullability != Nullability.JAVA_NOT_ANNOTATED)
         }
         if (annotations.any { it.isBadNullable }) {
             injectedAnnotations.add(AT_NULLABLE) // Again, this generally means a bad test classpath
-            println(
-                "WARN: Use @androidx.annotation.Nullable, not " +
+            docsHolder.logger.warn(
+                "Use @androidx.annotation.Nullable, not " +
                     "@${annotations.first{it.isBadNullable}.dri}"
             )
             assert(nullability != Nullability.JAVA_NOT_ANNOTATED)

@@ -150,7 +150,7 @@ internal class MultiLanguageRenderer(
         val javadocConverter =
             DocTagConverter(language, filePaths, holder, paramConverter, annotationConverter)
         val functionConverter = FunctionDocumentableConverter(
-            language, filePaths, javadocConverter, paramConverter,
+            language, filePaths, holder, javadocConverter, paramConverter,
             annotationConverter, metadataConverter
         )
         val propertyConverter = PropertyDocumentableConverter(

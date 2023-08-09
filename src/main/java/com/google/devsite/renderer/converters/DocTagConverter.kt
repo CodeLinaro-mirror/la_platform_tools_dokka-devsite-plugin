@@ -471,8 +471,8 @@ internal class DocTagConverter(
         var name = throws.name
         var dri: DRI? = throws.exceptionAddress
         if (throws.name in listOf("a", "an")) {
-            println(
-                "WARNING: do not use '${throws.name}' before the exception type in an @throws" +
+            docsHolder.logger.warn(
+                "Do not use '${throws.name}' before the exception type in an @throws" +
                     " statement. This is against jdoc spec, will be an error in the next version " +
                     "of dackka, and your exception is not being linked and looks bad. " +
                     "This was observed in $throws in ${parent.getErrorLocation()}"
@@ -480,8 +480,8 @@ internal class DocTagConverter(
             name = throws.text().firstWord()
             dri = null
         } else if ("{@link" in name) {
-            println(
-                "WARNING: do not {@link the exception type in an @throws statement. @throws state" +
+            docsHolder.logger.warn(
+                "Do not {@link the exception type in an @throws statement. @throws state" +
                     "ments are automatically linked. Manually java-linking them is against jdoc s" +
                     "pec, will be an error in the next version of dackka, and breaks linking beha" +
                     "vior causing them to actually *not* be linked. This was observed in $throws" +
@@ -490,8 +490,8 @@ internal class DocTagConverter(
             name = name.removePrefix("{@link ").removeSuffix("}")
             dri = null
         } else if (throws.exceptionAddress == null) {
-            println(
-                "WARNING: link to @throws type $name does not resolve. Is it from a package that " +
+            docsHolder.logger.warn(
+                "Link to @throws type $name does not resolve. Is it from a package that " +
                     "the containing file does not import? Is docs inherited to an un-documented " +
                     "override function, but the exception class is not in scope in the inheriting" +
                     " class? The general fix for these is to fully qualify the exception name, " +
@@ -669,7 +669,8 @@ internal class DocTagConverter(
                 pathProvider,
                 components,
                 summary,
-                deprecation
+                deprecation,
+                docsHolder
             )
         )
     }
@@ -767,7 +768,7 @@ internal class DocTagConverter(
         return if (segments.size == 1) {
             val (packageName, typeName) = typeToPackageNameAndType(segments.single())
             if (typeName.isEmpty()) {
-                var message = "WARN: Failed to resolve `@see $name`!"
+                var message = "Failed to resolve `@see $name`!"
                 // Maybe the link is `package.Class.aFunction` instead of `package.Class#aFunction`?
                 val last = name.substringAfterLast(".")
                 val rest = name.substringBeforeLast(".")
@@ -778,7 +779,7 @@ internal class DocTagConverter(
                     DefaultLink(Link.Params(typeN, "$url#$last"))
                 }
                 message += " In " + parent.getErrorLocation()
-                print(message)
+                docsHolder.logger.warn(message)
                 DefaultLink(Link.Params(name, url = ""))
             } else if (packageName.isEmpty()) {
                 // This is a same-package type link, though we sadly can't prove it's correct

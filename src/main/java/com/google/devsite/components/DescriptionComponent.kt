@@ -16,6 +16,7 @@
 
 package com.google.devsite.components
 
+import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.model.doc.DocTag
 
@@ -27,7 +28,8 @@ internal interface DescriptionComponent : ContextFreeComponent {
         val pathProvider: FilePathProvider?,
         val components: List<DocTag> = emptyList(),
         val summary: Boolean = false,
-        val deprecation: String? = null
+        val deprecation: String? = null,
+        val docsHolder: DocumentablesHolder? = null
     ) {
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
