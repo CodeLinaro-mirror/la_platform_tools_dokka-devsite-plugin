@@ -93,7 +93,7 @@ fun Platform.devsiteId() = "platform-${selectorDisplayName()}"
  * Returns the display name for the platform that is used in the dropdown selector
  */
 fun Platform.selectorDisplayName() = when (this) {
-    JS -> "Javascript"
+    JS -> "JavaScript"
     WASM -> "Web Assembly"
     NATIVE -> "Native/C/iOS"
     JVM -> "Android/JVM"
