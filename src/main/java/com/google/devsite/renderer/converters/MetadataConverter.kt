@@ -197,8 +197,10 @@ internal class MetadataConverter(
         "${dri.packageName}.${dri.classNames ?: nameForSyntheticClass(this)}"
 
     /**
-     * Finds the filepaths associated with the documentable's source entries. Returns null if there
-     * are no source entries, or no source entries with file paths.
+     * Finds the filepaths associated with the documentable's source entries.
+     *
+     * Returns null if there are no source entries, or no source entries with file paths, which is
+     * the case for all synthetic classes and functions.
      */
     private fun <T> T.getSourceFilePaths(): List<String>?
         where T : WithSources, T : Documentable {
