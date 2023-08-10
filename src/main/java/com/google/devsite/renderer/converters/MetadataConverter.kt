@@ -197,16 +197,11 @@ internal class MetadataConverter(
         "${dri.packageName}.${dri.classNames ?: nameForSyntheticClass(this)}"
 
     /**
-     * Finds the filepaths associated with the documentable's source entries. Returns null and logs
-     * a warning if there are no source entries.
+     * Finds the filepaths associated with the documentable's source entries. Returns null if there
+     * are no source entries, or no source entries with file paths.
      */
     private fun <T> T.getSourceFilePaths(): List<String>?
         where T : WithSources, T : Documentable {
-        if (sources.isEmpty()) {
-            docsHolder.logger.warn("Sources for $name is empty")
-            return null
-        }
-
         val paths = sources.entries.mapNotNull { it.getSourceFilePath() }
         if (paths.isEmpty()) return null
         return paths
