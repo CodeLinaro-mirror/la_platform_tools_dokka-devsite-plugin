@@ -372,6 +372,28 @@ internal class FilePathProviderTest(
         assertThat(reference.url.urlSuffix()).isEqualTo(expected)
     }
 
+    @Test
+    fun `No link is created for a suspend function type`() {
+        val suspendFunctionDri = DRI(
+            packageName = "kotlin.coroutines",
+            classNames = "SuspendFunction2"
+        )
+
+        val external = object : ExternalDokkaLocationProvider {
+            override fun resolve(dri: DRI): String? {
+                return when (dri.packageName!!) {
+                    "kotlin.coroutines" -> "http://non.empty"
+                    else -> null
+                }
+            }
+        }
+
+        val (name, url) = pathProvider(external).forReference(suspendFunctionDri)
+
+        assertThat(name).isEqualTo("SuspendFunction2")
+        assertThat(url).isEqualTo("")
+    }
+
     private fun classGraph(module: DModule): ClassGraph =
         runBlocking {
             DocumentablesHolder(displayLanguage, module, this).classGraph()

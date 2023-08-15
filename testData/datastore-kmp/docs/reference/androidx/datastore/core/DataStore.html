@@ -66,7 +66,7 @@
           <tr>
             <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
             <td>
-              <div><code><a href="/reference/androidx/datastore/core/DataStore.html#updateData(kotlin.coroutines.SuspendFunction1)">updateData</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-suspend-function1/index.html">SuspendFunction1</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> t,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;transform)</code></div>
+              <div><code><a href="/reference/androidx/datastore/core/DataStore.html#updateData(kotlin.coroutines.SuspendFunction1)">updateData</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> SuspendFunction1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> t,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;transform)</code></div>
               <p>Updates the data transactionally in an atomic read-modify-write operation.</p>
             </td>
           </tr>
@@ -133,7 +133,7 @@
             <h3 id="updateData(kotlin.coroutines.SuspendFunction1)">updateData</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;<a href="/reference/androidx/datastore/core/DataStore.html#updateData(kotlin.coroutines.SuspendFunction1)">updateData</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-suspend-function1/index.html">SuspendFunction1</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> t,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;transform)</pre>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;<a href="/reference/androidx/datastore/core/DataStore.html#updateData(kotlin.coroutines.SuspendFunction1)">updateData</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> SuspendFunction1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> t,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;transform)</pre>
         <p>Updates the data transactionally in an atomic read-modify-write operation. All operations are serialized, and the transform itself is a coroutine so it can perform heavy work such as RPCs.</p>
         <p>The coroutine completes when the data has been persisted durably to disk (after which <code><a href="/reference/androidx/datastore/core/DataStore.html#data()">data</a></code> will reflect the update). If the transform or write to disk fails, the transaction is aborted and an exception is thrown.</p>
         <div class="devsite-table-wrapper">

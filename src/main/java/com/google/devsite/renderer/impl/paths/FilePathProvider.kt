@@ -32,9 +32,10 @@ import org.jetbrains.dokka.model.Documentable
 import java.nio.file.Paths
 import kotlin.io.path.pathString
 
-private val NON_DOCUMENTABLE_PACKAGES = listOf(
-    "kotlin.jvm.functions"
-).associateWith { true }
+private val NON_DOCUMENTABLE_PREFIXES = listOf(
+    "kotlin.jvm.functions",
+    "kotlin.coroutines.SuspendFunction"
+)
 
 /** Converts various inputs to output file paths. */
 internal interface FilePathProvider {
@@ -81,9 +82,6 @@ internal interface FilePathProvider {
      */
     fun linkForReference(dri: DRI, name: String? = null, suffix: String = ""): Link {
         val ref = forReference(dri)
-        if (ref.url == "")
-            if (dri.packageName !in NON_DOCUMENTABLE_PACKAGES) // Currently impossible; future-proof
-                throw RuntimeException("Unresolved type link for DRI $dri")
         return DefaultLink(Link.Params((name ?: ref.name) + suffix, ref.url))
     }
 
@@ -100,6 +98,15 @@ internal interface FilePathProvider {
         val symbol = dri.callable
         val isInnerClassEnumEntry = documentable is DEnumEntry
 
+        // Exclude specific references from being linked (even if DokkaLocationProvider might be
+        // able to resolve them).
+        // In the future we might want to only link to things we *know* we've generated docs for by
+        // passing around a collection of valid locations but that could have performance implications
+        val fullName = "$packageName.$className"
+        if (NON_DOCUMENTABLE_PREFIXES.any { fullName.startsWith(it) }) {
+            return ReferencePath(className ?: packageName, "")
+        }
+
         // if the DokkaLocationProvider can resolve the dri, then we accept that
         locationProvider?.resolve(dri)?.let {
             val text = symbol?.name ?: className ?: packageName
@@ -110,13 +117,6 @@ internal interface FilePathProvider {
             packageName to forType(packageName, PACKAGE_SUMMARY_NAME)
         } else {
             className to forType(packageName, className)
-        }
-
-        // Exclude specific packages from being linked.
-        // In the future we might want to only link to things we *know* we've generated docs for by
-        // passing around a collection of valid locations but that could have performance implications
-        if (NON_DOCUMENTABLE_PACKAGES.getOrDefault(packageName, false)) {
-            return ReferencePath(typeName, "")
         }
 
         // if we have an enum value instead of an inner class, we need a link to the enum class
