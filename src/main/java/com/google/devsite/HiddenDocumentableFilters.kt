@@ -41,37 +41,45 @@ import org.jetbrains.kotlin.utils.addToStdlib.safeAs
  * - are deprecated with DeprecationLevel.HIDDEN
  *
  * There are two filters, one runs before the dokka merge step and one runs after.
- * The post-merge filter looks at packages, and the pre-merge filter looks at everything else.
+ * The pre-merge filter removes hidden documentables and maintains a set of names of hidden
+ * packages. The post-merge filter removes packages with their names in that set.
+ *
  * This is because Java and Kotlin files are split into different DPackages until the merge step.
  * Packages use @RestrictTo or @hide in package-info.java file if everything in the package should
- * be excluded from the docs. If this check ran pre-merge, only the Java files in the package would
- * be filtered out, as the Kotlin files are in a different DPackage at that point.
+ * be excluded from the docs. The pre-merge filter only hides the Java files in a package, as the
+ * Kotlin files are in a different DPackage at that point. The post-merge filter then hides the
+ * Kotlin sources.
+ *
+ * Previously the pre-merge filter didn't remove hidden packages, leaving it until the post-merge
+ * filter when the Java and Kotlin sources were in one package. However, a package which has
+ * package-info.java as its only Java source may be filtered out by the empty packages filter
+ * before the merge step (but after this filter), so it would never be merged with the Kotlin
+ * sources, and the Kotlin sources would not be hidden by the post-merge filter.
  */
 
 /**
- * Pre-merge transformer: filter hidden documentables, with the exception of DPackages.
- * The reason for leaving most filtering pre-merge is that empty packages are removed before the
- * merge, so if this filter removes everything from a package (but not the package itself), the
- * package will be excluded from the docs. If this filter ran after a merge, then the empty package
- * would remain.
+ * Pre-merge transformer: filter hidden documentables, adding the names of all hidden packages to
+ * [hiddenPackages]
  */
 class PreMergeHiddenDocumentableFilter(dokkaContext: DokkaContext) :
     SuppressedByConditionDocumentableFilterTransformer(dokkaContext) {
     override fun shouldBeSuppressed(d: Documentable): Boolean {
-        val hide = d !is DPackage && d.isHidden()
-        if (hide) addToHiddenSet(d)
-        return hide
+        if (!d.isHidden()) return false
+        if (d is DPackage) {
+            d.dri.packageName?.let { hiddenPackages.add(it) }
+        }
+        addToHiddenSet(d)
+        return true
     }
 }
 
 /**
- * Post-merge transformer: filter hidden packages, now that Kotlin and Java files in the same
- * package have been merged into the same DPackage object.
+ * Post-merge transformer: filter packages with names in [hiddenPackages]
  */
 class PostMergePackageDocumentableFilter : DocumentableTransformer {
     override fun invoke(original: DModule, context: DokkaContext): DModule {
         val filteredPackages = original.packages.filter {
-            val hide = it.isHidden()
+            val hide = hiddenPackages.contains(it.dri.packageName)
             if (hide) addToHiddenSet(it)
             !hide
         }
@@ -117,3 +125,4 @@ private fun addToHiddenSet(d: Documentable) {
 }
 
 private val hiddenDocumentables = mutableSetOf<DRI>()
+private val hiddenPackages = mutableSetOf<String>()
