@@ -17,3 +17,9 @@
 rootProject.name = "dokka-devsite-plugin"
 
 include(":integration-tests:cli")
+
+pluginManagement {
+    repositories {
+        maven("../../prebuilts/androidx/external")
+    }
+}
