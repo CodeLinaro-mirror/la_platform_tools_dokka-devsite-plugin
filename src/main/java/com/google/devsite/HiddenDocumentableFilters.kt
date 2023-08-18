@@ -55,6 +55,8 @@ import org.jetbrains.kotlin.utils.addToStdlib.safeAs
  * package-info.java as its only Java source may be filtered out by the empty packages filter
  * before the merge step (but after this filter), so it would never be merged with the Kotlin
  * sources, and the Kotlin sources would not be hidden by the post-merge filter.
+ *
+ * The post-merge filter also hides all subpackages of hidden packages.
  */
 
 /**
@@ -74,12 +76,12 @@ class PreMergeHiddenDocumentableFilter(dokkaContext: DokkaContext) :
 }
 
 /**
- * Post-merge transformer: filter packages with names in [hiddenPackages]
+ * Post-merge transformer: filter packages based on [packageShouldBeHidden]
  */
 class PostMergePackageDocumentableFilter : DocumentableTransformer {
     override fun invoke(original: DModule, context: DokkaContext): DModule {
         val filteredPackages = original.packages.filter {
-            val hide = hiddenPackages.contains(it.dri.packageName)
+            val hide = packageShouldBeHidden(it.packageName)
             if (hide) addToHiddenSet(it)
             !hide
         }
@@ -123,6 +125,15 @@ fun hasBeenHidden(dri: DRI): Boolean {
 private fun addToHiddenSet(d: Documentable) {
     (d.explodedChildren + d).forEach { hiddenDocumentables.add(it.dri) }
 }
+
+/**
+ * A package should be hidden if its name is in [hiddenPackages] or if it is a subpackage of a
+ * package in [hiddenPackages].
+ */
+private fun packageShouldBeHidden(name: String) =
+    // The "." in the startsWith condition is important, without it `packageAbc` would be a
+    // subpackage of `packageA`
+    hiddenPackages.any { it == name || name.startsWith("$it.") }
 
 private val hiddenDocumentables = mutableSetOf<DRI>()
 private val hiddenPackages = mutableSetOf<String>()
