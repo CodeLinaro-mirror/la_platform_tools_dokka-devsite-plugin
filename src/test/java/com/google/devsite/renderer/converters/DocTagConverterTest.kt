@@ -646,10 +646,15 @@ internal class DocTagConverterTest(
             |fun foo()
             """.render().documentation()
         }
-        assertThat(exception.localizedMessage).contains("in declaration of foo")
-        assertThat(exception.localizedMessage).contains("Test.kt at line 4")
-        assertThat(exception.localizedMessage).contains("Text(body=aaaaaa")
-        assertThat(exception.localizedMessage).contains("Param tags")
+        assertThat(exception.localizedMessage).isEqualTo(
+            "Exception thrown while handling Param tags [Param(root=" +
+                "CustomDocTag(children=[P(children=[Text(body=aaaaaa, children=[], params={})], " +
+                "params={})], params={}, name=MARKDOWN_FILE), name=NOT_A_REAL_PARAM)]."
+        )
+        assertThat(exception.cause!!.localizedMessage).isEqualTo(
+            "Unable to find what is referred to by \"@param NOT_A_REAL_PARAM\" in " +
+                "DFunction foo, with contents: aaaaaa"
+        )
         val standardOut = System.out
         val outputStreamCaptor = ByteArrayOutputStream()
         System.setOut(PrintStream(outputStreamCaptor))
@@ -659,11 +664,10 @@ internal class DocTagConverterTest(
         | */
         |class Foo { }
         """.render().documentation() // for type params and property params
-        val expected = "WARN: Unable to find what is referred to by \"@param NOT_A_REAL_PARAM\" " +
-            "in DClass Foo. Did you make a typo? Are you trying to refer to something not visible" +
-            " to users? in declaration of Foo in file "
-        assertThat(outputStreamCaptor.toString()).contains(expected)
-        assertThat(outputStreamCaptor.toString()).contains("Test.kt at line 4.")
+        val expected = "src/main/kotlin/androidx/example/Test.kt:4 Unable to find reference " +
+            "@param NOT_A_REAL_PARAM in DClass Foo. Are you trying to refer to something not " +
+            "visible to users?\n"
+        assertThat(outputStreamCaptor.toString()).endsWith(expected)
         System.setOut(standardOut)
         assertFails { // for @param in the wrong place
             """
@@ -686,11 +690,9 @@ internal class DocTagConverterTest(
         | */
         |class Foo(NOT_A_REAL_PROPERTY: String) { }
         """.render().documentation()
-        var expected = "WARN: Unable to find what is referred to by " +
-            "\"@property NOT_A_REAL_PROPERTY\" in DClass Foo. Did you make a typo? Are you trying" +
-            " to refer to something not visible to users? in declaration of Foo in file"
-        assertThat(outputStreamCaptor.toString()).contains(expected)
-        assertThat(outputStreamCaptor.toString()).contains("Test.kt at line 4.")
+        var expected = "src/main/kotlin/androidx/example/Test.kt:4 Unable to find reference " +
+            "@property NOT_A_REAL_PROPERTY in DClass Foo\n"
+        assertThat(outputStreamCaptor.toString()).endsWith(expected)
         System.setOut(PrintStream(outputStreamCaptor))
         """
         |/**
@@ -698,11 +700,9 @@ internal class DocTagConverterTest(
         | */
         |class Foo() { }
         """.render().documentation()
-        expected = "WARN: Unable to find what is referred to by \"@property NO_PROPERTIES_HERE\" " +
-            "in DClass Foo. Did you make a typo? Are you trying to refer to something not visible" +
-            " to users? in declaration of Foo in file "
+        expected = "src/main/kotlin/androidx/example/Test.kt:4 Unable to find reference @property" +
+            " NO_PROPERTIES_HERE in DClass Foo"
         assertThat(outputStreamCaptor.toString()).contains(expected)
-        assertThat(outputStreamCaptor.toString()).contains("Test.kt at line 4.")
         assertFails {
             """
             |class Foo() {
@@ -1130,7 +1130,7 @@ internal class DocTagConverterTest(
         """.render(java = true)
         val moduleJ2 = """
             |/**
-            | * @throws a IllegalStateException if my syntax is bad
+            | * @throws an IllegalStateException if my syntax is bad
             | */
             |public void foo() {}
         """.render(java = true)
@@ -1159,14 +1159,11 @@ internal class DocTagConverterTest(
             |fun foo()
         """.render()
 
-        val throwsBad1 = moduleJ1.throwsTable().item()
-        assertThat(outputStreamCaptor.toString()).contains("WARN: Do not {@link the exception")
+        val exception1 = assertFails { moduleJ1.throwsTable().item() }
         outputStreamCaptor.reset()
-        val throwsBad2 = moduleJ2.throwsTable().item()
-        assertThat(outputStreamCaptor.toString()).contains("WARN: Do not use 'a' before")
+        val exception2 = assertFails { moduleJ2.throwsTable().item() }
         outputStreamCaptor.reset()
-        val throwsBad3 = moduleK1.throwsTable().item()
-        assertThat(outputStreamCaptor.toString()).contains("WARN: Do not use 'an' before")
+        val exception3 = assertFails { moduleK1.throwsTable().item() }
         outputStreamCaptor.reset()
         val throwsBad4 = moduleJ3.throwsTable().item()
         assertThat(outputStreamCaptor.toString())
@@ -1179,22 +1176,30 @@ internal class DocTagConverterTest(
         val throwsFine1 = moduleK2.throwsTable().item()
         assertThat(outputStreamCaptor.toString()).isEmpty()
 
-        for (throws in listOf(throwsBad1, throwsBad2, throwsBad3)) {
-            assertThat(throws.name()).isEqualTo("")
-            assertThat(throws.data.title.typeName()).isEqualTo("IllegalStateException")
-            assertThat(throws.data.title.link().url).isEqualTo("")
+        for (exception in listOf(exception1, exception2, exception3)) {
+            assertThat(exception.localizedMessage).contains(
+                "Exception thrown while handling Throws tags " +
+                    "[Throws(root=CustomDocTag(children=[P(children=[Text(body="
+            )
         }
+        assertThat(exception1.localizedMessage).contains(
+            "if I try to linkify, children=[], params={})], params={})], params={}, name=MARKDOWN" +
+                "_FILE), name={@link IllegalStateException}, exceptionAddress=null)]."
+        )
+        assertThat(exception2.localizedMessage).contains(
+            "IllegalStateException if my syntax is bad, children=[], params={})], params={})], " +
+                "params={}, name=MARKDOWN_FILE), name=an, exceptionAddress=null)]."
+        )
+        assertThat(exception3.localizedMessage).contains(
+            "IllegalStateException if my syntax is bad, children=[], params={})], params={})], " +
+                "params={}, name=MARKDOWN_FILE), name=an, exceptionAddress=null)]."
+        )
         for (throws in listOf(throwsBad4, throwsBad5)) {
             assertThat(throws.name()).isEqualTo("")
             assertThat(throws.data.title.typeName()).isEqualTo("IOException")
             assertThat(throws.data.title.link().url).isEqualTo("")
         }
 
-        assertThat(throwsBad1.data.description.text()).isEqualTo("if I try to linkify")
-        assertThat(throwsBad2.data.description.text())
-            .isEqualTo("IllegalStateException if my syntax is bad")
-        assertThat(throwsBad3.data.description.text())
-            .isEqualTo("IllegalStateException if my syntax is bad")
         assertThat(throwsBad4.data.description.text())
             .isEqualTo("if file operations fail")
         assertThat(throwsBad5.data.description.text())
@@ -1420,7 +1425,6 @@ internal class DocTagConverterTest(
         val standardOut = System.out
         val outputStreamCaptor = ByteArrayOutputStream()
         System.setOut(PrintStream(outputStreamCaptor))
-
         """
             |/**
             | * @param b
@@ -1429,10 +1433,9 @@ internal class DocTagConverterTest(
             |fun foo(a: String, b: String, c: String)
         """.render().documentation()
 
-        val expected = "WARN: Missing @param tag for parameter `a` of function " +
-            "androidx.example//foo/#kotlin.String#kotlin.String#kotlin.String/" +
-            "PointingToDeclaration/"
-        assertThat(outputStreamCaptor.toString()).contains(expected)
+        val expected = "src/main/kotlin/androidx/example/Test.kt:5 Missing @param tag for " +
+            "parameter `a` in DFunction foo\n"
+        assertThat(outputStreamCaptor.toString()).endsWith(expected)
         System.setOut(standardOut)
     }
 

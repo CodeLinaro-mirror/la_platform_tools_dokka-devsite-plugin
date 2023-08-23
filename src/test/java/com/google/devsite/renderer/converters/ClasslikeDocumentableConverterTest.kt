@@ -1278,7 +1278,7 @@ internal class ClasslikeDocumentableConverterTest(
             |class Foo<T: Number, U>() {}
             """.render().page()
         }.message
-        assertThat(message).contains("androidx/example/Test.kt at line 2")
+        assertThat(message).contains("androidx/example/Test.kt:2")
     }
 
     @Test

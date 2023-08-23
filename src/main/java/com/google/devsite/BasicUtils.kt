@@ -27,6 +27,9 @@ import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.KmpTableRowSummaryItem
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TableRowSummaryItem
+import org.jetbrains.dokka.model.Documentable
+import org.jetbrains.dokka.model.doc.DocTag
+import org.jetbrains.dokka.model.doc.TagWrapper
 import java.util.Locale
 
 /** Enables calling `!nullableBool ?: false` rather than a built-in less readable alternative. */
@@ -76,3 +79,7 @@ internal typealias WithDescriptionList<T> =
     SummaryList<TableRowSummaryItem<T, DescriptionComponent>>
 internal typealias LinkDescriptionSummaryList = WithDescriptionList<Link>
 internal typealias DocsSummaryList = WithDescriptionList<ParameterComponent>
+
+internal val Documentable.className get() = (this::class).simpleName
+internal val DocTag.className get() = (this::class).simpleName
+internal val TagWrapper.className get() = (this::class).simpleName

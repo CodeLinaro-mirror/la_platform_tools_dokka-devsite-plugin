@@ -67,7 +67,7 @@ import org.jetbrains.dokka.plugability.ConfigurableBlock
  * the Java docs, in addition to those in [annotationsNotToDisplay]. Optional, if unspecified
  * defaults to an empty list.
  * @param annotationsNotToDisplayKotlin Equivalent to [annotationsNotToDisplayJava] for Kotlin docs.
- * @param hidingAnnotations: A list of annotation names (including the package name, e.g.
+ * @param hidingAnnotations A list of annotation names (including the package name, e.g.
  * `androidx.annotation.RestrictTo`) which mean that the elements they are applied to should be not
  * be displayed in the docs.
  * @param validNullabilityAnnotations A list of annotation names (including the package name, e.g.

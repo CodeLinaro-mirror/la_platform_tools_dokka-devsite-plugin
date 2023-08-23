@@ -17,6 +17,7 @@
 package com.google.devsite.renderer.converters
 
 import com.google.devsite.capitalize
+import com.google.devsite.className
 import com.google.devsite.not
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.Memoizers.isFromJavaMap
@@ -82,7 +83,6 @@ internal fun <T> T.getErrorLocation(
     sourceSet: DokkaConfiguration.DokkaSourceSet = getExpectOrCommonSourceSet()
 ): String where T : WithSources, T : Documentable {
     val sourceFilePath: String = this.sources[sourceSet]!!.path
-    val result = "in declaration of $name in file $sourceFilePath"
     // Regex that matches the declaration of `this`
     val matcher = when (sourceFilePath.substringAfterLast(".")) {
         "kt" ->
@@ -93,22 +93,22 @@ internal fun <T> T.getErrorLocation(
                 """(public|protected) (static |final )*""" +
                     """(class |enum |(@)?interface )?[a-zA-Z_0-9]+(<*>)? $name"""
                 ).toRegex()
-        "class" -> return result // this type's source is in a prebuilt?
+        "class" -> return sourceFilePath // this type's source is in a prebuilt?
         else -> {
             // This means the error occurred while parsing a synthetic element
-            if ("org.jetbrains.kotlin.descriptors" in sourceFilePath) return result
+            if ("org.jetbrains.kotlin.descriptors" in sourceFilePath) return sourceFilePath
             else throw RuntimeException("Unknown file type for $sourceFilePath")
         }
     }
     // Assume that the type params can't take up more than 3 lines
     File(sourceFilePath).readLines().windowed(size = 3, step = 1).forEachIndexed { index, lines ->
         if (matcher.containsMatchIn(lines.joinToString())) {
-            return "$result at line ${index + 2}." // The last line in the window
+            return "$sourceFilePath:${index + 2}" // The last line in the window
         }
     }
     // Multiple possible reasons for failure. For example, java syntax does not lend itself to
     // allowing declaractions to be identified by regex, so there is a good chance it could fail.
-    return "$result, line number could not be determined."
+    return "$sourceFilePath:UnknownLine"
 }
 
 @JvmName("This is internal and will never be used from JVM")
@@ -638,7 +638,7 @@ internal fun Documentable.getExpectOrCommonSourceSet() =
                 ?: sourceSets.singleOrNull { it.displayName.equalsIgnoreCase("androidMain") }
         }
         ?: throw RuntimeException(
-            "Unable to determine expect or common sourceSet for ${this::class.simpleName} $dri"
+            "Unable to determine expect or common sourceSet for ${this.className} $dri"
         )
 
 private fun String.equalsPossiblyWithMain(other: String) =

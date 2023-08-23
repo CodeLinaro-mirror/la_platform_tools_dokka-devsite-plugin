@@ -37,6 +37,7 @@ import com.google.devsite.renderer.converters.Nullability
 import com.google.devsite.renderer.converters.ParameterDocumentableConverter
 import com.google.devsite.renderer.converters.PropertyDocumentableConverter
 import com.google.devsite.renderer.converters.isFromBaseClass
+import com.google.devsite.renderer.converters.isRunningInDackkasTests
 import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.computeDocumentablesGraph
@@ -69,6 +70,7 @@ import org.jetbrains.dokka.plugability.PluginApiPreviewAcknowledgement
 import org.jetbrains.dokka.renderers.Renderer
 import org.jetbrains.dokka.utilities.DokkaConsoleLogger
 import org.jetbrains.dokka.utilities.LoggingLevel
+import org.junit.Before
 import org.mockito.Mockito
 import java.io.File
 import java.net.URL
@@ -78,6 +80,8 @@ import kotlin.coroutines.suspendCoroutine
 internal abstract class ConverterTestBase(
     private val displayLanguage: Language = Language.JAVA
 ) : BaseAbstractTest() {
+    @Before fun setUp() { isRunningInDackkasTests = true }
+
     protected fun List<String>.render(): DModule = testWithRootPageNode(this)
 
     protected fun String.render(

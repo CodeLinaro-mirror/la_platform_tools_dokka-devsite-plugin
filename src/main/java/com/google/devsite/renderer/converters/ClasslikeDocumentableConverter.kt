@@ -22,6 +22,7 @@ import com.google.devsite.FunctionSummaryList
 import com.google.devsite.LinkDescriptionSummaryList
 import com.google.devsite.PropertySummaryList
 import com.google.devsite.TypeSummaryItem
+import com.google.devsite.className
 import com.google.devsite.components.Link
 import com.google.devsite.components.impl.DefaultClassHierarchy
 import com.google.devsite.components.impl.DefaultClasslike
@@ -283,11 +284,6 @@ internal abstract class ClasslikeDocumentableConverter(
         val extensionPropertiesSummary =
             async { propertiesToSummary(extensionPropertiesTitle(), extensionProperties) }
         val extensionPropertiesDetail = async { propertiesToDetail(extensionProperties) }
-
-        val processed = docsHolder.classlikesDone.getAndIncrement()
-        if (processed % 100 == 0) {
-            docsHolder.logger.debug("Dackka: $displayLanguage classlikes processed: $processed")
-        }
 
         val (inheritedFunctions, inheritedConstants, inheritedProperties) = inheritedTypes.await()
 
@@ -1076,10 +1072,10 @@ internal abstract class ClasslikeDocumentableConverter(
         try {
             return toDo(documentable)
         } catch (e: Exception) {
-            var message = "Error when handling ${documentable::class} ${documentable.name} " +
-                "in ${classlike.name}"
+            var message = "Error when handling ${documentable.className} ${documentable.name} "
+            if (classlike != documentable) message += "in ${classlike.className} ${classlike.name}"
             if (documentable is WithSources)
-                message += ", " + documentable.getErrorLocation(sourceSet)
+                message += " at " + documentable.getErrorLocation(sourceSet)
             throw RuntimeException(message, e)
         }
     }

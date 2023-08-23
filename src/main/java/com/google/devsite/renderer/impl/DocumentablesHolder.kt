@@ -16,9 +16,11 @@
 
 package com.google.devsite.renderer.impl
 
+import com.google.devsite.className
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.explodedChildren
 import com.google.devsite.renderer.converters.filterOutJvmSynthetic
+import com.google.devsite.renderer.converters.getErrorLocation
 import com.google.devsite.renderer.converters.gettersAndSetters
 import com.google.devsite.renderer.converters.isExceptionClass
 import com.google.devsite.renderer.converters.isHoistedFromCompanion
@@ -69,11 +71,13 @@ import org.jetbrains.dokka.model.UnresolvedBound
 import org.jetbrains.dokka.model.Void
 import org.jetbrains.dokka.model.WithCompanion
 import org.jetbrains.dokka.model.WithSources
+import org.jetbrains.dokka.model.doc.NamedTagWrapper
+import org.jetbrains.dokka.model.doc.TagWrapper
 import org.jetbrains.dokka.model.properties.PropertyContainer
 import org.jetbrains.dokka.plugability.DokkaContext
 import org.jetbrains.dokka.utilities.DokkaConsoleLogger
 import org.jetbrains.dokka.utilities.LoggingLevel
-import java.util.concurrent.atomic.AtomicInteger
+import java.util.Locale
 
 /**
  * Centralized place to retrieve documentables.
@@ -93,8 +97,6 @@ internal class DocumentablesHolder(
     val baseSourceLink: String? = null,
     val annotationsNotToDisplay: Set<String> = emptySet(),
 ) {
-    internal var classlikesDone: AtomicInteger = AtomicInteger()
-
     private val packages = scope.async { computePackages(module) }
     // Includes even should-not-be-displayed classlikes
     private val classlikes = mutableMapOf<DRI, Deferred<List<DClasslike>>>()
@@ -472,4 +474,27 @@ internal class DocumentablesHolder(
     internal suspend fun shouldNotBeDisplayed(classlike: DClasslike) =
         // TODO: can this reuse `interestingObjects` instead of calling `isBoringCompanion` again?
         classlike is DObject && classlike.isBoringCompanion()
+
+    internal fun printWarningFor(
+        baseMessage: String,
+        documentableWithError: Documentable,
+        containingDocumentable: Documentable? = null,
+        brokenDocTag: TagWrapper? = null,
+        additionalContext: String = ""
+    ) {
+        var containingInfo = ""
+        if (brokenDocTag != null) {
+            var tagName = brokenDocTag.className
+            // we want Params to show up as `@param` with a lowercase p.
+            if (baseMessage.endsWith("@")) tagName = tagName?.lowercase(Locale.getDefault())
+            containingInfo += tagName
+            if (brokenDocTag is NamedTagWrapper) containingInfo += " ${brokenDocTag.name}"
+        }
+        containingInfo += " in ${documentableWithError.className} ${documentableWithError.name}"
+        val location = containingDocumentable?.getErrorLocation()
+            ?: documentableWithError.getErrorLocation()
+        logger.warn(
+            "$location $baseMessage$containingInfo$additionalContext"
+        )
+    }
 }

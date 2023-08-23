@@ -18,6 +18,7 @@ package com.google.devsite.testing
 
 import com.google.common.truth.Truth.assertWithMessage
 import com.google.devsite.DevsiteConfiguration
+import com.google.devsite.renderer.converters.isRunningInDackkasTests
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.DokkaConfigurationImpl
 import org.jetbrains.dokka.ExternalDocumentationLink
@@ -30,6 +31,7 @@ import org.jetbrains.dokka.testApi.logger.TestLogger
 import org.jetbrains.dokka.toCompactJsonString
 import org.jetbrains.dokka.utilities.DokkaConsoleLogger
 import org.jetbrains.dokka.utilities.LoggingLevel
+import org.junit.Before
 import testApi.testRunner.TestDokkaConfigurationBuilder
 import java.io.File
 import java.net.URL
@@ -42,6 +44,11 @@ import java.net.URL
 abstract class IntegrationTestBase : BaseAbstractTest(
     logger = TestLogger(DokkaConsoleLogger(LoggingLevel.DEBUG))
 ) {
+    @Before
+    fun setUp() {
+        isRunningInDackkasTests = true
+    }
+
     open fun TestDokkaConfigurationBuilder.makeSourcesets(
         sources: List<File>,
         samplesLocations: List<String>,

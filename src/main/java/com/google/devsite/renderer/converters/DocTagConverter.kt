@@ -18,6 +18,7 @@ package com.google.devsite.renderer.converters
 
 import com.google.devsite.DocsSummaryList
 import com.google.devsite.LinkDescriptionSummaryList
+import com.google.devsite.className
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.Link
@@ -207,8 +208,7 @@ internal class DocTagConverter(
                 }
             } catch (e: Exception) {
                 throw RuntimeException(
-                    "Exception thrown while handling ${firstTag::class.java} tags! Tags: $tags. " +
-                        "Parent: ${documentable.name}, " + documentable.getErrorLocation(),
+                    "Exception thrown while handling ${firstTag.className} tags $tags.",
                     e
                 )
             }
@@ -250,70 +250,73 @@ internal class DocTagConverter(
                 // doc is DClasslike. DClasslike's only valid @params are type params
                 is DClasslike -> {
                     val genericNames = generics.map { it.name }
-                    val invalidNames = tags.names().filter { it !in genericNames }.toMutableSet()
-                    if (invalidNames.isEmpty()) return tags
+                    val (forGenerics, otherAtParams) = tags.partition { it.name() in genericNames }
+                    if (otherAtParams.isEmpty()) return forGenerics
                     // Enforce that the propagated documentation makes sense somewhere. Specifically
                     // documentation primarily aimed at a constructor may wind up on the DClass
                     // if the parameter being documented is a primary constructor property parameter
                     val constructorParamNames = (documentable as? WithConstructors)?.constructors
                         ?.map { constructor -> constructor.parameters.map { it.name!! } }?.flatten()
                         .orEmpty()
-                    invalidNames.removeAll(
-                        (documentable.properties.map { it.name } + constructorParamNames).toSet()
-                    )
-                    logComponentNotFoundWarning("@param", invalidNames, documentable)
+                    val otherNames =
+                        (documentable.properties.map { it.name } + constructorParamNames)
+                    val (validTags, badTags) = otherAtParams.partition { it.name() in otherNames }
+                    badTags.forEach {
+                        docsHolder.printWarningFor(
+                            "Unable to find reference @",
+                            documentable,
+                            brokenDocTag = it,
+                            additionalContext =
+                            ". Are you trying to refer to something not visible to users?"
+                        )
+                    }
                     // Use only docs for type parameters in the parameter documentation table
-                    return tags.filter { it.name() in genericNames }
+                    return forGenerics
                 }
                 // doc is Property. It is possible that a parameter property is documented on the
                 // class as @param. That doc is used as though it were @property. Handled there.
                 // Properties can also have @param documentation for type parameters
                 is DProperty -> {
                     val genericNames = generics.map { it.name }
-                    val invalidNames = tags.names().filter {
-                        it !in genericNames && it != documentable.name
+                    val (forGenericsOrThis, badTags) = tags
+                        .partition { it.name() in genericNames || it.name() == documentable.name }
+                    badTags.forEach {
+                        docsHolder.printWarningFor(
+                            "Unable to find reference @",
+                            documentable,
+                            brokenDocTag = it,
+                            additionalContext =
+                            ". Are you trying to refer to something not visible to users?"
+                        )
                     }
-                    logComponentNotFoundWarning("@param", invalidNames, documentable)
-                    return tags
+                    return forGenericsOrThis
                 }
                 is DFunction -> {}
                 else ->
-                    throw RuntimeException("Can't apply @param to a ${documentable::class.java}")
+                    throw RuntimeException("Can't apply @param to a ${documentable.className}")
             }
         } else if (tags.first() is Property) {
             // A DClasslike with @property applying to property parameters may have Parameter tags
             // In such a case, none of these tags should become docs *on the DClasslike itself*
             return when (documentable) {
                 is DClasslike -> {
-                    logComponentNotFoundWarning(
-                        componentType = "@property",
-                        invalidComponents = tags.names().toSet()
-                            .subtract(documentable.properties.map { it.name }.toSet()),
-                        containingComponent = documentable
-                    )
+                    val propertyNames = documentable.properties.map { it.name }
+                    tags.filter { it.name() !in propertyNames }.forEach {
+                        docsHolder.printWarningFor(
+                            "Unable to find reference @",
+                            documentable,
+                            brokenDocTag = it
+                        )
+                    }
                     emptyList()
                 }
+
                 is DParameter, is DProperty -> tags
                 else ->
-                    throw RuntimeException("Can't apply @property to ${documentable::class.java}")
+                    throw RuntimeException("Can't apply @property to a ${documentable.className}")
             }
         }
         return tags
-    }
-
-    private fun logComponentNotFoundWarning(
-        componentType: String,
-        invalidComponents: Iterable<String>,
-        containingComponent: Documentable
-    ) {
-        invalidComponents.forEach { invalidComponent ->
-            docsHolder.logger.warn(
-                "Unable to find what is referred to by \"$componentType $invalidComponent\" in " +
-                    "${containingComponent::class.simpleName} ${containingComponent.name}. Did " +
-                    "you make a typo? Are you trying to refer to something not visible to users? " +
-                    containingComponent.getErrorLocation()
-            )
-        }
     }
 
     private fun params(
@@ -334,9 +337,9 @@ internal class DocTagConverter(
                     if (!tagged.contains(name)) {
                         // Synthetic receiver params don't need @param documentation
                         if (name == "receiver") return@mapNotNull null
-                        docsHolder.logger.warn(
-                            "Missing @param tag for parameter `$name` of function " +
-                                "${documentable.dri}"
+                        docsHolder.printWarningFor(
+                            "Missing @param tag for parameter `$name`",
+                            documentable
                         )
                     }
                     name to paramConverter.componentForParameter(
@@ -371,7 +374,7 @@ internal class DocTagConverter(
             if (allOptions[tag.name()] == null) {
                 throw RuntimeException(
                     "Unable to find what is referred to by \"@param " +
-                        "${tag.name()}\" in ${documentable::class.simpleName} " +
+                        "${tag.name()}\" in ${documentable.className} " +
                         "${documentable.name}, with contents: ${tag.text()}"
                 )
             }
@@ -471,32 +474,26 @@ internal class DocTagConverter(
         var name = throws.name
         var dri: DRI? = throws.exceptionAddress
         if (throws.name in listOf("a", "an")) {
-            docsHolder.logger.warn(
-                "Do not use '${throws.name}' before the exception type in an @throws" +
-                    " statement. This is against jdoc spec, will be an error in the next version " +
-                    "of dackka, and your exception is not being linked and looks bad. " +
-                    "This was observed in $throws in ${parent.getErrorLocation()}"
+            throw RuntimeException(
+                "Do not use '${throws.name}' before the exception type in an @throws statement. " +
+                    "This is against jdoc spec. Your exception is not being linked and looks bad"
             )
-            name = throws.text().firstWord()
-            dri = null
         } else if ("{@link" in name) {
-            docsHolder.logger.warn(
+            throw RuntimeException(
                 "Do not {@link the exception type in an @throws statement. @throws state" +
                     "ments are automatically linked. Manually java-linking them is against jdoc s" +
-                    "pec, will be an error in the next version of dackka, and breaks linking beha" +
-                    "vior causing them to actually *not* be linked. This was observed in $throws" +
-                    " in ${parent.getErrorLocation()}"
+                    "pec, and breaks linking behavior causing them to actually *not* be linked."
             )
-            name = name.removePrefix("{@link ").removeSuffix("}")
-            dri = null
         } else if (throws.exceptionAddress == null) {
-            docsHolder.logger.warn(
-                "Link to @throws type $name does not resolve. Is it from a package that " +
-                    "the containing file does not import? Is docs inherited to an un-documented " +
-                    "override function, but the exception class is not in scope in the inheriting" +
-                    " class? The general fix for these is to fully qualify the exception name, " +
-                    " e.g.`@throws java.io.IOException under some conditions`. This was observed" +
-                    " in $throws in ${parent.getErrorLocation()}"
+            docsHolder.printWarningFor(
+                "Link does not resolve for @",
+                parent,
+                brokenDocTag = throws,
+                additionalContext = ". Is it from a package that the containing file does not " +
+                    "import? Are docs inherited by an un-documented override function, but the " +
+                    "exception class is not in scope in the inheriting class? The general fix for" +
+                    " these is to fully qualify the exception name, e.g. " +
+                    "`@throws java.io.IOException under some conditions`."
             )
             dri = null
         }
@@ -580,8 +577,7 @@ internal class DocTagConverter(
                             )
                         } catch (e: Exception) {
                             throw RuntimeException(
-                                "Error when resolving samples when processing $name" +
-                                    getErrorLocation(),
+                                "Error when resolving samples when processing $name",
                                 e
                             )
                         }
@@ -632,9 +628,7 @@ internal class DocTagConverter(
                 for (part in parts) {
                     if ("@sample" !in part) {
                         if (part.isNotBlank()) components.add(Text(part.trim()))
-                    } else components.add(
-                        convertTextToJavadocSample(Text(part.trim()), samples, docsHolder.logger)
-                    )
+                    } else components.add(convertTextToJavadocSample(Text(part.trim()), samples))
                 }
             }
             is P -> {
@@ -643,7 +637,7 @@ internal class DocTagConverter(
                 }
             }
             // Having non-text components on the same line as a samples is not supported
-            else -> throw RuntimeException("considered invalid type ${root::class} for sample")
+            else -> throw RuntimeException("considered invalid type ${root.className} for sample")
         }
     }
 
@@ -768,18 +762,22 @@ internal class DocTagConverter(
         return if (segments.size == 1) {
             val (packageName, typeName) = typeToPackageNameAndType(segments.single())
             if (typeName.isEmpty()) {
-                var message = "Failed to resolve `@see $name`!"
+                var additionalContext = ""
                 // Maybe the link is `package.Class.aFunction` instead of `package.Class#aFunction`?
                 val last = name.substringAfterLast(".")
                 val rest = name.substringBeforeLast(".")
                 if (last.firstOrNull()?.isLowerCase() == true && rest.any { it.isUpperCase() }) {
-                    message += " Did you mean $rest#$last?"
+                    additionalContext = ". Did you mean $rest#$last?"
                     val (packageN, typeN) = typeToPackageNameAndType(rest)
                     val url = pathProvider.forType(packageN, typeN)
                     DefaultLink(Link.Params(typeN, "$url#$last"))
                 }
-                message += " In " + parent.getErrorLocation()
-                docsHolder.logger.warn(message)
+                docsHolder.printWarningFor(
+                    "Failed to resolve ",
+                    parent,
+                    brokenDocTag = this,
+                    additionalContext = additionalContext
+                )
                 DefaultLink(Link.Params(name, url = ""))
             } else if (packageName.isEmpty()) {
                 // This is a same-package type link, though we sadly can't prove it's correct

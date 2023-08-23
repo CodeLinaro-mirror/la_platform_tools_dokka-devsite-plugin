@@ -17,6 +17,7 @@
 package dokkatest.inheritance
 
 import com.google.common.truth.Ordered
+import kotlin.collections.MutableMap
 
 /** For verifying that methods can be inherited from externally-defined interfaces. */
 interface KotlinInterface: Comparable<KotlinInterface>, Ordered {

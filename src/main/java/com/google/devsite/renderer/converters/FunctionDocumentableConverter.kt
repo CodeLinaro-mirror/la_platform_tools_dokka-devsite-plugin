@@ -219,7 +219,9 @@ internal class FunctionDocumentableConverter(
         // So far I've only seen this in unit tests where we use the wrong entry point into
         // FunctionDocumentableConverter, but it's possible it could happen in other ways.
         if (function.isConstructor != (kind == SymbolDetail.SymbolKind.CONSTRUCTOR)) {
-            docsHolder.logger.warn("Constructor ${function.dri} is not being parsed correctly")
+            throw RuntimeException(
+                "Constructor ${function.dri} is not being parsed correctly! File a bug on dackka!"
+            )
         }
 
         return DefaultSymbolDetail(
@@ -272,7 +274,9 @@ internal class FunctionDocumentableConverter(
         // So far I've only seen this in unit tests where we use the wrong entry point into
         // FunctionDocumentableConverter, but it's possible it could happen in other ways.
         if (function.isConstructor != (kind == SymbolDetail.SymbolKind.CONSTRUCTOR)) {
-            docsHolder.logger.warn("Constructor ${function.dri} is not being parsed correctly")
+            throw RuntimeException(
+                "Constructor ${function.dri} is not being parsed correctly! File a bug on dackka!"
+            )
         }
 
         return DefaultKmpSymbolDetail(

@@ -47,7 +47,6 @@ internal class AnnotationDocumentableConverter(
     private val annotationsNotToDisplay: Set<String>,
     // Default value is provided for testing purposes only. The only real instantiation provides it.
     private val validNullabilityAnnotations: List<String> = defaultValidNullabilityAnnotations
-
 ) {
     /**
      * @param nullability the nullability of the annotated element. Contains information such as

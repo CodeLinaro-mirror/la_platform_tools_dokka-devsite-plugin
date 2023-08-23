@@ -24,7 +24,6 @@ import org.jetbrains.dokka.analysis.DokkaResolutionFacade
 import org.jetbrains.dokka.model.doc.Pre
 import org.jetbrains.dokka.model.doc.Text
 import org.jetbrains.dokka.plugability.DokkaContext
-import org.jetbrains.dokka.utilities.DokkaLogger
 import org.jetbrains.kotlin.idea.kdoc.resolveKDocLink
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
@@ -42,6 +41,7 @@ import org.jetbrains.kotlin.utils.addIfNotNull
 import java.io.File
 
 internal var failOnMissingSamples = true
+internal var isRunningInDackkasTests = false
 
 /**
  * This invokes the EnvironmentAndFacade object to turn a DRI
@@ -174,8 +174,7 @@ internal fun setUpAnalysis(context: DokkaContext) = context.configuration.source
 /** Resolves a javadoc `{@sample path/to/file.javaOrXml}`. Takes Text, returns <pre><code>. */
 internal fun convertTextToJavadocSample(
     block: Text,
-    samples: Set<File>,
-    logger: DokkaLogger
+    samples: Set<File>
 ): Pre {
     val sampleLine = block.body
         .trim().removePrefix("{").removeSuffix("}")
@@ -189,8 +188,9 @@ internal fun convertTextToJavadocSample(
     val whatSamples = sampleLine[2]
     val sampleFiles = samples.allFiles()
     var resolvedFile = sampleFiles.filter { it.absolutePath.contains(filePath) }
-    if (resolvedFile.isEmpty()) {
-        logger.warn("Failed samples resolution-by-path for $filePath, falling back to by-name")
+    // When we run tests in dackka, we use androidx source jars from prebuilts, but cannot get
+    // samples the same way, so the path of the samples is wrong, and we name-mangle to resolve them
+    if (resolvedFile.isEmpty() && isRunningInDackkasTests) {
         resolvedFile = sampleFiles.filter { it.name == filePath.split("/").last() }
     }
     return when (resolvedFile.size) {
