@@ -114,8 +114,11 @@ class BasicTest : IntegrationTestBase() {
     }
 
     @Test // A non-hidden package is necessary because of an upstream explicit !! after filtering
-    fun `Validate package-level @hide`() {
-        validateDirectory("hidden")
+    fun `Validate package-level @hide and custom hide annotations`() {
+        validateDirectory(
+            "hidden",
+            hidingAnnotations = listOf("dokkatest.nothidden.CustomHideAnnotation")
+        )
     }
 
     @Test // Currently only checks the links for enums resolve

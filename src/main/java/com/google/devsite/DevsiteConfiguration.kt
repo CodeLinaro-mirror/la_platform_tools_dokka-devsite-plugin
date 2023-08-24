@@ -67,6 +67,9 @@ import org.jetbrains.dokka.plugability.ConfigurableBlock
  * the Java docs, in addition to those in [annotationsNotToDisplay]. Optional, if unspecified
  * defaults to an empty list.
  * @param annotationsNotToDisplayKotlin Equivalent to [annotationsNotToDisplayJava] for Kotlin docs.
+ * @param hidingAnnotations: A list of annotation names (including the package name, e.g.
+ * `androidx.annotation.RestrictTo`) which mean that the elements they are applied to should be not
+ * be displayed in the docs.
  */
 data class DevsiteConfiguration(
     val docRootPath: String = "reference",
@@ -84,7 +87,8 @@ data class DevsiteConfiguration(
     val baseSourceLink: String?,
     val annotationsNotToDisplay: List<String>?,
     val annotationsNotToDisplayJava: List<String>?,
-    val annotationsNotToDisplayKotlin: List<String>?
+    val annotationsNotToDisplayKotlin: List<String>?,
+    val hidingAnnotations: List<String> = emptyList(),
 ) : ConfigurableBlock {
     init {
         if (javaDocsPath == null && kotlinDocsPath == null) {

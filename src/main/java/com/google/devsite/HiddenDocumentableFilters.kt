@@ -20,25 +20,23 @@ import com.google.devsite.renderer.converters.allAnnotations
 import com.google.devsite.renderer.converters.asString
 import com.google.devsite.renderer.converters.deprecatedDri
 import com.google.devsite.renderer.converters.explodedChildren
+import com.google.devsite.renderer.converters.fullName
 import org.jetbrains.dokka.base.transformers.documentables.SuppressedByConditionDocumentableFilterTransformer
 import org.jetbrains.dokka.links.DRI
-import org.jetbrains.dokka.model.Annotations
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.dfs
 import org.jetbrains.dokka.model.doc.CustomTagWrapper
-import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.jetbrains.dokka.plugability.DokkaContext
 import org.jetbrains.dokka.transformers.documentation.DocumentableTransformer
-import org.jetbrains.kotlin.utils.addToStdlib.safeAs
 
 /**
  * These filters remove items from the docs when they:
  * - have @hide in a comment
  * - have @removed in a comment
- * - have a @RestrictTo annotation
  * - are deprecated with DeprecationLevel.HIDDEN
+ * - are annotated with an annotation from [DevsiteConfiguration.hidingAnnotations]
  *
  * There are two filters, one runs before the dokka merge step and one runs after.
  * The pre-merge filter removes hidden documentables and maintains a set of names of hidden
@@ -63,10 +61,12 @@ import org.jetbrains.kotlin.utils.addToStdlib.safeAs
  * Pre-merge transformer: filter hidden documentables, adding the names of all hidden packages to
  * [hiddenPackages]
  */
-class PreMergeHiddenDocumentableFilter(dokkaContext: DokkaContext) :
-    SuppressedByConditionDocumentableFilterTransformer(dokkaContext) {
+class PreMergeHiddenDocumentableFilter(
+    dokkaContext: DokkaContext,
+    private val hidingAnnotations: List<String>
+) : SuppressedByConditionDocumentableFilterTransformer(dokkaContext) {
     override fun shouldBeSuppressed(d: Documentable): Boolean {
-        if (!d.isHidden()) return false
+        if (!d.isHidden(hidingAnnotations)) return false
         if (d is DPackage) {
             d.dri.packageName?.let { hiddenPackages.add(it) }
         }
@@ -89,9 +89,9 @@ class PostMergePackageDocumentableFilter : DocumentableTransformer {
     }
 }
 
-private fun Documentable.isHidden(): Boolean =
+private fun Documentable.isHidden(hidingAnnotations: List<String>): Boolean =
     this.allAnnotations().any {
-        it.dri == restrictToDri || it.dri == gmsHideDri || it.dri == googleInternalDri ||
+        hidingAnnotations.contains(it.dri.fullName) ||
             (it.dri == deprecatedDri && "DeprecationLevel.HIDDEN" in it.params["level"].asString())
     } || this.hasHideJavadocTag() || this.hasRemovedJavadocTag()
 
@@ -106,18 +106,6 @@ private fun Documentable.hasRemovedJavadocTag(): Boolean =
         (_, docs) ->
         docs.dfs { it is CustomTagWrapper && it.name.trim() == "removed" } != null
     }
-
-private val Documentable.annotations
-    // using .annotations() directly on the WithExtraProperties only returns the direct annotations
-    get() = this.safeAs<WithExtraProperties<Documentable>>()
-        ?.extra
-        ?.get(Annotations)
-
-private val restrictToDri = DRI(packageName = "androidx.annotation", classNames = "RestrictTo")
-private val gmsHideDri =
-    DRI(packageName = "com.google.android.gms.common.internal", classNames = "Hide")
-private val googleInternalDri =
-    DRI(packageName = "com.google.errorprone.annotations", classNames = "GoogleInternal")
 
 fun hasBeenHidden(dri: DRI): Boolean {
     return hiddenDocumentables.contains(dri)

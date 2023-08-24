@@ -17,7 +17,6 @@
 package com.google.devsite.testing
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.DevsiteConfiguration
 import com.google.devsite.DevsitePlugin
 import com.google.devsite.TypeSummaryItem
 import com.google.devsite.components.pages.DevsitePage
@@ -51,7 +50,6 @@ import org.jetbrains.dokka.CoreExtensions
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.DokkaGenerator
 import org.jetbrains.dokka.ExternalDocumentationLink
-import org.jetbrains.dokka.PluginConfigurationImpl
 import org.jetbrains.dokka.base.resolvers.local.DokkaLocationProvider
 import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
 import org.jetbrains.dokka.base.translators.descriptors.DefaultExternalDocumentablesProvider
@@ -68,7 +66,6 @@ import org.jetbrains.dokka.plugability.DokkaPlugin
 import org.jetbrains.dokka.plugability.DokkaPluginApiPreview
 import org.jetbrains.dokka.plugability.PluginApiPreviewAcknowledgement
 import org.jetbrains.dokka.renderers.Renderer
-import org.jetbrains.dokka.toJsonString
 import org.jetbrains.dokka.utilities.DokkaConsoleLogger
 import org.jetbrains.dokka.utilities.LoggingLevel
 import org.mockito.Mockito
@@ -221,28 +218,7 @@ internal abstract class ConverterTestBase(
             }
         }
         offlineMode = true
-        pluginsConfigurations = mutableListOf(
-            PluginConfigurationImpl(
-                fqPluginName = "com.google.devsite.DevsitePlugin",
-                serializationFormat = DokkaConfiguration.SerializationFormat.JSON,
-                values = DevsiteConfiguration(
-                    docRootPath = "reference",
-                    projectPath = "androidx",
-                    excludedPackages = null,
-                    excludedPackagesForJava = null,
-                    excludedPackagesForKotlin = null,
-                    libraryMetadataFilename = null,
-                    versionMetadataFilenames = null,
-                    javaDocsPath = "",
-                    kotlinDocsPath = "kotlin",
-                    packagePrefixToRemoveInToc = null,
-                    baseSourceLink = null,
-                    annotationsNotToDisplay = null,
-                    annotationsNotToDisplayJava = null,
-                    annotationsNotToDisplayKotlin = null,
-                ).toJsonString()
-            )
-        )
+        pluginsConfigurations = defaultPluginsConfiguration
     }
     private val dokkaGenerator =
         DokkaGenerator(configuration, DokkaConsoleLogger(LoggingLevel.WARN))

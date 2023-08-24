@@ -3,6 +3,7 @@ package com.google.devsite.transformers
 import com.google.common.truth.Correspondence
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.testing.ConverterTestBase
+import com.google.devsite.testing.defaultPluginsConfiguration
 import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.doc.DocumentationNode
@@ -25,6 +26,7 @@ class DocTagsForCheckedExceptionsTest : BaseAbstractTest() {
                 classpath += jvmStdlibPath!!
             }
         }
+        pluginsConfigurations = defaultPluginsConfiguration
     }
 
     @Test

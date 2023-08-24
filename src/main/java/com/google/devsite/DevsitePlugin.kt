@@ -22,6 +22,7 @@ import com.google.devsite.transformers.DocTagsForCheckedExceptionsTransformer
 import org.jetbrains.dokka.CoreExtensions
 import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.translators.descriptors.ExternalDocumentablesProvider
+import org.jetbrains.dokka.plugability.DokkaContext
 import org.jetbrains.dokka.plugability.DokkaPlugin
 import org.jetbrains.dokka.plugability.DokkaPluginApiPreview
 import org.jetbrains.dokka.plugability.PluginApiPreviewAcknowledgement
@@ -47,22 +48,18 @@ class DevsitePlugin : DokkaPlugin() {
 
     val renderer by extending {
         CoreExtensions.renderer providing {
-            val devsiteConfiguration = configuration<DevsitePlugin, DevsiteConfiguration>(it)
-            checkNotNull(devsiteConfiguration) {
-                "Missing Dackka plugin configuration. See go/dackka#running-files for more detail."
-            }
             MultiLanguageRenderer(
                 it,
                 dokkaBase.querySingle { outputWriter },
                 dokkaBase.querySingle { externalDocumentablesProvider },
-                devsiteConfiguration
+                getDevsiteConfiguration(it)
             )
         } override dokkaBase.htmlRenderer
     }
 
     val preMergeHiddenFilter by extending {
         dokkaBase.preMergeDocumentableTransformer providing {
-            PreMergeHiddenDocumentableFilter(it)
+            PreMergeHiddenDocumentableFilter(it, getDevsiteConfiguration(it).hidingAnnotations)
         } order { before(dokkaBase.emptyPackagesFilter) }
     }
 
@@ -72,5 +69,11 @@ class DevsitePlugin : DokkaPlugin() {
 
     val docTagsForCheckedExceptions by extending {
         CoreExtensions.documentableTransformer with DocTagsForCheckedExceptionsTransformer()
+    }
+
+    private fun getDevsiteConfiguration(dokkaContext: DokkaContext): DevsiteConfiguration {
+        return checkNotNull(configuration<DevsitePlugin, DevsiteConfiguration>(dokkaContext)) {
+            "Missing Dackka plugin configuration. See go/dackka#generating-docs for more detail."
+        }
     }
 }

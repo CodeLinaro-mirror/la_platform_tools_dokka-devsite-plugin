@@ -27,7 +27,7 @@ import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
 import org.jetbrains.dokka.pages.RootPageNode
 import org.jetbrains.dokka.plugability.DokkaContext
 import org.jetbrains.dokka.testApi.logger.TestLogger
-import org.jetbrains.dokka.toJsonString
+import org.jetbrains.dokka.toCompactJsonString
 import org.jetbrains.dokka.utilities.DokkaConsoleLogger
 import org.jetbrains.dokka.utilities.LoggingLevel
 import testApi.testRunner.TestDokkaConfigurationBuilder
@@ -74,7 +74,8 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         includedHeadTagsPathJava: String? = "_shared/_reference-head-tags.html",
         includedHeadTagsPathKotlin: String? = "_shared/_reference-head-tags.html",
         useAndroidxBaseSourceLink: Boolean = false,
-        versionMetadataFilesnames: List<String>? = null
+        versionMetadataFilesnames: List<String>? = null,
+        hidingAnnotations: List<String> = listOf("androidx.annotation.RestrictTo"),
     ): DokkaConfigurationImpl {
         sources.forEach { check(it.isDirectory) { "$it does not exist or is not a directory" } }
         val externalLinks = mapOf(
@@ -135,7 +136,8 @@ abstract class IntegrationTestBase : BaseAbstractTest(
                         annotationsNotToDisplayKotlin = listOf(
                             "kotlin.ExtensionFunctionType"
                         ),
-                    ).toJsonString()
+                        hidingAnnotations = hidingAnnotations,
+                    ).toCompactJsonString()
                 )
             )
         }
@@ -154,6 +156,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         includedHeadTagsPathJava: String?,
         includedHeadTagsPathKotlin: String?,
         useAndroidxBaseSourceLink: Boolean,
+        hidingAnnotations: List<String>,
     ): DokkaConfigurationImpl {
         val sources = File(sourceDir).absoluteFile
         return makeExternalConfiguration(
@@ -167,6 +170,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             includedHeadTagsPathJava,
             includedHeadTagsPathKotlin,
             useAndroidxBaseSourceLink,
+            hidingAnnotations = hidingAnnotations,
         )
     }
 
@@ -307,7 +311,8 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         includedHeadTagsPathJava: String? = "_shared/_reference-head-tags.html",
         includedHeadTagsPathKotlin: String? = "_shared/_reference-head-tags.html",
         suffix: String = "source",
-        useAndroidxBaseSourceLink: Boolean = false
+        useAndroidxBaseSourceLink: Boolean = false,
+        hidingAnnotations: List<String> = listOf("androidx.annotation.RestrictTo"),
     ) {
         val samplesBaseDir = "testData/$path"
         val outputBaseDir = "testData/$path/docs"
@@ -328,7 +333,8 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             kotlinDocsDirectory,
             includedHeadTagsPathJava,
             includedHeadTagsPathKotlin,
-            useAndroidxBaseSourceLink
+            useAndroidxBaseSourceLink,
+            hidingAnnotations,
         )
 
         val writerPlugin = TestOutputWriterPlugin()
