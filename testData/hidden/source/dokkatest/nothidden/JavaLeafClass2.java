@@ -28,4 +28,8 @@ public class JavaLeafClass2 {
 
     /** @removed */
     public void removedFunction() {}
+
+    private String hiddenBackingField = "asdf";
+    /** @hide */
+    public String getHiddenBackingField() { return hiddenBackingField; }
 }

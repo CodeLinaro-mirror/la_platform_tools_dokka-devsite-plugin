@@ -21,10 +21,12 @@ import com.google.devsite.renderer.converters.asString
 import com.google.devsite.renderer.converters.deprecatedDri
 import com.google.devsite.renderer.converters.explodedChildren
 import com.google.devsite.renderer.converters.fullName
+import com.google.devsite.renderer.converters.isFromJava
 import org.jetbrains.dokka.base.transformers.documentables.SuppressedByConditionDocumentableFilterTransformer
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DPackage
+import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.dfs
 import org.jetbrains.dokka.model.doc.CustomTagWrapper
@@ -66,6 +68,13 @@ class PreMergeHiddenDocumentableFilter(
     private val hidingAnnotations: List<String>
 ) : SuppressedByConditionDocumentableFilterTransformer(dokkaContext) {
     override fun shouldBeSuppressed(d: Documentable): Boolean {
+        // Upstream bug 2603 means private-backing-public-getter shows up as a public field.
+        // This is a real problem if the public getter is `@hide`, because it means something is
+        // newly exposed that shouldn't be. Filter for that case specifically.
+        if (d is DProperty && d.isFromJava() && d.getter?.let { shouldBeSuppressed(it) } == true) {
+            addToHiddenSet(d)
+            return true
+        }
         if (!d.isHidden(hidingAnnotations)) return false
         if (d is DPackage) {
             d.dri.packageName?.let { hiddenPackages.add(it) }
