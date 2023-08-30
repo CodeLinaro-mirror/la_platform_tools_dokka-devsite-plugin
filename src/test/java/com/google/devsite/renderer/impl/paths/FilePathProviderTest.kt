@@ -269,26 +269,45 @@ internal class FilePathProviderTest(
     }
 
     @Test
-    fun `Reference to hoisted companion value goes to the containing class page`() {
+    fun `Reference to hoisted companion value goes to the containing classlike page`() {
+        // Check for all kinds of [DClasslike]s that implement [WithCompanion]
         val module = """
-            |class Foo {
+            |class FooClass {
+            |    companion object {
+            |        @JvmField val hoistedVal = 3
+            |    }
+            |}
+            |annotation class FooAnnotation {
+            |    companion object {
+            |        @JvmField val hoistedVal = 3
+            |    }
+            |    }
+            |}
+            |interface FooInterface {
+            |    companion object {
+            |        @JvmField val hoistedVal = 3
+            |    }
+            |}
+            |enum FooEnum {
             |    companion object {
             |        @JvmField val hoistedVal = 3
             |    }
             |}
         """.trimIndent().render()
         val classGraph = classGraph(module)
-        val dri = DRI(
-            packageName = "androidx.example",
-            classNames = "Foo.Companion",
-            callable = Callable(name = "hoistedVal", params = emptyList())
-        )
-        val reference = pathProvider(
-            externalLocationProvider = null,
-            classGraph = classGraph
-        ).forReference(dri)
-        assertThat(reference.name).isEqualTo("hoistedVal")
-        assertThat(reference.url.urlSuffix()).isEqualTo("Foo.html#hoistedVal()")
+        for (name in listOf("FooClass", "FooAnnotation", "FooInterface", "FooEnum")) {
+            val dri = DRI(
+                packageName = "androidx.example",
+                classNames = "$name.Companion",
+                callable = Callable(name = "hoistedVal", params = emptyList())
+            )
+            val reference = pathProvider(
+                externalLocationProvider = null,
+                classGraph = classGraph
+            ).forReference(dri)
+            assertThat(reference.name).isEqualTo("hoistedVal")
+            assertThat(reference.url.urlSuffix()).isEqualTo("$name.html#hoistedVal()")
+        }
     }
 
     @Test
