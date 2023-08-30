@@ -10,7 +10,7 @@
         <h1>ProcessLifecycleOwner</h1>
       </div>
       <div id="metadata-info-block">
-        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/lifecycle/ProcessLifecycleOwner.java+class:androidx.lifecycle.ProcessLifecycleOwner&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/lifecycle/ProcessLifecycleOwner.kt+class:androidx.lifecycle.ProcessLifecycleOwner&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
       </div>
     </div>
     <div id="refdoc-switcher-placeholder"></div>
@@ -18,9 +18,9 @@
       <pre>class <a href="/reference/kotlin/androidx/lifecycle/ProcessLifecycleOwner.html">ProcessLifecycleOwner</a> : <a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></pre>
     </p>
     <hr>
-    <p>Class that provides lifecycle for the whole application process. </p>
-    <p> You can consider this LifecycleOwner as the composite of all of your Activities, except that <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.html#ON_CREATE">ON_CREATE</a></code> will be dispatched once and <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.html#ON_DESTROY">ON_DESTROY</a></code> will never be dispatched. Other lifecycle events will be dispatched with following rules: ProcessLifecycleOwner will dispatch <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.html#ON_START">ON_START</a></code>, <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.html#ON_RESUME">ON_RESUME</a></code> events, as a first activity moves through these events. <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.html#ON_PAUSE">ON_PAUSE</a></code>, <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.html#ON_STOP">ON_STOP</a></code>, events will be dispatched with a <b>delay</b> after a last activity passed through them. This delay is long enough to guarantee that ProcessLifecycleOwner won't send any events if activities are destroyed and recreated due to a configuration change. </p>
-    <p> It is useful for use cases where you would like to react on your app coming to the foreground or going to the background and you don't need a milliseconds accuracy in receiving lifecycle events.</p>
+    <p>Class that provides lifecycle for the whole application process.</p>
+    <p>You can consider this LifecycleOwner as the composite of all of your Activities, except that <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.html#ON_CREATE">Lifecycle.Event.ON_CREATE</a></code> will be dispatched once and <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.html#ON_DESTROY">Lifecycle.Event.ON_DESTROY</a></code> will never be dispatched. Other lifecycle events will be dispatched with following rules: ProcessLifecycleOwner will dispatch <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.html#ON_START">Lifecycle.Event.ON_START</a></code>, <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.html#ON_RESUME">Lifecycle.Event.ON_RESUME</a></code> events, as a first activity moves through these events. <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.html#ON_PAUSE">Lifecycle.Event.ON_PAUSE</a></code>, <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.html#ON_STOP">Lifecycle.Event.ON_STOP</a></code>, events will be dispatched with a <b>delay</b> after a last activity passed through them. This delay is long enough to guarantee that ProcessLifecycleOwner won't send any events if activities are destroyed and recreated due to a configuration change.</p>
+    <p>It is useful for use cases where you would like to react on your app coming to the foreground or going to the background and you don't need a milliseconds accuracy in receiving lifecycle events.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -30,21 +30,36 @@
         </colgroup>
         <thead>
           <tr>
-            <th colspan="100%"><h3>Public functions</h3></th>
+            <th colspan="100%"><h3>Public companion functions</h3></th>
           </tr>
         </thead>
         <tbody class="list">
           <tr>
-            <td><code>java-static <a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code></td>
+            <td><code><a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/lifecycle/ProcessLifecycleOwner.html#get()">get</a>()</code></div>
               <p>The LifecycleOwner for the whole application process.</p>
             </td>
           </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
           <tr>
-            <td><code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code></td>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>open <a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/lifecycle/ProcessLifecycleOwner.html#getLifecycle()">getLifecycle</a>()</code></div>
+              <div><code><a href="/reference/kotlin/androidx/lifecycle/ProcessLifecycleOwner.html#lifecycle()">lifecycle</a></code></div>
               <p>Returns the Lifecycle of the provider.</p>
             </td>
           </tr>
@@ -52,14 +67,14 @@
       </table>
     </div>
     <div class="list">
-      <h2>Public functions</h2>
+      <h2>Public companion functions</h2>
       <div class="api-item"><a name="get--"></a><a name="get"></a>
         <div class="api-name-block">
           <div>
             <h3 id="get()">get</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">java-static&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ProcessLifecycleOwner.html#get()">get</a>():&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></pre>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ProcessLifecycleOwner.html#get()">get</a>():&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></pre>
         <p>The LifecycleOwner for the whole application process. Note that if your application has multiple processes, this provider does not know about other processes.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -83,13 +98,16 @@
           </table>
         </div>
       </div>
-      <div class="api-item"><a name="getLifecycle--"></a><a name="getlifecycle"></a>
+    </div>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getLifecycle()"></a><a name="setLifecycle()"></a><a name="getLifecycle--"></a><a name="setLifecycle--"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="getLifecycle()">getLifecycle</h3>
+            <h3 id="lifecycle()">lifecycle</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ProcessLifecycleOwner.html#getLifecycle()">getLifecycle</a>():&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></pre>
+        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ProcessLifecycleOwner.html#lifecycle()">lifecycle</a>:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></pre>
         <p>Returns the Lifecycle of the provider.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">

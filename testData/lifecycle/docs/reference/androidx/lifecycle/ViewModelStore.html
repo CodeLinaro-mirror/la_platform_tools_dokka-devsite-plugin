@@ -10,7 +10,7 @@
         <h1>ViewModelStore</h1>
       </div>
       <div id="metadata-info-block">
-        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/lifecycle/ViewModelStore.java+class:androidx.lifecycle.ViewModelStore&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/lifecycle/ViewModelStore.kt+class:androidx.lifecycle.ViewModelStore&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
       </div>
     </div>
     <div id="refdoc-switcher-placeholder"></div>
@@ -18,10 +18,10 @@
       <pre>public class <a href="/reference/androidx/lifecycle/ViewModelStore.html">ViewModelStore</a></pre>
     </p>
     <hr>
-    <p>Class to store <code>ViewModels</code>. </p>
-    <p> An instance of <code>ViewModelStore</code> must be retained through configuration changes: if an owner of this <code>ViewModelStore</code> is destroyed and recreated due to configuration changes, new instance of an owner should still have the same old instance of <code>ViewModelStore</code>. </p>
-    <p> If an owner of this <code>ViewModelStore</code> is destroyed and is not going to be recreated, then it should call <code><a href="/reference/androidx/lifecycle/ViewModelStore.html#clear()">clear</a></code> on this <code>ViewModelStore</code>, so <code>ViewModels</code> would be notified that they are no longer used. </p>
-    <p> Use <code><a href="/reference/androidx/lifecycle/ViewModelStoreOwner.html#getViewModelStore()">getViewModelStore</a></code> to retrieve a <code>ViewModelStore</code> for activities and fragments.</p>
+    <p>Class to store <code>ViewModel</code>s.</p>
+    <p>An instance of <code>ViewModelStore</code> must be retained through configuration changes: if an owner of this <code>ViewModelStore</code> is destroyed and recreated due to configuration changes, new instance of an owner should still have the same old instance of <code>ViewModelStore</code>.</p>
+    <p>If an owner of this <code>ViewModelStore</code> is destroyed and is not going to be recreated, then it should call <code><a href="/reference/androidx/lifecycle/ViewModelStore.html#clear()">clear</a></code> on this <code>ViewModelStore</code>, so <code>ViewModel</code>s would be notified that they are no longer used.</p>
+    <p>Use ViewModelStoreOwner.getViewModelStore to retrieve a <code>ViewModelStore</code> for activities and fragments.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -59,7 +59,7 @@
             <td><code>final void</code></td>
             <td>
               <div><code><a href="/reference/androidx/lifecycle/ViewModelStore.html#clear()">clear</a>()</code></div>
-              <p>Clears internal storage and notifies ViewModels that they are no longer used.</p>
+              <p>Clears internal storage and notifies <code>ViewModel</code>s that they are no longer used.</p>
             </td>
           </tr>
         </tbody>
@@ -85,7 +85,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/lifecycle/ViewModelStore.html#clear()">clear</a>()</pre>
-        <p>Clears internal storage and notifies ViewModels that they are no longer used.</p>
+        <p>Clears internal storage and notifies <code>ViewModel</code>s that they are no longer used.</p>
       </div>
     </div>
   </body>

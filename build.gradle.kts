@@ -17,6 +17,7 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.util.Locale
 
 defaultTasks = mutableListOf("test", "jar", "shadowJar", "ktlint", "publish")
 
@@ -29,11 +30,11 @@ group = "com.google.devsite"
 version = "1.3.7" // This is appended to archiveBaseName in the ShadowJar task.
 
 val dokkaVersion = "1.8.20-dev-214"
-val kotlinVersion = "1.8.0"
-val jacksonVersion = "2.13.1"
+val kotlinVersion = "1.9.10"
+val jacksonVersion = "2.15.0"
 val coroutinesVersion = "1.6.3"
 plugins {
-    kotlin("jvm") version "1.8.0"
+    kotlin("jvm") version "1.9.10"
     id("com.github.johnrengelman.shadow") version "7.1.1"
     id("application")
     id("maven-publish")
@@ -47,7 +48,7 @@ dependencies {
     implementation("org.jetbrains.dokka:dokka-gradle-plugin:$dokkaVersion")
     implementation("org.jetbrains.dokka:dokka-analysis:$dokkaVersion")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.5")
+    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.8.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:$coroutinesVersion")
 
     implementation("org.jetbrains.dokka:dokka-base-test-utils:$dokkaVersion")
@@ -103,7 +104,7 @@ val kmpTestDataSSs: List<SourceSet> = kmpSourceDirs.flatMap {
 
 val testDataImpl = project.configurations.getByName(javaTestDataSS.implementationConfigurationName)
 val testDataAars by project.configurations.creating
-val testDataParent by project.configurations.sourceArtifacts
+val testDataParent by project.configurations.creating
 testDataParent.isCanBeResolved = false
 fun Configuration.setResolveSources(isKmp: Boolean = false) {
     isTransitive = false
@@ -135,31 +136,31 @@ val testDataSourcesKmp by project.configurations.creating
 testDataSourcesKmp.extendsFrom(testDataParent)
 testDataSourcesKmp.setResolveSources(isKmp = true)
 
-val lifecycleVersion = "2.5.1"
+val lifecycleVersion = "2.6.0"
 val collectionsVersion = "1.3.0-alpha02"
-val composeVersion = "1.5.0-beta01"
+val composeVersion = "1.5.0"
 val composeMaterial3Version = "1.2.0-alpha02"
 dependencies {
-    testDataImpl("io.reactivex.rxjava3:rxjava:3.0.0")
+    testDataImpl("io.reactivex.rxjava3:rxjava:3.0.2")
     testDataImpl("io.reactivex.rxjava2:rxjava:2.2.9")
     testDataImpl("org.robolectric:sandbox:4.8.1")
     testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:$coroutinesVersion")
     testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-rx2:$coroutinesVersion")
     testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-rx3:$coroutinesVersion")
     testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$coroutinesVersion")
-    testDataImpl("org.robolectric:android-all-instrumented:12-robolectric-7732740-i4")
+    testDataImpl("org.robolectric:android-all-instrumented:13-robolectric-9030017-i4")
     testDataImpl("junit:junit:4.13.2")
     testDataImpl("com.google.truth:truth:1.1.3")
     testDataImpl("com.android.tools.build:gradle:8.1.0-beta01")
 
-    testDataImpl(fileTree("$buildDir/exploded"))
+    testDataImpl(fileTree("${layout.buildDirectory.get()}/exploded"))
 
-    testDataAars("androidx.lifecycle:lifecycle-livedata-core:2.4.0")
-    testDataAars("androidx.lifecycle:lifecycle-viewmodel:2.4.0")
-    testDataAars("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
-    testDataAars("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
-    testDataAars("androidx.recyclerview:recyclerview:1.2.1")
-    testDataAars("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
+    testDataAars("androidx.lifecycle:lifecycle-livedata-core:$lifecycleVersion")
+    testDataAars("androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion")
+    testDataAars("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
+    testDataAars("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
+    testDataAars("androidx.recyclerview:recyclerview:1.3.0")
+    testDataAars("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
     testDataAars("androidx.compose.foundation:foundation:1.0.5")
     testDataAars("androidx.activity:activity:1.6.0-rc01")
     testDataAars("androidx.paging:paging-common:3.2.0-alpha02")
@@ -188,7 +189,7 @@ dependencies {
     testDataSources("androidx.ads:ads-identifier:1.0.0-alpha04")
     testDataSources("androidx.ads:ads-identifier-common:1.0.0-alpha04")
     testDataSources("androidx.ads:ads-identifier-provider:1.0.0-alpha04")
-    testDataSourcesKmp("androidx.annotation:annotation:1.6.0-alpha01")
+    testDataSourcesKmp("androidx.annotation:annotation:1.6.0")
     testDataSources("androidx.annotation:annotation-experimental:1.3.0")
     //testDataSources("androidx.annotation:annotation-experimental-lint:1.0.0-rc01") // need dep
     testDataSources("androidx.appcompat:appcompat:1.6.0-beta01")
@@ -200,9 +201,9 @@ dependencies {
     testDataSources("androidx.appsearch:appsearch-debug-view:1.1.0-alpha01")
     testDataSources("androidx.appsearch:appsearch-platform-storage:1.1.0-alpha01")
     testDataSources("androidx.appsearch:appsearch-local-storage:1.1.0-alpha01")
-    testDataSources("androidx.arch.core:core-common:2.1.0")
-    testDataSources("androidx.arch.core:core-runtime:2.1.0")
-    testDataSources("androidx.arch.core:core-testing:2.1.0")
+    testDataSources("androidx.arch.core:core-common:2.2.0")
+    testDataSources("androidx.arch.core:core-runtime:2.2.0")
+    testDataSources("androidx.arch.core:core-testing:2.2.0")
     testDataSources("androidx.asynclayoutinflater:asynclayoutinflater:1.0.0")
     testDataSources("androidx.autofill:autofill:1.2.0-beta01")
     testDataSources("androidx.benchmark:benchmark:1.0.0-alpha03")
@@ -217,7 +218,7 @@ dependencies {
     testDataSources("androidx.benchmark:benchmark-macro-junit4:1.2.0-alpha01")
     testDataSources("androidx.biometric:biometric:1.2.0-alpha04")
     testDataSources("androidx.biometric:biometric-ktx:1.2.0-alpha04")
-    testDataSources("androidx.browser:browser:1.4.0")
+    testDataSources("androidx.browser:browser:1.5.0")
     testDataSources("androidx.camera:camera-camera2:1.2.0-alpha04")
     testDataSources("androidx.camera:camera-camera2-pipe:1.0.0-alpha01")
     testDataSources("androidx.camera:camera-camera2-pipe-testing:1.0.0-alpha01")
@@ -284,7 +285,7 @@ dependencies {
 }
 
 val explodeAars by tasks.registering(Sync::class) {
-    into("$buildDir/exploded")
+    into("${layout.buildDirectory.get()}/exploded")
     from(testDataAars) {
         include("*.jar")
     }
@@ -308,7 +309,7 @@ val explodeSources by tasks.registering {
             val baseName = splitName.subList(0, versionInd).joinToString(separator = "-")
             logger.debug("Unzipping prebuilt for $baseName")
             from(zipTree(arch))
-            into("$buildDir/explodedSources/$baseName")
+            into("${layout.buildDirectory.get()}/explodedSources/$baseName")
         }
     }
 }
@@ -333,7 +334,10 @@ tasks.getByName("test") {
     dependsOn(tasks.withType<KotlinCompile>())
 }
 
-val zipTask = project.tasks.register<Zip>("zipResultsOf${name.capitalize()}") {
+val String.capitalize: String  get() =
+    replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+
+val zipTask = project.tasks.register<Zip>("zipResultsOf${name.capitalize}") {
     destinationDirectory.set(File(getDistributionDirectory(), "host-test-reports"))
     archiveFileName.set("dackka-tests.zip")
 }
@@ -363,7 +367,7 @@ dependencies {
     ktlintConfiguration("com.pinterest:ktlint:0.43.0")
 }
 
-val outputDir = "${project.buildDir}/reports/ktlint/"
+val outputDir = "${layout.buildDirectory.get()}/reports/ktlint/"
 val inputFiles = project.fileTree(mapOf("dir" to "src", "include" to "**/*.kt"))
 
 val ktlint by tasks.creating(JavaExec::class) {

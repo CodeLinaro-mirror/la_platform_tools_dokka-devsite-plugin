@@ -10,15 +10,15 @@
         <h1>ServiceLifecycleDispatcher</h1>
       </div>
       <div id="metadata-info-block">
-        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/lifecycle/ServiceLifecycleDispatcher.java+class:androidx.lifecycle.ServiceLifecycleDispatcher&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/lifecycle/ServiceLifecycleDispatcher.kt+class:androidx.lifecycle.ServiceLifecycleDispatcher&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
       </div>
     </div>
     <div id="refdoc-switcher-placeholder"></div>
     <p>
-      <pre>class <a href="/reference/kotlin/androidx/lifecycle/ServiceLifecycleDispatcher.html">ServiceLifecycleDispatcher</a></pre>
+      <pre>open class <a href="/reference/kotlin/androidx/lifecycle/ServiceLifecycleDispatcher.html">ServiceLifecycleDispatcher</a></pre>
     </p>
     <hr>
-    <p>Helper class to dispatch lifecycle events for a service. Use it only if it is impossible to use <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleService.html">LifecycleService</a></code>.</p>
+    <p>Helper class to dispatch lifecycle events for a Service. Use it only if it is impossible to use <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleService.html">LifecycleService</a></code>.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -53,37 +53,53 @@
         </thead>
         <tbody class="list">
           <tr>
-            <td><code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/lifecycle/ServiceLifecycleDispatcher.html#getLifecycle()">getLifecycle</a>()</code></div>
-            </td>
-          </tr>
-          <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/lifecycle/ServiceLifecycleDispatcher.html#onServicePreSuperOnBind()">onServicePreSuperOnBind</a>()</code></div>
-              <p>Must be a first call in <code><a href="https://developer.android.com/reference/android/app/Service.html#onBind(android.content.Intent)">onBind</a></code> method, even before super.onBind call.</p>
+              <p>Must be a first call in <code><a href="https://developer.android.com/reference/android/app/Service.html#onBind(android.content.Intent)">Service.onBind</a></code> method, even before super.onBind call.</p>
             </td>
           </tr>
           <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/lifecycle/ServiceLifecycleDispatcher.html#onServicePreSuperOnCreate()">onServicePreSuperOnCreate</a>()</code></div>
-              <p>Must be a first call in <code><a href="https://developer.android.com/reference/android/app/Service.html#onCreate()">onCreate</a></code> method, even before super.onCreate call.</p>
+              <p>Must be a first call in <code><a href="https://developer.android.com/reference/android/app/Service.html#onCreate()">Service.onCreate</a></code> method, even before super.onCreate call.</p>
             </td>
           </tr>
           <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/lifecycle/ServiceLifecycleDispatcher.html#onServicePreSuperOnDestroy()">onServicePreSuperOnDestroy</a>()</code></div>
-              <p>Must be a first call in <code><a href="https://developer.android.com/reference/android/app/Service.html#onDestroy()">onDestroy</a></code> method, even before super.OnDestroy call.</p>
+              <p>Must be a first call in <code><a href="https://developer.android.com/reference/android/app/Service.html#onDestroy()">Service.onDestroy</a></code> method, even before super.OnDestroy call.</p>
             </td>
           </tr>
           <tr>
-            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/lifecycle/ServiceLifecycleDispatcher.html#onServicePreSuperOnStart()">onServicePreSuperOnStart</a>()</code></div>
-              <p>Must be a first call in <code><a href="https://developer.android.com/reference/android/app/Service.html#onStart(android.content.Intent, int)">onStart</a></code> or <code><a href="https://developer.android.com/reference/android/app/Service.html#onStartCommand(android.content.Intent, int, int)">onStartCommand</a></code> methods, even before a corresponding super call.</p>
+              <p>Must be a first call in <code><a href="https://developer.android.com/reference/android/app/Service.html#onStart(android.content.Intent, kotlin.Int)">Service.onStart</a></code> or <code><a href="https://developer.android.com/reference/android/app/Service.html#onStartCommand(android.content.Intent, kotlin.Int, kotlin.Int)">Service.onStartCommand</a></code> methods, even before a corresponding super call.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>open <a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/lifecycle/ServiceLifecycleDispatcher.html#lifecycle()">lifecycle</a></code></div>
+              <p><code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> for the given <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code></p>
             </td>
           </tr>
         </tbody>
@@ -123,43 +139,14 @@
     </div>
     <div class="list">
       <h2>Public functions</h2>
-      <div class="api-item"><a name="getLifecycle--"></a><a name="getlifecycle"></a>
-        <div class="api-name-block">
-          <div>
-            <h3 id="getLifecycle()">getLifecycle</h3>
-          </div>
-        </div>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ServiceLifecycleDispatcher.html#getLifecycle()">getLifecycle</a>():&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></pre>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Returns</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code></td>
-                <td>
-                  <p><code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> for the given <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code></p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
       <div class="api-item"><a name="onServicePreSuperOnBind--"></a><a name="onservicepresuperonbind"></a>
         <div class="api-name-block">
           <div>
             <h3 id="onServicePreSuperOnBind()">onServicePreSuperOnBind</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ServiceLifecycleDispatcher.html#onServicePreSuperOnBind()">onServicePreSuperOnBind</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Must be a first call in <code><a href="https://developer.android.com/reference/android/app/Service.html#onBind(android.content.Intent)">onBind</a></code> method, even before super.onBind call.</p>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ServiceLifecycleDispatcher.html#onServicePreSuperOnBind()">onServicePreSuperOnBind</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Must be a first call in <code><a href="https://developer.android.com/reference/android/app/Service.html#onBind(android.content.Intent)">Service.onBind</a></code> method, even before super.onBind call.</p>
       </div>
       <div class="api-item"><a name="onServicePreSuperOnCreate--"></a><a name="onservicepresuperoncreate"></a>
         <div class="api-name-block">
@@ -167,8 +154,8 @@
             <h3 id="onServicePreSuperOnCreate()">onServicePreSuperOnCreate</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ServiceLifecycleDispatcher.html#onServicePreSuperOnCreate()">onServicePreSuperOnCreate</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Must be a first call in <code><a href="https://developer.android.com/reference/android/app/Service.html#onCreate()">onCreate</a></code> method, even before super.onCreate call.</p>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ServiceLifecycleDispatcher.html#onServicePreSuperOnCreate()">onServicePreSuperOnCreate</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Must be a first call in <code><a href="https://developer.android.com/reference/android/app/Service.html#onCreate()">Service.onCreate</a></code> method, even before super.onCreate call.</p>
       </div>
       <div class="api-item"><a name="onServicePreSuperOnDestroy--"></a><a name="onservicepresuperondestroy"></a>
         <div class="api-name-block">
@@ -176,8 +163,8 @@
             <h3 id="onServicePreSuperOnDestroy()">onServicePreSuperOnDestroy</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ServiceLifecycleDispatcher.html#onServicePreSuperOnDestroy()">onServicePreSuperOnDestroy</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Must be a first call in <code><a href="https://developer.android.com/reference/android/app/Service.html#onDestroy()">onDestroy</a></code> method, even before super.OnDestroy call.</p>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ServiceLifecycleDispatcher.html#onServicePreSuperOnDestroy()">onServicePreSuperOnDestroy</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Must be a first call in <code><a href="https://developer.android.com/reference/android/app/Service.html#onDestroy()">Service.onDestroy</a></code> method, even before super.OnDestroy call.</p>
       </div>
       <div class="api-item"><a name="onServicePreSuperOnStart--"></a><a name="onservicepresuperonstart"></a>
         <div class="api-name-block">
@@ -185,8 +172,20 @@
             <h3 id="onServicePreSuperOnStart()">onServicePreSuperOnStart</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ServiceLifecycleDispatcher.html#onServicePreSuperOnStart()">onServicePreSuperOnStart</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Must be a first call in <code><a href="https://developer.android.com/reference/android/app/Service.html#onStart(android.content.Intent, int)">onStart</a></code> or <code><a href="https://developer.android.com/reference/android/app/Service.html#onStartCommand(android.content.Intent, int, int)">onStartCommand</a></code> methods, even before a corresponding super call.</p>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ServiceLifecycleDispatcher.html#onServicePreSuperOnStart()">onServicePreSuperOnStart</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Must be a first call in <code><a href="https://developer.android.com/reference/android/app/Service.html#onStart(android.content.Intent, kotlin.Int)">Service.onStart</a></code> or <code><a href="https://developer.android.com/reference/android/app/Service.html#onStartCommand(android.content.Intent, kotlin.Int, kotlin.Int)">Service.onStartCommand</a></code> methods, even before a corresponding super call.</p>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getLifecycle()"></a><a name="setLifecycle()"></a><a name="getLifecycle--"></a><a name="setLifecycle--"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="lifecycle()">lifecycle</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ServiceLifecycleDispatcher.html#lifecycle()">lifecycle</a>:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></pre>
+        <p><code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> for the given <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code></p>
       </div>
     </div>
   </body>

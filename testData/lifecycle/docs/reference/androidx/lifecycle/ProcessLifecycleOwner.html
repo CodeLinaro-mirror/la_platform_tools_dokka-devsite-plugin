@@ -10,17 +10,17 @@
         <h1>ProcessLifecycleOwner</h1>
       </div>
       <div id="metadata-info-block">
-        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/lifecycle/ProcessLifecycleOwner.java+class:androidx.lifecycle.ProcessLifecycleOwner&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/lifecycle/ProcessLifecycleOwner.kt+class:androidx.lifecycle.ProcessLifecycleOwner&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
       </div>
     </div>
     <div id="refdoc-switcher-placeholder"></div>
     <p>
-      <pre>public class <a href="/reference/androidx/lifecycle/ProcessLifecycleOwner.html">ProcessLifecycleOwner</a> implements <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></pre>
+      <pre>public final class <a href="/reference/androidx/lifecycle/ProcessLifecycleOwner.html">ProcessLifecycleOwner</a> implements <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></pre>
     </p>
     <hr>
-    <p>Class that provides lifecycle for the whole application process. </p>
-    <p> You can consider this LifecycleOwner as the composite of all of your Activities, except that <code><a href="/reference/androidx/lifecycle/Lifecycle.Event.html#ON_CREATE">ON_CREATE</a></code> will be dispatched once and <code><a href="/reference/androidx/lifecycle/Lifecycle.Event.html#ON_DESTROY">ON_DESTROY</a></code> will never be dispatched. Other lifecycle events will be dispatched with following rules: ProcessLifecycleOwner will dispatch <code><a href="/reference/androidx/lifecycle/Lifecycle.Event.html#ON_START">ON_START</a></code>, <code><a href="/reference/androidx/lifecycle/Lifecycle.Event.html#ON_RESUME">ON_RESUME</a></code> events, as a first activity moves through these events. <code><a href="/reference/androidx/lifecycle/Lifecycle.Event.html#ON_PAUSE">ON_PAUSE</a></code>, <code><a href="/reference/androidx/lifecycle/Lifecycle.Event.html#ON_STOP">ON_STOP</a></code>, events will be dispatched with a <b>delay</b> after a last activity passed through them. This delay is long enough to guarantee that ProcessLifecycleOwner won't send any events if activities are destroyed and recreated due to a configuration change. </p>
-    <p> It is useful for use cases where you would like to react on your app coming to the foreground or going to the background and you don't need a milliseconds accuracy in receiving lifecycle events.</p>
+    <p>Class that provides lifecycle for the whole application process.</p>
+    <p>You can consider this LifecycleOwner as the composite of all of your Activities, except that <code><a href="/reference/androidx/lifecycle/Lifecycle.Event.html#ON_CREATE">Lifecycle.Event.ON_CREATE</a></code> will be dispatched once and <code><a href="/reference/androidx/lifecycle/Lifecycle.Event.html#ON_DESTROY">Lifecycle.Event.ON_DESTROY</a></code> will never be dispatched. Other lifecycle events will be dispatched with following rules: ProcessLifecycleOwner will dispatch <code><a href="/reference/androidx/lifecycle/Lifecycle.Event.html#ON_START">Lifecycle.Event.ON_START</a></code>, <code><a href="/reference/androidx/lifecycle/Lifecycle.Event.html#ON_RESUME">Lifecycle.Event.ON_RESUME</a></code> events, as a first activity moves through these events. <code><a href="/reference/androidx/lifecycle/Lifecycle.Event.html#ON_PAUSE">Lifecycle.Event.ON_PAUSE</a></code>, <code><a href="/reference/androidx/lifecycle/Lifecycle.Event.html#ON_STOP">Lifecycle.Event.ON_STOP</a></code>, events will be dispatched with a <b>delay</b> after a last activity passed through them. This delay is long enough to guarantee that ProcessLifecycleOwner won't send any events if activities are destroyed and recreated due to a configuration change.</p>
+    <p>It is useful for use cases where you would like to react on your app coming to the foreground or going to the background and you don't need a milliseconds accuracy in receiving lifecycle events.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -35,7 +35,7 @@
         </thead>
         <tbody class="list">
           <tr>
-            <td><code>static @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code></td>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/lifecycle/ProcessLifecycleOwner.html#get()">get</a>()</code></div>
               <p>The LifecycleOwner for the whole application process.</p>
@@ -59,7 +59,7 @@
             <h3 id="get()">get</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;<a href="/reference/androidx/lifecycle/ProcessLifecycleOwner.html#get()">get</a>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;<a href="/reference/androidx/lifecycle/ProcessLifecycleOwner.html#get()">get</a>()</pre>
         <p>The LifecycleOwner for the whole application process. Note that if your application has multiple processes, this provider does not know about other processes.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">

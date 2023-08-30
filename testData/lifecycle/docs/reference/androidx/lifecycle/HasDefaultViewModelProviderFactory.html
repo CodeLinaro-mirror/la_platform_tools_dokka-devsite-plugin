@@ -10,7 +10,7 @@
         <h1>HasDefaultViewModelProviderFactory</h1>
       </div>
       <div id="metadata-info-block">
-        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/lifecycle/HasDefaultViewModelProviderFactory.java+class:androidx.lifecycle.HasDefaultViewModelProviderFactory&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/lifecycle/HasDefaultViewModelProviderFactory.kt+class:androidx.lifecycle.HasDefaultViewModelProviderFactory&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
       </div>
     </div>
     <div id="refdoc-switcher-placeholder"></div>
@@ -18,7 +18,7 @@
       <pre>public interface <a href="/reference/androidx/lifecycle/HasDefaultViewModelProviderFactory.html">HasDefaultViewModelProviderFactory</a></pre>
     </p>
     <hr>
-    <p>Interface that marks a <code><a href="/reference/androidx/lifecycle/ViewModelStoreOwner.html">ViewModelStoreOwner</a></code> as having a default <code><a href="/reference/androidx/lifecycle/ViewModelProvider.Factory.html">androidx.lifecycle.ViewModelProvider.Factory</a></code> for use with <code><a href="/reference/androidx/lifecycle/ViewModelProvider.html#ViewModelProvider(androidx.lifecycle.ViewModelStoreOwner)">ViewModelProvider</a></code>.</p>
+    <p>Interface that marks a <code><a href="/reference/androidx/lifecycle/ViewModelStoreOwner.html">ViewModelStoreOwner</a></code> as having a default <code><a href="/reference/androidx/lifecycle/ViewModelProvider.Factory.html">ViewModelProvider.Factory</a></code> for use with <code><a href="/reference/androidx/lifecycle/ViewModelProvider.html">ViewModelProvider</a></code>.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -36,14 +36,14 @@
             <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/lifecycle/HasDefaultViewModelProviderFactory.html#getDefaultViewModelCreationExtras()">getDefaultViewModelCreationExtras</a>()</code></div>
-              <p>Returns the default <code><a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a></code> that should be passed into the <code><a href="/reference/androidx/lifecycle/ViewModelProvider.Factory.html#create(java.lang.Class&lt;T&gt;,androidx.lifecycle.viewmodel.CreationExtras)">create</a></code> when no overriding <code><a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a></code> were passed to the <code><a href="/reference/androidx/lifecycle/ViewModelProvider.html">androidx.lifecycle.ViewModelProvider</a></code> constructors.</p>
+              <p>Returns the default <code><a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a></code> that should be passed into <code><a href="/reference/androidx/lifecycle/ViewModelProvider.Factory.html#create(java.lang.Class)">ViewModelProvider.Factory.create</a></code> when no overriding <code><a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a></code> were passed to the <code><a href="/reference/androidx/lifecycle/ViewModelProvider.html">ViewModelProvider</a></code> constructors.</p>
             </td>
           </tr>
           <tr>
             <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/ViewModelProvider.Factory.html">ViewModelProvider.Factory</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/lifecycle/HasDefaultViewModelProviderFactory.html#getDefaultViewModelProviderFactory()">getDefaultViewModelProviderFactory</a>()</code></div>
-              <p>Returns the default <code><a href="/reference/androidx/lifecycle/ViewModelProvider.Factory.html">androidx.lifecycle.ViewModelProvider.Factory</a></code> that should be used when no custom <code>Factory</code> is provided to the <code><a href="/reference/androidx/lifecycle/ViewModelProvider.html">androidx.lifecycle.ViewModelProvider</a></code> constructors.</p>
+              <p>Returns the default <code><a href="/reference/androidx/lifecycle/ViewModelProvider.Factory.html">ViewModelProvider.Factory</a></code> that should be used when no custom <code>Factory</code> is provided to the <code><a href="/reference/androidx/lifecycle/ViewModelProvider.html">ViewModelProvider</a></code> constructors.</p>
             </td>
           </tr>
         </tbody>
@@ -58,7 +58,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">default&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a>&nbsp;<a href="/reference/androidx/lifecycle/HasDefaultViewModelProviderFactory.html#getDefaultViewModelCreationExtras()">getDefaultViewModelCreationExtras</a>()</pre>
-        <p>Returns the default <code><a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a></code> that should be passed into the <code><a href="/reference/androidx/lifecycle/ViewModelProvider.Factory.html#create(java.lang.Class&lt;T&gt;,androidx.lifecycle.viewmodel.CreationExtras)">create</a></code> when no overriding <code><a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a></code> were passed to the <code><a href="/reference/androidx/lifecycle/ViewModelProvider.html">androidx.lifecycle.ViewModelProvider</a></code> constructors.</p>
+        <p>Returns the default <code><a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a></code> that should be passed into <code><a href="/reference/androidx/lifecycle/ViewModelProvider.Factory.html#create(java.lang.Class)">ViewModelProvider.Factory.create</a></code> when no overriding <code><a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a></code> were passed to the <code><a href="/reference/androidx/lifecycle/ViewModelProvider.html">ViewModelProvider</a></code> constructors.</p>
       </div>
       <div class="api-item"><a name="getDefaultViewModelProviderFactory--"></a><a name="getdefaultviewmodelproviderfactory"></a>
         <div class="api-name-block">
@@ -67,28 +67,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/ViewModelProvider.Factory.html">ViewModelProvider.Factory</a>&nbsp;<a href="/reference/androidx/lifecycle/HasDefaultViewModelProviderFactory.html#getDefaultViewModelProviderFactory()">getDefaultViewModelProviderFactory</a>()</pre>
-        <p>Returns the default <code><a href="/reference/androidx/lifecycle/ViewModelProvider.Factory.html">androidx.lifecycle.ViewModelProvider.Factory</a></code> that should be used when no custom <code>Factory</code> is provided to the <code><a href="/reference/androidx/lifecycle/ViewModelProvider.html">androidx.lifecycle.ViewModelProvider</a></code> constructors.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Returns</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/ViewModelProvider.Factory.html">ViewModelProvider.Factory</a></code></td>
-                <td>
-                  <p>a <code>ViewModelProvider.Factory</code></p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <p>Returns the default <code><a href="/reference/androidx/lifecycle/ViewModelProvider.Factory.html">ViewModelProvider.Factory</a></code> that should be used when no custom <code>Factory</code> is provided to the <code><a href="/reference/androidx/lifecycle/ViewModelProvider.html">ViewModelProvider</a></code> constructors.</p>
       </div>
     </div>
   </body>

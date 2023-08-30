@@ -26,12 +26,12 @@ import com.google.devsite.components.symbols.Platform
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
-import com.jetbrains.rd.util.concurrentMapOf
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.model.DClasslike
+import java.util.concurrent.ConcurrentHashMap
 
 internal class NonKmpClasslikeConverter(
     displayLanguage: Language,
@@ -103,7 +103,7 @@ internal class KmpClasslikeConverter(
 
     override suspend fun getClasslikeDescription(): ClasslikeDescription = coroutineScope {
         val signatures =
-            concurrentMapOf<ClasslikeSignature, MutableSet<DokkaConfiguration.DokkaSourceSet>>()
+            ConcurrentHashMap<ClasslikeSignature, MutableSet<DokkaConfiguration.DokkaSourceSet>>()
         var primarySignature: ClasslikeSignature? = null
         val primarySourceSet = classlike.getExpectOrCommonSourceSet()
 
@@ -119,7 +119,7 @@ internal class KmpClasslikeConverter(
                         classGraph = docsHolder.classGraph(),
                         sourceSet = sourceSet,
                     )
-                    if (sig !in signatures) signatures[sig] = mutableSetOf()
+                    if (!signatures.contains(sig)) signatures[sig] = mutableSetOf()
                     signatures[sig]!!.add(sourceSet)
                     if (sourceSet == primarySourceSet) primarySignature = sig
                 }

@@ -170,6 +170,7 @@
         <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>&nbsp;<a href="/reference/androidx/compose/ui/layout/Placeable.PlacementScope.html#getCoordinates()">getCoordinates</a>()</pre>
         <p>The <code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> of this layout, if known or <code>null</code> if the layout hasn't been placed yet. <code><a href="/reference/androidx/compose/ui/layout/Placeable.PlacementScope.html#coordinates()">coordinates</a></code> will be <code>null</code> when determining alignment lines, preventing alignment lines from depending on absolute coordinates.</p>
         <p>When <code><a href="/reference/androidx/compose/ui/layout/Placeable.PlacementScope.html#coordinates()">coordinates</a></code> is <code>null</code>, there will always be a follow-up placement call in which <code><a href="/reference/androidx/compose/ui/layout/Placeable.PlacementScope.html#coordinates()">coordinates</a></code> is not-<code>null</code>.</p>
+        <p>If you read a position from the coordinates during the placement block the block will be automatically re-executed when the parent layout changes a position. If you don't read it the placement block execution can be skipped as an optimization.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.unit.IntOffset
