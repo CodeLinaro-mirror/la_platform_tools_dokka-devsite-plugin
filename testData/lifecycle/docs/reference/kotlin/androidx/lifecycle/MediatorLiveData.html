@@ -45,21 +45,27 @@
     <p><code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code> subclass which may observe other <code>LiveData</code> objects and react on <code>OnChanged</code> events from them. </p>
     <p> This class correctly propagates its active/inactive states down to source <code>LiveData</code> objects. </p>
     <p> Consider the following scenario: we have 2 instances of <code>LiveData</code>, let's name them <code>liveData1</code> and <code>liveData2</code>, and we want to merge their emissions in one object: <code>liveDataMerger</code>. Then, <code>liveData1</code> and <code>liveData2</code> will become sources for the <code>MediatorLiveData liveDataMerger</code> and every time <code>onChanged</code> callback is called for either of them, we set a new value in <code>liveDataMerger</code>. </p>
-    <pre class="prettyprint">LiveDataliveData1 = ...;
-LiveData</pre>
+    <pre class="prettyprint">LiveData&lt;Integer&gt; liveData1 = ...;
+LiveData&lt;Integer&gt; liveData2 = ...;
+
+MediatorLiveData&lt;Integer&gt; liveDataMerger = new MediatorLiveData&lt;&gt;();
+liveDataMerger.addSource(liveData1, value -&gt; liveDataMerger.setValue(value));
+liveDataMerger.addSource(liveData2, value -&gt; liveDataMerger.setValue(value));
+</pre>
     <p> Let's consider that we only want 10 values emitted by <code>liveData1</code>, to be merged in the <code>liveDataMerger</code>. Then, after 10 values, we can stop listening to <code>
 liveData1</code> and remove it as a source. </p>
-    <pre class="prettyprint">liveDataMerger.addSource(liveData1, new Observer() {
+    <pre class="prettyprint">liveDataMerger.addSource(liveData1, new Observer&lt;Integer&gt;() {
      private int count = 1;
 
-     Override public void onChanged(@Nullable Integer s) {
+     @Override public void onChanged(@Nullable Integer s) {
          count++;
          liveDataMerger.setValue(s);
          if (count &gt; 10) {
              liveDataMerger.removeSource(liveData1);
          }
      }
-});</pre>
+});
+</pre>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <colgroup>
@@ -97,6 +103,13 @@ liveData1</code> and remove it as a source. </p>
           <tr>
             <td>
               <div><code><a href="/reference/kotlin/androidx/lifecycle/MediatorLiveData.html#MediatorLiveData()">MediatorLiveData</a>()</code></div>
+              <p>Creates a MediatorLiveData with no value assigned to it.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/lifecycle/MediatorLiveData.html#MediatorLiveData(T)">MediatorLiveData</a>(value:&nbsp;T!)</code></div>
+              <p>Creates a MediatorLiveData initialized with the given <code>value</code>.</p>
             </td>
           </tr>
         </tbody>
@@ -118,7 +131,7 @@ liveData1</code> and remove it as a source. </p>
             <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
               <div><code>@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>&lt;S&gt; <a href="/reference/kotlin/androidx/lifecycle/MediatorLiveData.html#addSource(androidx.lifecycle.LiveData&lt;S&gt;,androidx.lifecycle.Observer&lt;? super S&gt;)">addSource</a>(source:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a>&lt;S!&gt;,&nbsp;onChanged:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Observer.html">Observer</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>!&gt;)</code></div>
-              <p>Starts to listen the given <code>source</code> LiveData, <code>onChanged</code> observer will be called when <code>source</code> value was changed.</p>
+              <p>Starts to listen to the given <code>source</code> LiveData, <code>onChanged</code> observer will be called when <code>source</code> value was changed.</p>
             </td>
           </tr>
           <tr>
@@ -199,6 +212,13 @@ liveData1</code> and remove it as a source. </p>
                       </td>
                     </tr>
                     <tr>
+                      <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html#isInitialized()">isInitialized</a>()</code></div>
+                        <p>Returns whether an explicit value has been set on this LiveData.</p>
+                      </td>
+                    </tr>
+                    <tr>
                       <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
                         <div><code>@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br><a href="/reference/kotlin/androidx/lifecycle/LiveData.html#observe(androidx.lifecycle.LifecycleOwner,androidx.lifecycle.Observer&lt;? super T&gt;)">observe</a>(owner:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>,&nbsp;observer:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Observer.html">Observer</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>!&gt;)</code></div>
@@ -271,6 +291,37 @@ liveData1</code> and remove it as a source. </p>
           </div>
         </div>
         <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/lifecycle/MediatorLiveData.html#MediatorLiveData()">MediatorLiveData</a>()</pre>
+        <p>Creates a MediatorLiveData with no value assigned to it.</p>
+      </div>
+      <div class="api-item"><a name="MediatorLiveData-T-"></a><a name="mediatorlivedata"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="MediatorLiveData(T)">MediatorLiveData</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/lifecycle/MediatorLiveData.html#MediatorLiveData(T)">MediatorLiveData</a>(value:&nbsp;T!)</pre>
+        <p>Creates a MediatorLiveData initialized with the given <code>value</code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>value:&nbsp;T!</code></td>
+                <td>
+                  <p>initial value</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
     <div class="list">
@@ -282,7 +333,7 @@ liveData1</code> and remove it as a source. </p>
           </div>
         </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>fun&nbsp;&lt;S&gt; <a href="/reference/kotlin/androidx/lifecycle/MediatorLiveData.html#addSource(androidx.lifecycle.LiveData&lt;S&gt;,androidx.lifecycle.Observer&lt;? super S&gt;)">addSource</a>(source:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a>&lt;S!&gt;,&nbsp;onChanged:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Observer.html">Observer</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>!&gt;):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-        <p>Starts to listen the given <code>source</code> LiveData, <code>onChanged</code> observer will be called when <code>source</code> value was changed. </p>
+        <p>Starts to listen to the given <code>source</code> LiveData, <code>onChanged</code> observer will be called when <code>source</code> value was changed. </p>
         <p><code>onChanged</code> callback will be called only when this <code>MediatorLiveData</code> is active. </p>
         <p> If the given LiveData is already added as a source but with a different Observer, <code><a href="https://developer.android.com/reference/java/lang/IllegalArgumentException.html">IllegalArgumentException</a></code> will be thrown.</p>
         <div class="devsite-table-wrapper">

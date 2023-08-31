@@ -61,7 +61,6 @@ import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import com.google.devsite.strictSingleOrNull
-import com.jetbrains.rd.util.concurrentMapOf
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import org.jetbrains.dokka.DokkaConfiguration.DokkaSourceSet
@@ -90,6 +89,7 @@ import org.jetbrains.dokka.model.WithSupertypes
 import org.jetbrains.dokka.model.properties.PropertyContainer
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.jetbrains.dokka.model.toAdditionalModifiers
+import java.util.concurrent.ConcurrentHashMap
 
 /** Converts documentable class-likes into the classlike component. */
 internal abstract class ClasslikeDocumentableConverter(
@@ -735,7 +735,7 @@ internal abstract class ClasslikeDocumentableConverter(
         val type: String,
         val isFromJava: Boolean
     )
-    private val SIGNATURE_INSTANCES = concurrentMapOf<
+    private val SIGNATURE_INSTANCES = ConcurrentHashMap<
         Pair<SourceSetDependentSignatureInputs, SourceSetIndependentSignatureInputs>,
         ClasslikeSignature>()
 

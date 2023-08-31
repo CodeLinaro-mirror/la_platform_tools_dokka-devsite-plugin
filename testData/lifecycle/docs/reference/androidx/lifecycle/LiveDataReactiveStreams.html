@@ -9,16 +9,12 @@
       <div>
         <h1>LiveDataReactiveStreams</h1>
       </div>
-      <div id="metadata-info-block">
-        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/lifecycle/LiveDataReactiveStreams.java+class:androidx.lifecycle.LiveDataReactiveStreams&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
-      </div>
     </div>
     <div id="refdoc-switcher-placeholder"></div>
     <p>
       <pre>public final class <a href="/reference/androidx/lifecycle/LiveDataReactiveStreams.html">LiveDataReactiveStreams</a></pre>
     </p>
     <hr>
-    <p>Adapts <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code> input and output to the ReactiveStreams spec.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -33,16 +29,23 @@
         </thead>
         <tbody class="list">
           <tr>
-            <td><code>static @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a>&lt;T&gt;</code></td>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
             <td>
-              <div><code>&lt;T&gt; <a href="/reference/androidx/lifecycle/LiveDataReactiveStreams.html#fromPublisher(org.reactivestreams.Publisher&lt;T&gt;)">fromPublisher</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/org/reactivestreams/Publisher.html">Publisher</a>&lt;T&gt;&nbsp;publisher)</code></div>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/lifecycle/LiveDataReactiveStreams.html#(org.reactivestreams.Publisher).fromPublisher()">fromPublisher</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/org/reactivestreams/Publisher.html">Publisher</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver)</code></div>
               <p>Creates an observable <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code> stream from a ReactiveStreams <code><a href="/reference/org/reactivestreams/Publisher.html">Publisher</a></code>}.</p>
             </td>
           </tr>
           <tr>
-            <td><code>static @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/org/reactivestreams/Publisher.html">Publisher</a>&lt;T&gt;</code></td>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/org/reactivestreams/Publisher.html">Publisher</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
             <td>
-              <div><code>&lt;T&gt; <a href="/reference/androidx/lifecycle/LiveDataReactiveStreams.html#toPublisher(androidx.lifecycle.LifecycleOwner,androidx.lifecycle.LiveData&lt;T&gt;)">toPublisher</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;lifecycle,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a>&lt;T&gt;&nbsp;liveData<br>)</code></div>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/lifecycle/LiveDataReactiveStreams.html#toPublisher(androidx.lifecycle.LifecycleOwner,androidx.lifecycle.LiveData)">toPublisher</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;lifecycle,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;liveData<br>)</code></div>
+              <p>Adapts the given <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code> stream to a ReactiveStreams <code><a href="/reference/org/reactivestreams/Publisher.html">Publisher</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/org/reactivestreams/Publisher.html">Publisher</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/lifecycle/LiveDataReactiveStreams.html#(androidx.lifecycle.LiveData).toPublisher(androidx.lifecycle.LifecycleOwner)">toPublisher</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;lifecycle<br>)</code></div>
               <p>Adapts the given <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code> stream to a ReactiveStreams <code><a href="/reference/org/reactivestreams/Publisher.html">Publisher</a></code>.</p>
             </td>
           </tr>
@@ -51,50 +54,40 @@
     </div>
     <div class="list">
       <h2>Public methods</h2>
-      <div class="api-item"><a name="fromPublisher-org.reactivestreams.Publisher&lt;T&gt;-"></a><a name="frompublisher"></a>
+      <div class="api-item"><a name="-org.reactivestreams.Publisher-.fromPublisher--"></a><a name="frompublisher"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="fromPublisher(org.reactivestreams.Publisher&lt;T&gt;)">fromPublisher</h3>
+            <h3 id="(org.reactivestreams.Publisher).fromPublisher()">fromPublisher</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a>&lt;T&gt;&nbsp;&lt;T&gt; <a href="/reference/androidx/lifecycle/LiveDataReactiveStreams.html#fromPublisher(org.reactivestreams.Publisher&lt;T&gt;)">fromPublisher</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/org/reactivestreams/Publisher.html">Publisher</a>&lt;T&gt;&nbsp;publisher)</pre>
-        <p>Creates an observable <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code> stream from a ReactiveStreams <code><a href="/reference/org/reactivestreams/Publisher.html">Publisher</a></code>}. </p>
-        <p> When the LiveData becomes active, it subscribes to the emissions from the Publisher. </p>
-        <p> When the LiveData becomes inactive, the subscription is cleared. LiveData holds the last value emitted by the Publisher when the LiveData was active. </p>
-        <p> Therefore, in the case of a hot RxJava Observable, when a new LiveData <code><a href="/reference/androidx/lifecycle/Observer.html">Observer</a></code> is added, it will automatically notify with the last value held in LiveData, which might not be the last value emitted by the Publisher. </p>
-        <p> Note that LiveData does NOT handle errors and it expects that errors are treated as states in the data that's held. In case of an error being emitted by the publisher, an error will be propagated to the main thread and the app will crash.</p>
-        <div class="devsite-table-wrapper">
-          <table class="responsive">
-            <colgroup>
-              <col width="40%">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th colspan="100%">Parameters</th>
-              </tr>
-            </thead>
-            <tbody class="list">
-              <tr>
-                <td><code>&lt;T&gt;</code></td>
-                <td>
-                  <p>The type of data hold by this instance.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/lifecycle/LiveDataReactiveStreams.html#(org.reactivestreams.Publisher).fromPublisher()">fromPublisher</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/org/reactivestreams/Publisher.html">Publisher</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver)</pre>
+        <p>Creates an observable <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code> stream from a ReactiveStreams <code><a href="/reference/org/reactivestreams/Publisher.html">Publisher</a></code>}.</p>
+        <p>When the LiveData becomes active, it subscribes to the emissions from the Publisher.</p>
+        <p>When the LiveData becomes inactive, the subscription is cleared. LiveData holds the last value emitted by the Publisher when the LiveData was active.</p>
+        <p>Therefore, in the case of a hot RxJava Observable, when a new LiveData <code><a href="/reference/androidx/lifecycle/Observer.html">Observer</a></code> is added, it will automatically notify with the last value held in LiveData, which might not be the last value emitted by the Publisher.</p>
+        <p>Note that LiveData does NOT handle errors and it expects that errors are treated as states in the data that's held. In case of an error being emitted by the publisher, an error will be propagated to the main thread and the app will crash.</p>
       </div>
-      <div class="api-item"><a name="toPublisher(androidx.lifecycle.LifecycleOwner, androidx.lifecycle.LiveData&lt;T&gt;)"></a><a name="toPublisher-androidx.lifecycle.LifecycleOwner-androidx.lifecycle.LiveData&lt;T&gt;-"></a><a name="topublisher"></a>
+      <div class="api-item"><a name="toPublisher(androidx.lifecycle.LifecycleOwner, androidx.lifecycle.LiveData)"></a><a name="toPublisher-androidx.lifecycle.LifecycleOwner-androidx.lifecycle.LiveData-"></a><a name="topublisher"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="toPublisher(androidx.lifecycle.LifecycleOwner,androidx.lifecycle.LiveData&lt;T&gt;)">toPublisher</h3>
+            <h3 id="toPublisher(androidx.lifecycle.LifecycleOwner,androidx.lifecycle.LiveData)">toPublisher</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/org/reactivestreams/Publisher.html">Publisher</a>&lt;T&gt;&nbsp;&lt;T&gt; <a href="/reference/androidx/lifecycle/LiveDataReactiveStreams.html#toPublisher(androidx.lifecycle.LifecycleOwner,androidx.lifecycle.LiveData&lt;T&gt;)">toPublisher</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;lifecycle,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a>&lt;T&gt;&nbsp;liveData<br>)</pre>
-        <p>Adapts the given <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code> stream to a ReactiveStreams <code><a href="/reference/org/reactivestreams/Publisher.html">Publisher</a></code>. </p>
-        <p> By using a good publisher implementation such as RxJava 2.x Flowables, most consumers will be able to let the library deal with backpressure using operators and not need to worry about ever manually calling <code><a href="/reference/org/reactivestreams/Subscription.html#request(long)">request</a></code>. </p>
-        <p> On subscription to the publisher, the observer will attach to the given <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code>. Once <code><a href="/reference/org/reactivestreams/Subscription.html#request(long)">request</a></code> is called on the subscription object, an observer will be connected to the data stream. Calling request(Long.MAX_VALUE) is equivalent to creating an unbounded stream with no backpressure. If request with a finite count reaches 0, the observer will buffer the latest item and emit it to the subscriber when data is again requested. Any other items emitted during the time there was no backpressure requested will be dropped.</p>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/org/reactivestreams/Publisher.html">Publisher</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/lifecycle/LiveDataReactiveStreams.html#toPublisher(androidx.lifecycle.LifecycleOwner,androidx.lifecycle.LiveData)">toPublisher</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;lifecycle,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;liveData<br>)</pre>
+        <p>Adapts the given <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code> stream to a ReactiveStreams <code><a href="/reference/org/reactivestreams/Publisher.html">Publisher</a></code>.</p>
+        <p>By using a good publisher implementation such as RxJava 2.x Flowables, most consumers will be able to let the library deal with backpressure using operators and not need to worry about ever manually calling <code><a href="/reference/org/reactivestreams/Subscription.html#request(kotlin.Long)">Subscription.request</a></code>.</p>
+        <p>On subscription to the publisher, the observer will attach to the given <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code>. Once <code><a href="/reference/org/reactivestreams/Subscription.html#request(kotlin.Long)">Subscription.request</a></code> is called on the subscription object, an observer will be connected to the data stream. Calling <code>request(Long.MAX_VALUE)</code> is equivalent to creating an unbounded stream with no backpressure. If request with a finite count reaches 0, the observer will buffer the latest item and emit it to the subscriber when data is again requested. Any other items emitted during the time there was no backpressure requested will be dropped.</p>
+      </div>
+      <div class="api-item"><a name="-androidx.lifecycle.LiveData-.toPublisher-androidx.lifecycle.LifecycleOwner-"></a><a name="topublisher"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="(androidx.lifecycle.LiveData).toPublisher(androidx.lifecycle.LifecycleOwner)">toPublisher</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/org/reactivestreams/Publisher.html">Publisher</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/lifecycle/LiveDataReactiveStreams.html#(androidx.lifecycle.LiveData).toPublisher(androidx.lifecycle.LifecycleOwner)">toPublisher</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;lifecycle<br>)</pre>
+        <p>Adapts the given <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code> stream to a ReactiveStreams <code><a href="/reference/org/reactivestreams/Publisher.html">Publisher</a></code>.</p>
+        <p>By using a good publisher implementation such as RxJava 2.x Flowables, most consumers will be able to let the library deal with backpressure using operators and not need to worry about ever manually calling <code><a href="/reference/org/reactivestreams/Subscription.html#request(kotlin.Long)">Subscription.request</a></code>.</p>
+        <p>On subscription to the publisher, the observer will attach to the given <code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code>. Once <code><a href="/reference/org/reactivestreams/Subscription.html#request(kotlin.Long)">Subscription.request</a></code> is called on the subscription object, an observer will be connected to the data stream. Calling <code>request(Long.MAX_VALUE)</code> is equivalent to creating an unbounded stream with no backpressure. If request with a finite count reaches 0, the observer will buffer the latest item and emit it to the subscriber when data is again requested. Any other items emitted during the time there was no backpressure requested will be dropped.</p>
       </div>
     </div>
   </body>

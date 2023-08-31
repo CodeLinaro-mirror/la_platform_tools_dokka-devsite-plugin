@@ -27,7 +27,7 @@
       </div>
     </devsite-filter >
     <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
-        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/ui/node/DelegatingNode.html">DelegatingNode</a>, <a href="/reference/kotlin/androidx/compose/ui/focus/FocusTargetNode.html">FocusTargetNode</a></div>
+        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/ui/node/DelegatingNode.html">DelegatingNode</a></div>
       </span>
       <div id="subclasses-direct-summary">
         <div class="devsite-table-wrapper">
@@ -41,12 +41,6 @@
                 <td><code><a href="/reference/kotlin/androidx/compose/ui/node/DelegatingNode.html">DelegatingNode</a></code></td>
                 <td>
                   <p>A <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> which is able to delegate work to other <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> instances.</p>
-                </td>
-              </tr>
-              <tr>
-                <td><code><a href="/reference/kotlin/androidx/compose/ui/focus/FocusTargetNode.html">FocusTargetNode</a></code></td>
-                <td>
-                  <p>This modifier node can be used to create a modifier that makes a component focusable.</p>
                 </td>
               </tr>
             </tbody>
@@ -298,7 +292,7 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html#onAttach()">onAttach</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-          <p>Called when the node is attached to a <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">androidx.compose.ui.layout.Layout</a></code> which is part of the UI tree. When called, <code>node</code> is guaranteed to be non-null. You can call sideEffect, coroutineScope, etc.</p>
+          <p>Called when the node is attached to a <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">androidx.compose.ui.layout.Layout</a></code> which is part of the UI tree. When called, <code>node</code> is guaranteed to be non-null. You can call sideEffect, coroutineScope, etc. This is not guaranteed to get called at a time where the rest of the Modifier.Nodes in the hierarchy are &quot;up to date&quot;. For instance, at the time of calling onAttach for this node, another node may be in the tree that will be detached by the time Compose has finished applying changes. As a result, if you need to guarantee that the state of the tree is &quot;final&quot; for this round of changes, you should use the <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html#sideEffect(kotlin.Function0)">sideEffect</a></code> API to schedule the calculation to be done at that time.</p>
         </div>
         <div class="api-item"><a name="onDetach--"></a><a name="ondetach"></a>
           <div class="api-name-block">
