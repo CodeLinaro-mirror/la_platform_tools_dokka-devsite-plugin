@@ -3301,7 +3301,7 @@ internal class ClasslikeDocumentableConverterTest(
     ): List<DevsitePage<Classlike>> {
         val (holder, provider) = holderAndProvider(this)
         val metadataConverter = MetadataConverter(holder)
-        val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
+        val annotationConverter = annotationConverter(provider)
         val paramConverter =
             ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
         val javadocConverter =

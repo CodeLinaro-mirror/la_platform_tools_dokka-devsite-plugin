@@ -17,6 +17,7 @@
 package com.google.devsite.testing
 
 import com.google.devsite.DevsiteConfiguration
+import com.google.devsite.defaultValidNullabilityAnnotations
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.PluginConfigurationImpl
 import org.jetbrains.dokka.toCompactJsonString
@@ -44,6 +45,8 @@ val defaultPluginsConfiguration = mutableListOf(
             annotationsNotToDisplayJava = null,
             annotationsNotToDisplayKotlin = null,
             hidingAnnotations = listOf("androidx.annotation.RestrictTo"),
+            validNullabilityAnnotations = defaultValidNullabilityAnnotations +
+                listOf("androidx.example.NonNull", "androidx.example.Nullable")
         ).toCompactJsonString()
     )
 )

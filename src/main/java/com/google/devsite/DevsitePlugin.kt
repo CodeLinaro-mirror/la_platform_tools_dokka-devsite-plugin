@@ -70,10 +70,9 @@ class DevsitePlugin : DokkaPlugin() {
     val docTagsForCheckedExceptions by extending {
         CoreExtensions.documentableTransformer with DocTagsForCheckedExceptionsTransformer()
     }
-
-    private fun getDevsiteConfiguration(dokkaContext: DokkaContext): DevsiteConfiguration {
-        return checkNotNull(configuration<DevsitePlugin, DevsiteConfiguration>(dokkaContext)) {
-            "Missing Dackka plugin configuration. See go/dackka#generating-docs for more detail."
-        }
+}
+internal fun getDevsiteConfiguration(dokkaContext: DokkaContext): DevsiteConfiguration {
+    return checkNotNull(configuration<DevsitePlugin, DevsiteConfiguration>(dokkaContext)) {
+        "Missing Dackka plugin configuration. See go/dackka#generating-docs for more detail."
     }
 }

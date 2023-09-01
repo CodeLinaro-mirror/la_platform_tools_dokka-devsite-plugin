@@ -375,7 +375,7 @@ internal class PropertyDocumentableConverterTest(
 
     private fun DModule.propertyConverter(): PropertyDocumentableConverter {
         val (holder, provider) = holderAndProvider(this)
-        val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
+        val annotationConverter = annotationConverter(provider)
         val paramConverter =
             ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
         val docConverter =

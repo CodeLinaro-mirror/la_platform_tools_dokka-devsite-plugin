@@ -26,6 +26,5 @@ internal class NoopFilePathProvider : DevsiteFilePathProvider(
     "noop",
     "noop",
     locationProvider = null,
-    classGraph = emptyMap(),
     documentablesGraph = emptyMap()
 )

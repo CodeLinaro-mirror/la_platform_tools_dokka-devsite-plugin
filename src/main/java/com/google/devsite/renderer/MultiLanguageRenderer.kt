@@ -129,7 +129,6 @@ internal class MultiLanguageRenderer(
     ) {
         if (languageDocsPath == null) return
 
-        val classGraph = holder.classGraph()
         val documentablesGraph = holder.documentablesGraph()
 
         val filePaths = DevsiteFilePathProvider(
@@ -139,12 +138,14 @@ internal class MultiLanguageRenderer(
             devsiteConfiguration.projectPath,
             includedHeadTagsPath,
             locationProvider,
-            classGraph,
             documentablesGraph
         )
 
         val metadataConverter = MetadataConverter(holder)
-        val annotationConverter = AnnotationDocumentableConverter(language, filePaths, holder)
+        val annotationConverter = AnnotationDocumentableConverter(
+            language, filePaths, holder.annotationsNotToDisplay,
+            devsiteConfiguration.validNullabilityAnnotations
+        )
         val paramConverter =
             ParameterDocumentableConverter(language, filePaths, annotationConverter)
         val javadocConverter =

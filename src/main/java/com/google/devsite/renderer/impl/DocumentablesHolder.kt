@@ -193,7 +193,7 @@ internal class DocumentablesHolder(
 
     suspend fun allClasslikes(): List<DClasslike> = allClasslikes.await()
 
-    suspend fun classGraph(): Map<DRI, ClassNode> = classGraph.await()
+    suspend fun classGraph(): ClassGraph = classGraph.await()
 
     suspend fun documentablesGraph(): Map<DRI, Documentable> = documentablesGraph.await()
 

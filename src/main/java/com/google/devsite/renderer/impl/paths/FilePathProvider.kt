@@ -22,7 +22,6 @@ import com.google.devsite.components.symbols.TypeProjectionComponent
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.anchor
 import com.google.devsite.renderer.converters.isHoistedFromCompanion
-import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.renderer.impl.DocumentablesGraph
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.parent
@@ -66,8 +65,6 @@ internal interface FilePathProvider {
 
     /** The path to a file to be included in the head section of each generated HTML page */
     val includedHeadTagsPath: String?
-
-    val classGraph: ClassGraph
 
     val documentablesGraph: DocumentablesGraph
 

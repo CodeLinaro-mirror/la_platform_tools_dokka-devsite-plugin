@@ -1322,12 +1322,11 @@ internal class ParameterDocumentableConverterTest(
     }
 
     private fun DModule.paramConverter(): ParameterDocumentableConverter {
-        val (holder, pathProvider) = holderAndProvider(this)
-        val annotationConverter =
-            AnnotationDocumentableConverter(displayLanguage, pathProvider, holder)
+        val (holder, provider) = holderAndProvider(this)
+        val annotationConverter = annotationConverter(provider)
         return ParameterDocumentableConverter(
             displayLanguage,
-            pathProvider,
+            provider,
             annotationConverter
         )
     }

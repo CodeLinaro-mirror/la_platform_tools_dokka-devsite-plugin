@@ -16,12 +16,11 @@
 
 package dokkatest.simple;
 
-import org.jetbrains.annotations.NotNull;
+import androidx.annotation.NonNull;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-import dokkatest.simple.TwoKt;
 
 public class Fraggy {
 
@@ -33,10 +32,10 @@ public class Fraggy {
      * {@link Map} of the host will be used. Otherwise, this will use the
      * registry of the Fragment's Activity.
      */
-    @NotNull
+    @NonNull
     public final <I, O> List<I> registerForActivityResult(
-        @NotNull final Map<I, O> contract,
-        @NotNull final List<O> callback) {
+        @NonNull final Map<I, O> contract,
+        @NonNull final List<O> callback) {
         return new ArrayList<I>();
     }
     public int thisShouldShowUp() {return 0;}

@@ -16,11 +16,10 @@
 
 package dokkatest.inheritance
 
-import com.google.common.truth.Correspondence.BinaryPredicate
-import kotlin.collections.MutableMap
+import com.google.common.truth.Ordered
 
 /** For verifying that methods can be inherited from externally-defined interfaces. */
-interface KotlinInterface: Comparable<KotlinInterface>, BinaryPredicate<String, String> {
+interface KotlinInterface: Comparable<KotlinInterface>, Ordered {
     fun aDefaultMethod() = 5
     fun aNonImplementedMethod(): Int
 }
@@ -44,7 +43,7 @@ open class KotlinSuperClass: KotlinAbstractClass() {
         TODO("Not yet implemented")
     }
 
-    override fun apply(actual: String?, expected: String?): Boolean {
+    override fun inOrder() {
         TODO("Not yet implemented")
     }
 

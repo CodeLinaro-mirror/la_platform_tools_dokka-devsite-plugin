@@ -20,19 +20,17 @@ import com.google.devsite.components.impl.DefaultTypeProjectionComponent
 import com.google.devsite.components.symbols.TypeProjectionComponent
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.Nullability
-import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.renderer.impl.DocumentablesGraph
 import com.google.devsite.renderer.impl.paths.FilePathProvider.Companion.joinPaths
 
 /** Directory structure tailored for devsite tenants. */
 internal open class DevsiteFilePathProvider(
-    override val language: Language,
+    final override val language: Language,
     docRootPath: String,
     languagePath: String,
     projectPath: String,
     override val includedHeadTagsPath: String?,
     override val locationProvider: ExternalDokkaLocationProvider? = null,
-    override val classGraph: ClassGraph,
     override val documentablesGraph: DocumentablesGraph,
 ) : FilePathProvider {
     private val rootPath = joinPaths("/", docRootPath, languagePath)

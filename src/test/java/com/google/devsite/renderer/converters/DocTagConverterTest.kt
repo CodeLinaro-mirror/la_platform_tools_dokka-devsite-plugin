@@ -1497,7 +1497,7 @@ internal class DocTagConverterTest(
         """.render()
         val (holder, provider) = holderAndProvider(module)
         val metadataConverter = MetadataConverter(holder)
-        val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
+        val annotationConverter = annotationConverter(provider)
         val paramConverter =
             ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
         val javadocConverter =
@@ -1703,7 +1703,7 @@ internal class DocTagConverterTest(
     private fun DModule.description(doc: DModule.() -> Documentable = ::smartDoc):
         DescriptionComponent {
         val (holder, provider) = holderAndProvider(this)
-        val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
+        val annotationConverter = annotationConverter(provider)
         val paramConverter =
             ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
         val converter =
@@ -1719,7 +1719,7 @@ internal class DocTagConverterTest(
         isFromJava: Boolean? = null
     ): List<ContextFreeComponent> {
         val (holder, provider) = holderAndProvider(this)
-        val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
+        val annotationConverter = annotationConverter(provider)
         val paramConverter =
             ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
         val converter =

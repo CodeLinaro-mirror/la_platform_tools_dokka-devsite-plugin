@@ -51,22 +51,12 @@ internal val AT_NULLABLE = Annotation(DRI("androidx.annotation", "Nullable"), em
 internal val AT_NON_NULL = Annotation(DRI("androidx.annotation", "NonNull"), emptyMap())
 
 /** @return true if an `@Nullable` annotation is present, false otherwise */
-internal fun List<Annotation>.hasAtNullable(): Boolean =
-    any { it.dri.classNames == "Nullable" || it.isBadNullable }
+internal fun List<Annotation>.hasAtNullable(): Boolean = any { it.dri.classNames == "Nullable" }
 /** @return true if an `@NonNull` annotation is present, false otherwise */
 internal fun List<Annotation>.hasAtNonNull(): Boolean =
-    any { it.dri.classNames == "NonNull" || it.isBadNonNull }
+    any { it.dri.classNames in listOf("NonNull", "NotNull") }
 /** @return true if the `@Deprecated` annotation is present, false otherwise */
 internal fun List<Annotation>.isDeprecated(): Boolean = any { it.isDeprecated() }
-
-/** We sometimes convert androidx annotations to the android. namespace */
-internal val Annotation.isBadNullable get() = dri.classNames == "Nullable" &&
-    dri.fullName !in listOf(AT_NULLABLE.dri.fullName, "android.annotation.Nullable")
-internal val Annotation.isBadNonNull get() = dri.classNames == "NotNull" ||
-    (
-        dri.classNames == "NonNull" &&
-            dri.fullName !in listOf(AT_NON_NULL.dri.fullName, "android.annotation.NonNull")
-        )
 
 /** @return the complete list of annotations for this type */
 private fun WithExtraProperties<*>.annotations(sourceSet: DokkaConfiguration.DokkaSourceSet?) =

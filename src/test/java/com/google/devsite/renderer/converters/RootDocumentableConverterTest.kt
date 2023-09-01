@@ -452,7 +452,7 @@ internal class RootDocumentableConverterTest(
 
     private fun DModule.rootConverter(): RootDocumentableConverter {
         val (holder, provider) = holderAndProvider(this)
-        val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
+        val annotationConverter = annotationConverter(provider)
         val paramConverter =
             ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
         val javadocConverter =

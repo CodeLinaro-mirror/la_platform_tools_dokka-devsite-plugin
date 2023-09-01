@@ -24,6 +24,7 @@ import com.google.devsite.components.pages.PackageSummary
 import com.google.devsite.components.symbols.AnnotationComponent
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.SymbolDetail
+import com.google.devsite.getDevsiteConfiguration
 import com.google.devsite.joinMaybePrefix
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.AnnotationDocumentableConverter
@@ -163,7 +164,6 @@ internal abstract class ConverterTestBase(
                     languagePath = "",
                     projectPath = "androidx",
                     locationProvider = externalLocationProvider,
-                    classGraph = classGraph,
                     documentablesGraph = documentablesGraph,
                     includedHeadTagsPath = "_shared/_reference-head-tags.html",
                 )
@@ -174,7 +174,6 @@ internal abstract class ConverterTestBase(
                     languagePath = "kotlin",
                     projectPath = "androidx",
                     locationProvider = externalLocationProvider,
-                    classGraph = classGraph,
                     documentablesGraph = documentablesGraph,
                     includedHeadTagsPath = "_shared/_reference-head-tags.html",
                 )
@@ -263,6 +262,14 @@ internal abstract class ConverterTestBase(
         return holder to pathProvider
     }
 
+    protected fun annotationConverter(
+        provider: FilePathProvider,
+        hiddenAnnotations: Set<String> = emptySet()
+    ) = AnnotationDocumentableConverter(
+        displayLanguage, provider, hiddenAnnotations,
+        getDevsiteConfiguration(context).validNullabilityAnnotations
+    )
+
     protected fun testWithRootPageNode(sourceFiles: List<String>): DModule = runBlocking {
         suspendCoroutine { cont ->
             testInline(
@@ -340,7 +347,7 @@ internal abstract class ConverterTestBase(
     protected fun DModule.packagePage(): DevsitePage<PackageSummary> {
         val (holder, provider) = holderAndProvider(this)
         val metadataConverter = MetadataConverter(holder)
-        val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
+        val annotationConverter = annotationConverter(provider)
         val paramConverter =
             ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
         val javadocConverter =
@@ -371,7 +378,7 @@ internal abstract class ConverterTestBase(
     private fun DModule.functionConverter(): FunctionDocumentableConverter {
         val (holder, provider) = holderAndProvider(this)
         val metadataConverter = MetadataConverter(holder)
-        val annotationConverter = AnnotationDocumentableConverter(displayLanguage, provider, holder)
+        val annotationConverter = annotationConverter(provider)
         val paramConverter =
             ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
         val javadocConverter =
@@ -432,12 +439,8 @@ internal abstract class ConverterTestBase(
         nullability: Nullability = Nullability.DONT_CARE,
         hiddenAnnotations: Set<String> = emptySet()
     ): List<AnnotationComponent> {
-        val (holder, pathProvider) = holderAndProvider(this, hiddenAnnotations = hiddenAnnotations)
-        val converter = AnnotationDocumentableConverter(
-            displayLanguage,
-            pathProvider,
-            holder
-        )
+        val (holder, provider) = holderAndProvider(this, hiddenAnnotations = hiddenAnnotations)
+        val converter = annotationConverter(provider, hiddenAnnotations)
         return converter.annotationComponents(annotations, nullability)
     }
 

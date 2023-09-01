@@ -70,6 +70,10 @@ import org.jetbrains.dokka.plugability.ConfigurableBlock
  * @param hidingAnnotations: A list of annotation names (including the package name, e.g.
  * `androidx.annotation.RestrictTo`) which mean that the elements they are applied to should be not
  * be displayed in the docs.
+ * @param validNullabilityAnnotations A list of annotation names (including the package name, e.g.
+ * `androidx.annotation.Nullable`) which can be used for nullability. Using nullability annotations
+ * not on this list is not allowed. Android projects should generally exclusively use the `androidx`
+ * nullability annotations, which are the default.
  */
 data class DevsiteConfiguration(
     val docRootPath: String = "reference",
@@ -89,6 +93,8 @@ data class DevsiteConfiguration(
     val annotationsNotToDisplayJava: List<String>?,
     val annotationsNotToDisplayKotlin: List<String>?,
     val hidingAnnotations: List<String> = emptyList(),
+    // We set a default to the nullability annotations all android projects should use
+    val validNullabilityAnnotations: List<String> = defaultValidNullabilityAnnotations
 ) : ConfigurableBlock {
     init {
         if (javaDocsPath == null && kotlinDocsPath == null) {
@@ -134,3 +140,9 @@ data class DevsiteConfiguration(
             (annotationsNotToDisplayKotlin?.toSet() ?: emptyList())
     }
 }
+
+/** The `android.` annotations should be used in the android platform itself only--nowhere else. */
+val defaultValidNullabilityAnnotations = listOf(
+    "androidx.annotation.Nullable", "android.annotation.Nullable",
+    "androidx.annotation.NonNull", "android.annotation.NonNull"
+)

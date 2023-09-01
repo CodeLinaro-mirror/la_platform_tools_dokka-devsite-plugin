@@ -25,9 +25,9 @@ import com.google.devsite.components.symbols.AnnotationParameter
 import com.google.devsite.components.symbols.AnnotationValueAnnotationParameter
 import com.google.devsite.components.symbols.ArrayValueAnnotationParameter
 import com.google.devsite.components.symbols.NamedValueAnnotationParameter
+import com.google.devsite.defaultValidNullabilityAnnotations
 import com.google.devsite.hasBeenHidden
 import com.google.devsite.renderer.Language
-import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.model.AnnotationParameterValue
 import org.jetbrains.dokka.model.AnnotationValue
@@ -44,7 +44,10 @@ import org.jetbrains.dokka.model.StringValue
 internal class AnnotationDocumentableConverter(
     private val displayLanguage: Language,
     private val pathProvider: FilePathProvider,
-    private val docsHolder: DocumentablesHolder
+    private val annotationsNotToDisplay: Set<String>,
+    // Default value is provided for testing purposes only. The only real instantiation provides it.
+    private val validNullabilityAnnotations: List<String> = defaultValidNullabilityAnnotations
+
 ) {
     /**
      * @param nullability the nullability of the annotated element. Contains information such as
@@ -56,26 +59,17 @@ internal class AnnotationDocumentableConverter(
         nullability: Nullability,
     ): List<AnnotationComponent> {
         val injectedAnnotations = mutableListOf<Annotations.Annotation?>()
-        if (annotations.any { it.isBadNonNull }) {
-            injectedAnnotations.add(AT_NON_NULL) // Bad ones get filtered out later
-            docsHolder.logger.warn(
-                "Use @androidx.annotation.NonNull, not " +
-                    "@${annotations.first{it.isBadNonNull}.dri}"
+        if (annotations.any { it.isBadNullability }) {
+            throw RuntimeException(
+                "Used a nullability annotation ${annotations.filter { it.isBadNullability }} not " +
+                    "in the list of validNullabilityAnnotations passed to dackka."
             )
-            assert(nullability != Nullability.JAVA_NOT_ANNOTATED)
-        }
-        if (annotations.any { it.isBadNullable }) {
-            injectedAnnotations.add(AT_NULLABLE) // Again, this generally means a bad test classpath
-            docsHolder.logger.warn(
-                "Use @androidx.annotation.Nullable, not " +
-                    "@${annotations.first{it.isBadNullable}.dri}"
-            )
-            assert(nullability != Nullability.JAVA_NOT_ANNOTATED)
         }
 
         // NOTE: we inject @NonNull, but not @Nullable, as that is usually not useful to Java devs
         if (displayLanguage == Language.JAVA) {
-            injectedAnnotations += nullability.renderAsJavaAnnotation()
+            if (!annotations.any { it.isNullabilityAnnotation })
+                injectedAnnotations += nullability.renderAsJavaAnnotation()
         }
 
         return (annotations + injectedAnnotations).filterNotNull().filter { annotation ->
@@ -91,14 +85,12 @@ internal class AnnotationDocumentableConverter(
         // Not useful to developers
         if (annotation.isSuppressAnnotation() ||
             annotation.dri.packageName == "kotlin.jvm" ||
-            annotation.dri.fullName in docsHolder.annotationsNotToDisplay
+            annotation.dri.fullName in annotationsNotToDisplay
         ) return false
         // Surfaced separately
         if (annotation.isDeprecated()) return false
 
         if (annotation.dri.classNames in NULLABILITY_ANNOTATION_NAMES) {
-            // Ignored and overwritten with androidx.annotation.NonNull
-            if (annotation.isBadNullable || annotation.isBadNonNull) return false
             // Explicitly hidden nullability annotations
             if (nullability == Nullability.DONT_CARE) return false
             // Nullability annotations do not appear in Kotlin, even if explicit in Kotlin source
@@ -137,4 +129,10 @@ internal class AnnotationDocumentableConverter(
             )
         )
     }
+
+    private val Annotations.Annotation.isNullabilityAnnotation get() =
+        dri.classNames in listOf("Nullable", "NonNull", "NotNull")
+
+    private val Annotations.Annotation.isBadNullability get() =
+        isNullabilityAnnotation && dri.fullName !in validNullabilityAnnotations
 }
