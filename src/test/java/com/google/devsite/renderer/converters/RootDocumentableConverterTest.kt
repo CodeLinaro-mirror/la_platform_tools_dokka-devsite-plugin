@@ -450,20 +450,8 @@ internal class RootDocumentableConverterTest(
         }
     }
 
-    private fun DModule.rootConverter(): RootDocumentableConverter {
-        val (holder, provider) = holderAndProvider(this)
-        val annotationConverter = annotationConverter(provider)
-        val paramConverter =
-            ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
-        val javadocConverter =
-            DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
-        return RootDocumentableConverter(
-            displayLanguage,
-            provider,
-            holder,
-            javadocConverter
-        )
-    }
+    private fun DModule.rootConverter() = ConverterHolder(this@RootDocumentableConverterTest, this)
+        .rootDocumentableConverter
 
     private fun DModule.indexPageForClasses(): DevsitePage<ClassIndex> {
         return runBlocking { rootConverter().classesIndexPage() }

@@ -107,7 +107,8 @@ internal class DocTagConverter(
     private val pathProvider: FilePathProvider,
     private val docsHolder: DocumentablesHolder,
     private val paramConverter: ParameterDocumentableConverter,
-    private val annotationConverter: AnnotationDocumentableConverter
+    private val annotationConverter: AnnotationDocumentableConverter,
+    // private val sampleProviderFactory: SampleProviderFactory?
 ) {
     private val analysisMap = runBlocking { docsHolder.analysisMap() }
 
@@ -547,7 +548,8 @@ internal class DocTagConverter(
                     // TODO(KMP) we currently have no plan to provide KMP samples b/181224204
                     // As such, we currently assume that the samples-library is not KMP.
                     val sourceSet = this.getExpectOrCommonSourceSet()
-
+                    // val sampleProvider = sampleProviderFactory!!.build()
+                    // val sample = sampleProvider.getSample(sourceSet, dri)!!
                     val facade = analysisMap[sourceSet]
                         ?: analysisMap[analysisMap.keys.singleOrNull()]
                         ?: if (failOnMissingSamples) throw RuntimeException(
@@ -564,6 +566,7 @@ internal class DocTagConverter(
                         Pre(
                             params = mapOf("class" to "prettyprint lang-kotlin"),
                             children = listOf(Text(imports + body))
+                            // children = listOf(Text(sample.imports + sample.body))
                         )
                     )
                     components.addAll(it.children)

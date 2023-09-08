@@ -1321,15 +1321,8 @@ internal class ParameterDocumentableConverterTest(
         }
     }
 
-    private fun DModule.paramConverter(): ParameterDocumentableConverter {
-        val (holder, provider) = holderAndProvider(this)
-        val annotationConverter = annotationConverter(provider)
-        return ParameterDocumentableConverter(
-            displayLanguage,
-            provider,
-            annotationConverter
-        )
-    }
+    private fun DModule.paramConverter() =
+        ConverterHolder(this@ParameterDocumentableConverterTest, this).paramConverter
 
     private fun DModule.param(name: String = "foo", forSummary: Boolean = false):
         ParameterComponent {

@@ -818,18 +818,18 @@ internal class MetadataConverterTest(
         versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap(),
         fileMetadataMap: Map<String, LibraryMetadata> = emptyMap(),
     ): MetadataComponent {
-        val (holder, _) = holderAndProvider(
+        val converterHolder = ConverterHolder(
+            testClass = this@MetadataConverterTest,
             module = this,
             baseSourceLink = baseSourceLink,
             versionMetadataMap = versionMetadataMap,
             fileMetadataMap = fileMetadataMap
         )
-        val metadataConverter = MetadataConverter(holder)
 
         return when (documentable) {
-            is DClasslike -> metadataConverter.getMetadataForClasslike(documentable)
-            is DFunction -> metadataConverter.getMetadataForFunction(documentable)
-            is DProperty -> metadataConverter.getMetadataForProperty(documentable)
+            is DClasslike -> converterHolder.metadataConverter.getMetadataForClasslike(documentable)
+            is DFunction -> converterHolder.metadataConverter.getMetadataForFunction(documentable)
+            is DProperty -> converterHolder.metadataConverter.getMetadataForProperty(documentable)
             else -> throw RuntimeException("Cannot create metadata component for $documentable")
         }
     }

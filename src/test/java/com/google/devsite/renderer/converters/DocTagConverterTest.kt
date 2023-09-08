@@ -1498,54 +1498,17 @@ internal class DocTagConverterTest(
             |        }
             | }
         """.render()
-        val (holder, provider) = holderAndProvider(module)
-        val metadataConverter = MetadataConverter(holder)
-        val annotationConverter = annotationConverter(provider)
-        val paramConverter =
-            ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
-        val javadocConverter =
-            DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
-        val functionConverter =
-            FunctionDocumentableConverter(
-                displayLanguage, provider, holder, javadocConverter, paramConverter,
-                annotationConverter, metadataConverter
-            )
-        val propertyConverter =
-            PropertyDocumentableConverter(
-                displayLanguage, provider, javadocConverter, paramConverter,
-                annotationConverter, metadataConverter
-            )
-        val enumConverter = EnumValueDocumentableConverter(
-            displayLanguage, provider, javadocConverter, paramConverter, annotationConverter
-        )
-        val classConverter1 = NonKmpClasslikeConverter(
-            displayLanguage,
-            module.explicitClasslike("DynamicNavGraphBuilder"),
-            provider,
-            holder,
-            functionConverter,
-            propertyConverter,
-            enumConverter,
-            javadocConverter,
-            paramConverter,
-            annotationConverter,
-            metadataConverter
-        )
-        val documentedClass1 = runBlocking { classConverter1.classlike() }
-        val classConverter2 = NonKmpClasslikeConverter(
-            displayLanguage,
-            module.explicitClasslike("ParcelableArrayType"),
-            provider,
-            holder,
-            functionConverter,
-            propertyConverter,
-            enumConverter,
-            javadocConverter,
-            paramConverter,
-            annotationConverter,
-            metadataConverter
-        )
-        val documentedClass2 = runBlocking { classConverter2.classlike() }
+        val converterHolder = ConverterHolder(this@DocTagConverterTest, module)
+        runBlocking {
+            converterHolder
+                .NonKmpClasslikeConverter(module.explicitClasslike("DynamicNavGraphBuilder"))
+                .classlike()
+        }
+        runBlocking {
+            converterHolder
+                .NonKmpClasslikeConverter(module.explicitClasslike("ParcelableArrayType"))
+                .classlike()
+        }
         assertThat(outputStreamCaptor.toString()).doesNotContain("WARN")
         System.setOut(standardOut)
     }
@@ -1705,15 +1668,10 @@ internal class DocTagConverterTest(
 
     private fun DModule.description(doc: DModule.() -> Documentable = ::smartDoc):
         DescriptionComponent {
-        val (holder, provider) = holderAndProvider(this)
-        val annotationConverter = annotationConverter(provider)
-        val paramConverter =
-            ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
-        val converter =
-            DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
+        val converterHolder = ConverterHolder(this@DocTagConverterTest, this)
         val annotations =
             this.doc().annotations(getExpectOrCommonSourceSet()).deprecationAnnotation()
-        return converter.summaryDescription(this.doc(), annotations)
+        return converterHolder.javadocConverter.summaryDescription(this.doc(), annotations)
     }
 
     private fun DModule.documentation(
@@ -1721,20 +1679,15 @@ internal class DocTagConverterTest(
         paramNames: List<String> = emptyList(),
         isFromJava: Boolean? = null
     ): List<ContextFreeComponent> {
-        val (holder, provider) = holderAndProvider(this)
-        val annotationConverter = annotationConverter(provider)
-        val paramConverter =
-            ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
-        val converter =
-            DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
+        val converterHolder = ConverterHolder(this@DocTagConverterTest, this)
         val doc = doc()
         return if (doc is WithSources) {
-            converter.metadata(
+            converterHolder.javadocConverter.metadata(
                 documentable = doc,
                 returnType = NoopTypeProjectionComponent(""),
                 paramNames = paramNames,
             )
-        } else converter.metadata(
+        } else converterHolder.javadocConverter.metadata(
             documentable = doc,
             returnType = NoopTypeProjectionComponent(""),
             paramNames = paramNames,

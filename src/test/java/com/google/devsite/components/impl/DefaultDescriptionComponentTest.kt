@@ -1121,10 +1121,10 @@ public void onCreate() {
         deprecation: String? = null
     ): DefaultDescriptionComponent {
         val tag = explicitClasslike("Foo").tag()
-        val (_, pathProvider) = holderAndProvider(this)
+        val converterHolder = ConverterHolder(this@DefaultDescriptionComponentTest, this)
         return DefaultDescriptionComponent(
             Params(
-                pathProvider,
+                converterHolder.provider,
                 tag.children,
                 summary,
                 deprecation

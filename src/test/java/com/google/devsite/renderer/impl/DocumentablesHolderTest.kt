@@ -18,6 +18,7 @@ package com.google.devsite.renderer.impl
 
 import com.google.common.truth.Truth
 import com.google.devsite.renderer.Language
+import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DPackage
@@ -28,9 +29,9 @@ import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 
 @RunWith(Parameterized::class)
-class DocumentablesHolderTest(
+internal class DocumentablesHolderTest(
     private val displayLanguage: Language
-) {
+) : ConverterTestBase(displayLanguage) {
     private val packageA = mock<DPackage> {
         on { name } doReturn "com.example.a"
         on { packageName } doReturn "com.example.a"
@@ -56,7 +57,7 @@ class DocumentablesHolderTest(
         val expected = listOf("com.example.a", "com.example.b", "com.example.c", "com.exclude.a")
             .toTypedArray()
         val packages = runBlocking {
-            DocumentablesHolder(displayLanguage, module, this).packages()
+            ConverterHolder(this@DocumentablesHolderTest, module).holder.packages()
         }
         val result = packages.map { it.packageName }.toTypedArray()
         Truth.assertThat(result).isEqualTo(expected)
@@ -70,12 +71,11 @@ class DocumentablesHolderTest(
             """.*\.exclude.*""".toRegex()
         )
         val packages = runBlocking {
-            DocumentablesHolder(
-                displayLanguage,
-                module,
-                this,
+            ConverterHolder(
+                testClass = this@DocumentablesHolderTest,
+                module = module,
                 excludedPackages = excludedPackages
-            ).packages()
+            ).holder.packages()
         }
         val result = packages.map { it.packageName }.toTypedArray()
         Truth.assertThat(result).isEqualTo(expected)

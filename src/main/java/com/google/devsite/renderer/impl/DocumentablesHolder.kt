@@ -39,8 +39,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.analysis.DokkaResolutionFacade
+import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.signatures.KotlinSignatureUtils.driOrNull
-import org.jetbrains.dokka.base.translators.descriptors.ExternalDocumentablesProvider
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.withClass
 import org.jetbrains.dokka.model.Bound
@@ -75,8 +75,7 @@ import org.jetbrains.dokka.model.doc.NamedTagWrapper
 import org.jetbrains.dokka.model.doc.TagWrapper
 import org.jetbrains.dokka.model.properties.PropertyContainer
 import org.jetbrains.dokka.plugability.DokkaContext
-import org.jetbrains.dokka.utilities.DokkaConsoleLogger
-import org.jetbrains.dokka.utilities.LoggingLevel
+import org.jetbrains.dokka.plugability.querySingle
 import java.util.Locale
 
 /**
@@ -88,8 +87,7 @@ internal class DocumentablesHolder(
     val displayLanguage: Language,
     module: DModule,
     scope: CoroutineScope,
-    context: DokkaContext? = null,
-    private val externalDocumentablesProvider: ExternalDocumentablesProvider? = null,
+    context: DokkaContext,
     // TODO(handle packages with no common or JVM targets, as-Java. b/265948930)
     private val excludedPackages: Set<Regex> = emptySet(),
     val fileMetadataMap: Map<String, LibraryMetadata> = emptyMap(),
@@ -121,7 +119,10 @@ internal class DocumentablesHolder(
     private val documentablesGraph: Deferred<DocumentablesGraph>
     private val analysisMap: Deferred<Map<DokkaConfiguration.DokkaSourceSet, DokkaResolutionFacade>>
 
-    internal val logger = context?.logger ?: DokkaConsoleLogger(LoggingLevel.WARN)
+    internal val logger = context.logger
+    private val dokkaBase = context.plugin(DokkaBase::class)!!
+    private val externalDocumentablesProvider =
+        dokkaBase.querySingle { externalDocumentablesProvider }
 
     init {
         scope.apply {

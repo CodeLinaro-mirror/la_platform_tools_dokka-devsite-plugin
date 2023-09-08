@@ -29,13 +29,16 @@ import com.google.devsite.joinMaybePrefix
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.AnnotationDocumentableConverter
 import com.google.devsite.renderer.converters.DocTagConverter
+import com.google.devsite.renderer.converters.EnumValueDocumentableConverter
 import com.google.devsite.renderer.converters.FunctionDocumentableConverter
 import com.google.devsite.renderer.converters.MetadataConverter
 import com.google.devsite.renderer.converters.ModifierHints
+import com.google.devsite.renderer.converters.NonKmpClasslikeConverter
 import com.google.devsite.renderer.converters.NonKmpPackageConverter
 import com.google.devsite.renderer.converters.Nullability
 import com.google.devsite.renderer.converters.ParameterDocumentableConverter
 import com.google.devsite.renderer.converters.PropertyDocumentableConverter
+import com.google.devsite.renderer.converters.RootDocumentableConverter
 import com.google.devsite.renderer.converters.isFromBaseClass
 import com.google.devsite.renderer.converters.isRunningInDackkasTests
 import com.google.devsite.renderer.impl.ClassGraph
@@ -54,7 +57,6 @@ import org.jetbrains.dokka.DokkaGenerator
 import org.jetbrains.dokka.ExternalDocumentationLink
 import org.jetbrains.dokka.base.resolvers.local.DokkaLocationProvider
 import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
-import org.jetbrains.dokka.base.translators.descriptors.DefaultExternalDocumentablesProvider
 import org.jetbrains.dokka.model.Annotations
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
@@ -105,10 +107,9 @@ internal abstract class ConverterTestBase(
     protected fun DModule.explicitClasslikes(name: String): List<DClasslike> {
         val normalClasses = packages.flatMap { it.classlikes }
             .mapNotNull { it.explicitSubClasslike(name) }
-
-        val (holder, _) = holderAndProvider(this)
+        val converterHolder = ConverterHolder(this@ConverterTestBase, this)
         val synthetics = packages.flatMap {
-            holder.computeSyntheticClasses(it).filter { it.name == name }
+            converterHolder.holder.computeSyntheticClasses(it).filter { it.name == name }
         }
         return normalClasses + synthetics
     }
@@ -235,44 +236,88 @@ internal abstract class ConverterTestBase(
     // However, dackka has other methods for resolving internal links, so this is fine.
     internal val externalProvider =
         DefaultExternalDokkaLocationProvider(DokkaLocationProvider(mockRootPageNode, context))
-    internal val externalDocumentablesProvider =
-        DefaultExternalDocumentablesProvider(context)
 
-    internal fun holderAndProvider(
-        module: DModule,
+    protected class ConverterHolder(
+        val testClass: ConverterTestBase,
+        val module: DModule,
         baseSourceLink: String? = null,
         hiddenAnnotations: Set<String> = emptySet(),
         versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap(),
         fileMetadataMap: Map<String, LibraryMetadata> = emptyMap(),
-    ): Pair<DocumentablesHolder, FilePathProvider> {
-        val holder = runBlocking {
-            DocumentablesHolder(
-                displayLanguage,
-                module,
-                this,
-                context = context,
-                externalDocumentablesProvider = externalDocumentablesProvider,
-                baseSourceLink = baseSourceLink,
-                annotationsNotToDisplay = hiddenAnnotations,
-                versionMetadataMap = versionMetadataMap,
-                fileMetadataMap = fileMetadataMap,
+        excludedPackages: Set<Regex> = emptySet()
+    ) {
+        val holder by lazy {
+            runBlocking {
+                DocumentablesHolder(
+                    testClass.displayLanguage,
+                    module,
+                    this,
+                    context = testClass.context,
+                    baseSourceLink = baseSourceLink,
+                    annotationsNotToDisplay = hiddenAnnotations,
+                    versionMetadataMap = versionMetadataMap,
+                    fileMetadataMap = fileMetadataMap,
+                    excludedPackages = excludedPackages
+                )
+            }
+        }
+        val classGraph by lazy { runBlocking { holder.classGraph() } }
+        val provider by lazy {
+            testClass.pathProvider(
+                externalLocationProvider = testClass.externalProvider,
+                classGraph = classGraph
             )
         }
-        val classGraph = runBlocking { holder.classGraph() }
-        val pathProvider = pathProvider(
-            externalLocationProvider = externalProvider,
-            classGraph = classGraph
-        )
-        return holder to pathProvider
+        val metadataConverter by lazy { MetadataConverter(holder) }
+        val annotationConverter by lazy {
+            AnnotationDocumentableConverter(
+                testClass.displayLanguage, provider, hiddenAnnotations,
+                getDevsiteConfiguration(testClass.context).validNullabilityAnnotations
+            )
+        }
+        val paramConverter by lazy {
+            ParameterDocumentableConverter(testClass.displayLanguage, provider, annotationConverter)
+        }
+        val javadocConverter by lazy {
+            DocTagConverter(
+                testClass.displayLanguage, provider, holder, paramConverter,
+                annotationConverter // , null
+            )
+        }
+        val functionConverter by lazy {
+            FunctionDocumentableConverter(
+                testClass.displayLanguage, provider, holder, javadocConverter, paramConverter,
+                annotationConverter, metadataConverter
+            )
+        }
+        val propertyConverter by lazy {
+            PropertyDocumentableConverter(
+                testClass.displayLanguage, provider, javadocConverter, paramConverter,
+                annotationConverter, metadataConverter
+            )
+        }
+        val enumConverter by lazy {
+            EnumValueDocumentableConverter(
+                testClass.displayLanguage, provider, javadocConverter,
+                paramConverter, annotationConverter
+            )
+        }
+        val nonKmpPackageConverter by lazy {
+            NonKmpPackageConverter(
+                testClass.displayLanguage, module.packages.single(), provider, holder,
+                functionConverter, propertyConverter, javadocConverter, paramConverter
+            )
+        }
+        val rootDocumentableConverter by lazy {
+            RootDocumentableConverter(testClass.displayLanguage, provider, holder, javadocConverter)
+        }
+        fun NonKmpClasslikeConverter(classlike: DClasslike): NonKmpClasslikeConverter =
+            NonKmpClasslikeConverter(
+                testClass.displayLanguage, classlike, provider, holder, functionConverter,
+                propertyConverter, enumConverter, javadocConverter, paramConverter,
+                annotationConverter, metadataConverter
+            )
     }
-
-    protected fun annotationConverter(
-        provider: FilePathProvider,
-        hiddenAnnotations: Set<String> = emptySet()
-    ) = AnnotationDocumentableConverter(
-        displayLanguage, provider, hiddenAnnotations,
-        getDevsiteConfiguration(context).validNullabilityAnnotations
-    )
 
     protected fun testWithRootPageNode(sourceFiles: List<String>): DModule = runBlocking {
         suspendCoroutine { cont ->
@@ -348,55 +393,13 @@ internal abstract class ConverterTestBase(
         }
     }
 
-    protected fun DModule.packagePage(): DevsitePage<PackageSummary> {
-        val (holder, provider) = holderAndProvider(this)
-        val metadataConverter = MetadataConverter(holder)
-        val annotationConverter = annotationConverter(provider)
-        val paramConverter =
-            ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
-        val javadocConverter =
-            DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
-        val functionConverter = FunctionDocumentableConverter(
-            displayLanguage, provider, holder, javadocConverter, paramConverter,
-            annotationConverter, metadataConverter
-        )
-        val propertyConverter = PropertyDocumentableConverter(
-            displayLanguage, provider, javadocConverter, paramConverter,
-            annotationConverter, metadataConverter
-        )
-
-        val converter =
-            NonKmpPackageConverter(
-                displayLanguage,
-                packages.single(),
-                provider,
-                holder,
-                functionConverter,
-                propertyConverter,
-                javadocConverter,
-                paramConverter
-            )
-        return runBlocking { converter.summaryPage() }
+    protected fun DModule.packagePage(): DevsitePage<PackageSummary> = runBlocking {
+        ConverterHolder(this@ConverterTestBase, this@packagePage)
+            .nonKmpPackageConverter.summaryPage()
     }
 
-    private fun DModule.functionConverter(): FunctionDocumentableConverter {
-        val (holder, provider) = holderAndProvider(this)
-        val metadataConverter = MetadataConverter(holder)
-        val annotationConverter = annotationConverter(provider)
-        val paramConverter =
-            ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
-        val javadocConverter =
-            DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
-        return FunctionDocumentableConverter(
-            displayLanguage,
-            provider,
-            holder,
-            javadocConverter,
-            paramConverter,
-            annotationConverter,
-            metadataConverter
-        )
-    }
+    private fun DModule.functionConverter() =
+        ConverterHolder(this@ConverterTestBase, this).functionConverter
 
     protected fun DModule.functionSummary(
         doc: DModule.() -> DFunction = ::smartDoc,
@@ -443,9 +446,10 @@ internal abstract class ConverterTestBase(
         nullability: Nullability = Nullability.DONT_CARE,
         hiddenAnnotations: Set<String> = emptySet()
     ): List<AnnotationComponent> {
-        val (holder, provider) = holderAndProvider(this, hiddenAnnotations = hiddenAnnotations)
-        val converter = annotationConverter(provider, hiddenAnnotations)
-        return converter.annotationComponents(annotations, nullability)
+        val converterHolder = ConverterHolder(
+            testClass = this@ConverterTestBase, module = this, hiddenAnnotations = hiddenAnnotations
+        )
+        return converterHolder.annotationConverter.annotationComponents(annotations, nullability)
     }
 
     /** In case you aren't explicit, our best guess at what you want docs for. */

@@ -40,7 +40,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.base.renderers.OutputWriter
 import org.jetbrains.dokka.base.resolvers.local.DokkaLocationProvider
-import org.jetbrains.dokka.base.translators.descriptors.ExternalDocumentablesProvider
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.pages.ModulePageNode
 import org.jetbrains.dokka.pages.RootPageNode
@@ -51,7 +50,6 @@ import org.jetbrains.dokka.renderers.Renderer
 internal class MultiLanguageRenderer(
     private val context: DokkaContext,
     private val outputWriter: OutputWriter,
-    private val externalDocumentablesProvider: ExternalDocumentablesProvider,
     private val devsiteConfiguration: DevsiteConfiguration
 ) : Renderer {
 
@@ -85,7 +83,6 @@ internal class MultiLanguageRenderer(
                 module = module,
                 scope = this,
                 context = context,
-                externalDocumentablesProvider = externalDocumentablesProvider,
                 excludedPackages = devsiteConfiguration.computedExcludedPackagesForJava,
                 fileMetadataMap = fileMetadataMap,
                 versionMetadataMap = versionMetadataMap,
@@ -97,7 +94,6 @@ internal class MultiLanguageRenderer(
                 module = module,
                 scope = this,
                 context = context,
-                externalDocumentablesProvider = externalDocumentablesProvider,
                 excludedPackages = devsiteConfiguration.computedExcludedPackagesForKotlin,
                 fileMetadataMap = fileMetadataMap,
                 versionMetadataMap = versionMetadataMap,

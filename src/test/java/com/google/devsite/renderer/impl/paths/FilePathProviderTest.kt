@@ -19,7 +19,6 @@ package com.google.devsite.renderer.impl.paths
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.ClassGraph
-import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.links.Callable
@@ -414,9 +413,7 @@ internal class FilePathProviderTest(
     }
 
     private fun classGraph(module: DModule): ClassGraph =
-        runBlocking {
-            DocumentablesHolder(displayLanguage, module, this).classGraph()
-        }
+        runBlocking { ConverterHolder(this@FilePathProviderTest, module).classGraph }
 
     private fun String.urlSuffix() = substringAfter("example/")
 

@@ -22,7 +22,6 @@ import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.renderer.converters.testing.name
-import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
@@ -290,7 +289,7 @@ internal class PackageDocumentableConverterTest(
 
         javaOnly {
             val classes = runBlocking {
-                val holder = DocumentablesHolder(Language.JAVA, page, this)
+                val holder = ConverterHolder(this@PackageDocumentableConverterTest, page).holder
                 holder.classesFor(page.packages.last())
             }
             assertThat(classes.last().name).isEqualTo("PagingRx")
@@ -302,7 +301,7 @@ internal class PackageDocumentableConverterTest(
 
         kotlinOnly {
             val classes = runBlocking {
-                val holder = DocumentablesHolder(Language.KOTLIN, page, this)
+                val holder = ConverterHolder(this@PackageDocumentableConverterTest, page).holder
                 holder.classesFor(page.packages.last())
             }
             assertThat(classes).isEmpty()

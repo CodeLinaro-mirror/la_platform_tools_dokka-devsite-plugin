@@ -373,23 +373,8 @@ internal class PropertyDocumentableConverterTest(
             assertThat(shouldBeAVar == SymbolDetail.SymbolKind.PROPERTY)
     }
 
-    private fun DModule.propertyConverter(): PropertyDocumentableConverter {
-        val (holder, provider) = holderAndProvider(this)
-        val annotationConverter = annotationConverter(provider)
-        val paramConverter =
-            ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
-        val docConverter =
-            DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
-        val metadataConverter = MetadataConverter(holder)
-        return PropertyDocumentableConverter(
-            displayLanguage,
-            provider,
-            docConverter,
-            paramConverter,
-            annotationConverter,
-            metadataConverter
-        )
-    }
+    private fun DModule.propertyConverter() =
+        ConverterHolder(this@PropertyDocumentableConverterTest, this).propertyConverter
 
     private fun DModule.summary(
         name: String = "foo",

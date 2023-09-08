@@ -3298,41 +3298,9 @@ internal class ClasslikeDocumentableConverterTest(
     @JvmName("pagesForClasslikes")
     private fun DModule.pages(
         classlikes: List<DClasslike>
-    ): List<DevsitePage<Classlike>> {
-        val (holder, provider) = holderAndProvider(this)
-        val metadataConverter = MetadataConverter(holder)
-        val annotationConverter = annotationConverter(provider)
-        val paramConverter =
-            ParameterDocumentableConverter(displayLanguage, provider, annotationConverter)
-        val javadocConverter =
-            DocTagConverter(displayLanguage, provider, holder, paramConverter, annotationConverter)
-        val functionConverter = FunctionDocumentableConverter(
-            displayLanguage, provider, holder, javadocConverter, paramConverter,
-            annotationConverter, metadataConverter
-        )
-        val propertyConverter = PropertyDocumentableConverter(
-            displayLanguage, provider, javadocConverter, paramConverter,
-            annotationConverter, metadataConverter
-        )
-        val enumConverter = EnumValueDocumentableConverter(
-            displayLanguage, provider, javadocConverter, paramConverter, annotationConverter
-        )
-        val converters = classlikes.map {
-            NonKmpClasslikeConverter(
-                displayLanguage,
-                it,
-                provider,
-                holder,
-                functionConverter,
-                propertyConverter,
-                enumConverter,
-                javadocConverter,
-                paramConverter,
-                annotationConverter,
-                metadataConverter
-            )
-        }
-        return runBlocking { converters.map { it.classlike() } }
+    ): List<DevsitePage<Classlike>> = runBlocking {
+        val converterHolder = ConverterHolder(this@ClasslikeDocumentableConverterTest, this@pages)
+        classlikes.map { converterHolder.NonKmpClasslikeConverter(it).classlike() }
     }
 
     /** Note: does not return nested classlikes */
