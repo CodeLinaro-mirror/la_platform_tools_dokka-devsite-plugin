@@ -72,11 +72,11 @@ import org.jetbrains.dokka.model.doc.Property
 import org.jetbrains.dokka.model.isJvmName
 import org.jetbrains.dokka.model.properties.PropertyContainer
 import org.jetbrains.dokka.model.properties.WithExtraProperties
-import org.jetbrains.kotlin.builtins.jvm.JavaToKotlinClassMap
-import org.jetbrains.kotlin.name.ClassId
-import org.jetbrains.kotlin.name.FqName
 import java.io.File
 import java.util.concurrent.ConcurrentHashMap
+import kotlin.reflect.jvm.internal.impl.builtins.jvm.JavaToKotlinClassMap
+import kotlin.reflect.jvm.internal.impl.name.ClassId
+import kotlin.reflect.jvm.internal.impl.name.FqName
 
 /** For use when generating error messages. Is slow. */
 internal fun <T> T.getErrorLocation(
@@ -317,7 +317,7 @@ fun functionSignatureComparator(): Comparator<DFunction> = compareBy(
     { it.sourceSets.joinToString { it.displayName } }
 )
 
-/** [Comparator] intended for [Documentables] known to be name-unique in single-platform. */
+/** [Comparator] intended for [Documentable]s known to be name-unique in single-platform. */
 fun simpleDocumentableComparator(): Comparator<Documentable> = compareBy(
     { it.name },
     { it.dri.toString() },
@@ -412,15 +412,16 @@ internal fun DRI.possiblyConvertMappedType(displayLanguage: Language) =
 internal fun DRI.possiblyAsJava(): DRI {
     val fullyQualifiedName = packageName?.let { "$it." } + classNames
     // Use the fully qualified name to look up the class in the map
-    return JavaToKotlinClassMap.mapKotlinToJava(FqName(fullyQualifiedName).toUnsafe())?.let {
-        DRI(
-            packageName = it.packageFqName.asString(),
-            classNames = it.classNames(),
-            callable = this.callable,
-            extra = null,
-            target = PointingToDeclaration
-        )
-    } ?: this
+    return JavaToKotlinClassMap.INSTANCE.mapKotlinToJava(FqName(fullyQualifiedName).toUnsafe())
+        ?.let {
+            DRI(
+                packageName = it.packageFqName.asString(),
+                classNames = it.classNames(),
+                callable = this.callable,
+                extra = null,
+                target = PointingToDeclaration
+            )
+        } ?: this
 }
 /**
  * Uses the JavaToKotlinClassMap to possibly convert a dri to its Kotlin equivalent
@@ -429,7 +430,7 @@ internal fun DRI.possiblyAsJava(): DRI {
 internal fun DRI.possiblyAsKotlin(): DRI {
     val fullyQualifiedName = packageName?.let { "$it." } + classNames
     // Use the fully qualified name to look up the class in the map
-    return JavaToKotlinClassMap.mapJavaToKotlin(FqName(fullyQualifiedName))?.let {
+    return JavaToKotlinClassMap.INSTANCE.mapJavaToKotlin(FqName(fullyQualifiedName))?.let {
         DRI(
             packageName = it.packageFqName.asString(),
             classNames = it.classNames(),
@@ -516,7 +517,7 @@ fun List<DProperty>.gettersAndSetters(): List<DFunction> {
 }
 
 /**
- * Fixes issues with the given synthetic accessor for [propertyName] to be documented in Java, using
+ * Fixes issues with the given synthetic accessor [forProperty] to be documented in Java, using
  * [DRI.withFixedName] and [correctTagsInAccessorDocs]. If [getter] is false, the function is a setter.
  */
 private fun DFunction.fixSyntheticAccessor(forProperty: DProperty, getter: Boolean) = copy(

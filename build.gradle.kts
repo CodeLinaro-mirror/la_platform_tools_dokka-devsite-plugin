@@ -49,6 +49,7 @@ dependencies {
     implementation("org.jetbrains.dokka:dokka-analysis:$dokkaVersion")
 
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.8.0")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:$coroutinesVersion")
 
     implementation("org.jetbrains.dokka:dokka-base-test-utils:$dokkaVersion")
