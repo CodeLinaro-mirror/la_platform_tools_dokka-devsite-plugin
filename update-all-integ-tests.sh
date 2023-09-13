@@ -4,14 +4,10 @@ echo "Running tests to update data in build directory..."
 
 # re-run tasks here because gradle may consider the task "up to date" even though the source files have changed
 function run_tests() {
-  ./gradlew --continue --rerun-tasks :test --tests="com.google.devsite.integration.BasicTest" $@
+  ./gradlew --continue --rerun-tasks :test --tests="com.google.devsite.integration.*" $@
 }
 
-rm -f ./build/exploded/vision-interfaces-16.0.0.jar
-rm -f ./build/exploded/play-services-tasks-18.0.1.jar
-rm -f ./build/exploded/play-services-basement-18.0.0.jar
-rm -f ./build/exploded/uiautomator-2.2.0.jar
-
+rm -f ./build/exploded/vision-interfaces-16.0.0.jar ./build/exploded/uiautomator-2.2.0.jar ./build/exploded/play-services-*
 
 if run_tests $@ ; then
    echo "Test data is already up to date."

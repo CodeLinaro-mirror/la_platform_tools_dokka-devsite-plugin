@@ -18,9 +18,14 @@ package com.google.devsite.components.impl
 
 import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.render
+import com.google.devsite.components.symbols.KmpSymbolDetail
+import com.google.devsite.components.symbols.devsiteId
 import com.google.devsite.joinMaybePrefix
 import kotlinx.html.FlowContent
+import kotlinx.html.H2
+import kotlinx.html.attributesMapOf
 import kotlinx.html.h2
+import kotlinx.html.visit
 
 /** Default implementation of class-like pages. */
 internal data class DefaultClasslike(
@@ -39,7 +44,17 @@ internal data class DefaultClasslike(
                 symbolType.symbols.render(
                     into,
                     separator = null,
-                    header = { h2 { +symbolType.title } }
+                    header = if (symbolType.symbols.first() is KmpSymbolDetail) { ->
+                        val unionPlatformsString = symbolType.symbols
+                            // platforms of each detail
+                            .map { (it as KmpSymbolDetail).data.platforms.data.platforms }
+                            // all platforms of any detail
+                            .reduce { acc, next -> acc.union(next) }.joinToString { it.devsiteId() }
+                        H2(attributesMapOf("data-title", unionPlatformsString), consumer).visit {
+                            +symbolType.title
+                            comment(unionPlatformsString)
+                        }
+                    } else { { h2 { +symbolType.title } } }
                 )
             }
         }
