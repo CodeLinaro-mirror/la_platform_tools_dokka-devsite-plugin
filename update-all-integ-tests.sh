@@ -7,6 +7,12 @@ function run_tests() {
   ./gradlew --continue --rerun-tasks :test --tests="com.google.devsite.integration.BasicTest" $@
 }
 
+rm -f ./build/exploded/vision-interfaces-16.0.0.jar
+rm -f ./build/exploded/play-services-tasks-18.0.1.jar
+rm -f ./build/exploded/play-services-basement-18.0.0.jar
+rm -f ./build/exploded/uiautomator-2.2.0.jar
+
+
 if run_tests $@ ; then
    echo "Test data is already up to date."
    exit 0

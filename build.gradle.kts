@@ -261,7 +261,7 @@ dependencies {
     testDataSources("androidx.paging:paging-guava:3.2.0-alpha02")
     testDataSources("androidx.paging:paging-compose:1.0.0-alpha16")
 
-    // Compose is KMP, but they don't publish KMP source jars
+    // Compose is KMP, and they publish KMP source jars
     testDataSourcesKmp("androidx.compose.animation:animation:$composeVersion")
     testDataSourcesKmp("androidx.compose.animation:animation-core:$composeVersion")
     testDataSourcesKmp("androidx.compose.animation:animation-graphics:$composeVersion")

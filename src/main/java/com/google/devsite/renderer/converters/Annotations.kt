@@ -49,6 +49,8 @@ internal val Annotation.identifier: String get() = "${dri.fullName}(${params.val
 
 internal val AT_NULLABLE = Annotation(DRI("androidx.annotation", "Nullable"), emptyMap())
 internal val AT_NON_NULL = Annotation(DRI("androidx.annotation", "NonNull"), emptyMap())
+internal val ANDROID_NULLABLE_DRI = DRI("android.annotation", "Nullable")
+internal val ANDROID_NON_NULL_DRI = DRI("android.annotation", "NonNull")
 
 /** @return true if an `@Nullable` annotation is present, false otherwise */
 internal fun List<Annotation>.hasAtNullable(): Boolean = any { it.dri.classNames == "Nullable" }

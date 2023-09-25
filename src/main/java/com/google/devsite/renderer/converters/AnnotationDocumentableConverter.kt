@@ -73,7 +73,8 @@ internal class AnnotationDocumentableConverter(
 
         return (annotations + injectedAnnotations).filterNotNull().filter { annotation ->
             shouldDocumentAnnotation(annotation, nullability)
-        }.distinctBy { it.identifier }.map { annotation -> annotation.toDackkaAnnotation() }
+        }.map { it.fixNullability() } // Convert android.nullable to androidx., because it's public
+            .distinctBy { it.identifier }.map { annotation -> annotation.toDackkaAnnotation() }
     }
 
     /** @return true if a developer would find this annotation useful, false otherwise */
@@ -134,4 +135,10 @@ internal class AnnotationDocumentableConverter(
 
     private val Annotations.Annotation.isBadNullability get() =
         isNullabilityAnnotation && dri.fullName !in validNullabilityAnnotations
+
+    private fun Annotations.Annotation.fixNullability() = when (this.dri) {
+        ANDROID_NULLABLE_DRI -> AT_NULLABLE
+        ANDROID_NON_NULL_DRI -> AT_NON_NULL
+        else -> this
+    }
 }
