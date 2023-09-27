@@ -18,3 +18,6 @@ package dokkatest.nothidden
 
 @CustomHideAnnotation
 class HiddenWithCustomHide
+
+/** @suppress */
+fun suppressedFunction() {}
