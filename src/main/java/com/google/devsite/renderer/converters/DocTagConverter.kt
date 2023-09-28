@@ -173,7 +173,6 @@ internal class DocTagConverter(
             .filter { !it.belongsInDescriptionOf(documentable) }
         val tagsByType = metadataTags.sortedWith(tagOrder(paramNames)).groupBy { it.javaClass }
         val tables = tagsByType.mapNotNull { (_, rawTags) ->
-            // b/172000585
             var tags = handleUpstreamTagDuplication(documentable, rawTags, generics)
             if (tags.isEmpty()) return@mapNotNull null
             val firstTag = tags.first()
@@ -199,13 +198,26 @@ internal class DocTagConverter(
                     is Sample -> null // Samples are handled in the description
                     is Property ->
                         throw RuntimeException("Should have been consumed in description!")
-                    is CustomTagWrapper -> null // TODO("b/163811276: custom tag wrapper")
-                    is Since -> TODO("b/163811276: since")
-                    is Constructor -> null // TODO("b/180525239: constructor")
-                    // Documented separately above
-                    is Description, is Deprecated, is Receiver -> null
-                    // Don't care ;)
-                    is Suppress, is Version, is Author -> null
+                    is CustomTagWrapper -> docsHolder.printWarningFor(
+                        "unrecognized javadoc tag @",
+                        documentable,
+                        brokenDocTag = firstTag,
+                    ).let { null }
+                    is Since -> docsHolder.printWarningFor(
+                        "unsupported javadoc tag @",
+                        documentable,
+                        brokenDocTag = firstTag,
+                        additionalContext = ". Instead, autogenerate per go/dackka#api-since."
+                    ).let { null }
+                    is Constructor -> null // TODO("b/179999964: constructor")
+                    is Description, is Deprecated -> null // Documented separately in getDescription
+                    is Receiver -> null // gets merged with @params
+                    is Suppress -> throw RuntimeException(
+                        "Reaching the documentation generation step on a suppressed member should" +
+                            "be impossible! If you see this, file a bug on dackka. $documentable"
+                    )
+                    // These aren't tags we believe it is necessary to support
+                    is Version, is Author -> null
                 }
             } catch (e: Exception) {
                 throw RuntimeException(
@@ -586,8 +598,9 @@ internal class DocTagConverter(
                         }
                     }
                 }
-                is Author, is Version, is Since, is Return, is Receiver, is Constructor,
-                is Deprecated, is Suppress -> { /* TODO: We do not support these tags yet */ }
+                is Author, is Version -> {} // These are not supported
+                is Return, is Receiver, is Constructor -> {} // These become tables in metadata()
+                is Deprecated, is Suppress, is Since -> {} // These are handled elsewhere
             }
         }
         if (components.isEmpty()) return UndocumentedSymbolDescriptionComponent
