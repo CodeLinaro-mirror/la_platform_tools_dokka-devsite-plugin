@@ -18,7 +18,9 @@ package dokkatest.linking;
 
 /**
  * Reference link {@link dokkatest.linking.KotlinEnum} should resolve <p>
- * sjuff sjuff {@link dokkatest.linking.KotlinEnum#ON_CREATE} should resolve <p>
+ * sjuff sjuff {@link dokkatest.linking.KotlinEnum#ON_CREATE} should resolve, and so should {@link
+ * dokkatest.linking.KotlinEnum#ON_CREATE}, and so should this one (making it multiline {@link
+ * dokkatest.linking.KotlinEnum}. (It does not; b/195524451) <p>
  * sjujj sjujj {@link dokkatest.linking.JavaEnum#ON_DECEIT} should resolve
  */
 public class JavaLinker {}
