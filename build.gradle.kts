@@ -144,7 +144,7 @@ val composeMaterial3Version = "1.2.0-alpha02"
 dependencies {
     testDataImpl("io.reactivex.rxjava3:rxjava:3.0.2")
     testDataImpl("io.reactivex.rxjava2:rxjava:2.2.9")
-    testDataImpl("org.robolectric:sandbox:4.8.1")
+    testDataImpl("org.robolectric:sandbox:4.11.1")
     testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:$coroutinesVersion")
     testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-rx2:$coroutinesVersion")
     testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-rx3:$coroutinesVersion")
