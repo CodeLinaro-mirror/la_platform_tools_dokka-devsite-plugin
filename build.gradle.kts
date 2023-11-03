@@ -152,7 +152,7 @@ dependencies {
     testDataImpl("org.robolectric:android-all-instrumented:13-robolectric-9030017-i4")
     testDataImpl("junit:junit:4.13.2")
     testDataImpl("com.google.truth:truth:1.1.3")
-    testDataImpl("com.android.tools.build:gradle:8.1.0-beta01")
+    testDataImpl("com.android.tools.build:gradle:8.3.0-alpha10")
 
     testDataImpl(fileTree("${layout.buildDirectory.get()}/exploded"))
 
