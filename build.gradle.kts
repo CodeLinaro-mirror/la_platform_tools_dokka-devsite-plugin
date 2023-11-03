@@ -30,11 +30,11 @@ group = "com.google.devsite"
 version = "1.4.0" // This is appended to archiveBaseName in the ShadowJar task.
 
 val dokkaVersion = "1.8.20-dev-214"
-val kotlinVersion = "1.9.10"
+val kotlinVersion = "1.9.20"
 val jacksonVersion = "2.15.0"
 val coroutinesVersion = "1.6.3"
 plugins {
-    kotlin("jvm") version "1.9.10"
+    kotlin("jvm") version "1.9.20"
     id("com.github.johnrengelman.shadow") version "7.1.1"
     id("application")
     id("maven-publish")
