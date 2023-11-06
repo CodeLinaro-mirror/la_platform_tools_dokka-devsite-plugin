@@ -23,7 +23,7 @@ import kotlinx.html.FlowContent
 
 /** Default implementation of a type summary. */
 internal data class DefaultTypeSummary(
-    override val data: TypeSummary.Params
+    override val data: TypeSummary.Params,
 ) : TypeSummary {
     override fun render(into: FlowContent) = into.run {
         data.modifiers.render(into, terminator = { +" " })

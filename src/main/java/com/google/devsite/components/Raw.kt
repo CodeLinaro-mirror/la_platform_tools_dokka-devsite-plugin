@@ -21,6 +21,6 @@ internal interface Raw : ContextFreeComponent {
     val data: Params
 
     data class Params(
-        val text: String
+        val text: String,
     )
 }

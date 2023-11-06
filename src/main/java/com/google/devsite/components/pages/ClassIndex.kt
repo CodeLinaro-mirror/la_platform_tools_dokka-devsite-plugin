@@ -25,6 +25,6 @@ internal interface ClassIndex : ContextFreeComponent {
 
     data class Params(
         val packagesUrl: String,
-        val alphabetizedClasses: Map<Char, LinkDescriptionSummaryList>
+        val alphabetizedClasses: Map<Char, LinkDescriptionSummaryList>,
     )
 }

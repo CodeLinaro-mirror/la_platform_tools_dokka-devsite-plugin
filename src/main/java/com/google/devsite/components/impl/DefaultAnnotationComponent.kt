@@ -24,7 +24,7 @@ import kotlinx.html.FlowContent
 
 /** Default implementation of an annotation. */
 internal data class DefaultAnnotationComponent(
-    override val data: AnnotationComponent.Params
+    override val data: AnnotationComponent.Params,
 ) : AnnotationComponent {
     override fun render(into: FlowContent) = into.run {
         +"@"

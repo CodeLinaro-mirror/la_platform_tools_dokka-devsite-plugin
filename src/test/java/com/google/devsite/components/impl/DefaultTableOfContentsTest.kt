@@ -28,8 +28,8 @@ class DefaultTableOfContentsTest {
             Params(
                 classesUrl = "classes.html",
                 packagesUrl = "packages.html",
-                packages = listOf(NoopTocPackage, NoopTocPackage)
-            )
+                packages = listOf(NoopTocPackage, NoopTocPackage),
+            ),
         )
 
         val output = buildString {
@@ -47,7 +47,7 @@ toc:
 
 noop
 noop
-            """.trim()
+            """.trim(),
         )
     }
 }

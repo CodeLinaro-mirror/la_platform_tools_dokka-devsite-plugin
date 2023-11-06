@@ -28,7 +28,7 @@ import kotlinx.html.h2
 
 /** Default implementation of the package summary page. */
 internal data class DefaultPackageSummary(
-    override val data: PackageSummary.Params
+    override val data: PackageSummary.Params,
 ) : PackageSummary {
     override fun render(into: FlowContent) = into.run {
         data.header?.render(into)
@@ -72,7 +72,7 @@ internal data class DefaultPackageSummary(
 
     private fun <T : ContextFreeComponent> FlowContent.renderSummary(
         summary: WithDescriptionList<T>,
-        title: String
+        title: String,
     ) {
         if (summary.hasContent()) {
             h2 { +title }

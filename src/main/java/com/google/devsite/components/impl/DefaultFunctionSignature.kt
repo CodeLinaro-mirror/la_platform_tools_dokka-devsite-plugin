@@ -27,7 +27,7 @@ import kotlinx.html.unsafe
 
 /** Default implementation of a function signature. */
 internal data class DefaultFunctionSignature(
-    override val data: FunctionSignature.Params
+    override val data: FunctionSignature.Params,
 ) : FunctionSignature {
     override fun render(into: FlowContent) = into.run {
         data.typeParameters.render(this, brackets = "<>", shouldBreak = ShouldBreak.NO)
@@ -53,13 +53,17 @@ internal data class DefaultFunctionSignature(
         data.parameters.render(
             into,
             this@DefaultFunctionSignature.shouldBreak(),
-            brackets = "()"
+            brackets = "()",
         )
     }
 
     override fun toString() = data.typeParameters.joinMaybePrefix(postfix = " ") +
-        if (data.receiver != null) data.receiver.toString() + "." else "" +
-            if (data.isDeprecated) "deprecated " else "" +
+        if (data.receiver != null) {
+            data.receiver.toString() + "."
+        } else "" +
+            if (data.isDeprecated) {
+                "deprecated "
+            } else "" +
                 data.name +
                 data.parameters.joinMaybePrefix(prefix = "(", postfix = ")")
 }

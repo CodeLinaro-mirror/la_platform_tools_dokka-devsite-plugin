@@ -31,7 +31,7 @@ import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
 internal class FilePathProviderTest(
-    private val displayLanguage: Language
+    private val displayLanguage: Language,
 ) : ConverterTestBase(displayLanguage) {
 
     val pathProvider = pathProvider(externalLocationProvider = externalProvider)
@@ -70,7 +70,7 @@ internal class FilePathProviderTest(
     fun `Top-level function has correct link`() {
         val dri = DRI(
             packageName = "androidx.example",
-            callable = Callable(name = "foo", params = emptyList())
+            callable = Callable(name = "foo", params = emptyList()),
         )
 
         val (name, url) = pathProvider.forReference(dri)
@@ -88,14 +88,14 @@ internal class FilePathProviderTest(
                 params = listOf(
                     TypeConstructor(
                         fullyQualifiedName = "kotlin.String",
-                        params = emptyList()
+                        params = emptyList(),
                     ),
                     TypeConstructor(
                         fullyQualifiedName = "kotlin.Int",
-                        params = emptyList()
-                    )
-                )
-            )
+                        params = emptyList(),
+                    ),
+                ),
+            ),
         )
 
         val (name, url) = pathProvider.forReference(dri)
@@ -112,15 +112,15 @@ internal class FilePathProviderTest(
                 name = "foo",
                 receiver = TypeConstructor(
                     fullyQualifiedName = "kotlin.String",
-                    params = emptyList()
+                    params = emptyList(),
                 ),
                 params = listOf(
                     TypeConstructor(
                         fullyQualifiedName = "kotlin.Int",
-                        params = emptyList()
-                    )
-                )
-            )
+                        params = emptyList(),
+                    ),
+                ),
+            ),
         )
 
         val (name, url) = pathProvider.forReference(dri)
@@ -134,7 +134,7 @@ internal class FilePathProviderTest(
         val dri = DRI(
             packageName = "androidx.example",
             classNames = "Foo",
-            callable = Callable(name = "foo", params = emptyList())
+            callable = Callable(name = "foo", params = emptyList()),
         )
 
         val (name, url) = pathProvider.forReference(dri)
@@ -157,7 +157,7 @@ internal class FilePathProviderTest(
             packageName = "androidx.example",
             classNames = "Outer.Inner.FOO",
             extra = "{\"org.jetbrains.dokka.links.EnumEntryDRIExtra\":" +
-                "{\"key\":\"org.jetbrains.dokka.links.EnumEntryDRIExtra\"}}"
+                "{\"key\":\"org.jetbrains.dokka.links.EnumEntryDRIExtra\"}}",
         )
 
         val (name, url) = pathProvider(classGraph = classGraph).forReference(dri)
@@ -171,7 +171,7 @@ internal class FilePathProviderTest(
         val enternalDri = DRI(
             packageName = "external.example",
             classNames = "Foo",
-            callable = Callable(name = "foo", params = emptyList())
+            callable = Callable(name = "foo", params = emptyList()),
         )
 
         val external = object : ExternalDokkaLocationProvider {
@@ -192,7 +192,7 @@ internal class FilePathProviderTest(
         val internalDri = DRI(
             packageName = "androidx.example",
             classNames = "Foo",
-            callable = Callable(name = "foo", params = emptyList())
+            callable = Callable(name = "foo", params = emptyList()),
         )
 
         val external = object : ExternalDokkaLocationProvider {
@@ -217,11 +217,11 @@ internal class FilePathProviderTest(
         val dri = DRI(
             packageName = "androidx.example",
             classNames = "Foo",
-            callable = null
+            callable = null,
         )
         val actual = pathProvider(
             externalLocationProvider = null,
-            classGraph = classGraph
+            classGraph = classGraph,
         ).findInDocumentablesGraph(dri)?.name
         val expected = "Foo"
         assertThat(actual).isEqualTo(expected)
@@ -238,11 +238,11 @@ internal class FilePathProviderTest(
         val dri = DRI(
             packageName = "androidx.example",
             classNames = "Outer.Inner",
-            callable = null
+            callable = null,
         )
         val actual = pathProvider(
             externalLocationProvider = null,
-            classGraph = classGraph
+            classGraph = classGraph,
         ).findInDocumentablesGraph(dri)?.name
         val expected = "Inner"
         assertThat(actual).isEqualTo(expected)
@@ -257,11 +257,11 @@ internal class FilePathProviderTest(
         val dri = DRI(
             packageName = "androidx.example",
             classNames = "A.B.C.D",
-            callable = null
+            callable = null,
         )
         val actual = pathProvider(
             externalLocationProvider = null,
-            classGraph = classGraph
+            classGraph = classGraph,
         ).findInDocumentablesGraph(dri)?.name
         val expected = "D"
         assertThat(actual).isEqualTo(expected)
@@ -298,11 +298,11 @@ internal class FilePathProviderTest(
             val dri = DRI(
                 packageName = "androidx.example",
                 classNames = "$name.Companion",
-                callable = Callable(name = "hoistedVal", params = emptyList())
+                callable = Callable(name = "hoistedVal", params = emptyList()),
             )
             val reference = pathProvider(
                 externalLocationProvider = null,
-                classGraph = classGraph
+                classGraph = classGraph,
             ).forReference(dri)
             assertThat(reference.name).isEqualTo("hoistedVal")
             assertThat(reference.url.urlSuffix()).isEqualTo("$name.html#hoistedVal()")
@@ -323,11 +323,11 @@ internal class FilePathProviderTest(
         val dri = DRI(
             packageName = "androidx.example",
             classNames = "Foo.Companion",
-            callable = Callable(name = funName, params = emptyList())
+            callable = Callable(name = funName, params = emptyList()),
         )
         val reference = pathProvider(
             externalLocationProvider = null,
-            classGraph = classGraph
+            classGraph = classGraph,
         ).forReference(dri)
         assertThat(reference.name).isEqualTo(funName)
         // All functions are hoisted in Kotlin
@@ -351,11 +351,11 @@ internal class FilePathProviderTest(
         val dri = DRI(
             packageName = "androidx.example",
             classNames = "Foo.FooCompanion",
-            callable = Callable(name = "hoistedFun", params = emptyList())
+            callable = Callable(name = "hoistedFun", params = emptyList()),
         )
         val reference = pathProvider(
             externalLocationProvider = null,
-            classGraph = classGraph
+            classGraph = classGraph,
         ).forReference(dri)
         assertThat(reference.name).isEqualTo("hoistedFun")
         assertThat(reference.url.urlSuffix()).isEqualTo("Foo.html#hoistedFun()")
@@ -375,11 +375,11 @@ internal class FilePathProviderTest(
         val dri = DRI(
             packageName = "androidx.example",
             classNames = "Foo.FooCompanion",
-            callable = Callable(name = "nonHoistedVal", params = emptyList())
+            callable = Callable(name = "nonHoistedVal", params = emptyList()),
         )
         val reference = pathProvider(
             externalLocationProvider = null,
-            classGraph = classGraph
+            classGraph = classGraph,
         ).forReference(dri)
         assertThat(reference.name).isEqualTo(propertyName)
         // All properties are hoisted in Kotlin
@@ -394,7 +394,7 @@ internal class FilePathProviderTest(
     fun `No link is created for a suspend function type`() {
         val suspendFunctionDri = DRI(
             packageName = "kotlin.coroutines",
-            classNames = "SuspendFunction2"
+            classNames = "SuspendFunction2",
         )
 
         val external = object : ExternalDokkaLocationProvider {
@@ -422,7 +422,7 @@ internal class FilePathProviderTest(
         @Parameterized.Parameters(name = "{0}")
         fun data() = listOf(
             arrayOf(Language.JAVA),
-            arrayOf(Language.KOTLIN)
+            arrayOf(Language.KOTLIN),
         )
     }
 }

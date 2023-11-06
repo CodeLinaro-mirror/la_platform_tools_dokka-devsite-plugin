@@ -44,7 +44,7 @@ internal class NonKmpClasslikeConverter(
     javadocConverter: DocTagConverter,
     paramConverter: ParameterDocumentableConverter,
     annotationConverter: AnnotationDocumentableConverter,
-    metadataConverter: MetadataConverter
+    metadataConverter: MetadataConverter,
 ) : ClasslikeDocumentableConverter(
     displayLanguage,
     classlike,
@@ -56,7 +56,7 @@ internal class NonKmpClasslikeConverter(
     javadocConverter,
     paramConverter,
     annotationConverter,
-    metadataConverter
+    metadataConverter,
 ) {
     override val header: DefaultDevsitePlatformSelector? = null
     override val functionToSummaryConverter = functionConverter::summary
@@ -79,7 +79,7 @@ internal class KmpClasslikeConverter(
     paramConverter: ParameterDocumentableConverter,
     annotationConverter: AnnotationDocumentableConverter,
     metadataConverter: MetadataConverter,
-    platforms: List<Platform>
+    platforms: List<Platform>,
 ) : ClasslikeDocumentableConverter(
     displayLanguage,
     classlike,
@@ -91,7 +91,7 @@ internal class KmpClasslikeConverter(
     javadocConverter,
     paramConverter,
     annotationConverter,
-    metadataConverter
+    metadataConverter,
 ) {
     override val header = DefaultDevsitePlatformSelector(platforms)
     override val functionToSummaryConverter = functionConverter::summaryKmp
@@ -137,8 +137,8 @@ internal class KmpClasslikeConverter(
                 descriptionDocs = javadocConverter.metadata(classlike),
                 platform = DefaultPlatformComponent(setOf(classlike.getExpectOrCommonSourceSet())),
                 allSignatures = signatures.mapValues { (_, v) -> DefaultPlatformComponent(v) }
-                    .toList()
-            )
+                    .toList(),
+            ),
         )
     }
 }

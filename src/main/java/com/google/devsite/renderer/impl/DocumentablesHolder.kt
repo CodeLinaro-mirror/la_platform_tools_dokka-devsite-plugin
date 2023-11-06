@@ -96,6 +96,7 @@ internal class DocumentablesHolder(
     val annotationsNotToDisplay: Set<String> = emptySet(),
 ) {
     private val packages = scope.async { computePackages(module) }
+
     // Includes even should-not-be-displayed classlikes
     private val classlikes = mutableMapOf<DRI, Deferred<List<DClasslike>>>()
     private val classes = mutableMapOf<DRI, Deferred<List<DClass>>>()
@@ -113,6 +114,7 @@ internal class DocumentablesHolder(
     private val allClasslikes: Deferred<List<DClasslike>>
     private val allCompanions: Deferred<Map<DRI, DObject>>
     private val nestedClasslikesJob: Job
+
     // Filtering for should-show should be done by accessors of this field
     private val nestedClasslikes = mutableMapOf<DRI, Deferred<List<DClasslike>>>()
     private val classGraph: Deferred<ClassGraph>
@@ -134,14 +136,14 @@ internal class DocumentablesHolder(
                 val interestingObjectsList = async {
                     computeInterestingObjects(
                         children.await().filterIsInstance<DObject>(),
-                        companionsMap.await().keys
+                        companionsMap.await().keys,
                     )
                 }
                 val syntheticClassList = async { computeSyntheticClasses(dPackage) }
                 val combinedClasslikesList = async {
                     computeClasslikes(
                         children.await(),
-                        syntheticClassList.await()
+                        syntheticClassList.await(),
                     )
                 }
 
@@ -177,7 +179,7 @@ internal class DocumentablesHolder(
             computeClassGraph(
                 allClasslikes.await() + allCompanions.await().values,
                 externalDocumentablesProvider,
-                context?.configuration?.sourceSets
+                context?.configuration?.sourceSets,
             )
         }
         documentablesGraph = scope.async { computeDocumentablesGraph(classGraph.await()) }
@@ -248,8 +250,7 @@ internal class DocumentablesHolder(
      * Iterate through the all packages and create map of each class to its associated
      * extension functions.
      */
-    private suspend fun computeExtensionFunctionMap():
-        HashMap<DRI, MutableList<DFunction>> {
+    private suspend fun computeExtensionFunctionMap(): HashMap<DRI, MutableList<DFunction>> {
         val extensionFunctionsMapping = HashMap<DRI, MutableList<DFunction>>()
         packages().forEach { dPackage ->
             dPackage.functions.forEach { function ->
@@ -259,7 +260,7 @@ internal class DocumentablesHolder(
                 dPackage.properties.gettersAndSetters().forEach { accessor ->
                     accessor.addToMapping(
                         accessor.receiver?.type,
-                        extensionFunctionsMapping
+                        extensionFunctionsMapping,
                     )
                 }
             }
@@ -279,7 +280,7 @@ internal class DocumentablesHolder(
                 dPackage.properties.forEach { property ->
                     property.addToMapping(
                         property.receiver?.type?.driOrNull,
-                        extensionPropertiesMapping
+                        extensionPropertiesMapping,
                     )
                 }
             }
@@ -300,7 +301,8 @@ internal class DocumentablesHolder(
             // These types have no classlike pages, so we only document the extension fun
             // in the package summary
             is JavaObject, is PrimitiveJavaType, Void, // builtins
-            is TypeAliased, is FunctionalTypeConstructor, is TypeParameter -> {}
+            is TypeAliased, is FunctionalTypeConstructor, is TypeParameter,
+            -> {}
             Dynamic -> TODO() // I don't think this case is possible?
             is UnresolvedBound -> throw RuntimeException("Unresolved receiver of $this")
             else -> throw RuntimeException("Unknown receiver for $this")
@@ -317,7 +319,7 @@ internal class DocumentablesHolder(
         return module.packages
             .filterNot { thisPackage ->
                 excludedPackages.any {
-                    excludedRegex ->
+                        excludedRegex ->
                     excludedRegex.matches(thisPackage.packageName)
                 }
             }.sortedBy { "${it.name} ${it.dri}" }
@@ -326,19 +328,19 @@ internal class DocumentablesHolder(
     /** Returns all should-be-documented classlikes in this module. */
     private suspend fun computeClasslikes(module: DModule): List<DClasslike> {
         return computeClasslikes(
-            module.packages.flatMap { classlikesFor(it) }
+            module.packages.flatMap { classlikesFor(it) },
         ) // classlikesFor already contains synth for Java
     }
 
     /** Returns all classlikes among all given documentables. */
     private suspend fun computeClasslikes(
         docs: List<Documentable>,
-        syntheticClasses: Set<DClass> = emptySet()
+        syntheticClasses: Set<DClass> = emptySet(),
     ): List<DClasslike> {
         return (docs.filterIsInstance<DClasslike>() + syntheticClasses)
             .filterNot { thisClasslike ->
                 excludedPackages.any {
-                    excludedRegex ->
+                        excludedRegex ->
                     excludedRegex.matches(thisClasslike.packageName())
                 }
             }.filterNot { shouldNotBeDisplayed(it) }
@@ -385,7 +387,7 @@ internal class DocumentablesHolder(
                     modifier = dPackage.sourceSets.associateWith { JavaModifier.Final },
                     sourceSets = dPackage.sourceSets,
                     isExpectActual = false,
-                    extra = PropertyContainer.empty()
+                    extra = PropertyContainer.empty(),
                 )
             }.toSet()
     }
@@ -396,7 +398,7 @@ internal class DocumentablesHolder(
      * This method uses @file:JvmName if it exists or the filename with "Kt" appended
      **/
     private fun <T> List<T>.mapToSyntheticNames(): Map<String, List<T>>
-    where T : Documentable, T : WithSources =
+        where T : Documentable, T : WithSources =
         map { it.sources to it }
             .groupBy({ (_, function) -> nameForSyntheticClass(function) }) { it.second }
 
@@ -428,7 +430,7 @@ internal class DocumentablesHolder(
     /** Computes the list of objects that are interesting in the display language */
     private suspend fun computeInterestingObjects(
         allObjects: List<DObject>,
-        companions: Set<DRI>
+        companions: Set<DRI>,
     ): List<DObject> {
         // Un-ordinary companions are companions, but also appear in the ToC.
         val interestingObjects = allObjects.filter { !it.isBoringCompanion() }
@@ -436,7 +438,7 @@ internal class DocumentablesHolder(
         // Thus, we can elsewhere freely use `isBoringCompanion` without checking companionhood.
         (allObjects.filter { it.name == "Companion" }.map { it.dri } - companions).forEach {
             throw RuntimeException(
-                "Object with illegal name: named 'Companion' but is not a companion object: $it."
+                "Object with illegal name: named 'Companion' but is not a companion object: $it.",
             )
         }
         return interestingObjects.sortedBy { "${it.name()} ${it.dri}" }
@@ -481,7 +483,7 @@ internal class DocumentablesHolder(
         documentableWithError: Documentable,
         containingDocumentable: Documentable? = null,
         brokenDocTag: TagWrapper? = null,
-        additionalContext: String = ""
+        additionalContext: String = "",
     ) {
         var containingInfo = ""
         if (brokenDocTag != null) {
@@ -495,7 +497,7 @@ internal class DocumentablesHolder(
         val location = containingDocumentable?.getErrorLocation()
             ?: documentableWithError.getErrorLocation()
         logger.warn(
-            "$location $baseMessage$containingInfo$additionalContext"
+            "$location $baseMessage$containingInfo$additionalContext",
         )
     }
 }

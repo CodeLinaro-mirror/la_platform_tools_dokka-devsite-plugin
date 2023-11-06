@@ -25,7 +25,7 @@ internal interface Link : ContextFreeComponent, Sizeable {
     open class Params(
         val name: String,
         val url: String,
-        val externalLink: Boolean = false
+        val externalLink: Boolean = false,
     ) {
         override fun equals(other: Any?): Boolean {
             if (this === other) return true

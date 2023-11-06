@@ -43,7 +43,7 @@ import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
 internal class ParameterDocumentableConverterTest(
-    private val displayLanguage: Language
+    private val displayLanguage: Language,
 ) : ConverterTestBase(displayLanguage) {
 
     private val intArray = if (displayLanguage == Language.JAVA) "int[]" else "IntArray"
@@ -184,7 +184,7 @@ internal class ParameterDocumentableConverterTest(
             |public void foo(Map<? super String, ? extends Double> a)
         """.render(java = true).param()
 
-        for (param in listOf(paramK/*, paramJ*/)) {
+        for (param in listOf(paramK)) { // TODO: listOf(paramK, paramJ)
             val paramType = param.data.type
             val generic = paramType.data.generics.items(2)
 
@@ -322,11 +322,13 @@ internal class ParameterDocumentableConverterTest(
             val ints = listOf(nullaInt, nullaInt)
 
             val expectedNonNull =
-                if (module == moduleJ) Nullability.JAVA_ANNOTATED_NOT_NULL
-                else Nullability.KOTLIN_DEFAULT
+                if (module == moduleJ) {
+                    Nullability.JAVA_ANNOTATED_NOT_NULL
+                } else Nullability.KOTLIN_DEFAULT
             val expectedNullable =
-                if (module == moduleJ) Nullability.JAVA_ANNOTATED_NULLABLE
-                else Nullability.KOTLIN_NULLABLE
+                if (module == moduleJ) {
+                    Nullability.JAVA_ANNOTATED_NULLABLE
+                } else Nullability.KOTLIN_NULLABLE
 
             nonnas.forEach { assertThat(it.nullable).isFalse() }
             nullas.forEach { assertThat(it.nullable).isTrue() }
@@ -810,7 +812,6 @@ internal class ParameterDocumentableConverterTest(
             """.render(java = true).param(forSummary = isSummary)
 
             for (param in listOf(paramK, paramJ, paramJ2)) {
-
                 kotlinOnly {
                     assertThat(param.annotations).isEmpty()
                     assertThat(param.nullable).isTrue()
@@ -876,7 +877,7 @@ internal class ParameterDocumentableConverterTest(
             kotlinOnly {
                 assertThat(paramType.link().name).isEqualTo("Int")
                 assertThat(paramType.link().url).isEqualTo(
-                    "https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"
+                    "https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html",
                 )
             }
         }
@@ -986,7 +987,7 @@ internal class ParameterDocumentableConverterTest(
 
             kotlinOnly {
                 assertThat(paramType.link().url).isEqualTo(
-                    "https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"
+                    "https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html",
                 )
             }
         }
@@ -1129,7 +1130,7 @@ internal class ParameterDocumentableConverterTest(
                 assertThat(paramType.link().name).isEqualTo("Array")
                 assertThat(generic?.link()?.name).isEqualTo("Array")
                 assertThat(
-                    generic?.data?.generics?.singleOrNull()?.link()?.name
+                    generic?.data?.generics?.singleOrNull()?.link()?.name,
                 ).isEqualTo("IntArray")
             }
         }
@@ -1173,7 +1174,7 @@ internal class ParameterDocumentableConverterTest(
         assertThat(paramString.data.type.data.name).isEqualTo("String")
         assertThat(paramUnresolved.data.type.data.name).isEqualTo("<Error class: unknown class>")
 
-        for (param in listOf(paramString/*, paramUnresolved*/)) {
+        for (param in listOf(paramString)) { // TODO: listOf(paramString, paramUnresolved)
             assertThat(param.annotations.size).isEqualTo(1)
             assertThat(param.nullable).isTrue()
             assertThat(param.annotations.first().name).isEqualTo("Squark")
@@ -1229,11 +1230,11 @@ internal class ParameterDocumentableConverterTest(
             assertThat(list.link().name).isEqualTo("List")
             assertThat(list.link().url).isEqualTo(
                 "https://kotlinlang.org/api/latest/" +
-                    "jvm/stdlib/kotlin.collections/-list/index.html"
+                    "jvm/stdlib/kotlin.collections/-list/index.html",
             )
             assertThat(list.alternativeLink()?.url).isEqualTo(
                 "https://kotlinlang.org/api/latest/" +
-                    "jvm/stdlib/kotlin.collections/-mutable-list/index.html"
+                    "jvm/stdlib/kotlin.collections/-mutable-list/index.html",
             )
 
             val entry = module.param("entry").data.type
@@ -1241,11 +1242,11 @@ internal class ParameterDocumentableConverterTest(
             assertThat(entry.link().name).isEqualTo("Map.Entry")
             assertThat(entry.link().url).isEqualTo(
                 "https://kotlinlang.org/api/latest/" +
-                    "jvm/stdlib/kotlin.collections/-map/-entry/index.html"
+                    "jvm/stdlib/kotlin.collections/-map/-entry/index.html",
             )
             assertThat(entry.alternativeLink()?.url).isEqualTo(
                 "https://kotlinlang.org/api/latest" +
-                    "/jvm/stdlib/kotlin.collections/-mutable-map/-mutable-entry/index.html"
+                    "/jvm/stdlib/kotlin.collections/-mutable-map/-mutable-entry/index.html",
             )
         }
 
@@ -1254,14 +1255,14 @@ internal class ParameterDocumentableConverterTest(
             assertThat(list).isNotInstanceOf(MappedTypeProjectionComponent::class.java)
             assertThat(list.link().name).isEqualTo("List")
             assertThat(list.link().url).isEqualTo(
-                "https://developer.android.com/reference/java/util/List.html"
+                "https://developer.android.com/reference/java/util/List.html",
             )
 
             val entry = module.param("entry").data.type
             assertThat(entry).isNotInstanceOf(MappedTypeProjectionComponent::class.java)
             assertThat(entry.link().name).isEqualTo("Map.Entry")
             assertThat(entry.link().url).isEqualTo(
-                "https://developer.android.com/reference/java/util/Map.Entry.html"
+                "https://developer.android.com/reference/java/util/Map.Entry.html",
             )
         }
     }
@@ -1280,11 +1281,11 @@ internal class ParameterDocumentableConverterTest(
             assertThat(returnType.link().name).isEqualTo("List")
             assertThat(returnType.link().url).isEqualTo(
                 "https://kotlinlang.org/api/latest/" +
-                    "jvm/stdlib/kotlin.collections/-list/index.html"
+                    "jvm/stdlib/kotlin.collections/-list/index.html",
             )
             assertThat(returnType.alternativeLink()?.url).isEqualTo(
                 "https://kotlinlang.org/api/latest/" +
-                    "jvm/stdlib/kotlin.collections/-mutable-list/index.html"
+                    "jvm/stdlib/kotlin.collections/-mutable-list/index.html",
             )
         }
     }
@@ -1324,13 +1325,15 @@ internal class ParameterDocumentableConverterTest(
     private fun DModule.paramConverter() =
         ConverterHolder(this@ParameterDocumentableConverterTest, this).paramConverter
 
-    private fun DModule.param(name: String = "foo", forSummary: Boolean = false):
-        ParameterComponent {
+    private fun DModule.param(
+        name: String = "foo",
+        forSummary: Boolean = false,
+    ): ParameterComponent {
         return paramConverter().componentForParameter(
             param = parameterDoc(name),
             isSummary = forSummary,
             isFromJava = function()!!.isFromJava(),
-            parent = function()!!
+            parent = function()!!,
         )
     }
 
@@ -1342,7 +1345,7 @@ internal class ParameterDocumentableConverterTest(
             propagatedAnnotations = emptyList(),
             isReturnType = true,
             isJavaSource = function(functionName)!!.isFromJava(),
-            sourceSet = getExpectOrCommonSourceSet()
+            sourceSet = getExpectOrCommonSourceSet(),
         )
     }
 
@@ -1354,7 +1357,7 @@ internal class ParameterDocumentableConverterTest(
         @Parameterized.Parameters(name = "{0}")
         fun data() = listOf(
             arrayOf(Language.JAVA),
-            arrayOf(Language.KOTLIN)
+            arrayOf(Language.KOTLIN),
         )
     }
 }

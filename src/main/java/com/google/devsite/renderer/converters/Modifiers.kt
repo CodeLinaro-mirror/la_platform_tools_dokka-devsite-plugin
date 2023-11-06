@@ -29,15 +29,18 @@ import org.jetbrains.dokka.model.properties.WithExtraProperties
 
 /** @return the complete list of modifiers for this type */
 internal fun Documentable.modifiers(
-    sourceSet: DokkaConfiguration.DokkaSourceSet
+    sourceSet: DokkaConfiguration.DokkaSourceSet,
 ): List<String> {
     val result = mutableListOf<String?>()
-    if (this is WithAbstraction)
+    if (this is WithAbstraction) {
         result += listOf(modifier[sourceSet]?.name)
-    if (this is WithVisibility)
+    }
+    if (this is WithVisibility) {
         result += listOf(visibility[sourceSet]?.name)
-    if (this is WithExtraProperties<*>)
+    }
+    if (this is WithExtraProperties<*>) {
         result += getExtraModifiers(sourceSet)
+    }
     return result.filterNotNull().filter { it.isNotEmpty() }
 }
 
@@ -46,7 +49,7 @@ internal fun Documentable.modifiers(
  *  i.e. VarArg
  */
 internal fun <T : WithExtraProperties<*>> T.getExtraModifiers(
-    sourceSet: DokkaConfiguration.DokkaSourceSet
+    sourceSet: DokkaConfiguration.DokkaSourceSet,
 ) = extra.allOfType<AdditionalModifiers>().flatMap { modifiers ->
     modifiers.content[sourceSet]?.map { it.name }
         ?.filter { it.isNotEmpty() } ?: emptyList()
@@ -54,7 +57,7 @@ internal fun <T : WithExtraProperties<*>> T.getExtraModifiers(
 
 /** @return true if the modifiers represent a constant symbol, false otherwise */
 internal fun DProperty.isConstant(
-    modifiers: List<String> = modifiers(getExpectOrCommonSourceSet())
+    modifiers: List<String> = modifiers(getExpectOrCommonSourceSet()),
 ): Boolean {
     return "const" in modifiers ||
         // A Java `static final` property is generally a constant, but due to b/241259955 could be
@@ -69,7 +72,7 @@ internal val EmptyModifiers = Modifiers()
 
 /** Returns a filtered and re-written list of modifiers. */
 internal fun List<String>.modifiersFor(
-    hints: ModifierHints
+    hints: ModifierHints,
 ): Modifiers {
     val modifiers = toMutableSet()
 
@@ -190,7 +193,7 @@ val modifierOrder = listOf(
     // Types (one of)
     "enum", "annotation", "fun",
     // More (could be more than one)
-    "companion", "inline", "infix", "operator", "data", "noinline", "crossinline"
+    "companion", "inline", "infix", "operator", "data", "noinline", "crossinline",
 )
 
 /**
@@ -230,7 +233,7 @@ internal data class ModifierHints(
     val isSummary: Boolean = false,
     val injectStatic: Boolean = false,
     val isConstructor: Boolean = false,
-    val inCompanion: Boolean = false
+    val inCompanion: Boolean = false,
 ) {
     val inInterface get() = containingType == DInterface::class.java
     val inPackage get() = containingType == DPackage::class.java

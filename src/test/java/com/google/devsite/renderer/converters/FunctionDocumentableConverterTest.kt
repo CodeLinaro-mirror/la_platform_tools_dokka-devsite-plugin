@@ -46,7 +46,7 @@ import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
 internal class FunctionDocumentableConverterTest(
-    private val displayLanguage: Language
+    private val displayLanguage: Language,
 ) : ConverterTestBase(displayLanguage) {
 
     override var defaultHints = ModifierHints(
@@ -54,7 +54,8 @@ internal class FunctionDocumentableConverterTest(
         isSummary = false,
         type = DFunction::class.java,
         containingType = DClass::class.java,
-        isFromJava = false // There's no great way to do this. Currently only affects `const` inject
+        isFromJava = false, // There's no great way to do this. Currently only affects
+        // `const` inject
     )
 
     @Test
@@ -183,8 +184,9 @@ internal class FunctionDocumentableConverterTest(
             val barReturnz = summaries["bar"]!!.returnSummary()
             javaOnly { assertThat(barReturnz.modifiers).containsExactly("default") }
             kotlinOnly {
-                if (summaries == summariesJ) assertThat(barReturnz.modifiers).isEmpty()
-                else assertThat(barReturnz.modifiers).containsExactly("open")
+                if (summaries == summariesJ) {
+                    assertThat(barReturnz.modifiers).isEmpty()
+                } else assertThat(barReturnz.modifiers).containsExactly("open")
             }
         }
     }
@@ -374,7 +376,7 @@ internal class FunctionDocumentableConverterTest(
             signature.data.name.data.url,
             "androidx/example/package-summary.html#" +
                 "(kotlin.collections.List)" +
-                ".foo(kotlin.Number,kotlin.collections.Map,kotlin.Function2)"
+                ".foo(kotlin.Number,kotlin.collections.Map,kotlin.Function2)",
         )
     }
 
@@ -479,8 +481,9 @@ internal class FunctionDocumentableConverterTest(
                 |fun nonna(): String = "foo"
                 """.render()
         fun DModule.sOrD(summary: Boolean, functionName: String): TypeProjectionComponent =
-            if (summary) functionSummary(functionName).data.title.data.type
-            else functionDetail(functionName).data.returnType
+            if (summary) {
+                functionSummary(functionName).data.title.data.type
+            } else functionDetail(functionName).data.returnType
         for (isSummary in listOf(true, false)) {
             for (whichFun in listOf("nonna", "nulla", "nonnaBefore", "nonnaClose", "platform")) {
                 val typeJ = if (whichFun == "nonna") null else moduleJ.sOrD(isSummary, whichFun)
@@ -491,7 +494,7 @@ internal class FunctionDocumentableConverterTest(
                     assertThat(
                         annotations.singleOrNull()?.name?.let {
                             it in NULLABILITY_ANNOTATION_NAMES
-                        }
+                        },
                     )
                     kotlinOnly {
                         // We've decided to hide all nullability annotations as-kotlin even if they
@@ -652,7 +655,7 @@ internal class FunctionDocumentableConverterTest(
             "(kotlin.collections.List)" +
                 ".foo(kotlin.Number, kotlin.collections.Map, kotlin.Function2)",
             "-kotlin.collections.List-.foo-kotlin.Number-kotlin.collections.Map-kotlin.Function2-",
-            "foo"
+            "foo",
         )
     }
 
@@ -750,7 +753,7 @@ internal class FunctionDocumentableConverterTest(
         @Parameterized.Parameters(name = "{0}")
         fun data() = listOf(
             arrayOf(Language.JAVA),
-            arrayOf(Language.KOTLIN)
+            arrayOf(Language.KOTLIN),
         )
     }
 }

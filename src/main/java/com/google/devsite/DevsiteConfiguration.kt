@@ -94,18 +94,18 @@ data class DevsiteConfiguration(
     val annotationsNotToDisplayKotlin: List<String>?,
     val hidingAnnotations: List<String> = emptyList(),
     // We set a default to the nullability annotations all android projects should use
-    val validNullabilityAnnotations: List<String> = defaultValidNullabilityAnnotations
+    val validNullabilityAnnotations: List<String> = defaultValidNullabilityAnnotations,
 ) : ConfigurableBlock {
     init {
         if (javaDocsPath == null && kotlinDocsPath == null) {
             throw IllegalStateException(
                 "Invalid Dackka configuration: at least one of `javaDocsPath` and " +
-                    "`kotlinDocsPath` must be specified as non-null"
+                    "`kotlinDocsPath` must be specified as non-null",
             )
         } else if (javaDocsPath == kotlinDocsPath) {
             throw IllegalStateException(
                 "Invalid Dackka configuration: `javaDocsPath` and `kotlinDocsPath` cannot have " +
-                    "the same value."
+                    "the same value.",
             )
         }
     }
@@ -143,6 +143,8 @@ data class DevsiteConfiguration(
 
 /** The `android.` annotations should be used in the android platform itself only--nowhere else. */
 val defaultValidNullabilityAnnotations = listOf(
-    "androidx.annotation.Nullable", "android.annotation.Nullable",
-    "androidx.annotation.NonNull", "android.annotation.NonNull"
+    "androidx.annotation.Nullable",
+    "android.annotation.Nullable",
+    "androidx.annotation.NonNull",
+    "android.annotation.NonNull",
 )

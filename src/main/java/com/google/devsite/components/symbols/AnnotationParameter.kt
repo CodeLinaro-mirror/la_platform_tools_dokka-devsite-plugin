@@ -30,6 +30,7 @@ internal interface NamedValueAnnotationParameter : AnnotationParameter {
         val valueSize = data.value.length
         return nameSize + valueSize
     }
+
     // Name is null if inside an array, in which case only the array is named
     data class Params(val name: String?, val value: String)
 }

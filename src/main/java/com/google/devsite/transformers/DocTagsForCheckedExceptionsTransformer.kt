@@ -26,36 +26,37 @@ class DocTagsForCheckedExceptionsTransformer : DocumentableTransformer {
         original.copy(
             packages = original.packages.map { p ->
                 p.copy(classlikes = p.classlikes.map(::transformClasslike))
-            }
+            },
         )
 
     private fun transformClasslike(classlike: DClasslike): DClasslike =
         when (classlike) {
             is DInterface -> classlike.copy(
                 functions = classlike.functions.map(::transformFunction),
-                classlikes = classlike.classlikes.map(::transformClasslike)
+                classlikes = classlike.classlikes.map(::transformClasslike),
             )
             is DClass -> classlike.copy(
                 functions = classlike.functions.map(::transformFunction),
-                classlikes = classlike.classlikes.map(::transformClasslike)
+                classlikes = classlike.classlikes.map(::transformClasslike),
             )
             is DEnum -> classlike.copy(
                 functions = classlike.functions.map(::transformFunction),
-                classlikes = classlike.classlikes.map(::transformClasslike)
+                classlikes = classlike.classlikes.map(::transformClasslike),
             )
             is DObject -> classlike.copy(
                 functions = classlike.functions.map(::transformFunction),
-                classlikes = classlike.classlikes.map(::transformClasslike)
+                classlikes = classlike.classlikes.map(::transformClasslike),
             )
             is DAnnotation -> classlike
         }
 
     private fun transformFunction(
-        function: DFunction
+        function: DFunction,
     ): DFunction {
         val allExceptions = function.extra[CheckedExceptions]?.exceptions
-        return if (allExceptions.isNullOrEmpty()) function
-        else {
+        return if (allExceptions.isNullOrEmpty()) {
+            function
+        } else {
             val newDocs = allExceptions.entries.map { (set, exceptions) ->
                 val oldDoc = function.documentation[set] ?: DocumentationNode(emptyList())
                 set to documentThrows(oldDoc, exceptions)
@@ -67,7 +68,7 @@ class DocTagsForCheckedExceptionsTransformer : DocumentableTransformer {
 
     private fun documentThrows(
         oldDoc: DocumentationNode,
-        exceptions: List<DRI>
+        exceptions: List<DRI>,
     ): DocumentationNode {
         val knownThrows = oldDoc.children.filterIsInstance<ThrowsTag>()
             .mapNotNull { it.exceptionAddress }
@@ -77,7 +78,7 @@ class DocTagsForCheckedExceptionsTransformer : DocumentableTransformer {
             ThrowsTag(
                 CustomDocTag(name = MarkdownElementTypes.MARKDOWN_FILE.name),
                 it.fqName().orEmpty(),
-                it
+                it,
             )
         }
 

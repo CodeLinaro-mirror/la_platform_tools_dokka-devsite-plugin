@@ -30,7 +30,7 @@ internal interface ClasslikeDescription : ContextFreeComponent {
         open val primarySignature: ClasslikeSignature,
         open val hierarchy: ClassHierarchy,
         open val relatedSymbols: RelatedSymbols,
-        open val descriptionDocs: List<ContextFreeComponent>
+        open val descriptionDocs: List<ContextFreeComponent>,
     ) {
         override fun equals(other: Any?): Boolean {
             if (this === other) return true

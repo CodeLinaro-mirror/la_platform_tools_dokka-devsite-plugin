@@ -23,7 +23,7 @@ import kotlinx.html.id
 
 /** Default implementation of a MetadataComponent. */
 internal data class DefaultMetadataComponent(
-    override val data: MetadataComponent.Params
+    override val data: MetadataComponent.Params,
 ) : MetadataComponent {
 
     override fun render(into: FlowContent): Unit = into.run {

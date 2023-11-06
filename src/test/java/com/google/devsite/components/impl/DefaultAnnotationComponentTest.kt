@@ -37,7 +37,7 @@ class DefaultAnnotationComponentTest {
         assertThat(output).isEqualTo(
             """
 <div>@Foo</div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -48,10 +48,10 @@ class DefaultAnnotationComponentTest {
                 type = NoopLink("Foo"),
                 parameters = listOf(
                     DefaultNamedValueAnnotationParameter(
-                        NamedValueAnnotationParameter.Params("a", "value")
-                    )
-                )
-            )
+                        NamedValueAnnotationParameter.Params("a", "value"),
+                    ),
+                ),
+            ),
         )
 
         val output = createHTML().div {
@@ -62,7 +62,7 @@ class DefaultAnnotationComponentTest {
         assertThat(output).isEqualTo(
             """
 <div>@Foo(a&nbsp;=&nbsp;value)</div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -73,13 +73,13 @@ class DefaultAnnotationComponentTest {
                 type = NoopLink("Foo"),
                 parameters = listOf(
                     DefaultNamedValueAnnotationParameter(
-                        NamedValueAnnotationParameter.Params("a", "value")
+                        NamedValueAnnotationParameter.Params("a", "value"),
                     ),
                     DefaultNamedValueAnnotationParameter(
-                        NamedValueAnnotationParameter.Params("another", "value")
-                    )
-                )
-            )
+                        NamedValueAnnotationParameter.Params("another", "value"),
+                    ),
+                ),
+            ),
         )
 
         val output = createHTML().div {
@@ -90,7 +90,7 @@ class DefaultAnnotationComponentTest {
         assertThat(output).isEqualTo(
             """
 <div>@Foo(a&nbsp;=&nbsp;value,&nbsp;another&nbsp;=&nbsp;value)</div>
-            """.trim()
+            """.trim(),
         )
     }
 }

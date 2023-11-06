@@ -45,7 +45,7 @@ class BasicTest : IntegrationTestBase() {
             testName = "fragment",
             artifactNames = listOf("fragment"),
             samples = true,
-            versionMetadata = true
+            versionMetadata = true,
         )
     }
 
@@ -70,8 +70,8 @@ class BasicTest : IntegrationTestBase() {
                 "lifecycle-service",
                 "lifecycle-viewmodel",
                 "lifecycle-viewmodel-ktx",
-                "lifecycle-viewmodel-savedstate"
-            )
+                "lifecycle-viewmodel-savedstate",
+            ),
         )
     }
 
@@ -87,11 +87,11 @@ class BasicTest : IntegrationTestBase() {
                 "paging-rxjava2",
                 "paging-rxjava2-ktx",
                 "paging-rxjava3",
-                "paging-guava"
+                "paging-guava",
                 // Either don't compile testData/paging/source or dackka applies the compose plugin
                 // "paging-compose"
             ),
-            samples = true
+            samples = true,
         )
     }
 
@@ -99,7 +99,7 @@ class BasicTest : IntegrationTestBase() {
     fun `Validate @sample`() {
         validateDirectory(
             "sampleAnnotation",
-            sampleLocations = listOf("samples")
+            sampleLocations = listOf("samples"),
         )
     }
 
@@ -117,7 +117,7 @@ class BasicTest : IntegrationTestBase() {
     fun `Validate package-level @hide and custom hide annotations`() {
         validateDirectory(
             "hidden",
-            hidingAnnotations = listOf("dokkatest.nothidden.CustomHideAnnotation")
+            hidingAnnotations = listOf("dokkatest.nothidden.CustomHideAnnotation"),
         )
     }
 
@@ -134,7 +134,7 @@ class BasicTest : IntegrationTestBase() {
             projectPath = "",
             kotlinDocsDirectory = "",
             javaDocsDirectory = null,
-            includedHeadTagsPathKotlin = null
+            includedHeadTagsPathKotlin = null,
         )
     }
 

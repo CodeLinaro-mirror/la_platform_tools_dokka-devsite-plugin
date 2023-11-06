@@ -28,6 +28,6 @@ internal interface PropertySignature : SymbolSignature {
     data class Params(
         override val name: Link,
         override val receiver: ParameterComponent? = null,
-        val constantValue: String? = null
+        val constantValue: String? = null,
     ) : SymbolSignature.Params
 }

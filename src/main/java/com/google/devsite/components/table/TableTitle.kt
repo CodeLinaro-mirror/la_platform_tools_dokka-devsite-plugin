@@ -22,6 +22,6 @@ internal interface TableTitle : RowComponent {
 
     data class Params(
         val title: String,
-        val big: Boolean = false
+        val big: Boolean = false,
     )
 }

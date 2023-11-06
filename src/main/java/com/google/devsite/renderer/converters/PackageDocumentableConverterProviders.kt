@@ -31,7 +31,7 @@ internal class NonKmpPackageConverter(
     functionConverter: FunctionDocumentableConverter,
     propertyConverter: PropertyDocumentableConverter,
     javadocConverter: DocTagConverter,
-    paramConverter: ParameterDocumentableConverter
+    paramConverter: ParameterDocumentableConverter,
 ) : PackageDocumentableConverter(
     displayLanguage,
     dPackage,
@@ -40,7 +40,7 @@ internal class NonKmpPackageConverter(
     functionConverter,
     propertyConverter,
     javadocConverter,
-    paramConverter
+    paramConverter,
 ) {
     override val header: DefaultDevsitePlatformSelector? = null
     override val functionToSummaryConverter = functionConverter::summary
@@ -59,7 +59,7 @@ internal class KmpPackageConverter(
     propertyConverter: PropertyDocumentableConverter,
     javadocConverter: DocTagConverter,
     paramConverter: ParameterDocumentableConverter,
-    platforms: List<Platform>
+    platforms: List<Platform>,
 ) : PackageDocumentableConverter(
     displayLanguage,
     dPackage,
@@ -68,7 +68,7 @@ internal class KmpPackageConverter(
     functionConverter,
     propertyConverter,
     javadocConverter,
-    paramConverter
+    paramConverter,
 ) {
     override val header = DefaultDevsitePlatformSelector(platforms)
     override val functionToSummaryConverter = functionConverter::summaryKmp

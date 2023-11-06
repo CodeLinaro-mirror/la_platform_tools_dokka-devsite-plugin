@@ -24,6 +24,6 @@ internal interface ClassHierarchy : ContextFreeComponent {
     val data: Params
 
     data class Params(
-        val parents: List<Link>
+        val parents: List<Link>,
     )
 }

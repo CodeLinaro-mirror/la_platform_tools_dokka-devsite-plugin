@@ -25,7 +25,7 @@ import kotlinx.html.FlowContent
 
 /** Default implementation of a function parameter. */
 internal data class DefaultParameterComponent(
-    override val data: ParameterComponent.Params
+    override val data: ParameterComponent.Params,
 ) : ParameterComponent {
 
     override fun render(into: FlowContent) = into.run {
@@ -64,6 +64,8 @@ internal data class DefaultParameterComponent(
     override fun toString() = data.annotationComponents.joinMaybePrefix(postfix = " ") +
         data.modifiers.joinMaybePrefix(postfix = " ") +
         data.type +
-        if (data.name.isNotEmpty()) " " + data.name else "" +
+        if (data.name.isNotEmpty()) {
+            " " + data.name
+        } else "" +
             (data.defaultValue ?: "")
 }

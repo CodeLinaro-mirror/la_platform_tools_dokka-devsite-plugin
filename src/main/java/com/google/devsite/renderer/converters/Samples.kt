@@ -50,7 +50,7 @@ internal var isRunningInDackkasTests = false
  */
 internal fun fqNameToPsiElement(
     resolutionFacade: DokkaResolutionFacade,
-    functionName: String
+    functionName: String,
 ): PsiElement? {
     val packageName = functionName.takeWhile { it != '.' }
     val descriptor = resolutionFacade.resolveSession.getPackageFragment(FqName(packageName))
@@ -60,7 +60,7 @@ internal fun fqNameToPsiElement(
         resolutionFacade,
         descriptor,
         null,
-        functionName.split(".")
+        functionName.split("."),
     ).firstOrNull()
         ?: throw RuntimeException("Unresolved function $functionName in @sample")
     return DescriptorToSourceUtils.descriptorToDeclaration(symbol)
@@ -140,7 +140,9 @@ internal fun processImports(psiElement: PsiElement): String {
         if (filteredImports.isEmpty()) { return "" }
         // The first blank line doesn't appear in rendered html, just makes raws look nicer
         return "\n" + filteredImports.joinToString(separator = "\n") { it.text } + "\n\n"
-    } else throw RuntimeException("${psiFile::class} is not a supported sample file type")
+    } else {
+        throw RuntimeException("${psiFile::class} is not a supported sample file type")
+    }
 }
 
 /**
@@ -155,7 +157,7 @@ internal fun setUpAnalysis(context: DokkaContext) = context.configuration.source
     .filter { it.samples.isNotEmpty() }.associateWith { sourceSet ->
         AnalysisEnvironment(
             DokkaMessageCollector(context.logger),
-            sourceSet.analysisPlatform
+            sourceSet.analysisPlatform,
         ).run {
             if (analysisPlatform == Platform.jvm) {
                 addClasspath(PathUtil.getJdkClassesRootsFromCurrentJre())
@@ -174,16 +176,18 @@ internal fun setUpAnalysis(context: DokkaContext) = context.configuration.source
 /** Resolves a javadoc `{@sample path/to/file.javaOrXml}`. Takes Text, returns <pre><code>. */
 internal fun convertTextToJavadocSample(
     block: Text,
-    samples: Set<File>
+    samples: Set<File>,
 ): Pre {
     val sampleLine = block.body
         .trim().removePrefix("{").removeSuffix("}")
         // Upstream inserts "*"s on line breaks within the { }
         .split(" ").filter { it.isNotEmpty() && it != "*" }
-    if (sampleLine[0] != "@sample") throw RuntimeException(
-        "invalid first line of " +
-            "purported sample block: \"${sampleLine[0]}\"; expected to be \"@sample\""
-    )
+    if (sampleLine[0] != "@sample") {
+        throw RuntimeException(
+            "invalid first line of " +
+                "purported sample block: \"${sampleLine[0]}\"; expected to be \"@sample\"",
+        )
+    }
     val filePath = sampleLine[1]
     val whatSamples = sampleLine[2]
     val sampleFiles = samples.allFiles()
@@ -194,16 +198,20 @@ internal fun convertTextToJavadocSample(
         resolvedFile = sampleFiles.filter { it.name == filePath.split("/").last() }
     }
     return when (resolvedFile.size) {
-        0 -> if (failOnMissingSamples) throw RuntimeException(
-            "Unable to find the sample file $filePath in the samples directory " +
-                sampleFiles.map { it.path }.reduce { acc, s -> acc.commonPrefixWith(s) }
-        ) else Pre(emptyList())
+        0 -> if (failOnMissingSamples) {
+            throw RuntimeException(
+                "Unable to find the sample file $filePath in the samples directory " +
+                    sampleFiles.map { it.path }.reduce { acc, s -> acc.commonPrefixWith(s) },
+            )
+        } else {
+            Pre(emptyList())
+        }
         1 -> {
             // extractCodeBlockFromFile can only work with .java and .xml files
             val fileExtension = resolvedFile.single().path.substringAfterLast(".")
             Pre(
                 params = mapOf("class" to "prettyprint lang-$fileExtension"),
-                children = listOf(extractCodeBlockFromFile(resolvedFile.single(), whatSamples))
+                children = listOf(extractCodeBlockFromFile(resolvedFile.single(), whatSamples)),
             )
         }
         else -> throw RuntimeException("Somehow, multiple files with path $filePath were found.")
@@ -211,7 +219,9 @@ internal fun convertTextToJavadocSample(
 }
 
 private fun Iterable<File>.allFiles() = this.map { it.allFiles() }.flatten()
-private fun File.allFiles(): List<File> = if (this.isFile) listOf(this) else
+private fun File.allFiles(): List<File> = if (this.isFile) {
+    listOf(this)
+} else
     listFiles()!!.asIterable().allFiles()
 
 /**

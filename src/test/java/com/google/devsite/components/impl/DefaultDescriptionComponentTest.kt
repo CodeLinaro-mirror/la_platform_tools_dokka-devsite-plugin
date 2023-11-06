@@ -43,7 +43,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
 <body>
   <p>Hello world!</p>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -53,7 +53,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             |/** Hello world! */
             |class Foo
         """.render().description(
-            deprecation = "This class is deprecated."
+            deprecation = "This class is deprecated.",
         )
 
         val output = createHTML().body {
@@ -68,7 +68,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
     <p>Hello world!</p>
   </aside>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -93,7 +93,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
 <body>
   <p>1 2 3.</p>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -118,7 +118,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
 <body>
   <p>This is foo.bar, blah blah.</p>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -139,7 +139,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
 <body>
   <p>Foo.Bar has great drinks.</p>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -196,7 +196,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
 <body>
   <p>This Animatable function creates a float value holder that automatically animates its value when the value is changed via animateTo.</p>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -224,7 +224,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
 <body>
   <p>Animation will be forced to end when its value reaches upper/lower bound (if they have been defined, e.g. via Animatable.updateBounds)</p>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -248,7 +248,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
 <body>
   <p>the amount of time (in milliseconds) the animation will take to finish.</p>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -261,7 +261,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             |class Foo
         """.render().description(
             summary = true,
-            deprecation = "This class is deprecated."
+            deprecation = "This class is deprecated.",
         )
 
         val output = createHTML().body {
@@ -275,7 +275,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
                 "  <p><strong>This class is deprecated.</strong>\n" +
                 "    <p>Hello world!</p>\n" +
                 "  </p>\n" +
-                "   </body>".trim()
+                "   </body>".trim(),
         )
     }
 
@@ -320,7 +320,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
   <p>There was an old lady who swallowed a cow. I don't know how she swallowed a cow! She swallowed the cow to catch the goat... She swallowed the goat to catch the dog... She swallowed the dog to catch the cat... She swallowed the cat to catch the bird ... She swallowed the bird to catch the spider That wiggled and wiggled and tickled inside her. She swallowed the spider to catch the fly. But I dunno why she swallowed that fly Perhaps she'll die.</p>
   <p>There was an old lady who swallowed a horse - She's dead, of course.</p>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -345,7 +345,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
 <body>
   <p>A <br>B <br>C.</p>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -371,7 +371,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
 <body>
   <p>The <code>Boolean</code> type has two possible values: <code>true</code> or <code>false</code>.</p>
 </body>
-            """.trim()
+            """.trim(),
             )
         }
     }
@@ -391,7 +391,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
         assertThat(output).isEqualTo(
             """
 <body><p><em>Italics</em>, <b>Bold</b>, <em><b>Both</b></em>, <del>Bad</del>.</p></body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -428,7 +428,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
     </li>
   </ul>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -465,7 +465,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
     </li>
   </ol>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -508,7 +508,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
     </li>
   </ol>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -556,7 +556,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
          The subdirectory you're sharing.
      </dd>
 </dl></body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -601,7 +601,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
     <dd> The subdirectory you're sharing. </dd>
   </dl>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -672,7 +672,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
     </li>
   </ul>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -720,7 +720,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
     </tr>
   </table>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -757,7 +757,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
     val butWhy = &quot;per markdown spec, because four-spaces prefix&quot;
 }</pre>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -778,7 +778,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
 <body>
   <p>Click <a href="http://meme">here</a>.</p>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -801,7 +801,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
 <body>
   <p><code><a href="/reference/androidx/example/Bar.html">Bar</a></code> is pretty cool.</p>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -824,7 +824,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
 <body>
   <p><code><a href="/reference/androidx/example/package-summary.html#bar()">bar</a></code> is pretty cool.</p>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -849,7 +849,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
 <body>
   <p><code><a href="/reference/androidx/example/BarIsVeryVeryVeryVeryLongNamed.html">Special snowflake snowflake snowflake snowflake snowflake</a></code> is pretty cool.</p>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -870,7 +870,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
 <body>
   <p><img alt="Alt text" src="/path/to/img.jpg"></p>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -896,7 +896,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
     <p>Two things are infinite: the universe and human stupidity; and I'm not sure about the universe. -- Albert Einstein</p>
   </blockquote>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -919,7 +919,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
     <del>Hello</del>
  world!</p>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -964,7 +964,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
         DOPreserveWhitespace: String            \\ blah
     }
 </pre>
-</body>"""
+</body>""",
         )
     }
 
@@ -1008,7 +1008,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
       </tr>
     </tbody>
   </table>
-</body>"""
+</body>""",
         )
     }
 
@@ -1057,7 +1057,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
                 .detectDiskReads()
 </pre>
 </body>
-        """.trim()
+        """.trim(),
         )
         // language=html
         assertThat(outputK).isEqualTo(
@@ -1070,7 +1070,7 @@ public void onCreate() {
         StrictMode.setThreadPolicy(new [Foo]()
                 .detectDiskReads()
 </pre></body>
-        """.trim()
+        """.trim(),
         )
     }
 
@@ -1091,7 +1091,7 @@ public void onCreate() {
 <body>
   <p>Click <a href="/guide">here</a>.</p>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -1112,13 +1112,13 @@ public void onCreate() {
 <body>
   <p><h2 id="sample-formats">Fields relevant to sample formats</h2></p>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
     private fun DModule.description(
         summary: Boolean = false,
-        deprecation: String? = null
+        deprecation: String? = null,
     ): DefaultDescriptionComponent {
         val tag = explicitClasslike("Foo").tag()
         val converterHolder = ConverterHolder(this@DefaultDescriptionComponentTest, this)
@@ -1127,8 +1127,8 @@ public void onCreate() {
                 converterHolder.provider,
                 tag.children,
                 summary,
-                deprecation
-            )
+                deprecation,
+            ),
         )
     }
 

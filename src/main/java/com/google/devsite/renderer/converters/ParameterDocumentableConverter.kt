@@ -67,7 +67,7 @@ import java.util.concurrent.ConcurrentHashMap
 internal class ParameterDocumentableConverter(
     private val displayLanguage: Language,
     private val pathProvider: FilePathProvider,
-    private val annotationConverter: AnnotationDocumentableConverter
+    private val annotationConverter: AnnotationDocumentableConverter,
 ) {
 
     /**
@@ -86,7 +86,7 @@ internal class ParameterDocumentableConverter(
         param: DParameter,
         isSummary: Boolean,
         isFromJava: Boolean,
-        parent: Documentable
+        parent: Documentable,
     ): ParameterComponent = when (displayLanguage) {
         Language.JAVA -> {
             val (propagatedAnnotations, retainedAnnotations) =
@@ -96,7 +96,7 @@ internal class ParameterDocumentableConverter(
                 param.type.getNullability(
                     displayLanguage,
                     isFromJava,
-                    param.sourceSetIndependentAnnotations()
+                    param.sourceSetIndependentAnnotations(),
                 )
             DefaultParameterComponent(
                 ParameterComponent.Params(
@@ -106,7 +106,7 @@ internal class ParameterDocumentableConverter(
                         isJavaSource = isFromJava,
                         sourceSet = parent.getExpectOrCommonSourceSet(),
                         propagatedAnnotations = propagatedAnnotations,
-                        propagatedNullability = nullability
+                        propagatedNullability = nullability,
                     ),
                     displayLanguage = Language.JAVA,
                     modifiers = param.getExtraModifiers(parent.getExpectOrCommonSourceSet())
@@ -117,13 +117,13 @@ internal class ParameterDocumentableConverter(
                                 containingType = parent::class.java,
                                 isFromJava = isFromJava,
                                 isSummary = false,
-                            )
+                            ),
                         ),
                     annotationComponents = annotationConverter.annotationComponents(
                         annotations = retainedAnnotations,
                         nullability = Nullability.DONT_CARE, // Propagate Nullability, don't retain
-                    )
-                )
+                    ),
+                ),
             )
         }
         Language.KOTLIN -> {
@@ -141,8 +141,8 @@ internal class ParameterDocumentableConverter(
                             type = DParameter::class.java,
                             containingType = parent::class.java,
                             isFromJava = isFromJava,
-                            isSummary = false
-                        )
+                            isSummary = false,
+                        ),
                     ),
                 annotations = param.annotations(parent.getExpectOrCommonSourceSet()),
             )
@@ -156,7 +156,7 @@ internal class ParameterDocumentableConverter(
         parent: Documentable,
         defaultValue: String? = null,
         modifiers: Modifiers = EmptyModifiers,
-        annotations: List<Annotation> = emptyList()
+        annotations: List<Annotation> = emptyList(),
     ): ParameterComponent {
         val projKotlin = param.type.possiblyAsKotlin()
         val name = param.name.orEmpty()
@@ -164,7 +164,7 @@ internal class ParameterDocumentableConverter(
             projection = projKotlin,
             isJavaSource = isFromJava,
             sourceSet = parent.getExpectOrCommonSourceSet(),
-            propagatedAnnotations = annotations.filter { it.belongsOnReturnType() }
+            propagatedAnnotations = annotations.filter { it.belongsOnReturnType() },
         )
 
         val paramName = if (projKotlin.isLambda() && name.isEmpty()) {
@@ -183,15 +183,15 @@ internal class ParameterDocumentableConverter(
                 annotationComponents = annotationConverter.annotationComponents(
                     annotations = annotations.filter { !it.belongsOnReturnType() },
                     nullability = Nullability.DONT_CARE, // as-Kotlin doesn't nullable-annotate
-                )
-            )
+                ),
+            ),
         )
     }
 
     /** Turns a DTypeParameter into a TypeParameterComponent */
     fun componentForTypeParameter(
         param: DTypeParameter,
-        isFromJava: Boolean
+        isFromJava: Boolean,
     ) = DefaultTypeParameterComponent(
         TypeParameterComponent.Params(
             name = param.variantTypeParameter.inner.name,
@@ -206,14 +206,14 @@ internal class ParameterDocumentableConverter(
                         it.getNullability(
                             displayLanguage,
                             isFromJava,
-                            param.sourceSetIndependentAnnotations()
+                            param.sourceSetIndependentAnnotations(),
                         )
-                    }
+                    },
                 )
             },
             pathProvider = pathProvider,
-            displayLanguage = displayLanguage
-        )
+            displayLanguage = displayLanguage,
+        ),
     )
 
     /** Turns a lambda (a: String) -> Int 's parameter (a Projection), to a ParameterComponent */
@@ -221,7 +221,7 @@ internal class ParameterDocumentableConverter(
         projection: Projection,
         isFromJava: Boolean,
         sourceSet: DokkaConfiguration.DokkaSourceSet,
-        isSummary: Boolean = false
+        isSummary: Boolean = false,
     ): ParameterComponent {
         val primaryType = componentForProjection(
             projection = projection,
@@ -230,7 +230,7 @@ internal class ParameterDocumentableConverter(
             removedAnnotations = projection.annotations(sourceSet)
                 .filter { !it.belongsOnReturnType() }.distinctBy { it.identifier },
             propagatedAnnotations = projection.annotations(sourceSet)
-                .filter { it.belongsOnReturnType() }
+                .filter { it.belongsOnReturnType() },
         )
 
         val name = (projection as? TypeConstructor)?.presentableName ?: ""
@@ -246,8 +246,8 @@ internal class ParameterDocumentableConverter(
                     isSummary = isSummary,
                     type = DParameter::class.java,
                     containingType = DParameter::class.java,
-                    isFromJava = isFromJava
-                )
+                    isFromJava = isFromJava,
+                ),
             )
 
         return DefaultParameterComponent(
@@ -260,9 +260,9 @@ internal class ParameterDocumentableConverter(
                 annotationComponents = annotationConverter.annotationComponents(
                     annotations = projection.annotations(sourceSet)
                         .filter { !it.belongsOnReturnType() },
-                    nullability = projection.getNullability(displayLanguage, isFromJava)
-                )
-            )
+                    nullability = projection.getNullability(displayLanguage, isFromJava),
+                ),
+            ),
         )
     }
 
@@ -289,15 +289,16 @@ internal class ParameterDocumentableConverter(
         propagatedAnnotations: List<Annotation> = emptyList(),
         removedAnnotations: List<Annotation> = emptyList(),
         isReturnType: Boolean = false,
-        propagatedNullability: Nullability? = null
+        propagatedNullability: Nullability? = null,
     ): TypeProjectionComponent {
         // Lambda functions can't be generic types, but their parameters are crammed into the same
         // "projections" location where generic types are stored.
         // This must happen before the rewriting because PrimitiveJavaTypes can't have generics
         var generics = projection.generics(isJavaSource, sourceSet)
         // This rewriting must happen before Variance is handled, or we won't know whether to unbox
-        val proj = if (displayLanguage == Language.KOTLIN) projection.possiblyAsKotlin()
-        // This recurs, though isReturnType is always false past the top level
+        val proj = if (displayLanguage == Language.KOTLIN) {
+            projection.possiblyAsKotlin()
+        } // This recurs, though isReturnType is always false past the top level
         else projection.rewriteKotlinPrimitivesForJava(isReturnType)
         // If a type becomes a java primitive array via rewriting, generics get hoisted
         if (proj is PrimitiveJavaType && proj.name.endsWith("[]")) generics = emptyList()
@@ -311,7 +312,7 @@ internal class ParameterDocumentableConverter(
                 propagatedAnnotations = propagatedAnnotations,
                 removedAnnotations = removedAnnotations,
                 isReturnType = false,
-                propagatedNullability = Nullability.KOTLIN_NULLABLE or propagatedNullability
+                propagatedNullability = Nullability.KOTLIN_NULLABLE or propagatedNullability,
             )
         }
         // isReturnType = should_convert_Unit_to_void, which is always false for `GenericOf<Unit>`.
@@ -323,7 +324,7 @@ internal class ParameterDocumentableConverter(
                 propagatedAnnotations = propagatedAnnotations,
                 removedAnnotations = removedAnnotations,
                 isReturnType = false,
-                propagatedNullability = propagatedNullability
+                propagatedNullability = propagatedNullability,
             )
         }
         if (proj is TypeAliased) {
@@ -334,7 +335,7 @@ internal class ParameterDocumentableConverter(
                 propagatedAnnotations = propagatedAnnotations,
                 removedAnnotations = removedAnnotations,
                 isReturnType = isReturnType,
-                propagatedNullability = propagatedNullability
+                propagatedNullability = propagatedNullability,
             )
         }
 
@@ -357,15 +358,15 @@ internal class ParameterDocumentableConverter(
                     nullability = nullability,
                     displayLanguage = Language.JAVA,
                     generics = generics,
-                    annotationComponents = annotationComponents
-                )
+                    annotationComponents = annotationComponents,
+                ),
             )
             Language.KOTLIN -> when {
                 proj.isLambda() -> componentForLambdaProjectionAsKotlin(
                     proj = proj,
                     annotations = annotations,
                     nullability = nullability,
-                    sourceSet = sourceSet
+                    sourceSet = sourceSet,
                 )
                 isJavaSource && proj is GenericTypeConstructor && proj.dri in mappedCollections ->
                     DefaultMappedTypeProjectionComponent(
@@ -375,14 +376,14 @@ internal class ParameterDocumentableConverter(
                                 Link.Params(
                                     name = "Mutable",
                                     url = pathProvider.forReference(
-                                        mappedCollections.getValue(proj.dri)
-                                    ).url
-                                )
+                                        mappedCollections.getValue(proj.dri),
+                                    ).url,
+                                ),
                             ),
                             annotationComponents = annotationComponents,
                             nullability = nullability,
-                            generics = generics
-                        )
+                            generics = generics,
+                        ),
                     )
                 else -> DefaultTypeProjectionComponent(
                     TypeProjectionComponent.Params(
@@ -390,8 +391,8 @@ internal class ParameterDocumentableConverter(
                         nullability = nullability,
                         displayLanguage = Language.KOTLIN,
                         generics = generics,
-                        annotationComponents = annotationComponents
-                    )
+                        annotationComponents = annotationComponents,
+                    ),
                 )
             }
         }
@@ -428,10 +429,11 @@ internal class ParameterDocumentableConverter(
                 annotationComponents = annotationConverter.annotationComponents(
                     annotations = annotations,
                     // Don't inject space-consuming nullability annotations for type parameters
-                    nullability = if (displayLanguage == Language.JAVA) Nullability.DONT_CARE
-                    else proj.getNullability(displayLanguage, false, annotations) or nullability,
-                )
-            )
+                    nullability = if (displayLanguage == Language.JAVA) {
+                        Nullability.DONT_CARE
+                    } else proj.getNullability(displayLanguage, false, annotations) or nullability,
+                ),
+            ),
         )
     }
 
@@ -442,7 +444,8 @@ internal class ParameterDocumentableConverter(
         }
         is Nullable -> this.inner.generics(isJavaSource, sourceSet)
         is TypeParameter, is PrimitiveJavaType, is UnresolvedBound,
-        is JavaObject, Star, Void, Dynamic -> emptyList()
+        is JavaObject, Star, Void, Dynamic,
+        -> emptyList()
         // These three don't matter in the main use case because we recurse there later
         is Variance<*> -> this.inner.generics(isJavaSource, sourceSet)
         is TypeAliased -> this.inner.generics(isJavaSource, sourceSet)
@@ -471,12 +474,12 @@ internal class ParameterDocumentableConverter(
             ) {
                 copy(
                     projections = emptyList(),
-                    dri = DRI("kotlin", javaPrimitiveToKotlinArrayType[proj.name])
+                    dri = DRI("kotlin", javaPrimitiveToKotlinArrayType[proj.name]),
                 )
             } else {
                 copy(
                     projections = projections.map { it.possiblyAsKotlin() },
-                    dri = dri.possiblyAsKotlin()
+                    dri = dri.possiblyAsKotlin(),
                 )
             }
         }
@@ -493,7 +496,8 @@ internal class ParameterDocumentableConverter(
         }
 
         is GenericTypeConstructor, is TypeParameter, is PrimitiveJavaType,
-        is UnresolvedBound, is JavaObject, Star, Void -> null
+        is UnresolvedBound, is JavaObject, Star, Void,
+        -> null
         is Nullable -> inner.receiver()
         is DefinitelyNonNullable -> inner.receiver()
         is Variance<*> -> inner.receiver()
@@ -511,8 +515,8 @@ internal class ParameterDocumentableConverter(
         is TypeParameter -> DefaultLink(
             Link.Params(
                 name = (presentableName ?: name) + suffix,
-                url = ""
-            )
+                url = "",
+            ),
         )
         Star -> DefaultLink(
             Link.Params(
@@ -520,8 +524,8 @@ internal class ParameterDocumentableConverter(
                     Language.JAVA -> "?"
                     Language.KOTLIN -> "*"
                 },
-                url = ""
-            )
+                url = "",
+            ),
         )
         Void -> when (displayLanguage) {
             Language.JAVA -> DefaultLink(Link.Params(name = "void", url = ""))
@@ -531,7 +535,7 @@ internal class ParameterDocumentableConverter(
         is PrimitiveJavaType -> when (displayLanguage) {
             Language.JAVA -> DefaultLink(Link.Params(name = name, url = ""))
             Language.KOTLIN -> pathProvider.linkForReference(
-                DRI("kotlin", name.capitalize())
+                DRI("kotlin", name.capitalize()),
             )
         }
         is UnresolvedBound -> DefaultLink(Link.Params(name = name, url = ""))
@@ -540,7 +544,7 @@ internal class ParameterDocumentableConverter(
         Dynamic, is TypeAliased, is Contravariance<*>, is Covariance<*>, is Invariance<*> ->
             throw RuntimeException(
                 "Error in type projection: ${(this::class).simpleName} bound" +
-                    "is not supported here: $this"
+                    "is not supported here: $this",
             )
     }
 
@@ -555,7 +559,8 @@ internal class ParameterDocumentableConverter(
         is TypeAliased -> inner.isLambda()
         is DefinitelyNonNullable -> inner.isLambda()
         is TypeParameter, is PrimitiveJavaType,
-        is UnresolvedBound, is JavaObject, Star, Void -> false
+        is UnresolvedBound, is JavaObject, Star, Void,
+        -> false
         Dynamic -> error("Unknown bound: $this of type ${this::class.java}")
     }
 
@@ -569,10 +574,24 @@ internal class ParameterDocumentableConverter(
 
     internal companion object {
         val kotlinPrimitives = listOf(
-            "Boolean", "Byte", "Char", "Short", "Int", "Long", "Float", "Double"
+            "Boolean",
+            "Byte",
+            "Char",
+            "Short",
+            "Int",
+            "Long",
+            "Float",
+            "Double",
         )
         val javaBoxedPrimitives = listOf(
-            "Boolean", "Byte", "Character", "Short", "Int", "Long", "Float", "Double"
+            "Boolean",
+            "Byte",
+            "Character",
+            "Short",
+            "Int",
+            "Long",
+            "Float",
+            "Double",
         )
         val javaPrimitiveToKotlinArrayType = mapOf(
             "int" to "IntArray",
@@ -582,7 +601,7 @@ internal class ParameterDocumentableConverter(
             "short" to "ShortArray",
             "long" to "LongArray",
             "float" to "FloatArray",
-            "double" to "DoubleArray"
+            "double" to "DoubleArray",
         )
         val kotlinPrimitiveArrays = javaPrimitiveToKotlinArrayType.values.toSet()
 
@@ -601,7 +620,7 @@ internal class ParameterDocumentableConverter(
             mappingFor("ListIterator"),
             mappingFor("Map"),
             kotlinCollectionsDRI.withClass("Map").withClass("Entry") to
-                kotlinCollectionsDRI.withClass("MutableMap").withClass("MutableEntry")
+                kotlinCollectionsDRI.withClass("MutableMap").withClass("MutableEntry"),
         )
 
         private val toKotlinTypeMemo = ConcurrentHashMap<Projection, Projection>()
@@ -622,7 +641,7 @@ internal class ParameterDocumentableConverter(
         internal fun Projection.rewriteKotlinPrimitivesForJava(
             isReturnType: Boolean = false,
             mustBoxPrimitive: Boolean = false,
-            useQualifiedTypes: Boolean = false
+            useQualifiedTypes: Boolean = false,
         ): Projection = when (this) {
             // TypeParameter: `public <T> void baroo(T[] derp)`.
             is FunctionalTypeConstructor, is GenericTypeConstructor -> {
@@ -634,7 +653,7 @@ internal class ParameterDocumentableConverter(
                     it.rewriteKotlinPrimitivesForJava(
                         isReturnType = false,
                         mustBoxPrimitive = true,
-                        useQualifiedTypes = useQualifiedTypes
+                        useQualifiedTypes = useQualifiedTypes,
                     )
                 }
 
@@ -653,7 +672,7 @@ internal class ParameterDocumentableConverter(
                     // kotlin.IntArray -> int[]
                 } else if (isStdlib && className in kotlinPrimitiveArrays) {
                     PrimitiveJavaType(
-                        className.removeSuffix("Array").lowercase(Locale.getDefault()) + "[]"
+                        className.removeSuffix("Array").lowercase(Locale.getDefault()) + "[]",
                     )
                 } else if (isStdlib && className == "Array") {
                     val name = innerProjections.single().nameForJavaArray(useQualifiedTypes)
@@ -667,33 +686,34 @@ internal class ParameterDocumentableConverter(
                 val newInner = inner.rewriteKotlinPrimitivesForJava(
                     isReturnType = false,
                     mustBoxPrimitive = true,
-                    useQualifiedTypes = useQualifiedTypes
+                    useQualifiedTypes = useQualifiedTypes,
                 )
-                if (newInner is Void) Void // Special handling for `Unit?` being treated as `Unit`
-                else this.copy(inner = newInner as Bound)
+                if (newInner is Void) {
+                    Void // Special handling for `Unit?` being treated as `Unit`
+                } else this.copy(inner = newInner as Bound)
             }
             is Variance<*> ->
                 this.copy(
                     inner.rewriteKotlinPrimitivesForJava(
                         isReturnType = false,
                         mustBoxPrimitive = true,
-                        useQualifiedTypes = useQualifiedTypes
-                    ) as Bound
+                        useQualifiedTypes = useQualifiedTypes,
+                    ) as Bound,
                 )
             is DefinitelyNonNullable -> this.copy(
                 inner = inner.rewriteKotlinPrimitivesForJava(
                     isReturnType = false,
                     mustBoxPrimitive = true,
-                    useQualifiedTypes = useQualifiedTypes
-                ) as Bound
+                    useQualifiedTypes = useQualifiedTypes,
+                ) as Bound,
             )
             // Typealiases don't cancel the argument propagation because they're cosmetic-only
             is TypeAliased -> this.copy(
                 inner = inner.rewriteKotlinPrimitivesForJava(
                     isReturnType = isReturnType,
                     mustBoxPrimitive = mustBoxPrimitive,
-                    useQualifiedTypes = useQualifiedTypes
-                ) as Bound
+                    useQualifiedTypes = useQualifiedTypes,
+                ) as Bound,
             )
             // <T> is T in both Java and Kotlin
             is TypeParameter -> this
@@ -741,7 +761,7 @@ internal class ParameterDocumentableConverter(
         // GenericTypeConstructor and FunctionalTypeConstructor are data classes, so we can hoist `copy`
         private fun TypeConstructor.copy(
             dri: DRI = this.dri,
-            projections: List<Projection> = this.projections
+            projections: List<Projection> = this.projections,
         ): Projection =
             when (this) {
                 is GenericTypeConstructor -> this.copy(dri, projections)
@@ -751,7 +771,7 @@ internal class ParameterDocumentableConverter(
         // `copy` is defined for data classes. Variance is a sealed class whose only subclasses
         // Covariance, Contravariance, and Invariance are data classes, so we can hoist `copy`
         private fun Variance<*>.copy(
-            inner: Bound = this.inner
+            inner: Bound = this.inner,
         ): Projection =
             when (this) {
                 is Covariance -> this.copy(inner)

@@ -36,7 +36,7 @@ class DefaultClassHierarchyTest {
         assertThat(output).isEqualTo(
             """
 <body></body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -62,7 +62,7 @@ class DefaultClassHierarchyTest {
     </table>
   </div>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -92,7 +92,7 @@ class DefaultClassHierarchyTest {
     </table>
   </div>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -104,9 +104,9 @@ class DefaultClassHierarchyTest {
                     NoopLink("a"),
                     NoopLink("b"),
                     NoopLink("c"),
-                    NoopLink("d")
-                )
-            )
+                    NoopLink("d"),
+                ),
+            ),
         )
 
         val output = createHTML().body {
@@ -142,7 +142,7 @@ class DefaultClassHierarchyTest {
     </table>
   </div>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 }

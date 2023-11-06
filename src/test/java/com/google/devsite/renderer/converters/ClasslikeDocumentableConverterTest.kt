@@ -62,7 +62,7 @@ import kotlin.test.assertFails
 
 @RunWith(Parameterized::class)
 internal class ClasslikeDocumentableConverterTest(
-    private val displayLanguage: Language
+    private val displayLanguage: Language,
 ) : ConverterTestBase(displayLanguage) {
     @Test
     fun `Classlike creates components with correct title`() {
@@ -101,7 +101,7 @@ internal class ClasslikeDocumentableConverterTest(
 
         assertThat(
             classlike.allSummarySections.filter { it.hasContent() } +
-                classlike.inheritedSummarySections.filter { it.hasContent() }
+                classlike.inheritedSummarySections.filter { it.hasContent() },
         ).isEmpty()
         assertThat(classlike.allDetailsSections.filter { it.symbols.isNotEmpty() }).isEmpty()
     }
@@ -551,10 +551,10 @@ internal class ClasslikeDocumentableConverterTest(
         val signatureK = pageExternalK.data.content.data.description.data.primarySignature
         val signatureJ = pageExternalJ.data.content.data.description.data.primarySignature
         assertThat(
-            signatureK.data.implements.map { it.data.name }
+            signatureK.data.implements.map { it.data.name },
         ).isEqualTo(listOf("Lazy"))
         assertThat(
-            signatureJ.data.implements.map { it.data.name }
+            signatureJ.data.implements.map { it.data.name },
         ).isEqualTo(listOf("Lazy"))
     }
 
@@ -573,7 +573,7 @@ internal class ClasslikeDocumentableConverterTest(
         val signatureJ = pageExternalJ.data.content.data.description.data.primarySignature
         for (signature in listOf(signatureJ, signatureK)) {
             assertThat(
-                signature.data.extends.map { it.data.name }
+                signature.data.extends.map { it.data.name },
             ).isEqualTo(listOf("AbstractList"))
             assertThat(signature.data.implements).isEmpty()
         }
@@ -915,7 +915,7 @@ internal class ClasslikeDocumentableConverterTest(
         val ctrDocsParamTable = constructorDetails.data.metadata[1] as DocsSummaryList
         val param1docs = ctrDocsParamTable.items().single { it.name() == "param1" }.data.description
         assertThat(param1docs.text()).isEqualTo("param1_docs")
-        */
+         */
 
         val bazConstructorParams = baz.data.publicConstructorsDetails.symbols.single()
             .data.metadata[1] as DocsSummaryList
@@ -930,11 +930,11 @@ internal class ClasslikeDocumentableConverterTest(
         val expected = when (displayLanguage) {
             Language.KOTLIN -> listOf(
                 bar.data.publicConstructorsSummary,
-                bar.data.protectedPropertiesSummary
+                bar.data.protectedPropertiesSummary,
             )
             Language.JAVA -> listOf(
                 bar.data.publicConstructorsSummary,
-                bar.data.protectedFunctionsSummary
+                bar.data.protectedFunctionsSummary,
             )
         }
         val observed = bar.allSummarySections.filter { it.hasContent() } +
@@ -946,7 +946,7 @@ internal class ClasslikeDocumentableConverterTest(
         val bctrDocsParamTabl = bConstructorDetails.data.metadata[1] as DocsSummaryList
         val bparam2doc = bctrDocsParamTabl.items().single { it.name() == "param2" }.data.description
         assertThat(bparam2doc.text()).isEqualTo("param2_docs")
-        */
+         */
     }
 
     @Test
@@ -999,10 +999,10 @@ internal class ClasslikeDocumentableConverterTest(
         val inheritedMethods = inheritedSummary.entries.single().value.data.items
         val inheritedMethodSignatures = inheritedMethods.map { it.data.description.data.signature }
         assertThat(inheritedMethodSignatures.map { it.data.name.data.name }).isEqualTo(
-            listOf("a", "b", "b", "b", "b", "c")
+            listOf("a", "b", "b", "b", "b", "c"),
         )
         assertThat(inheritedMethodSignatures.map { it.data.parameters.size }).isEqualTo(
-            listOf(0, 0, 1, 2, 2, 0)
+            listOf(0, 0, 1, 2, 2, 0),
         )
         val paramNames = inheritedMethodSignatures.map {
             it.data.parameters.map { it.data.name }
@@ -1014,8 +1014,8 @@ internal class ClasslikeDocumentableConverterTest(
                 listOf("input"),
                 listOf("input", "input2"),
                 listOf("input", "zinput2"),
-                listOf()
-            )
+                listOf(),
+            ),
         )
     }
 
@@ -1090,10 +1090,12 @@ internal class ClasslikeDocumentableConverterTest(
         val throwableDRI = "kotlin.Throwable"
         // add/get is not consolidated into a property in Kotlin
         val sixFuns = listOf(
-            "addSuppressed", "getSuppressed",
-            "fillInStackTrace", "printStackTrace",
+            "addSuppressed",
+            "getSuppressed",
+            "fillInStackTrace",
+            "printStackTrace",
             "getLocalizedMessage",
-            "initCause"
+            "initCause",
         )
         // "Message" becomes a "val" in Kotlin, which hides its getter. ToString is from Object.
         // val missingInKotlin = listOf("getMessage", "toString")
@@ -1153,10 +1155,12 @@ internal class ClasslikeDocumentableConverterTest(
         val throwableDRI = "java.lang.Throwable"
         // add/get is not consolidated into a property in Kotlin
         val sixFuns = listOf(
-            "addSuppressed", "getSuppressed",
-            "fillInStackTrace", "printStackTrace",
+            "addSuppressed",
+            "getSuppressed",
+            "fillInStackTrace",
+            "printStackTrace",
             "getLocalizedMessage",
-            "initCause"
+            "initCause",
         )
         // "Message" becomes a "val" in Kotlin, which hides its getter. ToString is from Object.
         val missingInKotlin = listOf("getMessage", "toString")
@@ -1241,14 +1245,18 @@ internal class ClasslikeDocumentableConverterTest(
         // Java function include generated getters and setters
         kotlinOnly {
             assertThat(functions).containsExactly(
-                "androidx.example.GrandParent", listOf("grandA", "grandB"),
-                "androidx.example.Parent", listOf("parentC")
+                "androidx.example.GrandParent",
+                listOf("grandA", "grandB"),
+                "androidx.example.Parent",
+                listOf("parentC"),
             )
         }
         javaOnly {
             assertThat(functions).containsExactly(
-                "androidx.example.GrandParent", listOf("getGrandC", "grandA", "grandB"),
-                "androidx.example.Parent", listOf("getParentA", "getParentB", "parentC")
+                "androidx.example.GrandParent",
+                listOf("getGrandC", "grandA", "grandB"),
+                "androidx.example.Parent",
+                listOf("getParentA", "getParentB", "parentC"),
             )
         }
 
@@ -1259,13 +1267,16 @@ internal class ClasslikeDocumentableConverterTest(
         // In Java, the properties are surfaced through getter functions except for @JvmFields
         kotlinOnly {
             assertThat(properties).containsExactly(
-                "androidx.example.GrandParent", listOf("grandC", "grandD"),
-                "androidx.example.Parent", listOf("parentA", "parentB")
+                "androidx.example.GrandParent",
+                listOf("grandC", "grandD"),
+                "androidx.example.Parent",
+                listOf("parentA", "parentB"),
             )
         }
         javaOnly {
             assertThat(properties).containsExactly(
-                "androidx.example.GrandParent", listOf("grandD")
+                "androidx.example.GrandParent",
+                listOf("grandD"),
             )
         }
     }
@@ -1312,8 +1323,8 @@ internal class ClasslikeDocumentableConverterTest(
                     "Protected constructors",
                     "Public methods",
                     "Protected methods",
-                    "Extension functions"
-                )
+                    "Extension functions",
+                ),
             ).inOrder()
         }
 
@@ -1334,8 +1345,8 @@ internal class ClasslikeDocumentableConverterTest(
                     "Public properties",
                     "Protected properties",
                     "Extension functions",
-                    "Extension properties"
-                )
+                    "Extension properties",
+                ),
             ).inOrder()
         }
     }
@@ -1390,7 +1401,7 @@ internal class ClasslikeDocumentableConverterTest(
             assertThat(classlike.data.publicCompanionPropertiesSummary.item().name())
                 .isEqualTo("bar")
             assertThat(
-                classlike.data.protectedCompanionPropertiesSummary.item().name()
+                classlike.data.protectedCompanionPropertiesSummary.item().name(),
             ).isEqualTo("baz")
         }
         javaOnly {
@@ -1585,8 +1596,10 @@ internal class ClasslikeDocumentableConverterTest(
             val functions = foo.publicFunctionsSummary.data.items
             assertThat(functions.map { it.name() })
                 .containsExactly(
-                    "getRegularVar", "setRegularVar",
-                    "getLateinitVar", "setLateinitVar"
+                    "getRegularVar",
+                    "setRegularVar",
+                    "getLateinitVar",
+                    "setLateinitVar",
                 )
 
             val properties = foo.publicPropertiesSummary.data.items
@@ -1617,8 +1630,10 @@ internal class ClasslikeDocumentableConverterTest(
             val testKt = module.page("TestKt").data.content.data
             val functions = testKt.publicFunctionsSummary.data.items
             assertThat(functions.map { it.name() }).containsExactly(
-                "getTopLevelRegularVar", "setTopLevelRegularVar",
-                "getTopLevelLateinitVar", "setTopLevelLateinitVar"
+                "getTopLevelRegularVar",
+                "setTopLevelRegularVar",
+                "getTopLevelLateinitVar",
+                "setTopLevelLateinitVar",
             )
 
             val properties = testKt.publicPropertiesSummary.data.items
@@ -1673,8 +1688,12 @@ internal class ClasslikeDocumentableConverterTest(
         javaOnly {
             val functions = foo.publicFunctionsSummary
             assertThat(functions.map { it.name() }).containsExactly(
-                "getRegularVar", "getLateinitVar", "getJvmStaticVar",
-                "setRegularVar", "setLateinitVar", "setJvmStaticVar"
+                "getRegularVar",
+                "getLateinitVar",
+                "getJvmStaticVar",
+                "setRegularVar",
+                "setLateinitVar",
+                "setJvmStaticVar",
             )
             val staticFunctions = functions
                 .filter { it.data.title.data.modifiers.contains("static") }
@@ -1683,7 +1702,9 @@ internal class ClasslikeDocumentableConverterTest(
 
             val properties = foo.publicPropertiesSummary
             assertThat(properties.map { it.name() }).containsExactly(
-                "jvmFieldVar", "lateinitVar", "INSTANCE"
+                "jvmFieldVar",
+                "lateinitVar",
+                "INSTANCE",
             )
             // All of these properties appear as static
             assertThat(properties.filter { it.data.title.data.modifiers.contains("static") })
@@ -1731,7 +1752,9 @@ internal class ClasslikeDocumentableConverterTest(
         javaOnly {
             val functions = foo.publicFunctionsSummary.data.items
             assertThat(functions.map { it.name() }).containsExactly(
-                "getObjExtension", "getObjExtensionWithStaticGetter", "getObjStaticExtension"
+                "getObjExtension",
+                "getObjExtensionWithStaticGetter",
+                "getObjStaticExtension",
             )
 
             // The getters should have one parameter, the receiver string
@@ -2031,8 +2054,12 @@ internal class ClasslikeDocumentableConverterTest(
             // Overridden functions
             assertThat(companionPageMethods.map { it.name() })
                 .containsExactly(
-                    "becomesStaticFun", "getBecomesLateinitVar", "getNotStaticOverriddenVar",
-                    "notStaticOverriddenFun", "setBecomesLateinitVar", "setNotStaticOverriddenVar"
+                    "becomesStaticFun",
+                    "getBecomesLateinitVar",
+                    "getNotStaticOverriddenVar",
+                    "notStaticOverriddenFun",
+                    "setBecomesLateinitVar",
+                    "setNotStaticOverriddenVar",
                 )
             // Overridden vars
             assertThat(companionPageFields).isEmpty()
@@ -2073,20 +2100,22 @@ internal class ClasslikeDocumentableConverterTest(
             "publicHoistedField",
             "protectedHoistedField",
             "publicHoistedConst",
-            "protectedHoistedConst"
+            "protectedHoistedConst",
         ) + if (displayLanguage == Language.KOTLIN) {
             listOf(
                 "publicConlyProp",
                 "protectedConlyProp",
                 "publicDuplicatedProp",
-                "protectedDuplicatedProp"
+                "protectedDuplicatedProp",
             )
-        } else listOf(
-            "getPublicConlyProp",
-            "getProtectedConlyProp",
-            "getPublicDuplicatedProp",
-            "getProtectedDuplicatedProp"
-        )
+        } else {
+            listOf(
+                "getPublicConlyProp",
+                "getProtectedConlyProp",
+                "getPublicDuplicatedProp",
+                "getProtectedDuplicatedProp",
+            )
+        }
 
         val containerClass = module.page("TheContainer").data.content
         val companionClass = module.page("TheCompanion").data.content
@@ -2094,18 +2123,18 @@ internal class ClasslikeDocumentableConverterTest(
             .isEqualTo("TheContainer.TheCompanion")
         // Pull public/protected elements that are hoisted or are in the companion
         // "CompanionONLY" conly is a misnomer right now; includes methods in both companion&parent
-        var publicHoistedFuns = if (displayLanguage == Language.KOTLIN)
+        var publicHoistedFuns = if (displayLanguage == Language.KOTLIN) {
             containerClass.data.publicCompanionFunctionsSummary.data.items
-        else containerClass.data.publicFunctionsSummary.filter { "static" in it.modifiers() }
-        var protectedHoistedFuns = if (displayLanguage == Language.KOTLIN)
+        } else containerClass.data.publicFunctionsSummary.filter { "static" in it.modifiers() }
+        var protectedHoistedFuns = if (displayLanguage == Language.KOTLIN) {
             containerClass.data.protectedCompanionFunctionsSummary.data.items
-        else containerClass.data.protectedFunctionsSummary.filter { "static" in it.modifiers() }
-        var publicHoistedProps = if (displayLanguage == Language.KOTLIN)
+        } else containerClass.data.protectedFunctionsSummary.filter { "static" in it.modifiers() }
+        var publicHoistedProps = if (displayLanguage == Language.KOTLIN) {
             containerClass.data.publicCompanionPropertiesSummary.data.items
-        else containerClass.data.publicPropertiesSummary.filter { "static" in it.modifiers() }
-        var protectedHoistedProps = if (displayLanguage == Language.KOTLIN)
+        } else containerClass.data.publicPropertiesSummary.filter { "static" in it.modifiers() }
+        var protectedHoistedProps = if (displayLanguage == Language.KOTLIN) {
             containerClass.data.protectedCompanionPropertiesSummary.data.items
-        else containerClass.data.protectedPropertiesSummary.filter { "static" in it.modifiers() }
+        } else containerClass.data.protectedPropertiesSummary.filter { "static" in it.modifiers() }
         var publicConlyFuns = companionClass.data.publicFunctionsSummary.data.items
         var protectedConlyFuns = companionClass.data.protectedFunctionsSummary.data.items
         var publicConlyProps = companionClass.data.publicPropertiesSummary.data.items
@@ -2131,44 +2160,46 @@ internal class ClasslikeDocumentableConverterTest(
         javaOnly {
             // Perform asserts based on name mangling
             assertThat(publicHoistedFuns.names()).containsExactlyElementsIn(
-                names.filter { "ublic" in it && "Hoisted" in it && "Fun" in it }
+                names.filter { "ublic" in it && "Hoisted" in it && "Fun" in it },
             )
             assertThat(protectedHoistedFuns.names()).containsExactlyElementsIn(
-                names.filter { "rotected" in it && "Hoisted" in it && "Fun" in it }
+                names.filter { "rotected" in it && "Hoisted" in it && "Fun" in it },
             )
             assertThat(publicHoistedProps.names()).containsExactlyElementsIn(
                 names.filter {
                     "ublic" in it && "Hoisted" in it &&
                         ("Prop" in it || "Field" in it)
-                }
+                },
             )
             assertThat(protectedHoistedProps.names()).containsExactlyElementsIn(
                 names.filter {
                     "rotected" in it && "Hoisted" in it &&
                         ("Prop" in it || "Field" in it)
-                }
+                },
             )
             assertThat(publicConlyFuns.names()).containsExactlyElementsIn(
-                names.filter { "ublic" in it && "Conly" in it && ("Fun" in it || "get" in it) }
+                names.filter { "ublic" in it && "Conly" in it && ("Fun" in it || "get" in it) },
             )
             assertThat(protectedConlyFuns.names()).containsExactlyElementsIn(
-                names.filter { "rotected" in it && "Conly" in it && ("Fun" in it || "get" in it) }
+                names.filter { "rotected" in it && "Conly" in it && ("Fun" in it || "get" in it) },
             )
             // Regular properties converted to accessors in java
             assertThat(publicConlyProps.names()).isEmpty()
             assertThat(protectedConlyProps.names()).isEmpty()
             assertThat(publicDuplicatedFuns.names()).containsExactlyElementsIn(
-                names.filter { "ublic" in it && "Duplicated" in it && ("Fun" in it || "get" in it) }
+                names.filter {
+                    "ublic" in it && "Duplicated" in it && ("Fun" in it || "get" in it)
+                },
             )
             assertThat(protectedDuplicatedFuns.names()).containsExactlyElementsIn(
                 names.filter {
                     "rotected" in it && "Duplicated" in it && ("Fun" in it || "get" in it)
-                }
+                },
             )
             assertThat(publicDuplicatedProps.names()).isEmpty()
             assertThat(protectedDuplicatedProps.names()).isEmpty()
             assertThat(hoistedConstants.names()).containsExactlyElementsIn(
-                names.filter { "Const" in it }
+                names.filter { "Const" in it },
             )
             assertThat(companionConstants).isEmpty()
         }
@@ -2183,20 +2214,20 @@ internal class ClasslikeDocumentableConverterTest(
             assertThat(publicConlyProps).isEmpty()
             assertThat(protectedConlyProps).isEmpty()
             assertThat(publicDuplicatedFuns.names()).containsExactlyElementsIn(
-                names.filter { "ublic" in it && "Fun" in it }
+                names.filter { "ublic" in it && "Fun" in it },
             )
             assertThat(protectedDuplicatedFuns.names()).containsExactlyElementsIn(
-                names.filter { "rotected" in it && "Fun" in it }
+                names.filter { "rotected" in it && "Fun" in it },
             )
             assertThat(publicDuplicatedProps.names()).containsExactlyElementsIn(
-                names.filter { "ublic" in it && ("Prop" in it || "Field" in it) }
+                names.filter { "ublic" in it && ("Prop" in it || "Field" in it) },
             )
             assertThat(protectedDuplicatedProps.names()).containsExactlyElementsIn(
-                names.filter { "rotected" in it && ("Prop" in it || "Field" in it) }
+                names.filter { "rotected" in it && ("Prop" in it || "Field" in it) },
             )
             assertThat(hoistedConstants).containsExactlyElementsIn(companionConstants)
             assertThat(hoistedConstants.names()).containsExactlyElementsIn(
-                names.filter { "Const" in it }
+                names.filter { "Const" in it },
             )
         }
     }
@@ -2256,7 +2287,7 @@ internal class ClasslikeDocumentableConverterTest(
                 |import foo.Foo
                 |
                 |fun Foo.zab() = Unit
-            """
+            """,
         )
         val classlike = src.render().page().data.content
         val extFunctions = classlike.data.extensionFunctionsDetails.symbols
@@ -2293,7 +2324,7 @@ internal class ClasslikeDocumentableConverterTest(
                 |import foo.Foo
                 |
                 |fun Foo.zab() = Unit
-            """
+            """,
         )
         val classlike = src.render().page().data.content
         val extFunctions = classlike.data.extensionFunctionsDetails.symbols
@@ -2329,7 +2360,7 @@ internal class ClasslikeDocumentableConverterTest(
                 |package foo2
                 |
                 |fun Foo.baz() = Unit
-            """
+            """,
         )
 
         // Each Foo should have one extension function: bar for foo1, baz for foo2
@@ -2696,10 +2727,14 @@ internal class ClasslikeDocumentableConverterTest(
         javaOnly {
             val functions = foo.publicFunctionsSummary
             assertThat(functions.map { it.name() }).containsExactly(
-                "getDefinedAccessorsDocsOnProp", "setDefinedAccessorsDocsOnProp",
-                "getNoDefinedAccessorsDocsOnProp", "setNoDefinedAccessorsDocsOnProp",
-                "getDefinedAccessorsDocsOnAccessors", "setDefinedAccessorsDocsOnAccessors",
-                "getDefinedAccessorsDocsOnBoth", "setDefinedAccessorsDocsOnBoth"
+                "getDefinedAccessorsDocsOnProp",
+                "setDefinedAccessorsDocsOnProp",
+                "getNoDefinedAccessorsDocsOnProp",
+                "setNoDefinedAccessorsDocsOnProp",
+                "getDefinedAccessorsDocsOnAccessors",
+                "setDefinedAccessorsDocsOnAccessors",
+                "getDefinedAccessorsDocsOnBoth",
+                "setDefinedAccessorsDocsOnBoth",
             )
             for (function in functions) {
                 assertThat(function.description.text()).isEqualTo("Some documentation.")
@@ -2749,7 +2784,8 @@ internal class ClasslikeDocumentableConverterTest(
             public annotation class Foo {}
         """.trimIndent().render(java = false).page("Foo").data.content
 
-        for (classlike in listOf(classlikeJ/*, classlikeK*/)) { // TODO: b/195529157
+        // TODO: b/195529157 `listOf(classlikeJ, classlikeK)`
+        for (classlike in listOf(classlikeJ)) {
             assertThat(classlike.data.publicConstructorsDetails).isEmpty()
         }
     }
@@ -2854,12 +2890,16 @@ internal class ClasslikeDocumentableConverterTest(
         val moduleJ = sourceJ.renderWithoutLanguageHeader()
 
         for (module in listOf(moduleK, moduleJ)) {
-            val testKt = if (displayLanguage == Language.JAVA || module == moduleJ)
+            val testKt = if (displayLanguage == Language.JAVA || module == moduleJ) {
                 module.page("TestKt").data.content
-            else null
-            val packagePage = if (displayLanguage == Language.KOTLIN && module == moduleK)
+            } else {
+                null
+            }
+            val packagePage = if (displayLanguage == Language.KOTLIN && module == moduleK) {
                 module.packagePage().data.content
-            else null
+            } else {
+                null
+            }
             // This is top-level in Kotlin and in a Kt class in Java
             val topLevelFun = packagePage?.data?.topLevelFunctionsSummary?.item()
                 ?: testKt!!.data.publicFunctionsSummary.single()
@@ -2879,18 +2919,20 @@ internal class ClasslikeDocumentableConverterTest(
             assertThat(topObjectFun.data.title.data.modifiers).doesNotContain("static")
             assertThat(topObjectFun.urlSuffix()).isEqualTo("TopLevelObject.html#topObjectFun()")
 
-            if (testKt != null) assertThat(testKt.data.nestedTypesSummary).isEmpty()
-            else assertThat(packagePage!!.data.objects.data.items.map { it.name() })
+            if (testKt != null) {
+                assertThat(testKt.data.nestedTypesSummary).isEmpty()
+            } else assertThat(packagePage!!.data.objects.data.items.map { it.name() })
                 .contains("TopLevelObject")
 
             fun IterableSubject.containsPublicMaybeStatic() =
-                if (module == moduleK) this.containsExactly("public", "static").inOrder()
-                else this.containsExactly("public").inOrder()
+                if (module == moduleK) {
+                    this.containsExactly("public", "static").inOrder()
+                } else this.containsExactly("public").inOrder()
 
             val topObjectSignature = topObject.data.description.data.primarySignature
-            if (displayLanguage == Language.KOTLIN && module == moduleK)
+            if (displayLanguage == Language.KOTLIN && module == moduleK) {
                 assertThat(topObjectSignature.data.type).isEqualTo("object")
-            else assertThat(topObjectSignature.data.type).isEqualTo("class")
+            } else assertThat(topObjectSignature.data.type).isEqualTo("class")
 
             javaOnly {
                 // top-level static classes don't exist in Java
@@ -2907,17 +2949,17 @@ internal class ClasslikeDocumentableConverterTest(
             val companionFun = companionObject.data.publicFunctionsSummary.single()
             assertThat(companionFun.name()).isEqualTo("companionFun")
             javaOnly { assertThat(companionFun.modifiers()).contains("static") }
-            if (module == moduleJ || displayLanguage == Language.JAVA)
+            if (module == moduleJ || displayLanguage == Language.JAVA) {
                 assertThat(companionFun.urlSuffix())
                     .isEqualTo("Container.ContainerCompanion.html#companionFun()")
-            // For Kotlin source and display only, the link is hoisted to the containing class
+            } // For Kotlin source and display only, the link is hoisted to the containing class
             else
                 assertThat(companionFun.urlSuffix()).isEqualTo("Container.html#companionFun()")
 
             val companionObjectSignature = companionObject.data.description.data.primarySignature
-            if (displayLanguage == Language.KOTLIN && module == moduleK)
+            if (displayLanguage == Language.KOTLIN && module == moduleK) {
                 assertThat(companionObjectSignature.data.type).isEqualTo("object")
-            else assertThat(companionObjectSignature.data.type).isEqualTo("class")
+            } else assertThat(companionObjectSignature.data.type).isEqualTo("class")
 
             javaOnly {
                 assertThat(companionObject.modifiers()).containsPublicMaybeStatic()
@@ -2955,11 +2997,11 @@ internal class ClasslikeDocumentableConverterTest(
         val (extensionFunctions, extensionPage) = when (displayLanguage) {
             Language.KOTLIN -> Pair(
                 module.packagePage().data.content.data.extensionFunctionsSummary,
-                "package-summary.html"
+                "package-summary.html",
             )
             Language.JAVA -> Pair(
                 module.page("TestKt").data.content.data.publicFunctionsSummary,
-                "TestKt.html"
+                "TestKt.html",
             )
         }
         assertThat(extensionFunctions[0].urlSuffix()).isEqualTo("$extensionPage#$fooSuffix")
@@ -2982,7 +3024,7 @@ internal class ClasslikeDocumentableConverterTest(
         val enumDModuleJ = """
             |public enum Foo { BAR, BAZ }
         """.render(java = true)
-        for (enumDModule in listOf(/*enumDModuleK, */enumDModuleJ)) {
+        for (enumDModule in listOf(enumDModuleJ)) { // TODO: listOf(enumDModuleK, enumDModuleJ)
             // Test upstream behavior: only one enumJ.valueOf exists on the enum & it returns a Foo
             val dFunctions = enumDModule.explicitClasslike("Foo").functions
             val valueOfDFunctions = dFunctions.filter { it.name == "valueOf" }
@@ -3010,7 +3052,7 @@ internal class ClasslikeDocumentableConverterTest(
                 fileAnnotations = listOf(
                     "@file:JvmName(\"PagingRx\")",
                     "@file:JvmMultifileClass",
-                )
+                ),
             ) + """
                     |/**
                     | * An [Observable] of [PagingData], which mirrors the stream provided by [Pager.flow], but exposes
@@ -3028,7 +3070,7 @@ internal class ClasslikeDocumentableConverterTest(
                 fileAnnotations = listOf(
                     "@file:JvmName(\"PagingRx\")",
                     "@file:JvmMultifileClass",
-                )
+                ),
             ) + """
                     |/**
                     | * Returns a [PagingData] containing only elements matching the given [predicate].
@@ -3038,7 +3080,7 @@ internal class ClasslikeDocumentableConverterTest(
                     |fun <T : Any> PagingData<T>.filterAsync(
                     |    predicate: (T) -> Single<Boolean>
                     |): PagingData<T> = filter { predicate(it).await() }
-                """
+                """,
         )
         val module = testWithRootPageNode(src)
     }
@@ -3078,7 +3120,7 @@ internal class ClasslikeDocumentableConverterTest(
             |open interface KotlinParent""",
             """/src/main/kotlin/androidx/example/KotlinChild.kt
             |package androidx.example
-            |class KotlinChild: androidx.example.JavaParent(), KotlinParent"""
+            |class KotlinChild: androidx.example.JavaParent(), KotlinParent""",
         )
 
         val module = testWithRootPageNode(src.map { it.trimMargin() })
@@ -3286,7 +3328,7 @@ internal class ClasslikeDocumentableConverterTest(
     }
 
     private fun DModule.page(
-        name: String = "Foo"
+        name: String = "Foo",
     ): DevsitePage<Classlike> {
         val classlike = explicitClasslikes(name).single()
         return page { classlike }
@@ -3297,7 +3339,7 @@ internal class ClasslikeDocumentableConverterTest(
 
     @JvmName("pagesForClasslikes")
     private fun DModule.pages(
-        classlikes: List<DClasslike>
+        classlikes: List<DClasslike>,
     ): List<DevsitePage<Classlike>> = runBlocking {
         val converterHolder = ConverterHolder(this@ClasslikeDocumentableConverterTest, this@pages)
         classlikes.map { converterHolder.NonKmpClasslikeConverter(it).classlike() }
@@ -3314,8 +3356,9 @@ internal class ClasslikeDocumentableConverterTest(
     private fun DModule.companionFor(name: String = "Foo") =
         explicitClasslike("Foo").classlikes.single { it.name == "Companion" }
 
-    private fun String.possiblyAsGetter() = if (displayLanguage == Language.KOTLIN) this
-    else "get" + this.capitalize()
+    private fun String.possiblyAsGetter() = if (displayLanguage == Language.KOTLIN) {
+        this
+    } else "get" + this.capitalize()
 
     private fun Classlike.propertySymbol(name: String = "foo") =
         (data.publicPropertiesSummary + data.protectedPropertiesSummary + data.inheritedProperties)
@@ -3331,7 +3374,7 @@ internal class ClasslikeDocumentableConverterTest(
         @Parameterized.Parameters(name = "{0}")
         fun data() = listOf(
             arrayOf(Language.JAVA),
-            arrayOf(Language.KOTLIN)
+            arrayOf(Language.KOTLIN),
         )
     }
 }

@@ -26,7 +26,7 @@ import kotlinx.html.FlowContent
 
 /** Default implementation of a function or class type parameter. */
 internal data class DefaultTypeParameterComponent(
-    override val data: TypeParameterComponent.Params
+    override val data: TypeParameterComponent.Params,
 ) : TypeParameterComponent {
     init {
         validate()
@@ -41,7 +41,10 @@ internal data class DefaultTypeParameterComponent(
     override fun render(into: FlowContent, angleBrackets: Boolean) = into.run {
         if (angleBrackets) { +"<" }
         data.annotationComponents.render(
-            into, ShouldBreak.NO, separator = "", terminator = { +nbsp }
+            into,
+            ShouldBreak.NO,
+            separator = "",
+            terminator = { +nbsp },
         )
         when (data.displayLanguage) {
             Language.JAVA -> {
@@ -89,11 +92,14 @@ internal data class DefaultTypeParameterComponent(
             data.annotationComponents.joinMaybePrefix { it.toString() } +
             data.modifiers.joinMaybePrefix(postfix = " ") +
             (
-                if (data.projections.isNotEmpty()) (
-                    (if (data.displayLanguage == Language.KOTLIN) ":" else "extends") +
-                        data.projections.joinMaybePrefix(separator = " & ") { it.toString() }
-                    )
-                else ""
+                if (data.projections.isNotEmpty()) {
+                    (
+                        (if (data.displayLanguage == Language.KOTLIN) ":" else "extends") +
+                            data.projections.joinMaybePrefix(separator = " & ") { it.toString() }
+                        )
+                } else {
+                    ""
+                }
                 ) +
             (if (showAngleBrackets) ">" else "")
 

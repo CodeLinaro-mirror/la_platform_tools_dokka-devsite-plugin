@@ -28,7 +28,7 @@ internal interface RelatedSymbols : ContextFreeComponent {
         val directSubclasses: List<Link>,
         val directSummary: LinkDescriptionSummaryList,
         val indirectSubclasses: List<Link>,
-        val indirectSummary: LinkDescriptionSummaryList
+        val indirectSummary: LinkDescriptionSummaryList,
     )
 
     val isEmpty: Boolean get() =

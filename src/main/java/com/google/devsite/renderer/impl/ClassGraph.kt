@@ -42,7 +42,7 @@ internal typealias DocumentablesGraph = Map<DRI, Documentable>
 internal fun computeClassGraph(
     classlikes: List<DClasslike>,
     externalDocumentablesProvider: ExternalDocumentablesProvider? = null,
-    sourceSets: List<DokkaConfiguration.DokkaSourceSet>? = null
+    sourceSets: List<DokkaConfiguration.DokkaSourceSet>? = null,
 ): ClassGraph {
     fun MutableMap<DRI, DClasslike?>.getOrExternal(key: DRI) = getOrPut(key) {
         sourceSets?.firstNotNullOfOrNull { sourceSet ->
@@ -56,7 +56,9 @@ internal fun computeClassGraph(
 
     for (classlike in classlikes) {
         recursivelyUpdateClasslikeSupertypesTree(
-            classlike, classGraph, drisToClasslikes::getOrExternal
+            classlike,
+            classGraph,
+            drisToClasslikes::getOrExternal,
         )
     }
 
@@ -78,7 +80,7 @@ internal fun computeClassGraph(
             interfaces = level.interfaces.mapNotNull { drisToClasslikes.getOrExternal(it) },
             directInterfaces = level.directInterfaces.mapNotNull {
                 drisToClasslikes.getOrExternal(it)
-            }
+            },
         )
     }
 }
@@ -87,7 +89,6 @@ internal fun computeClassGraph(
  * Generates a map that allows looking up each Documentable by its DRI
  */
 internal fun computeDocumentablesGraph(classGraph: ClassGraph): DocumentablesGraph {
-
     // helper function for adding a Documentable to a graph
     fun addToDocumentablesGraph(graph: MutableMap<DRI, Documentable>, documentable: Documentable) {
         if (!graph.containsKey(documentable.dri)) {
@@ -137,7 +138,7 @@ private fun recursivelyUpdateClasslikeSupertypesTree(
     classGraph: Map<DRI, MutableClassNode>,
     driToClasslike: (DRI) -> DClasslike?,
     initial: DClasslike = current,
-    highestVisibleSubtype: DClasslike = current
+    highestVisibleSubtype: DClasslike = current,
 ) {
     if (current !is WithSupertypes || current.supertypes.isEmpty()) return
 
@@ -163,7 +164,11 @@ private fun recursivelyUpdateClasslikeSupertypesTree(
 
             val newHighestVisible = if (hidden) highestVisibleSubtype else supertype
             recursivelyUpdateClasslikeSupertypesTree(
-                supertype, classGraph, driToClasslike, initial, newHighestVisible
+                supertype,
+                classGraph,
+                driToClasslike,
+                initial,
+                newHighestVisible,
             )
 
             // Only add this supertype to leaf's node if this is visible in docs.
@@ -196,7 +201,7 @@ internal data class ClassNode(
     val directSuperClasses: List<DClasslike>,
     val superClasses: List<DClasslike>,
     val interfaces: List<DClasslike>,
-    val directInterfaces: List<DClasslike>
+    val directInterfaces: List<DClasslike>,
 )
 
 // TODO(b/168956053): Use DClasslike directly once dokka has cheap hashCode impl
@@ -208,7 +213,7 @@ private data class MutableClassNode(
     val directSuperClasses: MutableSet<DRI> = LinkedHashSet(),
     val superClasses: MutableSet<DRI> = LinkedHashSet(),
     val interfaces: MutableSet<DRI> = LinkedHashSet(),
-    val directInterfaces: MutableSet<DRI> = LinkedHashSet()
+    val directInterfaces: MutableSet<DRI> = LinkedHashSet(),
 ) {
     private companion object {
         /**

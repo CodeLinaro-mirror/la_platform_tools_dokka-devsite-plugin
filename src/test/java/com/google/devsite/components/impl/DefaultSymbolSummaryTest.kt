@@ -31,8 +31,8 @@ class DefaultSymbolSummaryTest {
             Params(
                 signature = NoopFunctionSignature("foo()"),
                 description = NoopDescriptionComponent("This method does baz."),
-                annotationComponents = emptyList()
-            )
+                annotationComponents = emptyList(),
+            ),
         )
 
         val output = createHTML().div {
@@ -46,7 +46,7 @@ class DefaultSymbolSummaryTest {
   <div><code>foo()</code></div>
   <p>This method does baz.</p>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 }

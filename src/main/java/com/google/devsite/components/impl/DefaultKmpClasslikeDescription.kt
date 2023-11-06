@@ -28,7 +28,7 @@ import kotlinx.html.style
 import kotlinx.html.ul
 
 internal data class DefaultKmpClasslikeDescription(
-    override val data: KmpClasslikeDescription.Params
+    override val data: KmpClasslikeDescription.Params,
 ) : KmpClasslikeDescription {
 
     override fun render(into: FlowContent) = into.run {

@@ -29,7 +29,7 @@ import kotlinx.html.visit
 
 /** Default implementation of class-like pages. */
 internal data class DefaultClasslike(
-    override val data: Classlike.Params
+    override val data: Classlike.Params,
 ) : Classlike {
     override fun render(into: FlowContent) = into.run {
         data.description.render(this)
@@ -44,17 +44,24 @@ internal data class DefaultClasslike(
                 symbolType.symbols.render(
                     into,
                     separator = null,
-                    header = if (symbolType.symbols.first() is KmpSymbolDetail) { ->
-                        val unionPlatformsString = symbolType.symbols
-                            // platforms of each detail
-                            .map { (it as KmpSymbolDetail).data.platforms.data.platforms }
-                            // all platforms of any detail
-                            .reduce { acc, next -> acc.union(next) }.joinToString { it.devsiteId() }
-                        H2(attributesMapOf("data-title", unionPlatformsString), consumer).visit {
-                            +symbolType.title
-                            comment(unionPlatformsString)
+                    header = if (symbolType.symbols.first() is KmpSymbolDetail) {
+                        { ->
+                            val unionPlatformsString = symbolType.symbols
+                                // platforms of each detail
+                                .map { (it as KmpSymbolDetail).data.platforms.data.platforms }
+                                // all platforms of any detail
+                                .reduce { acc, next -> acc.union(next) }.joinToString {
+                                    it.devsiteId()
+                                }
+                            H2(
+                                attributesMapOf("data-title", unionPlatformsString),
+                                consumer,
+                            ).visit {
+                                +symbolType.title
+                                comment(unionPlatformsString)
+                            }
                         }
-                    } else { { h2 { +symbolType.title } } }
+                    } else { { h2 { +symbolType.title } } },
                 )
             }
         }

@@ -28,7 +28,7 @@ import kotlinx.html.unsafe
 
 /** Default implementation of the list of classes page. */
 internal data class DefaultClassIndex(
-    override val data: ClassIndex.Params
+    override val data: ClassIndex.Params,
 ) : ClassIndex {
     override fun render(into: FlowContent) = into.run {
         p {

@@ -33,7 +33,9 @@ internal object NoopSymbolDetail : SymbolDetail<SymbolSignature> {
         }
     }
 }
+
 @Suppress("UNCHECKED_CAST")
 internal val NoopSymbolDetailF = NoopSymbolDetail as SymbolDetail<FunctionSignature>
+
 @Suppress("UNCHECKED_CAST")
 internal val NoopSymbolDetailP = NoopSymbolDetail as SymbolDetail<PropertySignature>

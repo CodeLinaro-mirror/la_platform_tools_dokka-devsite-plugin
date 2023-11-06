@@ -28,7 +28,7 @@ import kotlinx.html.id
 
 /** Default implementation of a VersionMetadataComponent. */
 internal data class DefaultVersionMetadataComponent(
-    override val data: VersionMetadataComponent.Params
+    override val data: VersionMetadataComponent.Params,
 ) : VersionMetadataComponent {
 
     override fun render(into: FlowContent): Unit = into.run {
@@ -65,19 +65,19 @@ internal data class DefaultVersionMetadataComponent(
         fun createVersionMetadataWithBaseUrl(
             addedIn: String?,
             deprecatedIn: String?,
-            baseUrl: String?
+            baseUrl: String?,
         ) = DefaultVersionMetadataComponent(
             VersionMetadataComponent.Params(
                 addedIn = addedIn?.let { createVersionLinkFromBase(it, baseUrl) },
-                deprecatedIn = deprecatedIn?.let { createVersionLinkFromBase(it, baseUrl) }
-            )
+                deprecatedIn = deprecatedIn?.let { createVersionLinkFromBase(it, baseUrl) },
+            ),
         )
 
         /**
          * Generate mapping of each class to its API metadata
          */
         fun convertJsonVersionMetadataToVersionMap(
-            versionMetadataList: List<JsonVersionMetadata>
+            versionMetadataList: List<JsonVersionMetadata>,
         ): Map<String, ClassVersionMetadata> {
             val versionMetadataMap = hashMapOf<String, ClassVersionMetadata>()
             versionMetadataList.forEach { versionMetadata ->
@@ -87,7 +87,7 @@ internal data class DefaultVersionMetadataComponent(
                         addedIn = versionMetadata.addedIn,
                         deprecatedIn = versionMetadata.deprecatedIn,
                         methodVersions = createMethodVersionMetadata(versionMetadata.methods),
-                        fieldVersions = createFieldVersionMetadata(versionMetadata.fields)
+                        fieldVersions = createFieldVersionMetadata(versionMetadata.fields),
                     )
             }
 
@@ -98,8 +98,8 @@ internal data class DefaultVersionMetadataComponent(
             DefaultLink(
                 Link.Params(
                     name = version,
-                    url = baseUrl?.plus("#$version").orEmpty()
-                )
+                    url = baseUrl?.plus("#$version").orEmpty(),
+                ),
             )
     }
 }

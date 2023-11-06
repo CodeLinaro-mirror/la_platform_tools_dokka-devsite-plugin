@@ -30,6 +30,6 @@ internal class DocumentablesWrapper : DocumentableToPageTranslator {
         name = module.name,
         content = ContentText("DO NOT USE", DCI(emptySet(), ContentKind.Main), emptySet()),
         documentables = listOf(module),
-        children = emptyList()
+        children = emptyList(),
     )
 }

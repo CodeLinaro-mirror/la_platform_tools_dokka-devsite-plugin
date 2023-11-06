@@ -20,7 +20,7 @@ import com.google.devsite.components.pages.TableOfContents
 
 /** Default implementation of the toc. */
 internal data class DefaultTableOfContents(
-    override val data: TableOfContents.Params
+    override val data: TableOfContents.Params,
 ) : TableOfContents {
     override fun render(into: StringBuilder) = into.run {
         appendLine("toc:")

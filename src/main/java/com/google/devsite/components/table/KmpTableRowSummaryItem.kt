@@ -36,7 +36,7 @@ internal interface KmpTableRowSummaryItem<T : ContextFreeComponent?, V : Context
     data class Params<T : ContextFreeComponent?, V : ContextFreeComponent>(
         override val title: T,
         override val description: V,
-        val platforms: PlatformComponent
+        val platforms: PlatformComponent,
     ) : TableRowSummaryItem.Params<T, V>(title, description)
 
     private val nColumns get() = listOfNotNull(data.title, data.description, data.platforms).size

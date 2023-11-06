@@ -29,7 +29,7 @@ internal interface DescriptionComponent : ContextFreeComponent {
         val components: List<DocTag> = emptyList(),
         val summary: Boolean = false,
         val deprecation: String? = null,
-        val docsHolder: DocumentablesHolder? = null
+        val docsHolder: DocumentablesHolder? = null,
     ) {
         override fun equals(other: Any?): Boolean {
             if (this === other) return true

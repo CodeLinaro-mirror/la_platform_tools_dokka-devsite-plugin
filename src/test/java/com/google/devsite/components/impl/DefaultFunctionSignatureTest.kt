@@ -33,8 +33,8 @@ class DefaultFunctionSignatureTest {
     fun `Signature with no params renders correctly`() {
         val component = DefaultFunctionSignature(
             Params(
-                name = NoopLink("foo")
-            )
+                name = NoopLink("foo"),
+            ),
         )
 
         val output = createHTML().div {
@@ -45,7 +45,7 @@ class DefaultFunctionSignatureTest {
         assertThat(output).isEqualTo(
             """
 <div>foo()</div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -56,9 +56,9 @@ class DefaultFunctionSignatureTest {
                 name = NoopLink("foo"),
                 parameters = listOf(
                     NoopParameterComponent("String foo"),
-                    NoopParameterComponent("int bar")
-                )
-            )
+                    NoopParameterComponent("int bar"),
+                ),
+            ),
         )
 
         val output = createHTML().div {
@@ -69,7 +69,7 @@ class DefaultFunctionSignatureTest {
         assertThat(output).isEqualTo(
             """
 <div>foo(String foo,&nbsp;int bar)</div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -80,10 +80,10 @@ class DefaultFunctionSignatureTest {
                 name = NoopLink("foo"),
                 parameters = listOf(
                     NoopParameterComponent("String foo"),
-                    NoopParameterComponent("int bar")
+                    NoopParameterComponent("int bar"),
                 ),
-                isDeprecated = true
-            )
+                isDeprecated = true,
+            ),
         )
 
         val output = createHTML().div {
@@ -94,7 +94,7 @@ class DefaultFunctionSignatureTest {
         assertThat(output).isEqualTo(
             """
 <div><span><del>foo</del></span>(String foo,&nbsp;int bar)</div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -103,8 +103,8 @@ class DefaultFunctionSignatureTest {
         val component = DefaultFunctionSignature(
             Params(
                 name = NoopLink("foo"),
-                receiver = NoopParameterComponent("String")
-            )
+                receiver = NoopParameterComponent("String"),
+            ),
         )
 
         val output = createHTML().div {
@@ -115,7 +115,7 @@ class DefaultFunctionSignatureTest {
         assertThat(output).isEqualTo(
             """
 <div>String.foo()</div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -126,9 +126,9 @@ class DefaultFunctionSignatureTest {
                 name = NoopLink("foo"),
                 parameters = listOf(
                     NoopParameterComponent("String foo", forceBreak = true),
-                    NoopParameterComponent("int bar", forceBreak = true)
-                )
-            )
+                    NoopParameterComponent("int bar", forceBreak = true),
+                ),
+            ),
         )
 
         val output = createHTML().div {
@@ -139,7 +139,7 @@ class DefaultFunctionSignatureTest {
         assertThat(output).isEqualTo(
             """
 <div>foo(<br>&nbsp;&nbsp;&nbsp;&nbsp;String foo,<br>&nbsp;&nbsp;&nbsp;&nbsp;int bar<br>)</div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -151,7 +151,7 @@ class DefaultFunctionSignatureTest {
                     name = NoopLink("copyWhenGreater"),
                     parameters = listOf(
                         NoopParameterComponent("list: List<T>", forceBreak = true),
-                        NoopParameterComponent("T threshold", forceBreak = true)
+                        NoopParameterComponent("T threshold", forceBreak = true),
                     ),
                     typeParameters = listOf(
                         DefaultTypeParameterComponent(
@@ -159,14 +159,14 @@ class DefaultFunctionSignatureTest {
                                 name = "T",
                                 projections = listOf(
                                     NoopTypeProjectionComponent("CharSequence"),
-                                    NoopTypeProjectionComponent("Comparable<T>")
+                                    NoopTypeProjectionComponent("Comparable<T>"),
                                 ),
                                 pathProvider = NoopFilePathProvider(),
-                                displayLanguage = displayLanguage
-                            )
-                        )
-                    )
-                )
+                                displayLanguage = displayLanguage,
+                            ),
+                        ),
+                    ),
+                ),
             )
 
             val output = createHTML().div {
@@ -178,14 +178,14 @@ class DefaultFunctionSignatureTest {
                 assertThat(output).isEqualTo(
                     """
 <div>&lt;T&nbsp;:&nbsp;CharSequence&nbsp;&amp;&nbsp;Comparable&lt;T&gt;&gt; copyWhenGreater(<br>&nbsp;&nbsp;&nbsp;&nbsp;list: List&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;T threshold<br>)</div>
-            """.trim()
+            """.trim(),
                 )
             } else {
                 // language=html
                 assertThat(output).isEqualTo(
                     """
 <div>&lt;T&nbsp;extends&nbsp;CharSequence&nbsp;&amp;&nbsp;Comparable&lt;T&gt;&gt; copyWhenGreater(<br>&nbsp;&nbsp;&nbsp;&nbsp;list: List&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;T threshold<br>)</div>
-            """.trim()
+            """.trim(),
                 )
             }
         }

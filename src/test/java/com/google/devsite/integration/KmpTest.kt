@@ -53,7 +53,7 @@ class KmpTest : IntegrationTestBase() {
         validatePrebuilts(
             testName = "datastore-kmp",
             artifactNames = listOf("datastore-core"),
-            samples = true
+            samples = true,
         )
     }
 
@@ -62,7 +62,7 @@ class KmpTest : IntegrationTestBase() {
         squashAndroid = true
         validatePrebuilts(
             testName = "annotation-kmp",
-            artifactNames = listOf("annotation")
+            artifactNames = listOf("annotation"),
         )
     }
 
@@ -77,9 +77,9 @@ class KmpTest : IntegrationTestBase() {
                 "runtime",
                 "ui", "ui-geometry", "ui-graphics", "ui-text", "ui-unit", "ui-util",
                 "ui-tooling", "ui-tooling-preview",
-                "ui-test", "ui-test-junit4"
+                "ui-test", "ui-test-junit4",
             ),
-            samples = true
+            samples = true,
         )
     }
 
@@ -90,7 +90,7 @@ class KmpTest : IntegrationTestBase() {
         sources: List<File>,
         samplesLocations: List<String>,
         includeFiles: List<String>,
-        externalLinks: List<ExternalDocumentationLinkImpl>
+        externalLinks: List<ExternalDocumentationLinkImpl>,
     ) {
         fun SourceSetsBuilder.createSourceSet(
             name: String,
@@ -107,7 +107,7 @@ class KmpTest : IntegrationTestBase() {
             externalDocumentationLinks = externalLinks
             documentedVisibilities = setOf(
                 DokkaConfiguration.Visibility.PUBLIC,
-                DokkaConfiguration.Visibility.PROTECTED
+                DokkaConfiguration.Visibility.PROTECTED,
             )
             this.analysisPlatform = analysisPlatform
             this.dependentSourceSets = ssDependencies
@@ -122,9 +122,12 @@ class KmpTest : IntegrationTestBase() {
         if (squashAndroid) {
             sourceFolders["jvm"] = sourceFolders["jvm"]!! + sourceFolders["android"]!!
             sourceFolders.remove("android")
-        } else throw RuntimeException(
-            "Due to upstream squashing, not squashing android into jvm isn't currently supported."
-        )
+        } else {
+            throw RuntimeException(
+                "Due to upstream squashing, not squashing android into jvm isn't currently " +
+                    "supported.",
+            )
+        }
 
         return sourceSets {
             val common = createSourceSet("common", sources.filterForPlatform("common"))

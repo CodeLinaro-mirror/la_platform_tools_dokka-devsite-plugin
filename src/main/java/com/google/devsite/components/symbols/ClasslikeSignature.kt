@@ -34,6 +34,6 @@ internal interface ClasslikeSignature : ContextFreeComponent {
         val extends: List<Link>,
         val typeParameters: List<TypeParameterComponent>,
         val annotationComponents: List<AnnotationComponent>,
-        val typeAliasEquals: TypeProjectionComponent? = null
+        val typeAliasEquals: TypeProjectionComponent? = null,
     )
 }

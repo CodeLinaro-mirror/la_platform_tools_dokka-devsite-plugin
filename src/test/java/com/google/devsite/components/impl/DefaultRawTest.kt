@@ -35,7 +35,7 @@ class DefaultRawTest {
         assertThat(output).isEqualTo(
             """
 <div>Hello world!</div>
-            """.trim()
+            """.trim(),
         )
     }
 }

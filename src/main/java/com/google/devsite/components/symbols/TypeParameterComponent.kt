@@ -47,12 +47,12 @@ internal interface TypeParameterComponent : ParameterComponent {
         val pathProvider: FilePathProvider,
         override val displayLanguage: Language,
         override val modifiers: Modifiers = EmptyModifiers,
-        override val annotationComponents: List<AnnotationComponent> = emptyList()
+        override val annotationComponents: List<AnnotationComponent> = emptyList(),
     ) : ParameterComponent.Params(
         name = name,
         type = projections.firstOrNull() ?: pathProvider.ANY,
         displayLanguage = displayLanguage,
         modifiers = modifiers,
-        annotationComponents = annotationComponents
+        annotationComponents = annotationComponents,
     )
 }

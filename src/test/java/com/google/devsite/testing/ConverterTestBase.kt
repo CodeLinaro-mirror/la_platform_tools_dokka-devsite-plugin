@@ -80,7 +80,7 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 internal abstract class ConverterTestBase(
-    private val displayLanguage: Language = Language.JAVA
+    private val displayLanguage: Language = Language.JAVA,
 ) : BaseAbstractTest() {
     @Before fun setUp() { isRunningInDackkasTests = true }
 
@@ -88,7 +88,7 @@ internal abstract class ConverterTestBase(
 
     protected fun String.render(
         java: Boolean = false,
-        fileUseAnnotation: String = ""
+        fileUseAnnotation: String = "",
     ): DModule = if (java) {
         testJavaWithRootPageNode(trimMargin())
     } else {
@@ -115,8 +115,9 @@ internal abstract class ConverterTestBase(
     }
 
     private fun DClasslike.explicitSubClasslike(name: String): DClasslike? =
-        if (this.name == name) this
-        else this.classlikes.mapNotNull { it.explicitSubClasslike(name) }.singleOrNull()
+        if (this.name == name) {
+            this
+        } else this.classlikes.mapNotNull { it.explicitSubClasslike(name) }.singleOrNull()
 
     protected fun DModule.function(name: String? = null, classname: String? = null) =
         packages.single().functions.singleOrNull { it.name == name }
@@ -158,7 +159,7 @@ internal abstract class ConverterTestBase(
 
     protected fun pathProvider(
         externalLocationProvider: ExternalDokkaLocationProvider? = null,
-        classGraph: ClassGraph = emptyMap()
+        classGraph: ClassGraph = emptyMap(),
     ): FilePathProvider {
         val documentablesGraph = computeDocumentablesGraph(classGraph)
         return when (displayLanguage) {
@@ -201,12 +202,12 @@ internal abstract class ConverterTestBase(
         "coroutines" to "https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core",
         "android" to "https://developer.android.com/reference",
         "guava" to "https://guava.dev/releases/18.0/api/docs/package-list",
-        "kotlin" to "https://kotlinlang.org/api/latest/jvm/stdlib/"
+        "kotlin" to "https://kotlinlang.org/api/latest/jvm/stdlib/",
     ).map {
         ExternalDocumentationLink(
             url = URL(it.value),
             packageListUrl = File("testData").toPath()
-                .resolve("package-lists/${it.key}/package-list").toUri().toURL()
+                .resolve("package-lists/${it.key}/package-list").toUri().toURL(),
         )
     }
     private val configuration = dokkaConfiguration {
@@ -217,7 +218,7 @@ internal abstract class ConverterTestBase(
                 externalDocumentationLinks = externalLinks
                 documentedVisibilities = setOf(
                     DokkaConfiguration.Visibility.PUBLIC,
-                    DokkaConfiguration.Visibility.PROTECTED
+                    DokkaConfiguration.Visibility.PROTECTED,
                 )
             }
         }
@@ -229,9 +230,10 @@ internal abstract class ConverterTestBase(
     private val context = dokkaGenerator.initializePlugins(
         configuration,
         DokkaConsoleLogger(LoggingLevel.WARN),
-        emptyList()
+        emptyList(),
     )
     private val mockRootPageNode: RootPageNode = Mockito.mock(RootPageNode::class.java)
+
     // This provider will only work on external links; the mock will fail it on internal links.
     // However, dackka has other methods for resolving internal links, so this is fine.
     internal val externalProvider =
@@ -244,7 +246,7 @@ internal abstract class ConverterTestBase(
         hiddenAnnotations: Set<String> = emptySet(),
         versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap(),
         fileMetadataMap: Map<String, LibraryMetadata> = emptyMap(),
-        excludedPackages: Set<Regex> = emptySet()
+        excludedPackages: Set<Regex> = emptySet(),
     ) {
         val holder by lazy {
             runBlocking {
@@ -257,7 +259,7 @@ internal abstract class ConverterTestBase(
                     annotationsNotToDisplay = hiddenAnnotations,
                     versionMetadataMap = versionMetadataMap,
                     fileMetadataMap = fileMetadataMap,
-                    excludedPackages = excludedPackages
+                    excludedPackages = excludedPackages,
                 )
             }
         }
@@ -265,14 +267,16 @@ internal abstract class ConverterTestBase(
         val provider by lazy {
             testClass.pathProvider(
                 externalLocationProvider = testClass.externalProvider,
-                classGraph = classGraph
+                classGraph = classGraph,
             )
         }
         val metadataConverter by lazy { MetadataConverter(holder) }
         val annotationConverter by lazy {
             AnnotationDocumentableConverter(
-                testClass.displayLanguage, provider, hiddenAnnotations,
-                getDevsiteConfiguration(testClass.context).validNullabilityAnnotations
+                testClass.displayLanguage,
+                provider,
+                hiddenAnnotations,
+                getDevsiteConfiguration(testClass.context).validNullabilityAnnotations,
             )
         }
         val paramConverter by lazy {
@@ -280,32 +284,53 @@ internal abstract class ConverterTestBase(
         }
         val javadocConverter by lazy {
             DocTagConverter(
-                testClass.displayLanguage, provider, holder, paramConverter,
-                annotationConverter // , null
+                testClass.displayLanguage,
+                provider,
+                holder,
+                paramConverter,
+                annotationConverter, // , null
             )
         }
         val functionConverter by lazy {
             FunctionDocumentableConverter(
-                testClass.displayLanguage, provider, holder, javadocConverter, paramConverter,
-                annotationConverter, metadataConverter
+                testClass.displayLanguage,
+                provider,
+                holder,
+                javadocConverter,
+                paramConverter,
+                annotationConverter,
+                metadataConverter,
             )
         }
         val propertyConverter by lazy {
             PropertyDocumentableConverter(
-                testClass.displayLanguage, provider, javadocConverter, paramConverter,
-                annotationConverter, metadataConverter
+                testClass.displayLanguage,
+                provider,
+                javadocConverter,
+                paramConverter,
+                annotationConverter,
+                metadataConverter,
             )
         }
         val enumConverter by lazy {
             EnumValueDocumentableConverter(
-                testClass.displayLanguage, provider, javadocConverter,
-                paramConverter, annotationConverter
+                testClass.displayLanguage,
+                provider,
+                javadocConverter,
+                paramConverter,
+                annotationConverter,
             )
         }
         val nonKmpPackageConverter by lazy {
             NonKmpPackageConverter(
-                testClass.displayLanguage, module.packages.single(), provider, holder,
-                functionConverter, propertyConverter, javadocConverter, paramConverter
+                testClass.displayLanguage,
+                module.packages.single(),
+                provider,
+                holder,
+                functionConverter,
+                propertyConverter,
+                javadocConverter,
+                paramConverter,
             )
         }
         val rootDocumentableConverter by lazy {
@@ -315,7 +340,7 @@ internal abstract class ConverterTestBase(
             NonKmpClasslikeConverter(
                 testClass.displayLanguage, classlike, provider, holder, functionConverter,
                 propertyConverter, enumConverter, javadocConverter, paramConverter,
-                annotationConverter, metadataConverter
+                annotationConverter, metadataConverter,
             )
     }
 
@@ -325,7 +350,7 @@ internal abstract class ConverterTestBase(
                 sourceFiles.joinToString("\n\n"),
                 configuration,
                 pluginOverrides = listOf(NoopPlugin),
-                loggerForTest = DokkaConsoleLogger(LoggingLevel.WARN)
+                loggerForTest = DokkaConsoleLogger(LoggingLevel.WARN),
             ) {
                 renderingStage = { node: RootPageNode, _: DokkaContext ->
                     val module = (node as ModulePageNode).documentables.single() as DModule
@@ -372,7 +397,7 @@ internal abstract class ConverterTestBase(
 
     private fun testJavaWithRootPageNode(
         sourceCode: String,
-        imports: List<String> = emptyList()
+        imports: List<String> = emptyList(),
     ): DModule {
         val importText = imports.joinToString() { "|import $it;\n" }
         val source = javaFullHeader(imports = importText) + "|" + sourceCode.trimIndent()
@@ -381,6 +406,7 @@ internal abstract class ConverterTestBase(
 
     object NoopPlugin : DokkaPlugin() {
         private val devsite by lazy { plugin<DevsitePlugin>() }
+
         @OptIn(DokkaPluginApiPreview::class)
         override fun pluginApiPreviewAcknowledgement() = PluginApiPreviewAcknowledgement
 
@@ -403,13 +429,13 @@ internal abstract class ConverterTestBase(
 
     protected fun DModule.functionSummary(
         doc: DModule.() -> DFunction = ::smartDoc,
-        hints: ModifierHints = defaultHints
+        hints: ModifierHints = defaultHints,
     ): TypeSummaryItem<FunctionSignature> {
         return functionConverter().summary(this.doc(), hints.copy(isSummary = true))!!
     }
 
     protected fun DModule.functionSummaries(
-        hints: ModifierHints = defaultHints
+        hints: ModifierHints = defaultHints,
     ): Map<String, TypeSummaryItem<FunctionSignature>> {
         return functions()!!.associate {
             it.name to functionConverter().summary(it, hints.copy(isSummary = true))!!
@@ -418,13 +444,13 @@ internal abstract class ConverterTestBase(
 
     protected fun DModule.functionDetail(
         doc: DModule.() -> DFunction = ::smartDoc,
-        hints: ModifierHints = defaultHints
+        hints: ModifierHints = defaultHints,
     ): SymbolDetail<FunctionSignature> {
         return functionConverter().detail(this.doc(), hints)!!
     }
 
     protected fun DModule.functionSignature(
-        doc: DModule.() -> DFunction = ::smartDoc
+        doc: DModule.() -> DFunction = ::smartDoc,
     ): FunctionSignature {
         return with(functionConverter()) {
             this@functionSignature.doc().signature(isSummary = false)
@@ -433,21 +459,23 @@ internal abstract class ConverterTestBase(
 
     protected fun DModule.functionSummary(
         funName: String,
-        hints: ModifierHints = defaultHints
+        hints: ModifierHints = defaultHints,
     ) = functionSummary({ this.function(funName)!! }, hints)
 
     protected fun DModule.functionDetail(
         funName: String,
-        hints: ModifierHints = defaultHints
+        hints: ModifierHints = defaultHints,
     ) = functionDetail({ this.function(funName)!! }, hints)
 
     protected fun DModule.annotationComponents(
         annotations: List<Annotations.Annotation>,
         nullability: Nullability = Nullability.DONT_CARE,
-        hiddenAnnotations: Set<String> = emptySet()
+        hiddenAnnotations: Set<String> = emptySet(),
     ): List<AnnotationComponent> {
         val converterHolder = ConverterHolder(
-            testClass = this@ConverterTestBase, module = this, hiddenAnnotations = hiddenAnnotations
+            testClass = this@ConverterTestBase,
+            module = this,
+            hiddenAnnotations = hiddenAnnotations,
         )
         return converterHolder.annotationConverter.annotationComponents(annotations, nullability)
     }

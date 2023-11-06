@@ -32,12 +32,12 @@ internal class DefaultMetadataComponentTest {
         val libraryMetadata = LibraryMetadata(
             groupId = "testGroup",
             artifactId = "testArtifactId",
-            releaseNotesUrl = "https://d.android.com"
+            releaseNotesUrl = "https://d.android.com",
         )
         val metadata = MetadataComponent.Params(
             libraryMetadata = libraryMetadata,
             sourceLinkUrl = null,
-            versionMetadata = null
+            versionMetadata = null,
         )
         val component = DefaultMetadataComponent(metadata)
 
@@ -53,7 +53,7 @@ internal class DefaultMetadataComponentTest {
     <div id="maven-coordinates">Artifact: <a href="https://d.android.com">testGroup:testArtifactId</a></div>
   </div>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -62,12 +62,12 @@ internal class DefaultMetadataComponentTest {
         val libraryMetadata = LibraryMetadata(
             groupId = "testGroup",
             artifactId = "testArtifactId",
-            releaseNotesUrl = ""
+            releaseNotesUrl = "",
         )
         val metadata = MetadataComponent.Params(
             libraryMetadata = libraryMetadata,
             sourceLinkUrl = null,
-            versionMetadata = null
+            versionMetadata = null,
         )
         val component = DefaultMetadataComponent(metadata)
 
@@ -83,7 +83,7 @@ internal class DefaultMetadataComponentTest {
     <div id="maven-coordinates">Artifact: testGroup:testArtifactId</div>
   </div>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -92,7 +92,7 @@ internal class DefaultMetadataComponentTest {
         val metadata = MetadataComponent.Params(
             libraryMetadata = null,
             sourceLinkUrl = "https://cs.android.com",
-            versionMetadata = null
+            versionMetadata = null,
         )
         val component = DefaultMetadataComponent(metadata)
 
@@ -108,7 +108,7 @@ internal class DefaultMetadataComponentTest {
     <div id="source-link"><a href="https://cs.android.com" class="external">View Source</a></div>
   </div>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -117,12 +117,12 @@ internal class DefaultMetadataComponentTest {
         val libraryMetadata = LibraryMetadata(
             groupId = "testGroup",
             artifactId = "testArtifactId",
-            releaseNotesUrl = "https://d.android.com"
+            releaseNotesUrl = "https://d.android.com",
         )
         val metadata = MetadataComponent.Params(
             libraryMetadata = libraryMetadata,
             sourceLinkUrl = "https://cs.android.com",
-            versionMetadata = null
+            versionMetadata = null,
         )
         val component = DefaultMetadataComponent(metadata)
 
@@ -139,7 +139,7 @@ internal class DefaultMetadataComponentTest {
     <div id="source-link"><a href="https://cs.android.com" class="external">View Source</a></div>
   </div>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -148,12 +148,12 @@ internal class DefaultMetadataComponentTest {
         val versionMetadata = DefaultVersionMetadataComponent.createVersionMetadataWithBaseUrl(
             addedIn = "1.5.4",
             deprecatedIn = "1.6.0-alpha04",
-            baseUrl = "https://developer.android.com/jetpack/androidx/releases/fragment"
+            baseUrl = "https://developer.android.com/jetpack/androidx/releases/fragment",
         )
         val metadata = MetadataComponent.Params(
             libraryMetadata = null,
             sourceLinkUrl = null,
-            versionMetadata = versionMetadata
+            versionMetadata = versionMetadata,
         )
         val component = DefaultMetadataComponent(metadata)
 
@@ -172,7 +172,7 @@ internal class DefaultMetadataComponentTest {
     </div>
   </div>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -181,12 +181,12 @@ internal class DefaultMetadataComponentTest {
         // Empty string URL renders as text
         val versionMetadata = VersionMetadataComponent.Params(
             addedIn = DefaultLink(Link.Params(name = "API Level 8", url = "")),
-            deprecatedIn = DefaultLink(Link.Params(name = "API Level 12", url = ""))
+            deprecatedIn = DefaultLink(Link.Params(name = "API Level 12", url = "")),
         )
         val metadata = MetadataComponent.Params(
             libraryMetadata = null,
             sourceLinkUrl = null,
-            versionMetadata = DefaultVersionMetadataComponent(versionMetadata)
+            versionMetadata = DefaultVersionMetadataComponent(versionMetadata),
         )
         val component = DefaultMetadataComponent(metadata)
 
@@ -205,7 +205,7 @@ internal class DefaultMetadataComponentTest {
     </div>
   </div>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -214,12 +214,12 @@ internal class DefaultMetadataComponentTest {
         val versionMetadata = DefaultVersionMetadataComponent.createVersionMetadataWithBaseUrl(
             addedIn = "1.5.4",
             deprecatedIn = null,
-            baseUrl = "https://developer.android.com/jetpack/androidx/releases/fragment"
+            baseUrl = "https://developer.android.com/jetpack/androidx/releases/fragment",
         )
         val metadata = MetadataComponent.Params(
             libraryMetadata = null,
             sourceLinkUrl = null,
-            versionMetadata = versionMetadata
+            versionMetadata = versionMetadata,
         )
         val component = DefaultMetadataComponent(metadata)
 
@@ -237,7 +237,7 @@ internal class DefaultMetadataComponentTest {
     </div>
   </div>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -246,16 +246,16 @@ internal class DefaultMetadataComponentTest {
         val libraryMetadata = LibraryMetadata(
             groupId = "testGroup",
             artifactId = "testArtifactId",
-            releaseNotesUrl = "https://d.android.com"
+            releaseNotesUrl = "https://d.android.com",
         )
         val versionMetadata = VersionMetadataComponent.Params(
             addedIn = DefaultLink(Link.Params(name = "API Level 8", url = "")),
-            deprecatedIn = DefaultLink(Link.Params(name = "API Level 12", url = ""))
+            deprecatedIn = DefaultLink(Link.Params(name = "API Level 12", url = "")),
         )
         val metadata = MetadataComponent.Params(
             libraryMetadata = libraryMetadata,
             sourceLinkUrl = "https://cs.android.com",
-            versionMetadata = DefaultVersionMetadataComponent(versionMetadata)
+            versionMetadata = DefaultVersionMetadataComponent(versionMetadata),
         )
         val component = DefaultMetadataComponent(metadata)
 
@@ -276,7 +276,7 @@ internal class DefaultMetadataComponentTest {
     </div>
   </div>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -285,7 +285,7 @@ internal class DefaultMetadataComponentTest {
         val metadata = MetadataComponent.Params(
             libraryMetadata = null,
             sourceLinkUrl = null,
-            versionMetadata = null
+            versionMetadata = null,
         )
         val component = DefaultMetadataComponent(metadata)
 
@@ -297,7 +297,7 @@ internal class DefaultMetadataComponentTest {
         assertThat(output).isEqualTo(
             """
 <body></body>
-            """.trim()
+            """.trim(),
         )
     }
 }

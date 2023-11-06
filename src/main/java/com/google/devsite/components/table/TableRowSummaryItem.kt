@@ -33,7 +33,7 @@ internal interface TableRowSummaryItem<T : ContextFreeComponent?, V : ContextFre
 
     open class Params<T : ContextFreeComponent?, V : ContextFreeComponent> (
         open val title: T,
-        override val description: V
+        override val description: V,
     ) : SummaryItem.Params {
         // Due to not being at the bottom of a class hierarchy, this Params can't be a data class
         override fun equals(other: Any?): Boolean {

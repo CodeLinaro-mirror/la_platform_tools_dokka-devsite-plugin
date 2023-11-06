@@ -47,12 +47,12 @@ class DefaultClasslikeSignatureTest {
                             name = "GenericType",
                             projections = listOf(NoopTypeProjectionComponent("GenericSupertype")),
                             pathProvider = NoopFilePathProvider(),
-                            displayLanguage = Language.KOTLIN
-                        )
-                    )
+                            displayLanguage = Language.KOTLIN,
+                        ),
+                    ),
                 ),
-                annotationComponents = listOf(NoopAnnotationComponent("@GenericAnnotation"))
-            )
+                annotationComponents = listOf(NoopAnnotationComponent("@GenericAnnotation")),
+            ),
         )
 
         val output = createHTML().body {
@@ -63,7 +63,7 @@ class DefaultClasslikeSignatureTest {
         Truth.assertThat(output).isEqualTo(
             """
 <body>@GenericAnnotation<br>public abstract class Foo&lt;GenericType&nbsp;:&nbsp;GenericSupertype&gt; extends Anyclass implements SomeInterface</body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -83,12 +83,12 @@ class DefaultClasslikeSignatureTest {
                             name = "GenericType",
                             projections = listOf(NoopTypeProjectionComponent("GenericSupertype")),
                             pathProvider = NoopFilePathProvider(),
-                            displayLanguage = Language.KOTLIN
-                        )
-                    )
+                            displayLanguage = Language.KOTLIN,
+                        ),
+                    ),
                 ),
-                annotationComponents = listOf(NoopAnnotationComponent("@GenericAnnotation"))
-            )
+                annotationComponents = listOf(NoopAnnotationComponent("@GenericAnnotation")),
+            ),
         )
 
         val output = createHTML().body {
@@ -99,7 +99,7 @@ class DefaultClasslikeSignatureTest {
         Truth.assertThat(output).isEqualTo(
             """
 <body>@GenericAnnotation<br>open class Foo&lt;GenericType&nbsp;:&nbsp;GenericSupertype&gt; : Anyclass, SomeInterface</body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -114,8 +114,8 @@ class DefaultClasslikeSignatureTest {
                 extends = listOf(),
                 implements = listOf(NoopLink("SomeInterface")),
                 typeParameters = listOf(),
-                annotationComponents = emptyList()
-            )
+                annotationComponents = emptyList(),
+            ),
         )
 
         val output = createHTML().body {
@@ -126,7 +126,7 @@ class DefaultClasslikeSignatureTest {
         Truth.assertThat(output).isEqualTo(
             """
 <body>interface Foo extends SomeInterface</body>
-        """.trim()
+        """.trim(),
         )
     }
 }

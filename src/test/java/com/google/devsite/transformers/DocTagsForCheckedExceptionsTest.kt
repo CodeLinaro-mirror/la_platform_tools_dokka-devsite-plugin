@@ -15,7 +15,7 @@ class DocTagsForCheckedExceptionsTest : BaseAbstractTest() {
     private val driCorrespondence: Correspondence<ThrowsTag, String> =
         Correspondence.transforming(
             { it?.exceptionAddress?.toString() },
-            "has DRI equal to"
+            "has DRI equal to",
         )
 
     val configuration = dokkaConfiguration {
@@ -46,7 +46,7 @@ class DocTagsForCheckedExceptionsTest : BaseAbstractTest() {
             }
             """.trimIndent(),
             configuration,
-            pluginOverrides = listOf(ConverterTestBase.NoopPlugin)
+            pluginOverrides = listOf(ConverterTestBase.NoopPlugin),
         ) {
             documentablesTransformationStage = { mod ->
                 val docs: DocumentationNode = (mod.packages.single().classlikes.single() as DClass)
@@ -57,7 +57,7 @@ class DocTagsForCheckedExceptionsTest : BaseAbstractTest() {
                     .comparingElementsUsing(driCorrespondence)
                     .containsExactly(
                         "java.io/IOException///PointingToDeclaration/",
-                        "java.util.concurrent/TimeoutException///PointingToDeclaration/"
+                        "java.util.concurrent/TimeoutException///PointingToDeclaration/",
                     )
             }
         }
@@ -77,7 +77,7 @@ class DocTagsForCheckedExceptionsTest : BaseAbstractTest() {
             }
             """.trimIndent(),
             configuration,
-            pluginOverrides = listOf(ConverterTestBase.NoopPlugin)
+            pluginOverrides = listOf(ConverterTestBase.NoopPlugin),
         ) {
             documentablesTransformationStage = { mod ->
                 val docs: DocumentationNode = (mod.packages.single().classlikes.single() as DClass)
@@ -88,7 +88,7 @@ class DocTagsForCheckedExceptionsTest : BaseAbstractTest() {
                     .comparingElementsUsing(driCorrespondence)
                     .containsExactly(
                         "java.io/IOException///PointingToDeclaration/",
-                        "java.util.concurrent/TimeoutException///PointingToDeclaration/"
+                        "java.util.concurrent/TimeoutException///PointingToDeclaration/",
                     )
             }
         }
@@ -113,7 +113,7 @@ class DocTagsForCheckedExceptionsTest : BaseAbstractTest() {
             }
             """.trimIndent(),
             configuration,
-            pluginOverrides = listOf(ConverterTestBase.NoopPlugin)
+            pluginOverrides = listOf(ConverterTestBase.NoopPlugin),
         ) {
             documentablesTransformationStage = { mod ->
                 val docs: DocumentationNode = (mod.packages.single().classlikes.single() as DClass)
@@ -125,7 +125,7 @@ class DocTagsForCheckedExceptionsTest : BaseAbstractTest() {
                     .containsExactly(
                         "java.io/IOException///PointingToDeclaration/",
                         "java.util.concurrent/TimeoutException///PointingToDeclaration/",
-                        "java.lang/IllegalStateException///PointingToDeclaration/"
+                        "java.lang/IllegalStateException///PointingToDeclaration/",
                     )
             }
         }
@@ -151,7 +151,7 @@ class DocTagsForCheckedExceptionsTest : BaseAbstractTest() {
             }
             """.trimIndent(),
             configuration,
-            pluginOverrides = listOf(ConverterTestBase.NoopPlugin)
+            pluginOverrides = listOf(ConverterTestBase.NoopPlugin),
         ) {
             documentablesTransformationStage = { mod ->
                 val docs: DocumentationNode = (mod.packages.single().classlikes.single() as DClass)
@@ -163,7 +163,7 @@ class DocTagsForCheckedExceptionsTest : BaseAbstractTest() {
                     .containsExactly(
                         "java.io/IOException///PointingToDeclaration/",
                         "java.util.concurrent/TimeoutException///PointingToDeclaration/",
-                        "java.lang/IllegalStateException///PointingToDeclaration/"
+                        "java.lang/IllegalStateException///PointingToDeclaration/",
                     )
             }
         }
@@ -191,7 +191,7 @@ class DocTagsForCheckedExceptionsTest : BaseAbstractTest() {
             }
             """.trimIndent(),
             configuration,
-            pluginOverrides = listOf(ConverterTestBase.NoopPlugin)
+            pluginOverrides = listOf(ConverterTestBase.NoopPlugin),
         ) {
             documentablesTransformationStage = { mod ->
                 val docs: DocumentationNode = (mod.packages.single().classlikes.single() as DClass)
@@ -202,7 +202,7 @@ class DocTagsForCheckedExceptionsTest : BaseAbstractTest() {
                     .comparingElementsUsing(driCorrespondence)
                     .containsExactly(
                         "java.io/IOException///PointingToDeclaration/",
-                        "java.util.concurrent/TimeoutException///PointingToDeclaration/"
+                        "java.util.concurrent/TimeoutException///PointingToDeclaration/",
                     )
             }
         }

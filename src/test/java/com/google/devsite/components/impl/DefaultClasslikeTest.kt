@@ -50,7 +50,7 @@ hierarchy
 relatedSymbols
 descriptionDocs
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -64,10 +64,10 @@ descriptionDocs
                         hierarchy = NoopClassHierarchy(),
                         primarySignature = NoopClasslikeSignature(),
                         relatedSymbols = NoopRelatedSymbols(),
-                        descriptionDocs = emptyList()
-                    )
-                )
-            )
+                        descriptionDocs = emptyList(),
+                    ),
+                ),
+            ),
         )
 
         val output = createHTML().body {
@@ -84,7 +84,7 @@ descriptionDocs
   <div>Class hierarchy</div>
   <div>Related symbols</div>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -93,8 +93,8 @@ descriptionDocs
         val component = DefaultClasslike(
             emptyClasslikeParams.copy(
                 publicFunctionsSummary = NoopSummaryList(),
-                publicFunctionsDetails = Classlike.TitledList("Symbols", listOf(NoopSymbolDetailF))
-            )
+                publicFunctionsDetails = Classlike.TitledList("Symbols", listOf(NoopSymbolDetailF)),
+            ),
         )
 
         val output = createHTML().body {
@@ -117,7 +117,7 @@ descriptionDocs
     <div>noop</div>
   </div>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 }
@@ -157,5 +157,5 @@ internal val emptyClasslikeParams =
         extensionPropertiesDetails = emptyTitledList(),
         inheritedConstants = emptyInheritedSymbolsList(),
         inheritedFunctions = emptyInheritedSymbolsList(),
-        inheritedProperties = emptyInheritedSymbolsList()
+        inheritedProperties = emptyInheritedSymbolsList(),
     )

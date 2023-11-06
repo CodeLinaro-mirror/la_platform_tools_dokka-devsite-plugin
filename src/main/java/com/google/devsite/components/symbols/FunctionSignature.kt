@@ -28,7 +28,7 @@ internal interface FunctionSignature : SymbolSignature, Sizeable {
         override val receiver: ParameterComponent? = null,
         val typeParameters: List<TypeParameterComponent> = emptyList(),
         val parameters: List<ParameterComponent> = emptyList(),
-        val isDeprecated: Boolean = false
+        val isDeprecated: Boolean = false,
     ) : SymbolSignature.Params
 
     override fun length(): Int {

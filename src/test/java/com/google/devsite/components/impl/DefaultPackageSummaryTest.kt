@@ -42,7 +42,7 @@ class DefaultPackageSummaryTest {
     @Test
     fun `Package summary with description renders correctly`() {
         val component = createPackageSummary(
-            description = listOf(NoopDescriptionComponent("Hello World!"))
+            description = listOf(NoopDescriptionComponent("Hello World!")),
         )
 
         val output = createHTML().div {
@@ -55,7 +55,7 @@ class DefaultPackageSummaryTest {
 <div>
   <p>Hello World!</p>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -74,7 +74,7 @@ class DefaultPackageSummaryTest {
   <h2>Interfaces</h2>
   <div>noop</div>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -93,7 +93,7 @@ class DefaultPackageSummaryTest {
   <h2>Classes</h2>
   <div>noop</div>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -112,7 +112,7 @@ class DefaultPackageSummaryTest {
   <h2>Enums</h2>
   <div>noop</div>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -125,7 +125,7 @@ class DefaultPackageSummaryTest {
             val component = createPackageSummary(
                 classes = defaultSummaryListOf(NoopTableRowTypeSummaryItemLD),
                 objects = defaultSummaryListOf(NoopTableRowTypeSummaryItemLD),
-                displayLanguage = language
+                displayLanguage = language,
             )
 
             val output = createHTML().div {
@@ -200,7 +200,7 @@ class DefaultPackageSummaryTest {
   <h2>Exceptions</h2>
   <div>noop</div>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -219,7 +219,7 @@ class DefaultPackageSummaryTest {
   <h2>Annotations</h2>
   <div>noop</div>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -227,7 +227,7 @@ class DefaultPackageSummaryTest {
     fun `Package summary with only type aliases renders correctly`() {
         val component = createPackageSummary(
             displayLanguage = Language.KOTLIN,
-            typeAliases = NoopSummaryList()
+            typeAliases = NoopSummaryList(),
         )
 
         val output = createHTML().div {
@@ -241,7 +241,7 @@ class DefaultPackageSummaryTest {
   <h2>Type aliases</h2>
   <div>noop</div>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -263,7 +263,7 @@ class DefaultPackageSummaryTest {
             topLevelProperties = listOf(NoopSymbolDetailP),
             topLevelFunctions = listOf(NoopSymbolDetailF),
             extensionProperties = listOf(NoopSymbolDetailP),
-            extensionFunctions = listOf(NoopSymbolDetailF)
+            extensionFunctions = listOf(NoopSymbolDetailF),
         )
 
         val output = createHTML().div {
@@ -285,7 +285,7 @@ class DefaultPackageSummaryTest {
   <h2>Exceptions</h2>
   <div>noop</div>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -294,7 +294,7 @@ class DefaultPackageSummaryTest {
         val component = createPackageSummary(
             displayLanguage = Language.KOTLIN,
             topLevelConstantsSummary = NoopSummaryList(),
-            topLevelConstants = listOf(NoopSymbolDetailP)
+            topLevelConstants = listOf(NoopSymbolDetailP),
         )
 
         val output = createHTML().div {
@@ -310,7 +310,7 @@ class DefaultPackageSummaryTest {
   <h2>Constants</h2>
   <div>noop</div>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -319,7 +319,7 @@ class DefaultPackageSummaryTest {
         val component = createPackageSummary(
             displayLanguage = Language.KOTLIN,
             topLevelPropertiesSummary = NoopSummaryList(),
-            topLevelProperties = listOf(NoopSymbolDetailP)
+            topLevelProperties = listOf(NoopSymbolDetailP),
         )
 
         val output = createHTML().div {
@@ -335,7 +335,7 @@ class DefaultPackageSummaryTest {
   <h2>Top-level properties</h2>
   <div>noop</div>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -344,7 +344,7 @@ class DefaultPackageSummaryTest {
         val component = createPackageSummary(
             displayLanguage = Language.KOTLIN,
             topLevelFunctionsSummary = NoopSummaryList(),
-            topLevelFunctions = listOf(NoopSymbolDetailF)
+            topLevelFunctions = listOf(NoopSymbolDetailF),
         )
 
         val output = createHTML().div {
@@ -360,7 +360,7 @@ class DefaultPackageSummaryTest {
   <h2>Top-level functions</h2>
   <div>noop</div>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -369,7 +369,7 @@ class DefaultPackageSummaryTest {
         val component = createPackageSummary(
             displayLanguage = Language.KOTLIN,
             extensionFunctionsSummary = NoopSummaryList(),
-            extensionFunctions = listOf(NoopSymbolDetailF)
+            extensionFunctions = listOf(NoopSymbolDetailF),
         )
 
         val output = createHTML().div {
@@ -385,7 +385,7 @@ class DefaultPackageSummaryTest {
   <h2>Extension functions</h2>
   <div>noop</div>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -394,7 +394,7 @@ class DefaultPackageSummaryTest {
         val component = createPackageSummary(
             displayLanguage = Language.KOTLIN,
             extensionPropertiesSummary = NoopSummaryList(),
-            extensionProperties = listOf(NoopSymbolDetailP)
+            extensionProperties = listOf(NoopSymbolDetailP),
         )
 
         val output = createHTML().div {
@@ -410,7 +410,7 @@ class DefaultPackageSummaryTest {
   <h2>Extension properties</h2>
   <div>noop</div>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -427,7 +427,7 @@ class DefaultPackageSummaryTest {
             topLevelProperties = listOf(NoopSymbolDetailP),
             topLevelFunctions = listOf(NoopSymbolDetailF),
             extensionProperties = listOf(NoopSymbolDetailP),
-            extensionFunctions = listOf(NoopSymbolDetailF)
+            extensionFunctions = listOf(NoopSymbolDetailF),
         )
 
         val output = createHTML().div {
@@ -459,7 +459,7 @@ class DefaultPackageSummaryTest {
   <h2>Extension properties</h2>
   <div>noop</div>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -482,7 +482,7 @@ class DefaultPackageSummaryTest {
         topLevelProperties: List<SymbolDetail<PropertySignature>> = emptyList(),
         topLevelFunctions: List<SymbolDetail<FunctionSignature>> = emptyList(),
         extensionProperties: List<SymbolDetail<PropertySignature>> = emptyList(),
-        extensionFunctions: List<SymbolDetail<FunctionSignature>> = emptyList()
+        extensionFunctions: List<SymbolDetail<FunctionSignature>> = emptyList(),
     ) = DefaultPackageSummary(
         Params(
             header = null,
@@ -504,7 +504,7 @@ class DefaultPackageSummaryTest {
             topLevelProperties = topLevelProperties,
             topLevelFunctions = topLevelFunctions,
             extensionProperties = extensionProperties,
-            extensionFunctions = extensionFunctions
-        )
+            extensionFunctions = extensionFunctions,
+        ),
     )
 }

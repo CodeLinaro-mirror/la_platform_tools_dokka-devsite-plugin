@@ -34,9 +34,10 @@ internal fun DefaultPlatformComponent(sourceSets: Set<DokkaConfiguration.DokkaSo
             DefaultPlatformComponent(PlatformComponent.Params(platforms = this))
         }
     }
+
 /** Default implementation of a table header. */
 internal data class DefaultPlatformComponent(
-    override val data: PlatformComponent.Params
+    override val data: PlatformComponent.Params,
 ) : PlatformComponent {
 
     override fun render(into: FlowContent) = into.run {

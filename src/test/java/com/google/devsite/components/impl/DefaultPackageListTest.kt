@@ -34,7 +34,7 @@ class DefaultPackageListTest {
 a
 b
 c
-            """.trim()
+            """.trim(),
         )
     }
 }

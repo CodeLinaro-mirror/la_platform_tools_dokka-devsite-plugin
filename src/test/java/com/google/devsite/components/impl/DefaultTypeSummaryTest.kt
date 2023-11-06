@@ -29,8 +29,8 @@ class DefaultTypeSummaryTest {
     fun `Simple type renders correctly`() {
         val component = DefaultTypeSummary(
             Params(
-                type = NoopTypeProjectionComponent("Unit")
-            )
+                type = NoopTypeProjectionComponent("Unit"),
+            ),
         )
 
         val output = createHTML().div {
@@ -41,7 +41,7 @@ class DefaultTypeSummaryTest {
         assertThat(output).isEqualTo(
             """
 <div>Unit</div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -50,8 +50,8 @@ class DefaultTypeSummaryTest {
         val component = DefaultTypeSummary(
             Params(
                 type = NoopTypeProjectionComponent("Unit"),
-                modifiers = Modifiers("open", "suspend")
-            )
+                modifiers = Modifiers("open", "suspend"),
+            ),
         )
 
         val output = createHTML().div {
@@ -62,7 +62,7 @@ class DefaultTypeSummaryTest {
         assertThat(output).isEqualTo(
             """
 <div>open&nbsp;suspend Unit</div>
-            """.trim()
+            """.trim(),
         )
     }
 }

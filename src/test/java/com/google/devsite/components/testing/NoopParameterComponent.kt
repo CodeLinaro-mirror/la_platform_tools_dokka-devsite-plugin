@@ -21,7 +21,7 @@ import kotlinx.html.FlowContent
 
 internal class NoopParameterComponent(
     private val text: String,
-    private val forceBreak: Boolean = false
+    private val forceBreak: Boolean = false,
 ) : ParameterComponent {
     override val data: ParameterComponent.Params
         get() = throw NotImplementedError()

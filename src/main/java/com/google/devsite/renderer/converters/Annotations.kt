@@ -54,9 +54,11 @@ internal val ANDROID_NON_NULL_DRI = DRI("android.annotation", "NonNull")
 
 /** @return true if an `@Nullable` annotation is present, false otherwise */
 internal fun List<Annotation>.hasAtNullable(): Boolean = any { it.dri.classNames == "Nullable" }
+
 /** @return true if an `@NonNull` annotation is present, false otherwise */
 internal fun List<Annotation>.hasAtNonNull(): Boolean =
     any { it.dri.classNames in listOf("NonNull", "NotNull") }
+
 /** @return true if the `@Deprecated` annotation is present, false otherwise */
 internal fun List<Annotation>.isDeprecated(): Boolean = any { it.isDeprecated() }
 
@@ -104,7 +106,7 @@ internal fun List<Annotation>.deprecationAnnotation() =
  * @return the list of file-level annotations on this WithSource's source file
  */
 internal fun <T> T.fileLevelAnnotations(sourceSet: DokkaConfiguration.DokkaSourceSet?)
-where T : WithSources, T : Documentable =
+    where T : WithSources, T : Documentable =
     (this as WithExtraProperties<*>).extra.allOfType<Annotations>().flatMap { annotations ->
         annotations.fileLevelAnnotations[sourceSet]
             ?: emptyList()
@@ -127,6 +129,7 @@ internal val NULLABILITY_ANNOTATION_NAMES = listOf("NonNull", "Nullable", "NotNu
 // List of androidx annotations that (now that we are on Java 8) ideally would be migrated
 // ANNOTATION_TARGET.METHOD -> ANNOTATION_TARGET.TYPE. If on a function, they refer to return type
 private val KNOWN_TYPEBOUND_ANNOTATION_NAMES = listOf("Dimension", "Px", "Size")
+
 // For androidx annotations. E.g. IntRes, IntRange, GravityInt, HalfFloat, ColorLong, UiContext
 private val KNOWN_TYPEBOUND_ANNOTATION_SUFFIXES =
     listOf("Res", "Range", "Long", "Int", "Float", "Context")

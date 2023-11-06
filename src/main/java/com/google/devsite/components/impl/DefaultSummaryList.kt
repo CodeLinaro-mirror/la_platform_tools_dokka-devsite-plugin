@@ -26,7 +26,7 @@ import kotlinx.html.tr
 
 /** Default implementation of the table view. */
 internal data class DefaultSummaryList<T : SummaryItem>(
-    override val data: SummaryList.Params<T>
+    override val data: SummaryList.Params<T>,
 ) : SummaryList<T> {
     override fun render(into: FlowContent) = into.run {
         if (!hasContent()) return

@@ -46,7 +46,7 @@ internal class AnnotationDocumentableConverter(
     private val pathProvider: FilePathProvider,
     private val annotationsNotToDisplay: Set<String>,
     // Default value is provided for testing purposes only. The only real instantiation provides it.
-    private val validNullabilityAnnotations: List<String> = defaultValidNullabilityAnnotations
+    private val validNullabilityAnnotations: List<String> = defaultValidNullabilityAnnotations,
 ) {
     /**
      * @param nullability the nullability of the annotated element. Contains information such as
@@ -61,14 +61,15 @@ internal class AnnotationDocumentableConverter(
         if (annotations.any { it.isBadNullability }) {
             throw RuntimeException(
                 "Used a nullability annotation ${annotations.filter { it.isBadNullability }} not " +
-                    "in the list of validNullabilityAnnotations passed to dackka."
+                    "in the list of validNullabilityAnnotations passed to dackka.",
             )
         }
 
         // NOTE: we inject @NonNull, but not @Nullable, as that is usually not useful to Java devs
         if (displayLanguage == Language.JAVA) {
-            if (!annotations.any { it.isNullabilityAnnotation })
+            if (!annotations.any { it.isNullabilityAnnotation }) {
                 injectedAnnotations += nullability.renderAsJavaAnnotation()
+            }
         }
 
         return (annotations + injectedAnnotations).filterNotNull().filter { annotation ->
@@ -86,7 +87,9 @@ internal class AnnotationDocumentableConverter(
         if (annotation.isSuppressAnnotation() ||
             annotation.dri.packageName == "kotlin.jvm" ||
             annotation.dri.fullName in annotationsNotToDisplay
-        ) return false
+        ) {
+            return false
+        }
         // Surfaced separately
         if (annotation.isDeprecated()) return false
 
@@ -107,26 +110,26 @@ internal class AnnotationDocumentableConverter(
     }
 
     private fun AnnotationParameterValue.toComponent(
-        name: String? = null
+        name: String? = null,
     ): AnnotationParameter = when (this) {
         is StringValue -> DefaultNamedValueAnnotationParameter(
-            NamedValueAnnotationParameter.Params(name, "\"${asString()}\"")
+            NamedValueAnnotationParameter.Params(name, "\"${asString()}\""),
         )
         is LiteralValue, is EnumValue, is ClassValue ->
             DefaultNamedValueAnnotationParameter(
-                NamedValueAnnotationParameter.Params(name, asString())
+                NamedValueAnnotationParameter.Params(name, asString()),
             )
         is ArrayValue -> DefaultArrayValueAnnotationParameter(
             ArrayValueAnnotationParameter.Params(
                 name,
-                innerAnnotationParameters = value.map { it.toComponent() }
-            )
+                innerAnnotationParameters = value.map { it.toComponent() },
+            ),
         )
         is AnnotationValue -> DefaultAnnotationValueAnnotationParameter(
             AnnotationValueAnnotationParameter.Params(
                 name,
-                annotationComponentValue = annotation.toDackkaAnnotation()
-            )
+                annotationComponentValue = annotation.toDackkaAnnotation(),
+            ),
         )
     }
 

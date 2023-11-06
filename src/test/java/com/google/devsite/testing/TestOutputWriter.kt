@@ -27,6 +27,7 @@ class TestOutputWriterPlugin(failOnOverwrite: Boolean = false) : DokkaPlugin() {
     val writer = TestOutputWriter(failOnOverwrite)
 
     private val dokkaBase by lazy { plugin<DokkaBase>() }
+
     @OptIn(DokkaPluginApiPreview::class)
     override fun pluginApiPreviewAcknowledgement() = PluginApiPreviewAcknowledgement
 

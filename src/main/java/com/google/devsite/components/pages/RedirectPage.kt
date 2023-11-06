@@ -24,6 +24,6 @@ internal interface RedirectPage : HtmlComponent<HTML> {
     val data: Params
 
     data class Params(
-        val url: String
+        val url: String,
     )
 }

@@ -25,7 +25,7 @@ import kotlinx.html.FlowContent
 internal class NoopLambdaTypeProjectionComponent(
     private val params: List<String> = emptyList(),
     private val type: String,
-    private val receiver: String? = null
+    private val receiver: String? = null,
 ) : LambdaTypeProjectionComponent {
     override val data: LambdaTypeProjectionComponent.Params
         get() = throw NotImplementedError()

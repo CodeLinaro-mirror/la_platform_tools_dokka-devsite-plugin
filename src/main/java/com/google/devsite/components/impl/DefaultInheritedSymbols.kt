@@ -31,7 +31,7 @@ import kotlinx.html.unsafe
 
 /** Default implementation of inherited symbols. */
 internal data class DefaultInheritedSymbols<T : SymbolSignature>(
-    override val data: InheritedSymbolsList.Params<T>
+    override val data: InheritedSymbolsList.Params<T>,
 ) : InheritedSymbolsList<T> {
     override fun render(into: FlowContent) {
         if (data.inheritedSymbolSummaries.isEmpty()) return
@@ -67,7 +67,9 @@ internal data class DefaultInheritedSymbols<T : SymbolSignature>(
         }
     }
 
-    override fun toString() = if (!hasContent()) "" else
+    override fun toString() = if (!hasContent()) {
+        ""
+    } else
         data.header.toString() + " " + data.inheritedSymbolSummaries
             .map { (from, summaries) -> "from $from, inherited $summaries" }.joinToString()
 }
@@ -75,6 +77,6 @@ internal data class DefaultInheritedSymbols<T : SymbolSignature>(
 internal fun <T : SymbolSignature> emptyInheritedSymbolsList() = DefaultInheritedSymbols(
     InheritedSymbolsList.Params<T>(
         DefaultTableTitle(TableTitle.Params("")),
-        emptyMap()
-    )
+        emptyMap(),
+    ),
 )

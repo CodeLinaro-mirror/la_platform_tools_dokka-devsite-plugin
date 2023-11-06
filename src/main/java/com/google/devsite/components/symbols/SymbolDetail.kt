@@ -46,7 +46,7 @@ internal interface SymbolDetail<T : SymbolSignature> : ContextFreeComponent {
         open val modifiers: Modifiers = EmptyModifiers,
         open val extFunctionClass: String? = null,
         open val annotationComponents: List<AnnotationComponent> = emptyList(),
-        open val metadataComponent: MetadataComponent? = null
+        open val metadataComponent: MetadataComponent? = null,
     ) {
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
@@ -84,6 +84,6 @@ internal interface SymbolDetail<T : SymbolSignature> : ContextFreeComponent {
         READ_ONLY_PROPERTY("val"),
         PROPERTY("var"),
         FUNCTION("fun"),
-        CONSTRUCTOR("")
+        CONSTRUCTOR(""),
     }
 }

@@ -65,7 +65,7 @@ import org.jetbrains.dokka.transformers.documentation.DocumentableTransformer
  */
 class PreMergeHiddenDocumentableFilter(
     dokkaContext: DokkaContext,
-    private val hidingAnnotations: List<String>
+    private val hidingAnnotations: List<String>,
 ) : SuppressedByConditionDocumentableFilterTransformer(dokkaContext) {
     override fun shouldBeSuppressed(d: Documentable): Boolean {
         // Upstream bug 2603 means private-backing-public-getter shows up as a public field.
@@ -106,13 +106,13 @@ private fun Documentable.isHidden(hidingAnnotations: List<String>): Boolean =
 
 private fun Documentable.hasHideJavadocTag(): Boolean =
     this.documentation.any {
-        (_, docs) ->
+            (_, docs) ->
         docs.dfs { it is CustomTagWrapper && it.name.trim() == "hide" } != null
     }
 
 private fun Documentable.hasRemovedJavadocTag(): Boolean =
     this.documentation.any {
-        (_, docs) ->
+            (_, docs) ->
         docs.dfs { it is CustomTagWrapper && it.name.trim() == "removed" } != null
     }
 

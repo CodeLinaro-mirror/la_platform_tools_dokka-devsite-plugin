@@ -31,7 +31,7 @@ internal interface PlatformComponent : ContextFreeComponent {
     val data: Params
 
     data class Params(
-        val platforms: Set<Platform>
+        val platforms: Set<Platform>,
     )
 
     fun renderForDetail(into: FlowContent)
@@ -47,14 +47,15 @@ enum class Platform {
     JVM,
     NATIVE,
     WASM,
-    JS;
+    JS,
+    ;
     /* Not used yet; strategy undecided
     ANDROID,
     IOS
     // Things to consider:
     ANDROID_JVM
     ANDROID_NATIVE
-    */
+     */
 
     companion object {
         fun from(analysisPlatform: DokkaPlatform): Platform {

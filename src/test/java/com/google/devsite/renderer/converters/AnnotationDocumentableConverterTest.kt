@@ -36,7 +36,7 @@ import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
 internal class AnnotationDocumentableConverterTest(
-    displayLanguage: Language
+    displayLanguage: Language,
 ) : ConverterTestBase(displayLanguage) {
 
     @Test
@@ -149,8 +149,9 @@ internal class AnnotationDocumentableConverterTest(
             val parameterTwo = annotationTwo.data.parameters.item()
 
             // NOTE: "value" in java does not match "bar" in kotlin
-            if (annotations == annotationsK) assertThat(parameterOne.name).isEqualTo("bar")
-            else assertThat(parameterOne.name).isEqualTo("value")
+            if (annotations == annotationsK) {
+                assertThat(parameterOne.name).isEqualTo("bar")
+            } else assertThat(parameterOne.name).isEqualTo("value")
             assertThat(parameterOne.value).isEqualTo("\"abc\"")
             assertThat(parameterTwo.name).isEqualTo("bar")
             assertThat(parameterTwo.value).isEqualTo("\"baz\"")
@@ -185,8 +186,9 @@ internal class AnnotationDocumentableConverterTest(
             val parameterTwo = annotationTwo.data.parameters.item()
 
             // NOTE: "value" in java does not match "bar" in kotlin
-            if (annotations == annotationsK) assertThat(parameterOne.name).isEqualTo("bar")
-            else assertThat(parameterOne.name).isEqualTo("value")
+            if (annotations == annotationsK) {
+                assertThat(parameterOne.name).isEqualTo("bar")
+            } else assertThat(parameterOne.name).isEqualTo("value")
             assertThat(parameterOne.value).isEqualTo("\"abc\"")
             assertThat(parameterTwo.name).isEqualTo("bar")
             assertThat(parameterTwo.value).isEqualTo("\"baz\"")
@@ -216,8 +218,9 @@ internal class AnnotationDocumentableConverterTest(
             val annotationTwo = annotations.exceptNonNull().last()
             val parameterTwo = annotationTwo.data.parameters.item()
 
-            if (annotations == annotationsK) assertThat(parameterOne.name).isEqualTo("bar")
-            else assertThat(parameterOne.name).isEqualTo("value")
+            if (annotations == annotationsK) {
+                assertThat(parameterOne.name).isEqualTo("bar")
+            } else assertThat(parameterOne.name).isEqualTo("value")
             assertThat(parameterOne.value).isEqualTo("\"abc\"")
             assertThat(parameterTwo.name).isEqualTo("bar")
             assertThat(parameterTwo.value).isEqualTo("\"baz\"")
@@ -247,8 +250,9 @@ internal class AnnotationDocumentableConverterTest(
             val annotationTwo = annotations.exceptNonNull().last()
             val parameterTwo = annotationTwo.data.parameters.item()
 
-            if (annotations == annotationsK) assertThat(parameterOne.name).isEqualTo("bar")
-            else assertThat(parameterOne.name).isEqualTo("value")
+            if (annotations == annotationsK) {
+                assertThat(parameterOne.name).isEqualTo("bar")
+            } else assertThat(parameterOne.name).isEqualTo("value")
             assertThat(parameterOne.value).isEqualTo("\"abc\"")
             assertThat(parameterTwo.name).isEqualTo("bar")
             assertThat(parameterTwo.value).isEqualTo("\"baz\"")
@@ -422,14 +426,14 @@ internal class AnnotationDocumentableConverterTest(
     private fun DModule.annotationComponents(
         element: Documentable,
         nullability: Nullability = Nullability.DONT_CARE,
-        hiddenAnnotations: Set<String> = emptySet()
+        hiddenAnnotations: Set<String> = emptySet(),
     ): List<AnnotationComponent> =
         annotationComponents(element.allAnnotations(), nullability, hiddenAnnotations)
 
     private fun DModule.functionAnnotationComponents(
         name: String = "foo",
         nullability: Nullability = Nullability.DONT_CARE,
-        hiddenAnnotations: Set<String> = emptySet()
+        hiddenAnnotations: Set<String> = emptySet(),
     ): List<AnnotationComponent> =
         annotationComponents(function(name)!!, nullability, hiddenAnnotations)
 
@@ -440,7 +444,7 @@ internal class AnnotationDocumentableConverterTest(
         @Parameterized.Parameters(name = "{0}")
         fun data() = listOf(
             arrayOf(Language.JAVA),
-            arrayOf(Language.KOTLIN)
+            arrayOf(Language.KOTLIN),
         )
     }
 }

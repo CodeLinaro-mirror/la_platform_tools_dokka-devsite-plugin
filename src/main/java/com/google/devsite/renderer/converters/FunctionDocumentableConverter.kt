@@ -51,7 +51,7 @@ internal class FunctionDocumentableConverter(
     private val javadocConverter: DocTagConverter,
     private val paramConverter: ParameterDocumentableConverter,
     private val annotationConverter: AnnotationDocumentableConverter,
-    private val metadataConverter: MetadataConverter
+    private val metadataConverter: MetadataConverter,
 ) {
 
     /** @return the function summary component */
@@ -69,32 +69,34 @@ internal class FunctionDocumentableConverter(
                             propagatedAnnotations = typeAnnotations,
                             isReturnType = true,
                             isJavaSource = function.isFromJava(),
-                            sourceSet = jvmSourceSet
+                            sourceSet = jvmSourceSet,
                         ),
-                        modifiers = function.modifiers(jvmSourceSet).modifiersFor(hints)
-                    )
+                        modifiers = function.modifiers(jvmSourceSet).modifiersFor(hints),
+                    ),
                 ),
                 description = DefaultSymbolSummary(
                     SymbolSummary.Params(
                         signature = function.signature(isSummary = true),
                         description = javadocConverter.summaryDescription(
                             function,
-                            nonTypeAnnotations.deprecationAnnotation()
+                            nonTypeAnnotations.deprecationAnnotation(),
                         ),
                         annotationComponents = annotationConverter.annotationComponents(
                             annotations = nonTypeAnnotations,
                             // Propagates to return type instead
                             nullability = Nullability.DONT_CARE,
-                        )
-                    )
-                )
-            )
+                        ),
+                    ),
+                ),
+            ),
         )
     }
 
     /** @return the function summary component */
-    fun summaryKmp(function: DFunction, hints: ModifierHints):
-        KmpTypeSummaryItem<FunctionSignature> {
+    fun summaryKmp(
+        function: DFunction,
+        hints: ModifierHints,
+    ): KmpTypeSummaryItem<FunctionSignature> {
         // TODO(KMP member signatures b/254493209)
         val (typeAnnotations, nonTypeAnnotations) =
             function.annotations(function.getExpectOrCommonSourceSet())
@@ -109,29 +111,29 @@ internal class FunctionDocumentableConverter(
                             propagatedAnnotations = typeAnnotations,
                             isReturnType = true,
                             isJavaSource = function.isFromJava(),
-                            sourceSet = function.getExpectOrCommonSourceSet()
+                            sourceSet = function.getExpectOrCommonSourceSet(),
                         ),
                         // TODO(KMP, b/254493209)
                         modifiers = function.modifiers(function.getExpectOrCommonSourceSet())
-                            .modifiersFor(hints)
-                    )
+                            .modifiersFor(hints),
+                    ),
                 ),
                 description = DefaultSymbolSummary(
                     SymbolSummary.Params(
                         signature = function.signature(isSummary = true),
                         description = javadocConverter.summaryDescription(
                             function,
-                            nonTypeAnnotations.deprecationAnnotation()
+                            nonTypeAnnotations.deprecationAnnotation(),
                         ),
                         annotationComponents = annotationConverter.annotationComponents(
                             annotations = nonTypeAnnotations,
                             // Propagates to return type instead
                             nullability = Nullability.DONT_CARE,
-                        )
-                    )
+                        ),
+                    ),
                 ),
-                platforms = DefaultPlatformComponent(function.sourceSets)
-            )
+                platforms = DefaultPlatformComponent(function.sourceSets),
+            ),
         )
     }
 
@@ -150,10 +152,10 @@ internal class FunctionDocumentableConverter(
                             annotations = function.annotations(jvmSourceSet),
                             // Propagates to return type instead
                             nullability = Nullability.DONT_CARE,
-                        )
-                    )
-                )
-            )
+                        ),
+                    ),
+                ),
+            ),
         )
     }
 
@@ -173,11 +175,11 @@ internal class FunctionDocumentableConverter(
                                 .annotations(function.getExpectOrCommonSourceSet()),
                             // Propagates to return type instead
                             nullability = Nullability.DONT_CARE,
-                        )
-                    )
+                        ),
+                    ),
                 ),
-                platforms = DefaultPlatformComponent(function.sourceSets)
-            )
+                platforms = DefaultPlatformComponent(function.sourceSets),
+            ),
         )
 
     /** @return the function detail component */
@@ -200,7 +202,7 @@ internal class FunctionDocumentableConverter(
     private fun detail(
         function: DFunction,
         hints: ModifierHints,
-        kind: SymbolDetail.SymbolKind
+        kind: SymbolDetail.SymbolKind,
     ): SymbolDetail<FunctionSignature>? {
         val jvmSourceSet = function.getAsJavaSourceSet() ?: return null
         val (typeAnnotations, signatureAnnotations) =
@@ -211,16 +213,19 @@ internal class FunctionDocumentableConverter(
             propagatedAnnotations = typeAnnotations,
             isReturnType = true,
             propagatedNullability =
-            if (kind == SymbolDetail.SymbolKind.CONSTRUCTOR || function.isConstructor)
-                Nullability.DONT_CARE else null,
-            sourceSet = jvmSourceSet
+            if (kind == SymbolDetail.SymbolKind.CONSTRUCTOR || function.isConstructor) {
+                Nullability.DONT_CARE
+            } else {
+                null
+            },
+            sourceSet = jvmSourceSet,
         )
 
         // So far I've only seen this in unit tests where we use the wrong entry point into
         // FunctionDocumentableConverter, but it's possible it could happen in other ways.
         if (function.isConstructor != (kind == SymbolDetail.SymbolKind.CONSTRUCTOR)) {
             throw RuntimeException(
-                "Constructor ${function.dri} is not being parsed correctly! File a bug on dackka!"
+                "Constructor ${function.dri} is not being parsed correctly! File a bug on dackka!",
             )
         }
 
@@ -235,7 +240,7 @@ internal class FunctionDocumentableConverter(
                     documentable = function,
                     returnType = returnType,
                     paramNames = listOf("receiver") + function.parameters.map { it.name!! },
-                    deprecationAnnotation = signatureAnnotations.deprecationAnnotation()
+                    deprecationAnnotation = signatureAnnotations.deprecationAnnotation(),
                 ),
                 displayLanguage = displayLanguage,
                 modifiers = function.modifiers(jvmSourceSet).modifiersFor(hints),
@@ -245,8 +250,8 @@ internal class FunctionDocumentableConverter(
                     // Nullability is on the return type instead
                     nullability = Nullability.DONT_CARE,
                 ),
-                metadataComponent = metadataConverter.getMetadataForFunction(function)
-            )
+                metadataComponent = metadataConverter.getMetadataForFunction(function),
+            ),
         )
     }
 
@@ -254,7 +259,7 @@ internal class FunctionDocumentableConverter(
     private fun detailKmp(
         function: DFunction,
         hints: ModifierHints,
-        kind: SymbolDetail.SymbolKind
+        kind: SymbolDetail.SymbolKind,
     ): KmpSymbolDetail<FunctionSignature> {
         // TODO(KMP member signatures b/254493209)
         val (typeAnnotations, signatureAnnotations) =
@@ -266,16 +271,19 @@ internal class FunctionDocumentableConverter(
             propagatedAnnotations = typeAnnotations,
             isReturnType = true,
             propagatedNullability =
-            if (kind == SymbolDetail.SymbolKind.CONSTRUCTOR || function.isConstructor)
-                Nullability.DONT_CARE else null,
-            sourceSet = function.getExpectOrCommonSourceSet()
+            if (kind == SymbolDetail.SymbolKind.CONSTRUCTOR || function.isConstructor) {
+                Nullability.DONT_CARE
+            } else {
+                null
+            },
+            sourceSet = function.getExpectOrCommonSourceSet(),
         )
 
         // So far I've only seen this in unit tests where we use the wrong entry point into
         // FunctionDocumentableConverter, but it's possible it could happen in other ways.
         if (function.isConstructor != (kind == SymbolDetail.SymbolKind.CONSTRUCTOR)) {
             throw RuntimeException(
-                "Constructor ${function.dri} is not being parsed correctly! File a bug on dackka!"
+                "Constructor ${function.dri} is not being parsed correctly! File a bug on dackka!",
             )
         }
 
@@ -290,7 +298,7 @@ internal class FunctionDocumentableConverter(
                     documentable = function,
                     returnType = returnType,
                     paramNames = listOf("receiver") + function.parameters.map { it.name!! },
-                    deprecationAnnotation = signatureAnnotations.deprecationAnnotation()
+                    deprecationAnnotation = signatureAnnotations.deprecationAnnotation(),
                 ),
                 displayLanguage = displayLanguage,
                 // TODO(KMP, b/254493209)
@@ -303,8 +311,8 @@ internal class FunctionDocumentableConverter(
                     nullability = Nullability.DONT_CARE,
                 ),
                 platforms = DefaultPlatformComponent(function.sourceSets),
-                metadataComponent = metadataConverter.getMetadataForFunction(function)
-            )
+                metadataComponent = metadataConverter.getMetadataForFunction(function),
+            ),
         )
     }
 
@@ -314,7 +322,7 @@ internal class FunctionDocumentableConverter(
                 param = it,
                 isSummary = isSummary,
                 isFromJava = isFromJava(),
-                parent = this
+                parent = this,
             )
         }
         val parameters = parameters.map {
@@ -322,7 +330,7 @@ internal class FunctionDocumentableConverter(
                 param = it,
                 isSummary = isSummary,
                 isFromJava = isFromJava(),
-                parent = this
+                parent = this,
             )
         }
         val typeParameters = this.generics.map {
@@ -333,7 +341,7 @@ internal class FunctionDocumentableConverter(
             FunctionSignature.Params(
                 name = pathProvider.linkForReference(
                     dri.possiblyConvertMappedType(displayLanguage),
-                    name = this.name
+                    name = this.name,
                 ),
                 receiver = when (displayLanguage) {
                     Language.JAVA -> receiver?.let { extFunctionClass() }
@@ -345,8 +353,8 @@ internal class FunctionDocumentableConverter(
                     Language.KOTLIN -> parameters
                 },
                 // TODO(handle sourceSet-varying deprecations b/262711247)
-                isDeprecated = annotations(getExpectOrCommonSourceSet()).isDeprecated()
-            )
+                isDeprecated = annotations(getExpectOrCommonSourceSet()).isDeprecated(),
+            ),
         )
     }
 
@@ -366,7 +374,7 @@ internal class FunctionDocumentableConverter(
             callable.anchor(),
             callable.anchor(separator = ", "),
             callable.anchor("-", "-", "-"),
-            callable.name.lowercase(Locale.getDefault())
+            callable.name.lowercase(Locale.getDefault()),
         )
     }
 
@@ -382,11 +390,11 @@ internal class FunctionDocumentableConverter(
                     TypeProjectionComponent.Params(
                         type = pathProvider.linkForReference(driForSyntheticClass()),
                         nullability = Nullability.DONT_CARE,
-                        displayLanguage = displayLanguage // Fake synthetic classes can't be null
-                    )
+                        displayLanguage = displayLanguage, // Fake synthetic classes can't be null
+                    ),
                 ),
-                displayLanguage = displayLanguage
-            )
+                displayLanguage = displayLanguage,
+            ),
         )
     }
 }

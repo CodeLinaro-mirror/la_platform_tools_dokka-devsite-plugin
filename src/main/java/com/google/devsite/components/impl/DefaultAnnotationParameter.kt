@@ -27,7 +27,7 @@ import kotlinx.html.Entities
 import kotlinx.html.FlowContent
 
 internal data class DefaultNamedValueAnnotationParameter(
-    override val data: NamedValueAnnotationParameter.Params
+    override val data: NamedValueAnnotationParameter.Params,
 ) : NamedValueAnnotationParameter {
     override fun render(into: FlowContent) = into.run {
         data.name.render(into)
@@ -38,7 +38,7 @@ internal data class DefaultNamedValueAnnotationParameter(
 }
 
 internal data class DefaultAnnotationValueAnnotationParameter(
-    override val data: AnnotationValueAnnotationParameter.Params
+    override val data: AnnotationValueAnnotationParameter.Params,
 ) : AnnotationValueAnnotationParameter {
     override fun render(into: FlowContent) = into.run {
         data.name.render(into)
@@ -49,7 +49,7 @@ internal data class DefaultAnnotationValueAnnotationParameter(
 }
 
 internal data class DefaultArrayValueAnnotationParameter(
-    override val data: ArrayValueAnnotationParameter.Params
+    override val data: ArrayValueAnnotationParameter.Params,
 ) : ArrayValueAnnotationParameter {
     override fun render(into: FlowContent) = into.run {
         data.name.render(into)

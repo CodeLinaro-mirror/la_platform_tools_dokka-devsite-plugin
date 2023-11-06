@@ -46,7 +46,7 @@ val defaultPluginsConfiguration = mutableListOf(
             annotationsNotToDisplayKotlin = null,
             hidingAnnotations = listOf("androidx.annotation.RestrictTo"),
             validNullabilityAnnotations = defaultValidNullabilityAnnotations +
-                listOf("androidx.example.NonNull", "androidx.example.Nullable")
-        ).toCompactJsonString()
-    )
+                listOf("androidx.example.NonNull", "androidx.example.Nullable"),
+        ).toCompactJsonString(),
+    ),
 )

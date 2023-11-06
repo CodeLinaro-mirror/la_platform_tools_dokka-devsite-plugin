@@ -46,15 +46,19 @@ internal fun <T> Collection<T>.joinMaybePrefix(
     prefix: String = "",
     postfix: String = "",
     separator: CharSequence = ", ",
-    transform: ((T) -> CharSequence)? = null
-) = if (this.isEmpty()) ""
-else joinToString(prefix = prefix, postfix = postfix, separator = separator, transform = transform)
+    transform: ((T) -> CharSequence)? = null,
+) = if (this.isEmpty()) {
+    ""
+} else {
+    joinToString(prefix = prefix, postfix = postfix, separator = separator, transform = transform)
+}
 
 /** Performs an outer/tensor product. tensorOf((a,b), (c,d)) is ((a,c), (a,d), (b,c), (b,d)) */
 fun <T> tensorOf(vararg lists: Iterable<T>): List<List<T>> =
     lists.fold(listOf(listOf())) { accumulated, nextDimension ->
         accumulated.flatMap { aSlice -> nextDimension.map { element -> aSlice + element } }
     }
+
 /** Version of tensorOf that uses arrays. Because Kotlin's slices and list/array dance are silly. */
 inline fun <reified T> tensorOf(vararg arrays: Array<T>): Array<Array<T>> =
     tensorOf(*(arrays.map { it.asIterable() }.toTypedArray()))

@@ -47,7 +47,7 @@ internal class DevsiteRenderer(
     }
 
     private suspend fun writePackage(
-        dPackage: DPackage
+        dPackage: DPackage,
     ) = coroutineScope {
         launch { packageRenderer.writeIndex(dPackage) }
         launch { packageRenderer.writePackageSummary(dPackage) }

@@ -24,6 +24,6 @@ internal interface VersionMetadataComponent : ContextFreeComponent {
 
     data class Params(
         val addedIn: Link?,
-        val deprecatedIn: Link?
+        val deprecatedIn: Link?,
     )
 }

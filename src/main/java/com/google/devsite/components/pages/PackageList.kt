@@ -23,6 +23,6 @@ internal interface PackageList : TextComponent {
     val data: Params
 
     data class Params(
-        val packages: List<String>
+        val packages: List<String>,
     )
 }

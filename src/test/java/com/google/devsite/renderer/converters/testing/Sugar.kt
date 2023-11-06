@@ -57,14 +57,15 @@ internal fun ClassIndex.items(size: Int?) = data.alphabetizedClasses.entries.ite
 internal fun ClassIndex.item() = items(1).single()
 
 internal fun <T : ContextFreeComponent, V : ContextFreeComponent>
-SummaryList<TableRowSummaryItem<T, V>>.item() = items(1).single()
+    SummaryList<TableRowSummaryItem<T, V>>.item() = items(1).single()
 internal fun <T : ContextFreeComponent, V : ContextFreeComponent>
-SummaryList<TableRowSummaryItem<T, V>>.items(size: Int? = null) = data.items.items(size)
+    SummaryList<TableRowSummaryItem<T, V>>.items(size: Int? = null) = data.items.items(size)
 internal fun <T : ContextFreeComponent, V : ContextFreeComponent>
-SummaryList<TableRowSummaryItem<T, V>>.single() = items().single()
+    SummaryList<TableRowSummaryItem<T, V>>.single() = items().single()
 internal fun <V : SummaryItem> SummaryList<V>.first() = data.items.first()
 
 internal fun <T : Link> TableRowSummaryItem<T, DescriptionComponent>.link() = data.title.data
+
 @JvmName("paramDescriptionTableRowSummaryItemLink")
 internal fun TableRowSummaryItem<ParameterComponent, DescriptionComponent>.link() =
     data.title.data.type.link()
@@ -77,13 +78,13 @@ internal fun Classlike.modifiers() = data.description.data.primarySignature.data
 internal val Classlike.descriptionDocs get() = data.description.data.descriptionDocs
 
 @JvmName("TypeSymbolSummaryName")
-internal fun <T : SymbolSignature> TypeSummaryItem<T>.name():
-    String = this.data.description.name()
-internal fun TableRowSummaryItem<ParameterComponent, DescriptionComponent>
-.name(): String = this.data.title.data.name
+internal fun <T : SymbolSignature> TypeSummaryItem<T>.name(): String = this.data.description.name()
+internal fun TableRowSummaryItem<ParameterComponent, DescriptionComponent>.name(): String =
+    this.data.title.data.name
+
 @JvmName("LinkDescriptionName")
-internal fun TableRowSummaryItem<Link, DescriptionComponent>
-.name(): String = this.data.title.data.name
+internal fun TableRowSummaryItem<Link, DescriptionComponent>.name(): String =
+    this.data.title.data.name
 internal fun Iterable<TypeSummaryItem<PropertySignature>>.nonInstance() =
     filterNot { it.data.title.data.type.name() == "INSTANCE" }
 
@@ -123,6 +124,7 @@ internal fun Pair<SummaryList<*>, Classlike.TitledList<*>>.title() = first.data.
 @JvmName("titleFunctionSignature")
 internal fun InheritedSymbolsList<FunctionSignature>.title() = data.header.data.title
 internal fun InheritedSymbolsList<PropertySignature>.title() = data.header.data.title
+
 @JvmName("fromFunctionSignature")
 internal fun InheritedSymbolsList<FunctionSignature>.from(name: String) =
     data.inheritedSymbolSummaries.entries.singleOrNull { (key, _) -> key.data.name == name }

@@ -53,7 +53,7 @@ internal abstract class PackageDocumentableConverter(
     protected val functionConverter: FunctionDocumentableConverter,
     protected val propertyConverter: PropertyDocumentableConverter,
     protected val javadocConverter: DocTagConverter,
-    protected val paramConverter: ParameterDocumentableConverter
+    protected val paramConverter: ParameterDocumentableConverter,
 ) {
     protected abstract val header: DefaultDevsitePlatformSelector?
     protected abstract val functionToSummaryConverter:
@@ -83,7 +83,9 @@ internal abstract class PackageDocumentableConverter(
         val annotations = async {
             docsToSummary(docsHolder.annotationsFor(dPackage))
         }
-        @Suppress("UNCHECKED_CAST") val typeAliases = async {
+
+        @Suppress("UNCHECKED_CAST")
+        val typeAliases = async {
             docsToSummary(docsHolder.typeAliasesFor(dPackage)) as WithDescriptionList<DefaultUnlink>
         }
 
@@ -111,7 +113,7 @@ internal abstract class PackageDocumentableConverter(
                         displayLanguage,
                         description = javadocConverter.metadata(
                             documentable = dPackage,
-                            isFromJava = false // This parameter is not used in the DPackage case
+                            isFromJava = false, // This parameter is not used in the DPackage case
                         ),
                         interfaces = interfaces.await(),
                         classes = classes.await(),
@@ -129,12 +131,12 @@ internal abstract class PackageDocumentableConverter(
                         topLevelProperties = topLevelProperties.await(),
                         topLevelFunctions = topLevelFunctions.await(),
                         extensionProperties = extensionProperties.await(),
-                        extensionFunctions = extensionFunctions.await()
-                    )
+                        extensionFunctions = extensionFunctions.await(),
+                    ),
                 ),
                 metadataComponent = null,
                 includedHeadTagPath = pathProvider.includedHeadTagsPath,
-            )
+            ),
         )
     }
 
@@ -145,27 +147,28 @@ internal abstract class PackageDocumentableConverter(
                 type = DFunction::class.java,
                 containingType = DPackage::class.java,
                 isFromJava = it.isFromJava(),
-                isSummary = true
+                isSummary = true,
             )
             functionToSummaryConverter(it, modifierHints)
         }
 
         return DefaultSummaryList(
             SummaryList.Params(
-                items = components
-            )
+                items = components,
+            ),
         )
     }
 
-    private fun functionsToDetail(functions: List<DFunction>):
-        List<SymbolDetail<FunctionSignature>> {
+    private fun functionsToDetail(
+        functions: List<DFunction>,
+    ): List<SymbolDetail<FunctionSignature>> {
         return functions.mapNotNull {
             val modifierHints = ModifierHints(
                 displayLanguage = displayLanguage,
                 type = DFunction::class.java,
                 containingType = DPackage::class.java,
                 isFromJava = it.isFromJava(),
-                isSummary = false
+                isSummary = false,
             )
             functionToDetailConverter(it, modifierHints)
         }
@@ -178,27 +181,28 @@ internal abstract class PackageDocumentableConverter(
                 type = DProperty::class.java,
                 containingType = DPackage::class.java,
                 isFromJava = it.isFromJava(),
-                isSummary = true
+                isSummary = true,
             )
             propertyToSummaryConverter(it, modifierHints)
         }
 
         return DefaultSummaryList(
             SummaryList.Params(
-                items = components
-            )
+                items = components,
+            ),
         )
     }
 
-    private fun propertiesToDetail(properties: List<DProperty>):
-        List<SymbolDetail<PropertySignature>> {
+    private fun propertiesToDetail(
+        properties: List<DProperty>,
+    ): List<SymbolDetail<PropertySignature>> {
         return properties.mapNotNull {
             val modifierHints = ModifierHints(
                 displayLanguage = displayLanguage,
                 type = DProperty::class.java,
                 containingType = DPackage::class.java,
                 isFromJava = it.isFromJava(),
-                isSummary = false
+                isSummary = false,
             )
             propertyToDetailConverter(it, modifierHints)
         }

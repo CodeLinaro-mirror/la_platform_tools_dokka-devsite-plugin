@@ -33,7 +33,7 @@ import kotlin.io.path.pathString
 
 private val NON_DOCUMENTABLE_PREFIXES = listOf(
     "kotlin.jvm.functions",
-    "kotlin.coroutines.SuspendFunction"
+    "kotlin.coroutines.SuspendFunction",
 )
 
 /** Converts various inputs to output file paths. */
@@ -183,5 +183,5 @@ internal interface FilePathProvider {
 
 internal val ANY_DRI: Map<Language, DRI> = mapOf(
     Language.JAVA to DRI("java.lang", "Object"),
-    Language.KOTLIN to DRI("kotlin", "Any")
+    Language.KOTLIN to DRI("kotlin", "Any"),
 )

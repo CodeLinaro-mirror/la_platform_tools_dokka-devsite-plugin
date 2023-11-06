@@ -33,7 +33,7 @@ internal interface AnnotationComponent : ContextFreeComponent, Sizeable {
 
     data class Params(
         val type: Link,
-        val parameters: List<AnnotationParameter> = emptyList()
+        val parameters: List<AnnotationParameter> = emptyList(),
     )
 
     val name: String

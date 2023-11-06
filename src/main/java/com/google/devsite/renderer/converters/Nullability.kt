@@ -49,7 +49,8 @@ enum class Nullability {
     JAVA_ANNOTATED_NULLABLE,
     JAVA_NEVER_NULL, // This refers to types that cannot be nullable, e.g. int
     JAVA_NOT_ANNOTATED, // This means "platform type," which mostly means nullable
-    DONT_CARE; // Sometimes we don't print nullability, usually if it should be obvious from context
+    DONT_CARE, // Sometimes we don't print nullability, usually if it should be obvious from context
+    ;
 
     fun renderAsJavaAnnotation() = when (this) {
         // DO NOT inject @Nullable. Even if it would be correct, it would not be useful to Java clients.
@@ -63,31 +64,43 @@ enum class Nullability {
     fun renderAsKotlinSuffix() = when (this) {
         KOTLIN_NULLABLE, JAVA_ANNOTATED_NULLABLE -> "?"
         KOTLIN_DEFAULT, JAVA_ANNOTATED_NOT_NULL,
-        JAVA_NEVER_NULL -> ""
+        JAVA_NEVER_NULL,
+        -> ""
         JAVA_NOT_ANNOTATED -> "!"
         DONT_CARE -> ""
     }
 
     fun isNullable() = when (this) {
         KOTLIN_NULLABLE, JAVA_ANNOTATED_NULLABLE,
-        JAVA_NOT_ANNOTATED, DONT_CARE -> true
+        JAVA_NOT_ANNOTATED, DONT_CARE,
+        -> true
         KOTLIN_DEFAULT, JAVA_ANNOTATED_NOT_NULL,
-        JAVA_NEVER_NULL -> false
+        JAVA_NEVER_NULL,
+        -> false
     }
 
     val nullable get() = this.isNullable()
 
-    infix fun or(other: Nullability?): Nullability = if (other == null) this
-    else NULLABILITY_PRECEDENCE_LIST[
-        min(NULLABILITY_PRECEDENCE_LIST.indexOf(this), NULLABILITY_PRECEDENCE_LIST.indexOf(other))
-    ]
+    infix fun or(other: Nullability?): Nullability = if (other == null) {
+        this
+    } else {
+        NULLABILITY_PRECEDENCE_LIST[
+            min(
+                NULLABILITY_PRECEDENCE_LIST.indexOf(this),
+                NULLABILITY_PRECEDENCE_LIST.indexOf(other),
+            ),
+        ]
+    }
 
     companion object {
         internal val NULLABILITY_PRECEDENCE_LIST = listOf(
             DONT_CARE,
-            JAVA_NEVER_NULL, KOTLIN_NULLABLE,
-            JAVA_ANNOTATED_NULLABLE, JAVA_ANNOTATED_NOT_NULL,
-            KOTLIN_DEFAULT, JAVA_NOT_ANNOTATED
+            JAVA_NEVER_NULL,
+            KOTLIN_NULLABLE,
+            JAVA_ANNOTATED_NULLABLE,
+            JAVA_ANNOTATED_NOT_NULL,
+            KOTLIN_DEFAULT,
+            JAVA_NOT_ANNOTATED,
         )
     }
 }
@@ -105,11 +118,12 @@ enum class Nullability {
 internal fun Projection.getNullability(
     displayLanguage: Language,
     isJavaSource: Boolean? = null,
-    injectedAnnotations: List<Annotations.Annotation> = emptyList()
+    injectedAnnotations: List<Annotations.Annotation> = emptyList(),
 ): Nullability {
     // TODO: hoist this into the renderer, it's what should know and care about displayLanguage
-    if (!this.typeIsNullableAtAll(displayLanguage = displayLanguage))
+    if (!this.typeIsNullableAtAll(displayLanguage = displayLanguage)) {
         return Nullability.DONT_CARE // This can overwrite annotations (could have been propagated)
+    }
 
     return when (this) {
         is Nullable -> Nullability.KOTLIN_NULLABLE
@@ -120,7 +134,8 @@ internal fun Projection.getNullability(
         Dynamic, Star -> Nullability.KOTLIN_DEFAULT // Can come from Kotlin source only
         // Unannotated java projections are nullable, default Kotlin aren't
         is TypeParameter, is TypeConstructor, is JavaObject, is UnresolvedBound,
-        is PrimitiveJavaType -> {
+        is PrimitiveJavaType,
+        -> {
             var annotations = injectedAnnotations
             // Java arrays are nullable; non-array primitives aren't
             if (this is PrimitiveJavaType) if ("[" !in name) Nullability.JAVA_NEVER_NULL
@@ -186,7 +201,9 @@ internal fun Projection.typeIsNullableAtAll(displayLanguage: Language) = when (t
                 (className == "Unit") -> false
                 else -> true
             }
-        } else true
+        } else {
+            true
+        }
     is Void -> false
     is PrimitiveJavaType -> "[" in this.name
     else -> true

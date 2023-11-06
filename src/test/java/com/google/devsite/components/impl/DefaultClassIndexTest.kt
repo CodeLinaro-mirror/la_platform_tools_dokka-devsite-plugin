@@ -39,7 +39,7 @@ class DefaultClassIndexTest {
   <p>These are all the API classes. See all <a href="packages.html">API packages</a>.</p>
   <p><em>This project has no classes.</em></p>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -61,7 +61,7 @@ class DefaultClassIndexTest {
   <h2 id="letter_A">A</h2>
   <div>noop</div>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -70,8 +70,8 @@ class DefaultClassIndexTest {
         val component = DefaultClassIndex(
             Params(
                 "packages.html",
-                mapOf('A' to NoopSummaryList(), 'B' to NoopSummaryList(), 'Z' to NoopSummaryList())
-            )
+                mapOf('A' to NoopSummaryList(), 'B' to NoopSummaryList(), 'Z' to NoopSummaryList()),
+            ),
         )
 
         val output = createHTML().body {
@@ -91,7 +91,7 @@ class DefaultClassIndexTest {
   <h2 id="letter_Z">Z</h2>
   <div>noop</div>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 }

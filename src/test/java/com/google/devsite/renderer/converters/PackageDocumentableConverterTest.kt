@@ -30,7 +30,7 @@ import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
 internal class PackageDocumentableConverterTest(
-    private val displayLanguage: Language
+    private val displayLanguage: Language,
 ) : ConverterTestBase(displayLanguage) {
     @Test
     fun `Package summary creates components with correct page title`() {
@@ -40,7 +40,7 @@ internal class PackageDocumentableConverterTest(
                 |package hello.i.am.a.packagez
                 |
                 |class A
-            """.trimMargin()
+            """.trimMargin(),
         ).render().packagePage()
 
         assertThat(page.data.title).isEqualTo("hello.i.am.a.packagez")
@@ -54,7 +54,7 @@ internal class PackageDocumentableConverterTest(
                 |package hello.i.am.a.packagez
                 |
                 |class A
-            """.trimMargin()
+            """.trimMargin(),
         ).render().packagePage()
 
         assertPath(page.data.path, "hello/i/am/a/packagez/package-summary.html")
@@ -377,7 +377,7 @@ internal class PackageDocumentableConverterTest(
         @Parameterized.Parameters(name = "{0}")
         fun data() = listOf(
             arrayOf(Language.JAVA),
-            arrayOf(Language.KOTLIN)
+            arrayOf(Language.KOTLIN),
         )
     }
 }

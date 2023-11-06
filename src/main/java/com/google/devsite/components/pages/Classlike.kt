@@ -76,7 +76,7 @@ internal interface Classlike : ContextFreeComponent {
 
         val inheritedConstants: InheritedSymbolsList<PropertySignature>,
         val inheritedFunctions: InheritedSymbolsList<FunctionSignature>,
-        val inheritedProperties: InheritedSymbolsList<PropertySignature>
+        val inheritedProperties: InheritedSymbolsList<PropertySignature>,
     )
 
     data class TitledList<T : SymbolDetail<*>>(val title: String, val symbols: List<T>) : List<T> {
@@ -102,17 +102,17 @@ internal interface Classlike : ContextFreeComponent {
         data.publicCompanionFunctionsSummary,
         data.protectedCompanionFunctionsSummary,
         data.publicCompanionPropertiesSummary,
-        data.protectedCompanionPropertiesSummary
+        data.protectedCompanionPropertiesSummary,
     )
     private val functionSummaries get() = listOfNotNull(
         data.publicConstructorsSummary,
         data.protectedConstructorsSummary,
         data.publicFunctionsSummary,
-        data.protectedFunctionsSummary
+        data.protectedFunctionsSummary,
     )
     private val propertiesSummaries get() = listOfNotNull(
         data.publicPropertiesSummary,
-        data.protectedPropertiesSummary
+        data.protectedPropertiesSummary,
     )
     private val extensionFunctionsSummary get() = listOf(data.extensionFunctionsSummary)
     private val extensionPropertiesSummary get() = listOf(data.extensionPropertiesSummary)
@@ -130,12 +130,12 @@ internal interface Classlike : ContextFreeComponent {
             Language.JAVA -> listOfNotNull(
                 data.inheritedConstants,
                 data.inheritedProperties,
-                data.inheritedFunctions
+                data.inheritedFunctions,
             )
             Language.KOTLIN -> listOfNotNull(
                 data.inheritedConstants,
                 data.inheritedFunctions,
-                data.inheritedProperties
+                data.inheritedProperties,
             )
         }
     val allVisibleSummaries: List<Component<FlowContent>> get() =
@@ -157,11 +157,11 @@ internal interface Classlike : ContextFreeComponent {
         data.publicConstructorsDetails,
         data.protectedConstructorsDetails,
         data.publicFunctionsDetails,
-        data.protectedFunctionsDetails
+        data.protectedFunctionsDetails,
     )
     private val propertiesDetails get() = listOfNotNull(
         data.publicPropertiesDetails,
-        data.protectedPropertiesDetails
+        data.protectedPropertiesDetails,
     )
     private val extensionFunctionsDetails get() = listOf(data.extensionFunctionsDetails)
     private val extensionPropertiesDetails get() = listOf(data.extensionPropertiesDetails)

@@ -32,8 +32,12 @@ internal interface KmpClasslikeDescription : ClasslikeDescription {
         override val relatedSymbols: RelatedSymbols,
         override val descriptionDocs: List<ContextFreeComponent>,
         val platform: PlatformComponent,
-        val allSignatures: List<Pair<ClasslikeSignature, PlatformComponent>>
+        val allSignatures: List<Pair<ClasslikeSignature, PlatformComponent>>,
     ) : ClasslikeDescription.Params(
-        header, primarySignature, hierarchy, relatedSymbols, descriptionDocs
+        header,
+        primarySignature,
+        hierarchy,
+        relatedSymbols,
+        descriptionDocs,
     )
 }

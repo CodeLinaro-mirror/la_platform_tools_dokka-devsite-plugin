@@ -24,6 +24,6 @@ internal interface AnnotatedLink : Link {
 
     data class Params(
         val annotations: List<AnnotationComponent>,
-        val link: Link
+        val link: Link,
     ) : Link.Params(name = link.data.name, url = link.data.url)
 }

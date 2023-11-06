@@ -20,7 +20,7 @@ import com.google.devsite.components.symbols.TocPackage
 
 /** Default implementation of the toc. */
 internal data class DefaultTocPackage(
-    override val data: TocPackage.Params
+    override val data: TocPackage.Params,
 ) : TocPackage {
     override fun render(into: StringBuilder) = into.run {
         appendLine("- title: \"${data.name}\"")
@@ -33,7 +33,7 @@ internal data class DefaultTocPackage(
             data.enums,
             data.exceptions,
             data.annotations,
-            data.objects
+            data.objects,
         ).flatten()
         if (content.isEmpty()) return
 

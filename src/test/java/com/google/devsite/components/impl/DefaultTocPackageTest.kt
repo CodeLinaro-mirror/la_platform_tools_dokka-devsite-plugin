@@ -27,8 +27,8 @@ class DefaultTocPackageTest {
         val component = DefaultTocPackage(
             Params(
                 name = "androidx.example",
-                packageUrl = "androidx/example/package-summary"
-            )
+                packageUrl = "androidx/example/package-summary",
+            ),
         )
 
         val output = buildString {
@@ -39,7 +39,7 @@ class DefaultTocPackageTest {
             """
 - title: "androidx.example"
   path: "androidx/example/package-summary"
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -53,8 +53,8 @@ class DefaultTocPackageTest {
                 classes = listOf(Type("Class", "link")),
                 enums = listOf(Type("Enum", "link")),
                 exceptions = listOf(Type("Exception", "link")),
-                annotations = listOf(Type("Annotation", "link"))
-            )
+                annotations = listOf(Type("Annotation", "link")),
+            ),
         )
 
         val output = buildString {
@@ -96,7 +96,7 @@ class DefaultTocPackageTest {
     section:
     - title: "Annotation"
       path: "link"
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -108,9 +108,9 @@ class DefaultTocPackageTest {
                 packageUrl = "androidx/example/package-summary",
                 interfaces = listOf(
                     Type("InterfaceA", "link/a"),
-                    Type("InterfaceB", "link/b")
-                )
-            )
+                    Type("InterfaceB", "link/b"),
+                ),
+            ),
         )
 
         val output = buildString {
@@ -130,7 +130,7 @@ class DefaultTocPackageTest {
       path: "link/a"
     - title: "InterfaceB"
       path: "link/b"
-            """.trim()
+            """.trim(),
         )
     }
 }

@@ -51,7 +51,7 @@ class DevsitePlugin : DokkaPlugin() {
             MultiLanguageRenderer(
                 it,
                 dokkaBase.querySingle { outputWriter },
-                getDevsiteConfiguration(it)
+                getDevsiteConfiguration(it),
             )
         } override dokkaBase.htmlRenderer
     }

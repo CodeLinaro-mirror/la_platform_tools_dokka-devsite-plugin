@@ -34,14 +34,15 @@ internal class ModifiersTest : ConverterTestBase() {
         isSummary = false,
         type = DFunction::class.java,
         containingType = DClass::class.java,
-        isFromJava = false // There's no great way to do this. Currently only affects `const` inject
+        isFromJava = false, // There's no great way to do this. Currently only affects
+        // `const` inject
     )
     private val javaHints: ModifierHints = ModifierHints(
         Language.JAVA,
         isSummary = false,
         type = DFunction::class.java,
         containingType = DClass::class.java,
-        isFromJava = true
+        isFromJava = true,
     )
 
     private val noopDoc = DModule("irrelevant", emptyList(), emptyMap(), null, emptySet())
@@ -159,7 +160,7 @@ internal class ModifiersTest : ConverterTestBase() {
             "override",
             "open",
             "infix",
-            "data"
+            "data",
         )
 
         assertThat(modifiers.modifiersFor(javaHints)).isEmpty()

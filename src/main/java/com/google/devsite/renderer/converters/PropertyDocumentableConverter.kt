@@ -46,7 +46,7 @@ internal class PropertyDocumentableConverter(
     private val javadocConverter: DocTagConverter,
     private val paramConverter: ParameterDocumentableConverter,
     private val annotationConverter: AnnotationDocumentableConverter,
-    private val metadataConverter: MetadataConverter
+    private val metadataConverter: MetadataConverter,
 ) {
 
     /** @return the property summary component */
@@ -62,32 +62,34 @@ internal class PropertyDocumentableConverter(
                             projection = property.type,
                             isJavaSource = property.isFromJava(),
                             sourceSet = jvmSourceSet,
-                            propagatedAnnotations = typeAnnotations
+                            propagatedAnnotations = typeAnnotations,
                         ),
-                        modifiers = property.modifiers(jvmSourceSet).modifiersFor(hints)
-                    )
+                        modifiers = property.modifiers(jvmSourceSet).modifiersFor(hints),
+                    ),
                 ),
                 description = DefaultSymbolSummary(
                     SymbolSummary.Params(
                         signature = property.signature(isSummary = true),
                         description = javadocConverter.summaryDescription(
                             property,
-                            nonTypeAnnotations.deprecationAnnotation()
+                            nonTypeAnnotations.deprecationAnnotation(),
                         ),
                         annotationComponents = annotationConverter.annotationComponents(
                             annotations = nonTypeAnnotations,
                             // Propagates to return type instead
                             nullability = Nullability.DONT_CARE,
-                        )
-                    )
-                )
-            )
+                        ),
+                    ),
+                ),
+            ),
         )
     }
 
     /** @return the property summary component */
-    fun summaryKmp(property: DProperty, hints: ModifierHints):
-        KmpTypeSummaryItem<PropertySignature> {
+    fun summaryKmp(
+        property: DProperty,
+        hints: ModifierHints,
+    ): KmpTypeSummaryItem<PropertySignature> {
         // TODO(KMP member signatures)
         val (typeAnnotations, nonTypeAnnotations) =
             property.annotations(property.getExpectOrCommonSourceSet())
@@ -100,29 +102,29 @@ internal class PropertyDocumentableConverter(
                             property.type,
                             property.isFromJava(),
                             property.getExpectOrCommonSourceSet(),
-                            typeAnnotations
+                            typeAnnotations,
                         ),
                         // TODO(KMP, b/254493209)
                         modifiers = property.modifiers(property.getExpectOrCommonSourceSet())
                             .modifiersFor(hints),
-                    )
+                    ),
                 ),
                 description = DefaultSymbolSummary(
                     SymbolSummary.Params(
                         signature = property.signature(isSummary = true),
                         description = javadocConverter.summaryDescription(
                             property,
-                            nonTypeAnnotations.deprecationAnnotation()
+                            nonTypeAnnotations.deprecationAnnotation(),
                         ),
                         annotationComponents = annotationConverter.annotationComponents(
                             annotations = nonTypeAnnotations,
                             // Propagates to return type instead
                             nullability = Nullability.DONT_CARE,
-                        )
-                    )
+                        ),
+                    ),
                 ),
-                platforms = DefaultPlatformComponent(property.sourceSets)
-            )
+                platforms = DefaultPlatformComponent(property.sourceSets),
+            ),
         )
     }
 
@@ -140,8 +142,8 @@ internal class PropertyDocumentableConverter(
                 .getNullability(
                     displayLanguage = displayLanguage,
                     isJavaSource = property.isFromJava(),
-                    injectedAnnotations = typeAnnotations
-                )
+                    injectedAnnotations = typeAnnotations,
+                ),
         )
         return DefaultSymbolDetail(
             SymbolDetail.Params(
@@ -155,7 +157,7 @@ internal class PropertyDocumentableConverter(
                     documentable = property,
                     returnType = returnType,
                     paramNames = listOf("receiver"),
-                    deprecationAnnotation = nonTypeAnnotations.deprecationAnnotation()
+                    deprecationAnnotation = nonTypeAnnotations.deprecationAnnotation(),
                 ),
                 displayLanguage = displayLanguage,
                 modifiers = property.modifiers(jvmSourceSet).modifiersFor(hints),
@@ -163,8 +165,8 @@ internal class PropertyDocumentableConverter(
                     annotations = nonTypeAnnotations,
                     nullability = Nullability.DONT_CARE, // Propagates to return type instead
                 ),
-                metadataComponent = metadataConverter.getMetadataForProperty(property)
-            )
+                metadataComponent = metadataConverter.getMetadataForProperty(property),
+            ),
         )
     }
 
@@ -183,8 +185,8 @@ internal class PropertyDocumentableConverter(
                 .getNullability(
                     displayLanguage = displayLanguage,
                     isJavaSource = property.isFromJava(),
-                    injectedAnnotations = typeAnnotations
-                )
+                    injectedAnnotations = typeAnnotations,
+                ),
         )
         return DefaultKmpSymbolDetail(
             KmpSymbolDetail.Params(
@@ -198,7 +200,7 @@ internal class PropertyDocumentableConverter(
                     documentable = property,
                     returnType = returnType,
                     paramNames = listOf("receiver"),
-                    deprecationAnnotation = nonTypeAnnotations.deprecationAnnotation()
+                    deprecationAnnotation = nonTypeAnnotations.deprecationAnnotation(),
                 ),
                 displayLanguage = displayLanguage,
                 // TODO(KMP, b/254493209)
@@ -209,8 +211,8 @@ internal class PropertyDocumentableConverter(
                     nullability = Nullability.DONT_CARE, // Propagates to return type instead
                 ),
                 platforms = DefaultPlatformComponent(property.sourceSets),
-                metadataComponent = metadataConverter.getMetadataForProperty(property)
-            )
+                metadataComponent = metadataConverter.getMetadataForProperty(property),
+            ),
         )
     }
 
@@ -221,14 +223,16 @@ internal class PropertyDocumentableConverter(
                 param = it,
                 isSummary = isSummary,
                 isFromJava = isFromJava(),
-                parent = this
+                parent = this,
             )
         }
         val constantValue = if (isConstant()) {
             // the value of a constant is stored as a DefaultValue, pick it out if it exists
             extra.allOfType<DefaultValue>().singleOrNull()?.expression
                 ?.get(getExpectOrCommonSourceSet())?.getValue()
-        } else null
+        } else {
+            null
+        }
         return DefaultPropertySignature(
             PropertySignature.Params(
                 // TODO(b/168136770): figure out path for default anchors
@@ -237,8 +241,8 @@ internal class PropertyDocumentableConverter(
                     Language.JAVA -> null
                     Language.KOTLIN -> receiver
                 },
-                constantValue = constantValue
-            )
+                constantValue = constantValue,
+            ),
         )
     }
 
@@ -255,7 +259,7 @@ internal class PropertyDocumentableConverter(
             getterCallable.anchor(),
             setterCallable.anchor(),
             getterCallable.anchor(open = "-", close = "-"),
-            setterCallable.anchor(open = "-", close = "-")
+            setterCallable.anchor(open = "-", close = "-"),
         )
     }
 }

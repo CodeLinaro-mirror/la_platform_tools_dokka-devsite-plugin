@@ -39,7 +39,7 @@ class DefaultTableRowSummaryItemTest {
   <td><code></code></td>
   <td></td>
 </tr>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -49,8 +49,8 @@ class DefaultTableRowSummaryItemTest {
             DefaultTableRowSummaryItem(
                 Params(
                     PlainTextOutput("Title"),
-                    PlainTextOutput("Description")
-                )
+                    PlainTextOutput("Description"),
+                ),
             )
 
         val b = createHTML().tr {
@@ -64,7 +64,7 @@ class DefaultTableRowSummaryItemTest {
   <td><code>Title</code></td>
   <td>Description</td>
 </tr>
-            """.trim()
+            """.trim(),
         )
     }
 }

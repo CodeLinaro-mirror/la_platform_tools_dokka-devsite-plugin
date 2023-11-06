@@ -22,7 +22,7 @@ import com.google.devsite.components.symbols.Platform
 import kotlinx.html.FlowContent
 
 internal data class DefaultDevsitePlatformSelector(
-    val platforms: List<Platform>
+    val platforms: List<Platform>,
 ) : ContextFreeComponent {
 
     override fun render(into: FlowContent) =

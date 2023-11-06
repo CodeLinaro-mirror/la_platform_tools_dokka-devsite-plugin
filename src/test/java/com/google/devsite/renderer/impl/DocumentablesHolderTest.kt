@@ -30,7 +30,7 @@ import org.mockito.kotlin.mock
 
 @RunWith(Parameterized::class)
 internal class DocumentablesHolderTest(
-    private val displayLanguage: Language
+    private val displayLanguage: Language,
 ) : ConverterTestBase(displayLanguage) {
     private val packageA = mock<DPackage> {
         on { name } doReturn "com.example.a"
@@ -67,14 +67,15 @@ internal class DocumentablesHolderTest(
     fun `computePackages returns list of packages with packages filtered out`() {
         val expected = listOf("com.example.a", "com.example.c").toTypedArray()
         val excludedPackages = setOf(
-            "com.example.b".toRegex(), "com.example.d".toRegex(),
-            """.*\.exclude.*""".toRegex()
+            "com.example.b".toRegex(),
+            "com.example.d".toRegex(),
+            """.*\.exclude.*""".toRegex(),
         )
         val packages = runBlocking {
             ConverterHolder(
                 testClass = this@DocumentablesHolderTest,
                 module = module,
-                excludedPackages = excludedPackages
+                excludedPackages = excludedPackages,
             ).holder.packages()
         }
         val result = packages.map { it.packageName }.toTypedArray()
@@ -86,7 +87,7 @@ internal class DocumentablesHolderTest(
         @Parameterized.Parameters(name = "{0}")
         fun data() = listOf(
             arrayOf(Language.JAVA),
-            arrayOf(Language.KOTLIN)
+            arrayOf(Language.KOTLIN),
         )
     }
 }

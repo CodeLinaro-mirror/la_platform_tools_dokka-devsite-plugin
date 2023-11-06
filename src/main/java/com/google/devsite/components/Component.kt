@@ -42,17 +42,17 @@ inline fun FlowContent.devsiteFilter(crossinline block: HTMLTag.() -> Unit = {})
         initialAttributes = attributesMapOf("select-el-container-id", "platform"),
         namespace = null,
         inlineTag = false,
-        emptyTag = false
+        emptyTag = false,
     ).visit(block)
 fun FlowContent.devsitePlatformSelector(
-    platforms: List<Platform>
+    platforms: List<Platform>,
 ) = HTMLTag(
     tagName = "devsite-select ",
     consumer = consumer,
     initialAttributes = attributesMapOf("id", "platform", "label", "Select a platform"),
     namespace = null,
     inlineTag = false,
-    emptyTag = false
+    emptyTag = false,
 ).visit {
     this@devsitePlatformSelector.select {
         multiple = true
@@ -72,7 +72,7 @@ internal fun List<Component<FlowContent>>.render(
     separator: String? = ",",
     brackets: String = "",
     header: (() -> Unit)? = null,
-    terminator: (() -> Unit)? = null
+    terminator: (() -> Unit)? = null,
 ) = into.run {
     if (isEmpty() && brackets != "()") return@run // do not print empty brackets except fun() parens
     if (header != null) header()
@@ -81,8 +81,9 @@ internal fun List<Component<FlowContent>>.render(
     for (parameter in this@render) {
         if (shouldBreak == ShouldBreak.AND_INDENT) repeat(4) { +Entities.nbsp }
         // Group type parameters within a single set of <>s, rather than each making their own
-        if (parameter is TypeParameterComponent) parameter.render(this, false)
-        else parameter.render(this)
+        if (parameter is TypeParameterComponent) {
+            parameter.render(this, false)
+        } else parameter.render(this)
 
         if (parameter !== last() && separator != null) { // null separator -> no separation/spaces
             +separator
@@ -103,7 +104,7 @@ internal fun List<String>.render(
     nbsp: Boolean = true,
     separator: String = "",
     header: (() -> Unit)? = null,
-    terminator: (() -> Unit)? = null
+    terminator: (() -> Unit)? = null,
 ) = into.run {
     if (isEmpty()) return@run
     if (header != null) header()
@@ -127,13 +128,14 @@ internal enum class ShouldBreak {
     YES, //   Manually break
     AND_INDENT, // Manually break and indent
     MAYBE, // Use spaces instead of nbsps. If it breaks, it breaks
-    NO //     Do not break line. nbsps everywhere
+    NO, //     Do not break line. nbsps everywhere
 }
 
 /** Infer from the length of the Sizeable whether to explicitly break the line */
 internal fun Sizeable.shouldBreak() =
-    if (length() < ASSUMED_MINIMUM_LINE_LENGTH) ShouldBreak.NO
-    else ShouldBreak.AND_INDENT
+    if (length() < ASSUMED_MINIMUM_LINE_LENGTH) {
+        ShouldBreak.NO
+    } else ShouldBreak.AND_INDENT
 
 /** We assume that the two-column tables will be more than 70 chars long, but not far more */
 private const val ASSUMED_MINIMUM_LINE_LENGTH = 70

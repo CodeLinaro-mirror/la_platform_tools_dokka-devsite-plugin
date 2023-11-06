@@ -29,7 +29,7 @@ internal interface InheritedSymbolsList<T : SymbolSignature> :
 
     data class Params<T : SymbolSignature>(
         val header: TableTitle,
-        val inheritedSymbolSummaries: Map<Link, SummaryList<TypeSummaryItem<T>>>
+        val inheritedSymbolSummaries: Map<Link, SummaryList<TypeSummaryItem<T>>>,
     )
 
     fun hasContent() = data.inheritedSymbolSummaries.isNotEmpty()

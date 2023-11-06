@@ -25,9 +25,9 @@ import kotlinx.html.td
 /** Default implementation of the two-pane layout item for symbol tables. */
 internal data class DefaultKmpTableRowSummaryItem<
     T : ContextFreeComponent?,
-    V : ContextFreeComponent
+    V : ContextFreeComponent,
     > (
-    override val data: KmpTableRowSummaryItem.Params<T, V>
+    override val data: KmpTableRowSummaryItem.Params<T, V>,
 ) : KmpTableRowSummaryItem<T, V> {
     override fun render(into: TR) = into.run {
         data.title?.let { title ->

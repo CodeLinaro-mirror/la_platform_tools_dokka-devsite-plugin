@@ -39,7 +39,7 @@ import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
 internal class PropertyDocumentableConverterTest(
-    private val displayLanguage: Language
+    private val displayLanguage: Language,
 ) : ConverterTestBase(displayLanguage) {
 
     override var defaultHints = ModifierHints(
@@ -47,7 +47,8 @@ internal class PropertyDocumentableConverterTest(
         isSummary = false,
         type = DProperty::class.java,
         containingType = DClass::class.java,
-        isFromJava = false // There's no great way to do this. Currently only affects `const` inject
+        isFromJava = false, // There's no great way to do this. Currently only
+        // affects `const` inject
     )
 
     @Test
@@ -89,8 +90,9 @@ internal class PropertyDocumentableConverterTest(
         |val nonna: String = "foo"
         """.render()
         fun DModule.sOrD(summary: Boolean, propertyName: String): TypeProjectionComponent =
-            if (summary) summary(propertyName).data.title.data.type
-            else detail(propertyName).data.returnType
+            if (summary) {
+                summary(propertyName).data.title.data.type
+            } else detail(propertyName).data.returnType
         for (isSummary in listOf(true, false)) {
             for (whichProp in listOf("nonna", "nulla", "nonnaBefore", "nonnaClose", "platform")) {
                 val typeJ = if (whichProp == "nonna") null else moduleJ.sOrD(isSummary, whichProp)
@@ -101,7 +103,7 @@ internal class PropertyDocumentableConverterTest(
                     assertThat(
                         annotations.singleOrNull()?.name?.let {
                             it in NULLABILITY_ANNOTATION_NAMES
-                        }
+                        },
                     )
                     kotlinOnly {
                         // We've decided to hide all nullability annotations as-kotlin even if they
@@ -142,7 +144,7 @@ internal class PropertyDocumentableConverterTest(
 
         assertPath(
             signature.data.name.data.url,
-            "androidx/example/package-summary.html#(kotlin.collections.List).foo()"
+            "androidx/example/package-summary.html#(kotlin.collections.List).foo()",
         )
     }
 
@@ -235,7 +237,7 @@ internal class PropertyDocumentableConverterTest(
             "(kotlin.collections.List).getFoo()",
             "(kotlin.collections.List).setFoo()",
             "-kotlin.collections.List-.getFoo--",
-            "-kotlin.collections.List-.setFoo--"
+            "-kotlin.collections.List-.setFoo--",
         )
     }
 
@@ -247,9 +249,9 @@ internal class PropertyDocumentableConverterTest(
             |val String.numbah: Int = 5
         """.render()
         fun DModule.sOrDAnnotations(summary: Boolean, propertyName: String) =
-            if (summary)
+            if (summary) {
                 summary(propertyName).data.description.data.annotationComponents
-            else detail(propertyName).data.annotationComponents
+            } else detail(propertyName).data.annotationComponents
         for (isSummary in listOf(true, false)) {
             val annotations = module.sOrDAnnotations(isSummary, "numbah")
             assertThat(annotations.single().name).isEqualTo("ExperimentalComposeApi")
@@ -309,7 +311,7 @@ internal class PropertyDocumentableConverterTest(
         """.render().signature("BAR").data
         assertThat(stringConstantK.constantValue).isNotNull()
         assertThat(stringConstantK.constantValue).isEqualTo("Hi")
-        */
+         */
     }
 
     @Test
@@ -324,12 +326,12 @@ internal class PropertyDocumentableConverterTest(
         val link = htmlParts.first { it.startsWith("href") }.split(">")[0]
         javaOnly {
             assertThat(link).isEqualTo(
-                "href=\"https://developer.android.com/reference/java/lang/Object.html\""
+                "href=\"https://developer.android.com/reference/java/lang/Object.html\"",
             )
         }
         kotlinOnly {
             assertThat(link).isEqualTo(
-                "href=\"https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html\""
+                "href=\"https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html\"",
             )
         }
     }
@@ -362,8 +364,11 @@ internal class PropertyDocumentableConverterTest(
         val internalSetTopVar = kindOf("internalSetTopVar")
 
         val vals = listOf(
-            fullClassVal, internalSetClassVar, protectedSetClassVar,
-            fullTopVal, internalSetTopVar
+            fullClassVal,
+            internalSetClassVar,
+            protectedSetClassVar,
+            fullTopVal,
+            internalSetTopVar,
         )
         val vars = listOf(fullClassVar, fullTopVar)
 
@@ -378,21 +383,21 @@ internal class PropertyDocumentableConverterTest(
 
     private fun DModule.summary(
         name: String = "foo",
-        hints: ModifierHints = defaultHints
+        hints: ModifierHints = defaultHints,
     ): TypeSummaryItem<PropertySignature> {
         return propertyConverter().summary(property(name)!!, hints)!!
     }
 
     private fun DModule.detail(
         name: String = "foo",
-        hints: ModifierHints = defaultHints
+        hints: ModifierHints = defaultHints,
     ): SymbolDetail<PropertySignature> {
         return propertyConverter().detail(property(name)!!, hints)!!
     }
 
     private fun DModule.signature(
         name: String = "foo",
-        hints: ModifierHints = defaultHints
+        hints: ModifierHints = defaultHints,
     ): PropertySignature {
         return propertyConverter().summary(property(name)!!, hints)!!
             .data.description.data.signature
@@ -405,7 +410,7 @@ internal class PropertyDocumentableConverterTest(
         @Parameterized.Parameters(name = "{0}")
         fun data() = listOf(
             arrayOf(Language.JAVA),
-            arrayOf(Language.KOTLIN)
+            arrayOf(Language.KOTLIN),
         )
     }
 }

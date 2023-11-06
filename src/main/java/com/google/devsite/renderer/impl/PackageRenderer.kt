@@ -56,7 +56,7 @@ internal class PackageRenderer(
     private val javadocConverter: DocTagConverter,
     private val paramConverter: ParameterDocumentableConverter,
     private val annotationConverter: AnnotationDocumentableConverter,
-    private val metadataConverter: MetadataConverter
+    private val metadataConverter: MetadataConverter,
 ) {
     /** Writes the home page. Is a redirect page with no content. */
     suspend fun writeIndex(dPackage: DPackage) {
@@ -69,7 +69,7 @@ internal class PackageRenderer(
         outputWriter.write(
             pathProvider.forType(dPackage.name, DIR_INDEX_NAME),
             index,
-            ""
+            "",
         )
     }
 
@@ -84,9 +84,9 @@ internal class PackageRenderer(
                 propertyConverter,
                 javadocConverter,
                 paramConverter,
-                dPackage.getPlatforms()
+                dPackage.getPlatforms(),
             )
-        } else
+        } else {
             NonKmpPackageConverter(
                 displayLanguage,
                 dPackage,
@@ -95,8 +95,9 @@ internal class PackageRenderer(
                 functionConverter,
                 propertyConverter,
                 javadocConverter,
-                paramConverter
+                paramConverter,
             )
+        }
         val page = converter.summaryPage()
         val packageSummary = createHTML().html {
             page.render(this)
@@ -105,13 +106,13 @@ internal class PackageRenderer(
         outputWriter.write(
             pathProvider.forType(dPackage.name, PACKAGE_SUMMARY_NAME),
             packageSummary,
-            ""
+            "",
         )
     }
 
     suspend fun writeClasslike(
         dPackage: DPackage,
-        dClasslike: DClasslike
+        dClasslike: DClasslike,
     ) {
         // Compose is "not kmp" but has expect/actuals; we need to deterministically use the expect
         // Because source jars are not KMP, we can't check `"common" in it.path`, so ban .***.kt
@@ -134,9 +135,9 @@ internal class PackageRenderer(
                 paramConverter,
                 annotationConverter,
                 metadataConverter,
-                dPackage.getPlatforms()
+                dPackage.getPlatforms(),
             )
-        } else
+        } else {
             NonKmpClasslikeConverter(
                 displayLanguage,
                 dClasslike,
@@ -148,8 +149,9 @@ internal class PackageRenderer(
                 javadocConverter,
                 paramConverter,
                 annotationConverter,
-                metadataConverter
+                metadataConverter,
             )
+        }
         val page = converter.classlike()
         val classlike = createHTML().html {
             page.render(this)
@@ -158,9 +160,10 @@ internal class PackageRenderer(
         outputWriter.write(
             pathProvider.forType(dClasslike.packageName(), dClasslike.name()),
             classlike,
-            ""
+            "",
         )
     }
+
     // Note: this cannot distinguish java-only, android-only, and non-KMP libraries.
     private fun DPackage.isKotlinAndKMP() = displayLanguage == Language.KOTLIN && isKMP()
     private fun DPackage.isKMP() =

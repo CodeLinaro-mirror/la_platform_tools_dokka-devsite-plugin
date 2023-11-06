@@ -35,7 +35,7 @@ class DefaultLinkTest {
         assertThat(output).isEqualTo(
             """
 <div><a href="link">Name</a></div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -51,7 +51,7 @@ class DefaultLinkTest {
         assertThat(output).isEqualTo(
             """
 <div>Name</div>
-            """.trim()
+            """.trim(),
         )
     }
 }

@@ -38,8 +38,8 @@ class DefaultParameterComponentTest {
             Params(
                 name = "number",
                 type = NoopTypeProjectionComponent("Int"),
-                displayLanguage = Language.KOTLIN
-            )
+                displayLanguage = Language.KOTLIN,
+            ),
         )
 
         val output = createHTML().div {
@@ -50,7 +50,7 @@ class DefaultParameterComponentTest {
         assertThat(output).isEqualTo(
             """
 <div>number:&nbsp;Int</div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -60,8 +60,8 @@ class DefaultParameterComponentTest {
             Params(
                 name = "number",
                 type = NoopTypeProjectionComponent("int"),
-                displayLanguage = Language.JAVA
-            )
+                displayLanguage = Language.JAVA,
+            ),
         )
 
         val output = createHTML().div {
@@ -72,7 +72,7 @@ class DefaultParameterComponentTest {
         assertThat(output).isEqualTo(
             """
 <div>int&nbsp;number</div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -82,8 +82,8 @@ class DefaultParameterComponentTest {
             Params(
                 name = "",
                 type = NoopTypeProjectionComponent("Int"),
-                displayLanguage = Language.KOTLIN
-            )
+                displayLanguage = Language.KOTLIN,
+            ),
         )
 
         val output = createHTML().div {
@@ -94,7 +94,7 @@ class DefaultParameterComponentTest {
         assertThat(output).isEqualTo(
             """
 <div>Int</div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -105,8 +105,8 @@ class DefaultParameterComponentTest {
                 name = "number",
                 type = NoopTypeProjectionComponent("Int"),
                 displayLanguage = Language.KOTLIN,
-                modifiers = Modifiers("vararg")
-            )
+                modifiers = Modifiers("vararg"),
+            ),
         )
 
         val output = createHTML().div {
@@ -117,7 +117,7 @@ class DefaultParameterComponentTest {
         assertThat(output).isEqualTo(
             """
 <div>vararg&nbsp;number:&nbsp;Int</div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -127,8 +127,8 @@ class DefaultParameterComponentTest {
             Params(
                 name = "",
                 type = NoopTypeProjectionComponent("int"),
-                displayLanguage = Language.JAVA
-            )
+                displayLanguage = Language.JAVA,
+            ),
         )
 
         val output = createHTML().div {
@@ -139,7 +139,7 @@ class DefaultParameterComponentTest {
         assertThat(output).isEqualTo(
             """
 <div>int</div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -152,9 +152,9 @@ class DefaultParameterComponentTest {
                 displayLanguage = Language.KOTLIN,
                 annotationComponents = listOf(
                     NoopAnnotationComponent("@Really"),
-                    NoopAnnotationComponent("@Special")
-                )
-            )
+                    NoopAnnotationComponent("@Special"),
+                ),
+            ),
         )
 
         val output = createHTML().div {
@@ -165,7 +165,7 @@ class DefaultParameterComponentTest {
         assertThat(output).isEqualTo(
             """
 <div>@Really @Special number:&nbsp;Int</div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -178,9 +178,9 @@ class DefaultParameterComponentTest {
                 displayLanguage = Language.JAVA,
                 annotationComponents = listOf(
                     NoopAnnotationComponent("@Really"),
-                    NoopAnnotationComponent("@Special")
-                )
-            )
+                    NoopAnnotationComponent("@Special"),
+                ),
+            ),
         )
 
         val output = createHTML().div {
@@ -191,7 +191,7 @@ class DefaultParameterComponentTest {
         assertThat(output).isEqualTo(
             """
 <div>@Really @Special int&nbsp;number</div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -201,8 +201,8 @@ class DefaultParameterComponentTest {
             Params(
                 name = "block",
                 type = NoopLambdaTypeProjectionComponent(type = "Unit"),
-                displayLanguage = Language.KOTLIN
-            )
+                displayLanguage = Language.KOTLIN,
+            ),
         )
 
         val output = createHTML().div {
@@ -213,7 +213,7 @@ class DefaultParameterComponentTest {
         assertThat(output).isEqualTo(
             """
 <div>block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> Unit</div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -223,8 +223,8 @@ class DefaultParameterComponentTest {
             Params(
                 name = "number",
                 type = NoopLambdaTypeProjectionComponent(receiver = "Int", type = "Int"),
-                displayLanguage = Language.KOTLIN
-            )
+                displayLanguage = Language.KOTLIN,
+            ),
         )
 
         val output = createHTML().div {
@@ -235,7 +235,7 @@ class DefaultParameterComponentTest {
         assertThat(output).isEqualTo(
             """
 <div>number:&nbsp;Int.() <span style="white-space: nowrap;">-&gt;</span> Int</div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -251,12 +251,12 @@ class DefaultParameterComponentTest {
                         displayLanguage = Language.KOTLIN,
                         lambdaParams = listOf(
                             NoopParameterComponent("Int"),
-                            NoopParameterComponent("String")
-                        )
-                    )
+                            NoopParameterComponent("String"),
+                        ),
+                    ),
                 ),
-                displayLanguage = Language.KOTLIN
-            )
+                displayLanguage = Language.KOTLIN,
+            ),
         )
 
         val output = createHTML().div {
@@ -267,7 +267,7 @@ class DefaultParameterComponentTest {
         assertThat(output).isEqualTo(
             """
 <div>number:&nbsp;(Int, String) <span style="white-space: nowrap;">-&gt;</span> Int</div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -282,11 +282,11 @@ class DefaultParameterComponentTest {
                         nullability = Nullability.KOTLIN_DEFAULT,
                         displayLanguage = Language.KOTLIN,
                         lambdaParams = listOf(NoopParameterComponent("String")),
-                        receiver = NoopTypeProjectionComponent("Boolean")
-                    )
+                        receiver = NoopTypeProjectionComponent("Boolean"),
+                    ),
                 ),
-                displayLanguage = Language.KOTLIN
-            )
+                displayLanguage = Language.KOTLIN,
+            ),
         )
 
         val output = createHTML().div {
@@ -297,7 +297,7 @@ class DefaultParameterComponentTest {
         assertThat(output).isEqualTo(
             """
 <div>number:&nbsp;Boolean.(String) <span style="white-space: nowrap;">-&gt;</span> Int</div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -312,11 +312,11 @@ class DefaultParameterComponentTest {
                         nullability = Nullability.KOTLIN_DEFAULT,
                         displayLanguage = Language.KOTLIN,
                         lambdaModifiers = listOf("suspend"),
-                        lambdaParams = listOf(NoopParameterComponent("String"))
-                    )
+                        lambdaParams = listOf(NoopParameterComponent("String")),
+                    ),
                 ),
-                displayLanguage = Language.KOTLIN
-            )
+                displayLanguage = Language.KOTLIN,
+            ),
         )
 
         val output = createHTML().div {
@@ -327,7 +327,7 @@ class DefaultParameterComponentTest {
         assertThat(output).isEqualTo(
             """
 <div>number:&nbsp;suspend&nbsp;(String) <span style="white-space: nowrap;">-&gt;</span> Int</div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -338,8 +338,8 @@ class DefaultParameterComponentTest {
                 name = "number",
                 type = NoopTypeProjectionComponent("Int"),
                 displayLanguage = Language.KOTLIN,
-                defaultValue = "5"
-            )
+                defaultValue = "5",
+            ),
         )
 
         val output = createHTML().div {
@@ -350,7 +350,7 @@ class DefaultParameterComponentTest {
         assertThat(output).isEqualTo(
             """
 <div>number:&nbsp;Int = 5</div>
-            """.trim()
+            """.trim(),
         )
     }
 }

@@ -33,7 +33,7 @@ import org.jetbrains.dokka.links.TypeReference
 internal fun Callable.anchor(
     open: String = "(",
     separator: String = ",",
-    close: String = ")"
+    close: String = ")",
 ): String {
     val receiverStr = if (receiver == null) "" else "$open${receiver!!.name()}$close."
     val signature = params.joinToString(separator) { it.name() }

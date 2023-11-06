@@ -27,7 +27,7 @@ import kotlinx.html.unsafe
 
 /** Default implementation of related symbols. */
 internal data class DefaultRelatedSymbols(
-    override val data: RelatedSymbols.Params
+    override val data: RelatedSymbols.Params,
 ) : RelatedSymbols {
     override fun render(into: FlowContent) = into.run {
         renderRelatedSymbolsFor(data.directSubclasses, data.directSummary, "direct")
@@ -37,7 +37,7 @@ internal data class DefaultRelatedSymbols(
     private fun FlowContent.renderRelatedSymbolsFor(
         subclasses: List<Link>,
         summary: LinkDescriptionSummaryList,
-        relatedness: String
+        relatedness: String,
     ) {
         if (subclasses.isEmpty()) return
 

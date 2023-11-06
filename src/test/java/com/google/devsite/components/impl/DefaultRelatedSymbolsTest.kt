@@ -32,8 +32,8 @@ class DefaultRelatedSymbolsTest {
                 directSubclasses = emptyList(),
                 directSummary = NoopSummaryList(show = false),
                 indirectSubclasses = emptyList(),
-                indirectSummary = NoopSummaryList(show = false)
-            )
+                indirectSummary = NoopSummaryList(show = false),
+            ),
         )
 
         val output = createHTML().div {
@@ -44,7 +44,7 @@ class DefaultRelatedSymbolsTest {
         assertThat(output).isEqualTo(
             """
 <div></div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -55,8 +55,8 @@ class DefaultRelatedSymbolsTest {
                 directSubclasses = listOf(NoopLink("abc")),
                 directSummary = NoopSummaryList(),
                 indirectSubclasses = emptyList(),
-                indirectSummary = NoopSummaryList(show = false)
-            )
+                indirectSummary = NoopSummaryList(show = false),
+            ),
         )
 
         val output = createHTML().div {
@@ -75,7 +75,7 @@ class DefaultRelatedSymbolsTest {
     </div>
 </devsite-expandable>  </div>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -86,8 +86,8 @@ class DefaultRelatedSymbolsTest {
                 directSubclasses = emptyList(),
                 directSummary = NoopSummaryList(show = false),
                 indirectSubclasses = listOf(NoopLink("abc")),
-                indirectSummary = NoopSummaryList()
-            )
+                indirectSummary = NoopSummaryList(),
+            ),
         )
 
         val output = createHTML().div {
@@ -106,7 +106,7 @@ class DefaultRelatedSymbolsTest {
     </div>
 </devsite-expandable>  </div>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 }

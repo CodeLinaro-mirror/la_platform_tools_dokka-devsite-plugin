@@ -24,7 +24,7 @@ import kotlinx.html.p
 import kotlinx.html.pre
 
 internal data class DefaultClasslikeDescription(
-    override val data: ClasslikeDescription.Params
+    override val data: ClasslikeDescription.Params,
 ) : ClasslikeDescription {
 
     override fun render(into: FlowContent) = into.run {

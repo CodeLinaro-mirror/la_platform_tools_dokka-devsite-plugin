@@ -365,7 +365,7 @@ tasks.withType<Test> {
 
 val ktlintConfiguration: Configuration by configurations.creating
 dependencies {
-    ktlintConfiguration("com.pinterest:ktlint:0.43.0")
+    ktlintConfiguration("com.pinterest:ktlint:0.49.1")
 }
 
 val outputDir = "${layout.buildDirectory.get()}/reports/ktlint/"

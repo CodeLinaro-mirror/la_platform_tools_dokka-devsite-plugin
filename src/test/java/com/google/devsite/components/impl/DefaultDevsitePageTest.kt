@@ -37,8 +37,8 @@ class DefaultDevsitePageTest {
                 title = "Page Title",
                 content = NoopContextFreeComponent,
                 metadataComponent = null,
-                includedHeadTagPath = "_shared/_reference-head-tags.html"
-            )
+                includedHeadTagPath = "_shared/_reference-head-tags.html",
+            ),
         )
 
         val output = createHTML().html {
@@ -64,7 +64,7 @@ class DefaultDevsitePageTest {
     <div>noop</div>
   </body>
 </html>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -78,8 +78,8 @@ class DefaultDevsitePageTest {
                 title = "Page Title",
                 content = NoopContextFreeComponent,
                 metadataComponent = null,
-                includedHeadTagPath = "_shared/_reference-head-tags.html"
-            )
+                includedHeadTagPath = "_shared/_reference-head-tags.html",
+            ),
         )
 
         val output = createHTML().html {
@@ -105,7 +105,7 @@ class DefaultDevsitePageTest {
     <div>noop</div>
   </body>
 </html>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -114,19 +114,19 @@ class DefaultDevsitePageTest {
         val libraryMetadata = LibraryMetadata(
             groupId = "android.x",
             artifactId = "artifact",
-            releaseNotesUrl = "https://d.android.com"
+            releaseNotesUrl = "https://d.android.com",
         )
         val versionMetadata = DefaultVersionMetadataComponent.createVersionMetadataWithBaseUrl(
             addedIn = "1.5.4",
             deprecatedIn = "1.6.0-alpha04",
-            baseUrl = "https://developer.android.com/jetpack/androidx/releases/fragment"
+            baseUrl = "https://developer.android.com/jetpack/androidx/releases/fragment",
         )
         val metadataComponent = DefaultMetadataComponent(
             MetadataComponent.Params(
                 libraryMetadata = libraryMetadata,
                 sourceLinkUrl = "https://cs.android.com",
-                versionMetadata = versionMetadata
-            )
+                versionMetadata = versionMetadata,
+            ),
         )
         val pageComponent = DefaultDevsitePage(
             Params(
@@ -136,8 +136,8 @@ class DefaultDevsitePageTest {
                 title = "Page Title",
                 content = NoopContextFreeComponent,
                 metadataComponent = metadataComponent,
-                includedHeadTagPath = "_shared/_reference-head-tags.html"
-            )
+                includedHeadTagPath = "_shared/_reference-head-tags.html",
+            ),
         )
 
         val output = createHTML().html {
@@ -171,7 +171,7 @@ class DefaultDevsitePageTest {
     <div>noop</div>
   </body>
 </html>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -180,14 +180,14 @@ class DefaultDevsitePageTest {
         val libraryMetadata = LibraryMetadata(
             groupId = "android.x",
             artifactId = "artifact",
-            releaseNotesUrl = ""
+            releaseNotesUrl = "",
         )
         val metadataComponent = DefaultMetadataComponent(
             MetadataComponent.Params(
                 libraryMetadata = libraryMetadata,
                 sourceLinkUrl = null,
-                versionMetadata = null
-            )
+                versionMetadata = null,
+            ),
         )
         val pageComponent = DefaultDevsitePage(
             Params(
@@ -197,8 +197,8 @@ class DefaultDevsitePageTest {
                 title = "Page Title",
                 content = NoopContextFreeComponent,
                 metadataComponent = metadataComponent,
-                includedHeadTagPath = "_shared/_reference-head-tags.html"
-            )
+                includedHeadTagPath = "_shared/_reference-head-tags.html",
+            ),
         )
 
         val output = createHTML().html {
@@ -227,7 +227,7 @@ class DefaultDevsitePageTest {
     <div>noop</div>
   </body>
 </html>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -241,8 +241,8 @@ class DefaultDevsitePageTest {
                 title = "Page Title",
                 content = NoopContextFreeComponent,
                 metadataComponent = null,
-                includedHeadTagPath = null
-            )
+                includedHeadTagPath = null,
+            ),
         )
 
         val output = createHTML().html {
@@ -267,7 +267,7 @@ class DefaultDevsitePageTest {
     <div>noop</div>
   </body>
 </html>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -281,8 +281,8 @@ class DefaultDevsitePageTest {
                 title = "Page Title",
                 content = NoopContextFreeComponent,
                 metadataComponent = null,
-                includedHeadTagPath = "en/docs/reference/android/_reference-head-tags.html"
-            )
+                includedHeadTagPath = "en/docs/reference/android/_reference-head-tags.html",
+            ),
         )
 
         val output = createHTML().html {
@@ -308,7 +308,7 @@ class DefaultDevsitePageTest {
     <div>noop</div>
   </body>
 </html>
-            """.trim()
+            """.trim(),
         )
     }
 }

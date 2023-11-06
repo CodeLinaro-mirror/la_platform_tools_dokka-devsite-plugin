@@ -23,7 +23,7 @@ import kotlinx.html.unsafe
 
 /** Default implementation of a table header. */
 internal data class DefaultTableTitle(
-    override val data: TableTitle.Params
+    override val data: TableTitle.Params,
 ) : TableTitle {
     override fun render(into: TR) = into.run {
         th {

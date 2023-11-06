@@ -52,6 +52,6 @@ internal interface PackageSummary : ContextFreeComponent {
         val topLevelProperties: List<SymbolDetail<PropertySignature>>,
         val topLevelFunctions: List<SymbolDetail<FunctionSignature>>,
         val extensionProperties: List<SymbolDetail<PropertySignature>>,
-        val extensionFunctions: List<SymbolDetail<FunctionSignature>>
+        val extensionFunctions: List<SymbolDetail<FunctionSignature>>,
     )
 }

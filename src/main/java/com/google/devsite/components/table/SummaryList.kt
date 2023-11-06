@@ -26,7 +26,7 @@ internal interface SummaryList<T : SummaryItem> : ContextFreeComponent, List<T> 
     fun hasContent(): Boolean
     data class Params<T>(
         val header: TableTitle? = null,
-        var items: List<T>
+        var items: List<T>,
     )
     fun title(): String? = data.header?.data?.title
 

@@ -36,7 +36,7 @@ internal class EnumValueDocumentableConverter(
     private val pathProvider: FilePathProvider,
     private val javadocConverter: DocTagConverter,
     private val paramConverter: ParameterDocumentableConverter,
-    private val annotationConverter: AnnotationDocumentableConverter
+    private val annotationConverter: AnnotationDocumentableConverter,
 ) {
 
     /** @return the enum value summary component */
@@ -45,8 +45,8 @@ internal class EnumValueDocumentableConverter(
         return DefaultTableRowSummaryItem(
             TableRowSummaryItem.Params(
                 title = pathProvider.linkForReference(enumValue.dri, enumValue.name),
-                description = javadocConverter.summaryDescription(enumValue)
-            )
+                description = javadocConverter.summaryDescription(enumValue),
+            ),
         )
     }
 
@@ -64,7 +64,7 @@ internal class EnumValueDocumentableConverter(
             // While technically an ENUM_VALUE is a member of ENUM_TYPE? because you can always
             // define an enum value which is `null`, this isn't useful information
             propagatedNullability = Nullability.DONT_CARE,
-            propagatedAnnotations = typeAnnotations
+            propagatedAnnotations = typeAnnotations,
         )
         return DefaultSymbolDetail(
             SymbolDetail.Params(
@@ -78,7 +78,7 @@ internal class EnumValueDocumentableConverter(
                     returnType = projection,
                     paramNames = listOf(),
                     deprecationAnnotation = nonTypeAnnotations.deprecationAnnotation(),
-                    isFromJava = dEnum.isFromJava()
+                    isFromJava = dEnum.isFromJava(),
                 ),
                 displayLanguage = displayLanguage,
                 modifiers = enumValue.getExtraModifiers(enumValue.getExpectOrCommonSourceSet())
@@ -86,8 +86,8 @@ internal class EnumValueDocumentableConverter(
                 annotationComponents = annotationConverter.annotationComponents(
                     annotations = nonTypeAnnotations,
                     nullability = Nullability.DONT_CARE, // See above
-                )
-            )
+                ),
+            ),
         )
     }
 
@@ -97,15 +97,15 @@ internal class EnumValueDocumentableConverter(
             PropertySignature.Params(
                 // TODO(b/168136770): figure out path for default anchors
                 name = pathProvider.linkForReference(dri),
-                receiver = null
-            )
+                receiver = null,
+            ),
         )
     }
 
     /** Returns anchors for this enum value. */
     private fun DEnumEntry.generateAnchors(): LinkedHashSet<String> {
         return linkedSetOf(
-            name
+            name,
         )
     }
 }

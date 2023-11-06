@@ -66,7 +66,7 @@ import kotlin.test.assertFails
 @Suppress("UNCHECKED_CAST")
 @RunWith(Parameterized::class)
 internal class DocTagConverterTest(
-    private val displayLanguage: Language
+    private val displayLanguage: Language,
 ) : ConverterTestBase(displayLanguage) {
     @Test
     fun `Empty description isn't documented`() {
@@ -106,7 +106,7 @@ internal class DocTagConverterTest(
   <p>Hello World!</p>
   <p><h2>Second level</h2> <h3>Third level</h3></p>
 </body>
-            """.trim()
+            """.trim(),
         )
 
         val moduleJ = """
@@ -126,7 +126,7 @@ internal class DocTagConverterTest(
   <h2>Second level</h2>
   <h3>Third level</h3>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -196,7 +196,7 @@ internal class DocTagConverterTest(
 <body>
   <p>Hello World! Docs with period issue, e.g. this/e.g. this.</p>
 </body>
-                """.trim()
+                """.trim(),
             )
 
             val detail = module.documentation(doc = { this.clazz() }).item() as DescriptionComponent
@@ -207,7 +207,7 @@ internal class DocTagConverterTest(
 <body>
   <p>Hello World! Docs with period issue, e.g. this/e.g. this.${separator}A second line of desc. A third line of desc.</p>
 </body>
-            """.trim()
+            """.trim(),
             )
 
             val dComponents = detail.data.components
@@ -244,7 +244,7 @@ internal class DocTagConverterTest(
 <body>
   <p>The non-biometric credential used to secure the device (i.e. PIN, pattern, or password).</p>
 </body>
-            """.trim()
+            """.trim(),
         )
 
         val detail = module.documentation(doc = { this.property(name = "DEVICE_CREDENTIAL")!! })
@@ -255,7 +255,7 @@ internal class DocTagConverterTest(
 <body>
   <p>The non-biometric credential used to secure the device (i.e. PIN, pattern, or password). This should typically only be used in combination with a biometric auth type, such as BIOMETRIC_WEAK.</p>
 </body>
-        """.trim()
+        """.trim(),
         )
 
         val dComponents = detail.data.components
@@ -306,7 +306,7 @@ internal class DocTagConverterTest(
     </tbody>
   </table>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -347,7 +347,7 @@ internal class DocTagConverterTest(
     </tbody>
   </table>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -360,7 +360,9 @@ internal class DocTagConverterTest(
             | * @param Baz Bazzy baz
             | */
             |class <Bar: String, Baz> Foo: List<Bar>
-        """.render().documentation(doc = { this.clazz() })
+        """.render().documentation(doc = {
+            this.clazz()
+        })
         val documentationJ = """
             |/**
             | * Hello World!
@@ -369,7 +371,9 @@ internal class DocTagConverterTest(
             | */
             |public class Foo<Bar extends String, Baz> extends java.util.List<Bar> {
             |}
-        """.render(java = true).documentation(doc = { this.clazz() })
+        """.render(java = true).documentation(doc = {
+            this.clazz()
+        })
 
         for (documentation in listOf(documentationK, documentationJ)) {
             val classParams = documentation.paramList()
@@ -397,7 +401,9 @@ internal class DocTagConverterTest(
             | * @blamaram Wam wham
             | */
             |fun <Bar: String, Baz> foo(): List<Bar>
-        """.render().documentation(doc = { this.function("foo")!! })
+        """.render().documentation(doc = {
+            this.function("foo")!!
+        })
         val documentationJ = """
             |/**
             | * Hello World!
@@ -406,7 +412,9 @@ internal class DocTagConverterTest(
             | */
             |public <Bar extends String, Baz> java.util.List<Bar> foo() {
             |}
-        """.render(java = true).documentation(doc = { this.function("foo")!! })
+        """.render(java = true).documentation(doc = {
+            this.function("foo")!!
+        })
 
         for (documentation in listOf(documentationK, documentationJ)) {
             val params = documentation.paramList()
@@ -441,7 +449,7 @@ internal class DocTagConverterTest(
         val constructorDoc = module.documentation({ this.constructor() })
         val conParamDoc = module.documentation(
             { this.constructor().parameters.single() },
-            isFromJava = false
+            isFromJava = false,
         ).single()
 
         // An odd propagation system, but it seems to work out to properly document everything?
@@ -594,9 +602,10 @@ internal class DocTagConverterTest(
         assertThat((rendered.explicitClasslike("Seele") as DClass).constructors).isEmpty()
 
         val constructorDoc = rendered.documentation(
-            { (this.explicitClasslike("Ba") as DClass).constructors.single() })
+            { (this.explicitClasslike("Ba") as DClass).constructors.single() },
+        )
         val conParamDoc = rendered.documentation(
-            { (this.explicitClasslike("Ba") as DClass).constructors.single().parameters.single() }
+            { (this.explicitClasslike("Ba") as DClass).constructors.single().parameters.single() },
         ).single()
 
         assertThat(constructorDoc.size).isEqualTo(2)
@@ -649,11 +658,11 @@ internal class DocTagConverterTest(
         assertThat(exception.localizedMessage).isEqualTo(
             "Exception thrown while handling Param tags [Param(root=" +
                 "CustomDocTag(children=[P(children=[Text(body=aaaaaa, children=[], params={})], " +
-                "params={})], params={}, name=MARKDOWN_FILE), name=NOT_A_REAL_PARAM)]."
+                "params={})], params={}, name=MARKDOWN_FILE), name=NOT_A_REAL_PARAM)].",
         )
         assertThat(exception.cause!!.localizedMessage).isEqualTo(
             "Unable to find what is referred to by \"@param NOT_A_REAL_PARAM\" in " +
-                "DFunction foo, with contents: aaaaaa"
+                "DFunction foo, with contents: aaaaaa",
         )
         val standardOut = System.out
         val outputStreamCaptor = ByteArrayOutputStream()
@@ -792,9 +801,11 @@ internal class DocTagConverterTest(
                     assertThat(param1Generic.annotations).isEmpty()
                 }
                 // This is also the upstream bug; T should be @NonNull from both source languages
-                if (documentation == documentationK) assertThat(
-                    param0Generic.annotations.single().isAtNonNull
-                ).isTrue()
+                if (documentation == documentationK) {
+                    assertThat(
+                        param0Generic.annotations.single().isAtNonNull,
+                    ).isTrue()
+                }
                 assertThat(param0Left.annotations).isEmpty()
                 assertThat(param1Left.annotations).isEmpty()
                 assertThat(param1Left.typeAnnotations().single().isAtNonNull).isTrue()
@@ -876,13 +887,13 @@ internal class DocTagConverterTest(
         }
         assertThat(param0.data.description.text()).isEqualTo(
             "Function that runs on each " +
-                "loaded item, returning items of a potentially new type."
+                "loaded item, returning items of a potentially new type.",
         )
         assertThat(param1Left.data.name).isEqualTo("ToValue")
         assertThat(param1Left.projectionName()).isEqualTo("String")
         assertThat(param1.data.description.text()).isEqualTo(
             "Type of items produced by the " +
-                "new DataSource, from the passed function."
+                "new DataSource, from the passed function.",
         )
     }
 
@@ -928,7 +939,7 @@ internal class DocTagConverterTest(
             .isEqualTo("https://developer.android.com/guide/topics/ui/drag-drop")
         assertThat(see2.link().name).isEqualTo("Multi-window support")
         assertThat(see2.link().url).isEqualTo(
-            "https://developer.android.com/guide/topics/large-screens/multi-window-support#dnd"
+            "https://developer.android.com/guide/topics/large-screens/multi-window-support#dnd",
         )
     }
 
@@ -1042,7 +1053,7 @@ internal class DocTagConverterTest(
         val functionDesc = doc.first() as DescriptionComponent
         assertThat(functionDesc.text()).isEqualTo(
             "Below is a sample of a simple database." +
-                "  // File: Song.java\n @ Entity\npublic class Song {"
+                "  // File: Song.java\n @ Entity\npublic class Song {",
         )
         assertThat(functionDesc.data.components.last()).isInstanceOf(Pre::class.java)
     }
@@ -1091,12 +1102,16 @@ internal class DocTagConverterTest(
         """.render(java = true).documentation()
 
         for (documentation in listOf(documentationJ, documentationK)) {
-            val expectedDRI = if (documentation == documentationJ) "java.lang.IllegalStateException"
-            else "kotlin.IllegalStateException"
+            val expectedDRI = if (documentation == documentationJ) {
+                "java.lang.IllegalStateException"
+            } else {
+                "kotlin.IllegalStateException"
+            }
 
-            val expectedURL = if (documentation == documentationJ) "https://developer.android.com" +
-                "/reference/java/lang/IllegalStateException.html"
-            else "https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/" +
+            val expectedURL = if (documentation == documentationJ) {
+                "https://developer.android.com" +
+                    "/reference/java/lang/IllegalStateException.html"
+            } else "https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/" +
                 "-illegal-state-exception/index.html"
 
             val throwsSummary =
@@ -1179,20 +1194,20 @@ internal class DocTagConverterTest(
         for (exception in listOf(exception1, exception2, exception3)) {
             assertThat(exception.localizedMessage).contains(
                 "Exception thrown while handling Throws tags " +
-                    "[Throws(root=CustomDocTag(children=[P(children=[Text(body="
+                    "[Throws(root=CustomDocTag(children=[P(children=[Text(body=",
             )
         }
         assertThat(exception1.localizedMessage).contains(
             "if I try to linkify, children=[], params={})], params={})], params={}, name=MARKDOWN" +
-                "_FILE), name={@link IllegalStateException}, exceptionAddress=null)]."
+                "_FILE), name={@link IllegalStateException}, exceptionAddress=null)].",
         )
         assertThat(exception2.localizedMessage).contains(
             "IllegalStateException if my syntax is bad, children=[], params={})], params={})], " +
-                "params={}, name=MARKDOWN_FILE), name=an, exceptionAddress=null)]."
+                "params={}, name=MARKDOWN_FILE), name=an, exceptionAddress=null)].",
         )
         assertThat(exception3.localizedMessage).contains(
             "IllegalStateException if my syntax is bad, children=[], params={})], params={})], " +
-                "params={}, name=MARKDOWN_FILE), name=an, exceptionAddress=null)]."
+                "params={}, name=MARKDOWN_FILE), name=an, exceptionAddress=null)].",
         )
         for (throws in listOf(throwsBad4, throwsBad5)) {
             assertThat(throws.name()).isEqualTo("")
@@ -1211,7 +1226,7 @@ internal class DocTagConverterTest(
         assertThat(throwsFine1.data.title.typeName()).isEqualTo("kotlin.IllegalStateException")
         assertThat(throwsFine1.data.title.link().url).isEqualTo(
             "https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/" +
-                "-illegal-state-exception/index.html"
+                "-illegal-state-exception/index.html",
         )
 
         System.setOut(standardOut)
@@ -1344,7 +1359,7 @@ internal class DocTagConverterTest(
         val paramText = paramSummary.item()
 
         assertThat(paramText.link().url).isEqualTo(
-            "https://developer.android.com/reference/java/lang/String.html"
+            "https://developer.android.com/reference/java/lang/String.html",
         )
     }
 
@@ -1545,7 +1560,9 @@ internal class DocTagConverterTest(
             | */
             |public void longFunctionName(Object arg1, String arg2, int arg3, Integer arg4) {}
             |
-        """.render(java = true).documentation({ this.function("longFunctionName")!! })
+        """.render(java = true).documentation({
+            this.function("longFunctionName")!!
+        })
         val components = (documentation.single() as DescriptionComponent)
             .data.components.single().children
         val link = components[1] as DocumentationLink
@@ -1647,7 +1664,9 @@ internal class DocTagConverterTest(
              * @param <V> The result type returned by this Future's {@code get} method
              */
             public interface Future<V>
-        """.trimIndent().render(java = true).documentation({ this.explicitClasslike("Future") })
+        """.trimIndent().render(java = true).documentation({
+            this.explicitClasslike("Future")
+        })
         val description = documentation[0] as DescriptionComponent
         val firstCodeBlock = (description.data.components[2] as CodeBlock).text()
         assertThat(firstCodeBlock).doesNotContain("&lt;")
@@ -1677,7 +1696,7 @@ internal class DocTagConverterTest(
     private fun DModule.documentation(
         doc: DModule.() -> Documentable = ::smartDoc,
         paramNames: List<String> = emptyList(),
-        isFromJava: Boolean? = null
+        isFromJava: Boolean? = null,
     ): List<ContextFreeComponent> {
         val converterHolder = ConverterHolder(this@DocTagConverterTest, this)
         val doc = doc()
@@ -1691,7 +1710,7 @@ internal class DocTagConverterTest(
             documentable = doc,
             returnType = NoopTypeProjectionComponent(""),
             paramNames = paramNames,
-            isFromJava = isFromJava!!
+            isFromJava = isFromJava!!,
         )
     }
 
@@ -1719,7 +1738,7 @@ internal class DocTagConverterTest(
         @Parameterized.Parameters(name = "{0}")
         fun data() = listOf(
             arrayOf(Language.JAVA),
-            arrayOf(Language.KOTLIN)
+            arrayOf(Language.KOTLIN),
         )
     }
 }

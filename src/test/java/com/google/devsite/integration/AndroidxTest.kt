@@ -46,8 +46,8 @@ class AndroidxTest : IntegrationTestBase() {
                 "$base/fragment/",
                 "$base/leanback/",
                 "$base/media/",
-                "$base/media2/"
-            )
+                "$base/media2/",
+            ),
         )
     }
 
@@ -64,7 +64,7 @@ class AndroidxTest : IntegrationTestBase() {
             "watchface-samples-minimal-complications",
             "watchface-samples-minimal-style",
             "generator", // material-icons-generator
-            "appsearch-builtin-types"
+            "appsearch-builtin-types",
         )
         crawlingExecTest(getAndroidxPath(), excludedPaths)
     }
@@ -163,7 +163,7 @@ class AndroidxTest : IntegrationTestBase() {
                 "tracing-perfetto",
                 "tracing-perfetto-binary",
                 "tracing-perfetto-common",
-            )
+            ),
         )
     }
 

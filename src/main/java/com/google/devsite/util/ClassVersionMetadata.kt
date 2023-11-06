@@ -24,7 +24,7 @@ data class ClassVersionMetadata(
     val addedIn: String,
     val deprecatedIn: String? = null,
     val methodVersions: Map<String, MethodVersionMetadata> = emptyMap(),
-    val fieldVersions: Map<String, FieldVersionMetadata> = emptyMap()
+    val fieldVersions: Map<String, FieldVersionMetadata> = emptyMap(),
 ) {
 
     /**
@@ -50,7 +50,7 @@ data class ClassVersionMetadata(
  * Converts JSON version metadata for fields into a map
  */
 fun createFieldVersionMetadata(
-    jsonVersionMetadataFields: List<JsonVersionMetadata.JsonVersionMetadataField>
+    jsonVersionMetadataFields: List<JsonVersionMetadata.JsonVersionMetadataField>,
 ): Map<String, ClassVersionMetadata.FieldVersionMetadata> {
     val versionMetadataMap = hashMapOf<String, ClassVersionMetadata.FieldVersionMetadata>()
 
@@ -70,7 +70,7 @@ fun createFieldVersionMetadata(
  * Converts JSON version metadata for methods into a map
  */
 fun createMethodVersionMetadata(
-    jsonVersionMetadataMethods: List<JsonVersionMetadata.JsonVersionMetadataMethod>
+    jsonVersionMetadataMethods: List<JsonVersionMetadata.JsonVersionMetadataMethod>,
 ): Map<String, ClassVersionMetadata.MethodVersionMetadata> {
     val versionMetadataMap = hashMapOf<String, ClassVersionMetadata.MethodVersionMetadata>()
 

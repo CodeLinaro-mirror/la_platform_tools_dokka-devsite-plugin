@@ -44,8 +44,8 @@ class DefaultSymbolDetailTest {
                 signature = NoopFunctionSignature("foo()"),
                 anchors = linkedSetOf(),
                 metadata = emptyList(),
-                displayLanguage = Language.JAVA
-            )
+                displayLanguage = Language.JAVA,
+            ),
         )
 
         val output = createHTML().div {
@@ -65,7 +65,7 @@ class DefaultSymbolDetailTest {
     <pre class="api-signature no-pretty-print">void&nbsp;foo()</pre>
   </div>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -79,8 +79,8 @@ class DefaultSymbolDetailTest {
                 signature = NoopFunctionSignature("foo()"),
                 anchors = linkedSetOf(),
                 metadata = emptyList(),
-                displayLanguage = Language.KOTLIN
-            )
+                displayLanguage = Language.KOTLIN,
+            ),
         )
 
         val output = createHTML().div {
@@ -100,7 +100,7 @@ class DefaultSymbolDetailTest {
     <pre class="api-signature no-pretty-print">fun&nbsp;foo():&nbsp;Unit</pre>
   </div>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -114,8 +114,8 @@ class DefaultSymbolDetailTest {
                 signature = NoopFunctionSignature("foo"),
                 anchors = linkedSetOf(),
                 metadata = emptyList(),
-                displayLanguage = Language.KOTLIN
-            )
+                displayLanguage = Language.KOTLIN,
+            ),
         )
 
         val output = createHTML().div {
@@ -135,7 +135,7 @@ class DefaultSymbolDetailTest {
     <pre class="api-signature no-pretty-print">val&nbsp;foo:&nbsp;Unit</pre>
   </div>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -149,8 +149,8 @@ class DefaultSymbolDetailTest {
                 signature = NoopFunctionSignature("MyClass()"),
                 anchors = linkedSetOf(),
                 metadata = emptyList(),
-                displayLanguage = Language.KOTLIN
-            )
+                displayLanguage = Language.KOTLIN,
+            ),
         )
 
         val output = createHTML().div {
@@ -170,7 +170,7 @@ class DefaultSymbolDetailTest {
     <pre class="api-signature no-pretty-print">MyClass()</pre>
   </div>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -184,8 +184,8 @@ class DefaultSymbolDetailTest {
                 signature = NoopFunctionSignature("MyClass()"),
                 anchors = linkedSetOf(),
                 metadata = emptyList(),
-                displayLanguage = Language.JAVA
-            )
+                displayLanguage = Language.JAVA,
+            ),
         )
 
         val output = createHTML().div {
@@ -205,7 +205,7 @@ class DefaultSymbolDetailTest {
     <pre class="api-signature no-pretty-print">MyClass()</pre>
   </div>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -222,9 +222,9 @@ class DefaultSymbolDetailTest {
                 displayLanguage = Language.JAVA,
                 annotationComponents = listOf(
                     NoopAnnotationComponent("@Foo"),
-                    NoopAnnotationComponent("@Bar")
-                )
-            )
+                    NoopAnnotationComponent("@Bar"),
+                ),
+            ),
         )
 
         val output = createHTML().div {
@@ -244,7 +244,7 @@ class DefaultSymbolDetailTest {
     <pre class="api-signature no-pretty-print">@Foo<br>@Bar<br>void&nbsp;foo()</pre>
   </div>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -259,8 +259,8 @@ class DefaultSymbolDetailTest {
                 anchors = linkedSetOf(),
                 metadata = emptyList(),
                 displayLanguage = Language.JAVA,
-                modifiers = Modifiers("protected", "abstract")
-            )
+                modifiers = Modifiers("protected", "abstract"),
+            ),
         )
 
         val output = createHTML().div {
@@ -280,7 +280,7 @@ class DefaultSymbolDetailTest {
     <pre class="api-signature no-pretty-print">protected&nbsp;abstract&nbsp;void&nbsp;foo()</pre>
   </div>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -295,8 +295,8 @@ class DefaultSymbolDetailTest {
                 anchors = linkedSetOf(),
                 metadata = emptyList(),
                 displayLanguage = Language.KOTLIN,
-                modifiers = Modifiers("protected", "abstract")
-            )
+                modifiers = Modifiers("protected", "abstract"),
+            ),
         )
 
         val output = createHTML().div {
@@ -316,7 +316,7 @@ class DefaultSymbolDetailTest {
     <pre class="api-signature no-pretty-print">protected&nbsp;abstract&nbsp;fun&nbsp;foo():&nbsp;Unit</pre>
   </div>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -330,8 +330,8 @@ class DefaultSymbolDetailTest {
                 signature = NoopFunctionSignature("foo()"),
                 anchors = linkedSetOf("foo(a,b)", "foo(a, b)", "foo-a-b-"),
                 metadata = emptyList(),
-                displayLanguage = Language.JAVA
-            )
+                displayLanguage = Language.JAVA,
+            ),
         )
 
         val output = createHTML().div {
@@ -351,7 +351,7 @@ class DefaultSymbolDetailTest {
     <pre class="api-signature no-pretty-print">void&nbsp;foo()</pre>
   </div>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -365,8 +365,8 @@ class DefaultSymbolDetailTest {
                 signature = NoopFunctionSignature("foo()"),
                 anchors = linkedSetOf(),
                 metadata = listOf(NoopContextFreeComponent, NoopContextFreeComponent),
-                displayLanguage = Language.JAVA
-            )
+                displayLanguage = Language.JAVA,
+            ),
         )
 
         val output = createHTML().div {
@@ -388,7 +388,7 @@ class DefaultSymbolDetailTest {
     <div>noop</div>
   </div>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -403,8 +403,8 @@ class DefaultSymbolDetailTest {
                 anchors = linkedSetOf(),
                 metadata = emptyList(),
                 displayLanguage = Language.JAVA,
-                extFunctionClass = "MyClassKt"
-            )
+                extFunctionClass = "MyClassKt",
+            ),
         )
 
         val output = createHTML().div {
@@ -424,7 +424,7 @@ class DefaultSymbolDetailTest {
     <pre class="api-signature no-pretty-print">void&nbsp;foo()</pre>
   </div>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 
@@ -435,16 +435,16 @@ class DefaultSymbolDetailTest {
                 libraryMetadata = LibraryMetadata(
                     groupId = "testGroup",
                     artifactId = "testArtifactId",
-                    releaseNotesUrl = "https://d.android.com"
+                    releaseNotesUrl = "https://d.android.com",
                 ),
                 sourceLinkUrl = "https://cs.android.com",
                 versionMetadata = DefaultVersionMetadataComponent(
                     VersionMetadataComponent.Params(
                         addedIn = DefaultLink(Link.Params(name = "API Level 8", url = "")),
-                        deprecatedIn = DefaultLink(Link.Params(name = "API Level 12", url = ""))
-                    )
-                )
-            )
+                        deprecatedIn = DefaultLink(Link.Params(name = "API Level 12", url = "")),
+                    ),
+                ),
+            ),
         )
         val component = DefaultSymbolDetail(
             Params(
@@ -455,8 +455,8 @@ class DefaultSymbolDetailTest {
                 anchors = linkedSetOf(),
                 metadata = emptyList(),
                 displayLanguage = Language.JAVA,
-                metadataComponent = metadataComponent
-            )
+                metadataComponent = metadataComponent,
+            ),
         )
 
         val output = createHTML().div {
@@ -484,7 +484,7 @@ class DefaultSymbolDetailTest {
     <pre class="api-signature no-pretty-print">void&nbsp;foo()</pre>
   </div>
 </div>
-            """.trim()
+            """.trim(),
         )
     }
 }

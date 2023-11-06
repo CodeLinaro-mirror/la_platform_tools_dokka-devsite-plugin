@@ -22,7 +22,7 @@ import com.google.devsite.joinMaybePrefix
 import kotlinx.html.FlowContent
 
 internal data class DefaultAnnotatedLink(
-    override val data: AnnotatedLink.Params
+    override val data: AnnotatedLink.Params,
 ) : AnnotatedLink {
 
     override fun render(into: FlowContent) = into.run {

@@ -34,7 +34,7 @@ import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
 internal class RootDocumentableConverterTest(
-    private val displayLanguage: Language
+    private val displayLanguage: Language,
 ) : ConverterTestBase(displayLanguage) {
     @Test
     fun `Class index creates components with correct page title`() {
@@ -170,7 +170,7 @@ internal class RootDocumentableConverterTest(
                 |package b
                 |
                 |class AA
-            """.trimMargin()
+            """.trimMargin(),
         ).render().indexPageForClasses()
 
         val classIndex = page.data.content
@@ -259,7 +259,7 @@ internal class RootDocumentableConverterTest(
                 |package androidx.example
                 |
                 |class Foo
-            """.trimMargin()
+            """.trimMargin(),
         ).render().indexPageForPackages()
 
         val packageIndex = page.data.content
@@ -289,7 +289,7 @@ internal class RootDocumentableConverterTest(
                 |package c
                 |
                 |class C
-            """.trimMargin()
+            """.trimMargin(),
         ).render().indexPageForPackages()
 
         val packageIndex = page.data.content
@@ -316,7 +316,7 @@ internal class RootDocumentableConverterTest(
                 |package a
                 |
                 |class A
-            """.trimMargin()
+            """.trimMargin(),
         ).render().indexPageForPackages()
 
         val packageIndex = page.data.content
@@ -429,7 +429,7 @@ internal class RootDocumentableConverterTest(
                 |package androidx.example.a
                 |
                 |class A
-            """.trimMargin()
+            """.trimMargin(),
         ).render().toc(packagePrefixToRemove = "androidx.example")
 
         val packageNames = toc.data.packages.map { it.data.name }
@@ -470,7 +470,7 @@ internal class RootDocumentableConverterTest(
         @Parameterized.Parameters(name = "{0}")
         fun data() = listOf(
             arrayOf(Language.JAVA),
-            arrayOf(Language.KOTLIN)
+            arrayOf(Language.KOTLIN),
         )
     }
 }

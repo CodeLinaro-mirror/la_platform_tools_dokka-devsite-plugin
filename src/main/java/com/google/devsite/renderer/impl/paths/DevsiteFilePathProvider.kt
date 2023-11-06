@@ -60,16 +60,16 @@ internal open class DevsiteFilePathProvider(
                     TypeProjectionComponent.Params(
                         type = this.linkForReference(ANY_DRI[Language.KOTLIN]!!),
                         nullability = Nullability.KOTLIN_DEFAULT,
-                        displayLanguage = Language.KOTLIN
-                    )
+                        displayLanguage = Language.KOTLIN,
+                    ),
                 )
             Language.JAVA ->
                 DefaultTypeProjectionComponent(
                     TypeProjectionComponent.Params(
                         type = this.linkForReference(ANY_DRI[Language.JAVA]!!),
                         nullability = Nullability.JAVA_NOT_ANNOTATED,
-                        displayLanguage = Language.JAVA
-                    )
+                        displayLanguage = Language.JAVA,
+                    ),
                 )
         }
 }

@@ -34,13 +34,13 @@ internal class MetadataRenderer(
     private val pathProvider: FilePathProvider,
     displayLanguage: Language,
     private val docsHolder: DocumentablesHolder,
-    javadocConverter: DocTagConverter
+    javadocConverter: DocTagConverter,
 ) {
     private val converter = RootDocumentableConverter(
         displayLanguage,
         pathProvider,
         docsHolder,
-        javadocConverter
+        javadocConverter,
     )
 
     /** Writes the list of packages in machine-readable format. */

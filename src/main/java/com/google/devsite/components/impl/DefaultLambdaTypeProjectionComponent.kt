@@ -26,7 +26,7 @@ import kotlinx.html.FlowContent
 
 /** Default implementation of a function parameter type. */
 internal data class DefaultLambdaTypeProjectionComponent(
-    override val data: LambdaTypeProjectionComponent.Params
+    override val data: LambdaTypeProjectionComponent.Params,
 ) : LambdaTypeProjectionComponent {
     override fun render(into: FlowContent) = into.run {
         if (data.nullability.nullable) +"("
@@ -51,7 +51,9 @@ internal data class DefaultLambdaTypeProjectionComponent(
     override fun toString(): String {
         val result = data.annotationComponents.joinToString() +
             data.lambdaModifiers.joinToString() +
-            if (data.receiver != null) "${data.receiver}." else "" +
+            if (data.receiver != null) {
+                "${data.receiver}."
+            } else "" +
                 data.lambdaParams.joinMaybePrefix(prefix = "(", postfix = ")") +
                 " -> " + data.type +
                 data.generics.joinMaybePrefix(prefix = "<", postfix = ">")

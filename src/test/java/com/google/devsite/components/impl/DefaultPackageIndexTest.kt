@@ -40,7 +40,7 @@ class DefaultPackageIndexTest {
   <p>These are all the API packages. See all <a href="classes.html">API classes</a>.</p>
   <div>noop</div>
 </body>
-            """.trim()
+            """.trim(),
         )
     }
 }

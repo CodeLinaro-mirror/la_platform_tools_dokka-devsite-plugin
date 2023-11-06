@@ -80,7 +80,7 @@ import kotlin.reflect.jvm.internal.impl.name.FqName
 
 /** For use when generating error messages. Is slow. */
 internal fun <T> T.getErrorLocation(
-    sourceSet: DokkaConfiguration.DokkaSourceSet = getExpectOrCommonSourceSet()
+    sourceSet: DokkaConfiguration.DokkaSourceSet = getExpectOrCommonSourceSet(),
 ): String where T : WithSources, T : Documentable {
     val sourceFilePath: String = this.sources[sourceSet]!!.path
     // Regex that matches the declaration of `this`
@@ -96,8 +96,11 @@ internal fun <T> T.getErrorLocation(
         "class" -> return sourceFilePath // this type's source is in a prebuilt?
         else -> {
             // This means the error occurred while parsing a synthetic element
-            if ("org.jetbrains.kotlin.descriptors" in sourceFilePath) return sourceFilePath
-            else throw RuntimeException("Unknown file type for $sourceFilePath")
+            if ("org.jetbrains.kotlin.descriptors" in sourceFilePath) {
+                return sourceFilePath
+            } else {
+                throw RuntimeException("Unknown file type for $sourceFilePath")
+            }
         }
     }
     // Assume that the type params can't take up more than 3 lines
@@ -112,8 +115,11 @@ internal fun <T> T.getErrorLocation(
 }
 
 @JvmName("This is internal and will never be used from JVM")
-internal fun Documentable.getErrorLocation() = if (this is WithSources) this.getErrorLocation()
-else "File location could not be determined."
+internal fun Documentable.getErrorLocation() = if (this is WithSources) {
+    this.getErrorLocation()
+} else {
+    "File location could not be determined."
+}
 
 /** Recursively expands all children. */
 internal val <T> WithChildren<T>.explodedChildren: List<T>
@@ -127,7 +133,9 @@ internal fun DClasslike.name() = dri.classNames!!
 internal fun DClasslike.generics() = (this as? WithGenerics)?.generics ?: emptyList()
 
 internal fun DClasslike.hasSupertypes(classGraph: ClassGraph) =
-    if (this !is WithSupertypes) false else {
+    if (this !is WithSupertypes) {
+        false
+    } else {
         classGraph.getValue(dri).superClasses.isNotEmpty() ||
             classGraph.getValue(dri).interfaces.isNotEmpty()
     }
@@ -135,9 +143,13 @@ internal fun DClasslike.hasSupertypes(classGraph: ClassGraph) =
 internal fun DClasslike.packageName() = dri.packageName!!
 
 private val baseClasses = listOf(
-    "kotlin.Any", "java.lang.Object", "kotlin.Enum",
-    "java.lang.Enum", "java.lang.annotation.Annotation"
+    "kotlin.Any",
+    "java.lang.Object",
+    "kotlin.Enum",
+    "java.lang.Enum",
+    "java.lang.annotation.Annotation",
 )
+
 /**
  * Returns true if this dri is from a build in base class like Any, Object, Enum, Annotation
  */
@@ -158,7 +170,7 @@ internal data class Hashable(
     val dri: DRI?,
     val visibility: Collection<Visibility>,
     val modifiers: Collection<Modifier>,
-    val isPsi: Boolean?
+    val isPsi: Boolean?,
 )
 
 private fun WithSources.toHashable() = Hashable(
@@ -167,7 +179,7 @@ private fun WithSources.toHashable() = Hashable(
     dri = if (this is Documentable) this.dri else null,
     visibility = if (this is WithVisibility) this.visibility.values else emptyList(),
     modifiers = if (this is WithAbstraction) this.modifier.values else emptyList(),
-    isPsi = this.sources.entries.singleOrNull()?.value is PsiDocumentableSource
+    isPsi = this.sources.entries.singleOrNull()?.value is PsiDocumentableSource,
 )
 
 /**
@@ -178,10 +190,13 @@ private fun WithSources.toHashable() = Hashable(
 internal fun WithSources.isFromJava() = this.toHashable().isFromJava()
 private fun Hashable.isFromJava() =
     isFromJavaMap.getOrPut(this) {
-        if (isSynthetic == true) false
-        else if (visibility.isNotEmpty()) !visibility.any { it is KotlinVisibility }
-        else if (modifiers.isNotEmpty()) !modifiers.any { it is KotlinModifier }
-        else isPsi == true
+        if (isSynthetic == true) {
+            false
+        } else if (visibility.isNotEmpty()) {
+            !visibility.any { it is KotlinVisibility }
+        } else if (modifiers.isNotEmpty()) {
+            !modifiers.any { it is KotlinModifier }
+        } else isPsi == true
     }
 
 // `expect`s cannot be `lateinit`, and `actual`s cannot either because they must match modifiers
@@ -250,7 +265,7 @@ internal fun DFunction.withJavaSynthetic(syntheticClassName: String): DFunction 
         // this needs to be the dri IN the synthetic class
         dri = dri.copy(classNames = syntheticClassName),
         // put the static annotation on functions in the synthetic class
-        extra = extra.addModifier(ExtraModifiers.JavaOnlyModifiers.Static, sourceSets)
+        extra = extra.addModifier(ExtraModifiers.JavaOnlyModifiers.Static, sourceSets),
     )
 
 /**
@@ -268,7 +283,7 @@ internal fun DProperty.withJavaSynthetic(syntheticClassName: String): DProperty 
         extra = extra.addModifier(ExtraModifiers.JavaOnlyModifiers.Static, sourceSets),
         // convert the getter and setter as well
         getter = getter?.withJavaSynthetic(syntheticClassName),
-        setter = setter?.withJavaSynthetic(syntheticClassName)
+        setter = setter?.withJavaSynthetic(syntheticClassName),
     )
 
 /**
@@ -276,14 +291,14 @@ internal fun DProperty.withJavaSynthetic(syntheticClassName: String): DProperty 
  */
 internal fun <T> PropertyContainer<T>.addModifier(
     newModifier: ExtraModifiers,
-    sourceSets: Set<DokkaConfiguration.DokkaSourceSet>
+    sourceSets: Set<DokkaConfiguration.DokkaSourceSet>,
 ): PropertyContainer<T> where T : Documentable {
     val newModifiers = this.allOfType<AdditionalModifiers>().map { modifiers ->
         AdditionalModifiers(
             sourceSets.associateWith { sourceSet ->
                 val previous = modifiers.content[sourceSet] ?: emptySet()
                 previous + newModifier
-            }
+            },
         )
     }
     return addAll(newModifiers)
@@ -296,7 +311,7 @@ fun DFunction.withJvmName(): DFunction {
     val jvmName = jvmName() ?: return this
     return copy(
         name = jvmName,
-        dri = dri.copy(callable = dri.callable?.copy(name = jvmName))
+        dri = dri.copy(callable = dri.callable?.copy(name = jvmName)),
     )
 }
 
@@ -314,14 +329,14 @@ fun functionSignatureComparator(): Comparator<DFunction> = compareBy(
     { it.name },
     { it.parameters.size },
     { it.signatureAsString() },
-    { it.sourceSets.joinToString { it.displayName } }
+    { it.sourceSets.joinToString { it.displayName } },
 )
 
 /** [Comparator] intended for [Documentable]s known to be name-unique in single-platform. */
 fun simpleDocumentableComparator(): Comparator<Documentable> = compareBy(
     { it.name },
     { it.dri.toString() },
-    { it.sourceSets.joinToString { it.displayName } }
+    { it.sourceSets.joinToString { it.displayName } },
 )
 
 private fun DFunction.signatureAsString() =
@@ -367,7 +382,7 @@ fun <T : Documentable> List<T>.filterOutJvmSynthetic(): List<T> = this.filterNot
 
 /** Adds an annotation to a Documentable. Often used for injecting e.g. @JvmStatic. */
 internal fun <T> T.addAnnotation(newA: Annotations.Annotation): T
-where T : Documentable, T : WithExtraProperties<T> {
+    where T : Documentable, T : WithExtraProperties<T> {
     return withNewExtras(extra.addAnnotation(newA, sourceSets))
 }
 
@@ -377,7 +392,7 @@ where T : Documentable, T : WithExtraProperties<T> {
  */
 internal fun <T> PropertyContainer<T>.addAnnotation(
     newA: Annotations.Annotation,
-    sourceSets: Set<DokkaConfiguration.DokkaSourceSet>
+    sourceSets: Set<DokkaConfiguration.DokkaSourceSet>,
 ): PropertyContainer<T>
     where T : AnnotationTarget {
     val newAnnotations = this[Annotations]?.let { annotations ->
@@ -419,10 +434,11 @@ internal fun DRI.possiblyAsJava(): DRI {
                 classNames = it.classNames(),
                 callable = this.callable,
                 extra = null,
-                target = PointingToDeclaration
+                target = PointingToDeclaration,
             )
         } ?: this
 }
+
 /**
  * Uses the JavaToKotlinClassMap to possibly convert a dri to its Kotlin equivalent
  * https://kotlinlang.org/docs/reference/java-interop.html#mapped-types
@@ -436,7 +452,7 @@ internal fun DRI.possiblyAsKotlin(): DRI {
             classNames = it.classNames(),
             callable = this.callable,
             extra = null,
-            target = PointingToDeclaration
+            target = PointingToDeclaration,
         )
     } ?: this
 }
@@ -485,7 +501,7 @@ fun DFunction.convertReceiverForJava() =
     receiver?.let { receiver ->
         copy(
             parameters = listOf(receiver.copy(name = "receiver")) + parameters,
-            receiver = null
+            receiver = null,
         )
     } ?: this
 
@@ -523,7 +539,7 @@ fun List<DProperty>.gettersAndSetters(): List<DFunction> {
 private fun DFunction.fixSyntheticAccessor(forProperty: DProperty, getter: Boolean) = copy(
     dri = dri.withFixedName(getter),
     documentation = injectPropertyDocsToAccessor(this, forProperty)
-        .correctTagsInAccessorDocs(forProperty.name, getter)
+        .correctTagsInAccessorDocs(forProperty.name, getter),
 )
 
 /**
@@ -533,8 +549,8 @@ private fun DFunction.fixSyntheticAccessor(forProperty: DProperty, getter: Boole
  */
 private fun DRI.withFixedName(getter: Boolean) = copy(
     callable = callable!!.copy(
-        name = fixCallableName(callable?.name ?: "", getter)
-    )
+        name = fixCallableName(callable?.name ?: "", getter),
+    ),
 )
 
 private fun fixCallableName(badName: String, getter: Boolean) =
@@ -550,7 +566,7 @@ private fun fixCallableName(badName: String, getter: Boolean) =
  */
 private fun injectPropertyDocsToAccessor(
     accessor: DFunction,
-    property: DProperty
+    property: DProperty,
 ): SourceSetDependent<DocumentationNode> {
     val accessorDocs = accessor.documentation.toMutableMap()
     property.documentation.forEach { (sourceSet, propertyDocs) ->
@@ -580,7 +596,7 @@ private fun injectPropertyDocsToAccessor(
  */
 private fun SourceSetDependent<DocumentationNode>.correctTagsInAccessorDocs(
     propertyName: String,
-    getter: Boolean
+    getter: Boolean,
 ): SourceSetDependent<DocumentationNode> {
     return this.mapValues { entry ->
         DocumentationNode(
@@ -588,14 +604,17 @@ private fun SourceSetDependent<DocumentationNode>.correctTagsInAccessorDocs(
                 when (it) {
                     is Param -> {
                         // Getters should have no params, move text out into a description
-                        if (getter) Description(it.root)
-                        // Setters have one param, named the same as the property (b/268236485)
-                        else Param(it.root, propertyName)
+                        if (getter) {
+                            Description(it.root)
+                        } // Setters have one param, named the same as the property (b/268236485)
+                        else {
+                            Param(it.root, propertyName)
+                        }
                     }
                     is Property -> Description(it.root)
                     else -> it
                 }
-            }
+            },
         )
     }
 }
@@ -614,8 +633,10 @@ fun DProperty.isJvmField(): Boolean {
 }
 
 internal fun List<DFunction>.names() = map { it.name }
+
 @JvmName("internalAndThusKotlinOnly")
 internal fun List<DParameter>.names() = map { it.name }
+
 @JvmName("internalAndThusKotlinOnlyAlso")
 internal fun List<DProperty>.names() = map { it.name }
 
@@ -639,7 +660,7 @@ internal fun Documentable.getExpectOrCommonSourceSet() =
                 ?: sourceSets.singleOrNull { it.displayName.equalsIgnoreCase("androidMain") }
         }
         ?: throw RuntimeException(
-            "Unable to determine expect or common sourceSet for ${this.className} $dri"
+            "Unable to determine expect or common sourceSet for ${this.className} $dri",
         )
 
 private fun String.equalsPossiblyWithMain(other: String) =

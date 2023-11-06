@@ -42,7 +42,7 @@ import java.net.URL
  * Html output results can be found in testData/
  */
 abstract class IntegrationTestBase : BaseAbstractTest(
-    logger = TestLogger(DokkaConsoleLogger(LoggingLevel.DEBUG))
+    logger = TestLogger(DokkaConsoleLogger(LoggingLevel.DEBUG)),
 ) {
     @Before
     fun setUp() {
@@ -53,7 +53,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         sources: List<File>,
         samplesLocations: List<String>,
         includeFiles: List<String> = emptyList(),
-        externalLinks: List<ExternalDocumentationLinkImpl> = emptyList()
+        externalLinks: List<ExternalDocumentationLinkImpl> = emptyList(),
     ) = sourceSets {
         sourceSet {
             sourceRoots = sources.map { it.absolutePath }
@@ -64,7 +64,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             includes = includeFiles
             documentedVisibilities = setOf(
                 DokkaConfiguration.Visibility.PUBLIC,
-                DokkaConfiguration.Visibility.PROTECTED
+                DokkaConfiguration.Visibility.PROTECTED,
             )
         }
     }
@@ -89,13 +89,13 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             "coroutines" to "https://kotlinlang.org/api/kotlinx.coroutines",
             "android" to "https://developer.android.com/reference",
             "guava" to "https://guava.dev/releases/18.0/api/docs/package-list",
-            "kotlin" to "https://kotlinlang.org/api/latest/jvm/stdlib/"
+            "kotlin" to "https://kotlinlang.org/api/latest/jvm/stdlib/",
         ).map {
             ExternalDocumentationLink(
                 url = URL(it.value),
                 // TODO: improve package-list updateability b/243840381
                 packageListUrl = File("testData").toPath()
-                    .resolve("package-lists/${it.key}/package-list").toUri().toURL()
+                    .resolve("package-lists/${it.key}/package-list").toUri().toURL(),
             )
         }
 
@@ -137,15 +137,15 @@ abstract class IntegrationTestBase : BaseAbstractTest(
                             "androidx.annotation.CheckResult",
                             "kotlin.ParameterName",
                             "kotlin.js.JsName",
-                            "java.lang.Override"
+                            "java.lang.Override",
                         ),
                         annotationsNotToDisplayJava = null,
                         annotationsNotToDisplayKotlin = listOf(
-                            "kotlin.ExtensionFunctionType"
+                            "kotlin.ExtensionFunctionType",
                         ),
                         hidingAnnotations = hidingAnnotations,
-                    ).toCompactJsonString()
-                )
+                    ).toCompactJsonString(),
+                ),
             )
         }
     }
@@ -213,7 +213,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
     fun crawlingExecTest(
         checkoutRoot: String,
         excludedPaths: MutableList<String> = mutableListOf(),
-        maxFolders: Int = 999999
+        maxFolders: Int = 999999,
     ) {
         // We never intend to run dackka on these folders
         excludedPaths += listOf(
@@ -221,7 +221,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             "development", // A folder of scripts
             "buildSrc", // Not published or documented
             "frameworks", // basically a recursive symlink to checkout-root
-            "annotation-sampled" // not published and its docs confuse the samples system
+            "annotation-sampled", // not published and its docs confuse the samples system
         )
         var sourceRoots = mutableListOf<File>()
         val samplesRoots = mutableSetOf<String>() // Due to symlinks, we need to de-dupe Support4
@@ -290,7 +290,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             projectPath = "androidx",
             javaDocsPath = "",
             kotlinDocsPath = "kotlin",
-            useAndroidxBaseSourceLink = true
+            useAndroidxBaseSourceLink = true,
         )
 
         val writerPlugin = TestOutputWriterPlugin()
@@ -348,7 +348,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
 
         testFromData(
             configuration,
-            pluginOverrides = listOf(writerPlugin)
+            pluginOverrides = listOf(writerPlugin),
         ) {
             renderingStage = { _: RootPageNode, _: DokkaContext ->
                 verifyOutput(writerPlugin, outputBaseDir)
@@ -374,7 +374,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         samples: Boolean = false,
         includeFiles: List<String> = emptyList(),
         useAndroidxBaseSourceLink: Boolean = true,
-        versionMetadata: Boolean = false
+        versionMetadata: Boolean = false,
     ) {
         val outputBaseDir = "testData/$testName/docs"
         val samplesBaseDir = "testData/$testName/samples"
@@ -395,7 +395,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             javaDocsPath = "",
             kotlinDocsPath = "kotlin",
             useAndroidxBaseSourceLink = useAndroidxBaseSourceLink,
-            versionMetadataFilesnames = versionMetadataFiles
+            versionMetadataFilesnames = versionMetadataFiles,
         )
 
         val writerPlugin = TestOutputWriterPlugin()

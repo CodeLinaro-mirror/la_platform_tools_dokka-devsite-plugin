@@ -33,7 +33,7 @@ import kotlinx.html.pre
 
 /** Default implementation of a fully documented function. */
 internal data class DefaultSymbolDetail<T : SymbolSignature>(
-    override val data: SymbolDetail.Params<T>
+    override val data: SymbolDetail.Params<T>,
 ) : SymbolDetail<T> {
     override fun render(into: FlowContent) = into.div(classes = "api-item") {
         for (anchor in data.anchors.drop(1)) {
@@ -42,7 +42,6 @@ internal data class DefaultSymbolDetail<T : SymbolSignature>(
 
         // CSS is declared in internal codebase (cl/552578388)
         div("api-name-block") {
-
             // Wrap the h3 element in a div in case devsite modifies h3 elements in the future.
             // This preserves the Flexbox spacing between h3 and the metadata component container.
             div {
@@ -90,9 +89,10 @@ internal data class DefaultSymbolDetail<T : SymbolSignature>(
     override fun toString() = (data.extFunctionClass ?: "") + data.name + " at " +
         data.anchors.joinToString() + data.annotationComponents.joinToString() +
         data.modifiers.joinToString() + (
-        if (data.displayLanguage == Language.KOTLIN) "${data.returnType} : ${data.signature}"
-        else "" + data.signature + data.returnType
-        ) + data.metadata.sortedBy { descriptionSorter(it) }
+            if (data.displayLanguage == Language.KOTLIN) {
+                "${data.returnType} : ${data.signature}"
+            } else "" + data.signature + data.returnType
+            ) + data.metadata.sortedBy { descriptionSorter(it) }
 }
 
 internal fun descriptionSorter(component: ContextFreeComponent): Int {

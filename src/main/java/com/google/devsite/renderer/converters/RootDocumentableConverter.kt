@@ -44,7 +44,7 @@ internal class RootDocumentableConverter(
     private val displayLanguage: Language,
     private val pathProvider: FilePathProvider,
     private val docsHolder: DocumentablesHolder,
-    private val javadocConverter: DocTagConverter
+    private val javadocConverter: DocTagConverter,
 ) {
     /** @return the root component for the class index page */
     // TODO(KMP b/256171288)
@@ -57,8 +57,8 @@ internal class RootDocumentableConverter(
             DefaultSummaryList(
                 SummaryList.Params(
                     items = nodes.sortedBy { it.dri.classNames + " " + it.dri }
-                        .map { javadocConverter.summaryForDocumentable(it) }
-                )
+                        .map { javadocConverter.summaryForDocumentable(it) },
+                ),
             )
         }
 
@@ -71,12 +71,12 @@ internal class RootDocumentableConverter(
                 content = DefaultClassIndex(
                     ClassIndex.Params(
                         pathProvider.packages,
-                        componentClasses
-                    )
+                        componentClasses,
+                    ),
                 ),
                 metadataComponent = null,
                 includedHeadTagPath = pathProvider.includedHeadTagsPath,
-            )
+            ),
 
         )
     }
@@ -89,8 +89,8 @@ internal class RootDocumentableConverter(
             SummaryList.Params(
                 items = packages
                     .filter { it.name != "[root]" } // this synthetic package has broken self-links
-                    .map { javadocConverter.summaryForDocumentable(it, showAnnotations = false) }
-            )
+                    .map { javadocConverter.summaryForDocumentable(it, showAnnotations = false) },
+            ),
         )
 
         return DefaultDevsitePage(
@@ -102,12 +102,12 @@ internal class RootDocumentableConverter(
                 content = DefaultPackageIndex(
                     PackageIndex.Params(
                         pathProvider.classes,
-                        componentPackages
-                    )
+                        componentPackages,
+                    ),
                 ),
                 metadataComponent = null,
                 includedHeadTagPath = pathProvider.includedHeadTagsPath,
-            )
+            ),
         )
     }
 
@@ -123,8 +123,8 @@ internal class RootDocumentableConverter(
             TableOfContents.Params(
                 classesUrl = pathProvider.classes,
                 packagesUrl = pathProvider.packages,
-                packages = packageComponents
-            )
+                packages = packageComponents,
+            ),
         )
     }
 
@@ -135,7 +135,7 @@ internal class RootDocumentableConverter(
 
     private fun CoroutineScope.packageForTocAsync(
         dPackage: DPackage,
-        packagePrefixToRemove: String?
+        packagePrefixToRemove: String?,
     ): Deferred<DefaultTocPackage> = async {
         val interfaces = docsHolder.interfacesFor(dPackage).map(::typeForToc)
         val objects = docsHolder.interestingObjectsFor(dPackage).map(::typeForToc)
@@ -152,13 +152,14 @@ internal class RootDocumentableConverter(
                 name = dPackage.name.removePrefix(prefixToTrim),
                 packageUrl = pathProvider.forReference(dPackage.dri).url,
                 interfaces = interfaces,
-                classes = if (displayLanguage == Language.KOTLIN) classes
-                else (classes + objects).sortedBy { it.name },
+                classes = if (displayLanguage == Language.KOTLIN) {
+                    classes
+                } else (classes + objects).sortedBy { it.name },
                 enums = enums,
                 exceptions = exceptions,
                 annotations = annotations,
-                objects = if (displayLanguage == Language.KOTLIN) objects else emptyList()
-            ) // Typealiases do not appear in the toc because they do not get their own pages
+                objects = if (displayLanguage == Language.KOTLIN) objects else emptyList(),
+            ), // Typealiases do not appear in the toc because they do not get their own pages
         )
     }
 

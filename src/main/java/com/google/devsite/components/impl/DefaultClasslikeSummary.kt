@@ -22,7 +22,7 @@ import kotlinx.html.code
 import kotlinx.html.div
 
 internal data class DefaultClasslikeSummary(
-    override val data: ClasslikeSummary.Params
+    override val data: ClasslikeSummary.Params,
 ) : ClasslikeSummary {
     override fun render(into: FlowContent) = into.run {
         div {
