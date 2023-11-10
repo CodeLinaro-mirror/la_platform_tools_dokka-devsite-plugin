@@ -59,6 +59,10 @@ dependencies {
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:$jacksonVersion")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
 
+    // Force the newer version to get the bugfix for https://github.com/jhy/jsoup/issues/1910
+    // To fix b/309773103. We can remove this once we update the upstream version b/295154071
+    implementation("org.jsoup:jsoup:1.6.1")
+
     testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlinVersion")
     testImplementation("junit:junit:4.13.2")
     testImplementation("com.google.truth:truth:1.1.3")
