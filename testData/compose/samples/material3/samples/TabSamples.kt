@@ -39,13 +39,16 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LeadingIconTab
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ScrollableTabRow
+import androidx.compose.material3.PrimaryScrollableTabRow
+import androidx.compose.material3.PrimaryTabRow
+import androidx.compose.material3.SecondaryScrollableTabRow
+import androidx.compose.material3.SecondaryTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabPosition
-import androidx.compose.material3.TabRow
 import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
@@ -63,19 +66,13 @@ import androidx.compose.ui.unit.dp
 
 @Preview
 @Composable
-fun PrimaryTabs() {
+@Sampled
+@OptIn(ExperimentalMaterial3Api::class)
+fun PrimaryTextTabs() {
     var state by remember { mutableStateOf(0) }
     val titles = listOf("Tab 1", "Tab 2", "Tab 3 with lots of text")
     Column {
-        TabRow(selectedTabIndex = state, indicator = @Composable { tabPositions ->
-            if (state < tabPositions.size) {
-                val width by animateDpAsState(targetValue = tabPositions[state].contentWidth)
-                TabRowDefaults.PrimaryIndicator(
-                    modifier = Modifier.tabIndicatorOffset(tabPositions[state]),
-                    width = width
-                )
-            }
-        }) {
+        PrimaryTabRow(selectedTabIndex = state) {
             titles.forEachIndexed { index, title ->
                 Tab(
                     selected = state == index,
@@ -94,11 +91,32 @@ fun PrimaryTabs() {
 
 @Preview
 @Composable
-fun SecondaryTabs() {
+@OptIn(ExperimentalMaterial3Api::class)
+fun PrimaryIconTabs() {
+    var state by remember { mutableStateOf(0) }
+    val icons = listOf(Icons.Filled.Favorite, Icons.Filled.Favorite, Icons.Filled.Favorite)
+    Column {
+        PrimaryTabRow(selectedTabIndex = state) {
+            icons.forEachIndexed { index, icon ->
+                Tab(
+                    selected = state == index,
+                    onClick = { state = index },
+                    icon = { Icon(icon, contentDescription = "Favorite") }
+                )
+            }
+        }
+    }
+}
+
+@Preview
+@Composable
+@Sampled
+@OptIn(ExperimentalMaterial3Api::class)
+fun SecondaryTextTabs() {
     var state by remember { mutableStateOf(0) }
     val titles = listOf("Tab 1", "Tab 2", "Tab 3 with lots of text")
     Column {
-        TabRow(selectedTabIndex = state) {
+        SecondaryTabRow(selectedTabIndex = state) {
             titles.forEachIndexed { index, title ->
                 Tab(
                     selected = state == index,
@@ -118,11 +136,12 @@ fun SecondaryTabs() {
 @Preview
 @Sampled
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 fun TextTabs() {
     var state by remember { mutableStateOf(0) }
     val titles = listOf("Tab 1", "Tab 2", "Tab 3 with lots of text")
     Column {
-        TabRow(selectedTabIndex = state) {
+        PrimaryTabRow(selectedTabIndex = state) {
             titles.forEachIndexed { index, title ->
                 Tab(
                     selected = state == index,
@@ -141,11 +160,12 @@ fun TextTabs() {
 
 @Preview
 @Composable
-fun IconTabs() {
+@OptIn(ExperimentalMaterial3Api::class)
+fun SecondaryIconTabs() {
     var state by remember { mutableStateOf(0) }
     val icons = listOf(Icons.Filled.Favorite, Icons.Filled.Favorite, Icons.Filled.Favorite)
     Column {
-        TabRow(selectedTabIndex = state) {
+        SecondaryTabRow(selectedTabIndex = state) {
             icons.forEachIndexed { index, icon ->
                 Tab(
                     selected = state == index,
@@ -164,6 +184,7 @@ fun IconTabs() {
 
 @Preview
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 fun TextAndIconTabs() {
     var state by remember { mutableStateOf(0) }
     val titlesAndIcons = listOf(
@@ -172,7 +193,7 @@ fun TextAndIconTabs() {
         "Tab 3 with lots of text" to Icons.Filled.Favorite
     )
     Column {
-        TabRow(selectedTabIndex = state) {
+        PrimaryTabRow(selectedTabIndex = state) {
             titlesAndIcons.forEachIndexed { index, (title, icon) ->
                 Tab(
                     selected = state == index,
@@ -192,6 +213,7 @@ fun TextAndIconTabs() {
 
 @Preview
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 fun LeadingIconTabs() {
     var state by remember { mutableStateOf(0) }
     val titlesAndIcons = listOf(
@@ -200,7 +222,7 @@ fun LeadingIconTabs() {
         "Tab 3 with lots of text" to Icons.Filled.Favorite
     )
     Column {
-        ScrollableTabRow(selectedTabIndex = state) {
+        PrimaryScrollableTabRow(selectedTabIndex = state) {
             titlesAndIcons.forEachIndexed { index, (title, icon) ->
                 LeadingIconTab(
                     selected = state == index,
@@ -220,7 +242,8 @@ fun LeadingIconTabs() {
 
 @Preview
 @Composable
-fun ScrollingPrimaryTabs() {
+@OptIn(ExperimentalMaterial3Api::class)
+fun ScrollingPrimaryTextTabs() {
     var state by remember { mutableStateOf(0) }
     val titles = listOf(
         "Tab 1",
@@ -235,7 +258,7 @@ fun ScrollingPrimaryTabs() {
         "Tab 10"
     )
     Column {
-        ScrollableTabRow(selectedTabIndex = state, indicator = @Composable { tabPositions ->
+        PrimaryScrollableTabRow(selectedTabIndex = state, indicator = @Composable { tabPositions ->
             if (state < tabPositions.size) {
                 val width by animateDpAsState(targetValue = tabPositions[state].contentWidth)
                 TabRowDefaults.PrimaryIndicator(
@@ -262,7 +285,8 @@ fun ScrollingPrimaryTabs() {
 
 @Preview
 @Composable
-fun ScrollingSecondaryTabs() {
+@OptIn(ExperimentalMaterial3Api::class)
+fun ScrollingSecondaryTextTabs() {
     var state by remember { mutableStateOf(0) }
     val titles = listOf(
         "Tab 1",
@@ -277,7 +301,7 @@ fun ScrollingSecondaryTabs() {
         "Tab 10"
     )
     Column {
-        ScrollableTabRow(selectedTabIndex = state) {
+        SecondaryScrollableTabRow(selectedTabIndex = state) {
             titles.forEachIndexed { index, title ->
                 Tab(
                     selected = state == index,
@@ -296,6 +320,7 @@ fun ScrollingSecondaryTabs() {
 
 @Preview
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 fun ScrollingTextTabs() {
     var state by remember { mutableStateOf(0) }
     val titles = listOf(
@@ -311,7 +336,7 @@ fun ScrollingTextTabs() {
         "Tab 10"
     )
     Column {
-        ScrollableTabRow(selectedTabIndex = state) {
+        PrimaryScrollableTabRow(selectedTabIndex = state) {
             titles.forEachIndexed { index, title ->
                 Tab(
                     selected = state == index,
@@ -331,11 +356,12 @@ fun ScrollingTextTabs() {
 @Preview
 @Sampled
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 fun FancyTabs() {
     var state by remember { mutableStateOf(0) }
     val titles = listOf("Tab 1", "Tab 2", "Tab 3")
     Column {
-        TabRow(selectedTabIndex = state) {
+        SecondaryTabRow(selectedTabIndex = state) {
             titles.forEachIndexed { index, title ->
                 FancyTab(
                     title = title,
@@ -355,6 +381,7 @@ fun FancyTabs() {
 @Preview
 @Sampled
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 fun FancyIndicatorTabs() {
     var state by remember { mutableStateOf(0) }
     val titles = listOf("Tab 1", "Tab 2", "Tab 3")
@@ -368,7 +395,7 @@ fun FancyIndicatorTabs() {
     }
 
     Column {
-        TabRow(
+        SecondaryTabRow(
             selectedTabIndex = state,
             indicator = indicator
         ) {
@@ -391,6 +418,7 @@ fun FancyIndicatorTabs() {
 @Preview
 @Sampled
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 fun FancyIndicatorContainerTabs() {
     var state by remember { mutableStateOf(0) }
     val titles = listOf("Tab 1", "Tab 2", "Tab 3")
@@ -400,7 +428,7 @@ fun FancyIndicatorContainerTabs() {
     }
 
     Column {
-        TabRow(
+        SecondaryTabRow(
             selectedTabIndex = state,
             indicator = indicator
         ) {
@@ -422,6 +450,7 @@ fun FancyIndicatorContainerTabs() {
 
 @Preview
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 fun ScrollingFancyIndicatorContainerTabs() {
     var state by remember { mutableStateOf(0) }
     val titles = listOf(
@@ -441,7 +470,7 @@ fun ScrollingFancyIndicatorContainerTabs() {
     }
 
     Column {
-        ScrollableTabRow(
+        SecondaryScrollableTabRow(
             selectedTabIndex = state,
             indicator = indicator
         ) {

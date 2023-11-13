@@ -99,8 +99,8 @@
             <tr>
               <td><code>suspend <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/material3/DrawerState.html#animateTo(androidx.compose.material3.DrawerValue,androidx.compose.animation.core.AnimationSpec)">animateTo</a>(targetValue:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/DrawerValue.html">DrawerValue</a>,&nbsp;anim:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>&gt;)</code></div>
-                <p>Set the state of the drawer with specific animation</p>
+                <div><code><span><del><a href="/reference/kotlin/androidx/compose/material3/DrawerState.html#animateTo(androidx.compose.material3.DrawerValue,androidx.compose.animation.core.AnimationSpec)">animateTo</a></del></span>(targetValue:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/DrawerValue.html">DrawerValue</a>,&nbsp;anim:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>&gt;)</code></div>
+                <p><strong>This function is deprecated.</strong> This method has been replaced by the open and close methods.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -155,6 +155,16 @@
           </thead>
           <tbody class="list">
             <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/DrawerState.html#currentOffset()">currentOffset</a></code></div>
+                <p>The current position (in pixels) of the drawer sheet, or Float.NaN before the offset is initialized.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/material3/DrawerValue.html">DrawerValue</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/material3/DrawerState.html#currentValue()">currentValue</a></code></div>
@@ -198,7 +208,7 @@
               <td><code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>&gt;</code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/material3/DrawerState.html#offset()">offset</a></code></div>
-                <p>The current position (in pixels) of the drawer container.</p>
+                <p><strong>This property is deprecated.</strong> Please access the offset through currentOffset, which returns the value directly instead of wrapping it in a state object.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -296,7 +306,8 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/DrawerState.html#animateTo(androidx.compose.material3.DrawerValue,androidx.compose.animation.core.AnimationSpec)">animateTo</a>(targetValue:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/DrawerValue.html">DrawerValue</a>,&nbsp;anim:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>&gt;):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<span><del><a href="/reference/kotlin/androidx/compose/material3/DrawerState.html#animateTo(androidx.compose.material3.DrawerValue,androidx.compose.animation.core.AnimationSpec)">animateTo</a></del></span>(targetValue:&nbsp;<a href="/reference/kotlin/androidx/compose/material3/DrawerValue.html">DrawerValue</a>,&nbsp;anim:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>&gt;):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <aside class="caution"><strong>This function is deprecated.</strong><br>This method has been replaced by the open and close methods. The animation spec is now an implementation detail of ModalDrawer.</aside>
           <p>Set the state of the drawer with specific animation</p>
           <div class="devsite-table-wrapper">
             <table class="responsive">
@@ -434,6 +445,40 @@
       <div class="list">
         <h2 data-title="platform-Common/All">Public properties
           <!--platform-Common/All--></h2>
+        <div class="api-item"><a name="getCurrentOffset()"></a><a name="setCurrentOffset()"></a><a name="getCurrentOffset--"></a><a name="setCurrentOffset--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="currentOffset()">currentOffset</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/DrawerState.html#currentOffset()">currentOffset</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+          <p>The current position (in pixels) of the drawer sheet, or Float.NaN before the offset is initialized.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/material3/AnchoredDraggableState.html#offset()">offset</a></code></td>
+                  <td>
+                    <p>for more information.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
         <div class="api-item"><a name="getCurrentValue()"></a><a name="setCurrentValue()"></a><a name="getCurrentValue--"></a><a name="setCurrentValue--"></a>
           <div class="api-name-block">
             <div>
@@ -498,7 +543,29 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/DrawerState.html#offset()">offset</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>&gt;</pre>
-          <p>The current position (in pixels) of the drawer container.</p>
+          <aside class="caution"><strong>This property is deprecated.</strong><br>Please access the offset through currentOffset, which returns the value directly instead of wrapping it in a state object.</aside>
+          <p>The current position (in pixels) of the drawer sheet, or Float.NaN before the offset is initialized.</p>
+          <div class="devsite-table-wrapper">
+            <table class="responsive">
+              <colgroup>
+                <col width="40%">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="100%">See also</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr>
+                  <td><code><a href="/reference/kotlin/androidx/compose/material3/AnchoredDraggableState.html#offset()">offset</a></code></td>
+                  <td>
+                    <p>for more information.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="api-item"><a name="getTargetValue()"></a><a name="setTargetValue()"></a><a name="getTargetValue--"></a><a name="setTargetValue--"></a>
           <div class="api-name-block">

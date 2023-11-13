@@ -75,8 +75,8 @@
           <tr>
             <td><code>final void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/material3/DrawerState.html#animateTo(androidx.compose.material3.DrawerValue,androidx.compose.animation.core.AnimationSpec)">animateTo</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/DrawerValue.html">DrawerValue</a>&nbsp;targetValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;&nbsp;anim<br>)</code></div>
-              <p>Set the state of the drawer with specific animation</p>
+              <div><code><span><del><a href="/reference/androidx/compose/material3/DrawerState.html#animateTo(androidx.compose.material3.DrawerValue,androidx.compose.animation.core.AnimationSpec)">animateTo</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/DrawerValue.html">DrawerValue</a>&nbsp;targetValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;&nbsp;anim<br>)</code></div>
+              <p><strong>This method is deprecated.</strong> This method has been replaced by the open and close methods.</p>
             </td>
           </tr>
           <tr>
@@ -84,6 +84,13 @@
             <td>
               <div><code><a href="/reference/androidx/compose/material3/DrawerState.html#close()">close</a>()</code></div>
               <p>Close the drawer with animation and suspend until it if fully closed or animation has been cancelled.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/material3/DrawerState.html#getCurrentOffset()">getCurrentOffset</a>()</code></div>
+              <p>The current position (in pixels) of the drawer sheet, or Float.NaN before the offset is initialized.</p>
             </td>
           </tr>
           <tr>
@@ -97,7 +104,7 @@
             <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/material3/DrawerState.html#getOffset()">getOffset</a>()</code></div>
-              <p>The current position (in pixels) of the drawer container.</p>
+              <p>The current position (in pixels) of the drawer sheet, or Float.NaN before the offset is initialized.</p>
             </td>
           </tr>
           <tr>
@@ -191,7 +198,8 @@
             <h3 id="animateTo(androidx.compose.material3.DrawerValue,androidx.compose.animation.core.AnimationSpec)">animateTo</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/material3/DrawerState.html#animateTo(androidx.compose.material3.DrawerValue,androidx.compose.animation.core.AnimationSpec)">animateTo</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/DrawerValue.html">DrawerValue</a>&nbsp;targetValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;&nbsp;anim<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<span><del><a href="/reference/androidx/compose/material3/DrawerState.html#animateTo(androidx.compose.material3.DrawerValue,androidx.compose.animation.core.AnimationSpec)">animateTo</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material3/DrawerValue.html">DrawerValue</a>&nbsp;targetValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;&nbsp;anim<br>)</pre>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>This method has been replaced by the open and close methods. The animation spec is now an implementation detail of ModalDrawer.</aside>
         <p>Set the state of the drawer with specific animation</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -251,6 +259,36 @@
           </table>
         </div>
       </div>
+      <div class="api-item"><a name="getCurrentOffset--"></a><a name="getcurrentoffset"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getCurrentOffset()">getCurrentOffset</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/material3/DrawerState.html#getCurrentOffset()">getCurrentOffset</a>()</pre>
+        <p>The current position (in pixels) of the drawer sheet, or Float.NaN before the offset is initialized.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/material3/AnchoredDraggableState.html#offset()">offset</a></code></td>
+                <td>
+                  <p>for more information.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="api-item"><a name="getCurrentValue--"></a><a name="getcurrentvalue"></a>
         <div class="api-name-block">
           <div>
@@ -268,7 +306,28 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;&nbsp;<a href="/reference/androidx/compose/material3/DrawerState.html#getOffset()">getOffset</a>()</pre>
-        <p>The current position (in pixels) of the drawer container.</p>
+        <p>The current position (in pixels) of the drawer sheet, or Float.NaN before the offset is initialized.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="/reference/androidx/compose/material3/AnchoredDraggableState.html#offset()">offset</a></code></td>
+                <td>
+                  <p>for more information.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <div class="api-item"><a name="getTargetValue--"></a><a name="gettargetvalue"></a>
         <div class="api-name-block">

@@ -58,7 +58,7 @@
         </ul>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.Text
@@ -73,7 +73,7 @@ Column {
             )
         }
     )
-    Divider()
+    HorizontalDivider()
 }</pre>
         <ul>
           <li>
@@ -82,7 +82,7 @@ Column {
         </ul>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.Text
@@ -99,16 +99,16 @@ Column {
             )
         }
     )
-    Divider()
+    HorizontalDivider()
 }</pre>
         <ul>
           <li>
-            <p>three-line item</p>
+            <p>three-line item with both overline and supporting content</p>
           </li>
         </ul>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.Text
@@ -126,7 +126,35 @@ Column {
         },
         trailingContent = { Text(&quot;meta&quot;) }
     )
-    Divider()
+    HorizontalDivider()
+}</pre>
+        <ul>
+          <li>
+            <p>three-line item with extended supporting content</p>
+          </li>
+        </ul>
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.Text
+
+Column {
+    ListItem(
+        headlineContent = { Text(&quot;Three line list item&quot;) },
+        supportingContent = {
+            Text(&quot;Secondary text that is long and perhaps goes onto another line&quot;)
+        },
+        leadingContent = {
+            Icon(
+                Icons.Filled.Favorite,
+                contentDescription = &quot;Localized description&quot;,
+            )
+        },
+        trailingContent = { Text(&quot;meta&quot;) }
+    )
+    HorizontalDivider()
 }</pre>
         <div class="devsite-table-wrapper">
           <table class="responsive">

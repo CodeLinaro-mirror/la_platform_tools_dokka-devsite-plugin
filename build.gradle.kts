@@ -140,7 +140,8 @@ testDataSourcesKmp.setResolveSources(isKmp = true)
 val lifecycleVersion = "2.6.0"
 val collectionsVersion = "1.3.0-alpha02"
 val composeVersion = "1.5.0"
-val composeMaterial3Version = "1.2.0-alpha02"
+val composeMaterial3Version = "1.2.0-alpha10"
+val benchmarkVersion = "1.2.0-rc02"
 dependencies {
     testDataImpl("io.reactivex.rxjava3:rxjava:3.0.2")
     testDataImpl("io.reactivex.rxjava2:rxjava:2.2.9")
@@ -208,15 +209,15 @@ dependencies {
     testDataSources("androidx.asynclayoutinflater:asynclayoutinflater:1.0.0")
     testDataSources("androidx.autofill:autofill:1.2.0-beta01")
     testDataSources("androidx.benchmark:benchmark:1.0.0-alpha03")
-    testDataSources("androidx.benchmark:benchmark-common:1.2.0-alpha01")
-    testDataSources("androidx.benchmark:benchmark-gradle-plugin:1.2.0-alpha01")
+    testDataSources("androidx.benchmark:benchmark-common:$benchmarkVersion")
+    testDataSources("androidx.benchmark:benchmark-gradle-plugin:$benchmarkVersion")
     testDataImpl(project.files("" + project.gradle.gradleHomeDir + "/lib/gradle-kotlin-dsl-" +
         project.gradle.gradleVersion + ".jar")) // Needed for benchmark-gradle-plugin
     // testDataImpl(gradleKotlinDslOf(project)) // should be equivalent to ^^ but does not work
     testDataImpl(gradleApi())
-    testDataSources("androidx.benchmark:benchmark-junit4:1.2.0-alpha01")
-    testDataSources("androidx.benchmark:benchmark-macro:1.2.0-alpha01")
-    testDataSources("androidx.benchmark:benchmark-macro-junit4:1.2.0-alpha01")
+    testDataSources("androidx.benchmark:benchmark-junit4:$benchmarkVersion")
+    testDataSources("androidx.benchmark:benchmark-macro:$benchmarkVersion")
+    testDataSources("androidx.benchmark:benchmark-macro-junit4:$benchmarkVersion")
     testDataSources("androidx.biometric:biometric:1.2.0-alpha04")
     testDataSources("androidx.biometric:biometric-ktx:1.2.0-alpha04")
     testDataSources("androidx.browser:browser:1.5.0")
