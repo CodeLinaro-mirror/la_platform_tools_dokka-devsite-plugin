@@ -71,11 +71,9 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/CheckboxDefaults.html#colors(androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">colors</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;checkedColor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = MaterialTheme.colorScheme.fromToken(CheckboxTokens.SelectedContainerColor),<br>&nbsp;&nbsp;&nbsp;&nbsp;uncheckedColor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = MaterialTheme.colorScheme.fromToken(CheckboxTokens.UnselectedOutlineColor),<br>&nbsp;&nbsp;&nbsp;&nbsp;checkmarkColor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = MaterialTheme.colorScheme.fromToken(CheckboxTokens.SelectedIconColor),<br>&nbsp;&nbsp;&nbsp;&nbsp;disabledCheckedColor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = MaterialTheme.colorScheme
-                .fromToken(CheckboxTokens.SelectedDisabledContainerColor)
-                .copy(alpha = CheckboxTokens.SelectedDisabledContainerOpacity),<br>&nbsp;&nbsp;&nbsp;&nbsp;disabledUncheckedColor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = MaterialTheme.colorScheme
-                .fromToken(CheckboxTokens.UnselectedDisabledOutlineColor)
-                .copy(alpha = CheckboxTokens.UnselectedDisabledContainerOpacity),<br>&nbsp;&nbsp;&nbsp;&nbsp;disabledIndeterminateColor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = disabledCheckedColor<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/material3/CheckboxColors.html">CheckboxColors</a></pre>
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/CheckboxDefaults.html#colors(androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">colors</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;checkedColor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = CheckboxTokens.SelectedContainerColor.value,<br>&nbsp;&nbsp;&nbsp;&nbsp;uncheckedColor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = CheckboxTokens.UnselectedOutlineColor.value,<br>&nbsp;&nbsp;&nbsp;&nbsp;checkmarkColor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = CheckboxTokens.SelectedIconColor.value,<br>&nbsp;&nbsp;&nbsp;&nbsp;disabledCheckedColor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = CheckboxTokens.SelectedDisabledContainerColor.value
+            .copy(alpha = CheckboxTokens.SelectedDisabledContainerOpacity),<br>&nbsp;&nbsp;&nbsp;&nbsp;disabledUncheckedColor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = CheckboxTokens.UnselectedDisabledOutlineColor.value
+            .copy(alpha = CheckboxTokens.UnselectedDisabledContainerOpacity),<br>&nbsp;&nbsp;&nbsp;&nbsp;disabledIndeterminateColor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = disabledCheckedColor<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/material3/CheckboxColors.html">CheckboxColors</a></pre>
           <p>Creates a <code><a href="/reference/kotlin/androidx/compose/material3/CheckboxColors.html">CheckboxColors</a></code> that will animate between the provided colors according to the Material specification.</p>
           <div class="devsite-table-wrapper">
             <table class="responsive">
@@ -90,43 +88,41 @@
               </thead>
               <tbody class="list">
                 <tr>
-                  <td><code>checkedColor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = MaterialTheme.colorScheme.fromToken(CheckboxTokens.SelectedContainerColor)</code></td>
+                  <td><code>checkedColor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = CheckboxTokens.SelectedContainerColor.value</code></td>
                   <td>
                     <p>the color that will be used for the border and box when checked</p>
                   </td>
                 </tr>
                 <tr>
-                  <td><code>uncheckedColor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = MaterialTheme.colorScheme.fromToken(CheckboxTokens.UnselectedOutlineColor)</code></td>
+                  <td><code>uncheckedColor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = CheckboxTokens.UnselectedOutlineColor.value</code></td>
                   <td>
-                    <p>color that will be used for the border when unchecked</p>
+                    <p>color that will be used for the border when unchecked. By default, the inner box is transparent when unchecked.</p>
                   </td>
                 </tr>
                 <tr>
-                  <td><code>checkmarkColor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = MaterialTheme.colorScheme.fromToken(CheckboxTokens.SelectedIconColor)</code></td>
+                  <td><code>checkmarkColor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = CheckboxTokens.SelectedIconColor.value</code></td>
                   <td>
                     <p>color that will be used for the checkmark when checked</p>
                   </td>
                 </tr>
                 <tr>
-                  <td><code>disabledCheckedColor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = MaterialTheme.colorScheme
-                .fromToken(CheckboxTokens.SelectedDisabledContainerColor)
-                .copy(alpha = CheckboxTokens.SelectedDisabledContainerOpacity)</code></td>
+                  <td><code>disabledCheckedColor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = CheckboxTokens.SelectedDisabledContainerColor.value
+            .copy(alpha = CheckboxTokens.SelectedDisabledContainerOpacity)</code></td>
                   <td>
                     <p>color that will be used for the box and border when disabled and checked</p>
                   </td>
                 </tr>
                 <tr>
-                  <td><code>disabledUncheckedColor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = MaterialTheme.colorScheme
-                .fromToken(CheckboxTokens.UnselectedDisabledOutlineColor)
-                .copy(alpha = CheckboxTokens.UnselectedDisabledContainerOpacity)</code></td>
+                  <td><code>disabledUncheckedColor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = CheckboxTokens.UnselectedDisabledOutlineColor.value
+            .copy(alpha = CheckboxTokens.UnselectedDisabledContainerOpacity)</code></td>
                   <td>
-                    <p>color that will be used for the box and border when disabled and not checked</p>
+                    <p>color that will be used for the border when disabled and unchecked. By default, the inner box is transparent when unchecked.</p>
                   </td>
                 </tr>
                 <tr>
                   <td><code>disabledIndeterminateColor:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a> = disabledCheckedColor</code></td>
                   <td>
-                    <p>color that will be used for the box and border in a <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TriStateCheckbox(androidx.compose.ui.state.ToggleableState,kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.material3.CheckboxColors,androidx.compose.foundation.interaction.MutableInteractionSource)">TriStateCheckbox</a></code> when disabled AND in an <code><a href="/reference/kotlin/androidx/compose/ui/state/ToggleableState.html#Indeterminate">ToggleableState.Indeterminate</a></code> state.</p>
+                    <p>color that will be used for the box and border in a <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TriStateCheckbox(androidx.compose.ui.state.ToggleableState,kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.material3.CheckboxColors,androidx.compose.foundation.interaction.MutableInteractionSource)">TriStateCheckbox</a></code> when disabled AND in an <code><a href="/reference/kotlin/androidx/compose/ui/state/ToggleableState.html#Indeterminate">ToggleableState.Indeterminate</a></code> state</p>
                   </td>
                 </tr>
               </tbody>
