@@ -61,7 +61,7 @@ dependencies {
 
     // Force the newer version to get the bugfix for https://github.com/jhy/jsoup/issues/1910
     // To fix b/309773103. We can remove this once we update the upstream version b/295154071
-    implementation("org.jsoup:jsoup:1.6.1")
+    implementation("org.jsoup:jsoup:1.16.2")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlinVersion")
     testImplementation("junit:junit:4.13.2")
