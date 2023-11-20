@@ -58,11 +58,11 @@ import org.jetbrains.dokka.ExternalDocumentationLink
 import org.jetbrains.dokka.base.resolvers.local.DokkaLocationProvider
 import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
 import org.jetbrains.dokka.model.Annotations
-import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DProperty
+import org.jetbrains.dokka.model.WithConstructors
 import org.jetbrains.dokka.pages.ModulePageNode
 import org.jetbrains.dokka.pages.RootPageNode
 import org.jetbrains.dokka.plugability.DokkaContext
@@ -127,8 +127,8 @@ internal abstract class ConverterTestBase(
 
     protected fun DModule.constructor() = constructors().single()
 
-    protected fun DModule.constructors() = (classlike() as? DClass)?.constructors?.ifEmpty { null }
-        ?: (classlike()?.classlikes?.single() as DClass).constructors
+    protected fun DModule.constructors() = (classlike() as? WithConstructors)?.constructors
+        ?.ifEmpty { null } ?: (classlike()?.classlikes?.single() as WithConstructors).constructors
 
     protected fun DModule.functions() =
         packages.single().functions.ifEmpty { null }

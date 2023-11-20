@@ -468,7 +468,7 @@ internal class DocTagConverterTest(
 
     @Test
     fun `@constructor docs are applied`() {
-        val withAnnotation = """
+        val constructorModule = """
             |/**
             | * The amount by which the text is shifted up or down from current the baseline.
             | * @constructor Primary constructor docs
@@ -480,13 +480,30 @@ internal class DocTagConverterTest(
             |}
         """.render()
 
-        val constructorDoc1 = withAnnotation.documentation({ this.constructors().first() })
+        val constructorDoc1 = constructorModule.documentation({ this.constructors().first() })
             .single() as DescriptionComponent
-        val constructorDoc2 = withAnnotation.documentation({ this.constructors().last() })
+        val constructorDoc2 = constructorModule.documentation({ this.constructors().last() })
             .single() as DescriptionComponent
 
         assertThat(constructorDoc1.text()).isEqualTo("Secondary constructor docs")
         assertThat(constructorDoc2.text()).isEqualTo("Primary constructor docs")
+    }
+
+    @Test
+    fun `@constructor docs are applied on annotation class`() {
+        // Note that annotations cannot have secondary constructors
+        val constructorModule = """
+            |/**
+            | * The amount by which the text is shifted up or down from current the baseline.
+            | * @constructor Primary constructor docs
+            | */
+            |annotation class BaselineShift(val multiplier: Float)
+        """.render()
+
+        val constructorDoc = constructorModule.documentation({ this.constructors().single() })
+            .single() as DescriptionComponent
+
+        assertThat(constructorDoc.text()).isEqualTo("Primary constructor docs")
     }
 
     @Test
