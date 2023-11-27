@@ -18,7 +18,7 @@ class DocTagsForCheckedExceptionsTest : BaseAbstractTest() {
             "has DRI equal to",
         )
 
-    val configuration = dokkaConfiguration {
+    private val configuration = dokkaConfiguration {
         sourceSets {
             sourceSet {
                 sourceRoots = listOf("src")

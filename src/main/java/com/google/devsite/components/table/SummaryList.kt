@@ -59,8 +59,8 @@ internal interface SummaryList<T : SummaryItem> : ContextFreeComponent, List<T> 
         return this
     }
 
-    operator fun minus(other: List<T>): SummaryList<T> {
-        data.items = data.items - other
+    operator fun minus(other: Collection<T>): SummaryList<T> {
+        data.items = data.items - other.toSet()
         return this
     }
 }

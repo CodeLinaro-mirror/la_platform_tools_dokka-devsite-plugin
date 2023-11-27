@@ -16,12 +16,12 @@
 
 package dokkatest.hiddenParents
 
-interface DiamondGrandparent {}
+interface DiamondGrandparent
 
 /** @hide */
-interface DiamondParent1 : DiamondGrandparent {}
+interface DiamondParent1 : DiamondGrandparent
 
 /** @hide */
-interface DiamondParent2 : DiamondGrandparent {}
+interface DiamondParent2 : DiamondGrandparent
 
-class DiamondChild : DiamondParent1, DiamondParent2 {}
+class DiamondChild : DiamondParent1, DiamondParent2

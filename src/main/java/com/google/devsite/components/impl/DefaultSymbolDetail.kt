@@ -98,8 +98,7 @@ internal data class DefaultSymbolDetail<T : SymbolSignature>(
 internal fun descriptionSorter(component: ContextFreeComponent): Int {
     return when (component) {
         is SummaryList<*> -> {
-            val tableName = component.data.header!!.data.title
-            when (tableName) {
+            when (component.data.header!!.data.title) {
                 "Parameters" -> 1
                 "Returns" -> 2
                 "Throws" -> 3

@@ -32,11 +32,7 @@ class TestOutputWriterPlugin(failOnOverwrite: Boolean = false) : DokkaPlugin() {
     override fun pluginApiPreviewAcknowledgement() = PluginApiPreviewAcknowledgement
 
     val testWriter by extending {
-        (
-            dokkaBase.outputWriter
-                with writer
-                override dokkaBase.fileWriter
-            )
+        (dokkaBase.outputWriter with writer override dokkaBase.fileWriter)
     }
 }
 

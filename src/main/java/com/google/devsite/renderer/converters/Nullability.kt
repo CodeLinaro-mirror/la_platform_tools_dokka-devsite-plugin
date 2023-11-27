@@ -31,7 +31,6 @@ import org.jetbrains.dokka.model.TypeParameter
 import org.jetbrains.dokka.model.UnresolvedBound
 import org.jetbrains.dokka.model.Variance
 import org.jetbrains.dokka.model.Void
-import org.jetbrains.dokka.model.properties.WithExtraProperties
 import kotlin.math.min
 
 /**
@@ -70,7 +69,7 @@ enum class Nullability {
         DONT_CARE -> ""
     }
 
-    fun isNullable() = when (this) {
+    private fun isNullable() = when (this) {
         KOTLIN_NULLABLE, JAVA_ANNOTATED_NULLABLE,
         JAVA_NOT_ANNOTATED, DONT_CARE,
         -> true
@@ -136,11 +135,10 @@ internal fun Projection.getNullability(
         is TypeParameter, is TypeConstructor, is JavaObject, is UnresolvedBound,
         is PrimitiveJavaType,
         -> {
-            var annotations = injectedAnnotations
             // Java arrays are nullable; non-array primitives aren't
             if (this is PrimitiveJavaType) if ("[" !in name) Nullability.JAVA_NEVER_NULL
             // This is the only case where annotations can override the normal nullability
-            if (this is WithExtraProperties<*>) annotations += sourceSetIndependentAnnotations()
+            val annotations = injectedAnnotations + sourceSetIndependentAnnotations()
 
             // We hide nullability annotations on Kotlin docs even if they were explicit in Kotlin
             // source. This is highly opinionated. As such, we throw a warningto make this explicit.
@@ -172,13 +170,6 @@ internal fun List<Annotations.Annotation>.inferNullability(): Nullability? {
 internal val Language.defaultNullability get() = when (this) {
     Language.KOTLIN -> Nullability.KOTLIN_DEFAULT
     Language.JAVA -> Nullability.JAVA_NOT_ANNOTATED
-}
-
-/** Designed to be used with an isFromJava boolean.*/
-internal val Boolean?.defaultNullability get() = when (this) {
-    true -> Nullability.JAVA_NOT_ANNOTATED
-    false -> Nullability.KOTLIN_DEFAULT
-    null -> Nullability.JAVA_NOT_ANNOTATED // default
 }
 
 internal fun defaultNullability(isFromJava: Boolean?) = when (isFromJava) {

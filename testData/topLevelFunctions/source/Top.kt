@@ -37,7 +37,7 @@ fun a() = Unit
 fun b(i1: Int?, i2: String?, i3: Boolean, foo: Baz): String = ""
 
 /** I'm so sad, they're deleting me! */
-@Deprecated("This method was too sad.")
+@Deprecated("This method was too sad.", ReplaceWith("happyBoi"))
 fun sadBoi(): Nothing = error("Ouch")
 
 /**

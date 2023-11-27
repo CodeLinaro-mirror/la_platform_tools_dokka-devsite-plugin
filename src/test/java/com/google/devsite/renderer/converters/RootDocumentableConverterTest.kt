@@ -34,7 +34,7 @@ import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
 internal class RootDocumentableConverterTest(
-    private val displayLanguage: Language,
+    displayLanguage: Language,
 ) : ConverterTestBase(displayLanguage) {
     @Test
     fun `Class index creates components with correct page title`() {

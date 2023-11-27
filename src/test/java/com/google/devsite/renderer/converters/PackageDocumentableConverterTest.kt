@@ -30,7 +30,7 @@ import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
 internal class PackageDocumentableConverterTest(
-    private val displayLanguage: Language,
+    displayLanguage: Language,
 ) : ConverterTestBase(displayLanguage) {
     @Test
     fun `Package summary creates components with correct page title`() {

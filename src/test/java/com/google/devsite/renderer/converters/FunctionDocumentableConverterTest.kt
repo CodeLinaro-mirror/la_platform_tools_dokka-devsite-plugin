@@ -46,7 +46,7 @@ import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
 internal class FunctionDocumentableConverterTest(
-    private val displayLanguage: Language,
+    displayLanguage: Language,
 ) : ConverterTestBase(displayLanguage) {
 
     override var defaultHints = ModifierHints(

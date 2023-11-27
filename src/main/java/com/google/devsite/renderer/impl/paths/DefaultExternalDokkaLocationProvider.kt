@@ -24,12 +24,12 @@ import java.util.concurrent.ConcurrentHashMap
 class DefaultExternalDokkaLocationProvider(
     private val dokkaLocationProvider: DokkaLocationProvider,
 ) : ExternalDokkaLocationProvider {
-    val memoizer = ConcurrentHashMap<DRI, String>()
+    private val memoizer = ConcurrentHashMap<DRI, String>()
 
     /** ConcurrentHashMap cannot have nullable type parameters for some reason */
     private fun String.nullifier(): String? = if (this == "null") null else this
 
-    @kotlin.jvm.JvmName("is private")
+    @JvmName("is private")
     private fun String?.deNullifier(): String = this ?: "null"
 
     override fun resolve(dri: DRI): String? = memoizer.getOrPut(dri) {

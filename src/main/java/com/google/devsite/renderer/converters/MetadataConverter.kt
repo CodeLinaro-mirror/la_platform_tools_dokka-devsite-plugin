@@ -60,9 +60,8 @@ internal class MetadataConverter(
      * Creates a metadata component for the classlike.
      */
     fun getMetadataForClasslike(classlike: DClasslike): MetadataComponent {
-        val paths = classlike.getSourceFilePaths()
-        val libraryMetadata = paths?.let { classlike.findMatchingLibraryMetadata(it) }
-        val sourceUrl = paths?.let { classlike.createLinkToSource(it) }
+        val libraryMetadata = classlike.findMatchingLibraryMetadata()
+        val sourceUrl = classlike.createLinkToSource()
         val versionMetadata = classlike.findMatchingVersionMetadata(
             libraryMetadata?.releaseNotesUrl,
         )
@@ -80,8 +79,7 @@ internal class MetadataConverter(
      * Creates a metadata component for the [function].
      */
     fun getMetadataForFunction(function: DFunction): MetadataComponent {
-        val paths = function.getSourceFilePaths()
-        val libraryMetadata = paths?.let { function.findMatchingLibraryMetadata(it) }
+        val libraryMetadata = function.findMatchingLibraryMetadata()
         val versionMetadata = function.findMatchingVersionMetadata(libraryMetadata?.releaseNotesUrl)
 
         return DefaultMetadataComponent(
@@ -98,8 +96,7 @@ internal class MetadataConverter(
      * Creates a metadata component for the [property].
      */
     fun getMetadataForProperty(property: DProperty): MetadataComponent {
-        val paths = property.getSourceFilePaths()
-        val libraryMetadata = paths?.let { property.findMatchingLibraryMetadata(it) }
+        val libraryMetadata = property.findMatchingLibraryMetadata()
         val versionMetadata = property.findMatchingVersionMetadata(libraryMetadata?.releaseNotesUrl)
 
         return DefaultMetadataComponent(
@@ -116,7 +113,9 @@ internal class MetadataConverter(
      * Iterate through the library metadata Map to find a [LibraryMetadata] that matches the
      * current class being processed.  Otherwise, return null.
      */
-    private fun Documentable.findMatchingLibraryMetadata(paths: List<String>): LibraryMetadata? {
+    private fun <T> T.findMatchingLibraryMetadata(): LibraryMetadata?
+        where T : Documentable, T : WithSources {
+        val paths = getSourceFilePaths() ?: return null
         val path = if (paths.size > 1) {
             // If there are multiple paths, this is probably KMP and the paths end in ".kt",
             // ".jvm.kt", ".native.kt", etc. Pick out the ".kt" path.
@@ -196,18 +195,22 @@ internal class MetadataConverter(
     private fun <T> T.containingClassName(): String where T : WithSources, T : Documentable =
         "${dri.packageName}.${dri.classNames ?: nameForSyntheticClass(this)}"
 
+    private val doNotAccess = mutableMapOf<Documentable, List<String>?>()
+
+    @Suppress("UNCHECKED_CAST")
+    private fun <T> sourceFilesPathsMemoizer(): MutableMap<T, List<String>?>
+        where T : WithSources, T : Documentable = doNotAccess as MutableMap<T, List<String>?>
+
     /**
      * Finds the filepaths associated with the documentable's source entries.
      *
      * Returns null if there are no source entries, or no source entries with file paths, which is
      * the case for all synthetic classes and functions.
      */
-    private fun <T> T.getSourceFilePaths(): List<String>?
-        where T : WithSources, T : Documentable {
-        val paths = sources.entries.mapNotNull { it.getSourceFilePath() }
-        if (paths.isEmpty()) return null
-        return paths
-    }
+    private fun <T> T.getSourceFilePaths(): List<String>? where T : WithSources, T : Documentable =
+        sourceFilesPathsMemoizer<T>().getOrPut(this) {
+            sources.entries.mapNotNull { it.getSourceFilePath() }.ifEmpty { null }
+        }
 
     /**
      * Get the source file path from the [SourceEntry] relative to the root of the source directory,
@@ -233,7 +236,8 @@ internal class MetadataConverter(
      *
      * Returns null if there was no base source link in the configuration.
      */
-    private fun Documentable.createLinkToSource(paths: List<String>): String? {
+    private fun <T> T.createLinkToSource(): String? where T : Documentable, T : WithSources {
+        val paths = getSourceFilePaths() ?: return null
         // Reduce the list of paths to a single path by taking the common prefix of all of them.
         val path = paths.reduce { currPrefix, nextPath -> currPrefix.commonPrefixWith(nextPath) }
         return docsHolder.baseSourceLink?.format(path, dri.fullName)

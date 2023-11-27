@@ -295,7 +295,6 @@ internal abstract class ConverterTestBase(
             FunctionDocumentableConverter(
                 testClass.displayLanguage,
                 provider,
-                holder,
                 javadocConverter,
                 paramConverter,
                 annotationConverter,
@@ -399,7 +398,7 @@ internal abstract class ConverterTestBase(
         sourceCode: String,
         imports: List<String> = emptyList(),
     ): DModule {
-        val importText = imports.joinToString() { "|import $it;\n" }
+        val importText = imports.joinToString { "|import $it;\n" }
         val source = javaFullHeader(imports = importText) + "|" + sourceCode.trimIndent()
         return testWithRootPageNode(listOf(source))
     }

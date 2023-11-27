@@ -34,7 +34,7 @@ internal class FilePathProviderTest(
     private val displayLanguage: Language,
 ) : ConverterTestBase(displayLanguage) {
 
-    val pathProvider = pathProvider(externalLocationProvider = externalProvider)
+    private val pathProvider = pathProvider(externalLocationProvider = externalProvider)
 
     @Test
     fun `Root package has correct link`() {

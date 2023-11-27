@@ -50,14 +50,14 @@ internal class LegacyJavaTests : ConverterTestBase() {
         val kotlinFunctions = variedVisibilityTestClass.render(java = false).functions()!!
 
         assertThat(javaFunctions.size).isEqualTo(2)
-        assertThat(javaFunctions.map { it -> it.name })
+        assertThat(javaFunctions.map { it.name })
             .containsExactlyElementsIn(listOf("publicBar", "protectedBar"))
         assertThat(kotlinFunctions.size).isEqualTo(2)
-        assertThat(kotlinFunctions.map { it -> it.name })
+        assertThat(kotlinFunctions.map { it.name })
             .containsExactlyElementsIn(listOf("publicBar", "protectedBar"))
     }
 
-    internal fun DModule.classlikes() = packages.flatMap { it -> it.classlikes }
+    internal fun DModule.classlikes() = packages.flatMap { it.classlikes }
     internal fun DModule.classes() = classlikes().filterIsInstance<DClass>()
     // internal fun DModule.functions() = classes().flatMap { it -> it.functions }
     // internal fun DModule.constructors() = classes().flatMap { it -> it.constructors }

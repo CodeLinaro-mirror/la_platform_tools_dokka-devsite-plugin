@@ -75,6 +75,9 @@ internal fun Projection.annotations(sourceSet: DokkaConfiguration.DokkaSourceSet
     (this as? Bound)?.annotations(sourceSet)
         ?: (this as? WithExtraProperties<*>)?.annotations(sourceSet) ?: emptyList()
 
+internal fun Projection.sourceSetIndependentAnnotations(): List<Annotation> =
+    (this as? WithExtraProperties<*>)?.sourceSetIndependentAnnotations() ?: emptyList()
+
 internal fun WithExtraProperties<*>.sourceSetIndependentAnnotations(): List<Annotation> =
     extra.allOfType<Annotations>()
         .strictSingleOrNull()?.directAnnotations?.values?.firstOrNull() ?: emptyList()

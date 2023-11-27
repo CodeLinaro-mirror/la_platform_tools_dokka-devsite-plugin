@@ -23,7 +23,7 @@ import com.google.devsite.components.symbols.TypeSummary
 import kotlinx.html.FlowContent
 import kotlinx.html.div
 
-internal class NoopSymbolSummary<T : SymbolSignature>() : SymbolSummary<T> {
+internal class NoopSymbolSummary<T : SymbolSignature> : SymbolSummary<T> {
     override val data: SymbolSummary.Params<T>
         get() = throw NotImplementedError()
 
