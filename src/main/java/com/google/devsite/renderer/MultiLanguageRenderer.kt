@@ -157,7 +157,6 @@ internal class MultiLanguageRenderer(
         val functionConverter = FunctionDocumentableConverter(
             language,
             filePaths,
-            holder,
             javadocConverter,
             paramConverter,
             annotationConverter,

@@ -38,7 +38,6 @@ import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.KmpTableRowSummaryItem
 import com.google.devsite.components.table.TableRowSummaryItem
 import com.google.devsite.renderer.Language
-import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.model.DFunction
 import java.util.Locale
@@ -47,7 +46,6 @@ import java.util.Locale
 internal class FunctionDocumentableConverter(
     private val displayLanguage: Language,
     private val pathProvider: FilePathProvider,
-    private val docsHolder: DocumentablesHolder,
     private val javadocConverter: DocTagConverter,
     private val paramConverter: ParameterDocumentableConverter,
     private val annotationConverter: AnnotationDocumentableConverter,

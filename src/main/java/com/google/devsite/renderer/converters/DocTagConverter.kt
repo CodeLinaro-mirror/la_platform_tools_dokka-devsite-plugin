@@ -28,7 +28,6 @@ import com.google.devsite.components.impl.DefaultKmpTableRowSummaryItem
 import com.google.devsite.components.impl.DefaultLink
 import com.google.devsite.components.impl.DefaultParameterComponent
 import com.google.devsite.components.impl.DefaultPlatformComponent
-import com.google.devsite.components.impl.DefaultPropertySignature
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableRowSummaryItem
 import com.google.devsite.components.impl.DefaultTableTitle
@@ -37,7 +36,6 @@ import com.google.devsite.components.impl.DefaultUnlink
 import com.google.devsite.components.impl.UndocumentedSymbolDescriptionComponent
 import com.google.devsite.components.symbols.AnnotatedLink
 import com.google.devsite.components.symbols.ParameterComponent
-import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.TypeProjectionComponent
 import com.google.devsite.components.table.KmpTableRowSummaryItem
 import com.google.devsite.components.table.SummaryList
@@ -487,7 +485,7 @@ internal class DocTagConverter(
         throws: Throws,
         parent: Documentable,
     ): ParameterComponent {
-        var name = throws.name
+        val name = throws.name
         var dri: DRI? = throws.exceptionAddress
         if (throws.name in listOf("a", "an")) {
             throw RuntimeException(
@@ -842,28 +840,6 @@ internal class DocTagConverter(
         return packageName to typeName
     }
 
-    // Duplicated from PropertyDocumentableConverter. This is the price of global variables.
-    internal fun DProperty.signature(isSummary: Boolean): PropertySignature {
-        val receiver = receiver?.let {
-            paramConverter.componentForParameter(
-                param = it,
-                isSummary = isSummary,
-                isFromJava = isFromJava(),
-                parent = this,
-            )
-        }
-        return DefaultPropertySignature(
-            PropertySignature.Params(
-                // TODO(b/168136770): figure out path for default anchors
-                name = pathProvider.linkForReference(dri),
-                receiver = when (displayLanguage) {
-                    Language.JAVA -> null
-                    Language.KOTLIN -> receiver
-                },
-            ),
-        )
-    }
-
     internal fun docsToSummaryDefault(documentables: List<Documentable>) =
         docsToSummary(documentables, false)
 
@@ -871,7 +847,7 @@ internal class DocTagConverter(
      * Converts a generic List<Documentable> to a SummaryList.
      * Does nothing clever; only converts Documentables to links (by default with annotations)
      */
-    internal fun docsToSummary(
+    private fun docsToSummary(
         documentables: List<Documentable>,
         showAnnotations: Boolean,
     ) = DefaultSummaryList(
@@ -934,7 +910,7 @@ internal class DocTagConverter(
      * Converts generic Documentables to TableRowSummaryItems, as simple maybe-annotated links
      * This is used for mini-signatures, e.g. nested types list, subclasses list, package summary
      */
-    internal fun summaryForDocumentableKmp(
+    private fun summaryForDocumentableKmp(
         documentable: Documentable,
     ): TableRowSummaryItem<Link, DescriptionComponent> {
         return DefaultKmpTableRowSummaryItem(

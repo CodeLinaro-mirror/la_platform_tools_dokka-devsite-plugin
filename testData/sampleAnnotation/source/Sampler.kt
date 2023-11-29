@@ -99,13 +99,13 @@ class TopLevelClass {
      *
      * @sample dokkatest.sampleAnnotation.samples.FunctionContainingClassSample
      */
-    class InnerClass {}
+    class InnerClass
     /**
      * inner interface docs
      *
      * @sample dokkatest.sampleAnnotation.samples.FunctionContainingClassSample
      */
-    interface InnerInterface {}
+    interface InnerInterface
 }
 
 /**
@@ -113,4 +113,4 @@ class TopLevelClass {
  *
  * @sample dokkatest.sampleAnnotation.samples.FunctionContainingClassSample
  */
-interface topLevelInterface {}
+interface TopLevelInterface

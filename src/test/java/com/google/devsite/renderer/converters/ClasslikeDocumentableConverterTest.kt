@@ -2070,6 +2070,7 @@ internal class ClasslikeDocumentableConverterTest(
         }
     }
 
+    @Suppress("SuspiciousCollectionReassignment")
     @Test
     fun `Comprehensive companion function-property hoist-duplication test`() {
         val module = """
@@ -2140,16 +2141,16 @@ internal class ClasslikeDocumentableConverterTest(
         var publicConlyProps = companionClass.data.publicPropertiesSummary.data.items
         var protectedConlyProps = companionClass.data.protectedPropertiesSummary.data.items
         // Now filter out elements in both hoisted and conly and put them in duplicated
-        val publicDuplicatedFuns = publicConlyFuns.intersect(publicHoistedFuns)
+        val publicDuplicatedFuns = publicConlyFuns.intersect(publicHoistedFuns.toSet())
         publicConlyFuns -= publicDuplicatedFuns
         publicHoistedFuns -= publicDuplicatedFuns
-        val protectedDuplicatedFuns = protectedConlyFuns.intersect(protectedHoistedFuns)
+        val protectedDuplicatedFuns = protectedConlyFuns.intersect(protectedHoistedFuns.toSet())
         protectedConlyFuns -= protectedDuplicatedFuns
         protectedHoistedFuns -= protectedDuplicatedFuns
-        val publicDuplicatedProps = publicConlyProps.intersect(publicHoistedProps)
+        val publicDuplicatedProps = publicConlyProps.intersect(publicHoistedProps.toSet())
         publicConlyProps -= publicDuplicatedProps
         publicHoistedProps -= publicDuplicatedProps
-        val protectedDuplicatedProps = protectedConlyProps.intersect(protectedHoistedProps)
+        val protectedDuplicatedProps = protectedConlyProps.intersect(protectedHoistedProps.toSet())
         protectedConlyProps -= protectedDuplicatedProps
         protectedHoistedProps -= protectedDuplicatedProps
         // No visibility distinction for constants: b/237083570
@@ -3097,10 +3098,10 @@ internal class ClasslikeDocumentableConverterTest(
         val a = moduleK.children.first().children.first() as DObject
         val a2 = a.copy()
         val b = a.copy(sources = emptyMap())
-        assertThat(a.equals(a2)).isTrue()
+        assertThat(a == a2).isTrue()
         assertThat(a.hashCode() == a2.hashCode()).isTrue()
         // These lines fail
-        assertThat(a.equals(b)).isTrue()
+        assertThat(a == b).isTrue()
         assertThat(a.hashCode() == b.hashCode()).isTrue()
     }
 
@@ -3366,7 +3367,7 @@ internal class ClasslikeDocumentableConverterTest(
 
     private fun ConstructorSummaryList.constructor() = data.items.item().data.description
 
-    fun <T : SymbolSignature> TypeSummaryItem<T>.urlSuffix() =
+    private fun <T : SymbolSignature> TypeSummaryItem<T>.urlSuffix() =
         data.description.data.signature.data.name.data.url.substringAfter("example/")
 
     companion object {

@@ -57,7 +57,11 @@ internal class AnnotationDocumentableConverter(
         annotations: List<Annotations.Annotation>,
         nullability: Nullability,
     ): List<AnnotationComponent> {
-        val injectedAnnotations = mutableListOf<Annotations.Annotation?>()
+        // Convert android.nullable to androidx., because those are the public versions
+        @Suppress("NAME_SHADOWING")
+        val annotations = annotations.map { it.fixNullability() }
+
+        val injectedAnnotations = mutableListOf<Annotations.Annotation>()
         if (annotations.any { it.isBadNullability }) {
             throw RuntimeException(
                 "Used a nullability annotation ${annotations.filter { it.isBadNullability }} not " +
@@ -68,14 +72,13 @@ internal class AnnotationDocumentableConverter(
         // NOTE: we inject @NonNull, but not @Nullable, as that is usually not useful to Java devs
         if (displayLanguage == Language.JAVA) {
             if (!annotations.any { it.isNullabilityAnnotation }) {
-                injectedAnnotations += nullability.renderAsJavaAnnotation()
+                nullability.renderAsJavaAnnotation()?.let { injectedAnnotations += it }
             }
         }
 
-        return (annotations + injectedAnnotations).filterNotNull().filter { annotation ->
+        return (annotations + injectedAnnotations).filter { annotation ->
             shouldDocumentAnnotation(annotation, nullability)
-        }.map { it.fixNullability() } // Convert android.nullable to androidx., because it's public
-            .distinctBy { it.identifier }.map { annotation -> annotation.toDackkaAnnotation() }
+        }.distinctBy { it.identifier }.map { annotation -> annotation.toDackkaAnnotation() }
     }
 
     /** @return true if a developer would find this annotation useful, false otherwise */

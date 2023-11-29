@@ -20,6 +20,6 @@ import androidx.annotation.VisibleForTesting
 
 class ClassWithVisibleForTestingFunction {
     @VisibleForTesting
-    fun TestingFunction() = Unit
+    fun testingFunction() = Unit
     fun visibleFunction() = Unit
 }

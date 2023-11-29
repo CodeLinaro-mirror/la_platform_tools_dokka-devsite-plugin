@@ -168,7 +168,7 @@ internal class DocumentablesHolder(
             }
         }
 
-        analysisMap = scope.async { context?.let { setUpAnalysis(context) } ?: mapOf() }
+        analysisMap = scope.async { setUpAnalysis(context) }
 
         allClasslikes = scope.async { computeClasslikes(module) }
         allCompanions = scope.async {
@@ -179,7 +179,7 @@ internal class DocumentablesHolder(
             computeClassGraph(
                 allClasslikes.await() + allCompanions.await().values,
                 externalDocumentablesProvider,
-                context?.configuration?.sourceSets,
+                context.configuration.sourceSets,
             )
         }
         documentablesGraph = scope.async { computeDocumentablesGraph(classGraph.await()) }

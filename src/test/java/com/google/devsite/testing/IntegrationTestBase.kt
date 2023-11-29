@@ -151,7 +151,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
     }
 
     /** For when a test uses source in `./testData/` */
-    fun makeInternalConfiguration(
+    private fun makeInternalConfiguration(
         samplesBaseDir: String,
         sourceDir: String,
         sampleLocations: List<String> = emptyList(),
@@ -414,7 +414,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         File(file).bufferedReader().readLines()
 
     /** Confirms that the given output writer's output matches the contents of the given directory. */
-    protected fun verifyOutput(writerPlugin: TestOutputWriterPlugin, outputPath: String) {
+    private fun verifyOutput(writerPlugin: TestOutputWriterPlugin, outputPath: String) {
         val outputDirectory = File(outputPath).absolutePath
         val generatedFiles = writerPlugin.writer.contents
 
@@ -450,7 +450,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         }
     }
 
-    fun File.recursivelyListFiles(): List<File> =
+    private fun File.recursivelyListFiles(): List<File> =
         (this.listFiles { it: File -> !it.isDirectory }?.asList() ?: emptyList()) + (
             this.listFiles { it: File -> it.isDirectory }
                 ?.flatMap { it: File -> it.recursivelyListFiles() } ?: emptyList()

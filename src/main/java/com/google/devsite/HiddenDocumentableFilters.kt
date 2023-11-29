@@ -37,7 +37,7 @@ import org.jetbrains.dokka.transformers.documentation.DocumentableTransformer
  * These filters remove items from the docs when they:
  * - have @hide in a comment
  * - have @removed in a comment
- * - are deprecated with DeprecationLevel.HIDDEN
+ * - are deprecated with [DeprecationLevel.HIDDEN]
  * - are annotated with an annotation from [DevsiteConfiguration.hidingAnnotations]
  *
  * There are two filters, one runs before the dokka merge step and one runs after.

@@ -30,7 +30,7 @@ import org.mockito.kotlin.mock
 
 @RunWith(Parameterized::class)
 internal class DocumentablesHolderTest(
-    private val displayLanguage: Language,
+    displayLanguage: Language,
 ) : ConverterTestBase(displayLanguage) {
     private val packageA = mock<DPackage> {
         on { name } doReturn "com.example.a"

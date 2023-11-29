@@ -760,7 +760,7 @@ internal abstract class ClasslikeDocumentableConverter(
                         pathProvider.linkForReference(it.dri)
                     }
                     )
-                else -> emptyList<Link>() to emptyList<Link>()
+                else -> emptyList<Link>() to emptyList()
             }
             DefaultClasslikeSignature(
                 ClasslikeSignature.Params(

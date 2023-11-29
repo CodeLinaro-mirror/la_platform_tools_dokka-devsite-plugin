@@ -228,7 +228,7 @@ internal class ParameterDocumentableConverter(
             isJavaSource = isFromJava,
             sourceSet = sourceSet,
             removedAnnotations = projection.annotations(sourceSet)
-                .filter { !it.belongsOnReturnType() }.distinctBy { it.identifier },
+                .filter { !it.belongsOnReturnType() }.distinctBy { it.identifier }.toSet(),
             propagatedAnnotations = projection.annotations(sourceSet)
                 .filter { it.belongsOnReturnType() },
         )
@@ -274,20 +274,23 @@ internal class ParameterDocumentableConverter(
      * we *do* want to show nullability information since it's built into the type. Thus, we look at
      * annotations in addition to the Dokka Nullable type.
      *
+     * @param projection what is being converted to a TypeProjectionComponent
+     * @param isJavaSource used to determine whether an unannotated projection is nullable
+     * @param sourceSet the sourceSet this projection's container is associated with
      * @param propagatedAnnotations used in cases where e.g. annotations on a function should be
      *      propagated to the return type
-     * @param isJavaSource used to determine whether an unannotated projection is nullable
+     * @param removedAnnotations the annotations that were consumed in a wrapper of this projection,
+     *      and thus should not be shown on the projection itself
      * @param isReturnType used to determine if Unit return types should be converted to void
-     * @param showNullability if false, overrides default behavior and hides nullability annotations
-     * @param isKotlinNullable whether this projection was wrapped in Nullable. As such, should
-     *      only be set when calling this function from inside this function
+     * @param propagatedNullability any nullability value that might be caused by things wrapping or
+     *      containing this projection, such as misplaced nullability annotations or [Nullable]
      */
     fun componentForProjection(
         projection: Projection,
         isJavaSource: Boolean,
         sourceSet: DokkaConfiguration.DokkaSourceSet,
         propagatedAnnotations: List<Annotation> = emptyList(),
-        removedAnnotations: List<Annotation> = emptyList(),
+        removedAnnotations: Set<Annotation> = emptySet(),
         isReturnType: Boolean = false,
         propagatedNullability: Nullability? = null,
     ): TypeProjectionComponent {
@@ -583,7 +586,7 @@ internal class ParameterDocumentableConverter(
             "Float",
             "Double",
         )
-        val javaBoxedPrimitives = listOf(
+        private val javaBoxedPrimitives = listOf(
             "Boolean",
             "Byte",
             "Character",
@@ -593,7 +596,7 @@ internal class ParameterDocumentableConverter(
             "Float",
             "Double",
         )
-        val javaPrimitiveToKotlinArrayType = mapOf(
+        private val javaPrimitiveToKotlinArrayType = mapOf(
             "int" to "IntArray",
             "boolean" to "BooleanArray",
             "byte" to "ByteArray",
@@ -603,7 +606,7 @@ internal class ParameterDocumentableConverter(
             "float" to "FloatArray",
             "double" to "DoubleArray",
         )
-        val kotlinPrimitiveArrays = javaPrimitiveToKotlinArrayType.values.toSet()
+        private val kotlinPrimitiveArrays = javaPrimitiveToKotlinArrayType.values.toSet()
 
         private val kotlinCollectionsDRI = DRI(packageName = "kotlin.collections")
 
