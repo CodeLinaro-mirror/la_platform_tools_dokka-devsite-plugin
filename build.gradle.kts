@@ -27,7 +27,7 @@ repositories {
 }
 
 group = "com.google.devsite"
-version = "1.4.0" // This is appended to archiveBaseName in the ShadowJar task.
+version = "1.4.1" // This is appended to archiveBaseName in the ShadowJar task.
 
 val dokkaVersion = "1.8.20-dev-214"
 val kotlinVersion = "1.9.20"
