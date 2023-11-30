@@ -15,7 +15,7 @@
     </div>
     <div id="refdoc-switcher-placeholder"></div>
     <p>
-      <pre>data class <a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">PagingSource.LoadResult.Page</a>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; : <a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.html">PagingSource.LoadResult</a></pre>
+      <pre>data class <a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">PagingSource.LoadResult.Page</a>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; : <a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.html">PagingSource.LoadResult</a>, <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html">Iterable</a></pre>
     </p>
     <div class="devsite-table-wrapper">
       <table class="jd-inheritance-table">
@@ -37,6 +37,7 @@
     </div>
     <hr>
     <p>Success result object for <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.load</a></code>.</p>
+    <p>As a convenience, iterating on this object will iterate through its loaded <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#data()">data</a></code>.</p>
     <pre class="prettyprint lang-kotlin">// One common method of pagination is to use next (and optionally previous) tokens.
 // The below code shows you how to
 data class NetworkResponseObject(
@@ -133,6 +134,12 @@ fun NetworkResponseObject.toPage(pageNumber: Int): LoadResult.Page&lt;Int, Item&
         </thead>
         <tbody class="list">
           <tr>
+            <td><code>open&nbsp;operator <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterator/index.html">Iterator</a>&lt;Value&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#iterator()">iterator</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
             <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#toString()">toString</a>()</code></div>
@@ -164,14 +171,14 @@ fun NetworkResponseObject.toPage(pageNumber: Int): LoadResult.Page&lt;Int, Item&
             <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#itemsAfter()">itemsAfter</a></code></div>
-              <p>Optional count of items after the loaded data.</p>
+              <p>Count of items after the loaded data.</p>
             </td>
           </tr>
           <tr>
             <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#itemsBefore()">itemsBefore</a></code></div>
-              <p>Optional count of items before the loaded data.</p>
+              <p>Count of items before the loaded data.</p>
             </td>
           </tr>
           <tr>
@@ -187,6 +194,43 @@ fun NetworkResponseObject.toPage(pageNumber: Int): LoadResult.Page&lt;Int, Item&
               <div><code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#prevKey()">prevKey</a></code></div>
               <p><code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">Key</a></code> for previous page if more data can be loaded in that direction, <code>null</code> otherwise.</p>
             </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html">kotlin.collections.Iterable</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/for-each.html">forEach</a>(p0:&nbsp;<a href="https://developer.android.com/reference/java/util/function/Consumer.html">Consumer</a>&lt;Value&gt;)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="https://developer.android.com/reference/java/util/Spliterator.html">Spliterator</a>&lt;Value&gt;</code></td>
+                      <td>
+                        <div><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/spliterator.html">spliterator</a>()</code></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
           </tr>
         </tbody>
       </table>
@@ -257,6 +301,14 @@ fun NetworkResponseObject.toPage(pageNumber: Int): LoadResult.Page&lt;Int, Item&
     </div>
     <div class="list">
       <h2>Public functions</h2>
+      <div class="api-item"><a name="iterator--"></a><a name="iterator"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="iterator()">iterator</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">open&nbsp;operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#iterator()">iterator</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterator/index.html">Iterator</a>&lt;Value&gt;</pre>
+      </div>
       <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
         <div class="api-name-block">
           <div>
@@ -284,7 +336,7 @@ fun NetworkResponseObject.toPage(pageNumber: Int): LoadResult.Page&lt;Int, Item&
           </div>
         </div>
         <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#itemsAfter()">itemsAfter</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
-        <p>Optional count of items after the loaded data.</p>
+        <p>Count of items after the loaded data. Must be implemented if <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#jumpingSupported()">jumping</a></code> is enabled. Optional otherwise.</p>
       </div>
       <div class="api-item"><a name="getItemsBefore()"></a><a name="setItemsBefore()"></a><a name="getItemsBefore--"></a><a name="setItemsBefore--"></a>
         <div class="api-name-block">
@@ -293,7 +345,7 @@ fun NetworkResponseObject.toPage(pageNumber: Int): LoadResult.Page&lt;Int, Item&
           </div>
         </div>
         <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#itemsBefore()">itemsBefore</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
-        <p>Optional count of items before the loaded data.</p>
+        <p>Count of items before the loaded data. Must be implemented if <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#jumpingSupported()">jumping</a></code> is enabled. Optional otherwise.</p>
       </div>
       <div class="api-item"><a name="getNextKey()"></a><a name="setNextKey()"></a><a name="getNextKey--"></a><a name="setNextKey--"></a>
         <div class="api-name-block">

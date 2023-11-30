@@ -38,6 +38,20 @@
           <tr>
             <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
+              <div><code>@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.OnBackStackChangedListener.html#onBackStackChangeCommitted(androidx.fragment.app.Fragment,boolean)">onBackStackChangeCommitted</a>(fragment:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,&nbsp;pop:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>)</code></div>
+              <p>Called whenever the contents of a back stack change is committed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code>@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.OnBackStackChangedListener.html#onBackStackChangeStarted(androidx.fragment.app.Fragment,boolean)">onBackStackChangeStarted</a>(fragment:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,&nbsp;pop:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>)</code></div>
+              <p>Called whenever the contents of the back stack are starting to be changed, before fragments being to move to their target states.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
               <div><code>@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.OnBackStackChangedListener.html#onBackStackChanged()">onBackStackChanged</a>()</code></div>
               <p>Called whenever the contents of the back stack change.</p>
             </td>
@@ -47,6 +61,88 @@
     </div>
     <div class="list">
       <h2>Public functions</h2>
+      <div class="api-item"><a name="onBackStackChangeCommitted(androidx.fragment.app.Fragment, boolean)"></a><a name="onBackStackChangeCommitted-androidx.fragment.app.Fragment-boolean-"></a><a name="onbackstackchangecommitted"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="onBackStackChangeCommitted(androidx.fragment.app.Fragment,boolean)">onBackStackChangeCommitted</h3>
+          </div>
+          <div id="metadata-info-block">
+            <div id="version-metadata">
+              <div id="added-in">Added in 1.6.0</div>
+            </div>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.OnBackStackChangedListener.html#onBackStackChangeCommitted(androidx.fragment.app.Fragment,boolean)">onBackStackChangeCommitted</a>(fragment:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,&nbsp;pop:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Called whenever the contents of a back stack change is committed.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>fragment:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
+                <td>
+                  <p>that is affected by the committed back stack change</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>pop:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                <td>
+                  <p>whether this back stack change is a pop</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="onBackStackChangeStarted(androidx.fragment.app.Fragment, boolean)"></a><a name="onBackStackChangeStarted-androidx.fragment.app.Fragment-boolean-"></a><a name="onbackstackchangestarted"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="onBackStackChangeStarted(androidx.fragment.app.Fragment,boolean)">onBackStackChangeStarted</h3>
+          </div>
+          <div id="metadata-info-block">
+            <div id="version-metadata">
+              <div id="added-in">Added in 1.6.0</div>
+            </div>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.OnBackStackChangedListener.html#onBackStackChangeStarted(androidx.fragment.app.Fragment,boolean)">onBackStackChangeStarted</a>(fragment:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,&nbsp;pop:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Called whenever the contents of the back stack are starting to be changed, before fragments being to move to their target states.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>fragment:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
+                <td>
+                  <p>that is affected by the starting back stack change</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>pop:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                <td>
+                  <p>whether this back stack change is a pop</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="api-item"><a name="onBackStackChanged--"></a><a name="onbackstackchanged"></a>
         <div class="api-name-block">
           <div>

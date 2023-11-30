@@ -249,7 +249,7 @@ class MyPagingSource(
           </tr>
           <tr>
             <td>
-              <div><code>data class <a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">PagingSource.LoadResult.Page</a>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; : <a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.html">PagingSource.LoadResult</a></code></div>
+              <div><code>data class <a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">PagingSource.LoadResult.Page</a>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; : <a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.html">PagingSource.LoadResult</a>, <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html">Iterable</a></code></div>
               <p>Success result object for <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.load</a></code>.</p>
             </td>
           </tr>
@@ -562,6 +562,7 @@ class MyPagingSource(
         <p>Override this to <code>true</code> if pseudo-fast scrolling via jumps is supported.</p>
         <p>A jump occurs when a <code>RecyclerView</code> scrolls through a number of placeholders defined by <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#jumpThreshold()">PagingConfig.jumpThreshold</a></code> and triggers a load with <code><a href="/reference/kotlin/androidx/paging/LoadType.html#REFRESH">LoadType</a></code>.</p>
         <p><code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>s that support jumps should override <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">getRefreshKey</a></code> to return a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">Key</a></code> that would load data fulfilling the viewport given a user's current <code><a href="/reference/kotlin/androidx/paging/PagingState.html#anchorPosition()">PagingState.anchorPosition</a></code>.</p>
+        <p>To support jumping, the <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">LoadResult.Page</a></code> returned from this PagingSource must implement <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#itemsBefore()">itemsBefore</a></code> and <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#itemsAfter()">itemsAfter</a></code> to notify Paging the boundaries within which it can jump.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>

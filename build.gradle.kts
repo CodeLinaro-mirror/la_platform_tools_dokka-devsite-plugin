@@ -145,7 +145,7 @@ val lifecycleVersion = "2.6.0"
 val collectionsVersion = "1.3.0-alpha02"
 val composeVersion = "1.5.0"
 val composeMaterial3Version = "1.2.0-alpha10"
-val benchmarkVersion = "1.2.0-rc02"
+val benchmarkVersion = "1.2.0"
 dependencies {
     testDataImpl("io.reactivex.rxjava3:rxjava:3.0.2")
     testDataImpl("io.reactivex.rxjava2:rxjava:2.2.9")
@@ -168,10 +168,10 @@ dependencies {
     testDataAars("androidx.recyclerview:recyclerview:1.3.0")
     testDataAars("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
     testDataAars("androidx.compose.foundation:foundation:1.0.5")
-    testDataAars("androidx.activity:activity:1.6.0-rc01")
-    testDataAars("androidx.paging:paging-common:3.2.0-alpha02")
+    testDataAars("androidx.activity:activity:1.6.0")
+    testDataAars("androidx.paging:paging-common:3.2.0")
 
-    testDataSources("androidx.fragment:fragment:1.6.0-alpha01")
+    testDataSources("androidx.fragment:fragment:1.6.0")
     // TODO: publish sample source code in a way accessible to dackka (/studio) b/153171116
     // testDataSources("androidx.fragment:fragment-samples:1.6.0-alpha01")
     testDataSources("androidx.lifecycle:lifecycle-common:$lifecycleVersion")
@@ -190,8 +190,8 @@ dependencies {
     testDataSources("androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion")
     testDataSources("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     testDataSources("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycleVersion")
-    testDataSources("androidx.activity:activity:1.6.0-beta01")
-    testDataSources("androidx.activity:activity-ktx:1.6.0-beta01")
+    testDataSources("androidx.activity:activity:1.6.0")
+    testDataSources("androidx.activity:activity-ktx:1.6.0")
     testDataSources("androidx.ads:ads-identifier:1.0.0-alpha04")
     testDataSources("androidx.ads:ads-identifier-common:1.0.0-alpha04")
     testDataSources("androidx.ads:ads-identifier-provider:1.0.0-alpha04")
@@ -251,21 +251,21 @@ dependencies {
     // We do not test against androidx.test, because they are not part of the androidx build
     // and also publish source jars with problematic no-write-permission on parts
     testDataAars("androidx.test.uiautomator:uiautomator:2.2.0") // no source jar
-    testDataSources("androidx.tracing:tracing:1.2.0-alpha01")
-    testDataSources("androidx.tracing:tracing-ktx:1.2.0-alpha01")
-    testDataSources("androidx.tracing:tracing-perfetto:1.0.0-alpha01")
-    testDataSources("androidx.tracing:tracing-perfetto-binary:1.0.0-alpha02")
-    testDataSources("androidx.tracing:tracing-perfetto-common:1.0.0-alpha01")
+    testDataSources("androidx.tracing:tracing:1.2.0")
+    testDataSources("androidx.tracing:tracing-ktx:1.2.0")
+    testDataSources("androidx.tracing:tracing-perfetto:1.0.0")
+    testDataSources("androidx.tracing:tracing-perfetto-binary:1.0.0")
+    testDataSources("androidx.tracing:tracing-perfetto-common:1.0.0-alpha16")
 
-    testDataSources("androidx.paging:paging-common:3.2.0-alpha02")
-    testDataSources("androidx.paging:paging-common-ktx:3.2.0-alpha02")
-    testDataSources("androidx.paging:paging-runtime:3.2.0-alpha02")
-    testDataSources("androidx.paging:paging-runtime-ktx:3.2.0-alpha02")
-    testDataSources("androidx.paging:paging-rxjava2:3.2.0-alpha02")
-    testDataSources("androidx.paging:paging-rxjava2-ktx:3.2.0-alpha02")
-    testDataSources("androidx.paging:paging-rxjava3:3.2.0-alpha02")
-    testDataSources("androidx.paging:paging-guava:3.2.0-alpha02")
-    testDataSources("androidx.paging:paging-compose:1.0.0-alpha16")
+    testDataSources("androidx.paging:paging-common:3.2.0")
+    testDataSources("androidx.paging:paging-common-ktx:3.2.0")
+    testDataSources("androidx.paging:paging-runtime:3.2.0")
+    testDataSources("androidx.paging:paging-runtime-ktx:3.2.0")
+    testDataSources("androidx.paging:paging-rxjava2:3.2.0")
+    testDataSources("androidx.paging:paging-rxjava2-ktx:3.2.0")
+    testDataSources("androidx.paging:paging-rxjava3:3.2.0")
+    testDataSources("androidx.paging:paging-guava:3.2.0")
+    testDataSources("androidx.paging:paging-compose:3.2.0")
 
     // Compose is KMP, and they publish KMP source jars
     testDataSourcesKmp("androidx.compose.animation:animation:$composeVersion")

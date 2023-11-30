@@ -216,14 +216,14 @@
           <tr>
             <td><code>abstract <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#commitNow()">commitNow</a>()</code></div>
+              <div><code>@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#commitNow()">commitNow</a>()</code></div>
               <p>Commits this transaction synchronously.</p>
             </td>
           </tr>
           <tr>
             <td><code>abstract <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#commitNowAllowingStateLoss()">commitNowAllowingStateLoss</a>()</code></div>
+              <div><code>@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#commitNowAllowingStateLoss()">commitNowAllowingStateLoss</a>()</code></div>
               <p>Like <code><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#commitNow()">commitNow</a></code> but allows the commit to be executed after an activity's state is saved.</p>
             </td>
           </tr>
@@ -1021,7 +1021,7 @@
             </div>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#commitNow()">commitNow</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#commitNow()">commitNow</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
         <p>Commits this transaction synchronously. Any added fragments will be initialized and brought completely to the lifecycle state of their host and any removed fragments will be torn down accordingly before this call returns. Committing a transaction in this way allows fragments to be added as dedicated, encapsulated components that monitor the lifecycle state of their host while providing firmer ordering guarantees around when those fragments are fully initialized and ready. Fragments that manage views will have those views created and attached. </p>
         <p>Calling <code>commitNow</code> is preferable to calling <code><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#commit()">commit</a></code> followed by <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#executePendingTransactions()">executePendingTransactions</a></code> as the latter will have the side effect of attempting to commit <em>all</em> currently pending transactions whether that is the desired behavior or not.</p>
         <p>Transactions committed in this way may not be added to the FragmentManager's back stack, as doing so would break other expected ordering guarantees for other asynchronously committed transactions. This method will throw <code><a href="https://developer.android.com/reference/java/lang/IllegalStateException.html">IllegalStateException</a></code> if the transaction previously requested to be added to the back stack with <code><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#addToBackStack(java.lang.String)">addToBackStack</a></code>.</p>
@@ -1038,7 +1038,7 @@
             </div>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#commitNowAllowingStateLoss()">commitNowAllowingStateLoss</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#commitNowAllowingStateLoss()">commitNowAllowingStateLoss</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
         <p>Like <code><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#commitNow()">commitNow</a></code> but allows the commit to be executed after an activity's state is saved. This is dangerous because the commit can be lost if the activity needs to later be restored from its state, so this should only be used for cases where it is okay for the UI state to change unexpectedly on the user.</p>
       </div>
       <div class="api-item"><a name="detach-androidx.fragment.app.Fragment-"></a><a name="detach"></a>
