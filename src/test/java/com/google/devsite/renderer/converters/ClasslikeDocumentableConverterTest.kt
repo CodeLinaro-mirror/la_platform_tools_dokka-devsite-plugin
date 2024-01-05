@@ -3328,6 +3328,23 @@ internal class ClasslikeDocumentableConverterTest(
         assertThat(setListenerMethods.size).isEqualTo(2)
     }
 
+    @Test
+    fun `Data class with JvmField`() {
+        // bar is a field/property, no accessors in Java
+        val classlike = """
+            |data class Foo (@JvmField val bar: String)
+        """.render().page("Foo").data.content
+
+        val ctor = classlike.data.publicConstructorsSummary.single()
+        val ctorParam = ctor.data.description.data.signature.data.parameters.single()
+        assertThat(ctorParam.data.name).isEqualTo("bar")
+
+        val field = classlike.data.publicPropertiesSummary.single().data.description.data
+        assertThat(field.signature.data.name.data.name).isEqualTo("bar")
+
+        assertThat(classlike.data.publicFunctionsSummary).isEmpty()
+    }
+
     private fun DModule.page(
         name: String = "Foo",
     ): DevsitePage<Classlike> {
