@@ -214,10 +214,6 @@ dependencies {
     testDataSources("androidx.autofill:autofill:1.2.0-beta01")
     testDataSources("androidx.benchmark:benchmark:1.0.0-alpha03")
     testDataSources("androidx.benchmark:benchmark-common:$benchmarkVersion")
-    testDataSources("androidx.benchmark:benchmark-gradle-plugin:$benchmarkVersion")
-    testDataImpl(project.files("" + project.gradle.gradleHomeDir + "/lib/gradle-kotlin-dsl-" +
-        project.gradle.gradleVersion + ".jar")) // Needed for benchmark-gradle-plugin
-    // testDataImpl(gradleKotlinDslOf(project)) // should be equivalent to ^^ but does not work
     testDataImpl(gradleApi())
     testDataSources("androidx.benchmark:benchmark-junit4:$benchmarkVersion")
     testDataSources("androidx.benchmark:benchmark-macro:$benchmarkVersion")
