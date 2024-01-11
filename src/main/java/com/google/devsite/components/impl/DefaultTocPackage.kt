@@ -25,26 +25,26 @@ internal data class DefaultTocPackage(
     override fun render(into: StringBuilder) = into.run {
         appendLine("- title: \"${data.name}\"")
         appendLine("  path: \"${data.packageUrl}\"")
+
+        val content = mapOf(
+            "Interfaces" to data.interfaces,
+            "Classes" to data.classes,
+            "Enums" to data.enums,
+            "Exceptions" to data.exceptions,
+            "Annotations" to data.annotations,
+            "Objects" to data.objects,
+        ).filter { (_, contents) -> contents.isNotEmpty() }
+        if (content.isEmpty()) return@run
+
         appendLine()
-
-        val content = listOf(
-            data.interfaces,
-            data.classes,
-            data.enums,
-            data.exceptions,
-            data.annotations,
-            data.objects,
-        ).flatten()
-        if (content.isEmpty()) return
-
         appendLine("  section:")
 
-        renderTypes("Interfaces", data.interfaces)
-        renderTypes("Classes", data.classes)
-        renderTypes("Enums", data.enums)
-        renderTypes("Exceptions", data.exceptions)
-        renderTypes("Annotations", data.annotations)
-        renderTypes("Objects", data.objects)
+        content.onEachIndexed { i, (name, contents) ->
+            if (i != 0) {
+                appendLine()
+            }
+            renderTypes(name, contents)
+        }
     }
 
     private fun StringBuilder.renderTypes(sectionName: String, types: List<TocPackage.Type>) {
@@ -57,8 +57,6 @@ internal data class DefaultTocPackage(
         for (type in types) {
             renderType(type)
         }
-
-        appendLine()
     }
 
     private fun StringBuilder.renderType(type: TocPackage.Type) {

@@ -30,9 +30,9 @@ internal data class DefaultTableOfContents(
         appendLine()
         appendLine("- title: \"Package Index\"")
         appendLine("  path: \"${data.packagesUrl}\"")
-        appendLine()
 
         for (packageSection in data.packages) {
+            appendLine()
             packageSection.render(this)
         }
     }
