@@ -791,6 +791,43 @@ internal class MetadataConverterTest(
         }
     }
 
+    @Test
+    fun `Library metadata for a top-level function and property`() {
+        val libraryMetadataMap = mapOf(
+            "kotlin/androidx/example/Test.kt" to LibraryMetadata(
+                groupId = "androidx.example",
+                artifactId = "example",
+                releaseNotesUrl = "https://d.android.com/release/example",
+            ),
+        )
+
+        val module = """
+            |const val foo = 3
+            |fun bar() {}
+            |}
+        """.render()
+        val (function, property) = if (displayLanguage == Language.JAVA) {
+            val syntheticClass = module.classlike("TestKt")!!
+            Pair(syntheticClass.functions.single(), syntheticClass.properties.single())
+        } else {
+            Pair(module.function("foo")!!, module.property("bar")!!)
+        }
+
+        val metadataComponents = listOf(
+            module.metadata(function, fileMetadataMap = libraryMetadataMap),
+            module.metadata(property, fileMetadataMap = libraryMetadataMap),
+        )
+        for (metadataComponent in metadataComponents) {
+            val libraryMetadata = metadataComponent.data.libraryMetadata
+            assertThat(libraryMetadata).isNotNull()
+            assertThat(libraryMetadata!!.groupId).isEqualTo("androidx.example")
+            assertThat(libraryMetadata.artifactId).isEqualTo("example")
+            assertThat(libraryMetadata.releaseNotesUrl).isEqualTo(
+                "https://d.android.com/release/example",
+            )
+        }
+    }
+
     private fun DModule.metadataForClasslike(
         name: String = "Foo",
         baseSourceLink: String? = null,

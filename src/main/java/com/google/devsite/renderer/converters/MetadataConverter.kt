@@ -25,6 +25,7 @@ import com.google.devsite.renderer.converters.ParameterDocumentableConverter.Com
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.util.LibraryMetadata
 import org.jetbrains.dokka.DokkaConfiguration
+import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.Contravariance
 import org.jetbrains.dokka.model.Covariance
 import org.jetbrains.dokka.model.DClasslike
@@ -84,8 +85,10 @@ internal class MetadataConverter(
 
         return DefaultMetadataComponent(
             MetadataComponent.Params(
-                // TODO(b/264828018): display artifact ID and source link for some functions
-                libraryMetadata = null,
+                // Display library metadata only for top-level functions, so it isn't duplicated
+                // from the class metadata for functions within classes.
+                libraryMetadata = if (function.dri.isTopLevel()) libraryMetadata else null,
+                // TODO(b/264828018): display source link for some functions
                 sourceLinkUrl = null,
                 versionMetadata = versionMetadata,
             ),
@@ -101,8 +104,10 @@ internal class MetadataConverter(
 
         return DefaultMetadataComponent(
             MetadataComponent.Params(
-                // TODO(b/264828018): display artifact ID and source link for some properties
-                libraryMetadata = null,
+                // Display library metadata only for top-level properties, so it isn't duplicated
+                // from the class metadata for properties within classes.
+                libraryMetadata = if (property.dri.isTopLevel()) libraryMetadata else null,
+                // TODO(b/264828018): display source link for some properties
                 sourceLinkUrl = null,
                 versionMetadata = versionMetadata,
             ),
@@ -242,6 +247,13 @@ internal class MetadataConverter(
         val path = paths.reduce { currPrefix, nextPath -> currPrefix.commonPrefixWith(nextPath) }
         return docsHolder.baseSourceLink?.format(path, dri.fullName)
     }
+
+    /**
+     * Returns whether the function or property DRI is originally top-level (either it isn't in a
+     * class or is in a synthetic class).
+     */
+    private fun DRI.isTopLevel(): Boolean =
+        classNames == null || docsHolder.fromSyntheticClass(this)
 
     companion object {
 

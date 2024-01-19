@@ -209,6 +209,18 @@ internal class DocumentablesHolder(
         classlikes.getValue(dPackage.dri).await()
 
     /**
+     * Returns whether the [dri] is for a synthetic class or a documentable contained in a synthetic
+     * class.
+     */
+    fun fromSyntheticClass(dri: DRI): Boolean {
+        return runBlocking {
+            syntheticClasses[DRI(packageName = dri.packageName)]?.await()?.any {
+                it.dri.classNames == dri.classNames
+            } ?: false
+        }
+    }
+
+    /**
      * Returns a classlike's nested classlikes.
      * Does not include should-not-be-documented Documentables.
      */
