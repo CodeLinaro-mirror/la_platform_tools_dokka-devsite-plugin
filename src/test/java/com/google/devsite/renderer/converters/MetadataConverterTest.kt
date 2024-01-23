@@ -804,13 +804,12 @@ internal class MetadataConverterTest(
         val module = """
             |const val foo = 3
             |fun bar() {}
-            |}
         """.render()
         val (function, property) = if (displayLanguage == Language.JAVA) {
             val syntheticClass = module.classlike("TestKt")!!
             Pair(syntheticClass.functions.single(), syntheticClass.properties.single())
         } else {
-            Pair(module.function("foo")!!, module.property("bar")!!)
+            Pair(module.function("bar")!!, module.property("foo")!!)
         }
 
         val metadataComponents = listOf(

@@ -101,6 +101,7 @@ internal class DocumentablesHolder(
     private val classlikes = mutableMapOf<DRI, Deferred<List<DClasslike>>>()
     private val classes = mutableMapOf<DRI, Deferred<List<DClass>>>()
     private val syntheticClasses = mutableMapOf<DRI, Deferred<Set<DClass>>>()
+    private val syntheticClassNames = mutableMapOf<DRI, Deferred<Set<String>>>()
     private val enums = mutableMapOf<DRI, Deferred<List<DEnum>>>()
     private val interfaces = mutableMapOf<DRI, Deferred<List<DInterface>>>()
     private val annotations = mutableMapOf<DRI, Deferred<List<DAnnotation>>>()
@@ -140,6 +141,9 @@ internal class DocumentablesHolder(
                     )
                 }
                 val syntheticClassList = async { computeSyntheticClasses(dPackage) }
+                val syntheticClassNameSet = async {
+                    syntheticClassList.await().map { it.name }.toSet()
+                }
                 val combinedClasslikesList = async {
                     computeClasslikes(
                         children.await(),
@@ -158,6 +162,7 @@ internal class DocumentablesHolder(
                 classlikes[dPackage.dri] = combinedClasslikesList
                 classes[dPackage.dri] = classList
                 syntheticClasses[dPackage.dri] = syntheticClassList
+                syntheticClassNames[dPackage.dri] = syntheticClassNameSet
                 enums[dPackage.dri] = enumList
                 interfaces[dPackage.dri] = interfaceList
                 annotations[dPackage.dri] = annotationList
@@ -212,11 +217,10 @@ internal class DocumentablesHolder(
      * Returns whether the [dri] is for a synthetic class or a documentable contained in a synthetic
      * class.
      */
-    fun fromSyntheticClass(dri: DRI): Boolean {
+    fun isFromSyntheticClass(dri: DRI): Boolean {
         return runBlocking {
-            syntheticClasses[DRI(packageName = dri.packageName)]?.await()?.any {
-                it.dri.classNames == dri.classNames
-            } ?: false
+            val classNames = syntheticClassNames[DRI(packageName = dri.packageName)]?.await()
+            classNames?.contains(dri.classNames) == true
         }
     }
 

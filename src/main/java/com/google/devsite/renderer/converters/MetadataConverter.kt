@@ -253,7 +253,7 @@ internal class MetadataConverter(
      * class or is in a synthetic class).
      */
     private fun DRI.isTopLevel(): Boolean =
-        classNames == null || docsHolder.fromSyntheticClass(this)
+        classNames == null || docsHolder.isFromSyntheticClass(this)
 
     companion object {
 
