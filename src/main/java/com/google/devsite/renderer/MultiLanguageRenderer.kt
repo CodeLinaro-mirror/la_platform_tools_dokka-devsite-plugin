@@ -86,7 +86,9 @@ internal class MultiLanguageRenderer(
                 excludedPackages = devsiteConfiguration.computedExcludedPackagesForJava,
                 fileMetadataMap = fileMetadataMap,
                 versionMetadataMap = versionMetadataMap,
-                baseSourceLink = devsiteConfiguration.baseSourceLink,
+                baseClassSourceLink = devsiteConfiguration.baseSourceLink,
+                baseFunctionSourceLink = devsiteConfiguration.baseFunctionSourceLink,
+                basePropertySourceLink = devsiteConfiguration.basePropertySourceLink,
                 annotationsNotToDisplay = devsiteConfiguration.allAnnotationsNotToDisplayJava,
             )
             val kHolder = DocumentablesHolder(
@@ -97,7 +99,9 @@ internal class MultiLanguageRenderer(
                 excludedPackages = devsiteConfiguration.computedExcludedPackagesForKotlin,
                 fileMetadataMap = fileMetadataMap,
                 versionMetadataMap = versionMetadataMap,
-                baseSourceLink = devsiteConfiguration.baseSourceLink,
+                baseClassSourceLink = devsiteConfiguration.baseSourceLink,
+                baseFunctionSourceLink = devsiteConfiguration.baseFunctionSourceLink,
+                basePropertySourceLink = devsiteConfiguration.basePropertySourceLink,
                 annotationsNotToDisplay = devsiteConfiguration.allAnnotationsNotToDisplayKotlin,
             )
 

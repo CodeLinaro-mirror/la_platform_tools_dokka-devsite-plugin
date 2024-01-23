@@ -92,7 +92,9 @@ internal class DocumentablesHolder(
     private val excludedPackages: Set<Regex> = emptySet(),
     val fileMetadataMap: Map<String, LibraryMetadata> = emptyMap(),
     val versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap(),
-    val baseSourceLink: String? = null,
+    val baseClassSourceLink: String? = null,
+    val baseFunctionSourceLink: String? = null,
+    val basePropertySourceLink: String? = null,
     val annotationsNotToDisplay: Set<String> = emptySet(),
 ) {
     private val packages = scope.async { computePackages(module) }

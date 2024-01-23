@@ -127,6 +127,8 @@ abstract class IntegrationTestBase : BaseAbstractTest(
                         includedHeadTagsPathKotlin = includedHeadTagsPathKotlin,
                         packagePrefixToRemoveInToc = null,
                         baseSourceLink = baseSourceLink,
+                        baseFunctionSourceLink = null,
+                        basePropertySourceLink = null,
                         // These lists are based on the AndroidX excluded annotations
                         annotationsNotToDisplay = listOf(
                             "androidx.compose.runtime.Stable",

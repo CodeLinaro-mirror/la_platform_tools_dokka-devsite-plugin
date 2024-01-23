@@ -63,7 +63,10 @@ internal class MetadataConverter(
      */
     fun getMetadataForClasslike(classlike: DClasslike): MetadataComponent {
         val libraryMetadata = classlike.findMatchingLibraryMetadata()
-        val sourceUrl = classlike.createLinkToSource()
+        val sourceUrl = classlike.createLinkToSource(
+            docsHolder.baseClassSourceLink,
+            classlike.dri.fullName,
+        )
         val versionMetadata = classlike.findMatchingVersionMetadata(
             libraryMetadata?.releaseNotesUrl,
         )
@@ -84,14 +87,19 @@ internal class MetadataConverter(
         val libraryMetadata = function.findMatchingLibraryMetadata()
         val versionMetadata = function.findMatchingVersionMetadata(libraryMetadata?.releaseNotesUrl)
 
-        // Display library metadata only for top-level and extension functions, so it isn't
-        // duplicated from the class metadata for functions within classes.
+        // Display library metadata and source links only for top-level and extension functions, so
+        // they aren't duplicated from the class metadata for functions within classes.
         val includeAdditionalMetadata = function.dri.isTopLevel() || function.isExtension()
+        val sourceLink = if (includeAdditionalMetadata) {
+            function.createLinkToSource(docsHolder.baseFunctionSourceLink, function.name)
+        } else {
+            null
+        }
+
         return DefaultMetadataComponent(
             MetadataComponent.Params(
                 libraryMetadata = if (includeAdditionalMetadata) libraryMetadata else null,
-                // TODO(b/264828018): display source link for some functions
-                sourceLinkUrl = null,
+                sourceLinkUrl = sourceLink,
                 versionMetadata = versionMetadata,
             ),
         )
@@ -104,14 +112,19 @@ internal class MetadataConverter(
         val libraryMetadata = property.findMatchingLibraryMetadata()
         val versionMetadata = property.findMatchingVersionMetadata(libraryMetadata?.releaseNotesUrl)
 
-        // Display library metadata only for top-level and extension properties, so it isn't
-        // duplicated from the class metadata for properties within classes.
+        // Display library metadata and source links only for top-level and extension properties, so
+        // they aren't duplicated from the class metadata for properties within classes.
         val includeAdditionalMetadata = property.dri.isTopLevel() || property.isExtension()
+        val sourceLink = if (includeAdditionalMetadata) {
+            property.createLinkToSource(docsHolder.basePropertySourceLink, property.name)
+        } else {
+            null
+        }
+
         return DefaultMetadataComponent(
             MetadataComponent.Params(
                 libraryMetadata = if (includeAdditionalMetadata) libraryMetadata else null,
-                // TODO(b/264828018): display source link for some properties
-                sourceLinkUrl = null,
+                sourceLinkUrl = sourceLink,
                 versionMetadata = versionMetadata,
             ),
         )
@@ -240,15 +253,19 @@ internal class MetadataConverter(
     }
 
     /**
-     * Creates a link to the source of the classlike using the base URL from the configuration.
+     * Creates a link to the source of the documentable using the supplied [baseLink] and [name].
      *
-     * Returns null if there was no base source link in the configuration.
+     * Returns null if [baseLink] is null or the documentable has no source entries.
      */
-    private fun <T> T.createLinkToSource(): String? where T : Documentable, T : WithSources {
+    private fun <T> T.createLinkToSource(
+        baseLink: String?,
+        name: String,
+    ): String? where T : Documentable, T : WithSources {
+        baseLink ?: return null
         val paths = getSourceFilePaths() ?: return null
         // Reduce the list of paths to a single path by taking the common prefix of all of them.
         val path = paths.reduce { currPrefix, nextPath -> currPrefix.commonPrefixWith(nextPath) }
-        return docsHolder.baseSourceLink?.format(path, dri.fullName)
+        return baseLink.format(path, name)
     }
 
     /**

@@ -40,7 +40,7 @@ internal class MetadataConverterTest(
         val metadataComponent = """
             |class Foo
         """.render().metadataForClasslike(
-            baseSourceLink = "https://cs.android.com/search?q=file:%s+class:%s",
+            baseClassSourceLink = "https://cs.android.com/search?q=file:%s+class:%s",
         )
 
         val link = metadataComponent.data.sourceLink
@@ -57,7 +57,7 @@ internal class MetadataConverterTest(
         val metadataComponent = """
                 |class Foo
             """.render().metadataForClasslike(
-            baseSourceLink = "https://cs.android.com/search?q=file:%s",
+            baseClassSourceLink = "https://cs.android.com/search?q=file:%s",
         )
 
         val link = metadataComponent.data.sourceLink
@@ -857,40 +857,101 @@ internal class MetadataConverterTest(
         }
     }
 
+    @Test
+    fun `Top level function source link`() {
+        val module = """
+            |fun bar() {}
+        """.render()
+        val function = if (displayLanguage == Language.JAVA) {
+            module.classlike("TestKt")!!.functions.single()
+        } else {
+            module.function("bar")!!
+        }
+        val metadataComponent = module.metadata(
+            function,
+            baseFunctionSourceLink = "https://cs.android.com/search?q=file:%s+function:%s",
+        )
+        val sourceLinkComponent = metadataComponent.data.sourceLink
+        assertThat(sourceLinkComponent).isNotNull()
+        assertThat(sourceLinkComponent!!.data.url).isEqualTo(
+            "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+function:bar",
+        )
+    }
+
+    @Test
+    fun `Top level property source link`() {
+        val module = """
+            |const val foo = 3
+        """.render()
+        val property = if (displayLanguage == Language.JAVA) {
+            module.classlike("TestKt")!!.properties.single()
+        } else {
+            module.property("foo")!!
+        }
+        val metadataComponent = module.metadata(
+            property,
+            basePropertySourceLink = "https://cs.android.com/search?q=file:%s+symbol:%s",
+        )
+        val sourceLinkComponent = metadataComponent.data.sourceLink
+        assertThat(sourceLinkComponent).isNotNull()
+        assertThat(sourceLinkComponent!!.data.url).isEqualTo(
+            "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+symbol:foo",
+        )
+    }
+
     private fun DModule.metadataForClasslike(
         name: String = "Foo",
-        baseSourceLink: String? = null,
+        baseClassSourceLink: String? = null,
         versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap(),
         fileMetadataMap: Map<String, LibraryMetadata> = emptyMap(),
     ): MetadataComponent =
-        metadata(classlike(name)!!, baseSourceLink, versionMetadataMap, fileMetadataMap)
+        metadata(
+            documentable = classlike(name)!!,
+            baseClassSourceLink = baseClassSourceLink,
+            versionMetadataMap = versionMetadataMap,
+            fileMetadataMap = fileMetadataMap,
+        )
 
     private fun DModule.metadataForMethod(
         name: String = "bar",
-        baseSourceLink: String? = null,
+        baseFunctionSourceLink: String? = null,
         versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap(),
         fileMetadataMap: Map<String, LibraryMetadata> = emptyMap(),
     ): MetadataComponent =
-        metadata(function(name)!!, baseSourceLink, versionMetadataMap, fileMetadataMap)
+        metadata(
+            documentable = function(name)!!,
+            baseFunctionSourceLink = baseFunctionSourceLink,
+            versionMetadataMap = versionMetadataMap,
+            fileMetadataMap = fileMetadataMap,
+        )
 
     private fun DModule.metadataForProperty(
         name: String = "foo",
-        baseSourceLink: String? = null,
+        basePropertySourceLink: String? = null,
         versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap(),
         fileMetadataMap: Map<String, LibraryMetadata> = emptyMap(),
     ): MetadataComponent =
-        metadata(property(name)!!, baseSourceLink, versionMetadataMap, fileMetadataMap)
+        metadata(
+            documentable = property(name)!!,
+            basePropertySourceLink = basePropertySourceLink,
+            versionMetadataMap = versionMetadataMap,
+            fileMetadataMap = fileMetadataMap,
+        )
 
     private fun DModule.metadata(
         documentable: Documentable,
-        baseSourceLink: String? = null,
+        baseClassSourceLink: String? = null,
+        baseFunctionSourceLink: String? = null,
+        basePropertySourceLink: String? = null,
         versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap(),
         fileMetadataMap: Map<String, LibraryMetadata> = emptyMap(),
     ): MetadataComponent {
         val converterHolder = ConverterHolder(
             testClass = this@MetadataConverterTest,
             module = this,
-            baseSourceLink = baseSourceLink,
+            baseClassSourceLink = baseClassSourceLink,
+            baseFunctionSourceLink = baseFunctionSourceLink,
+            basePropertySourceLink = basePropertySourceLink,
             versionMetadataMap = versionMetadataMap,
             fileMetadataMap = fileMetadataMap,
         )

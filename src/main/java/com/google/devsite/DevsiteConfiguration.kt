@@ -58,8 +58,18 @@ import org.jetbrains.dokka.plugability.ConfigurableBlock
  * for each package). Optional, defaults to `null` (no string trimmed from package names).
  * @param baseSourceLink Used to generate links to the source for each class page. This is a format
  * string with placeholders for the filepath and (optionally) the qualified name of the class
- * (`https://cs.android.com/search?q=file:%s+class:%s&ss=androidx/platform/frameworks/support` is
- * the [baseSourceLink] for AndroidX). Optional, if not specified, no source links are generated.
+ * (`https://cs.android.com/search?q=file:%s+class:%s` is the [baseSourceLink] for AndroidX).
+ * Optional, if not specified, no source links are generated.
+ * @param baseFunctionSourceLink Like [baseSourceLink], but used to generate links to the source for
+ * top-level and companion functions. This is a format string with placeholders for the filepath and
+ * function name (`https://cs.android.com/search?q=file:%s+function:%s` is the
+ * [baseFunctionSourceLink] for AndroidX). Optional, if not specified, no source links are generated
+ * for functions.
+ * @param basePropertySourceLink Like [baseSourceLink], but used to generate links to the source for
+ * top-level and companion properties. This is a format string with placeholders for the filepath
+ * and property name `https://cs.android.com/search?q=file:%s+symbol:%s` is the
+ * [basePropertySourceLink] for AndroidX). Optional, if not specified, no source links are generated
+ * for properties.
  * @param annotationsNotToDisplay A list of annotation names (including the package name, e.g.
  * `java.lang.Override`) which should not be displayed in the docs. Optional, if unspecified
  * defaults to an empty list. Note that nullability annotations are handled separately.
@@ -89,6 +99,8 @@ data class DevsiteConfiguration(
     val includedHeadTagsPathKotlin: String? = "_shared/_reference-head-tags.html",
     val packagePrefixToRemoveInToc: String?,
     val baseSourceLink: String?,
+    val baseFunctionSourceLink: String?,
+    val basePropertySourceLink: String?,
     val annotationsNotToDisplay: List<String>?,
     val annotationsNotToDisplayJava: List<String>?,
     val annotationsNotToDisplayKotlin: List<String>?,
