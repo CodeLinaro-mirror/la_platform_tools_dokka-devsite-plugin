@@ -63,8 +63,9 @@ import org.jetbrains.dokka.plugability.ConfigurableBlock
  * @param baseFunctionSourceLink Like [baseSourceLink], but used to generate links to the source for
  * top-level and companion functions. This is a format string with placeholders for the filepath and
  * function name (`https://cs.android.com/search?q=file:%s+function:%s` is the
- * [baseFunctionSourceLink] for AndroidX). Optional, if not specified, no source links are generated
- * for functions.
+ * [baseFunctionSourceLink] for AndroidX). Property accessors will be linked based on their property
+ * with [basePropertySourceLink], as synthetic accessors don't exist in source. Optional, if not
+ * specified, no source links are generated for functions.
  * @param basePropertySourceLink Like [baseSourceLink], but used to generate links to the source for
  * top-level and companion properties. This is a format string with placeholders for the filepath
  * and property name `https://cs.android.com/search?q=file:%s+symbol:%s` is the

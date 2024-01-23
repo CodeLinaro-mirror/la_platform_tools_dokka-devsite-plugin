@@ -91,7 +91,14 @@ internal class MetadataConverter(
         // they aren't duplicated from the class metadata for functions within classes.
         val includeAdditionalMetadata = function.dri.isTopLevel() || function.isExtension()
         val sourceLink = if (includeAdditionalMetadata) {
-            function.createLinkToSource(docsHolder.baseFunctionSourceLink, function.name)
+            // If this is a property accessor, link to the property instead because the function may
+            // not exist in source.
+            val sourceProperty = function.extra[SourceProperty.PropertyKey]?.property
+            sourceProperty?.createLinkToSource(
+                docsHolder.basePropertySourceLink,
+                sourceProperty.name,
+            )
+                ?: function.createLinkToSource(docsHolder.baseFunctionSourceLink, function.name)
         } else {
             null
         }

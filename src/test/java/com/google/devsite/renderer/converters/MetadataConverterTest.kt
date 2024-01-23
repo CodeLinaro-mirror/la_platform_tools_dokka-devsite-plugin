@@ -899,6 +899,27 @@ internal class MetadataConverterTest(
         )
     }
 
+    @Test
+    fun `Top level property accessor source link`() {
+        if (displayLanguage == Language.JAVA) {
+            val module = """
+                |val foo = 3
+            """.render()
+
+            val accessor = module.properties()!!.gettersAndSetters().single()
+            val metadataComponent = module.metadata(
+                accessor,
+                baseFunctionSourceLink = "https://cs.android.com/search?q=file:%s+function:%s",
+                basePropertySourceLink = "https://cs.android.com/search?q=file:%s+symbol:%s",
+            )
+            val sourceLinkComponent = metadataComponent.data.sourceLink
+            assertThat(sourceLinkComponent).isNotNull()
+            assertThat(sourceLinkComponent!!.data.url).isEqualTo(
+                "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+symbol:foo",
+            )
+        }
+    }
+
     private fun DModule.metadataForClasslike(
         name: String = "Foo",
         baseClassSourceLink: String? = null,

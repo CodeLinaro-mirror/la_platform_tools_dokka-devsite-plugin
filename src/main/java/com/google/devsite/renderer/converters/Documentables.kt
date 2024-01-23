@@ -69,6 +69,7 @@ import org.jetbrains.dokka.model.doc.DocumentationNode
 import org.jetbrains.dokka.model.doc.Param
 import org.jetbrains.dokka.model.doc.Property
 import org.jetbrains.dokka.model.isJvmName
+import org.jetbrains.dokka.model.properties.ExtraProperty
 import org.jetbrains.dokka.model.properties.PropertyContainer
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 import java.io.File
@@ -521,14 +522,22 @@ fun List<DProperty>.gettersAndSetters(): List<DFunction> {
             func = func?.addAnnotation(JvmStatic)
         }
         val callableName = func?.dri?.callable?.name ?: ""
-        if (callableName.startsWith("<get-")) {
+        func = if (callableName.startsWith("<get-")) {
             func!!.fixSyntheticAccessor(property, getter = true)
         } else if (callableName.startsWith("<set-")) {
             func!!.fixSyntheticAccessor(property, getter = false)
         } else {
             func
         }
+        func?.withNewExtras(func.extra.plus(SourceProperty(property)))
     }
+}
+
+/** An [ExtraProperty] for generated accessors to link back to the property they came from. */
+internal data class SourceProperty(val property: DProperty) : ExtraProperty<DFunction> {
+    object PropertyKey : ExtraProperty.Key<DFunction, SourceProperty>
+
+    override val key: ExtraProperty.Key<DFunction, *> = PropertyKey
 }
 
 /**
