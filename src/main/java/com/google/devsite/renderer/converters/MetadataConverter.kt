@@ -49,6 +49,7 @@ import org.jetbrains.dokka.model.TypeParameter
 import org.jetbrains.dokka.model.UnresolvedBound
 import org.jetbrains.dokka.model.Void
 import org.jetbrains.dokka.model.WithSources
+import org.jetbrains.dokka.model.isExtension
 
 /**
  * Creates metadata components (a section containing information such as artifact ID and source
@@ -83,11 +84,12 @@ internal class MetadataConverter(
         val libraryMetadata = function.findMatchingLibraryMetadata()
         val versionMetadata = function.findMatchingVersionMetadata(libraryMetadata?.releaseNotesUrl)
 
+        // Display library metadata only for top-level and extension functions, so it isn't
+        // duplicated from the class metadata for functions within classes.
+        val includeAdditionalMetadata = function.dri.isTopLevel() || function.isExtension()
         return DefaultMetadataComponent(
             MetadataComponent.Params(
-                // Display library metadata only for top-level functions, so it isn't duplicated
-                // from the class metadata for functions within classes.
-                libraryMetadata = if (function.dri.isTopLevel()) libraryMetadata else null,
+                libraryMetadata = if (includeAdditionalMetadata) libraryMetadata else null,
                 // TODO(b/264828018): display source link for some functions
                 sourceLinkUrl = null,
                 versionMetadata = versionMetadata,
@@ -102,11 +104,12 @@ internal class MetadataConverter(
         val libraryMetadata = property.findMatchingLibraryMetadata()
         val versionMetadata = property.findMatchingVersionMetadata(libraryMetadata?.releaseNotesUrl)
 
+        // Display library metadata only for top-level and extension properties, so it isn't
+        // duplicated from the class metadata for properties within classes.
+        val includeAdditionalMetadata = property.dri.isTopLevel() || property.isExtension()
         return DefaultMetadataComponent(
             MetadataComponent.Params(
-                // Display library metadata only for top-level properties, so it isn't duplicated
-                // from the class metadata for properties within classes.
-                libraryMetadata = if (property.dri.isTopLevel()) libraryMetadata else null,
+                libraryMetadata = if (includeAdditionalMetadata) libraryMetadata else null,
                 // TODO(b/264828018): display source link for some properties
                 sourceLinkUrl = null,
                 versionMetadata = versionMetadata,

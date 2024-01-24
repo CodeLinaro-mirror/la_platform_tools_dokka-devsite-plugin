@@ -827,6 +827,36 @@ internal class MetadataConverterTest(
         }
     }
 
+    @Test
+    fun `Library metadata for extension function and property`() {
+        val libraryMetadataMap = mapOf(
+            "kotlin/androidx/example/Test.kt" to LibraryMetadata(
+                groupId = "androidx.example",
+                artifactId = "example",
+                releaseNotesUrl = "https://d.android.com/release/example",
+            ),
+        )
+
+        val module = """
+            |val String.foo get() = 0
+            |fun String.bar() = Unit
+        """.render()
+
+        val metadataComponents = listOf(
+            module.metadataForMethod(fileMetadataMap = libraryMetadataMap),
+            module.metadataForProperty(fileMetadataMap = libraryMetadataMap),
+        )
+        for (metadataComponent in metadataComponents) {
+            val libraryMetadata = metadataComponent.data.libraryMetadata
+            assertThat(libraryMetadata).isNotNull()
+            assertThat(libraryMetadata!!.groupId).isEqualTo("androidx.example")
+            assertThat(libraryMetadata.artifactId).isEqualTo("example")
+            assertThat(libraryMetadata.releaseNotesUrl).isEqualTo(
+                "https://d.android.com/release/example",
+            )
+        }
+    }
+
     private fun DModule.metadataForClasslike(
         name: String = "Foo",
         baseSourceLink: String? = null,
