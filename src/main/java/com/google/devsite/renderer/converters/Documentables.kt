@@ -42,7 +42,6 @@ import org.jetbrains.dokka.model.DEnumEntry
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DObject
-import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.DParameter
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.DTypeAlias
@@ -654,14 +653,13 @@ internal fun Documentable.getExpectOrCommonSourceSet() =
         ?: expectPresentInSet
         ?: sourceSets.singleOrNull { it.analysisPlatform == org.jetbrains.dokka.Platform.common }
         ?: sourceSets.singleOrNull { it.displayName.equalsPossiblyWithMain("common") }
-        ?: (this as? DPackage).let { // b/254490320. The one case we expect to see this is package
-            // descriptions. Below is a weak fallback for libraries with no common sourceSet.
-            sourceSets.singleOrNull { it.displayName.equalsIgnoreCase("jvmMain") }
-                ?: sourceSets.singleOrNull { it.displayName.equalsIgnoreCase("androidMain") }
-        }
-        ?: throw RuntimeException(
-            "Unable to determine expect or common sourceSet for ${this.className} $dri",
-        )
+        // b/254490320. The one case we expect to see this is package descriptions.
+        // Below is a weak fallback for libraries with no common sourceSet.
+        ?: sourceSets.singleOrNull { it.displayName.equalsIgnoreCase("jvmMain") }
+        ?: sourceSets.singleOrNull { it.displayName.equalsIgnoreCase("androidMain") }
+        ?: sourceSets.singleOrNull { it.displayName.equalsIgnoreCase("desktopMain") }
+        ?: sourceSets.firstOrNull()
+        ?: throw RuntimeException("No sourceSets present for ${this.className} $dri")
 
 private fun String.equalsPossiblyWithMain(other: String) =
     this.equalsIgnoreCase(other) || this.equalsIgnoreCase(other + "main")
