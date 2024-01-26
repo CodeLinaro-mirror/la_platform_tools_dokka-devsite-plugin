@@ -920,6 +920,63 @@ internal class MetadataConverterTest(
         }
     }
 
+    @Test
+    fun `Source link for renamed function`() {
+        val module = """
+            |@JvmName("bar")
+            |fun foo() = Unit
+        """.render()
+        val renamedFunction = module.function("foo")!!.withJvmName()
+
+        val metadataComponent = module.metadata(
+            renamedFunction,
+            baseFunctionSourceLink = "https://cs.android.com/search?q=file:%s+function:%s",
+        )
+        val sourceLinkComponent = metadataComponent.data.sourceLink
+        assertThat(sourceLinkComponent).isNotNull()
+        assertThat(sourceLinkComponent!!.data.url).isEqualTo(
+            "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+function:foo",
+        )
+    }
+
+    @Test
+    fun `Source link for renamed accessor`() {
+        val module = """
+            |@get:JvmName("bar")
+            |val foo = 3
+        """.render()
+        val renamedFunction = module.properties()!!.gettersAndSetters().single().withJvmName()
+
+        val metadataComponent = module.metadata(
+            renamedFunction,
+            baseFunctionSourceLink = "https://cs.android.com/search?q=file:%s+function:%s",
+            basePropertySourceLink = "https://cs.android.com/search?q=file:%s+symbol:%s",
+        )
+        val sourceLinkComponent = metadataComponent.data.sourceLink
+        assertThat(sourceLinkComponent).isNotNull()
+        assertThat(sourceLinkComponent!!.data.url).isEqualTo(
+            "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+symbol:foo",
+        )
+    }
+
+    @Test
+    fun `Source link for function in renamed file`() {
+        val module = """
+            |fun foo() = Unit
+        """.render(fileUseAnnotation = "@file:JvmName(\"Foo\")")
+        val function = module.function("foo")!!.withJvmName()
+
+        val metadataComponent = module.metadata(
+            function,
+            baseFunctionSourceLink = "https://cs.android.com/search?q=file:%s+function:%s",
+        )
+        val sourceLinkComponent = metadataComponent.data.sourceLink
+        assertThat(sourceLinkComponent).isNotNull()
+        assertThat(sourceLinkComponent!!.data.url).isEqualTo(
+            "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+function:foo",
+        )
+    }
+
     private fun DModule.metadataForClasslike(
         name: String = "Foo",
         baseClassSourceLink: String? = null,

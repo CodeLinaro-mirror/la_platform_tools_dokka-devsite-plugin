@@ -312,7 +312,15 @@ fun DFunction.withJvmName(): DFunction {
     return copy(
         name = jvmName,
         dri = dri.copy(callable = dri.callable?.copy(name = jvmName)),
+        extra = extra.plus(OriginalName(name)),
     )
+}
+
+/** An [ExtraProperty] to track the original name of an element renamed with @JvmName. */
+internal data class OriginalName(val name: String) : ExtraProperty<DFunction> {
+    object PropertyKey : ExtraProperty.Key<DFunction, OriginalName>
+
+    override val key: ExtraProperty.Key<DFunction, *> = PropertyKey
 }
 
 internal fun DFunction.matches(other: DFunction): Boolean =

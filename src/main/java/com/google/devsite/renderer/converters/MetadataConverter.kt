@@ -98,7 +98,11 @@ internal class MetadataConverter(
                 docsHolder.basePropertySourceLink,
                 sourceProperty.name,
             )
-                ?: function.createLinkToSource(docsHolder.baseFunctionSourceLink, function.name)
+                ?: function.createLinkToSource(
+                    docsHolder.baseFunctionSourceLink,
+                    // If the function was renamed, use the name from source.
+                    function.extra[OriginalName.PropertyKey]?.name ?: function.name,
+                )
         } else {
             null
         }
