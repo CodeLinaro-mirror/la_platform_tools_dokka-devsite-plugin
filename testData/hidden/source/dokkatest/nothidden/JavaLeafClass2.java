@@ -32,4 +32,10 @@ public class JavaLeafClass2 {
     private String hiddenBackingField = "asdf";
     /** @hide */
     public String getHiddenBackingField() { return hiddenBackingField; }
+
+    // The field is visible, but the getter is hidden
+    public String visibleField = "";
+
+    @CustomHideAnnotation
+    public String getVisibleField() { return visibleField; }
 }

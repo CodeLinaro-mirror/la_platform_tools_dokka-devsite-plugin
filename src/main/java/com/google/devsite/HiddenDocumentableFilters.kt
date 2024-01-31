@@ -98,11 +98,18 @@ class PostMergePackageDocumentableFilter : DocumentableTransformer {
     }
 }
 
-private fun Documentable.isHidden(hidingAnnotations: List<String>): Boolean =
-    this.allAnnotations().any {
+private fun Documentable.isHiddenWithAnnotation(hidingAnnotations: List<String>): Boolean =
+    allAnnotations().any {
         hidingAnnotations.contains(it.dri.fullName) ||
             (it.dri == deprecatedDri && "DeprecationLevel.HIDDEN" in it.params["level"].asString())
-    } || this.hasHideJavadocTag() || this.hasRemovedJavadocTag()
+    }
+
+private fun Documentable.isHidden(hidingAnnotations: List<String>): Boolean =
+    isHiddenWithAnnotation(hidingAnnotations) ||
+        this.hasHideJavadocTag() ||
+        this.hasRemovedJavadocTag() ||
+        // Mirror Metalava's behavior for properties annotated with `@get:<hiding annotation>`
+        (this as? DProperty)?.getter?.isHiddenWithAnnotation(hidingAnnotations) == true
 
 private fun Documentable.hasHideJavadocTag(): Boolean =
     this.documentation.any {
