@@ -1,0 +1,208 @@
+<html devsite="true">
+  <head>
+    <title>PullToRefreshState</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="header-block">
+      <div>
+        <h1>PullToRefreshState</h1>
+      </div>
+      <div id="metadata-info-block">
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/material3/pulltorefresh/PullToRefresh.kt+class:androidx.compose.material3.pulltorefresh.PullToRefreshState&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      </div>
+    </div>
+    <div id="refdoc-switcher-placeholder"></div>
+    <p>
+      <pre>@<a href="/reference/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br>public interface <a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a></pre>
+    </p>
+    <hr>
+    <p>The state that is associated with a <code><a href="/reference/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshContainer(androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">PullToRefreshContainer</a></code>. Each instance of <code><a href="/reference/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshContainer(androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">PullToRefreshContainer</a></code> should have its own <code><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a></code>.</p>
+    <p><code><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a></code> can be used with other progress indicators like so:</p>
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.Text
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+
+var itemCount by remember { mutableStateOf(15) }
+val state = rememberPullToRefreshState()
+if (state.isRefreshing) {
+    LaunchedEffect(true) {
+        // fetch something
+        delay(1500)
+        itemCount += 5
+        state.endRefresh()
+    }
+}
+Box(Modifier.nestedScroll(state.nestedScrollConnection)) {
+    LazyColumn(Modifier.fillMaxSize()) {
+        if (!state.isRefreshing) {
+            items(itemCount) {
+                ListItem({ Text(text = &quot;Item ${itemCount - it}&quot;) })
+            }
+        }
+    }
+    if (state.isRefreshing) {
+        LinearProgressIndicator()
+    } else {
+        LinearProgressIndicator(progress = { state.progress })
+    }
+}</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#endRefresh()">endRefresh</a>()</code></div>
+              <p>Sets <code><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#isRefreshing()">isRefreshing</a></code> to false.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#getNestedScrollConnection()">getNestedScrollConnection</a>()</code></div>
+              <p>A <code><a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></code> that should be attached to a <code><a href="/reference/androidx/compose/ui/input/nestedscroll/package-summary.html#(androidx.compose.ui.Modifier).nestedScroll(androidx.compose.ui.input.nestedscroll.NestedScrollConnection,androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher)">Modifier.nestedScroll</a></code> in order to keep track of the scroll events.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#getPositionalThreshold()">getPositionalThreshold</a>()</code></div>
+              <p>The threshold (in pixels), above which if a release occurs, a refresh will be called</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract float</code></td>
+            <td>
+              <div><code>@<a href="/reference/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a><br><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#getProgress()">getProgress</a>()</code></div>
+              <p>PullRefresh progress towards <code><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#positionalThreshold()">positionalThreshold</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract float</code></td>
+            <td>
+              <div><code>@<a href="/reference/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a><br><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#getVerticalOffset()">getVerticalOffset</a>()</code></div>
+              <p>The vertical offset (in pixels) for the <code><a href="/reference/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshContainer(androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">PullToRefreshContainer</a></code> to consume</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#getIsRefreshing()">isRefreshing</a>()</code></div>
+              <p>Indicates whether a refresh is occurring.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#setNestedScrollConnection(androidx.compose.ui.input.nestedscroll.NestedScrollConnection)">setNestedScrollConnection</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a>&nbsp;nestedScrollConnection<br>)</code></div>
+              <p>A <code><a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></code> that should be attached to a <code><a href="/reference/androidx/compose/ui/input/nestedscroll/package-summary.html#(androidx.compose.ui.Modifier).nestedScroll(androidx.compose.ui.input.nestedscroll.NestedScrollConnection,androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher)">Modifier.nestedScroll</a></code> in order to keep track of the scroll events.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#startRefresh()">startRefresh</a>()</code></div>
+              <p>Sets <code><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#isRefreshing()">isRefreshing</a></code> to true.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="endRefresh--"></a><a name="endrefresh"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="endRefresh()">endRefresh</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#endRefresh()">endRefresh</a>()</pre>
+        <p>Sets <code><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#isRefreshing()">isRefreshing</a></code> to false.</p>
+      </div>
+      <div class="api-item"><a name="getNestedScrollConnection--"></a><a name="getnestedscrollconnection"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getNestedScrollConnection()">getNestedScrollConnection</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a>&nbsp;<a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#getNestedScrollConnection()">getNestedScrollConnection</a>()</pre>
+        <p>A <code><a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></code> that should be attached to a <code><a href="/reference/androidx/compose/ui/input/nestedscroll/package-summary.html#(androidx.compose.ui.Modifier).nestedScroll(androidx.compose.ui.input.nestedscroll.NestedScrollConnection,androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher)">Modifier.nestedScroll</a></code> in order to keep track of the scroll events.</p>
+      </div>
+      <div class="api-item"><a name="getPositionalThreshold--"></a><a name="getpositionalthreshold"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getPositionalThreshold()">getPositionalThreshold</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;float&nbsp;<a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#getPositionalThreshold()">getPositionalThreshold</a>()</pre>
+        <p>The threshold (in pixels), above which if a release occurs, a refresh will be called</p>
+      </div>
+      <div class="api-item"><a name="getProgress--"></a><a name="getprogress"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getProgress()">getProgress</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a><br>abstract&nbsp;float&nbsp;<a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#getProgress()">getProgress</a>()</pre>
+        <p>PullRefresh progress towards <code><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#positionalThreshold()">positionalThreshold</a></code>. 0.0 indicates no progress, 1.0 indicates complete progress, 1.0 indicates overshoot beyond the provided threshold</p>
+      </div>
+      <div class="api-item"><a name="getVerticalOffset--"></a><a name="getverticaloffset"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getVerticalOffset()">getVerticalOffset</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a><br>abstract&nbsp;float&nbsp;<a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#getVerticalOffset()">getVerticalOffset</a>()</pre>
+        <p>The vertical offset (in pixels) for the <code><a href="/reference/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshContainer(androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">PullToRefreshContainer</a></code> to consume</p>
+      </div>
+      <div class="api-item"><a name="getIsRefreshing--"></a><a name="getisrefreshing"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getIsRefreshing()">isRefreshing</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#getIsRefreshing()">isRefreshing</a>()</pre>
+        <p>Indicates whether a refresh is occurring.</p>
+      </div>
+      <div class="api-item"><a name="setNestedScrollConnection-androidx.compose.ui.input.nestedscroll.NestedScrollConnection-"></a><a name="setnestedscrollconnection"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="setNestedScrollConnection(androidx.compose.ui.input.nestedscroll.NestedScrollConnection)">setNestedScrollConnection</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#setNestedScrollConnection(androidx.compose.ui.input.nestedscroll.NestedScrollConnection)">setNestedScrollConnection</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a>&nbsp;nestedScrollConnection<br>)</pre>
+        <p>A <code><a href="/reference/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></code> that should be attached to a <code><a href="/reference/androidx/compose/ui/input/nestedscroll/package-summary.html#(androidx.compose.ui.Modifier).nestedScroll(androidx.compose.ui.input.nestedscroll.NestedScrollConnection,androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher)">Modifier.nestedScroll</a></code> in order to keep track of the scroll events.</p>
+      </div>
+      <div class="api-item"><a name="startRefresh--"></a><a name="startrefresh"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="startRefresh()">startRefresh</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#startRefresh()">startRefresh</a>()</pre>
+        <p>Sets <code><a href="/reference/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#isRefreshing()">isRefreshing</a></code> to true.</p>
+      </div>
+    </div>
+  </body>
+</html>

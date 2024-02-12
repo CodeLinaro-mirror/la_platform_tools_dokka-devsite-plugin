@@ -1,0 +1,280 @@
+<html devsite="true">
+  <head>
+    <title>PullToRefreshState</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="header-block">
+      <div>
+        <h1>PullToRefreshState</h1>
+      </div>
+      <div id="metadata-info-block">
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/compose/material3/pulltorefresh/PullToRefresh.kt+class:androidx.compose.material3.pulltorefresh.PullToRefreshState&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      </div>
+    </div>
+    <div id="refdoc-switcher-placeholder"></div>
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-filter  select-el-container-id="platform">
+      <div>
+        <ul class="list" style="list-style: none; padding-left: 0">
+          <li>
+            <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+            <!--platform-Common/All-->
+            <pre>@<a href="/reference/kotlin/androidx/compose/material3/ExperimentalMaterial3Api.html">ExperimentalMaterial3Api</a><br>interface <a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a></pre>
+          </li>
+        </ul>
+      </div>
+    </devsite-filter >
+    <hr>
+    <p>The state that is associated with a <code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshContainer(androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">PullToRefreshContainer</a></code>. Each instance of <code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshContainer(androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">PullToRefreshContainer</a></code> should have its own <code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a></code>.</p>
+    <p><code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html">PullToRefreshState</a></code> can be used with other progress indicators like so:</p>
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.Text
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+
+var itemCount by remember { mutableStateOf(15) }
+val state = rememberPullToRefreshState()
+if (state.isRefreshing) {
+    LaunchedEffect(true) {
+        // fetch something
+        delay(1500)
+        itemCount += 5
+        state.endRefresh()
+    }
+}
+Box(Modifier.nestedScroll(state.nestedScrollConnection)) {
+    LazyColumn(Modifier.fillMaxSize()) {
+        if (!state.isRefreshing) {
+            items(itemCount) {
+                ListItem({ Text(text = &quot;Item ${itemCount - it}&quot;) })
+            }
+        }
+    }
+    if (state.isRefreshing) {
+        LinearProgressIndicator()
+    } else {
+        LinearProgressIndicator(progress = { state.progress })
+    }
+}</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public functions</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#endRefresh()">endRefresh</a>()</code></div>
+                <p>Sets <code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#isRefreshing()">isRefreshing</a></code> to false.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#startRefresh()">startRefresh</a>()</code></div>
+                <p>Sets <code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#isRefreshing()">isRefreshing</a></code> to true.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <div class="devsite-table-wrapper">
+      <devsite-filter  select-el-container-id="platform">
+        <table class="fixed">
+          <colgroup>
+            <col width="35%">
+            <col width="58%">
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="100%"><h3>Public properties</h3></th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#isRefreshing()">isRefreshing</a></code></div>
+                <p>Indicates whether a refresh is occurring.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#nestedScrollConnection()">nestedScrollConnection</a></code></div>
+                <p>A <code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></code> that should be attached to a <code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/package-summary.html#(androidx.compose.ui.Modifier).nestedScroll(androidx.compose.ui.input.nestedscroll.NestedScrollConnection,androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher)">Modifier.nestedScroll</a></code> in order to keep track of the scroll events.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#positionalThreshold()">positionalThreshold</a></code></div>
+                <p>The threshold (in pixels), above which if a release occurs, a refresh will be called</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#progress()">progress</a></code></div>
+                <p>PullRefresh progress towards <code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#positionalThreshold()">positionalThreshold</a></code>.</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <div><code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#verticalOffset()">verticalOffset</a></code></div>
+                <p>The vertical offset (in pixels) for the <code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshContainer(androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">PullToRefreshContainer</a></code> to consume</p>
+              </td>
+              <td>
+                <div class="kotlin-platform" data-title="Common/All">Cmn</div>
+                <!--platform-Common/All--></td>
+            </tr>
+          </tbody>
+        </table>
+      </devsite-filter >
+    </div>
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2 data-title="platform-Common/All">Public functions
+          <!--platform-Common/All--></h2>
+        <div class="api-item"><a name="endRefresh--"></a><a name="endrefresh"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="endRefresh()">endRefresh</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#endRefresh()">endRefresh</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Sets <code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#isRefreshing()">isRefreshing</a></code> to false.</p>
+        </div>
+        <div class="api-item"><a name="startRefresh--"></a><a name="startrefresh"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="startRefresh()">startRefresh</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#startRefresh()">startRefresh</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <p>Sets <code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#isRefreshing()">isRefreshing</a></code> to true.</p>
+        </div>
+      </div>
+    </devsite-filter >
+    <devsite-filter  select-el-container-id="platform">
+      <div class="list">
+        <h2 data-title="platform-Common/All">Public properties
+          <!--platform-Common/All--></h2>
+        <div class="api-item"><a name="getIsRefreshing()"></a><a name="setIsRefreshing()"></a><a name="getIsRefreshing--"></a><a name="setIsRefreshing--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="isRefreshing()">isRefreshing</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#isRefreshing()">isRefreshing</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <p>Indicates whether a refresh is occurring.</p>
+        </div>
+        <div class="api-item"><a name="getNestedScrollConnection()"></a><a name="setNestedScrollConnection()"></a><a name="getNestedScrollConnection--"></a><a name="setNestedScrollConnection--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="nestedScrollConnection()">nestedScrollConnection</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">var&nbsp;<a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#nestedScrollConnection()">nestedScrollConnection</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></pre>
+          <p>A <code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollConnection.html">NestedScrollConnection</a></code> that should be attached to a <code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/package-summary.html#(androidx.compose.ui.Modifier).nestedScroll(androidx.compose.ui.input.nestedscroll.NestedScrollConnection,androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher)">Modifier.nestedScroll</a></code> in order to keep track of the scroll events.</p>
+        </div>
+        <div class="api-item"><a name="getPositionalThreshold()"></a><a name="setPositionalThreshold()"></a><a name="getPositionalThreshold--"></a><a name="setPositionalThreshold--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="positionalThreshold()">positionalThreshold</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#positionalThreshold()">positionalThreshold</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+          <p>The threshold (in pixels), above which if a release occurs, a refresh will be called</p>
+        </div>
+        <div class="api-item"><a name="getProgress()"></a><a name="setProgress()"></a><a name="getProgress--"></a><a name="setProgress--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="progress()">progress</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#progress()">progress</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+          <p>PullRefresh progress towards <code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#positionalThreshold()">positionalThreshold</a></code>. 0.0 indicates no progress, 1.0 indicates complete progress, 1.0 indicates overshoot beyond the provided threshold</p>
+        </div>
+        <div class="api-item"><a name="getVerticalOffset()"></a><a name="setVerticalOffset()"></a><a name="getVerticalOffset--"></a><a name="setVerticalOffset--"></a>
+          <div class="api-name-block">
+            <div>
+              <h3 id="verticalOffset()">verticalOffset</h3>
+            </div>
+            <div class="api-name-platform-and-metadata">
+              <div class="api-name-platform-icons"><span class="kotlin-platform" data-title="Common/All">Cmn</span>
+                <!--platform-Common/All--></div>
+            </div>
+          </div>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/PullToRefreshState.html#verticalOffset()">verticalOffset</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+          <p>The vertical offset (in pixels) for the <code><a href="/reference/kotlin/androidx/compose/material3/pulltorefresh/package-summary.html#PullToRefreshContainer(androidx.compose.material3.pulltorefresh.PullToRefreshState,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color)">PullToRefreshContainer</a></code> to consume</p>
+        </div>
+      </div>
+    </devsite-filter >
+  </body>
+</html>

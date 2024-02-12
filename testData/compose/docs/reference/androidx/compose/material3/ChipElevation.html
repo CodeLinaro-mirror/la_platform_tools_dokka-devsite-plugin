@@ -18,8 +18,30 @@
       <pre>public final class <a href="/reference/androidx/compose/material3/ChipElevation.html">ChipElevation</a></pre>
     </p>
     <hr>
-    <p>Represents the elevation for a chip in different states.</p>
+    <p>Represents the elevation used in a selectable chip in different states.</p>
+    <p>Note that this default implementation does not take into consideration the <code>selectable</code> state passed into its <code><a href="/reference/androidx/compose/material3/ChipElevation.html#tonalElevation(kotlin.Boolean)">tonalElevation</a></code> and <code><a href="/reference/androidx/compose/material3/ChipElevation.html#shadowElevation(kotlin.Boolean,androidx.compose.foundation.interaction.InteractionSource)">shadowElevation</a></code>. If you wish to apply that state, use a different <code><a href="/reference/androidx/compose/material3/SelectableChipElevation.html">SelectableChipElevation</a></code>.</p>
+    <p>Note that its <code><a href="/reference/androidx/compose/material3/ChipElevation.html#tonalElevation(kotlin.Boolean)">tonalElevation</a></code> implementation only depends on <code><a href="/reference/androidx/compose/material3/ChipElevation.html#elevation()">elevation</a></code> and <code><a href="/reference/androidx/compose/material3/ChipElevation.html#disabledElevation()">disabledElevation</a></code></p>
     <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/material3/ChipElevation.html#ChipElevation(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">ChipElevation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;elevation,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;pressedElevation,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;focusedElevation,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;hoveredElevation,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;draggedElevation,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;disabledElevation<br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <colgroup>
@@ -39,6 +61,48 @@
             </td>
           </tr>
           <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/material3/ChipElevation.html#getDisabledElevation()">getDisabledElevation</a>()</code></div>
+              <p>the elevation used when the chip is not enabled</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/material3/ChipElevation.html#getDraggedElevation()">getDraggedElevation</a>()</code></div>
+              <p>the elevation used when the chip is dragged</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/material3/ChipElevation.html#getElevation()">getElevation</a>()</code></div>
+              <p>the elevation used when the chip is enabled.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/material3/ChipElevation.html#getFocusedElevation()">getFocusedElevation</a>()</code></div>
+              <p>the elevation used when the chip is focused</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/material3/ChipElevation.html#getHoveredElevation()">getHoveredElevation</a>()</code></div>
+              <p>the elevation used when the chip is hovered</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/material3/ChipElevation.html#getPressedElevation()">getPressedElevation</a>()</code></div>
+              <p>the elevation used when the chip is pressed.</p>
+            </td>
+          </tr>
+          <tr>
             <td><code>int</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/material3/ChipElevation.html#hashCode()">hashCode</a>()</code></div>
@@ -46,6 +110,68 @@
           </tr>
         </tbody>
       </table>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="ChipElevation(androidx.compose.ui.unit.Dp, androidx.compose.ui.unit.Dp, androidx.compose.ui.unit.Dp, androidx.compose.ui.unit.Dp, androidx.compose.ui.unit.Dp, androidx.compose.ui.unit.Dp)"></a><a name="ChipElevation-androidx.compose.ui.unit.Dp-androidx.compose.ui.unit.Dp-androidx.compose.ui.unit.Dp-androidx.compose.ui.unit.Dp-androidx.compose.ui.unit.Dp-androidx.compose.ui.unit.Dp-"></a><a name="chipelevation"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="ChipElevation(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">ChipElevation</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/compose/material3/ChipElevation.html#ChipElevation(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">ChipElevation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;elevation,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;pressedElevation,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;focusedElevation,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;hoveredElevation,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;draggedElevation,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;disabledElevation<br>)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;elevation</code></td>
+                <td>
+                  <p>the elevation used when the chip is enabled.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;pressedElevation</code></td>
+                <td>
+                  <p>the elevation used when the chip is pressed.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;focusedElevation</code></td>
+                <td>
+                  <p>the elevation used when the chip is focused</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;hoveredElevation</code></td>
+                <td>
+                  <p>the elevation used when the chip is hovered</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;draggedElevation</code></td>
+                <td>
+                  <p>the elevation used when the chip is dragged</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;disabledElevation</code></td>
+                <td>
+                  <p>the elevation used when the chip is not enabled</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
     <div class="list">
       <h2>Public methods</h2>
@@ -56,6 +182,60 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/material3/ChipElevation.html#equals(kotlin.Any)">equals</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;other)</pre>
+      </div>
+      <div class="api-item"><a name="getDisabledElevation--"></a><a name="getdisabledelevation"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getDisabledElevation()">getDisabledElevation</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;<a href="/reference/androidx/compose/material3/ChipElevation.html#getDisabledElevation()">getDisabledElevation</a>()</pre>
+        <p>the elevation used when the chip is not enabled</p>
+      </div>
+      <div class="api-item"><a name="getDraggedElevation--"></a><a name="getdraggedelevation"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getDraggedElevation()">getDraggedElevation</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;<a href="/reference/androidx/compose/material3/ChipElevation.html#getDraggedElevation()">getDraggedElevation</a>()</pre>
+        <p>the elevation used when the chip is dragged</p>
+      </div>
+      <div class="api-item"><a name="getElevation--"></a><a name="getelevation"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getElevation()">getElevation</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;<a href="/reference/androidx/compose/material3/ChipElevation.html#getElevation()">getElevation</a>()</pre>
+        <p>the elevation used when the chip is enabled.</p>
+      </div>
+      <div class="api-item"><a name="getFocusedElevation--"></a><a name="getfocusedelevation"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getFocusedElevation()">getFocusedElevation</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;<a href="/reference/androidx/compose/material3/ChipElevation.html#getFocusedElevation()">getFocusedElevation</a>()</pre>
+        <p>the elevation used when the chip is focused</p>
+      </div>
+      <div class="api-item"><a name="getHoveredElevation--"></a><a name="gethoveredelevation"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getHoveredElevation()">getHoveredElevation</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;<a href="/reference/androidx/compose/material3/ChipElevation.html#getHoveredElevation()">getHoveredElevation</a>()</pre>
+        <p>the elevation used when the chip is hovered</p>
+      </div>
+      <div class="api-item"><a name="getPressedElevation--"></a><a name="getpressedelevation"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getPressedElevation()">getPressedElevation</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;<a href="/reference/androidx/compose/material3/ChipElevation.html#getPressedElevation()">getPressedElevation</a>()</pre>
+        <p>the elevation used when the chip is pressed.</p>
       </div>
       <div class="api-item"><a name="hashCode--"></a><a name="hashcode"></a>
         <div class="api-name-block">

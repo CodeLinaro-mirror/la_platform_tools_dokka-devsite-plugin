@@ -1,0 +1,144 @@
+<html devsite="true">
+  <head>
+    <title>FileStorage</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="header-block">
+      <div>
+        <h1>FileStorage</h1>
+      </div>
+      <div id="metadata-info-block">
+        <div id="source-link"><a href="https://cs.android.com/search?q=file:androidx/datastore/core/FileStorage.kt+class:androidx.datastore.core.FileStorage&amp;ss=androidx/platform/frameworks/support" class="external">View Source</a></div>
+      </div>
+    </div>
+    <div id="refdoc-switcher-placeholder"></div>
+    <p>
+      <pre>public final class <a href="/reference/androidx/datastore/core/FileStorage.html">FileStorage</a>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; implements <a href="/reference/androidx/datastore/core/Storage.html">Storage</a></pre>
+    </p>
+    <hr>
+    <p>The Java IO File version of the Storage<T> interface. Is able to read and write <code><a href="/reference/androidx/datastore/core/FileStorage.html">T</a></code> to a given file location.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/datastore/core/FileStorage.html#FileStorage(androidx.datastore.core.Serializer,kotlin.Function1,kotlin.Function0)">FileStorage</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/datastore/core/Serializer.html">Serializer</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;serializer,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/io/File.html">File</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/datastore/core/InterProcessCoordinator.html">InterProcessCoordinator</a>&gt;&nbsp;coordinatorProducer,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/io/File.html">File</a>&gt;&nbsp;produceFile<br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/datastore/core/StorageConnection.html">StorageConnection</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/datastore/core/FileStorage.html#createConnection()">createConnection</a>()</code></div>
+              <p>Creates a storage connection which allows reading and writing to the underlying storage.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="FileStorage(androidx.datastore.core.Serializer, kotlin.Function1, kotlin.Function0)"></a><a name="FileStorage-androidx.datastore.core.Serializer-kotlin.Function1-kotlin.Function0-"></a><a name="filestorage"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="FileStorage(androidx.datastore.core.Serializer,kotlin.Function1,kotlin.Function0)">FileStorage</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/datastore/core/FileStorage.html#FileStorage(androidx.datastore.core.Serializer,kotlin.Function1,kotlin.Function0)">FileStorage</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/datastore/core/Serializer.html">Serializer</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;serializer,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/io/File.html">File</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/datastore/core/InterProcessCoordinator.html">InterProcessCoordinator</a>&gt;&nbsp;coordinatorProducer,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/io/File.html">File</a>&gt;&nbsp;produceFile<br>)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/datastore/core/Serializer.html">Serializer</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;serializer</code></td>
+                <td>
+                  <p>The serializer that can write <code><a href="/reference/androidx/datastore/core/FileStorage.html">T</a></code> to and from a byte array.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/io/File.html">File</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/datastore/core/InterProcessCoordinator.html">InterProcessCoordinator</a>&gt;&nbsp;coordinatorProducer</code></td>
+                <td>
+                  <p>The producer to provide <code><a href="/reference/androidx/datastore/core/InterProcessCoordinator.html">InterProcessCoordinator</a></code> that coordinates IO operations across processes if needed. By default it provides single process coordinator, which doesn't support cross process use cases.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/io/File.html">File</a>&gt;&nbsp;produceFile</code></td>
+                <td>
+                  <p>The file producer that returns the file that will be read and written.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="createConnection--"></a><a name="createconnection"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="createConnection()">createConnection</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/datastore/core/StorageConnection.html">StorageConnection</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;<a href="/reference/androidx/datastore/core/FileStorage.html#createConnection()">createConnection</a>()</pre>
+        <p>Creates a storage connection which allows reading and writing to the underlying storage.</p>
+        <p>Should be closed after usage.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code><a href="https://developer.android.com/reference/java/io/IOException.html">java.io.IOException</a></code></td>
+                <td>
+                  <p>Unrecoverable IO exception when trying to access the underlying storage.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

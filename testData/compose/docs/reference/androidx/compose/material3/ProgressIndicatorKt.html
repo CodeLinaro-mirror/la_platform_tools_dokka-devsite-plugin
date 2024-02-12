@@ -162,10 +162,10 @@ Column(horizontalAlignment = Alignment.CenterHorizontally) {
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.material.Slider
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.semantics.semantics
@@ -177,21 +177,23 @@ val animatedProgress by animateFloatAsState(
 )
 
 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-    CircularProgressIndicator(progress = animatedProgress)
+    CircularProgressIndicator(progress = { animatedProgress })
     Spacer(Modifier.requiredHeight(30.dp))
-    OutlinedButton(
-        modifier = Modifier.semantics {
-            val progressPercent = (progress * 100).toInt()
-            if (progressPercent in progressBreakpoints) {
-                stateDescription = &quot;Progress $progressPercent%&quot;
-            }
-        },
-        onClick = {
-            if (progress &lt; 1f) progress += 0.1f
-        }
-    ) {
-        Text(&quot;Increase&quot;)
-    }
+    Slider(
+        modifier = Modifier
+            .padding(start = 24.dp, end = 24.dp)
+            .semantics {
+                val progressPercent = (progress * 100).toInt()
+                if (progressPercent in progressBreakpoints) {
+                    stateDescription = &quot;Progress $progressPercent%&quot;
+                }
+            },
+        value = progress,
+        valueRange = 0f..1f,
+        steps = 100,
+        onValueChange = {
+            progress = it
+        })
 }</pre>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -257,14 +259,10 @@ Column(horizontalAlignment = Alignment.CenterHorizontally) {
         <p><img alt="Linear progress indicator image" src="https://developer.android.com/images/reference/androidx/compose/material3/linear-progress-indicator.png"></p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.LinearProgressIndicator
-import androidx.compose.ui.semantics.semantics
 
 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-    LinearProgressIndicator(
-        modifier = Modifier.semantics(mergeDescendants = true) {}.padding(10.dp)
-    )
+    LinearProgressIndicator()
 }</pre>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -332,9 +330,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.material.Slider
 import androidx.compose.material3.LinearProgressIndicator
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.semantics.semantics
@@ -347,23 +344,24 @@ val animatedProgress by animateFloatAsState(
 
 Column(horizontalAlignment = Alignment.CenterHorizontally) {
     LinearProgressIndicator(
-        modifier = Modifier.semantics(mergeDescendants = true) {}.padding(10.dp),
-        progress = animatedProgress,
+        progress = { animatedProgress },
     )
     Spacer(Modifier.requiredHeight(30.dp))
-    OutlinedButton(
-        modifier = Modifier.semantics {
-            val progressPercent = (progress * 100).toInt()
-            if (progressPercent in progressBreakpoints) {
-                stateDescription = &quot;Progress $progressPercent%&quot;
-            }
-        },
-        onClick = {
-            if (progress &lt; 1f) progress += 0.1f
-        }
-    ) {
-        Text(&quot;Increase&quot;)
-    }
+    Slider(
+        modifier = Modifier
+            .padding(start = 24.dp, end = 24.dp)
+            .semantics {
+                val progressPercent = (progress * 100).toInt()
+                if (progressPercent in progressBreakpoints) {
+                    stateDescription = &quot;Progress $progressPercent%&quot;
+                }
+            },
+        value = progress,
+        valueRange = 0f..1f,
+        steps = 100,
+        onValueChange = {
+            progress = it
+        })
 }</pre>
         <div class="devsite-table-wrapper">
           <table class="responsive">
