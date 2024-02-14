@@ -227,11 +227,10 @@ internal class MetadataConverter(
     private fun <T> T.containingClassName(): String where T : WithSources, T : Documentable =
         "${dri.packageName}.${dri.classNames ?: nameForSyntheticClass(this)}"
 
-    private val doNotAccess = mutableMapOf<Documentable, List<String>?>()
-
-    @Suppress("UNCHECKED_CAST")
-    private fun <T> sourceFilesPathsMemoizer(): MutableMap<T, List<String>?>
-        where T : WithSources, T : Documentable = doNotAccess as MutableMap<T, List<String>?>
+    /**
+     * This should not be accessed outside of [getSourceFilePaths], which controls synchronization.
+     */
+    private val sourceFilesPaths = mutableMapOf<Documentable, List<String>?>()
 
     /**
      * Finds the filepaths associated with the documentable's source entries.
@@ -239,8 +238,9 @@ internal class MetadataConverter(
      * Returns null if there are no source entries, or no source entries with file paths, which is
      * the case for all synthetic classes and functions.
      */
+    @Synchronized
     private fun <T> T.getSourceFilePaths(): List<String>? where T : WithSources, T : Documentable =
-        sourceFilesPathsMemoizer<T>().getOrPut(this) {
+        sourceFilesPaths.getOrPut(this) {
             sources.entries.mapNotNull { it.getSourceFilePath() }.ifEmpty { null }
         }
 
