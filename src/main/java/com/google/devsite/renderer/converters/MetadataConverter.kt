@@ -24,6 +24,7 @@ import com.google.devsite.components.symbols.VersionMetadataComponent
 import com.google.devsite.renderer.converters.ParameterDocumentableConverter.Companion.rewriteKotlinPrimitivesForJava
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.util.LibraryMetadata
+import com.jetbrains.rd.util.ConcurrentHashMap
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.Contravariance
@@ -228,9 +229,9 @@ internal class MetadataConverter(
         "${dri.packageName}.${dri.classNames ?: nameForSyntheticClass(this)}"
 
     /**
-     * This should not be accessed outside of [getSourceFilePaths], which controls synchronization.
+     * This should not be accessed outside of [getSourceFilePaths].
      */
-    private val sourceFilesPaths = mutableMapOf<Documentable, List<String>?>()
+    private val sourceFilesPaths = ConcurrentHashMap<Documentable, List<String>>()
 
     /**
      * Finds the filepaths associated with the documentable's source entries.
@@ -238,11 +239,11 @@ internal class MetadataConverter(
      * Returns null if there are no source entries, or no source entries with file paths, which is
      * the case for all synthetic classes and functions.
      */
-    @Synchronized
     private fun <T> T.getSourceFilePaths(): List<String>? where T : WithSources, T : Documentable =
+        // ConcurrentHashMap values cannot be null, so an empty list is stored instead.
         sourceFilesPaths.getOrPut(this) {
-            sources.entries.mapNotNull { it.getSourceFilePath() }.ifEmpty { null }
-        }
+            sources.entries.mapNotNull { it.getSourceFilePath() }
+        }.ifEmpty { null }
 
     /**
      * Get the source file path from the [SourceEntry] relative to the root of the source directory,
