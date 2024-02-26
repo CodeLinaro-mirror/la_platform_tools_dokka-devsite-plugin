@@ -335,16 +335,16 @@ internal fun DFunction.matches(other: DFunction): Boolean =
  * [Comparator] which sorts [DFunction] by name, then number of params, params names, and then
  * source sets if necessary.
  */
-fun functionSignatureComparator(): Comparator<DFunction> = compareBy(
+val functionSignatureComparator = compareBy<DFunction>(
     { it.name },
     { it.parameters.size },
     { it.signatureAsString() },
     { it.sourceSets.joinToString { it.displayName } },
 )
 
-/** [Comparator] intended for [Documentable]s known to be name-unique in single-platform. */
-fun simpleDocumentableComparator(): Comparator<Documentable> = compareBy(
-    { it.name },
+/** [Comparator] intended for [DClasslike]s known to be name-unique per-platform. */
+val simpleDocumentableComparator = compareBy<Documentable>(
+    { it.dri.fullName },
     { it.dri.toString() },
     { it.sourceSets.joinToString { it.displayName } },
 )
@@ -422,7 +422,8 @@ internal val JvmStatic = Annotations.Annotation(DRI("kotlin.jvm", "JvmStatic"), 
 
 internal fun String?.orNull() = if (this == "") null else this
 
-internal val DRI.fullName: String get() = (packageName.orNull()?.let { "$it." }) + classNames
+internal val DRI.fullName: String get() = (packageName.orNull()?.let { "$it." }) +
+    (classNames ?: "")
 
 internal fun DRI.possiblyConvertMappedType(displayLanguage: Language) =
     when (displayLanguage) {

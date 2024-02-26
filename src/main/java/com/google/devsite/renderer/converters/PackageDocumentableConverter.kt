@@ -210,22 +210,22 @@ internal abstract class PackageDocumentableConverter(
 
     private fun topLevelConstants() = dPackage.properties
         .filter { it.isConstant() }
-        .sortedWith(simpleDocumentableComparator())
+        .sortedWith(simpleDocumentableComparator)
 
     private fun topLevelProperties() = dPackage.properties
         .filterNot { it.isConstant() }
         .filter { it.receiver == null }
-        .sortedWith(simpleDocumentableComparator())
+        .sortedWith(simpleDocumentableComparator)
 
     private fun topLevelFunctions() = dPackage.functions
         .filter { it.receiver == null }
-        .sortedWith(functionSignatureComparator())
+        .sortedWith(functionSignatureComparator)
 
     private fun extensionProperties() = dPackage.properties
         .filterNot { it.receiver == null }
-        .sortedWith(simpleDocumentableComparator())
+        .sortedWith(simpleDocumentableComparator)
 
     private fun extensionFunctions() = dPackage.functions
         .filterNot { it.receiver == null }
-        .sortedWith(functionSignatureComparator())
+        .sortedWith(functionSignatureComparator)
 }

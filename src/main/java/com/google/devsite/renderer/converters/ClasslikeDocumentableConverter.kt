@@ -125,23 +125,23 @@ internal abstract class ClasslikeDocumentableConverter(
         val (unsortedCompanionFunctions, unsortedCompanionProperties) =
             classlike.companionFunctionsAndProperties()
         val companionFunctions = unsortedCompanionFunctions
-            .sortedWith(functionSignatureComparator())
+            .sortedWith(functionSignatureComparator)
         val companionProperties = unsortedCompanionProperties
-            .sortedWith(simpleDocumentableComparator())
+            .sortedWith(simpleDocumentableComparator)
 
         val (initialFunctions, initialProperties) = classlike.nonInheritedTypes()
         val inheritedAll = classlike.inheritedTypes(classlike.supertypesForDisplayLanguage())
 
         val declaredFunctions = computeDeclaredFunctions(initialFunctions, companionFunctions)
-            .sortedWith(functionSignatureComparator())
+            .sortedWith(functionSignatureComparator)
         val declaredProperties = computeDeclaredProperties(initialProperties, companionProperties)
-            .sortedWith(simpleDocumentableComparator())
+            .sortedWith(simpleDocumentableComparator)
 
         val enumValues = (classlike as? DEnum)?.entries.orEmpty()
-            .sortedWith(simpleDocumentableComparator())
+            .sortedWith(simpleDocumentableComparator)
 
         val allConstructors = (classlike as? WithConstructors)?.constructors.orEmpty()
-            .sortedWith(functionSignatureComparator())
+            .sortedWith(functionSignatureComparator)
         val enumValuesSummary = async {
             enumValuesToSummary(enumValuesTitle(), enumValues)
         }
@@ -260,7 +260,7 @@ internal abstract class ClasslikeDocumentableConverter(
             // together in a logical way
             .sortedWith(
                 compareBy<DFunction> { nameForSyntheticClass(it) }
-                    .then(functionSignatureComparator()),
+                    .then(functionSignatureComparator),
             )
             // Convert DRIs to this class so link from summary to detail will stay on class page
             .map { it.withDRIOfClass(classlike) }
@@ -278,7 +278,7 @@ internal abstract class ClasslikeDocumentableConverter(
             // together in a logical way
             .sortedWith(
                 compareBy<DProperty> { nameForSyntheticClass(it) }
-                    .then(simpleDocumentableComparator()),
+                    .then(simpleDocumentableComparator),
             )
             // Convert DRIs to this class so link from summary to detail will stay on class page
             .map { it.withDRIOfClass(classlike) }
@@ -868,7 +868,7 @@ internal abstract class ClasslikeDocumentableConverter(
         }
 
         val functions = symbols.filterIsInstance<DFunction>()
-            .sortedWith(functionSignatureComparator())
+            .sortedWith(functionSignatureComparator)
         val functionsRenamed = when (displayLanguage) {
             Language.JAVA -> functions.map { it.withJvmName() }
             Language.KOTLIN -> functions
@@ -880,7 +880,7 @@ internal abstract class ClasslikeDocumentableConverter(
                 }
 
         val (consts, properties) = symbols.filterIsInstance<DProperty>()
-            .sortedWith(simpleDocumentableComparator())
+            .sortedWith(simpleDocumentableComparator)
             .partition { it.isConstant() }
 
         val constsSummary = consts.takeIf { it.isNotEmpty() }

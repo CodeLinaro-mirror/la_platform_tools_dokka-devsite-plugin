@@ -52,12 +52,13 @@ internal class RootDocumentableConverter(
         val allClasses = docsHolder.allClasslikes().filterNot {
             docsHolder.shouldNotBeDisplayed(it)
         }
-        val alphabetizedClasses = allClasses.groupBy(::categorizeClasslikes)
+        // Custom sorting for this because of the alphabetization scheme. Grouping preserves sort.
+        val alphabetizedClasses = allClasses.sortedBy { it.name() }
+            .groupBy(::categorizeClasslikes)
         val componentClasses = alphabetizedClasses.mapValues { (_, nodes) ->
             DefaultSummaryList(
                 SummaryList.Params(
-                    items = nodes.sortedBy { it.dri.classNames + " " + it.dri }
-                        .map { javadocConverter.summaryForDocumentable(it) },
+                    items = nodes.map { javadocConverter.summaryForDocumentable(it) },
                 ),
             )
         }

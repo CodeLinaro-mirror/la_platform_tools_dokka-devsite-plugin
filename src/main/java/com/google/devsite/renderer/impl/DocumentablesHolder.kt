@@ -20,14 +20,15 @@ import com.google.devsite.className
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.explodedChildren
 import com.google.devsite.renderer.converters.filterOutJvmSynthetic
+import com.google.devsite.renderer.converters.functionSignatureComparator
 import com.google.devsite.renderer.converters.getErrorLocation
 import com.google.devsite.renderer.converters.getExpectOrCommonSourceSet
 import com.google.devsite.renderer.converters.gettersAndSetters
 import com.google.devsite.renderer.converters.isExceptionClass
 import com.google.devsite.renderer.converters.isHoistedFromCompanion
-import com.google.devsite.renderer.converters.name
 import com.google.devsite.renderer.converters.nameForSyntheticClass
 import com.google.devsite.renderer.converters.packageName
+import com.google.devsite.renderer.converters.simpleDocumentableComparator
 import com.google.devsite.renderer.converters.withJavaSynthetic
 import com.google.devsite.util.ClassVersionMetadata
 import com.google.devsite.util.LibraryMetadata
@@ -343,7 +344,7 @@ internal class DocumentablesHolder(
                         excludedRegex ->
                     excludedRegex.matches(thisPackage.packageName)
                 }
-            }.sortedBy { "${it.name} ${it.dri}" }
+            }.sortedWith(simpleDocumentableComparator)
     }
 
     /** Returns all should-be-documented classlikes in this module. */
@@ -365,7 +366,7 @@ internal class DocumentablesHolder(
                     excludedRegex.matches(thisClasslike.packageName())
                 }
             }.filterNot { shouldNotBeDisplayed(it) }
-            .sortedBy { "${it.name()} ${it.dri}" }
+            .sortedWith(simpleDocumentableComparator)
     }
 
     /**
@@ -396,7 +397,7 @@ internal class DocumentablesHolder(
                     constructors = emptyList(),
                     functions = nodes.filterIsInstance<DFunction>().map {
                         it.withJavaSynthetic(syntheticClassName)
-                    }.sortedBy { "${it.name} ${it.dri}" },
+                    }.sortedWith(functionSignatureComparator),
                     classlikes = emptyList(),
                     sources = emptyMap(),
                     expectPresentInSet = null,
@@ -424,24 +425,24 @@ internal class DocumentablesHolder(
             .groupBy({ (_, function) -> nameForSyntheticClass(function) }) { it.second }
 
     private fun computeEnums(docs: List<Documentable>): List<DEnum> {
-        return docs.filterIsInstance<DEnum>().sortedBy { "${it.name()} ${it.dri}" }
+        return docs.filterIsInstance<DEnum>().sortedWith(simpleDocumentableComparator)
     }
 
     private fun computeInterfaces(docs: List<Documentable>): List<DInterface> {
-        return docs.filterIsInstance<DInterface>().sortedBy { "${it.name()} ${it.dri}" }
+        return docs.filterIsInstance<DInterface>().sortedWith(simpleDocumentableComparator)
     }
 
     private fun computeAnnotations(docs: List<Documentable>): List<DAnnotation> {
-        return docs.filterIsInstance<DAnnotation>().sortedBy { "${it.name()} ${it.dri}" }
+        return docs.filterIsInstance<DAnnotation>().sortedWith(simpleDocumentableComparator)
     }
 
     private fun computeTypesAliases(dPackage: DPackage): List<DTypeAlias> {
-        return dPackage.typealiases.sortedBy { "${it.name} ${it.dri}" }
+        return dPackage.typealiases.sortedWith(simpleDocumentableComparator)
     }
 
     private fun computeExceptions(docs: List<Documentable>): List<DClass> {
         return docs.filterIsInstance<DClass>().filter { it.isExceptionClass }
-            .sortedBy { "${it.name()} ${it.dri}" }
+            .sortedWith(simpleDocumentableComparator)
     }
 
     /** Returns a Map<DRI, DObject> because `Set<Documentable>.contains` is unusable b/232944038. */
@@ -462,7 +463,7 @@ internal class DocumentablesHolder(
                 "Object with illegal name: named 'Companion' but is not a companion object: $it.",
             )
         }
-        return interestingObjects.sortedBy { "${it.name()} ${it.dri}" }
+        return interestingObjects.sortedWith(simpleDocumentableComparator)
     }
 
     fun isCompanion(dObject: DObject) = runBlocking { dObject.dri in allCompanions.await().keys }
