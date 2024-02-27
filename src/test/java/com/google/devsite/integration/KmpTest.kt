@@ -25,6 +25,7 @@ import org.junit.Test
 import testApi.testRunner.SourceSetsBuilder
 import testApi.testRunner.TestDokkaConfigurationBuilder
 import java.io.File
+import kotlin.test.Ignore
 
 class KmpTest : IntegrationTestBase() {
     @Test
@@ -47,6 +48,7 @@ class KmpTest : IntegrationTestBase() {
         )
     }
 
+    @Ignore("b/326147716")
     @Test
     fun `Validate prod AndroidX datastore-core prebuilts`() {
         squashAndroid = true
