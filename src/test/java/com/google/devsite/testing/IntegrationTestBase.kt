@@ -83,6 +83,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         useAndroidxBaseSourceLink: Boolean = false,
         versionMetadataFilesnames: List<String>? = null,
         hidingAnnotations: List<String> = listOf("androidx.annotation.RestrictTo"),
+        includeHiddenParentSymbols: Boolean = false,
     ): DokkaConfigurationImpl {
         sources.forEach { check(it.isDirectory) { "$it does not exist or is not a directory" } }
         val externalLinks = mapOf(
@@ -146,6 +147,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
                             "kotlin.ExtensionFunctionType",
                         ),
                         hidingAnnotations = hidingAnnotations,
+                        includeHiddenParentSymbols = includeHiddenParentSymbols,
                     ).toCompactJsonString(),
                 ),
             )
@@ -166,6 +168,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         includedHeadTagsPathKotlin: String?,
         useAndroidxBaseSourceLink: Boolean,
         hidingAnnotations: List<String>,
+        includeHiddenParentSymbols: Boolean,
     ): DokkaConfigurationImpl {
         val sources = File(sourceDir).absoluteFile
         return makeExternalConfiguration(
@@ -180,6 +183,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             includedHeadTagsPathKotlin,
             useAndroidxBaseSourceLink,
             hidingAnnotations = hidingAnnotations,
+            includeHiddenParentSymbols = includeHiddenParentSymbols,
         )
     }
 
@@ -322,6 +326,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         suffix: String = "source",
         useAndroidxBaseSourceLink: Boolean = false,
         hidingAnnotations: List<String> = listOf("androidx.annotation.RestrictTo"),
+        includeHiddenParentSymbols: Boolean = false,
     ) {
         val samplesBaseDir = "testData/$path"
         val outputBaseDir = "testData/$path/docs"
@@ -344,6 +349,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             includedHeadTagsPathKotlin,
             useAndroidxBaseSourceLink,
             hidingAnnotations,
+            includeHiddenParentSymbols,
         )
 
         val writerPlugin = TestOutputWriterPlugin()

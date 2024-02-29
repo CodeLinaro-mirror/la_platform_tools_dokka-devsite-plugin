@@ -159,8 +159,13 @@ class BasicTest : IntegrationTestBase() {
     }
 
     @Test
-    fun `Validate hidden parents`() {
+    fun `Validate default hidden parents`() {
         validateDirectory("hiddenParents")
+    }
+
+    @Test
+    fun `Validate hidden parents with included symbols`() {
+        validateDirectory("hiddenParents-include", includeHiddenParentSymbols = true)
     }
 
     @Test

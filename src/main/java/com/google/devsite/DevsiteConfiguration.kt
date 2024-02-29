@@ -85,6 +85,11 @@ import org.jetbrains.dokka.plugability.ConfigurableBlock
  * `androidx.annotation.Nullable`) which can be used for nullability. Using nullability annotations
  * not on this list is not allowed. Android projects should generally exclusively use the `androidx`
  * nullability annotations, which are the default.
+ * @param includeHiddenParentSymbols Whether to document methods/fields of hidden parent classes as
+ * though they were defined on the visible child class. Defaults to false (not documenting these
+ * symbols), which matches the behavior of the AndroidX RestrictTo lint check. Documenting the
+ * symbols is closer to the behavior of Metalava. (If a hidden parent  symbol is overridden on a
+ * visible child class, then it will be included regardless.)
  */
 data class DevsiteConfiguration(
     val docRootPath: String = "reference",
@@ -108,6 +113,7 @@ data class DevsiteConfiguration(
     val hidingAnnotations: List<String> = emptyList(),
     // We set a default to the nullability annotations all android projects should use
     val validNullabilityAnnotations: List<String> = defaultValidNullabilityAnnotations,
+    val includeHiddenParentSymbols: Boolean = false,
 ) : ConfigurableBlock {
     init {
         if (javaDocsPath == null && kotlinDocsPath == null) {

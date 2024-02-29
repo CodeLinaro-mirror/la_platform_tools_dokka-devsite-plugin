@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dokkatest.hiddenParents
+package dokkatest.hiddenParentsInclude
 
 /** @hide */
 open class HiddenAncestorClass {
@@ -39,16 +39,11 @@ open class HiddenParentClass : HiddenGrandparentClass() {
     fun parentClassFunction(): Unit {}
     val parentClassProperty = 4
     open fun parentClassFunctionOverriddenByChild() = Unit
-    // This is originally defined in a visible class, but is hidden because it is overridden by a
-    // hidden class (and not later overridden by a visible class) and the RestrictTo lint check is
-    // based on the method definition lowest in the class hierarchy.
     override fun greatGrandparentClassFunctionOverriddenByParent() = Unit
 }
 
 class VisibleExtendingChild : HiddenParentClass() {
     fun childFunction(): Unit {}
     val childProperty = 5
-    // This is originally defined in a hidden class, but is visible because it is overridden by a
-    // visible class.
     override fun parentClassFunctionOverriddenByChild() = Unit
 }

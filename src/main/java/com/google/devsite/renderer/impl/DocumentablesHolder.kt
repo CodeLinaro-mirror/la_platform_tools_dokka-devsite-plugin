@@ -95,6 +95,7 @@ internal class DocumentablesHolder(
     val baseFunctionSourceLink: String? = null,
     val basePropertySourceLink: String? = null,
     val annotationsNotToDisplay: Set<String> = emptySet(),
+    val includeHiddenParentSymbols: Boolean = false,
     val analysisPlugin: KotlinAnalysisPlugin,
 ) {
     private val packages = scope.async { computePackages(module) }

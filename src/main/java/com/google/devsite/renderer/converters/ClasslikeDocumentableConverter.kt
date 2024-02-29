@@ -59,6 +59,7 @@ import com.google.devsite.components.table.SummaryItem
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TableRowSummaryItem
 import com.google.devsite.components.table.TableTitle
+import com.google.devsite.hasBeenHidden
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.renderer.impl.DocumentablesHolder
@@ -1007,9 +1008,18 @@ internal abstract class ClasslikeDocumentableConverter(
         if (forClass.isSynthetic) {
             return this
         }
-        return filter { symbol -> !symbol.isInherited(supertypes) && !symbol.dri.isFromBaseClass() }
-            .map { symbol -> symbol.withDRIOfClass(forClass) }
+
+        return filter { symbol ->
+            // Remove all symbols inherited from visible supertypes
+            !symbol.isInherited(supertypes) && !symbol.dri.isFromBaseClass() &&
+                // If hidden parent symbols shouldn't be included, remove any symbols defined in
+                // classes marked as hidden
+                (docsHolder.includeHiddenParentSymbols || !hasBeenHidden(symbol.dri.ofClass()))
+        }.map { symbol -> symbol.withDRIOfClass(forClass) }
     }
+
+    /** Returns just the class part of a DRI. */
+    private fun DRI.ofClass(): DRI = DRI(packageName, classNames)
 
     /**
      * If the DProperty or DFunction does not already have a DRI with the given class, makes a copy

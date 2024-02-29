@@ -93,6 +93,7 @@ internal class MultiLanguageRenderer(
                 baseFunctionSourceLink = devsiteConfiguration.baseFunctionSourceLink,
                 basePropertySourceLink = devsiteConfiguration.basePropertySourceLink,
                 annotationsNotToDisplay = devsiteConfiguration.allAnnotationsNotToDisplayJava,
+                includeHiddenParentSymbols = devsiteConfiguration.includeHiddenParentSymbols,
                 analysisPlugin = analysisPlugin,
             )
             val kHolder = DocumentablesHolder(
@@ -107,6 +108,7 @@ internal class MultiLanguageRenderer(
                 baseFunctionSourceLink = devsiteConfiguration.baseFunctionSourceLink,
                 basePropertySourceLink = devsiteConfiguration.basePropertySourceLink,
                 annotationsNotToDisplay = devsiteConfiguration.allAnnotationsNotToDisplayKotlin,
+                includeHiddenParentSymbols = devsiteConfiguration.includeHiddenParentSymbols,
                 analysisPlugin = analysisPlugin,
             )
 
