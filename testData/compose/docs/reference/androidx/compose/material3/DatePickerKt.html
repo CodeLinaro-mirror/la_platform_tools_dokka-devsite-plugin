@@ -67,11 +67,16 @@
         <p><img alt="Date picker image" src="https://developer.android.com/images/reference/androidx/compose/material3/date-picker.png"></p>
         <p>A simple DatePicker looks like:</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDatePickerState
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
     // Pre-select a date for January 4, 2020
@@ -85,11 +90,17 @@ Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
 }</pre>
         <p>A DatePicker with an initial UI of a date input mode looks like:</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DatePicker
+import androidx.compose.material3.DisplayMode
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDatePickerState
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
     val state = rememberDatePickerState(initialDisplayMode = DisplayMode.Input)
@@ -102,10 +113,16 @@ Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
 }</pre>
         <p>A DatePicker with a provided <code><a href="/reference/androidx/compose/material3/SelectableDates.html">SelectableDates</a></code> that blocks certain days from being selected looks like:</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.DatePicker
+import androidx.compose.material3.SelectableDates
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDatePickerState
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 val datePickerState = rememberDatePickerState(
     selectableDates = object : SelectableDates {

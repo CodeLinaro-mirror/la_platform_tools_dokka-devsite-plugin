@@ -66,6 +66,7 @@
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/foundation/IndicationKt.html#(androidx.compose.ui.Modifier).indication(androidx.compose.foundation.interaction.InteractionSource,androidx.compose.foundation.Indication)">indication</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>&nbsp;interactionSource,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/foundation/Indication.html">Indication</a>&nbsp;indication<br>)</pre>
         <p>Draws visual effects for this component when interactions occur.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -76,6 +77,8 @@ import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.material.Text
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 val interactionSource = remember { MutableInteractionSource() }
 Column {

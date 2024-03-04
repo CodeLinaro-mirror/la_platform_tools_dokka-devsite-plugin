@@ -59,9 +59,13 @@
         <p><code><a href="/reference/androidx/compose/animation/core/Animatable.html">Animatable</a></code> also supports animating data types other than <code><a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a></code>, such as Floats and generic types. See <code><a href="/reference/androidx/compose/animation/core/Animatable.html">androidx.compose.animation.core.Animatable</a></code> for other variants.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.Animatable
+import androidx.compose.animation.core.AnimationSpec
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.ui.graphics.Color
 
 @Composable
 fun animate(
@@ -118,6 +122,10 @@ fun animate(
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 
 @Composable
 fun ColorAnimation(primary: Boolean) {

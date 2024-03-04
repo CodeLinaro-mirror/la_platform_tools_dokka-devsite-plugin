@@ -20,37 +20,31 @@ import com.google.common.truth.Truth
 import com.google.devsite.renderer.Language
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
+import org.jetbrains.dokka.DokkaConfiguration
+import org.jetbrains.dokka.DokkaSourceSetID
+import org.jetbrains.dokka.DokkaSourceSetImpl
+import org.jetbrains.dokka.links.DRI
+import org.jetbrains.dokka.model.DClasslike
+import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DPackage
+import org.jetbrains.dokka.model.DProperty
+import org.jetbrains.dokka.model.DTypeAlias
+import org.jetbrains.dokka.model.SourceSetDependent
+import org.jetbrains.dokka.model.doc.DocumentationNode
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
-import org.mockito.kotlin.doReturn
-import org.mockito.kotlin.mock
 
 @RunWith(Parameterized::class)
 internal class DocumentablesHolderTest(
     displayLanguage: Language,
 ) : ConverterTestBase(displayLanguage) {
-    private val packageA = mock<DPackage> {
-        on { name } doReturn "com.example.a"
-        on { packageName } doReturn "com.example.a"
-    }
-    private val packageB = mock<DPackage> {
-        on { name } doReturn "com.example.b"
-        on { packageName } doReturn "com.example.b"
-    }
-    private val packageC = mock<DPackage> {
-        on { name } doReturn "com.example.c"
-        on { packageName } doReturn "com.example.c"
-    }
-    private val packageD = mock<DPackage> {
-        on { name } doReturn "com.exclude.a"
-        on { packageName } doReturn "com.exclude.a"
-    }
-    private val module = mock<DModule> {
-        on { packages } doReturn listOf(packageC, packageB, packageD, packageA)
-    }
+    private val packageA = fakeDPackage(dri = DRI(packageName = "com.example.a"))
+    private val packageB = fakeDPackage(dri = DRI(packageName = "com.example.b"))
+    private val packageC = fakeDPackage(dri = DRI(packageName = "com.example.c"))
+    private val packageD = fakeDPackage(dri = DRI(packageName = "com.exclude.a"))
+    private val module = fakeDModule(packages = listOf(packageC, packageB, packageD, packageA))
 
     @Test
     fun `computePackages returns list of packages sorted by package name`() {
@@ -91,3 +85,21 @@ internal class DocumentablesHolderTest(
         )
     }
 }
+
+private fun fakeDPackage(
+    dri: DRI = DRI(),
+    functions: List<DFunction> = emptyList(),
+    properties: List<DProperty> = emptyList(),
+    classlikes: List<DClasslike> = emptyList(),
+    typealiases: List<DTypeAlias> = emptyList(),
+    docs: SourceSetDependent<DocumentationNode> = emptyMap(),
+    sourceSets: Set<DokkaConfiguration.DokkaSourceSet> =
+        setOf(DokkaSourceSetImpl(sourceSetID = DokkaSourceSetID("", ""))),
+) = DPackage(dri, functions, properties, classlikes, typealiases, docs, sourceSets = sourceSets)
+private fun fakeDModule(
+    name: String = "FAKE",
+    packages: List<DPackage> = emptyList(),
+    documentation: SourceSetDependent<DocumentationNode> = emptyMap(),
+    sourceSets: Set<DokkaConfiguration.DokkaSourceSet> =
+        setOf(DokkaSourceSetImpl(sourceSetID = DokkaSourceSetID("", ""))),
+) = DModule(name, packages, documentation, sourceSets = sourceSets)

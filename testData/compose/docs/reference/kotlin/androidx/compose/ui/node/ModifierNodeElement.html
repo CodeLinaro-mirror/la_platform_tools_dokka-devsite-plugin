@@ -29,7 +29,15 @@
     <hr>
     <p>A <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Element.html">Modifier.Element</a></code> which manages an instance of a particular <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> implementation. A given <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> implementation can only be used when a <code><a href="/reference/kotlin/androidx/compose/ui/node/ModifierNodeElement.html">ModifierNodeElement</a></code> which creates and updates that implementation is applied to a Layout.</p>
     <p>A <code><a href="/reference/kotlin/androidx/compose/ui/node/ModifierNodeElement.html">ModifierNodeElement</a></code> should be very lightweight, and do little more than hold the information necessary to create and maintain an instance of the associated <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> type.</p>
-    <pre class="prettyprint lang-kotlin">class Circle(var color: Color) : DrawModifierNode, Modifier.Node() {
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.ContentDrawScope
+import androidx.compose.ui.node.DrawModifierNode
+import androidx.compose.ui.node.ModifierNodeElement
+import androidx.compose.ui.platform.InspectorInfo
+
+class Circle(var color: Color) : DrawModifierNode, Modifier.Node() {
     override fun ContentDrawScope.draw() {
         drawCircle(color)
     }
@@ -48,6 +56,11 @@ data class CircleElement(
 }
 fun Modifier.circle(color: Color) = this then CircleElement(color)</pre>
     <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.node.ModifierNodeElement
+import androidx.compose.ui.node.SemanticsModifierNode
+import androidx.compose.ui.platform.InspectorInfo
+import androidx.compose.ui.semantics.SemanticsPropertyReceiver
 import androidx.compose.ui.semantics.heading
 
 class HeadingNode : SemanticsModifierNode, Modifier.Node() {

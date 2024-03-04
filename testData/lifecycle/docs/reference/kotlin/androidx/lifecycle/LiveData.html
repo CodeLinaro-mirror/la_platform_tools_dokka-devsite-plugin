@@ -177,21 +177,21 @@
           <tr>
             <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code>@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br><a href="/reference/kotlin/androidx/lifecycle/LiveData.html#observe(androidx.lifecycle.LifecycleOwner,androidx.lifecycle.Observer&lt;? super T&gt;)">observe</a>(owner:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>,&nbsp;observer:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Observer.html">Observer</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>!&gt;)</code></div>
+              <div><code>@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br><a href="/reference/kotlin/androidx/lifecycle/LiveData.html#observe(androidx.lifecycle.LifecycleOwner,androidx.lifecycle.Observer&lt;? super T&gt;)">observe</a>(owner:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>,&nbsp;observer:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Observer.html">Observer</a>&lt;T!&gt;)</code></div>
               <p>Adds the given observer to the observers list within the lifespan of the given owner.</p>
             </td>
           </tr>
           <tr>
             <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code>@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br><a href="/reference/kotlin/androidx/lifecycle/LiveData.html#observeForever(androidx.lifecycle.Observer&lt;? super T&gt;)">observeForever</a>(observer:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Observer.html">Observer</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>!&gt;)</code></div>
+              <div><code>@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br><a href="/reference/kotlin/androidx/lifecycle/LiveData.html#observeForever(androidx.lifecycle.Observer&lt;? super T&gt;)">observeForever</a>(observer:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Observer.html">Observer</a>&lt;T!&gt;)</code></div>
               <p>Adds the given observer to the observers list.</p>
             </td>
           </tr>
           <tr>
             <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code>@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br><a href="/reference/kotlin/androidx/lifecycle/LiveData.html#removeObserver(androidx.lifecycle.Observer&lt;? super T&gt;)">removeObserver</a>(observer:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Observer.html">Observer</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>!&gt;)</code></div>
+              <div><code>@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br><a href="/reference/kotlin/androidx/lifecycle/LiveData.html#removeObserver(androidx.lifecycle.Observer&lt;? super T&gt;)">removeObserver</a>(observer:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Observer.html">Observer</a>&lt;T!&gt;)</code></div>
               <p>Removes the given observer from the observers list.</p>
             </td>
           </tr>
@@ -477,7 +477,7 @@
             <h3 id="observe(androidx.lifecycle.LifecycleOwner,androidx.lifecycle.Observer&lt;? super T&gt;)">observe</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveData.html#observe(androidx.lifecycle.LifecycleOwner,androidx.lifecycle.Observer&lt;? super T&gt;)">observe</a>(owner:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>,&nbsp;observer:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Observer.html">Observer</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>!&gt;):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveData.html#observe(androidx.lifecycle.LifecycleOwner,androidx.lifecycle.Observer&lt;? super T&gt;)">observe</a>(owner:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>,&nbsp;observer:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Observer.html">Observer</a>&lt;T!&gt;):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
         <p>Adds the given observer to the observers list within the lifespan of the given owner. The events are dispatched on the main thread. If LiveData already has data set, it will be delivered to the observer. </p>
         <p> The observer will only receive events if the owner is in <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#STARTED">STARTED</a></code> or <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#RESUMED">RESUMED</a></code> state (active). </p>
         <p> If the owner moves to the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#DESTROYED">DESTROYED</a></code> state, the observer will automatically be removed. </p>
@@ -504,7 +504,7 @@
                 </td>
               </tr>
               <tr>
-                <td><code>observer:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Observer.html">Observer</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>!&gt;</code></td>
+                <td><code>observer:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Observer.html">Observer</a>&lt;T!&gt;</code></td>
                 <td>
                   <p>The observer that will receive the events</p>
                 </td>
@@ -519,7 +519,7 @@
             <h3 id="observeForever(androidx.lifecycle.Observer&lt;? super T&gt;)">observeForever</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveData.html#observeForever(androidx.lifecycle.Observer&lt;? super T&gt;)">observeForever</a>(observer:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Observer.html">Observer</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>!&gt;):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveData.html#observeForever(androidx.lifecycle.Observer&lt;? super T&gt;)">observeForever</a>(observer:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Observer.html">Observer</a>&lt;T!&gt;):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
         <p>Adds the given observer to the observers list. This call is similar to <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html#observe(androidx.lifecycle.LifecycleOwner,androidx.lifecycle.Observer&lt;? super T&gt;)">observe</a></code> with a LifecycleOwner, which is always active. This means that the given observer will receive all events and will never be automatically removed. You should manually call <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html#removeObserver(androidx.lifecycle.Observer&lt;? super T&gt;)">removeObserver</a></code> to stop observing this LiveData. While LiveData has one of such observers, it will be considered as active. </p>
         <p> If the observer was already added with an owner to this LiveData, LiveData throws an <code><a href="https://developer.android.com/reference/java/lang/IllegalArgumentException.html">IllegalArgumentException</a></code>.</p>
         <div class="devsite-table-wrapper">
@@ -535,7 +535,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>observer:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Observer.html">Observer</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>!&gt;</code></td>
+                <td><code>observer:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Observer.html">Observer</a>&lt;T!&gt;</code></td>
                 <td>
                   <p>The observer that will receive the events</p>
                 </td>
@@ -550,7 +550,7 @@
             <h3 id="removeObserver(androidx.lifecycle.Observer&lt;? super T&gt;)">removeObserver</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveData.html#removeObserver(androidx.lifecycle.Observer&lt;? super T&gt;)">removeObserver</a>(observer:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Observer.html">Observer</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>!&gt;):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveData.html#removeObserver(androidx.lifecycle.Observer&lt;? super T&gt;)">removeObserver</a>(observer:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Observer.html">Observer</a>&lt;T!&gt;):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
         <p>Removes the given observer from the observers list.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -565,7 +565,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>observer:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Observer.html">Observer</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>!&gt;</code></td>
+                <td><code>observer:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Observer.html">Observer</a>&lt;T!&gt;</code></td>
                 <td>
                   <p>The Observer to receive events.</p>
                 </td>

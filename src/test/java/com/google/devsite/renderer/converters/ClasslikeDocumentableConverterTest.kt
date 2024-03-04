@@ -1289,7 +1289,8 @@ internal class ClasslikeDocumentableConverterTest(
             |class Foo<T: Number, U>() {}
             """.render().page()
         }.message
-        assertThat(message).contains("androidx/example/Test.kt:2")
+        assertThat(message).contains("when handling DFunction Foo in DClass Foo")
+        // assertThat(message).contains("androidx/example/Test.kt:2") b/327166311
     }
 
     @Test

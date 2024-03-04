@@ -1,7 +1,6 @@
 package com.google.devsite.transformers
 
-import org.intellij.markdown.MarkdownElementTypes
-import org.jetbrains.dokka.base.parsers.MarkdownParser.Companion.fqName
+import org.jetbrains.dokka.analysis.kotlin.markdown.MARKDOWN_ELEMENT_FILE_NAME
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.CheckedExceptions
 import org.jetbrains.dokka.model.DAnnotation
@@ -66,6 +65,10 @@ class DocTagsForCheckedExceptionsTransformer : DocumentableTransformer {
         }
     }
 
+    // This is hacky; copied from upstream
+    private fun DRI.fqName(): String? = "$packageName.$classNames"
+        .takeIf { packageName != null && classNames != null }
+
     private fun documentThrows(
         oldDoc: DocumentationNode,
         exceptions: List<DRI>,
@@ -76,7 +79,7 @@ class DocTagsForCheckedExceptionsTransformer : DocumentableTransformer {
 
         val throwTags = exceptions.minus(knownThrows).map {
             ThrowsTag(
-                CustomDocTag(name = MarkdownElementTypes.MARKDOWN_FILE.name),
+                CustomDocTag(name = MARKDOWN_ELEMENT_FILE_NAME),
                 it.fqName().orEmpty(),
                 it,
             )

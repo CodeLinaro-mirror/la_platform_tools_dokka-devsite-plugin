@@ -226,6 +226,7 @@
         <p>The scope is accessible between <code><a href="/reference/androidx/compose/ui/Modifier.Node.html#onAttach()">onAttach</a></code> and <code><a href="/reference/androidx/compose/ui/Modifier.Node.html#onDetach()">onDetach</a></code> calls, and will be cancelled after the node is detached (after <code><a href="/reference/androidx/compose/ui/Modifier.Node.html#onDetach()">onDetach</a></code> returns).</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.core.Animatable
+import androidx.compose.ui.Modifier
 
 class AnimatedNode : Modifier.Node() {
     val animatable = Animatable(0f)
@@ -340,6 +341,7 @@ class AnimatedNode : Modifier.Node() {
         <p>This callback is called while the node is attached. Right after this callback the node will be detached and later reattached when reused.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.Modifier
 
 class SelectableNode : Modifier.Node() {
     var selected by mutableStateOf(false)

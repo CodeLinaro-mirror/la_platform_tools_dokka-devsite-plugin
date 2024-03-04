@@ -185,6 +185,9 @@
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Text(
     &quot;Hello, World!&quot;,
@@ -197,6 +200,8 @@ Text(
     <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 class FancyModifier(val level: Float) : Modifier.Element
 
@@ -213,6 +218,9 @@ Row(
     <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun PaddedColumn(modifier: Modifier = Modifier) {
@@ -226,6 +234,8 @@ fun PaddedColumn(modifier: Modifier = Modifier) {
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Button
 import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 
 @Composable
 fun ButtonBar(
@@ -1526,6 +1536,11 @@ fun ButtonBar(
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.paddingFrom
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.FirstBaseline
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 // We want to have 30.sp distance from the top of the layout box to the baseline of the
 // first line of text.
@@ -1604,6 +1619,11 @@ Text(
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.paddingFrom
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.FirstBaseline
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 // We want to have 30.sp distance from the top of the layout box to the baseline of the
 // first line of text.
@@ -1681,8 +1701,13 @@ Text(
         <p>A <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code> that positions the content in a layout such that the distance from the top of the layout to the <code><a href="/reference/androidx/compose/ui/layout/package-summary.html#FirstBaseline()">baseline of the first line of text in the content</a></code> is <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).paddingFromBaseline(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">top</a></code>, and the distance from the <code><a href="/reference/androidx/compose/ui/layout/package-summary.html#LastBaseline()">baseline of the last line of text in the content</a></code> to the bottom of the layout is <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).paddingFromBaseline(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">bottom</a></code>.</p>
         <p>When the modified layout is min height constrained and the padded layout is smaller than the constraint, the modified layout will satisfy the min constraint and the content will be positioned to satisfy the <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).paddingFromBaseline(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">top</a></code> requirement if specified, or the <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).paddingFromBaseline(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp)">bottom</a></code> requirement otherwise.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.paddingFrom
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.FirstBaseline
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 // We want to have 30.dp distance from the top of the layout box to the baseline of the
 // first line of text, and a 40.dp distance from the bottom of the layout box to the baseline
@@ -1726,8 +1751,12 @@ Text(
         <p>A <code><a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code> that positions the content in a layout such that the distance from the top of the layout to the <code><a href="/reference/androidx/compose/ui/layout/package-summary.html#FirstBaseline()">baseline of the first line of text in the content</a></code> is <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).paddingFromBaseline(androidx.compose.ui.unit.TextUnit,androidx.compose.ui.unit.TextUnit)">top</a></code>, and the distance from the <code><a href="/reference/androidx/compose/ui/layout/package-summary.html#LastBaseline()">baseline of the last line of text in the content</a></code> to the bottom of the layout is <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).paddingFromBaseline(androidx.compose.ui.unit.TextUnit,androidx.compose.ui.unit.TextUnit)">bottom</a></code>.</p>
         <p>When the modified layout is min height constrained and the padded layout is smaller than the constraint, the modified layout will satisfy the min constraint and the content will be positioned to satisfy the <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).paddingFromBaseline(androidx.compose.ui.unit.TextUnit,androidx.compose.ui.unit.TextUnit)">top</a></code> requirement if specified, or the <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).paddingFromBaseline(androidx.compose.ui.unit.TextUnit,androidx.compose.ui.unit.TextUnit)">bottom</a></code> requirement otherwise.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.paddingFrom
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.FirstBaseline
+import androidx.compose.ui.unit.sp
 
 // We want to have 30.sp distance from the top of the layout box to the baseline of the
 // first line of text, and a 40.sp distance from the bottom of the layout box to the baseline
@@ -1773,7 +1802,10 @@ Text(
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Box(Modifier.size(100.dp).alpha(alpha = 0.5f).background(Color.Red))</pre>
         <div class="devsite-table-wrapper">
@@ -1837,9 +1869,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 val shortText = &quot;Hi&quot;
 val longText = &quot;Very long text\nthat spans across\nmultiple lines&quot;
@@ -1906,6 +1942,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.width
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Box(Modifier.width(100.dp).aspectRatio(2f).background(Color.Green))</pre>
         <div class="devsite-table-wrapper">
@@ -1942,6 +1981,9 @@ Box(Modifier.width(100.dp).aspectRatio(2f).background(Color.Green))</pre>
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Text(
     &quot;Text with background&quot;,
@@ -1988,6 +2030,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 val gradientBrush = Brush.horizontalGradient(
     colors = listOf(Color.Red, Color.Blue, Color.Green),
@@ -2056,6 +2102,8 @@ import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 // Marquee only animates when the content doesn't fit in the max width.
 Column(Modifier.width(30.dp)) {
@@ -2063,6 +2111,7 @@ Column(Modifier.width(30.dp)) {
 }</pre>
         <p>To only animate when the composable is focused, specify <code><a href="/reference/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).basicMarquee(kotlin.Int,androidx.compose.foundation.MarqueeAnimationMode,kotlin.Int,kotlin.Int,androidx.compose.foundation.MarqueeSpacing,androidx.compose.ui.unit.Dp)">animationMode</a></code> and make the composable focusable.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.MarqueeAnimationMode
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
@@ -2070,8 +2119,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.unit.dp
 
 val focusRequester = remember { FocusRequester() }
 
@@ -2089,12 +2140,20 @@ Column(Modifier.width(30.dp)) {
 import androidx.compose.foundation.MarqueeSpacing
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.BlendMode
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.CompositingStrategy
+import androidx.compose.ui.graphics.drawscope.ContentDrawScope
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.unit.dp
 
 val edgeWidth = 32.dp
 fun ContentDrawScope.drawFadedEdge(leftEdge: Boolean) {
@@ -2196,7 +2255,12 @@ Text(
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.BlurredEdgeTreatment
 import androidx.compose.ui.draw.blur
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Box(
     Modifier.size(300.dp)
@@ -2210,9 +2274,11 @@ Box(
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.BlurredEdgeTreatment
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 
 Image(
     painter = painterResource(R.drawable.circus),
@@ -2282,7 +2348,12 @@ Image(
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.BlurredEdgeTreatment
 import androidx.compose.ui.draw.blur
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Box(
     Modifier.size(300.dp)
@@ -2296,9 +2367,11 @@ Box(
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.BlurredEdgeTreatment
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 
 Image(
     painter = painterResource(R.drawable.circus),
@@ -2373,6 +2446,9 @@ Image(
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Text(
     &quot;Text with  square border&quot;,
@@ -2420,7 +2496,14 @@ Text(
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.TileMode
+import androidx.compose.ui.unit.dp
 
 val gradientBrush = Brush.horizontalGradient(
     colors = listOf(Color.Red, Color.Blue, Color.Green),
@@ -2441,12 +2524,19 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.TileMode
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 val widthRange = (1..10)
 var width by remember { mutableStateOf((widthRange.random()).dp) }
@@ -2583,6 +2673,9 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Text(
     &quot;Text with gradient border&quot;,
@@ -2644,8 +2737,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.relocation.BringIntoViewRequester
 import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusTarget
 import androidx.compose.ui.focus.onFocusChanged
 
@@ -2708,8 +2803,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.relocation.BringIntoViewRequester
 import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusTarget
 import androidx.compose.ui.focus.onFocusChanged
 
@@ -2771,6 +2868,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 
 val count = remember { mutableStateOf(0) }
 // content that you want to make clickable
@@ -2830,6 +2928,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 
 val count = remember { mutableStateOf(0) }
 // content that you want to make clickable
@@ -2902,6 +3001,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 
 val count = remember { mutableStateOf(0) }
 // content that you want to make clickable
@@ -2980,6 +3080,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 
 val count = remember { mutableStateOf(0) }
 // content that you want to make clickable
@@ -3134,7 +3235,9 @@ Text(text = count.value.toString(), modifier = Modifier.clickable { count.value 
         <p>If <code><a href="/reference/androidx/compose/ui/package-summary.html#(androidx.compose.ui.Modifier).composed(kotlin.Function1,kotlin.Function1)">inspectorInfo</a></code> is specified this modifier will be visible to tools during development. Specify the name and arguments of the original modifier.</p>
         <p>Example usage:</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.debugInspectorInfo
 
 // let's create your own custom stateful modifier
@@ -3153,8 +3256,11 @@ fun Modifier.myColorModifier(color: Color) = composed(
     }
 )</pre>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.debugInspectorInfo
+import androidx.compose.ui.unit.Dp
 
 // let's create your own custom stateful modifier with multiple arguments
 fun Modifier.myModifier(width: Dp, height: Dp, color: Color) = composed(
@@ -3187,7 +3293,9 @@ fun Modifier.myModifier(width: Dp, height: Dp, color: Color) = composed(
         <p>If <code><a href="/reference/androidx/compose/ui/package-summary.html#(androidx.compose.ui.Modifier).composed(kotlin.String,kotlin.Any,kotlin.Function1,kotlin.Function1)">inspectorInfo</a></code> is specified this modifier will be visible to tools during development. Specify the name and arguments of the original modifier.</p>
         <p>Example usage:</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.debugInspectorInfo
 
 // let's create your own custom stateful modifier
@@ -3206,8 +3314,11 @@ fun Modifier.myColorModifier(color: Color) = composed(
     }
 )</pre>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.debugInspectorInfo
+import androidx.compose.ui.unit.Dp
 
 // let's create your own custom stateful modifier with multiple arguments
 fun Modifier.myModifier(width: Dp, height: Dp, color: Color) = composed(
@@ -3240,7 +3351,9 @@ fun Modifier.myModifier(width: Dp, height: Dp, color: Color) = composed(
         <p>If <code><a href="/reference/androidx/compose/ui/package-summary.html#(androidx.compose.ui.Modifier).composed(kotlin.String,kotlin.Array,kotlin.Function1,kotlin.Function1)">inspectorInfo</a></code> is specified this modifier will be visible to tools during development. Specify the name and arguments of the original modifier.</p>
         <p>Example usage:</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.debugInspectorInfo
 
 // let's create your own custom stateful modifier
@@ -3259,8 +3372,11 @@ fun Modifier.myColorModifier(color: Color) = composed(
     }
 )</pre>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.debugInspectorInfo
+import androidx.compose.ui.unit.Dp
 
 // let's create your own custom stateful modifier with multiple arguments
 fun Modifier.myModifier(width: Dp, height: Dp, color: Color) = composed(
@@ -3293,7 +3409,9 @@ fun Modifier.myModifier(width: Dp, height: Dp, color: Color) = composed(
         <p>If <code><a href="/reference/androidx/compose/ui/package-summary.html#(androidx.compose.ui.Modifier).composed(kotlin.String,kotlin.Any,kotlin.Any,kotlin.Function1,kotlin.Function1)">inspectorInfo</a></code> is specified this modifier will be visible to tools during development. Specify the name and arguments of the original modifier.</p>
         <p>Example usage:</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.debugInspectorInfo
 
 // let's create your own custom stateful modifier
@@ -3312,8 +3430,11 @@ fun Modifier.myColorModifier(color: Color) = composed(
     }
 )</pre>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.debugInspectorInfo
+import androidx.compose.ui.unit.Dp
 
 // let's create your own custom stateful modifier with multiple arguments
 fun Modifier.myModifier(width: Dp, height: Dp, color: Color) = composed(
@@ -3346,7 +3467,9 @@ fun Modifier.myModifier(width: Dp, height: Dp, color: Color) = composed(
         <p>If <code><a href="/reference/androidx/compose/ui/package-summary.html#(androidx.compose.ui.Modifier).composed(kotlin.String,kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function1,kotlin.Function1)">inspectorInfo</a></code> is specified this modifier will be visible to tools during development. Specify the name and arguments of the original modifier.</p>
         <p>Example usage:</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.debugInspectorInfo
 
 // let's create your own custom stateful modifier
@@ -3365,8 +3488,11 @@ fun Modifier.myColorModifier(color: Color) = composed(
     }
 )</pre>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.debugInspectorInfo
+import androidx.compose.ui.unit.Dp
 
 // let's create your own custom stateful modifier with multiple arguments
 fun Modifier.myModifier(width: Dp, height: Dp, color: Color) = composed(
@@ -3407,8 +3533,11 @@ fun Modifier.myModifier(width: Dp, height: Dp, color: Color) = composed(
         <p>For example, a <code><a href="/reference/androidx/compose/ui/graphics/LinearGradient.html">androidx.compose.ui.graphics.LinearGradient</a></code> that is to occupy the full bounds of the drawing area can be created once the size has been defined and referenced for subsequent draw calls without having to re-allocate.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 
 Box(
     Modifier.drawWithCache {
@@ -3427,8 +3556,11 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 
 val colors1 = listOf(Color.Red, Color.Blue)
 val colors2 = listOf(Color.Yellow, Color.Green)
@@ -3448,12 +3580,18 @@ Box(
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.BlendMode
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.Path
 import androidx.compose.ui.graphics.vector.PathData
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.unit.dp
 
 val vectorPainter = rememberVectorPainter(24.dp, 24.dp, autoMirror = true) {
         viewportWidth, viewportHeight -&gt;
@@ -3564,7 +3702,11 @@ import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.graphics.Color.Companion.Green
+import androidx.compose.ui.unit.dp
 
 var color by remember { mutableStateOf(Black) }
 Box(
@@ -3610,8 +3752,12 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusTarget
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.graphics.Color.Companion.Green
+import androidx.compose.ui.unit.dp
 
 var color by remember { mutableStateOf(Black) }
 Box(
@@ -3633,12 +3779,15 @@ Box(
         <p>Use this modifier to specify a custom focus traversal order.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.focus.focusRequester
 
@@ -3724,12 +3873,15 @@ Column(Modifier.fillMaxSize(), Arrangement.SpaceEvenly) {
         <p>A modifier that lets you specify a <code><a href="/reference/androidx/compose/ui/focus/FocusRequester.html">FocusRequester</a></code> for the current composable so that this <code><a href="/reference/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusOrder(androidx.compose.ui.focus.FocusRequester)">focusRequester</a></code> can be used by another composable to specify a custom focus order.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.focus.focusRequester
 
@@ -3802,10 +3954,14 @@ Column(Modifier.fillMaxSize(), Arrangement.SpaceEvenly) {
         <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/ui/FocusPropertiesKt.html">FocusPropertiesKt</a>.<a href="/reference/androidx/compose/ui/Modifier.html#(androidx.compose.ui.Modifier).focusProperties(kotlin.Function1)">focusProperties</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/focus/FocusProperties.html">FocusProperties</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;scope<br>)</pre>
         <p>This modifier allows you to specify properties that are accessible to <code><a href="/reference/androidx/compose/ui/focus/package-summary.html#(androidx.compose.ui.Modifier).focusTarget()">focusTarget</a></code>s further down the modifier chain or on child layout nodes.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.focus.focusTarget
+import androidx.compose.ui.input.InputMode.Companion.Touch
+import androidx.compose.ui.platform.LocalInputModeManager
 
 Column {
     // Always focusable.
@@ -3836,9 +3992,13 @@ import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.graphics.Color.Companion.Green
+import androidx.compose.ui.unit.dp
 
 val focusRequester = remember { FocusRequester() }
 var color by remember { mutableStateOf(Black) }
@@ -3868,6 +4028,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Button
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
 
 Row {
     Column(Modifier.focusGroup()) {
@@ -3887,10 +4048,15 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.graphics.Color.Companion.Red
+import androidx.compose.ui.unit.dp
 
 val interactionSource = remember { MutableInteractionSource() }
 LazyRow(
@@ -3922,6 +4088,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 
@@ -4003,6 +4170,7 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.material.Text
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 
 val animatedAlpha = remember { Animatable(0f) }
@@ -4053,6 +4221,7 @@ LaunchedEffect(animatedAlpha) {
         <p>If the layer parameters are backed by a <code><a href="/reference/androidx/compose/runtime/State.html">androidx.compose.runtime.State</a></code> or an animated value prefer an overload with a lambda block on <code><a href="/reference/androidx/compose/ui/graphics/GraphicsLayerScope.html">GraphicsLayerScope</a></code> as reading a state inside the block will only cause the layer properties update without triggering recomposition and relayout.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 
 Text(&quot;Hello World&quot;, Modifier.graphicsLayer(alpha = 0.5f, clip = true))</pre>
@@ -4060,8 +4229,12 @@ Text(&quot;Hello World&quot;, Modifier.graphicsLayer(alpha = 0.5f, clip = true))
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.CompositingStrategy
 import androidx.compose.ui.graphics.drawscope.inset
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.unit.dp
 
 Canvas(
     modifier =
@@ -4228,6 +4401,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Text
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 // MutableInteractionSource to track changes of the component's interactions (like &quot;hovered&quot;)
 val interactionSource = remember { MutableInteractionSource() }
@@ -4280,6 +4457,7 @@ Box(
         <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/ui/IndicationKt.html">IndicationKt</a>.<a href="/reference/androidx/compose/ui/Modifier.html#(androidx.compose.ui.Modifier).indication(androidx.compose.foundation.interaction.InteractionSource,androidx.compose.foundation.Indication)">indication</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>&nbsp;interactionSource,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/foundation/Indication.html">Indication</a>&nbsp;indication<br>)</pre>
         <p>Draws visual effects for this component when interactions occur.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -4290,6 +4468,8 @@ import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.material.Text
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 val interactionSource = remember { MutableInteractionSource() }
 Column {
@@ -4354,8 +4534,12 @@ Column {
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.debugInspectorInfo
 import androidx.compose.ui.platform.inspectable
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 
 /**
  * Sample with a single parameter
@@ -4407,11 +4591,16 @@ fun Modifier.fancyFrame(size: Dp, color: Color) = inspectable(
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 // Builds a layout containing two pieces of text separated by a divider, where the divider
 // is sized according to the height of the longest text.
@@ -4439,11 +4628,16 @@ Box {
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 // Builds a layout containing two aspectRatios separated by a divider, where the divider
 // is sized according to the height of the taller aspectRatio.
@@ -4497,10 +4691,14 @@ Box {
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 // Builds a layout containing three Box having the same width as the widest one.
 //
@@ -4533,10 +4731,13 @@ Box {
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 
 // Builds a layout containing three Text boxes having the same width as the widest one.
 //
@@ -4571,6 +4772,9 @@ Box {
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.input.key.onPreviewKeyEvent
 
@@ -4622,6 +4826,9 @@ Box(
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.input.key.onPreviewKeyEvent
 
@@ -4673,9 +4880,11 @@ Box(
         <p>Example usage:</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.unit.Constraints
 
 Layout({
     // Here the Containers are only needed to apply the modifiers. You could use the
@@ -4712,6 +4921,8 @@ Layout({
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.unit.offset
 
@@ -4764,6 +4975,8 @@ Box(
         </ol>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.AnimationVector2D
+import androidx.compose.animation.core.VectorConverter
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -4771,12 +4984,20 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.intermediateLayout
 import androidx.compose.ui.layout.layout
+import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.round
 
 // Creates a custom modifier that animates the constraints and measures child with the
 // animated constraints. This modifier is built on top of `Modifier.intermediateLayout`, which
@@ -4847,13 +5068,17 @@ Row(
         <p>This function returns a no-op modifier on API levels below P (28), since the framework does not support the <code><a href="https://developer.android.com/reference/android/widget/Magnifier.html">Magnifier</a></code> widget on those levels. However, even on higher API levels, not all magnifier features are supported on all platforms. To check whether a given <code><a href="/reference/androidx/compose/foundation/MagnifierStyle.html">MagnifierStyle</a></code> is supported by the current platform, check the <code><a href="/reference/androidx/compose/foundation/MagnifierStyle.html#isSupported()">MagnifierStyle.isSupported</a></code> property.</p>
         <p>This function does not allow configuration of <code><a href="https://developer.android.com/reference/android/widget/Magnifier.Builder.html#setSourceBounds(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Int)">source bounds</a></code> since the magnifier widget does not support constraining to the bounds of composables.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.MagnifierStyle
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.magnifier
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
 
@@ -4981,8 +5206,14 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
 
 // here we use LazyColumn that has build-in nested scroll, but we want to act like a
 // parent for this LazyColumn and participate in its nested scroll.
@@ -5030,16 +5261,24 @@ Box(
         <p>Here's the example of the component that is draggable and dispatches nested scroll to participate in the nested scroll chain:</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.unit.dp
 
 // Let's take Modifier.draggable (which doesn't have nested scroll build in, unlike Modifier
 // .scrollable) and add nested scroll support our component that contains draggable
@@ -5176,10 +5415,13 @@ Box(
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.absoluteOffset
+import androidx.compose.foundation.layout.offset
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
 
 // This text will be offset in steps of 10.dp from the top left of the available space.
 var offset by remember { mutableStateOf(0) }
@@ -5223,8 +5465,12 @@ Text(
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.absoluteOffset
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.Text
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 // This text will be offset (10.dp, 20.dp) from the center of the available space.
 Text(
@@ -5271,7 +5517,9 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
 
 // This text will be offset in steps of 10.dp from the top left of the available space in
 // left-to-right context, and from top right in right-to-left context.
@@ -5318,6 +5566,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.Text
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 // This text will be offset (10.dp, 20.dp) from the center of the available space. In the
 // right-to-left context, the offset will be (-10.dp, 20.dp).
@@ -5364,9 +5615,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.layout.positionInWindow
+import androidx.compose.ui.unit.dp
 
 Column(
     Modifier.onGloballyPositioned { coordinates -&gt;
@@ -5396,6 +5650,9 @@ Column(
         <p>Invoke <code><a href="/reference/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).onPlaced(kotlin.Function1)">onPlaced</a></code> after the parent <code><a href="/reference/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> and parent layout has been placed and before child <code><a href="/reference/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> is placed. This allows child <code><a href="/reference/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> to adjust its own placement based on where the parent is.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.AnimationVector2D
+import androidx.compose.animation.core.Spring.StiffnessMediumLow
+import androidx.compose.animation.core.VectorConverter
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -5404,12 +5661,20 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onPlaced
 import androidx.compose.ui.layout.positionInParent
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.round
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -5464,6 +5729,7 @@ fun AnimatedChildAlignment(alignment: Alignment) {
         <p>Example usage:</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onSizeChanged
 
 // Use onSizeChanged() for diagnostics. Use Layout or SubcomposeLayout if you want
@@ -5487,7 +5753,10 @@ Text(
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.spring
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.OverscrollEffect
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.rememberScrollableState
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
@@ -5495,12 +5764,20 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.overscroll
 import androidx.compose.material.Text
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.Velocity
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalFoundationApi::class)
 // our custom offset overscroll that offset the element it is applied to when we hit the bound
@@ -5639,6 +5916,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.absolutePadding
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Box(Modifier.background(color = Color.Gray)) {
     Box(
@@ -5663,6 +5943,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Box(Modifier.background(color = Color.Gray)) {
     Box(Modifier.padding(all = 20.dp).size(50.dp).background(Color.Blue))
@@ -5684,6 +5967,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 val innerPadding = PaddingValues(top = 10.dp, start = 15.dp)
 Box(Modifier.background(color = Color.Gray)) {
@@ -5705,6 +5991,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Box(Modifier.background(color = Color.Gray)) {
     Box(
@@ -5730,6 +6019,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Box(Modifier.background(color = Color.Gray)) {
     Box(
@@ -5751,8 +6043,13 @@ Box(Modifier.background(color = Color.Gray)) {
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.unit.dp
 
 class CustomPainter : Painter() {
 
@@ -5833,6 +6130,8 @@ Box(
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 
 Column(Modifier.pointerHoverIcon(PointerIcon.Crosshair)) {
@@ -5943,6 +6242,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.progressSemantics
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 
 Box(Modifier.progressSemantics().background(color = Color.Cyan)) {
     Text(&quot;Operation is on progress&quot;)
@@ -5961,6 +6262,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.progressSemantics
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 val progress = 0.5f // emulate progress from some state
 Box(
@@ -6060,11 +6364,16 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
+import androidx.compose.ui.Alignment.Companion.CenterVertically
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.input.rotary.onPreRotaryScrollEvent
 import androidx.compose.ui.input.rotary.onRotaryScrollEvent
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.dp
 
 MaterialTheme(colors = darkColors()) {
     val rowScrollState = rememberScrollState()
@@ -6212,8 +6521,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.input.rotary.onRotaryScrollEvent
 
 val scrollState = rememberScrollState()
@@ -6264,11 +6576,16 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
+import androidx.compose.ui.Alignment.Companion.CenterVertically
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.input.rotary.onPreRotaryScrollEvent
 import androidx.compose.ui.input.rotary.onRotaryScrollEvent
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.dp
 
 MaterialTheme(colors = darkColors()) {
     val rowScrollState = rememberScrollState()
@@ -6409,7 +6726,9 @@ MaterialTheme(colors = darkColors()) {
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.unit.dp
 
 Box(
     Modifier.rotate(45f)
@@ -6449,7 +6768,9 @@ Box(
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.unit.dp
 
 Box(
     Modifier.scale(2f)
@@ -6510,7 +6831,9 @@ Box(
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.unit.dp
 
 Box(
     Modifier.scale(scaleX = 2f, scaleY = 3f)
@@ -6578,6 +6901,11 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.TileMode
+import androidx.compose.ui.unit.dp
 
 val scrollState = rememberScrollState()
 val gradient = Brush.horizontalGradient(
@@ -6664,6 +6992,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.TileMode
+import androidx.compose.ui.unit.dp
 
 val scrollState = rememberScrollState()
 val gradient = Brush.verticalGradient(
@@ -6748,6 +7081,7 @@ Box(
         <p>If you don't need to have fling or nested scroll support, but want to make component simply draggable, consider using <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).draggable(androidx.compose.foundation.gestures.DraggableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Boolean,kotlin.coroutines.SuspendFunction2,kotlin.coroutines.SuspendFunction2,kotlin.Boolean)">draggable</a></code>.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.rememberScrollableState
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
@@ -6755,7 +7089,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 // actual composable state that we will show on UI and update in `Scrollable`
 val offset = remember { mutableStateOf(0f) }
@@ -6846,6 +7185,7 @@ Box(
         <p>This overload provides the access to <code><a href="/reference/androidx/compose/foundation/OverscrollEffect.html">OverscrollEffect</a></code> that defines the behaviour of the over scrolling logic. Consider using <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableDefaults.html#overscrollEffect()">ScrollableDefaults.overscrollEffect</a></code> for the platform look-and-feel.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.rememberScrollableState
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
@@ -6853,7 +7193,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 // actual composable state that we will show on UI and update in `Scrollable`
 val offset = remember { mutableStateOf(0f) }
@@ -6985,6 +7330,9 @@ import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 val option1 = Color.Red
 val option2 = Color.Blue
@@ -7066,6 +7414,9 @@ import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 val option1 = Color.Red
 val option2 = Color.Blue
@@ -7225,7 +7576,10 @@ Column {
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.unit.dp
 
 Box(
     Modifier.shadow(12.dp, RectangleShape)
@@ -7299,7 +7653,14 @@ Box(
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.requiredSizeIn
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.sizeIn
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun DefaultMinBox(modifier: Modifier = Modifier) {
@@ -7331,6 +7692,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Box(Modifier.fillMaxHeight().background(Color.Red), contentAlignment = Alignment.Center) {
     Box(Modifier.size(100.dp).background(color = Color.Magenta))
@@ -7341,6 +7706,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.requiredWidth
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Box(Modifier.requiredSize(100.dp).background(Color.Red), contentAlignment = Alignment.Center) {
     // The inner Box will be (30.dp x 50.dp).
@@ -7386,6 +7755,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Box(Modifier.fillMaxSize().background(Color.Red), contentAlignment = Alignment.Center) {
     Box(Modifier.size(100.dp).background(color = Color.Magenta))
@@ -7396,6 +7769,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.requiredWidth
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Box(Modifier.requiredSize(100.dp).background(Color.Red), contentAlignment = Alignment.Center) {
     // The inner Box will be (50.dp x 50.dp).
@@ -7441,6 +7818,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Box(Modifier.fillMaxWidth().background(Color.Red), contentAlignment = Alignment.Center) {
     Box(Modifier.size(100.dp).background(color = Color.Magenta))
@@ -7451,6 +7832,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Box(Modifier.requiredSize(100.dp).background(Color.Red), contentAlignment = Alignment.Center) {
     // The inner Box will be (50.dp x 30.dp).
@@ -7498,6 +7883,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.height
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Box {
     Box(Modifier.height(100.dp).aspectRatio(1f).background(Color.Blue))
@@ -7526,7 +7914,11 @@ Box {
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 // The result is a 50.dp x 50.dp blue box centered in a 100.dp x 100.dp space.
 // Note that although a previous modifier asked it to be 100.dp height, this
@@ -7562,6 +7954,10 @@ Box(
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 // The result is a 50.dp x 50.dp red box centered in a 100.dp x 100.dp space.
 // Note that although a previous modifier asked it to be 100.dp x 100.dp, this
@@ -7617,6 +8013,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.requiredWidth
+import androidx.compose.foundation.layout.width
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 // The result is a 50.dp x 50.dp magenta box centered in a 100.dp x 100.dp space.
 // Note that although a previous modifier asked it to be 100.dp width, this
@@ -7652,6 +8052,9 @@ Box(
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Box {
     Box(Modifier.size(100.dp, 100.dp).background(Color.Red))
@@ -7671,7 +8074,10 @@ Box {
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.DpSize
+import androidx.compose.ui.unit.dp
 
 Box {
     Box(Modifier.size(DpSize(100.dp, 100.dp)).background(Color.Red))
@@ -7691,6 +8097,9 @@ Box {
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Box {
     Box(Modifier.size(100.dp, 100.dp).background(Color.Red))
@@ -7720,6 +8129,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.width
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Box {
     Box(Modifier.width(100.dp).aspectRatio(1f).background(Color.Magenta))
@@ -7749,6 +8161,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 // Here the result will be a 50.dp x 20.dp blue box centered vertically in a 50.dp x 50.dp
 // space. Because of the size modifier, if wrapContentHeight did not exist,
@@ -7778,6 +8194,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 // Here the result will be a 20.dp x 20.dp blue box top-centered in a 40.dp x 40.dp space.
 // Because of the sizeIn modifier, if wrapContentSize did not exist, the blue rectangle
@@ -7807,6 +8227,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 // Here the result will be a 20.dp x 50.dp blue box centered vertically in a 50.dp x 50.dp
 // space. Because of the size modifier, if wrapContentWidth did not exist,
@@ -7833,6 +8257,9 @@ Box(
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.input.key.onPreviewKeyEvent
 
@@ -7884,6 +8311,9 @@ Box(
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.input.key.onPreviewKeyEvent
 
@@ -8005,6 +8435,7 @@ import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 
 var checked by remember { mutableStateOf(false) }
 // content that you want to make toggleable
@@ -8087,6 +8518,7 @@ import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 
 var checked by remember { mutableStateOf(false) }
 // content that you want to make toggleable
@@ -8178,10 +8610,13 @@ Text(
         <p>TriStateToggleable should be used when there are dependent Toggleables associated to this component and those can have different values.</p>
         <p>This version has no <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> or <code><a href="/reference/androidx/compose/foundation/Indication.html">Indication</a></code> parameters, default indication from <code><a href="/reference/androidx/compose/foundation/package-summary.html#LocalIndication()">LocalIndication</a></code> will be used. To specify <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> or <code><a href="/reference/androidx/compose/foundation/Indication.html">Indication</a></code>, use another overload.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.selection.triStateToggleable
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.state.ToggleableState
 
 var checked by remember { mutableStateOf(ToggleableState.Indeterminate) }
 // content that you want to make toggleable
@@ -8267,10 +8702,13 @@ Text(
         <p>TriStateToggleable should be used when there are dependent Toggleables associated to this component and those can have different values.</p>
         <p>This version requires both <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> and <code><a href="/reference/androidx/compose/foundation/Indication.html">Indication</a></code> to work properly. Use another overload if you don't need these parameters.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.selection.triStateToggleable
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.state.ToggleableState
 
 var checked by remember { mutableStateOf(ToggleableState.Indeterminate) }
 // content that you want to make toggleable
@@ -8381,10 +8819,16 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 Box(
     Modifier
@@ -8497,10 +8941,16 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 Row(
     Modifier
@@ -8622,6 +9072,7 @@ import androidx.compose.foundation.layout.imeNestedScroll
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
 
 LazyColumn(
     modifier = Modifier
@@ -8648,9 +9099,12 @@ LazyColumn(
         <p>For example, if a parent layout uses <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).displayCutoutPadding()">displayCutoutPadding</a></code>, the area that the parent layout pads for the status bars will not be padded again by this <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).captionBarPadding()">captionBarPadding</a></code> modifier.</p>
         <p>When used, the <code><a href="https://developer.android.com/reference/android/view/WindowInsets.html">WindowInsets</a></code> will be consumed.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.captionBarPadding
+import androidx.compose.ui.Modifier
+import androidx.core.view.WindowCompat
 
 class SampleActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -8674,11 +9128,17 @@ class SampleActivity : ComponentActivity() {
         <p>Consume insets that haven't been consumed yet by other insets Modifiers similar to <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets)">windowInsetsPadding</a></code> without adding any padding.</p>
         <p>This can be useful when content offsets are provided by <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.foundation.layout.WindowInsets).asPaddingValues()">WindowInsets.asPaddingValues</a></code>. This should be used further down the hierarchy than the <code><a href="/reference/androidx/compose/foundation/layout/PaddingValues.html">PaddingValues</a></code> is used so that the values aren't consumed before the padding is added.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.Modifier
+import androidx.core.view.WindowCompat
 
 class SampleActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -8704,11 +9164,17 @@ class SampleActivity : ComponentActivity() {
         <p>Consume <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.PaddingValues)">paddingValues</a></code> as insets as if the padding was added irrespective of insets. Layouts further down the hierarchy that use <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets)">windowInsetsPadding</a></code>, safeContentPadding, and other insets padding Modifiers won't pad for the values that <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.PaddingValues)">paddingValues</a></code> provides. This can be useful when content offsets are provided by layout rather than <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets)">windowInsetsPadding</a></code> modifiers.</p>
         <p>This method consumes all of <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.PaddingValues)">paddingValues</a></code> in addition to whatever has been consumed by other <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets)">windowInsetsPadding</a></code> modifiers by ancestors. <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</a></code> accepting a <code><a href="/reference/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> argument ensures that its insets are consumed and doesn't consume more if they have already been consumed by ancestors.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.dp
+import androidx.core.view.WindowCompat
 
 class SampleActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -8759,11 +9225,16 @@ class SampleActivity : ComponentActivity() {
         <p>For example, if a parent layout uses <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).statusBarsPadding()">statusBarsPadding</a></code>, the area that the parent layout pads for the status bars will not be padded again by this <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).displayCutoutPadding()">displayCutoutPadding</a></code> modifier.</p>
         <p>When used, the <code><a href="https://developer.android.com/reference/android/view/WindowInsets.html">WindowInsets</a></code> will be consumed.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.displayCutoutPadding
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.core.view.WindowCompat
 
 class SampleActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -8797,11 +9268,17 @@ class SampleActivity : ComponentActivity() {
         <p>For example, if a parent layout uses <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).navigationBarsPadding()">navigationBarsPadding</a></code>, the area that the parent layout pads for the status bars will not be padded again by this <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).imePadding()">imePadding</a></code> modifier.</p>
         <p>When used, the <code><a href="https://developer.android.com/reference/android/view/WindowInsets.html">WindowInsets</a></code> will be consumed.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.core.view.WindowCompat
 
 class SampleActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -8832,11 +9309,16 @@ class SampleActivity : ComponentActivity() {
         <p>For example, if a parent layout uses <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).navigationBarsPadding()">navigationBarsPadding</a></code>, the area that the parent layout pads for the status bars will not be padded again by this <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).mandatorySystemGesturesPadding()">mandatorySystemGesturesPadding</a></code> modifier.</p>
         <p>When used, the <code><a href="https://developer.android.com/reference/android/view/WindowInsets.html">WindowInsets</a></code> will be consumed.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.mandatorySystemGesturesPadding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.core.view.WindowCompat
 
 class SampleActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -8872,11 +9354,17 @@ class SampleActivity : ComponentActivity() {
         <p>For example, if a parent layout uses <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).systemBarsPadding()">systemBarsPadding</a></code>, the area that the parent layout pads for the status bars will not be padded again by this <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).navigationBarsPadding()">navigationBarsPadding</a></code> modifier.</p>
         <p>When used, the <code><a href="https://developer.android.com/reference/android/view/WindowInsets.html">WindowInsets</a></code> will be consumed.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.core.view.WindowCompat
 
 class SampleActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -8907,15 +9395,22 @@ class SampleActivity : ComponentActivity() {
         <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/ui/WindowInsetsPaddingKt.html">WindowInsetsPaddingKt</a>.<a href="/reference/androidx/compose/ui/Modifier.html#(androidx.compose.ui.Modifier).onConsumedWindowInsetsChanged(kotlin.Function1)">onConsumedWindowInsetsChanged</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</pre>
         <p>Calls <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).onConsumedWindowInsetsChanged(kotlin.Function1)">block</a></code> with the <code><a href="/reference/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> that have been consumed, either by <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</a></code> or one of the padding Modifiers, such as imePadding.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.MutableWindowInsets
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.exclude
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.onConsumedWindowInsetsChanged
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeContent
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.core.view.WindowCompat
 
 class SampleActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -8950,11 +9445,17 @@ class SampleActivity : ComponentActivity() {
         <p>For example, if a parent layout uses <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).navigationBarsPadding()">navigationBarsPadding</a></code>, the area that the parent layout pads for the status bars will not be padded again by this <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).safeContentPadding()">safeContentPadding</a></code> modifier.</p>
         <p>When used, the <code><a href="https://developer.android.com/reference/android/view/WindowInsets.html">WindowInsets</a></code> will be consumed.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.safeContent
 import androidx.compose.foundation.layout.safeContentPadding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.core.view.WindowCompat
 
 class SampleActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -8991,11 +9492,16 @@ class SampleActivity : ComponentActivity() {
         <p>For example, if a parent layout uses <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).statusBarsPadding()">statusBarsPadding</a></code>, the area that the parent pads for the status bars will not be padded again by this <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).safeDrawingPadding()">safeDrawingPadding</a></code> modifier.</p>
         <p>When used, the <code><a href="https://developer.android.com/reference/android/view/WindowInsets.html">WindowInsets</a></code> will be consumed.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.core.view.WindowCompat
 
 class SampleActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -9031,11 +9537,16 @@ class SampleActivity : ComponentActivity() {
         <p>For example, if a parent layout uses <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).navigationBarsPadding()">navigationBarsPadding</a></code>, the area that the parent layout pads for the status bars will not be padded again by this <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).safeGesturesPadding()">safeGesturesPadding</a></code> modifier.</p>
         <p>When used, the <code><a href="https://developer.android.com/reference/android/view/WindowInsets.html">WindowInsets</a></code> will be consumed.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.safeGesturesPadding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.core.view.WindowCompat
 
 class SampleActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -9071,11 +9582,17 @@ class SampleActivity : ComponentActivity() {
         <p>For example, if a parent layout uses <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).displayCutoutPadding()">displayCutoutPadding</a></code>, the area that the parent layout pads for the status bars will not be padded again by this <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).statusBarsPadding()">statusBarsPadding</a></code> modifier.</p>
         <p>When used, the <code><a href="https://developer.android.com/reference/android/view/WindowInsets.html">WindowInsets</a></code> will be consumed.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.core.view.WindowCompat
 
 class SampleActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -9109,9 +9626,13 @@ class SampleActivity : ComponentActivity() {
         <p>For example, if a parent layout uses <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).statusBarsPadding()">statusBarsPadding</a></code>, the area that the parent layout pads for the status bars will not be padded again by this <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).systemBarsPadding()">systemBarsPadding</a></code> modifier.</p>
         <p>When used, the <code><a href="https://developer.android.com/reference/android/view/WindowInsets.html">WindowInsets</a></code> will be consumed.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.ui.Modifier
+import androidx.core.view.WindowCompat
 
 class SampleActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -9137,11 +9658,16 @@ class SampleActivity : ComponentActivity() {
         <p>For example, if a parent layout uses <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).waterfallPadding()">waterfallPadding</a></code>, the area that the parent layout pads for the status bars will not be padded again by this <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).systemGesturesPadding()">systemGesturesPadding</a></code> modifier.</p>
         <p>When used, the <code><a href="https://developer.android.com/reference/android/view/WindowInsets.html">WindowInsets</a></code> will be consumed.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.systemGesturesPadding
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.core.view.WindowCompat
 
 class SampleActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -9177,11 +9703,16 @@ class SampleActivity : ComponentActivity() {
         <p>For example, if a parent layout uses <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).systemGesturesPadding()">systemGesturesPadding</a></code>, the area that the parent layout pads for the status bars will not be padded again by this <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).waterfallPadding()">waterfallPadding</a></code> modifier.</p>
         <p>When used, the <code><a href="https://developer.android.com/reference/android/view/WindowInsets.html">WindowInsets</a></code> will be consumed.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.waterfallPadding
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.core.view.WindowCompat
 
 class SampleActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -9215,12 +9746,19 @@ class SampleActivity : ComponentActivity() {
         <p>Any insets consumed by other insets padding modifiers or <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</a></code> on a parent layout will be excluded from <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets)">insets</a></code>. <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets)">insets</a></code> will be <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumed</a></code> for child layouts as well.</p>
         <p>For example, if an ancestor uses statusBarsPadding and this modifier uses WindowInsets.Companion.systemBars, the portion of the system bars that the status bars uses will not be padded again by this modifier.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.ime
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.union
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.core.view.WindowCompat
 
 class SampleActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -9277,12 +9815,19 @@ class SampleActivity : ComponentActivity() {
         <p>Sets the height to that of <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsBottomHeight(androidx.compose.foundation.layout.WindowInsets)">insets</a></code> at the <code><a href="/reference/androidx/compose/foundation/layout/WindowInsets.html#getBottom(androidx.compose.ui.unit.Density)">bottom</a></code> of the screen.</p>
         <p>When used, the android.view.WindowInsets will respect the consumed insets from <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets)">windowInsetsPadding</a></code> and <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</a></code>, but won't consume any insets.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.windowInsetsTopHeight
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.core.view.WindowCompat
 
 class SampleActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -9312,12 +9857,19 @@ class SampleActivity : ComponentActivity() {
         <p>Sets the width to that of <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsEndWidth(androidx.compose.foundation.layout.WindowInsets)">insets</a></code> at the <code><a href="/reference/androidx/compose/ui/Alignment.Companion.html#End()">end</a></code> of the screen, using either <code><a href="/reference/androidx/compose/foundation/layout/WindowInsets.html#getLeft(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection)">left</a></code> or <code><a href="/reference/androidx/compose/foundation/layout/WindowInsets.html#getRight(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection)">right</a></code>, depending on the <code><a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code>.</p>
         <p>When used, the android.view.WindowInsets will respect the consumed insets from <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets)">windowInsetsPadding</a></code> and <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</a></code>, but won't consume any insets.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.windowInsetsEndWidth
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.core.view.WindowCompat
 
 class SampleActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -9347,12 +9899,19 @@ class SampleActivity : ComponentActivity() {
         <p>Sets the width to that of <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsStartWidth(androidx.compose.foundation.layout.WindowInsets)">insets</a></code> at the <code><a href="/reference/androidx/compose/ui/Alignment.Companion.html#Start()">start</a></code> of the screen, using either <code><a href="/reference/androidx/compose/foundation/layout/WindowInsets.html#getLeft(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection)">left</a></code> or <code><a href="/reference/androidx/compose/foundation/layout/WindowInsets.html#getRight(androidx.compose.ui.unit.Density,androidx.compose.ui.unit.LayoutDirection)">right</a></code>, depending on the <code><a href="/reference/androidx/compose/ui/unit/LayoutDirection.html">LayoutDirection</a></code>.</p>
         <p>When used, the android.view.WindowInsets will respect the consumed insets from <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets)">windowInsetsPadding</a></code> and <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</a></code>, but won't consume any insets.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.windowInsetsStartWidth
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.core.view.WindowCompat
 
 class SampleActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -9382,12 +9941,19 @@ class SampleActivity : ComponentActivity() {
         <p>Sets the height to that of <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsTopHeight(androidx.compose.foundation.layout.WindowInsets)">insets</a></code> at the <code><a href="/reference/androidx/compose/foundation/layout/WindowInsets.html#getTop(androidx.compose.ui.unit.Density)">top</a></code> of the screen.</p>
         <p>When used, the android.view.WindowInsets will respect the consumed insets from <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets)">windowInsetsPadding</a></code> and <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#(androidx.compose.ui.Modifier).consumeWindowInsets(androidx.compose.foundation.layout.WindowInsets)">consumeWindowInsets</a></code>, but won't consume any insets.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsTopHeight
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.core.view.WindowCompat
 
 class SampleActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -9419,6 +9985,7 @@ class SampleActivity : ComponentActivity() {
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.zIndex
 
 Box {

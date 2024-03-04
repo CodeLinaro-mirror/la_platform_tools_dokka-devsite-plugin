@@ -49,13 +49,19 @@
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/animation/graphics/ExperimentalAnimationGraphicsApi.html">ExperimentalAnimationGraphicsApi</a><br>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/graphics/vector/AnimatedImageVector.html">AnimatedImageVector</a>&nbsp;<a href="/reference/androidx/compose/animation/graphics/res/AnimatedVectorResourcesKt.html#(androidx.compose.animation.graphics.vector.AnimatedImageVector.Companion).animatedVectorResource(kotlin.Int)">animatedVectorResource</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/graphics/vector/AnimatedImageVector.Companion.html">AnimatedImageVector.Companion</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/DrawableRes.html">DrawableRes</a> int&nbsp;id<br>)</pre>
         <p>Load an <code><a href="/reference/androidx/compose/animation/graphics/vector/AnimatedImageVector.html">AnimatedImageVector</a></code> from an Android resource id.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.annotation.DrawableRes
+import androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi
 import androidx.compose.animation.graphics.res.animatedVectorResource
 import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
+import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalAnimationGraphicsApi::class)
 @Composable

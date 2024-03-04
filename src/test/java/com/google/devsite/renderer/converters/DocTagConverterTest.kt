@@ -690,7 +690,8 @@ internal class DocTagConverterTest(
         | */
         |class Foo { }
         """.render().documentation() // for type params and property params
-        val expected = "src/main/kotlin/androidx/example/Test.kt:4 Unable to find reference " +
+        // val expected = "src/main/kotlin/androidx/example/Test.kt:4 Unable to find reference " +
+        val expected = "Unable to find reference " + // b/327166311
             "@param NOT_A_REAL_PARAM in DClass Foo. Are you trying to refer to something not " +
             "visible to users?\n"
         assertThat(outputStreamCaptor.toString()).endsWith(expected)
@@ -716,7 +717,8 @@ internal class DocTagConverterTest(
         | */
         |class Foo(NOT_A_REAL_PROPERTY: String) { }
         """.render().documentation()
-        var expected = "src/main/kotlin/androidx/example/Test.kt:4 Unable to find reference " +
+        // var expected = "src/main/kotlin/androidx/example/Test.kt:4*/ Unable to find reference " +
+        var expected = "Unable to find reference " + // b/327166311
             "@property NOT_A_REAL_PROPERTY in DClass Foo\n"
         assertThat(outputStreamCaptor.toString()).endsWith(expected)
         System.setOut(PrintStream(outputStreamCaptor))
@@ -726,8 +728,9 @@ internal class DocTagConverterTest(
         | */
         |class Foo() { }
         """.render().documentation()
-        expected = "src/main/kotlin/androidx/example/Test.kt:4 Unable to find reference @property" +
-            " NO_PROPERTIES_HERE in DClass Foo"
+        // expected = "src/main/kotlin/androidx/example/Test.kt:4*/ Unable to find reference " +
+        expected = "Unable to find reference " + // 327166311
+            "@property NO_PROPERTIES_HERE in DClass Foo"
         assertThat(outputStreamCaptor.toString()).contains(expected)
         assertFails {
             """
@@ -1465,7 +1468,8 @@ internal class DocTagConverterTest(
             |fun foo(a: String, b: String, c: String)
         """.render().documentation()
 
-        val expected = "src/main/kotlin/androidx/example/Test.kt:5 Missing @param tag for " +
+        // val expected = "src/main/kotlin/androidx/example/Test.kt:5 Missing @param tag for " +
+        val expected = "Missing @param tag for " + // b/327166311
             "parameter `a` in DFunction foo\n"
         assertThat(outputStreamCaptor.toString()).endsWith(expected)
         System.setOut(standardOut)

@@ -29,6 +29,8 @@
     <hr>
     <p>Builder class for AnnotatedString. Enables construction of an <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code> using methods such as <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#append(kotlin.String)">append</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#addStyle(androidx.compose.ui.text.SpanStyle,kotlin.Int,kotlin.Int)">addStyle</a></code>.</p>
     <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 
@@ -49,6 +51,7 @@ buildAnnotatedString {
 }</pre>
     <p>This class implements <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/-appendable/index.html">Appendable</a></code> and can be used with other APIs that don't know about <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></code>s:</p>
     <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
 
 val words = listOf(&quot;Hello&quot;, &quot;World&quot;)
@@ -497,6 +500,7 @@ buildAnnotatedString {
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#addStringAnnotation(kotlin.String,kotlin.String,kotlin.Int,kotlin.Int)">addStringAnnotation</a>(tag:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,&nbsp;annotation:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,&nbsp;start:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;end:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>Set an Annotation for the given range.</p>
           <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
 
 buildAnnotatedString {
@@ -673,6 +677,7 @@ buildAnnotatedString {
           <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#addTtsAnnotation(androidx.compose.ui.text.TtsAnnotation,kotlin.Int,kotlin.Int)">addTtsAnnotation</a>(ttsAnnotation:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/TtsAnnotation.html">TtsAnnotation</a>,&nbsp;start:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;end:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>Set a <code><a href="/reference/kotlin/androidx/compose/ui/text/TtsAnnotation.html">TtsAnnotation</a></code> for the given range.</p>
           <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
 
 buildAnnotatedString {
@@ -751,6 +756,7 @@ buildAnnotatedString {
           <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#addUrlAnnotation(androidx.compose.ui.text.UrlAnnotation,kotlin.Int,kotlin.Int)">addUrlAnnotation</a>(urlAnnotation:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/UrlAnnotation.html">UrlAnnotation</a>,&nbsp;start:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;end:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>Set a <code><a href="/reference/kotlin/androidx/compose/ui/text/UrlAnnotation.html">UrlAnnotation</a></code> for the given range. URLs may be treated specially by screen readers, including being identified while reading text with an audio icon or being summarized in a links menu.</p>
           <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
 
 buildAnnotatedString {
@@ -1101,6 +1107,7 @@ buildAnnotatedString {
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#pushStringAnnotation(kotlin.String,kotlin.String)">pushStringAnnotation</a>(tag:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,&nbsp;annotation:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
           <p>Attach the given <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#pushStringAnnotation(kotlin.String,kotlin.String)">annotation</a></code> to any appended text until a corresponding <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#pop()">pop</a></code> is called.</p>
           <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
 
 buildAnnotatedString {
@@ -1179,7 +1186,9 @@ buildAnnotatedString {
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#pushStyle(androidx.compose.ui.text.ParagraphStyle)">pushStyle</a>(style:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/ParagraphStyle.html">ParagraphStyle</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
           <p>Applies the given <code><a href="/reference/kotlin/androidx/compose/ui/text/ParagraphStyle.html">ParagraphStyle</a></code> to any appended text until a corresponding <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#pop()">pop</a></code> is called.</p>
           <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.ParagraphStyle
+import androidx.compose.ui.unit.sp
 
 with(AnnotatedString.Builder()) {
     // push a ParagraphStyle to be applied to any appended text after this point.
@@ -1228,6 +1237,8 @@ with(AnnotatedString.Builder()) {
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#pushStyle(androidx.compose.ui.text.SpanStyle)">pushStyle</a>(style:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
           <p>Applies the given <code><a href="/reference/kotlin/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a></code> to any appended text until a corresponding <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#pop()">pop</a></code> is called.</p>
           <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 
@@ -1278,6 +1289,7 @@ buildAnnotatedString {
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#pushTtsAnnotation(androidx.compose.ui.text.TtsAnnotation)">pushTtsAnnotation</a>(ttsAnnotation:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/TtsAnnotation.html">TtsAnnotation</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
           <p>Attach the given <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#pushTtsAnnotation(androidx.compose.ui.text.TtsAnnotation)">ttsAnnotation</a></code> to any appended text until a corresponding <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#pop()">pop</a></code> is called.</p>
           <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
 
 buildAnnotatedString {
@@ -1350,6 +1362,7 @@ buildAnnotatedString {
           <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/ui/text/ExperimentalTextApi.html">ExperimentalTextApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#pushUrlAnnotation(androidx.compose.ui.text.UrlAnnotation)">pushUrlAnnotation</a>(urlAnnotation:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/UrlAnnotation.html">UrlAnnotation</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
           <p>Attach the given <code><a href="/reference/kotlin/androidx/compose/ui/text/UrlAnnotation.html">UrlAnnotation</a></code> to any appended text until a corresponding <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#pop()">pop</a></code> is called.</p>
           <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
 
 buildAnnotatedString {
@@ -1718,6 +1731,8 @@ buildAnnotatedString {
           <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a>.<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#(androidx.compose.ui.text.AnnotatedString.Builder).withStyle(androidx.compose.ui.text.ParagraphStyle,kotlin.Function1)">withStyle</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;style:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/ParagraphStyle.html">ParagraphStyle</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;block:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a>.() <span style="white-space: nowrap;">-&gt;</span> R<br>):&nbsp;R</pre>
           <p>Pushes <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withStyle(androidx.compose.ui.text.ParagraphStyle,kotlin.Function1)">style</a></code> to the <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a></code>, executes <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withStyle(androidx.compose.ui.text.ParagraphStyle,kotlin.Function1)">block</a></code> and then pops the <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withStyle(androidx.compose.ui.text.ParagraphStyle,kotlin.Function1)">style</a></code>.</p>
           <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
@@ -1814,6 +1829,8 @@ buildAnnotatedString {
           <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a>.<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html#(androidx.compose.ui.text.AnnotatedString.Builder).withStyle(androidx.compose.ui.text.SpanStyle,kotlin.Function1)">withStyle</a>(style:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a>,&nbsp;block:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a>.() <span style="white-space: nowrap;">-&gt;</span> R):&nbsp;R</pre>
           <p>Pushes <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withStyle(androidx.compose.ui.text.SpanStyle,kotlin.Function1)">style</a></code> to the <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a></code>, executes <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withStyle(androidx.compose.ui.text.SpanStyle,kotlin.Function1)">block</a></code> and then pops the <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withStyle(androidx.compose.ui.text.SpanStyle,kotlin.Function1)">style</a></code>.</p>
           <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
@@ -1916,8 +1933,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.foundation.text.appendInlineContent
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.Placeholder
+import androidx.compose.ui.text.PlaceholderVerticalAlign
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.unit.em
 
 val myId = &quot;inlineContent&quot;
 val text = buildAnnotatedString {

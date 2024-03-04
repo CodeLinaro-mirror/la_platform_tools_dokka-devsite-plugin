@@ -42,7 +42,11 @@
     <p>If using RxJava and LiveData extensions on <code><a href="/reference/kotlin/androidx/paging/Pager.html">Pager</a></code>, use the non-suspending overload of <code><a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html#submitData(androidx.paging.PagingData)">submitData</a></code>, which accepts a <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code>.</p>
     <p><code><a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code> listens to internal <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> loading events as <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">pages</a></code> are loaded, and uses <code><a href="/reference/kotlin/androidx/recyclerview/widget/DiffUtil.html">DiffUtil</a></code> on a background thread to compute fine grained updates as updated content in the form of new PagingData objects are received.</p>
     <p><em>State Restoration</em>: To be able to restore <code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.html">RecyclerView</a></code> state (e.g. scroll position) after a configuration change / application recreate, <code><a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code> calls <code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#setStateRestorationPolicy(androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy)">RecyclerView.Adapter.setStateRestorationPolicy</a></code> with <code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.StateRestorationPolicy.PREVENT.html">RecyclerView.Adapter.StateRestorationPolicy.PREVENT</a></code> upon initialization and waits for the first page to load before allowing state restoration. Any other call to <code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#setStateRestorationPolicy(androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy)">RecyclerView.Adapter.setStateRestorationPolicy</a></code> by the application will disable this logic and will rely on the user set value.</p>
-    <pre class="prettyprint lang-kotlin">val USER_COMPARATOR = object : DiffUtil.ItemCallback&lt;User&gt;() {
+    <pre class="prettyprint lang-kotlin">
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
+
+val USER_COMPARATOR = object : DiffUtil.ItemCallback&lt;User&gt;() {
     override fun areItemsTheSame(oldItem: User, newItem: User): Boolean =
         // User ID serves as unique ID
         oldItem.userId == newItem.userId
@@ -482,7 +486,10 @@ class UserAdapter : PagingDataAdapter&lt;User, UserViewHolder&gt;(USER_COMPARATO
         <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html#addLoadStateListener(kotlin.Function1)">addLoadStateListener</a>(listener:&nbsp;(<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
         <p>Add a <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> listener to observe the loading state of the current <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>.</p>
         <p>As new <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> generations are submitted and displayed, the listener will be notified to reflect the current <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code>.</p>
-        <pre class="prettyprint lang-kotlin">val adapter = UserPagingAdapter()
+        <pre class="prettyprint lang-kotlin">
+import androidx.paging.LoadState
+
+val adapter = UserPagingAdapter()
 adapter.addLoadStateListener {
     // show a retry button outside the list when refresh hits an error
     retryButton.isVisible = it.refresh is LoadState.Error
@@ -674,7 +681,11 @@ adapter.addLoadStateListener {
         <p>Refresh the data presented by this <code><a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code>.</p>
         <p><code><a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html#refresh()">refresh</a></code> triggers the creation of a new <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> with a new instance of <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> to represent an updated snapshot of the backing dataset. If a <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html">RemoteMediator</a></code> is set, calling <code><a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html#refresh()">refresh</a></code> will also trigger a call to <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">RemoteMediator.load</a></code> with <code><a href="/reference/kotlin/androidx/paging/LoadType.html#REFRESH">LoadType</a></code> to allow <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html">RemoteMediator</a></code> to check for updates to the dataset backing <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
         <p>Note: This API is intended for UI-driven refresh signals, such as swipe-to-refresh. Invalidation due repository-layer signals, such as DB-updates, should instead use <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#invalidate()">PagingSource.invalidate</a></code>.</p>
-        <pre class="prettyprint lang-kotlin">class MyActivity : AppCompatActivity() {
+        <pre class="prettyprint lang-kotlin">
+import androidx.appcompat.app.AppCompatActivity
+import androidx.paging.LoadState
+
+class MyActivity : AppCompatActivity() {
     private lateinit var binding: MyActivityBinding
     private val pagingAdapter = UserPagingAdapter()
 
@@ -910,6 +921,8 @@ adapter.addLoadStateListener {
         <p>Note: This method suspends while it is actively presenting page loads from a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>, until the <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> is invalidated. Although cancellation will propagate to this call automatically, collecting from a <code><a href="/reference/kotlin/androidx/paging/Pager.html#flow()">Pager.flow</a></code> with the intention of presenting the most up-to-date representation of your backing dataset should typically be done using <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/index.html">collectLatest</a></code>.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 
 class MyFlowActivity : AppCompatActivity() {
     val pagingAdapter = UserPagingAdapter()
@@ -959,6 +972,7 @@ class MyFlowActivity : AppCompatActivity() {
         <p>This method is typically used when observing a RxJava or LiveData stream produced by <code><a href="/reference/kotlin/androidx/paging/Pager.html">Pager</a></code>. For <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> support, use the suspending overload of <code><a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html#submitData(androidx.paging.PagingData)">submitData</a></code>, which automates cancellation via <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code> instead of relying of <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code>.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 
 class MyLiveDataActivity : AppCompatActivity() {
     val pagingAdapter = UserPagingAdapter()
@@ -974,6 +988,7 @@ class MyLiveDataActivity : AppCompatActivity() {
 }</pre>
         <pre class="prettyprint lang-kotlin">
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 
 class MyRxJava2Activity : AppCompatActivity() {
     val pagingAdapter = UserPagingAdapter()

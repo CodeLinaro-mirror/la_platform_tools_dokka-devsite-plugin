@@ -24,7 +24,6 @@ import com.google.devsite.renderer.converters.Memoizers.isFromJavaMap
 import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.startsWithAnyOf
 import org.jetbrains.dokka.DokkaConfiguration
-import org.jetbrains.dokka.analysis.PsiDocumentableSource
 import org.jetbrains.dokka.base.signatures.KotlinSignatureUtils.driOrNull
 import org.jetbrains.dokka.base.transformers.documentables.isException
 import org.jetbrains.dokka.links.DRI
@@ -77,12 +76,14 @@ import java.util.concurrent.ConcurrentHashMap
 import kotlin.reflect.jvm.internal.impl.builtins.jvm.JavaToKotlinClassMap
 import kotlin.reflect.jvm.internal.impl.name.ClassId
 import kotlin.reflect.jvm.internal.impl.name.FqName
+import kotlin.reflect.jvm.jvmName
 
 /** For use when generating error messages. Is slow. */
 internal fun <T> T.getErrorLocation(
     sourceSet: DokkaConfiguration.DokkaSourceSet = getExpectOrCommonSourceSet(),
 ): String where T : WithSources, T : Documentable {
     val sourceFilePath: String = this.sources[sourceSet]!!.path
+    if (".tmp" in sourceFilePath) return "Error occurred in an unreadable temporary file!"
     // Regex that matches the declaration of `this`
     val matcher = when (sourceFilePath.substringAfterLast(".")) {
         "kt" ->
@@ -173,13 +174,14 @@ internal data class Hashable(
     val isPsi: Boolean?,
 )
 
+// TODO(improve isFromJava b/328044424), TODO(improve documentable hashability b/232944038)
 private fun WithSources.toHashable() = Hashable(
     clazz = this::class.java,
     isSynthetic = (this as? DClasslike)?.isSynthetic,
     dri = if (this is Documentable) this.dri else null,
     visibility = if (this is WithVisibility) this.visibility.values else emptyList(),
     modifiers = if (this is WithAbstraction) this.modifier.values else emptyList(),
-    isPsi = this.sources.entries.singleOrNull()?.value is PsiDocumentableSource,
+    isPsi = this.sources.entries.singleOrNull()?.let { "Psi" in (it.value::class).jvmName },
 )
 
 /**

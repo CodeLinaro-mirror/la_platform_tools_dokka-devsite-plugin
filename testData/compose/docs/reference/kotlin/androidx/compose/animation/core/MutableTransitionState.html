@@ -30,6 +30,8 @@
     <p>MutableTransitionState contains two fields: <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code>. <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a></code> is initialized to the provided initialState, and can only be mutated by a <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code>. <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code> is also initialized to initialState. It can be mutated to alter the course of a transition animation that is created with the <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a></code> using <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(kotlin.Any,kotlin.String)">updateTransition</a></code>. Both <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code> are backed by a <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> object.</p>
     <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.core.MutableTransitionState
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.Transition
 import androidx.compose.animation.core.animateDp
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.spring
@@ -38,8 +40,12 @@ import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Card
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.unit.dp
 
 // This composable enters the composition with a custom enter transition. This is achieved by
 // defining a different initialState than the first target state using `MutableTransitionState`
@@ -225,7 +231,9 @@ fun PoppingInCard() {
           <p><code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#isIdle()">isIdle</a></code> returns whether the transition has finished running. This will return false once the <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code> has been set to a different value than <code><a href="/reference/kotlin/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a></code>.</p>
           <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.animateColor
+import androidx.compose.animation.core.ExperimentalTransitionApi
 import androidx.compose.animation.core.MutableTransitionState
+import androidx.compose.animation.core.Transition
 import androidx.compose.animation.core.animateDp
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.background
@@ -233,7 +241,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun SelectableItem(selectedState: MutableTransitionState&lt;Boolean&gt;) {

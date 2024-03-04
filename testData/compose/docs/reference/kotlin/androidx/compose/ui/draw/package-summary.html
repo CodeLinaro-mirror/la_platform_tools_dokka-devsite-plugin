@@ -301,7 +301,10 @@
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Box(Modifier.size(100.dp).alpha(alpha = 0.5f).background(Color.Red))</pre>
       <div class="devsite-table-wrapper">
@@ -364,7 +367,12 @@ Box(Modifier.size(100.dp).alpha(alpha = 0.5f).background(Color.Red))</pre>
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.BlurredEdgeTreatment
 import androidx.compose.ui.draw.blur
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Box(
     Modifier.size(300.dp)
@@ -378,9 +386,11 @@ Box(
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.BlurredEdgeTreatment
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 
 Image(
     painter = painterResource(R.drawable.circus),
@@ -454,7 +464,12 @@ Image(
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.BlurredEdgeTreatment
 import androidx.compose.ui.draw.blur
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Box(
     Modifier.size(300.dp)
@@ -468,9 +483,11 @@ Box(
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.BlurredEdgeTreatment
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 
 Image(
     painter = painterResource(R.drawable.circus),
@@ -608,8 +625,11 @@ Image(
       <p>For example, a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/LinearGradient.html">androidx.compose.ui.graphics.LinearGradient</a></code> that is to occupy the full bounds of the drawing area can be created once the size has been defined and referenced for subsequent draw calls without having to re-allocate.</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 
 Box(
     Modifier.drawWithCache {
@@ -628,8 +648,11 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 
 val colors1 = listOf(Color.Red, Color.Blue)
 val colors2 = listOf(Color.Yellow, Color.Green)
@@ -649,12 +672,18 @@ Box(
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.BlendMode
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.Path
 import androidx.compose.ui.graphics.vector.PathData
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.unit.dp
 
 val vectorPainter = rememberVectorPainter(24.dp, 24.dp, autoMirror = true) {
         viewportWidth, viewportHeight -&gt;
@@ -712,8 +741,13 @@ Image(
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.unit.dp
 
 class CustomPainter : Painter() {
 
@@ -798,7 +832,9 @@ Box(
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.unit.dp
 
 Box(
     Modifier.rotate(45f)
@@ -842,7 +878,9 @@ Box(
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.unit.dp
 
 Box(
     Modifier.scale(2f)
@@ -907,7 +945,9 @@ Box(
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.unit.dp
 
 Box(
     Modifier.scale(scaleX = 2f, scaleY = 3f)
@@ -979,7 +1019,10 @@ Box(
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.unit.dp
 
 Box(
     Modifier.shadow(12.dp, RectangleShape)

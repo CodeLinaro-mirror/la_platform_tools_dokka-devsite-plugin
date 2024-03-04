@@ -28,7 +28,7 @@
     </devsite-filter >
     <hr>
     <p>The <code>Color</code> class contains color information to be used while painting in <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Canvas.html">Canvas</a></code>. <code>Color</code> supports <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code>s with 3 <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpace.html#componentCount()">components</a></code>, plus one for <code><a href="/reference/kotlin/androidx/compose/ui/graphics/Color.html#alpha()">alpha</a></code>.</p>
-    <h3> Creating</h3>
+    <h3>Creating</h3>
     <p><code>Color</code> can be created with one of these methods:</p>
     <pre class="prettyprint">// from 4 separate [Float] components. Alpha and ColorSpace are optional
 val rgbaWhiteFloat = Color(red = 1f, green = 1f, blue = 1f, alpha = 1f,
@@ -40,7 +40,7 @@ val fromLongBlue = Color(0xFF0000FF)
 
 // from SRGB integer component values. Alpha is optional
 val rgbaWhiteInt = Color(red = 0xFF, green = 0xFF, blue = 0xFF, alpha = 0xFF)</pre>
-    <h3> Representation</h3>
+    <h3>Representation</h3>
     <p>A <code>Color</code> always defines a color using 4 components packed in a single 64 bit long value. One of these components is always alpha while the other three components depend on the color space's <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorModel.html">color model</a></code>. The most common color model is the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorModel.html#Rgb()">RGB</a></code> model in which the components represent red, green, and blue values.</p>
     <p><b>Component ranges:</b> the ranges defined in the tables below indicate the ranges that can be encoded in a color long. They do not represent the actual ranges as they may differ per color space. For instance, the RGB components of a color in the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#DisplayP3()">Display P3</a></code> color space use the <code>[0..1]</code> range. Please refer to the documentation of the various <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpaces.html">color spaces</a></code> to find their respective ranges.</p>
     <p><b>Alpha range:</b> while alpha is encoded in a color long using a 10 bit integer (thus using a range of <code>[0..1023]</code>), it is converted to and from <code>[0..1]</code> float values when decoding and encoding color longs.</p>

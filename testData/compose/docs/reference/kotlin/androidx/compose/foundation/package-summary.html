@@ -708,8 +708,11 @@
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.inset
+import androidx.compose.ui.unit.dp
 
 Canvas(modifier = Modifier.size(100.dp)) {
     drawRect(Color.Magenta)
@@ -765,8 +768,11 @@ Canvas(modifier = Modifier.size(100.dp)) {
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Canvas(
     contentDescription = &quot;Pie chart: 80% apples, 20% bananas (localized string)&quot;,
@@ -909,7 +915,13 @@ Canvas(
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Paint
+import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.unit.dp
 
 val customPainter = remember {
     object : Painter() {
@@ -1001,6 +1013,8 @@ Image(
       <p>The following sample shows basic usage of an Image composable to position and draw an <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a></code> on screen</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.graphics.ImageBitmap
 
 val ImageBitmap = createTestImage()
 // Lays out and draws an image sized to the dimensions of the ImageBitmap
@@ -1008,7 +1022,13 @@ Image(bitmap = ImageBitmap, contentDescription = &quot;Localized description&quo
       <p>For use cases that require drawing a rectangular subset of the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a></code> consumers can use overload that consumes a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/painter/Painter.html">Painter</a></code> parameter shown in this sample</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.painter.BitmapPainter
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 
@@ -1178,6 +1198,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 val dark = isSystemInDarkTheme()
 val color = if (dark) Color.White else Color.Black
@@ -1228,6 +1251,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.Text
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 
 // Create ScrollState to own it and be able to control scroll behaviour of scrollable Row below
 val scrollState = rememberScrollState()
@@ -1313,6 +1338,9 @@ Column {
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Text(
     &quot;Text with background&quot;,
@@ -1363,6 +1391,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 val gradientBrush = Brush.horizontalGradient(
     colors = listOf(Color.Red, Color.Blue, Color.Green),
@@ -1435,6 +1467,8 @@ import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 // Marquee only animates when the content doesn't fit in the max width.
 Column(Modifier.width(30.dp)) {
@@ -1442,6 +1476,7 @@ Column(Modifier.width(30.dp)) {
 }</pre>
       <p>To only animate when the composable is focused, specify <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).basicMarquee(kotlin.Int,androidx.compose.foundation.MarqueeAnimationMode,kotlin.Int,kotlin.Int,androidx.compose.foundation.MarqueeSpacing,androidx.compose.ui.unit.Dp)">animationMode</a></code> and make the composable focusable.</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.MarqueeAnimationMode
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
@@ -1449,8 +1484,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.unit.dp
 
 val focusRequester = remember { FocusRequester() }
 
@@ -1468,12 +1505,20 @@ Column(Modifier.width(30.dp)) {
 import androidx.compose.foundation.MarqueeSpacing
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.BlendMode
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.CompositingStrategy
+import androidx.compose.ui.graphics.drawscope.ContentDrawScope
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.unit.dp
 
 val edgeWidth = 32.dp
 fun ContentDrawScope.drawFadedEdge(leftEdge: Boolean) {
@@ -1578,6 +1623,9 @@ Text(
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Text(
     &quot;Text with  square border&quot;,
@@ -1629,7 +1677,14 @@ Text(
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.TileMode
+import androidx.compose.ui.unit.dp
 
 val gradientBrush = Brush.horizontalGradient(
     colors = listOf(Color.Red, Color.Blue, Color.Green),
@@ -1650,12 +1705,19 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.TileMode
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 val widthRange = (1..10)
 var width by remember { mutableStateOf((widthRange.random()).dp) }
@@ -1796,6 +1858,9 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 Text(
     &quot;Text with gradient border&quot;,
@@ -1861,6 +1926,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 
 val count = remember { mutableStateOf(0) }
 // content that you want to make clickable
@@ -1924,6 +1990,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 
 val count = remember { mutableStateOf(0) }
 // content that you want to make clickable
@@ -2034,6 +2101,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 
 val count = remember { mutableStateOf(0) }
 // content that you want to make clickable
@@ -2116,6 +2184,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 
 val count = remember { mutableStateOf(0) }
 // content that you want to make clickable
@@ -2276,6 +2345,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Button
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
 
 Row {
     Column(Modifier.focusGroup()) {
@@ -2295,10 +2365,15 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.graphics.Color.Companion.Red
+import androidx.compose.ui.unit.dp
 
 val interactionSource = remember { MutableInteractionSource() }
 LazyRow(
@@ -2334,6 +2409,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 
@@ -2408,6 +2484,11 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.TileMode
+import androidx.compose.ui.unit.dp
 
 val scrollState = rememberScrollState()
 val gradient = Brush.horizontalGradient(
@@ -2500,6 +2581,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Text
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 // MutableInteractionSource to track changes of the component's interactions (like &quot;hovered&quot;)
 val interactionSource = remember { MutableInteractionSource() }
@@ -2556,6 +2641,7 @@ Box(
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>.<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).indication(androidx.compose.foundation.interaction.InteractionSource,androidx.compose.foundation.Indication)">indication</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;interactionSource:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;indication:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a>?<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a></pre>
       <p>Draws visual effects for this component when interactions occur.</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -2566,6 +2652,8 @@ import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.material.Text
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 val interactionSource = remember { MutableInteractionSource() }
 Column {
@@ -2634,13 +2722,17 @@ Column {
       <p>This function returns a no-op modifier on API levels below P (28), since the framework does not support the <code><a href="https://developer.android.com/reference/android/widget/Magnifier.html">Magnifier</a></code> widget on those levels. However, even on higher API levels, not all magnifier features are supported on all platforms. To check whether a given <code><a href="/reference/kotlin/androidx/compose/foundation/MagnifierStyle.html">MagnifierStyle</a></code> is supported by the current platform, check the <code><a href="/reference/kotlin/androidx/compose/foundation/MagnifierStyle.html#isSupported()">MagnifierStyle.isSupported</a></code> property.</p>
       <p>This function does not allow configuration of <code><a href="https://developer.android.com/reference/android/widget/Magnifier.Builder.html#setSourceBounds(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Int)">source bounds</a></code> since the magnifier widget does not support constraining to the bounds of composables.</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.MagnifierStyle
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.magnifier
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
 
@@ -2757,7 +2849,10 @@ if (!MagnifierStyle.Default.isSupported) {
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.spring
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.OverscrollEffect
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.rememberScrollableState
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
@@ -2765,12 +2860,20 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.overscroll
 import androidx.compose.material.Text
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.Velocity
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalFoundationApi::class)
 // our custom offset overscroll that offset the element it is applied to when we hit the bound
@@ -2912,6 +3015,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.progressSemantics
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 
 Box(Modifier.progressSemantics().background(color = Color.Cyan)) {
     Text(&quot;Operation is on progress&quot;)
@@ -2934,6 +3039,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.progressSemantics
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 val progress = 0.5f // emulate progress from some state
 Box(
@@ -3060,6 +3168,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.TileMode
+import androidx.compose.ui.unit.dp
 
 val scrollState = rememberScrollState()
 val gradient = Brush.verticalGradient(

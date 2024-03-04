@@ -21,13 +21,13 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.explodedChildren
 import com.google.devsite.renderer.converters.filterOutJvmSynthetic
 import com.google.devsite.renderer.converters.getErrorLocation
+import com.google.devsite.renderer.converters.getExpectOrCommonSourceSet
 import com.google.devsite.renderer.converters.gettersAndSetters
 import com.google.devsite.renderer.converters.isExceptionClass
 import com.google.devsite.renderer.converters.isHoistedFromCompanion
 import com.google.devsite.renderer.converters.name
 import com.google.devsite.renderer.converters.nameForSyntheticClass
 import com.google.devsite.renderer.converters.packageName
-import com.google.devsite.renderer.converters.setUpAnalysis
 import com.google.devsite.renderer.converters.withJavaSynthetic
 import com.google.devsite.util.ClassVersionMetadata
 import com.google.devsite.util.LibraryMetadata
@@ -37,9 +37,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import org.jetbrains.dokka.DokkaConfiguration
-import org.jetbrains.dokka.analysis.DokkaResolutionFacade
-import org.jetbrains.dokka.base.DokkaBase
+import org.jetbrains.dokka.analysis.kotlin.KotlinAnalysisPlugin
 import org.jetbrains.dokka.base.signatures.KotlinSignatureUtils.driOrNull
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.withClass
@@ -96,6 +94,7 @@ internal class DocumentablesHolder(
     val baseFunctionSourceLink: String? = null,
     val basePropertySourceLink: String? = null,
     val annotationsNotToDisplay: Set<String> = emptySet(),
+    val analysisPlugin: KotlinAnalysisPlugin,
 ) {
     private val packages = scope.async { computePackages(module) }
 
@@ -122,12 +121,16 @@ internal class DocumentablesHolder(
     private val nestedClasslikes = mutableMapOf<DRI, Deferred<List<DClasslike>>>()
     private val classGraph: Deferred<ClassGraph>
     private val documentablesGraph: Deferred<DocumentablesGraph>
-    private val analysisMap: Deferred<Map<DokkaConfiguration.DokkaSourceSet, DokkaResolutionFacade>>
+
+    // TODO(KMP) we currently have no plan to provide KMP samples b/181224204
+    // private val analysisMap: Deferred<Map<SourceSet, SampleAnalysisEnvironment>>
+    internal val sampleAnalysisEnvironment =
+        analysisPlugin.querySingle { sampleAnalysisEnvironmentCreator }.create()
+    internal val commonSourceSet = module.getExpectOrCommonSourceSet()
 
     internal val logger = context.logger
-    private val dokkaBase = context.plugin(DokkaBase::class)!!
-    private val externalDocumentablesProvider =
-        dokkaBase.querySingle { externalDocumentablesProvider }
+    private val externalDocumentableProvider =
+        analysisPlugin.querySingle { externalDocumentableProvider }
 
     init {
         scope.apply {
@@ -175,7 +178,8 @@ internal class DocumentablesHolder(
             }
         }
 
-        analysisMap = scope.async { setUpAnalysis(context) }
+        // analysisMap = scope.async {
+        // setUpAnalysis(context, analysisPlugin.querySingle { sampleAnalysisEnvironmentCreator }) }
 
         allClasslikes = scope.async { computeClasslikes(module) }
         allCompanions = scope.async {
@@ -185,7 +189,7 @@ internal class DocumentablesHolder(
         classGraph = scope.async {
             computeClassGraph(
                 allClasslikes.await() + allCompanions.await().values,
-                externalDocumentablesProvider,
+                externalDocumentableProvider,
                 context.configuration.sourceSets,
             )
         }
@@ -209,8 +213,7 @@ internal class DocumentablesHolder(
 
     suspend fun documentablesGraph(): Map<DRI, Documentable> = documentablesGraph.await()
 
-    suspend fun analysisMap(): Map<DokkaConfiguration.DokkaSourceSet, DokkaResolutionFacade> =
-        analysisMap.await()
+    // suspend fun analysisMap(): Map<SourceSet, SampleAnalysisEnvironment> = analysisMap.await()
 
     suspend fun classlikesFor(dPackage: DPackage): List<DClasslike> =
         classlikes.getValue(dPackage.dri).await()

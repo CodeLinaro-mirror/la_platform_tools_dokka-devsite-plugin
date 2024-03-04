@@ -52,23 +52,32 @@
     <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a></code> provides a receiver scope for all (direct and indirect) child layouts in <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a></code>. This receiver scope allows access to <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.Placeable.PlacementScope).lookaheadScopeCoordinates()">lookaheadScopeCoordinates</a></code> from any child's <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.PlacementScope.html">Placeable.PlacementScope</a></code>. It also allows any child to convert <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> (which can be retrieved in <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.PlacementScope.html">Placeable.PlacementScope</a></code>) to <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code> using <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).toLookaheadCoordinates()">toLookaheadCoordinates</a></code>.</p>
     <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.AnimationVector2D
+import androidx.compose.animation.core.VectorConverter
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.movableContentOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.LookaheadScope
 import androidx.compose.ui.layout.intermediateLayout
 import androidx.compose.ui.layout.layout
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.round
 
 // Creates a custom modifier to animate the local position of the layout within the
@@ -265,6 +274,8 @@ LookaheadScope {
           <p>Creates an intermediate layout based on target size of the child layout calculated in the lookahead. This allows the intermediate layout to morph the child layout after lookahead through <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">measure</a></code>, in which the size of the child layout calculated from the lookahead is provided. <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">intermediateLayout</a></code> does <em>not</em> participate in the lookahead. It is only invoked for retroactively changing the layout based on the lookahead before the layout is drawn.</p>
           <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.AnimationVector2D
+import androidx.compose.animation.core.VectorConverter
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -272,12 +283,20 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.intermediateLayout
 import androidx.compose.ui.layout.layout
+import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.round
 
 // Creates a custom modifier that animates the constraints and measures child with the
 // animated constraints. This modifier is built on top of `Modifier.intermediateLayout`, which
@@ -366,23 +385,32 @@ Row(
           <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.Modifier).onPlaced(kotlin.Function2)">onPlaced</a></code> callback will be invoked with the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code> of the LayoutNode emitted by <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#LookaheadLayout(kotlin.Function1,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">LookaheadLayout</a></code> as the first parameter, and the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code> of this modifier as the second parameter. Given the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code>s, both lookahead position and current position of this modifier in the <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#LookaheadLayout(kotlin.Function1,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">LookaheadLayout</a></code>'s coordinates system can be calculated using <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).localLookaheadPositionOf(androidx.compose.ui.layout.LayoutCoordinates)">LookaheadLayoutCoordinates.localLookaheadPositionOf</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html#localPositionOf(androidx.compose.ui.layout.LayoutCoordinates,androidx.compose.ui.geometry.Offset)">LookaheadLayoutCoordinates.localPositionOf</a></code>, respectively.</p>
           <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.AnimationVector2D
+import androidx.compose.animation.core.VectorConverter
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.movableContentOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.LookaheadScope
 import androidx.compose.ui.layout.intermediateLayout
 import androidx.compose.ui.layout.layout
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.round
 
 // Creates a custom modifier to animate the local position of the layout within the

@@ -60,6 +60,7 @@
         <p><code><a href="/reference/androidx/compose/animation/package-summary.html#(androidx.compose.animation.core.Transition).animateColor(kotlin.Function1,kotlin.String,kotlin.Function1)">label</a></code> is used to differentiate from other animations in the same transition in Android Studio.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.animateColor
+import androidx.compose.animation.core.Transition
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
@@ -73,10 +74,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.unit.dp
 
 // enum class ComponentState { Pressed, Released }
 var useRed by remember { mutableStateOf(false) }
@@ -206,6 +212,9 @@ Column {
         <p>A <code><a href="/reference/androidx/compose/animation/package-summary.html#(androidx.compose.animation.core.InfiniteTransition).animateColor(androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.animation.core.InfiniteRepeatableSpec,kotlin.String)">label</a></code> for differentiating this animation from others in android studio.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.animateColor
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.Transition
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
@@ -213,6 +222,13 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 

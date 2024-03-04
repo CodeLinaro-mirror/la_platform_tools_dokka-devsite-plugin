@@ -175,8 +175,11 @@
           <p>On the other hand, some attributes only play a role when drawing the created text layout. For example text layout can be created completely in black color but we can apply <code><a href="/reference/kotlin/androidx/compose/ui/text/TextStyle.html#color()">TextStyle.color</a></code> later in draw phase. This also means that animating text color shouldn't invalidate text layout.</p>
           <p>Thus, <code><a href="/reference/kotlin/androidx/compose/ui/text/TextMeasurer.html#textLayoutCache()">textLayoutCache</a></code> helps in the process of converting a set of text layout inputs to a text layout while ignoring non-layout-affecting attributes. Iterative calls that use the same input parameters should benefit from substantial performance improvements.</p>
           <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.sp
 
 textMeasurer.measure(
     text = &quot;Hello, World&quot;,
@@ -285,10 +288,13 @@ textMeasurer.measure(
           <p>On the other hand, some attributes only play a role when drawing the created text layout. For example text layout can be created completely in black color but we can apply <code><a href="/reference/kotlin/androidx/compose/ui/text/TextStyle.html#color()">TextStyle.color</a></code> later in draw phase. This also means that animating text color shouldn't invalidate text layout.</p>
           <p>Thus, <code><a href="/reference/kotlin/androidx/compose/ui/text/TextMeasurer.html#textLayoutCache()">textLayoutCache</a></code> helps in the process of converting a set of text layout inputs to a text layout while ignoring non-layout-affecting attributes. Iterative calls that use the same input parameters should benefit from substantial performance improvements.</p>
           <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.sp
 
 textMeasurer.measure(
     text = buildAnnotatedString {

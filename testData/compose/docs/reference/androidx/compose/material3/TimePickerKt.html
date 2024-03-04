@@ -70,10 +70,14 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TimeInput
+import androidx.compose.material3.TimePicker
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.window.Dialog
 
 var showTimePicker by remember { mutableStateOf(false) }
 val state = rememberTimePickerState()
@@ -164,6 +168,9 @@ import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.window.Dialog
 
 var showTimePicker by remember { mutableStateOf(false) }
 val state = rememberTimePickerState()
@@ -200,6 +207,9 @@ if (showTimePicker) {
 }</pre>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Box
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Keyboard
+import androidx.compose.material.icons.outlined.Schedule
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -212,6 +222,10 @@ import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.window.Dialog
 
 var showTimePicker by remember { mutableStateOf(false) }
 val state = rememberTimePickerState()

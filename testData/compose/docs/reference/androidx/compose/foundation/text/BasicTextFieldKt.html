@@ -61,6 +61,7 @@
         <p>Example usage:</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 
@@ -96,6 +97,7 @@ Box {
         <p>If you want to add decorations to your text field, such as icon or similar, and increase the hit target area, use the decoration box:</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
@@ -103,8 +105,14 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.Icon
+import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 var value by rememberSaveable { mutableStateOf(&quot;initial value&quot;) }
 BasicTextField(
@@ -133,11 +141,17 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.dp
 
 /** The offset translator used for credit card input field */
 val creditCardOffsetTranslator = object : OffsetMapping {
@@ -314,6 +328,7 @@ BasicTextField(
         <p>Example usage:</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.text.input.TextFieldValue
@@ -352,6 +367,7 @@ Box {
         <p>If you want to add decorations to your text field, such as icon or similar, and increase the hit target area, use the decoration box:</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
@@ -359,8 +375,14 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.Icon
+import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 var value by rememberSaveable { mutableStateOf(&quot;initial value&quot;) }
 BasicTextField(

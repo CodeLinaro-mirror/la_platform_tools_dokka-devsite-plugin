@@ -97,9 +97,13 @@
         <p>Example of a flat AssistChip:</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.AssistChip
+import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
+import androidx.compose.ui.Modifier
 
 AssistChip(
     onClick = { /* Do something! */ },
@@ -209,9 +213,14 @@ AssistChip(
         <p>Example of an elevated AssistChip with a trailing icon:</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.AssistChip
+import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.ElevatedAssistChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
+import androidx.compose.ui.Modifier
 
 ElevatedAssistChip(
     onClick = { /* Do something! */ },
@@ -322,11 +331,16 @@ ElevatedAssistChip(
         <p>Example of an elevated FilterChip with a trailing icon:</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.ElevatedFilterChip
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 
 var selected by remember { mutableStateOf(false) }
 ElevatedFilterChip(
@@ -448,6 +462,7 @@ ElevatedFilterChip(
         <p>Example of an elevated SuggestionChip with a trailing icon:</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.material3.ElevatedSuggestionChip
+import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Text
 
 ElevatedSuggestionChip(
@@ -546,11 +561,15 @@ ElevatedSuggestionChip(
         <p>Example of a flat FilterChip with a trailing icon:</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 
 var selected by remember { mutableStateOf(false) }
 FilterChip(
@@ -572,11 +591,16 @@ FilterChip(
         <p>Example of a FilterChip with both a leading icon and a selected icon:</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 
 var selected by remember { mutableStateOf(false) }
 FilterChip(
@@ -717,11 +741,15 @@ InputChip(
         <p>Example of an InputChip with an avatar and a trailing icon:</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.InputChip
+import androidx.compose.material3.InputChipDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 
 var selected by remember { mutableStateOf(false) }
 InputChip(
@@ -745,6 +773,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Text
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 Column(horizontalAlignment = Alignment.CenterHorizontally) {
     Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
@@ -759,13 +791,18 @@ Column(horizontalAlignment = Alignment.CenterHorizontally) {
 }</pre>
         <p>Alternatively, use <code><a href="/reference/androidx/compose/foundation/layout/package-summary.html#FlowRow(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.foundation.layout.Arrangement.Vertical,kotlin.Int,kotlin.Function1)">androidx.compose.foundation.layout.FlowRow</a></code> to wrap chips to a new line.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEachIndexed
 
 val colorNames = listOf(

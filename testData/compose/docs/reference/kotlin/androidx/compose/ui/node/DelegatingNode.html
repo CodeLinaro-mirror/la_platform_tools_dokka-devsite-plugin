@@ -48,7 +48,15 @@
     <p>A <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> which is able to delegate work to other <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> instances.</p>
     <p>This can be useful to compose multiple node implementations into one.</p>
     <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.PointerEvent
+import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.ui.node.DelegatingNode
+import androidx.compose.ui.node.PointerInputModifierNode
+import androidx.compose.ui.node.SemanticsModifierNode
+import androidx.compose.ui.semantics.SemanticsPropertyReceiver
 import androidx.compose.ui.semantics.onClick
+import androidx.compose.ui.unit.IntSize
 
 class TapGestureNode(var onTap: () -&gt; Unit) : PointerInputModifierNode, Modifier.Node() {
     override fun onPointerEvent(
@@ -91,7 +99,15 @@ class TapGestureWithClickSemantics(onTap: () -&gt; Unit) :
     }
 }</pre>
     <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.PointerEvent
+import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.ui.node.DelegatingNode
+import androidx.compose.ui.node.PointerInputModifierNode
+import androidx.compose.ui.node.SemanticsModifierNode
+import androidx.compose.ui.semantics.SemanticsPropertyReceiver
 import androidx.compose.ui.semantics.onClick
+import androidx.compose.ui.unit.IntSize
 
 class TapGestureNode(var onTap: () -&gt; Unit) : PointerInputModifierNode, Modifier.Node() {
     override fun onPointerEvent(
@@ -127,7 +143,17 @@ class TapGestureWithClickSemantics(onTap: () -&gt; Unit) : DelegatingNode() {
     val semantics = delegate(TapSemanticsNode(onTap))
 }</pre>
     <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.PointerEvent
+import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.ui.layout.LayoutCoordinates
+import androidx.compose.ui.node.DelegatingNode
+import androidx.compose.ui.node.GlobalPositionAwareModifierNode
+import androidx.compose.ui.node.PointerInputModifierNode
+import androidx.compose.ui.node.SemanticsModifierNode
+import androidx.compose.ui.semantics.SemanticsPropertyReceiver
 import androidx.compose.ui.semantics.onClick
+import androidx.compose.ui.unit.IntSize
 
 class ExpensivePositionHandlingOnPointerEvents : PointerInputModifierNode, DelegatingNode() {
 
@@ -188,7 +214,13 @@ class TapGestureWithClickSemantics(onTap: () -&gt; Unit) : DelegatingNode() {
     val gesture = delegate(TapGestureNode(onTap))
     val semantics = delegate(TapSemanticsNode(onTap))
 }</pre>
-    <pre class="prettyprint lang-kotlin">class MyModifierNode(global: Boolean) : DelegatingNode() {
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.LayoutCoordinates
+import androidx.compose.ui.node.DelegatingNode
+import androidx.compose.ui.node.GlobalPositionAwareModifierNode
+
+class MyModifierNode(global: Boolean) : DelegatingNode() {
     val globalAwareNode = object : GlobalPositionAwareModifierNode, Modifier.Node() {
         override fun onGloballyPositioned(coordinates: LayoutCoordinates) {
             // ...
@@ -207,7 +239,12 @@ class TapGestureWithClickSemantics(onTap: () -&gt; Unit) : DelegatingNode() {
         }
 }</pre>
     <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.LayoutCoordinates
+import androidx.compose.ui.node.DelegatingNode
+import androidx.compose.ui.node.GlobalPositionAwareModifierNode
 import androidx.compose.ui.node.requireLayoutDirection
+import androidx.compose.ui.unit.LayoutDirection
 
 class MyModifierNode : DelegatingNode() {
     val globalAwareNode = object : GlobalPositionAwareModifierNode, Modifier.Node() {

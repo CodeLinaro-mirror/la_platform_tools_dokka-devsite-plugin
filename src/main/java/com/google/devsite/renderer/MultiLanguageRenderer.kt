@@ -35,9 +35,11 @@ import com.google.devsite.util.ClassVersionMetadata
 import com.google.devsite.util.JsonLibraryMetadata
 import com.google.devsite.util.JsonVersionMetadata
 import com.google.devsite.util.LibraryMetadata
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import org.jetbrains.dokka.analysis.kotlin.KotlinAnalysisPlugin
 import org.jetbrains.dokka.base.renderers.OutputWriter
 import org.jetbrains.dokka.base.resolvers.local.DokkaLocationProvider
 import org.jetbrains.dokka.model.DModule
@@ -51,6 +53,7 @@ internal class MultiLanguageRenderer(
     private val context: DokkaContext,
     private val outputWriter: OutputWriter,
     private val devsiteConfiguration: DevsiteConfiguration,
+    private val analysisPlugin: KotlinAnalysisPlugin,
 ) : Renderer {
 
     override fun render(root: RootPageNode) {
@@ -90,6 +93,7 @@ internal class MultiLanguageRenderer(
                 baseFunctionSourceLink = devsiteConfiguration.baseFunctionSourceLink,
                 basePropertySourceLink = devsiteConfiguration.basePropertySourceLink,
                 annotationsNotToDisplay = devsiteConfiguration.allAnnotationsNotToDisplayJava,
+                analysisPlugin = analysisPlugin,
             )
             val kHolder = DocumentablesHolder(
                 displayLanguage = Language.KOTLIN,
@@ -103,9 +107,11 @@ internal class MultiLanguageRenderer(
                 baseFunctionSourceLink = devsiteConfiguration.baseFunctionSourceLink,
                 basePropertySourceLink = devsiteConfiguration.basePropertySourceLink,
                 annotationsNotToDisplay = devsiteConfiguration.allAnnotationsNotToDisplayKotlin,
+                analysisPlugin = analysisPlugin,
             )
 
-            launch {
+            val failOnExceptionHandler = CoroutineExceptionHandler { _, except -> throw except }
+            launch(failOnExceptionHandler) {
                 renderLanguage(
                     Language.JAVA,
                     devsiteConfiguration.javaDocsPath,
@@ -114,7 +120,7 @@ internal class MultiLanguageRenderer(
                     devsiteConfiguration.includedHeadTagsPathJava,
                 )
             }
-            launch {
+            launch(failOnExceptionHandler) {
                 renderLanguage(
                     Language.KOTLIN,
                     devsiteConfiguration.kotlinDocsPath,

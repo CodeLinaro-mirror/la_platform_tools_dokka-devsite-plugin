@@ -51,9 +51,11 @@
         <p>Unlike <code><a href="/reference/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code>, <code><a href="/reference/androidx/compose/animation/core/Animatable.html">Animatable</a></code> ensures mutual exclusiveness on its animation. To do so, when a new animation is started via <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Boolean,kotlin.Function1)">animateTo</a></code> (or <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animateDecay(kotlin.Float,kotlin.Float,androidx.compose.animation.core.FloatDecayAnimationSpec,kotlin.Function2)">animateDecay</a></code>), any ongoing animation job will be cancelled.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.graphicsLayer
 

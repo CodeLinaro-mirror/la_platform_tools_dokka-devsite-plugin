@@ -45,17 +45,23 @@
     <p><code><a href="/reference/kotlin/androidx/compose/animation/EnterTransition.html#None()">EnterTransition.None</a></code> can be used when no enter transition is desired. Different <code><a href="/reference/kotlin/androidx/compose/animation/EnterTransition.html">EnterTransition</a></code>s can be combined using plus operator,  for example:</p>
     <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideIn
 import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOut
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 var visible by remember { mutableStateOf(true) }
 AnimatedVisibility(
@@ -379,14 +385,19 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.slideIn
 import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOut
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.TransformOrigin
+import androidx.compose.ui.unit.dp
 
 var visible by remember { mutableStateOf(true) }
 AnimatedVisibility(
@@ -459,6 +470,9 @@ AnimatedVisibility(
           <pre class="api-signature no-pretty-print">infix&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/EnterTransition.html">EnterTransition</a>.<a href="/reference/kotlin/androidx/compose/animation/EnterTransition.html#(androidx.compose.animation.EnterTransition).togetherWith(androidx.compose.animation.ExitTransition)">togetherWith</a>(exit:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/ExitTransition.html">ExitTransition</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/ContentTransform.html">ContentTransform</a></pre>
           <p>This creates a <code><a href="/reference/kotlin/androidx/compose/animation/ContentTransform.html">ContentTransform</a></code> using the provided <code><a href="/reference/kotlin/androidx/compose/animation/EnterTransition.html">EnterTransition</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#(androidx.compose.animation.EnterTransition).togetherWith(androidx.compose.animation.ExitTransition)">exit</a></code>, where the enter and exit transition will be running simultaneously. For example:</p>
           <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.ContentTransform
 import androidx.compose.animation.SizeTransform
 import androidx.compose.animation.core.keyframes
 import androidx.compose.animation.core.tween

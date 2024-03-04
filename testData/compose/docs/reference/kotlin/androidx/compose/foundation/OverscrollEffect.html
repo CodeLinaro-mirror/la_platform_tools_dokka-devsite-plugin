@@ -33,7 +33,10 @@
     <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.spring
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.OverscrollEffect
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.rememberScrollableState
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
@@ -41,12 +44,20 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.overscroll
 import androidx.compose.material.Text
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.Velocity
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalFoundationApi::class)
 // our custom offset overscroll that offset the element it is applied to when we hit the bound
@@ -243,6 +254,7 @@ Box(
           <p>Applies overscroll to <code><a href="/reference/kotlin/androidx/compose/foundation/OverscrollEffect.html#applyToFling(androidx.compose.ui.unit.Velocity,kotlin.coroutines.SuspendFunction1)">performFling</a></code>. <code><a href="/reference/kotlin/androidx/compose/foundation/OverscrollEffect.html#applyToFling(androidx.compose.ui.unit.Velocity,kotlin.coroutines.SuspendFunction1)">performFling</a></code> should represent a fling (the release of a drag or scroll), and returns the amount of <code><a href="/reference/kotlin/androidx/compose/ui/unit/Velocity.html">Velocity</a></code> consumed, so in simple cases the amount of overscroll to show should be equal to <code>velocity - performFling(velocity)</code>. The OverscrollEffect can optionally consume some <code><a href="/reference/kotlin/androidx/compose/ui/unit/Velocity.html">Velocity</a></code> before calling <code><a href="/reference/kotlin/androidx/compose/foundation/OverscrollEffect.html#applyToFling(androidx.compose.ui.unit.Velocity,kotlin.coroutines.SuspendFunction1)">performFling</a></code>, such as to release any existing tension. The implementation <em>must</em> call <code><a href="/reference/kotlin/androidx/compose/foundation/OverscrollEffect.html#applyToFling(androidx.compose.ui.unit.Velocity,kotlin.coroutines.SuspendFunction1)">performFling</a></code> exactly once.</p>
           <p>For example, assume we want to apply overscroll to a custom component that isn't using <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).scrollable(androidx.compose.foundation.gestures.ScrollableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,androidx.compose.foundation.interaction.MutableInteractionSource)">androidx.compose.foundation.gestures.scrollable</a></code>. Here is a simple example of a component using <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).draggable(androidx.compose.foundation.gestures.DraggableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Boolean,kotlin.coroutines.SuspendFunction2,kotlin.coroutines.SuspendFunction2,kotlin.Boolean)">androidx.compose.foundation.gestures.draggable</a></code> instead:</p>
           <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.layout.Box
@@ -250,6 +262,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 var dragPosition by remember { mutableStateOf(0f) }
 val minPosition = -1000f
@@ -270,16 +285,24 @@ Box(
 }</pre>
           <p>To apply overscroll, we decorate the existing logic with applyToScroll, and return the amount of delta we have consumed when updating the drag position. We then call applyToFling using the velocity provided by onDragStopped.</p>
           <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.ScrollableDefaults
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.overscroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.unit.Velocity
+import androidx.compose.ui.unit.dp
 
 var dragPosition by remember { mutableStateOf(0f) }
 val minPosition = -1000f
@@ -371,6 +394,7 @@ Box(
           <p>Applies overscroll to <code><a href="/reference/kotlin/androidx/compose/foundation/OverscrollEffect.html#applyToScroll(androidx.compose.ui.geometry.Offset,androidx.compose.ui.input.nestedscroll.NestedScrollSource,kotlin.Function1)">performScroll</a></code>. <code><a href="/reference/kotlin/androidx/compose/foundation/OverscrollEffect.html#applyToScroll(androidx.compose.ui.geometry.Offset,androidx.compose.ui.input.nestedscroll.NestedScrollSource,kotlin.Function1)">performScroll</a></code> should represent a drag / scroll, and returns the amount of delta consumed, so in simple cases the amount of overscroll to show should be equal to <code>delta - performScroll(delta)</code>. The OverscrollEffect can optionally consume some delta before calling <code><a href="/reference/kotlin/androidx/compose/foundation/OverscrollEffect.html#applyToScroll(androidx.compose.ui.geometry.Offset,androidx.compose.ui.input.nestedscroll.NestedScrollSource,kotlin.Function1)">performScroll</a></code>, such as to release any existing tension. The implementation <em>must</em> call <code><a href="/reference/kotlin/androidx/compose/foundation/OverscrollEffect.html#applyToScroll(androidx.compose.ui.geometry.Offset,androidx.compose.ui.input.nestedscroll.NestedScrollSource,kotlin.Function1)">performScroll</a></code> exactly once. This function should return the sum of all the delta that was consumed during this operation - both by the overscroll and <code><a href="/reference/kotlin/androidx/compose/foundation/OverscrollEffect.html#applyToScroll(androidx.compose.ui.geometry.Offset,androidx.compose.ui.input.nestedscroll.NestedScrollSource,kotlin.Function1)">performScroll</a></code>.</p>
           <p>For example, assume we want to apply overscroll to a custom component that isn't using <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).scrollable(androidx.compose.foundation.gestures.ScrollableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,androidx.compose.foundation.interaction.MutableInteractionSource)">androidx.compose.foundation.gestures.scrollable</a></code>. Here is a simple example of a component using <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).draggable(androidx.compose.foundation.gestures.DraggableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Boolean,kotlin.coroutines.SuspendFunction2,kotlin.coroutines.SuspendFunction2,kotlin.Boolean)">androidx.compose.foundation.gestures.draggable</a></code> instead:</p>
           <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.layout.Box
@@ -378,6 +402,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 var dragPosition by remember { mutableStateOf(0f) }
 val minPosition = -1000f
@@ -398,16 +425,24 @@ Box(
 }</pre>
           <p>To apply overscroll, we need to decorate the existing logic with applyToScroll, and return the amount of delta we have consumed when updating the drag position. Note that we also need to call applyToFling - this is used as an end signal for overscroll so that effects can correctly reset after any animations, when the gesture has stopped.</p>
           <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.ScrollableDefaults
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.overscroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.unit.Velocity
+import androidx.compose.ui.unit.dp
 
 var dragPosition by remember { mutableStateOf(0f) }
 val minPosition = -1000f

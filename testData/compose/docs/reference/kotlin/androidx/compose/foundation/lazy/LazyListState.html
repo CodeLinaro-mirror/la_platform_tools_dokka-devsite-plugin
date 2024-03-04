@@ -475,6 +475,13 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 
 val state = rememberLazyListState()
@@ -534,6 +541,13 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 
 val state = rememberLazyListState()
@@ -587,8 +601,10 @@ Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontal
           <p>Note that this property is observable and if you use it in the composable function it will be recomposed on every change causing potential performance issues.</p>
           <p>If you want to run some side effects like sending an analytics event or updating a state based on this value consider using &quot;snapshotFlow&quot;:</p>
           <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshotFlow
 
 val listState = rememberLazyListState()
@@ -600,7 +616,9 @@ LaunchedEffect(listState) {
 }</pre>
           <p>If you need to use it in the composition then consider wrapping the calculation into a derived state in order to only have recompositions when the derived value changes:</p>
           <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.Button
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 
@@ -690,8 +708,11 @@ if (!isAtTop) {
           <p>Note that this property is observable and is updated after every scroll or remeasure. If you use it in the composable function it will be recomposed on every change causing potential performance issues including infinity recomposition loop. Therefore, avoid using it in the composition.</p>
           <p>If you want to run some side effects like sending an analytics event or updating a state based on this value consider using &quot;snapshotFlow&quot;:</p>
           <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshotFlow
 
 val listState = rememberLazyListState()

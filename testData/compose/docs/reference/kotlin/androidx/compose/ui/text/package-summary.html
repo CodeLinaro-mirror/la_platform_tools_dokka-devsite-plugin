@@ -1367,6 +1367,8 @@
       <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#buildAnnotatedString(kotlin.Function1)">buildAnnotatedString</a>(builder:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.html">AnnotatedString</a></pre>
       <p>Build a new AnnotatedString by populating newly created <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a></code> provided by <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#buildAnnotatedString(kotlin.Function1)">builder</a></code>.</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
@@ -2035,10 +2037,14 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.layout
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.unit.sp
 
 val textMeasurer = rememberTextMeasurer()
 var textLayoutResult by remember {
@@ -2073,10 +2079,20 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.LocalTextStyle
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.layout
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Constraints
 
 // We can disable implicit caching since we will cache in DrawWithCache
 val textMeasurer = rememberTextMeasurer(cacheSize = 0)
@@ -2200,6 +2216,8 @@ Box(
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.rememberTextMeasurer
 
@@ -2211,9 +2229,14 @@ Canvas(Modifier.fillMaxSize()) {
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.drawText
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.sp
 
 val textMeasurer = rememberTextMeasurer()
 
@@ -2315,10 +2338,13 @@ Canvas(Modifier.fillMaxSize()) {
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 
 val textMeasurer = rememberTextMeasurer()
@@ -3029,6 +3055,8 @@ Canvas(Modifier.fillMaxSize()) {
       <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a>.<a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withStyle(androidx.compose.ui.text.ParagraphStyle,kotlin.Function1)">withStyle</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;style:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/ParagraphStyle.html">ParagraphStyle</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;block:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a>.() <span style="white-space: nowrap;">-&gt;</span> R<br>):&nbsp;R</pre>
       <p>Pushes <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withStyle(androidx.compose.ui.text.ParagraphStyle,kotlin.Function1)">style</a></code> to the <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a></code>, executes <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withStyle(androidx.compose.ui.text.ParagraphStyle,kotlin.Function1)">block</a></code> and then pops the <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withStyle(androidx.compose.ui.text.ParagraphStyle,kotlin.Function1)">style</a></code>.</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
@@ -3125,6 +3153,8 @@ buildAnnotatedString {
       <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a>.<a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withStyle(androidx.compose.ui.text.SpanStyle,kotlin.Function1)">withStyle</a>(style:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/SpanStyle.html">SpanStyle</a>,&nbsp;block:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a>.() <span style="white-space: nowrap;">-&gt;</span> R):&nbsp;R</pre>
       <p>Pushes <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withStyle(androidx.compose.ui.text.SpanStyle,kotlin.Function1)">style</a></code> to the <code><a href="/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder.html">AnnotatedString.Builder</a></code>, executes <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withStyle(androidx.compose.ui.text.SpanStyle,kotlin.Function1)">block</a></code> and then pops the <code><a href="/reference/kotlin/androidx/compose/ui/text/package-summary.html#(androidx.compose.ui.text.AnnotatedString.Builder).withStyle(androidx.compose.ui.text.SpanStyle,kotlin.Function1)">style</a></code>.</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle

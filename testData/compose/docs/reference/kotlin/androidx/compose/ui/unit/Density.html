@@ -180,7 +180,11 @@
 </devsite-expandable>    </div>
     <hr>
     <p>A density of the screen. Used for the conversions between pixels, <code><a href="/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></code>, <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code>.</p>
-    <pre class="prettyprint lang-kotlin">val sizeInPx = with(LocalDensity.current) { 16.dp.toPx() }</pre>
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.dp
+
+val sizeInPx = with(LocalDensity.current) { 16.dp.toPx() }</pre>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <devsite-filter  select-el-container-id="platform">

@@ -64,6 +64,7 @@ import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.WithConstructors
 import org.jetbrains.dokka.pages.ModulePageNode
+import org.jetbrains.dokka.pages.PageNode
 import org.jetbrains.dokka.pages.RootPageNode
 import org.jetbrains.dokka.plugability.DokkaContext
 import org.jetbrains.dokka.plugability.DokkaPlugin
@@ -73,7 +74,6 @@ import org.jetbrains.dokka.renderers.Renderer
 import org.jetbrains.dokka.utilities.DokkaConsoleLogger
 import org.jetbrains.dokka.utilities.LoggingLevel
 import org.junit.Before
-import org.mockito.Mockito
 import java.io.File
 import java.net.URL
 import kotlin.coroutines.resume
@@ -232,7 +232,16 @@ internal abstract class ConverterTestBase(
         DokkaConsoleLogger(LoggingLevel.WARN),
         emptyList(),
     )
-    private val mockRootPageNode: RootPageNode = Mockito.mock(RootPageNode::class.java)
+    private class FakeRootPageNode(
+        override val children: List<PageNode> = emptyList(),
+        override val name: String = "FAKE",
+        forceTopLevelName: Boolean = false,
+    ) : RootPageNode(forceTopLevelName) {
+        override fun modified(name: String, children: List<PageNode>): RootPageNode { TODO() }
+    }
+
+    private val mockRootPageNode: RootPageNode = FakeRootPageNode()
+    internal val devsitePlugin = context.plugin(DevsitePlugin::class)!!
 
     // This provider will only work on external links; the mock will fail it on internal links.
     // However, dackka has other methods for resolving internal links, so this is fine.
@@ -264,6 +273,7 @@ internal abstract class ConverterTestBase(
                     versionMetadataMap = versionMetadataMap,
                     fileMetadataMap = fileMetadataMap,
                     excludedPackages = excludedPackages,
+                    analysisPlugin = testClass.devsitePlugin.analysisPlugin,
                 )
             }
         }
