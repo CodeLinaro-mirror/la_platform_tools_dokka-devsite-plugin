@@ -66,6 +66,12 @@ internal class PackageRenderer(
             redirectComponent.render(this)
         }
 
+        // Multiple index files will clobber each other if this happens. We do this in some tests.
+        if (pathProvider.forType(dPackage.name, DIR_INDEX_NAME) == pathProvider.rootIndex) {
+            docsHolder.printWarningFor("package name collision with root!", dPackage)
+            return
+        }
+
         outputWriter.write(
             pathProvider.forType(dPackage.name, DIR_INDEX_NAME),
             index,
