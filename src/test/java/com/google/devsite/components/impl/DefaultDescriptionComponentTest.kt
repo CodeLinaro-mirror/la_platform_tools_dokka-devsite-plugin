@@ -1116,6 +1116,49 @@ public void onCreate() {
         )
     }
 
+    @Test
+    fun `Test @usesMathJax`() {
+        val classlike = """
+            |/**
+            | * {@usesMathJax}
+            | *
+            | * Destination pixels covered by the source are cleared to 0.
+            | *
+            | * <p>\(\alpha_{out} = 0\)</p>
+            | * <p>\(C_{out} = 0\)</p>
+            | */
+            |public class Foo {}
+        """.render(java = true)
+
+        val summary = createHTML().body {
+            classlike.description(summary = true).render(this)
+        }.trim()
+        // No MathJax tag in summary (and only the first line included)
+        // language=html
+        assertThat(summary).isEqualTo(
+            """
+                <body>
+                  <p> Destination pixels covered by the source are cleared to 0.</p>
+                </body>
+            """.trimIndent(),
+        )
+
+        val detail = createHTML().body {
+            classlike.description(summary = false).render(this)
+        }.trim()
+        // Inserted MathJax HTML in detail
+        // language=html
+        assertThat(detail).isEqualTo(
+            """
+                <body>
+                  <p><devsite-mathjax config="TeX-AMS_SVG"></devsite-mathjax> Destination pixels covered by the source are cleared to 0. </p>
+                  <p>\(\alpha_{out} = 0\)</p>
+                  <p>\(C_{out} = 0\)</p>
+                </body>
+            """.trimIndent(),
+        )
+    }
+
     private fun DModule.description(
         summary: Boolean = false,
         deprecation: String? = null,

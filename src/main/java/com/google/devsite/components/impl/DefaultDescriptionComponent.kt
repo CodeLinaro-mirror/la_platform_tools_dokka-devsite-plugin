@@ -167,6 +167,15 @@ internal data class DefaultDescriptionComponent(
     private val periodSpaceNonLowercase = """\.\s+[0-9A-Z{<`@"(\\\[]""".toRegex()
     private val doesntEnd = listOf("e.g.", "i.e.", "viz.")
 
+    // A doc tag indicating the component uses MathJax (https://docs.mathjax.org/en/v2.7-latest).
+    // Dokka does not turn this into a CustomTagWrapper, so it needs to be separately handled.
+    private val mathJaxDocTag = "{@usesMathJax}"
+
+    // See go/devsite-reference/widgets/mathjax. While this only _needs_ to be inserted once per
+    // page, it works to include it multiple times, so it is injected for each appearance of the
+    // doc tag in a detail component.
+    private val mathJaxHtml = "<devsite-mathjax config=\"TeX-AMS_SVG\"></devsite-mathjax>"
+
     /**
      * @param tags the DocTags in this context. This DocTag should be one of them.
      * @Returns whether this Text DocTag ends with the end of a sentence.
@@ -242,23 +251,30 @@ internal data class DefaultDescriptionComponent(
             val isHtml = tag.params["content-type"] == "html"
             when (tag) {
                 is Text -> if (data.summary) {
+                    // Remove the MathJax tag. The HTML doesn't need to be injected here because it
+                    // will be injected for the detail component.
+                    val text = tag.body.removeMathJax()
                     // If there is a sentence-end, break on the first
-                    val matches = tag.body.matchPeriodSpaceNonLowercase()
+                    val matches = text.matchPeriodSpaceNonLowercase()
                     if (matches.isNotEmpty()) {
-                        +(tag.body.subSequence(0, matches.minOrNull()!! + 1).toString())
+                        +(text.subSequence(0, matches.minOrNull()!! + 1).toString())
                         state.terminate = true
                     } else if (tag.breaksAtEndOfTag(tags)) { // If this tag is a full sentence
-                        +tag.body.trimEnd()
+                        +text.trimEnd()
                         state.terminate = true
                     } else if (isHtml) {
-                        consumer.onTagContentUnsafe { raw(tag.body.handleDocRoot()) }
+                        consumer.onTagContentUnsafe { raw(text.handleDocRoot()) }
                     } else {
-                        +tag.body
+                        +text
                     }
                 } else {
                     if (tag.children.isEmpty()) {
                         if (isHtml) {
                             consumer.onTagContentUnsafe { raw(tag.body.handleDocRoot()) }
+                        } else if (tag.body.contains(mathJaxDocTag)) {
+                            // Remove the MathJax doc tag and inject HTML to enable MathJax.
+                            consumer.onTagContentUnsafe { raw(mathJaxHtml) }
+                            +tag.body.removeMathJax()
                         } else {
                             +tag.body
                         }
@@ -353,6 +369,10 @@ internal data class DefaultDescriptionComponent(
 
     private fun String.handleDocRoot(): String {
         return replace("{@docRoot}", "/")
+    }
+
+    private fun String.removeMathJax(): String {
+        return replace(mathJaxDocTag, "")
     }
 
     // TODO: remove improper handling of dt b/217941159
