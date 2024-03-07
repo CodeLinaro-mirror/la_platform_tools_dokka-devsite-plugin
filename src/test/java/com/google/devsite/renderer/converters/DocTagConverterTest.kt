@@ -130,7 +130,6 @@ internal class DocTagConverterTest(
         )
     }
 
-    @Suppress("unused") // TODO: fix deprecated class details b/183420241
     @Test
     fun `Deprecated class summary and detail description flags correct in 4x Kotlin and Java`() {
         val codeK = """
@@ -140,8 +139,9 @@ internal class DocTagConverterTest(
             |@Deprecated("Bye")
             |class Foo
         """.render()
-        val summarykK = codeK.description()
+        val summaryK = codeK.description()
         val detailsK = codeK.documentation()
+
         val codeJ = """
             |/**
             | * class_description
@@ -152,18 +152,19 @@ internal class DocTagConverterTest(
         """.render(java = true)
         val summaryJ = codeJ.description { this.clazz() }
         val detailsJ = codeJ.documentation(doc = { this.clazz() })
-        for (summary in listOf(summarykK, summaryJ)) {
+
+        for (summary in listOf(summaryK, summaryJ)) {
             assertThat(summary.data.summary).isTrue()
             assertThat(summary.text()).isEqualTo("Bye")
             assertThat(summary.data.deprecation).isEqualTo("This class is deprecated.")
         }
-        /* TODO: fix deprecated class details b/183420241
+
         for (details in listOf(detailsK, detailsJ)) {
-            val detail = (details.single() as Description)
+            val detail = (details.first() as DescriptionComponent)
             assertThat(detail.data.summary).isFalse()
             assertThat(detail.text()).isEqualTo("Bye")
             assertThat(detail.data.deprecation).isEqualTo("This class is deprecated.")
-        }*/
+        }
     }
 
     /**
