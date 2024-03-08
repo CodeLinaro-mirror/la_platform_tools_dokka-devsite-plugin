@@ -19,6 +19,7 @@ package com.google.devsite.components.pages
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.HtmlComponent
 import com.google.devsite.components.symbols.MetadataComponent
+import com.google.devsite.components.symbols.ReferenceObject
 import com.google.devsite.renderer.Language
 import kotlinx.html.HTML
 
@@ -34,5 +35,6 @@ internal interface DevsitePage<T : ContextFreeComponent> : HtmlComponent<HTML> {
         val content: T,
         val metadataComponent: MetadataComponent?,
         val includedHeadTagPath: String?,
+        val referenceObject: ReferenceObject? = null,
     )
 }
