@@ -27,9 +27,9 @@ repositories {
 }
 
 group = "com.google.devsite"
-version = "1.4.3" // This is appended to archiveBaseName in the ShadowJar task.
+version = "1.5.0" // This is appended to archiveBaseName in the ShadowJar task.
 
-val dokkaVersion = "1.8.20-dev-214"
+val dokkaVersion = "2.0.0-test-2b6eb92892fa8ca794a1ea40a1117efd32106d05"
 val kotlinVersion = "1.9.20"
 val jacksonVersion = "2.15.0"
 val coroutinesVersion = "1.6.3"
@@ -45,19 +45,19 @@ application {
 }
 
 dependencies {
-    implementation("org.jetbrains.dokka:dokka-gradle-plugin:$dokkaVersion")
-    implementation("org.jetbrains.dokka:dokka-analysis:$dokkaVersion")
-
-    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.8.0")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:$coroutinesVersion")
-
-    implementation("org.jetbrains.dokka:dokka-base-test-utils:$dokkaVersion")
     implementation("org.jetbrains.dokka:dokka-base:$dokkaVersion")
+    implementation("org.jetbrains.dokka:dokka-base-test-utils:$dokkaVersion")
     implementation("org.jetbrains.dokka:dokka-cli:$dokkaVersion")
     implementation("org.jetbrains.dokka:dokka-core:$dokkaVersion")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:$jacksonVersion")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
+    implementation("org.jetbrains.dokka:dokka-gradle-plugin:$dokkaVersion")
+    compileOnly("org.jetbrains.dokka:analysis-kotlin-api:$dokkaVersion")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.9.1")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:$coroutinesVersion")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.10")
 
     // Force the newer version to get the bugfix for https://github.com/jhy/jsoup/issues/1910
     // To fix b/309773103. We can remove this once we update the upstream version b/295154071
@@ -67,8 +67,6 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     testImplementation("com.google.truth:truth:1.1.3")
     testImplementation("org.jetbrains.dokka:dokka-test-api:$dokkaVersion")
-    testImplementation("org.mockito:mockito-inline:4.2.0")
-    testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
 }
 
 tasks.withType<KotlinCompile> {

@@ -29,8 +29,12 @@
     <hr>
     <p><code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">KeyframesSpecConfig</a></code> stores a mutable configuration of the key frames, including <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#durationMillis()">durationMillis</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#delayMillis()">delayMillis</a></code>, and all the key frames. Each key frame defines what the animation value should be at a particular time. Once the key frames are fully configured, the <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">KeyframesSpecConfig</a></code> can be used to create a <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.html">KeyframesSpec</a></code>.</p>
     <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.keyframes
 import androidx.compose.ui.unit.DpOffset
+import androidx.compose.ui.unit.dp
 
 // Use FastOutSlowInEasing for the interval from 0 to 50 ms, and LinearOutSlowInEasing for the
 // time between 50 and 100ms
@@ -358,6 +362,8 @@ keyframes&lt;DpOffset&gt; {
           <pre class="api-signature no-pretty-print">infix&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframeEntity.html">KeyframesSpec.KeyframeEntity</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html#(androidx.compose.animation.core.KeyframesSpec.KeyframeEntity).with(androidx.compose.animation.core.Easing)">with</a>(easing:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/Easing.html">Easing</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>Adds an <code><a href="/reference/kotlin/androidx/compose/animation/core/Easing.html">Easing</a></code> for the interval started with the just provided timestamp. For example:     0f at 50 with LinearEasing</p>
           <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.keyframes
 
 // Use FastOutSlowInEasing for the interval from 0 to 50 ms, and LinearOutSlowInEasing for the

@@ -38,7 +38,12 @@
     <hr>
     <p>Error result object for <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.load</a></code>.</p>
     <p>This return type indicates an expected, recoverable error (such as a network load failure). This failure will be forwarded to the UI as a <code><a href="/reference/kotlin/androidx/paging/LoadState.Error.html">LoadState.Error</a></code>, and may be retried.</p>
-    <pre class="prettyprint lang-kotlin">/**
+    <pre class="prettyprint lang-kotlin">
+import androidx.paging.PagingSource
+import androidx.paging.PagingSource.LoadResult
+import androidx.paging.PagingState
+
+/**
  * Sample page-keyed PagingSource, which uses Int page number to load pages.
  *
  * Loads Items from network requests via Retrofit to a backend service.

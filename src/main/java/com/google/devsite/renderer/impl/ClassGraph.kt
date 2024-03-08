@@ -20,7 +20,7 @@ import com.google.devsite.hasBeenHidden
 import com.google.devsite.renderer.converters.getExpectOrCommonSourceSet
 import com.google.devsite.renderer.converters.gettersAndSetters
 import org.jetbrains.dokka.DokkaConfiguration
-import org.jetbrains.dokka.base.translators.descriptors.ExternalDocumentablesProvider
+import org.jetbrains.dokka.analysis.kotlin.documentable.ExternalDocumentableProvider
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DProperty
@@ -41,12 +41,12 @@ internal typealias DocumentablesGraph = Map<DRI, Documentable>
  */
 internal fun computeClassGraph(
     classlikes: List<DClasslike>,
-    externalDocumentablesProvider: ExternalDocumentablesProvider? = null,
+    externalDocumentableProvider: ExternalDocumentableProvider? = null,
     sourceSets: List<DokkaConfiguration.DokkaSourceSet>? = null,
 ): ClassGraph {
     fun MutableMap<DRI, DClasslike?>.getOrExternal(key: DRI) = getOrPut(key) {
         sourceSets?.firstNotNullOfOrNull { sourceSet ->
-            externalDocumentablesProvider?.findClasslike(key, sourceSet)
+            externalDocumentableProvider?.getClasslike(key, sourceSet)
         }
     }
     val drisToClasslikes = classlikes.associateBy<DClasslike?, DRI> { it!!.dri }.toMutableMap()

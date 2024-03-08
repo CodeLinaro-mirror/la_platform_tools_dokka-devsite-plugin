@@ -25,6 +25,8 @@
 import androidx.compose.foundation.MutatorMutex
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 
@@ -206,6 +208,8 @@ fun ScrollControls(scrollState: ScrollState) {
         <p>This variant of <code><a href="/reference/androidx/compose/foundation/MutatorMutex.html#mutate(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction0)">mutate</a></code> calls its <code><a href="/reference/androidx/compose/foundation/MutatorMutex.html#mutateWith(kotlin.Any,androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">block</a></code> with a <code><a href="/reference/androidx/compose/foundation/MutatorMutex.html#mutateWith(kotlin.Any,androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">receiver</a></code>, removing the need to create an additional capturing lambda to invoke it with a receiver object. This can be used to expose a mutable scope to the provided <code><a href="/reference/androidx/compose/foundation/MutatorMutex.html#mutateWith(kotlin.Any,androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">block</a></code> while leaving the rest of the state object read-only. For example:</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.MutatorMutex
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.mutableStateOf
 
 @Stable

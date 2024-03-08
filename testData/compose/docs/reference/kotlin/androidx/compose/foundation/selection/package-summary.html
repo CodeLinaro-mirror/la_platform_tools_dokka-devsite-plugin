@@ -121,6 +121,9 @@ import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 val option1 = Color.Red
 val option2 = Color.Blue
@@ -206,6 +209,9 @@ import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 val option1 = Color.Red
 val option2 = Color.Blue
@@ -329,6 +335,7 @@ import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 
 var checked by remember { mutableStateOf(false) }
 // content that you want to make toggleable
@@ -415,6 +422,7 @@ import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 
 var checked by remember { mutableStateOf(false) }
 // content that you want to make toggleable
@@ -510,10 +518,13 @@ Text(
       <p>TriStateToggleable should be used when there are dependent Toggleables associated to this component and those can have different values.</p>
       <p>This version has no <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> or <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a></code> parameters, default indication from <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#LocalIndication()">LocalIndication</a></code> will be used. To specify <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> or <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a></code>, use another overload.</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.selection.triStateToggleable
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.state.ToggleableState
 
 var checked by remember { mutableStateOf(ToggleableState.Indeterminate) }
 // content that you want to make toggleable
@@ -603,10 +614,13 @@ Text(
       <p>TriStateToggleable should be used when there are dependent Toggleables associated to this component and those can have different values.</p>
       <p>This version requires both <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> and <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a></code> to work properly. Use another overload if you don't need these parameters.</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.selection.triStateToggleable
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.state.ToggleableState
 
 var checked by remember { mutableStateOf(ToggleableState.Indeterminate) }
 // content that you want to make toggleable

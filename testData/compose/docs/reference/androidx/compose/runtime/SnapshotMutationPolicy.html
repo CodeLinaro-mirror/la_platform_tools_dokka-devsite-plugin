@@ -22,7 +22,10 @@
     <p>A mutation policy can be passed as an parameter to <code><a href="/reference/androidx/compose/runtime/package-summary.html#mutableStateOf(kotlin.Any,androidx.compose.runtime.SnapshotMutationPolicy)">mutableStateOf</a></code>, and <code><a href="/reference/androidx/compose/runtime/package-summary.html#compositionLocalOf(androidx.compose.runtime.SnapshotMutationPolicy,kotlin.Function0)">compositionLocalOf</a></code>.</p>
     <p>Typically, one of the stock policies should be used such as <code><a href="/reference/androidx/compose/runtime/package-summary.html#referentialEqualityPolicy()">referentialEqualityPolicy</a></code>, <code><a href="/reference/androidx/compose/runtime/package-summary.html#structuralEqualityPolicy()">structuralEqualityPolicy</a></code>, or <code><a href="/reference/androidx/compose/runtime/package-summary.html#neverEqualPolicy()">neverEqualPolicy</a></code>. However, a custom mutation policy can be created by implementing this interface, such as a counter policy,</p>
     <pre class="prettyprint lang-kotlin">
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.SnapshotMutationPolicy
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.snapshots.Snapshot
 
 /**
  * A policy that treats an `MutableState&lt;Int&gt;` as a counter. Changing the value to the same
@@ -106,7 +109,10 @@ try {
         <p>Merge conflicting changes in snapshots. This is only called if <code><a href="/reference/androidx/compose/runtime/SnapshotMutationPolicy.html#merge(kotlin.Any,kotlin.Any,kotlin.Any)">current</a></code> and <code><a href="/reference/androidx/compose/runtime/SnapshotMutationPolicy.html#merge(kotlin.Any,kotlin.Any,kotlin.Any)">applied</a></code> are not <code><a href="/reference/androidx/compose/runtime/SnapshotMutationPolicy.html#equivalent(kotlin.Any,kotlin.Any)">equivalent</a></code>. If a valid merged value can be calculated then it should be returned.</p>
         <p>For example, if the state object holds an immutable data class with multiple fields, and <code><a href="/reference/androidx/compose/runtime/SnapshotMutationPolicy.html#merge(kotlin.Any,kotlin.Any,kotlin.Any)">applied</a></code> has changed fields that are unmodified by <code><a href="/reference/androidx/compose/runtime/SnapshotMutationPolicy.html#merge(kotlin.Any,kotlin.Any,kotlin.Any)">current</a></code> it might be valid to return a new copy of the data class that combines that changes from both <code><a href="/reference/androidx/compose/runtime/SnapshotMutationPolicy.html#merge(kotlin.Any,kotlin.Any,kotlin.Any)">current</a></code> and <code><a href="/reference/androidx/compose/runtime/SnapshotMutationPolicy.html#merge(kotlin.Any,kotlin.Any,kotlin.Any)">applied</a></code> allowing a snapshot to apply that would have otherwise failed.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.SnapshotMutationPolicy
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.snapshots.Snapshot
 
 /**
  * A policy that treats an `MutableState&lt;Int&gt;` as a counter. Changing the value to the same

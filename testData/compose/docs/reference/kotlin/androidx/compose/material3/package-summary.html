@@ -2776,12 +2776,18 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.AlertDialogDefaults
 import androidx.compose.material3.BasicAlertDialog
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 val openDialog = remember { mutableStateOf(true) }
 
@@ -2920,6 +2926,8 @@ if (openDialog.value) {
 }</pre>
       <p>Usage with a &quot;Hero&quot; icon:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -3105,9 +3113,13 @@ if (openDialog.value) {
       <p>Example of a flat AssistChip:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.AssistChip
+import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
+import androidx.compose.ui.Modifier
 
 AssistChip(
     onClick = { /* Do something! */ },
@@ -3275,12 +3287,16 @@ AssistChip(
       <p>A common use case is to display a badge with navigation bar items. For more information, see <a href="https://m3.material.io/components/navigation-bar/overview">Navigation Bar</a></p>
       <p>A simple icon with badge example looks like:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 
 NavigationBar {
@@ -3366,12 +3382,18 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.AlertDialogDefaults
 import androidx.compose.material3.BasicAlertDialog
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 val openDialog = remember { mutableStateOf(true) }
 
@@ -3538,6 +3560,8 @@ if (openDialog.value) {
       <p>A bottom app bar displays navigation and key actions at the bottom of mobile screens.</p>
       <p><img alt="Bottom app bar image" src="https://developer.android.com/images/reference/androidx/compose/material3/bottom-app-bar.png"></p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -3551,8 +3575,14 @@ BottomAppBar(
 )</pre>
       <p>It can optionally display a <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#FloatingActionButton(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.material3.FloatingActionButtonElevation,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function0)">FloatingActionButton</a></code> embedded at the end of the BottomAppBar.</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.BottomAppBarDefaults
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 
@@ -3738,6 +3768,8 @@ BottomAppBar(
       <p>A bottom app bar displays navigation and key actions at the bottom of mobile screens.</p>
       <p><img alt="Bottom app bar image" src="https://developer.android.com/images/reference/androidx/compose/material3/bottom-app-bar.png"></p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -3751,8 +3783,14 @@ BottomAppBar(
 )</pre>
       <p>It can optionally display a <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#FloatingActionButton(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.material3.FloatingActionButtonElevation,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function0)">FloatingActionButton</a></code> embedded at the end of the BottomAppBar.</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.BottomAppBarDefaults
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 
@@ -3780,17 +3818,28 @@ BottomAppBar(
 )</pre>
       <p>A bottom app bar that uses a <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#BottomAppBar(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function0,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.Dp,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.layout.WindowInsets,androidx.compose.material3.BottomAppBarScrollBehavior)">scrollBehavior</a></code> to customize its nested scrolling behavior when working in conjunction with a scrolling content looks like:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.BottomAppBarDefaults
+import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.unit.dp
 
 val scrollBehavior = BottomAppBarDefaults.exitAlwaysScrollBehavior()
 Scaffold(
@@ -3982,7 +4031,11 @@ import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberBottomSheetScaffoldState
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 val scope = rememberCoroutineScope()
 val scaffoldState = rememberBottomSheetScaffoldState()
@@ -4166,9 +4219,13 @@ Button(onClick = { /* Do something! */ }) { Text(&quot;Button&quot;) }</pre>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
+import androidx.compose.ui.Modifier
 
 Button(
     onClick = { /* Do something! */ },
@@ -4290,6 +4347,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 Card(Modifier.size(width = 180.dp, height = 100.dp)) {
     Box(Modifier.fillMaxSize()) {
@@ -4364,6 +4424,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 Card(
     onClick = { /* Do something */ },
@@ -4455,14 +4518,23 @@ Card(
       <p>This CenterAlignedTopAppBar has slots for a title, navigation icon, and actions.</p>
       <p>A center aligned top app bar that uses a <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#CenterAlignedTopAppBar(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Function0,kotlin.Function1,androidx.compose.foundation.layout.WindowInsets,androidx.compose.material3.TopAppBarColors,androidx.compose.material3.TopAppBarScrollBehavior)">scrollBehavior</a></code> to customize its nested scrolling behavior when working in conjunction with a scrolling content looks like:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 
 Scaffold(
     topBar = {
@@ -4601,9 +4673,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.unit.dp
 
 val (checkedState, onStateChange) = remember { mutableStateOf(true) }
 Row(
@@ -4718,6 +4795,7 @@ Row(
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.ui.Alignment
 
 Column(horizontalAlignment = Alignment.CenterHorizontally) {
     CircularProgressIndicator()
@@ -4804,9 +4882,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.material.Slider
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ProgressIndicatorDefaults
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.unit.dp
 
 var progress by remember { mutableStateOf(0.1f) }
 val animatedProgress by animateFloatAsState(
@@ -4914,11 +4998,16 @@ Column(horizontalAlignment = Alignment.CenterHorizontally) {
       <p><img alt="Date picker image" src="https://developer.android.com/images/reference/androidx/compose/material3/date-picker.png"></p>
       <p>A simple DatePicker looks like:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDatePickerState
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
     // Pre-select a date for January 4, 2020
@@ -4932,11 +5021,17 @@ Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
 }</pre>
       <p>A DatePicker with an initial UI of a date input mode looks like:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DatePicker
+import androidx.compose.material3.DisplayMode
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDatePickerState
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
     val state = rememberDatePickerState(initialDisplayMode = DisplayMode.Input)
@@ -4949,10 +5044,16 @@ Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
 }</pre>
       <p>A DatePicker with a provided <code><a href="/reference/kotlin/androidx/compose/material3/SelectableDates.html">SelectableDates</a></code> that blocks certain days from being selected looks like:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.DatePicker
+import androidx.compose.material3.SelectableDates
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDatePickerState
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 val datePickerState = rememberDatePickerState(
     selectableDates = object : SelectableDates {
@@ -5080,6 +5181,7 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
 
 // Decoupled snackbar host state from scaffold state for demo purposes.
 val snackState = remember { SnackbarHostState() }
@@ -5331,12 +5433,15 @@ if (openDialog.value) {
       <p><img alt="Date range picker image" src="https://developer.android.com/images/reference/androidx/compose/material3/range-picker.png"></p>
       <p>A simple DateRangePicker looks like:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.DateRangePicker
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.SnackbarHost
@@ -5346,6 +5451,9 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDateRangePickerState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 
 // Decoupled snackbar host state from scaffold state for demo purposes.
@@ -5657,9 +5765,14 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Face
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Button
 import androidx.compose.material3.DismissibleDrawerSheet
 import androidx.compose.material3.DismissibleNavigationDrawer
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.Text
@@ -5667,6 +5780,9 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 val drawerState = rememberDrawerState(DrawerValue.Closed)
 val scope = rememberCoroutineScope()
@@ -5791,19 +5907,30 @@ DismissibleNavigationDrawer(
       <p>An example looks like:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.DockedSearchBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.traversalIndex
+import androidx.compose.ui.unit.dp
 
 var text by rememberSaveable { mutableStateOf(&quot;&quot;) }
 var active by rememberSaveable { mutableStateOf(false) }
@@ -5986,6 +6113,11 @@ Box(Modifier.fillMaxSize().semantics { isTraversalGroup = true }) {
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.outlined.Edit
+import androidx.compose.material.icons.outlined.Email
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.HorizontalDivider
@@ -5994,6 +6126,9 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 
 var expanded by remember { mutableStateOf(false) }
 
@@ -6046,6 +6181,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -6054,6 +6192,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 
 var expanded by remember { mutableStateOf(false) }
 val scrollState = rememberScrollState()
@@ -6166,6 +6306,11 @@ Box(
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.outlined.Edit
+import androidx.compose.material.icons.outlined.Email
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.HorizontalDivider
@@ -6174,6 +6319,9 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 
 var expanded by remember { mutableStateOf(false) }
 
@@ -6309,9 +6457,14 @@ Box(
       <p>Example of an elevated AssistChip with a trailing icon:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.AssistChip
+import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.ElevatedAssistChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
+import androidx.compose.ui.Modifier
 
 ElevatedAssistChip(
     onClick = { /* Do something! */ },
@@ -6422,6 +6575,7 @@ ElevatedAssistChip(
       <p><img alt="Elevated button image" src="https://developer.android.com/images/reference/androidx/compose/material3/elevated-button.png"></p>
       <p>Elevated buttons are high-emphasis buttons that are essentially <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#FilledTonalButton(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.graphics.Shape,androidx.compose.material3.ButtonColors,androidx.compose.material3.ButtonElevation,androidx.compose.foundation.BorderStroke,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function1)">FilledTonalButton</a></code>s with a shadow. To prevent shadow creep, only use them when absolutely necessary, such as when the button requires visual separation from patterned container.</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material3.Button
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Text
 
@@ -6532,8 +6686,12 @@ ElevatedButton(onClick = { /* Do something! */ }) { Text(&quot;Elevated Button&q
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Card
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 ElevatedCard(Modifier.size(width = 180.dp, height = 100.dp)) {
     Box(Modifier.fillMaxSize()) {
@@ -6600,8 +6758,12 @@ ElevatedCard(Modifier.size(width = 180.dp, height = 100.dp)) {
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Card
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 ElevatedCard(
     onClick = { /* Do something */ },
@@ -6689,11 +6851,16 @@ ElevatedCard(
       <p>Example of an elevated FilterChip with a trailing icon:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.ElevatedFilterChip
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 
 var selected by remember { mutableStateOf(false) }
 ElevatedFilterChip(
@@ -6819,6 +6986,7 @@ ElevatedFilterChip(
       <p>Example of an elevated SuggestionChip with a trailing icon:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.material3.ElevatedSuggestionChip
+import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Text
 
 ElevatedSuggestionChip(
@@ -6921,10 +7089,12 @@ ElevatedSuggestionChip(
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 
 val options = listOf(&quot;Option 1&quot;, &quot;Option 2&quot;, &quot;Option 3&quot;, &quot;Option 4&quot;, &quot;Option 5&quot;)
 var expanded by remember { mutableStateOf(false) }
@@ -6964,10 +7134,12 @@ ExposedDropdownMenuBox(
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 
 val options = listOf(&quot;Option 1&quot;, &quot;Option 2&quot;, &quot;Option 3&quot;, &quot;Option 4&quot;, &quot;Option 5&quot;)
 var expanded by remember { mutableStateOf(false) }
@@ -7062,6 +7234,7 @@ ExposedDropdownMenuBox(
       <p>The other extended floating action button overload supports a text label and icon.</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Text
 
 ExtendedFloatingActionButton(onClick = { /* do something */ }) {
@@ -7148,7 +7321,10 @@ ExtendedFloatingActionButton(onClick = { /* do something */ }) {
       <p>The other extended floating action button overload is for FABs without an icon.</p>
       <p>Default content description for accessibility is extended from the extended fabs icon. For custom behavior, you can provide your own via <code><a href="/reference/kotlin/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.Modifier).semantics(kotlin.Boolean,kotlin.Function1)">Modifier.semantics</a></code>.</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 
@@ -7162,12 +7338,18 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.FabPosition
 import androidx.compose.material.Scaffold
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 val listState = rememberLazyListState()
 // The FAB is initially expanded. Once the first visible item is past the first item we
@@ -7293,8 +7475,12 @@ Scaffold(
       <p><code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#FilledIconButton(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.graphics.Shape,androidx.compose.material3.IconButtonColors,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function0)">content</a></code> should typically be an <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#Icon(androidx.compose.ui.graphics.vector.ImageVector,kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color)">Icon</a></code> (see androidx.compose.material.icons.Icons). If using a custom icon, note that the typical size for the internal icon is 24 x 24 dp. This icon button has an overall minimum touch target size of 48 x 48dp, to meet accessibility guidelines.</p>
       <p>Filled icon button sample:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 
 FilledIconButton(onClick = { /* doSomething() */ }) {
     Icon(Icons.Outlined.Lock, contentDescription = &quot;Localized description&quot;)
@@ -7374,8 +7560,12 @@ FilledIconButton(onClick = { /* doSomething() */ }) {
       <p><code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#FilledIconToggleButton(kotlin.Boolean,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.graphics.Shape,androidx.compose.material3.IconToggleButtonColors,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function0)">content</a></code> should typically be an <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#Icon(androidx.compose.ui.graphics.vector.ImageVector,kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color)">Icon</a></code> (see androidx.compose.material.icons.Icons). If using a custom icon, note that the typical size for the internal icon is 24 x 24 dp. This icon button has an overall minimum touch target size of 48 x 48dp, to meet accessibility guidelines.</p>
       <p>Toggleable filled icon button sample:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material3.FilledIconToggleButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconToggleButton
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 
@@ -7467,6 +7657,7 @@ FilledIconToggleButton(checked = checked, onCheckedChange = { checked = it }) {
       <p><img alt="Filled tonal button image" src="https://developer.android.com/images/reference/androidx/compose/material3/filled-tonal-button.png"></p>
       <p>Filled tonal buttons are medium-emphasis buttons that is an alternative middle ground between default <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#Button(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.graphics.Shape,androidx.compose.material3.ButtonColors,androidx.compose.material3.ButtonElevation,androidx.compose.foundation.BorderStroke,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function1)">Button</a></code>s (filled) and <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#OutlinedButton(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.graphics.Shape,androidx.compose.material3.ButtonColors,androidx.compose.material3.ButtonElevation,androidx.compose.foundation.BorderStroke,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function1)">OutlinedButton</a></code>s. They can be used in contexts where lower-priority button requires slightly more emphasis than an outline would give, such as &quot;Next&quot; in an onboarding flow. Tonal buttons use the secondary color mapping.</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material3.Button
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Text
 
@@ -7575,8 +7766,12 @@ FilledTonalButton(onClick = { /* Do something! */ }) { Text(&quot;Filled Tonal B
       <p><code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#FilledTonalIconButton(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.graphics.Shape,androidx.compose.material3.IconButtonColors,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function0)">content</a></code> should typically be an <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#Icon(androidx.compose.ui.graphics.vector.ImageVector,kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color)">Icon</a></code> (see androidx.compose.material.icons.Icons). If using a custom icon, note that the typical size for the internal icon is 24 x 24 dp. This icon button has an overall minimum touch target size of 48 x 48dp, to meet accessibility guidelines.</p>
       <p>Filled tonal icon button sample:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 
 FilledTonalIconButton(onClick = { /* doSomething() */ }) {
     Icon(Icons.Outlined.Lock, contentDescription = &quot;Localized description&quot;)
@@ -7657,8 +7852,12 @@ FilledTonalIconButton(onClick = { /* doSomething() */ }) {
       <p><code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#FilledTonalIconToggleButton(kotlin.Boolean,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.graphics.Shape,androidx.compose.material3.IconToggleButtonColors,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function0)">content</a></code> should typically be an <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#Icon(androidx.compose.ui.graphics.vector.ImageVector,kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color)">Icon</a></code> (see androidx.compose.material.icons.Icons). If using a custom icon, note that the typical size for the internal icon is 24 x 24 dp. This icon button has an overall minimum touch target size of 48 x 48dp, to meet accessibility guidelines.</p>
       <p>Toggleable filled tonal icon button sample:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material3.FilledTonalIconToggleButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconToggleButton
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 
@@ -7754,11 +7953,15 @@ FilledTonalIconToggleButton(checked = checked, onCheckedChange = { checked = it 
       <p>Example of a flat FilterChip with a trailing icon:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 
 var selected by remember { mutableStateOf(false) }
 FilterChip(
@@ -7780,11 +7983,16 @@ FilterChip(
       <p>Example of a FilterChip with both a leading icon and a selected icon:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 
 var selected by remember { mutableStateOf(false) }
 FilterChip(
@@ -7913,6 +8121,8 @@ FilterChip(
       <p><img alt="FAB image" src="https://developer.android.com/images/reference/androidx/compose/material3/fab.png"></p>
       <p>FAB typically contains an icon, for a FAB with text and an icon, see <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#ExtendedFloatingActionButton(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.material3.FloatingActionButtonElevation,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function1)">ExtendedFloatingActionButton</a></code>.</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 
@@ -8208,6 +8418,9 @@ FloatingActionButton(
       <p><img alt="Standard icon button image" src="https://developer.android.com/images/reference/androidx/compose/material3/standard-icon-button.png"></p>
       <p><code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#IconButton(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.material3.IconButtonColors,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function0)">content</a></code> should typically be an <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#Icon(androidx.compose.ui.graphics.vector.ImageVector,kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color)">Icon</a></code> (see androidx.compose.material.icons.Icons). If using a custom icon, note that the typical size for the internal icon is 24 x 24 dp. This icon button has an overall minimum touch target size of 48 x 48dp, to meet accessibility guidelines.</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 
@@ -8282,6 +8495,9 @@ IconButton(onClick = { /* doSomething() */ }) {
       <p><img alt="Standard icon toggle button image" src="https://developer.android.com/images/reference/androidx/compose/material3/standard-icon-toggle-button.png"></p>
       <p><code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#IconToggleButton(kotlin.Boolean,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.material3.IconToggleButtonColors,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function0)">content</a></code> should typically be an <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#Icon(androidx.compose.ui.graphics.vector.ImageVector,kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color)">Icon</a></code> (see androidx.compose.material.icons.Icons). If using a custom icon, note that the typical size for the internal icon is 24 x 24 dp. This icon button has an overall minimum touch target size of 48 x 48dp, to meet accessibility guidelines.</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconToggleButton
 import androidx.compose.runtime.mutableStateOf
@@ -8385,11 +8601,15 @@ InputChip(
       <p>Example of an InputChip with an avatar and a trailing icon:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.InputChip
+import androidx.compose.material3.InputChipDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 
 var selected by remember { mutableStateOf(false) }
 InputChip(
@@ -8413,6 +8633,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Text
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 Column(horizontalAlignment = Alignment.CenterHorizontally) {
     Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
@@ -8427,13 +8651,18 @@ Column(horizontalAlignment = Alignment.CenterHorizontally) {
 }</pre>
       <p>Alternatively, use <code><a href="/reference/kotlin/androidx/compose/foundation/layout/package-summary.html#FlowRow(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.foundation.layout.Arrangement.Vertical,kotlin.Int,kotlin.Function1)">androidx.compose.foundation.layout.FlowRow</a></code> to wrap chips to a new line.</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEachIndexed
 
 val colorNames = listOf(
@@ -8572,6 +8801,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Label
 import androidx.compose.material3.PlainTooltip
@@ -8579,7 +8811,11 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
 
 var sliderPosition by remember { mutableStateOf(0f) }
 val interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
@@ -8628,9 +8864,16 @@ import androidx.compose.material3.Label
 import androidx.compose.material3.PlainTooltip
 import androidx.compose.material3.RangeSlider
 import androidx.compose.material3.RangeSliderState
+import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
+import androidx.compose.material3.SliderState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
 
 val rangeSliderState = remember {
     RangeSliderState(
@@ -8764,8 +9007,13 @@ Column(modifier = Modifier.padding(horizontal = 16.dp)) {
       <p><img alt="Large FAB image" src="https://developer.android.com/images/reference/androidx/compose/material3/large-fab.png"></p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LargeFloatingActionButton
+import androidx.compose.ui.Modifier
 
 LargeFloatingActionButton(
     onClick = { /* do something */ },
@@ -8857,15 +9105,25 @@ LargeFloatingActionButton(
       <p>This LargeTopAppBar has slots for a title, navigation icon, and actions. In its default expanded state, the title is displayed in a second row under the navigation and actions.</p>
       <p>A large top app bar that uses a <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#LargeTopAppBar(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Function0,kotlin.Function1,androidx.compose.foundation.layout.WindowInsets,androidx.compose.material3.TopAppBarColors,androidx.compose.material3.TopAppBarScrollBehavior)">scrollBehavior</a></code> to customize its nested scrolling behavior when working in conjunction with scrolling content looks like:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LargeTopAppBar
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 
 val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
 Scaffold(
@@ -9095,6 +9353,7 @@ Scaffold(
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.ui.Alignment
 
 Column(horizontalAlignment = Alignment.CenterHorizontally) {
     LinearProgressIndicator()
@@ -9175,9 +9434,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.material.Slider
 import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.ProgressIndicatorDefaults
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.unit.dp
 
 var progress by remember { mutableStateOf(0.1f) }
 val animatedProgress by animateFloatAsState(
@@ -9274,6 +9539,8 @@ Column(horizontalAlignment = Alignment.CenterHorizontally) {
       </ul>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
@@ -9298,6 +9565,8 @@ Column {
       </ul>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
@@ -9324,6 +9593,8 @@ Column {
       </ul>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
@@ -9351,6 +9622,8 @@ Column {
       </ul>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
@@ -9508,15 +9781,25 @@ Column {
       <p>This MediumTopAppBar has slots for a title, navigation icon, and actions. In its default expanded state, the title is displayed in a second row under the navigation and actions.</p>
       <p>A medium top app bar that uses a <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#MediumTopAppBar(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Function0,kotlin.Function1,androidx.compose.foundation.layout.WindowInsets,androidx.compose.material3.TopAppBarColors,androidx.compose.material3.TopAppBarScrollBehavior)">scrollBehavior</a></code> to customize its nested scrolling behavior when working in conjunction with scrolling content looks like:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 
 val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
 Scaffold(
@@ -9641,6 +9924,7 @@ Scaffold(
       <p><img alt="Bottom sheet image" src="https://developer.android.com/images/reference/androidx/compose/material3/bottom_sheet.png"></p>
       <p>A simple example of a modal bottom sheet looks like this:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -9650,6 +9934,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.selection.toggleable
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
@@ -9662,6 +9949,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.unit.dp
 
 var openBottomSheet by rememberSaveable { mutableStateOf(false) }
 var skipPartiallyExpanded by remember { mutableStateOf(false) }
@@ -9939,16 +10230,25 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Face
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Button
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
+import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 val drawerState = rememberDrawerState(DrawerValue.Closed)
 val scope = rememberCoroutineScope()
@@ -10058,11 +10358,17 @@ ModalNavigationDrawer(
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.TrendingUp
+import androidx.compose.material.icons.filled.BookmarkBorder
+import androidx.compose.material.icons.filled.StarBorder
 import androidx.compose.material3.MultiChoiceSegmentedButtonRow
 import androidx.compose.material3.SegmentedButton
+import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 
 val checkedList = remember { mutableStateListOf&lt;Int&gt;() }
 val options = listOf(&quot;Favorites&quot;, &quot;Trending&quot;, &quot;Saved&quot;)
@@ -10148,6 +10454,8 @@ MultiChoiceSegmentedButtonRow {
       <p><code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#NavigationBar(androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.Dp,androidx.compose.foundation.layout.WindowInsets,kotlin.Function1)">NavigationBar</a></code> should contain three to five <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.foundation.layout.RowScope).NavigationBarItem(kotlin.Boolean,kotlin.Function0,kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Function0,kotlin.Boolean,androidx.compose.material3.NavigationBarItemColors,androidx.compose.foundation.interaction.MutableInteractionSource)">NavigationBarItem</a></code>s, each representing a singular destination.</p>
       <p>A simple example looks like:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -10240,16 +10548,25 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Face
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Button
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
+import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 val drawerState = rememberDrawerState(DrawerValue.Closed)
 val scope = rememberCoroutineScope()
@@ -10372,6 +10689,10 @@ ModalNavigationDrawer(
       <p><code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#NavigationRail(androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,kotlin.Function1,androidx.compose.foundation.layout.WindowInsets,kotlin.Function1)">NavigationRail</a></code> should contain multiple <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#NavigationRailItem(kotlin.Boolean,kotlin.Function0,kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Function0,kotlin.Boolean,androidx.compose.material3.NavigationRailItemColors,androidx.compose.foundation.interaction.MutableInteractionSource)">NavigationRailItem</a></code>s, each representing a singular destination.</p>
       <p>A simple example looks like:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
@@ -10546,6 +10867,7 @@ NavigationRail {
       <p><img alt="Outlined button image" src="https://developer.android.com/images/reference/androidx/compose/material3/outlined-button.png"></p>
       <p>Outlined buttons are medium-emphasis buttons. They contain actions that are important, but are not the primary action in an app. Outlined buttons pair well with <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#Button(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.graphics.Shape,androidx.compose.material3.ButtonColors,androidx.compose.material3.ButtonElevation,androidx.compose.foundation.BorderStroke,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function1)">Button</a></code>s to indicate an alternative, secondary action.</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 
@@ -10656,8 +10978,12 @@ OutlinedButton(onClick = { /* Do something! */ }) { Text(&quot;Outlined Button&q
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Card
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 OutlinedCard(Modifier.size(width = 180.dp, height = 100.dp)) {
     Box(Modifier.fillMaxSize()) {
@@ -10730,8 +11056,12 @@ OutlinedCard(Modifier.size(width = 180.dp, height = 100.dp)) {
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Card
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 OutlinedCard(
     onClick = { /* Do something */ },
@@ -10823,7 +11153,11 @@ OutlinedCard(
       <p>Use this &quot;contained&quot; icon button when the component requires more visual separation from the background.</p>
       <p><code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#OutlinedIconButton(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.graphics.Shape,androidx.compose.material3.IconButtonColors,androidx.compose.foundation.BorderStroke,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function0)">content</a></code> should typically be an <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#Icon(androidx.compose.ui.graphics.vector.ImageVector,kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color)">Icon</a></code> (see androidx.compose.material.icons.Icons). If using a custom icon, note that the typical size for the internal icon is 24 x 24 dp. The outlined icon button has an overall minimum touch target size of 48 x 48dp, to meet accessibility guidelines.</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedIconButton
 
 OutlinedIconButton(onClick = { /* doSomething() */ }) {
@@ -10909,7 +11243,11 @@ OutlinedIconButton(onClick = { /* doSomething() */ }) {
       <p><img alt="Outlined icon toggle button image" src="https://developer.android.com/images/reference/androidx/compose/material3/outlined-icon-toggle-button.png"></p>
       <p><code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#OutlinedIconToggleButton(kotlin.Boolean,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.graphics.Shape,androidx.compose.material3.IconToggleButtonColors,androidx.compose.foundation.BorderStroke,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function0)">content</a></code> should typically be an <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#Icon(androidx.compose.ui.graphics.vector.ImageVector,kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color)">Icon</a></code> (see androidx.compose.material.icons.Icons). If using a custom icon, note that the typical size for the internal icon is 24 x 24 dp. This icon button has an overall minimum touch target size of 48 x 48dp, to meet accessibility guidelines.</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconToggleButton
 import androidx.compose.material3.OutlinedIconToggleButton
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -11010,7 +11348,9 @@ OutlinedIconToggleButton(checked = checked, onCheckedChange = { checked = it }) 
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 
 var text by rememberSaveable { mutableStateOf(&quot;&quot;) }
@@ -11193,7 +11533,9 @@ OutlinedTextField(
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
@@ -11454,6 +11796,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Face
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.PermanentDrawerSheet
@@ -11461,6 +11807,9 @@ import androidx.compose.material3.PermanentNavigationDrawer
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 // icons to mimic drawer destinations
 val items = listOf(Icons.Default.Favorite, Icons.Default.Face, Icons.Default.Email)
@@ -11658,11 +12007,15 @@ PermanentNavigationDrawer(
       <p>A simple example with text tabs looks like:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
 
 var state by remember { mutableStateOf(0) }
 val titles = listOf(&quot;Tab 1&quot;, &quot;Tab 2&quot;, &quot;Tab 3 with lots of text&quot;)
@@ -11685,10 +12038,14 @@ Column {
       <p>You can also provide your own custom tab, such as:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SecondaryTabRow
+import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 
 var state by remember { mutableStateOf(0) }
 val titles = listOf(&quot;Tab 1&quot;, &quot;Tab 2&quot;, &quot;Tab 3&quot;)
@@ -11711,14 +12068,19 @@ Column {
       <p>Where the custom tab itself could look like:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 Tab(selected, onClick) {
     Column(
@@ -11753,6 +12115,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Tab
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.unit.dp
 
 // Draws a rounded rectangular with border around the Tab, with a 5.dp padding from the edges
 // Color is passed in as a parameter [color]
@@ -11765,12 +12131,15 @@ Box(
       <p>We can reuse <code><a href="/reference/kotlin/androidx/compose/material3/TabRowDefaults.html#(androidx.compose.ui.Modifier).tabIndicatorOffset(androidx.compose.material3.TabPosition)">TabRowDefaults.tabIndicatorOffset</a></code> and just provide this indicator, as we aren't changing how the size and position of the indicator changes between tabs:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SecondaryTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 
 var state by remember { mutableStateOf(0) }
 val titles = listOf(&quot;Tab 1&quot;, &quot;Tab 2&quot;, &quot;Tab 3&quot;)
@@ -11807,8 +12176,15 @@ import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Tab
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 
 val colors = listOf(
@@ -11866,11 +12242,14 @@ FancyIndicator(
       <p>We can now just pass this indicator directly to TabRow:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SecondaryTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 
 var state by remember { mutableStateOf(0) }
 val titles = listOf(&quot;Tab 1&quot;, &quot;Tab 2&quot;, &quot;Tab 3&quot;)
@@ -12010,10 +12389,13 @@ Column {
       <p><img alt="Radio button image" src="https://developer.android.com/images/reference/androidx/compose/material3/radio-button.png"></p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material3.RadioButton
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 
 // We have two radio buttons and only one can be selected
@@ -12043,10 +12425,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.unit.dp
 
 val radioOptions = listOf(&quot;Calls&quot;, &quot;Missed&quot;, &quot;Friends&quot;)
 val (selectedOption, onOptionSelected) = remember { mutableStateOf(radioOptions[0]) }
@@ -12149,9 +12536,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.RangeSlider
 import androidx.compose.material3.RangeSliderState
+import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
 
 val rangeSliderState = remember {
     RangeSliderState(
@@ -12179,9 +12571,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.RangeSlider
 import androidx.compose.material3.RangeSliderState
+import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
 
 val rangeSliderState = remember {
     RangeSliderState(
@@ -12307,9 +12704,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.RangeSlider
 import androidx.compose.material3.RangeSliderState
+import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
 
 val rangeSliderState = remember {
     RangeSliderState(
@@ -12337,9 +12739,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.RangeSlider
 import androidx.compose.material3.RangeSliderState
+import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
 
 val rangeSliderState = remember {
     RangeSliderState(
@@ -12373,9 +12780,16 @@ import androidx.compose.material3.Label
 import androidx.compose.material3.PlainTooltip
 import androidx.compose.material3.RangeSlider
 import androidx.compose.material3.RangeSliderState
+import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
+import androidx.compose.material3.SliderState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
 
 val rangeSliderState = remember {
     RangeSliderState(
@@ -12574,9 +12988,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.RangeSlider
 import androidx.compose.material3.RangeSliderState
+import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
 
 val rangeSliderState = remember {
     RangeSliderState(
@@ -12604,9 +13023,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.RangeSlider
 import androidx.compose.material3.RangeSliderState
+import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
 
 val rangeSliderState = remember {
     RangeSliderState(
@@ -12640,9 +13064,16 @@ import androidx.compose.material3.Label
 import androidx.compose.material3.PlainTooltip
 import androidx.compose.material3.RangeSlider
 import androidx.compose.material3.RangeSliderState
+import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
+import androidx.compose.material3.SliderState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
 
 val rangeSliderState = remember {
     RangeSliderState(
@@ -12925,13 +13356,18 @@ import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 val colors = listOf(
     Color(0xFFffd7d7.toInt()),
@@ -12986,12 +13422,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
 
 val snackbarHostState = remember { SnackbarHostState() }
 val scope = rememberCoroutineScope()
@@ -13208,19 +13646,29 @@ Scaffold(
       <p>An example looks like:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.traversalIndex
+import androidx.compose.ui.unit.dp
 
 var text by rememberSaveable { mutableStateOf(&quot;&quot;) }
 var active by rememberSaveable { mutableStateOf(false) }
@@ -13506,11 +13954,15 @@ Box(Modifier.fillMaxSize().semantics { isTraversalGroup = true }) {
       <p>A simple example with text tabs looks like:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SecondaryTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
 
 var state by remember { mutableStateOf(0) }
 val titles = listOf(&quot;Tab 1&quot;, &quot;Tab 2&quot;, &quot;Tab 3 with lots of text&quot;)
@@ -13608,7 +14060,9 @@ Column {
       <p><a href="https://m3.material.io/components/segmented-buttons/overview" class="external" target="_blank">Material Segmented Button</a>.</p>
       <p>A Layout to correctly position and size <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#(androidx.compose.material3.MultiChoiceSegmentedButtonRowScope).SegmentedButton(kotlin.Boolean,kotlin.Function1,androidx.compose.ui.graphics.Shape,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.material3.SegmentedButtonColors,androidx.compose.foundation.BorderStroke,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function0,kotlin.Function0)">SegmentedButton</a></code>s in a Row. It handles overlapping items so that strokes of the item are correctly on top of each other. <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#SingleChoiceSegmentedButtonRow(androidx.compose.ui.Modifier,androidx.compose.ui.unit.Dp,kotlin.Function1)">SingleChoiceSegmentedButtonRow</a></code> is used when the selection only allows one value, for correct semantics.</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.SegmentedButton
+import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
@@ -13696,7 +14150,10 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
 
 var sliderPosition by remember { mutableStateOf(0f) }
 Column(modifier = Modifier.padding(horizontal = 16.dp)) {
@@ -13714,7 +14171,10 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
 
 var sliderPosition by remember { mutableStateOf(0f) }
 Column(modifier = Modifier.padding(horizontal = 16.dp)) {
@@ -13739,6 +14199,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Label
 import androidx.compose.material3.PlainTooltip
@@ -13746,7 +14209,11 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
 
 var sliderPosition by remember { mutableStateOf(0f) }
 val interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
@@ -13790,10 +14257,15 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.SliderState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
 
 val sliderState = remember {
     SliderState(
@@ -13920,7 +14392,10 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
 
 var sliderPosition by remember { mutableStateOf(0f) }
 Column(modifier = Modifier.padding(horizontal = 16.dp)) {
@@ -13938,7 +14413,10 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
 
 var sliderPosition by remember { mutableStateOf(0f) }
 Column(modifier = Modifier.padding(horizontal = 16.dp)) {
@@ -14060,7 +14538,10 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
 
 var sliderPosition by remember { mutableStateOf(0f) }
 Column(modifier = Modifier.padding(horizontal = 16.dp)) {
@@ -14078,7 +14559,10 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
 
 var sliderPosition by remember { mutableStateOf(0f) }
 Column(modifier = Modifier.padding(horizontal = 16.dp)) {
@@ -14103,6 +14587,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Label
 import androidx.compose.material3.PlainTooltip
@@ -14110,7 +14597,11 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
 
 var sliderPosition by remember { mutableStateOf(0f) }
 val interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
@@ -14154,10 +14645,15 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.SliderState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
 
 val sliderState = remember {
     SliderState(
@@ -14299,6 +14795,9 @@ Column(modifier = Modifier.padding(horizontal = 16.dp)) {
       <p>The FAB represents the most important action on a screen. It puts key actions within reach.</p>
       <p><img alt="Small FAB image" src="https://developer.android.com/images/reference/androidx/compose/material3/small-fab.png"></p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.SmallFloatingActionButton
 
@@ -14389,14 +14888,22 @@ SmallFloatingActionButton(
       <p><img alt="Small top app bar image" src="https://developer.android.com/images/reference/androidx/compose/material3/small-top-app-bar.png"></p>
       <p>A simple top app bar looks like:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 
 Scaffold(
     topBar = {
@@ -14446,15 +14953,24 @@ Scaffold(
 )</pre>
       <p>A top app bar that uses a <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#SmallTopAppBar(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Function0,kotlin.Function1,androidx.compose.foundation.layout.WindowInsets,androidx.compose.material3.TopAppBarColors,androidx.compose.material3.TopAppBarScrollBehavior)">scrollBehavior</a></code> to customize its nested scrolling behavior when working in conjunction with a scrolling content looks like:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 
 val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 Scaffold(
@@ -14513,15 +15029,24 @@ Scaffold(
     }
 )</pre>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 
 val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 Scaffold(
@@ -14656,12 +15181,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
 
 val snackbarHostState = remember { SnackbarHostState() }
 val scope = rememberCoroutineScope()
@@ -14696,16 +15223,23 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarVisuals
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 class SnackbarVisualsWithError(
     override val message: String,
@@ -14785,12 +15319,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
 
 val snackbarHostState = remember { SnackbarHostState() }
 val scope = rememberCoroutineScope()
@@ -14916,12 +15453,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
 
 val snackbarHostState = remember { SnackbarHostState() }
 val scope = rememberCoroutineScope()
@@ -14956,16 +15495,23 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarVisuals
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 class SnackbarVisualsWithError(
     override val message: String,
@@ -15051,6 +15597,8 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
 
 val snackbarHostState = remember { SnackbarHostState() }
 val scope = rememberCoroutineScope()
@@ -15181,12 +15729,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
 
 val snackbarHostState = remember { SnackbarHostState() }
 val scope = rememberCoroutineScope()
@@ -15221,16 +15771,23 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarVisuals
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 class SnackbarVisualsWithError(
     override val message: String,
@@ -15700,10 +16257,12 @@ Surface(
       <p>To manually retrieve the content color inside a surface, use <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#LocalContentColor()">LocalContentColor</a></code>.</p>
       <p>Toggleable surface sample:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.text.style.TextAlign
 
 var checked by remember { mutableStateOf(false) }
 Surface(
@@ -15843,6 +16402,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.text.style.TextAlign
 
 var selected by remember { mutableStateOf(false) }
 Surface(
@@ -15960,8 +16520,12 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.SwipeToDismissBox
+import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberSwipeToDismissBoxState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 
 val dismissState = rememberSwipeToDismissBoxState()
 SwipeToDismissBox(
@@ -16056,8 +16620,12 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.SwipeToDismissBox
+import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberSwipeToDismissBoxState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 
 val dismissState = rememberSwipeToDismissBoxState()
 SwipeToDismissBox(
@@ -16150,9 +16718,12 @@ SwipeToDismissBox(
       <p>Switches toggle the state of a single item on or off.</p>
       <p><img alt="Switch image" src="https://developer.android.com/images/reference/androidx/compose/material3/switch.png"></p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Switch
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 
 var checked by remember { mutableStateOf(true) }
@@ -16163,10 +16734,16 @@ Switch(
       <p>Switch can be used with a custom icon via <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#Switch(kotlin.Boolean,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function0,kotlin.Boolean,androidx.compose.material3.SwitchColors,androidx.compose.foundation.interaction.MutableInteractionSource)">thumbContent</a></code> parameter</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 
 var checked by remember { mutableStateOf(true) }
@@ -16265,14 +16842,19 @@ Switch(
       <p>A custom tab using this API may look like:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 Tab(selected, onClick) {
     Column(
@@ -16495,11 +17077,15 @@ Tab(selected, onClick) {
       <p>A simple example with text tabs looks like:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
 
 var state by remember { mutableStateOf(0) }
 val titles = listOf(&quot;Tab 1&quot;, &quot;Tab 2&quot;, &quot;Tab 3 with lots of text&quot;)
@@ -16522,10 +17108,14 @@ Column {
       <p>You can also provide your own custom tab, such as:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SecondaryTabRow
+import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 
 var state by remember { mutableStateOf(0) }
 val titles = listOf(&quot;Tab 1&quot;, &quot;Tab 2&quot;, &quot;Tab 3&quot;)
@@ -16548,14 +17138,19 @@ Column {
       <p>Where the custom tab itself could look like:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 Tab(selected, onClick) {
     Column(
@@ -16590,6 +17185,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Tab
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.unit.dp
 
 // Draws a rounded rectangular with border around the Tab, with a 5.dp padding from the edges
 // Color is passed in as a parameter [color]
@@ -16602,12 +17201,15 @@ Box(
       <p>We can reuse <code><a href="/reference/kotlin/androidx/compose/material3/TabRowDefaults.html#(androidx.compose.ui.Modifier).tabIndicatorOffset(androidx.compose.material3.TabPosition)">TabRowDefaults.tabIndicatorOffset</a></code> and just provide this indicator, as we aren't changing how the size and position of the indicator changes between tabs:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SecondaryTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 
 var state by remember { mutableStateOf(0) }
 val titles = listOf(&quot;Tab 1&quot;, &quot;Tab 2&quot;, &quot;Tab 3&quot;)
@@ -16644,8 +17246,15 @@ import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Tab
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 
 val colors = listOf(
@@ -16703,11 +17312,14 @@ FancyIndicator(
       <p>We can now just pass this indicator directly to TabRow:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SecondaryTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 
 var state by remember { mutableStateOf(0) }
 val titles = listOf(&quot;Tab 1&quot;, &quot;Tab 2&quot;, &quot;Tab 3&quot;)
@@ -17101,6 +17713,7 @@ Column {
       <p><img alt="Text button image" src="https://developer.android.com/images/reference/androidx/compose/material3/text-button.png"></p>
       <p>Text buttons are typically used for less-pronounced actions, including those located in dialogs and cards. In cards, text buttons help maintain an emphasis on card content. Text buttons are used for the lowest priority actions, especially when presenting multiple options.</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 
@@ -17211,6 +17824,7 @@ TextButton(onClick = { /* Do something! */ }) { Text(&quot;Text Button&quot;) }<
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 
 var text by rememberSaveable { mutableStateOf(&quot;&quot;) }
@@ -17226,6 +17840,7 @@ TextField(
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 
 var text by rememberSaveable { mutableStateOf(&quot;&quot;) }
@@ -17238,10 +17853,14 @@ TextField(
 )</pre>
       <p>You can also provide leading and trailing icons:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 
 var text by rememberSaveable { mutableStateOf(&quot;&quot;) }
@@ -17258,6 +17877,7 @@ TextField(
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 
 var text by rememberSaveable { mutableStateOf(&quot;&quot;) }
@@ -17278,9 +17898,12 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.error
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.style.TextAlign
 
 val errorMessage = &quot;Text input too long&quot;
 var text by rememberSaveable { mutableStateOf(&quot;&quot;) }
@@ -17318,6 +17941,7 @@ TextField(
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 
 var text by rememberSaveable { mutableStateOf(&quot;&quot;) }
@@ -17333,13 +17957,17 @@ TextField(
       <p>Password text field example:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 
 var password by rememberSaveable { mutableStateOf(&quot;&quot;) }
 var passwordHidden by rememberSaveable { mutableStateOf(true) }
@@ -17368,7 +17996,10 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.input.ImeAction
 
 val keyboardController = LocalSoftwareKeyboardController.current
 var text by rememberSaveable { mutableStateOf(&quot;&quot;) }
@@ -17559,6 +18190,7 @@ TextField(
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
@@ -17747,10 +18379,14 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TimeInput
+import androidx.compose.material3.TimePicker
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.window.Dialog
 
 var showTimePicker by remember { mutableStateOf(false) }
 val state = rememberTimePickerState()
@@ -17845,6 +18481,9 @@ import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.window.Dialog
 
 var showTimePicker by remember { mutableStateOf(false) }
 val state = rememberTimePickerState()
@@ -17881,6 +18520,9 @@ if (showTimePicker) {
 }</pre>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Box
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Keyboard
+import androidx.compose.material.icons.outlined.Schedule
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -17893,6 +18535,10 @@ import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.window.Dialog
 
 var showTimePicker by remember { mutableStateOf(false) }
 val state = rememberTimePickerState()
@@ -18013,11 +18659,14 @@ if (showTimePicker) {
       <p>tooltips provide a descriptive message for an anchor. It can be used to call the users attention to the anchor.</p>
       <p>Tooltip that is invoked when the anchor is long pressed:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.PlainTooltip
 import androidx.compose.material3.Text
 import androidx.compose.material3.TooltipBox
+import androidx.compose.material3.TooltipDefaults
 import androidx.compose.material3.rememberTooltipState
 
 TooltipBox(
@@ -18043,13 +18692,19 @@ TooltipBox(
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.PlainTooltip
 import androidx.compose.material3.Text
 import androidx.compose.material3.TooltipBox
+import androidx.compose.material3.TooltipDefaults
 import androidx.compose.material3.rememberTooltipState
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 val tooltipState = rememberTooltipState()
 val scope = rememberCoroutineScope()
@@ -18079,11 +18734,14 @@ Column(
 }</pre>
       <p>Plain tooltip with caret shown on long press:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.PlainTooltip
 import androidx.compose.material3.Text
 import androidx.compose.material3.TooltipBox
+import androidx.compose.material3.TooltipDefaults
 import androidx.compose.material3.rememberTooltipState
 
 TooltipBox(
@@ -18108,12 +18766,15 @@ TooltipBox(
 }</pre>
       <p>Tooltip that is invoked when the anchor is long pressed:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.RichTooltip
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TooltipBox
+import androidx.compose.material3.TooltipDefaults
 import androidx.compose.material3.rememberTooltipState
 import androidx.compose.runtime.rememberCoroutineScope
 
@@ -18149,14 +18810,20 @@ TooltipBox(
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.RichTooltip
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TooltipBox
+import androidx.compose.material3.TooltipDefaults
 import androidx.compose.material3.rememberTooltipState
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 val tooltipState = rememberTooltipState(isPersistent = true)
 val scope = rememberCoroutineScope()
@@ -18314,14 +18981,22 @@ Column(
       <p><img alt="Small top app bar image" src="https://developer.android.com/images/reference/androidx/compose/material3/small-top-app-bar.png"></p>
       <p>A simple top app bar looks like:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 
 Scaffold(
     topBar = {
@@ -18371,15 +19046,24 @@ Scaffold(
 )</pre>
       <p>A top app bar that uses a <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#TopAppBar(kotlin.Function0,androidx.compose.ui.Modifier,kotlin.Function0,kotlin.Function1,androidx.compose.foundation.layout.WindowInsets,androidx.compose.material3.TopAppBarColors,androidx.compose.material3.TopAppBarScrollBehavior)">scrollBehavior</a></code> to customize its nested scrolling behavior when working in conjunction with a scrolling content looks like:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 
 val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 Scaffold(
@@ -18438,15 +19122,24 @@ Scaffold(
     }
 )</pre>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 
 val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 Scaffold(
@@ -18575,9 +19268,13 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.Text
 import androidx.compose.material3.TriStateCheckbox
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.state.ToggleableState
+import androidx.compose.ui.unit.dp
 
 Column {
     // define dependent checkboxes states
@@ -19653,11 +20350,17 @@ Column {
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.TrendingUp
+import androidx.compose.material.icons.filled.BookmarkBorder
+import androidx.compose.material.icons.filled.StarBorder
 import androidx.compose.material3.MultiChoiceSegmentedButtonRow
 import androidx.compose.material3.SegmentedButton
+import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 
 val checkedList = remember { mutableStateListOf&lt;Int&gt;() }
 val options = listOf(&quot;Favorites&quot;, &quot;Trending&quot;, &quot;Saved&quot;)
@@ -19789,7 +20492,9 @@ MultiChoiceSegmentedButtonRow {
       <p>This should typically be used inside of a <code><a href="/reference/kotlin/androidx/compose/material3/package-summary.html#SingleChoiceSegmentedButtonRow(androidx.compose.ui.Modifier,androidx.compose.ui.unit.Dp,kotlin.Function1)">SingleChoiceSegmentedButtonRow</a></code></p>
       <p>For a sample showing Segmented button with only checked icons see:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.SegmentedButton
+import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf

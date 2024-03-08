@@ -558,7 +558,13 @@
           <p>When <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.PlacementScope.html#coordinates()">coordinates</a></code> is <code>null</code>, there will always be a follow-up placement call in which <code><a href="/reference/kotlin/androidx/compose/ui/layout/Placeable.PlacementScope.html#coordinates()">coordinates</a></code> is not-<code>null</code>.</p>
           <p>If you read a position from the coordinates during the placement block the block will be automatically re-executed when the parent layout changes a position. If you don't read it the placement block execution can be skipped as an optimization.</p>
           <pre class="prettyprint lang-kotlin">
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.Placeable
+import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.round
 

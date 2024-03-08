@@ -50,6 +50,7 @@ import androidx.compose.runtime.compositionLocalOf
 val ActiveUser = compositionLocalOf&lt;User&gt; { error(&quot;No active user found!&quot;) }</pre>
     <p>Somewhere up the tree, a <code><a href="/reference/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code> component can be used, which provides a value for the <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code>. This would often be at the &quot;root&quot; of a tree, but could be anywhere, and can also be used in multiple places to override the provided value for a sub-tree.</p>
     <pre class="prettyprint lang-kotlin">
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 
 @Composable
@@ -59,12 +60,18 @@ fun App(user: User) {
     }
 }</pre>
     <p>Intermediate components do not need to know about the <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code> value, and can have zero dependencies on it. For example, <code>SomeScreen</code> might look like this:</p>
-    <pre class="prettyprint lang-kotlin">@Composable
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.runtime.Composable
+
+@Composable
 fun SomeScreen() {
     UserPhoto()
 }</pre>
     <p>Finally, a component that wishes to consume the <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code> value can use the <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html#current()">current</a></code> property of the <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code> key which returns the current value of the <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code>, and subscribes the component to changes of it.</p>
-    <pre class="prettyprint lang-kotlin">@Composable
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.runtime.Composable
+
+@Composable
 fun UserPhoto() {
     val user = ActiveUser.current
     ProfileIcon(src = user.profilePhotoUrl)
@@ -133,7 +140,10 @@ fun UserPhoto() {
         </div>
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;<a href="/reference/androidx/compose/runtime/CompositionLocal.html#getCurrent()">getCurrent</a>()</pre>
         <p>Return the value provided by the nearest <code><a href="/reference/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code> component that invokes, directly or indirectly, the composable function that uses this property.</p>
-        <pre class="prettyprint lang-kotlin">@Composable
+        <pre class="prettyprint lang-kotlin">
+import androidx.compose.runtime.Composable
+
+@Composable
 fun UserPhoto() {
     val user = ActiveUser.current
     ProfileIcon(src = user.profilePhotoUrl)

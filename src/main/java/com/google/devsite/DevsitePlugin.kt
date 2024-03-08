@@ -20,8 +20,8 @@ import com.google.devsite.renderer.DocumentablesWrapper
 import com.google.devsite.renderer.MultiLanguageRenderer
 import com.google.devsite.transformers.DocTagsForCheckedExceptionsTransformer
 import org.jetbrains.dokka.CoreExtensions
+import org.jetbrains.dokka.analysis.kotlin.KotlinAnalysisPlugin
 import org.jetbrains.dokka.base.DokkaBase
-import org.jetbrains.dokka.base.translators.descriptors.ExternalDocumentablesProvider
 import org.jetbrains.dokka.plugability.DokkaContext
 import org.jetbrains.dokka.plugability.DokkaPlugin
 import org.jetbrains.dokka.plugability.DokkaPluginApiPreview
@@ -31,7 +31,7 @@ import org.jetbrains.dokka.plugability.querySingle
 
 class DevsitePlugin : DokkaPlugin() {
     private val dokkaBase by lazy { plugin<DokkaBase>() }
-    private val externalDocumentablesProvider by extensionPoint<ExternalDocumentablesProvider>()
+    internal val analysisPlugin by lazy { plugin<KotlinAnalysisPlugin>() }
 
     /** "All of Dokka's plugin API is in preview and it can be changed in a backwards-incompatible
      *  manner with a best-effort migration. By opting in, you (we) acknowledge the risks of relying
@@ -52,6 +52,7 @@ class DevsitePlugin : DokkaPlugin() {
                 it,
                 dokkaBase.querySingle { outputWriter },
                 getDevsiteConfiguration(it),
+                analysisPlugin,
             )
         } override dokkaBase.htmlRenderer
     }

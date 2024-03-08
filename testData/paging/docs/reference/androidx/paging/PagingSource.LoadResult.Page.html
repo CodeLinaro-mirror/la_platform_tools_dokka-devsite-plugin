@@ -38,7 +38,11 @@
     <hr>
     <p>Success result object for <code><a href="/reference/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.load</a></code>.</p>
     <p>As a convenience, iterating on this object will iterate through its loaded <code><a href="/reference/androidx/paging/PagingSource.LoadResult.Page.html#data()">data</a></code>.</p>
-    <pre class="prettyprint lang-kotlin">// One common method of pagination is to use next (and optionally previous) tokens.
+    <pre class="prettyprint lang-kotlin">
+import androidx.paging.PagingSource
+import androidx.paging.PagingSource.LoadResult
+
+// One common method of pagination is to use next (and optionally previous) tokens.
 // The below code shows you how to
 data class NetworkResponseObject(
     val items: List&lt;Item&gt;,
@@ -54,7 +58,11 @@ fun NetworkResponseObject.toPage() = LoadResult.Page(
     nextKey = next, // next token will be the params.key of a subsequent append load
     itemsAfter = approximateItemsRemaining
 )</pre>
-    <pre class="prettyprint lang-kotlin">// If you load by page number, the response may not define how to load the next page.
+    <pre class="prettyprint lang-kotlin">
+import androidx.paging.PagingSource
+import androidx.paging.PagingSource.LoadResult
+
+// If you load by page number, the response may not define how to load the next page.
 data class NetworkResponseObject(
     val items: List&lt;Item&gt;
 )

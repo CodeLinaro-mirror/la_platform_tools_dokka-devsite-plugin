@@ -78,15 +78,22 @@
         <p>Target based animation that animates from the given <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animate(kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.animation.core.AnimationSpec,kotlin.Function2)">initialValue</a></code> towards the <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animate(kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.animation.core.AnimationSpec,kotlin.Function2)">targetValue</a></code>, with an optional <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animate(kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.animation.core.AnimationSpec,kotlin.Function2)">initialVelocity</a></code>. By default, a <code><a href="/reference/androidx/compose/animation/core/package-summary.html#spring(kotlin.Float,kotlin.Float,kotlin.Any)">spring</a></code> will be used for the animation. An alternative <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animate(kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.animation.core.AnimationSpec,kotlin.Function2)">animationSpec</a></code> can be provided to replace the default <code><a href="/reference/androidx/compose/animation/core/package-summary.html#spring(kotlin.Float,kotlin.Float,kotlin.Any)">spring</a></code>.</p>
         <p>This is a convenient method for Float animation. If there's a need to access more info related to the animation such as start time, target, etc, consider using <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Boolean,kotlin.Function1)">AnimationState.animateTo</a></code>. To animate non-<code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code> data types, consider the <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animate(kotlin.Float,kotlin.Float,kotlin.Float,androidx.compose.animation.core.AnimationSpec,kotlin.Function2)">animate</a></code> overload/variant for generic types.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animate
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 
 @Composable
@@ -311,8 +318,12 @@ fun InfiniteAnimationDemo() {
         <p>Target based animation that takes the value and velocity from the <code><a href="/reference/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> as the starting condition, and animate to the <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Boolean,kotlin.Function1)">targetValue</a></code>, using the <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Boolean,kotlin.Function1)">animationSpec</a></code>. During the animation, the given <code><a href="/reference/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> will be updated with the up-to-date value/velocity, frame time, etc.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.core.AnimationState
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animate
 import androidx.compose.animation.core.animateTo
+import androidx.compose.animation.core.isFinished
 import androidx.compose.animation.core.spring
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 

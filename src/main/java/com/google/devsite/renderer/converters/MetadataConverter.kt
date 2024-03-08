@@ -16,7 +16,6 @@
 
 package com.google.devsite.renderer.converters
 
-import com.google.common.annotations.VisibleForTesting
 import com.google.devsite.components.impl.DefaultMetadataComponent
 import com.google.devsite.components.impl.DefaultVersionMetadataComponent
 import com.google.devsite.components.symbols.MetadataComponent
@@ -24,7 +23,6 @@ import com.google.devsite.components.symbols.VersionMetadataComponent
 import com.google.devsite.renderer.converters.ParameterDocumentableConverter.Companion.rewriteKotlinPrimitivesForJava
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.util.LibraryMetadata
-import com.jetbrains.rd.util.ConcurrentHashMap
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.Contravariance
@@ -51,6 +49,7 @@ import org.jetbrains.dokka.model.UnresolvedBound
 import org.jetbrains.dokka.model.Void
 import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.isExtension
+import java.util.concurrent.ConcurrentHashMap
 
 /**
  * Creates metadata components (a section containing information such as artifact ID and source
@@ -292,7 +291,6 @@ internal class MetadataConverter(
         /**
          * Converts a method signature to a string that matches the formatting in the apiSince JSON
          */
-        @VisibleForTesting
         fun apiSinceMethodSignature(function: DFunction): String {
             // The metadata uses the Java API, so use the JvmName if it exists
             val functionName = function.jvmName() ?: function.name

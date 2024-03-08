@@ -224,6 +224,8 @@
           <p>Copies the pixel data within the ImageBitmap into the given array. Each value is represented as ARGB values packed into an Int. The stride parameter allows the caller to allow for gaps in the returned pixels array between rows. For normal packed, results, the stride value is equivalent to the width of the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/ImageBitmap.html">ImageBitmap</a></code>. The returned colors are non-premultiplied ARGB values in the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#Srgb()">ColorSpaces.Srgb</a></code> color space.</p>
           <p>Note this method can block so it is recommended to not invoke this method in performance critical code paths</p>
           <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.PixelMap
 
 val imageBitmap = createImageBitmap()
@@ -468,6 +470,9 @@ for (x in 0 until pixelmap.width) {
           <p>Convenience method to extract pixel information from the given ImageBitmap into a <code><a href="/reference/kotlin/androidx/compose/ui/graphics/PixelMap.html">PixelMap</a></code> that supports for querying pixel information based on</p>
           <p>Note this method can block so it is recommended to not invoke this method in performance critical code paths</p>
           <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.PixelMap
 import androidx.compose.ui.graphics.toPixelMap
 
 val imageBitmap = createImageBitmap()

@@ -81,6 +81,7 @@
         <p>The other extended floating action button overload supports a text label and icon.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Text
 
 ExtendedFloatingActionButton(onClick = { /* do something */ }) {
@@ -163,7 +164,10 @@ ExtendedFloatingActionButton(onClick = { /* do something */ }) {
         <p>The other extended floating action button overload is for FABs without an icon.</p>
         <p>Default content description for accessibility is extended from the extended fabs icon. For custom behavior, you can provide your own via <code><a href="/reference/androidx/compose/ui/semantics/package-summary.html#(androidx.compose.ui.Modifier).semantics(kotlin.Boolean,kotlin.Function1)">Modifier.semantics</a></code>.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 
@@ -177,12 +181,18 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.FabPosition
 import androidx.compose.material.Scaffold
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 val listState = rememberLazyListState()
 // The FAB is initially expanded. Once the first visible item is past the first item we
@@ -303,6 +313,8 @@ Scaffold(
         <p><img alt="FAB image" src="https://developer.android.com/images/reference/androidx/compose/material3/fab.png"></p>
         <p>FAB typically contains an icon, for a FAB with text and an icon, see <code><a href="/reference/androidx/compose/material3/package-summary.html#ExtendedFloatingActionButton(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,androidx.compose.material3.FloatingActionButtonElevation,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Function1)">ExtendedFloatingActionButton</a></code>.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 
@@ -387,8 +399,13 @@ FloatingActionButton(
         <p><img alt="Large FAB image" src="https://developer.android.com/images/reference/androidx/compose/material3/large-fab.png"></p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LargeFloatingActionButton
+import androidx.compose.ui.Modifier
 
 LargeFloatingActionButton(
     onClick = { /* do something */ },
@@ -474,6 +491,9 @@ LargeFloatingActionButton(
         <p>The FAB represents the most important action on a screen. It puts key actions within reach.</p>
         <p><img alt="Small FAB image" src="https://developer.android.com/images/reference/androidx/compose/material3/small-fab.png"></p>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.SmallFloatingActionButton
 

@@ -32,7 +32,14 @@
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material.Text
 import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.ContentDrawScope
+import androidx.compose.ui.node.CompositionLocalConsumerModifierNode
+import androidx.compose.ui.node.DrawModifierNode
+import androidx.compose.ui.node.ModifierNodeElement
 import androidx.compose.ui.node.currentValueOf
+import androidx.compose.ui.platform.InspectorInfo
 
 val localBackgroundColor = compositionLocalOf { Color.White }
 class BackgroundColor : Modifier.Node(), DrawModifierNode,
@@ -167,6 +174,9 @@ Box(Modifier.backgroundColor()) {
           <p>For all other reads of a CompositionLocal, this function will <b>not</b> notify you when the value of the local changes. <code><a href="/reference/kotlin/androidx/compose/ui/Modifier.Node.html">Modifier.Node</a></code> classes that also implement <code><a href="/reference/kotlin/androidx/compose/ui/node/ObserverModifierNode.html">ObserverModifierNode</a></code> may observe CompositionLocals arbitrarily by performing the lookup in an <code><a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.Modifier.Node).observeReads(kotlin.Function0)">observeReads</a></code> block. To continue observing values of the CompositionLocal, it must be read again in an <code><a href="/reference/kotlin/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.Modifier.Node).observeReads(kotlin.Function0)">observeReads</a></code> block during or after the <code><a href="/reference/kotlin/androidx/compose/ui/node/ObserverModifierNode.html#onObservedReadsChanged()">ObserverModifierNode.onObservedReadsChanged</a></code> callback is invoked. See below for an example of how to implement this observation pattern.</p>
           <pre class="prettyprint lang-kotlin">
 import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.node.CompositionLocalConsumerModifierNode
+import androidx.compose.ui.node.ObserverModifierNode
 import androidx.compose.ui.node.currentValueOf
 import androidx.compose.ui.node.observeReads
 

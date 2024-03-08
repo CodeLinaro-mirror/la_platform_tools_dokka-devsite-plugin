@@ -796,7 +796,8 @@ internal abstract class ClasslikeDocumentableConverter(
         sourceSet: DokkaSourceSet,
     ): SourceSetDependentSignatureInputs {
         val typeAliasEquals = (classlike as? WithExtraProperties<*>)?.extra
-            ?.allOfType<ActualTypealias>()?.strictSingleOrNull()?.underlyingType?.get(sourceSet)
+            ?.allOfType<ActualTypealias>()?.strictSingleOrNull()
+            ?.typeAlias?.underlyingType?.get(sourceSet)
         val modifiers = classlike.modifiers(sourceSet) +
             (typeAliasEquals?.let { listOf("actual") } ?: emptyList())
         return SourceSetDependentSignatureInputs(

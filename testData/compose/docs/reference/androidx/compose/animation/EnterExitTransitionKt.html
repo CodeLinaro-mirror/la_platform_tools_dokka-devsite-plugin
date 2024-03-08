@@ -164,8 +164,12 @@ import androidx.compose.animation.shrinkHorizontally
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 var visible by remember { mutableStateOf(true) }
 AnimatedVisibility(
@@ -240,15 +244,25 @@ AnimatedVisibility(
         <p>For expanding only horizontally or vertically, consider <code><a href="/reference/androidx/compose/animation/package-summary.html#expandHorizontally(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment.Horizontal,kotlin.Boolean,kotlin.Function1)">expandHorizontally</a></code>, <code><a href="/reference/androidx/compose/animation/package-summary.html#expandVertically(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment.Vertical,kotlin.Boolean,kotlin.Function1)">expandVertically</a></code>.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandIn
 import androidx.compose.animation.shrinkOut
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.dp
 
 var visible by remember { mutableStateOf(true) }
 
@@ -335,10 +349,14 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 var visible by remember { mutableStateOf(true) }
 
@@ -413,6 +431,8 @@ import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 var visible by remember { mutableStateOf(true) }
 AnimatedVisibility(
@@ -475,6 +495,8 @@ import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 var visible by remember { mutableStateOf(true) }
 AnimatedVisibility(
@@ -531,6 +553,7 @@ AnimatedVisibility(
         <p>The scaling will change the visual of the content, but will <b>not</b> affect the layout size. <code><a href="/reference/androidx/compose/animation/package-summary.html#scaleIn(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Float,androidx.compose.ui.graphics.TransformOrigin)">scaleIn</a></code> can be combined with <code><a href="/reference/androidx/compose/animation/package-summary.html#expandIn(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">expandIn</a></code>/<code><a href="/reference/androidx/compose/animation/package-summary.html#expandHorizontally(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment.Horizontal,kotlin.Boolean,kotlin.Function1)">expandHorizontally</a></code>/<code><a href="/reference/androidx/compose/animation/package-summary.html#expandVertically(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment.Vertical,kotlin.Boolean,kotlin.Function1)">expandVertically</a></code> to coordinate layout size change while scaling. For example:</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.expandIn
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
@@ -546,7 +569,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TransformOrigin
+import androidx.compose.ui.unit.dp
 
 Column {
     var showRed by remember { mutableStateOf(true) }
@@ -634,6 +661,7 @@ Column {
         <p>The scaling will change the visual of the content, but will <b>not</b> affect the layout size. <code><a href="/reference/androidx/compose/animation/package-summary.html#scaleOut(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Float,androidx.compose.ui.graphics.TransformOrigin)">scaleOut</a></code> can be combined with <code><a href="/reference/androidx/compose/animation/package-summary.html#shrinkOut(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">shrinkOut</a></code>/<code><a href="/reference/androidx/compose/animation/package-summary.html#shrinkHorizontally(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment.Horizontal,kotlin.Boolean,kotlin.Function1)">shrinkHorizontally</a></code>/<code><a href="/reference/androidx/compose/animation/package-summary.html#shrinkVertically(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment.Vertical,kotlin.Boolean,kotlin.Function1)">shrinkVertically</a></code> for coordinated layout size change animation. For example:</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.expandIn
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
@@ -649,7 +677,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TransformOrigin
+import androidx.compose.ui.unit.dp
 
 Column {
     var showRed by remember { mutableStateOf(true) }
@@ -744,8 +776,12 @@ import androidx.compose.animation.shrinkHorizontally
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 var visible by remember { mutableStateOf(true) }
 AnimatedVisibility(
@@ -820,15 +856,25 @@ AnimatedVisibility(
         <p>For shrinking only horizontally or vertically, consider <code><a href="/reference/androidx/compose/animation/package-summary.html#shrinkHorizontally(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment.Horizontal,kotlin.Boolean,kotlin.Function1)">shrinkHorizontally</a></code>, <code><a href="/reference/androidx/compose/animation/package-summary.html#shrinkVertically(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment.Vertical,kotlin.Boolean,kotlin.Function1)">shrinkVertically</a></code>.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandIn
 import androidx.compose.animation.shrinkOut
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.dp
 
 var visible by remember { mutableStateOf(true) }
 
@@ -915,10 +961,14 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 var visible by remember { mutableStateOf(true) }
 
@@ -987,15 +1037,21 @@ AnimatedVisibility(
         <p><code><a href="/reference/androidx/compose/animation/package-summary.html#slideIn(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">initialOffset</a></code> is a lambda that takes the full size of the content and returns an offset. This allows the offset to be defined proportional to the full size, or as an absolute value.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideIn
 import androidx.compose.animation.slideOut
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
 
 var visible by remember { mutableStateOf(true) }
 AnimatedVisibility(
@@ -1055,17 +1111,23 @@ AnimatedVisibility(
         <p><code><a href="/reference/androidx/compose/animation/package-summary.html#slideInHorizontally(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">initialOffsetX</a></code> is a lambda that takes the full width of the content and returns an offset. This allows the starting offset to be defined proportional to the full size, or as an absolute value. It defaults to return half of negative width, which would offset the content to the left by half of its width, and slide towards the right.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideIn
 import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOut
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 var visible by remember { mutableStateOf(true) }
 AnimatedVisibility(
@@ -1131,14 +1193,19 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.slideIn
 import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOut
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.TransformOrigin
+import androidx.compose.ui.unit.dp
 
 var visible by remember { mutableStateOf(true) }
 AnimatedVisibility(
@@ -1198,15 +1265,21 @@ AnimatedVisibility(
         <p><code><a href="/reference/androidx/compose/animation/package-summary.html#slideOut(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">targetOffset</a></code> is a lambda that takes the full size of the content and returns an offset. This allows the offset to be defined proportional to the full size, or as an absolute value.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideIn
 import androidx.compose.animation.slideOut
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
 
 var visible by remember { mutableStateOf(true) }
 AnimatedVisibility(
@@ -1266,17 +1339,23 @@ AnimatedVisibility(
         <p><code><a href="/reference/androidx/compose/animation/package-summary.html#slideOutHorizontally(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">targetOffsetX</a></code> is a lambda that takes the full width of the content and returns an offset. This allows the target offset to be defined proportional to the full size, or as an absolute value. It defaults to return half of negative width, which would slide the content to the left by half of its width.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideIn
 import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOut
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 var visible by remember { mutableStateOf(true) }
 AnimatedVisibility(

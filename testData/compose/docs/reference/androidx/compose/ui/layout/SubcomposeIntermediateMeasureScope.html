@@ -15,7 +15,7 @@
     </div>
     <div id="refdoc-switcher-placeholder"></div>
     <p>
-      <pre>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public interface <a href="/reference/androidx/compose/ui/layout/SubcomposeIntermediateMeasureScope.html">SubcomposeIntermediateMeasureScope</a> extends <a href="/reference/androidx/compose/ui/layout/SubcomposeMeasureScope.html">SubcomposeMeasureScope</a></pre>
+      <pre>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public sealed interface <a href="/reference/androidx/compose/ui/layout/SubcomposeIntermediateMeasureScope.html">SubcomposeIntermediateMeasureScope</a> extends <a href="/reference/androidx/compose/ui/layout/SubcomposeMeasureScope.html">SubcomposeMeasureScope</a></pre>
     </p>
     <hr>
     <p><code><a href="/reference/androidx/compose/ui/layout/SubcomposeIntermediateMeasureScope.html">SubcomposeIntermediateMeasureScope</a></code> is the receiver scope for the intermediate measurer policy that gets invoked during the intermediate measure pass.</p>
@@ -24,7 +24,9 @@
     <p>The second measurement is done in the intermediate measure pass after the lookahead pass. The intermediate measure pass allows adjustments to the measurement/placement using the pre-calculated layout information as animation targets to smooth over any any layout changes. In this measurement, intermediateMeasurePolicy will be invoked with the intermediate/animating constraints. By default, measure policy will be invoked in intermediateMeasurePolicy, and hence the same measure logic in measurePolicy with intermediate constraints will be used to measure and layout children in the intermediate pass.</p>
     <p>Note: When measurePolicy is invoked in <code><a href="/reference/androidx/compose/ui/layout/SubcomposeIntermediateMeasureScope.html">SubcomposeIntermediateMeasureScope</a></code>, <code>subcompose</code> will simply retrieve the measurables associated with the given slot id based on the subcomposition during lookahead pass. This means if a given slot id has not been subcomposed in the lookahead pass, invoking subcompose during intermediate pass will result in an empty list.</p>
     <pre class="prettyprint lang-kotlin">
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.layout.SubcomposeLayout
+import androidx.compose.ui.unit.IntSize
 
 // In this example, there is a custom modifier that animates the constraints and measures
 // child with the animated constraints, as defined below.

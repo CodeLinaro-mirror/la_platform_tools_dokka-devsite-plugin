@@ -65,11 +65,11 @@
       </li>
     </ul>
     <p>The most commonly used RGB color space is <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#Srgb()">sRGB</a></code>.</p>
-    <h3> Primaries and white point chromaticities</h3>
+    <h3>Primaries and white point chromaticities</h3>
     <p>In this implementation, the chromaticity of the primaries and the white point of an RGB color space is defined in the CIE xyY color space. This color space separates the chromaticity of a color, the x and y components, and its luminance, the Y component. Since the primaries and the white point have full brightness, the Y component is assumed to be 1 and only the x and y components are needed to encode them.</p>
     <p>For convenience, this implementation also allows to define the primaries and white point in the CIE XYZ space. The tristimulus XYZ values are internally converted to xyY.</p>
     <p><a href="https://developer.android.com/reference/android/images/graphics/colorspace_srgb.png">sRGB primaries and white point</a></p>
-    <h3> Transfer functions</h3>
+    <h3>Transfer functions</h3>
     <p>A transfer function is a color component conversion function, defined as a single variable, monotonic mathematical function. It is applied to each individual component of a color. They are used to perform the mapping between linear tristimulus values and non-linear electronic signal value.</p>
     <p>The <em>opto-electronic transfer function</em> (OETF or OECF) encodes tristimulus values in a scene to a non-linear electronic signal value. An OETF is often expressed as a power function with an exponent between 0.38 and 0.55 (the reciprocal of 1.8 to 2.6).</p>
     <p>The <em>electro-optical transfer function</em> (EOTF or EOCF) decodes a non-linear electronic signal value to a tristimulus value at the display. An EOTF is often expressed as a power function with an exponent between 1.8 and 2.6.</p>
@@ -79,10 +79,10 @@
     <p><a href="https://developer.android.com/reference/android/graphics/ColorSpace.Rgb">See RGB equation</a></p>
     <p>If the transfer functions of the color space can be expressed as an ICC parametric curve as defined in ICC.1:2004-10, the numeric parameters can be retrieved from <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/Rgb.html#transferParameters()">transferParameters</a></code>. This can be useful to match color spaces for instance.</p>
     <p>Some RGB color spaces, such as <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#Aces()">ColorSpaces.Aces</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#LinearExtendedSrgb()">scRGB</a></code>, are said to be linear because their transfer functions are the identity function: <code>f(x) = x</code>. If the source and/or destination are known to be linear, it is not necessary to invoke the transfer functions.</p>
-    <h3> Range</h3>
+    <h3>Range</h3>
     <p>Most RGB color spaces allow RGB values in the range <code>[0..1]</code>. There are however a few RGB color spaces that allow much larger ranges. For instance, <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#ExtendedSrgb()">scRGB</a></code> is used to manipulate the range <code>[-0.5..7.5]</code> while <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#Aces()">ACES</a></code> can be used throughout the range <code>[-65504, 65504]</code>.</p>
     <p><a href="https://developer.android.com/reference/android/images/graphics/colorspace_scrgb.png">Extended sRGB and its large range</a></p>
-    <h3> Converting between RGB color spaces</h3>
+    <h3>Converting between RGB color spaces</h3>
     <p>Conversion between two color spaces is achieved by using an intermediate color space called the profile connection space (PCS). The PCS used by this implementation is CIE XYZ. The conversion operation is defined as such:</p>
     <p><a href="https://developer.android.com/reference/android/graphics/ColorSpace.Rgb">See RGB equation</a></p>
     <p>Where <code>Tsrc</code> is the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/Rgb.html#getTransform()">RGB to XYZ transform</a></code> of the source color space and <code>Tdst^-1</code> the <code><a href="/reference/kotlin/androidx/compose/ui/graphics/colorspace/Rgb.html#getInverseTransform()">XYZ to RGB transform</a></code> of the destination color space.</p>

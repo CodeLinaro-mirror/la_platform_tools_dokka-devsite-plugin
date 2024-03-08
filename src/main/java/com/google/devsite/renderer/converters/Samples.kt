@@ -16,33 +16,15 @@
 
 package com.google.devsite.renderer.converters
 
-import com.intellij.psi.PsiElement
-import org.jetbrains.dokka.Platform
-import org.jetbrains.dokka.analysis.AnalysisEnvironment
-import org.jetbrains.dokka.analysis.DokkaMessageCollector
-import org.jetbrains.dokka.analysis.DokkaResolutionFacade
+import org.jetbrains.dokka.analysis.kotlin.sample.SampleSnippet
 import org.jetbrains.dokka.model.doc.Pre
 import org.jetbrains.dokka.model.doc.Text
-import org.jetbrains.dokka.plugability.DokkaContext
-import org.jetbrains.kotlin.idea.kdoc.resolveKDocLink
-import org.jetbrains.kotlin.name.FqName
-import org.jetbrains.kotlin.name.Name
-import org.jetbrains.kotlin.psi.KtBlockExpression
-import org.jetbrains.kotlin.psi.KtCallExpression
-import org.jetbrains.kotlin.psi.KtDeclarationWithBody
-import org.jetbrains.kotlin.psi.KtFile
-import org.jetbrains.kotlin.psi.KtImportDirective
-import org.jetbrains.kotlin.psi.KtTreeVisitorVoid
-import org.jetbrains.kotlin.resolve.BindingContext
-import org.jetbrains.kotlin.resolve.DescriptorToSourceUtils
-import org.jetbrains.kotlin.resolve.ImportPath
-import org.jetbrains.kotlin.utils.PathUtil
-import org.jetbrains.kotlin.utils.addIfNotNull
 import java.io.File
 
 internal var failOnMissingSamples = true
 internal var isRunningInDackkasTests = false
-
+// TODO(KMP) we currently have no plan to provide KMP samples b/181224204, so we assume `common`
+/*
 /**
  * This invokes the EnvironmentAndFacade object to turn a DRI
  * (like "dokkatest.sampleAnnotation.samples.FunctionContainingClassSample") into a PSIElement
@@ -99,7 +81,35 @@ private val importsToIgnore = listOf("androidx.annotation.Sampled")
 
 // Based on old dokka's implementation, hide all non-androidx import statements
 private val androidxPackage = Name.identifier("androidx")
+*/
+/**
+ * We know these imports should not be included in the sampled code, even though they are
+ * referenced.
+ */
+private val importsToIgnore = listOf("androidx.annotation.Sampled")
 
+// Based on old dokka's implementation, hide all non-androidx import statements
+private const val androidxPackage = "androidx."
+internal fun processImports(sample: SampleSnippet): String {
+    val importList = sample.imports
+    val filteredImports = importList.filter { importString ->
+        val importName = importString.trim()
+        // Hide all non-androidx imports
+        if (!importName.startsWith(androidxPackage)) return@filter false
+        // Hide all explicitly ignored imports (like androidx.annotations.Sampled)
+        if (importsToIgnore.any { importName.startsWith(it) }) return@filter false
+        // Hide empty lines
+        if (importName.trim().isEmpty()) return@filter false
+
+        // Return whether any of the code in the sample uses this import
+        return@filter importName.substringAfterLast(".") in sample.body
+    }
+    // Don't spam blank lines if there are no imports (post-filtering)
+    if (filteredImports.isEmpty()) { return "" }
+    // The first blank line doesn't appear in rendered html, just makes raws look nicer
+    return "\n" + filteredImports.joinToString(separator = "\n") { "import $it" } + "\n\n"
+}
+/*
 /**
  * This takes a PSIElement and returns the list of import statements it requires.
  * For example, the list of import statements associated with all elements in a function's
@@ -153,9 +163,13 @@ internal fun processImports(psiElement: PsiElement): String {
  *
  * These are generated for each sourceSet with samples, and returned as a map.
  */
-internal fun setUpAnalysis(context: DokkaContext) = context.configuration.sourceSets
-    .filter { it.samples.isNotEmpty() }.associateWith { sourceSet ->
-        AnalysisEnvironment(
+internal fun setUpAnalysis(
+    context: DokkaContext,
+    sampleAnalysisEnvironmentCreator: SampleAnalysisEnvironmentCreator,
+) = context.configuration.sourceSets
+    /*.filter { it.samples.isNotEmpty() }*/.associateWith { sourceSet ->
+        sampleAnalysisEnvironmentCreator.create()
+        /*AnalysisEnvironment(
             DokkaMessageCollector(context.logger),
             sourceSet.analysisPlatform,
         ).run {
@@ -170,9 +184,9 @@ internal fun setUpAnalysis(context: DokkaContext) = context.configuration.source
 
             val environment = createCoreEnvironment()
             createResolutionFacade(environment).first
-        }
+        }*/
     }
-
+*/
 /** Resolves a javadoc `{@sample path/to/file.javaOrXml}`. Takes Text, returns <pre><code>. */
 internal fun convertTextToJavadocSample(
     block: Text,

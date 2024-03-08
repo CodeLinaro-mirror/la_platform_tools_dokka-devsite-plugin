@@ -946,7 +946,13 @@ Layout(content) { measurables, constraints -&gt;
 }</pre>
       <p>Example usage with custom intrinsic measurements:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.layout.IntrinsicMeasurable
+import androidx.compose.ui.layout.IntrinsicMeasureScope
 import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.Measurable
+import androidx.compose.ui.layout.MeasurePolicy
+import androidx.compose.ui.layout.MeasureResult
+import androidx.compose.ui.layout.MeasureScope
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.unit.Constraints
 
@@ -1121,7 +1127,13 @@ Layout(content) { measurables, constraints -&gt;
 }</pre>
       <p>Example usage with custom intrinsic measurements:</p>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.layout.IntrinsicMeasurable
+import androidx.compose.ui.layout.IntrinsicMeasureScope
 import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.Measurable
+import androidx.compose.ui.layout.MeasurePolicy
+import androidx.compose.ui.layout.MeasureResult
+import androidx.compose.ui.layout.MeasureScope
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.unit.Constraints
 
@@ -1265,6 +1277,7 @@ Layout(content = content, measurePolicy = measurePolicy)</pre>
       <p>Example usage:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.Measurable
 import androidx.compose.ui.layout.layout
 
 // We can provide pass a list of two composable lambdas in order to be able to treat
@@ -1373,23 +1386,32 @@ Layout(listOf(content1, content2)) { (content1Measurables, content2Measurables),
       <p><code><a href="/reference/kotlin/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a></code> starts a scope in which all layouts scope will receive a lookahead pass preceding the main measure/layout pass. This lookahead pass will calculate the layout size and position for all child layouts, and make the lookahead results available in <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function3)">Modifier.intermediateLayout</a></code>. <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function3)">Modifier.intermediateLayout</a></code> gets invoked in the main pass to allow transient layout changes in the main pass that gradually morph the layout over the course of multiple frames until it catches up with lookahead.</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.AnimationVector2D
+import androidx.compose.animation.core.VectorConverter
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.movableContentOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.LookaheadScope
 import androidx.compose.ui.layout.intermediateLayout
 import androidx.compose.ui.layout.layout
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.round
 
 // Creates a custom modifier to animate the local position of the layout within the
@@ -1635,7 +1657,9 @@ SubcomposeLayout { constraints -&gt;
         </li>
       </ul>
       <pre class="prettyprint lang-kotlin">
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.layout.SubcomposeLayout
+import androidx.compose.ui.unit.IntSize
 
 // In this example, there is a custom modifier that animates the constraints and measures
 // child with the animated constraints, as defined below.
@@ -2051,6 +2075,8 @@ SubcomposeLayout { constraints -&gt;
       </ol>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.AnimationVector2D
+import androidx.compose.animation.core.VectorConverter
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -2058,12 +2084,20 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.intermediateLayout
 import androidx.compose.ui.layout.layout
+import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.round
 
 // Creates a custom modifier that animates the constraints and measures child with the
 // animated constraints. This modifier is built on top of `Modifier.intermediateLayout`, which
@@ -2141,6 +2175,8 @@ Row(
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.unit.offset
 
@@ -2192,9 +2228,11 @@ Box(
       <p>Example usage:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.unit.Constraints
 
 Layout({
     // Here the Containers are only needed to apply the modifiers. You could use the
@@ -2236,9 +2274,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.layout.positionInWindow
+import androidx.compose.ui.unit.dp
 
 Column(
     Modifier.onGloballyPositioned { coordinates -&gt;
@@ -2272,6 +2313,9 @@ Column(
       <p>Invoke <code><a href="/reference/kotlin/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).onPlaced(kotlin.Function1)">onPlaced</a></code> after the parent <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> and parent layout has been placed and before child <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> is placed. This allows child <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html">LayoutModifier</a></code> to adjust its own placement based on where the parent is.</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.AnimationVector2D
+import androidx.compose.animation.core.Spring.StiffnessMediumLow
+import androidx.compose.animation.core.VectorConverter
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -2280,12 +2324,20 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onPlaced
 import androidx.compose.ui.layout.positionInParent
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.round
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -2358,6 +2410,7 @@ fun AnimatedChildAlignment(alignment: Alignment) {
       <p>Example usage:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onSizeChanged
 
 // Use onSizeChanged() for diagnostics. Use Layout or SubcomposeLayout if you want
@@ -2580,9 +2633,11 @@ Text(
       <p>Example usage:</p>
       <pre class="prettyprint lang-kotlin">
 import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.unit.Constraints
 
 Layout({
     // Here the Containers are only needed to apply the modifiers. You could use the

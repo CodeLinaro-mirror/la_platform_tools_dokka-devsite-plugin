@@ -51,13 +51,17 @@
         <p>This function returns a no-op modifier on API levels below P (28), since the framework does not support the <code><a href="https://developer.android.com/reference/android/widget/Magnifier.html">Magnifier</a></code> widget on those levels. However, even on higher API levels, not all magnifier features are supported on all platforms. To check whether a given <code><a href="/reference/androidx/compose/foundation/MagnifierStyle.html">MagnifierStyle</a></code> is supported by the current platform, check the <code><a href="/reference/androidx/compose/foundation/MagnifierStyle.html#isSupported()">MagnifierStyle.isSupported</a></code> property.</p>
         <p>This function does not allow configuration of <code><a href="https://developer.android.com/reference/android/widget/Magnifier.Builder.html#setSourceBounds(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Int)">source bounds</a></code> since the magnifier widget does not support constraining to the bounds of composables.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.compose.foundation.MagnifierStyle
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.magnifier
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
 

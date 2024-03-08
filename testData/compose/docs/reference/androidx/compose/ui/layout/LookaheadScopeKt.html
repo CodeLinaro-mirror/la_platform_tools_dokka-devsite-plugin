@@ -73,23 +73,32 @@
         <p><code><a href="/reference/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a></code> starts a scope in which all layouts scope will receive a lookahead pass preceding the main measure/layout pass. This lookahead pass will calculate the layout size and position for all child layouts, and make the lookahead results available in <code><a href="/reference/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function3)">Modifier.intermediateLayout</a></code>. <code><a href="/reference/androidx/compose/ui/layout/package-summary.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function3)">Modifier.intermediateLayout</a></code> gets invoked in the main pass to allow transient layout changes in the main pass that gradually morph the layout over the course of multiple frames until it catches up with lookahead.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.AnimationVector2D
+import androidx.compose.animation.core.VectorConverter
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.movableContentOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.LookaheadScope
 import androidx.compose.ui.layout.intermediateLayout
 import androidx.compose.ui.layout.layout
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.round
 
 // Creates a custom modifier to animate the local position of the layout within the
@@ -218,6 +227,8 @@ LookaheadScope {
         </ol>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.AnimationVector2D
+import androidx.compose.animation.core.VectorConverter
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -225,12 +236,20 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.intermediateLayout
 import androidx.compose.ui.layout.layout
+import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.round
 
 // Creates a custom modifier that animates the constraints and measures child with the
 // animated constraints. This modifier is built on top of `Modifier.intermediateLayout`, which

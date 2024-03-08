@@ -49,13 +49,19 @@
         <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/animation/graphics/ExperimentalAnimationGraphicsApi.html">ExperimentalAnimationGraphicsApi</a><br>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/painter/Painter.html">Painter</a>&nbsp;<a href="/reference/androidx/compose/animation/graphics/res/AnimatedVectorPainterResourcesKt.html#rememberAnimatedVectorPainter(androidx.compose.animation.graphics.vector.AnimatedImageVector,kotlin.Boolean)">rememberAnimatedVectorPainter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/graphics/vector/AnimatedImageVector.html">AnimatedImageVector</a>&nbsp;animatedImageVector,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;atEnd<br>)</pre>
         <p>Creates and remembers a <code><a href="/reference/androidx/compose/ui/graphics/painter/Painter.html">Painter</a></code> to render an <code><a href="/reference/androidx/compose/animation/graphics/vector/AnimatedImageVector.html">AnimatedImageVector</a></code>. It renders the image either at the start or the end of all the animations depending on the <code><a href="/reference/androidx/compose/animation/graphics/res/package-summary.html#rememberAnimatedVectorPainter(androidx.compose.animation.graphics.vector.AnimatedImageVector,kotlin.Boolean)">atEnd</a></code>. Changes to <code><a href="/reference/androidx/compose/animation/graphics/res/package-summary.html#rememberAnimatedVectorPainter(androidx.compose.animation.graphics.vector.AnimatedImageVector,kotlin.Boolean)">atEnd</a></code> are animated.</p>
         <pre class="prettyprint lang-kotlin">
+import androidx.annotation.DrawableRes
+import androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi
 import androidx.compose.animation.graphics.res.animatedVectorResource
 import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
+import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalAnimationGraphicsApi::class)
 @Composable

@@ -37,7 +37,11 @@
     </div>
     <hr>
     <p><code><a href="https://guava.dev/releases/18.0/api/docs/package-list/com/google/common/util/concurrent/ListenableFuture.html">ListenableFuture</a></code>-based compatibility wrapper around <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>'s suspending APIs.</p>
-    <pre class="prettyprint lang-kotlin">class MyListenableFuturePagingSource(
+    <pre class="prettyprint lang-kotlin">
+import androidx.paging.ListenableFuturePagingSource
+import androidx.paging.PagingState
+
+class MyListenableFuturePagingSource(
     val myBackend: GuavaBackendService,
     val searchTerm: String
 ) : ListenableFuturePagingSource&lt;String, Item&gt;() {

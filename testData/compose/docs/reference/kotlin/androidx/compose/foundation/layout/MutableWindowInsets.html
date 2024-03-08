@@ -29,15 +29,22 @@
     <hr>
     <p>A <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> whose values can change without changing the instance. This is useful to avoid recomposition when <code><a href="/reference/kotlin/androidx/compose/foundation/layout/WindowInsets.html">WindowInsets</a></code> can change.</p>
     <pre class="prettyprint lang-kotlin">
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.MutableWindowInsets
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.exclude
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.onConsumedWindowInsetsChanged
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeContent
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.core.view.WindowCompat
 
 class SampleActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

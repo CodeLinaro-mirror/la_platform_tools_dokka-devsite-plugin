@@ -45,7 +45,6 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import com.google.devsite.strictSingleOrNull
-import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.Annotations
@@ -106,9 +105,9 @@ internal class DocTagConverter(
     private val docsHolder: DocumentablesHolder,
     private val paramConverter: ParameterDocumentableConverter,
     private val annotationConverter: AnnotationDocumentableConverter,
-    // private val sampleProviderFactory: SampleProviderFactory?
 ) {
-    private val analysisMap = runBlocking { docsHolder.analysisMap() }
+    // We currently assume all sample are in the common sourceSet. TODO KMP samples b/181224204
+    // private val analysisMap = runBlocking { docsHolder.analysisMap() }
 
     /**
      * @param documentable the documentable we are getting the documentation of
@@ -559,32 +558,24 @@ internal class DocTagConverter(
             when (it) {
                 is Sample -> {
                     val dri = it.name
+                    // val sourceSet = this.getExpectOrCommonSourceSet()
+                    /* val analysisEnvironment = analysisMap[sourceSet]!!
+                    val sample = try {
+                        analysisEnvironment
+                            .resolveSample(sourceSet, dri)!!
+                    } catch (e: NullPointerException) {
+                        throw RuntimeException("Unable to resolve sample $dri!")
+                    }*/
                     // TODO(KMP) we currently have no plan to provide KMP samples b/181224204
-                    // As such, we currently assume that the samples-library is not KMP.
-                    val sourceSet = this.getExpectOrCommonSourceSet()
-                    // val sampleProvider = sampleProviderFactory!!.build()
-                    // val sample = sampleProvider.getSample(sourceSet, dri)!!
-                    val facade = analysisMap[sourceSet]
-                        ?: analysisMap[analysisMap.keys.singleOrNull()]
-                        ?: if (failOnMissingSamples) {
-                            throw RuntimeException(
-                                "Cannot resolve facade: ${sourceSet.sourceSetID} for $this",
-                            )
-                        } else {
-                            return@forEach
-                        }
-
-                    val psiElement = fqNameToPsiElement(facade, dri)
-                        ?: throw RuntimeException("Cannot find PsiElement corresponding to $dri")
-
-                    val imports = processImports(psiElement)
-                    val body = processBody(psiElement)
+                    // As such, we currently assume that all samples are in common
+                    val sample = docsHolder.sampleAnalysisEnvironment
+                        .resolveSample(docsHolder.commonSourceSet, dri)!!
+                    val imports = processImports(sample)
 
                     components.add(
                         Pre(
                             params = mapOf("class" to "prettyprint lang-kotlin"),
-                            children = listOf(Text(imports + body)),
-                            // children = listOf(Text(sample.imports + sample.body))
+                            children = listOf(Text(imports + sample.body)),
                         ),
                     )
                     components.addAll(it.children)

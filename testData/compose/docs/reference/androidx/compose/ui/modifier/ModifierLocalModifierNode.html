@@ -21,8 +21,14 @@
     <p>A <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">androidx.compose.ui.Modifier.Node</a></code> that is capable of consuming and providing <code><a href="/reference/androidx/compose/ui/modifier/ModifierLocal.html">ModifierLocal</a></code> values.</p>
     <p>This is the <code><a href="/reference/androidx/compose/ui/Modifier.Node.html">androidx.compose.ui.Modifier.Node</a></code> equivalent of the <code><a href="/reference/androidx/compose/ui/modifier/ModifierLocalConsumer.html">ModifierLocalConsumer</a></code> and <code><a href="/reference/androidx/compose/ui/modifier/ModifierLocalProvider.html">ModifierLocalProvider</a></code> interfaces.</p>
     <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.modifier.ModifierLocalModifierNode
 import androidx.compose.ui.modifier.modifierLocalMapOf
 import androidx.compose.ui.modifier.modifierLocalOf
+import androidx.compose.ui.node.LayoutAwareModifierNode
+import androidx.compose.ui.node.ModifierNodeElement
+import androidx.compose.ui.platform.InspectorInfo
+import androidx.compose.ui.unit.IntSize
 
 class Logger { fun log(string: String) { println(string) } }
 

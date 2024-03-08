@@ -23,6 +23,7 @@
     <p>Example usage:</p>
     <pre class="prettyprint lang-kotlin">
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onSizeChanged
 
 // Use onSizeChanged() for diagnostics. Use Layout or SubcomposeLayout if you want
@@ -35,6 +36,9 @@ Text(
 )</pre>
     <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.AnimationVector2D
+import androidx.compose.animation.core.Spring.StiffnessMediumLow
+import androidx.compose.animation.core.VectorConverter
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -43,12 +47,20 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onPlaced
 import androidx.compose.ui.layout.positionInParent
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.round
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -88,7 +100,14 @@ fun AnimatedChildAlignment(alignment: Alignment) {
         )
     }
 }</pre>
-    <pre class="prettyprint lang-kotlin">class SizeLoggerNode(var id: String) : LayoutAwareModifierNode, Modifier.Node() {
+    <pre class="prettyprint lang-kotlin">
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.node.LayoutAwareModifierNode
+import androidx.compose.ui.node.ModifierNodeElement
+import androidx.compose.ui.platform.InspectorInfo
+import androidx.compose.ui.unit.IntSize
+
+class SizeLoggerNode(var id: String) : LayoutAwareModifierNode, Modifier.Node() {
     override fun onRemeasured(size: IntSize) {
         println(&quot;The size of $id was $size&quot;)
     }

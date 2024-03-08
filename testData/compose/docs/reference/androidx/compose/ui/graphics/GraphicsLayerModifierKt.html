@@ -68,6 +68,7 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.material.Text
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 
 val animatedAlpha = remember { Animatable(0f) }
@@ -118,6 +119,7 @@ LaunchedEffect(animatedAlpha) {
         <p>If the layer parameters are backed by a <code><a href="/reference/androidx/compose/runtime/State.html">androidx.compose.runtime.State</a></code> or an animated value prefer an overload with a lambda block on <code><a href="/reference/androidx/compose/ui/graphics/GraphicsLayerScope.html">GraphicsLayerScope</a></code> as reading a state inside the block will only cause the layer properties update without triggering recomposition and relayout.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.material.Text
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 
 Text(&quot;Hello World&quot;, Modifier.graphicsLayer(alpha = 0.5f, clip = true))</pre>
@@ -125,8 +127,12 @@ Text(&quot;Hello World&quot;, Modifier.graphicsLayer(alpha = 0.5f, clip = true))
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.CompositingStrategy
 import androidx.compose.ui.graphics.drawscope.inset
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.unit.dp
 
 Canvas(
     modifier =
