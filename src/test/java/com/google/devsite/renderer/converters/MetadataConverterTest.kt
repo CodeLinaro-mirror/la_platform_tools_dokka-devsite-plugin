@@ -348,11 +348,8 @@ internal class MetadataConverterTest(
                 .isEqualTo("bar03(java.util.List<?>)")
             assertThat(MetadataConverter.apiSinceMethodSignature(functions[3]))
                 .isEqualTo("bar04(java.util.List<? extends java.lang.String>)")
-            // TODO(b/293119896): this should work for Java too
-            if (functions == functionsK) {
-                assertThat(MetadataConverter.apiSinceMethodSignature(functions[4]))
-                    .isEqualTo("bar05(java.util.List<? super java.lang.String>)")
-            }
+            assertThat(MetadataConverter.apiSinceMethodSignature(functions[4]))
+                .isEqualTo("bar05(java.util.List<? super java.lang.String>)")
         }
     }
 
