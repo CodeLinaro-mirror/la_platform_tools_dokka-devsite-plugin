@@ -21,6 +21,30 @@
     <p><code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> can be transformed to alter data as it loads, and presented in a <code>RecyclerView</code> via <code>AsyncPagingDataDiffer</code> or <code>PagingDataAdapter</code>.</p>
     <p>LiveData support is available as an extension property provided by the <code>androidx.paging:paging-runtime</code> artifact.</p>
     <p>RxJava support is available as extension properties provided by the <code>androidx.paging:paging-rxjava2</code> artifact.</p>
+    <pre class="prettyprint lang-kotlin">
+import androidx.paging.insertSeparators
+
+/*
+ * Create letter separators in an alphabetically sorted list.
+ *
+ * For example, if the input is:
+ *     &quot;apple&quot;, &quot;apricot&quot;, &quot;banana&quot;, &quot;carrot&quot;
+ *
+ * The operator would output:
+ *     &quot;A&quot;, &quot;apple&quot;, &quot;apricot&quot;, &quot;B&quot;, &quot;banana&quot;, &quot;C&quot;, &quot;carrot&quot;
+ */
+pagingDataStream.map { pagingData -&gt;
+    // map outer stream, so we can perform transformations on each paging generation
+    pagingData.insertSeparators { before: String?, after: String? -&gt;
+        if (after != null &amp;&amp; before?.first() != after.first()) {
+            // separator - after is first item that starts with its first letter
+            after.first().toUpperCase().toString()
+        } else {
+            // no separator - either end of list, or first letters of before/after are the same
+            null
+        }
+    }
+}</pre>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">

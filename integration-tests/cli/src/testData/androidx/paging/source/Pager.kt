@@ -36,6 +36,8 @@ import kotlinx.coroutines.flow.Flow
  *
  * RxJava support is available as extension properties provided by the
  * `androidx.paging:paging-rxjava2` artifact.
+ *
+ * @sample androidx.paging.samples.insertSeparatorsSample
  */
 public class Pager<Key : Any, Value : Any>
 // Experimental usage is propagated to public API via constructor argument.
