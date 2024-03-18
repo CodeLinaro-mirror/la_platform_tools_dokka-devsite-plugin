@@ -3304,7 +3304,6 @@ internal class ClasslikeDocumentableConverterTest(
         assertThat(foo.constantsSummary.map { it.name() }).containsExactly("publicNoGetter")
     }
 
-    @Ignore // b/279500397 go/dokka-upstream-bug/2992
     @Test
     fun `Can have two setters in Java`() {
         var classlike = """
