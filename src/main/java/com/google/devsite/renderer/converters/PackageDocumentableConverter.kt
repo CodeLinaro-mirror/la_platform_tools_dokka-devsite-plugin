@@ -25,12 +25,14 @@ import com.google.devsite.components.Link
 import com.google.devsite.components.impl.DefaultDevsitePage
 import com.google.devsite.components.impl.DefaultDevsitePlatformSelector
 import com.google.devsite.components.impl.DefaultPackageSummary
+import com.google.devsite.components.impl.DefaultReferenceObject
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultUnlink
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.pages.PackageSummary
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.PropertySignature
+import com.google.devsite.components.symbols.ReferenceObject
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TableRowSummaryItem
@@ -69,24 +71,23 @@ internal abstract class PackageDocumentableConverter(
 
     /** @return the root component for the package summary page */
     suspend fun summaryPage(): DevsitePage<PackageSummary> = coroutineScope {
-        val interfaces = async {
-            docsToSummary(docsHolder.interfacesFor(dPackage))
-        }
-        val classes = async {
-            docsToSummary(docsHolder.classesFor(dPackage))
-        }
-        val enums = async { docsToSummary(docsHolder.enumsFor(dPackage)) }
-        val objects = async { docsToSummary(docsHolder.interestingObjectsFor(dPackage)) }
-        val exceptions = async {
-            docsToSummary(docsHolder.exceptionsFor(dPackage))
-        }
-        val annotations = async {
-            docsToSummary(docsHolder.annotationsFor(dPackage))
-        }
+        val interfaceList = docsHolder.interfacesFor(dPackage)
+        val interfaces = async { docsToSummary(interfaceList) }
+        val classList = docsHolder.classesFor(dPackage)
+        val classes = async { docsToSummary(classList) }
+        val enumList = docsHolder.enumsFor(dPackage)
+        val enums = async { docsToSummary(enumList) }
+        val objectList = docsHolder.interestingObjectsFor(dPackage)
+        val objects = async { docsToSummary(objectList) }
+        val exceptionList = docsHolder.exceptionsFor(dPackage)
+        val exceptions = async { docsToSummary(exceptionList) }
+        val annotationList = docsHolder.annotationsFor(dPackage)
+        val annotations = async { docsToSummary(annotationList) }
 
-        @Suppress("UNCHECKED_CAST")
+        val typeAliasList = docsHolder.typeAliasesFor(dPackage)
         val typeAliases = async {
-            docsToSummary(docsHolder.typeAliasesFor(dPackage)) as WithDescriptionList<DefaultUnlink>
+            @Suppress("UNCHECKED_CAST")
+            docsToSummary(typeAliasList) as WithDescriptionList<DefaultUnlink>
         }
 
         val topLevelConstantsSummary = async { propertiesToSummary(topLevelConstants()) }
@@ -136,6 +137,26 @@ internal abstract class PackageDocumentableConverter(
                 ),
                 metadataComponent = null,
                 includedHeadTagPath = pathProvider.includedHeadTagsPath,
+                referenceObject = DefaultReferenceObject(
+                    ReferenceObject.Params(
+                        name = dPackage.dri.packageName.orEmpty(),
+                        language = displayLanguage,
+                        // Aggregate all classlikes, functions, and properties. If available (it is
+                        // for functions and properties), the anchor is used to enable devsite
+                        // search to link directly to the item.
+                        properties = buildList {
+                            addAll(interfaceList)
+                            addAll(classList)
+                            addAll(enumList)
+                            addAll(objectList)
+                            addAll(exceptionList)
+                            addAll(annotationList)
+                            addAll(typeAliasList)
+                            addAll(dPackage.functions)
+                            addAll(dPackage.properties)
+                        }.mapNotNull { it.dri.callable?.anchor() ?: it.name },
+                    ),
+                ),
             ),
         )
     }

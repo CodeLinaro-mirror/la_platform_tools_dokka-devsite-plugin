@@ -32,6 +32,7 @@ import com.google.devsite.components.impl.DefaultClasslikeSummary
 import com.google.devsite.components.impl.DefaultDevsitePage
 import com.google.devsite.components.impl.DefaultDevsitePlatformSelector
 import com.google.devsite.components.impl.DefaultInheritedSymbols
+import com.google.devsite.components.impl.DefaultReferenceObject
 import com.google.devsite.components.impl.DefaultRelatedSymbols
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableRowSummaryItem
@@ -46,6 +47,7 @@ import com.google.devsite.components.symbols.ClasslikeSignature
 import com.google.devsite.components.symbols.ClasslikeSummary
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.PropertySignature
+import com.google.devsite.components.symbols.ReferenceObject
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSignature
 import com.google.devsite.components.symbols.SymbolSummary
@@ -378,6 +380,23 @@ internal abstract class ClasslikeDocumentableConverter(
                 ),
                 metadataComponent = metadataComponent.await(),
                 includedHeadTagPath = pathProvider.includedHeadTagsPath,
+                referenceObject = DefaultReferenceObject(
+                    ReferenceObject.Params(
+                        name = classlike.dri.classNames.orEmpty(),
+                        path = classlike.dri.packageName.orEmpty(),
+                        // Aggregate all functions and properties. The anchor is used to enable
+                        // devsite search to link directly to the item.
+                        properties = buildList {
+                            addAll(declaredFunctions)
+                            addAll(declaredProperties)
+                            addAll(companionFunctions)
+                            addAll(companionProperties)
+                            addAll(extensionFunctions)
+                            addAll(extensionProperties)
+                        }.mapNotNull { it.dri.callable?.anchor() ?: it.name },
+                        language = displayLanguage,
+                    ),
+                ),
             ),
         )
     }

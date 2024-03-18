@@ -41,6 +41,9 @@ internal data class DefaultDevsitePage<T : ContextFreeComponent>(
         }
 
         body {
+            // Add devsite ReferenceObject metadata
+            data.referenceObject?.render(this)
+
             div {
                 // CSS id declared in internal codebase (cl/548038546)
                 id = "header-block"

@@ -19,6 +19,7 @@ package com.google.devsite.components.impl
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.pages.DevsitePage.Params
 import com.google.devsite.components.symbols.MetadataComponent
+import com.google.devsite.components.symbols.ReferenceObject
 import com.google.devsite.components.testing.NoopContextFreeComponent
 import com.google.devsite.renderer.Language
 import com.google.devsite.util.LibraryMetadata
@@ -299,6 +300,58 @@ class DefaultDevsitePageTest {
 {% include "en/docs/reference/android/_reference-head-tags.html" %}
   </head>
   <body>
+    <div id="header-block">
+      <div>
+        <h1>Page Title</h1>
+      </div>
+    </div>
+    <div id="refdoc-switcher-placeholder"></div>
+    <div>noop</div>
+  </body>
+</html>
+            """.trim(),
+        )
+    }
+
+    @Test
+    fun `Page with reference object renders correctly`() {
+        val referenceObject = DefaultReferenceObject(
+            ReferenceObject.Params(
+                name = "Foo",
+                language = Language.JAVA,
+            ),
+        )
+
+        val component = DefaultDevsitePage(
+            Params(
+                displayLanguage = Language.JAVA,
+                path = "page.html",
+                bookPath = "/reference/androidx/_book.yaml",
+                title = "Page Title",
+                content = NoopContextFreeComponent,
+                metadataComponent = null,
+                includedHeadTagPath = null,
+                referenceObject = referenceObject,
+            ),
+        )
+
+        val output = createHTML().html {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<html devsite="true">
+  <head>
+    <title>Page Title</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+  </head>
+  <body>
+    <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
+      <meta itemprop="name" content="Foo">
+      <meta itemprop="language" content="JAVA">
+    </div>
     <div id="header-block">
       <div>
         <h1>Page Title</h1>
