@@ -50,7 +50,6 @@ tasks.register<JavaExec>("run") {
 
     args = listOf(
         "${project.buildDir}/resources/config.json",
-        "-moduleName", "sample",
         "-loggingLevel", "WARN"
     )
 
