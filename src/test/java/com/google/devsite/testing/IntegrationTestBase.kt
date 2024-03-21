@@ -331,6 +331,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         val samplesBaseDir = "testData/$path"
         val outputBaseDir = "testData/$path/docs"
         val sourceDir = "testData/$path/$suffix"
+        val loggingDir = "testData/$path/logs"
 
         val inferredProjectPath = projectPath
             ?: File(sourceDir).listFiles().orEmpty().singleOrNull { it.isDirectory }?.name
@@ -359,7 +360,8 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             pluginOverrides = listOf(writerPlugin),
         ) {
             renderingStage = { _: RootPageNode, _: DokkaContext ->
-                verifyOutput(writerPlugin, outputBaseDir)
+                verifyOutput(writerPlugin.writer.contents, outputBaseDir)
+                verifyOutput(logFiles(sourceDir), loggingDir)
             }
         }
     }
@@ -386,6 +388,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
     ) {
         val outputBaseDir = "testData/$testName/docs"
         val samplesBaseDir = "testData/$testName/samples"
+        val loggingDir = "testData/$testName/logs"
 
         val versionMetadataBaseDir = "testData/$testName/versionMetadata"
         val versionMetadataFiles = if (versionMetadata) {
@@ -394,8 +397,9 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             null
         }
 
+        val sourceDir = "build/explodedSources"
         val configuration = makeExternalConfiguration(
-            artifactNames.map { File("build/explodedSources/$it/").absoluteFile },
+            artifactNames.map { File("$sourceDir/$it/").absoluteFile },
             if (samples) listOf(samplesBaseDir) else emptyList(),
             includeFiles = includeFiles.map { File("testData/$testName/source", it).absolutePath },
             docRootPath = "reference",
@@ -413,21 +417,36 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             pluginOverrides = listOf(writerPlugin),
         ) {
             renderingStage = { _: RootPageNode, _: DokkaContext ->
-                verifyOutput(writerPlugin, outputBaseDir)
+                verifyOutput(writerPlugin.writer.contents, outputBaseDir)
+                verifyOutput(logFiles(sourceDir), loggingDir)
             }
         }
+    }
+
+    /** Creates a map from a filename for a logging level to the logged messages of that level. */
+    private fun logFiles(sourceDir: String): Map<String, String> {
+        val absoluteSourcePath = File(sourceDir).absolutePath
+        return mapOf(
+            // Start with "//" to match the filepaths from the writer plugin contents
+            "//warnings.txt" to cleanLogMessages(logger.warnMessages, absoluteSourcePath),
+            "//debug.txt" to cleanLogMessages(logger.debugMessages, absoluteSourcePath),
+            "//error.txt" to cleanLogMessages(logger.errorMessages, absoluteSourcePath),
+        ).filter { it.value.isNotEmpty() }
+    }
+
+    private fun cleanLogMessages(messages: List<String>, sourceDir: String): String {
+        return messages.map { it.replace(sourceDir, "\$SRC_DIR") }.sorted().joinToString("\n")
     }
 
     protected fun classpathFromFile(file: String): List<String> =
         File(file).bufferedReader().readLines()
 
-    /** Confirms that the given output writer's output matches the contents of the given directory. */
-    private fun verifyOutput(writerPlugin: TestOutputWriterPlugin, outputPath: String) {
+    /** Confirms that the given file to output map matches the contents of the given directory. */
+    private fun verifyOutput(generatedFiles: Map<String, String>, outputPath: String) {
         val outputDirectory = File(outputPath).absolutePath
-        val generatedFiles = writerPlugin.writer.contents
 
         val dumpedFile = File("build/docs/$outputPath")
-        dump(writerPlugin, dumpedFile.absolutePath)
+        dump(generatedFiles, dumpedFile.absolutePath)
 
         for ((fileName, generatedContent) in generatedFiles) {
             val expectedFile = File(outputDirectory, fileName)
@@ -464,11 +483,10 @@ abstract class IntegrationTestBase : BaseAbstractTest(
                 ?.flatMap { it: File -> it.recursivelyListFiles() } ?: emptyList()
             )
 
-    /** Exports the output of writerPlugin to outputPath. */
-    private fun dump(writerPlugin: TestOutputWriterPlugin, outputPath: String) {
+    /** Exports the file to output map to outputPath. */
+    private fun dump(generatedFiles: Map<String, String>, outputPath: String) {
         val outputDirectory = File(outputPath)
         outputDirectory.deleteRecursively()
-        val generatedFiles = writerPlugin.writer.contents
 
         for ((fileName, fileContent) in generatedFiles) {
             val expectedFile = File(outputDirectory, fileName)
