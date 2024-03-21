@@ -56,6 +56,21 @@ tasks.register<JavaExec>("run") {
     doFirst {
         generatedDir.deleteRecursively()
     }
+
+    // Track all warning lines to write to a file sorted after dackka finishes
+    val loggedLines = mutableListOf<String>()
+    val absoluteSourcePath = projectDir.absolutePath
+    logging.addStandardOutputListener {
+        if (it.isNotBlank()) {
+            loggedLines.add(it.toString().replace(absoluteSourcePath, "\$SRC_DIR"))
+        }
+    }
+    doLast {
+        if (loggedLines.isNotEmpty()) {
+            val loggingFile = File(generatedDir, "logging.txt")
+            loggingFile.writeText(loggedLines.sorted().joinToString("\n"))
+        }
+    }
 }
 
 tasks.register("verifyRun") {
