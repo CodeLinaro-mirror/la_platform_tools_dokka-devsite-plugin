@@ -21,17 +21,22 @@ import com.google.devsite.renderer.converters.asString
 import com.google.devsite.renderer.converters.deprecatedDri
 import com.google.devsite.renderer.converters.explodedChildren
 import com.google.devsite.renderer.converters.fullName
+import com.google.devsite.renderer.converters.getExpectOrCommonSourceSet
 import com.google.devsite.renderer.converters.isFromJava
+import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.base.transformers.documentables.SuppressedByConditionDocumentableFilterTransformer
 import org.jetbrains.dokka.links.DRI
+import org.jetbrains.dokka.model.DAnnotation
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
+import org.jetbrains.dokka.model.Visibility
 import org.jetbrains.dokka.model.dfs
 import org.jetbrains.dokka.model.doc.CustomTagWrapper
 import org.jetbrains.dokka.plugability.DokkaContext
 import org.jetbrains.dokka.transformers.documentation.DocumentableTransformer
+import org.jetbrains.dokka.transformers.documentation.PreMergeDocumentableTransformer
 
 /**
  * These filters remove items from the docs when they:
@@ -97,6 +102,39 @@ class PostMergePackageDocumentableFilter : DocumentableTransformer {
         return original.copy(packages = filteredPackages)
     }
 }
+
+class PreMergePrivateAnnotationRecorder : PreMergeDocumentableTransformer {
+    /**
+     * Does not modify the modules, but adds all annotations with visibilities not in the configured
+     * documented visibilities to the hidden set.
+     */
+    override fun invoke(modules: List<DModule>): List<DModule> {
+        modules.forEach { module ->
+            module.packages.forEach { dPackage ->
+                dPackage.classlikes.forEach { classlike ->
+                    if (classlike is DAnnotation) {
+                        val sourceSet = classlike.getExpectOrCommonSourceSet()
+                        if (
+                            classlike.visibility[sourceSet]
+                                ?.isDocumented(sourceSet.documentedVisibilities) == false
+                        ) {
+                            addToHiddenSet(classlike)
+                        }
+                    }
+                }
+            }
+        }
+        return modules
+    }
+}
+
+/**
+ * Returns whether the [Visibility] corresponds to one of the documented visibilities in the set of
+ * [DokkaConfiguration.Visibility]s.
+ */
+private fun Visibility.isDocumented(
+    documentedVisibilities: Set<DokkaConfiguration.Visibility>,
+): Boolean = DokkaConfiguration.Visibility.fromString(name) in documentedVisibilities
 
 private fun Documentable.isHiddenWithAnnotation(hidingAnnotations: List<String>): Boolean =
     allAnnotations().any {

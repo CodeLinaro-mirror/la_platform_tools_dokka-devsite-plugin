@@ -124,6 +124,18 @@ internal class AnnotationDocumentableConverterTest(
     }
 
     @Test
+    fun `Private annotation does not appear on function`() {
+        val annotations = """
+            |private annotation class PrivateAnnotation
+            |internal annotation class InternalAnnotation
+            |@PrivateAnnotation
+            |@InternalAnnotation
+            |fun foo() = Unit
+        """.render().functionAnnotationComponents()
+        assertThat(annotations).isEmpty()
+    }
+
+    @Test
     fun `Method component has annotation and value in 4x Kotlin and Java`() {
         val annotationsK = """
             |annotation class Hello(val bar: String)

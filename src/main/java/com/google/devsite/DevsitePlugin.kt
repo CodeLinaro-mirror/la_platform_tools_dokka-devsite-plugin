@@ -57,6 +57,12 @@ class DevsitePlugin : DokkaPlugin() {
         } override dokkaBase.htmlRenderer
     }
 
+    val privateAnnotationFilter by extending {
+        dokkaBase.preMergeDocumentableTransformer with PreMergePrivateAnnotationRecorder() order {
+            before(dokkaBase.documentableVisibilityFilter)
+        }
+    }
+
     val preMergeHiddenFilter by extending {
         dokkaBase.preMergeDocumentableTransformer providing {
             PreMergeHiddenDocumentableFilter(it, getDevsiteConfiguration(it).hidingAnnotations)
