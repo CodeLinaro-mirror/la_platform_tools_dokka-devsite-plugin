@@ -124,15 +124,41 @@ internal class AnnotationDocumentableConverterTest(
     }
 
     @Test
-    fun `Private annotation does not appear on function`() {
+    fun `Private annotation does not appear on function - kotlin`() {
         val annotations = """
-            |private annotation class PrivateAnnotation
-            |internal annotation class InternalAnnotation
-            |@PrivateAnnotation
-            |@InternalAnnotation
-            |fun foo() = Unit
+            |open class Container {
+            |    annotation class PublicAnnotation
+            |    protected annotation class ProtectedAnnotation
+            |    internal annotation class InternalAnnotation
+            |    private annotation class PrivateAnnotation
+            |
+            |    @PublicAnnotation
+            |    @ProtectedAnnotation
+            |    @InternalAnnotation
+            |    @PrivateAnnotation
+            |    fun foo() = Unit
+            |}
         """.render().functionAnnotationComponents()
-        assertThat(annotations).isEmpty()
+        assertThat(annotations.map { it.name })
+            .containsExactly("Container.PublicAnnotation", "Container.ProtectedAnnotation")
+    }
+
+    @Test
+    fun `Private annotation does not appear on function - java`() {
+        val annotations = """
+            |public @interface PublicAnnotation {}
+            |protected @interface ProtectedAnnotation {}
+            |@interface PackagePrivateAnnotation {}
+            |private @interface PrivateAnnotation {}
+            |
+            |@PublicAnnotation
+            |@ProtectedAnnotation
+            |@PackagePrivateAnnotation
+            |@PrivateAnnotation
+            |public void foo() {}
+        """.render(java = true).functionAnnotationComponents()
+        assertThat(annotations.map { it.name })
+            .containsExactly("Test.PublicAnnotation", "Test.ProtectedAnnotation")
     }
 
     @Test

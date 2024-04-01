@@ -27,6 +27,7 @@ import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.base.transformers.documentables.SuppressedByConditionDocumentableFilterTransformer
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.DAnnotation
+import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.DProperty
@@ -111,20 +112,25 @@ class PreMergePrivateAnnotationRecorder : PreMergeDocumentableTransformer {
     override fun invoke(modules: List<DModule>): List<DModule> {
         modules.forEach { module ->
             module.packages.forEach { dPackage ->
-                dPackage.classlikes.forEach { classlike ->
-                    if (classlike is DAnnotation) {
-                        val sourceSet = classlike.getExpectOrCommonSourceSet()
-                        if (
-                            classlike.visibility[sourceSet]
-                                ?.isDocumented(sourceSet.documentedVisibilities) == false
-                        ) {
-                            addToHiddenSet(classlike)
-                        }
-                    }
-                }
+                checkAllClasslikes(dPackage.classlikes)
             }
         }
         return modules
+    }
+
+    private fun checkAllClasslikes(classlikes: List<DClasslike>) {
+        classlikes.forEach { classlike ->
+            if (classlike is DAnnotation) {
+                val sourceSet = classlike.getExpectOrCommonSourceSet()
+                if (
+                    classlike.visibility[sourceSet]
+                        ?.isDocumented(sourceSet.documentedVisibilities) == false
+                ) {
+                    addToHiddenSet(classlike)
+                }
+            }
+            checkAllClasslikes(classlike.classlikes)
+        }
     }
 }
 
@@ -134,7 +140,10 @@ class PreMergePrivateAnnotationRecorder : PreMergeDocumentableTransformer {
  */
 private fun Visibility.isDocumented(
     documentedVisibilities: Set<DokkaConfiguration.Visibility>,
-): Boolean = DokkaConfiguration.Visibility.fromString(name) in documentedVisibilities
+): Boolean =
+    // Java package visibility has an empty string name as a [Visibility] but not as a
+    // [DokkaConfiguration.Visibility]. All other visibilities match between the definitions.
+    DokkaConfiguration.Visibility.fromString(name.ifEmpty { "package" }) in documentedVisibilities
 
 private fun Documentable.isHiddenWithAnnotation(hidingAnnotations: List<String>): Boolean =
     allAnnotations().any {
