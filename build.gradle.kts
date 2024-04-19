@@ -19,7 +19,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.util.Locale
 
-defaultTasks = mutableListOf("test", "jar", "shadowJar", "ktlint", "publish")
+defaultTasks = mutableListOf("test", "jar", "shadowJar", "ktlint", "publish", "zipTestResults")
 
 repositories {
     maven("../../prebuilts/androidx/external")
@@ -338,12 +338,8 @@ tasks.getByName("test") {
 val String.capitalize: String  get() =
     replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
 
-val zipTask = project.tasks.register<Zip>("zipResultsOf${name.capitalize}") {
-    destinationDirectory.set(File(getDistributionDirectory(), "host-test-reports"))
-    archiveFileName.set("dackka-tests.zip")
-}
-
-tasks.withType<Test> {
+val testTask = tasks.named<Test>("test")
+testTask.configure {
     maxHeapSize = "4g"
     maxParallelForks = Runtime.getRuntime().availableProcessors()
     testLogging.events = hashSetOf(
@@ -353,14 +349,14 @@ tasks.withType<Test> {
         TestLogEvent.STANDARD_OUT,
         TestLogEvent.STANDARD_ERROR
     )
-
     if (isBuildingOnServer()) ignoreFailures = true
-    finalizedBy(zipTask)
-    doFirst {
-        zipTask.configure {
-            from(reports.junitXml.outputLocation)
-        }
-    }
+}
+
+val zipTask = project.tasks.register<Zip>("zipTestResults") {
+    dependsOn(testTask)
+    destinationDirectory.set(File(getDistributionDirectory(), "host-test-reports"))
+    archiveFileName.set("dackka-tests.zip")
+    from(project.file(testTask.flatMap { it.reports.junitXml.outputLocation}))
 }
 
 val ktlintConfiguration: Configuration by configurations.creating
