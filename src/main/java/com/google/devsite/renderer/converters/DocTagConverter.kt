@@ -46,6 +46,7 @@ import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import com.google.devsite.strictSingleOrNull
 import org.jetbrains.dokka.DokkaConfiguration
+import org.jetbrains.dokka.base.transformers.documentables.isDeprecated
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.Annotations
 import org.jetbrains.dokka.model.Callable
@@ -347,6 +348,8 @@ internal class DocTagConverter(
                     if (!tagged.contains(name)) {
                         // Synthetic receiver params don't need @param documentation
                         if (name == "receiver") return@mapNotNull null
+                        // This warning is primarily for blocking newly-added code
+                        if (documentable.isDeprecated()) return@mapNotNull null
                         docsHolder.printWarningFor(
                             "Missing @param tag for parameter `$name`",
                             documentable,

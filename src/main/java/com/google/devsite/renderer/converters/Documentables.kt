@@ -71,7 +71,6 @@ import org.jetbrains.dokka.model.isJvmName
 import org.jetbrains.dokka.model.properties.ExtraProperty
 import org.jetbrains.dokka.model.properties.PropertyContainer
 import org.jetbrains.dokka.model.properties.WithExtraProperties
-import java.io.File
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.reflect.jvm.internal.impl.builtins.jvm.JavaToKotlinClassMap
 import kotlin.reflect.jvm.internal.impl.name.ClassId
@@ -84,34 +83,9 @@ internal fun <T> T.getErrorLocation(
 ): String where T : WithSources, T : Documentable {
     val sourceFilePath: String = this.sources[sourceSet]!!.path
     if (".tmp" in sourceFilePath) return "Error occurred in an unreadable temporary file!"
-    // Regex that matches the declaration of `this`
-    val matcher = when (sourceFilePath.substringAfterLast(".")) {
-        "kt" ->
-            """(fun|val|var|class|interface|enum|object) (<*> )?([a-zA-Z_0-9]+\.(<*>)?)?$name"""
-                .toRegex()
-        "java" ->
-            (
-                """(public|protected) (static |final )*""" +
-                    """(class |enum |(@)?interface )?[a-zA-Z_0-9]+(<*>)? $name"""
-                ).toRegex()
-        "class" -> return sourceFilePath // this type's source is in a prebuilt?
-        else -> {
-            // This means the error occurred while parsing a synthetic element
-            if ("org.jetbrains.kotlin.descriptors" in sourceFilePath) {
-                return sourceFilePath
-            } else {
-                throw RuntimeException("Unknown file type for $sourceFilePath")
-            }
-        }
-    }
-    // Assume that the type params can't take up more than 3 lines
-    File(sourceFilePath).readLines().windowed(size = 3, step = 1).forEachIndexed { index, lines ->
-        if (matcher.containsMatchIn(lines.joinToString())) {
-            return "$sourceFilePath:${index + 2}" // The last line in the window
-        }
-    }
-    // Multiple possible reasons for failure. For example, java syntax does not lend itself to
-    // allowing declaractions to be identified by regex, so there is a good chance it could fail.
+    val index = this.sources[sourceSet]!!.computeLineNumber()
+    if (index != null) return "$sourceFilePath:$index"
+    // If this happens, we should probably file an upstream bug.
     return "$sourceFilePath:UnknownLine"
 }
 
