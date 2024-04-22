@@ -23,3 +23,38 @@ pluginManagement {
         maven("../../prebuilts/androidx/external")
     }
 }
+
+buildscript {
+    repositories {
+        maven("../../prebuilts/androidx/external")
+    }
+    dependencies {
+        classpath("com.gradle:gradle-enterprise-gradle-plugin:3.16")
+        classpath("com.gradle:common-custom-user-data-gradle-plugin:1.12")
+    }
+}
+
+apply(plugin = "com.gradle.enterprise")
+apply(plugin = "com.gradle.common-custom-user-data-gradle-plugin")
+
+val BUILD_NUMBER = System.getenv("BUILD_NUMBER")
+gradleEnterprise {
+    server = "https://ge.androidx.dev"
+
+    buildScan {
+        capture {
+            isTaskInputFiles = true
+        }
+        obfuscation {
+            hostname { host -> "unset" }
+            ipAddresses { listOf("0.0.0.0") }
+        }
+        if (BUILD_NUMBER != null) {
+            value("BUILD_NUMBER", BUILD_NUMBER)
+            link("ci.android.com build", "https://ci.android.com/builds/branches/aosp-androidx-main/grid?head=$BUILD_NUMBER&tail=$BUILD_NUMBER")
+        }
+
+        // Always try to publish scan for dackka-main. No longer fails the build if offline/blocked.
+        publishAlways()
+    }
+}
