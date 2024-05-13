@@ -18,6 +18,7 @@ package com.google.devsite.testing
 
 import com.google.common.truth.Truth.assertWithMessage
 import com.google.devsite.DevsiteConfiguration
+import com.google.devsite.defaultValidNullabilityAnnotations
 import com.google.devsite.renderer.converters.isRunningInDackkasTests
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.DokkaConfigurationImpl
@@ -84,6 +85,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         versionMetadataFilesnames: List<String>? = null,
         hidingAnnotations: List<String> = listOf("androidx.annotation.RestrictTo"),
         includeHiddenParentSymbols: Boolean = false,
+        validNullabilityAnnotations: List<String> = defaultValidNullabilityAnnotations,
     ): DokkaConfigurationImpl {
         sources.forEach { check(it.isDirectory) { "$it does not exist or is not a directory" } }
         val externalLinks = mapOf(
@@ -148,6 +150,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
                         ),
                         hidingAnnotations = hidingAnnotations,
                         includeHiddenParentSymbols = includeHiddenParentSymbols,
+                        validNullabilityAnnotations = validNullabilityAnnotations,
                     ).toCompactJsonString(),
                 ),
             )
@@ -189,6 +192,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
 
     /** Executes dackka on source from an androidx checkout on the same machine. No validation. */
     fun executionTest(
+        testName: String,
         paths: List<String>,
         sampleLocations: List<String> = emptyList(),
         includeFiles: List<String> = emptyList(),
@@ -202,6 +206,8 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             javaDocsPath = "",
             kotlinDocsPath = "kotlin",
             useAndroidxBaseSourceLink = true,
+            validNullabilityAnnotations = defaultValidNullabilityAnnotations +
+                "org.checkerframework.checker.nullness.qual.Nullable",
         )
 
         val writerPlugin = TestOutputWriterPlugin()
@@ -209,7 +215,11 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         testFromData(
             configuration,
             pluginOverrides = listOf(writerPlugin),
-        ) { }
+        ) {
+            renderingStage = { _: RootPageNode, _: DokkaContext ->
+                dump(writerPlugin.writer.contents, File("build/docs/$testName").absolutePath)
+            }
+        }
     }
 
     /**
@@ -217,6 +227,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
      * @param maxFolders limits the source files run against, in case of performance issues
      */
     fun crawlingExecTest(
+        testName: String,
         checkoutRoot: String,
         excludedPaths: MutableList<String> = mutableListOf(),
         maxFolders: Int = 999999,
@@ -265,6 +276,8 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             javaDocsPath = "",
             kotlinDocsPath = "kotlin",
             useAndroidxBaseSourceLink = true,
+            validNullabilityAnnotations = defaultValidNullabilityAnnotations +
+                "org.checkerframework.checker.nullness.qual.Nullable",
         )
 
         val writerPlugin = TestOutputWriterPlugin()
@@ -272,7 +285,11 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         testFromData(
             configuration,
             pluginOverrides = listOf(writerPlugin),
-        ) { }
+        ) {
+            renderingStage = { _: RootPageNode, _: DokkaContext ->
+                dump(writerPlugin.writer.contents, File("build/docs/$testName").absolutePath)
+            }
+        }
     }
 
     /**
@@ -304,7 +321,11 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         testFromData(
             configuration,
             pluginOverrides = listOf(writerPlugin),
-        ) { }
+        ) {
+            renderingStage = { _: RootPageNode, _: DokkaContext ->
+                dump(writerPlugin.writer.contents, File("build/docs/$testName").absolutePath)
+            }
+        }
     }
 
     /**

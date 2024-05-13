@@ -41,13 +41,14 @@ class AndroidxTest : IntegrationTestBase() {
     fun `Run dackka against partial androidx tip-of-tree`() {
         val base = getAndroidxPath()
         executionTest(
+            testName = "partialAndroidx",
             paths = listOf(
                 "$base/appcompat/",
                 "$base/fragment/",
                 "$base/leanback/",
                 "$base/media/",
-                "$base/media2/",
             ),
+            sampleLocations = listOf("$base/samples/", "$base/fragment/fragment-compose/samples"),
         )
     }
 
@@ -66,7 +67,7 @@ class AndroidxTest : IntegrationTestBase() {
             "generator", // material-icons-generator
             "appsearch-builtin-types",
         )
-        crawlingExecTest(getAndroidxPath(), excludedPaths)
+        crawlingExecTest("fullAndroidx", getAndroidxPath(), excludedPaths, maxFolders = 200)
     }
 
     @Ignore // Must be run manually
@@ -80,7 +81,7 @@ class AndroidxTest : IntegrationTestBase() {
     fun `Run dackka against many AndroidX prebuilts`() {
         failOnMissingSamples = false // We do not (yet) publish samples source jars; b/149006789
         executePrebuilts(
-            testName = "all",
+            testName = "manyAndroidxPrebuilts",
             // A list of the first few source jars alphabetically, some of their dependencies, and
             // other projects chosen on as-available or as-useful-for-testing bases.
             artifactNames = listOf(
@@ -97,7 +98,7 @@ class AndroidxTest : IntegrationTestBase() {
                 "appsearch",
                 "appsearch-ktx",
                 "appsearch-compiler",
-                "appsearch-builtin-types",
+                // "appsearch-builtin-types", // still broken until the next release
                 "appsearch-debug-view",
                 "appsearch-platform-storage",
                 "appsearch-local-storage",

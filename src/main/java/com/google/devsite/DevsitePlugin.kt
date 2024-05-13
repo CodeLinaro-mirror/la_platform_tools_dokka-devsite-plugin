@@ -57,6 +57,10 @@ class DevsitePlugin : DokkaPlugin() {
         } override dokkaBase.htmlRenderer
     }
 
+    val docTagsForCheckedExceptions by extending {
+        CoreExtensions.documentableTransformer with DocTagsForCheckedExceptionsTransformer()
+    }
+
     val privateAnnotationFilter by extending {
         dokkaBase.preMergeDocumentableTransformer with PreMergePrivateAnnotationRecorder() order {
             before(dokkaBase.documentableVisibilityFilter)
@@ -71,10 +75,6 @@ class DevsitePlugin : DokkaPlugin() {
 
     val hiddenPackageFilter by extending {
         CoreExtensions.documentableTransformer with PostMergePackageDocumentableFilter()
-    }
-
-    val docTagsForCheckedExceptions by extending {
-        CoreExtensions.documentableTransformer with DocTagsForCheckedExceptionsTransformer()
     }
 }
 internal fun getDevsiteConfiguration(dokkaContext: DokkaContext): DevsiteConfiguration {

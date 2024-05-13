@@ -572,7 +572,8 @@ internal class DocTagConverter(
                     // TODO(KMP) we currently have no plan to provide KMP samples b/181224204
                     // As such, we currently assume that all samples are in common
                     val sample = docsHolder.sampleAnalysisEnvironment
-                        .resolveSample(docsHolder.commonSourceSet, dri)!!
+                        .resolveSample(docsHolder.commonSourceSet, dri)
+                        ?: throw RuntimeException("Unable to resolve sample $dri")
                     val imports = processImports(sample)
 
                     components.add(
