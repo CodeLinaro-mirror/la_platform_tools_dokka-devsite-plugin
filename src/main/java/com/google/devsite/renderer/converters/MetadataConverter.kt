@@ -230,7 +230,7 @@ internal class MetadataConverter(
     /**
      * This should not be accessed outside of [getSourceFilePaths].
      */
-    private val sourceFilesPaths = ConcurrentHashMap<Documentable, List<String>>()
+    private val sourceFilesPaths = ConcurrentHashMap<DRI, List<String>>()
 
     /**
      * Finds the filepaths associated with the documentable's source entries.
@@ -240,7 +240,7 @@ internal class MetadataConverter(
      */
     private fun <T> T.getSourceFilePaths(): List<String>? where T : WithSources, T : Documentable =
         // ConcurrentHashMap values cannot be null, so an empty list is stored instead.
-        sourceFilesPaths.getOrPut(this) {
+        sourceFilesPaths.getOrPut(this.dri) {
             sources.entries.mapNotNull { it.getSourceFilePath() }
         }.ifEmpty { null }
 
