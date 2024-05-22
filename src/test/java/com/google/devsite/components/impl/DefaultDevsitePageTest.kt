@@ -33,7 +33,7 @@ class DefaultDevsitePageTest {
         val component = DefaultDevsitePage(
             Params(
                 displayLanguage = Language.JAVA,
-                path = "page.html",
+                pathForSwitcher = "page.html",
                 bookPath = "/reference/androidx/_book.yaml",
                 title = "Page Title",
                 content = NoopContextFreeComponent,
@@ -61,7 +61,10 @@ class DefaultDevsitePageTest {
         <h1>Page Title</h1>
       </div>
     </div>
-    <div id="refdoc-switcher-placeholder"></div>
+
+{% setvar page_path %}page.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
     <div>noop</div>
   </body>
 </html>
@@ -74,7 +77,7 @@ class DefaultDevsitePageTest {
         val component = DefaultDevsitePage(
             Params(
                 displayLanguage = Language.KOTLIN,
-                path = "page.html",
+                pathForSwitcher = "page.html",
                 bookPath = "/reference/androidx/_book.yaml",
                 title = "Page Title",
                 content = NoopContextFreeComponent,
@@ -102,7 +105,10 @@ class DefaultDevsitePageTest {
         <h1>Page Title</h1>
       </div>
     </div>
-    <div id="refdoc-switcher-placeholder"></div>
+
+{% setvar page_path %}page.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
     <div>noop</div>
   </body>
 </html>
@@ -132,7 +138,7 @@ class DefaultDevsitePageTest {
         val pageComponent = DefaultDevsitePage(
             Params(
                 displayLanguage = Language.KOTLIN,
-                path = "page.html",
+                pathForSwitcher = "page.html",
                 bookPath = "/reference/androidx/_book.yaml",
                 title = "Page Title",
                 content = NoopContextFreeComponent,
@@ -168,7 +174,10 @@ class DefaultDevsitePageTest {
         </div>
       </div>
     </div>
-    <div id="refdoc-switcher-placeholder"></div>
+
+{% setvar page_path %}page.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
     <div>noop</div>
   </body>
 </html>
@@ -193,7 +202,7 @@ class DefaultDevsitePageTest {
         val pageComponent = DefaultDevsitePage(
             Params(
                 displayLanguage = Language.KOTLIN,
-                path = "page.html",
+                pathForSwitcher = "page.html",
                 bookPath = "/reference/androidx/_book.yaml",
                 title = "Page Title",
                 content = NoopContextFreeComponent,
@@ -224,7 +233,10 @@ class DefaultDevsitePageTest {
         <div id="maven-coordinates">Artifact: android.x:artifact</div>
       </div>
     </div>
-    <div id="refdoc-switcher-placeholder"></div>
+
+{% setvar page_path %}page.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
     <div>noop</div>
   </body>
 </html>
@@ -237,7 +249,7 @@ class DefaultDevsitePageTest {
         val component = DefaultDevsitePage(
             Params(
                 displayLanguage = Language.JAVA,
-                path = "page.html",
+                pathForSwitcher = "page.html",
                 bookPath = "/reference/androidx/_book.yaml",
                 title = "Page Title",
                 content = NoopContextFreeComponent,
@@ -264,7 +276,10 @@ class DefaultDevsitePageTest {
         <h1>Page Title</h1>
       </div>
     </div>
-    <div id="refdoc-switcher-placeholder"></div>
+
+{% setvar page_path %}page.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
     <div>noop</div>
   </body>
 </html>
@@ -277,7 +292,7 @@ class DefaultDevsitePageTest {
         val component = DefaultDevsitePage(
             Params(
                 displayLanguage = Language.JAVA,
-                path = "page.html",
+                pathForSwitcher = "page.html",
                 bookPath = "/reference/androidx/_book.yaml",
                 title = "Page Title",
                 content = NoopContextFreeComponent,
@@ -305,7 +320,10 @@ class DefaultDevsitePageTest {
         <h1>Page Title</h1>
       </div>
     </div>
-    <div id="refdoc-switcher-placeholder"></div>
+
+{% setvar page_path %}page.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
     <div>noop</div>
   </body>
 </html>
@@ -325,7 +343,7 @@ class DefaultDevsitePageTest {
         val component = DefaultDevsitePage(
             Params(
                 displayLanguage = Language.JAVA,
-                path = "page.html",
+                pathForSwitcher = "page.html",
                 bookPath = "/reference/androidx/_book.yaml",
                 title = "Page Title",
                 content = NoopContextFreeComponent,
@@ -357,7 +375,10 @@ class DefaultDevsitePageTest {
         <h1>Page Title</h1>
       </div>
     </div>
-    <div id="refdoc-switcher-placeholder"></div>
+
+{% setvar page_path %}page.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
     <div>noop</div>
   </body>
 </html>

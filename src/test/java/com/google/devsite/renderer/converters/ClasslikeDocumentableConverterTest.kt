@@ -79,7 +79,7 @@ internal class ClasslikeDocumentableConverterTest(
             |class Foo
         """.render().page()
 
-        assertPath(page.data.path, "androidx/example/Foo.html")
+        assertThat(page.data.pathForSwitcher!!).isEqualTo("androidx/example/Foo.html")
     }
 
     @Test
@@ -1962,8 +1962,10 @@ internal class ClasslikeDocumentableConverterTest(
         assertThat(bar.nestedTypesSummary).hasSize(1)
 
         val companions = module.pages("Companion")
-        val fooCompanion = companions.single { it.data.path.contains("Foo") }.data.content.data
-        val barCompanion = companions.single { it.data.path.contains("Bar") }.data.content.data
+        val fooCompanion = companions.single { it.data.pathForSwitcher!!.contains("Foo") }
+            .data.content.data
+        val barCompanion = companions.single { it.data.pathForSwitcher!!.contains("Bar") }
+            .data.content.data
 
         assertThat(fooCompanion.extensionFunctionsSummary).hasSize(1)
         // Extension properties appear as accessors in Java, properties in Kotlin

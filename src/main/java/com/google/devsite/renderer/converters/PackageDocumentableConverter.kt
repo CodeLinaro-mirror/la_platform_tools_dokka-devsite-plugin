@@ -39,6 +39,7 @@ import com.google.devsite.components.table.TableRowSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
+import com.google.devsite.renderer.not
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import org.jetbrains.dokka.model.DFunction
@@ -102,10 +103,20 @@ internal abstract class PackageDocumentableConverter(
         val extensionProperties = async { propertiesToDetail(extensionProperties()) }
         val extensionFunctions = async { functionsToDetail(extensionFunctions()) }
 
+        val isKotlinOnlyNonJVMPackage =
+            this@PackageDocumentableConverter is KmpPackageConverter &&
+                dPackage.getExpectOrCommonSourceSet().analysisPlatform !in
+                listOf(org.jetbrains.dokka.Platform.common, org.jetbrains.dokka.Platform.jvm)
+        val isNotDisplayedForOtherLanguage = docsHolder.excludedPackages[displayLanguage.not()]!!
+            .any { it.matches(dPackage.packageName) }
+        val pathForSwitcher = if (isNotDisplayedForOtherLanguage || isKotlinOnlyNonJVMPackage) {
+            null
+        } else pathProvider.forReference(dPackage.dri).url
+
         DefaultDevsitePage(
             DevsitePage.Params(
                 displayLanguage,
-                path = pathProvider.forReference(dPackage.dri).url,
+                pathForSwitcher = pathForSwitcher?.removePrefix(pathProvider.rootPath + "/"),
                 bookPath = pathProvider.book,
                 title = dPackage.name,
                 content = DefaultPackageSummary(

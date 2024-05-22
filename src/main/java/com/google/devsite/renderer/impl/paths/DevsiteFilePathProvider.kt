@@ -33,7 +33,7 @@ internal open class DevsiteFilePathProvider(
     override val locationProvider: ExternalDokkaLocationProvider? = null,
     override val documentablesGraph: DocumentablesGraph,
 ) : FilePathProvider {
-    private val rootPath = joinPaths("/", docRootPath, languagePath)
+    final override val rootPath = joinPaths("/", docRootPath, languagePath)
 
     override val packageList = joinPaths(rootPath, projectPath, MACHINE_PACKAGE_LIST_FILE)
 

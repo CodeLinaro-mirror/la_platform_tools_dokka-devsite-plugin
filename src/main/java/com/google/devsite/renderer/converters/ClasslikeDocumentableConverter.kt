@@ -64,6 +64,7 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
+import com.google.devsite.renderer.not
 import com.google.devsite.strictSingleOrNull
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
@@ -291,10 +292,26 @@ internal abstract class ClasslikeDocumentableConverter(
 
         val (inheritedFunctions, inheritedConstants, inheritedProperties) = inheritedTypes.await()
 
+        val isJavaOnlyClasslike = docsHolder.isFromSyntheticClass(classlike.dri)
+        val isKotlinOnlyNonJVMClasslike =
+            this@ClasslikeDocumentableConverter is KmpClasslikeConverter &&
+                classlike.getExpectOrCommonSourceSet().analysisPlatform !in
+                listOf(org.jetbrains.dokka.Platform.common, org.jetbrains.dokka.Platform.jvm)
+        val isNotDisplayedForOtherLanguage = docsHolder.excludedPackages[displayLanguage.not()]!!
+            .any { it.matches(classlike.packageName()) }
+
+        val pathForSwitcher = when {
+            // Kotlin-only (non-JVM-target) members can't be used from a JVM target at all
+            (isNotDisplayedForOtherLanguage || isKotlinOnlyNonJVMClasslike) -> null
+            // Java-only (synthetic) classlikes' members are in the package summary in Kotlin
+            isJavaOnlyClasslike -> pathProvider.forReference(classlike.dri.parent).url
+            else -> pathProvider.forReference(classlike.dri).url
+        }
+
         DefaultDevsitePage(
             DevsitePage.Params(
                 displayLanguage,
-                path = pathProvider.forReference(classlike.dri).url,
+                pathForSwitcher = pathForSwitcher?.removePrefix(pathProvider.rootPath + "/"),
                 bookPath = pathProvider.book,
                 title = classlike.name(),
                 content = DefaultClasslike(
