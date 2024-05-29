@@ -147,7 +147,7 @@ val benchmarkVersion = "1.2.0"
 dependencies {
     testDataImpl("io.reactivex.rxjava3:rxjava:3.0.2")
     testDataImpl("io.reactivex.rxjava2:rxjava:2.2.9")
-    testDataImpl("org.robolectric:sandbox:4.12.1")
+    testDataImpl("org.robolectric:sandbox:4.12.2")
     testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:$coroutinesVersion")
     testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-rx2:$coroutinesVersion")
     testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-rx3:$coroutinesVersion")
