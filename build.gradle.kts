@@ -29,7 +29,7 @@ repositories {
 group = "com.google.devsite"
 version = "1.6.0" // This is appended to archiveBaseName in the ShadowJar task.
 
-val dokkaVersion = "2.0.0-test-2b6eb92892fa8ca794a1ea40a1117efd32106d05"
+val dokkaVersion = "2.0.20-dev-337"
 val kotlinVersion = "1.9.20"
 val jacksonVersion = "2.15.0"
 val coroutinesVersion = "1.6.3"
@@ -53,6 +53,8 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
     implementation("org.jetbrains.dokka:dokka-gradle-plugin:$dokkaVersion")
     compileOnly("org.jetbrains.dokka:analysis-kotlin-api:$dokkaVersion")
+    implementation("org.jetbrains.dokka:analysis-kotlin-descriptors:$dokkaVersion")
+
 
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.9.1")
     implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
