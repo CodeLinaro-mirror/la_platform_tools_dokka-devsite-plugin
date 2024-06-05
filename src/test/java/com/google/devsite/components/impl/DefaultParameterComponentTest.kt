@@ -34,323 +34,342 @@ import org.junit.Test
 class DefaultParameterComponentTest {
     @Test
     fun `Simple Kotlin parameter renders correctly`() {
-        val component = DefaultParameterComponent(
-            Params(
-                name = "number",
-                type = NoopTypeProjectionComponent("Int"),
-                displayLanguage = Language.KOTLIN,
-            ),
-        )
+        val component =
+            DefaultParameterComponent(
+                Params(
+                    name = "number",
+                    type = NoopTypeProjectionComponent("Int"),
+                    displayLanguage = Language.KOTLIN,
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>number:&nbsp;Int</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Simple Java parameter renders correctly`() {
-        val component = DefaultParameterComponent(
-            Params(
-                name = "number",
-                type = NoopTypeProjectionComponent("int"),
-                displayLanguage = Language.JAVA,
-            ),
-        )
+        val component =
+            DefaultParameterComponent(
+                Params(
+                    name = "number",
+                    type = NoopTypeProjectionComponent("int"),
+                    displayLanguage = Language.JAVA,
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>int&nbsp;number</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Kotlin parameter without name renders correctly`() {
-        val component = DefaultParameterComponent(
-            Params(
-                name = "",
-                type = NoopTypeProjectionComponent("Int"),
-                displayLanguage = Language.KOTLIN,
-            ),
-        )
+        val component =
+            DefaultParameterComponent(
+                Params(
+                    name = "",
+                    type = NoopTypeProjectionComponent("Int"),
+                    displayLanguage = Language.KOTLIN,
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>Int</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Vararg Kotlin parameter renders correctly`() {
-        val component = DefaultParameterComponent(
-            Params(
-                name = "number",
-                type = NoopTypeProjectionComponent("Int"),
-                displayLanguage = Language.KOTLIN,
-                modifiers = Modifiers("vararg"),
-            ),
-        )
+        val component =
+            DefaultParameterComponent(
+                Params(
+                    name = "number",
+                    type = NoopTypeProjectionComponent("Int"),
+                    displayLanguage = Language.KOTLIN,
+                    modifiers = Modifiers("vararg"),
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>vararg&nbsp;number:&nbsp;Int</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Java parameter without name renders correctly`() {
-        val component = DefaultParameterComponent(
-            Params(
-                name = "",
-                type = NoopTypeProjectionComponent("int"),
-                displayLanguage = Language.JAVA,
-            ),
-        )
+        val component =
+            DefaultParameterComponent(
+                Params(
+                    name = "",
+                    type = NoopTypeProjectionComponent("int"),
+                    displayLanguage = Language.JAVA,
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>int</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Kotlin parameter with annotations renders correctly`() {
-        val component = DefaultParameterComponent(
-            Params(
-                name = "number",
-                type = NoopTypeProjectionComponent("Int"),
-                displayLanguage = Language.KOTLIN,
-                annotationComponents = listOf(
-                    NoopAnnotationComponent("@Really"),
-                    NoopAnnotationComponent("@Special"),
+        val component =
+            DefaultParameterComponent(
+                Params(
+                    name = "number",
+                    type = NoopTypeProjectionComponent("Int"),
+                    displayLanguage = Language.KOTLIN,
+                    annotationComponents =
+                        listOf(
+                            NoopAnnotationComponent("@Really"),
+                            NoopAnnotationComponent("@Special"),
+                        ),
                 ),
-            ),
-        )
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>@Really @Special number:&nbsp;Int</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Java parameter with annotations renders correctly`() {
-        val component = DefaultParameterComponent(
-            Params(
-                name = "number",
-                type = NoopTypeProjectionComponent("int"),
-                displayLanguage = Language.JAVA,
-                annotationComponents = listOf(
-                    NoopAnnotationComponent("@Really"),
-                    NoopAnnotationComponent("@Special"),
+        val component =
+            DefaultParameterComponent(
+                Params(
+                    name = "number",
+                    type = NoopTypeProjectionComponent("int"),
+                    displayLanguage = Language.JAVA,
+                    annotationComponents =
+                        listOf(
+                            NoopAnnotationComponent("@Really"),
+                            NoopAnnotationComponent("@Special"),
+                        ),
                 ),
-            ),
-        )
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>@Really @Special int&nbsp;number</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Kotlin parameter with factory lambda renders correctly`() {
-        val component = DefaultParameterComponent(
-            Params(
-                name = "block",
-                type = NoopLambdaTypeProjectionComponent(type = "Unit"),
-                displayLanguage = Language.KOTLIN,
-            ),
-        )
+        val component =
+            DefaultParameterComponent(
+                Params(
+                    name = "block",
+                    type = NoopLambdaTypeProjectionComponent(type = "Unit"),
+                    displayLanguage = Language.KOTLIN,
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> Unit</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Kotlin parameter with receiver renders correctly`() {
-        val component = DefaultParameterComponent(
-            Params(
-                name = "number",
-                type = NoopLambdaTypeProjectionComponent(receiver = "Int", type = "Int"),
-                displayLanguage = Language.KOTLIN,
-            ),
-        )
+        val component =
+            DefaultParameterComponent(
+                Params(
+                    name = "number",
+                    type = NoopLambdaTypeProjectionComponent(receiver = "Int", type = "Int"),
+                    displayLanguage = Language.KOTLIN,
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>number:&nbsp;Int.() <span style="white-space: nowrap;">-&gt;</span> Int</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Kotlin parameter with lambda params renders correctly`() {
-        val component = DefaultParameterComponent(
-            Params(
-                name = "number",
-                type = DefaultLambdaTypeProjectionComponent(
-                    LambdaTypeProjectionComponent.Params(
-                        type = NoopLink("Int"),
-                        nullability = Nullability.KOTLIN_DEFAULT,
-                        displayLanguage = Language.KOTLIN,
-                        lambdaParams = listOf(
-                            NoopParameterComponent("Int"),
-                            NoopParameterComponent("String"),
+        val component =
+            DefaultParameterComponent(
+                Params(
+                    name = "number",
+                    type =
+                        DefaultLambdaTypeProjectionComponent(
+                            LambdaTypeProjectionComponent.Params(
+                                type = NoopLink("Int"),
+                                nullability = Nullability.KOTLIN_DEFAULT,
+                                displayLanguage = Language.KOTLIN,
+                                lambdaParams =
+                                    listOf(
+                                        NoopParameterComponent("Int"),
+                                        NoopParameterComponent("String"),
+                                    ),
+                            ),
                         ),
-                    ),
+                    displayLanguage = Language.KOTLIN,
                 ),
-                displayLanguage = Language.KOTLIN,
-            ),
-        )
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>number:&nbsp;(Int, String) <span style="white-space: nowrap;">-&gt;</span> Int</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Kotlin parameter with both receiver and lambda params renders correctly`() {
-        val component = DefaultParameterComponent(
-            Params(
-                name = "number",
-                type = DefaultLambdaTypeProjectionComponent(
-                    LambdaTypeProjectionComponent.Params(
-                        type = NoopLink("Int"),
-                        nullability = Nullability.KOTLIN_DEFAULT,
-                        displayLanguage = Language.KOTLIN,
-                        lambdaParams = listOf(NoopParameterComponent("String")),
-                        receiver = NoopTypeProjectionComponent("Boolean"),
-                    ),
+        val component =
+            DefaultParameterComponent(
+                Params(
+                    name = "number",
+                    type =
+                        DefaultLambdaTypeProjectionComponent(
+                            LambdaTypeProjectionComponent.Params(
+                                type = NoopLink("Int"),
+                                nullability = Nullability.KOTLIN_DEFAULT,
+                                displayLanguage = Language.KOTLIN,
+                                lambdaParams = listOf(NoopParameterComponent("String")),
+                                receiver = NoopTypeProjectionComponent("Boolean"),
+                            ),
+                        ),
+                    displayLanguage = Language.KOTLIN,
                 ),
-                displayLanguage = Language.KOTLIN,
-            ),
-        )
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>number:&nbsp;Boolean.(String) <span style="white-space: nowrap;">-&gt;</span> Int</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Kotlin parameter with lambda modifiers renders correctly`() {
-        val component = DefaultParameterComponent(
-            Params(
-                name = "number",
-                type = DefaultLambdaTypeProjectionComponent(
-                    LambdaTypeProjectionComponent.Params(
-                        type = NoopLink("Int"),
-                        nullability = Nullability.KOTLIN_DEFAULT,
-                        displayLanguage = Language.KOTLIN,
-                        lambdaModifiers = listOf("suspend"),
-                        lambdaParams = listOf(NoopParameterComponent("String")),
-                    ),
+        val component =
+            DefaultParameterComponent(
+                Params(
+                    name = "number",
+                    type =
+                        DefaultLambdaTypeProjectionComponent(
+                            LambdaTypeProjectionComponent.Params(
+                                type = NoopLink("Int"),
+                                nullability = Nullability.KOTLIN_DEFAULT,
+                                displayLanguage = Language.KOTLIN,
+                                lambdaModifiers = listOf("suspend"),
+                                lambdaParams = listOf(NoopParameterComponent("String")),
+                            ),
+                        ),
+                    displayLanguage = Language.KOTLIN,
                 ),
-                displayLanguage = Language.KOTLIN,
-            ),
-        )
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>number:&nbsp;suspend&nbsp;(String) <span style="white-space: nowrap;">-&gt;</span> Int</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Kotlin parameter with default value renders correctly`() {
-        val component = DefaultParameterComponent(
-            Params(
-                name = "number",
-                type = NoopTypeProjectionComponent("Int"),
-                displayLanguage = Language.KOTLIN,
-                defaultValue = "5",
-            ),
-        )
+        val component =
+            DefaultParameterComponent(
+                Params(
+                    name = "number",
+                    type = NoopTypeProjectionComponent("Int"),
+                    displayLanguage = Language.KOTLIN,
+                    defaultValue = "5",
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>number:&nbsp;Int = 5</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 }

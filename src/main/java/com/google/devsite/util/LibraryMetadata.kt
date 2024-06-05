@@ -19,9 +19,7 @@ package com.google.devsite.util
 import com.google.devsite.components.Link
 import com.google.devsite.components.impl.DefaultLink
 
-/**
- * Data class to store the metadata associated with a particular artifact ID
- */
+/** Data class to store the metadata associated with a particular artifact ID */
 data class LibraryMetadata(
     var groupId: String,
     var artifactId: String,
@@ -38,11 +36,12 @@ data class LibraryMetadata(
         ): Map<String, LibraryMetadata> {
             val fileMetadataMap = hashMapOf<String, LibraryMetadata>()
             metadataList.forEach { jsonLibraryMetadata ->
-                val fileMetadata = LibraryMetadata(
-                    groupId = jsonLibraryMetadata.groupId,
-                    artifactId = jsonLibraryMetadata.artifactId,
-                    releaseNotesUrl = jsonLibraryMetadata.releaseNotesUrl,
-                )
+                val fileMetadata =
+                    LibraryMetadata(
+                        groupId = jsonLibraryMetadata.groupId,
+                        artifactId = jsonLibraryMetadata.artifactId,
+                        releaseNotesUrl = jsonLibraryMetadata.releaseNotesUrl,
+                    )
 
                 jsonLibraryMetadata.jarContents.forEach { file ->
 

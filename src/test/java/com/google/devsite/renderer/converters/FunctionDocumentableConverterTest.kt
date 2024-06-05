@@ -49,20 +49,24 @@ internal class FunctionDocumentableConverterTest(
     displayLanguage: Language,
 ) : ConverterTestBase(displayLanguage) {
 
-    override var defaultHints = ModifierHints(
-        displayLanguage = displayLanguage,
-        isSummary = false,
-        type = DFunction::class.java,
-        containingType = DClass::class.java,
-        isFromJava = false, // There's no great way to do this. Currently only affects
-        // `const` inject
-    )
+    override var defaultHints =
+        ModifierHints(
+            displayLanguage = displayLanguage,
+            isSummary = false,
+            type = DFunction::class.java,
+            containingType = DClass::class.java,
+            isFromJava = false, // There's no great way to do this. Currently only affects
+            // `const` inject
+        )
 
     @Test
     fun `Top level function summary component has correct default modifiers`() {
-        val summary = """
+        val summary =
+            """
             |fun foo() = Unit
-        """.render().functionSummary()
+        """
+                .render()
+                .functionSummary()
 
         val returnz = summary.returnSummary()
 
@@ -71,9 +75,12 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Function summary component ignores public modifier`() {
-        val summary = """
+        val summary =
+            """
             |public fun foo() = Unit
-        """.render().functionSummary()
+        """
+                .render()
+                .functionSummary()
 
         val returnz = summary.returnSummary()
 
@@ -83,9 +90,12 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Function summary component has suspend modifier`() {
-        val summary = """
+        val summary =
+            """
             |suspend fun foo() = Unit
-        """.render().functionSummary()
+        """
+                .render()
+                .functionSummary()
 
         val returnz = summary.returnSummary()
 
@@ -94,9 +104,12 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Function summary component has inline modifier`() {
-        val summary = """
+        val summary =
+            """
             |inline fun foo() = Unit
-        """.render().functionSummary()
+        """
+                .render()
+                .functionSummary()
 
         val returnz = summary.returnSummary()
 
@@ -105,11 +118,14 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Function summary for protected component in abstract class has no modifier`() {
-        val summary = """
+        val summary =
+            """
             |abstract class Foo {
             |    protected open fun foo() = Unit
             |}
-        """.render().functionSummary()
+        """
+                .render()
+                .functionSummary()
 
         val returnz = summary.returnSummary()
 
@@ -120,11 +136,14 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Function summary component in abstract class has abstract modifier`() {
-        val summary = """
+        val summary =
+            """
             |abstract class Foo {
             |    abstract fun foo()
             |}
-        """.render().functionSummary()
+        """
+                .render()
+                .functionSummary()
 
         val returnz = summary.returnSummary()
 
@@ -133,11 +152,14 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Function summary component in class has open modifiers`() {
-        val summary = """
+        val summary =
+            """
             |class Foo {
             |    open fun foo() = Unit
             |}
-        """.render().functionSummary()
+        """
+                .render()
+                .functionSummary()
 
         val returnz = summary.returnSummary()
 
@@ -147,11 +169,14 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Function summary abstract before suspend`() {
-        val summary = """
+        val summary =
+            """
             |class Foo {
             |    abstract suspend fun foo(): Unit
             |}
-        """.render().functionSummary()
+        """
+                .render()
+                .functionSummary()
 
         val returnz = summary.returnSummary()
 
@@ -163,19 +188,24 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Function summary component in interface has abstract modifiers when appropriate`() {
-        val summariesK = """
+        val summariesK =
+            """
             |interface Foo {
             |    fun foo()
             |    fun bar() = "default implementation"
             |}
-        """.render().functionSummaries(defaultHints.copy(containingType = DInterface::class.java))
-        val summariesJ = """
+        """
+                .render()
+                .functionSummaries(defaultHints.copy(containingType = DInterface::class.java))
+        val summariesJ =
+            """
             |public interface Foo {
             |    public void foo();
             |    public default void bar() {return "default implementation"; }
             |}
-         """.render(java = true)
-            .functionSummaries(defaultHints.copy(containingType = DInterface::class.java))
+         """
+                .render(java = true)
+                .functionSummaries(defaultHints.copy(containingType = DInterface::class.java))
 
         for (summaries in listOf(summariesK, summariesJ)) {
             val fooReturnz = summaries["foo"]!!.returnSummary()
@@ -193,10 +223,13 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Function summary component creates return type link`() {
-        val summary = """
+        val summary =
+            """
             |class A
             |fun foo(): A
-        """.render().functionSummary()
+        """
+                .render()
+                .functionSummary()
 
         val returnType = summary.returnSummary().type
 
@@ -206,9 +239,12 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Function summary component creates void return type link`() {
-        val summary = """
+        val summary =
+            """
             |fun foo() = Unit
-        """.render().functionSummary()
+        """
+                .render()
+                .functionSummary()
 
         val returnType = summary.returnSummary().type
 
@@ -225,9 +261,12 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Function summary component handles constructors`() {
-        val summary = """
+        val summary =
+            """
             |class MyClass
-        """.render().functionSummary()
+        """
+                .render()
+                .functionSummary()
 
         val constructor = summary.data.description
 
@@ -236,9 +275,12 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Function summary component creates return type generics`() {
-        val summary = """
+        val summary =
+            """
             |fun foo(): Map<String, List<Long>>
-        """.render().functionSummary()
+        """
+                .render()
+                .functionSummary()
 
         val returnz = summary.returnSummary()
         val generics = returnz.type.data.generics.items(2)
@@ -251,9 +293,12 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Function summary component creates signature with name`() {
-        val summary = """
+        val summary =
+            """
             |fun iAmACoolFunction()
-        """.render().functionSummary()
+        """
+                .render()
+                .functionSummary()
 
         val function = summary.data.description
 
@@ -262,9 +307,12 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Function summary component creates extension receiver`() {
-        val summary = """
+        val summary =
+            """
             |fun String.foo()
-        """.render().functionSummary()
+        """
+                .render()
+                .functionSummary()
 
         val function = summary.data.description
         val signature = function.functionSignature()
@@ -292,9 +340,12 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Function summary component creates extension receiver for proper type`() {
-        val summary = """
+        val summary =
+            """
             |fun Any.foo()
-        """.render().functionSummary()
+        """
+                .render()
+                .functionSummary()
 
         val function = summary.data.description
         val signature = function.data.signature
@@ -323,9 +374,12 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Function summary component creates params`() {
-        val summary = """
+        val summary =
+            """
             |fun foo(a: String)
-        """.render().functionSummary()
+        """
+                .render()
+                .functionSummary()
 
         val function = summary.data.description
         val param = function.data.signature.data.parameters.single()
@@ -338,9 +392,12 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Function summary component creates inline generics`() {
-        val summary = """
+        val summary =
+            """
             |fun <T: Number, U> foo() = Unit
-        """.render().functionSummary()
+        """
+                .render()
+                .functionSummary()
         val typeParams = summary.data.description.data.signature.data.typeParameters
         assertThat(typeParams.first().data.name).isEqualTo("T")
         assertThat(typeParams.first().projectionName()).isEqualTo("Number")
@@ -351,9 +408,18 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Function signature component creates multiple inline generics`() {
-        val inlineGenerics = """
+        val inlineGenerics =
+            """
             |fun <T: Number, U: List<String>, V: T> foo() = Unit
-        """.render().functionSummary().data.description.data.signature.data.typeParameters
+        """
+                .render()
+                .functionSummary()
+                .data
+                .description
+                .data
+                .signature
+                .data
+                .typeParameters
 
         assertThat(inlineGenerics.map { it.data.name }).isEqualTo(listOf("T", "U", "V"))
         assertThat(inlineGenerics[0].projectionName()).isEqualTo("Number")
@@ -365,9 +431,12 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Function summary component has correct relative link`() {
-        val summary = """
+        val summary =
+            """
             |fun <T : Number> List<String>.foo(t: T, a: Map<String, Int>, block: String.(Float) -> Double) = Unit
-        """.render().functionSummary()
+        """
+                .render()
+                .functionSummary()
 
         val function = summary.data.description
         val signature = function.data.signature
@@ -382,10 +451,13 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Function summary component understands Java primitives`() {
-        val summary = """
+        val summary =
+            """
             |public void foo(
             |    boolean a, int b, double c, float d, short e, long f, char g, byte h) {}
-        """.render(java = true).functionSummary()
+        """
+                .render(java = true)
+                .functionSummary()
 
         val function = summary.data.description
         val returnType = summary.returnSummary().type.link()
@@ -413,9 +485,12 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Function summary component understands Java object`() {
-        val summary = """
+        val summary =
+            """
             |public Object foo() {}
-        """.render(java = true).functionSummary()
+        """
+                .render(java = true)
+                .functionSummary()
 
         val returnType = summary.returnSummary().type.link()
 
@@ -425,12 +500,18 @@ internal class FunctionDocumentableConverterTest(
 
     @Test // b/190477978 Patch upstream to generate default java constructor
     fun `Function summary component exists for (default) constructors`() {
-        val summaryK = """
+        val summaryK =
+            """
             |class Foo
-        """.render().functionSummary()
-        val summaryJ = """
+        """
+                .render()
+                .functionSummary()
+        val summaryJ =
+            """
             |public class Foo {}
-        """.render(java = true).functionSummary()
+        """
+                .render(java = true)
+                .functionSummary()
         for (summary in listOf(summaryJ, summaryK)) {
             val ctor = summaryK.data.description
             assertThat(ctor.name()).isEqualTo("Foo")
@@ -439,18 +520,24 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Function detail component has correct name`() {
-        val detail = """
+        val detail =
+            """
             |fun foo()
-        """.render().functionDetail()
+        """
+                .render()
+                .functionDetail()
 
         assertThat(detail.data.name).isEqualTo("foo")
     }
 
     @Test
     fun `Top level function detail component has correct default modifiers`() {
-        val detail = """
+        val detail =
+            """
             |fun foo() = Unit
-        """.render().functionDetail()
+        """
+                .render()
+                .functionDetail()
 
         javaOnly { assertThat(detail.data.modifiers).containsExactly("public", "final") }
         kotlinOnly { assertThat(detail.data.modifiers).isEmpty() }
@@ -458,28 +545,35 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Top level function detail component has annotations`() {
-        val detail = """
+        val detail =
+            """
             |annotation class Hello
             |@Hello fun foo() = Unit
-        """.render().functionDetail()
+        """
+                .render()
+                .functionDetail()
 
         assertThat(detail.data.annotationComponents).isNotEmpty()
     }
 
     @Test
     fun `Function summary and detail include nullability information in 4x Kotlin and Java`() {
-        val moduleJ = """
+        val moduleJ =
+            """
                 |@Nullable
                 |public String nulla() { return null; }
                 |public String platform() { return null; }
                 |@NonNull
                 |public String nonnaBefore() { return ""; }
                 |public @NonNull String nonnaClose() { return ""; }
-                """.render(java = true)
-        val moduleK = """
+                """
+                .render(java = true)
+        val moduleK =
+            """
                 |fun nulla(): String? = null // nullability annotations in Kotlin are errors.
                 |fun nonna(): String = "foo"
-                """.render()
+                """
+                .render()
         fun DModule.sOrD(summary: Boolean, functionName: String): TypeProjectionComponent =
             if (summary) {
                 functionSummary(functionName).data.title.data.type
@@ -514,7 +608,8 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Function detail signature nullability is correct on example from Platform`() {
-        val detail = """
+        val detail =
+            """
             |/**
             | * Defines a mapping from an int value to a String. Such a mapping can be used
             | * in an @ExportedProperty to provide more meaningful values to the end user.
@@ -556,7 +651,9 @@ internal class FunctionDocumentableConverterTest(
             | * @see android.view.ViewDebug.IntToString
             | */
             |public IntToString[] indexMapping() default { };
-        """.render(java = true).functionDetail()
+        """
+                .render(java = true)
+                .functionDetail()
         val returnType = detail.data.returnType
         val primaryAnnotations = returnType.annotations
 
@@ -569,16 +666,15 @@ internal class FunctionDocumentableConverterTest(
             val genericAnnotations = returnTypeGeneric.annotations
             assertThat(genericAnnotations).isEmpty()
         }
-        javaOnly {
-            assertThat(returnType.name()).isEqualTo("Test.IntToString[]")
-        }
+        javaOnly { assertThat(returnType.name()).isEqualTo("Test.IntToString[]") }
         assertThat(returnType.nullable).isTrue()
         assertThat(primaryAnnotations).isEmpty()
     }
 
     @Test
     fun `Nullability annotations in java source are preserved, Fragment example`() {
-        val signature = """
+        val signature =
+            """
             |public @interface androidx.annotation.NonNull
             |/**
             | * Print internal state into the given stream.
@@ -590,7 +686,11 @@ internal class FunctionDocumentableConverterTest(
             | * @param args additional arguments to the dump request.
             | */
             |public void onDump(@NonNull java.lang.String prefix, @Nullable java.io.FileDescriptor fd, @NonNull java.io.PrintWriter writer, @Nullable java.lang.String[] args) { throw new RuntimeException("Stub!"); }
-        """.render(java = true).functionDetail("onDump").data.signature
+        """
+                .render(java = true)
+                .functionDetail("onDump")
+                .data
+                .signature
         val param1 = signature.data.parameters[0]
         assertThat(param1.data.name).isEqualTo("prefix")
         assertThat(param1.typeName()).isEqualTo("String")
@@ -601,11 +701,16 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Lambda parameter type is correct when identical to lambda return type or receiver`() {
-        val summary = """
+        val summary =
+            """
             |fun ScrollableState(consumeScrollDelta: Float.(Float) -> Float): ScrollableState {
             |    return DefaultScrollableState(consumeScrollDelta)
             |}
-        """.render().functionSummary("ScrollableState").data.description
+        """
+                .render()
+                .functionSummary("ScrollableState")
+                .data
+                .description
         kotlinOnly {
             val parameter = summary.data.signature.data.parameters.single()
             val lambda = (parameter.data.type as LambdaTypeProjectionComponent)
@@ -618,18 +723,24 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Function detail component is marked as function type`() {
-        val detail = """
+        val detail =
+            """
             |fun foo()
-        """.render().functionDetail()
+        """
+                .render()
+                .functionDetail()
 
         assertThat(detail.data.symbolKind).isEqualTo(SymbolKind.FUNCTION)
     }
 
     @Test
     fun `Function detail component creates void return type link`() {
-        val detail = """
+        val detail =
+            """
             |fun foo() = Unit
-        """.render().functionDetail()
+        """
+                .render()
+                .functionDetail()
 
         val returnType = detail.data.returnType
 
@@ -646,29 +757,39 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Function detail component has correct anchors`() {
-        val detail = """
+        val detail =
+            """
             |fun <T : Number> List<String>.foo(t: T, a: Map<String, Int>, block: String.(Float) -> Double) = Unit
-        """.render().functionDetail()
+        """
+                .render()
+                .functionDetail()
 
-        assertThat(detail.data.anchors).containsExactly(
-            "(kotlin.collections.List).foo(kotlin.Number,kotlin.collections.Map,kotlin.Function2)",
-            "(kotlin.collections.List)" +
-                ".foo(kotlin.Number, kotlin.collections.Map, kotlin.Function2)",
-            "-kotlin.collections.List-.foo-kotlin.Number-kotlin.collections.Map-kotlin.Function2-",
-            "foo",
-        )
+        assertThat(detail.data.anchors)
+            .containsExactly(
+                "(kotlin.collections.List).foo(kotlin.Number,kotlin.collections.Map,kotlin.Function2)",
+                "(kotlin.collections.List)" +
+                    ".foo(kotlin.Number, kotlin.collections.Map, kotlin.Function2)",
+                "-kotlin.collections.List-.foo-kotlin.Number-kotlin.collections.Map-kotlin.Function2-",
+                "foo",
+            )
     }
 
     @Test
     fun `Where statement generates correct bounds`() {
-        val signatureK = """
+        val signatureK =
+            """
             |fun <T> copyWhenGreater(list: List<T>, threshold: T): List<String>
             |   where T : CharSequence,
             |         T : Comparable<T> { return emptyList() }
-        """.render().functionSignature()
-        val signatureJ = """
+        """
+                .render()
+                .functionSignature()
+        val signatureJ =
+            """
             |public <T extends Kotlin.CharSequence & Comparable<T>> List<String> copyWhenGreater(List<T> list, T threshold) {}
-        """.render(java = true).functionSignature()
+        """
+                .render(java = true)
+                .functionSignature()
         for (signature in listOf(signatureJ, signatureK)) {
             val bounds = signature.data.typeParameters.single().data.projections
             assertThat(bounds[0].data.type.data.name).isEqualTo("CharSequence")
@@ -679,18 +800,22 @@ internal class FunctionDocumentableConverterTest(
 
     @Test // This is broken upstream: b/203682189, go/dokka-upstream-bug/2561
     fun `Overall nullability of array types is handled properly in 4x Java and Kotlin`() {
-        val moduleK = """
+        val moduleK =
+            """
             |fun foo(): IntArray?
             |fun oof(): IntArray
             |fun bar(param: List<Array<String>?>)
             |fun rab(param: List<Array<String>>)
-        """.render()
-        val moduleJ = """
+        """
+                .render()
+        val moduleJ =
+            """
             |public int[] foo();
             |public @NonNull int[] oof();
             |public void bar(java.util.List<int[]> param)
             |public void rab(java.util.List<@NonNull int[]> param)
-        """.render(java = true)
+        """
+                .render(java = true)
 
         val drab = moduleJ.function("rab")!!.parameters.single()
         val genericDrab = (drab.type as GenericTypeConstructor).projections.single()
@@ -713,9 +838,7 @@ internal class FunctionDocumentableConverterTest(
             assertThat(barType.nullable).isTrue()
             assertThat(barType.data.annotationComponents).isEmpty() // @Nullable is never injected
 
-            javaOnly {
-                assertThat(oofType.data.annotationComponents.single().isAtNonNull).isTrue()
-            }
+            javaOnly { assertThat(oofType.data.annotationComponents.single().isAtNonNull).isTrue() }
             kotlinOnly {
                 assertThat(oofType.data.annotationComponents).isEmpty()
                 assertThat(rabType.data.annotationComponents).isEmpty()
@@ -734,11 +857,15 @@ internal class FunctionDocumentableConverterTest(
 
     @Test // This source is from compose.foundation.DarkTheme
     fun `Delegate-to-internal pattern works in Kotlin`() {
-        val returnSummary = """
+        val returnSummary =
+            """
             fun isSystemInDarkTheme() = _isSystemInDarkTheme()
 
             internal expect fun _isSystemInDarkTheme(): Boolean
-        """.render().functionSummary("isSystemInDarkTheme").returnSummary()
+        """
+                .render()
+                .functionSummary("isSystemInDarkTheme")
+                .returnSummary()
         assertThat(returnSummary.type.name().lowercase()).isEqualTo("boolean")
     }
 
@@ -751,9 +878,10 @@ internal class FunctionDocumentableConverterTest(
     companion object {
         @JvmStatic
         @Parameterized.Parameters(name = "{0}")
-        fun data() = listOf(
-            arrayOf(Language.JAVA),
-            arrayOf(Language.KOTLIN),
-        )
+        fun data() =
+            listOf(
+                arrayOf(Language.JAVA),
+                arrayOf(Language.KOTLIN),
+            )
     }
 }

@@ -29,68 +29,72 @@ class DefaultAnnotationComponentTest {
     fun `Annotation with no params renders correctly`() {
         val component = DefaultAnnotationComponent(Params(NoopLink("Foo")))
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>@Foo</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Annotation with one param renders correctly`() {
-        val component = DefaultAnnotationComponent(
-            Params(
-                type = NoopLink("Foo"),
-                parameters = listOf(
-                    DefaultNamedValueAnnotationParameter(
-                        NamedValueAnnotationParameter.Params("a", "value"),
-                    ),
+        val component =
+            DefaultAnnotationComponent(
+                Params(
+                    type = NoopLink("Foo"),
+                    parameters =
+                        listOf(
+                            DefaultNamedValueAnnotationParameter(
+                                NamedValueAnnotationParameter.Params("a", "value"),
+                            ),
+                        ),
                 ),
-            ),
-        )
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>@Foo(a&nbsp;=&nbsp;value)</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Annotation with multiple params renders correctly`() {
-        val component = DefaultAnnotationComponent(
-            Params(
-                type = NoopLink("Foo"),
-                parameters = listOf(
-                    DefaultNamedValueAnnotationParameter(
-                        NamedValueAnnotationParameter.Params("a", "value"),
-                    ),
-                    DefaultNamedValueAnnotationParameter(
-                        NamedValueAnnotationParameter.Params("another", "value"),
-                    ),
+        val component =
+            DefaultAnnotationComponent(
+                Params(
+                    type = NoopLink("Foo"),
+                    parameters =
+                        listOf(
+                            DefaultNamedValueAnnotationParameter(
+                                NamedValueAnnotationParameter.Params("a", "value"),
+                            ),
+                            DefaultNamedValueAnnotationParameter(
+                                NamedValueAnnotationParameter.Params("another", "value"),
+                            ),
+                        ),
                 ),
-            ),
-        )
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>@Foo(a&nbsp;=&nbsp;value,&nbsp;another&nbsp;=&nbsp;value)</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 }

@@ -27,15 +27,15 @@ class DefaultRawTest {
     fun `Raw text renders correctly`() {
         val component = DefaultRaw(Params("Hello world!"))
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>Hello world!</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 }

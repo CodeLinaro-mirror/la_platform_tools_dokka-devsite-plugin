@@ -23,6 +23,7 @@ import com.google.devsite.components.symbols.VersionMetadataComponent
 import com.google.devsite.renderer.converters.ParameterDocumentableConverter.Companion.rewriteKotlinPrimitivesForJava
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.util.LibraryMetadata
+import java.util.concurrent.ConcurrentHashMap
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.Contravariance
@@ -49,7 +50,6 @@ import org.jetbrains.dokka.model.UnresolvedBound
 import org.jetbrains.dokka.model.Void
 import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.isExtension
-import java.util.concurrent.ConcurrentHashMap
 
 /**
  * Creates metadata components (a section containing information such as artifact ID and source
@@ -58,18 +58,18 @@ import java.util.concurrent.ConcurrentHashMap
 internal class MetadataConverter(
     private val docsHolder: DocumentablesHolder,
 ) {
-    /**
-     * Creates a metadata component for the classlike.
-     */
+    /** Creates a metadata component for the classlike. */
     fun getMetadataForClasslike(classlike: DClasslike): MetadataComponent {
         val libraryMetadata = classlike.findMatchingLibraryMetadata()
-        val sourceUrl = classlike.createLinkToSource(
-            docsHolder.baseClassSourceLink,
-            classlike.dri.fullName,
-        )
-        val versionMetadata = classlike.findMatchingVersionMetadata(
-            libraryMetadata?.releaseNotesUrl,
-        )
+        val sourceUrl =
+            classlike.createLinkToSource(
+                docsHolder.baseClassSourceLink,
+                classlike.dri.fullName,
+            )
+        val versionMetadata =
+            classlike.findMatchingVersionMetadata(
+                libraryMetadata?.releaseNotesUrl,
+            )
 
         return DefaultMetadataComponent(
             MetadataComponent.Params(
@@ -80,9 +80,7 @@ internal class MetadataConverter(
         )
     }
 
-    /**
-     * Creates a metadata component for the [function].
-     */
+    /** Creates a metadata component for the [function]. */
     fun getMetadataForFunction(function: DFunction): MetadataComponent {
         val libraryMetadata = function.findMatchingLibraryMetadata()
         val versionMetadata = function.findMatchingVersionMetadata(libraryMetadata?.releaseNotesUrl)
@@ -90,22 +88,24 @@ internal class MetadataConverter(
         // Display library metadata and source links only for top-level and extension functions, so
         // they aren't duplicated from the class metadata for functions within classes.
         val includeAdditionalMetadata = function.dri.isTopLevel() || function.isExtension()
-        val sourceLink = if (includeAdditionalMetadata) {
-            // If this is a property accessor, link to the property instead because the function may
-            // not exist in source.
-            val sourceProperty = function.extra[SourceProperty.PropertyKey]?.property
-            sourceProperty?.createLinkToSource(
-                docsHolder.basePropertySourceLink,
-                sourceProperty.name,
-            )
-                ?: function.createLinkToSource(
-                    docsHolder.baseFunctionSourceLink,
-                    // If the function was renamed, use the name from source.
-                    function.extra[OriginalName.PropertyKey]?.name ?: function.name,
+        val sourceLink =
+            if (includeAdditionalMetadata) {
+                // If this is a property accessor, link to the property instead because the function
+                // may
+                // not exist in source.
+                val sourceProperty = function.extra[SourceProperty.PropertyKey]?.property
+                sourceProperty?.createLinkToSource(
+                    docsHolder.basePropertySourceLink,
+                    sourceProperty.name,
                 )
-        } else {
-            null
-        }
+                    ?: function.createLinkToSource(
+                        docsHolder.baseFunctionSourceLink,
+                        // If the function was renamed, use the name from source.
+                        function.extra[OriginalName.PropertyKey]?.name ?: function.name,
+                    )
+            } else {
+                null
+            }
 
         return DefaultMetadataComponent(
             MetadataComponent.Params(
@@ -116,9 +116,7 @@ internal class MetadataConverter(
         )
     }
 
-    /**
-     * Creates a metadata component for the [property].
-     */
+    /** Creates a metadata component for the [property]. */
     fun getMetadataForProperty(property: DProperty): MetadataComponent {
         val libraryMetadata = property.findMatchingLibraryMetadata()
         val versionMetadata = property.findMatchingVersionMetadata(libraryMetadata?.releaseNotesUrl)
@@ -126,11 +124,12 @@ internal class MetadataConverter(
         // Display library metadata and source links only for top-level and extension properties, so
         // they aren't duplicated from the class metadata for properties within classes.
         val includeAdditionalMetadata = property.dri.isTopLevel() || property.isExtension()
-        val sourceLink = if (includeAdditionalMetadata) {
-            property.createLinkToSource(docsHolder.basePropertySourceLink, property.name)
-        } else {
-            null
-        }
+        val sourceLink =
+            if (includeAdditionalMetadata) {
+                property.createLinkToSource(docsHolder.basePropertySourceLink, property.name)
+            } else {
+                null
+            }
 
         return DefaultMetadataComponent(
             MetadataComponent.Params(
@@ -142,26 +141,28 @@ internal class MetadataConverter(
     }
 
     /**
-     * Iterate through the library metadata Map to find a [LibraryMetadata] that matches the
-     * current class being processed.  Otherwise, return null.
+     * Iterate through the library metadata Map to find a [LibraryMetadata] that matches the current
+     * class being processed. Otherwise, return null.
      */
-    private fun <T> T.findMatchingLibraryMetadata(): LibraryMetadata?
-        where T : Documentable, T : WithSources {
+    private fun <T> T.findMatchingLibraryMetadata(): LibraryMetadata? where
+    T : Documentable,
+    T : WithSources {
         val paths = getSourceFilePaths() ?: return null
-        val path = if (paths.size > 1) {
-            // If there are multiple paths, this is probably KMP and the paths end in ".kt",
-            // ".jvm.kt", ".native.kt", etc. Pick out the ".kt" path.
-            paths.singleOrNull { it.indexOf(".") == it.lastIndexOf(".") }
-        } else {
-            paths.single()
-        }
+        val path =
+            if (paths.size > 1) {
+                // If there are multiple paths, this is probably KMP and the paths end in ".kt",
+                // ".jvm.kt", ".native.kt", etc. Pick out the ".kt" path.
+                paths.singleOrNull { it.indexOf(".") == it.lastIndexOf(".") }
+            } else {
+                paths.single()
+            }
 
         return docsHolder.fileMetadataMap[path]
     }
 
     /**
      * Query the API version metadata Map to find a [VersionMetadataComponent] that matches the
-     * current class being processed and append a release URL.  Otherwise, return null.
+     * current class being processed and append a release URL. Otherwise, return null.
      */
     private fun DClasslike.findMatchingVersionMetadata(
         releaseNotesUrl: String?,
@@ -179,15 +180,18 @@ internal class MetadataConverter(
 
     /**
      * Query the API version metadata Map to find a [VersionMetadataComponent] that matches the
-     * current function being processed and append a release URL.  Otherwise, return null.
+     * current function being processed and append a release URL. Otherwise, return null.
      */
     private fun DFunction.findMatchingVersionMetadata(
         releaseNotesUrl: String?,
     ): VersionMetadataComponent? {
         val classVersionMetadata = docsHolder.versionMetadataMap[containingClassName()]
-        val methodVersionMetadata = classVersionMetadata?.methodVersions?.get(
-            apiSinceMethodSignature(this),
-        )
+        val methodVersionMetadata =
+            classVersionMetadata
+                ?.methodVersions
+                ?.get(
+                    apiSinceMethodSignature(this),
+                )
 
         return methodVersionMetadata?.let {
             DefaultVersionMetadataComponent.createVersionMetadataWithBaseUrl(
@@ -200,9 +204,9 @@ internal class MetadataConverter(
 
     /**
      * Query the API version metadata map to find a [VersionMetadataComponent] that matches the
-     * current property being processed and append a release URL.  Otherwise, return null.
-     * Many properties will be represented in the version metadata map by their accessors, so this
-     * looks for metadata of the getter if metadata can't be found for the property itself.
+     * current property being processed and append a release URL. Otherwise, return null. Many
+     * properties will be represented in the version metadata map by their accessors, so this looks
+     * for metadata of the getter if metadata can't be found for the property itself.
      */
     private fun DProperty.findMatchingVersionMetadata(
         releaseNotesUrl: String?,
@@ -221,15 +225,13 @@ internal class MetadataConverter(
 
     /**
      * Constructs the fully-qualified name for the containing class of the [Documentable] in the
-     * Java view of the API. This means if the [Documentable] is a top-level function or property,
-     * a synthetic class name is used.
+     * Java view of the API. This means if the [Documentable] is a top-level function or property, a
+     * synthetic class name is used.
      */
     private fun <T> T.containingClassName(): String where T : WithSources, T : Documentable =
         "${dri.packageName}.${dri.classNames ?: nameForSyntheticClass(this)}"
 
-    /**
-     * This should not be accessed outside of [getSourceFilePaths].
-     */
+    /** This should not be accessed outside of [getSourceFilePaths]. */
     private val sourceFilesPaths = ConcurrentHashMap<DRI, List<String>>()
 
     /**
@@ -240,9 +242,9 @@ internal class MetadataConverter(
      */
     private fun <T> T.getSourceFilePaths(): List<String>? where T : WithSources, T : Documentable =
         // ConcurrentHashMap values cannot be null, so an empty list is stored instead.
-        sourceFilesPaths.getOrPut(this.dri) {
-            sources.entries.mapNotNull { it.getSourceFilePath() }
-        }.ifEmpty { null }
+        sourceFilesPaths
+            .getOrPut(this.dri) { sources.entries.mapNotNull { it.getSourceFilePath() } }
+            .ifEmpty { null }
 
     /**
      * Get the source file path from the [SourceEntry] relative to the root of the source directory,
@@ -257,8 +259,8 @@ internal class MetadataConverter(
         // Find the source root that the file path starts with, so it can be trimmed off.
         // This assumes the full file path always begins with one of the source roots, if it doesn't
         // the entry may be from an external source and this returns null.
-        val relevantSourceRoot = sourceRoots.firstOrNull { fullFilePath.startsWith(it) }
-            ?: return null
+        val relevantSourceRoot =
+            sourceRoots.firstOrNull { fullFilePath.startsWith(it) } ?: return null
         val filePath = fullFilePath.substringAfter(relevantSourceRoot)
         return filePath.removePrefix("/")
     }
@@ -295,32 +297,41 @@ internal class MetadataConverter(
             // The metadata uses the Java API, so use the JvmName if it exists
             val functionName = function.jvmName() ?: function.name
 
-            val generics = if (function.generics.isEmpty()) {
-                ""
-            } else {
-                "<" + function.generics.joinToString(", ") { it.metalavaName() } + ">"
-            }
+            val generics =
+                if (function.generics.isEmpty()) {
+                    ""
+                } else {
+                    "<" + function.generics.joinToString(", ") { it.metalavaName() } + ">"
+                }
 
             // The metadata uses the Java API, move the receiver to a parameter
-            val parameters = if (function.receiver != null) {
-                function.convertReceiverForJava().parameters
-            } else {
-                function.parameters
-            }
+            val parameters =
+                if (function.receiver != null) {
+                    function.convertReceiverForJava().parameters
+                } else {
+                    function.parameters
+                }
 
-            val paramTypes = parameters.map { param ->
-                val basicTypeName = param.type.rewriteKotlinPrimitivesForJava(
-                    useQualifiedTypes = true,
-                ).metalavaName()
+            val paramTypes =
+                parameters
+                    .map { param ->
+                        val basicTypeName =
+                            param.type
+                                .rewriteKotlinPrimitivesForJava(
+                                    useQualifiedTypes = true,
+                                )
+                                .metalavaName()
 
-                // Kotlin varargs are separate from the type representation
-                // The other parameter modifier that impacts the signature is `suspend`, which is
-                // handled in [FunctionalTypeConstructor.functionalTypeMetalavaName()]
-                val modifiers = param.modifiers(param.getExpectOrCommonSourceSet())
-                val additional = if (modifiers.contains("vararg")) "..." else ""
+                        // Kotlin varargs are separate from the type representation
+                        // The other parameter modifier that impacts the signature is `suspend`,
+                        // which is
+                        // handled in [FunctionalTypeConstructor.functionalTypeMetalavaName()]
+                        val modifiers = param.modifiers(param.getExpectOrCommonSourceSet())
+                        val additional = if (modifiers.contains("vararg")) "..." else ""
 
-                "$basicTypeName$additional"
-            }.toMutableList()
+                        "$basicTypeName$additional"
+                    }
+                    .toMutableList()
 
             // `suspend` functions have a continuation arg in the Java API that does not appear in
             // the Kotlin representation. Other function modifiers do not impact the Java signature
@@ -338,37 +349,41 @@ internal class MetadataConverter(
          * This is based on [ParameterDocumentableConverter.Companion.nameForJavaArray], but meant
          * to match the signatures generated by metalava.
          */
-        private fun Projection.metalavaName(): String = when (this) {
-            is TypeParameter -> name
-            // possiblyAsJava() is needed here as Metalava generates a Java view of types
-            // Example: both java.lang.String and kotlin.String are represented as java.lang.String
-            is GenericTypeConstructor -> {
-                val nested = if (projections.isEmpty()) {
-                    ""
-                } else {
-                    """<${projections.joinToString(",") { it.metalavaName() }}>"""
+        private fun Projection.metalavaName(): String =
+            when (this) {
+                is TypeParameter -> name
+                // possiblyAsJava() is needed here as Metalava generates a Java view of types
+                // Example: both java.lang.String and kotlin.String are represented as
+                // java.lang.String
+                is GenericTypeConstructor -> {
+                    val nested =
+                        if (projections.isEmpty()) {
+                            ""
+                        } else {
+                            """<${projections.joinToString(",") { it.metalavaName() }}>"""
+                        }
+                    "${dri.possiblyAsJava().fullName}$nested"
                 }
-                "${dri.possiblyAsJava().fullName}$nested"
+                is Nullable -> inner.metalavaName()
+                is DefinitelyNonNullable -> inner.metalavaName()
+                is TypeAliased -> inner.metalavaName()
+                is UnresolvedBound -> name
+                // `? extends Object` is redundant, it is in the metadata as "?"
+                is Covariance<*> ->
+                    if (inner is JavaObject) {
+                        "?"
+                    } else {
+                        "? extends ${inner.metalavaName()}"
+                    }
+                is Contravariance<*> -> "? super ${inner.metalavaName()}"
+                is Invariance<*> -> inner.metalavaName()
+                is PrimitiveJavaType -> name
+                Void -> "void"
+                Star -> "?"
+                is JavaObject -> "java.lang.Object"
+                is FunctionalTypeConstructor -> functionalTypeMetalavaName()
+                Dynamic -> throw RuntimeException("Invalid State: trying to get name of a Dynamic")
             }
-            is Nullable -> inner.metalavaName()
-            is DefinitelyNonNullable -> inner.metalavaName()
-            is TypeAliased -> inner.metalavaName()
-            is UnresolvedBound -> name
-            // `? extends Object` is redundant, it is in the metadata as "?"
-            is Covariance<*> -> if (inner is JavaObject) {
-                "?"
-            } else {
-                "? extends ${inner.metalavaName()}"
-            }
-            is Contravariance<*> -> "? super ${inner.metalavaName()}"
-            is Invariance<*> -> inner.metalavaName()
-            is PrimitiveJavaType -> name
-            Void -> "void"
-            Star -> "?"
-            is JavaObject -> "java.lang.Object"
-            is FunctionalTypeConstructor -> functionalTypeMetalavaName()
-            Dynamic -> throw RuntimeException("Invalid State: trying to get name of a Dynamic")
-        }
 
         /**
          * Converts the [FunctionalTypeConstructor] to its Java-style type name, which is what is
@@ -377,48 +392,55 @@ internal class MetadataConverter(
         private fun FunctionalTypeConstructor.functionalTypeMetalavaName(): String {
             // `suspend` function types appear as `kotlin.coroutines.SuspendFunction<N>` in the
             // model, but in the Java signature as `kotlin.jvm.functions.Function<N+1>`
-            val typeName = if (isSuspendable) {
-                val num = dri.classNames!!.substringAfter("SuspendFunction").toInt() + 1
-                "kotlin.jvm.functions.Function$num"
-            } else {
-                dri.fullName
-            }
-
-            val paramNames = projections.dropLast(1).map {
-                val name = it.metalavaName()
-                // Non-object param types appear as contravariance in the metadata, while
-                // object params just appear as Object -- except for in `suspend` functions, where
-                // `? super Object` does show up.
-                if (it is Invariance<*> && (name != "java.lang.Object" || isSuspendable)) {
-                    "? super $name"
+            val typeName =
+                if (isSuspendable) {
+                    val num = dri.classNames!!.substringAfter("SuspendFunction").toInt() + 1
+                    "kotlin.jvm.functions.Function$num"
                 } else {
-                    name
+                    dri.fullName
                 }
-            }
-            val returnName = projections.last().let { type ->
-                type.metalavaName().let { name ->
-                    if (isSuspendable) {
-                        // `suspend` functions have their return types wrapped in a Continuation, and
-                        // an extra `?` added at the end of the list of generics
-                        "? super kotlin.coroutines.Continuation<? super $name>,?"
-                    } else if (name == "java.lang.Object") {
-                        // An object return type appears in the metadata as "?"
-                        "?"
+
+            val paramNames =
+                projections.dropLast(1).map {
+                    val name = it.metalavaName()
+                    // Non-object param types appear as contravariance in the metadata, while
+                    // object params just appear as Object -- except for in `suspend` functions,
+                    // where
+                    // `? super Object` does show up.
+                    if (it is Invariance<*> && (name != "java.lang.Object" || isSuspendable)) {
+                        "? super $name"
                     } else {
-                        val innerType = (type as? Invariance<*>)?.inner?.unwrapNullability()
-                        if (
-                            innerType is PrimitiveJavaType ||
-                            (innerType is GenericTypeConstructor && innerType.projections.isEmpty())
-                        ) {
-                            // Simple types appear as-is in the metadata, more complex types include
-                            // "? extends" first
-                            name
+                        name
+                    }
+                }
+            val returnName =
+                projections.last().let { type ->
+                    type.metalavaName().let { name ->
+                        if (isSuspendable) {
+                            // `suspend` functions have their return types wrapped in a
+                            // Continuation, and
+                            // an extra `?` added at the end of the list of generics
+                            "? super kotlin.coroutines.Continuation<? super $name>,?"
+                        } else if (name == "java.lang.Object") {
+                            // An object return type appears in the metadata as "?"
+                            "?"
                         } else {
-                            "? extends $name"
+                            val innerType = (type as? Invariance<*>)?.inner?.unwrapNullability()
+                            if (
+                                innerType is PrimitiveJavaType ||
+                                    (innerType is GenericTypeConstructor &&
+                                        innerType.projections.isEmpty())
+                            ) {
+                                // Simple types appear as-is in the metadata, more complex types
+                                // include
+                                // "? extends" first
+                                name
+                            } else {
+                                "? extends $name"
+                            }
                         }
                     }
                 }
-            }
             val nested = (paramNames + returnName).joinToString(",")
 
             return "$typeName<$nested>"
@@ -429,21 +451,26 @@ internal class MetadataConverter(
          * apiSince metadata.
          */
         private fun DTypeParameter.metalavaName(): String {
-            val boundsNames = bounds.map { it.metalavaName() }
-                // `extends java.lang.Object` is redundant and not included in the metadata
-                // Filtering by if `it !is JavaObject` doesn't work because the `JavaObject` may
-                // be nested in a different `Projection`
-                .filter { it != "java.lang.Object" }
-            val bounds = if (boundsNames.isEmpty()) { "" } else {
-                // This is always "extends", even if the bound represents an interface
-                " extends " + boundsNames.joinToString(" & ")
-            }
+            val boundsNames =
+                bounds
+                    .map { it.metalavaName() }
+                    // `extends java.lang.Object` is redundant and not included in the metadata
+                    // Filtering by if `it !is JavaObject` doesn't work because the `JavaObject` may
+                    // be nested in a different `Projection`
+                    .filter { it != "java.lang.Object" }
+            val bounds =
+                if (boundsNames.isEmpty()) {
+                    ""
+                } else {
+                    // This is always "extends", even if the bound represents an interface
+                    " extends " + boundsNames.joinToString(" & ")
+                }
             return name + bounds
         }
 
         /**
-         * Remove an outer nullability wrapper from the [Projection], if one exists.
-         * Does not recur into nested projections.
+         * Remove an outer nullability wrapper from the [Projection], if one exists. Does not recur
+         * into nested projections.
          */
         private fun Projection.unwrapNullability(): Projection =
             when (this) {

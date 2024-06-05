@@ -60,18 +60,20 @@ internal interface ArrayValueAnnotationParameter : AnnotationParameter {
 }
 
 internal val AnnotationParameter.name: String
-    get() = when (this) {
-        is AnnotationValueAnnotationParameter -> this.data.name!!
-        is ArrayValueAnnotationParameter -> this.data.name!!
-        is NamedValueAnnotationParameter -> this.data.name!!
-        else -> throw RuntimeException("impossible subtype of AnnotationParameter")
-    }
+    get() =
+        when (this) {
+            is AnnotationValueAnnotationParameter -> this.data.name!!
+            is ArrayValueAnnotationParameter -> this.data.name!!
+            is NamedValueAnnotationParameter -> this.data.name!!
+            else -> throw RuntimeException("impossible subtype of AnnotationParameter")
+        }
 
 /** This is expected to be used as e.g. assertThat(parameter.value).isEqualTo("a string") */
 internal val AnnotationParameter.value: Any
-    get() = when (this) {
-        is AnnotationValueAnnotationParameter -> this.data.annotationComponentValue
-        is ArrayValueAnnotationParameter -> this.data.innerAnnotationParameters
-        is NamedValueAnnotationParameter -> this.data.value
-        else -> throw RuntimeException("impossible subtype of AnnotationParameter")
-    }
+    get() =
+        when (this) {
+            is AnnotationValueAnnotationParameter -> this.data.annotationComponentValue
+            is ArrayValueAnnotationParameter -> this.data.innerAnnotationParameters
+            is NamedValueAnnotationParameter -> this.data.value
+            else -> throw RuntimeException("impossible subtype of AnnotationParameter")
+        }

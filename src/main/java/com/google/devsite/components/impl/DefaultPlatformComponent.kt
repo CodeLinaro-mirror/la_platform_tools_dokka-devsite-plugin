@@ -40,29 +40,31 @@ internal data class DefaultPlatformComponent(
     override val data: PlatformComponent.Params,
 ) : PlatformComponent {
 
-    override fun render(into: FlowContent) = into.run {
-        data.platforms.forEach {
-            div {
-                // Hooks up to devsite/android/en/assets/css/reference-docs.css
-                classes = setOf("kotlin-platform")
-                attributes["data-title"] = it.selectorDisplayName()
-                it.render(into)
+    override fun render(into: FlowContent) =
+        into.run {
+            data.platforms.forEach {
+                div {
+                    // Hooks up to devsite/android/en/assets/css/reference-docs.css
+                    classes = setOf("kotlin-platform")
+                    attributes["data-title"] = it.selectorDisplayName()
+                    it.render(into)
+                }
+                comment("platform-${it.selectorDisplayName()}")
             }
-            comment("platform-${it.selectorDisplayName()}")
         }
-    }
 
-    override fun renderForDetail(into: FlowContent) = into.run {
-        data.platforms.forEach {
-            span {
-                // TODO(improve detail section display, e.g. move to right-aligned)
-                classes = setOf("kotlin-platform")
-                attributes["data-title"] = it.selectorDisplayName()
-                it.render(into)
+    override fun renderForDetail(into: FlowContent) =
+        into.run {
+            data.platforms.forEach {
+                span {
+                    // TODO(improve detail section display, e.g. move to right-aligned)
+                    classes = setOf("kotlin-platform")
+                    attributes["data-title"] = it.selectorDisplayName()
+                    it.render(into)
+                }
+                comment("platform-${it.selectorDisplayName()}")
             }
-            comment("platform-${it.selectorDisplayName()}")
         }
-    }
 
     override fun toString() = data.platforms.toString()
 }

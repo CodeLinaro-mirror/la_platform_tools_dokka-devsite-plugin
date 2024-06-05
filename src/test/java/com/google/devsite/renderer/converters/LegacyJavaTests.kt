@@ -24,24 +24,22 @@ import org.junit.Ignore
 import org.junit.Test
 
 /**
- * Tests derived from the sprint on old dokka.
- * These tests were originally generated when we noticed old dokka doing things wrong, fixed them,
- * and then wrote tests to verify that we had fixed them.
+ * Tests derived from the sprint on old dokka. These tests were originally generated when we noticed
+ * old dokka doing things wrong, fixed them, and then wrote tests to verify that we had fixed them.
  * These are the legacy tests that take Java source
  *
- * These tests do not purely test dackka, they test some functionality of dokka.
- * However, that makes sense as they are not true unit tests, but format-agnostic parity tests.
+ * These tests do not purely test dackka, they test some functionality of dokka. However, that makes
+ * sense as they are not true unit tests, but format-agnostic parity tests.
  */
 // TODO: get all of these tests working, and un-ignore them
 internal class LegacyJavaTests : ConverterTestBase() {
 
-    /**
-     * Protected functions not showing up: This is https://github.com/Kotlin/dokka/issues/434
-     */
+    /** Protected functions not showing up: This is https://github.com/Kotlin/dokka/issues/434 */
     @Ignore
     @Test
     fun `Java functions with visibilities render correctly`() {
-        val variedVisibilityTestClass = """
+        val variedVisibilityTestClass =
+            """
             public void publicBar() {}
             protected void protectedBar() {}
             private void privateBar() {}
@@ -58,6 +56,7 @@ internal class LegacyJavaTests : ConverterTestBase() {
     }
 
     internal fun DModule.classlikes() = packages.flatMap { it.classlikes }
+
     internal fun DModule.classes() = classlikes().filterIsInstance<DClass>()
     // internal fun DModule.functions() = classes().flatMap { it -> it.functions }
     // internal fun DModule.constructors() = classes().flatMap { it -> it.constructors }

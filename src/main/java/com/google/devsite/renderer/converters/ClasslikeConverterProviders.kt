@@ -26,12 +26,12 @@ import com.google.devsite.components.symbols.Platform
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
+import java.util.concurrent.ConcurrentHashMap
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.model.DClasslike
-import java.util.concurrent.ConcurrentHashMap
 
 internal class NonKmpClasslikeConverter(
     displayLanguage: Language,
@@ -45,19 +45,20 @@ internal class NonKmpClasslikeConverter(
     paramConverter: ParameterDocumentableConverter,
     annotationConverter: AnnotationDocumentableConverter,
     metadataConverter: MetadataConverter,
-) : ClasslikeDocumentableConverter(
-    displayLanguage,
-    classlike,
-    pathProvider,
-    docsHolder,
-    functionConverter,
-    propertyConverter,
-    enumConverter,
-    javadocConverter,
-    paramConverter,
-    annotationConverter,
-    metadataConverter,
-) {
+) :
+    ClasslikeDocumentableConverter(
+        displayLanguage,
+        classlike,
+        pathProvider,
+        docsHolder,
+        functionConverter,
+        propertyConverter,
+        enumConverter,
+        javadocConverter,
+        paramConverter,
+        annotationConverter,
+        metadataConverter,
+    ) {
     override val header: DefaultDevsitePlatformSelector? = null
     override val functionToSummaryConverter = functionConverter::summary
     override val functionToDetailConverter = functionConverter::detail
@@ -80,19 +81,20 @@ internal class KmpClasslikeConverter(
     annotationConverter: AnnotationDocumentableConverter,
     metadataConverter: MetadataConverter,
     platforms: List<Platform>,
-) : ClasslikeDocumentableConverter(
-    displayLanguage,
-    classlike,
-    pathProvider,
-    docsHolder,
-    functionConverter,
-    propertyConverter,
-    enumConverter,
-    javadocConverter,
-    paramConverter,
-    annotationConverter,
-    metadataConverter,
-) {
+) :
+    ClasslikeDocumentableConverter(
+        displayLanguage,
+        classlike,
+        pathProvider,
+        docsHolder,
+        functionConverter,
+        propertyConverter,
+        enumConverter,
+        javadocConverter,
+        paramConverter,
+        annotationConverter,
+        metadataConverter,
+    ) {
     override val header = DefaultDevsitePlatformSelector(platforms)
     override val functionToSummaryConverter = functionConverter::summaryKmp
     override val functionToDetailConverter = functionConverter::detailKmp
@@ -110,15 +112,19 @@ internal class KmpClasslikeConverter(
         coroutineScope {
             classlike.sourceSets.forEach { sourceSet ->
                 launch {
-                    // We must do this computation every time, because we don't know what will and what
+                    // We must do this computation every time, because we don't know what will and
+                    // what
                     // won't affect the signature until after we calculate it for each sourceSet
-                    // E.g. the JVM sourceSet might have an `@JvmName` but otherwise have the same signature
-                    // `@JvmName` doesn't affect displayed signature, so those should all be collapsed.
-                    val sig = computeSignature(
-                        classlike = classlike,
-                        classGraph = docsHolder.classGraph(),
-                        sourceSet = sourceSet,
-                    )
+                    // E.g. the JVM sourceSet might have an `@JvmName` but otherwise have the same
+                    // signature
+                    // `@JvmName` doesn't affect displayed signature, so those should all be
+                    // collapsed.
+                    val sig =
+                        computeSignature(
+                            classlike = classlike,
+                            classGraph = docsHolder.classGraph(),
+                            sourceSet = sourceSet,
+                        )
                     if (!signatures.contains(sig)) signatures[sig] = mutableSetOf()
                     signatures[sig]!!.add(sourceSet)
                     if (sourceSet == primarySourceSet) primarySignature = sig
@@ -136,8 +142,8 @@ internal class KmpClasslikeConverter(
                 relatedSymbols = relatedSymbols.await(),
                 descriptionDocs = javadocConverter.metadata(classlike),
                 platform = DefaultPlatformComponent(setOf(classlike.getExpectOrCommonSourceSet())),
-                allSignatures = signatures.mapValues { (_, v) -> DefaultPlatformComponent(v) }
-                    .toList(),
+                allSignatures =
+                    signatures.mapValues { (_, v) -> DefaultPlatformComponent(v) }.toList(),
             ),
         )
     }

@@ -28,29 +28,28 @@ class DefaultClassHierarchyTest {
     fun `Empty class hierarchy renders correctly`() {
         val component = DefaultClassHierarchy(Params(emptyList()))
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body></body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Class hierarchy with one parent renders correctly`() {
         val component = DefaultClassHierarchy(Params(listOf(NoopLink("a"))))
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <div class="devsite-table-wrapper">
     <table class="jd-inheritance-table">
@@ -62,21 +61,21 @@ class DefaultClassHierarchyTest {
     </table>
   </div>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Class hierarchy with two parents renders correctly`() {
         val component = DefaultClassHierarchy(Params(listOf(NoopLink("a"), NoopLink("b"))))
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <div class="devsite-table-wrapper">
     <table class="jd-inheritance-table">
@@ -92,30 +91,31 @@ class DefaultClassHierarchyTest {
     </table>
   </div>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Class hierarchy with many parents renders correctly`() {
-        val component = DefaultClassHierarchy(
-            Params(
-                listOf(
-                    NoopLink("a"),
-                    NoopLink("b"),
-                    NoopLink("c"),
-                    NoopLink("d"),
+        val component =
+            DefaultClassHierarchy(
+                Params(
+                    listOf(
+                        NoopLink("a"),
+                        NoopLink("b"),
+                        NoopLink("c"),
+                        NoopLink("d"),
+                    ),
                 ),
-            ),
-        )
+            )
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <div class="devsite-table-wrapper">
     <table class="jd-inheritance-table">
@@ -142,7 +142,8 @@ class DefaultClassHierarchyTest {
     </table>
   </div>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 }

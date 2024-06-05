@@ -15,11 +15,12 @@ internal interface MappedTypeProjectionComponent : TypeProjectionComponent {
         override val annotationComponents: List<AnnotationComponent> = emptyList(),
         override val nullability: Nullability,
         override val generics: List<TypeProjectionComponent> = emptyList(),
-    ) : TypeProjectionComponent.Params(
-        type = type,
-        nullability = nullability,
-        displayLanguage = Language.KOTLIN,
-        generics = generics,
-        annotationComponents = annotationComponents,
-    )
+    ) :
+        TypeProjectionComponent.Params(
+            type = type,
+            nullability = nullability,
+            displayLanguage = Language.KOTLIN,
+            generics = generics,
+            annotationComponents = annotationComponents,
+        )
 }

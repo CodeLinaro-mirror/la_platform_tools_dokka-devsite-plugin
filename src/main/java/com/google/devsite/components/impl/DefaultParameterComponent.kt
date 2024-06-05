@@ -28,44 +28,45 @@ internal data class DefaultParameterComponent(
     override val data: ParameterComponent.Params,
 ) : ParameterComponent {
 
-    override fun render(into: FlowContent) = into.run {
-        data.annotationComponents.render(into, separator = "", terminator = { +" " })
+    override fun render(into: FlowContent) =
+        into.run {
+            data.annotationComponents.render(into, separator = "", terminator = { +" " })
 
-        when (data.displayLanguage) {
-            Language.JAVA -> {
-                data.type.render(into)
-                if (data.name.isNotEmpty()) {
-                    +Entities.nbsp
-                    +data.name
+            when (data.displayLanguage) {
+                Language.JAVA -> {
+                    data.type.render(into)
+                    if (data.name.isNotEmpty()) {
+                        +Entities.nbsp
+                        +data.name
+                    }
                 }
-            }
-            Language.KOTLIN -> {
-                // vararg is the only valid parameter modifier I know of
-                for (modifier in data.modifiers) {
-                    +modifier
-                    +Entities.nbsp
-                }
+                Language.KOTLIN -> {
+                    // vararg is the only valid parameter modifier I know of
+                    for (modifier in data.modifiers) {
+                        +modifier
+                        +Entities.nbsp
+                    }
 
-                if (data.name.isNotEmpty()) {
-                    +data.name
-                    +":"
-                    +Entities.nbsp
-                }
+                    if (data.name.isNotEmpty()) {
+                        +data.name
+                        +":"
+                        +Entities.nbsp
+                    }
 
-                data.type.render(into)
+                    data.type.render(into)
 
-                if (data.defaultValue != null) {
-                    +" = ${data.defaultValue}"
+                    if (data.defaultValue != null) {
+                        +" = ${data.defaultValue}"
+                    }
                 }
             }
         }
-    }
 
-    override fun toString() = data.annotationComponents.joinMaybePrefix(postfix = " ") +
-        data.modifiers.joinMaybePrefix(postfix = " ") +
-        data.type +
-        if (data.name.isNotEmpty()) {
-            " " + data.name
-        } else "" +
-            (data.defaultValue ?: "")
+    override fun toString() =
+        data.annotationComponents.joinMaybePrefix(postfix = " ") +
+            data.modifiers.joinMaybePrefix(postfix = " ") +
+            data.type +
+            if (data.name.isNotEmpty()) {
+                " " + data.name
+            } else "" + (data.defaultValue ?: "")
 }

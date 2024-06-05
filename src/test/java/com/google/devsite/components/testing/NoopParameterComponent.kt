@@ -26,9 +26,7 @@ internal class NoopParameterComponent(
     override val data: ParameterComponent.Params
         get() = throw NotImplementedError()
 
-    override fun render(into: FlowContent) = into.run {
-        +text
-    }
+    override fun render(into: FlowContent) = into.run { +text }
 
     override fun length() = if (forceBreak) 10_000 else 0
 }

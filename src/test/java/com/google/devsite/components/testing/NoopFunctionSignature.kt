@@ -23,7 +23,5 @@ internal class NoopFunctionSignature(private val text: String) : FunctionSignatu
     override val data: FunctionSignature.Params
         get() = throw NotImplementedError()
 
-    override fun render(into: FlowContent) = into.run {
-        +text
-    }
+    override fun render(into: FlowContent) = into.run { +text }
 }

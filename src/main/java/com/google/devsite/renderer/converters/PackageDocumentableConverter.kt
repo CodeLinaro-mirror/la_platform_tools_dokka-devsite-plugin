@@ -106,12 +106,15 @@ internal abstract class PackageDocumentableConverter(
         val isKotlinOnlyNonJVMPackage =
             this@PackageDocumentableConverter is KmpPackageConverter &&
                 dPackage.getExpectOrCommonSourceSet().analysisPlatform !in
-                listOf(org.jetbrains.dokka.Platform.common, org.jetbrains.dokka.Platform.jvm)
-        val isNotDisplayedForOtherLanguage = docsHolder.excludedPackages[displayLanguage.not()]!!
-            .any { it.matches(dPackage.packageName) }
-        val pathForSwitcher = if (isNotDisplayedForOtherLanguage || isKotlinOnlyNonJVMPackage) {
-            null
-        } else pathProvider.forReference(dPackage.dri).url
+                    listOf(org.jetbrains.dokka.Platform.common, org.jetbrains.dokka.Platform.jvm)
+        val isNotDisplayedForOtherLanguage =
+            docsHolder.excludedPackages[displayLanguage.not()]!!.any {
+                it.matches(dPackage.packageName)
+            }
+        val pathForSwitcher =
+            if (isNotDisplayedForOtherLanguage || isKotlinOnlyNonJVMPackage) {
+                null
+            } else pathProvider.forReference(dPackage.dri).url
 
         DefaultDevsitePage(
             DevsitePage.Params(
@@ -119,70 +122,79 @@ internal abstract class PackageDocumentableConverter(
                 pathForSwitcher = pathForSwitcher?.removePrefix(pathProvider.rootPath + "/"),
                 bookPath = pathProvider.book,
                 title = dPackage.name,
-                content = DefaultPackageSummary(
-                    PackageSummary.Params(
-                        header,
-                        displayLanguage,
-                        description = javadocConverter.metadata(
-                            documentable = dPackage,
-                            isFromJava = false, // This parameter is not used in the DPackage case
+                content =
+                    DefaultPackageSummary(
+                        PackageSummary.Params(
+                            header,
+                            displayLanguage,
+                            description =
+                                javadocConverter.metadata(
+                                    documentable = dPackage,
+                                    isFromJava =
+                                        false, // This parameter is not used in the DPackage case
+                                ),
+                            interfaces = interfaces.await(),
+                            classes = classes.await(),
+                            enums = enums.await(),
+                            objects = objects.await(),
+                            exceptions = exceptions.await(),
+                            annotations = annotations.await(),
+                            typeAliases = typeAliases.await(),
+                            topLevelConstantsSummary = topLevelConstantsSummary.await(),
+                            topLevelPropertiesSummary = topLevelPropertiesSummary.await(),
+                            topLevelFunctionsSummary = topLevelFunctionsSummary.await(),
+                            extensionPropertiesSummary = extensionPropertiesSummary.await(),
+                            extensionFunctionsSummary = extensionFunctionsSummary.await(),
+                            topLevelConstants = topLevelConstants.await(),
+                            topLevelProperties = topLevelProperties.await(),
+                            topLevelFunctions = topLevelFunctions.await(),
+                            extensionProperties = extensionProperties.await(),
+                            extensionFunctions = extensionFunctions.await(),
                         ),
-                        interfaces = interfaces.await(),
-                        classes = classes.await(),
-                        enums = enums.await(),
-                        objects = objects.await(),
-                        exceptions = exceptions.await(),
-                        annotations = annotations.await(),
-                        typeAliases = typeAliases.await(),
-                        topLevelConstantsSummary = topLevelConstantsSummary.await(),
-                        topLevelPropertiesSummary = topLevelPropertiesSummary.await(),
-                        topLevelFunctionsSummary = topLevelFunctionsSummary.await(),
-                        extensionPropertiesSummary = extensionPropertiesSummary.await(),
-                        extensionFunctionsSummary = extensionFunctionsSummary.await(),
-                        topLevelConstants = topLevelConstants.await(),
-                        topLevelProperties = topLevelProperties.await(),
-                        topLevelFunctions = topLevelFunctions.await(),
-                        extensionProperties = extensionProperties.await(),
-                        extensionFunctions = extensionFunctions.await(),
                     ),
-                ),
                 metadataComponent = null,
                 includedHeadTagPath = pathProvider.includedHeadTagsPath,
-                referenceObject = DefaultReferenceObject(
-                    ReferenceObject.Params(
-                        name = dPackage.dri.packageName.orEmpty(),
-                        language = displayLanguage,
-                        // Aggregate all classlikes, functions, and properties. If available (it is
-                        // for functions and properties), the anchor is used to enable devsite
-                        // search to link directly to the item.
-                        properties = buildList {
-                            addAll(interfaceList)
-                            addAll(classList)
-                            addAll(enumList)
-                            addAll(objectList)
-                            addAll(exceptionList)
-                            addAll(annotationList)
-                            addAll(typeAliasList)
-                            addAll(dPackage.functions)
-                            addAll(dPackage.properties)
-                        }.mapNotNull { it.dri.callable?.anchor() ?: it.name },
+                referenceObject =
+                    DefaultReferenceObject(
+                        ReferenceObject.Params(
+                            name = dPackage.dri.packageName.orEmpty(),
+                            language = displayLanguage,
+                            // Aggregate all classlikes, functions, and properties. If available (it
+                            // is
+                            // for functions and properties), the anchor is used to enable devsite
+                            // search to link directly to the item.
+                            properties =
+                                buildList {
+                                        addAll(interfaceList)
+                                        addAll(classList)
+                                        addAll(enumList)
+                                        addAll(objectList)
+                                        addAll(exceptionList)
+                                        addAll(annotationList)
+                                        addAll(typeAliasList)
+                                        addAll(dPackage.functions)
+                                        addAll(dPackage.properties)
+                                    }
+                                    .mapNotNull { it.dri.callable?.anchor() ?: it.name },
+                        ),
                     ),
-                ),
             ),
         )
     }
 
     private fun functionsToSummary(functions: List<DFunction>): FunctionSummaryList {
-        val components = functions.mapNotNull {
-            val modifierHints = ModifierHints(
-                displayLanguage = displayLanguage,
-                type = DFunction::class.java,
-                containingType = DPackage::class.java,
-                isFromJava = it.isFromJava(),
-                isSummary = true,
-            )
-            functionToSummaryConverter(it, modifierHints)
-        }
+        val components =
+            functions.mapNotNull {
+                val modifierHints =
+                    ModifierHints(
+                        displayLanguage = displayLanguage,
+                        type = DFunction::class.java,
+                        containingType = DPackage::class.java,
+                        isFromJava = it.isFromJava(),
+                        isSummary = true,
+                    )
+                functionToSummaryConverter(it, modifierHints)
+            }
 
         return DefaultSummaryList(
             SummaryList.Params(
@@ -195,28 +207,31 @@ internal abstract class PackageDocumentableConverter(
         functions: List<DFunction>,
     ): List<SymbolDetail<FunctionSignature>> {
         return functions.mapNotNull {
-            val modifierHints = ModifierHints(
-                displayLanguage = displayLanguage,
-                type = DFunction::class.java,
-                containingType = DPackage::class.java,
-                isFromJava = it.isFromJava(),
-                isSummary = false,
-            )
+            val modifierHints =
+                ModifierHints(
+                    displayLanguage = displayLanguage,
+                    type = DFunction::class.java,
+                    containingType = DPackage::class.java,
+                    isFromJava = it.isFromJava(),
+                    isSummary = false,
+                )
             functionToDetailConverter(it, modifierHints)
         }
     }
 
     private fun propertiesToSummary(properties: List<DProperty>): PropertySummaryList {
-        val components = properties.mapNotNull {
-            val modifierHints = ModifierHints(
-                displayLanguage = displayLanguage,
-                type = DProperty::class.java,
-                containingType = DPackage::class.java,
-                isFromJava = it.isFromJava(),
-                isSummary = true,
-            )
-            propertyToSummaryConverter(it, modifierHints)
-        }
+        val components =
+            properties.mapNotNull {
+                val modifierHints =
+                    ModifierHints(
+                        displayLanguage = displayLanguage,
+                        type = DProperty::class.java,
+                        containingType = DPackage::class.java,
+                        isFromJava = it.isFromJava(),
+                        isSummary = true,
+                    )
+                propertyToSummaryConverter(it, modifierHints)
+            }
 
         return DefaultSummaryList(
             SummaryList.Params(
@@ -229,35 +244,35 @@ internal abstract class PackageDocumentableConverter(
         properties: List<DProperty>,
     ): List<SymbolDetail<PropertySignature>> {
         return properties.mapNotNull {
-            val modifierHints = ModifierHints(
-                displayLanguage = displayLanguage,
-                type = DProperty::class.java,
-                containingType = DPackage::class.java,
-                isFromJava = it.isFromJava(),
-                isSummary = false,
-            )
+            val modifierHints =
+                ModifierHints(
+                    displayLanguage = displayLanguage,
+                    type = DProperty::class.java,
+                    containingType = DPackage::class.java,
+                    isFromJava = it.isFromJava(),
+                    isSummary = false,
+                )
             propertyToDetailConverter(it, modifierHints)
         }
     }
 
-    private fun topLevelConstants() = dPackage.properties
-        .filter { it.isConstant() }
-        .sortedWith(simpleDocumentableComparator)
+    private fun topLevelConstants() =
+        dPackage.properties.filter { it.isConstant() }.sortedWith(simpleDocumentableComparator)
 
-    private fun topLevelProperties() = dPackage.properties
-        .filterNot { it.isConstant() }
-        .filter { it.receiver == null }
-        .sortedWith(simpleDocumentableComparator)
+    private fun topLevelProperties() =
+        dPackage.properties
+            .filterNot { it.isConstant() }
+            .filter { it.receiver == null }
+            .sortedWith(simpleDocumentableComparator)
 
-    private fun topLevelFunctions() = dPackage.functions
-        .filter { it.receiver == null }
-        .sortedWith(functionSignatureComparator)
+    private fun topLevelFunctions() =
+        dPackage.functions.filter { it.receiver == null }.sortedWith(functionSignatureComparator)
 
-    private fun extensionProperties() = dPackage.properties
-        .filterNot { it.receiver == null }
-        .sortedWith(simpleDocumentableComparator)
+    private fun extensionProperties() =
+        dPackage.properties
+            .filterNot { it.receiver == null }
+            .sortedWith(simpleDocumentableComparator)
 
-    private fun extensionFunctions() = dPackage.functions
-        .filterNot { it.receiver == null }
-        .sortedWith(functionSignatureComparator)
+    private fun extensionFunctions() =
+        dPackage.functions.filterNot { it.receiver == null }.sortedWith(functionSignatureComparator)
 }

@@ -24,19 +24,16 @@ import kotlinx.html.a
 internal data class DefaultLink(
     override val data: Link.Params,
 ) : Link {
-    override fun render(into: FlowContent) = into.run {
-        if (data.url.isEmpty()) {
-            +data.name
-        } else if (data.externalLink) {
-            a(data.url, classes = "external") {
+    override fun render(into: FlowContent) =
+        into.run {
+            if (data.url.isEmpty()) {
                 +data.name
-            }
-        } else {
-            a(data.url) {
-                +data.name
+            } else if (data.externalLink) {
+                a(data.url, classes = "external") { +data.name }
+            } else {
+                a(data.url) { +data.name }
             }
         }
-    }
 
     override fun toString() = data.name + if (data.url.isNotEmpty()) "<ref=${data.url}>" else ""
 }

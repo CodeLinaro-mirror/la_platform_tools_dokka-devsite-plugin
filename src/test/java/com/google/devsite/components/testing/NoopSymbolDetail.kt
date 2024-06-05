@@ -27,11 +27,7 @@ internal object NoopSymbolDetail : SymbolDetail<SymbolSignature> {
     override val data: SymbolDetail.Params<SymbolSignature>
         get() = throw NotImplementedError()
 
-    override fun render(into: FlowContent) = into.run {
-        div {
-            +"noop"
-        }
-    }
+    override fun render(into: FlowContent) = into.run { div { +"noop" } }
 }
 
 @Suppress("UNCHECKED_CAST")

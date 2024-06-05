@@ -26,21 +26,20 @@ import org.junit.Test
 class DefaultPackageIndexTest {
     @Test
     fun `Package list renders correctly`() {
-        val component =
-            DefaultPackageIndex(Params("classes.html", NoopSummaryList()))
+        val component = DefaultPackageIndex(Params("classes.html", NoopSummaryList()))
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <p>These are all the API packages. See all <a href="classes.html">API classes</a>.</p>
   <div>noop</div>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 }

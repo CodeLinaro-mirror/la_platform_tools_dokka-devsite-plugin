@@ -38,9 +38,7 @@ import org.jetbrains.dokka.model.EnumValue
 import org.jetbrains.dokka.model.LiteralValue
 import org.jetbrains.dokka.model.StringValue
 
-/**
- * Converts annotations into their components.
- */
+/** Converts annotations into their components. */
 internal class AnnotationDocumentableConverter(
     private val displayLanguage: Language,
     private val pathProvider: FilePathProvider,
@@ -50,7 +48,7 @@ internal class AnnotationDocumentableConverter(
 ) {
     /**
      * @param nullability the nullability of the annotated element. Contains information such as
-     * source language and whether we care about the nullability of the annotated element.
+     *   source language and whether we care about the nullability of the annotated element.
      * @return the AnnotationComponents for the given annotations on the annotated element
      */
     fun annotationComponents(
@@ -58,8 +56,7 @@ internal class AnnotationDocumentableConverter(
         nullability: Nullability,
     ): List<AnnotationComponent> {
         // Convert android.nullable to androidx., because those are the public versions
-        @Suppress("NAME_SHADOWING")
-        val annotations = annotations.map { it.fixNullability() }
+        @Suppress("NAME_SHADOWING") val annotations = annotations.map { it.fixNullability() }
 
         val injectedAnnotations = mutableListOf<Annotations.Annotation>()
         if (annotations.any { it.isBadNullability }) {
@@ -76,9 +73,10 @@ internal class AnnotationDocumentableConverter(
             }
         }
 
-        return (annotations + injectedAnnotations).filter { annotation ->
-            shouldDocumentAnnotation(annotation, nullability)
-        }.distinctBy { it.identifier }.map { annotation -> annotation.toDackkaAnnotation() }
+        return (annotations + injectedAnnotations)
+            .filter { annotation -> shouldDocumentAnnotation(annotation, nullability) }
+            .distinctBy { it.identifier }
+            .map { annotation -> annotation.toDackkaAnnotation() }
     }
 
     /** @return true if a developer would find this annotation useful, false otherwise */
@@ -87,9 +85,10 @@ internal class AnnotationDocumentableConverter(
         nullability: Nullability,
     ): Boolean {
         // Not useful to developers
-        if (annotation.isSuppressAnnotation() ||
-            annotation.dri.packageName == "kotlin.jvm" ||
-            annotation.dri.fullName in annotationsNotToDisplay
+        if (
+            annotation.isSuppressAnnotation() ||
+                annotation.dri.packageName == "kotlin.jvm" ||
+                annotation.dri.fullName in annotationsNotToDisplay
         ) {
             return false
         }
@@ -114,37 +113,44 @@ internal class AnnotationDocumentableConverter(
 
     private fun AnnotationParameterValue.toComponent(
         name: String? = null,
-    ): AnnotationParameter = when (this) {
-        is StringValue -> DefaultNamedValueAnnotationParameter(
-            NamedValueAnnotationParameter.Params(name, "\"${asString()}\""),
-        )
-        is LiteralValue, is EnumValue, is ClassValue ->
-            DefaultNamedValueAnnotationParameter(
-                NamedValueAnnotationParameter.Params(name, asString()),
-            )
-        is ArrayValue -> DefaultArrayValueAnnotationParameter(
-            ArrayValueAnnotationParameter.Params(
-                name,
-                innerAnnotationParameters = value.map { it.toComponent() },
-            ),
-        )
-        is AnnotationValue -> DefaultAnnotationValueAnnotationParameter(
-            AnnotationValueAnnotationParameter.Params(
-                name,
-                annotationComponentValue = annotation.toDackkaAnnotation(),
-            ),
-        )
-    }
+    ): AnnotationParameter =
+        when (this) {
+            is StringValue ->
+                DefaultNamedValueAnnotationParameter(
+                    NamedValueAnnotationParameter.Params(name, "\"${asString()}\""),
+                )
+            is LiteralValue,
+            is EnumValue,
+            is ClassValue ->
+                DefaultNamedValueAnnotationParameter(
+                    NamedValueAnnotationParameter.Params(name, asString()),
+                )
+            is ArrayValue ->
+                DefaultArrayValueAnnotationParameter(
+                    ArrayValueAnnotationParameter.Params(
+                        name,
+                        innerAnnotationParameters = value.map { it.toComponent() },
+                    ),
+                )
+            is AnnotationValue ->
+                DefaultAnnotationValueAnnotationParameter(
+                    AnnotationValueAnnotationParameter.Params(
+                        name,
+                        annotationComponentValue = annotation.toDackkaAnnotation(),
+                    ),
+                )
+        }
 
-    private val Annotations.Annotation.isNullabilityAnnotation get() =
-        dri.classNames in listOf("Nullable", "NonNull", "NotNull")
+    private val Annotations.Annotation.isNullabilityAnnotation
+        get() = dri.classNames in listOf("Nullable", "NonNull", "NotNull")
 
-    private val Annotations.Annotation.isBadNullability get() =
-        isNullabilityAnnotation && dri.fullName !in validNullabilityAnnotations
+    private val Annotations.Annotation.isBadNullability
+        get() = isNullabilityAnnotation && dri.fullName !in validNullabilityAnnotations
 
-    private fun Annotations.Annotation.fixNullability() = when (this.dri) {
-        ANDROID_NULLABLE_DRI -> AT_NULLABLE
-        ANDROID_NON_NULL_DRI -> AT_NON_NULL
-        else -> this
-    }
+    private fun Annotations.Annotation.fixNullability() =
+        when (this.dri) {
+            ANDROID_NULLABLE_DRI -> AT_NULLABLE
+            ANDROID_NON_NULL_DRI -> AT_NON_NULL
+            else -> this
+        }
 }

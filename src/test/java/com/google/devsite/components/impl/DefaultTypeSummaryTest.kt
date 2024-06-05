@@ -27,42 +27,44 @@ import org.junit.Test
 class DefaultTypeSummaryTest {
     @Test
     fun `Simple type renders correctly`() {
-        val component = DefaultTypeSummary(
-            Params(
-                type = NoopTypeProjectionComponent("Unit"),
-            ),
-        )
+        val component =
+            DefaultTypeSummary(
+                Params(
+                    type = NoopTypeProjectionComponent("Unit"),
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>Unit</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Type with modifiers renders correctly`() {
-        val component = DefaultTypeSummary(
-            Params(
-                type = NoopTypeProjectionComponent("Unit"),
-                modifiers = Modifiers("open", "suspend"),
-            ),
-        )
+        val component =
+            DefaultTypeSummary(
+                Params(
+                    type = NoopTypeProjectionComponent("Unit"),
+                    modifiers = Modifiers("open", "suspend"),
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>open&nbsp;suspend Unit</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 }

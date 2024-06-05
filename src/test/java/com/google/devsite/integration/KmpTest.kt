@@ -18,14 +18,14 @@ package com.google.devsite.integration
 
 import com.google.devsite.capitalize
 import com.google.devsite.testing.IntegrationTestBase
+import java.io.File
+import kotlin.test.Ignore
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.DokkaSourceSetID
 import org.jetbrains.dokka.ExternalDocumentationLinkImpl
 import org.junit.Test
 import testApi.testRunner.SourceSetsBuilder
 import testApi.testRunner.TestDokkaConfigurationBuilder
-import java.io.File
-import kotlin.test.Ignore
 
 class KmpTest : IntegrationTestBase() {
     @Test
@@ -72,15 +72,27 @@ class KmpTest : IntegrationTestBase() {
     fun `Validate prod AndroidX compose prebuilts`() {
         validatePrebuilts(
             testName = "compose",
-            artifactNames = listOf(
-                "animation", "animation-core", "animation-graphics",
-                "foundation", "foundation-layout",
-                "material3", "material3-window-size-class",
-                "runtime",
-                "ui", "ui-geometry", "ui-graphics", "ui-text", "ui-unit", "ui-util",
-                "ui-tooling", "ui-tooling-preview",
-                "ui-test", "ui-test-junit4",
-            ),
+            artifactNames =
+                listOf(
+                    "animation",
+                    "animation-core",
+                    "animation-graphics",
+                    "foundation",
+                    "foundation-layout",
+                    "material3",
+                    "material3-window-size-class",
+                    "runtime",
+                    "ui",
+                    "ui-geometry",
+                    "ui-graphics",
+                    "ui-text",
+                    "ui-unit",
+                    "ui-util",
+                    "ui-tooling",
+                    "ui-tooling-preview",
+                    "ui-test",
+                    "ui-test-junit4",
+                ),
             samples = true,
         )
     }
@@ -107,19 +119,25 @@ class KmpTest : IntegrationTestBase() {
             sourceRoots = sourcesOfPlatform.map { it.absolutePath }
             classpath = classpathFromFile("testData/classpath.txt")
             externalDocumentationLinks = externalLinks
-            documentedVisibilities = setOf(
-                DokkaConfiguration.Visibility.PUBLIC,
-                DokkaConfiguration.Visibility.PROTECTED,
-            )
+            documentedVisibilities =
+                setOf(
+                    DokkaConfiguration.Visibility.PUBLIC,
+                    DokkaConfiguration.Visibility.PROTECTED,
+                )
             this.analysisPlatform = analysisPlatform
             this.dependentSourceSets = ssDependencies
         }
-        fun List<File>.filterForPlatform(identifier: String) = filter { it.isDirectory }.flatMap {
-            it.listFiles()?.filter { identifier.lowercase() in it.name.lowercase() } ?: emptyList()
-        }
+        fun List<File>.filterForPlatform(identifier: String) =
+            filter { it.isDirectory }
+                .flatMap {
+                    it.listFiles()?.filter { identifier.lowercase() in it.name.lowercase() }
+                        ?: emptyList()
+                }
 
-        val sourceFolders = listOf("jvm", "android", "native", "js")
-            .associateWith { sources.filterForPlatform(it) }.toMutableMap()
+        val sourceFolders =
+            listOf("jvm", "android", "native", "js")
+                .associateWith { sources.filterForPlatform(it) }
+                .toMutableMap()
 
         if (squashAndroid) {
             sourceFolders["jvm"] = sourceFolders["jvm"]!! + sourceFolders["android"]!!
@@ -134,9 +152,9 @@ class KmpTest : IntegrationTestBase() {
         return sourceSets {
             val common = createSourceSet("common", sources.filterForPlatform("common"))
             val dependOnCommon = setOf(common.value.sourceSetID)
-            sourceFolders.filter { it.value.isNotEmpty() }.map {
-                createSourceSet(it.key, it.value, dependOnCommon)
-            }
+            sourceFolders
+                .filter { it.value.isNotEmpty() }
+                .map { createSourceSet(it.key, it.value, dependOnCommon) }
         }
     }
 }

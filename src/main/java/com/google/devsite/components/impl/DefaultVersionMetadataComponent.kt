@@ -31,51 +31,52 @@ internal data class DefaultVersionMetadataComponent(
     override val data: VersionMetadataComponent.Params,
 ) : VersionMetadataComponent {
 
-    override fun render(into: FlowContent): Unit = into.run {
-        div {
-            id = "version-metadata"
-            data.addedIn?.let {
-                div {
-                    id = "added-in"
-                    +"Added in "
-                    it.render(into)
+    override fun render(into: FlowContent): Unit =
+        into.run {
+            div {
+                id = "version-metadata"
+                data.addedIn?.let {
+                    div {
+                        id = "added-in"
+                        +"Added in "
+                        it.render(into)
+                    }
                 }
-            }
-            data.deprecatedIn?.let {
-                div {
-                    id = "deprecated-in"
-                    +"Deprecated in "
-                    it.render(into)
+                data.deprecatedIn?.let {
+                    div {
+                        id = "deprecated-in"
+                        +"Deprecated in "
+                        it.render(into)
+                    }
                 }
             }
         }
-    }
 
-    override fun toString() = "Version information:" +
-        data.addedIn?.let { " Added in $it" }.orEmpty() +
-        data.deprecatedIn?.let { " Deprecated in $it" }.orEmpty()
+    override fun toString() =
+        "Version information:" +
+            data.addedIn?.let { " Added in $it" }.orEmpty() +
+            data.deprecatedIn?.let { " Deprecated in $it" }.orEmpty()
 
     companion object {
         /**
          * Creates a [DefaultVersionMetadataComponent] with the given [addedIn] and [deprecatedIn]
-         * versions, with the link URLs in the form `[baseUrl]#version`.
-         * If [baseUrl] is `null`, the link will have an empty string URL (rendered as plain text).
-         * This is the format used for AndroidX version links.
+         * versions, with the link URLs in the form `[baseUrl]#version`. If [baseUrl] is `null`, the
+         * link will have an empty string URL (rendered as plain text). This is the format used for
+         * AndroidX version links.
          */
         fun createVersionMetadataWithBaseUrl(
             addedIn: String?,
             deprecatedIn: String?,
             baseUrl: String?,
-        ) = DefaultVersionMetadataComponent(
-            VersionMetadataComponent.Params(
-                addedIn = addedIn?.let { createVersionLinkFromBase(it, baseUrl) },
-                deprecatedIn = deprecatedIn?.let { createVersionLinkFromBase(it, baseUrl) },
-            ),
-        )
+        ) =
+            DefaultVersionMetadataComponent(
+                VersionMetadataComponent.Params(
+                    addedIn = addedIn?.let { createVersionLinkFromBase(it, baseUrl) },
+                    deprecatedIn = deprecatedIn?.let { createVersionLinkFromBase(it, baseUrl) },
+                ),
+            )
 
-        /**
-         * Generate mapping of each class to its API metadata
-         */
+        /** Generate mapping of each class to its API metadata */
         fun convertJsonVersionMetadataToVersionMap(
             versionMetadataList: List<JsonVersionMetadata>,
         ): Map<String, ClassVersionMetadata> {

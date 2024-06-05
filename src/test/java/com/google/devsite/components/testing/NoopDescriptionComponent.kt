@@ -24,7 +24,5 @@ internal class NoopDescriptionComponent(private val text: String) : DescriptionC
     override val data: DescriptionComponent.Params
         get() = throw NotImplementedError()
 
-    override fun render(into: FlowContent) = into.run {
-        p { +text }
-    }
+    override fun render(into: FlowContent) = into.run { p { +text } }
 }

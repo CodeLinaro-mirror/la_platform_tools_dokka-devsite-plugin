@@ -22,30 +22,33 @@ import com.google.devsite.components.symbols.TocPackage
 internal data class DefaultTocPackage(
     override val data: TocPackage.Params,
 ) : TocPackage {
-    override fun render(into: StringBuilder) = into.run {
-        appendLine("- title: \"${data.name}\"")
-        appendLine("  path: \"${data.packageUrl}\"")
+    override fun render(into: StringBuilder) =
+        into.run {
+            appendLine("- title: \"${data.name}\"")
+            appendLine("  path: \"${data.packageUrl}\"")
 
-        val content = mapOf(
-            "Interfaces" to data.interfaces,
-            "Classes" to data.classes,
-            "Enums" to data.enums,
-            "Exceptions" to data.exceptions,
-            "Annotations" to data.annotations,
-            "Objects" to data.objects,
-        ).filter { (_, contents) -> contents.isNotEmpty() }
-        if (content.isEmpty()) return@run
+            val content =
+                mapOf(
+                        "Interfaces" to data.interfaces,
+                        "Classes" to data.classes,
+                        "Enums" to data.enums,
+                        "Exceptions" to data.exceptions,
+                        "Annotations" to data.annotations,
+                        "Objects" to data.objects,
+                    )
+                    .filter { (_, contents) -> contents.isNotEmpty() }
+            if (content.isEmpty()) return@run
 
-        appendLine()
-        appendLine("  section:")
+            appendLine()
+            appendLine("  section:")
 
-        content.onEachIndexed { i, (name, contents) ->
-            if (i != 0) {
-                appendLine()
+            content.onEachIndexed { i, (name, contents) ->
+                if (i != 0) {
+                    appendLine()
+                }
+                renderTypes(name, contents)
             }
-            renderTypes(name, contents)
         }
-    }
 
     private fun StringBuilder.renderTypes(sectionName: String, types: List<TocPackage.Type>) {
         if (types.isEmpty()) return
@@ -64,8 +67,9 @@ internal data class DefaultTocPackage(
         appendLine("      path: \"${type.url}\"")
     }
 
-    override fun toString() = "Table of Contents for package ${data.name} at ${data.packageUrl}. " +
-        "Interfaces: ${data.interfaces}, Classes: ${data.classes}, Enums: ${data.enums}, " +
-        "Exceptions: ${data.exceptions}, Annotations: ${data.annotations}, " +
-        "Objects: ${data.objects}."
+    override fun toString() =
+        "Table of Contents for package ${data.name} at ${data.packageUrl}. " +
+            "Interfaces: ${data.interfaces}, Classes: ${data.classes}, Enums: ${data.enums}, " +
+            "Exceptions: ${data.exceptions}, Annotations: ${data.annotations}, " +
+            "Objects: ${data.objects}."
 }

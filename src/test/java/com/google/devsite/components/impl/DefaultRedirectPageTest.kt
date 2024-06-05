@@ -27,13 +27,12 @@ class DefaultRedirectPageTest {
     fun `Page renders correctly`() {
         val component = DefaultRedirectPage(Params("foo.html"))
 
-        val output = createHTML().html {
-            component.render(this)
-        }.trim()
+        val output = createHTML().html { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <html>
   <head>
     <meta charset="utf-8">
@@ -46,7 +45,8 @@ class DefaultRedirectPageTest {
     <h1>Redirecting&hellip;</h1>
 <a href="foo.html">Click here if you are not redirected.</a></body>
 </html>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 }

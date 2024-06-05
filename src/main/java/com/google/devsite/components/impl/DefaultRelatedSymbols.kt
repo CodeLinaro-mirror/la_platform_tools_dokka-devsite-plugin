@@ -29,10 +29,11 @@ import kotlinx.html.unsafe
 internal data class DefaultRelatedSymbols(
     override val data: RelatedSymbols.Params,
 ) : RelatedSymbols {
-    override fun render(into: FlowContent) = into.run {
-        renderRelatedSymbolsFor(data.directSubclasses, data.directSummary, "direct")
-        renderRelatedSymbolsFor(data.indirectSubclasses, data.indirectSummary, "indirect")
-    }
+    override fun render(into: FlowContent) =
+        into.run {
+            renderRelatedSymbolsFor(data.directSubclasses, data.directSummary, "direct")
+            renderRelatedSymbolsFor(data.indirectSubclasses, data.indirectSummary, "indirect")
+        }
 
     private fun FlowContent.renderRelatedSymbolsFor(
         subclasses: List<Link>,
@@ -62,7 +63,8 @@ internal data class DefaultRelatedSymbols(
         }
     }
 
-    override fun toString() = "Direct subclasses: ${data.directSubclasses.joinToString()}, summar" +
-        "y ${data.directSummary}. Indirect subclasses: ${data.indirectSubclasses.joinToString()}," +
-        " summary ${data.indirectSummary}"
+    override fun toString() =
+        "Direct subclasses: ${data.directSubclasses.joinToString()}, summar" +
+            "y ${data.directSummary}. Indirect subclasses: ${data.indirectSubclasses.joinToString()}," +
+            " summary ${data.indirectSummary}"
 }

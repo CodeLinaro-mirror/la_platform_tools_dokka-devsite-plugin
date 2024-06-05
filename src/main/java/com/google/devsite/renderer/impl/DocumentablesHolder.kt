@@ -32,6 +32,7 @@ import com.google.devsite.renderer.converters.simpleDocumentableComparator
 import com.google.devsite.renderer.converters.withJavaSynthetic
 import com.google.devsite.util.ClassVersionMetadata
 import com.google.devsite.util.LibraryMetadata
+import java.util.Locale
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Job
@@ -75,7 +76,6 @@ import org.jetbrains.dokka.model.doc.TagWrapper
 import org.jetbrains.dokka.model.properties.PropertyContainer
 import org.jetbrains.dokka.plugability.DokkaContext
 import org.jetbrains.dokka.plugability.querySingle
-import java.util.Locale
 
 /**
  * Centralized place to retrieve documentables.
@@ -185,27 +185,32 @@ internal class DocumentablesHolder(
         // setUpAnalysis(context, analysisPlugin.querySingle { sampleAnalysisEnvironmentCreator }) }
 
         allClasslikes = scope.async { computeClasslikes(module) }
-        allCompanions = scope.async {
-            module.packages.flatMap { companions[it.dri]!!.await().entries }
-                .associate { it.key to it.value }
-        }
-        classGraph = scope.async {
-            computeClassGraph(
-                allClasslikes.await() + allCompanions.await().values,
-                externalDocumentableProvider,
-                context.configuration.sourceSets,
-            )
-        }
+        allCompanions =
+            scope.async {
+                module.packages
+                    .flatMap { companions[it.dri]!!.await().entries }
+                    .associate { it.key to it.value }
+            }
+        classGraph =
+            scope.async {
+                computeClassGraph(
+                    allClasslikes.await() + allCompanions.await().values,
+                    externalDocumentableProvider,
+                    context.configuration.sourceSets,
+                )
+            }
         documentablesGraph = scope.async { computeDocumentablesGraph(classGraph.await()) }
 
-        nestedClasslikesJob = scope.launch {
-            for (classlike in allClasslikes.await()) {
-                val nestedClasslikesList =
-                    async { computeClasslikes(classlike.explodedChildren) }
+        nestedClasslikesJob =
+            scope.launch {
+                for (classlike in allClasslikes.await()) {
+                    val nestedClasslikesList = async {
+                        computeClasslikes(classlike.explodedChildren)
+                    }
 
-                nestedClasslikes[classlike.dri] = nestedClasslikesList
+                    nestedClasslikes[classlike.dri] = nestedClasslikesList
+                }
             }
-        }
     }
 
     suspend fun packages(): List<DPackage> = packages.await()
@@ -225,13 +230,15 @@ internal class DocumentablesHolder(
      * Returns whether the [dri] is for a synthetic class or a documentable contained in a synthetic
      * class.
      */
-    fun isFromSyntheticClass(dri: DRI) = dri.classNames in runBlocking {
-        syntheticClassNames[DRI(packageName = dri.packageName)]?.await() ?: emptySet()
-    }
+    fun isFromSyntheticClass(dri: DRI) =
+        dri.classNames in
+            runBlocking {
+                syntheticClassNames[DRI(packageName = dri.packageName)]?.await() ?: emptySet()
+            }
 
     /**
-     * Returns a classlike's nested classlikes.
-     * Does not include should-not-be-documented Documentables.
+     * Returns a classlike's nested classlikes. Does not include should-not-be-documented
+     * Documentables.
      */
     suspend fun nestedClasslikesFor(classlike: DClasslike): List<DClasslike> {
         nestedClasslikesJob.join()
@@ -243,8 +250,7 @@ internal class DocumentablesHolder(
     suspend fun classesFor(dPackage: DPackage): List<DClass> =
         classes.getValue(dPackage.dri).await()
 
-    suspend fun enumsFor(dPackage: DPackage): List<DEnum> =
-        enums.getValue(dPackage.dri).await()
+    suspend fun enumsFor(dPackage: DPackage): List<DEnum> = enums.getValue(dPackage.dri).await()
 
     suspend fun interfacesFor(dPackage: DPackage): List<DInterface> =
         interfaces.getValue(dPackage.dri).await()
@@ -268,8 +274,8 @@ internal class DocumentablesHolder(
         extensionPropertyMap.await().getOrDefault(dClasslike.dri, emptyList())
 
     /**
-     * Iterate through the all packages and create map of each class to its associated
-     * extension functions.
+     * Iterate through the all packages and create map of each class to its associated extension
+     * functions.
      */
     private suspend fun computeExtensionFunctionMap(): HashMap<DRI, MutableList<DFunction>> {
         val extensionFunctionsMapping = HashMap<DRI, MutableList<DFunction>>()
@@ -290,8 +296,8 @@ internal class DocumentablesHolder(
     }
 
     /**
-     * Iterate through the all packages and create map of each class to its associated
-     * extension functions.
+     * Iterate through the all packages and create map of each class to its associated extension
+     * functions.
      */
     private suspend fun computeExtensionPropertyMap(): HashMap<DRI, MutableList<DProperty>> {
         val extensionPropertiesMapping = HashMap<DRI, MutableList<DProperty>>()
@@ -310,8 +316,8 @@ internal class DocumentablesHolder(
     }
 
     /**
-     * If applicable, adds an extension function to the map, based on its receiver's type.
-     * Takes the receiver's type as a param to allow recursive calling for nullable receivers.
+     * If applicable, adds an extension function to the map, based on its receiver's type. Takes the
+     * receiver's type as a param to allow recursive calling for nullable receivers.
      */
     private fun DFunction.addToMapping(rType: Bound?, map: HashMap<DRI, MutableList<DFunction>>) {
         when (rType) {
@@ -321,9 +327,12 @@ internal class DocumentablesHolder(
             is Nullable -> addToMapping(rType.inner, map)
             // These types have no classlike pages, so we only document the extension fun
             // in the package summary
-            is JavaObject, is PrimitiveJavaType, Void, // builtins
-            is TypeAliased, is FunctionalTypeConstructor, is TypeParameter,
-            -> {}
+            is JavaObject,
+            is PrimitiveJavaType,
+            Void, // builtins
+            is TypeAliased,
+            is FunctionalTypeConstructor,
+            is TypeParameter, -> {}
             Dynamic -> TODO() // I don't think this case is possible?
             is UnresolvedBound -> throw RuntimeException("Unresolved receiver of $this")
             else -> throw RuntimeException("Unknown receiver for $this")
@@ -339,11 +348,11 @@ internal class DocumentablesHolder(
     private fun computePackages(module: DModule): List<DPackage> {
         return module.packages
             .filterNot { thisPackage ->
-                excludedPackages[displayLanguage]!!.any {
-                        excludedRegex ->
+                excludedPackages[displayLanguage]!!.any { excludedRegex ->
                     excludedRegex.matches(thisPackage.packageName)
                 }
-            }.sortedWith(simpleDocumentableComparator)
+            }
+            .sortedWith(simpleDocumentableComparator)
     }
 
     /** Returns all should-be-documented classlikes in this module. */
@@ -363,17 +372,17 @@ internal class DocumentablesHolder(
                 excludedPackages[displayLanguage]!!.any { excludedRegex ->
                     excludedRegex.matches(thisClasslike.packageName())
                 }
-            }.filterNot { shouldNotBeDisplayed(it) }
+            }
+            .filterNot { shouldNotBeDisplayed(it) }
             .sortedWith(simpleDocumentableComparator)
     }
 
-    /**
-     * Takes a sorted list of all classlikes and filters to the non-exception classes.
-     */
+    /** Takes a sorted list of all classlikes and filters to the non-exception classes. */
     private fun computeClasses(classlikes: List<DClasslike>): List<DClass> =
         classlikes.filterIsInstance<DClass>().filterNot { it.isExceptionClass }
 
-    /** Computes the syntheticClasses from top level functions that are used to document Kotlin as
+    /**
+     * Computes the syntheticClasses from top level functions that are used to document Kotlin as
      * Java
      */
     internal fun computeSyntheticClasses(dPackage: DPackage): Set<DClass> {
@@ -390,12 +399,16 @@ internal class DocumentablesHolder(
                 DClass(
                     dri = dPackage.dri.withClass(syntheticClassName),
                     name = syntheticClassName,
-                    properties = nodes.filterIsInstance<DProperty>()
-                        .map { it.withJavaSynthetic(syntheticClassName) },
+                    properties =
+                        nodes.filterIsInstance<DProperty>().map {
+                            it.withJavaSynthetic(syntheticClassName)
+                        },
                     constructors = emptyList(),
-                    functions = nodes.filterIsInstance<DFunction>().map {
-                        it.withJavaSynthetic(syntheticClassName)
-                    }.sortedWith(functionSignatureComparator),
+                    functions =
+                        nodes
+                            .filterIsInstance<DFunction>()
+                            .map { it.withJavaSynthetic(syntheticClassName) }
+                            .sortedWith(functionSignatureComparator),
                     classlikes = emptyList(),
                     sources = emptyMap(),
                     expectPresentInSet = null,
@@ -409,16 +422,19 @@ internal class DocumentablesHolder(
                     isExpectActual = false,
                     extra = PropertyContainer.empty(),
                 )
-            }.toSet()
+            }
+            .toSet()
     }
 
-    /** Returns a map from String name of synthetic class that this Function (WithSources) would be
+    /**
+     * Returns a map from String name of synthetic class that this Function (WithSources) would be
      * in to the Functions that are part of those classes
      *
      * This method uses @file:JvmName if it exists or the filename with "Kt" appended
-     **/
-    private fun <T> List<T>.mapToSyntheticNames(): Map<String, List<T>>
-        where T : Documentable, T : WithSources =
+     */
+    private fun <T> List<T>.mapToSyntheticNames(): Map<String, List<T>> where
+    T : Documentable,
+    T : WithSources =
         map { it.sources to it }
             .groupBy({ (_, function) -> nameForSyntheticClass(function) }) { it.second }
 
@@ -439,7 +455,9 @@ internal class DocumentablesHolder(
     }
 
     private fun computeExceptions(docs: List<Documentable>): List<DClass> {
-        return docs.filterIsInstance<DClass>().filter { it.isExceptionClass }
+        return docs
+            .filterIsInstance<DClass>()
+            .filter { it.isExceptionClass }
             .sortedWith(simpleDocumentableComparator)
     }
 
@@ -475,18 +493,18 @@ internal class DocumentablesHolder(
      * This function can also be used on DObjects where it is unknown whether it is a companion at
      * all. This works because we enforce non-companion objects being named 'Companion' as an error.
      *
-     * Returns true: is both a companion and uninteresting
-     * Returns false: either is not a companion, or is interesting
+     * Returns true: is both a companion and uninteresting Returns false: either is not a companion,
+     * or is interesting
      */
     private suspend fun DObject.isBoringCompanion(): Boolean =
         name == "Companion" &&
             supertypes.all { it.value.isEmpty() } &&
             children.all { it.isHoistedFromCompanion(displayLanguage) } &&
             // Even if all properties are hoisted, their Java accessors may not be.
-            (
-                displayLanguage != Language.JAVA || properties.gettersAndSetters()
-                    .all { it.isHoistedFromCompanion(displayLanguage) }
-                ) &&
+            (displayLanguage != Language.JAVA ||
+                properties.gettersAndSetters().all {
+                    it.isHoistedFromCompanion(displayLanguage)
+                }) &&
             extensionFunctionsFor(this).isEmpty() &&
             extensionPropertiesFor(this).isEmpty()
 
@@ -514,8 +532,8 @@ internal class DocumentablesHolder(
             if (brokenDocTag is NamedTagWrapper) containingInfo += " ${brokenDocTag.name}"
         }
         containingInfo += " in ${documentableWithError.className} ${documentableWithError.name}"
-        val location = containingDocumentable?.getErrorLocation()
-            ?: documentableWithError.getErrorLocation()
+        val location =
+            containingDocumentable?.getErrorLocation() ?: documentableWithError.getErrorLocation()
         logger.warn(
             "$location $baseMessage$containingInfo$additionalContext",
         )

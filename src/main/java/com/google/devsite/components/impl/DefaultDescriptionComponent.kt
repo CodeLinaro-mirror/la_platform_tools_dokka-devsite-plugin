@@ -136,31 +136,32 @@ import org.jetbrains.dokka.model.doc.Var
 internal data class DefaultDescriptionComponent(
     override val data: DescriptionComponent.Params,
 ) : DescriptionComponent {
-    override fun render(into: FlowContent) = into.run {
-        if (data.deprecation == null) {
-            if (data.summary) {
-                renderTags(data.components, State())
-            } else {
-                renderTags(data.components, State())
-            }
-        } else {
-            if (data.summary) {
-                // Displays the deprecation message in a table cell (e.g. class summary table)
-                p {
-                    strong { +data.deprecation }
-                    if (data.components.firstOrNull() is Text) +" "
+    override fun render(into: FlowContent) =
+        into.run {
+            if (data.deprecation == null) {
+                if (data.summary) {
+                    renderTags(data.components, State())
+                } else {
                     renderTags(data.components, State())
                 }
             } else {
-                // Displays the deprecation message in notice box with "caution" styling
-                aside("caution") {
-                    strong { +data.deprecation }
-                    br()
-                    renderTags(data.components, State())
+                if (data.summary) {
+                    // Displays the deprecation message in a table cell (e.g. class summary table)
+                    p {
+                        strong { +data.deprecation }
+                        if (data.components.firstOrNull() is Text) +" "
+                        renderTags(data.components, State())
+                    }
+                } else {
+                    // Displays the deprecation message in notice box with "caution" styling
+                    aside("caution") {
+                        strong { +data.deprecation }
+                        br()
+                        renderTags(data.components, State())
+                    }
                 }
             }
         }
-    }
 
     // TODO: make this work for non-english docstrings
     private val periodSpaceCapital = """\.\s+[A-Z]""".toRegex()
@@ -178,9 +179,9 @@ internal data class DefaultDescriptionComponent(
 
     /**
      * @param tags the DocTags in this context. This DocTag should be one of them.
-     * @Returns whether this Text DocTag ends with the end of a sentence.
-     * Specifically, whether it meets one of the following conditions (each of which indicate that
-     *    this tag ends a sentence):
+     * @Returns whether this Text DocTag ends with the end of a sentence. Specifically, whether it
+     *   meets one of the following conditions (each of which indicate that this tag ends a
+     *   sentence):
      * 1. Has no children or subsequent tags.
      * 2. Ends in a period, and the next tag/child starts in a capital letter.
      * 3. Ends in a period, and the next tag starts with an ambiguous character (neither upper nor
@@ -194,10 +195,9 @@ internal data class DefaultDescriptionComponent(
         val tagIndex = tags.indexOf(this)
         // Identify the first sentence of the description. Summaries only contain that.
         val followingText = // Simply render all tags into one string for this check.
-            (
-                this.children.text(separator = " ") +
-                    tags.subList(tagIndex + 1, tags.size).text(separator = " ")
-                ).trim()
+            (this.children.text(separator = " ") +
+                    tags.subList(tagIndex + 1, tags.size).text(separator = " "))
+                .trim()
         if (followingText == "") return true
         // In some cases the first sentence doesn't end at the first period e.g. when
         // there is an "e.g.". We detect this by checking whether the first character
@@ -213,16 +213,18 @@ internal data class DefaultDescriptionComponent(
         if (tagIndex + 1 < tags.size && tags[tagIndex + 1] !is Text) return true
         // If the next tag is a Text that begins with a lower case, the sentence has not ended.
         if (followingText[0] in 'a'..'z') return false
-        data.docsHolder?.logger?.warn(
-            "You have a strange period in these docs that may or may not end a sentence: " +
-                tags.text(),
-        )
+        data.docsHolder
+            ?.logger
+            ?.warn(
+                "You have a strange period in these docs that may or may not end a sentence: " +
+                    tags.text(),
+            )
         return true // This should never happen--it would require period-space-something-weird
     }
 
     /**
-     * @Returns whether this string contains a sentence end-and-start-a-new at the given index.
-     * Uses similar criteria to the above function.
+     * @Returns whether this string contains a sentence end-and-start-a-new at the given index. Uses
+     *   similar criteria to the above function.
      */
     private fun String.containsSentenceBreakAt(index: Int): Boolean {
         if (doesntEnd.any { this.subSequence(0, index + 1).endsWith(it) }) return false
@@ -233,7 +235,8 @@ internal data class DefaultDescriptionComponent(
 
     /**
      * @Returns the indexes of all period-space-non-lowercase-known-char sequences in this string.
-     * Pair with the above fun to tell whether there is a sentence-end strictly-inside this string.
+     *   Pair with the above fun to tell whether there is a sentence-end strictly-inside this
+     *   string.
      */
     private fun String.matchPeriodSpaceNonLowercase(): List<Int> {
         // check if there is a sentence-end strictly-inside the tag.body
@@ -250,63 +253,67 @@ internal data class DefaultDescriptionComponent(
             val link = tag.params["href"]?.handleDocRoot()
             val isHtml = tag.params["content-type"] == "html"
             when (tag) {
-                is Text -> if (data.summary) {
-                    // Remove the MathJax tag. The HTML doesn't need to be injected here because it
-                    // will be injected for the detail component.
-                    val text = tag.body.removeMathJax()
-                    // If there is a sentence-end, break on the first
-                    val matches = text.matchPeriodSpaceNonLowercase()
-                    if (matches.isNotEmpty()) {
-                        +(text.subSequence(0, matches.minOrNull()!! + 1).toString())
-                        state.terminate = true
-                    } else if (tag.breaksAtEndOfTag(tags)) { // If this tag is a full sentence
-                        +text.trimEnd()
-                        state.terminate = true
-                    } else if (isHtml) {
-                        consumer.onTagContentUnsafe { raw(text.handleDocRoot()) }
-                    } else {
-                        +text
-                    }
-                } else {
-                    if (tag.children.isEmpty()) {
-                        if (isHtml) {
-                            consumer.onTagContentUnsafe { raw(tag.body.handleDocRoot()) }
-                        } else if (tag.body.contains(mathJaxDocTag)) {
-                            // Remove the MathJax doc tag and inject HTML to enable MathJax.
-                            consumer.onTagContentUnsafe { raw(mathJaxHtml) }
-                            +tag.body.removeMathJax()
+                is Text ->
+                    if (data.summary) {
+                        // Remove the MathJax tag. The HTML doesn't need to be injected here because
+                        // it
+                        // will be injected for the detail component.
+                        val text = tag.body.removeMathJax()
+                        // If there is a sentence-end, break on the first
+                        val matches = text.matchPeriodSpaceNonLowercase()
+                        if (matches.isNotEmpty()) {
+                            +(text.subSequence(0, matches.minOrNull()!! + 1).toString())
+                            state.terminate = true
+                        } else if (tag.breaksAtEndOfTag(tags)) { // If this tag is a full sentence
+                            +text.trimEnd()
+                            state.terminate = true
+                        } else if (isHtml) {
+                            consumer.onTagContentUnsafe { raw(text.handleDocRoot()) }
                         } else {
-                            +tag.body
+                            +text
                         }
                     } else {
-                        if (link == null) {
-                            renderTags(tag.children, state)
+                        if (tag.children.isEmpty()) {
+                            if (isHtml) {
+                                consumer.onTagContentUnsafe { raw(tag.body.handleDocRoot()) }
+                            } else if (tag.body.contains(mathJaxDocTag)) {
+                                // Remove the MathJax doc tag and inject HTML to enable MathJax.
+                                consumer.onTagContentUnsafe { raw(mathJaxHtml) }
+                                +tag.body.removeMathJax()
+                            } else {
+                                +tag.body
+                            }
                         } else {
-                            a(link) { +tag.body }
+                            if (link == null) {
+                                renderTags(tag.children, state)
+                            } else {
+                                a(link) { +tag.body }
+                            }
                         }
                     }
-                }
                 is P -> {
                     p { renderTags(tag.children, state) }
                     // Sometimes developers forget periods. Max one paragraph per sentence though.
                     if (data.summary) state.terminate = true
                 }
                 is A -> a(link) { renderTags(tag.children, state) }
-                is B, is Strong -> b { renderTags(tag.children, state) }
+                is B,
+                is Strong -> b { renderTags(tag.children, state) }
                 Br -> br { renderTags(tag.children, state) }
-                is H1 -> kotlinx.html.H1(tag.params, consumer)
-                    .visit { renderTags(tag.children, state) }
-                is H2 -> kotlinx.html.H2(tag.params, consumer)
-                    .visit { renderTags(tag.children, state) }
-                is H3 -> kotlinx.html.H3(tag.params, consumer)
-                    .visit { renderTags(tag.children, state) }
-                is H4 -> kotlinx.html.H4(tag.params, consumer)
-                    .visit { renderTags(tag.children, state) }
-                is H5 -> kotlinx.html.H5(tag.params, consumer)
-                    .visit { renderTags(tag.children, state) }
-                is H6 -> kotlinx.html.H6(tag.params, consumer)
-                    .visit { renderTags(tag.children, state) }
-                is I, is Em -> em { renderTags(tag.children, state) }
+                is H1 ->
+                    kotlinx.html.H1(tag.params, consumer).visit { renderTags(tag.children, state) }
+                is H2 ->
+                    kotlinx.html.H2(tag.params, consumer).visit { renderTags(tag.children, state) }
+                is H3 ->
+                    kotlinx.html.H3(tag.params, consumer).visit { renderTags(tag.children, state) }
+                is H4 ->
+                    kotlinx.html.H4(tag.params, consumer).visit { renderTags(tag.children, state) }
+                is H5 ->
+                    kotlinx.html.H5(tag.params, consumer).visit { renderTags(tag.children, state) }
+                is H6 ->
+                    kotlinx.html.H6(tag.params, consumer).visit { renderTags(tag.children, state) }
+                is I,
+                is Em -> em { renderTags(tag.children, state) }
                 is Div -> DIV(tag.params, consumer).visit { renderTags(tag.children, state) }
                 is Dl -> dl { renderDescriptionList(tag.children, state) }
                 is Span -> span { renderTags(tag.children, state) }
@@ -319,49 +326,83 @@ internal data class DefaultDescriptionComponent(
                 HorizontalRule -> hr { renderTags(tag.children, state) }
                 is CodeInline -> code { renderTags(tag.children, state) }
                 // Turn CodeBlock into pre. TODO: guess codeblock-literal's language b/279184834
-                is Pre, is CodeBlock -> {
+                is Pre,
+                is CodeBlock -> {
                     pre((tag.params["class"] ?: "").addIfNotContained("prettyprint")) {
                         renderTags(tag.children, state)
                     }
                 }
-                is DocumentationLink -> code {
-                    val url = data.pathProvider!!.forReference(tag.dri).url
-                    // TODO: improve enforcement/warning for broken links in description b/192556649
-                    a(url) {
+                is DocumentationLink ->
+                    code {
+                        val url = data.pathProvider!!.forReference(tag.dri).url
+                        // TODO: improve enforcement/warning for broken links in description
+                        // b/192556649
+                        a(url) { renderTags(tag.children, state) }
+                    }
+                is Img ->
+                    img(src = tag.params.getValue("href"), alt = tag.params["alt"]) {
                         renderTags(tag.children, state)
                     }
-                }
-                is Img -> img(src = tag.params.getValue("href"), alt = tag.params["alt"]) {
+                is BlockQuote -> blockQuote { renderTags(tag.children, state) }
+                is CustomDocTag -> {
                     renderTags(tag.children, state)
                 }
-                is BlockQuote -> blockQuote { renderTags(tag.children, state) }
-                is CustomDocTag -> { renderTags(tag.children, state) }
                 is Var -> htmlVar { renderTags(tag.children, state) }
-                is Html, is Head, is Meta, is Header, is Title, is Footer, is IFrame,
-                is Main, is Menu, is Nav, is Index,
-                ->
+                is Html,
+                is Head,
+                is Meta,
+                is Header,
+                is Title,
+                is Footer,
+                is IFrame,
+                is Main,
+                is Menu,
+                is Nav,
+                is Index, ->
                     throw NotImplementedError(
                         "Inline HTML pages are not supported: " +
                             "${tag.javaClass.simpleName}. Context: ${tags.text()}.",
                     )
-                is Small, is Big, is Cite, is Dfn, is Dir, is Font, is Frame, is FrameSet,
-                is Input, is Link, is Listing, is NoFrames, is Tt, is U, is Script,
-                is NoScript, is Section,
-                -> throw NotImplementedError(
-                    "Unknown use case for " +
-                        "${tag.javaClass.simpleName}.  Context: ${tags.text()}.",
-                )
-                is THead, is TBody, is Td, is TFoot, is Th, is Tr ->
+                is Small,
+                is Big,
+                is Cite,
+                is Dfn,
+                is Dir,
+                is Font,
+                is Frame,
+                is FrameSet,
+                is Input,
+                is Link,
+                is Listing,
+                is NoFrames,
+                is Tt,
+                is U,
+                is Script,
+                is NoScript,
+                is Section, ->
+                    throw NotImplementedError(
+                        "Unknown use case for " +
+                            "${tag.javaClass.simpleName}.  Context: ${tags.text()}.",
+                    )
+                is THead,
+                is TBody,
+                is Td,
+                is TFoot,
+                is Th,
+                is Tr ->
                     error("Not in table context: ${tag.javaClass.simpleName}.  Context: $tags.")
-                is Li -> error(
-                    "Not in list context: ${tag.javaClass.simpleName}. The <li> tag " +
-                        "must be contained in a parent element (such as <ol>, <ul>, or <menu>). " +
-                        "Context: ${tags.text()}.",
-                )
-                is Dd, is Dt -> error(
-                    "Not in list context: ${tag.javaClass.simpleName}. The <dt> or <dd> tag " +
-                        "<must be contained in a <dl> element. Context: ${tags.text()}.",
-                )
+                is Li ->
+                    error(
+                        "Not in list context: ${tag.javaClass.simpleName}. The <li> tag " +
+                            "must be contained in a parent element (such as <ol>, <ul>, or <menu>). " +
+                            "Context: ${tags.text()}.",
+                    )
+                is Dd,
+                is Dt ->
+                    error(
+                        "Not in list context: ${tag.javaClass.simpleName}. The <dt> or <dd> tag " +
+                            "<must be contained in a <dl> element. Context: ${tags.text()}.",
+                    )
                 is Caption -> TODO("Support this tag")
             }
         }
@@ -380,9 +421,7 @@ internal data class DefaultDescriptionComponent(
         for (tag in tags) {
             when (tag) {
                 is Dd -> dd { renderTags(tag.children, state) }
-                is Dt -> dt {
-                    unsafe { +createHTML().p { renderTags(tag.children, state) } }
-                }
+                is Dt -> dt { unsafe { +createHTML().p { renderTags(tag.children, state) } } }
                 is Dl -> renderTags(listOf(tag), state)
                 else -> error("Invalid tag inside of DescriptionList: ${tag.javaClass.simpleName}.")
             }
@@ -398,10 +437,11 @@ internal data class DefaultDescriptionComponent(
                 is Th -> tr { renderTableRow(tag.children, isHeader = true, state) }
                 is Tr -> tr { renderTableRow(tag.children, isHeader = false, state) }
                 is Caption -> caption { renderTags(tag.children, state) }
-                else -> error(
-                    "Invalid tag inside of Table: ${tag.javaClass.simpleName}. " +
-                        "Context: ${tags.text()}.",
-                )
+                else ->
+                    error(
+                        "Invalid tag inside of Table: ${tag.javaClass.simpleName}. " +
+                            "Context: ${tags.text()}.",
+                    )
             }
         }
     }
@@ -410,10 +450,11 @@ internal data class DefaultDescriptionComponent(
         for (tag in tags) {
             when (tag) {
                 is Tr -> tr { renderTableRow(tag.children, isHeader = true, state) }
-                else -> error(
-                    "Invalid tag inside of TableHeader: ${tag.javaClass.simpleName}. " +
-                        "Context: ${tags.text()}.",
-                )
+                else ->
+                    error(
+                        "Invalid tag inside of TableHeader: ${tag.javaClass.simpleName}. " +
+                            "Context: ${tags.text()}.",
+                    )
             }
         }
     }
@@ -422,10 +463,11 @@ internal data class DefaultDescriptionComponent(
         for (tag in tags) {
             when (tag) {
                 is Tr -> tr { renderTableRow(tag.children, isHeader = false, state) }
-                else -> error(
-                    "Invalid tag inside of TableBody: ${tag.javaClass.simpleName}. " +
-                        "Context: ${tags.text()}.",
-                )
+                else ->
+                    error(
+                        "Invalid tag inside of TableBody: ${tag.javaClass.simpleName}. " +
+                            "Context: ${tags.text()}.",
+                    )
             }
         }
     }
@@ -434,10 +476,11 @@ internal data class DefaultDescriptionComponent(
         for (tag in tags) {
             when (tag) {
                 is Tr -> tr { renderTableRow(tag.children, isHeader = false, state) }
-                else -> error(
-                    "Invalid tag inside of TableFooter: ${tag.javaClass.simpleName}. " +
-                        "Context: ${tags.text()}.",
-                )
+                else ->
+                    error(
+                        "Invalid tag inside of TableFooter: ${tag.javaClass.simpleName}. " +
+                            "Context: ${tags.text()}.",
+                    )
             }
         }
     }
@@ -446,20 +489,22 @@ internal data class DefaultDescriptionComponent(
         for (tag in tags) {
             when (tag) {
                 is Td -> td { renderTags(tag.children, state) }
-                is P -> if (isHeader) {
-                    // KotlinX.HTML seems broken here: we can't render paragraphs or divs
-                    // TODO(b/164125463): Figure out how to add other elements
-                    th { +(tag.children.single() as Text).body }
-                } else {
-                    td { renderTags(tag.children, state) }
-                }
+                is P ->
+                    if (isHeader) {
+                        // KotlinX.HTML seems broken here: we can't render paragraphs or divs
+                        // TODO(b/164125463): Figure out how to add other elements
+                        th { +(tag.children.single() as Text).body }
+                    } else {
+                        td { renderTags(tag.children, state) }
+                    }
                 // <th> is being converted to Text class
                 // TODO(b/193096057): determine root cause
                 is Text -> th { +tag.body }
-                else -> error(
-                    "Invalid tag inside of TableRow: ${tag.javaClass.simpleName}. " +
-                        "Context: ${tags.text()}.",
-                )
+                else ->
+                    error(
+                        "Invalid tag inside of TableRow: ${tag.javaClass.simpleName}. " +
+                            "Context: ${tags.text()}.",
+                    )
             }
         }
     }
@@ -468,11 +513,13 @@ internal data class DefaultDescriptionComponent(
         for (tag in tags) {
             when (tag) {
                 is Li -> li { renderTags(tag.children, state) }
-                is Ol, is Ul -> renderTags(listOf(tag), state)
-                else -> error(
-                    "Invalid tag inside of OrderedList: ${tag.javaClass.simpleName}. " +
-                        "Context: ${tags.text()}.",
-                )
+                is Ol,
+                is Ul -> renderTags(listOf(tag), state)
+                else ->
+                    error(
+                        "Invalid tag inside of OrderedList: ${tag.javaClass.simpleName}. " +
+                            "Context: ${tags.text()}.",
+                    )
             }
         }
     }
@@ -481,11 +528,13 @@ internal data class DefaultDescriptionComponent(
         for (tag in tags) {
             when (tag) {
                 is Li -> li { renderTags(tag.children, state) }
-                is Ol, is Ul -> renderTags(listOf(tag), state)
-                else -> error(
-                    "Invalid tag inside of UnorderedList: ${tag.javaClass.simpleName}. " +
-                        "Context: ${tags.text()}.",
-                )
+                is Ol,
+                is Ul -> renderTags(listOf(tag), state)
+                else ->
+                    error(
+                        "Invalid tag inside of UnorderedList: ${tag.javaClass.simpleName}. " +
+                            "Context: ${tags.text()}.",
+                    )
             }
         }
     }
@@ -497,22 +546,24 @@ internal data class DefaultDescriptionComponent(
     private class State(var terminate: Boolean = false)
 
     /** Function for printing context */
-    fun List<DocTag>.text(separator: String = ", "): String = joinToString(separator) {
-        when (it) {
-            is DocumentationLink -> it.dri.toString() + it.children.text()
-            is CustomDocTag -> it.name + it.children.text()
-            is Text -> it.body + it.children.text()
-            else -> it.children.text()
+    fun List<DocTag>.text(separator: String = ", "): String =
+        joinToString(separator) {
+            when (it) {
+                is DocumentationLink -> it.dri.toString() + it.children.text()
+                is CustomDocTag -> it.name + it.children.text()
+                is Text -> it.body + it.children.text()
+                else -> it.children.text()
+            }
         }
-    }
 
-    override fun toString() = if (data.summary) {
-        "summary of "
-    } else "" +
-        if (data.deprecation != null) {
-            data.deprecation + " "
-        } else "" +
-            data.components.joinToString { it.toString() }
+    override fun toString() =
+        if (data.summary) {
+            "summary of "
+        } else
+            "" +
+                if (data.deprecation != null) {
+                    data.deprecation + " "
+                } else "" + data.components.joinToString { it.toString() }
 }
 
 private fun String.addIfNotContained(addend: String) = if (addend in this) this else this + addend

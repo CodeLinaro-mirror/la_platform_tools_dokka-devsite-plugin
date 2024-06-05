@@ -25,16 +25,16 @@ class DefaultPackageListTest {
     fun `Package list renders correctly`() {
         val component = DefaultPackageList(Params(listOf("a", "b", "c")))
 
-        val output = buildString {
-            component.render(this)
-        }.trim()
+        val output = buildString { component.render(this) }.trim()
 
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 a
 b
 c
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 }

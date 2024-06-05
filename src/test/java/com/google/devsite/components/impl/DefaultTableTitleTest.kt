@@ -27,35 +27,35 @@ class DefaultTableTitleTest {
     fun `Small header renders correctly`() {
         val component = DefaultTableTitle(Params("Title"))
 
-        val output = createHTML().tr {
-            component.render(this)
-        }.trim()
+        val output = createHTML().tr { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <tr>
   <th colspan="100%">Title</th>
 </tr>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Big header renders correctly`() {
         val component = DefaultTableTitle(Params("Title", big = true))
 
-        val output = createHTML().tr {
-            component.render(this)
-        }.trim()
+        val output = createHTML().tr { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <tr>
   <th colspan="100%"><h3>Title</h3></th>
 </tr>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 }

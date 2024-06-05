@@ -16,10 +16,10 @@
 
 package com.google.devsite.renderer.converters
 
+import java.io.File
 import org.jetbrains.dokka.analysis.kotlin.sample.SampleSnippet
 import org.jetbrains.dokka.model.doc.Pre
 import org.jetbrains.dokka.model.doc.Text
-import java.io.File
 
 internal var failOnMissingSamples = true
 internal var isRunningInDackkasTests = false
@@ -90,25 +90,30 @@ private val importsToIgnore = listOf("androidx.annotation.Sampled")
 
 // Based on old dokka's implementation, hide all non-androidx import statements
 private const val androidxPackage = "androidx."
+
 internal fun processImports(sample: SampleSnippet): String {
     val importList = sample.imports
-    val filteredImports = importList.filter { importString ->
-        val importName = importString.trim()
-        // Hide all non-androidx imports
-        if (!importName.startsWith(androidxPackage)) return@filter false
-        // Hide all explicitly ignored imports (like androidx.annotations.Sampled)
-        if (importsToIgnore.any { importName.startsWith(it) }) return@filter false
-        // Hide empty lines
-        if (importName.trim().isEmpty()) return@filter false
+    val filteredImports =
+        importList.filter { importString ->
+            val importName = importString.trim()
+            // Hide all non-androidx imports
+            if (!importName.startsWith(androidxPackage)) return@filter false
+            // Hide all explicitly ignored imports (like androidx.annotations.Sampled)
+            if (importsToIgnore.any { importName.startsWith(it) }) return@filter false
+            // Hide empty lines
+            if (importName.trim().isEmpty()) return@filter false
 
-        // Return whether any of the code in the sample uses this import
-        return@filter importName.substringAfterLast(".") in sample.body
-    }
+            // Return whether any of the code in the sample uses this import
+            return@filter importName.substringAfterLast(".") in sample.body
+        }
     // Don't spam blank lines if there are no imports (post-filtering)
-    if (filteredImports.isEmpty()) { return "" }
+    if (filteredImports.isEmpty()) {
+        return ""
+    }
     // The first blank line doesn't appear in rendered html, just makes raws look nicer
     return "\n" + filteredImports.joinToString(separator = "\n") { "import $it" } + "\n\n"
 }
+
 /*
 /**
  * This takes a PSIElement and returns the list of import statements it requires.
@@ -192,10 +197,14 @@ internal fun convertTextToJavadocSample(
     block: Text,
     samples: Set<File>,
 ): Pre {
-    val sampleLine = block.body
-        .trim().removePrefix("{").removeSuffix("}")
-        // Upstream inserts "*"s on line breaks within the { }
-        .split(" ").filter { it.isNotEmpty() && it != "*" }
+    val sampleLine =
+        block.body
+            .trim()
+            .removePrefix("{")
+            .removeSuffix("}")
+            // Upstream inserts "*"s on line breaks within the { }
+            .split(" ")
+            .filter { it.isNotEmpty() && it != "*" }
     if (sampleLine[0] != "@sample") {
         throw RuntimeException(
             "invalid first line of " +
@@ -212,14 +221,15 @@ internal fun convertTextToJavadocSample(
         resolvedFile = sampleFiles.filter { it.name == filePath.split("/").last() }
     }
     return when (resolvedFile.size) {
-        0 -> if (failOnMissingSamples) {
-            throw RuntimeException(
-                "Unable to find the sample file $filePath in the samples directory " +
-                    sampleFiles.map { it.path }.reduce { acc, s -> acc.commonPrefixWith(s) },
-            )
-        } else {
-            Pre(emptyList())
-        }
+        0 ->
+            if (failOnMissingSamples) {
+                throw RuntimeException(
+                    "Unable to find the sample file $filePath in the samples directory " +
+                        sampleFiles.map { it.path }.reduce { acc, s -> acc.commonPrefixWith(s) },
+                )
+            } else {
+                Pre(emptyList())
+            }
         1 -> {
             // extractCodeBlockFromFile can only work with .java and .xml files
             val fileExtension = resolvedFile.single().path.substringAfterLast(".")
@@ -233,15 +243,16 @@ internal fun convertTextToJavadocSample(
 }
 
 private fun Iterable<File>.allFiles() = this.map { it.allFiles() }.flatten()
-private fun File.allFiles(): List<File> = if (this.isFile) {
-    listOf(this)
-} else
-    listFiles()!!.asIterable().allFiles()
+
+private fun File.allFiles(): List<File> =
+    if (this.isFile) {
+        listOf(this)
+    } else listFiles()!!.asIterable().allFiles()
 
 /**
- * Extracts sample code from a file (probably a java or xml file).
- * Takes all lines between BEGIN_INCLUDE(block_to_take) and END_INCLUDE(block_to_take)
- * Reduces all indents to that of the first line
+ * Extracts sample code from a file (probably a java or xml file). Takes all lines between
+ * BEGIN_INCLUDE(block_to_take) and END_INCLUDE(block_to_take) Reduces all indents to that of the
+ * first line
  */
 internal fun extractCodeBlockFromFile(sampleFile: File, blockToTake: String): Text {
     var result = "\n"
@@ -258,7 +269,5 @@ internal fun extractCodeBlockFromFile(sampleFile: File, blockToTake: String): Te
     throw RuntimeException("No END_INCLUDE($blockToTake) in ${sampleFile.name} sample!")
 }
 
-/**
- * The number of spaces before the first non-space character on this line
- */
+/** The number of spaces before the first non-space character on this line */
 private fun indentSize(it: String) = (it.length - it.trimStart().length).coerceAtLeast(0)

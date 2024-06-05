@@ -23,18 +23,19 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.anchor
 import com.google.devsite.renderer.converters.isHoistedFromCompanion
 import com.google.devsite.renderer.impl.DocumentablesGraph
+import java.nio.file.Paths
+import kotlin.io.path.pathString
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.parent
 import org.jetbrains.dokka.model.DEnumEntry
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.WithCompanion
-import java.nio.file.Paths
-import kotlin.io.path.pathString
 
-private val NON_DOCUMENTABLE_PREFIXES = listOf(
-    "kotlin.jvm.functions",
-    "kotlin.coroutines.SuspendFunction",
-)
+private val NON_DOCUMENTABLE_PREFIXES =
+    listOf(
+        "kotlin.jvm.functions",
+        "kotlin.coroutines.SuspendFunction",
+    )
 
 /** Converts various inputs to output file paths. */
 internal interface FilePathProvider {
@@ -57,7 +58,10 @@ internal interface FilePathProvider {
     /** The global index file that encompasses all packages. */
     val rootIndex: String
 
-    /** The _toc.yaml file, responsible for pointing to the paths of each index.html file in the doc tree. */
+    /**
+     * The _toc.yaml file, responsible for pointing to the paths of each index.html file in the doc
+     * tree.
+     */
     val toc: String
 
     /** The _book.yaml file, responsible for the sidebar nav. */
@@ -75,10 +79,9 @@ internal interface FilePathProvider {
     fun forType(packageName: String, name: String): String
 
     /**
-     * @see forReference
-     *
      * @param name is used to override the computed name for @JvmName, generated getters, etc.
      * @param suffix is used in the case of links of a nullable type
+     * @see forReference
      */
     fun linkForReference(dri: DRI, name: String? = null, suffix: String = ""): Link {
         val ref = forReference(dri)
@@ -101,7 +104,8 @@ internal interface FilePathProvider {
         // Exclude specific references from being linked (even if DokkaLocationProvider might be
         // able to resolve them).
         // In the future we might want to only link to things we *know* we've generated docs for by
-        // passing around a collection of valid locations but that could have performance implications
+        // passing around a collection of valid locations but that could have performance
+        // implications
         val fullName = "$packageName.$className"
         if (NON_DOCUMENTABLE_PREFIXES.any { fullName.startsWith(it) }) {
             return ReferencePath(className ?: packageName, "")
@@ -113,11 +117,12 @@ internal interface FilePathProvider {
             return ReferencePath(text, it)
         }
 
-        val (typeName, typeUrl) = if (className == null) {
-            packageName to forType(packageName, PACKAGE_SUMMARY_NAME)
-        } else {
-            className to forType(packageName, className)
-        }
+        val (typeName, typeUrl) =
+            if (className == null) {
+                packageName to forType(packageName, PACKAGE_SUMMARY_NAME)
+            } else {
+                className to forType(packageName, className)
+            }
 
         // if we have an enum value instead of an inner class, we need a link to the enum class
         // (Foo) without the value (Foo.ENUM) and append the enum value as a hash.
@@ -129,8 +134,12 @@ internal interface FilePathProvider {
 
         // If this is the child of a companion object that is documented on the page of the
         // companion's containing class, link to the class page instead of the companion page.
-        if (symbol != null && outerClassName != null && documentable != null &&
-            isCompanion(dri.parent) && documentable.isHoistedFromCompanion(language)
+        if (
+            symbol != null &&
+                outerClassName != null &&
+                documentable != null &&
+                isCompanion(dri.parent) &&
+                documentable.isHoistedFromCompanion(language)
         ) {
             val outerTypeUrl = forType(packageName, outerClassName)
             return ReferencePath(symbol.name, "$outerTypeUrl#${symbol.anchor()}")
@@ -143,16 +152,14 @@ internal interface FilePathProvider {
         }
     }
 
-    /**
-     * Returns a [Documentable] with the given [DRI] if it exists, else null.
-     */
+    /** Returns a [Documentable] with the given [DRI] if it exists, else null. */
     fun findInDocumentablesGraph(dri: DRI): Documentable? {
         return documentablesGraph[dri]
     }
 
     /**
-     * Checks if the [dri] represents a companion object based on if the parent is a class and
-     * has a companion with an identical DRI.
+     * Checks if the [dri] represents a companion object based on if the parent is a class and has a
+     * companion with an identical DRI.
      */
     fun isCompanion(dri: DRI): Boolean {
         val parentDocumentable = findInDocumentablesGraph(dri.parent)
@@ -164,9 +171,7 @@ internal interface FilePathProvider {
     /**
      * Removes the innermost class from a list if it exists
      *
-     * Outer.Inner -> Outer
-     * A.B.C -> A.B
-     * MyClass -> MyClass
+     * Outer.Inner -> Outer A.B.C -> A.B MyClass -> MyClass
      */
     private fun getOuterClassName(className: String?): String? {
         val classNames = className?.split(".") ?: emptyList()
@@ -176,6 +181,7 @@ internal interface FilePathProvider {
             className
         }
     }
+
     val ANY: TypeProjectionComponent
 
     companion object {
@@ -184,7 +190,8 @@ internal interface FilePathProvider {
     }
 }
 
-internal val ANY_DRI: Map<Language, DRI> = mapOf(
-    Language.JAVA to DRI("java.lang", "Object"),
-    Language.KOTLIN to DRI("kotlin", "Any"),
-)
+internal val ANY_DRI: Map<Language, DRI> =
+    mapOf(
+        Language.JAVA to DRI("java.lang", "Object"),
+        Language.KOTLIN to DRI("kotlin", "Any"),
+    )

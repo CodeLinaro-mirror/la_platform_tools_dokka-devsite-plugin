@@ -29,10 +29,11 @@ import kotlinx.html.FlowContent
 internal data class DefaultNamedValueAnnotationParameter(
     override val data: NamedValueAnnotationParameter.Params,
 ) : NamedValueAnnotationParameter {
-    override fun render(into: FlowContent) = into.run {
-        data.name.render(into)
-        +data.value
-    }
+    override fun render(into: FlowContent) =
+        into.run {
+            data.name.render(into)
+            +data.value
+        }
 
     override fun toString() = "$name $value"
 }
@@ -40,10 +41,11 @@ internal data class DefaultNamedValueAnnotationParameter(
 internal data class DefaultAnnotationValueAnnotationParameter(
     override val data: AnnotationValueAnnotationParameter.Params,
 ) : AnnotationValueAnnotationParameter {
-    override fun render(into: FlowContent) = into.run {
-        data.name.render(into)
-        data.annotationComponentValue.render(into)
-    }
+    override fun render(into: FlowContent) =
+        into.run {
+            data.name.render(into)
+            data.annotationComponentValue.render(into)
+        }
 
     override fun toString() = "$name $value"
 }
@@ -51,19 +53,25 @@ internal data class DefaultAnnotationValueAnnotationParameter(
 internal data class DefaultArrayValueAnnotationParameter(
     override val data: ArrayValueAnnotationParameter.Params,
 ) : ArrayValueAnnotationParameter {
-    override fun render(into: FlowContent) = into.run {
-        data.name.render(into)
-        data.innerAnnotationParameters.render(into, brackets = "[]", shouldBreak = ShouldBreak.NO)
-    }
+    override fun render(into: FlowContent) =
+        into.run {
+            data.name.render(into)
+            data.innerAnnotationParameters.render(
+                into,
+                brackets = "[]",
+                shouldBreak = ShouldBreak.NO
+            )
+        }
 
     override fun toString() = "$name $value"
 }
 
-private fun String?.render(into: FlowContent) = into.run {
-    if (this@render != null) {
-        +this@render
-        +Entities.nbsp
-        +"="
-        +Entities.nbsp
+private fun String?.render(into: FlowContent) =
+    into.run {
+        if (this@render != null) {
+            +this@render
+            +Entities.nbsp
+            +"="
+            +Entities.nbsp
+        }
     }
-}

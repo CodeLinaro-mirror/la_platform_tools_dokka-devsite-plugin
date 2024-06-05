@@ -22,33 +22,35 @@ import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.PluginConfigurationImpl
 import org.jetbrains.dokka.toCompactJsonString
 
-/**
- * A [DevsiteConfiguration] based off of AndroidX to use in tests.
- */
-val defaultPluginsConfiguration = mutableListOf(
-    PluginConfigurationImpl(
-        fqPluginName = "com.google.devsite.DevsitePlugin",
-        serializationFormat = DokkaConfiguration.SerializationFormat.JSON,
-        values = DevsiteConfiguration(
-            docRootPath = "reference",
-            projectPath = "androidx",
-            excludedPackages = null,
-            excludedPackagesForJava = null,
-            excludedPackagesForKotlin = null,
-            libraryMetadataFilename = null,
-            versionMetadataFilenames = null,
-            javaDocsPath = "",
-            kotlinDocsPath = "kotlin",
-            packagePrefixToRemoveInToc = null,
-            baseSourceLink = null,
-            basePropertySourceLink = null,
-            baseFunctionSourceLink = null,
-            annotationsNotToDisplay = null,
-            annotationsNotToDisplayJava = null,
-            annotationsNotToDisplayKotlin = null,
-            hidingAnnotations = listOf("androidx.annotation.RestrictTo"),
-            validNullabilityAnnotations = defaultValidNullabilityAnnotations +
-                listOf("androidx.example.NonNull", "androidx.example.Nullable"),
-        ).toCompactJsonString(),
-    ),
-)
+/** A [DevsiteConfiguration] based off of AndroidX to use in tests. */
+val defaultPluginsConfiguration =
+    mutableListOf(
+        PluginConfigurationImpl(
+            fqPluginName = "com.google.devsite.DevsitePlugin",
+            serializationFormat = DokkaConfiguration.SerializationFormat.JSON,
+            values =
+                DevsiteConfiguration(
+                        docRootPath = "reference",
+                        projectPath = "androidx",
+                        excludedPackages = null,
+                        excludedPackagesForJava = null,
+                        excludedPackagesForKotlin = null,
+                        libraryMetadataFilename = null,
+                        versionMetadataFilenames = null,
+                        javaDocsPath = "",
+                        kotlinDocsPath = "kotlin",
+                        packagePrefixToRemoveInToc = null,
+                        baseSourceLink = null,
+                        basePropertySourceLink = null,
+                        baseFunctionSourceLink = null,
+                        annotationsNotToDisplay = null,
+                        annotationsNotToDisplayJava = null,
+                        annotationsNotToDisplayKotlin = null,
+                        hidingAnnotations = listOf("androidx.annotation.RestrictTo"),
+                        validNullabilityAnnotations =
+                            defaultValidNullabilityAnnotations +
+                                listOf("androidx.example.NonNull", "androidx.example.Nullable"),
+                    )
+                    .toCompactJsonString(),
+        ),
+    )

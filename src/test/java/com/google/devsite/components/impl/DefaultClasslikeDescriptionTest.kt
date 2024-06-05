@@ -31,32 +31,35 @@ import org.junit.Test
 class DefaultClasslikeDescriptionTest {
     @Test
     fun `Class description renders correctly`() {
-        val component = DefaultClasslikeDescription(
-            ClasslikeDescription.Params(
-                header = DefaultDevsitePlatformSelector(listOf(Platform.COMMON)),
-                hierarchy = DefaultClassHierarchy(
-                    ClassHierarchy.Params(parents = listOf(NoopLink("some class"))),
+        val component =
+            DefaultClasslikeDescription(
+                ClasslikeDescription.Params(
+                    header = DefaultDevsitePlatformSelector(listOf(Platform.COMMON)),
+                    hierarchy =
+                        DefaultClassHierarchy(
+                            ClassHierarchy.Params(parents = listOf(NoopLink("some class"))),
+                        ),
+                    primarySignature = NoopClasslikeSignature(),
+                    relatedSymbols =
+                        DefaultRelatedSymbols(
+                            RelatedSymbols.Params(
+                                emptyList(),
+                                emptySummaryList(),
+                                emptyList(),
+                                emptySummaryList(),
+                            ),
+                        ),
+                    descriptionDocs =
+                        listOf(DefaultRaw(Raw.Params("description description docs"))),
                 ),
-                primarySignature = NoopClasslikeSignature(),
-                relatedSymbols = DefaultRelatedSymbols(
-                    RelatedSymbols.Params(
-                        emptyList(),
-                        emptySummaryList(),
-                        emptyList(),
-                        emptySummaryList(),
-                    ),
-                ),
-                descriptionDocs = listOf(DefaultRaw(Raw.Params("description description docs"))),
-            ),
-        )
+            )
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        Truth.assertThat(output).isEqualTo(
-            """
+        Truth.assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option></select></devsite-select >
   <p>
@@ -73,7 +76,8 @@ class DefaultClasslikeDescriptionTest {
   </div>
   <hr>
 description description docs</body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 }

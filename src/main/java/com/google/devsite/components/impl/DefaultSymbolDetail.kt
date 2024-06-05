@@ -35,64 +35,72 @@ import kotlinx.html.pre
 internal data class DefaultSymbolDetail<T : SymbolSignature>(
     override val data: SymbolDetail.Params<T>,
 ) : SymbolDetail<T> {
-    override fun render(into: FlowContent) = into.div(classes = "api-item") {
-        for (anchor in data.anchors.drop(1)) {
-            a { attributes["name"] = anchor }
-        }
+    override fun render(into: FlowContent) =
+        into.div(classes = "api-item") {
+            for (anchor in data.anchors.drop(1)) {
+                a { attributes["name"] = anchor }
+            }
 
-        // CSS is declared in internal codebase (cl/552578388)
-        div("api-name-block") {
-            // Wrap the h3 element in a div in case devsite modifies h3 elements in the future.
-            // This preserves the Flexbox spacing between h3 and the metadata component container.
-            div {
-                h3 {
-                    data.anchors.firstOrNull()?.let { attributes["id"] = it }
-                    if (data.displayLanguage == Language.JAVA && data.extFunctionClass != null) {
-                        +data.extFunctionClass!!
-                        +"."
+            // CSS is declared in internal codebase (cl/552578388)
+            div("api-name-block") {
+                // Wrap the h3 element in a div in case devsite modifies h3 elements in the future.
+                // This preserves the Flexbox spacing between h3 and the metadata component
+                // container.
+                div {
+                    h3 {
+                        data.anchors.firstOrNull()?.let { attributes["id"] = it }
+                        if (
+                            data.displayLanguage == Language.JAVA && data.extFunctionClass != null
+                        ) {
+                            +data.extFunctionClass!!
+                            +"."
+                        }
+                        +data.name
                     }
-                    +data.name
+                }
+                data.metadataComponent?.render(this)
+            }
+            pre("api-signature no-pretty-print") {
+                data.annotationComponents.render(into, ShouldBreak.YES, separator = "")
+                data.modifiers.render(this, terminator = { +Entities.nbsp })
+
+                when (data.displayLanguage) {
+                    Language.JAVA -> {
+                        if (data.symbolKind != SymbolKind.CONSTRUCTOR) {
+                            data.returnType.render(this)
+                            +Entities.nbsp
+                        }
+
+                        data.signature.render(this)
+                    }
+                    Language.KOTLIN -> {
+                        +data.symbolKind.keyword
+                        if (data.symbolKind != SymbolKind.CONSTRUCTOR) +Entities.nbsp
+                        data.signature.render(this)
+
+                        if (data.symbolKind != SymbolKind.CONSTRUCTOR) {
+                            +":"
+                            +Entities.nbsp
+                            data.returnType.render(this)
+                        }
+                    }
                 }
             }
-            data.metadataComponent?.render(this)
-        }
-        pre("api-signature no-pretty-print") {
-            data.annotationComponents.render(into, ShouldBreak.YES, separator = "")
-            data.modifiers.render(this, terminator = { +Entities.nbsp })
 
-            when (data.displayLanguage) {
-                Language.JAVA -> {
-                    if (data.symbolKind != SymbolKind.CONSTRUCTOR) {
-                        data.returnType.render(this)
-                        +Entities.nbsp
-                    }
-
-                    data.signature.render(this)
-                }
-                Language.KOTLIN -> {
-                    +data.symbolKind.keyword
-                    if (data.symbolKind != SymbolKind.CONSTRUCTOR) +Entities.nbsp
-                    data.signature.render(this)
-
-                    if (data.symbolKind != SymbolKind.CONSTRUCTOR) {
-                        +":"
-                        +Entities.nbsp
-                        data.returnType.render(this)
-                    }
-                }
-            }
+            data.metadata.sortedBy { descriptionSorter(it) }.render(this, separator = null)
         }
 
-        data.metadata.sortedBy { descriptionSorter(it) }.render(this, separator = null)
-    }
-
-    override fun toString() = (data.extFunctionClass ?: "") + data.name + " at " +
-        data.anchors.joinToString() + data.annotationComponents.joinToString() +
-        data.modifiers.joinToString() + (
-            if (data.displayLanguage == Language.KOTLIN) {
+    override fun toString() =
+        (data.extFunctionClass ?: "") +
+            data.name +
+            " at " +
+            data.anchors.joinToString() +
+            data.annotationComponents.joinToString() +
+            data.modifiers.joinToString() +
+            (if (data.displayLanguage == Language.KOTLIN) {
                 "${data.returnType} : ${data.signature}"
-            } else "" + data.signature + data.returnType
-            ) + data.metadata.sortedBy { descriptionSorter(it) }
+            } else "" + data.signature + data.returnType) +
+            data.metadata.sortedBy { descriptionSorter(it) }
 }
 
 internal fun descriptionSorter(component: ContextFreeComponent): Int {

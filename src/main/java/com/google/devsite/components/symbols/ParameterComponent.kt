@@ -79,5 +79,7 @@ internal interface ParameterComponent : SymbolBase {
 
     val nullable: Boolean
         get() = data.type.nullable || data.annotationComponents.any { it.name == "Nullable" }
-    val annotations: List<AnnotationComponent> get() = data.annotationComponents
+
+    val annotations: List<AnnotationComponent>
+        get() = data.annotationComponents
 }

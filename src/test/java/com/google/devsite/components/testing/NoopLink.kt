@@ -23,9 +23,7 @@ internal class NoopLink(private val text: String) : Link {
     override val data: Link.Params
         get() = throw NotImplementedError()
 
-    override fun render(into: FlowContent) = into.run {
-        +text
-    }
+    override fun render(into: FlowContent) = into.run { +text }
 
     override fun length() = text.length
 }

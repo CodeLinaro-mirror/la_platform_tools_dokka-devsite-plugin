@@ -25,10 +25,11 @@ internal data class DefaultAnnotatedLink(
     override val data: AnnotatedLink.Params,
 ) : AnnotatedLink {
 
-    override fun render(into: FlowContent) = into.run {
-        data.annotations.render(into, separator = " ")
-        data.link.render(into)
-    }
+    override fun render(into: FlowContent) =
+        into.run {
+            data.annotations.render(into, separator = " ")
+            data.link.render(into)
+        }
 
     override fun toString() = data.annotations.joinMaybePrefix(postfix = " ") + data.link
 }

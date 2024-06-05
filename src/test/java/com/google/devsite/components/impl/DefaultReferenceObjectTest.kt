@@ -26,47 +26,48 @@ import org.junit.Test
 class DefaultReferenceObjectTest {
     @Test
     fun `Basic reference object renders correctly`() {
-        val component = DefaultReferenceObject(
-            ReferenceObject.Params(
-                language = Language.JAVA,
-                name = "Foo",
-            ),
-        )
+        val component =
+            DefaultReferenceObject(
+                ReferenceObject.Params(
+                    language = Language.JAVA,
+                    name = "Foo",
+                ),
+            )
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        Truth.assertThat(output).isEqualTo(
-            """
+        Truth.assertThat(output)
+            .isEqualTo(
+                """
                 <body>
                   <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
                     <meta itemprop="name" content="Foo">
                     <meta itemprop="language" content="JAVA">
                   </div>
                 </body>
-            """.trimIndent(),
-        )
+            """
+                    .trimIndent(),
+            )
     }
 
     @Test
     fun `Reference object with path renders correctly`() {
-        val component = DefaultReferenceObject(
-            ReferenceObject.Params(
-                language = Language.KOTLIN,
-                name = "Foo",
-                path = "test.pkg",
-            ),
-        )
+        val component =
+            DefaultReferenceObject(
+                ReferenceObject.Params(
+                    language = Language.KOTLIN,
+                    name = "Foo",
+                    path = "test.pkg",
+                ),
+            )
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        Truth.assertThat(output).isEqualTo(
-            """
+        Truth.assertThat(output)
+            .isEqualTo(
+                """
                 <body>
                   <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
                     <meta itemprop="name" content="Foo">
@@ -74,27 +75,28 @@ class DefaultReferenceObjectTest {
                     <meta itemprop="language" content="KOTLIN">
                   </div>
                 </body>
-            """.trimIndent(),
-        )
+            """
+                    .trimIndent(),
+            )
     }
 
     @Test
     fun `Reference object with single property renders correctly`() {
-        val component = DefaultReferenceObject(
-            ReferenceObject.Params(
-                language = Language.KOTLIN,
-                name = "Foo",
-                properties = listOf("foo"),
-            ),
-        )
+        val component =
+            DefaultReferenceObject(
+                ReferenceObject.Params(
+                    language = Language.KOTLIN,
+                    name = "Foo",
+                    properties = listOf("foo"),
+                ),
+            )
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        Truth.assertThat(output).isEqualTo(
-            """
+        Truth.assertThat(output)
+            .isEqualTo(
+                """
                 <body>
                   <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
                     <meta itemprop="name" content="Foo">
@@ -102,27 +104,28 @@ class DefaultReferenceObjectTest {
                     <meta itemprop="language" content="KOTLIN">
                   </div>
                 </body>
-            """.trimIndent(),
-        )
+            """
+                    .trimIndent(),
+            )
     }
 
     @Test
     fun `Reference object with multiple properties renders correctly`() {
-        val component = DefaultReferenceObject(
-            ReferenceObject.Params(
-                language = Language.KOTLIN,
-                name = "Foo",
-                properties = listOf("foo", "bar", "Foo.Companion", "FOO"),
-            ),
-        )
+        val component =
+            DefaultReferenceObject(
+                ReferenceObject.Params(
+                    language = Language.KOTLIN,
+                    name = "Foo",
+                    properties = listOf("foo", "bar", "Foo.Companion", "FOO"),
+                ),
+            )
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        Truth.assertThat(output).isEqualTo(
-            """
+        Truth.assertThat(output)
+            .isEqualTo(
+                """
                 <body>
                   <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
                     <meta itemprop="name" content="Foo">
@@ -133,28 +136,29 @@ class DefaultReferenceObjectTest {
                     <meta itemprop="language" content="KOTLIN">
                   </div>
                 </body>
-            """.trimIndent(),
-        )
+            """
+                    .trimIndent(),
+            )
     }
 
     @Test
     fun `Reference object with path and multiple properties renders correctly`() {
-        val component = DefaultReferenceObject(
-            ReferenceObject.Params(
-                language = Language.JAVA,
-                name = "Foo",
-                path = "test.pkg",
-                properties = listOf("foo", "bar", "Foo.Companion", "FOO"),
-            ),
-        )
+        val component =
+            DefaultReferenceObject(
+                ReferenceObject.Params(
+                    language = Language.JAVA,
+                    name = "Foo",
+                    path = "test.pkg",
+                    properties = listOf("foo", "bar", "Foo.Companion", "FOO"),
+                ),
+            )
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        Truth.assertThat(output).isEqualTo(
-            """
+        Truth.assertThat(output)
+            .isEqualTo(
+                """
                 <body>
                   <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
                     <meta itemprop="name" content="Foo">
@@ -166,7 +170,8 @@ class DefaultReferenceObjectTest {
                     <meta itemprop="language" content="JAVA">
                   </div>
                 </body>
-            """.trimIndent(),
-        )
+            """
+                    .trimIndent(),
+            )
     }
 }

@@ -28,35 +28,37 @@ import kotlinx.html.FlowContent
 internal data class DefaultLambdaTypeProjectionComponent(
     override val data: LambdaTypeProjectionComponent.Params,
 ) : LambdaTypeProjectionComponent {
-    override fun render(into: FlowContent) = into.run {
-        if (data.nullability.nullable) +"("
-        data.annotationComponents.render(this, separator = "", terminator = { +" " })
-        data.lambdaModifiers.render(this, terminator = { +Entities.nbsp })
-        if (data.receiver != null) {
-            data.receiver.render(this)
-            +"."
+    override fun render(into: FlowContent) =
+        into.run {
+            if (data.nullability.nullable) +"("
+            data.annotationComponents.render(this, separator = "", terminator = { +" " })
+            data.lambdaModifiers.render(this, terminator = { +Entities.nbsp })
+            if (data.receiver != null) {
+                data.receiver.render(this)
+                +"."
+            }
+            data.lambdaParams.render(this, brackets = "()")
+            +" "
+            nobr { +"->" }
+            +" "
+            data.type.render(this)
+            // Render any generics on the return type
+            data.generics.render(into, ShouldBreak.NO, brackets = "<>")
+            if (data.nullability.nullable) +")?"
         }
-        data.lambdaParams.render(this, brackets = "()")
-        +" "
-        nobr {
-            +"->"
-        }
-        +" "
-        data.type.render(this)
-        // Render any generics on the return type
-        data.generics.render(into, ShouldBreak.NO, brackets = "<>")
-        if (data.nullability.nullable) +")?"
-    }
 
     override fun toString(): String {
-        val result = data.annotationComponents.joinToString() +
-            data.lambdaModifiers.joinToString() +
-            if (data.receiver != null) {
-                "${data.receiver}."
-            } else "" +
-                data.lambdaParams.joinMaybePrefix(prefix = "(", postfix = ")") +
-                " -> " + data.type +
-                data.generics.joinMaybePrefix(prefix = "<", postfix = ">")
+        val result =
+            data.annotationComponents.joinToString() +
+                data.lambdaModifiers.joinToString() +
+                if (data.receiver != null) {
+                    "${data.receiver}."
+                } else
+                    "" +
+                        data.lambdaParams.joinMaybePrefix(prefix = "(", postfix = ")") +
+                        " -> " +
+                        data.type +
+                        data.generics.joinMaybePrefix(prefix = "<", postfix = ">")
 
         return if (data.nullability.nullable) "($result)?" else result
     }

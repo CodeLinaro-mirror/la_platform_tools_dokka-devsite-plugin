@@ -38,74 +38,102 @@ internal data class DefaultTypeParameterComponent(
      * When rendering a single type param, e.g. in the left column of the parameters table, wrap <>s
      * When rendering a list of type params, group all within a single <>. Handled in List.render()
      */
-    override fun render(into: FlowContent, angleBrackets: Boolean) = into.run {
-        if (angleBrackets) { +"<" }
-        data.annotationComponents.render(
-            into,
-            ShouldBreak.NO,
-            separator = "",
-            terminator = { +nbsp },
-        )
-        when (data.displayLanguage) {
-            Language.JAVA -> {
-                +data.name
-                // TODO: handle "implements"
-                when (data.projections.size) {
-                    0 -> { /* do nothing */ }
-                    1 -> { +nbsp; +"extends"; +nbsp; data.projections.single().render(into) }
-                    // Temporary solution, because some rewriting would be necessary to hoist the
-                    // projection information, so it can go at the end of the function signature
-                    else -> {
-                        +nbsp; +"extends"; +nbsp
-                        for (projection in data.projections) {
-                            projection.render(into)
-                            if (projection !== data.projections.last()) { +nbsp; +"&"; +nbsp }
+    override fun render(into: FlowContent, angleBrackets: Boolean) =
+        into.run {
+            if (angleBrackets) {
+                +"<"
+            }
+            data.annotationComponents.render(
+                into,
+                ShouldBreak.NO,
+                separator = "",
+                terminator = { +nbsp },
+            )
+            when (data.displayLanguage) {
+                Language.JAVA -> {
+                    +data.name
+                    // TODO: handle "implements"
+                    when (data.projections.size) {
+                        0 -> {
+                            /* do nothing */
+                        }
+                        1 -> {
+                            +nbsp
+                            +"extends"
+                            +nbsp
+                            data.projections.single().render(into)
+                        }
+                        // Temporary solution, because some rewriting would be necessary to hoist
+                        // the
+                        // projection information, so it can go at the end of the function signature
+                        else -> {
+                            +nbsp
+                            +"extends"
+                            +nbsp
+                            for (projection in data.projections) {
+                                projection.render(into)
+                                if (projection !== data.projections.last()) {
+                                    +nbsp
+                                    +"&"
+                                    +nbsp
+                                }
+                            }
+                        }
+                    }
+                }
+                Language.KOTLIN -> {
+                    +data.name
+                    data.modifiers.render(into)
+                    // TODO: handle in/out
+                    when (data.projections.size) {
+                        0 -> {
+                            /* do nothing */
+                        }
+                        1 -> {
+                            +nbsp
+                            +":"
+                            +nbsp
+                            data.projections.single().render(into)
+                        }
+                        // Temporary solution, because some rewriting would be necessary to hoist
+                        // the
+                        // projection information, so it can go at the end of the function signature
+                        else -> {
+                            +nbsp
+                            +":"
+                            +nbsp
+                            for (projection in data.projections) {
+                                projection.render(into)
+                                if (projection !== data.projections.last()) {
+                                    +nbsp
+                                    +"&"
+                                    +nbsp
+                                }
+                            }
                         }
                     }
                 }
             }
-            Language.KOTLIN -> {
-                +data.name
-                data.modifiers.render(into)
-                // TODO: handle in/out
-                when (data.projections.size) {
-                    0 -> { /* do nothing */ }
-                    1 -> { +nbsp; +":"; +nbsp; data.projections.single().render(into) }
-                    // Temporary solution, because some rewriting would be necessary to hoist the
-                    // projection information, so it can go at the end of the function signature
-                    else -> {
-                        +nbsp; +":"; +nbsp
-                        for (projection in data.projections) {
-                            projection.render(into)
-                            if (projection !== data.projections.last()) { +nbsp; +"&"; +nbsp }
-                        }
-                    }
-                }
+            if (angleBrackets) {
+                +">"
             }
         }
-        if (angleBrackets) { +">" }
-    }
 
     override fun toString() = toString(true)
+
     fun toString(showAngleBrackets: Boolean) =
         (if (showAngleBrackets) "<" else "") +
             data.annotationComponents.joinMaybePrefix { it.toString() } +
             data.modifiers.joinMaybePrefix(postfix = " ") +
-            (
-                if (data.projections.isNotEmpty()) {
-                    (
-                        (if (data.displayLanguage == Language.KOTLIN) ":" else "extends") +
-                            data.projections.joinMaybePrefix(separator = " & ") { it.toString() }
-                        )
-                } else {
-                    ""
-                }
-                ) +
+            (if (data.projections.isNotEmpty()) {
+                ((if (data.displayLanguage == Language.KOTLIN) ":" else "extends") +
+                    data.projections.joinMaybePrefix(separator = " & ") { it.toString() })
+            } else {
+                ""
+            }) +
             (if (showAngleBrackets) ">" else "")
 
     override fun validate() {
-        require(data.name.isNotEmpty()) {
-            "Type parameters must have names."
-        }
+        require(data.name.isNotEmpty()) { "Type parameters must have names." }
     }
 }

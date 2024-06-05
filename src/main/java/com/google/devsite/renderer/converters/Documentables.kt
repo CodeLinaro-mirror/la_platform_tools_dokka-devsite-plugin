@@ -23,6 +23,11 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.Memoizers.isFromJavaMap
 import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.startsWithAnyOf
+import java.util.concurrent.ConcurrentHashMap
+import kotlin.reflect.jvm.internal.impl.builtins.jvm.JavaToKotlinClassMap
+import kotlin.reflect.jvm.internal.impl.name.ClassId
+import kotlin.reflect.jvm.internal.impl.name.FqName
+import kotlin.reflect.jvm.jvmName
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.base.signatures.KotlinSignatureUtils.driOrNull
 import org.jetbrains.dokka.base.transformers.documentables.isException
@@ -71,11 +76,6 @@ import org.jetbrains.dokka.model.isJvmName
 import org.jetbrains.dokka.model.properties.ExtraProperty
 import org.jetbrains.dokka.model.properties.PropertyContainer
 import org.jetbrains.dokka.model.properties.WithExtraProperties
-import java.util.concurrent.ConcurrentHashMap
-import kotlin.reflect.jvm.internal.impl.builtins.jvm.JavaToKotlinClassMap
-import kotlin.reflect.jvm.internal.impl.name.ClassId
-import kotlin.reflect.jvm.internal.impl.name.FqName
-import kotlin.reflect.jvm.jvmName
 
 /** For use when generating error messages. Is slow. */
 internal fun <T> T.getErrorLocation(
@@ -90,19 +90,18 @@ internal fun <T> T.getErrorLocation(
 }
 
 @JvmName("This is internal and will never be used from JVM")
-internal fun Documentable.getErrorLocation() = if (this is WithSources) {
-    this.getErrorLocation()
-} else {
-    "File location could not be determined."
-}
+internal fun Documentable.getErrorLocation() =
+    if (this is WithSources) {
+        this.getErrorLocation()
+    } else {
+        "File location could not be determined."
+    }
 
 /** Recursively expands all children. */
 internal val <T> WithChildren<T>.explodedChildren: List<T>
     get() = children + children.filterIsInstance<WithChildren<T>>().flatMap { it.explodedChildren }
 
-/**
- * Returns the type's name. Do not use [Documentable.name] as it won't include the outer class.
- */
+/** Returns the type's name. Do not use [Documentable.name] as it won't include the outer class. */
 internal fun DClasslike.name() = dri.classNames!!
 
 internal fun DClasslike.generics() = (this as? WithGenerics)?.generics ?: emptyList()
@@ -117,25 +116,23 @@ internal fun DClasslike.hasSupertypes(classGraph: ClassGraph) =
 
 internal fun DClasslike.packageName() = dri.packageName!!
 
-private val baseClasses = listOf(
-    "kotlin.Any",
-    "java.lang.Object",
-    "kotlin.Enum",
-    "java.lang.Enum",
-    "java.lang.annotation.Annotation",
-)
+private val baseClasses =
+    listOf(
+        "kotlin.Any",
+        "java.lang.Object",
+        "kotlin.Enum",
+        "java.lang.Enum",
+        "java.lang.annotation.Annotation",
+    )
 
-/**
- * Returns true if this dri is from a build in base class like Any, Object, Enum, Annotation
- */
+/** Returns true if this dri is from a build in base class like Any, Object, Enum, Annotation */
 internal fun DRI.isFromBaseClass(): Boolean {
     val classAndPackage = packageName?.plus(".").plus(classNames)
     return baseClasses.contains(classAndPackage)
 }
 
 private object Memoizers {
-    val isFromJavaMap: ConcurrentHashMap<Hashable, Boolean> =
-        ConcurrentHashMap<Hashable, Boolean>()
+    val isFromJavaMap: ConcurrentHashMap<Hashable, Boolean> = ConcurrentHashMap<Hashable, Boolean>()
 }
 
 /** go/dokka-upstream-bug/2620. Because Documentables aren't remotely efficiently hashable. */
@@ -149,21 +146,22 @@ internal data class Hashable(
 )
 
 // TODO(improve isFromJava b/328044424), TODO(improve documentable hashability b/232944038)
-private fun WithSources.toHashable() = Hashable(
-    clazz = this::class.java,
-    isSynthetic = (this as? DClasslike)?.isSynthetic,
-    dri = if (this is Documentable) this.dri else null,
-    visibility = if (this is WithVisibility) this.visibility.values else emptyList(),
-    modifiers = if (this is WithAbstraction) this.modifier.values else emptyList(),
-    isPsi = this.sources.entries.singleOrNull()?.let { "Psi" in (it.value::class).jvmName },
-)
+private fun WithSources.toHashable() =
+    Hashable(
+        clazz = this::class.java,
+        isSynthetic = (this as? DClasslike)?.isSynthetic,
+        dri = if (this is Documentable) this.dri else null,
+        visibility = if (this is WithVisibility) this.visibility.values else emptyList(),
+        modifiers = if (this is WithAbstraction) this.modifier.values else emptyList(),
+        isPsi = this.sources.entries.singleOrNull()?.let { "Psi" in (it.value::class).jvmName },
+    )
 
 /**
- * Infer whether this Documentable is from java source,
- * and thus whether it's nullable if not annotated.
- * Memoized.
+ * Infer whether this Documentable is from java source, and thus whether it's nullable if not
+ * annotated. Memoized.
  */
 internal fun WithSources.isFromJava() = this.toHashable().isFromJava()
+
 private fun Hashable.isFromJava() =
     isFromJavaMap.getOrPut(this) {
         if (isSynthetic == true) {
@@ -176,8 +174,7 @@ private fun Hashable.isFromJava() =
     }
 
 // `expect`s cannot be `lateinit`, and `actual`s cannot either because they must match modifiers
-internal fun DProperty.isLateinit(): Boolean =
-    "lateinit" in modifiers(getExpectOrCommonSourceSet())
+internal fun DProperty.isLateinit(): Boolean = "lateinit" in modifiers(getExpectOrCommonSourceSet())
 
 internal fun Documentable.isJavaStaticMethod() = this is DFunction && isStaticAnnotated()
 
@@ -185,39 +182,43 @@ internal fun Documentable.isStaticAnnotated() =
     annotations(getAsJavaSourceSet()).any { it.dri == JvmStatic.dri }
 
 private val INTERNAL_PACKAGES = listOf("java", "Kotlin", "google", "android")
+
 internal fun DRI.isExternal() = !packageName?.startsWithAnyOf(INTERNAL_PACKAGES) ?: true
 
 /**
  * @param displayLanguage the Language of the docs this Documentable will be displayed in
  * @return the String name that represents this type when displayed
  */
-fun Documentable.stringForType(displayLanguage: Language): String = when (this) {
-    is DClass -> "class"
-    is DInterface -> "interface"
-    is DEnum -> "enum"
-    is DEnumEntry -> "enum value"
-    is DAnnotation -> "annotation"
-    is DFunction -> when (displayLanguage) {
-        Language.JAVA -> "method"
-        Language.KOTLIN -> "function"
+fun Documentable.stringForType(displayLanguage: Language): String =
+    when (this) {
+        is DClass -> "class"
+        is DInterface -> "interface"
+        is DEnum -> "enum"
+        is DEnumEntry -> "enum value"
+        is DAnnotation -> "annotation"
+        is DFunction ->
+            when (displayLanguage) {
+                Language.JAVA -> "method"
+                Language.KOTLIN -> "function"
+            }
+        is DProperty ->
+            when (displayLanguage) {
+                Language.JAVA -> "field"
+                Language.KOTLIN -> "property"
+            }
+        is DObject ->
+            when (displayLanguage) {
+                Language.KOTLIN -> "object"
+                Language.JAVA -> "class"
+            }
+        is DTypeAlias -> "type alias"
+        is DParameter -> "parameter"
+        else -> error("Unsupported type: $this")
     }
-    is DProperty -> when (displayLanguage) {
-        Language.JAVA -> "field"
-        Language.KOTLIN -> "property"
-    }
-    is DObject -> when (displayLanguage) {
-        Language.KOTLIN -> "object"
-        Language.JAVA -> "class"
-    }
-    is DTypeAlias -> "type alias"
-    is DParameter -> "parameter"
-    else -> error("Unsupported type: $this")
-}
 
 /**
- * Returns if a class is an Exception or not
- * isException, the built-in method in Dokka, only considers its supertype, so we also look for
- * functions that are Throwable
+ * Returns if a class is an Exception or not isException, the built-in method in Dokka, only
+ * considers its supertype, so we also look for functions that are Throwable
  * https://github.com/Kotlin/dokka/issues/1557
  */
 val DClass.isExceptionClass: Boolean
@@ -231,10 +232,9 @@ val DClasslike.isSynthetic: Boolean
     get() = name().endsWith("Kt") || this.jvmFileName() != null
 
 /**
- * Converts a top level function to its representation under a Java synthetic class.
- * Replaces the dri to point to the synthetic class and applies the static modifier.
- * This doesn't change the name to the [jvmName], because that's handled later in
- * [ClasslikeDocumentableConverter].
+ * Converts a top level function to its representation under a Java synthetic class. Replaces the
+ * dri to point to the synthetic class and applies the static modifier. This doesn't change the name
+ * to the [jvmName], because that's handled later in [ClasslikeDocumentableConverter].
  */
 internal fun DFunction.withJavaSynthetic(syntheticClassName: String): DFunction =
     copy(
@@ -245,11 +245,10 @@ internal fun DFunction.withJavaSynthetic(syntheticClassName: String): DFunction 
     )
 
 /**
- * Converts a top level property to its representation under a Java synthetic class.
- * Replaces the dri to point to the synthetic class and applies the static modifier, as well as
- * converting the property's accessors.
- * This doesn't change the name to the [jvmName], because that's handled later in
- * [ClasslikeDocumentableConverter].
+ * Converts a top level property to its representation under a Java synthetic class. Replaces the
+ * dri to point to the synthetic class and applies the static modifier, as well as converting the
+ * property's accessors. This doesn't change the name to the [jvmName], because that's handled later
+ * in [ClasslikeDocumentableConverter].
  */
 internal fun DProperty.withJavaSynthetic(syntheticClassName: String): DProperty =
     copy(
@@ -262,27 +261,24 @@ internal fun DProperty.withJavaSynthetic(syntheticClassName: String): DProperty 
         setter = setter?.withJavaSynthetic(syntheticClassName),
     )
 
-/**
- * Adds the [newModifier] to the [PropertyContainer] for each of the [sourceSets] provided.
- */
+/** Adds the [newModifier] to the [PropertyContainer] for each of the [sourceSets] provided. */
 internal fun <T> PropertyContainer<T>.addModifier(
     newModifier: ExtraModifiers,
     sourceSets: Set<DokkaConfiguration.DokkaSourceSet>,
 ): PropertyContainer<T> where T : Documentable {
-    val newModifiers = this.allOfType<AdditionalModifiers>().map { modifiers ->
-        AdditionalModifiers(
-            sourceSets.associateWith { sourceSet ->
-                val previous = modifiers.content[sourceSet] ?: emptySet()
-                previous + newModifier
-            },
-        )
-    }
+    val newModifiers =
+        this.allOfType<AdditionalModifiers>().map { modifiers ->
+            AdditionalModifiers(
+                sourceSets.associateWith { sourceSet ->
+                    val previous = modifiers.content[sourceSet] ?: emptySet()
+                    previous + newModifier
+                },
+            )
+        }
     return addAll(newModifiers)
 }
 
-/**
- * Converts a level function to its presentation with JvmName
- */
+/** Converts a level function to its presentation with JvmName */
 fun DFunction.withJvmName(): DFunction {
     val jvmName = jvmName() ?: return this
     return copy(
@@ -309,64 +305,64 @@ internal fun DFunction.matches(other: DFunction): Boolean =
  * [Comparator] which sorts [DFunction] by name, then number of params, params names, and then
  * source sets if necessary.
  */
-val functionSignatureComparator = compareBy<DFunction>(
-    { it.name },
-    { it.parameters.size },
-    { it.signatureAsString() },
-    { it.sourceSets.joinToString { it.displayName } },
-)
+val functionSignatureComparator =
+    compareBy<DFunction>(
+        { it.name },
+        { it.parameters.size },
+        { it.signatureAsString() },
+        { it.sourceSets.joinToString { it.displayName } },
+    )
 
 /** [Comparator] intended for [DClasslike]s known to be name-unique per-platform. */
-val simpleDocumentableComparator = compareBy<Documentable>(
-    { it.dri.fullName },
-    { it.dri.toString() },
-    { it.sourceSets.joinToString { it.displayName } },
-)
+val simpleDocumentableComparator =
+    compareBy<Documentable>(
+        { it.dri.fullName },
+        { it.dri.toString() },
+        { it.sourceSets.joinToString { it.displayName } },
+    )
 
 private fun DFunction.signatureAsString() =
     "$name(${parameters.joinToString(separator = ", ") { it.paramAsString() }})"
 
 /** Turn a parameter into a string. Used in sorting functions. */
 private fun DParameter.paramAsString() =
-    (name ?: "") + ( // Sorting criterion roughly matches rendered text
+    (name ?: "") +
+        ( // Sorting criterion roughly matches rendered text
         (type as? UnresolvedBound)?.name // driOrNull doesn't handle UnresolvedBound, sadly.
-            ?: type.driOrNull?.let { "${it.classNames} $it" } // by classname, then full dri
+        ?: type.driOrNull?.let { "${it.classNames} $it" } // by classname, then full dri
         )
 
 /**
- * Returns the value of the @JvmName for this function if one exists or null
- * This is only relevant for as-Java docs
+ * Returns the value of the @JvmName for this function if one exists or null This is only relevant
+ * for as-Java docs
  */
 fun Documentable.jvmName(): String? {
     return annotations(getAsJavaSourceSet()).firstOrNull { it.isJvmName() }?.nameAsString()
 }
 
-/**
- * Returns the value of the file:@JvmName if one exists or null
- */
+/** Returns the value of the file:@JvmName if one exists or null */
 fun <T> T.jvmFileName() where T : WithSources, T : Documentable =
     fileLevelAnnotations(getAsJavaSourceSet()).firstOrNull { it.isJvmName() }?.nameAsString()
 
-/**
- * Returns the value of the file:@JvmName if one exists or null
- */
+/** Returns the value of the file:@JvmName if one exists or null */
 fun <T> nameForSyntheticClass(entry: T) where T : WithSources, T : Documentable =
-    entry.jvmFileName() ?: entry.sources.let {
-        it.entries.first().value.path.split("/").last().split(".").first() + "Kt"
-    }
+    entry.jvmFileName()
+        ?: entry.sources.let {
+            it.entries.first().value.path.split("/").last().split(".").first() + "Kt"
+        }
 
 fun DFunction.driForSyntheticClass() = DRI(dri.packageName, nameForSyntheticClass(this))
 
-/**
- * Filters out elements that are annotated with @JvmSynthetic
- */
-fun <T : Documentable> List<T>.filterOutJvmSynthetic(): List<T> = this.filterNot { elem ->
-    elem.annotations(elem.getAsJavaSourceSet()).any { it.dri.classNames.equals("JvmSynthetic") }
-}
+/** Filters out elements that are annotated with @JvmSynthetic */
+fun <T : Documentable> List<T>.filterOutJvmSynthetic(): List<T> =
+    this.filterNot { elem ->
+        elem.annotations(elem.getAsJavaSourceSet()).any { it.dri.classNames.equals("JvmSynthetic") }
+    }
 
 /** Adds an annotation to a Documentable. Often used for injecting e.g. @JvmStatic. */
-internal fun <T> T.addAnnotation(newA: Annotations.Annotation): T
-    where T : Documentable, T : WithExtraProperties<T> {
+internal fun <T> T.addAnnotation(newA: Annotations.Annotation): T where
+T : Documentable,
+T : WithExtraProperties<T> {
     return withNewExtras(extra.addAnnotation(newA, sourceSets))
 }
 
@@ -377,16 +373,16 @@ internal fun <T> T.addAnnotation(newA: Annotations.Annotation): T
 internal fun <T> PropertyContainer<T>.addAnnotation(
     newA: Annotations.Annotation,
     sourceSets: Set<DokkaConfiguration.DokkaSourceSet>,
-): PropertyContainer<T>
-    where T : AnnotationTarget {
-    val newAnnotations = this[Annotations]?.let { annotations ->
-        val newDirectAnnotations =
-            sourceSets.associateWith {
-                val previous = annotations.directAnnotations[it] ?: emptyList()
-                previous + newA
-            }
-        annotations.copy(myContent = newDirectAnnotations + annotations.fileLevelAnnotations)
-    }
+): PropertyContainer<T> where T : AnnotationTarget {
+    val newAnnotations =
+        this[Annotations]?.let { annotations ->
+            val newDirectAnnotations =
+                sourceSets.associateWith {
+                    val previous = annotations.directAnnotations[it] ?: emptyList()
+                    previous + newA
+                }
+            annotations.copy(myContent = newDirectAnnotations + annotations.fileLevelAnnotations)
+        }
     val extraWithoutAnnotations: PropertyContainer<T> = minus(Annotations)
 
     return extraWithoutAnnotations.addAll(listOfNotNull(newAnnotations))
@@ -396,8 +392,8 @@ internal val JvmStatic = Annotations.Annotation(DRI("kotlin.jvm", "JvmStatic"), 
 
 internal fun String?.orNull() = if (this == "") null else this
 
-internal val DRI.fullName: String get() = (packageName.orNull()?.let { "$it." }) +
-    (classNames ?: "")
+internal val DRI.fullName: String
+    get() = (packageName.orNull()?.let { "$it." }) + (classNames ?: "")
 
 internal fun DRI.possiblyConvertMappedType(displayLanguage: Language) =
     when (displayLanguage) {
@@ -452,19 +448,20 @@ private fun ClassId.classNames(): String =
  * implementation of that type, but wrapping [String] values in quotes for presentation, and
  * stripping trailing zeros and appending 'f' or 'd' to floats and doubles respectively.
  */
-fun Expression.getValue(): String? = when (this) {
-    is ComplexExpression -> value
-    is IntegerConstant -> "$value"
-    is BooleanConstant -> "$value"
-    is StringConstant -> "\"$value\""
-    is DoubleConstant -> "$value"
-    is FloatConstant -> "${value}f"
-    else -> null
-}
+fun Expression.getValue(): String? =
+    when (this) {
+        is ComplexExpression -> value
+        is IntegerConstant -> "$value"
+        is BooleanConstant -> "$value"
+        is StringConstant -> "\"$value\""
+        is DoubleConstant -> "$value"
+        is FloatConstant -> "${value}f"
+        else -> null
+    }
 
 /**
- * Whether the property should show up as a class/object property in the Java docs.
- * Properties that don't fall into one of these categories only appear as accessors.
+ * Whether the property should show up as a class/object property in the Java docs. Properties that
+ * don't fall into one of these categories only appear as accessors.
  */
 fun DProperty.isPropertyInJava() = isJvmField() || isFromJava() || isLateinit()
 
@@ -475,12 +472,11 @@ fun DProperty.hasAnAccessor() = getter != null || setter != null
  * Whether the property (belonging to an object) needs to be hoisted to the containing class in the
  * Java docs.
  */
-fun DProperty.objectPropertyHoistedInJava() =
-    isJvmFieldAnnotated() || isLateinit() || isConstant()
+fun DProperty.objectPropertyHoistedInJava() = isJvmFieldAnnotated() || isLateinit() || isConstant()
 
 /**
- * If the function has a receiver, converts it to a parameter named "receiver".
- * Otherwise, returns the original function.
+ * If the function has a receiver, converts it to a parameter named "receiver". Otherwise, returns
+ * the original function.
  */
 fun DFunction.convertReceiverForJava() =
     receiver?.let { receiver ->
@@ -496,26 +492,27 @@ fun DFunction.convertReceiverForJava() =
  */
 fun List<DProperty>.gettersAndSetters(): List<DFunction> {
     return filter {
-        // JvmFields are only accessed as fields, not through accessors
-        !it.isJvmField()
-    }.flatMap {
-        listOf(it to it.getter, it to it.setter)
-    }.mapNotNull {
-        var (property, func) = it
-        // Static properties should also have static accessors
-        if (property.isStaticAnnotated()) {
-            func = func?.addAnnotation(JvmStatic)
+            // JvmFields are only accessed as fields, not through accessors
+            !it.isJvmField()
         }
-        val callableName = func?.dri?.callable?.name ?: ""
-        func = if (callableName.startsWith("<get-")) {
-            func!!.fixSyntheticAccessor(property, getter = true)
-        } else if (callableName.startsWith("<set-")) {
-            func!!.fixSyntheticAccessor(property, getter = false)
-        } else {
-            func
+        .flatMap { listOf(it to it.getter, it to it.setter) }
+        .mapNotNull {
+            var (property, func) = it
+            // Static properties should also have static accessors
+            if (property.isStaticAnnotated()) {
+                func = func?.addAnnotation(JvmStatic)
+            }
+            val callableName = func?.dri?.callable?.name ?: ""
+            func =
+                if (callableName.startsWith("<get-")) {
+                    func!!.fixSyntheticAccessor(property, getter = true)
+                } else if (callableName.startsWith("<set-")) {
+                    func!!.fixSyntheticAccessor(property, getter = false)
+                } else {
+                    func
+                }
+            func?.withNewExtras(func.extra.plus(SourceProperty(property)))
         }
-        func?.withNewExtras(func.extra.plus(SourceProperty(property)))
-    }
 }
 
 /** An [ExtraProperty] for generated accessors to link back to the property they came from. */
@@ -527,24 +524,28 @@ internal data class SourceProperty(val property: DProperty) : ExtraProperty<DFun
 
 /**
  * Fixes issues with the given synthetic accessor [forProperty] to be documented in Java, using
- * [DRI.withFixedName] and [correctTagsInAccessorDocs]. If [getter] is false, the function is a setter.
+ * [DRI.withFixedName] and [correctTagsInAccessorDocs]. If [getter] is false, the function is a
+ * setter.
  */
-private fun DFunction.fixSyntheticAccessor(forProperty: DProperty, getter: Boolean) = copy(
-    dri = dri.withFixedName(getter),
-    documentation = injectPropertyDocsToAccessor(this, forProperty)
-        .correctTagsInAccessorDocs(forProperty.name, getter),
-)
+private fun DFunction.fixSyntheticAccessor(forProperty: DProperty, getter: Boolean) =
+    copy(
+        dri = dri.withFixedName(getter),
+        documentation =
+            injectPropertyDocsToAccessor(this, forProperty)
+                .correctTagsInAccessorDocs(forProperty.name, getter),
+    )
 
 /**
- * Fixes the name of synthetic accessors, e.g. <get-bar> to getBar
- * If [getter] is true, it is assumed the function name starts with "<get-", otherwise it is
- * assumes it starts with "<set-".
+ * Fixes the name of synthetic accessors, e.g. <get-bar> to getBar If [getter] is true, it is
+ * assumed the function name starts with "<get-", otherwise it is assumes it starts with "<set-".
  */
-private fun DRI.withFixedName(getter: Boolean) = copy(
-    callable = callable!!.copy(
-        name = fixCallableName(callable?.name ?: "", getter),
-    ),
-)
+private fun DRI.withFixedName(getter: Boolean) =
+    copy(
+        callable =
+            callable!!.copy(
+                name = fixCallableName(callable?.name ?: "", getter),
+            ),
+    )
 
 private fun fixCallableName(badName: String, getter: Boolean) =
     if (getter) {
@@ -572,8 +573,8 @@ private fun injectPropertyDocsToAccessor(
 
 /**
  * This function converts @param and @property tags in synthetic accessor docs, based on whether the
- * accessor is a [getter] or setter (which is assumed if [getter] is false).
- * There are a few separate issues here:
+ * accessor is a [getter] or setter (which is assumed if [getter] is false). There are a few
+ * separate issues here:
  *
  * For getters: Some properties are documented with @param tags in a class constructor. When
  * converted to synthetic accessors, the @param tag stays with the function. However, a synthetic
@@ -615,23 +616,20 @@ private fun SourceSetDependent<DocumentationNode>.correctTagsInAccessorDocs(
 private fun DRI.isAtJvmField(): Boolean = packageName == "kotlin.jvm" && classNames == "JvmField"
 
 private fun Annotations.Annotation.isAtJvmField(): Boolean = dri.isAtJvmField()
+
 internal fun DProperty.isJvmFieldAnnotated() =
     annotations(getAsJavaSourceSet()).any { it.isAtJvmField() }
 
-/**
- * Returns whether property is annotated as @JvmField
- */
+/** Returns whether property is annotated as @JvmField */
 fun DProperty.isJvmField(): Boolean {
     return isJvmFieldAnnotated() || isConstant()
 }
 
 internal fun List<DFunction>.names() = map { it.name }
 
-@JvmName("internalAndThusKotlinOnly")
-internal fun List<DParameter>.names() = map { it.name }
+@JvmName("internalAndThusKotlinOnly") internal fun List<DParameter>.names() = map { it.name }
 
-@JvmName("internalAndThusKotlinOnlyAlso")
-internal fun List<DProperty>.names() = map { it.name }
+@JvmName("internalAndThusKotlinOnlyAlso") internal fun List<DProperty>.names() = map { it.name }
 
 /**
  * Attempts to get the `expect` source set for a Documentable, or wherever else a sourceset-agnostic
@@ -639,8 +637,8 @@ internal fun List<DProperty>.names() = map { it.name }
  * documentation from this kind of source set, and ignore e.g. `actual`s' documentation.
  *
  * Single-platform functions, regardless of function, will return sourceSets.singleOrNull
- * expect/actual classes and elements will return expectPresentInSet
- * There are fallbacks for some odd cases following that.
+ * expect/actual classes and elements will return expectPresentInSet There are fallbacks for some
+ * odd cases following that.
  */
 internal fun Documentable.getExpectOrCommonSourceSet() =
     sourceSets.singleOrNull()
@@ -657,6 +655,7 @@ internal fun Documentable.getExpectOrCommonSourceSet() =
 
 private fun String.equalsPossiblyWithMain(other: String) =
     this.equalsIgnoreCase(other) || this.equalsIgnoreCase(other + "main")
+
 private fun String.equalsIgnoreCase(other: String) = this.uppercase() == other.uppercase()
 
 /**

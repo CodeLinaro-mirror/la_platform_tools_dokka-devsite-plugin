@@ -32,30 +32,34 @@ class DefaultInheritedSymbolsTest {
 
     @Test
     fun `Inherited symbols table renders correctly `() {
-        val inheritedSymbols: Map<Link, FunctionSummaryList> = hashMapOf(
-            NoopLink("aClass") to DefaultSummaryList(
-                SummaryList.Params(
-                    items = listOf(NoopTableRowTypeSummaryItemF, NoopTableRowTypeSummaryItemF),
-                ),
-            ),
-        )
+        val inheritedSymbols: Map<Link, FunctionSummaryList> =
+            hashMapOf(
+                NoopLink("aClass") to
+                    DefaultSummaryList(
+                        SummaryList.Params(
+                            items =
+                                listOf(NoopTableRowTypeSummaryItemF, NoopTableRowTypeSummaryItemF),
+                        ),
+                    ),
+            )
 
-        val component = DefaultInheritedSymbols(
-            InheritedSymbolsList.Params(
-                header = DefaultTableTitle(
-                    TableTitle.Params("Inherited Methods", big = true),
+        val component =
+            DefaultInheritedSymbols(
+                InheritedSymbolsList.Params(
+                    header =
+                        DefaultTableTitle(
+                            TableTitle.Params("Inherited Methods", big = true),
+                        ),
+                    inheritedSymbolSummaries = inheritedSymbols,
                 ),
-                inheritedSymbolSummaries = inheritedSymbols,
-            ),
-        )
+            )
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        Truth.assertThat(output).isEqualTo(
-            """
+        Truth.assertThat(output)
+            .isEqualTo(
+                """
                 <body>
                   <div class="devsite-table-wrapper">
                     <table class="responsive" id="inhmethods">
@@ -85,31 +89,33 @@ class DefaultInheritedSymbolsTest {
                     </table>
                   </div>
                 </body>
-            """.trimIndent(),
-        )
+            """
+                    .trimIndent(),
+            )
     }
 
     @Test
     fun `Empty inherited symbols table renders correctly `() {
-        val component = DefaultInheritedSymbols(
-            InheritedSymbolsList.Params(
-                header = DefaultTableTitle(
-                    TableTitle.Params("Inherited Methods", big = true),
+        val component =
+            DefaultInheritedSymbols(
+                InheritedSymbolsList.Params(
+                    header =
+                        DefaultTableTitle(
+                            TableTitle.Params("Inherited Methods", big = true),
+                        ),
+                    inheritedSymbolSummaries = HashMap(),
                 ),
-                inheritedSymbolSummaries = HashMap(),
-            ),
+            )
 
-        )
-
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        Truth.assertThat(output).isEqualTo(
-            """
+        Truth.assertThat(output)
+            .isEqualTo(
+                """
                 <body></body>
-            """.trimIndent(),
-        )
+            """
+                    .trimIndent(),
+            )
     }
 }

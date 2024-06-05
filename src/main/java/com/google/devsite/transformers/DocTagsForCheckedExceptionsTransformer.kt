@@ -13,39 +13,42 @@ import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DObject
 import org.jetbrains.dokka.model.doc.CustomDocTag
 import org.jetbrains.dokka.model.doc.DocumentationNode
+import org.jetbrains.dokka.model.doc.Throws as ThrowsTag
 import org.jetbrains.dokka.plugability.DokkaContext
 import org.jetbrains.dokka.transformers.documentation.DocumentableTransformer
-import org.jetbrains.dokka.model.doc.Throws as ThrowsTag
 
-/**
- * Adds documentation tags representing checked exceptions from java.
- */
+/** Adds documentation tags representing checked exceptions from java. */
 class DocTagsForCheckedExceptionsTransformer : DocumentableTransformer {
     override fun invoke(original: DModule, context: DokkaContext): DModule =
         original.copy(
-            packages = original.packages.map { p ->
-                p.copy(classlikes = p.classlikes.map(::transformClasslike))
-            },
+            packages =
+                original.packages.map { p ->
+                    p.copy(classlikes = p.classlikes.map(::transformClasslike))
+                },
         )
 
     private fun transformClasslike(classlike: DClasslike): DClasslike =
         when (classlike) {
-            is DInterface -> classlike.copy(
-                functions = classlike.functions.map(::transformFunction),
-                classlikes = classlike.classlikes.map(::transformClasslike),
-            )
-            is DClass -> classlike.copy(
-                functions = classlike.functions.map(::transformFunction),
-                classlikes = classlike.classlikes.map(::transformClasslike),
-            )
-            is DEnum -> classlike.copy(
-                functions = classlike.functions.map(::transformFunction),
-                classlikes = classlike.classlikes.map(::transformClasslike),
-            )
-            is DObject -> classlike.copy(
-                functions = classlike.functions.map(::transformFunction),
-                classlikes = classlike.classlikes.map(::transformClasslike),
-            )
+            is DInterface ->
+                classlike.copy(
+                    functions = classlike.functions.map(::transformFunction),
+                    classlikes = classlike.classlikes.map(::transformClasslike),
+                )
+            is DClass ->
+                classlike.copy(
+                    functions = classlike.functions.map(::transformFunction),
+                    classlikes = classlike.classlikes.map(::transformClasslike),
+                )
+            is DEnum ->
+                classlike.copy(
+                    functions = classlike.functions.map(::transformFunction),
+                    classlikes = classlike.classlikes.map(::transformClasslike),
+                )
+            is DObject ->
+                classlike.copy(
+                    functions = classlike.functions.map(::transformFunction),
+                    classlikes = classlike.classlikes.map(::transformClasslike),
+                )
             is DAnnotation -> classlike
         }
 
@@ -56,34 +59,35 @@ class DocTagsForCheckedExceptionsTransformer : DocumentableTransformer {
         return if (allExceptions.isNullOrEmpty()) {
             function
         } else {
-            val newDocs = allExceptions.entries.map { (set, exceptions) ->
-                val oldDoc = function.documentation[set] ?: DocumentationNode(emptyList())
-                set to documentThrows(oldDoc, exceptions)
-            }
+            val newDocs =
+                allExceptions.entries.map { (set, exceptions) ->
+                    val oldDoc = function.documentation[set] ?: DocumentationNode(emptyList())
+                    set to documentThrows(oldDoc, exceptions)
+                }
 
             function.copy(documentation = function.documentation + newDocs)
         }
     }
 
     // This is hacky; copied from upstream
-    private fun DRI.fqName(): String? = "$packageName.$classNames"
-        .takeIf { packageName != null && classNames != null }
+    private fun DRI.fqName(): String? =
+        "$packageName.$classNames".takeIf { packageName != null && classNames != null }
 
     private fun documentThrows(
         oldDoc: DocumentationNode,
         exceptions: List<DRI>,
     ): DocumentationNode {
-        val knownThrows = oldDoc.children.filterIsInstance<ThrowsTag>()
-            .mapNotNull { it.exceptionAddress }
-            .toSet()
+        val knownThrows =
+            oldDoc.children.filterIsInstance<ThrowsTag>().mapNotNull { it.exceptionAddress }.toSet()
 
-        val throwTags = exceptions.minus(knownThrows).map {
-            ThrowsTag(
-                CustomDocTag(name = MARKDOWN_ELEMENT_FILE_NAME),
-                it.fqName().orEmpty(),
-                it,
-            )
-        }
+        val throwTags =
+            exceptions.minus(knownThrows).map {
+                ThrowsTag(
+                    CustomDocTag(name = MARKDOWN_ELEMENT_FILE_NAME),
+                    it.fqName().orEmpty(),
+                    it,
+                )
+            }
 
         return oldDoc.copy(children = oldDoc.children + throwTags)
     }

@@ -31,32 +31,30 @@ internal data class DefaultKmpClasslikeDescription(
     override val data: KmpClasslikeDescription.Params,
 ) : KmpClasslikeDescription {
 
-    override fun render(into: FlowContent) = into.run {
-        if (data.header != null) data.header.render(this)
-        devsiteFilter {
-            into.div {
-                into.ul("list") {
-                    style = "list-style: none; padding-left: 0"
-                    li { // sadly, we can't easily sort allSignatures by platform; sig -> List<Platform>
-                        data.platform.render(this)
-                        pre {
-                            data.primarySignature.render(this)
+    override fun render(into: FlowContent) =
+        into.run {
+            if (data.header != null) data.header.render(this)
+            devsiteFilter {
+                into.div {
+                    into.ul("list") {
+                        style = "list-style: none; padding-left: 0"
+                        li { // sadly, we can't easily sort allSignatures by platform; sig ->
+                            // List<Platform>
+                            data.platform.render(this)
+                            pre { data.primarySignature.render(this) }
                         }
-                    }
-                    data.allSignatures.forEach { (signature, platform) ->
-                        if (signature == data.primarySignature) return@forEach
-                        li {
-                            platform.render(this)
-                            pre {
-                                signature.render(this)
+                        data.allSignatures.forEach { (signature, platform) ->
+                            if (signature == data.primarySignature) return@forEach
+                            li {
+                                platform.render(this)
+                                pre { signature.render(this) }
                             }
                         }
                     }
                 }
             }
+            data.hierarchy.render(this)
+            data.relatedSymbols.render(this)
+            data.descriptionDocs.render(this, separator = null, header = { hr() })
         }
-        data.hierarchy.render(this)
-        data.relatedSymbols.render(this)
-        data.descriptionDocs.render(this, separator = null, header = { hr() })
-    }
 }

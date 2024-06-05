@@ -52,20 +52,25 @@ internal class EnumValueDocumentableConverter(
 
     /** @return the enum detail component */
     // TODO(KMP, b/256172699)
-    fun detail(dEnum: DEnum, enumValue: DEnumEntry, hints: ModifierHints):
-        SymbolDetail<PropertySignature> {
+    fun detail(
+        dEnum: DEnum,
+        enumValue: DEnumEntry,
+        hints: ModifierHints
+    ): SymbolDetail<PropertySignature> {
         val (typeAnnotations, nonTypeAnnotations) =
-            dEnum.annotations(dEnum.getExpectOrCommonSourceSet())
-                .partition { it.belongsOnReturnType() }
-        val projection = paramConverter.componentForProjection(
-            GenericTypeConstructor(dEnum.dri, emptyList()),
-            isJavaSource = dEnum.isFromJava(),
-            sourceSet = enumValue.getExpectOrCommonSourceSet(),
-            // While technically an ENUM_VALUE is a member of ENUM_TYPE? because you can always
-            // define an enum value which is `null`, this isn't useful information
-            propagatedNullability = Nullability.DONT_CARE,
-            propagatedAnnotations = typeAnnotations,
-        )
+            dEnum.annotations(dEnum.getExpectOrCommonSourceSet()).partition {
+                it.belongsOnReturnType()
+            }
+        val projection =
+            paramConverter.componentForProjection(
+                GenericTypeConstructor(dEnum.dri, emptyList()),
+                isJavaSource = dEnum.isFromJava(),
+                sourceSet = enumValue.getExpectOrCommonSourceSet(),
+                // While technically an ENUM_VALUE is a member of ENUM_TYPE? because you can always
+                // define an enum value which is `null`, this isn't useful information
+                propagatedNullability = Nullability.DONT_CARE,
+                propagatedAnnotations = typeAnnotations,
+            )
         return DefaultSymbolDetail(
             SymbolDetail.Params(
                 name = enumValue.name,
@@ -73,20 +78,24 @@ internal class EnumValueDocumentableConverter(
                 symbolKind = SymbolDetail.SymbolKind.READ_ONLY_PROPERTY,
                 signature = enumValue.signature(),
                 anchors = enumValue.generateAnchors(),
-                metadata = javadocConverter.metadata(
-                    documentable = enumValue,
-                    returnType = projection,
-                    paramNames = listOf(),
-                    deprecationAnnotation = nonTypeAnnotations.deprecationAnnotation(),
-                    isFromJava = dEnum.isFromJava(),
-                ),
+                metadata =
+                    javadocConverter.metadata(
+                        documentable = enumValue,
+                        returnType = projection,
+                        paramNames = listOf(),
+                        deprecationAnnotation = nonTypeAnnotations.deprecationAnnotation(),
+                        isFromJava = dEnum.isFromJava(),
+                    ),
                 displayLanguage = displayLanguage,
-                modifiers = enumValue.getExtraModifiers(enumValue.getExpectOrCommonSourceSet())
-                    .modifiersFor(hints),
-                annotationComponents = annotationConverter.annotationComponents(
-                    annotations = nonTypeAnnotations,
-                    nullability = Nullability.DONT_CARE, // See above
-                ),
+                modifiers =
+                    enumValue
+                        .getExtraModifiers(enumValue.getExpectOrCommonSourceSet())
+                        .modifiersFor(hints),
+                annotationComponents =
+                    annotationConverter.annotationComponents(
+                        annotations = nonTypeAnnotations,
+                        nullability = Nullability.DONT_CARE, // See above
+                    ),
             ),
         )
     }

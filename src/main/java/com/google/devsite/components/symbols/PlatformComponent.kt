@@ -38,8 +38,8 @@ internal interface PlatformComponent : ContextFreeComponent {
 }
 
 /**
- * Converts a Dokka Platform into a Dackka platform.
- * These dackka platforms are what can be used to filter functions by sourceSet on dac
+ * Converts a Dokka Platform into a Dackka platform. These dackka platforms are what can be used to
+ * filter functions by sourceSet on dac
  */
 enum class Platform {
     // The order in which these constants appear here is the order in which they are sorted
@@ -49,6 +49,7 @@ enum class Platform {
     WASM,
     JS,
     ;
+
     /* Not used yet; strategy undecided
     ANDROID,
     IOS
@@ -70,37 +71,40 @@ enum class Platform {
     }
 }
 
-/**
- * Returns the shortname displayed inline with documentables
- */
-fun Platform.shortName() = when (this) {
-    JS -> "JS"
-    NATIVE -> "N"
-    JVM -> "A"
-    COMMON -> "Cmn"
-    WASM -> "WASM"
-}
-
-fun Platform.render(into: FlowContent) = into.run {
-    when (this@render) {
-        WASM, JS, NATIVE, COMMON -> +shortName()
-        JVM -> span(classes = "material-symbols-outlined") { +"android" }
+/** Returns the shortname displayed inline with documentables */
+fun Platform.shortName() =
+    when (this) {
+        JS -> "JS"
+        NATIVE -> "N"
+        JVM -> "A"
+        COMMON -> "Cmn"
+        WASM -> "WASM"
     }
-}
+
+fun Platform.render(into: FlowContent) =
+    into.run {
+        when (this@render) {
+            WASM,
+            JS,
+            NATIVE,
+            COMMON -> +shortName()
+            JVM -> span(classes = "material-symbols-outlined") { +"android" }
+        }
+    }
 
 fun Platform.devsiteId() = "platform-${selectorDisplayName()}"
 
-/**
- * Returns the display name for the platform that is used in the dropdown selector
- */
-fun Platform.selectorDisplayName() = when (this) {
-    JS -> "JavaScript"
-    WASM -> "Web Assembly"
-    NATIVE -> "Native/C/iOS"
-    JVM -> "Android/JVM"
-    COMMON -> "Common/All"
-}
+/** Returns the display name for the platform that is used in the dropdown selector */
+fun Platform.selectorDisplayName() =
+    when (this) {
+        JS -> "JavaScript"
+        WASM -> "Web Assembly"
+        NATIVE -> "Native/C/iOS"
+        JVM -> "Android/JVM"
+        COMMON -> "Common/All"
+    }
 
-// Docs: https://github.com/Kotlin/dokka/blob/master/plugins/base/src/main/kotlin/translators/documentables/DefaultPageCreator.kt
+// Docs:
+// https://github.com/Kotlin/dokka/blob/master/plugins/base/src/main/kotlin/translators/documentables/DefaultPageCreator.kt
 // This class has a number of places that it does things by platform that we don't currently support
 // Such as: See tags, Descriptions, Params, and Throws. TODO(b/254490320)

@@ -33,49 +33,25 @@ import java.io.IOException
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class JsonVersionMetadata(
-
-    @JsonProperty("class")
-    val clazz: String,
-
-    @JsonProperty("addedIn")
-    val addedIn: String,
-
-    @JsonProperty("deprecatedIn")
-    val deprecatedIn: String? = null,
-
-    @JsonProperty("methods")
-    val methods: List<JsonVersionMetadataMethod> = emptyList(),
-
-    @JsonProperty("fields")
-    val fields: List<JsonVersionMetadataField> = emptyList(),
+    @JsonProperty("class") val clazz: String,
+    @JsonProperty("addedIn") val addedIn: String,
+    @JsonProperty("deprecatedIn") val deprecatedIn: String? = null,
+    @JsonProperty("methods") val methods: List<JsonVersionMetadataMethod> = emptyList(),
+    @JsonProperty("fields") val fields: List<JsonVersionMetadataField> = emptyList(),
 ) {
 
-    /**
-     * Nested data class to store API method metadata
-     */
+    /** Nested data class to store API method metadata */
     data class JsonVersionMetadataMethod(
-        @JsonProperty("method")
-        var method: String,
-
-        @JsonProperty("addedIn")
-        val addedIn: String,
-
-        @JsonProperty("deprecatedIn")
-        val deprecatedIn: String? = null,
+        @JsonProperty("method") var method: String,
+        @JsonProperty("addedIn") val addedIn: String,
+        @JsonProperty("deprecatedIn") val deprecatedIn: String? = null,
     )
 
-    /**
-     * Nested data class to store API field metadata
-     */
+    /** Nested data class to store API field metadata */
     data class JsonVersionMetadataField(
-        @JsonProperty("field")
-        var field: String,
-
-        @JsonProperty("addedIn")
-        val addedIn: String,
-
-        @JsonProperty("deprecatedIn")
-        val deprecatedIn: String? = null,
+        @JsonProperty("field") var field: String,
+        @JsonProperty("addedIn") val addedIn: String,
+        @JsonProperty("deprecatedIn") val deprecatedIn: String? = null,
     )
 
     companion object {

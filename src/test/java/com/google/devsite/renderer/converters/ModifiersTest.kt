@@ -19,48 +19,56 @@ package com.google.devsite.renderer.converters
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.renderer.Language
 import com.google.devsite.testing.ConverterTestBase
+import kotlin.test.assertFails
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DProperty
 import org.junit.Test
-import kotlin.test.assertFails
 
 internal class ModifiersTest : ConverterTestBase() {
 
-    private val kotlinHints: ModifierHints = ModifierHints(
-        Language.KOTLIN,
-        isSummary = false,
-        type = DFunction::class.java,
-        containingType = DClass::class.java,
-        isFromJava = false, // There's no great way to do this. Currently only affects
-        // `const` inject
-    )
-    private val javaHints: ModifierHints = ModifierHints(
-        Language.JAVA,
-        isSummary = false,
-        type = DFunction::class.java,
-        containingType = DClass::class.java,
-        isFromJava = true,
-    )
+    private val kotlinHints: ModifierHints =
+        ModifierHints(
+            Language.KOTLIN,
+            isSummary = false,
+            type = DFunction::class.java,
+            containingType = DClass::class.java,
+            isFromJava = false, // There's no great way to do this. Currently only affects
+            // `const` inject
+        )
+    private val javaHints: ModifierHints =
+        ModifierHints(
+            Language.JAVA,
+            isSummary = false,
+            type = DFunction::class.java,
+            containingType = DClass::class.java,
+            isFromJava = true,
+        )
 
     private val noopDoc = DModule("irrelevant", emptyList(), emptyMap(), null, emptySet())
 
     @Test
     fun `Public modifier is found`() {
-        val modifiers = """
+        val modifiers =
+            """
             |fun foo() = Unit
-        """.render().modifierz()
+        """
+                .render()
+                .modifierz()
 
         assertThat(modifiers).contains("public")
     }
 
     @Test
     fun `Public modifier is found in Java`() {
-        val modifiers = """
+        val modifiers =
+            """
             |public void foo()
-        """.render(java = true).modifierz()
+        """
+                .render(java = true)
+                .modifierz()
 
         assertThat(modifiers).contains("public")
         assertThat(modifiers).hasSize(1)
@@ -68,100 +76,125 @@ internal class ModifiersTest : ConverterTestBase() {
 
     @Test
     fun `Multiple modifiers are found`() {
-        val modifiers = """
+        val modifiers =
+            """
             |class Foo {
             |    public abstract fun foo()
             |}
-        """.render().modifierz()
+        """
+                .render()
+                .modifierz()
 
         assertThat(modifiers).hasSize(2)
     }
 
     @Test
     fun `Protected modifier is found`() {
-        val modifiers = """
+        val modifiers =
+            """
             |abstract class Foo {
             |  protected fun foo() = Unit
             |}
-        """.render().modifierz()
+        """
+                .render()
+                .modifierz()
 
         assertThat(modifiers).contains("protected")
     }
 
     @Test
     fun `Suspend modifier is found`() {
-        val modifiers = """
+        val modifiers =
+            """
             |suspend fun foo() = Unit
-        """.render().modifierz()
+        """
+                .render()
+                .modifierz()
 
         assertThat(modifiers).contains("suspend")
     }
 
     @Test
     fun `Inline modifier is found`() {
-        val modifiers = """
+        val modifiers =
+            """
             |inline fun foo() = Unit
-        """.render().modifierz()
+        """
+                .render()
+                .modifierz()
 
         assertThat(modifiers).contains("inline")
     }
 
     @Test
     fun `Abstract modifier is found`() {
-        val modifiers = """
+        val modifiers =
+            """
             |abstract class Foo {
             |    abstract fun foo()
             |}
-        """.render().modifierz()
+        """
+                .render()
+                .modifierz()
 
         assertThat(modifiers).contains("abstract")
     }
 
     @Test
     fun `Open modifier is found`() {
-        val modifiers = """
+        val modifiers =
+            """
             |class Foo {
             |    open fun foo() = Unit
             |}
-        """.render().modifierz()
+        """
+                .render()
+                .modifierz()
 
         assertThat(modifiers).contains("open")
     }
 
     @Test
     fun `Const modifier is considered constant`() {
-        val foo = """
+        val foo =
+            """
             |class Foo {
             |    const val foo = 0
             |}
-        """.render().property("foo")!!
+        """
+                .render()
+                .property("foo")!!
 
         assertThat(foo.isConstant(foo.modifierz())).isTrue()
     }
 
     @Test
     fun `Static final modifiers are considered constant`() {
-        val foo = """
+        val foo =
+            """
             |public static final int FOO = 0;
-        """.render(java = true).property("FOO")!!
+        """
+                .render(java = true)
+                .property("FOO")!!
 
         assertThat(foo.isConstant(foo.modifierz())).isTrue()
     }
 
     @Test
     fun `Unknown Kotlin modifiers are stripped from Java`() {
-        val modifiers = listOf(
-            "suspend",
-            "inline",
-            "noinline",
-            "crossinline",
-            "reified",
-            "operator",
-            "override",
-            "open",
-            "infix",
-            "data",
-        )
+        val modifiers =
+            listOf(
+                "suspend",
+                "inline",
+                "noinline",
+                "crossinline",
+                "reified",
+                "operator",
+                "override",
+                "open",
+                "infix",
+                "data",
+            )
 
         assertThat(modifiers.modifiersFor(javaHints)).isEmpty()
     }
@@ -240,7 +273,8 @@ internal class ModifiersTest : ConverterTestBase() {
 
     @Test
     fun `"default" modifier for interfaces works`() {
-        val theInterface = """
+        val theInterface =
+            """
             |public interface DefaultLifecycleObserver {
             |    /**
             |     * Notifies that {@code ON_CREATE} event occurred.
@@ -250,11 +284,14 @@ internal class ModifiersTest : ConverterTestBase() {
             |    public default String onCreate(String owner) {}
             |    public String nonDefaultMethod(String arg) {}
             |}
-        """.render(java = true).classlike()!!.classlikes.single()
-        val onCreateModifiers = theInterface.functions.single { it.name == "onCreate" }
-            .modifierz()
-        val nonDefaultModifiers = theInterface.functions.single { it.name == "nonDefaultMethod" }
-            .modifierz()
+        """
+                .render(java = true)
+                .classlike()!!
+                .classlikes
+                .single()
+        val onCreateModifiers = theInterface.functions.single { it.name == "onCreate" }.modifierz()
+        val nonDefaultModifiers =
+            theInterface.functions.single { it.name == "nonDefaultMethod" }.modifierz()
         val hintsJ = javaHints.copy(containingType = DInterface::class.java)
         val hintsK = kotlinHints.copy(containingType = DInterface::class.java)
         assertThat(onCreateModifiers.modifiersFor(hintsJ).single()).isEqualTo("default")

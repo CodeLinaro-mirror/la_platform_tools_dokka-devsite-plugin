@@ -25,20 +25,21 @@ import kotlinx.html.unsafe
 internal data class DefaultTableTitle(
     override val data: TableTitle.Params,
 ) : TableTitle {
-    override fun render(into: TR) = into.run {
-        th {
-            attributes["colspan"] = "100%"
+    override fun render(into: TR) =
+        into.run {
+            th {
+                attributes["colspan"] = "100%"
 
-            if (data.big) {
-                // TODO(b/164125463): th isn't flow content :(
-                unsafe { +"<h3>" }
-                +data.title
-                unsafe { +"</h3>" }
-            } else {
-                +data.title
+                if (data.big) {
+                    // TODO(b/164125463): th isn't flow content :(
+                    unsafe { +"<h3>" }
+                    +data.title
+                    unsafe { +"</h3>" }
+                } else {
+                    +data.title
+                }
             }
         }
-    }
 
     override fun toString() = data.title
 }

@@ -42,6 +42,9 @@ import com.google.devsite.renderer.converters.testing.text
 import com.google.devsite.renderer.converters.testing.typeAnnotations
 import com.google.devsite.renderer.converters.testing.typeName
 import com.google.devsite.testing.ConverterTestBase
+import java.io.ByteArrayOutputStream
+import java.io.PrintStream
+import kotlin.test.assertFails
 import kotlinx.coroutines.runBlocking
 import kotlinx.html.body
 import kotlinx.html.stream.createHTML
@@ -59,9 +62,6 @@ import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
-import java.io.ByteArrayOutputStream
-import java.io.PrintStream
-import kotlin.test.assertFails
 
 @Suppress("UNCHECKED_CAST")
 @RunWith(Parameterized::class)
@@ -70,19 +70,25 @@ internal class DocTagConverterTest(
 ) : ConverterTestBase(displayLanguage) {
     @Test
     fun `Empty description isn't documented`() {
-        val description = """
+        val description =
+            """
             |class Foo
-        """.render().description()
+        """
+                .render()
+                .description()
 
         assertThat(description).isInstanceOf(UndocumentedSymbolDescriptionComponent::class.java)
     }
 
     @Test
     fun `Basic summary description has correct flags`() {
-        val description = """
+        val description =
+            """
             |/** Hello World! */
             |class Foo
-        """.render().description()
+        """
+                .render()
+                .description()
 
         assertThat(description.data.summary).isTrue()
         assertThat(description.data.deprecation).isNull()
@@ -90,66 +96,78 @@ internal class DocTagConverterTest(
 
     @Test
     fun `h2 and h3 work in description`() {
-        val moduleK = """
+        val moduleK =
+            """
             |/** Hello World!
             | *
             | * <h2>Second level</h2>
             | * <h3>Third level</h3>
             | */
             |class Foo
-        """.render()
+        """
+                .render()
 
         val detailK = moduleK.documentation(doc = { this.clazz() }).item() as DescriptionComponent
-        assertThat(detailK.render()).isEqualTo(
-            """
+        assertThat(detailK.render())
+            .isEqualTo(
+                """
 <body>
   <p>Hello World!</p>
   <p><h2>Second level</h2> <h3>Third level</h3></p>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
 
-        val moduleJ = """
+        val moduleJ =
+            """
             |/** Hello World!
             | *
             | * <h2>Second level</h2>
             | * <h3>Third level</h3>
             | */
             |public class Foo {}
-        """.render(java = true)
+        """
+                .render(java = true)
 
         val detailJ = moduleJ.documentation(doc = { this.clazz() }).item() as DescriptionComponent
-        assertThat(detailJ.render()).isEqualTo(
-            """
+        assertThat(detailJ.render())
+            .isEqualTo(
+                """
 <body>
   <p>Hello World! </p>
   <h2>Second level</h2>
   <h3>Third level</h3>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Deprecated class summary and detail description flags correct in 4x Kotlin and Java`() {
-        val codeK = """
+        val codeK =
+            """
             |/**
             | * class_description
             | */
             |@Deprecated("Bye")
             |class Foo
-        """.render()
+        """
+                .render()
         val summaryK = codeK.description()
         val detailsK = codeK.documentation()
 
-        val codeJ = """
+        val codeJ =
+            """
             |/**
             | * class_description
             | * @deprecated Bye
             | */
             |@Deprecated
             |public class Foo {}
-        """.render(java = true)
+        """
+                .render(java = true)
         val summaryJ = codeJ.description { this.clazz() }
         val detailsJ = codeJ.documentation(doc = { this.clazz() })
 
@@ -172,44 +190,52 @@ internal class DocTagConverterTest(
      */
     @Test
     fun `Full summary and description work with multiline in 4x Kotlin and Java`() {
-        val moduleK = """
+        val moduleK =
+            """
             |/**
             | * Hello World! Docs with period issue, e.g.&nbsp;this/e.g. this.
             | *
             | * A second line of desc. A third line of desc.
             | */
             |class Foo
-        """.render()
-        val moduleJ = """
+        """
+                .render()
+        val moduleJ =
+            """
             |/**
             | * Hello World! Docs with period issue, e.g.&nbsp;this/e.g. this.
             | *
             | * A second line of desc. A third line of desc.
             | */
             |public class Foo() {}
-        """.render(java = true)
+        """
+                .render(java = true)
 
         for (module in listOf(moduleJ, moduleK)) {
             val summary = module.description(doc = { this.clazz() })
             assertThat(summary.data.summary).isTrue()
-            assertThat(summary.render()).isEqualTo(
-                """
+            assertThat(summary.render())
+                .isEqualTo(
+                    """
 <body>
   <p>Hello World! Docs with period issue, e.g. this/e.g. this.</p>
 </body>
-                """.trim(),
-            )
+                """
+                        .trim(),
+                )
 
             val detail = module.documentation(doc = { this.clazz() }).item() as DescriptionComponent
             assertThat(detail.data.summary).isFalse()
             val separator = if (module == moduleK) "</p>\n  <p>" else " "
-            assertThat(detail.render()).isEqualTo(
-                """
+            assertThat(detail.render())
+                .isEqualTo(
+                    """
 <body>
   <p>Hello World! Docs with period issue, e.g. this/e.g. this.${separator}A second line of desc. A third line of desc.</p>
 </body>
-            """.trim(),
-            )
+            """
+                        .trim(),
+                )
 
             val dComponents = detail.data.components
             val sComponents = summary.data.components
@@ -220,12 +246,11 @@ internal class DocTagConverterTest(
         }
     }
 
-    /**
-     * In particular, this is testing "i.e. UppercaseLetter".
-     */
+    /** In particular, this is testing "i.e. UppercaseLetter". */
     @Test
     fun `More tests for ie based on androidx biometric`() {
-        val module = """
+        val module =
+            """
             |public class BiometricManager {
             |   public interface Authenticators {
             |       /**
@@ -236,28 +261,34 @@ internal class DocTagConverterTest(
             |       int DEVICE_CREDENTIAL = 1 << 15;
             |   }
             |}
-        """.render(java = true)
+        """
+                .render(java = true)
 
         val summary = module.description(doc = { this.property(name = "DEVICE_CREDENTIAL")!! })
         assertThat(summary.data.summary).isTrue()
-        assertThat(summary.render()).isEqualTo(
-            """
+        assertThat(summary.render())
+            .isEqualTo(
+                """
 <body>
   <p>The non-biometric credential used to secure the device (i.e. PIN, pattern, or password).</p>
 </body>
-            """.trim(),
-        )
-
-        val detail = module.documentation(doc = { this.property(name = "DEVICE_CREDENTIAL")!! })
-            .item() as DescriptionComponent
-        assertThat(detail.data.summary).isFalse()
-        assertThat(detail.render()).isEqualTo(
             """
+                    .trim(),
+            )
+
+        val detail =
+            module.documentation(doc = { this.property(name = "DEVICE_CREDENTIAL")!! }).item()
+                as DescriptionComponent
+        assertThat(detail.data.summary).isFalse()
+        assertThat(detail.render())
+            .isEqualTo(
+                """
 <body>
   <p>The non-biometric credential used to secure the device (i.e. PIN, pattern, or password). This should typically only be used in combination with a biometric auth type, such as BIOMETRIC_WEAK.</p>
 </body>
-        """.trim(),
-        )
+        """
+                    .trim(),
+            )
 
         val dComponents = detail.data.components
         val sComponents = summary.data.components
@@ -268,7 +299,8 @@ internal class DocTagConverterTest(
 
     @Test // b/192714584
     fun `th tag can be nested in a tr tag (with a thead tag)`() {
-        val module = """
+        val module =
+            """
             |/**
             | * This is a table with a thead tag.
             | * <table>
@@ -285,11 +317,13 @@ internal class DocTagConverterTest(
             | * </table>
             | */
             |public class Foo() {}
-        """.render(java = true)
+        """
+                .render(java = true)
 
         val detail = module.documentation(doc = { this.clazz() }).item() as DescriptionComponent
-        assertThat(detail.render()).isEqualTo(
-            """
+        assertThat(detail.render())
+            .isEqualTo(
+                """
 <body>
   <p>This is a table with a thead tag. </p>
   <table>
@@ -307,13 +341,15 @@ internal class DocTagConverterTest(
     </tbody>
   </table>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test // b/192714584
     fun `th tag can be nested in a tr tag (without a thead tag)`() {
-        val module = """
+        val module =
+            """
             |/**
             | * This is a table without a thead tag.
             | * <table>
@@ -328,11 +364,13 @@ internal class DocTagConverterTest(
             | * </table>
             | */
             |public class Foo() {}
-        """.render(java = true)
+        """
+                .render(java = true)
 
         val detail = module.documentation(doc = { this.clazz() }).item() as DescriptionComponent
-        assertThat(detail.render()).isEqualTo(
-            """
+        assertThat(detail.render())
+            .isEqualTo(
+                """
 <body>
   <p>This is a table without a thead tag. </p>
   <table>
@@ -348,23 +386,26 @@ internal class DocTagConverterTest(
     </tbody>
   </table>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test // NOTE: upstream dokka does not support @param <Baz> documentation style in kotlin
     fun `Class type parameters can be documented with @param with or without angle brackets`() {
-        val documentationK = """
+        val documentationK =
+            """
             |/**
             | * Hello World!
             | * @param Bar A type of bar
             | * @param Baz Bazzy baz
             | */
             |class <Bar: String, Baz> Foo: List<Bar>
-        """.render().documentation(doc = {
-            this.clazz()
-        })
-        val documentationJ = """
+        """
+                .render()
+                .documentation(doc = { this.clazz() })
+        val documentationJ =
+            """
             |/**
             | * Hello World!
             | * @param Bar A type of bar
@@ -372,9 +413,9 @@ internal class DocTagConverterTest(
             | */
             |public class Foo<Bar extends String, Baz> extends java.util.List<Bar> {
             |}
-        """.render(java = true).documentation(doc = {
-            this.clazz()
-        })
+        """
+                .render(java = true)
+                .documentation(doc = { this.clazz() })
 
         for (documentation in listOf(documentationK, documentationJ)) {
             val classParams = documentation.paramList()
@@ -394,7 +435,8 @@ internal class DocTagConverterTest(
 
     @Test // NOTE: upstream dokka does not support @param <Baz> documentation style in kotlin
     fun `Function type parameters can be documented with @param with or without angle brackets`() {
-        val documentationK = """
+        val documentationK =
+            """
             |/**
             | * Hello World!
             | * @param Bar A type of bar
@@ -402,10 +444,11 @@ internal class DocTagConverterTest(
             | * @blamaram Wam wham
             | */
             |fun <Bar: String, Baz> foo(): List<Bar>
-        """.render().documentation(doc = {
-            this.function("foo")!!
-        })
-        val documentationJ = """
+        """
+                .render()
+                .documentation(doc = { this.function("foo")!! })
+        val documentationJ =
+            """
             |/**
             | * Hello World!
             | * @param Bar A type of bar
@@ -413,9 +456,9 @@ internal class DocTagConverterTest(
             | */
             |public <Bar extends String, Baz> java.util.List<Bar> foo() {
             |}
-        """.render(java = true).documentation(doc = {
-            this.function("foo")!!
-        })
+        """
+                .render(java = true)
+                .documentation(doc = { this.function("foo")!! })
 
         for (documentation in listOf(documentationK, documentationJ)) {
             val params = documentation.paramList()
@@ -436,22 +479,27 @@ internal class DocTagConverterTest(
     @Test
     fun `Property parameter docs propagate correctly`() {
         // Property parameters are kotlin-exclusive
-        val module = """
+        val module =
+            """
             |/**
             | * Class docs
             | * @property bar AtPropertyParameter docs
             | * @param bar AtParameterProperty docs
             | */
             |class Foo(val bar: String)
-        """.render()
+        """
+                .render()
 
         val propDoc = module.documentation({ this.property()!! }).single() as DescriptionComponent
         val classDoc = module.documentation({ this.clazz() }).single() as DescriptionComponent
         val constructorDoc = module.documentation({ this.constructor() })
-        val conParamDoc = module.documentation(
-            { this.constructor().parameters.single() },
-            isFromJava = false,
-        ).single()
+        val conParamDoc =
+            module
+                .documentation(
+                    { this.constructor().parameters.single() },
+                    isFromJava = false,
+                )
+                .single()
 
         // An odd propagation system, but it seems to work out to properly document everything?
         assertThat((propDoc).text()).isEqualTo("AtPropertyParameter docs")
@@ -469,7 +517,8 @@ internal class DocTagConverterTest(
 
     @Test
     fun `@constructor docs are applied`() {
-        val constructorModule = """
+        val constructorModule =
+            """
             |/**
             | * The amount by which the text is shifted up or down from current the baseline.
             | * @constructor Primary constructor docs
@@ -479,12 +528,15 @@ internal class DocTagConverterTest(
             |   constructor(multiplier: Int) : this(multiplier)
             |
             |}
-        """.render()
+        """
+                .render()
 
-        val constructorDoc1 = constructorModule.documentation({ this.constructors().first() })
-            .single() as DescriptionComponent
-        val constructorDoc2 = constructorModule.documentation({ this.constructors().last() })
-            .single() as DescriptionComponent
+        val constructorDoc1 =
+            constructorModule.documentation({ this.constructors().first() }).single()
+                as DescriptionComponent
+        val constructorDoc2 =
+            constructorModule.documentation({ this.constructors().last() }).single()
+                as DescriptionComponent
 
         assertThat(constructorDoc1.text()).isEqualTo("Secondary constructor docs")
         assertThat(constructorDoc2.text()).isEqualTo("Primary constructor docs")
@@ -493,23 +545,27 @@ internal class DocTagConverterTest(
     @Test
     fun `@constructor docs are applied on annotation class`() {
         // Note that annotations cannot have secondary constructors
-        val constructorModule = """
+        val constructorModule =
+            """
             |/**
             | * The amount by which the text is shifted up or down from current the baseline.
             | * @constructor Primary constructor docs
             | */
             |annotation class BaselineShift(val multiplier: Float)
-        """.render()
+        """
+                .render()
 
-        val constructorDoc = constructorModule.documentation({ this.constructors().single() })
-            .single() as DescriptionComponent
+        val constructorDoc =
+            constructorModule.documentation({ this.constructors().single() }).single()
+                as DescriptionComponent
 
         assertThat(constructorDoc.text()).isEqualTo("Primary constructor docs")
     }
 
     @Test
     fun `Class property parameters can be documented with @property on the class`() {
-        val module = """
+        val module =
+            """
             |/**
             | * Hello World!
             | * @param baz Buzzbuzzbuzz
@@ -518,7 +574,8 @@ internal class DocTagConverterTest(
             |class Foo(val bar: String) {
             |
             |}
-        """.render()
+        """
+                .render()
 
         val propertyDoc = module.documentation({ this.property("bar")!! })
         // Upstream dokka does not propagates @param documentation on property parameters to the
@@ -527,12 +584,15 @@ internal class DocTagConverterTest(
             .isEqualTo("A vary bary name")
         // Upstream dokka does not propagate @property documentation on property parameters to the
         // constructor. We think this is what we want.
-        assertFails { val constructorDoc = module.documentation({ this.constructor() }) }
+        assertFails {
+            val constructorDoc = module.documentation({ this.constructor() })
+        }
     }
 
     @Test
     fun `Property parameter can be @suppress-ed as property only`() {
-        val module = """
+        val module =
+            """
             |/**
             | * @param context context_docs
             | */
@@ -541,7 +601,8 @@ internal class DocTagConverterTest(
             |    @get:RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
             |    public val context: Context
             |) {
-        """.render()
+        """
+                .render()
         assertThat(module.properties()).isEmpty()
         assertThat(module.constructor().parameters.single().name).isEqualTo("context")
         val constructorParams = module.documentation({ this.constructor() }).paramList()
@@ -551,18 +612,24 @@ internal class DocTagConverterTest(
 
     @Test
     fun `Full documentation has img tag in 4x Kotlin and Java`() {
-        val documentationK = """
+        val documentationK =
+            """
             |/**
             | ![Alt text](/path/to/img.jpg)
             |*/
             |fun foo(a: Int)
-        """.render().documentation()
-        val documentationJ = """
+        """
+                .render()
+                .documentation()
+        val documentationJ =
+            """
             |/**
             | * <img src="/path/to/img.jpg" alt="Alt text"/>
             | */
             |public fun foo(Integer a)
-        """.render(java = true).documentation()
+        """
+                .render(java = true)
+                .documentation()
 
         for (documentation in listOf(documentationJ, documentationK)) {
             val description = documentation.last() as DescriptionComponent
@@ -575,20 +642,26 @@ internal class DocTagConverterTest(
 
     @Test // Developers sometimes use white space to line up documentation
     fun `Parameter documentation works and ignores whitespace`() {
-        val documentationK = """
+        val documentationK =
+            """
             |/**
             | * @param a blah
             | * @param b        bblargh
             | */
             |fun foo(a: Int, b: String)
-        """.render().documentation()
-        val documentationJ = """
+        """
+                .render()
+                .documentation()
+        val documentationJ =
+            """
             |/**
             | * @param a blah
             | * @param b        bblargh
             | */
             |public void foo(Int a, String b)
-        """.render(java = true).documentation()
+        """
+                .render(java = true)
+                .documentation()
 
         for (documentation in listOf(documentationK, documentationJ)) {
             val paramSummary = documentation.paramList()
@@ -604,7 +677,8 @@ internal class DocTagConverterTest(
     @Ignore // Upstream dokka does not support inheriting docs from hidden components
     @Test
     fun `Sealed class constructor docs inherit`() {
-        val rendered = """
+        val rendered =
+            """
             |/**
             | * @param foo seele_foo_docs
             | */
@@ -615,16 +689,27 @@ internal class DocTagConverterTest(
             |   constructor {}
             |}
             |class Ba: Seele
-        """.render()
+        """
+                .render()
         // sealed classes have hidden constructors
         assertThat((rendered.explicitClasslike("Seele") as DClass).constructors).isEmpty()
 
-        val constructorDoc = rendered.documentation(
-            { (this.explicitClasslike("Ba") as DClass).constructors.single() },
-        )
-        val conParamDoc = rendered.documentation(
-            { (this.explicitClasslike("Ba") as DClass).constructors.single().parameters.single() },
-        ).single()
+        val constructorDoc =
+            rendered.documentation(
+                { (this.explicitClasslike("Ba") as DClass).constructors.single() },
+            )
+        val conParamDoc =
+            rendered
+                .documentation(
+                    {
+                        (this.explicitClasslike("Ba") as DClass)
+                            .constructors
+                            .single()
+                            .parameters
+                            .single()
+                    },
+                )
+                .single()
 
         assertThat(constructorDoc.size).isEqualTo(2)
         assertThat((constructorDoc.first() as DescriptionComponent).text())
@@ -637,28 +722,32 @@ internal class DocTagConverterTest(
 
     @Test
     fun `Full documentation has properties`() {
-        val description = """
+        val description =
+            """
             |/** @property bar a barber */
             |val bar: String = "barbarbar
-        """.render().documentation(doc = {
-            this.packages.single()
-                .properties.single()
-        }).single() as DescriptionComponent
+        """
+                .render()
+                .documentation(doc = { this.packages.single().properties.single() })
+                .single() as DescriptionComponent
 
         assertThat(description.text()).isEqualTo("a barber")
     }
 
     @Test
     fun `Full class documentation has properties`() {
-        val description = """
+        val description =
+            """
             |class Foo {
             |   /** @property bar a barber */
             |   val bar: String = "barbarbar
             |}
-        """.render().documentation(doc = {
-            this.packages.single().classlikes.single()
-                .properties.single()
-        }).single() as DescriptionComponent
+        """
+                .render()
+                .documentation(
+                    doc = { this.packages.single().classlikes.single().properties.single() }
+                )
+                .single() as DescriptionComponent
 
         assertThat(description.text()).isEqualTo("a barber")
     }
@@ -671,17 +760,21 @@ internal class DocTagConverterTest(
             | * @param NOT_A_REAL_PARAM aaaaaa
             | */
             |fun foo()
-            """.render().documentation()
+            """
+                .render()
+                .documentation()
         }
-        assertThat(exception.localizedMessage).isEqualTo(
-            "Exception thrown while handling Param tags [Param(root=" +
-                "CustomDocTag(children=[P(children=[Text(body=aaaaaa, children=[], params={})], " +
-                "params={})], params={}, name=MARKDOWN_FILE), name=NOT_A_REAL_PARAM)].",
-        )
-        assertThat(exception.cause!!.localizedMessage).isEqualTo(
-            "Unable to find what is referred to by \"@param NOT_A_REAL_PARAM\" in " +
-                "DFunction foo, with contents: aaaaaa",
-        )
+        assertThat(exception.localizedMessage)
+            .isEqualTo(
+                "Exception thrown while handling Param tags [Param(root=" +
+                    "CustomDocTag(children=[P(children=[Text(body=aaaaaa, children=[], params={})], " +
+                    "params={})], params={}, name=MARKDOWN_FILE), name=NOT_A_REAL_PARAM)].",
+            )
+        assertThat(exception.cause!!.localizedMessage)
+            .isEqualTo(
+                "Unable to find what is referred to by \"@param NOT_A_REAL_PARAM\" in " +
+                    "DFunction foo, with contents: aaaaaa",
+            )
         val standardOut = System.out
         val outputStreamCaptor = ByteArrayOutputStream()
         System.setOut(PrintStream(outputStreamCaptor))
@@ -690,11 +783,14 @@ internal class DocTagConverterTest(
         | * @param NOT_A_REAL_PARAM aaaaaa
         | */
         |class Foo { }
-        """.render().documentation() // for type params and property params
+        """
+            .render()
+            .documentation() // for type params and property params
         // val expected = "src/main/kotlin/androidx/example/Test.kt:4 Unable to find reference " +
-        val expected = "Unable to find reference " + // b/327166311
-            "@param NOT_A_REAL_PARAM in DClass Foo. Are you trying to refer to something not " +
-            "visible to users?\n"
+        val expected =
+            "Unable to find reference " + // b/327166311
+                "@param NOT_A_REAL_PARAM in DClass Foo. Are you trying to refer to something not " +
+                "visible to users?\n"
         assertThat(outputStreamCaptor.toString()).endsWith(expected)
         System.setOut(standardOut)
         assertFails { // for @param in the wrong place
@@ -703,7 +799,9 @@ internal class DocTagConverterTest(
             | * @param NOT_A_REAL_PARAM aaaaaa
             | */
             |val foo = "bbb"
-            """.render().documentation()
+            """
+                .render()
+                .documentation()
         }
     }
 
@@ -717,10 +815,13 @@ internal class DocTagConverterTest(
         | * @property NOT_A_REAL_PROPERTY aaaaaa
         | */
         |class Foo(NOT_A_REAL_PROPERTY: String) { }
-        """.render().documentation()
+        """
+            .render()
+            .documentation()
         // var expected = "src/main/kotlin/androidx/example/Test.kt:4*/ Unable to find reference " +
-        var expected = "Unable to find reference " + // b/327166311
-            "@property NOT_A_REAL_PROPERTY in DClass Foo\n"
+        var expected =
+            "Unable to find reference " + // b/327166311
+                "@property NOT_A_REAL_PROPERTY in DClass Foo\n"
         assertThat(outputStreamCaptor.toString()).endsWith(expected)
         System.setOut(PrintStream(outputStreamCaptor))
         """
@@ -728,10 +829,13 @@ internal class DocTagConverterTest(
         | * @property NO_PROPERTIES_HERE aaaaaa
         | */
         |class Foo() { }
-        """.render().documentation()
+        """
+            .render()
+            .documentation()
         // expected = "src/main/kotlin/androidx/example/Test.kt:4*/ Unable to find reference " +
-        expected = "Unable to find reference " + // 327166311
-            "@property NO_PROPERTIES_HERE in DClass Foo"
+        expected =
+            "Unable to find reference " + // 327166311
+                "@property NO_PROPERTIES_HERE in DClass Foo"
         assertThat(outputStreamCaptor.toString()).contains(expected)
         assertFails {
             """
@@ -741,7 +845,9 @@ internal class DocTagConverterTest(
             |    */
             |   fun doAThing()
             |}
-            """.render().documentation() // can't @property on a function
+            """
+                .render()
+                .documentation() // can't @property on a function
         }
         assertFails {
             """
@@ -749,14 +855,18 @@ internal class DocTagConverterTest(
             | * @property NO_PROPERTIES_HERE aaaaaa
             | */
             |fun doAThing()
-            """.render().documentation() // can't @property on a function
+            """
+                .render()
+                .documentation() // can't @property on a function
         }
         assertFails {
             """
             |/** @property a */
             |val b
             |val a
-            """.render().documentation() // @property must be on correct property
+            """
+                .render()
+                .documentation() // @property must be on correct property
         }
         System.setOut(standardOut)
     }
@@ -764,7 +874,8 @@ internal class DocTagConverterTest(
     @Test // REGRESSION: go/dokka-upstream-bug/2388
     fun `Full documentation parameters table has types with nullability annotations`() {
         if (displayLanguage == Language.KOTLIN) return
-        val documentationK = """
+        val documentationK =
+            """
             |/**
             | * @param T a type
             | */
@@ -780,8 +891,11 @@ internal class DocTagConverterTest(
             |       @Suppress("DEPRECATION") currentList: List<T?>
             |    )
             |}
-        """.render().documentation()
-        val documentationJ = """
+        """
+                .render()
+                .documentation()
+        val documentationJ =
+            """
             |/**
             | * Called after the current PagedList has been updated.
             | *
@@ -791,7 +905,9 @@ internal class DocTagConverterTest(
             |public <T> void onCurrentListChanged(
             |            @Nullable java.util.List<@NonNull T> previousList,
             |            @NonNull java.util.List<@Nullable T> currentList) {}
-        """.render(java = true).documentation()
+        """
+                .render(java = true)
+                .documentation()
         for (documentation in listOf(documentationK, documentationJ)) {
             val paramTable = documentation.paramList()
             assertThat(paramTable.size).isEqualTo(2)
@@ -824,8 +940,9 @@ internal class DocTagConverterTest(
                 // This is also the upstream bug; T should be @NonNull from both source languages
                 if (documentation == documentationK) {
                     assertThat(
-                        param0Generic.annotations.single().isAtNonNull,
-                    ).isTrue()
+                            param0Generic.annotations.single().isAtNonNull,
+                        )
+                        .isTrue()
                 }
                 assertThat(param0Left.annotations).isEmpty()
                 assertThat(param1Left.annotations).isEmpty()
@@ -842,7 +959,8 @@ internal class DocTagConverterTest(
 
     @Test
     fun `Parameter detection works on nested named lambda types`() {
-        val documentation = """
+        val documentation =
+            """
             |/**
             | * @param funA a fun
             | * @param funB be fun
@@ -850,7 +968,9 @@ internal class DocTagConverterTest(
             | * @param foo a list of foos
             | */
             |fun mega(funA: (funB: ((unt: Unit, foo: List<Boolean>) -> String) -> Int) -> (Double))
-        """.render().documentation()
+        """
+                .render()
+                .documentation()
         val paramTable = documentation.paramList()
         val funADocs = paramTable.items().single { it.name() == "funA" }.data.description.text()
         assertThat(funADocs).isEqualTo("a fun")
@@ -864,7 +984,8 @@ internal class DocTagConverterTest(
 
     @Test
     fun `Parameter documentation works on generic and lambda types`() {
-        val documentation = """
+        val documentation =
+            """
             |abstract class Factory<Key : Any, Value : Any> {
             |    /**
             |     * Applies the given function to each value emitted by DataSources produced by this Factory.
@@ -879,7 +1000,9 @@ internal class DocTagConverterTest(
             |     */
             |    open fun <ToValue : String> map(function: (Value) -> ToValue): Factory<Key, ToValue>
             |}
-        """.render().documentation()
+        """
+                .render()
+                .documentation()
         val paramTable = documentation.paramList()
 
         // We don't want Value and/or Key to appear listed as parameters for map().
@@ -902,25 +1025,27 @@ internal class DocTagConverterTest(
             assertThat(lambdaSymbol.data.lambdaModifiers).isEmpty()
             // The evaluation type of the lambda is ToValue
             assertThat(lambdaSymbol.link().name).isEqualTo("ToValue")
-            val param0LambdaArgumentType = lambdaSymbol.data.lambdaParams
-                .map { it.data.type.link().name }
+            val param0LambdaArgumentType =
+                lambdaSymbol.data.lambdaParams.map { it.data.type.link().name }
             assertThat(param0LambdaArgumentType).isEqualTo(listOf("Value"))
         }
-        assertThat(param0.data.description.text()).isEqualTo(
-            "Function that runs on each " +
-                "loaded item, returning items of a potentially new type.",
-        )
+        assertThat(param0.data.description.text())
+            .isEqualTo(
+                "Function that runs on each " +
+                    "loaded item, returning items of a potentially new type.",
+            )
         assertThat(param1Left.data.name).isEqualTo("ToValue")
         assertThat(param1Left.projectionName()).isEqualTo("String")
-        assertThat(param1.data.description.text()).isEqualTo(
-            "Type of items produced by the " +
-                "new DataSource, from the passed function.",
-        )
+        assertThat(param1.data.description.text())
+            .isEqualTo(
+                "Type of items produced by the " + "new DataSource, from the passed function.",
+            )
     }
 
     @Test
     fun `Copied from PagingData`() {
-        val documentation = """
+        val documentation =
+            """
                 |/**
                 | * Returns a [PagingData] containing only elements matching the given [predicate]
                 | *
@@ -931,17 +1056,20 @@ internal class DocTagConverterTest(
                 |fun filterSync(predicate: (T) -> Boolean): PagingData<T> = transform { event ->
                 |    event.filter { predicate(it) }
                 |}
-        """.render().documentation()
-        val seeAlsoTable = documentation.first {
-            (it as? DocsSummaryList)?.title() == "See also"
-        } as DocsSummaryList
+        """
+                .render()
+                .documentation()
+        val seeAlsoTable =
+            documentation.first { (it as? DocsSummaryList)?.title() == "See also" }
+                as DocsSummaryList
         assertThat((seeAlsoTable.single().data.title as Link).data.name).isEqualTo("filter")
     }
 
     @Ignore // go/dokka-upstream-bug/2665
     @Test
     fun `Copied from draganddrop`() {
-        val documentationK = """
+        val documentationK =
+            """
             | /**
             | * <p><b>Note:</b> This class requires Android API level 24 or higher.
             | *
@@ -950,36 +1078,47 @@ internal class DocTagConverterTest(
             | *      Multi-window support</a>
             | */
             |public final class DropHelper { }
-        """.render().documentation()
-        val seeAlsoTable = documentationK.first {
-            (it as? DocsSummaryList)?.title() == "See also"
-        } as DocsSummaryList
+        """
+                .render()
+                .documentation()
+        val seeAlsoTable =
+            documentationK.first { (it as? DocsSummaryList)?.title() == "See also" }
+                as DocsSummaryList
         val (see1, see2) = seeAlsoTable.items(2)
         assertThat(see1.link().name).isEqualTo("Drag and drop")
         assertThat(see1.link().url)
             .isEqualTo("https://developer.android.com/guide/topics/ui/drag-drop")
         assertThat(see2.link().name).isEqualTo("Multi-window support")
-        assertThat(see2.link().url).isEqualTo(
-            "https://developer.android.com/guide/topics/large-screens/multi-window-support#dnd",
-        )
+        assertThat(see2.link().url)
+            .isEqualTo(
+                "https://developer.android.com/guide/topics/large-screens/multi-window-support#dnd",
+            )
     }
 
     @Test
     fun `Documentation spacing works over multiple lines`() {
-        val documentationK = """
+        val documentationK =
+            """
             |/**
             | * This is a multi-line documentation string. There is no space at the end of the
             | * first line, but "the first" with no space should not appear in the final documentation.
             | */
             | fun foo(): String
-        """.render().documentation().first() as DescriptionComponent
-        val documentationJ = """
+        """
+                .render()
+                .documentation()
+                .first() as DescriptionComponent
+        val documentationJ =
+            """
             |/**
             | * This is a multi-line documentation string. There is no space at the end of the
             | * first line, but "the first" with no space should not appear in the final documentation.
             | */
             | public String foo()
-        """.render(java = true).documentation().first() as DescriptionComponent
+        """
+                .render(java = true)
+                .documentation()
+                .first() as DescriptionComponent
 
         for (documentation in listOf(documentationK, documentationJ)) {
             assertThat(documentation.text()).doesNotContain("thefirst")
@@ -988,12 +1127,16 @@ internal class DocTagConverterTest(
 
     @Test
     fun `Test several odd link choices`() {
-        val documentation = """
+        val documentation =
+            """
             |/**
             | * Does bar on [this]
             | */
             |fun Foo.bar() {}
-        """.render().documentation().first() as DescriptionComponent
+        """
+                .render()
+                .documentation()
+                .first() as DescriptionComponent
         val docChildren = documentation.data.components.single().children
         assertThat(docChildren.size).isEqualTo(2)
         val link = (docChildren.last() as DocumentationLink)
@@ -1005,7 +1148,8 @@ internal class DocTagConverterTest(
 
     @Test
     fun `Multiline doc from fragment, with formatting`() {
-        val module = """
+        val module =
+            """
     |/**
     | * Instantiates a Fragment's view.
     | *
@@ -1023,19 +1167,24 @@ internal class DocTagConverterTest(
     |    return mHost.mFragmentManager.getLayoutInflaterFactory()
     |            .onCreateView(parent, name, context, attrs);
     |}
-        """.render(java = true)
-        val paramDocText = (
-            module.documentation(doc = {
-                this.function()!!.parameters.single { it.name == "parent" }
-            }, isFromJava = true).first() as DescriptionComponent
-            ).text()
+        """
+                .render(java = true)
+        val paramDocText =
+            (module
+                    .documentation(
+                        doc = { this.function()!!.parameters.single { it.name == "parent" } },
+                        isFromJava = true
+                    )
+                    .first() as DescriptionComponent)
+                .text()
 
         assertThat(paramDocText).doesNotContain("placedin")
     }
 
     @Test
     fun `@deprecated description works over multiple lines`() {
-        val documentation = """
+        val documentation =
+            """
             |/**
             | * Return the target fragment set by {@link #setTargetFragment}.
             | *
@@ -1047,7 +1196,8 @@ internal class DocTagConverterTest(
             | */
             | @Deprecated
             |public void foo(){}
-        """.render(java = true)
+        """
+                .render(java = true)
         val doc = documentation.documentation()
         val functionDesc = doc.first() as DescriptionComponent
         assertThat(functionDesc.data.deprecation).isNotNull()
@@ -1060,7 +1210,8 @@ internal class DocTagConverterTest(
 
     @Test // NOTE: render-to-text puts two spaces where the <pre> was. Is this correct?
     fun `Test code blocks with @literals and nesting`() {
-        val documentation = """
+        val documentation =
+            """
             |/**
             | * Below is a sample of a simple database.
             | * <pre>
@@ -1069,40 +1220,44 @@ internal class DocTagConverterTest(
             | * public class Song {
             | */
             |public void foo(){}
-        """.render(java = true)
+        """
+                .render(java = true)
         val doc = documentation.documentation()
         val functionDesc = doc.first() as DescriptionComponent
-        assertThat(functionDesc.text()).isEqualTo(
-            "Below is a sample of a simple database." +
-                "  // File: Song.java\n @ Entity\npublic class Song {",
-        )
+        assertThat(functionDesc.text())
+            .isEqualTo(
+                "Below is a sample of a simple database." +
+                    "  // File: Song.java\n @ Entity\npublic class Song {",
+            )
         assertThat(functionDesc.data.components.last()).isInstanceOf(Pre::class.java)
     }
 
     @Test
     fun `Full documentation has receiver param`() {
-        val documentation = """
+        val documentation =
+            """
             |/** @receiver blah */
             |fun Int.foo()
-        """.render().documentation()
+        """
+                .render()
+                .documentation()
 
         val paramSummary = documentation.paramList()
         val paramParam = paramSummary.item().data.title.data
 
-        javaOnly {
-            assertThat(paramParam.name).isEqualTo("receiver")
-        }
-        kotlinOnly {
-            assertThat(paramParam.name).isEqualTo("")
-        }
+        javaOnly { assertThat(paramParam.name).isEqualTo("receiver") }
+        kotlinOnly { assertThat(paramParam.name).isEqualTo("") }
     }
 
     @Test
     fun `Full documentation has return type`() {
-        val documentation = """
+        val documentation =
+            """
             |/** @return blah */
             |fun foo() = Unit
-        """.render().documentation()
+        """
+                .render()
+                .documentation()
 
         val paramSummary = documentation.last() as WithDescriptionList<TypeProjectionComponent>
         val returns = paramSummary.item()
@@ -1113,27 +1268,36 @@ internal class DocTagConverterTest(
 
     @Test
     fun `Full Kotlin documentation has thrown exceptions`() {
-        val documentationK = """
+        val documentationK =
+            """
             |/** @throws IllegalStateException if it fails */
             |fun foo()
-        """.render().documentation()
-        val documentationJ = """
+        """
+                .render()
+                .documentation()
+        val documentationJ =
+            """
             |/** @throws IllegalStateException if it fails */
             |public void foo() {}
-        """.render(java = true).documentation()
+        """
+                .render(java = true)
+                .documentation()
 
         for (documentation in listOf(documentationJ, documentationK)) {
-            val expectedDRI = if (documentation == documentationJ) {
-                "java.lang.IllegalStateException"
-            } else {
-                "kotlin.IllegalStateException"
-            }
+            val expectedDRI =
+                if (documentation == documentationJ) {
+                    "java.lang.IllegalStateException"
+                } else {
+                    "kotlin.IllegalStateException"
+                }
 
-            val expectedURL = if (documentation == documentationJ) {
-                "https://developer.android.com" +
-                    "/reference/java/lang/IllegalStateException.html"
-            } else "https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/" +
-                "-illegal-state-exception/index.html"
+            val expectedURL =
+                if (documentation == documentationJ) {
+                    "https://developer.android.com" +
+                        "/reference/java/lang/IllegalStateException.html"
+                } else
+                    "https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/" +
+                        "-illegal-state-exception/index.html"
 
             val throwsSummary =
                 documentation.first { (it as? DocsSummaryList)?.title() == "Throws" }
@@ -1156,44 +1320,57 @@ internal class DocTagConverterTest(
         val standardOut = System.out
         val outputStreamCaptor = ByteArrayOutputStream()
         System.setOut(PrintStream(outputStreamCaptor))
-        fun DModule.throwsTable() = documentation()
-            .first { (it as? DocsSummaryList)?.title() == "Throws" } as DocsSummaryList
-        val moduleJ1 = """
+        fun DModule.throwsTable() =
+            documentation().first { (it as? DocsSummaryList)?.title() == "Throws" }
+                as DocsSummaryList
+        val moduleJ1 =
+            """
             |/**
             | * @throws {@link IllegalStateException} if I try to linkify
             | */
             |public void foo() {}
-        """.render(java = true)
-        val moduleJ2 = """
+        """
+                .render(java = true)
+        val moduleJ2 =
+            """
             |/**
             | * @throws an IllegalStateException if my syntax is bad
             | */
             |public void foo() {}
-        """.render(java = true)
-        val moduleJ3 = """
+        """
+                .render(java = true)
+        val moduleJ3 =
+            """
             |/**
             | * @throws IOException if file operations fail
             | */
             |public void foo() {}
-        """.render(java = true)
-        val moduleK1 = """
+        """
+                .render(java = true)
+        val moduleK1 =
+            """
             |/**
             | * @throws an IllegalStateException if my syntax is bad
             | */
             |fun foo()
-        """.render()
-        val moduleK2 = """
+        """
+                .render()
+        val moduleK2 =
+            """
             |/**
             | * @throws [IllegalStateException] but this one is actually fine, it turns out
             | */
             |fun foo()
-        """.render()
-        val moduleK3 = """
+        """
+                .render()
+        val moduleK3 =
+            """
             |/**
             | * @throws IOException if file operations fail
             | */
             |fun foo()
-        """.render()
+        """
+                .render()
 
         val exception1 = assertFails { moduleJ1.throwsTable().item() }
         outputStreamCaptor.reset()
@@ -1213,59 +1390,65 @@ internal class DocTagConverterTest(
         assertThat(outputStreamCaptor.toString()).isEmpty()
 
         for (exception in listOf(exception1, exception2, exception3)) {
-            assertThat(exception.localizedMessage).contains(
-                "Exception thrown while handling Throws tags " +
-                    "[Throws(root=CustomDocTag(children=[P(children=[Text(body=",
-            )
+            assertThat(exception.localizedMessage)
+                .contains(
+                    "Exception thrown while handling Throws tags " +
+                        "[Throws(root=CustomDocTag(children=[P(children=[Text(body=",
+                )
         }
-        assertThat(exception1.localizedMessage).contains(
-            "if I try to linkify, children=[], params={})], params={})], params={}, name=MARKDOWN" +
-                "_FILE), name={@link IllegalStateException}, exceptionAddress=null)].",
-        )
-        assertThat(exception2.localizedMessage).contains(
-            "IllegalStateException if my syntax is bad, children=[], params={})], params={})], " +
-                "params={}, name=MARKDOWN_FILE), name=an, exceptionAddress=null)].",
-        )
-        assertThat(exception3.localizedMessage).contains(
-            "IllegalStateException if my syntax is bad, children=[], params={})], params={})], " +
-                "params={}, name=MARKDOWN_FILE), name=an, exceptionAddress=null)].",
-        )
+        assertThat(exception1.localizedMessage)
+            .contains(
+                "if I try to linkify, children=[], params={})], params={})], params={}, name=MARKDOWN" +
+                    "_FILE), name={@link IllegalStateException}, exceptionAddress=null)].",
+            )
+        assertThat(exception2.localizedMessage)
+            .contains(
+                "IllegalStateException if my syntax is bad, children=[], params={})], params={})], " +
+                    "params={}, name=MARKDOWN_FILE), name=an, exceptionAddress=null)].",
+            )
+        assertThat(exception3.localizedMessage)
+            .contains(
+                "IllegalStateException if my syntax is bad, children=[], params={})], params={})], " +
+                    "params={}, name=MARKDOWN_FILE), name=an, exceptionAddress=null)].",
+            )
         for (throws in listOf(throwsBad4, throwsBad5)) {
             assertThat(throws.name()).isEqualTo("")
             assertThat(throws.data.title.typeName()).isEqualTo("IOException")
             assertThat(throws.data.title.link().url).isEqualTo("")
         }
 
-        assertThat(throwsBad4.data.description.text())
-            .isEqualTo("if file operations fail")
-        assertThat(throwsBad5.data.description.text())
-            .isEqualTo("if file operations fail")
+        assertThat(throwsBad4.data.description.text()).isEqualTo("if file operations fail")
+        assertThat(throwsBad5.data.description.text()).isEqualTo("if file operations fail")
 
         assertThat(throwsFine1.data.description.text())
             .isEqualTo("but this one is actually fine, it turns out")
         assertThat(throwsFine1.name()).isEqualTo("")
         assertThat(throwsFine1.data.title.typeName()).isEqualTo("kotlin.IllegalStateException")
-        assertThat(throwsFine1.data.title.link().url).isEqualTo(
-            "https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/" +
-                "-illegal-state-exception/index.html",
-        )
+        assertThat(throwsFine1.data.title.link().url)
+            .isEqualTo(
+                "https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/" +
+                    "-illegal-state-exception/index.html",
+            )
 
         System.setOut(standardOut)
     }
 
     @Test
     fun `Full Java documentation has checked exceptions`() {
-        val documentation = """
+        val documentation =
+            """
             |/** IllegalStateException if it fails */
             |public void foo() throws IllegalStateException {}
-        """.render(java = true).documentation()
+        """
+                .render(java = true)
+                .documentation()
 
         val expectedDRI = "java.lang.IllegalStateException"
-        val expectedURL = "https://developer.android.com/reference/java/lang/" +
-            "IllegalStateException.html"
+        val expectedURL =
+            "https://developer.android.com/reference/java/lang/" + "IllegalStateException.html"
 
-        val throwsSummary = documentation.first { (it as? DocsSummaryList)?.title() == "Throws" }
-            as DocsSummaryList
+        val throwsSummary =
+            documentation.first { (it as? DocsSummaryList)?.title() == "Throws" } as DocsSummaryList
         val throwsTypeAsParam = throwsSummary.item().data.title
         val throwsTypeAsLink = throwsTypeAsParam.data.type.data.type
         val throwsDescription = throwsSummary.item().data.description
@@ -1278,10 +1461,13 @@ internal class DocTagConverterTest(
 
     @Test
     fun `Full documentation has see alsos`() {
-        val documentation = """
+        val documentation =
+            """
             |/** @see String blah */
             |fun foo()
-        """.render().documentation()
+        """
+                .render()
+                .documentation()
 
         val paramSummary = documentation.last() as LinkDescriptionSummaryList
         val paramText = paramSummary.item()
@@ -1293,10 +1479,13 @@ internal class DocTagConverterTest(
 
     @Test
     fun `See also parses external link`() {
-        val documentation = """
+        val documentation =
+            """
             |/** @see String */
             |class Foo
-        """.render().documentation()
+        """
+                .render()
+                .documentation()
 
         val paramSummary = documentation.last() as LinkDescriptionSummaryList
         val paramText = paramSummary.item()
@@ -1308,10 +1497,13 @@ internal class DocTagConverterTest(
 
     @Test
     fun `See also parses internal link`() {
-        val documentation = """
+        val documentation =
+            """
             |/** @see Bar */
             |class Foo { class Bar }
-        """.render().documentation()
+        """
+                .render()
+                .documentation()
 
         val paramSummary = documentation.last() as LinkDescriptionSummaryList
         val paramText = paramSummary.item()
@@ -1323,13 +1515,16 @@ internal class DocTagConverterTest(
     @Ignore // Our package-list is incomplete. b/225929725
     @Test
     fun `See also parses link with Kotlin style function`() {
-        val documentation = """
+        val documentation =
+            """
             |/**
             | * @see String.isEmpty
             | * @see String.lastIndex
             | */
             |class Foo
-        """.render().documentation()
+        """
+                .render()
+                .documentation()
 
         val paramSummary = documentation.last() as DocsSummaryList
         val (paramText1, paramText2) = paramSummary.items(2).toList()
@@ -1343,10 +1538,13 @@ internal class DocTagConverterTest(
 
     @Test
     fun `See also parses link with Java style function`() {
-        val documentation = """
+        val documentation =
+            """
             |/** @see String#isEmpty() */
             |public void foo() {}
-        """.render(java = true).documentation()
+        """
+                .render(java = true)
+                .documentation()
 
         val paramSummary = documentation.last() as LinkDescriptionSummaryList
         val paramText = paramSummary.item()
@@ -1358,10 +1556,13 @@ internal class DocTagConverterTest(
 
     @Test
     fun `See also parses link with unresolved function`() {
-        val documentation = """
+        val documentation =
+            """
             |/** @see com.example.foo.Foo#bar() */
             |public void foo() {}
-        """.render(java = true).documentation()
+        """
+                .render(java = true)
+                .documentation()
 
         val paramSummary = documentation.last() as LinkDescriptionSummaryList
         val paramText = paramSummary.item()
@@ -1371,25 +1572,32 @@ internal class DocTagConverterTest(
 
     @Test
     fun `See also parses link with class`() {
-        val documentation = """
+        val documentation =
+            """
             |/** @see String */
             |public void foo() {}
-        """.render(java = true).documentation()
+        """
+                .render(java = true)
+                .documentation()
 
         val paramSummary = documentation.last() as LinkDescriptionSummaryList
         val paramText = paramSummary.item()
 
-        assertThat(paramText.link().url).isEqualTo(
-            "https://developer.android.com/reference/java/lang/String.html",
-        )
+        assertThat(paramText.link().url)
+            .isEqualTo(
+                "https://developer.android.com/reference/java/lang/String.html",
+            )
     }
 
     @Test
     fun `See also parses link with unresolved class`() {
-        val documentation = """
+        val documentation =
+            """
             |/** @see com.example.foo.Foo */
             |public void foo() {}
-        """.render(java = true).documentation()
+        """
+                .render(java = true)
+                .documentation()
 
         val paramSummary = documentation.last() as LinkDescriptionSummaryList
         val paramText = paramSummary.item()
@@ -1399,14 +1607,17 @@ internal class DocTagConverterTest(
 
     @Test
     fun `Full documentation sorts tags in pre-defined order`() {
-        val documentation = """
+        val documentation =
+            """
             |/**
             | * @see String
             | * @param a
             | * @return
             | */
             |fun foo(a: String)
-        """.render().documentation()
+        """
+                .render()
+                .documentation()
 
         val returnSummary = documentation[1] as DocsSummaryList
         val paramSummary = documentation[2] as DocsSummaryList
@@ -1420,14 +1631,17 @@ internal class DocTagConverterTest(
     @Test
     fun `Full documentation sorts params in given order`() {
         val expected = listOf("a", "b", "c")
-        val documentation = """
+        val documentation =
+            """
             |/**
             | * @param b
             | * @param c
             | * @param a
             | */
             |fun foo(a: String, b: String, c: String)
-        """.render().documentation(paramNames = expected)
+        """
+                .render()
+                .documentation(paramNames = expected)
 
         val paramSummary = documentation.last() as DocsSummaryList
         val params = paramSummary.items(3)
@@ -1440,13 +1654,16 @@ internal class DocTagConverterTest(
     @Test
     fun `Param with same name as function is correctly documented`() {
         val expected = listOf("foo", "bar")
-        val documentation = """
+        val documentation =
+            """
         |/**
         | * @param foo a parameter with the same name as the function
         | * @param bar a parameter with a different name
         | */
         |fun foo(foo: String, bar: String)
-    """.render().documentation(paramNames = expected)
+    """
+                .render()
+                .documentation(paramNames = expected)
 
         val paramSummary = documentation.last() as DocsSummaryList
         val params = paramSummary.items(2)
@@ -1467,25 +1684,30 @@ internal class DocTagConverterTest(
             | * @param c
             | */
             |fun foo(a: String, b: String, c: String)
-        """.render().documentation()
+        """
+            .render()
+            .documentation()
 
         // val expected = "src/main/kotlin/androidx/example/Test.kt:5 Missing @param tag for " +
-        val expected = "Missing @param tag for " + // b/327166311
-            "parameter `a` in DFunction foo\n"
+        val expected =
+            "Missing @param tag for " + // b/327166311
+                "parameter `a` in DFunction foo\n"
         assertThat(outputStreamCaptor.toString()).endsWith(expected)
         System.setOut(standardOut)
     }
 
     @Test
     fun `@sample annotation in kotlin fails if the target samples doesn't exist`() {
-        val documentation = """
+        val documentation =
+            """
             |/**
             | * a very foo description
             | *
             | * @sample foo.samples.fooSample
             | */
             |fun foo(a: String, b: String, c: String)
-        """.trimIndent()
+        """
+                .trimIndent()
         assertFails { documentation.render().documentation() }
     }
 
@@ -1494,7 +1716,8 @@ internal class DocTagConverterTest(
         val standardOut = System.out
         val outputStreamCaptor = ByteArrayOutputStream()
         System.setOut(PrintStream(outputStreamCaptor))
-        val module = """
+        val module =
+            """
             |/**
             | * DSL for constructing a new [DynamicGraphNavigator.DynamicNavGraph]
             | *
@@ -1534,7 +1757,8 @@ internal class DocTagConverterTest(
             |            this.arrayType = arrayType
             |        }
             | }
-        """.render()
+        """
+                .render()
         val converterHolder = ConverterHolder(this@DocTagConverterTest, module)
         runBlocking {
             converterHolder
@@ -1552,7 +1776,8 @@ internal class DocTagConverterTest(
 
     @Test
     fun `Test @return on property parameters`() {
-        val module = """
+        val module =
+            """
             |public class Foo private constructor(
             |   /**
             |    * The arguments used for this entry
@@ -1562,7 +1787,8 @@ internal class DocTagConverterTest(
             |   @set:RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
             |   public var arguments: List<String>? = null
             |) {}
-        """.render()
+        """
+                .render()
         val documentation = module.documentation({ this.property("arguments")!! })
         val description = (documentation.first() as DescriptionComponent).text()
         assertThat(description).isEqualTo("The arguments used for this entry")
@@ -1574,7 +1800,8 @@ internal class DocTagConverterTest(
 
     @Test // Note: this tests upstream behavior.
     fun `Test spacing around line wraps including inside tags`() {
-        val documentation = """
+        val documentation =
+            """
             |/**
             | * blah blah blah blah {@link #longFunctionName(java.lang.Object, java.lang.String, int,
             | * java.lang.Integer) LongContainingClassName#longFunctionName(Object, String, int,
@@ -1582,18 +1809,19 @@ internal class DocTagConverterTest(
             | */
             |public void longFunctionName(Object arg1, String arg2, int arg3, Integer arg4) {}
             |
-        """.render(java = true).documentation({
-            this.function("longFunctionName")!!
-        })
-        val components = (documentation.single() as DescriptionComponent)
-            .data.components.single().children
+        """
+                .render(java = true)
+                .documentation({ this.function("longFunctionName")!! })
+        val components =
+            (documentation.single() as DescriptionComponent).data.components.single().children
         val link = components[1] as DocumentationLink
         assertThat(link.text()).doesNotContain("int,Integer") // should be a space here
     }
 
     @Test
     fun `from ExoPlayer2, @link split across lines works`() {
-        val documentation = """
+        val documentation =
+            """
         |public @interface Mega {
         |   /**
         |    * Reason why playback is suppressed even though {@link #getPlayWhenReady()} is {@code true}. One
@@ -1614,10 +1842,11 @@ internal class DocTagConverterTest(
         |
         |   public void longFunctionName(Object arg1, String arg2, int arg3, Integer arg4)
         |}
-        """.render(java = true)
-            .documentation({ this.explicitClasslike("PlaybackSuppressionReason") })
-        val components = (documentation.single() as DescriptionComponent)
-            .data.components.single().children
+        """
+                .render(java = true)
+                .documentation({ this.explicitClasslike("PlaybackSuppressionReason") })
+        val components =
+            (documentation.single() as DescriptionComponent).data.components.single().children
         val link1 = components[5] as DocumentationLink
         val link2 = components[7] as DocumentationLink
 
@@ -1630,13 +1859,13 @@ internal class DocTagConverterTest(
             .isEqualTo("PLAYBACK_SUPPRESSION_REASON_TRANSIENT_AUDIO_FOCUS_LOSS")
 
         assertThat(link1.text()).isEqualTo("PLAYBACK_SUPPRESSION_REASON_NONE")
-        assertThat(link2.text())
-            .isEqualTo("PLAYBACK_SUPPRESSION_REASON_TRANSIENT_AUDIO_FOCUS_LOSS")
+        assertThat(link2.text()).isEqualTo("PLAYBACK_SUPPRESSION_REASON_TRANSIENT_AUDIO_FOCUS_LOSS")
     }
 
     @Test
     fun `From Platform, java-concurrent-future, pre{@code formatting test`() {
-        val documentation = """
+        val documentation =
+            """
             /**
              * A {@code Future} represents the result of an asynchronous
              * computation.  Methods are provided to check if the computation is
@@ -1686,9 +1915,10 @@ internal class DocTagConverterTest(
              * @param <V> The result type returned by this Future's {@code get} method
              */
             public interface Future<V>
-        """.trimIndent().render(java = true).documentation({
-            this.explicitClasslike("Future")
-        })
+        """
+                .trimIndent()
+                .render(java = true)
+                .documentation({ this.explicitClasslike("Future") })
         val description = documentation[0] as DescriptionComponent
         val firstCodeBlock = (description.data.components[2] as CodeBlock).text()
         assertThat(firstCodeBlock).doesNotContain("&lt;")
@@ -1698,17 +1928,20 @@ internal class DocTagConverterTest(
     @Ignore // b/278255321; go/dokka-upstream-bug/2949
     @Test
     fun `Test @value tag`() {
-        val module = """
+        val module =
+            """
             |/** An at-value tag: {@value VALUE_1}. */
             |public enum Foo { VALUE_1, VALUE_2 }
-        """.render(java = true)
+        """
+                .render(java = true)
         val documentation = module.documentation({ this.explicitClasslike("Foo") })
         val description = (documentation.first() as DescriptionComponent).text()
         assertThat(description).doesNotContain("{@value")
     }
 
-    private fun DModule.description(doc: DModule.() -> Documentable = ::smartDoc):
-        DescriptionComponent {
+    private fun DModule.description(
+        doc: DModule.() -> Documentable = ::smartDoc
+    ): DescriptionComponent {
         val converterHolder = ConverterHolder(this@DocTagConverterTest, this)
         val annotations =
             this.doc().annotations(getExpectOrCommonSourceSet()).deprecationAnnotation()
@@ -1728,12 +1961,13 @@ internal class DocTagConverterTest(
                 returnType = NoopTypeProjectionComponent(""),
                 paramNames = paramNames,
             )
-        } else converterHolder.javadocConverter.metadata(
-            documentable = doc,
-            returnType = NoopTypeProjectionComponent(""),
-            paramNames = paramNames,
-            isFromJava = isFromJava!!,
-        )
+        } else
+            converterHolder.javadocConverter.metadata(
+                documentable = doc,
+                returnType = NoopTypeProjectionComponent(""),
+                paramNames = paramNames,
+                isFromJava = isFromJava!!,
+            )
     }
 
     private fun DModule.clazz(name: String? = null): DClass {
@@ -1747,20 +1981,19 @@ internal class DocTagConverterTest(
         return module.function() ?: module.classlike()!!
     }
 
-    private fun ContextFreeComponent.render() = createHTML().body {
-        this@render.render(this)
-    }.trim()
+    private fun ContextFreeComponent.render() =
+        createHTML().body { this@render.render(this) }.trim()
 
-    private fun List<ContextFreeComponent>.paramList() = first {
-        (it as? DocsSummaryList)?.title() == "Parameters"
-    } as DocsSummaryList
+    private fun List<ContextFreeComponent>.paramList() =
+        first { (it as? DocsSummaryList)?.title() == "Parameters" } as DocsSummaryList
 
     companion object {
         @JvmStatic
         @Parameterized.Parameters(name = "{0}")
-        fun data() = listOf(
-            arrayOf(Language.JAVA),
-            arrayOf(Language.KOTLIN),
-        )
+        fun data() =
+            listOf(
+                arrayOf(Language.JAVA),
+                arrayOf(Language.KOTLIN),
+            )
     }
 }

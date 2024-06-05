@@ -19,7 +19,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.util.Locale
 
-defaultTasks = mutableListOf("test", "jar", "shadowJar", "ktlint", "publish", "zipTestResults")
+defaultTasks = mutableListOf("test", "jar", "shadowJar", "ktCheck", "publish", "zipTestResults")
 
 repositories {
     maven("../../prebuilts/androidx/external")
@@ -361,34 +361,41 @@ val zipTask = project.tasks.register<Zip>("zipTestResults") {
     from(project.file(testTask.flatMap { it.reports.junitXml.outputLocation}))
 }
 
-val ktlintConfiguration: Configuration by configurations.creating
+val ktfmtConfiguration: Configuration by configurations.creating
 dependencies {
-    ktlintConfiguration("com.pinterest:ktlint:0.49.1")
+    ktfmtConfiguration("com.facebook:ktfmt:0.49")
 }
 
-val outputDir = "${layout.buildDirectory.get()}/reports/ktlint/"
-val inputFiles = project.fileTree(mapOf("dir" to "src", "include" to "**/*.kt"))
+class KtFilesProvider : CommandLineArgumentProvider {
 
-val ktlint by tasks.creating(JavaExec::class) {
-    inputs.files(inputFiles)
-    outputs.dir(outputDir)
+    override fun asArguments(): Iterable<String> {
+        val process = ProcessBuilder("sh", "-c", "find src -type f -name '*.kt'")
+            .redirectOutput(ProcessBuilder.Redirect.PIPE)
+            .start()
 
+        val ktFiles = process.inputStream.bufferedReader().use { it.readText() }.trim()
+        return ktFiles.split("\n")
+    }
+}
+
+val ktCheck by tasks.creating(JavaExec::class) {
     description = "Check Kotlin code style."
     group = "Verification"
-    classpath = ktlintConfiguration
-    mainClass.set("com.pinterest.ktlint.Main")
-    args = listOf("src/**/*.kt")
+    classpath = ktfmtConfiguration
+    mainClass.set("com.facebook.ktfmt.cli.Main")
+
+    argumentProviders.add(KtFilesProvider())
+    args = listOf("--kotlinlang-style", "--dry-run", "--set-exit-if-changed")
 }
 
-val ktlintFormat by tasks.creating(JavaExec::class) {
-    inputs.files(inputFiles)
-    outputs.dir(outputDir)
-
+val ktFormat by tasks.creating(JavaExec::class) {
     description = "Fix Kotlin code style deviations."
     group = "Formatting"
-    classpath = ktlintConfiguration
-    mainClass.set("com.pinterest.ktlint.Main")
-    args = listOf("-F", "src/**/*.kt")
+    classpath = ktfmtConfiguration
+    mainClass.set("com.facebook.ktfmt.cli.Main")
+
+    argumentProviders.add(KtFilesProvider())
+    args = listOf("--kotlinlang-style")
 }
 
 publishing {

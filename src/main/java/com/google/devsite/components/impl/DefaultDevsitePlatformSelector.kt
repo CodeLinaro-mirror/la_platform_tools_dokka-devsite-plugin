@@ -25,8 +25,7 @@ internal data class DefaultDevsitePlatformSelector(
     val platforms: List<Platform>,
 ) : ContextFreeComponent {
 
-    override fun render(into: FlowContent) =
-        into.devsitePlatformSelector(platforms)
+    override fun render(into: FlowContent) = into.devsitePlatformSelector(platforms)
 
     override fun toString() = "Devsite platform selector. Platforms: ${platforms.map { it.name }}"
 }

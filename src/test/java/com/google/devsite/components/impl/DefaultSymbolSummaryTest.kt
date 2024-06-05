@@ -27,26 +27,27 @@ import org.junit.Test
 class DefaultSymbolSummaryTest {
     @Test
     fun `Simple function summary renders correctly`() {
-        val component = DefaultSymbolSummary(
-            Params(
-                signature = NoopFunctionSignature("foo()"),
-                description = NoopDescriptionComponent("This method does baz."),
-                annotationComponents = emptyList(),
-            ),
-        )
+        val component =
+            DefaultSymbolSummary(
+                Params(
+                    signature = NoopFunctionSignature("foo()"),
+                    description = NoopDescriptionComponent("This method does baz."),
+                    annotationComponents = emptyList(),
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <div><code>foo()</code></div>
   <p>This method does baz.</p>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 }

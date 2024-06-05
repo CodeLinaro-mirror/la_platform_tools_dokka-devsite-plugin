@@ -29,141 +29,149 @@ internal class DefaultMetadataComponentTest {
 
     @Test
     fun `Library metadata renders correctly`() {
-        val libraryMetadata = LibraryMetadata(
-            groupId = "testGroup",
-            artifactId = "testArtifactId",
-            releaseNotesUrl = "https://d.android.com",
-        )
-        val metadata = MetadataComponent.Params(
-            libraryMetadata = libraryMetadata,
-            sourceLinkUrl = null,
-            versionMetadata = null,
-        )
+        val libraryMetadata =
+            LibraryMetadata(
+                groupId = "testGroup",
+                artifactId = "testArtifactId",
+                releaseNotesUrl = "https://d.android.com",
+            )
+        val metadata =
+            MetadataComponent.Params(
+                libraryMetadata = libraryMetadata,
+                sourceLinkUrl = null,
+                versionMetadata = null,
+            )
         val component = DefaultMetadataComponent(metadata)
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <div id="metadata-info-block">
     <div id="maven-coordinates">Artifact: <a href="https://d.android.com">testGroup:testArtifactId</a></div>
   </div>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Library metadata without release notes URL renders correctly`() {
-        val libraryMetadata = LibraryMetadata(
-            groupId = "testGroup",
-            artifactId = "testArtifactId",
-            releaseNotesUrl = "",
-        )
-        val metadata = MetadataComponent.Params(
-            libraryMetadata = libraryMetadata,
-            sourceLinkUrl = null,
-            versionMetadata = null,
-        )
+        val libraryMetadata =
+            LibraryMetadata(
+                groupId = "testGroup",
+                artifactId = "testArtifactId",
+                releaseNotesUrl = "",
+            )
+        val metadata =
+            MetadataComponent.Params(
+                libraryMetadata = libraryMetadata,
+                sourceLinkUrl = null,
+                versionMetadata = null,
+            )
         val component = DefaultMetadataComponent(metadata)
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <div id="metadata-info-block">
     <div id="maven-coordinates">Artifact: testGroup:testArtifactId</div>
   </div>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Link to source renders correctly`() {
-        val metadata = MetadataComponent.Params(
-            libraryMetadata = null,
-            sourceLinkUrl = "https://cs.android.com",
-            versionMetadata = null,
-        )
+        val metadata =
+            MetadataComponent.Params(
+                libraryMetadata = null,
+                sourceLinkUrl = "https://cs.android.com",
+                versionMetadata = null,
+            )
         val component = DefaultMetadataComponent(metadata)
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <div id="metadata-info-block">
     <div id="source-link"><a href="https://cs.android.com" class="external">View Source</a></div>
   </div>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Library metadata and link to source render correctly`() {
-        val libraryMetadata = LibraryMetadata(
-            groupId = "testGroup",
-            artifactId = "testArtifactId",
-            releaseNotesUrl = "https://d.android.com",
-        )
-        val metadata = MetadataComponent.Params(
-            libraryMetadata = libraryMetadata,
-            sourceLinkUrl = "https://cs.android.com",
-            versionMetadata = null,
-        )
+        val libraryMetadata =
+            LibraryMetadata(
+                groupId = "testGroup",
+                artifactId = "testArtifactId",
+                releaseNotesUrl = "https://d.android.com",
+            )
+        val metadata =
+            MetadataComponent.Params(
+                libraryMetadata = libraryMetadata,
+                sourceLinkUrl = "https://cs.android.com",
+                versionMetadata = null,
+            )
         val component = DefaultMetadataComponent(metadata)
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <div id="metadata-info-block">
     <div id="maven-coordinates">Artifact: <a href="https://d.android.com">testGroup:testArtifactId</a></div>
     <div id="source-link"><a href="https://cs.android.com" class="external">View Source</a></div>
   </div>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Version metadata renders correctly`() {
-        val versionMetadata = DefaultVersionMetadataComponent.createVersionMetadataWithBaseUrl(
-            addedIn = "1.5.4",
-            deprecatedIn = "1.6.0-alpha04",
-            baseUrl = "https://developer.android.com/jetpack/androidx/releases/fragment",
-        )
-        val metadata = MetadataComponent.Params(
-            libraryMetadata = null,
-            sourceLinkUrl = null,
-            versionMetadata = versionMetadata,
-        )
+        val versionMetadata =
+            DefaultVersionMetadataComponent.createVersionMetadataWithBaseUrl(
+                addedIn = "1.5.4",
+                deprecatedIn = "1.6.0-alpha04",
+                baseUrl = "https://developer.android.com/jetpack/androidx/releases/fragment",
+            )
+        val metadata =
+            MetadataComponent.Params(
+                libraryMetadata = null,
+                sourceLinkUrl = null,
+                versionMetadata = versionMetadata,
+            )
         val component = DefaultMetadataComponent(metadata)
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <div id="metadata-info-block">
     <div id="version-metadata">
@@ -172,31 +180,33 @@ internal class DefaultMetadataComponentTest {
     </div>
   </div>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Version metadata without links renders correctly`() {
         // Empty string URL renders as text
-        val versionMetadata = VersionMetadataComponent.Params(
-            addedIn = DefaultLink(Link.Params(name = "API Level 8", url = "")),
-            deprecatedIn = DefaultLink(Link.Params(name = "API Level 12", url = "")),
-        )
-        val metadata = MetadataComponent.Params(
-            libraryMetadata = null,
-            sourceLinkUrl = null,
-            versionMetadata = DefaultVersionMetadataComponent(versionMetadata),
-        )
+        val versionMetadata =
+            VersionMetadataComponent.Params(
+                addedIn = DefaultLink(Link.Params(name = "API Level 8", url = "")),
+                deprecatedIn = DefaultLink(Link.Params(name = "API Level 12", url = "")),
+            )
+        val metadata =
+            MetadataComponent.Params(
+                libraryMetadata = null,
+                sourceLinkUrl = null,
+                versionMetadata = DefaultVersionMetadataComponent(versionMetadata),
+            )
         val component = DefaultMetadataComponent(metadata)
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <div id="metadata-info-block">
     <div id="version-metadata">
@@ -205,31 +215,33 @@ internal class DefaultMetadataComponentTest {
     </div>
   </div>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Version metadata without deprecation renders correctly`() {
-        val versionMetadata = DefaultVersionMetadataComponent.createVersionMetadataWithBaseUrl(
-            addedIn = "1.5.4",
-            deprecatedIn = null,
-            baseUrl = "https://developer.android.com/jetpack/androidx/releases/fragment",
-        )
-        val metadata = MetadataComponent.Params(
-            libraryMetadata = null,
-            sourceLinkUrl = null,
-            versionMetadata = versionMetadata,
-        )
+        val versionMetadata =
+            DefaultVersionMetadataComponent.createVersionMetadataWithBaseUrl(
+                addedIn = "1.5.4",
+                deprecatedIn = null,
+                baseUrl = "https://developer.android.com/jetpack/androidx/releases/fragment",
+            )
+        val metadata =
+            MetadataComponent.Params(
+                libraryMetadata = null,
+                sourceLinkUrl = null,
+                versionMetadata = versionMetadata,
+            )
         val component = DefaultMetadataComponent(metadata)
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <div id="metadata-info-block">
     <div id="version-metadata">
@@ -237,35 +249,38 @@ internal class DefaultMetadataComponentTest {
     </div>
   </div>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Complete metadata renders correctly`() {
-        val libraryMetadata = LibraryMetadata(
-            groupId = "testGroup",
-            artifactId = "testArtifactId",
-            releaseNotesUrl = "https://d.android.com",
-        )
-        val versionMetadata = VersionMetadataComponent.Params(
-            addedIn = DefaultLink(Link.Params(name = "API Level 8", url = "")),
-            deprecatedIn = DefaultLink(Link.Params(name = "API Level 12", url = "")),
-        )
-        val metadata = MetadataComponent.Params(
-            libraryMetadata = libraryMetadata,
-            sourceLinkUrl = "https://cs.android.com",
-            versionMetadata = DefaultVersionMetadataComponent(versionMetadata),
-        )
+        val libraryMetadata =
+            LibraryMetadata(
+                groupId = "testGroup",
+                artifactId = "testArtifactId",
+                releaseNotesUrl = "https://d.android.com",
+            )
+        val versionMetadata =
+            VersionMetadataComponent.Params(
+                addedIn = DefaultLink(Link.Params(name = "API Level 8", url = "")),
+                deprecatedIn = DefaultLink(Link.Params(name = "API Level 12", url = "")),
+            )
+        val metadata =
+            MetadataComponent.Params(
+                libraryMetadata = libraryMetadata,
+                sourceLinkUrl = "https://cs.android.com",
+                versionMetadata = DefaultVersionMetadataComponent(versionMetadata),
+            )
         val component = DefaultMetadataComponent(metadata)
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <div id="metadata-info-block">
     <div id="maven-coordinates">Artifact: <a href="https://d.android.com">testGroup:testArtifactId</a></div>
@@ -276,28 +291,30 @@ internal class DefaultMetadataComponentTest {
     </div>
   </div>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Empty metadata component renders correctly`() {
-        val metadata = MetadataComponent.Params(
-            libraryMetadata = null,
-            sourceLinkUrl = null,
-            versionMetadata = null,
-        )
+        val metadata =
+            MetadataComponent.Params(
+                libraryMetadata = null,
+                sourceLinkUrl = null,
+                versionMetadata = null,
+            )
         val component = DefaultMetadataComponent(metadata)
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body></body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 }

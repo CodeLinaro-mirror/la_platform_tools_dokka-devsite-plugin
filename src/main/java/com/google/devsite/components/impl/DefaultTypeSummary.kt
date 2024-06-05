@@ -25,10 +25,11 @@ import kotlinx.html.FlowContent
 internal data class DefaultTypeSummary(
     override val data: TypeSummary.Params,
 ) : TypeSummary {
-    override fun render(into: FlowContent) = into.run {
-        data.modifiers.render(into, terminator = { +" " })
-        data.type.render(into)
-    }
+    override fun render(into: FlowContent) =
+        into.run {
+            data.modifiers.render(into, terminator = { +" " })
+            data.type.render(into)
+        }
 
     override fun toString() = data.modifiers.joinMaybePrefix(postfix = " ") + data.type
 }

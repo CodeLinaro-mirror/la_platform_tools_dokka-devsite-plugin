@@ -48,11 +48,12 @@ internal interface TypeParameterComponent : ParameterComponent {
         override val displayLanguage: Language,
         override val modifiers: Modifiers = EmptyModifiers,
         override val annotationComponents: List<AnnotationComponent> = emptyList(),
-    ) : ParameterComponent.Params(
-        name = name,
-        type = projections.firstOrNull() ?: pathProvider.ANY,
-        displayLanguage = displayLanguage,
-        modifiers = modifiers,
-        annotationComponents = annotationComponents,
-    )
+    ) :
+        ParameterComponent.Params(
+            name = name,
+            type = projections.firstOrNull() ?: pathProvider.ANY,
+            displayLanguage = displayLanguage,
+            modifiers = modifiers,
+            annotationComponents = annotationComponents,
+        )
 }

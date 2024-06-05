@@ -34,28 +34,36 @@ internal class PackageDocumentableConverterTest(
 ) : ConverterTestBase(displayLanguage) {
     @Test
     fun `Package summary creates components with correct page title`() {
-        val page = listOf(
-            """
+        val page =
+            listOf(
+                    """
                 |/src/main/kotlin/androidx/example/A.kt
                 |package hello.i.am.a.packagez
                 |
                 |class A
-            """.trimMargin(),
-        ).render().packagePage()
+            """
+                        .trimMargin(),
+                )
+                .render()
+                .packagePage()
 
         assertThat(page.data.title).isEqualTo("hello.i.am.a.packagez")
     }
 
     @Test
     fun `Package summary creates components with correct path`() {
-        val page = listOf(
-            """
+        val page =
+            listOf(
+                    """
                 |/src/main/kotlin/androidx/example/A.kt
                 |package hello.i.am.a.packagez
                 |
                 |class A
-            """.trimMargin(),
-        ).render().packagePage()
+            """
+                        .trimMargin(),
+                )
+                .render()
+                .packagePage()
 
         assertThat(page.data.pathForSwitcher!!)
             .isEqualTo("hello/i/am/a/packagez/package-summary.html")
@@ -63,18 +71,24 @@ internal class PackageDocumentableConverterTest(
 
     @Test
     fun `Package summary creates components with correct book path`() {
-        val page = """
+        val page =
+            """
             |class Foo
-        """.render().packagePage()
+        """
+                .render()
+                .packagePage()
 
         assertPath(page.data.bookPath, "androidx/_book.yaml")
     }
 
     @Test
     fun `Package summary creates components for interfaces`() {
-        val page = """
+        val page =
+            """
             |interface ImAnInterface
-        """.render().packagePage()
+        """
+                .render()
+                .packagePage()
 
         val summary = page.data.content
         val interfacz = summary.data.interfaces.item()
@@ -85,10 +99,13 @@ internal class PackageDocumentableConverterTest(
 
     @Test
     fun `Package summary creates components with sorted interfaces`() {
-        val page = """
+        val page =
+            """
             |interface B
             |interface A
-        """.render().packagePage()
+        """
+                .render()
+                .packagePage()
 
         val summary = page.data.content
         val interfaces = summary.data.interfaces.items(2)
@@ -99,9 +116,12 @@ internal class PackageDocumentableConverterTest(
 
     @Test
     fun `Package summary creates components for classes`() {
-        val page = """
+        val page =
+            """
             |class ImAClass
-        """.render().packagePage()
+        """
+                .render()
+                .packagePage()
 
         val summary = page.data.content
         val clazz = summary.data.classes.item()
@@ -112,10 +132,13 @@ internal class PackageDocumentableConverterTest(
 
     @Test
     fun `Package summary creates components with sorted classes`() {
-        val page = """
+        val page =
+            """
             |class B
             |class A
-        """.render().packagePage()
+        """
+                .render()
+                .packagePage()
 
         val summary = page.data.content
         val classes = summary.data.classes.items(2)
@@ -126,9 +149,12 @@ internal class PackageDocumentableConverterTest(
 
     @Test
     fun `Package summary creates components for nested classes`() {
-        val page = """
+        val page =
+            """
             |class Outer { class Inner }
-        """.render().packagePage()
+        """
+                .render()
+                .packagePage()
 
         val summary = page.data.content
         val inner = summary.data.classes.items(2).last()
@@ -139,9 +165,12 @@ internal class PackageDocumentableConverterTest(
 
     @Test
     fun `Package summary creates components for enums`() {
-        val page = """
+        val page =
+            """
             |enum class ImAnEnum
-        """.render().packagePage()
+        """
+                .render()
+                .packagePage()
 
         val summary = page.data.content
         val enum = summary.data.enums.item()
@@ -152,10 +181,13 @@ internal class PackageDocumentableConverterTest(
 
     @Test
     fun `Package summary creates components with sorted enums`() {
-        val page = """
+        val page =
+            """
             |enum class B
             |enum class A
-        """.render().packagePage()
+        """
+                .render()
+                .packagePage()
 
         val summary = page.data.content
         val enums = summary.data.enums.items(2)
@@ -166,9 +198,12 @@ internal class PackageDocumentableConverterTest(
 
     @Test
     fun `Package summary creates components for exceptions`() {
-        val page = """
+        val page =
+            """
             |class ImAnException : RuntimeException()
-        """.render().packagePage()
+        """
+                .render()
+                .packagePage()
 
         val summary = page.data.content
         val exception = summary.data.exceptions.item()
@@ -179,10 +214,13 @@ internal class PackageDocumentableConverterTest(
 
     @Test
     fun `Package summary creates components with sorted exceptions`() {
-        val page = """
+        val page =
+            """
             |class B : RuntimeException()
             |class A : RuntimeException()
-        """.render().packagePage()
+        """
+                .render()
+                .packagePage()
 
         val summary = page.data.content
         val classes = summary.data.classes.items(0)
@@ -194,9 +232,12 @@ internal class PackageDocumentableConverterTest(
 
     @Test
     fun `Package summary creates components for annotations`() {
-        val page = """
+        val page =
+            """
             |annotation class ImAnAnnotation
-        """.render().packagePage()
+        """
+                .render()
+                .packagePage()
 
         val summary = page.data.content
         val annotation = summary.data.annotations.item()
@@ -207,10 +248,13 @@ internal class PackageDocumentableConverterTest(
 
     @Test
     fun `Package summary creates components with sorted annotations`() {
-        val page = """
+        val page =
+            """
             |annotation class B
             |annotation class A
-        """.render().packagePage()
+        """
+                .render()
+                .packagePage()
 
         val summary = page.data.content
         val classes = summary.data.annotations.items(2)
@@ -221,9 +265,12 @@ internal class PackageDocumentableConverterTest(
 
     @Test
     fun `Package summary doesn't create components for type aliases`() {
-        val page = """
+        val page =
+            """
             |typealias ImATypeAlias = String
-        """.render().packagePage()
+        """
+                .render()
+                .packagePage()
 
         val summary = page.data.content
         val annotation = summary.data.typeAliases.item()
@@ -234,10 +281,13 @@ internal class PackageDocumentableConverterTest(
 
     @Test
     fun `Package summary creates components with sorted type aliases`() {
-        val page = """
+        val page =
+            """
             |typealias B = String
             |typealias A = String
-        """.render().packagePage()
+        """
+                .render()
+                .packagePage()
 
         val summary = page.data.content
         val classes = summary.data.typeAliases.items(2)
@@ -248,9 +298,12 @@ internal class PackageDocumentableConverterTest(
 
     @Test
     fun `Package summary creates components for top-level functions`() {
-        val page = """
+        val page =
+            """
             |fun foo()
-        """.render().packagePage()
+        """
+                .render()
+                .packagePage()
 
         val summary = page.data.content
         val topLevels = summary.data.topLevelFunctionsSummary
@@ -263,9 +316,12 @@ internal class PackageDocumentableConverterTest(
 
     @Test
     fun `Package summary creates synthetic classes for top-level functions in Java`() {
-        val page = """
+        val page =
+            """
             |fun foo()
-        """.render().packagePage()
+        """
+                .render()
+                .packagePage()
 
         val summary = page.data.content
         val classes = summary.data.classes.items()
@@ -275,18 +331,18 @@ internal class PackageDocumentableConverterTest(
             val className = classes.item().link().name
             assertThat(className).isEqualTo("TestKt")
         }
-        kotlinOnly {
-            assertThat(classes).hasSize(0)
-        }
+        kotlinOnly { assertThat(classes).hasSize(0) }
     }
 
     @Test
     fun `Synthetic classes for top-level functions use file JvmName appropriately`() {
-        val page = """
+        val page =
+            """
         |
         |fun foo()
         |
-        """.render(fileUseAnnotation = "@file:JvmName(\"PagingRx\")")
+        """
+                .render(fileUseAnnotation = "@file:JvmName(\"PagingRx\")")
 
         javaOnly {
             val classes = runBlocking {
@@ -311,10 +367,13 @@ internal class PackageDocumentableConverterTest(
 
     @Test
     fun `Package summary creates components with sorted top-level functions`() {
-        val page = """
+        val page =
+            """
             |fun b() = Unit
             |fun a() = Unit
-        """.render().packagePage()
+        """
+                .render()
+                .packagePage()
 
         val summary = page.data.content
         val topLevels = summary.data.topLevelFunctionsSummary.items(2)
@@ -325,9 +384,12 @@ internal class PackageDocumentableConverterTest(
 
     @Test
     fun `Package summary creates components for extension functions`() {
-        val page = """
+        val page =
+            """
             |fun String.foo()
-        """.render().packagePage()
+        """
+                .render()
+                .packagePage()
 
         val summary = page.data.content
         val topLevels = summary.data.topLevelFunctionsSummary
@@ -340,10 +402,13 @@ internal class PackageDocumentableConverterTest(
 
     @Test
     fun `Package summary creates components with sorted extension functions`() {
-        val page = """
+        val page =
+            """
             |fun String.b() = Unit
             |fun String.a() = Unit
-        """.render().packagePage()
+        """
+                .render()
+                .packagePage()
 
         val summary = page.data.content
         val extensions = summary.data.extensionFunctionsSummary.items(2)
@@ -354,14 +419,19 @@ internal class PackageDocumentableConverterTest(
 
     @Test
     fun `Companion objects are documented in Java but not Kotlin because they're inlined`() {
-        val packageSummary = """
+        val packageSummary =
+            """
             |class Foo {
             |    companion object FooCompanion
             |}
             |class Bar {
             |    companion object
             |}
-        """.render().packagePage().data.content
+        """
+                .render()
+                .packagePage()
+                .data
+                .content
 
         assertThat("FooCompanion" in packageSummary.data.classes.items().map { it.name() })
 
@@ -376,9 +446,10 @@ internal class PackageDocumentableConverterTest(
     companion object {
         @JvmStatic
         @Parameterized.Parameters(name = "{0}")
-        fun data() = listOf(
-            arrayOf(Language.JAVA),
-            arrayOf(Language.KOTLIN),
-        )
+        fun data() =
+            listOf(
+                arrayOf(Language.JAVA),
+                arrayOf(Language.KOTLIN),
+            )
     }
 }

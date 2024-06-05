@@ -18,10 +18,10 @@ package com.google.devsite.integration
 
 import com.google.devsite.renderer.converters.failOnMissingSamples
 import com.google.devsite.testing.IntegrationTestBase
+import java.io.File
 import org.junit.After
 import org.junit.Ignore
 import org.junit.Test
-import java.io.File
 
 /** Allows testing against lots of androidx sources, e.g. for profiling purposes. */
 class AndroidxTest : IntegrationTestBase() {
@@ -42,12 +42,13 @@ class AndroidxTest : IntegrationTestBase() {
         val base = getAndroidxPath()
         executionTest(
             testName = "partialAndroidx",
-            paths = listOf(
-                "$base/appcompat/",
-                "$base/fragment/",
-                "$base/leanback/",
-                "$base/media/",
-            ),
+            paths =
+                listOf(
+                    "$base/appcompat/",
+                    "$base/fragment/",
+                    "$base/leanback/",
+                    "$base/media/",
+                ),
             sampleLocations = listOf("$base/samples/", "$base/fragment/fragment-compose/samples"),
         )
     }
@@ -56,17 +57,18 @@ class AndroidxTest : IntegrationTestBase() {
     @Test
     fun `Run dackka against full androidx tip-of-tree`() {
         // some projects are not intended to be documented and have a large backlog of docs issues
-        val excludedPaths = mutableListOf(
-            "lint-checks",
-            "room-compiler",
-            "camera-camera2-pipe-integration",
-            "integration-tests", // Specifically paging
-            "watchface-samples-minimal-instances",
-            "watchface-samples-minimal-complications",
-            "watchface-samples-minimal-style",
-            "generator", // material-icons-generator
-            "appsearch-builtin-types",
-        )
+        val excludedPaths =
+            mutableListOf(
+                "lint-checks",
+                "room-compiler",
+                "camera-camera2-pipe-integration",
+                "integration-tests", // Specifically paging
+                "watchface-samples-minimal-instances",
+                "watchface-samples-minimal-complications",
+                "watchface-samples-minimal-style",
+                "generator", // material-icons-generator
+                "appsearch-builtin-types",
+            )
         crawlingExecTest("fullAndroidx", getAndroidxPath(), excludedPaths, maxFolders = 200)
     }
 
@@ -84,87 +86,86 @@ class AndroidxTest : IntegrationTestBase() {
             testName = "manyAndroidxPrebuilts",
             // A list of the first few source jars alphabetically, some of their dependencies, and
             // other projects chosen on as-available or as-useful-for-testing bases.
-            artifactNames = listOf(
-                "activity",
-                "activity-ktx",
-                "ads-identifier",
-                "ads-identifier-common",
-                "ads-identifier-provider",
-                "annotation",
-                "annotation-experimental",
-                // "annotation-experimental-lint", // com.android.tools.lint is not a dependency
-                "appcompat",
-                "appcompat-resources",
-                "appsearch",
-                "appsearch-ktx",
-                "appsearch-compiler",
-                // "appsearch-builtin-types", // still broken until the next release
-                "appsearch-debug-view",
-                "appsearch-platform-storage",
-                "appsearch-local-storage",
-                "core-common",
-                "core-runtime",
-                "core-testing",
-                "asynclayoutinflater",
-                "autofill",
-                "benchmark",
-                "benchmark-common",
-                "benchmark-junit4",
-                "benchmark-macro",
-                "benchmark-macro-junit4",
-                "benchmark-gradle-plugin",
-                // "biometric", // KMP project
-                // "biometric-ktx",
-                "browser",
-                "camera-camera2",
-                "camera-camera2-pipe",
-                "camera-camera2-pipe-testing",
-                "camera-core",
-                "camera-extensions",
-                "camera-lifecycle",
-                "camera-mlkit-vision",
-                "camera-extensions",
-                "camera-previewview",
-                "camera-video",
-                "camera-view",
-                "camera-viewfinder",
-                "app", // Part of Car; poorly named
-                "app-aaos",
-                "app-automotive",
-                "app-projected",
-                "app-testing",
-                // "car", // obsolete artifacts
-                // "car-cluster",
-                // "car-moderator",
-                "cardview",
-                // collection is KMP
-                // compose is KMP
+            artifactNames =
+                listOf(
+                    "activity",
+                    "activity-ktx",
+                    "ads-identifier",
+                    "ads-identifier-common",
+                    "ads-identifier-provider",
+                    "annotation",
+                    "annotation-experimental",
+                    // "annotation-experimental-lint", // com.android.tools.lint is not a dependency
+                    "appcompat",
+                    "appcompat-resources",
+                    "appsearch",
+                    "appsearch-ktx",
+                    "appsearch-compiler",
+                    // "appsearch-builtin-types", // still broken until the next release
+                    "appsearch-debug-view",
+                    "appsearch-platform-storage",
+                    "appsearch-local-storage",
+                    "core-common",
+                    "core-runtime",
+                    "core-testing",
+                    "asynclayoutinflater",
+                    "autofill",
+                    "benchmark",
+                    "benchmark-common",
+                    "benchmark-junit4",
+                    "benchmark-macro",
+                    "benchmark-macro-junit4",
+                    "benchmark-gradle-plugin",
+                    // "biometric", // KMP project
+                    // "biometric-ktx",
+                    "browser",
+                    "camera-camera2",
+                    "camera-camera2-pipe",
+                    "camera-camera2-pipe-testing",
+                    "camera-core",
+                    "camera-extensions",
+                    "camera-lifecycle",
+                    "camera-mlkit-vision",
+                    "camera-extensions",
+                    "camera-previewview",
+                    "camera-video",
+                    "camera-view",
+                    "camera-viewfinder",
+                    "app", // Part of Car; poorly named
+                    "app-aaos",
+                    "app-automotive",
+                    "app-projected",
+                    "app-testing",
+                    // "car", // obsolete artifacts
+                    // "car-cluster",
+                    // "car-moderator",
+                    "cardview",
+                    // collection is KMP
+                    // compose is KMP
 
-                "fragment",
-
-                "lifecycle-common",
-                "lifecycle-compiler",
-                "lifecycle-livedata",
-                "lifecycle-livedata-core",
-                "lifecycle-livedata-core-ktx",
-                "lifecycle-livedata-ktx",
-                "lifecycle-process",
-                "lifecycle-reactivestreams",
-                "lifecycle-reactivestreams-ktx",
-                "lifecycle-runtime",
-                "lifecycle-runtime-ktx",
-                "lifecycle-runtime-testing",
-                "lifecycle-service",
-                "lifecycle-viewmodel",
-                "lifecycle-viewmodel-ktx",
-                "lifecycle-viewmodel-savedstate",
-
-                "tracing",
-                "tracing-ktx",
-                "tracing-perfetto",
-                "tracing-perfetto-binary",
-                "tracing-perfetto-common",
-            ),
+                    "fragment",
+                    "lifecycle-common",
+                    "lifecycle-compiler",
+                    "lifecycle-livedata",
+                    "lifecycle-livedata-core",
+                    "lifecycle-livedata-core-ktx",
+                    "lifecycle-livedata-ktx",
+                    "lifecycle-process",
+                    "lifecycle-reactivestreams",
+                    "lifecycle-reactivestreams-ktx",
+                    "lifecycle-runtime",
+                    "lifecycle-runtime-ktx",
+                    "lifecycle-runtime-testing",
+                    "lifecycle-service",
+                    "lifecycle-viewmodel",
+                    "lifecycle-viewmodel-ktx",
+                    "lifecycle-viewmodel-savedstate",
+                    "tracing",
+                    "tracing-ktx",
+                    "tracing-perfetto",
+                    "tracing-perfetto-binary",
+                    "tracing-perfetto-common",
+                ),
         )
     }
 

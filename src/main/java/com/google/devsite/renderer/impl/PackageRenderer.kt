@@ -62,9 +62,7 @@ internal class PackageRenderer(
     suspend fun writeIndex(dPackage: DPackage) {
         val redirectUrl = pathProvider.forType(dPackage.name, PACKAGE_SUMMARY_NAME)
         val redirectComponent = DefaultRedirectPage(RedirectPage.Params(redirectUrl))
-        val index = createHTML().html {
-            redirectComponent.render(this)
-        }
+        val index = createHTML().html { redirectComponent.render(this) }
 
         // Multiple index files will clobber each other if this happens. We do this in some tests.
         if (pathProvider.forType(dPackage.name, DIR_INDEX_NAME) == pathProvider.rootIndex) {
@@ -80,34 +78,33 @@ internal class PackageRenderer(
     }
 
     suspend fun writePackageSummary(dPackage: DPackage) {
-        val converter = if (dPackage.isKotlinAndKMP()) {
-            KmpPackageConverter(
-                displayLanguage,
-                dPackage,
-                pathProvider,
-                docsHolder,
-                functionConverter,
-                propertyConverter,
-                javadocConverter,
-                paramConverter,
-                dPackage.getPlatforms(),
-            )
-        } else {
-            NonKmpPackageConverter(
-                displayLanguage,
-                dPackage,
-                pathProvider,
-                docsHolder,
-                functionConverter,
-                propertyConverter,
-                javadocConverter,
-                paramConverter,
-            )
-        }
+        val converter =
+            if (dPackage.isKotlinAndKMP()) {
+                KmpPackageConverter(
+                    displayLanguage,
+                    dPackage,
+                    pathProvider,
+                    docsHolder,
+                    functionConverter,
+                    propertyConverter,
+                    javadocConverter,
+                    paramConverter,
+                    dPackage.getPlatforms(),
+                )
+            } else {
+                NonKmpPackageConverter(
+                    displayLanguage,
+                    dPackage,
+                    pathProvider,
+                    docsHolder,
+                    functionConverter,
+                    propertyConverter,
+                    javadocConverter,
+                    paramConverter,
+                )
+            }
         val page = converter.summaryPage()
-        val packageSummary = createHTML().html {
-            page.render(this)
-        }
+        val packageSummary = createHTML().html { page.render(this) }
 
         outputWriter.write(
             pathProvider.forType(dPackage.name, PACKAGE_SUMMARY_NAME),
@@ -122,46 +119,49 @@ internal class PackageRenderer(
     ) {
         // Compose is "not kmp" but has expect/actuals; we need to deterministically use the expect
         // Because source jars are not KMP, we can't check `"common" in it.path`, so ban .***.kt
-        if (dClasslike.isExpectActual && !dPackage.isKMP() &&
-            dClasslike.sources.values.single().path.removeSuffix(".kt").contains(".")
-        ) { return }
+        if (
+            dClasslike.isExpectActual &&
+                !dPackage.isKMP() &&
+                dClasslike.sources.values.single().path.removeSuffix(".kt").contains(".")
+        ) {
+            return
+        }
         if (dClasslike.isSynthetic && displayLanguage == Language.KOTLIN) {
             return
         }
-        val converter = if (dPackage.isKotlinAndKMP()) {
-            KmpClasslikeConverter(
-                displayLanguage,
-                dClasslike,
-                pathProvider,
-                docsHolder,
-                functionConverter,
-                propertyConverter,
-                enumConverter,
-                javadocConverter,
-                paramConverter,
-                annotationConverter,
-                metadataConverter,
-                dPackage.getPlatforms(),
-            )
-        } else {
-            NonKmpClasslikeConverter(
-                displayLanguage,
-                dClasslike,
-                pathProvider,
-                docsHolder,
-                functionConverter,
-                propertyConverter,
-                enumConverter,
-                javadocConverter,
-                paramConverter,
-                annotationConverter,
-                metadataConverter,
-            )
-        }
+        val converter =
+            if (dPackage.isKotlinAndKMP()) {
+                KmpClasslikeConverter(
+                    displayLanguage,
+                    dClasslike,
+                    pathProvider,
+                    docsHolder,
+                    functionConverter,
+                    propertyConverter,
+                    enumConverter,
+                    javadocConverter,
+                    paramConverter,
+                    annotationConverter,
+                    metadataConverter,
+                    dPackage.getPlatforms(),
+                )
+            } else {
+                NonKmpClasslikeConverter(
+                    displayLanguage,
+                    dClasslike,
+                    pathProvider,
+                    docsHolder,
+                    functionConverter,
+                    propertyConverter,
+                    enumConverter,
+                    javadocConverter,
+                    paramConverter,
+                    annotationConverter,
+                    metadataConverter,
+                )
+            }
         val page = converter.classlike()
-        val classlike = createHTML().html {
-            page.render(this)
-        }
+        val classlike = createHTML().html { page.render(this) }
 
         outputWriter.write(
             pathProvider.forType(dClasslike.packageName(), dClasslike.name()),
@@ -172,8 +172,10 @@ internal class PackageRenderer(
 
     // Note: this cannot distinguish java-only, android-only, and non-KMP libraries.
     private fun DPackage.isKotlinAndKMP() = displayLanguage == Language.KOTLIN && isKMP()
+
     private fun DPackage.isKMP() =
         sourceSets.size > 1 || sourceSets.single().analysisPlatform != jvm
 }
+
 private fun DPackage.getPlatforms() =
     sourceSets.map { Platform.from(it.analysisPlatform) }.toSet().sorted()

@@ -7,9 +7,9 @@ import com.google.devsite.testing.defaultPluginsConfiguration
 import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.doc.DocumentationNode
+import org.jetbrains.dokka.model.doc.Throws as ThrowsTag
 import org.junit.Ignore
 import org.junit.Test
-import org.jetbrains.dokka.model.doc.Throws as ThrowsTag
 
 class DocTagsForCheckedExceptionsTest : BaseAbstractTest() {
     private val driCorrespondence: Correspondence<ThrowsTag, String> =
@@ -44,14 +44,19 @@ class DocTagsForCheckedExceptionsTest : BaseAbstractTest() {
                  */
                 public void tested() throws IOException, TimeoutException {}
             }
-            """.trimIndent(),
+            """
+                .trimIndent(),
             configuration,
             pluginOverrides = listOf(ConverterTestBase.NoopPlugin),
         ) {
             documentablesTransformationStage = { mod ->
-                val docs: DocumentationNode = (mod.packages.single().classlikes.single() as DClass)
-                    .functions.single()
-                    .documentation.values.single()
+                val docs: DocumentationNode =
+                    (mod.packages.single().classlikes.single() as DClass)
+                        .functions
+                        .single()
+                        .documentation
+                        .values
+                        .single()
 
                 assertThat(docs.children.filterIsInstance<ThrowsTag>())
                     .comparingElementsUsing(driCorrespondence)
@@ -75,14 +80,19 @@ class DocTagsForCheckedExceptionsTest : BaseAbstractTest() {
             public class UnderTest {
                 public void tested() throws IOException, TimeoutException {}
             }
-            """.trimIndent(),
+            """
+                .trimIndent(),
             configuration,
             pluginOverrides = listOf(ConverterTestBase.NoopPlugin),
         ) {
             documentablesTransformationStage = { mod ->
-                val docs: DocumentationNode = (mod.packages.single().classlikes.single() as DClass)
-                    .functions.single()
-                    .documentation.values.single()
+                val docs: DocumentationNode =
+                    (mod.packages.single().classlikes.single() as DClass)
+                        .functions
+                        .single()
+                        .documentation
+                        .values
+                        .single()
 
                 assertThat(docs.children.filterIsInstance<ThrowsTag>())
                     .comparingElementsUsing(driCorrespondence)
@@ -111,14 +121,19 @@ class DocTagsForCheckedExceptionsTest : BaseAbstractTest() {
                  */
                 public void tested() throws IOException, TimeoutException {}
             }
-            """.trimIndent(),
+            """
+                .trimIndent(),
             configuration,
             pluginOverrides = listOf(ConverterTestBase.NoopPlugin),
         ) {
             documentablesTransformationStage = { mod ->
-                val docs: DocumentationNode = (mod.packages.single().classlikes.single() as DClass)
-                    .functions.single()
-                    .documentation.values.single()
+                val docs: DocumentationNode =
+                    (mod.packages.single().classlikes.single() as DClass)
+                        .functions
+                        .single()
+                        .documentation
+                        .values
+                        .single()
 
                 assertThat(docs.children.filterIsInstance<ThrowsTag>())
                     .comparingElementsUsing(driCorrespondence)
@@ -149,14 +164,19 @@ class DocTagsForCheckedExceptionsTest : BaseAbstractTest() {
                  */
                 public void tested() throws IOException, TimeoutException {}
             }
-            """.trimIndent(),
+            """
+                .trimIndent(),
             configuration,
             pluginOverrides = listOf(ConverterTestBase.NoopPlugin),
         ) {
             documentablesTransformationStage = { mod ->
-                val docs: DocumentationNode = (mod.packages.single().classlikes.single() as DClass)
-                    .functions.single()
-                    .documentation.values.single()
+                val docs: DocumentationNode =
+                    (mod.packages.single().classlikes.single() as DClass)
+                        .functions
+                        .single()
+                        .documentation
+                        .values
+                        .single()
 
                 assertThat(docs.children.filterIsInstance<ThrowsTag>())
                     .comparingElementsUsing(driCorrespondence)
@@ -189,14 +209,19 @@ class DocTagsForCheckedExceptionsTest : BaseAbstractTest() {
             class Impl: Trait {
                 fun tested(): Unit = println(7)
             }
-            """.trimIndent(),
+            """
+                .trimIndent(),
             configuration,
             pluginOverrides = listOf(ConverterTestBase.NoopPlugin),
         ) {
             documentablesTransformationStage = { mod ->
-                val docs: DocumentationNode = (mod.packages.single().classlikes.single() as DClass)
-                    .functions.single()
-                    .documentation.values.single()
+                val docs: DocumentationNode =
+                    (mod.packages.single().classlikes.single() as DClass)
+                        .functions
+                        .single()
+                        .documentation
+                        .values
+                        .single()
 
                 assertThat(docs.children.filterIsInstance<ThrowsTag>())
                     .comparingElementsUsing(driCorrespondence)

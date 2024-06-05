@@ -27,45 +27,46 @@ import org.junit.Test
 class DefaultRelatedSymbolsTest {
     @Test
     fun `Empty related symbols renders correctly`() {
-        val component = DefaultRelatedSymbols(
-            Params(
-                directSubclasses = emptyList(),
-                directSummary = NoopSummaryList(show = false),
-                indirectSubclasses = emptyList(),
-                indirectSummary = NoopSummaryList(show = false),
-            ),
-        )
+        val component =
+            DefaultRelatedSymbols(
+                Params(
+                    directSubclasses = emptyList(),
+                    directSummary = NoopSummaryList(show = false),
+                    indirectSubclasses = emptyList(),
+                    indirectSummary = NoopSummaryList(show = false),
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div></div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Related symbols with direct subclasses renders correctly`() {
-        val component = DefaultRelatedSymbols(
-            Params(
-                directSubclasses = listOf(NoopLink("abc")),
-                directSummary = NoopSummaryList(),
-                indirectSubclasses = emptyList(),
-                indirectSummary = NoopSummaryList(show = false),
-            ),
-        )
+        val component =
+            DefaultRelatedSymbols(
+                Params(
+                    directSubclasses = listOf(NoopLink("abc")),
+                    directSummary = NoopSummaryList(),
+                    indirectSubclasses = emptyList(),
+                    indirectSummary = NoopSummaryList(show = false),
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
       <div class="showalways" id="subclasses-direct">abc</div>
@@ -75,28 +76,29 @@ class DefaultRelatedSymbolsTest {
     </div>
 </devsite-expandable>  </div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Related symbols with indirect subclasses renders correctly`() {
-        val component = DefaultRelatedSymbols(
-            Params(
-                directSubclasses = emptyList(),
-                directSummary = NoopSummaryList(show = false),
-                indirectSubclasses = listOf(NoopLink("abc")),
-                indirectSummary = NoopSummaryList(),
-            ),
-        )
+        val component =
+            DefaultRelatedSymbols(
+                Params(
+                    directSubclasses = emptyList(),
+                    directSummary = NoopSummaryList(show = false),
+                    indirectSubclasses = listOf(NoopLink("abc")),
+                    indirectSummary = NoopSummaryList(),
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known indirect subclasses
       <div class="showalways" id="subclasses-indirect">abc</div>
@@ -106,7 +108,8 @@ class DefaultRelatedSymbolsTest {
     </div>
 </devsite-expandable>  </div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 }

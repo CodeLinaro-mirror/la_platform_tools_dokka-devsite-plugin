@@ -27,13 +27,14 @@ internal interface SymbolSummary<T : SymbolSignature> : DescriptionComponent {
         val signature: T,
         val description: DescriptionComponent,
         val annotationComponents: List<AnnotationComponent>,
-    ) : DescriptionComponent.Params(
-        pathProvider = description.guarded?.data?.pathProvider,
-        components = description.guarded?.data?.components ?: emptyList(),
-        summary = description.guarded?.data?.summary ?: true,
-        deprecation = description.guarded?.data?.deprecation,
-        docsHolder = description.guarded?.data?.docsHolder,
-    )
+    ) :
+        DescriptionComponent.Params(
+            pathProvider = description.guarded?.data?.pathProvider,
+            components = description.guarded?.data?.components ?: emptyList(),
+            summary = description.guarded?.data?.summary ?: true,
+            deprecation = description.guarded?.data?.deprecation,
+            docsHolder = description.guarded?.data?.docsHolder,
+        )
 }
 
 // We can't directly access e.g. description.data.pathProvider, because attempting to throws for

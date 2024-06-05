@@ -43,11 +43,12 @@ internal interface LambdaTypeProjectionComponent : TypeProjectionComponent {
         // Generics on the return type
         override val generics: List<TypeProjectionComponent> = emptyList(),
         override val annotationComponents: List<AnnotationComponent> = emptyList(),
-    ) : TypeProjectionComponent.Params(
-        type = type,
-        nullability = nullability,
-        displayLanguage = displayLanguage,
-        generics = emptyList(),
-        annotationComponents = annotationComponents,
-    )
+    ) :
+        TypeProjectionComponent.Params(
+            type = type,
+            nullability = nullability,
+            displayLanguage = displayLanguage,
+            generics = emptyList(),
+            annotationComponents = annotationComponents,
+        )
 }

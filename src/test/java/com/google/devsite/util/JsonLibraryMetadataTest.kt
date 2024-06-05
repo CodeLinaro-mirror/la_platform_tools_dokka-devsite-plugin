@@ -17,17 +17,15 @@
 package com.google.devsite.util
 
 import com.google.common.truth.Truth.assertThat
+import java.io.FileNotFoundException
+import java.io.IOException
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
-import java.io.FileNotFoundException
-import java.io.IOException
 
 class JsonLibraryMetadataTest {
 
-    @JvmField
-    @Rule
-    val folder = TemporaryFolder()
+    @JvmField @Rule val folder = TemporaryFolder()
 
     @Test
     fun `getMetadataFromFile with empty string filename`() {
@@ -43,7 +41,8 @@ class JsonLibraryMetadataTest {
 
     @Test(expected = IOException::class)
     fun `getMetadataFromFile with unparseable json file throws IOException`() {
-        val json = """
+        val json =
+            """
 [
   {
     "a": "b"
@@ -52,7 +51,8 @@ class JsonLibraryMetadataTest {
     "c": "d"
   }
 ]
-        """.trimIndent()
+        """
+                .trimIndent()
 
         val file = folder.newFile("Unparseable.json")
         file.writeText(json)
@@ -61,7 +61,8 @@ class JsonLibraryMetadataTest {
 
     @Test
     fun `getMetadataFromFile with valid json file`() {
-        val json = """
+        val json =
+            """
 [
   {
     "groupId": "androidx.a",
@@ -82,7 +83,8 @@ class JsonLibraryMetadataTest {
     "jarContents": ["a/b/c.kt"]
   }
 ]
-        """.trimIndent()
+        """
+                .trimIndent()
 
         val file = folder.newFile("LibraryMetadata.json")
         file.writeText(json)
@@ -99,7 +101,8 @@ class JsonLibraryMetadataTest {
 
     @Test
     fun `getMetadataFromFile with valid json file with extra field`() {
-        val json = """
+        val json =
+            """
 [
   {
     "groupId": "androidx.a",
@@ -118,7 +121,8 @@ class JsonLibraryMetadataTest {
     "extrafield": "bar"
   }
 ]
-        """.trimIndent()
+        """
+                .trimIndent()
 
         val file = folder.newFile("LibraryMetadata.json")
         file.writeText(json)
@@ -129,7 +133,8 @@ class JsonLibraryMetadataTest {
 
     @Test
     fun `getMetadataFromFile with json file with blank groupId`() {
-        val json = """
+        val json =
+            """
 [
   {
     "groupId": "androidx.a",
@@ -144,7 +149,8 @@ class JsonLibraryMetadataTest {
     "jarContents": ["b/unused.kt"]
   }
 ]
-        """.trimIndent()
+        """
+                .trimIndent()
 
         val file = folder.newFile("LibraryMetadata.json")
         file.writeText(json)
@@ -156,7 +162,8 @@ class JsonLibraryMetadataTest {
 
     @Test
     fun `getMetadataFromFile with json file with blank artifactId`() {
-        val json = """
+        val json =
+            """
 [
   {
     "groupId": "androidx.a",
@@ -171,7 +178,8 @@ class JsonLibraryMetadataTest {
     "jarContents": ["b/unused.kt"]
   }
 ]
-        """.trimIndent()
+        """
+                .trimIndent()
 
         val file = folder.newFile("LibraryMetadata.json")
         file.writeText(json)
@@ -183,7 +191,8 @@ class JsonLibraryMetadataTest {
 
     @Test
     fun `getMetadataFromFile with json file with blank groupId and artifactId`() {
-        val json = """
+        val json =
+            """
 [
   {
     "groupId": "androidx.a",
@@ -198,7 +207,8 @@ class JsonLibraryMetadataTest {
     "jarContents": ["b/unused.kt"]
   }
 ]
-        """.trimIndent()
+        """
+                .trimIndent()
 
         val file = folder.newFile("LibraryMetadata.json")
         file.writeText(json)

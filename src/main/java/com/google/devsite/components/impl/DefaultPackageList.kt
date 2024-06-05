@@ -22,9 +22,10 @@ import com.google.devsite.components.pages.PackageList
 internal data class DefaultPackageList(
     override val data: PackageList.Params,
 ) : PackageList {
-    override fun render(into: StringBuilder) = into.run {
-        for (packageName in data.packages) {
-            appendLine(packageName)
+    override fun render(into: StringBuilder) =
+        into.run {
+            for (packageName in data.packages) {
+                appendLine(packageName)
+            }
         }
-    }
 }

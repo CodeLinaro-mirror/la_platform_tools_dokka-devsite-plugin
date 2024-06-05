@@ -29,31 +29,31 @@ class DefaultSummaryListTest {
     fun `Empty summary renders correctly`() {
         val component = DefaultSummaryList(Params(items = emptyList()))
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div></div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Simple summary renders correctly`() {
-        val component = DefaultSummaryList(
-            Params(items = listOf(NoopTableRowTypeSummaryItem, NoopTableRowTypeSummaryItem)),
-        )
+        val component =
+            DefaultSummaryList(
+                Params(items = listOf(NoopTableRowTypeSummaryItem, NoopTableRowTypeSummaryItem)),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <div class="devsite-table-wrapper">
     <table class="responsive">
@@ -68,8 +68,9 @@ class DefaultSummaryListTest {
     </table>
   </div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
@@ -77,13 +78,12 @@ class DefaultSummaryListTest {
         val component =
             DefaultSummaryList(Params(header = NoopTableTitle, listOf(NoopTableRowTypeSummaryItem)))
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <div class="devsite-table-wrapper">
     <table class="responsive">
@@ -100,7 +100,8 @@ class DefaultSummaryListTest {
     </table>
   </div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 }

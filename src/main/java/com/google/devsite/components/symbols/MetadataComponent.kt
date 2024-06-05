@@ -31,11 +31,12 @@ internal interface MetadataComponent : ContextFreeComponent {
         val versionMetadata: VersionMetadataComponent?,
     ) {
         internal val sourceLink: Link?
-            get() = sourceLinkUrl?.let {
-                DefaultLink(Link.Params(name = "View Source", url = it, externalLink = true))
-            }
+            get() =
+                sourceLinkUrl?.let {
+                    DefaultLink(Link.Params(name = "View Source", url = it, externalLink = true))
+                }
 
-        internal val isEmpty: Boolean = libraryMetadata == null && sourceLinkUrl == null &&
-            versionMetadata == null
+        internal val isEmpty: Boolean =
+            libraryMetadata == null && sourceLinkUrl == null && versionMetadata == null
     }
 }

@@ -31,32 +31,29 @@ import kotlinx.html.unsafe
 internal data class DefaultRedirectPage(
     override val data: RedirectPage.Params,
 ) : RedirectPage {
-    override fun render(into: HTML) = into.run {
-        head {
-            meta(charset = "utf-8")
-            meta(content = "0; url=${data.url}") {
-                httpEquiv = "refresh"
-            }
-            meta(name = "robots", content = "noindex")
-            link(rel = "canonical", href = data.url)
+    override fun render(into: HTML) =
+        into.run {
+            head {
+                meta(charset = "utf-8")
+                meta(content = "0; url=${data.url}") { httpEquiv = "refresh" }
+                meta(name = "robots", content = "noindex")
+                link(rel = "canonical", href = data.url)
 
-            title {
-                +"Redirecting"
-                unsafe { +"&hellip;" }
+                title {
+                    +"Redirecting"
+                    unsafe { +"&hellip;" }
+                }
+            }
+
+            body {
+                h1 {
+                    +"Redirecting"
+                    unsafe { +"&hellip;" }
+                }
+
+                a(data.url) { +"Click here if you are not redirected." }
             }
         }
-
-        body {
-            h1 {
-                +"Redirecting"
-                unsafe { +"&hellip;" }
-            }
-
-            a(data.url) {
-                +"Click here if you are not redirected."
-            }
-        }
-    }
 
     override fun toString() = "Redirect page to ${data.url}"
 }

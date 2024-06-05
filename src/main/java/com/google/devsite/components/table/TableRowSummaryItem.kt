@@ -31,7 +31,7 @@ internal interface TableRowSummaryItem<T : ContextFreeComponent?, V : ContextFre
     SummaryItem {
     override val data: Params<T, V>
 
-    open class Params<T : ContextFreeComponent?, V : ContextFreeComponent> (
+    open class Params<T : ContextFreeComponent?, V : ContextFreeComponent>(
         open val title: T,
         override val description: V,
     ) : SummaryItem.Params {
@@ -51,14 +51,15 @@ internal interface TableRowSummaryItem<T : ContextFreeComponent?, V : ContextFre
         }
     }
 
-    override fun layout(into: DIV, contents: TABLE.() -> Unit) = into.run {
-        // This format works fine for both 1-column and 2-column
-        table("responsive") {
-            colGroup {
-                COL(attributesMapOf("width", "40%"), consumer).visit {}
-                col() // Last col should be floating-width. (This method can't set "width".)
+    override fun layout(into: DIV, contents: TABLE.() -> Unit) =
+        into.run {
+            // This format works fine for both 1-column and 2-column
+            table("responsive") {
+                colGroup {
+                    COL(attributesMapOf("width", "40%"), consumer).visit {}
+                    col() // Last col should be floating-width. (This method can't set "width".)
+                }
+                contents()
             }
-            contents()
         }
-    }
 }

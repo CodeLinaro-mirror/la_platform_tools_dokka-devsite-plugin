@@ -44,16 +44,13 @@ internal fun Documentable.modifiers(
     return result.filterNotNull().filter { it.isNotEmpty() }
 }
 
-/**
- *  Returns a list of modifiers stored in the AdditionalModifiers extra field
- *  i.e. VarArg
- */
+/** Returns a list of modifiers stored in the AdditionalModifiers extra field i.e. VarArg */
 internal fun <T : WithExtraProperties<*>> T.getExtraModifiers(
     sourceSet: DokkaConfiguration.DokkaSourceSet,
-) = extra.allOfType<AdditionalModifiers>().flatMap { modifiers ->
-    modifiers.content[sourceSet]?.map { it.name }
-        ?.filter { it.isNotEmpty() } ?: emptyList()
-}
+) =
+    extra.allOfType<AdditionalModifiers>().flatMap { modifiers ->
+        modifiers.content[sourceSet]?.map { it.name }?.filter { it.isNotEmpty() } ?: emptyList()
+    }
 
 /** @return true if the modifiers represent a constant symbol, false otherwise */
 internal fun DProperty.isConstant(
@@ -68,6 +65,7 @@ internal fun DProperty.isConstant(
 internal data class Modifiers(var baselist: List<String>) : ArrayList<String>(baselist) {
     constructor(vararg items: String) : this(items.asList())
 }
+
 internal val EmptyModifiers = Modifiers()
 
 /** Returns a filtered and re-written list of modifiers. */
@@ -136,8 +134,11 @@ internal fun List<String>.modifiersFor(
             modifiers.remove("data")
         }
         Language.KOTLIN -> {
-            if ("static" in modifiers && "final" in modifiers &&
-                hints.isProperty && hints.isFromJava
+            if (
+                "static" in modifiers &&
+                    "final" in modifiers &&
+                    hints.isProperty &&
+                    hints.isFromJava
             ) {
                 modifiers.remove("static")
                 modifiers.remove("final")
@@ -176,25 +177,49 @@ internal fun List<String>.modifiersFor(
 }
 
 /**
- * Kotlin modifier order
- * (from https://kotlinlang.org/docs/reference/coding-conventions.html#modifiers)
+ * Kotlin modifier order (from
+ * https://kotlinlang.org/docs/reference/coding-conventions.html#modifiers)
  */
-val modifierOrder = listOf(
-    // visibility (one of)
-    "public", "protected", "private", "internal",
-    // Multi-platform (one of)
-    "expect", "actual",
-    // Containing Scope (one of)
-    "static", "java-static",
-    // Extensibility (one of)
-    "final", "open", "abstract", "sealed", "const",
-    // Other (could be more than one)
-    "external", "override", "lateinit", "tailrec", "vararg", "suspend", "inner",
-    // Types (one of)
-    "enum", "annotation", "fun",
-    // More (could be more than one)
-    "companion", "inline", "infix", "operator", "data", "noinline", "crossinline",
-)
+val modifierOrder =
+    listOf(
+        // visibility (one of)
+        "public",
+        "protected",
+        "private",
+        "internal",
+        // Multi-platform (one of)
+        "expect",
+        "actual",
+        // Containing Scope (one of)
+        "static",
+        "java-static",
+        // Extensibility (one of)
+        "final",
+        "open",
+        "abstract",
+        "sealed",
+        "const",
+        // Other (could be more than one)
+        "external",
+        "override",
+        "lateinit",
+        "tailrec",
+        "vararg",
+        "suspend",
+        "inner",
+        // Types (one of)
+        "enum",
+        "annotation",
+        "fun",
+        // More (could be more than one)
+        "companion",
+        "inline",
+        "infix",
+        "operator",
+        "data",
+        "noinline",
+        "crossinline",
+    )
 
 /**
  * Provides modifier hints for what should be shown in the documentation.
@@ -202,7 +227,6 @@ val modifierOrder = listOf(
  * Note: this is an imperfect approximation that won't be correct in all cases, but Dokka doesn't
  * give us a better solution without replicating compiler functionality. The crux of the problem is
  * that Dokka always includes modifiers even if they weren't specified in the code. Example:
- *
  * ```
  * interface Foo { fun bar() }
  * ```
@@ -211,7 +235,6 @@ val modifierOrder = listOf(
  * the compiler for developers. These hints give us a way of saying "look, developers will know this
  * modifier is implicit." That said, we can only go so far without replicating too much compiler
  * functionality. For example:
- *
  * ```
  * abstract Foo { protected abstract fun foo() }
  * class Bar { public override fun foo() }
@@ -235,7 +258,12 @@ internal data class ModifierHints(
     val isConstructor: Boolean = false,
     val inCompanion: Boolean = false,
 ) {
-    val inInterface get() = containingType == DInterface::class.java
-    val inPackage get() = containingType == DPackage::class.java
-    val isProperty get() = type == DProperty::class.java
+    val inInterface
+        get() = containingType == DInterface::class.java
+
+    val inPackage
+        get() = containingType == DPackage::class.java
+
+    val isProperty
+        get() = type == DProperty::class.java
 }

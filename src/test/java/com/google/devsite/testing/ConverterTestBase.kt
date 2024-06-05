@@ -50,6 +50,10 @@ import com.google.devsite.renderer.impl.paths.ExternalDokkaLocationProvider
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import com.google.devsite.util.ClassVersionMetadata
 import com.google.devsite.util.LibraryMetadata
+import java.io.File
+import java.net.URL
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.CoreExtensions
 import org.jetbrains.dokka.DokkaConfiguration
@@ -74,43 +78,47 @@ import org.jetbrains.dokka.renderers.Renderer
 import org.jetbrains.dokka.utilities.DokkaConsoleLogger
 import org.jetbrains.dokka.utilities.LoggingLevel
 import org.junit.Before
-import java.io.File
-import java.net.URL
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
 internal abstract class ConverterTestBase(
     private val displayLanguage: Language = Language.JAVA,
 ) : BaseAbstractTest() {
-    @Before fun setUp() { isRunningInDackkasTests = true }
+    @Before
+    fun setUp() {
+        isRunningInDackkasTests = true
+    }
 
     protected fun List<String>.render(): DModule = testWithRootPageNode(this)
 
     protected fun String.render(
         java: Boolean = false,
         fileUseAnnotation: String = "",
-    ): DModule = if (java) {
-        testJavaWithRootPageNode(trimMargin())
-    } else {
-        testKotlinWithRootPageNode(trimMargin(), fileUseAnnotation)
-    }
+    ): DModule =
+        if (java) {
+            testJavaWithRootPageNode(trimMargin())
+        } else {
+            testKotlinWithRootPageNode(trimMargin(), fileUseAnnotation)
+        }
 
     protected fun String.renderJava(imports: List<String> = emptyList()) =
         testJavaWithRootPageNode(trimMargin(), imports)
 
-    protected fun DModule.classlike(name: String? = null) = name?.let { explicitClasslike(it) }
-        ?: packages.single().classlikes.firstOrNull { it.name !in listOf("Nullable", "NonNull") }
+    protected fun DModule.classlike(name: String? = null) =
+        name?.let { explicitClasslike(it) }
+            ?: packages.single().classlikes.firstOrNull {
+                it.name !in listOf("Nullable", "NonNull")
+            }
 
     protected fun DModule.explicitClasslike(name: String) =
         this.explicitClasslikes(name).singleOrNull() ?: throw RuntimeException()
 
     protected fun DModule.explicitClasslikes(name: String): List<DClasslike> {
-        val normalClasses = packages.flatMap { it.classlikes }
-            .mapNotNull { it.explicitSubClasslike(name) }
+        val normalClasses =
+            packages.flatMap { it.classlikes }.mapNotNull { it.explicitSubClasslike(name) }
         val converterHolder = ConverterHolder(this@ConverterTestBase, this)
-        val synthetics = packages.flatMap {
-            converterHolder.holder.computeSyntheticClasses(it).filter { it.name == name }
-        }
+        val synthetics =
+            packages.flatMap {
+                converterHolder.holder.computeSyntheticClasses(it).filter { it.name == name }
+            }
         return normalClasses + synthetics
     }
 
@@ -127,8 +135,9 @@ internal abstract class ConverterTestBase(
 
     protected fun DModule.constructor() = constructors().single()
 
-    protected fun DModule.constructors() = (classlike() as? WithConstructors)?.constructors
-        ?.ifEmpty { null } ?: (classlike()?.classlikes?.single() as WithConstructors).constructors
+    protected fun DModule.constructors() =
+        (classlike() as? WithConstructors)?.constructors?.ifEmpty { null }
+            ?: (classlike()?.classlikes?.single() as WithConstructors).constructors
 
     protected fun DModule.functions() =
         packages.single().functions.ifEmpty { null }
@@ -147,8 +156,7 @@ internal abstract class ConverterTestBase(
             ?: classlikes.flatMap { it.properties }.singleOrNull()
 
     protected fun DModule.properties() =
-        packages.single().properties.ifEmpty { null }
-            ?: classlike()?.properties
+        packages.single().properties.ifEmpty { null } ?: classlike()?.properties
 
     protected fun assertPath(actual: String, expected: String, prefix: String = "") =
         when (displayLanguage) {
@@ -197,28 +205,36 @@ internal abstract class ConverterTestBase(
         }
     }
 
-    private val externalLinks = mapOf(
-        "coroutines" to "https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core",
-        "android" to "https://developer.android.com/reference",
-        "guava" to "https://guava.dev/releases/18.0/api/docs/package-list",
-        "kotlin" to "https://kotlinlang.org/api/latest/jvm/stdlib/",
-    ).map {
-        ExternalDocumentationLink(
-            url = URL(it.value),
-            packageListUrl = File("testData").toPath()
-                .resolve("package-lists/${it.key}/package-list").toUri().toURL(),
-        )
-    }
+    private val externalLinks =
+        mapOf(
+                "coroutines" to
+                    "https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core",
+                "android" to "https://developer.android.com/reference",
+                "guava" to "https://guava.dev/releases/18.0/api/docs/package-list",
+                "kotlin" to "https://kotlinlang.org/api/latest/jvm/stdlib/",
+            )
+            .map {
+                ExternalDocumentationLink(
+                    url = URL(it.value),
+                    packageListUrl =
+                        File("testData")
+                            .toPath()
+                            .resolve("package-lists/${it.key}/package-list")
+                            .toUri()
+                            .toURL(),
+                )
+            }
     private val configuration = dokkaConfiguration {
         sourceSets {
             sourceSet {
                 sourceRoots = listOf("src/main")
                 classpath = listOfNotNull(jvmStdlibPath, commonStdlibPath)
                 externalDocumentationLinks = externalLinks
-                documentedVisibilities = setOf(
-                    DokkaConfiguration.Visibility.PUBLIC,
-                    DokkaConfiguration.Visibility.PROTECTED,
-                )
+                documentedVisibilities =
+                    setOf(
+                        DokkaConfiguration.Visibility.PUBLIC,
+                        DokkaConfiguration.Visibility.PROTECTED,
+                    )
             }
         }
         offlineMode = true
@@ -226,17 +242,21 @@ internal abstract class ConverterTestBase(
     }
     private val dokkaGenerator =
         DokkaGenerator(configuration, DokkaConsoleLogger(LoggingLevel.WARN))
-    private val context = dokkaGenerator.initializePlugins(
-        configuration,
-        DokkaConsoleLogger(LoggingLevel.WARN),
-        emptyList(),
-    )
+    private val context =
+        dokkaGenerator.initializePlugins(
+            configuration,
+            DokkaConsoleLogger(LoggingLevel.WARN),
+            emptyList(),
+        )
+
     private class FakeRootPageNode(
         override val children: List<PageNode> = emptyList(),
         override val name: String = "FAKE",
         forceTopLevelName: Boolean = false,
     ) : RootPageNode(forceTopLevelName) {
-        override fun modified(name: String, children: List<PageNode>): RootPageNode { TODO() }
+        override fun modified(name: String, children: List<PageNode>): RootPageNode {
+            TODO()
+        }
     }
 
     private val mockRootPageNode: RootPageNode = FakeRootPageNode()
@@ -349,11 +369,20 @@ internal abstract class ConverterTestBase(
         val rootDocumentableConverter by lazy {
             RootDocumentableConverter(testClass.displayLanguage, provider, holder, javadocConverter)
         }
+
         fun NonKmpClasslikeConverter(classlike: DClasslike): NonKmpClasslikeConverter =
             NonKmpClasslikeConverter(
-                testClass.displayLanguage, classlike, provider, holder, functionConverter,
-                propertyConverter, enumConverter, javadocConverter, paramConverter,
-                annotationConverter, metadataConverter,
+                testClass.displayLanguage,
+                classlike,
+                provider,
+                holder,
+                functionConverter,
+                propertyConverter,
+                enumConverter,
+                javadocConverter,
+                paramConverter,
+                annotationConverter,
+                metadataConverter,
             )
     }
 
@@ -376,24 +405,27 @@ internal abstract class ConverterTestBase(
     protected fun String.renderWithoutLanguageHeader() = testWithRootPageNode(listOf(trimMargin()))
 
     protected fun kotlinHeader(name: String = "Test", fileAnnotations: List<String> = emptyList()) =
-        (
-            "|/src/main/kotlin/androidx/example/$name.kt\n" +
+        ("|/src/main/kotlin/androidx/example/$name.kt\n" +
                 fileAnnotations.joinMaybePrefix(postfix = "\n", separator = "\n") +
-                "|package androidx.example"
-            ).trimIndent() + "\n"
+                "|package androidx.example")
+            .trimIndent() + "\n"
 
     private fun testKotlinWithRootPageNode(sourceCode: String, fileUseAnnotation: String): DModule {
         val header = kotlinHeader(fileAnnotations = listOf(fileUseAnnotation))
         return testWithRootPageNode(listOf(header + "|" + sourceCode.trimIndent()))
     }
 
-    protected fun javaHeader(name: String = "Test") = """
+    protected fun javaHeader(name: String = "Test") =
+        """
         |/src/main/java/androidx/example/$name.java
         |package androidx.example;
-    """.trimIndent() + "\n"
+    """
+            .trimIndent() + "\n"
 
     /** Java does not support file-level annotations */
-    protected fun javaFullHeader(name: String = "Test", imports: String = "") = javaHeader(name) + """
+    protected fun javaFullHeader(name: String = "Test", imports: String = "") =
+        javaHeader(name) +
+            """
             $imports
             |import java.lang.annotation.Target;
             |import static java.lang.annotation.ElementType.*;
@@ -406,7 +438,8 @@ internal abstract class ConverterTestBase(
             |public @interface NonNull {
             |}
             |public class Test {
-    """.trimIndent()
+    """
+                .trimIndent()
 
     private fun testJavaWithRootPageNode(
         sourceCode: String,
@@ -434,7 +467,8 @@ internal abstract class ConverterTestBase(
 
     protected fun DModule.packagePage(): DevsitePage<PackageSummary> = runBlocking {
         ConverterHolder(this@ConverterTestBase, this@packagePage)
-            .nonKmpPackageConverter.summaryPage()
+            .nonKmpPackageConverter
+            .summaryPage()
     }
 
     private fun DModule.functionConverter() =
@@ -485,11 +519,12 @@ internal abstract class ConverterTestBase(
         nullability: Nullability = Nullability.DONT_CARE,
         hiddenAnnotations: Set<String> = emptySet(),
     ): List<AnnotationComponent> {
-        val converterHolder = ConverterHolder(
-            testClass = this@ConverterTestBase,
-            module = this,
-            hiddenAnnotations = hiddenAnnotations,
-        )
+        val converterHolder =
+            ConverterHolder(
+                testClass = this@ConverterTestBase,
+                module = this,
+                hiddenAnnotations = hiddenAnnotations,
+            )
         return converterHolder.annotationConverter.annotationComponents(annotations, nullability)
     }
 

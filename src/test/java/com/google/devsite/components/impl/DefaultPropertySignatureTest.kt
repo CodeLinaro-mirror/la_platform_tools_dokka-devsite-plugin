@@ -27,42 +27,44 @@ import org.junit.Test
 class DefaultPropertySignatureTest {
     @Test
     fun `Signature with no params renders correctly`() {
-        val component = DefaultPropertySignature(
-            Params(
-                name = NoopLink("foo"),
-            ),
-        )
+        val component =
+            DefaultPropertySignature(
+                Params(
+                    name = NoopLink("foo"),
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>foo</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Signature with receiver renders correctly`() {
-        val component = DefaultPropertySignature(
-            Params(
-                name = NoopLink("foo"),
-                receiver = NoopParameterComponent("String"),
-            ),
-        )
+        val component =
+            DefaultPropertySignature(
+                Params(
+                    name = NoopLink("foo"),
+                    receiver = NoopParameterComponent("String"),
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>String.foo</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 }

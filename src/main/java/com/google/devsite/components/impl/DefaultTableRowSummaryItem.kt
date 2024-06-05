@@ -26,21 +26,14 @@ import kotlinx.html.td
 internal data class DefaultTableRowSummaryItem<
     T : ContextFreeComponent?,
     V : ContextFreeComponent,
-    > (
+>(
     override val data: TableRowSummaryItem.Params<T, V>,
 ) : TableRowSummaryItem<T, V> {
-    override fun render(into: TR) = into.run {
-        data.title?.let { title ->
-            td {
-                code {
-                    title.render(this)
-                }
-            }
+    override fun render(into: TR) =
+        into.run {
+            data.title?.let { title -> td { code { title.render(this) } } }
+            td { data.description.render(this) }
         }
-        td {
-            data.description.render(this)
-        }
-    }
 
     override fun toString() = (data.title?.let { "$it: " } ?: "") + data.description.toString()
 }

@@ -66,6 +66,7 @@ import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import com.google.devsite.renderer.not
 import com.google.devsite.strictSingleOrNull
+import java.util.concurrent.ConcurrentHashMap
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import org.jetbrains.dokka.DokkaConfiguration.DokkaSourceSet
@@ -94,7 +95,6 @@ import org.jetbrains.dokka.model.WithSupertypes
 import org.jetbrains.dokka.model.properties.PropertyContainer
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.jetbrains.dokka.model.toAdditionalModifiers
-import java.util.concurrent.ConcurrentHashMap
 
 /** Converts documentable class-likes into the classlike component. */
 internal abstract class ClasslikeDocumentableConverter(
@@ -128,27 +128,29 @@ internal abstract class ClasslikeDocumentableConverter(
     suspend fun classlike(): DevsitePage<Classlike> = coroutineScope {
         val (unsortedCompanionFunctions, unsortedCompanionProperties) =
             classlike.companionFunctionsAndProperties()
-        val companionFunctions = unsortedCompanionFunctions
-            .sortedWith(functionSignatureComparator)
-        val companionProperties = unsortedCompanionProperties
-            .sortedWith(simpleDocumentableComparator)
+        val companionFunctions = unsortedCompanionFunctions.sortedWith(functionSignatureComparator)
+        val companionProperties =
+            unsortedCompanionProperties.sortedWith(simpleDocumentableComparator)
 
         val (initialFunctions, initialProperties) = classlike.nonInheritedTypes()
         val inheritedAll = classlike.inheritedTypes(classlike.supertypesForDisplayLanguage())
 
-        val declaredFunctions = computeDeclaredFunctions(initialFunctions, companionFunctions)
-            .sortedWith(functionSignatureComparator)
-        val declaredProperties = computeDeclaredProperties(initialProperties, companionProperties)
-            .sortedWith(simpleDocumentableComparator)
+        val declaredFunctions =
+            computeDeclaredFunctions(initialFunctions, companionFunctions)
+                .sortedWith(functionSignatureComparator)
+        val declaredProperties =
+            computeDeclaredProperties(initialProperties, companionProperties)
+                .sortedWith(simpleDocumentableComparator)
 
-        val enumValues = (classlike as? DEnum)?.entries.orEmpty()
-            .sortedWith(simpleDocumentableComparator)
+        val enumValues =
+            (classlike as? DEnum)?.entries.orEmpty().sortedWith(simpleDocumentableComparator)
 
-        val allConstructors = (classlike as? WithConstructors)?.constructors.orEmpty()
-            .sortedWith(functionSignatureComparator)
-        val enumValuesSummary = async {
-            enumValuesToSummary(enumValuesTitle(), enumValues)
-        }
+        val allConstructors =
+            (classlike as? WithConstructors)
+                ?.constructors
+                .orEmpty()
+                .sortedWith(functionSignatureComparator)
+        val enumValuesSummary = async { enumValuesToSummary(enumValuesTitle(), enumValues) }
         val nestedTypesSummary = async {
             nestedTypesToSummary(
                 // These are filtered for not-shown classlikes when accessed
@@ -199,47 +201,55 @@ internal abstract class ClasslikeDocumentableConverter(
             )
         }
         val publicCompanionFunctionsSummary = async {
-            emptyIfJava() ?: functionsToSummary(
-                publicCompanionFunctionsTitle(),
-                companionFunctions.filter(::isPublic),
-            )
+            emptyIfJava()
+                ?: functionsToSummary(
+                    publicCompanionFunctionsTitle(),
+                    companionFunctions.filter(::isPublic),
+                )
         }
         val protectedCompanionFunctionsSummary = async {
-            emptyIfJava() ?: functionsToSummary(
-                protectedCompanionFunctionsTitle(),
-                companionFunctions.filter(::isProtected),
-            )
+            emptyIfJava()
+                ?: functionsToSummary(
+                    protectedCompanionFunctionsTitle(),
+                    companionFunctions.filter(::isProtected),
+                )
         }
         val publicCompanionPropertiesSummary = async {
-            emptyIfJava() ?: propertiesToSummary(
-                publicCompanionPropertiesTitle(),
-                companionProperties.filter(::isPublicNonConst),
-            )
+            emptyIfJava()
+                ?: propertiesToSummary(
+                    publicCompanionPropertiesTitle(),
+                    companionProperties.filter(::isPublicNonConst),
+                )
         }
         val protectedCompanionPropertiesSummary = async {
-            emptyIfJava() ?: propertiesToSummary(
-                protectedCompanionPropertiesTitle(),
-                companionProperties.filter(::isProtectedNonConst),
-            )
+            emptyIfJava()
+                ?: propertiesToSummary(
+                    protectedCompanionPropertiesTitle(),
+                    companionProperties.filter(::isProtectedNonConst),
+                )
         }
 
-        val enumDetails = (classlike as? DEnum)?.let {
-            async { enumValuesToDetail(it, enumValues) }
+        val enumDetails =
+            (classlike as? DEnum)?.let { async { enumValuesToDetail(it, enumValues) } }
+        val constantsDetails = async { propertiesToDetail(declaredProperties.constants()) }
+        val publicPropertiesDetails = async {
+            propertiesToDetail(declaredProperties.filter(::isPublicNonConst))
         }
-        val constantsDetails =
-            async { propertiesToDetail(declaredProperties.constants()) }
-        val publicPropertiesDetails =
-            async { propertiesToDetail(declaredProperties.filter(::isPublicNonConst)) }
-        val protectedPropertiesDetails =
-            async { propertiesToDetail(declaredProperties.filter(::isProtectedNonConst)) }
-        val publicConstructorsDetails =
-            async { constructorsToDetail(allConstructors.filter(::isPublic)) }
-        val protectedConstructorsDetails =
-            async { constructorsToDetail(allConstructors.filter(::isProtected)) }
-        val publicFunctionsDetails =
-            async { functionsToDetail(declaredFunctions.filter(::isPublic)) }
-        val protectedFunctionsDetails =
-            async { functionsToDetail(declaredFunctions.filter(::isProtected)) }
+        val protectedPropertiesDetails = async {
+            propertiesToDetail(declaredProperties.filter(::isProtectedNonConst))
+        }
+        val publicConstructorsDetails = async {
+            constructorsToDetail(allConstructors.filter(::isPublic))
+        }
+        val protectedConstructorsDetails = async {
+            constructorsToDetail(allConstructors.filter(::isProtected))
+        }
+        val publicFunctionsDetails = async {
+            functionsToDetail(declaredFunctions.filter(::isPublic))
+        }
+        val protectedFunctionsDetails = async {
+            functionsToDetail(declaredFunctions.filter(::isProtected))
+        }
         val publicCompanionFunctionsDetail = async {
             emptyListIfJava() ?: functionsToDetail(companionFunctions.filter(::isPublic))
         }
@@ -259,35 +269,39 @@ internal abstract class ClasslikeDocumentableConverter(
 
         // Note: getters and setters of extension properties are already included in
         // classExtensionFunctions from DocumentablesHolder.extensionFunctionMap
-        var extensionFunctions = docsHolder.extensionFunctionsFor(classlike)
-            // Sort by the class the extension function came from first, so they will be grouped
-            // together in a logical way
-            .sortedWith(
-                compareBy<DFunction> { nameForSyntheticClass(it) }
-                    .then(functionSignatureComparator),
-            )
-            // Convert DRIs to this class so link from summary to detail will stay on class page
-            .map { it.withDRIOfClass(classlike) }
+        var extensionFunctions =
+            docsHolder
+                .extensionFunctionsFor(classlike)
+                // Sort by the class the extension function came from first, so they will be grouped
+                // together in a logical way
+                .sortedWith(
+                    compareBy<DFunction> { nameForSyntheticClass(it) }
+                        .then(functionSignatureComparator),
+                )
+                // Convert DRIs to this class so link from summary to detail will stay on class page
+                .map { it.withDRIOfClass(classlike) }
         if (displayLanguage == Language.JAVA) {
-            extensionFunctions = extensionFunctions.filterNot {
-                it.isSuspendFunction()
-            }
+            extensionFunctions = extensionFunctions.filterNot { it.isSuspendFunction() }
         }
-        val extensionFunctionsSummary =
-            async { functionsToSummary(extensionFunctionsTitle(), extensionFunctions) }
+        val extensionFunctionsSummary = async {
+            functionsToSummary(extensionFunctionsTitle(), extensionFunctions)
+        }
         val extensionFunctionsDetail = async { functionsToDetail(extensionFunctions) }
 
-        val extensionProperties = docsHolder.extensionPropertiesFor(classlike)
-            // Sort by the class the extension property came from first, so they will be grouped
-            // together in a logical way
-            .sortedWith(
-                compareBy<DProperty> { nameForSyntheticClass(it) }
-                    .then(simpleDocumentableComparator),
-            )
-            // Convert DRIs to this class so link from summary to detail will stay on class page
-            .map { it.withDRIOfClass(classlike) }
-        val extensionPropertiesSummary =
-            async { propertiesToSummary(extensionPropertiesTitle(), extensionProperties) }
+        val extensionProperties =
+            docsHolder
+                .extensionPropertiesFor(classlike)
+                // Sort by the class the extension property came from first, so they will be grouped
+                // together in a logical way
+                .sortedWith(
+                    compareBy<DProperty> { nameForSyntheticClass(it) }
+                        .then(simpleDocumentableComparator),
+                )
+                // Convert DRIs to this class so link from summary to detail will stay on class page
+                .map { it.withDRIOfClass(classlike) }
+        val extensionPropertiesSummary = async {
+            propertiesToSummary(extensionPropertiesTitle(), extensionProperties)
+        }
         val extensionPropertiesDetail = async { propertiesToDetail(extensionProperties) }
 
         val (inheritedFunctions, inheritedConstants, inheritedProperties) = inheritedTypes.await()
@@ -296,17 +310,20 @@ internal abstract class ClasslikeDocumentableConverter(
         val isKotlinOnlyNonJVMClasslike =
             this@ClasslikeDocumentableConverter is KmpClasslikeConverter &&
                 classlike.getExpectOrCommonSourceSet().analysisPlatform !in
-                listOf(org.jetbrains.dokka.Platform.common, org.jetbrains.dokka.Platform.jvm)
-        val isNotDisplayedForOtherLanguage = docsHolder.excludedPackages[displayLanguage.not()]!!
-            .any { it.matches(classlike.packageName()) }
+                    listOf(org.jetbrains.dokka.Platform.common, org.jetbrains.dokka.Platform.jvm)
+        val isNotDisplayedForOtherLanguage =
+            docsHolder.excludedPackages[displayLanguage.not()]!!.any {
+                it.matches(classlike.packageName())
+            }
 
-        val pathForSwitcher = when {
-            // Kotlin-only (non-JVM-target) members can't be used from a JVM target at all
-            (isNotDisplayedForOtherLanguage || isKotlinOnlyNonJVMClasslike) -> null
-            // Java-only (synthetic) classlikes' members are in the package summary in Kotlin
-            isJavaOnlyClasslike -> pathProvider.forReference(classlike.dri.parent).url
-            else -> pathProvider.forReference(classlike.dri).url
-        }
+        val pathForSwitcher =
+            when {
+                // Kotlin-only (non-JVM-target) members can't be used from a JVM target at all
+                (isNotDisplayedForOtherLanguage || isKotlinOnlyNonJVMClasslike) -> null
+                // Java-only (synthetic) classlikes' members are in the package summary in Kotlin
+                isJavaOnlyClasslike -> pathProvider.forReference(classlike.dri.parent).url
+                else -> pathProvider.forReference(classlike.dri).url
+            }
 
         DefaultDevsitePage(
             DevsitePage.Params(
@@ -314,107 +331,128 @@ internal abstract class ClasslikeDocumentableConverter(
                 pathForSwitcher = pathForSwitcher?.removePrefix(pathProvider.rootPath + "/"),
                 bookPath = pathProvider.book,
                 title = classlike.name(),
-                content = DefaultClasslike(
-                    Classlike.Params(
-                        description = getClasslikeDescription(),
-                        displayLanguage = displayLanguage,
-                        nestedTypesSummary = nestedTypesSummary.await(),
-                        enumValuesSummary = enumValuesSummary.await(),
-                        enumValuesDetails = TitledList(
-                            enumValuesTitle(),
-                            enumDetails?.await() ?: emptyList(),
+                content =
+                    DefaultClasslike(
+                        Classlike.Params(
+                            description = getClasslikeDescription(),
+                            displayLanguage = displayLanguage,
+                            nestedTypesSummary = nestedTypesSummary.await(),
+                            enumValuesSummary = enumValuesSummary.await(),
+                            enumValuesDetails =
+                                TitledList(
+                                    enumValuesTitle(),
+                                    enumDetails?.await() ?: emptyList(),
+                                ),
+                            constantsSummary = constantsSummary.await(),
+                            constantsDetails =
+                                TitledList(
+                                    constantsTitle(),
+                                    constantsDetails.await(),
+                                ),
+                            publicCompanionFunctionsSummary =
+                                publicCompanionFunctionsSummary.await(),
+                            publicCompanionFunctionsDetails =
+                                TitledList(
+                                    publicCompanionFunctionsTitle(),
+                                    publicCompanionFunctionsDetail.await(),
+                                ),
+                            protectedCompanionFunctionsSummary =
+                                protectedCompanionFunctionsSummary.await(),
+                            protectedCompanionFunctionsDetails =
+                                TitledList(
+                                    protectedCompanionFunctionsTitle(),
+                                    protectedCompanionFunctionsDetail.await(),
+                                ),
+                            publicCompanionPropertiesSummary =
+                                publicCompanionPropertiesSummary.await(),
+                            publicCompanionPropertiesDetails =
+                                TitledList(
+                                    publicCompanionPropertiesTitle(),
+                                    publicCompanionPropertiesDetail.await(),
+                                ),
+                            protectedCompanionPropertiesSummary =
+                                protectedCompanionPropertiesSummary.await(),
+                            protectedCompanionPropertiesDetails =
+                                TitledList(
+                                    protectedCompanionPropertiesTitle(),
+                                    protectedCompanionPropertiesDetail.await(),
+                                ),
+                            publicConstructorsSummary = publicConstructorsSummary.await(),
+                            publicConstructorsDetails =
+                                TitledList(
+                                    publicConstructorsTitle(),
+                                    publicConstructorsDetails.await(),
+                                ),
+                            protectedConstructorsSummary = protectedConstructorsSummary.await(),
+                            protectedConstructorsDetails =
+                                TitledList(
+                                    protectedConstructorsTitle(),
+                                    protectedConstructorsDetails.await(),
+                                ),
+                            publicFunctionsSummary = publicFunctionsSummary.await(),
+                            publicFunctionsDetails =
+                                TitledList(
+                                    publicMethodsTitle(displayLanguage),
+                                    publicFunctionsDetails.await(),
+                                ),
+                            protectedFunctionsSummary = protectedFunctionsSummary.await(),
+                            protectedFunctionsDetails =
+                                TitledList(
+                                    protectedMethodsTitle(displayLanguage),
+                                    protectedFunctionsDetails.await(),
+                                ),
+                            publicPropertiesSummary = publicPropertiesSummary.await(),
+                            publicPropertiesDetails =
+                                TitledList(
+                                    publicPropertiesTitle(displayLanguage),
+                                    publicPropertiesDetails.await(),
+                                ),
+                            protectedPropertiesSummary = protectedPropertiesSummary.await(),
+                            protectedPropertiesDetails =
+                                TitledList(
+                                    protectedPropertiesTitle(displayLanguage),
+                                    protectedPropertiesDetails.await(),
+                                ),
+                            extensionFunctionsSummary = extensionFunctionsSummary.await(),
+                            extensionFunctionsDetails =
+                                TitledList(
+                                    extensionFunctionsTitle(),
+                                    extensionFunctionsDetail.await(),
+                                ),
+                            extensionPropertiesSummary = extensionPropertiesSummary.await(),
+                            extensionPropertiesDetails =
+                                TitledList(
+                                    extensionPropertiesTitle(),
+                                    extensionPropertiesDetail.await(),
+                                ),
+                            inheritedFunctions = inheritedFunctions ?: emptyInheritedSymbolsList(),
+                            inheritedConstants = inheritedConstants ?: emptyInheritedSymbolsList(),
+                            inheritedProperties =
+                                inheritedProperties ?: emptyInheritedSymbolsList(),
                         ),
-                        constantsSummary = constantsSummary.await(),
-                        constantsDetails = TitledList(
-                            constantsTitle(),
-                            constantsDetails.await(),
-                        ),
-                        publicCompanionFunctionsSummary = publicCompanionFunctionsSummary.await(),
-                        publicCompanionFunctionsDetails = TitledList(
-                            publicCompanionFunctionsTitle(),
-                            publicCompanionFunctionsDetail.await(),
-                        ),
-                        protectedCompanionFunctionsSummary = protectedCompanionFunctionsSummary
-                            .await(),
-                        protectedCompanionFunctionsDetails = TitledList(
-                            protectedCompanionFunctionsTitle(),
-                            protectedCompanionFunctionsDetail.await(),
-                        ),
-                        publicCompanionPropertiesSummary = publicCompanionPropertiesSummary.await(),
-                        publicCompanionPropertiesDetails = TitledList(
-                            publicCompanionPropertiesTitle(),
-                            publicCompanionPropertiesDetail.await(),
-                        ),
-                        protectedCompanionPropertiesSummary = protectedCompanionPropertiesSummary
-                            .await(),
-                        protectedCompanionPropertiesDetails = TitledList(
-                            protectedCompanionPropertiesTitle(),
-                            protectedCompanionPropertiesDetail.await(),
-                        ),
-                        publicConstructorsSummary = publicConstructorsSummary.await(),
-                        publicConstructorsDetails = TitledList(
-                            publicConstructorsTitle(),
-                            publicConstructorsDetails.await(),
-                        ),
-                        protectedConstructorsSummary = protectedConstructorsSummary.await(),
-                        protectedConstructorsDetails = TitledList(
-                            protectedConstructorsTitle(),
-                            protectedConstructorsDetails.await(),
-                        ),
-                        publicFunctionsSummary = publicFunctionsSummary.await(),
-                        publicFunctionsDetails = TitledList(
-                            publicMethodsTitle(displayLanguage),
-                            publicFunctionsDetails.await(),
-                        ),
-                        protectedFunctionsSummary = protectedFunctionsSummary.await(),
-                        protectedFunctionsDetails = TitledList(
-                            protectedMethodsTitle(displayLanguage),
-                            protectedFunctionsDetails.await(),
-                        ),
-                        publicPropertiesSummary = publicPropertiesSummary.await(),
-                        publicPropertiesDetails = TitledList(
-                            publicPropertiesTitle(displayLanguage),
-                            publicPropertiesDetails.await(),
-                        ),
-                        protectedPropertiesSummary = protectedPropertiesSummary.await(),
-                        protectedPropertiesDetails = TitledList(
-                            protectedPropertiesTitle(displayLanguage),
-                            protectedPropertiesDetails.await(),
-                        ),
-                        extensionFunctionsSummary = extensionFunctionsSummary.await(),
-                        extensionFunctionsDetails = TitledList(
-                            extensionFunctionsTitle(),
-                            extensionFunctionsDetail.await(),
-                        ),
-                        extensionPropertiesSummary = extensionPropertiesSummary.await(),
-                        extensionPropertiesDetails = TitledList(
-                            extensionPropertiesTitle(),
-                            extensionPropertiesDetail.await(),
-                        ),
-                        inheritedFunctions = inheritedFunctions ?: emptyInheritedSymbolsList(),
-                        inheritedConstants = inheritedConstants ?: emptyInheritedSymbolsList(),
-                        inheritedProperties = inheritedProperties ?: emptyInheritedSymbolsList(),
                     ),
-                ),
                 metadataComponent = metadataComponent.await(),
                 includedHeadTagPath = pathProvider.includedHeadTagsPath,
-                referenceObject = DefaultReferenceObject(
-                    ReferenceObject.Params(
-                        name = classlike.dri.classNames.orEmpty(),
-                        path = classlike.dri.packageName.orEmpty(),
-                        // Aggregate all functions and properties. The anchor is used to enable
-                        // devsite search to link directly to the item.
-                        properties = buildList {
-                            addAll(declaredFunctions)
-                            addAll(declaredProperties)
-                            addAll(companionFunctions)
-                            addAll(companionProperties)
-                            addAll(extensionFunctions)
-                            addAll(extensionProperties)
-                        }.mapNotNull { it.dri.callable?.anchor() ?: it.name },
-                        language = displayLanguage,
+                referenceObject =
+                    DefaultReferenceObject(
+                        ReferenceObject.Params(
+                            name = classlike.dri.classNames.orEmpty(),
+                            path = classlike.dri.packageName.orEmpty(),
+                            // Aggregate all functions and properties. The anchor is used to enable
+                            // devsite search to link directly to the item.
+                            properties =
+                                buildList {
+                                        addAll(declaredFunctions)
+                                        addAll(declaredProperties)
+                                        addAll(companionFunctions)
+                                        addAll(companionProperties)
+                                        addAll(extensionFunctions)
+                                        addAll(extensionProperties)
+                                    }
+                                    .mapNotNull { it.dri.callable?.anchor() ?: it.name },
+                            language = displayLanguage,
+                        ),
                     ),
-                ),
             ),
         )
     }
@@ -441,85 +479,97 @@ internal abstract class ClasslikeDocumentableConverter(
         )
     }
 
-    private fun nestedTypesToSummary(nestedClasslikes: List<DClasslike>, classGraph: ClassGraph):
-        ClasslikeSummaryList {
-        val components = nestedClasslikes.map { nestedClasslike ->
-            errorContextInjector(nestedClasslike) {
-                DefaultTableRowSummaryItem(
-                    TableRowSummaryItem.Params(
-                        title = null,
-                        description = DefaultClasslikeSummary(
-                            ClasslikeSummary.Params(
-                                signature = computeSignature(nestedClasslike, classGraph),
-                                description = javadocConverter.summaryDescription(nestedClasslike),
-                            ),
-                        ) as ClasslikeSummary,
-                    ),
-                )
+    private fun nestedTypesToSummary(
+        nestedClasslikes: List<DClasslike>,
+        classGraph: ClassGraph
+    ): ClasslikeSummaryList {
+        val components =
+            nestedClasslikes.map { nestedClasslike ->
+                errorContextInjector(nestedClasslike) {
+                    DefaultTableRowSummaryItem(
+                        TableRowSummaryItem.Params(
+                            title = null,
+                            description =
+                                DefaultClasslikeSummary(
+                                    ClasslikeSummary.Params(
+                                        signature = computeSignature(nestedClasslike, classGraph),
+                                        description =
+                                            javadocConverter.summaryDescription(nestedClasslike),
+                                    ),
+                                )
+                                    as ClasslikeSummary,
+                        ),
+                    )
+                }
             }
-        }
 
         return DefaultSummaryList(
             SummaryList.Params(
-                header = DefaultTableTitle(
-                    TableTitle.Params(
-                        title = nestedTypesTitle(),
-                        big = true,
+                header =
+                    DefaultTableTitle(
+                        TableTitle.Params(
+                            title = nestedTypesTitle(),
+                            big = true,
+                        ),
                     ),
-                ),
                 items = components,
             ),
         )
     }
 
-    private fun functionsToSummary(name: String? = null, functions: List<DFunction>):
-        FunctionSummaryList {
-        val components = functions.mapNotNull {
-            val modifierHints = ModifierHints(
-                displayLanguage = displayLanguage,
-                type = DFunction::class.java,
-                containingType = classlike::class.java,
-                isFromJava = classlike.isFromJava(),
-                isSummary = true,
-                injectStatic = it.isJavaStaticMethod(),
-                inCompanion = classlike.isCompanion(),
-            )
-            errorContextInjector(it) {
-                functionToSummaryConverter(it, modifierHints)
+    private fun functionsToSummary(
+        name: String? = null,
+        functions: List<DFunction>
+    ): FunctionSummaryList {
+        val components =
+            functions.mapNotNull {
+                val modifierHints =
+                    ModifierHints(
+                        displayLanguage = displayLanguage,
+                        type = DFunction::class.java,
+                        containingType = classlike::class.java,
+                        isFromJava = classlike.isFromJava(),
+                        isSummary = true,
+                        injectStatic = it.isJavaStaticMethod(),
+                        inCompanion = classlike.isCompanion(),
+                    )
+                errorContextInjector(it) { functionToSummaryConverter(it, modifierHints) }
             }
-        }
 
         return DefaultSummaryList(
             SummaryList.Params(
-                header = name?.let {
+                header =
+                    name?.let {
+                        DefaultTableTitle(
+                            TableTitle.Params(
+                                title = name,
+                                big = true,
+                            ),
+                        )
+                    },
+                items = components,
+            ),
+        )
+    }
+
+    private fun constructorsToSummary(
+        name: String,
+        constructors: List<DFunction>
+    ): ConstructorSummaryList {
+        val components =
+            constructors.mapNotNull {
+                errorContextInjector(it) { constructorToSummaryConverter(it) }
+            }
+
+        return DefaultSummaryList(
+            SummaryList.Params(
+                header =
                     DefaultTableTitle(
                         TableTitle.Params(
                             title = name,
                             big = true,
                         ),
-                    )
-                },
-                items = components,
-            ),
-        )
-    }
-
-    private fun constructorsToSummary(name: String, constructors: List<DFunction>):
-        ConstructorSummaryList {
-        val components = constructors.mapNotNull {
-            errorContextInjector(it) {
-                constructorToSummaryConverter(it)
-            }
-        }
-
-        return DefaultSummaryList(
-            SummaryList.Params(
-                header = DefaultTableTitle(
-                    TableTitle.Params(
-                        title = name,
-                        big = true,
                     ),
-                ),
                 items = components,
             ),
         )
@@ -529,78 +579,83 @@ internal abstract class ClasslikeDocumentableConverter(
         functions: List<DFunction>,
     ): List<SymbolDetail<FunctionSignature>> {
         return functions.mapNotNull {
-            val modifierHints = ModifierHints(
+            val modifierHints =
+                ModifierHints(
+                    displayLanguage = displayLanguage,
+                    isSummary = false,
+                    type = DFunction::class.java,
+                    containingType = classlike::class.java,
+                    isFromJava = classlike.isFromJava(),
+                    injectStatic = it.isJavaStaticMethod(),
+                    inCompanion = classlike.isCompanion(),
+                )
+            errorContextInjector(it) { functionToDetailConverter(it, modifierHints) }
+        }
+    }
+
+    private fun constructorsToDetail(
+        functions: List<DFunction>
+    ): List<SymbolDetail<FunctionSignature>> {
+        val modifierHints =
+            ModifierHints(
                 displayLanguage = displayLanguage,
-                isSummary = false,
                 type = DFunction::class.java,
                 containingType = classlike::class.java,
                 isFromJava = classlike.isFromJava(),
-                injectStatic = it.isJavaStaticMethod(),
-                inCompanion = classlike.isCompanion(),
+                isSummary = false,
+                isConstructor = true,
             )
-            errorContextInjector(it) {
-                functionToDetailConverter(it, modifierHints)
-            }
-        }
-    }
-
-    private fun constructorsToDetail(functions: List<DFunction>):
-        List<SymbolDetail<FunctionSignature>> {
-        val modifierHints = ModifierHints(
-            displayLanguage = displayLanguage,
-            type = DFunction::class.java,
-            containingType = classlike::class.java,
-            isFromJava = classlike.isFromJava(),
-            isSummary = false,
-            isConstructor = true,
-        )
         return functions.mapNotNull {
-            errorContextInjector(it) {
-                constructorToDetailConverter(it, modifierHints)
-            }
+            errorContextInjector(it) { constructorToDetailConverter(it, modifierHints) }
         }
     }
 
-    private fun enumValuesToSummary(title: String, enumVals: List<DEnumEntry>):
-        LinkDescriptionSummaryList {
+    private fun enumValuesToSummary(
+        title: String,
+        enumVals: List<DEnumEntry>
+    ): LinkDescriptionSummaryList {
         val components = enumVals.map { errorContextInjector(it) { enumConverter.summary(it) } }
         return DefaultSummaryList(
             SummaryList.Params(
-                header = DefaultTableTitle(
-                    TableTitle.Params(
-                        title = title,
-                        big = true,
+                header =
+                    DefaultTableTitle(
+                        TableTitle.Params(
+                            title = title,
+                            big = true,
+                        ),
                     ),
-                ),
                 items = components,
             ),
         )
     }
 
-    private fun propertiesToSummary(name: String? = null, properties: List<DProperty>):
-        PropertySummaryList {
-        val components = properties.mapNotNull {
-            val modifierHints = ModifierHints(
-                displayLanguage = displayLanguage,
-                type = DProperty::class.java,
-                containingType = classlike::class.java,
-                isFromJava = classlike.isFromJava(),
-                isSummary = true,
-                injectStatic = it.isStaticAnnotated(),
-            )
-            errorContextInjector(it) {
-                propertyToSummaryConverter(it, modifierHints)
+    private fun propertiesToSummary(
+        name: String? = null,
+        properties: List<DProperty>
+    ): PropertySummaryList {
+        val components =
+            properties.mapNotNull {
+                val modifierHints =
+                    ModifierHints(
+                        displayLanguage = displayLanguage,
+                        type = DProperty::class.java,
+                        containingType = classlike::class.java,
+                        isFromJava = classlike.isFromJava(),
+                        isSummary = true,
+                        injectStatic = it.isStaticAnnotated(),
+                    )
+                errorContextInjector(it) { propertyToSummaryConverter(it, modifierHints) }
             }
-        }
 
-        val title = name?.let {
-            DefaultTableTitle(
-                TableTitle.Params(
-                    title = it,
-                    big = true,
-                ),
-            )
-        }
+        val title =
+            name?.let {
+                DefaultTableTitle(
+                    TableTitle.Params(
+                        title = it,
+                        big = true,
+                    ),
+                )
+            }
 
         return DefaultSummaryList(
             SummaryList.Params(
@@ -614,33 +669,33 @@ internal abstract class ClasslikeDocumentableConverter(
         properties: List<DProperty>,
     ): List<SymbolDetail<PropertySignature>> {
         return properties.mapNotNull {
-            val modifierHints = ModifierHints(
-                displayLanguage = displayLanguage,
-                type = DProperty::class.java,
-                containingType = classlike::class.java,
-                isFromJava = classlike.isFromJava(),
-                isSummary = false,
-                injectStatic = it.isStaticAnnotated(),
-            )
-            errorContextInjector(it) {
-                propertyToDetailConverter(it, modifierHints)
-            }
+            val modifierHints =
+                ModifierHints(
+                    displayLanguage = displayLanguage,
+                    type = DProperty::class.java,
+                    containingType = classlike::class.java,
+                    isFromJava = classlike.isFromJava(),
+                    isSummary = false,
+                    injectStatic = it.isStaticAnnotated(),
+                )
+            errorContextInjector(it) { propertyToDetailConverter(it, modifierHints) }
         }
     }
 
-    private fun enumValuesToDetail(dEnum: DEnum, enumValues: List<DEnumEntry>):
-        List<SymbolDetail<PropertySignature>> {
-        val modifierHints = ModifierHints(
-            displayLanguage,
-            type = DEnumEntry::class.java,
-            containingType = classlike::class.java,
-            isFromJava = classlike.isFromJava(),
-            isSummary = false,
-        )
+    private fun enumValuesToDetail(
+        dEnum: DEnum,
+        enumValues: List<DEnumEntry>
+    ): List<SymbolDetail<PropertySignature>> {
+        val modifierHints =
+            ModifierHints(
+                displayLanguage,
+                type = DEnumEntry::class.java,
+                containingType = classlike::class.java,
+                isFromJava = classlike.isFromJava(),
+                isSummary = false,
+            )
         return enumValues.map {
-            errorContextInjector(it) {
-                enumConverter.detail(dEnum, it, modifierHints)
-            }
+            errorContextInjector(it) { enumConverter.detail(dEnum, it, modifierHints) }
         }
     }
 
@@ -663,10 +718,12 @@ internal abstract class ClasslikeDocumentableConverter(
         }
 
         // Java documentation needs to respect @jvm* annotations
-        val properties = initialProperties.filterOutJvmSynthetic().filter {
-            it.isPropertyInJava() ||
-                !it.hasAnAccessor() // Sometimes isFromJava and thus isPropertyInJava are incorrect.
-        }
+        val properties =
+            initialProperties.filterOutJvmSynthetic().filter {
+                it.isPropertyInJava() ||
+                    !it.hasAnAccessor() // Sometimes isFromJava and thus isPropertyInJava are
+                // incorrect.
+            }
 
         // Some symbols are moved from the companion object type to the enclosing class in java
         // Objects that are not top-level
@@ -676,7 +733,8 @@ internal abstract class ClasslikeDocumentableConverter(
             emptyList()
         } else if (classlike is DObject) {
             val (static, nonStatic) = properties.partition { it.objectPropertyHoistedInJava() }
-            nonStatic + objectInstanceProperty +
+            nonStatic +
+                objectInstanceProperty +
                 // Inject the @JvmStatic annotation to properties that need it
                 static.map { it.addAnnotation(JvmStatic) }
         } else {
@@ -684,9 +742,9 @@ internal abstract class ClasslikeDocumentableConverter(
             properties +
                 // It is technically incorrect to put @JvmStatic on a property, but we use this
                 // to remember that we should later inject the `static` modifier to this
-                companionProperties.filter { it.objectPropertyHoistedInJava() }.map {
-                    it.addAnnotation(JvmStatic)
-                }
+                companionProperties
+                    .filter { it.objectPropertyHoistedInJava() }
+                    .map { it.addAnnotation(JvmStatic) }
         }
     }
 
@@ -708,15 +766,17 @@ internal abstract class ClasslikeDocumentableConverter(
         // Static companion functions are hoisted to the containing class
         return (initialFunctions + companionFunctions.filter { it.isJavaStaticMethod() })
             // Java documentation needs to respect @jvm* annotations
-            .filterOutJvmSynthetic().map { it.withJvmName() }
+            .filterOutJvmSynthetic()
+            .map { it.withJvmName() }
             .map { it.convertReceiverForJava() }
     }
 
     private val objectInstanceProperty: DProperty by lazy {
         DProperty(
-            dri = classlike.dri.copy(
-                callable = Callable(name = "INSTANCE", params = emptyList()),
-            ),
+            dri =
+                classlike.dri.copy(
+                    callable = Callable(name = "INSTANCE", params = emptyList()),
+                ),
             name = "INSTANCE",
             documentation = emptyMap(),
             expectPresentInSet = classlike.expectPresentInSet,
@@ -730,27 +790,32 @@ internal abstract class ClasslikeDocumentableConverter(
             sourceSets = classlike.sourceSets,
             generics = emptyList(),
             isExpectActual = false,
-            extra = PropertyContainer.withAll(
-                classlike.sourceSets.map {
-                    mapOf(
-                        it to setOf(ExtraModifiers.JavaOnlyModifiers.Static),
-                    ).toAdditionalModifiers()
-                } + classlike.sourceSets.map {
-                    Annotations(
+            extra =
+                PropertyContainer.withAll(
+                    classlike.sourceSets.map {
                         mapOf(
-                            it to listOf(
-                                Annotations.Annotation(
-                                    dri = DRI(
-                                        packageName = "kotlin.jvm",
-                                        classNames = "JvmField",
-                                    ),
-                                    params = emptyMap(),
+                                it to setOf(ExtraModifiers.JavaOnlyModifiers.Static),
+                            )
+                            .toAdditionalModifiers()
+                    } +
+                        classlike.sourceSets.map {
+                            Annotations(
+                                mapOf(
+                                    it to
+                                        listOf(
+                                            Annotations.Annotation(
+                                                dri =
+                                                    DRI(
+                                                        packageName = "kotlin.jvm",
+                                                        classNames = "JvmField",
+                                                    ),
+                                                params = emptyMap(),
+                                            ),
+                                        ),
                                 ),
-                            ),
-                        ),
-                    )
-                },
-            ),
+                            )
+                        },
+                ),
         )
     }
 
@@ -764,6 +829,7 @@ internal abstract class ClasslikeDocumentableConverter(
         val annotations: List<Annotations.Annotation>,
         val typeAliasEquals: TypeProjectionComponent? = null,
     )
+
     private data class SourceSetIndependentSignatureInputs(
         val generics: List<DTypeParameter>,
         val name: String,
@@ -771,9 +837,11 @@ internal abstract class ClasslikeDocumentableConverter(
         val type: String,
         val isFromJava: Boolean,
     )
-    private val SIGNATURE_INSTANCES = ConcurrentHashMap<
-        Pair<SourceSetDependentSignatureInputs, SourceSetIndependentSignatureInputs>,
-        ClasslikeSignature,
+
+    private val SIGNATURE_INSTANCES =
+        ConcurrentHashMap<
+            Pair<SourceSetDependentSignatureInputs, SourceSetIndependentSignatureInputs>,
+            ClasslikeSignature,
         >()
 
     protected open fun computeSignature(
@@ -789,39 +857,50 @@ internal abstract class ClasslikeDocumentableConverter(
             sourceSetDependentInput to sourceSetIndepInput,
         ) {
             // TODO(KMP ClassGraph b/253454963. Move these into sourceSetDependentInput.)
-            val (extends, implements) = when (sourceSetIndepInput.type) {
-                "class", "interface", "enum", "object" -> (
-                    classGraph.getValue(sourceSetIndepInput.dri).directSuperClasses.map {
-                        pathProvider.linkForReference(it.dri)
-                    } to classGraph.getValue(sourceSetIndepInput.dri).directInterfaces.map {
-                        pathProvider.linkForReference(it.dri)
-                    }
-                    )
-                else -> emptyList<Link>() to emptyList()
-            }
+            val (extends, implements) =
+                when (sourceSetIndepInput.type) {
+                    "class",
+                    "interface",
+                    "enum",
+                    "object" ->
+                        (classGraph.getValue(sourceSetIndepInput.dri).directSuperClasses.map {
+                            pathProvider.linkForReference(it.dri)
+                        } to
+                            classGraph.getValue(sourceSetIndepInput.dri).directInterfaces.map {
+                                pathProvider.linkForReference(it.dri)
+                            })
+                    else -> emptyList<Link>() to emptyList()
+                }
             DefaultClasslikeSignature(
                 ClasslikeSignature.Params(
                     displayLanguage = displayLanguage,
-                    name = pathProvider
-                        .linkForReference(sourceSetIndepInput.dri, sourceSetIndepInput.name),
-                    type = if (sourceSetDependentInput.typeAliasEquals != null) {
-                        "typealias"
-                    } else sourceSetIndepInput.type,
+                    name =
+                        pathProvider.linkForReference(
+                            sourceSetIndepInput.dri,
+                            sourceSetIndepInput.name
+                        ),
+                    type =
+                        if (sourceSetDependentInput.typeAliasEquals != null) {
+                            "typealias"
+                        } else sourceSetIndepInput.type,
                     modifiers = sourceSetDependentInput.modifiers,
                     implements = implements,
                     extends = extends,
-                    typeParameters = sourceSetIndepInput.generics.map {
-                        errorContextInjector(it) {
-                            paramConverter.componentForTypeParameter(
-                                it,
-                                sourceSetIndepInput.isFromJava,
-                            )
-                        }
-                    },
-                    annotationComponents = annotationConverter.annotationComponents(
-                        annotations = sourceSetDependentInput.annotations,
-                        nullability = Nullability.DONT_CARE, // Classlike definitions aren't null
-                    ),
+                    typeParameters =
+                        sourceSetIndepInput.generics.map {
+                            errorContextInjector(it) {
+                                paramConverter.componentForTypeParameter(
+                                    it,
+                                    sourceSetIndepInput.isFromJava,
+                                )
+                            }
+                        },
+                    annotationComponents =
+                        annotationConverter.annotationComponents(
+                            annotations = sourceSetDependentInput.annotations,
+                            nullability =
+                                Nullability.DONT_CARE, // Classlike definitions aren't null
+                        ),
                     typeAliasEquals = sourceSetDependentInput.typeAliasEquals,
                 ),
             )
@@ -832,11 +911,17 @@ internal abstract class ClasslikeDocumentableConverter(
         classlike: DClasslike,
         sourceSet: DokkaSourceSet,
     ): SourceSetDependentSignatureInputs {
-        val typeAliasEquals = (classlike as? WithExtraProperties<*>)?.extra
-            ?.allOfType<ActualTypealias>()?.strictSingleOrNull()
-            ?.typeAlias?.underlyingType?.get(sourceSet)
-        val modifiers = classlike.modifiers(sourceSet) +
-            (typeAliasEquals?.let { listOf("actual") } ?: emptyList())
+        val typeAliasEquals =
+            (classlike as? WithExtraProperties<*>)
+                ?.extra
+                ?.allOfType<ActualTypealias>()
+                ?.strictSingleOrNull()
+                ?.typeAlias
+                ?.underlyingType
+                ?.get(sourceSet)
+        val modifiers =
+            classlike.modifiers(sourceSet) +
+                (typeAliasEquals?.let { listOf("actual") } ?: emptyList())
         return SourceSetDependentSignatureInputs(
             modifiers.modifiersFor(
                 ModifierHints(
@@ -852,15 +937,17 @@ internal abstract class ClasslikeDocumentableConverter(
             typeAliasEquals?.let { paramConverter.componentForProjection(it, false, sourceSet) },
         )
     }
+
     private fun computeSourceSetIndependentSignatureInputs(
         classlike: DClasslike,
-    ) = SourceSetIndependentSignatureInputs(
-        dri = classlike.dri,
-        name = classlike.name(),
-        type = classlike.stringForType(displayLanguage),
-        generics = classlike.generics(),
-        isFromJava = classlike.isFromJava(),
-    )
+    ) =
+        SourceSetIndependentSignatureInputs(
+            dri = classlike.dri,
+            name = classlike.name(),
+            type = classlike.stringForType(displayLanguage),
+            generics = classlike.generics(),
+            isFromJava = classlike.isFromJava(),
+        )
 
     /** Walks up this class' type hierarchy and returns the hierarchy component. */
     protected suspend fun computeHierarchy(): ClassHierarchy {
@@ -874,61 +961,70 @@ internal abstract class ClasslikeDocumentableConverter(
             return DefaultClassHierarchy(ClassHierarchy.Params(parents = emptyList()))
         }
 
-        val classHierarchyRootDri = when (displayLanguage) {
-            Language.JAVA -> DRI(packageName = "java.lang", classNames = "Object")
-            Language.KOTLIN -> DRI(packageName = "kotlin", classNames = "Any")
-        }
-        val classHierarchyRootLink = pathProvider
-            .linkForReference(classHierarchyRootDri, classHierarchyRootDri.fullName)
+        val classHierarchyRootDri =
+            when (displayLanguage) {
+                Language.JAVA -> DRI(packageName = "java.lang", classNames = "Object")
+                Language.KOTLIN -> DRI(packageName = "kotlin", classNames = "Any")
+            }
+        val classHierarchyRootLink =
+            pathProvider.linkForReference(classHierarchyRootDri, classHierarchyRootDri.fullName)
         val thisLink = pathProvider.linkForReference(classlike.dri, classlike.dri.fullName)
 
-        val parentLinks = parents.map { classlike ->
-            pathProvider.linkForReference(classlike.dri, classlike.dri.fullName)
-        }
+        val parentLinks =
+            parents.map { classlike ->
+                pathProvider.linkForReference(classlike.dri, classlike.dri.fullName)
+            }
         val allLinks = listOf(classHierarchyRootLink) + parentLinks + listOf(thisLink)
         return DefaultClassHierarchy(ClassHierarchy.Params(allLinks))
     }
 
-    /**
-     * Creates a list of InheritedSymbols from a list of DFunctions
-     */
+    /** Creates a list of InheritedSymbols from a list of DFunctions */
     private fun computeInheritedSymbols(
         symbolList: List<Documentable>,
     ): Triple<
         InheritedSymbolsList<FunctionSignature>?,
         InheritedSymbolsList<PropertySignature>?,
         InheritedSymbolsList<PropertySignature>?,
-        > {
-        val symbols = when (displayLanguage) {
-            Language.JAVA -> symbolList.filterOutJvmSynthetic()
-            Language.KOTLIN -> symbolList
-        }
+    > {
+        val symbols =
+            when (displayLanguage) {
+                Language.JAVA -> symbolList.filterOutJvmSynthetic()
+                Language.KOTLIN -> symbolList
+            }
 
-        val functions = symbols.filterIsInstance<DFunction>()
-            .sortedWith(functionSignatureComparator)
-        val functionsRenamed = when (displayLanguage) {
-            Language.JAVA -> functions.map { it.withJvmName() }
-            Language.KOTLIN -> functions
-        }
+        val functions =
+            symbols.filterIsInstance<DFunction>().sortedWith(functionSignatureComparator)
+        val functionsRenamed =
+            when (displayLanguage) {
+                Language.JAVA -> functions.map { it.withJvmName() }
+                Language.KOTLIN -> functions
+            }
         val functionsSummary =
-            functionsRenamed.takeIf { it.isNotEmpty() }
+            functionsRenamed
+                .takeIf { it.isNotEmpty() }
                 ?.createInheritedCategory(title = inheritedMethodsTitle(displayLanguage)) {
                     functionsToSummary(functions = it)
                 }
 
-        val (consts, properties) = symbols.filterIsInstance<DProperty>()
-            .sortedWith(simpleDocumentableComparator)
-            .partition { it.isConstant() }
+        val (consts, properties) =
+            symbols
+                .filterIsInstance<DProperty>()
+                .sortedWith(simpleDocumentableComparator)
+                .partition { it.isConstant() }
 
-        val constsSummary = consts.takeIf { it.isNotEmpty() }
-            ?.createInheritedCategory(title = inheritedConstantsTitle()) {
-                propertiesToSummary(properties = it)
-            }
+        val constsSummary =
+            consts
+                .takeIf { it.isNotEmpty() }
+                ?.createInheritedCategory(title = inheritedConstantsTitle()) {
+                    propertiesToSummary(properties = it)
+                }
 
-        val propertiesSummary = properties.takeIf { it.isNotEmpty() }
-            ?.createInheritedCategory(title = inheritedPropertiesTitle(displayLanguage)) {
-                propertiesToSummary(properties = it)
-            }
+        val propertiesSummary =
+            properties
+                .takeIf { it.isNotEmpty() }
+                ?.createInheritedCategory(title = inheritedPropertiesTitle(displayLanguage)) {
+                    propertiesToSummary(properties = it)
+                }
 
         return Triple(functionsSummary, constsSummary, propertiesSummary)
     }
@@ -937,8 +1033,10 @@ internal abstract class ClasslikeDocumentableConverter(
         title: String,
         summaryGen: (List<T>) -> SummaryList<TypeSummaryItem<U>>,
     ): InheritedSymbolsList<U> where T : Documentable, T : WithExtraProperties<T> {
-        fun createInheritedSymbolsList(parentDri: DRI, symbolList: List<T>):
-            Pair<Link, SummaryList<TypeSummaryItem<U>>> {
+        fun createInheritedSymbolsList(
+            parentDri: DRI,
+            symbolList: List<T>
+        ): Pair<Link, SummaryList<TypeSummaryItem<U>>> {
             val link = pathProvider.linkForReference(parentDri, parentDri.fullName)
             val summary = summaryGen(symbolList)
             return link to summary
@@ -947,23 +1045,25 @@ internal abstract class ClasslikeDocumentableConverter(
         // val category = groupBy { it.driInheritedFrom() ?: it.dri.parent }
         // TODO: this is sorting classes--what if you have the same-named class in two sourceSets?
         // Addressing this will likely require fixing b/247079868
-        val category = groupBy { it.dri.parent }
-            .toSortedMap(compareBy { it.classNames + " " + it.fullName })
-            .entries.associate { (k, v) -> createInheritedSymbolsList(k, v) }
+        val category =
+            groupBy { it.dri.parent }
+                .toSortedMap(compareBy { it.classNames + " " + it.fullName })
+                .entries
+                .associate { (k, v) -> createInheritedSymbolsList(k, v) }
 
         return DefaultInheritedSymbols(
             InheritedSymbolsList.Params(
-                header = DefaultTableTitle(
-                    TableTitle.Params(title, big = true),
-                ),
+                header =
+                    DefaultTableTitle(
+                        TableTitle.Params(title, big = true),
+                    ),
                 inheritedSymbolSummaries = category,
             ),
         )
     }
 
     /**
-     * WARNING: does not work properly
-     * The dri from which this documentable is inherited, or null.
+     * WARNING: does not work properly The dri from which this documentable is inherited, or null.
      *
      * `extra[InheritedMember].inheritedFrom` does not actually contain where inherited members are
      * inherited from
@@ -996,13 +1096,12 @@ internal abstract class ClasslikeDocumentableConverter(
         return docs.map { pathProvider.linkForReference(it.dri) }
     }
 
-    /**
-     * Returns lists of functions and properties directly owned by this class-like.
-     */
+    /** Returns lists of functions and properties directly owned by this class-like. */
     private suspend fun DClasslike.nonInheritedTypes(): Pair<List<DFunction>, List<DProperty>> {
-        val allFunctions = if (displayLanguage == Language.KOTLIN) {
-            this.functions
-        } else this.functions + this.properties.gettersAndSetters()
+        val allFunctions =
+            if (displayLanguage == Language.KOTLIN) {
+                this.functions
+            } else this.functions + this.properties.gettersAndSetters()
 
         val supertypes = this.supertypesForDisplayLanguage()
 
@@ -1027,12 +1126,14 @@ internal abstract class ClasslikeDocumentableConverter(
         }
 
         return filter { symbol ->
-            // Remove all symbols inherited from visible supertypes
-            !symbol.isInherited(supertypes) && !symbol.dri.isFromBaseClass() &&
-                // If hidden parent symbols shouldn't be included, remove any symbols defined in
-                // classes marked as hidden
-                (docsHolder.includeHiddenParentSymbols || !hasBeenHidden(symbol.dri.ofClass()))
-        }.map { symbol -> symbol.withDRIOfClass(forClass) }
+                // Remove all symbols inherited from visible supertypes
+                !symbol.isInherited(supertypes) &&
+                    !symbol.dri.isFromBaseClass() &&
+                    // If hidden parent symbols shouldn't be included, remove any symbols defined in
+                    // classes marked as hidden
+                    (docsHolder.includeHiddenParentSymbols || !hasBeenHidden(symbol.dri.ofClass()))
+            }
+            .map { symbol -> symbol.withDRIOfClass(forClass) }
     }
 
     /** Returns just the class part of a DRI. */
@@ -1045,15 +1146,16 @@ internal abstract class ClasslikeDocumentableConverter(
      * Documentable must be a data class.
      */
     private inline fun <reified T : Documentable> T.withDRIOfClass(forClass: DClasslike): T {
-        return if (forClass.packageName() == this.dri.packageName &&
-            forClass.name() == this.dri.classNames
+        return if (
+            forClass.packageName() == this.dri.packageName && forClass.name() == this.dri.classNames
         ) {
             this
         } else {
-            val dri = this.dri.copy(
-                packageName = forClass.packageName(),
-                classNames = forClass.name(),
-            )
+            val dri =
+                this.dri.copy(
+                    packageName = forClass.packageName(),
+                    classNames = forClass.name(),
+                )
             when (this) {
                 is DFunction -> this.copy(dri) as T
                 is DProperty -> this.copy(dri) as T
@@ -1079,25 +1181,28 @@ internal abstract class ClasslikeDocumentableConverter(
     }
 
     /**
-     * Returns the list of inherited symbols, not from Any or Object
-     * If class is synthetic there should be no inherited methods
+     * Returns the list of inherited symbols, not from Any or Object If class is synthetic there
+     * should be no inherited methods
      */
     private fun DClasslike.inheritedTypes(supertypes: Set<DRI>): List<Documentable> {
         if (this.isSynthetic) {
             return emptyList()
         }
-        val allSymbols = when (displayLanguage) {
-            Language.KOTLIN -> this.children
-            Language.JAVA -> (this.children + this.properties.gettersAndSetters())
-                .filterNot { it is DProperty && it.hasAnAccessor() && !it.isPropertyInJava() }
-        }
+        val allSymbols =
+            when (displayLanguage) {
+                Language.KOTLIN -> this.children
+                Language.JAVA ->
+                    (this.children + this.properties.gettersAndSetters()).filterNot {
+                        it is DProperty && it.hasAnAccessor() && !it.isPropertyInJava()
+                    }
+            }
         return allSymbols.filter { it.isInherited(supertypes) && !it.dri.isFromBaseClass() }
     }
 
     private fun <T : Documentable> T.isInherited(supertypes: Set<DRI>): Boolean {
         // Convert mapped type for the function to make sure the DRI lines up with supertypes.
-        val classDRI = DRI(dri.packageName, dri.classNames)
-            .possiblyConvertMappedType(displayLanguage)
+        val classDRI =
+            DRI(dri.packageName, dri.classNames).possiblyConvertMappedType(displayLanguage)
         return supertypes.contains(classDRI)
     }
 
@@ -1146,18 +1251,21 @@ internal abstract class ClasslikeDocumentableConverter(
 internal fun Documentable.isHoistedFromCompanion(displayLanguage: Language): Boolean =
     when (displayLanguage) {
         Language.KOTLIN -> this is DProperty || this is DFunction
-        Language.JAVA -> (this is DFunction && this.isJavaStaticMethod()) ||
-            (this is DProperty && this.objectPropertyHoistedInJava())
+        Language.JAVA ->
+            (this is DFunction && this.isJavaStaticMethod()) ||
+                (this is DProperty && this.objectPropertyHoistedInJava())
     }
 
 // an `actual` cannot narrow visibility, but can widen it TODO(b/262710702)
 private fun isPublic(element: Documentable) =
     "public" in element.modifiers(element.getExpectOrCommonSourceSet())
+
 private fun isProtected(element: Documentable) =
     "protected" in element.modifiers(element.getExpectOrCommonSourceSet())
 
 /** Filter out constants, because those have a separate display sections from properties. */
 private fun isPublicNonConst(prop: DProperty) = isPublic(prop) && !prop.isConstant()
+
 private fun isProtectedNonConst(prop: DProperty) = isProtected(prop) && !prop.isConstant()
 
 /**
@@ -1172,41 +1280,60 @@ private fun List<DProperty>.constants() = filter { it.isConstant() }
 internal fun nestedTypesTitle() = "Nested types"
 
 internal fun publicConstructorsTitle() = "Public ${constructorsTitle()}"
+
 internal fun protectedConstructorsTitle() = "Protected ${constructorsTitle()}"
+
 internal fun constructorsTitle(): String = "constructors"
 
 internal fun publicMethodsTitle(displayLanguage: Language) =
     "Public ${methodsTitle(displayLanguage)}"
+
 internal fun inheritedMethodsTitle(displayLanguage: Language) =
     "Inherited ${methodsTitle(displayLanguage)}"
+
 internal fun protectedMethodsTitle(displayLanguage: Language) =
     "Protected ${methodsTitle(displayLanguage)}"
-internal fun methodsTitle(displayLanguage: Language): String = when (displayLanguage) {
-    Language.JAVA -> "methods"
-    Language.KOTLIN -> "functions"
-}
+
+internal fun methodsTitle(displayLanguage: Language): String =
+    when (displayLanguage) {
+        Language.JAVA -> "methods"
+        Language.KOTLIN -> "functions"
+    }
 
 internal fun publicPropertiesTitle(displayLanguage: Language) =
     "Public ${propertiesTitle(displayLanguage)}"
+
 internal fun inheritedPropertiesTitle(displayLanguage: Language) =
     "Inherited ${propertiesTitle(displayLanguage)}"
+
 internal fun protectedPropertiesTitle(displayLanguage: Language) =
     "Protected ${propertiesTitle(displayLanguage)}"
-internal fun propertiesTitle(displayLanguage: Language): String = when (displayLanguage) {
-    Language.JAVA -> "fields"
-    Language.KOTLIN -> "properties"
-}
+
+internal fun propertiesTitle(displayLanguage: Language): String =
+    when (displayLanguage) {
+        Language.JAVA -> "fields"
+        Language.KOTLIN -> "properties"
+    }
 
 internal fun constantsTitle() = "Constants"
+
 internal fun inheritedConstantsTitle() = "Inherited ${constantsTitle()}"
+
 internal fun enumValuesTitle() = "Enum Values"
 
 // Extension functions and companions are a Kotlin-only feature and only show up in as-Kotlin
 internal fun extensionFunctionsTitle() = "Extension functions"
+
 internal fun extensionPropertiesTitle() = "Extension properties"
+
 internal fun companionFunctionsTitle(): String = "companion ${methodsTitle(Language.KOTLIN)}"
+
 internal fun companionPropertiesTitle(): String = "companion ${propertiesTitle(Language.KOTLIN)}"
+
 internal fun publicCompanionFunctionsTitle(): String = "Public ${companionFunctionsTitle()}"
+
 internal fun protectedCompanionFunctionsTitle(): String = "Protected ${companionFunctionsTitle()}"
+
 internal fun publicCompanionPropertiesTitle(): String = "Public ${companionPropertiesTitle()}"
+
 internal fun protectedCompanionPropertiesTitle(): String = "Protected ${companionPropertiesTitle()}"

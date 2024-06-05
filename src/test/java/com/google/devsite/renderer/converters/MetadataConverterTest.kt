@@ -37,11 +37,14 @@ internal class MetadataConverterTest(
 ) : ConverterTestBase(displayLanguage) {
     @Test
     fun `Source links are generated correctly`() {
-        val metadataComponent = """
+        val metadataComponent =
+            """
             |class Foo
-        """.render().metadataForClasslike(
-            baseClassSourceLink = "https://cs.android.com/search?q=file:%s+class:%s",
-        )
+        """
+                .render()
+                .metadataForClasslike(
+                    baseClassSourceLink = "https://cs.android.com/search?q=file:%s+class:%s",
+                )
 
         val link = metadataComponent.data.sourceLink
         assertThat(link).isNotNull()
@@ -54,11 +57,14 @@ internal class MetadataConverterTest(
 
     @Test
     fun `Source links are generated correctly with no class in format string`() {
-        val metadataComponent = """
+        val metadataComponent =
+            """
                 |class Foo
-            """.render().metadataForClasslike(
-            baseClassSourceLink = "https://cs.android.com/search?q=file:%s",
-        )
+            """
+                .render()
+                .metadataForClasslike(
+                    baseClassSourceLink = "https://cs.android.com/search?q=file:%s",
+                )
 
         val link = metadataComponent.data.sourceLink
         assertThat(link).isNotNull()
@@ -70,16 +76,20 @@ internal class MetadataConverterTest(
 
     @Test
     fun `API version for a Class with both addedIn and deprecatedIn is generated correctly`() {
-        val metadata = ClassVersionMetadata(
-            className = "androidx.example.Foo",
-            addedIn = "1.2.3",
-            deprecatedIn = "2.3.4",
-        )
-        val metadataComponent = """
+        val metadata =
+            ClassVersionMetadata(
+                className = "androidx.example.Foo",
+                addedIn = "1.2.3",
+                deprecatedIn = "2.3.4",
+            )
+        val metadataComponent =
+            """
             |class Foo
-        """.render().metadataForClasslike(
-            versionMetadataMap = mapOf("androidx.example.Foo" to metadata),
-        )
+        """
+                .render()
+                .metadataForClasslike(
+                    versionMetadataMap = mapOf("androidx.example.Foo" to metadata),
+                )
 
         val versionMetadata = metadataComponent.data.versionMetadata
         assertThat(versionMetadata).isNotNull()
@@ -90,16 +100,20 @@ internal class MetadataConverterTest(
 
     @Test
     fun `API version for a Class with only addedIn is generated correctly`() {
-        val metadata = ClassVersionMetadata(
-            className = "androidx.example.Foo",
-            addedIn = "1.2.3",
-            deprecatedIn = null,
-        )
-        val metadataComponent = """
+        val metadata =
+            ClassVersionMetadata(
+                className = "androidx.example.Foo",
+                addedIn = "1.2.3",
+                deprecatedIn = null,
+            )
+        val metadataComponent =
+            """
             |class Foo
-        """.render().metadataForClasslike(
-            versionMetadataMap = mapOf("androidx.example.Foo" to metadata),
-        )
+        """
+                .render()
+                .metadataForClasslike(
+                    versionMetadataMap = mapOf("androidx.example.Foo" to metadata),
+                )
 
         val versionMetadata = metadataComponent.data.versionMetadata
         assertThat(versionMetadata).isNotNull()
@@ -111,50 +125,61 @@ internal class MetadataConverterTest(
     @Test
     fun `API version for companion is generated correctly`() {
         // Companions appear in the metadata as both a class and a field of the containing class
-        val metadata = mapOf(
-            "androidx.example.Foo" to ClassVersionMetadata(
-                className = "androidx.example.Foo",
-                addedIn = "1.2.3",
-                fieldVersions = mapOf(
-                    "Companion" to ClassVersionMetadata.FieldVersionMetadata(
-                        fieldName = "Companion",
+        val metadata =
+            mapOf(
+                "androidx.example.Foo" to
+                    ClassVersionMetadata(
+                        className = "androidx.example.Foo",
                         addedIn = "1.2.3",
+                        fieldVersions =
+                            mapOf(
+                                "Companion" to
+                                    ClassVersionMetadata.FieldVersionMetadata(
+                                        fieldName = "Companion",
+                                        addedIn = "1.2.3",
+                                    ),
+                            ),
                     ),
-                ),
-            ),
-            "androidx.example.Foo.Companion" to ClassVersionMetadata(
-                className = "androidx.example.Foo.Companion",
-                addedIn = "1.2.3",
-                methodVersions = mapOf(
-                    "bar()" to ClassVersionMetadata.MethodVersionMetadata(
-                        methodName = "bar()",
+                "androidx.example.Foo.Companion" to
+                    ClassVersionMetadata(
+                        className = "androidx.example.Foo.Companion",
                         addedIn = "1.2.3",
+                        methodVersions =
+                            mapOf(
+                                "bar()" to
+                                    ClassVersionMetadata.MethodVersionMetadata(
+                                        methodName = "bar()",
+                                        addedIn = "1.2.3",
+                                    ),
+                                "getFoo()" to
+                                    ClassVersionMetadata.MethodVersionMetadata(
+                                        methodName = "getFoo()",
+                                        addedIn = "1.2.3",
+                                    ),
+                            ),
                     ),
-                    "getFoo()" to ClassVersionMetadata.MethodVersionMetadata(
-                        methodName = "getFoo()",
-                        addedIn = "1.2.3",
-                    ),
-                ),
-            ),
-        )
-        val module = """
+            )
+        val module =
+            """
             |class Foo {
             |    companion object {
             |        val foo = 3
             |        fun bar(): Unit {}
             |    }
             |}
-        """.render()
+        """
+                .render()
 
         val companion = module.classlike("Companion")!!
         val property = companion.properties.single()
         val function = companion.functions.single()
 
-        val metadataComponents = listOf(
-            module.metadata(companion, versionMetadataMap = metadata),
-            module.metadata(property, versionMetadataMap = metadata),
-            module.metadata(function, versionMetadataMap = metadata),
-        )
+        val metadataComponents =
+            listOf(
+                module.metadata(companion, versionMetadataMap = metadata),
+                module.metadata(property, versionMetadataMap = metadata),
+                module.metadata(function, versionMetadataMap = metadata),
+            )
 
         for (metadataComponent in metadataComponents) {
             val versionMetadata = metadataComponent.data.versionMetadata
@@ -167,23 +192,29 @@ internal class MetadataConverterTest(
 
     @Test
     fun `API version for @JvmName items is generated correctly`() {
-        val metadata = mapOf(
-            "androidx.example.Foo" to ClassVersionMetadata(
-                className = "androidx.example.Foo",
-                addedIn = "1.2.3",
-                methodVersions = mapOf(
-                    "renamedMethod()" to ClassVersionMetadata.MethodVersionMetadata(
-                        methodName = "renamedMethod()",
+        val metadata =
+            mapOf(
+                "androidx.example.Foo" to
+                    ClassVersionMetadata(
+                        className = "androidx.example.Foo",
                         addedIn = "1.2.3",
+                        methodVersions =
+                            mapOf(
+                                "renamedMethod()" to
+                                    ClassVersionMetadata.MethodVersionMetadata(
+                                        methodName = "renamedMethod()",
+                                        addedIn = "1.2.3",
+                                    ),
+                                "renamedGetter()" to
+                                    ClassVersionMetadata.MethodVersionMetadata(
+                                        methodName = "renamedGetter()",
+                                        addedIn = "1.2.3",
+                                    ),
+                            ),
                     ),
-                    "renamedGetter()" to ClassVersionMetadata.MethodVersionMetadata(
-                        methodName = "renamedGetter()",
-                        addedIn = "1.2.3",
-                    ),
-                ),
-            ),
-        )
-        val module = """
+            )
+        val module =
+            """
             |class Foo {
             |    @JvmName("renamedMethod")
             |    fun originalMethod(): Unit {}
@@ -191,13 +222,15 @@ internal class MetadataConverterTest(
             |    @get:JvmName("renamedGetter")
             |    val originalProperty = 3
             |}
-        """.render()
+        """
+                .render()
 
         // Dackka's version of these methods won't be renamed
-        val metadataComponents = listOf(
-            module.metadataForMethod("originalMethod", versionMetadataMap = metadata),
-            module.metadataForProperty("originalProperty", versionMetadataMap = metadata),
-        )
+        val metadataComponents =
+            listOf(
+                module.metadataForMethod("originalMethod", versionMetadataMap = metadata),
+                module.metadataForProperty("originalProperty", versionMetadataMap = metadata),
+            )
 
         for (metadataComponent in metadataComponents) {
             val versionMetadata = metadataComponent.data.versionMetadata
@@ -210,25 +243,31 @@ internal class MetadataConverterTest(
 
     @Test
     fun `API version for a method is generated correctly`() {
-        val metadata = ClassVersionMetadata(
-            className = "androidx.example.Foo",
-            addedIn = "1.2.3",
-            methodVersions = mapOf(
-                "bar()" to ClassVersionMetadata.MethodVersionMetadata(
-                    methodName = "bar()",
-                    addedIn = "1.2.3",
-                    deprecatedIn = "2.3.4",
-                ),
-            ),
-        )
-        val metadataComponent = """
+        val metadata =
+            ClassVersionMetadata(
+                className = "androidx.example.Foo",
+                addedIn = "1.2.3",
+                methodVersions =
+                    mapOf(
+                        "bar()" to
+                            ClassVersionMetadata.MethodVersionMetadata(
+                                methodName = "bar()",
+                                addedIn = "1.2.3",
+                                deprecatedIn = "2.3.4",
+                            ),
+                    ),
+            )
+        val metadataComponent =
+            """
             |class Foo {
             |    fun bar() {}
             |}
-        """.render().metadataForMethod(
-            name = "bar",
-            versionMetadataMap = mapOf("androidx.example.Foo" to metadata),
-        )
+        """
+                .render()
+                .metadataForMethod(
+                    name = "bar",
+                    versionMetadataMap = mapOf("androidx.example.Foo" to metadata),
+                )
 
         val versionMetadata = metadataComponent.data.versionMetadata
         assertThat(versionMetadata).isNotNull()
@@ -239,7 +278,8 @@ internal class MetadataConverterTest(
 
     @Test
     fun `apiSinceMethodSignature formats methods to match apiSince metadata string`() {
-        val functionsJ = """
+        val functionsJ =
+            """
             |public class Foo<T> {
             |    public void bar01() {}
             |    public void bar02(String param1) {}
@@ -248,8 +288,11 @@ internal class MetadataConverterTest(
             |    public void bar05(int param1) {}
             |    public void bar06(String... param1) {}
             |}
-        """.render(java = true).functions()!!
-        val functionsK = """
+        """
+                .render(java = true)
+                .functions()!!
+        val functionsK =
+            """
             |class Foo<T> {
             |    fun bar01() {}
             |    fun bar02(param1: String) {}
@@ -258,11 +301,12 @@ internal class MetadataConverterTest(
             |    fun bar05(param1: Int) {}
             |    fun bar06(vararg param1: String) {}
             |}
-        """.render().functions()!!
+        """
+                .render()
+                .functions()!!
 
         for (functions in listOf(functionsJ, functionsK)) {
-            assertThat(MetadataConverter.apiSinceMethodSignature(functions[0]))
-                .isEqualTo("bar01()")
+            assertThat(MetadataConverter.apiSinceMethodSignature(functions[0])).isEqualTo("bar01()")
             assertThat(MetadataConverter.apiSinceMethodSignature(functions[1]))
                 .isEqualTo("bar02(java.lang.String)")
             assertThat(MetadataConverter.apiSinceMethodSignature(functions[2]))
@@ -281,7 +325,8 @@ internal class MetadataConverterTest(
 
     @Test
     fun `apiSinceMethodSignature formats methods with array params to match metadata string`() {
-        val functionsJ = """
+        val functionsJ =
+            """
             |public class Foo {
             |    public void bar01(String[] param1) {}
             |    public void bar02(int[] param1) {}
@@ -290,8 +335,11 @@ internal class MetadataConverterTest(
             |    public void bar05(int[][] param1) {}
             |    public void bar06(String[][] param1) {}
             |}
-        """.render(java = true).functions()!!
-        val functionsK = """
+        """
+                .render(java = true)
+                .functions()!!
+        val functionsK =
+            """
             |class Foo {
             |    fun bar01(param1: Array<String>) {}
             |    fun bar02(param1: IntArray) {}
@@ -300,7 +348,9 @@ internal class MetadataConverterTest(
             |    fun bar05(param1: Array<IntArray>) {}
             |    fun bar06(param1: Array<Array<String>>) {}
             |}
-        """.render().functions()!!
+        """
+                .render()
+                .functions()!!
 
         for (functions in listOf(functionsJ, functionsK)) {
             assertThat(MetadataConverter.apiSinceMethodSignature(functions[0]))
@@ -320,7 +370,8 @@ internal class MetadataConverterTest(
 
     @Test
     fun `apiSinceMethodSignature formats params with generics to match metadata string`() {
-        val functionsJ = """
+        val functionsJ =
+            """
             |public class Foo {
             |    public void bar01(java.util.List<String> param1) {}
             |    public void bar02(java.util.Map<String, String> param1) {}
@@ -328,8 +379,11 @@ internal class MetadataConverterTest(
             |    public void bar04(java.util.List<? extends String> param1) {}
             |    public void bar05(java.util.List<? super String> param1) {}
             |}
-        """.render(java = true).functions()!!
-        val functionsK = """
+        """
+                .render(java = true)
+                .functions()!!
+        val functionsK =
+            """
             |class Foo {
             |    fun bar01(param1: List<String>) {}
             |    fun bar02(param1: Map<String, String>) {}
@@ -337,7 +391,9 @@ internal class MetadataConverterTest(
             |    fun bar04(param1: List<out String>) {}
             |    fun bar05(param1: List<in String>) {}
             |}
-        """.render().functions()!!
+        """
+                .render()
+                .functions()!!
 
         for (functions in listOf(functionsJ, functionsK)) {
             assertThat(MetadataConverter.apiSinceMethodSignature(functions[0]))
@@ -355,7 +411,8 @@ internal class MetadataConverterTest(
 
     @Test
     fun `apiSinceMethodSignature formats methods with generics to match metadata string`() {
-        val functionsJ = """
+        val functionsJ =
+            """
             |public class Foo {
             |    public <E> void bar01(E param1) {}
             |    public <E extends String> void bar02(E param1) {}
@@ -363,8 +420,11 @@ internal class MetadataConverterTest(
             |    public <I, O> void bar04(java.util.Map<I, O> param1) {}
             |    public <E extends String & Cloneable> void bar05(E param) {}
             |}
-        """.render(java = true).functions()!!
-        val functionsK = """
+        """
+                .render(java = true)
+                .functions()!!
+        val functionsK =
+            """
             |class Foo {
             |    fun <E> bar01(param1: E) {}
             |    fun <E : String> bar02(param1: E) {}
@@ -372,7 +432,9 @@ internal class MetadataConverterTest(
             |    fun <I, O> bar04(param1: Map<I, O>) {}
             |    fun <E> bar05(param1: E)  where E: String, E: Cloneable {}
             |}
-        """.render().functions()!!
+        """
+                .render()
+                .functions()!!
 
         for (functions in listOf(functionsJ, functionsK)) {
             assertThat(MetadataConverter.apiSinceMethodSignature(functions[0]))
@@ -390,7 +452,8 @@ internal class MetadataConverterTest(
 
     @Test
     fun `apiSinceMethodSignature formats higher-order methods to match apiSince metadata string`() {
-        val functions = """
+        val functions =
+            """
             |class Foo {
             |    fun bar01(param: (String) -> String) {}
             |    fun bar02(param: (Any) -> String) {}
@@ -401,7 +464,9 @@ internal class MetadataConverterTest(
             |    fun bar07(param: () -> Unit) {}
             |    fun bar08(param: (List<String>) -> Unit) {}
             |}
-        """.render().functions()!!
+        """
+                .render()
+                .functions()!!
 
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[0]))
             .isEqualTo(
@@ -433,7 +498,8 @@ internal class MetadataConverterTest(
 
     @Test
     fun `apiSinceMethodSignature formats lambda returns to match metadata string`() {
-        val functions = """
+        val functions =
+            """
             |class Foo {
             |   fun bar01(param: () -> String) {}
             |   fun bar02(param: () -> String?) {}
@@ -447,7 +513,9 @@ internal class MetadataConverterTest(
             |   fun bar10(param: () -> ((String) -> String)) {}
             |   fun <E> bar11(param: () -> E) {}
             |}
-        """.render().functions()!!
+        """
+                .render()
+                .functions()!!
 
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[0]))
             .isEqualTo("bar01(kotlin.jvm.functions.Function0<java.lang.String>)")
@@ -486,7 +554,8 @@ internal class MetadataConverterTest(
 
     @Test
     fun `apiSinceMethodSignature formats suspend params to match apiSince metadata string`() {
-        val functions = """
+        val functions =
+            """
             |class Foo {
             |    fun bar01(param: suspend (String) -> String) {}
             |    fun bar02(param: suspend (Any) -> String) {}
@@ -496,7 +565,9 @@ internal class MetadataConverterTest(
             |    fun bar06(param: suspend (String) -> Unit) {}
             |    fun bar07(param: suspend () -> Unit) {}
             |}
-        """.render().functions()!!
+        """
+                .render()
+                .functions()!!
 
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[0]))
             .isEqualTo(
@@ -539,14 +610,17 @@ internal class MetadataConverterTest(
 
     @Test
     fun `apiSinceMethodSignature formats suspend function to match apiSince metadata string`() {
-        val functions = """
+        val functions =
+            """
             |class Foo {
             |    suspend fun bar01() {}
             |    suspend fun bar02(param: String) {}
             |    suspend fun bar03(param: (String) -> String) {}
             |    suspend fun bar04(param: suspend (String) -> String) {}
             |}
-        """.render().functions()!!
+        """
+                .render()
+                .functions()!!
 
         assertThat(MetadataConverter.apiSinceMethodSignature(functions[0]))
             .isEqualTo("bar01(kotlin.coroutines.Continuation<? super kotlin.Unit>)")
@@ -570,39 +644,49 @@ internal class MetadataConverterTest(
     @Test
     fun `API versions for synthetic classes, top-level properties, and top-level functions`() {
         // The version metadata is generated by metalava based on the Java API
-        val metadataMap = mapOf(
-            "androidx.example.TestKt" to ClassVersionMetadata(
-                className = "androidx.example.TestKt",
-                addedIn = "1.2.3",
-                methodVersions = mapOf(
-                    "topLevelFun()" to ClassVersionMetadata.MethodVersionMetadata(
-                        methodName = "topLevelFun()",
+        val metadataMap =
+            mapOf(
+                "androidx.example.TestKt" to
+                    ClassVersionMetadata(
+                        className = "androidx.example.TestKt",
                         addedIn = "1.2.3",
+                        methodVersions =
+                            mapOf(
+                                "topLevelFun()" to
+                                    ClassVersionMetadata.MethodVersionMetadata(
+                                        methodName = "topLevelFun()",
+                                        addedIn = "1.2.3",
+                                    ),
+                            ),
+                        fieldVersions =
+                            mapOf(
+                                "topLevelConst" to
+                                    ClassVersionMetadata.FieldVersionMetadata(
+                                        fieldName = "topLevelConst",
+                                        addedIn = "1.2.3",
+                                    ),
+                            ),
                     ),
-                ),
-                fieldVersions = mapOf(
-                    "topLevelConst" to ClassVersionMetadata.FieldVersionMetadata(
-                        fieldName = "topLevelConst",
-                        addedIn = "1.2.3",
-                    ),
-                ),
-            ),
-        )
-        val module = """
+            )
+        val module =
+            """
             |fun topLevelFun(): Unit {}
             |const val topLevelConst: Int = 2
-        """.render()
+        """
+                .render()
 
-        val metadataComponents = mutableListOf(
-            module.metadataForProperty("topLevelProperty", versionMetadataMap = metadataMap),
-            module.metadataForMethod("topLevelMethod", versionMetadataMap = metadataMap),
-        )
+        val metadataComponents =
+            mutableListOf(
+                module.metadataForProperty("topLevelProperty", versionMetadataMap = metadataMap),
+                module.metadataForMethod("topLevelMethod", versionMetadataMap = metadataMap),
+            )
         // In Java, the property and function will exist within a synthetic class
         if (displayLanguage == Language.JAVA) {
-            metadataComponents += module.metadataForClasslike(
-                name = "TestKt",
-                versionMetadataMap = metadataMap,
-            )
+            metadataComponents +=
+                module.metadataForClasslike(
+                    name = "TestKt",
+                    versionMetadataMap = metadataMap,
+                )
         }
 
         for (metadataComponent in metadataComponents) {
@@ -617,24 +701,30 @@ internal class MetadataConverterTest(
     @Test
     fun `API version for a regular property is generated correctly`() {
         // Regular properties are represented by their accessors in the metadata
-        val metadata = mapOf(
-            "androidx.example.Foo" to ClassVersionMetadata(
-                className = "androidx.example.Foo",
-                addedIn = "1.0.0",
-                methodVersions = mapOf(
-                    "getFoo()" to ClassVersionMetadata.MethodVersionMetadata(
-                        methodName = "getFoo()",
-                        addedIn = "1.2.3",
-                        deprecatedIn = "2.3.4",
+        val metadata =
+            mapOf(
+                "androidx.example.Foo" to
+                    ClassVersionMetadata(
+                        className = "androidx.example.Foo",
+                        addedIn = "1.0.0",
+                        methodVersions =
+                            mapOf(
+                                "getFoo()" to
+                                    ClassVersionMetadata.MethodVersionMetadata(
+                                        methodName = "getFoo()",
+                                        addedIn = "1.2.3",
+                                        deprecatedIn = "2.3.4",
+                                    ),
+                            ),
                     ),
-                ),
-            ),
-        )
-        val module = """
+            )
+        val module =
+            """
             |class Foo {
             |    val foo = 3
             |}
-        """.render()
+        """
+                .render()
 
         val metadataComponent = module.metadataForProperty(versionMetadataMap = metadata)
         val versionMetadata = metadataComponent.data.versionMetadata
@@ -646,24 +736,30 @@ internal class MetadataConverterTest(
 
     @Test
     fun `API version for a const property is generated correctly`() {
-        val metadata = ClassVersionMetadata(
-            className = "androidx.example.Foo",
-            addedIn = "1.0.0",
-            fieldVersions = mapOf(
-                "foo" to ClassVersionMetadata.FieldVersionMetadata(
-                    fieldName = "foo",
-                    addedIn = "1.2.3",
-                    deprecatedIn = "2.3.4",
-                ),
-            ),
-        )
-        val metadataComponent = """
+        val metadata =
+            ClassVersionMetadata(
+                className = "androidx.example.Foo",
+                addedIn = "1.0.0",
+                fieldVersions =
+                    mapOf(
+                        "foo" to
+                            ClassVersionMetadata.FieldVersionMetadata(
+                                fieldName = "foo",
+                                addedIn = "1.2.3",
+                                deprecatedIn = "2.3.4",
+                            ),
+                    ),
+            )
+        val metadataComponent =
+            """
             |class Foo {
             |    const val foo = 3
             |}
-        """.render().metadataForProperty(
-            versionMetadataMap = mapOf("androidx.example.Foo" to metadata),
-        )
+        """
+                .render()
+                .metadataForProperty(
+                    versionMetadataMap = mapOf("androidx.example.Foo" to metadata),
+                )
 
         val versionMetadata = metadataComponent.data.versionMetadata
         assertThat(versionMetadata).isNotNull()
@@ -675,42 +771,49 @@ internal class MetadataConverterTest(
     @Test
     fun `API versions for extension functions and properties are generated correctly`() {
         // Extension functions/properties will appear as functions with receivers
-        val metadata = mapOf(
-            "androidx.example.TestKt" to ClassVersionMetadata(
-                className = "androidx.example.TestKt",
-                addedIn = "1.2.3",
-                methodVersions = mapOf(
-                    "extensionFun(androidx.example.Foo)" to
-                        ClassVersionMetadata.MethodVersionMetadata(
-                            methodName = "extensionFun(androidx.example.Foo)",
-                            addedIn = "1.2.3",
-                        ),
-                    "getExtensionVal(androidx.example.Foo)" to
-                        ClassVersionMetadata.MethodVersionMetadata(
-                            methodName = "foo",
-                            addedIn = "1.2.3",
-                        ),
-                    "listExtensionFun(java.util.List<java.lang.String>)" to
-                        ClassVersionMetadata.MethodVersionMetadata(
-                            methodName = "listExtensionFun(java.util.List<java.lang.String>)",
-                            addedIn = "1.2.3",
-                        ),
-                ),
-            ),
-        )
-        val module = """
+        val metadata =
+            mapOf(
+                "androidx.example.TestKt" to
+                    ClassVersionMetadata(
+                        className = "androidx.example.TestKt",
+                        addedIn = "1.2.3",
+                        methodVersions =
+                            mapOf(
+                                "extensionFun(androidx.example.Foo)" to
+                                    ClassVersionMetadata.MethodVersionMetadata(
+                                        methodName = "extensionFun(androidx.example.Foo)",
+                                        addedIn = "1.2.3",
+                                    ),
+                                "getExtensionVal(androidx.example.Foo)" to
+                                    ClassVersionMetadata.MethodVersionMetadata(
+                                        methodName = "foo",
+                                        addedIn = "1.2.3",
+                                    ),
+                                "listExtensionFun(java.util.List<java.lang.String>)" to
+                                    ClassVersionMetadata.MethodVersionMetadata(
+                                        methodName =
+                                            "listExtensionFun(java.util.List<java.lang.String>)",
+                                        addedIn = "1.2.3",
+                                    ),
+                            ),
+                    ),
+            )
+        val module =
+            """
             |class Foo
             |
             |fun Foo.extensionFun(): Unit {}
             |val Foo.extensionVal: Int get() = 2
             |fun List<String>.listExtensionFun() {}
-        """.render()
+        """
+                .render()
 
-        val metadataComponents = listOf(
-            module.metadataForMethod("extensionFun", versionMetadataMap = metadata),
-            module.metadataForProperty("extensionVal", versionMetadataMap = metadata),
-            module.metadataForMethod("listExtensionFun", versionMetadataMap = metadata),
-        )
+        val metadataComponents =
+            listOf(
+                module.metadataForMethod("extensionFun", versionMetadataMap = metadata),
+                module.metadataForProperty("extensionVal", versionMetadataMap = metadata),
+                module.metadataForMethod("listExtensionFun", versionMetadataMap = metadata),
+            )
 
         for (metadataComponent in metadataComponents) {
             val versionMetadata = metadataComponent.data.versionMetadata
@@ -723,55 +826,66 @@ internal class MetadataConverterTest(
 
     @Test
     fun `Version metadata links to release notes`() {
-        val libraryMetadataMap = mapOf(
-            "kotlin/androidx/example/Test.kt" to LibraryMetadata(
-                groupId = "androidx.example",
-                artifactId = "example",
-                releaseNotesUrl = "https://d.android.com/release/example",
-            ),
-        )
-        val versionMetadataMap = mapOf(
-            "androidx.example.Foo" to ClassVersionMetadata(
-                className = "androidx.example.Foo",
-                addedIn = "1.2.3",
-                deprecatedIn = "2.3.4",
-                methodVersions = mapOf(
-                    "bar()" to ClassVersionMetadata.MethodVersionMetadata(
-                        methodName = "bar()",
+        val libraryMetadataMap =
+            mapOf(
+                "kotlin/androidx/example/Test.kt" to
+                    LibraryMetadata(
+                        groupId = "androidx.example",
+                        artifactId = "example",
+                        releaseNotesUrl = "https://d.android.com/release/example",
+                    ),
+            )
+        val versionMetadataMap =
+            mapOf(
+                "androidx.example.Foo" to
+                    ClassVersionMetadata(
+                        className = "androidx.example.Foo",
                         addedIn = "1.2.3",
                         deprecatedIn = "2.3.4",
+                        methodVersions =
+                            mapOf(
+                                "bar()" to
+                                    ClassVersionMetadata.MethodVersionMetadata(
+                                        methodName = "bar()",
+                                        addedIn = "1.2.3",
+                                        deprecatedIn = "2.3.4",
+                                    ),
+                            ),
+                        fieldVersions =
+                            mapOf(
+                                "foo" to
+                                    ClassVersionMetadata.FieldVersionMetadata(
+                                        fieldName = "foo",
+                                        addedIn = "1.2.3",
+                                        deprecatedIn = "2.3.4",
+                                    ),
+                            ),
                     ),
-                ),
-                fieldVersions = mapOf(
-                    "foo" to ClassVersionMetadata.FieldVersionMetadata(
-                        fieldName = "foo",
-                        addedIn = "1.2.3",
-                        deprecatedIn = "2.3.4",
-                    ),
-                ),
-            ),
-        )
+            )
 
-        val module = """
+        val module =
+            """
             |class Foo {
             |    const val foo = 3
             |    fun bar() {}
             |}
-        """.render()
-        val metadataComponents = listOf(
-            module.metadataForClasslike(
-                versionMetadataMap = versionMetadataMap,
-                fileMetadataMap = libraryMetadataMap,
-            ),
-            module.metadataForProperty(
-                versionMetadataMap = versionMetadataMap,
-                fileMetadataMap = libraryMetadataMap,
-            ),
-            module.metadataForMethod(
-                versionMetadataMap = versionMetadataMap,
-                fileMetadataMap = libraryMetadataMap,
-            ),
-        )
+        """
+                .render()
+        val metadataComponents =
+            listOf(
+                module.metadataForClasslike(
+                    versionMetadataMap = versionMetadataMap,
+                    fileMetadataMap = libraryMetadataMap,
+                ),
+                module.metadataForProperty(
+                    versionMetadataMap = versionMetadataMap,
+                    fileMetadataMap = libraryMetadataMap,
+                ),
+                module.metadataForMethod(
+                    versionMetadataMap = versionMetadataMap,
+                    fileMetadataMap = libraryMetadataMap,
+                ),
+            )
 
         for (metadataComponent in metadataComponents) {
             val versionMetadata = metadataComponent.data.versionMetadata
@@ -790,188 +904,227 @@ internal class MetadataConverterTest(
 
     @Test
     fun `Library metadata for a top-level function and property`() {
-        val libraryMetadataMap = mapOf(
-            "kotlin/androidx/example/Test.kt" to LibraryMetadata(
-                groupId = "androidx.example",
-                artifactId = "example",
-                releaseNotesUrl = "https://d.android.com/release/example",
-            ),
-        )
+        val libraryMetadataMap =
+            mapOf(
+                "kotlin/androidx/example/Test.kt" to
+                    LibraryMetadata(
+                        groupId = "androidx.example",
+                        artifactId = "example",
+                        releaseNotesUrl = "https://d.android.com/release/example",
+                    ),
+            )
 
-        val module = """
+        val module =
+            """
             |const val foo = 3
             |fun bar() {}
-        """.render()
-        val (function, property) = if (displayLanguage == Language.JAVA) {
-            val syntheticClass = module.classlike("TestKt")!!
-            Pair(syntheticClass.functions.single(), syntheticClass.properties.single())
-        } else {
-            Pair(module.function("bar")!!, module.property("foo")!!)
-        }
+        """
+                .render()
+        val (function, property) =
+            if (displayLanguage == Language.JAVA) {
+                val syntheticClass = module.classlike("TestKt")!!
+                Pair(syntheticClass.functions.single(), syntheticClass.properties.single())
+            } else {
+                Pair(module.function("bar")!!, module.property("foo")!!)
+            }
 
-        val metadataComponents = listOf(
-            module.metadata(function, fileMetadataMap = libraryMetadataMap),
-            module.metadata(property, fileMetadataMap = libraryMetadataMap),
-        )
+        val metadataComponents =
+            listOf(
+                module.metadata(function, fileMetadataMap = libraryMetadataMap),
+                module.metadata(property, fileMetadataMap = libraryMetadataMap),
+            )
         for (metadataComponent in metadataComponents) {
             val libraryMetadata = metadataComponent.data.libraryMetadata
             assertThat(libraryMetadata).isNotNull()
             assertThat(libraryMetadata!!.groupId).isEqualTo("androidx.example")
             assertThat(libraryMetadata.artifactId).isEqualTo("example")
-            assertThat(libraryMetadata.releaseNotesUrl).isEqualTo(
-                "https://d.android.com/release/example",
-            )
+            assertThat(libraryMetadata.releaseNotesUrl)
+                .isEqualTo(
+                    "https://d.android.com/release/example",
+                )
         }
     }
 
     @Test
     fun `Library metadata for extension function and property`() {
-        val libraryMetadataMap = mapOf(
-            "kotlin/androidx/example/Test.kt" to LibraryMetadata(
-                groupId = "androidx.example",
-                artifactId = "example",
-                releaseNotesUrl = "https://d.android.com/release/example",
-            ),
-        )
+        val libraryMetadataMap =
+            mapOf(
+                "kotlin/androidx/example/Test.kt" to
+                    LibraryMetadata(
+                        groupId = "androidx.example",
+                        artifactId = "example",
+                        releaseNotesUrl = "https://d.android.com/release/example",
+                    ),
+            )
 
-        val module = """
+        val module =
+            """
             |val String.foo get() = 0
             |fun String.bar() = Unit
-        """.render()
+        """
+                .render()
 
-        val metadataComponents = listOf(
-            module.metadataForMethod(fileMetadataMap = libraryMetadataMap),
-            module.metadataForProperty(fileMetadataMap = libraryMetadataMap),
-        )
+        val metadataComponents =
+            listOf(
+                module.metadataForMethod(fileMetadataMap = libraryMetadataMap),
+                module.metadataForProperty(fileMetadataMap = libraryMetadataMap),
+            )
         for (metadataComponent in metadataComponents) {
             val libraryMetadata = metadataComponent.data.libraryMetadata
             assertThat(libraryMetadata).isNotNull()
             assertThat(libraryMetadata!!.groupId).isEqualTo("androidx.example")
             assertThat(libraryMetadata.artifactId).isEqualTo("example")
-            assertThat(libraryMetadata.releaseNotesUrl).isEqualTo(
-                "https://d.android.com/release/example",
-            )
+            assertThat(libraryMetadata.releaseNotesUrl)
+                .isEqualTo(
+                    "https://d.android.com/release/example",
+                )
         }
     }
 
     @Test
     fun `Top level function source link`() {
-        val module = """
+        val module =
+            """
             |fun bar() {}
-        """.render()
-        val function = if (displayLanguage == Language.JAVA) {
-            module.classlike("TestKt")!!.functions.single()
-        } else {
-            module.function("bar")!!
-        }
-        val metadataComponent = module.metadata(
-            function,
-            baseFunctionSourceLink = "https://cs.android.com/search?q=file:%s+function:%s",
-        )
+        """
+                .render()
+        val function =
+            if (displayLanguage == Language.JAVA) {
+                module.classlike("TestKt")!!.functions.single()
+            } else {
+                module.function("bar")!!
+            }
+        val metadataComponent =
+            module.metadata(
+                function,
+                baseFunctionSourceLink = "https://cs.android.com/search?q=file:%s+function:%s",
+            )
         val sourceLinkComponent = metadataComponent.data.sourceLink
         assertThat(sourceLinkComponent).isNotNull()
-        assertThat(sourceLinkComponent!!.data.url).isEqualTo(
-            "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+function:bar",
-        )
+        assertThat(sourceLinkComponent!!.data.url)
+            .isEqualTo(
+                "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+function:bar",
+            )
     }
 
     @Test
     fun `Top level property source link`() {
-        val module = """
+        val module =
+            """
             |const val foo = 3
-        """.render()
-        val property = if (displayLanguage == Language.JAVA) {
-            module.classlike("TestKt")!!.properties.single()
-        } else {
-            module.property("foo")!!
-        }
-        val metadataComponent = module.metadata(
-            property,
-            basePropertySourceLink = "https://cs.android.com/search?q=file:%s+symbol:%s",
-        )
+        """
+                .render()
+        val property =
+            if (displayLanguage == Language.JAVA) {
+                module.classlike("TestKt")!!.properties.single()
+            } else {
+                module.property("foo")!!
+            }
+        val metadataComponent =
+            module.metadata(
+                property,
+                basePropertySourceLink = "https://cs.android.com/search?q=file:%s+symbol:%s",
+            )
         val sourceLinkComponent = metadataComponent.data.sourceLink
         assertThat(sourceLinkComponent).isNotNull()
-        assertThat(sourceLinkComponent!!.data.url).isEqualTo(
-            "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+symbol:foo",
-        )
+        assertThat(sourceLinkComponent!!.data.url)
+            .isEqualTo(
+                "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+symbol:foo",
+            )
     }
 
     @Test
     fun `Top level property accessor source link`() {
         if (displayLanguage == Language.JAVA) {
-            val module = """
+            val module =
+                """
                 |val foo = 3
-            """.render()
+            """
+                    .render()
 
             val accessor = module.properties()!!.gettersAndSetters().single()
-            val metadataComponent = module.metadata(
-                accessor,
-                baseFunctionSourceLink = "https://cs.android.com/search?q=file:%s+function:%s",
-                basePropertySourceLink = "https://cs.android.com/search?q=file:%s+symbol:%s",
-            )
+            val metadataComponent =
+                module.metadata(
+                    accessor,
+                    baseFunctionSourceLink = "https://cs.android.com/search?q=file:%s+function:%s",
+                    basePropertySourceLink = "https://cs.android.com/search?q=file:%s+symbol:%s",
+                )
             val sourceLinkComponent = metadataComponent.data.sourceLink
             assertThat(sourceLinkComponent).isNotNull()
-            assertThat(sourceLinkComponent!!.data.url).isEqualTo(
-                "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+symbol:foo",
-            )
+            assertThat(sourceLinkComponent!!.data.url)
+                .isEqualTo(
+                    "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+symbol:foo",
+                )
         }
     }
 
     @Test
     fun `Source link for renamed function`() {
-        val module = """
+        val module =
+            """
             |@JvmName("bar")
             |fun foo() = Unit
-        """.render()
+        """
+                .render()
         val renamedFunction = module.function("foo")!!.withJvmName()
 
-        val metadataComponent = module.metadata(
-            renamedFunction,
-            baseFunctionSourceLink = "https://cs.android.com/search?q=file:%s+function:%s",
-        )
+        val metadataComponent =
+            module.metadata(
+                renamedFunction,
+                baseFunctionSourceLink = "https://cs.android.com/search?q=file:%s+function:%s",
+            )
         val sourceLinkComponent = metadataComponent.data.sourceLink
         assertThat(sourceLinkComponent).isNotNull()
-        assertThat(sourceLinkComponent!!.data.url).isEqualTo(
-            "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+function:foo",
-        )
+        assertThat(sourceLinkComponent!!.data.url)
+            .isEqualTo(
+                "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+function:foo",
+            )
     }
 
     @Test
     fun `Source link for renamed accessor`() {
-        val module = """
+        val module =
+            """
             |@get:JvmName("bar")
             |val foo = 3
-        """.render()
+        """
+                .render()
         val renamedFunction = module.properties()!!.gettersAndSetters().single().withJvmName()
 
-        val metadataComponent = module.metadata(
-            renamedFunction,
-            baseFunctionSourceLink = "https://cs.android.com/search?q=file:%s+function:%s",
-            basePropertySourceLink = "https://cs.android.com/search?q=file:%s+symbol:%s",
-        )
+        val metadataComponent =
+            module.metadata(
+                renamedFunction,
+                baseFunctionSourceLink = "https://cs.android.com/search?q=file:%s+function:%s",
+                basePropertySourceLink = "https://cs.android.com/search?q=file:%s+symbol:%s",
+            )
         val sourceLinkComponent = metadataComponent.data.sourceLink
         assertThat(sourceLinkComponent).isNotNull()
-        assertThat(sourceLinkComponent!!.data.url).isEqualTo(
-            "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+symbol:foo",
-        )
+        assertThat(sourceLinkComponent!!.data.url)
+            .isEqualTo(
+                "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+symbol:foo",
+            )
     }
 
     @Test
     fun `Source link for function in renamed file`() {
-        val module = """
+        val module =
+            """
             |fun foo() = Unit
-        """.render(fileUseAnnotation = "@file:JvmName(\"Foo\")")
+        """
+                .render(fileUseAnnotation = "@file:JvmName(\"Foo\")")
         val function = module.function("foo")!!.withJvmName()
 
-        val metadataComponent = module.metadata(
-            function,
-            baseFunctionSourceLink = "https://cs.android.com/search?q=file:%s+function:%s",
-        )
+        val metadataComponent =
+            module.metadata(
+                function,
+                baseFunctionSourceLink = "https://cs.android.com/search?q=file:%s+function:%s",
+            )
         val sourceLinkComponent = metadataComponent.data.sourceLink
         assertThat(sourceLinkComponent).isNotNull()
-        assertThat(sourceLinkComponent!!.data.url).isEqualTo(
-            "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+function:foo",
-        )
+        assertThat(sourceLinkComponent!!.data.url)
+            .isEqualTo(
+                "https://cs.android.com/search?q=file:kotlin/androidx/example/Test.kt+function:foo",
+            )
     }
 
     private fun DModule.metadataForClasslike(
@@ -1021,15 +1174,16 @@ internal class MetadataConverterTest(
         versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap(),
         fileMetadataMap: Map<String, LibraryMetadata> = emptyMap(),
     ): MetadataComponent {
-        val converterHolder = ConverterHolder(
-            testClass = this@MetadataConverterTest,
-            module = this,
-            baseClassSourceLink = baseClassSourceLink,
-            baseFunctionSourceLink = baseFunctionSourceLink,
-            basePropertySourceLink = basePropertySourceLink,
-            versionMetadataMap = versionMetadataMap,
-            fileMetadataMap = fileMetadataMap,
-        )
+        val converterHolder =
+            ConverterHolder(
+                testClass = this@MetadataConverterTest,
+                module = this,
+                baseClassSourceLink = baseClassSourceLink,
+                baseFunctionSourceLink = baseFunctionSourceLink,
+                basePropertySourceLink = basePropertySourceLink,
+                versionMetadataMap = versionMetadataMap,
+                fileMetadataMap = fileMetadataMap,
+            )
 
         return when (documentable) {
             is DClasslike -> converterHolder.metadataConverter.getMetadataForClasslike(documentable)
@@ -1042,9 +1196,10 @@ internal class MetadataConverterTest(
     companion object {
         @JvmStatic
         @Parameterized.Parameters(name = "{0}")
-        fun data() = listOf(
-            arrayOf(Language.JAVA),
-            arrayOf(Language.KOTLIN),
-        )
+        fun data() =
+            listOf(
+                arrayOf(Language.JAVA),
+                arrayOf(Language.KOTLIN),
+            )
     }
 }

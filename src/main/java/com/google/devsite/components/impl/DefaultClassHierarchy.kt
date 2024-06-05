@@ -17,6 +17,7 @@
 package com.google.devsite.components.impl
 
 import com.google.devsite.components.table.ClassHierarchy
+import kotlin.math.max
 import kotlinx.html.Entities
 import kotlinx.html.FlowContent
 import kotlinx.html.div
@@ -24,43 +25,41 @@ import kotlinx.html.table
 import kotlinx.html.tbody
 import kotlinx.html.td
 import kotlinx.html.tr
-import kotlin.math.max
 
 /** Default implementation of a class hierarchy. */
 internal data class DefaultClassHierarchy(
     override val data: ClassHierarchy.Params,
 ) : ClassHierarchy {
-    override fun render(into: FlowContent) = into.run {
-        if (data.parents.isEmpty()) return
+    override fun render(into: FlowContent) =
+        into.run {
+            if (data.parents.isEmpty()) return
 
-        div("devsite-table-wrapper") {
-            table("jd-inheritance-table") {
-                tbody {
-                    for ((level, parent) in data.parents.withIndex()) {
-                        tr {
-                            repeat(max(0, level - 1)) {
-                                td { +Entities.nbsp }
-                            }
+            div("devsite-table-wrapper") {
+                table("jd-inheritance-table") {
+                    tbody {
+                        for ((level, parent) in data.parents.withIndex()) {
+                            tr {
+                                repeat(max(0, level - 1)) { td { +Entities.nbsp } }
 
-                            if (level != 0) {
-                                td(classes = "jd-inheritance-space") {
-                                    repeat(3) { +Entities.nbsp }
-                                    +"↳"
+                                if (level != 0) {
+                                    td(classes = "jd-inheritance-space") {
+                                        repeat(3) { +Entities.nbsp }
+                                        +"↳"
+                                    }
                                 }
-                            }
 
-                            td {
-                                attributes["colspan"] = (data.parents.size - level).toString()
+                                td {
+                                    attributes["colspan"] = (data.parents.size - level).toString()
 
-                                parent.render(this)
+                                    parent.render(this)
+                                }
                             }
                         }
                     }
                 }
             }
         }
-    }
 
-    override fun toString() = data.parents.withIndex().reversed()
-        .joinToString { (level, parent) -> "$level: $parent" }
+    override fun toString() =
+        data.parents.withIndex().reversed().joinToString { (level, parent) -> "$level: $parent" }
 }

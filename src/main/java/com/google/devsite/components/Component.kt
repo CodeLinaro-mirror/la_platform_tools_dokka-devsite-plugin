@@ -37,34 +37,38 @@ internal interface Component<T> {
 
 inline fun FlowContent.devsiteFilter(crossinline block: HTMLTag.() -> Unit = {}) =
     HTMLTag(
-        tagName = "devsite-filter ",
-        consumer = consumer,
-        initialAttributes = attributesMapOf("select-el-container-id", "platform"),
-        namespace = null,
-        inlineTag = false,
-        emptyTag = false,
-    ).visit(block)
+            tagName = "devsite-filter ",
+            consumer = consumer,
+            initialAttributes = attributesMapOf("select-el-container-id", "platform"),
+            namespace = null,
+            inlineTag = false,
+            emptyTag = false,
+        )
+        .visit(block)
+
 fun FlowContent.devsitePlatformSelector(
     platforms: List<Platform>,
-) = HTMLTag(
-    tagName = "devsite-select ",
-    consumer = consumer,
-    initialAttributes = attributesMapOf("id", "platform", "label", "Select a platform"),
-    namespace = null,
-    inlineTag = false,
-    emptyTag = false,
-).visit {
-    this@devsitePlatformSelector.select {
-        multiple = true
-        platforms.map { platform ->
-            option {
-                selected = true
-                value = platform.devsiteId()
-                +platform.selectorDisplayName()
+) =
+    HTMLTag(
+            tagName = "devsite-select ",
+            consumer = consumer,
+            initialAttributes = attributesMapOf("id", "platform", "label", "Select a platform"),
+            namespace = null,
+            inlineTag = false,
+            emptyTag = false,
+        )
+        .visit {
+            this@devsitePlatformSelector.select {
+                multiple = true
+                platforms.map { platform ->
+                    option {
+                        selected = true
+                        value = platform.devsiteId()
+                        +platform.selectorDisplayName()
+                    }
+                }
             }
         }
-    }
-}
 
 internal fun List<Component<FlowContent>>.render(
     into: FlowContent,
@@ -73,31 +77,42 @@ internal fun List<Component<FlowContent>>.render(
     brackets: String = "",
     header: (() -> Unit)? = null,
     terminator: (() -> Unit)? = null,
-) = into.run {
-    if (isEmpty() && brackets != "()") return@run // do not print empty brackets except fun() parens
-    if (header != null) header()
-    if (brackets != "") +brackets[0].toString()
-    if (shouldBreak == ShouldBreak.AND_INDENT) br()
-    for (parameter in this@render) {
-        if (shouldBreak == ShouldBreak.AND_INDENT) repeat(4) { +Entities.nbsp }
-        // Group type parameters within a single set of <>s, rather than each making their own
-        if (parameter is TypeParameterComponent) {
-            parameter.render(this, false)
-        } else parameter.render(this)
+) =
+    into.run {
+        if (isEmpty() && brackets != "()")
+            return@run // do not print empty brackets except fun() parens
+        if (header != null) header()
+        if (brackets != "") +brackets[0].toString()
+        if (shouldBreak == ShouldBreak.AND_INDENT) br()
+        for (parameter in this@render) {
+            if (shouldBreak == ShouldBreak.AND_INDENT) repeat(4) { +Entities.nbsp }
+            // Group type parameters within a single set of <>s, rather than each making their own
+            if (parameter is TypeParameterComponent) {
+                parameter.render(this, false)
+            } else parameter.render(this)
 
-        if (parameter !== last() && separator != null) { // null separator -> no separation/spaces
-            +separator
-            when (shouldBreak) {
-                ShouldBreak.YES, ShouldBreak.AND_INDENT -> { br() }
-                ShouldBreak.MAYBE -> { +" " }
-                ShouldBreak.NO -> { +Entities.nbsp }
+            if (
+                parameter !== last() && separator != null
+            ) { // null separator -> no separation/spaces
+                +separator
+                when (shouldBreak) {
+                    ShouldBreak.YES,
+                    ShouldBreak.AND_INDENT -> {
+                        br()
+                    }
+                    ShouldBreak.MAYBE -> {
+                        +" "
+                    }
+                    ShouldBreak.NO -> {
+                        +Entities.nbsp
+                    }
+                }
             }
         }
+        if (shouldBreak == ShouldBreak.YES || shouldBreak == ShouldBreak.AND_INDENT) br()
+        if (brackets != "") +brackets[1].toString()
+        if (terminator != null) terminator()
     }
-    if (shouldBreak == ShouldBreak.YES || shouldBreak == ShouldBreak.AND_INDENT) br()
-    if (brackets != "") +brackets[1].toString()
-    if (terminator != null) terminator()
-}
 
 internal fun List<String>.render(
     into: FlowContent,
@@ -105,18 +120,19 @@ internal fun List<String>.render(
     separator: String = "",
     header: (() -> Unit)? = null,
     terminator: (() -> Unit)? = null,
-) = into.run {
-    if (isEmpty()) return@run
-    if (header != null) header()
-    for (string in this@render) {
-        +string
-        if (string != last()) {
-            +separator
-            if (nbsp) +Entities.nbsp else +" "
+) =
+    into.run {
+        if (isEmpty()) return@run
+        if (header != null) header()
+        for (string in this@render) {
+            +string
+            if (string != last()) {
+                +separator
+                if (nbsp) +Entities.nbsp else +" "
+            }
         }
+        if (terminator != null) terminator()
     }
-    if (terminator != null) terminator()
-}
 
 internal fun List<String>.length(separator: String = " ") =
     sumOf { it.length } + (size - 1) * separator.length

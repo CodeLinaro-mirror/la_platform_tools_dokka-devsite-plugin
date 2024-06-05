@@ -26,31 +26,32 @@ import kotlinx.html.meta
 internal data class DefaultReferenceObject(
     override val data: ReferenceObject.Params,
 ) : ReferenceObject {
-    override fun render(into: FlowContent) = into.run {
-        div {
-            // The itemscope attribute doesn't need a value, but kotlinx.html requires one.
-            attributes["itemscope"] = ""
-            attributes["itemtype"] = "http://developers.google.com/ReferenceObject"
-            meta {
-                itemProp = "name"
-                content = data.name
-            }
-            data.path?.let {
+    override fun render(into: FlowContent) =
+        into.run {
+            div {
+                // The itemscope attribute doesn't need a value, but kotlinx.html requires one.
+                attributes["itemscope"] = ""
+                attributes["itemtype"] = "http://developers.google.com/ReferenceObject"
                 meta {
-                    itemProp = "path"
-                    content = it
+                    itemProp = "name"
+                    content = data.name
                 }
-            }
-            for (property in data.properties) {
+                data.path?.let {
+                    meta {
+                        itemProp = "path"
+                        content = it
+                    }
+                }
+                for (property in data.properties) {
+                    meta {
+                        itemProp = "property"
+                        content = property
+                    }
+                }
                 meta {
-                    itemProp = "property"
-                    content = property
+                    itemProp = "language"
+                    content = data.language.name
                 }
-            }
-            meta {
-                itemProp = "language"
-                content = data.language.name
             }
         }
-    }
 }

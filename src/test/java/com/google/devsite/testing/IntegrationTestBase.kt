@@ -20,6 +20,8 @@ import com.google.common.truth.Truth.assertWithMessage
 import com.google.devsite.DevsiteConfiguration
 import com.google.devsite.defaultValidNullabilityAnnotations
 import com.google.devsite.renderer.converters.isRunningInDackkasTests
+import java.io.File
+import java.net.URL
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.DokkaConfigurationImpl
 import org.jetbrains.dokka.ExternalDocumentationLink
@@ -34,17 +36,16 @@ import org.jetbrains.dokka.utilities.DokkaConsoleLogger
 import org.jetbrains.dokka.utilities.LoggingLevel
 import org.junit.Before
 import testApi.testRunner.TestDokkaConfigurationBuilder
-import java.io.File
-import java.net.URL
 
 /**
  * Full integration tests of source to html generation.
  *
  * Html output results can be found in testData/
  */
-abstract class IntegrationTestBase : BaseAbstractTest(
-    logger = TestLogger(DokkaConsoleLogger(LoggingLevel.DEBUG)),
-) {
+abstract class IntegrationTestBase :
+    BaseAbstractTest(
+        logger = TestLogger(DokkaConsoleLogger(LoggingLevel.DEBUG)),
+    ) {
     @Before
     fun setUp() {
         isRunningInDackkasTests = true
@@ -63,10 +64,11 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             externalDocumentationLinks = externalLinks
             samples = samplesLocations
             includes = includeFiles
-            documentedVisibilities = setOf(
-                DokkaConfiguration.Visibility.PUBLIC,
-                DokkaConfiguration.Visibility.PROTECTED,
-            )
+            documentedVisibilities =
+                setOf(
+                    DokkaConfiguration.Visibility.PUBLIC,
+                    DokkaConfiguration.Visibility.PROTECTED,
+                )
         }
     }
 
@@ -88,72 +90,84 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         validNullabilityAnnotations: List<String> = defaultValidNullabilityAnnotations,
     ): DokkaConfigurationImpl {
         sources.forEach { check(it.isDirectory) { "$it does not exist or is not a directory" } }
-        val externalLinks = mapOf(
-            "coroutines" to "https://kotlinlang.org/api/kotlinx.coroutines",
-            "android" to "https://developer.android.com/reference",
-            "guava" to "https://guava.dev/releases/18.0/api/docs/package-list",
-            "kotlin" to "https://kotlinlang.org/api/latest/jvm/stdlib/",
-        ).map {
-            ExternalDocumentationLink(
-                url = URL(it.value),
-                // TODO: improve package-list updateability b/243840381
-                packageListUrl = File("testData").toPath()
-                    .resolve("package-lists/${it.key}/package-list").toUri().toURL(),
-            )
-        }
+        val externalLinks =
+            mapOf(
+                    "coroutines" to "https://kotlinlang.org/api/kotlinx.coroutines",
+                    "android" to "https://developer.android.com/reference",
+                    "guava" to "https://guava.dev/releases/18.0/api/docs/package-list",
+                    "kotlin" to "https://kotlinlang.org/api/latest/jvm/stdlib/",
+                )
+                .map {
+                    ExternalDocumentationLink(
+                        url = URL(it.value),
+                        // TODO: improve package-list updateability b/243840381
+                        packageListUrl =
+                            File("testData")
+                                .toPath()
+                                .resolve("package-lists/${it.key}/package-list")
+                                .toUri()
+                                .toURL(),
+                    )
+                }
 
-        val baseSourceLink = if (useAndroidxBaseSourceLink) {
-            "https://cs.android.com/search?q=file:%s+class:%s" +
-                "&ss=androidx/platform/frameworks/support"
-        } else {
-            null
-        }
+        val baseSourceLink =
+            if (useAndroidxBaseSourceLink) {
+                "https://cs.android.com/search?q=file:%s+class:%s" +
+                    "&ss=androidx/platform/frameworks/support"
+            } else {
+                null
+            }
 
         return dokkaConfiguration {
             makeSourcesets(sources, samplesLocations, includeFiles, externalLinks)
             offlineMode = true
-            pluginsConfigurations = mutableListOf(
-                PluginConfigurationImpl(
-                    fqPluginName = "com.google.devsite.DevsitePlugin",
-                    serializationFormat = DokkaConfiguration.SerializationFormat.JSON,
-                    values = DevsiteConfiguration(
-                        docRootPath = docRootPath,
-                        projectPath = projectPath,
-                        excludedPackages = null,
-                        excludedPackagesForJava = null,
-                        excludedPackagesForKotlin = null,
-                        libraryMetadataFilename = null,
-                        versionMetadataFilenames = versionMetadataFilesnames,
-                        javaDocsPath = javaDocsPath,
-                        kotlinDocsPath = kotlinDocsPath,
-                        includedHeadTagsPathJava = includedHeadTagsPathJava,
-                        includedHeadTagsPathKotlin = includedHeadTagsPathKotlin,
-                        packagePrefixToRemoveInToc = null,
-                        baseSourceLink = baseSourceLink,
-                        baseFunctionSourceLink = null,
-                        basePropertySourceLink = null,
-                        // These lists are based on the AndroidX excluded annotations
-                        annotationsNotToDisplay = listOf(
-                            "androidx.compose.runtime.Stable",
-                            "androidx.compose.runtime.Immutable",
-                            "androidx.compose.runtime.ReadOnlyComposable",
-                            "androidx.annotation.OptIn",
-                            "kotlin.OptIn",
-                            "androidx.annotation.CheckResult",
-                            "kotlin.ParameterName",
-                            "kotlin.js.JsName",
-                            "java.lang.Override",
-                        ),
-                        annotationsNotToDisplayJava = null,
-                        annotationsNotToDisplayKotlin = listOf(
-                            "kotlin.ExtensionFunctionType",
-                        ),
-                        hidingAnnotations = hidingAnnotations,
-                        includeHiddenParentSymbols = includeHiddenParentSymbols,
-                        validNullabilityAnnotations = validNullabilityAnnotations,
-                    ).toCompactJsonString(),
-                ),
-            )
+            pluginsConfigurations =
+                mutableListOf(
+                    PluginConfigurationImpl(
+                        fqPluginName = "com.google.devsite.DevsitePlugin",
+                        serializationFormat = DokkaConfiguration.SerializationFormat.JSON,
+                        values =
+                            DevsiteConfiguration(
+                                    docRootPath = docRootPath,
+                                    projectPath = projectPath,
+                                    excludedPackages = null,
+                                    excludedPackagesForJava = null,
+                                    excludedPackagesForKotlin = null,
+                                    libraryMetadataFilename = null,
+                                    versionMetadataFilenames = versionMetadataFilesnames,
+                                    javaDocsPath = javaDocsPath,
+                                    kotlinDocsPath = kotlinDocsPath,
+                                    includedHeadTagsPathJava = includedHeadTagsPathJava,
+                                    includedHeadTagsPathKotlin = includedHeadTagsPathKotlin,
+                                    packagePrefixToRemoveInToc = null,
+                                    baseSourceLink = baseSourceLink,
+                                    baseFunctionSourceLink = null,
+                                    basePropertySourceLink = null,
+                                    // These lists are based on the AndroidX excluded annotations
+                                    annotationsNotToDisplay =
+                                        listOf(
+                                            "androidx.compose.runtime.Stable",
+                                            "androidx.compose.runtime.Immutable",
+                                            "androidx.compose.runtime.ReadOnlyComposable",
+                                            "androidx.annotation.OptIn",
+                                            "kotlin.OptIn",
+                                            "androidx.annotation.CheckResult",
+                                            "kotlin.ParameterName",
+                                            "kotlin.js.JsName",
+                                            "java.lang.Override",
+                                        ),
+                                    annotationsNotToDisplayJava = null,
+                                    annotationsNotToDisplayKotlin =
+                                        listOf(
+                                            "kotlin.ExtensionFunctionType",
+                                        ),
+                                    hidingAnnotations = hidingAnnotations,
+                                    includeHiddenParentSymbols = includeHiddenParentSymbols,
+                                    validNullabilityAnnotations = validNullabilityAnnotations,
+                                )
+                                .toCompactJsonString(),
+                    ),
+                )
         }
     }
 
@@ -197,18 +211,20 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         sampleLocations: List<String> = emptyList(),
         includeFiles: List<String> = emptyList(),
     ) {
-        val configuration = makeExternalConfiguration(
-            paths.map { File(it).absoluteFile },
-            sampleLocations,
-            includeFiles,
-            docRootPath = "reference",
-            projectPath = "androidx",
-            javaDocsPath = "",
-            kotlinDocsPath = "kotlin",
-            useAndroidxBaseSourceLink = true,
-            validNullabilityAnnotations = defaultValidNullabilityAnnotations +
-                "org.checkerframework.checker.nullness.qual.Nullable",
-        )
+        val configuration =
+            makeExternalConfiguration(
+                paths.map { File(it).absoluteFile },
+                sampleLocations,
+                includeFiles,
+                docRootPath = "reference",
+                projectPath = "androidx",
+                javaDocsPath = "",
+                kotlinDocsPath = "kotlin",
+                useAndroidxBaseSourceLink = true,
+                validNullabilityAnnotations =
+                    defaultValidNullabilityAnnotations +
+                        "org.checkerframework.checker.nullness.qual.Nullable",
+            )
 
         val writerPlugin = TestOutputWriterPlugin()
 
@@ -224,6 +240,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
 
     /**
      * Executes dackka on source from an androidx checkout on the same machine. No validation.
+     *
      * @param maxFolders limits the source files run against, in case of performance issues
      */
     fun crawlingExecTest(
@@ -233,13 +250,14 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         maxFolders: Int = 999999,
     ) {
         // We never intend to run dackka on these folders
-        excludedPaths += listOf(
-            "test", // "test" folders don't contain "main"; stop recursion
-            "development", // A folder of scripts
-            "buildSrc", // Not published or documented
-            "frameworks", // basically a recursive symlink to checkout-root
-            "annotation-sampled", // not published and its docs confuse the samples system
-        )
+        excludedPaths +=
+            listOf(
+                "test", // "test" folders don't contain "main"; stop recursion
+                "development", // A folder of scripts
+                "buildSrc", // Not published or documented
+                "frameworks", // basically a recursive symlink to checkout-root
+                "annotation-sampled", // not published and its docs confuse the samples system
+            )
         var sourceRoots = mutableListOf<File>()
         val samplesRoots = mutableSetOf<String>() // Due to symlinks, we need to de-dupe Support4
         // We want to limit unnecessary recursion work, and we can check that no main folder is more
@@ -249,14 +267,16 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         var nextDirs = mutableListOf<File>()
         for (i in 0..MAX_DEPTH) {
             currentDirs.forEach { parent ->
-                parent.listFiles { child -> child.isDirectory }?.forEach { child ->
-                    when (child.name) {
-                        "main" -> sourceRoots += child
-                        "samples" -> samplesRoots += child.absolutePath
-                        in excludedPaths -> {}
-                        else -> nextDirs += child
+                parent
+                    .listFiles { child -> child.isDirectory }
+                    ?.forEach { child ->
+                        when (child.name) {
+                            "main" -> sourceRoots += child
+                            "samples" -> samplesRoots += child.absolutePath
+                            in excludedPaths -> {}
+                            else -> nextDirs += child
+                        }
                     }
-                }
             }
             currentDirs = nextDirs
             nextDirs = mutableListOf()
@@ -267,18 +287,20 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         logger.debug("Number of main folders found: ${sourceRoots.size}")
         logger.debug("Number of samples folders found: ${samplesRoots.size}")
 
-        val configuration = makeExternalConfiguration(
-            sourceRoots,
-            samplesRoots.toList(),
-            emptyList(),
-            docRootPath = "reference",
-            projectPath = "androidx",
-            javaDocsPath = "",
-            kotlinDocsPath = "kotlin",
-            useAndroidxBaseSourceLink = true,
-            validNullabilityAnnotations = defaultValidNullabilityAnnotations +
-                "org.checkerframework.checker.nullness.qual.Nullable",
-        )
+        val configuration =
+            makeExternalConfiguration(
+                sourceRoots,
+                samplesRoots.toList(),
+                emptyList(),
+                docRootPath = "reference",
+                projectPath = "androidx",
+                javaDocsPath = "",
+                kotlinDocsPath = "kotlin",
+                useAndroidxBaseSourceLink = true,
+                validNullabilityAnnotations =
+                    defaultValidNullabilityAnnotations +
+                        "org.checkerframework.checker.nullness.qual.Nullable",
+            )
 
         val writerPlugin = TestOutputWriterPlugin()
 
@@ -295,9 +317,9 @@ abstract class IntegrationTestBase : BaseAbstractTest(
     /**
      * Runs dackka on sources from a prebuilt; for verifying that there are no errors.
      *
-     * Sources are unzipped from prebuilts/androidx/internal/ (grabbed via gradle dependency)
-     *      into `build/explodedSources/$artifactName-$version-sources/`
-     * Samples are kept locally (read from `testData/$testName/samples/`), as they are not published
+     * Sources are unzipped from prebuilts/androidx/internal/ (grabbed via gradle dependency) into
+     * `build/explodedSources/$artifactName-$version-sources/` Samples are kept locally (read from
+     * `testData/$testName/samples/`), as they are not published
      */
     fun executePrebuilts(
         testName: String,
@@ -306,15 +328,16 @@ abstract class IntegrationTestBase : BaseAbstractTest(
     ) {
         val samplesBaseDir = "testData/$testName/samples"
 
-        val configuration = makeExternalConfiguration(
-            artifactNames.map { File("build/explodedSources/$it/").absoluteFile },
-            if (samples) listOf(samplesBaseDir) else emptyList(),
-            docRootPath = "reference",
-            projectPath = "androidx",
-            javaDocsPath = "",
-            kotlinDocsPath = "kotlin",
-            useAndroidxBaseSourceLink = true,
-        )
+        val configuration =
+            makeExternalConfiguration(
+                artifactNames.map { File("build/explodedSources/$it/").absoluteFile },
+                if (samples) listOf(samplesBaseDir) else emptyList(),
+                docRootPath = "reference",
+                projectPath = "androidx",
+                javaDocsPath = "",
+                kotlinDocsPath = "kotlin",
+                useAndroidxBaseSourceLink = true,
+            )
 
         val writerPlugin = TestOutputWriterPlugin()
 
@@ -331,8 +354,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
     /**
      * Reads sources and outputs from a directory in `./testData/`, and validates based on them.
      *
-     * Sources are located at testData/$path/source
-     * outputs are located at testData/$path/docs
+     * Sources are located at testData/$path/source outputs are located at testData/$path/docs
      */
     open fun validateDirectory(
         path: String,
@@ -354,25 +376,27 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         val sourceDir = "testData/$path/$suffix"
         val loggingDir = "testData/$path/logs"
 
-        val inferredProjectPath = projectPath
-            ?: File(sourceDir).listFiles().orEmpty().singleOrNull { it.isDirectory }?.name
-            ?: "dokkatest"
+        val inferredProjectPath =
+            projectPath
+                ?: File(sourceDir).listFiles().orEmpty().singleOrNull { it.isDirectory }?.name
+                ?: "dokkatest"
 
-        val configuration = makeInternalConfiguration(
-            samplesBaseDir,
-            sourceDir,
-            sampleLocations,
-            includeFiles,
-            docRootPath,
-            inferredProjectPath,
-            javaDocsDirectory,
-            kotlinDocsDirectory,
-            includedHeadTagsPathJava,
-            includedHeadTagsPathKotlin,
-            useAndroidxBaseSourceLink,
-            hidingAnnotations,
-            includeHiddenParentSymbols,
-        )
+        val configuration =
+            makeInternalConfiguration(
+                samplesBaseDir,
+                sourceDir,
+                sampleLocations,
+                includeFiles,
+                docRootPath,
+                inferredProjectPath,
+                javaDocsDirectory,
+                kotlinDocsDirectory,
+                includedHeadTagsPathJava,
+                includedHeadTagsPathKotlin,
+                useAndroidxBaseSourceLink,
+                hidingAnnotations,
+                includeHiddenParentSymbols,
+            )
 
         val writerPlugin = TestOutputWriterPlugin()
 
@@ -390,10 +414,10 @@ abstract class IntegrationTestBase : BaseAbstractTest(
     /**
      * Runs dackka on sources from a prebuilt and validates against saved docs in `./testData/`.
      *
-     * Sources are unzipped from prebuilts/androidx/internal/ (grabbed via gradle dependency)
-     *      into `build/explodedSources/$artifactName-$version-sources/`
-     * outputs are located at `testData/$testName/docs`
-     * Samples are kept locally (read from `testData/$testName/samples/`), as they are not published
+     * Sources are unzipped from prebuilts/androidx/internal/ (grabbed via gradle dependency) into
+     * `build/explodedSources/$artifactName-$version-sources/` outputs are located at
+     * `testData/$testName/docs` Samples are kept locally (read from `testData/$testName/samples/`),
+     * as they are not published
      *
      * Use useAndroidxBaseSourceLink=true to include AndroidX source links in the generated page.
      * Multiple artifact names and source links don't work well together, links end up using
@@ -412,24 +436,27 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         val loggingDir = "testData/$testName/logs"
 
         val versionMetadataBaseDir = "testData/$testName/versionMetadata"
-        val versionMetadataFiles = if (versionMetadata) {
-            File(versionMetadataBaseDir).listFiles()?.map { it.absolutePath }
-        } else {
-            null
-        }
+        val versionMetadataFiles =
+            if (versionMetadata) {
+                File(versionMetadataBaseDir).listFiles()?.map { it.absolutePath }
+            } else {
+                null
+            }
 
         val sourceDir = "build/explodedSources"
-        val configuration = makeExternalConfiguration(
-            artifactNames.map { File("$sourceDir/$it/").absoluteFile },
-            if (samples) listOf(samplesBaseDir) else emptyList(),
-            includeFiles = includeFiles.map { File("testData/$testName/source", it).absolutePath },
-            docRootPath = "reference",
-            projectPath = "androidx",
-            javaDocsPath = "",
-            kotlinDocsPath = "kotlin",
-            useAndroidxBaseSourceLink = useAndroidxBaseSourceLink,
-            versionMetadataFilesnames = versionMetadataFiles,
-        )
+        val configuration =
+            makeExternalConfiguration(
+                artifactNames.map { File("$sourceDir/$it/").absoluteFile },
+                if (samples) listOf(samplesBaseDir) else emptyList(),
+                includeFiles =
+                    includeFiles.map { File("testData/$testName/source", it).absolutePath },
+                docRootPath = "reference",
+                projectPath = "androidx",
+                javaDocsPath = "",
+                kotlinDocsPath = "kotlin",
+                useAndroidxBaseSourceLink = useAndroidxBaseSourceLink,
+                versionMetadataFilesnames = versionMetadataFiles,
+            )
 
         val writerPlugin = TestOutputWriterPlugin()
 
@@ -448,11 +475,12 @@ abstract class IntegrationTestBase : BaseAbstractTest(
     private fun logFiles(sourceDir: String): Map<String, String> {
         val absoluteSourcePath = File(sourceDir).absolutePath
         return mapOf(
-            // Start with "//" to match the filepaths from the writer plugin contents
-            "//warnings.txt" to cleanLogMessages(logger.warnMessages, absoluteSourcePath),
-            "//debug.txt" to cleanLogMessages(logger.debugMessages, absoluteSourcePath),
-            "//error.txt" to cleanLogMessages(logger.errorMessages, absoluteSourcePath),
-        ).filter { it.value.isNotEmpty() }
+                // Start with "//" to match the filepaths from the writer plugin contents
+                "//warnings.txt" to cleanLogMessages(logger.warnMessages, absoluteSourcePath),
+                "//debug.txt" to cleanLogMessages(logger.debugMessages, absoluteSourcePath),
+                "//error.txt" to cleanLogMessages(logger.errorMessages, absoluteSourcePath),
+            )
+            .filter { it.value.isNotEmpty() }
     }
 
     private fun cleanLogMessages(messages: List<String>, sourceDir: String): String {
@@ -471,21 +499,24 @@ abstract class IntegrationTestBase : BaseAbstractTest(
 
         for ((fileName, generatedContent) in generatedFiles) {
             val expectedFile = File(outputDirectory, fileName)
-            val expectedText = if (expectedFile.exists()) {
-                expectedFile.readText()
-            } else {
-                ""
-            }
+            val expectedText =
+                if (expectedFile.exists()) {
+                    expectedFile.readText()
+                } else {
+                    ""
+                }
 
             if (expectedText != generatedContent) {
-                val message = """
+                val message =
+                    """
                     |Unexpected output in $fileName.
                     |To update the expected output to match the current output, run this command:
                     |
                     |  rm -rf $outputDirectory && cp -r ${dumpedFile.absolutePath} $outputDirectory
                     |
                     |Difference in outputs:
-                """.trimMargin()
+                """
+                        .trimMargin()
                 assertWithMessage(message).that(generatedContent).isEqualTo(expectedText)
             }
         }
@@ -494,15 +525,15 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         val fixedGeneratedPaths = generatedFiles.keys.map { it.replace("//", "/") }
         for (eFile in expectedFileList) {
             assertWithMessage("File ${eFile.path} was expected but not generated!")
-                .that(eFile.path.removePrefix(outputPath) in fixedGeneratedPaths).isTrue()
+                .that(eFile.path.removePrefix(outputPath) in fixedGeneratedPaths)
+                .isTrue()
         }
     }
 
     private fun File.recursivelyListFiles(): List<File> =
-        (this.listFiles { it: File -> !it.isDirectory }?.asList() ?: emptyList()) + (
-            this.listFiles { it: File -> it.isDirectory }
-                ?.flatMap { it: File -> it.recursivelyListFiles() } ?: emptyList()
-            )
+        (this.listFiles { it: File -> !it.isDirectory }?.asList() ?: emptyList()) +
+            (this.listFiles { it: File -> it.isDirectory }
+                ?.flatMap { it: File -> it.recursivelyListFiles() } ?: emptyList())
 
     /** Exports the file to output map to outputPath. */
     private fun dump(generatedFiles: Map<String, String>, outputPath: String) {

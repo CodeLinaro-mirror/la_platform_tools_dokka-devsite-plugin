@@ -27,15 +27,12 @@ internal data class DefaultClasslikeDescription(
     override val data: ClasslikeDescription.Params,
 ) : ClasslikeDescription {
 
-    override fun render(into: FlowContent) = into.run {
-        data.header?.render(this)
-        p {
-            pre {
-                data.primarySignature.render(this)
-            }
+    override fun render(into: FlowContent) =
+        into.run {
+            data.header?.render(this)
+            p { pre { data.primarySignature.render(this) } }
+            data.hierarchy.render(this)
+            data.relatedSymbols.render(this)
+            data.descriptionDocs.render(into, separator = null, header = { hr() })
         }
-        data.hierarchy.render(this)
-        data.relatedSymbols.render(this)
-        data.descriptionDocs.render(into, separator = null, header = { hr() })
-    }
 }

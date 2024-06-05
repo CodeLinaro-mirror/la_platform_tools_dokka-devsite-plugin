@@ -31,44 +31,58 @@ import kotlinx.html.visit
 internal data class DefaultClasslike(
     override val data: Classlike.Params,
 ) : Classlike {
-    override fun render(into: FlowContent) = into.run {
-        data.description.render(this)
-        // The ordering logic for these summaries is in Classlike.kt
-        allVisibleSummaries.render(into, separator = null, header = { h2 { +"Summary" } })
+    override fun render(into: FlowContent) =
+        into.run {
+            data.description.render(this)
+            // The ordering logic for these summaries is in Classlike.kt
+            allVisibleSummaries.render(into, separator = null, header = { h2 { +"Summary" } })
 
-        for (symbolType in allDetailsSections.filter { it.symbols.isNotEmpty() }) {
-            // Delegate choices of table layout (e.g. filters available) to the first item.
-            // This is the same method we use for layout of the summary section tables.
-            // We know that all items will want the same thing, because they will all be Ts
-            symbolType.symbols.first().layout(this) {
-                symbolType.symbols.render(
-                    into,
-                    separator = null,
-                    header = if (symbolType.symbols.first() is KmpSymbolDetail) {
-                        { ->
-                            val unionPlatformsString = symbolType.symbols
-                                // platforms of each detail
-                                .map { (it as KmpSymbolDetail).data.platforms.data.platforms }
-                                // all platforms of any detail
-                                .reduce { acc, next -> acc.union(next) }.joinToString {
-                                    it.devsiteId()
+            for (symbolType in allDetailsSections.filter { it.symbols.isNotEmpty() }) {
+                // Delegate choices of table layout (e.g. filters available) to the first item.
+                // This is the same method we use for layout of the summary section tables.
+                // We know that all items will want the same thing, because they will all be Ts
+                symbolType.symbols.first().layout(this) {
+                    symbolType.symbols.render(
+                        into,
+                        separator = null,
+                        header =
+                            if (symbolType.symbols.first() is KmpSymbolDetail) {
+                                { ->
+                                    val unionPlatformsString =
+                                        symbolType.symbols
+                                            // platforms of each detail
+                                            .map {
+                                                (it as KmpSymbolDetail)
+                                                    .data
+                                                    .platforms
+                                                    .data
+                                                    .platforms
+                                            }
+                                            // all platforms of any detail
+                                            .reduce { acc, next -> acc.union(next) }
+                                            .joinToString { it.devsiteId() }
+                                    H2(
+                                            attributesMapOf("data-title", unionPlatformsString),
+                                            consumer,
+                                        )
+                                        .visit {
+                                            +symbolType.title
+                                            comment(unionPlatformsString)
+                                        }
                                 }
-                            H2(
-                                attributesMapOf("data-title", unionPlatformsString),
-                                consumer,
-                            ).visit {
-                                +symbolType.title
-                                comment(unionPlatformsString)
-                            }
-                        }
-                    } else { { h2 { +symbolType.title } } },
-                )
+                            } else {
+                                { h2 { +symbolType.title } }
+                            },
+                    )
+                }
             }
         }
-    }
 
-    override fun toString() = data.description.toString() +
-        inheritedSummarySections.filter { it.hasContent() } +
-        allSummarySections.filter { it.hasContent() }.joinMaybePrefix(prefix = "Summaries") +
-        allDetailsSections.filter { it.symbols.isNotEmpty() }.joinMaybePrefix(prefix = "Details")
+    override fun toString() =
+        data.description.toString() +
+            inheritedSummarySections.filter { it.hasContent() } +
+            allSummarySections.filter { it.hasContent() }.joinMaybePrefix(prefix = "Summaries") +
+            allDetailsSections
+                .filter { it.symbols.isNotEmpty() }
+                .joinMaybePrefix(prefix = "Details")
 }

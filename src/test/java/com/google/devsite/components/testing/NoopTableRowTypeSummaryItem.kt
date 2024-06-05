@@ -30,9 +30,7 @@ internal object NoopTableRowTypeSummaryItem : TableRowSummaryItem<TypeSummary, S
     override val data: TableRowSummaryItem.Params<TypeSummary, SymbolSummary<*>>
         get() = throw NotImplementedError()
 
-    override fun render(into: TR) = into.run {
-        unsafe { +"<noop/>" }
-    }
+    override fun render(into: TR) = into.run { unsafe { +"<noop/>" } }
 }
 
 @Suppress("UNCHECKED_CAST")

@@ -23,9 +23,7 @@ internal class NoopAnnotationComponent(private val text: String) : AnnotationCom
     override val data: AnnotationComponent.Params
         get() = throw NotImplementedError()
 
-    override fun render(into: FlowContent) = into.run {
-        +text
-    }
+    override fun render(into: FlowContent) = into.run { +text }
 
     override fun length() = text.length
 }

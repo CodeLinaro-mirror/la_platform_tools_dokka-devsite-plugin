@@ -19,12 +19,13 @@ package com.google.devsite.components.testing
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.DevsiteFilePathProvider
 
-internal class NoopFilePathProvider : DevsiteFilePathProvider(
-    Language.KOTLIN,
-    "noop",
-    "noop",
-    "noop",
-    "noop",
-    locationProvider = null,
-    documentablesGraph = emptyMap(),
-)
+internal class NoopFilePathProvider :
+    DevsiteFilePathProvider(
+        Language.KOTLIN,
+        "noop",
+        "noop",
+        "noop",
+        "noop",
+        locationProvider = null,
+        documentablesGraph = emptyMap(),
+    )

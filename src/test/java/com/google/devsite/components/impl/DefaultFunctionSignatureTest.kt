@@ -31,162 +31,176 @@ import org.junit.Test
 class DefaultFunctionSignatureTest {
     @Test
     fun `Signature with no params renders correctly`() {
-        val component = DefaultFunctionSignature(
-            Params(
-                name = NoopLink("foo"),
-            ),
-        )
+        val component =
+            DefaultFunctionSignature(
+                Params(
+                    name = NoopLink("foo"),
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>foo()</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Signature with params renders correctly`() {
-        val component = DefaultFunctionSignature(
-            Params(
-                name = NoopLink("foo"),
-                parameters = listOf(
-                    NoopParameterComponent("String foo"),
-                    NoopParameterComponent("int bar"),
+        val component =
+            DefaultFunctionSignature(
+                Params(
+                    name = NoopLink("foo"),
+                    parameters =
+                        listOf(
+                            NoopParameterComponent("String foo"),
+                            NoopParameterComponent("int bar"),
+                        ),
                 ),
-            ),
-        )
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>foo(String foo,&nbsp;int bar)</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Signature with deprecation renders correctly`() {
-        val component = DefaultFunctionSignature(
-            Params(
-                name = NoopLink("foo"),
-                parameters = listOf(
-                    NoopParameterComponent("String foo"),
-                    NoopParameterComponent("int bar"),
+        val component =
+            DefaultFunctionSignature(
+                Params(
+                    name = NoopLink("foo"),
+                    parameters =
+                        listOf(
+                            NoopParameterComponent("String foo"),
+                            NoopParameterComponent("int bar"),
+                        ),
+                    isDeprecated = true,
                 ),
-                isDeprecated = true,
-            ),
-        )
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div><span><del>foo</del></span>(String foo,&nbsp;int bar)</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Signature with receiver renders correctly`() {
-        val component = DefaultFunctionSignature(
-            Params(
-                name = NoopLink("foo"),
-                receiver = NoopParameterComponent("String"),
-            ),
-        )
+        val component =
+            DefaultFunctionSignature(
+                Params(
+                    name = NoopLink("foo"),
+                    receiver = NoopParameterComponent("String"),
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>String.foo()</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Signature with breaks renders correctly`() {
-        val component = DefaultFunctionSignature(
-            Params(
-                name = NoopLink("foo"),
-                parameters = listOf(
-                    NoopParameterComponent("String foo", forceBreak = true),
-                    NoopParameterComponent("int bar", forceBreak = true),
+        val component =
+            DefaultFunctionSignature(
+                Params(
+                    name = NoopLink("foo"),
+                    parameters =
+                        listOf(
+                            NoopParameterComponent("String foo", forceBreak = true),
+                            NoopParameterComponent("int bar", forceBreak = true),
+                        ),
                 ),
-            ),
-        )
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>foo(<br>&nbsp;&nbsp;&nbsp;&nbsp;String foo,<br>&nbsp;&nbsp;&nbsp;&nbsp;int bar<br>)</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Signature with multiple bounds renders correctly`() {
         for (displayLanguage in listOf(Language.KOTLIN, Language.JAVA)) {
-            val component = DefaultFunctionSignature(
-                Params(
-                    name = NoopLink("copyWhenGreater"),
-                    parameters = listOf(
-                        NoopParameterComponent("list: List<T>", forceBreak = true),
-                        NoopParameterComponent("T threshold", forceBreak = true),
-                    ),
-                    typeParameters = listOf(
-                        DefaultTypeParameterComponent(
-                            TypeParameterComponent.Params(
-                                name = "T",
-                                projections = listOf(
-                                    NoopTypeProjectionComponent("CharSequence"),
-                                    NoopTypeProjectionComponent("Comparable<T>"),
-                                ),
-                                pathProvider = NoopFilePathProvider(),
-                                displayLanguage = displayLanguage,
+            val component =
+                DefaultFunctionSignature(
+                    Params(
+                        name = NoopLink("copyWhenGreater"),
+                        parameters =
+                            listOf(
+                                NoopParameterComponent("list: List<T>", forceBreak = true),
+                                NoopParameterComponent("T threshold", forceBreak = true),
                             ),
-                        ),
+                        typeParameters =
+                            listOf(
+                                DefaultTypeParameterComponent(
+                                    TypeParameterComponent.Params(
+                                        name = "T",
+                                        projections =
+                                            listOf(
+                                                NoopTypeProjectionComponent("CharSequence"),
+                                                NoopTypeProjectionComponent("Comparable<T>"),
+                                            ),
+                                        pathProvider = NoopFilePathProvider(),
+                                        displayLanguage = displayLanguage,
+                                    ),
+                                ),
+                            ),
                     ),
-                ),
-            )
+                )
 
-            val output = createHTML().div {
-                component.render(this)
-            }.trim()
+            val output = createHTML().div { component.render(this) }.trim()
 
             if (displayLanguage == Language.KOTLIN) {
                 // language=html
-                assertThat(output).isEqualTo(
-                    """
+                assertThat(output)
+                    .isEqualTo(
+                        """
 <div>&lt;T&nbsp;:&nbsp;CharSequence&nbsp;&amp;&nbsp;Comparable&lt;T&gt;&gt; copyWhenGreater(<br>&nbsp;&nbsp;&nbsp;&nbsp;list: List&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;T threshold<br>)</div>
-            """.trim(),
-                )
+            """
+                            .trim(),
+                    )
             } else {
                 // language=html
-                assertThat(output).isEqualTo(
-                    """
+                assertThat(output)
+                    .isEqualTo(
+                        """
 <div>&lt;T&nbsp;extends&nbsp;CharSequence&nbsp;&amp;&nbsp;Comparable&lt;T&gt;&gt; copyWhenGreater(<br>&nbsp;&nbsp;&nbsp;&nbsp;list: List&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;T threshold<br>)</div>
-            """.trim(),
-                )
+            """
+                            .trim(),
+                    )
             }
         }
     }

@@ -30,41 +30,36 @@ import kotlinx.html.unsafe
 internal data class DefaultClassIndex(
     override val data: ClassIndex.Params,
 ) : ClassIndex {
-    override fun render(into: FlowContent) = into.run {
-        p {
-            +"These are all the API classes. See all "
-            a(data.packagesUrl) {
-                +"API packages"
-            }
-            +"."
-        }
-
-        if (data.alphabetizedClasses.isEmpty()) {
+    override fun render(into: FlowContent) =
+        into.run {
             p {
-                em {
-                    +"This project has no classes."
+                +"These are all the API classes. See all "
+                a(data.packagesUrl) { +"API packages" }
+                +"."
+            }
+
+            if (data.alphabetizedClasses.isEmpty()) {
+                p { em { +"This project has no classes." } }
+                return
+            }
+
+            div("jd-letterlist") {
+                for ((letter) in data.alphabetizedClasses.entries) {
+                    a("#letter_$letter") { +letter.toString() }
+                    unsafe { +"&nbsp;&nbsp;" }
                 }
             }
-            return
-        }
 
-        div("jd-letterlist") {
-            for ((letter) in data.alphabetizedClasses.entries) {
-                a("#letter_$letter") { +letter.toString() }
-                unsafe { +"&nbsp;&nbsp;" }
+            for ((letter, summary) in data.alphabetizedClasses.entries) {
+                h2 {
+                    id = "letter_$letter"
+                    +letter.toString()
+                }
+
+                summary.render(this)
             }
         }
 
-        for ((letter, summary) in data.alphabetizedClasses.entries) {
-            h2 {
-                id = "letter_$letter"
-                +letter.toString()
-            }
-
-            summary.render(this)
-        }
-    }
-
-    override fun toString() = data.packagesUrl + " " +
-        data.alphabetizedClasses.map { "${it.key}: ${it.value}" }
+    override fun toString() =
+        data.packagesUrl + " " + data.alphabetizedClasses.map { "${it.key}: ${it.value}" }
 }

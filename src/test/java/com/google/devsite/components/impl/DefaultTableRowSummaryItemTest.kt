@@ -28,19 +28,19 @@ class DefaultTableRowSummaryItemTest {
     fun `Empty item renders correctly`() {
         val component = DefaultTableRowSummaryItem(Params(PlainTextOutput(""), PlainTextOutput("")))
 
-        val output = createHTML().tr {
-            component.render(this)
-        }.trim()
+        val output = createHTML().tr { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <tr>
   <td><code></code></td>
   <td></td>
 </tr>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
@@ -53,18 +53,18 @@ class DefaultTableRowSummaryItemTest {
                 ),
             )
 
-        val b = createHTML().tr {
-            component.render(this)
-        }.trim()
+        val b = createHTML().tr { component.render(this) }.trim()
 
         // language=html
-        assertThat(b).isEqualTo(
-            """
+        assertThat(b)
+            .isEqualTo(
+                """
 <tr>
   <td><code>Title</code></td>
   <td>Description</td>
 </tr>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 }

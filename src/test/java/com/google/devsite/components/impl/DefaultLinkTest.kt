@@ -27,31 +27,31 @@ class DefaultLinkTest {
     fun `Link renders correctly`() {
         val component = DefaultLink(Params("Name", "link"))
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div><a href="link">Name</a></div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Empty link renders correctly`() {
         val component = DefaultLink(Params("Name", ""))
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>Name</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 }

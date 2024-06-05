@@ -26,10 +26,11 @@ import org.jetbrains.dokka.transformers.documentation.DocumentableToPageTranslat
 
 /** Wrapper page translator implementation that simply passes on the module documentable. */
 internal class DocumentablesWrapper : DocumentableToPageTranslator {
-    override fun invoke(module: DModule): RootPageNode = ModulePageNode(
-        name = module.name,
-        content = ContentText("DO NOT USE", DCI(emptySet(), ContentKind.Main), emptySet()),
-        documentables = listOf(module),
-        children = emptyList(),
-    )
+    override fun invoke(module: DModule): RootPageNode =
+        ModulePageNode(
+            name = module.name,
+            content = ContentText("DO NOT USE", DCI(emptySet(), ContentKind.Main), emptySet()),
+            documentables = listOf(module),
+            children = emptyList(),
+        )
 }

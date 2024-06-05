@@ -27,9 +27,7 @@ internal class NoopSymbolSummary<T : SymbolSignature> : SymbolSummary<T> {
     override val data: SymbolSummary.Params<T>
         get() = throw NotImplementedError()
 
-    override fun render(into: FlowContent) = into.run {
-        div { +"no symbol summary" }
-    }
+    override fun render(into: FlowContent) = into.run { div { +"no symbol summary" } }
 }
 
 internal val NoopTypeSummary =

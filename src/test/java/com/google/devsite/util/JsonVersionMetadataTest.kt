@@ -17,17 +17,15 @@
 package com.google.devsite.util
 
 import com.google.common.truth.Truth.assertThat
+import java.io.FileNotFoundException
+import java.io.IOException
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
-import java.io.FileNotFoundException
-import java.io.IOException
 
 class JsonVersionMetadataTest {
 
-    @JvmField
-    @Rule
-    val folder = TemporaryFolder()
+    @JvmField @Rule val folder = TemporaryFolder()
 
     @Test
     fun `getMetadataFromFile with empty string filename`() {
@@ -43,7 +41,8 @@ class JsonVersionMetadataTest {
 
     @Test(expected = IOException::class)
     fun `getMetadataFromFile with unparseable json file throws IOException`() {
-        val json = """
+        val json =
+            """
 [
   {
     "a": "b"
@@ -52,7 +51,8 @@ class JsonVersionMetadataTest {
     "c": "d"
   }
 ]
-        """.trimIndent()
+        """
+                .trimIndent()
 
         val file = folder.newFile("Unparseable.json")
         file.writeText(json)
@@ -61,7 +61,8 @@ class JsonVersionMetadataTest {
 
     @Test
     fun `getMetadataFromFile with valid json file`() {
-        val json = """
+        val json =
+            """
 [
   {
     "class": "androidx.fragment.foo",
@@ -97,7 +98,8 @@ class JsonVersionMetadataTest {
     "fields": []
   }
 ]
-        """.trimIndent()
+        """
+                .trimIndent()
 
         val file = folder.newFile("LibraryMetadata.json")
         file.writeText(json)
@@ -135,7 +137,8 @@ class JsonVersionMetadataTest {
 
     @Test
     fun `getMetadataFromFile with valid json file with extra field`() {
-        val json = """
+        val json =
+            """
 [
   {
     "class": "androidx.fragment.foo",
@@ -143,7 +146,8 @@ class JsonVersionMetadataTest {
     "extraField": "extraFoo"
   }
 ]
-        """.trimIndent()
+        """
+                .trimIndent()
 
         val file = folder.newFile("LibraryMetadata.json")
         file.writeText(json)
@@ -154,7 +158,8 @@ class JsonVersionMetadataTest {
 
     @Test
     fun `getMetadataFromFile with missing JSON fields returns default values`() {
-        val json = """
+        val json =
+            """
 [
   {
     "class": "androidx.fragment.foo",
@@ -177,7 +182,8 @@ class JsonVersionMetadataTest {
     ]
   }
 ]
-        """.trimIndent()
+        """
+                .trimIndent()
 
         val file = folder.newFile("LibraryMetadata.json")
         file.writeText(json)

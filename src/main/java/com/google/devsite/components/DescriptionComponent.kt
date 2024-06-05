@@ -51,9 +51,7 @@ internal interface DescriptionComponent : ContextFreeComponent {
         }
 
         override fun toString(): String {
-            return "components: $components, " +
-                "summary: $summary, " +
-                "deprecation: $deprecation"
+            return "components: $components, " + "summary: $summary, " + "deprecation: $deprecation"
         }
     }
 }

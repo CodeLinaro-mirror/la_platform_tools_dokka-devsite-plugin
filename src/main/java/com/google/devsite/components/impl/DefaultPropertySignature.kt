@@ -23,22 +23,22 @@ import kotlinx.html.FlowContent
 internal data class DefaultPropertySignature(
     override val data: PropertySignature.Params,
 ) : PropertySignature {
-    override fun render(into: FlowContent) = into.run {
-        if (data.receiver != null) {
-            data.receiver.render(this)
-            +"."
-        }
+    override fun render(into: FlowContent) =
+        into.run {
+            if (data.receiver != null) {
+                data.receiver.render(this)
+                +"."
+            }
 
-        data.name.render(this)
+            data.name.render(this)
 
-        if (data.constantValue != null) {
-            +" = ${data.constantValue}"
+            if (data.constantValue != null) {
+                +" = ${data.constantValue}"
+            }
         }
-    }
 
     override fun toString() =
         if (data.receiver != null) {
             data.receiver.toString() + "."
-        } else "" +
-            data.name
+        } else "" + data.name
 }

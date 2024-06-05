@@ -28,31 +28,26 @@ import kotlinx.html.tr
 internal data class DefaultSummaryList<T : SummaryItem>(
     override val data: SummaryList.Params<T>,
 ) : SummaryList<T> {
-    override fun render(into: FlowContent) = into.run {
-        if (!hasContent()) return
-        div("devsite-table-wrapper") {
-            // Delegate choices of table layout (e.g. column number, width) to the first row.
-            // This is the same method html table rendering itself normally uses.
-            // We know that all rows will want the same thing, because they will all be Ts
-            data.items.first().layout(this) {
-                if (data.header != null) {
-                    thead {
-                        tr {
-                            data.header.render(this)
-                        }
+    override fun render(into: FlowContent) =
+        into.run {
+            if (!hasContent()) return
+            div("devsite-table-wrapper") {
+                // Delegate choices of table layout (e.g. column number, width) to the first row.
+                // This is the same method html table rendering itself normally uses.
+                // We know that all rows will want the same thing, because they will all be Ts
+                data.items.first().layout(this) {
+                    if (data.header != null) {
+                        thead { tr { data.header.render(this) } }
                     }
-                }
 
-                tbody(classes = "list") {
-                    for (item in data.items) {
-                        tr {
-                            item.render(this)
+                    tbody(classes = "list") {
+                        for (item in data.items) {
+                            tr { item.render(this) }
                         }
                     }
                 }
             }
         }
-    }
 
     override fun hasContent() = data.items.isNotEmpty()
 

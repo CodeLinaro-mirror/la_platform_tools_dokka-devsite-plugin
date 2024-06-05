@@ -36,25 +36,25 @@ import org.junit.Test
 class DefaultSymbolDetailTest {
     @Test
     fun `Simple Java function renders correctly`() {
-        val component = DefaultSymbolDetail(
-            Params(
-                name = "foo",
-                returnType = NoopTypeProjectionComponent("void"),
-                symbolKind = SymbolKind.FUNCTION,
-                signature = NoopFunctionSignature("foo()"),
-                anchors = linkedSetOf(),
-                metadata = emptyList(),
-                displayLanguage = Language.JAVA,
-            ),
-        )
+        val component =
+            DefaultSymbolDetail(
+                Params(
+                    name = "foo",
+                    returnType = NoopTypeProjectionComponent("void"),
+                    symbolKind = SymbolKind.FUNCTION,
+                    signature = NoopFunctionSignature("foo()"),
+                    anchors = linkedSetOf(),
+                    metadata = emptyList(),
+                    displayLanguage = Language.JAVA,
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <div class="api-item">
     <div class="api-name-block">
@@ -65,31 +65,32 @@ class DefaultSymbolDetailTest {
     <pre class="api-signature no-pretty-print">void&nbsp;foo()</pre>
   </div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Simple Kotlin function renders correctly`() {
-        val component = DefaultSymbolDetail(
-            Params(
-                name = "foo",
-                returnType = NoopTypeProjectionComponent("Unit"),
-                symbolKind = SymbolKind.FUNCTION,
-                signature = NoopFunctionSignature("foo()"),
-                anchors = linkedSetOf(),
-                metadata = emptyList(),
-                displayLanguage = Language.KOTLIN,
-            ),
-        )
+        val component =
+            DefaultSymbolDetail(
+                Params(
+                    name = "foo",
+                    returnType = NoopTypeProjectionComponent("Unit"),
+                    symbolKind = SymbolKind.FUNCTION,
+                    signature = NoopFunctionSignature("foo()"),
+                    anchors = linkedSetOf(),
+                    metadata = emptyList(),
+                    displayLanguage = Language.KOTLIN,
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <div class="api-item">
     <div class="api-name-block">
@@ -100,31 +101,32 @@ class DefaultSymbolDetailTest {
     <pre class="api-signature no-pretty-print">fun&nbsp;foo():&nbsp;Unit</pre>
   </div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Simple Kotlin property renders correctly`() {
-        val component = DefaultSymbolDetail(
-            Params(
-                name = "foo",
-                returnType = NoopTypeProjectionComponent("Unit"),
-                symbolKind = SymbolKind.READ_ONLY_PROPERTY,
-                signature = NoopFunctionSignature("foo"),
-                anchors = linkedSetOf(),
-                metadata = emptyList(),
-                displayLanguage = Language.KOTLIN,
-            ),
-        )
+        val component =
+            DefaultSymbolDetail(
+                Params(
+                    name = "foo",
+                    returnType = NoopTypeProjectionComponent("Unit"),
+                    symbolKind = SymbolKind.READ_ONLY_PROPERTY,
+                    signature = NoopFunctionSignature("foo"),
+                    anchors = linkedSetOf(),
+                    metadata = emptyList(),
+                    displayLanguage = Language.KOTLIN,
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <div class="api-item">
     <div class="api-name-block">
@@ -135,31 +137,32 @@ class DefaultSymbolDetailTest {
     <pre class="api-signature no-pretty-print">val&nbsp;foo:&nbsp;Unit</pre>
   </div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Simple Kotlin constructor renders correctly`() {
-        val component = DefaultSymbolDetail(
-            Params(
-                name = "MyClass",
-                returnType = NoopTypeProjectionComponent("Unit"),
-                symbolKind = SymbolKind.CONSTRUCTOR,
-                signature = NoopFunctionSignature("MyClass()"),
-                anchors = linkedSetOf(),
-                metadata = emptyList(),
-                displayLanguage = Language.KOTLIN,
-            ),
-        )
+        val component =
+            DefaultSymbolDetail(
+                Params(
+                    name = "MyClass",
+                    returnType = NoopTypeProjectionComponent("Unit"),
+                    symbolKind = SymbolKind.CONSTRUCTOR,
+                    signature = NoopFunctionSignature("MyClass()"),
+                    anchors = linkedSetOf(),
+                    metadata = emptyList(),
+                    displayLanguage = Language.KOTLIN,
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <div class="api-item">
     <div class="api-name-block">
@@ -170,31 +173,32 @@ class DefaultSymbolDetailTest {
     <pre class="api-signature no-pretty-print">MyClass()</pre>
   </div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Simple Java constructor renders correctly`() {
-        val component = DefaultSymbolDetail(
-            Params(
-                name = "MyClass",
-                returnType = NoopTypeProjectionComponent("Unit"),
-                symbolKind = SymbolKind.CONSTRUCTOR,
-                signature = NoopFunctionSignature("MyClass()"),
-                anchors = linkedSetOf(),
-                metadata = emptyList(),
-                displayLanguage = Language.JAVA,
-            ),
-        )
+        val component =
+            DefaultSymbolDetail(
+                Params(
+                    name = "MyClass",
+                    returnType = NoopTypeProjectionComponent("Unit"),
+                    symbolKind = SymbolKind.CONSTRUCTOR,
+                    signature = NoopFunctionSignature("MyClass()"),
+                    anchors = linkedSetOf(),
+                    metadata = emptyList(),
+                    displayLanguage = Language.JAVA,
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <div class="api-item">
     <div class="api-name-block">
@@ -205,35 +209,37 @@ class DefaultSymbolDetailTest {
     <pre class="api-signature no-pretty-print">MyClass()</pre>
   </div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Java function with annotations renders correctly`() {
-        val component = DefaultSymbolDetail(
-            Params(
-                name = "foo",
-                returnType = NoopTypeProjectionComponent("void"),
-                symbolKind = SymbolKind.FUNCTION,
-                signature = NoopFunctionSignature("foo()"),
-                anchors = linkedSetOf(),
-                metadata = emptyList(),
-                displayLanguage = Language.JAVA,
-                annotationComponents = listOf(
-                    NoopAnnotationComponent("@Foo"),
-                    NoopAnnotationComponent("@Bar"),
+        val component =
+            DefaultSymbolDetail(
+                Params(
+                    name = "foo",
+                    returnType = NoopTypeProjectionComponent("void"),
+                    symbolKind = SymbolKind.FUNCTION,
+                    signature = NoopFunctionSignature("foo()"),
+                    anchors = linkedSetOf(),
+                    metadata = emptyList(),
+                    displayLanguage = Language.JAVA,
+                    annotationComponents =
+                        listOf(
+                            NoopAnnotationComponent("@Foo"),
+                            NoopAnnotationComponent("@Bar"),
+                        ),
                 ),
-            ),
-        )
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <div class="api-item">
     <div class="api-name-block">
@@ -244,32 +250,33 @@ class DefaultSymbolDetailTest {
     <pre class="api-signature no-pretty-print">@Foo<br>@Bar<br>void&nbsp;foo()</pre>
   </div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Java function with modifiers renders correctly`() {
-        val component = DefaultSymbolDetail(
-            Params(
-                name = "foo",
-                returnType = NoopTypeProjectionComponent("void"),
-                symbolKind = SymbolKind.FUNCTION,
-                signature = NoopFunctionSignature("foo()"),
-                anchors = linkedSetOf(),
-                metadata = emptyList(),
-                displayLanguage = Language.JAVA,
-                modifiers = Modifiers("protected", "abstract"),
-            ),
-        )
+        val component =
+            DefaultSymbolDetail(
+                Params(
+                    name = "foo",
+                    returnType = NoopTypeProjectionComponent("void"),
+                    symbolKind = SymbolKind.FUNCTION,
+                    signature = NoopFunctionSignature("foo()"),
+                    anchors = linkedSetOf(),
+                    metadata = emptyList(),
+                    displayLanguage = Language.JAVA,
+                    modifiers = Modifiers("protected", "abstract"),
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <div class="api-item">
     <div class="api-name-block">
@@ -280,32 +287,33 @@ class DefaultSymbolDetailTest {
     <pre class="api-signature no-pretty-print">protected&nbsp;abstract&nbsp;void&nbsp;foo()</pre>
   </div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Kotlin function with modifiers renders correctly`() {
-        val component = DefaultSymbolDetail(
-            Params(
-                name = "foo",
-                returnType = NoopTypeProjectionComponent("Unit"),
-                symbolKind = SymbolKind.FUNCTION,
-                signature = NoopFunctionSignature("foo()"),
-                anchors = linkedSetOf(),
-                metadata = emptyList(),
-                displayLanguage = Language.KOTLIN,
-                modifiers = Modifiers("protected", "abstract"),
-            ),
-        )
+        val component =
+            DefaultSymbolDetail(
+                Params(
+                    name = "foo",
+                    returnType = NoopTypeProjectionComponent("Unit"),
+                    symbolKind = SymbolKind.FUNCTION,
+                    signature = NoopFunctionSignature("foo()"),
+                    anchors = linkedSetOf(),
+                    metadata = emptyList(),
+                    displayLanguage = Language.KOTLIN,
+                    modifiers = Modifiers("protected", "abstract"),
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <div class="api-item">
     <div class="api-name-block">
@@ -316,31 +324,32 @@ class DefaultSymbolDetailTest {
     <pre class="api-signature no-pretty-print">protected&nbsp;abstract&nbsp;fun&nbsp;foo():&nbsp;Unit</pre>
   </div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Function anchors render correctly`() {
-        val component = DefaultSymbolDetail(
-            Params(
-                name = "foo",
-                returnType = NoopTypeProjectionComponent("void"),
-                symbolKind = SymbolKind.FUNCTION,
-                signature = NoopFunctionSignature("foo()"),
-                anchors = linkedSetOf("foo(a,b)", "foo(a, b)", "foo-a-b-"),
-                metadata = emptyList(),
-                displayLanguage = Language.JAVA,
-            ),
-        )
+        val component =
+            DefaultSymbolDetail(
+                Params(
+                    name = "foo",
+                    returnType = NoopTypeProjectionComponent("void"),
+                    symbolKind = SymbolKind.FUNCTION,
+                    signature = NoopFunctionSignature("foo()"),
+                    anchors = linkedSetOf("foo(a,b)", "foo(a, b)", "foo-a-b-"),
+                    metadata = emptyList(),
+                    displayLanguage = Language.JAVA,
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <div class="api-item"><a name="foo(a, b)"></a><a name="foo-a-b-"></a>
     <div class="api-name-block">
@@ -351,31 +360,32 @@ class DefaultSymbolDetailTest {
     <pre class="api-signature no-pretty-print">void&nbsp;foo()</pre>
   </div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Function with metadata renders correctly`() {
-        val component = DefaultSymbolDetail(
-            Params(
-                name = "foo",
-                returnType = NoopTypeProjectionComponent("void"),
-                symbolKind = SymbolKind.FUNCTION,
-                signature = NoopFunctionSignature("foo()"),
-                anchors = linkedSetOf(),
-                metadata = listOf(NoopContextFreeComponent, NoopContextFreeComponent),
-                displayLanguage = Language.JAVA,
-            ),
-        )
+        val component =
+            DefaultSymbolDetail(
+                Params(
+                    name = "foo",
+                    returnType = NoopTypeProjectionComponent("void"),
+                    symbolKind = SymbolKind.FUNCTION,
+                    signature = NoopFunctionSignature("foo()"),
+                    anchors = linkedSetOf(),
+                    metadata = listOf(NoopContextFreeComponent, NoopContextFreeComponent),
+                    displayLanguage = Language.JAVA,
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <div class="api-item">
     <div class="api-name-block">
@@ -388,32 +398,33 @@ class DefaultSymbolDetailTest {
     <div>noop</div>
   </div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Function with extension function package renders correctly`() {
-        val component = DefaultSymbolDetail(
-            Params(
-                name = "foo",
-                returnType = NoopTypeProjectionComponent("void"),
-                symbolKind = SymbolKind.FUNCTION,
-                signature = NoopFunctionSignature("foo()"),
-                anchors = linkedSetOf(),
-                metadata = emptyList(),
-                displayLanguage = Language.JAVA,
-                extFunctionClass = "MyClassKt",
-            ),
-        )
+        val component =
+            DefaultSymbolDetail(
+                Params(
+                    name = "foo",
+                    returnType = NoopTypeProjectionComponent("void"),
+                    symbolKind = SymbolKind.FUNCTION,
+                    signature = NoopFunctionSignature("foo()"),
+                    anchors = linkedSetOf(),
+                    metadata = emptyList(),
+                    displayLanguage = Language.JAVA,
+                    extFunctionClass = "MyClassKt",
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <div class="api-item">
     <div class="api-name-block">
@@ -424,48 +435,53 @@ class DefaultSymbolDetailTest {
     <pre class="api-signature no-pretty-print">void&nbsp;foo()</pre>
   </div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Simple Java function with metadata renders correctly`() {
-        val metadataComponent = DefaultMetadataComponent(
-            MetadataComponent.Params(
-                libraryMetadata = LibraryMetadata(
-                    groupId = "testGroup",
-                    artifactId = "testArtifactId",
-                    releaseNotesUrl = "https://d.android.com",
+        val metadataComponent =
+            DefaultMetadataComponent(
+                MetadataComponent.Params(
+                    libraryMetadata =
+                        LibraryMetadata(
+                            groupId = "testGroup",
+                            artifactId = "testArtifactId",
+                            releaseNotesUrl = "https://d.android.com",
+                        ),
+                    sourceLinkUrl = "https://cs.android.com",
+                    versionMetadata =
+                        DefaultVersionMetadataComponent(
+                            VersionMetadataComponent.Params(
+                                addedIn = DefaultLink(Link.Params(name = "API Level 8", url = "")),
+                                deprecatedIn =
+                                    DefaultLink(Link.Params(name = "API Level 12", url = "")),
+                            ),
+                        ),
                 ),
-                sourceLinkUrl = "https://cs.android.com",
-                versionMetadata = DefaultVersionMetadataComponent(
-                    VersionMetadataComponent.Params(
-                        addedIn = DefaultLink(Link.Params(name = "API Level 8", url = "")),
-                        deprecatedIn = DefaultLink(Link.Params(name = "API Level 12", url = "")),
-                    ),
+            )
+        val component =
+            DefaultSymbolDetail(
+                Params(
+                    name = "foo",
+                    returnType = NoopTypeProjectionComponent("void"),
+                    symbolKind = SymbolKind.FUNCTION,
+                    signature = NoopFunctionSignature("foo()"),
+                    anchors = linkedSetOf(),
+                    metadata = emptyList(),
+                    displayLanguage = Language.JAVA,
+                    metadataComponent = metadataComponent,
                 ),
-            ),
-        )
-        val component = DefaultSymbolDetail(
-            Params(
-                name = "foo",
-                returnType = NoopTypeProjectionComponent("void"),
-                symbolKind = SymbolKind.FUNCTION,
-                signature = NoopFunctionSignature("foo()"),
-                anchors = linkedSetOf(),
-                metadata = emptyList(),
-                displayLanguage = Language.JAVA,
-                metadataComponent = metadataComponent,
-            ),
-        )
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <div class="api-item">
     <div class="api-name-block">
@@ -484,7 +500,8 @@ class DefaultSymbolDetailTest {
     <pre class="api-signature no-pretty-print">void&nbsp;foo()</pre>
   </div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 }

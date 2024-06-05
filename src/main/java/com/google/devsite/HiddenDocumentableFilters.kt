@@ -46,9 +46,9 @@ import org.jetbrains.dokka.transformers.documentation.PreMergeDocumentableTransf
  * - are deprecated with [DeprecationLevel.HIDDEN]
  * - are annotated with an annotation from [DevsiteConfiguration.hidingAnnotations]
  *
- * There are two filters, one runs before the dokka merge step and one runs after.
- * The pre-merge filter removes hidden documentables and maintains a set of names of hidden
- * packages. The post-merge filter removes packages with their names in that set.
+ * There are two filters, one runs before the dokka merge step and one runs after. The pre-merge
+ * filter removes hidden documentables and maintains a set of names of hidden packages. The
+ * post-merge filter removes packages with their names in that set.
  *
  * This is because Java and Kotlin files are split into different DPackages until the merge step.
  * Packages use @RestrictTo or @hide in package-info.java file if everything in the package should
@@ -58,9 +58,9 @@ import org.jetbrains.dokka.transformers.documentation.PreMergeDocumentableTransf
  *
  * Previously the pre-merge filter didn't remove hidden packages, leaving it until the post-merge
  * filter when the Java and Kotlin sources were in one package. However, a package which has
- * package-info.java as its only Java source may be filtered out by the empty packages filter
- * before the merge step (but after this filter), so it would never be merged with the Kotlin
- * sources, and the Kotlin sources would not be hidden by the post-merge filter.
+ * package-info.java as its only Java source may be filtered out by the empty packages filter before
+ * the merge step (but after this filter), so it would never be merged with the Kotlin sources, and
+ * the Kotlin sources would not be hidden by the post-merge filter.
  *
  * The post-merge filter also hides all subpackages of hidden packages.
  */
@@ -90,16 +90,15 @@ class PreMergeHiddenDocumentableFilter(
     }
 }
 
-/**
- * Post-merge transformer: filter packages based on [packageShouldBeHidden]
- */
+/** Post-merge transformer: filter packages based on [packageShouldBeHidden] */
 class PostMergePackageDocumentableFilter : DocumentableTransformer {
     override fun invoke(original: DModule, context: DokkaContext): DModule {
-        val filteredPackages = original.packages.filter {
-            val hide = packageShouldBeHidden(it.packageName)
-            if (hide) addToHiddenSet(it)
-            !hide
-        }
+        val filteredPackages =
+            original.packages.filter {
+                val hide = packageShouldBeHidden(it.packageName)
+                if (hide) addToHiddenSet(it)
+                !hide
+            }
         return original.copy(packages = filteredPackages)
     }
 }
@@ -111,9 +110,7 @@ class PreMergePrivateAnnotationRecorder : PreMergeDocumentableTransformer {
      */
     override fun invoke(modules: List<DModule>): List<DModule> {
         modules.forEach { module ->
-            module.packages.forEach { dPackage ->
-                checkAllClasslikes(dPackage.classlikes)
-            }
+            module.packages.forEach { dPackage -> checkAllClasslikes(dPackage.classlikes) }
         }
         return modules
     }
@@ -123,8 +120,9 @@ class PreMergePrivateAnnotationRecorder : PreMergeDocumentableTransformer {
             if (classlike is DAnnotation) {
                 val sourceSet = classlike.getExpectOrCommonSourceSet()
                 if (
-                    classlike.visibility[sourceSet]
-                        ?.isDocumented(sourceSet.documentedVisibilities) == false
+                    classlike.visibility[sourceSet]?.isDocumented(
+                        sourceSet.documentedVisibilities
+                    ) == false
                 ) {
                     addToHiddenSet(classlike)
                 }
@@ -159,20 +157,19 @@ private fun Documentable.isHidden(hidingAnnotations: List<String>): Boolean =
         (this as? DProperty)?.getter?.isHiddenWithAnnotation(hidingAnnotations) == true
 
 private fun Documentable.hasHideJavadocTag(): Boolean =
-    this.documentation.any {
-            (_, docs) ->
+    this.documentation.any { (_, docs) ->
         docs.dfs { it is CustomTagWrapper && it.name.trim() == "hide" } != null
     }
 
 private fun Documentable.hasRemovedJavadocTag(): Boolean =
-    this.documentation.any {
-            (_, docs) ->
+    this.documentation.any { (_, docs) ->
         docs.dfs { it is CustomTagWrapper && it.name.trim() == "removed" } != null
     }
 
 fun hasBeenHidden(dri: DRI): Boolean {
     return hiddenDocumentables.contains(dri)
 }
+
 private fun addToHiddenSet(d: Documentable) {
     (d.explodedChildren + d).forEach { hiddenDocumentables.add(it.dri) }
 }

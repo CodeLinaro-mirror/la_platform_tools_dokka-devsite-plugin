@@ -16,10 +16,10 @@
 
 package com.google.devsite.renderer.impl.paths
 
+import java.util.concurrent.ConcurrentHashMap
 import org.jetbrains.dokka.base.resolvers.local.DokkaLocationProvider
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.DisplaySourceSet
-import java.util.concurrent.ConcurrentHashMap
 
 class DefaultExternalDokkaLocationProvider(
     private val dokkaLocationProvider: DokkaLocationProvider,
@@ -29,10 +29,12 @@ class DefaultExternalDokkaLocationProvider(
     /** ConcurrentHashMap cannot have nullable type parameters for some reason */
     private fun String.nullifier(): String? = if (this == "null") null else this
 
-    @JvmName("is private")
-    private fun String?.deNullifier(): String = this ?: "null"
+    @JvmName("is private") private fun String?.deNullifier(): String = this ?: "null"
 
-    override fun resolve(dri: DRI): String? = memoizer.getOrPut(dri) {
-        dokkaLocationProvider.resolve(dri, emptySet<DisplaySourceSet>()).deNullifier()
-    }.nullifier()
+    override fun resolve(dri: DRI): String? =
+        memoizer
+            .getOrPut(dri) {
+                dokkaLocationProvider.resolve(dri, emptySet<DisplaySourceSet>()).deNullifier()
+            }
+            .nullifier()
 }

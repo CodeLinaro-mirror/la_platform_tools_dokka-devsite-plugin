@@ -40,13 +40,15 @@ internal fun Callable.anchor(
     return "$receiverStr$name$open$signature$close"
 }
 
-private fun TypeReference.name(): String = when (this) {
-    is JavaClassReference -> name
-    is TypeConstructor -> fullyQualifiedName
-    is Nullable -> wrapped.name()
-    // Parameters aren't used in kdoc links, so this is only relevant for Java linking to Kotlin
-    // Anything with multiple bounds in Java code is linked as the first bound....
-    // (see "simple" integration test Fraggy#createType)
-    is TypeParam -> bounds.first().name()
-    is RecursiveType, StarProjection -> ""
-}
+private fun TypeReference.name(): String =
+    when (this) {
+        is JavaClassReference -> name
+        is TypeConstructor -> fullyQualifiedName
+        is Nullable -> wrapped.name()
+        // Parameters aren't used in kdoc links, so this is only relevant for Java linking to Kotlin
+        // Anything with multiple bounds in Java code is linked as the first bound....
+        // (see "simple" integration test Fraggy#createType)
+        is TypeParam -> bounds.first().name()
+        is RecursiveType,
+        StarProjection -> ""
+    }

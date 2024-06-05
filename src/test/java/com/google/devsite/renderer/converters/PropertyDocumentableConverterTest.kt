@@ -42,21 +42,25 @@ internal class PropertyDocumentableConverterTest(
     displayLanguage: Language,
 ) : ConverterTestBase(displayLanguage) {
 
-    override var defaultHints = ModifierHints(
-        displayLanguage,
-        isSummary = false,
-        type = DProperty::class.java,
-        containingType = DClass::class.java,
-        isFromJava = false, // There's no great way to do this. Currently only
-        // affects `const` inject
-    )
+    override var defaultHints =
+        ModifierHints(
+            displayLanguage,
+            isSummary = false,
+            type = DProperty::class.java,
+            containingType = DClass::class.java,
+            isFromJava = false, // There's no great way to do this. Currently only
+            // affects `const` inject
+        )
 
     @Test
     fun `Property summary component creates return type link`() {
-        val summary = """
+        val summary =
+            """
             |class A
             |val foo: A
-        """.render().summary()
+        """
+                .render()
+                .summary()
 
         val returnType = summary.data.title.data.type
 
@@ -66,9 +70,12 @@ internal class PropertyDocumentableConverterTest(
 
     @Test
     fun `Property summary component creates signature with name`() {
-        val summary = """
+        val summary =
+            """
             |val iAmACoolProperty
-        """.render().summary()
+        """
+                .render()
+                .summary()
 
         val property = summary.data.description
 
@@ -77,18 +84,22 @@ internal class PropertyDocumentableConverterTest(
 
     @Test
     fun `Property summary and detail include nullability information in 4x Kotlin and Java`() {
-        val moduleJ = """
+        val moduleJ =
+            """
         |@Nullable
         |public String nulla;
         |public String platform;
         |@NonNull
         |public String nonnaBefore;
         |public @NonNull String nonnaClose;
-        """.render(java = true)
-        val moduleK = """
+        """
+                .render(java = true)
+        val moduleK =
+            """
         |val nulla: String? = null // nullability annotations in Kotlin are errors.
         |val nonna: String = "foo"
-        """.render()
+        """
+                .render()
         fun DModule.sOrD(summary: Boolean, propertyName: String): TypeProjectionComponent =
             if (summary) {
                 summary(propertyName).data.title.data.type
@@ -123,10 +134,13 @@ internal class PropertyDocumentableConverterTest(
 
     @Test
     fun `Property summary component contains @property documentation`() {
-        val summary = """
+        val summary =
+            """
             |/** @property foo some_documentation */
             |val foo
-        """.render().summary()
+        """
+                .render()
+                .summary()
 
         val property = summary.data.description
 
@@ -135,9 +149,12 @@ internal class PropertyDocumentableConverterTest(
 
     @Test
     fun `Property summary component has correct relative link`() {
-        val summary = """
+        val summary =
+            """
             |val <T : Number> List<T>.foo
-        """.render().summary()
+        """
+                .render()
+                .summary()
 
         val property = summary.data.description
         val signature = property.data.signature
@@ -150,28 +167,37 @@ internal class PropertyDocumentableConverterTest(
 
     @Test
     fun `Property detail component has correct name`() {
-        val detail = """
+        val detail =
+            """
             |val foo
-        """.render().detail()
+        """
+                .render()
+                .detail()
 
         assertThat(detail.data.name).isEqualTo("foo")
     }
 
     @Test
     fun `Property detail component is marked as property type`() {
-        val detail = """
+        val detail =
+            """
             |val foo
-        """.render().detail()
+        """
+                .render()
+                .detail()
 
         assertThat(detail.data.symbolKind).isEqualTo(SymbolDetail.SymbolKind.READ_ONLY_PROPERTY)
     }
 
     @Test
     fun `Property detail component creates return type link`() {
-        val detail = """
+        val detail =
+            """
             |class A
             |val foo: A
-        """.render().detail()
+        """
+                .render()
+                .detail()
 
         val returnType = detail.data.returnType
 
@@ -181,28 +207,35 @@ internal class PropertyDocumentableConverterTest(
 
     @Test
     fun `Property detail component has annotations`() {
-        val detail = """
+        val detail =
+            """
             |annotation class Hello
             |@Hello val foo: String
-        """.render().detail()
+        """
+                .render()
+                .detail()
 
         assertThat(detail.data.annotationComponents).isNotEmpty()
     }
 
     @Test
     fun `Overall nullability of array types is handled properly in 4x Java and Kotlin`() {
-        val moduleK = """
+        val moduleK =
+            """
             |val foo: IntArray?
             |val oof: IntArray
             |val bar: Array<String>?
             |val rab: Array<String>
-        """.render()
-        val moduleJ = """
+        """
+                .render()
+        val moduleJ =
+            """
             |public int[] foo;
             |public @NonNull int[] oof;
             |public String[] bar;
             |public @NonNull String[] rab;
-        """.render(java = true)
+        """
+                .render(java = true)
         for (module in listOf(moduleJ, moduleK)) {
             val fooType = module.detail("foo").data.returnType
             val oofType = module.detail("oof").data.returnType
@@ -228,26 +261,32 @@ internal class PropertyDocumentableConverterTest(
 
     @Test
     fun `Property detail component has correct anchors`() {
-        val detail = """
+        val detail =
+            """
             |val <T : Number> List<T>.foo
-        """.render().detail()
+        """
+                .render()
+                .detail()
 
-        assertThat(detail.data.anchors).containsExactly(
-            "(kotlin.collections.List).foo()",
-            "(kotlin.collections.List).getFoo()",
-            "(kotlin.collections.List).setFoo()",
-            "-kotlin.collections.List-.getFoo--",
-            "-kotlin.collections.List-.setFoo--",
-        )
+        assertThat(detail.data.anchors)
+            .containsExactly(
+                "(kotlin.collections.List).foo()",
+                "(kotlin.collections.List).getFoo()",
+                "(kotlin.collections.List).setFoo()",
+                "-kotlin.collections.List-.getFoo--",
+                "-kotlin.collections.List-.setFoo--",
+            )
     }
 
     @Test
     fun `Property summary and detail for Kotlin top-level property include annotations`() {
-        val module = """
+        val module =
+            """
             |annotation class ExperimentalComposeApi
             |@ExperimentalComposeApi
             |val String.numbah: Int = 5
-        """.render()
+        """
+                .render()
         fun DModule.sOrDAnnotations(summary: Boolean, propertyName: String) =
             if (summary) {
                 summary(propertyName).data.description.data.annotationComponents
@@ -260,18 +299,26 @@ internal class PropertyDocumentableConverterTest(
 
     @Test
     fun `Constant modifier translates properly between Kotlin and Java`() {
-        val detailJ = """
+        val detailJ =
+            """
             public static final Integer FOO = 5
-        """.render(java = true)
-            .detail("FOO", hints = defaultHints.copy(isFromJava = true))
-        val detailK = """
+        """
+                .render(java = true)
+                .detail("FOO", hints = defaultHints.copy(isFromJava = true))
+        val detailK =
+            """
             public const val FOO: Int = 5
-        """.render().detail("FOO")
-        val detailKNo = """
+        """
+                .render()
+                .detail("FOO")
+        val detailKNo =
+            """
             |object aarg {
             |    @JvmStatic public val FOO: Int = 5
             |}
-        """.render().detail("FOO")
+        """
+                .render()
+                .detail("FOO")
         for (detail in listOf(detailJ, detailK, detailKNo)) {
             javaOnly {
                 assertThat(detail.data.modifiers).isEqualTo(listOf("public", "static", "final"))
@@ -285,15 +332,23 @@ internal class PropertyDocumentableConverterTest(
 
     @Test
     fun `Constant properties have values`() {
-        val intConstantJ = """
+        val intConstantJ =
+            """
             public static final int FOO = 5;
-        """.render(java = true).signature("FOO").data
+        """
+                .render(java = true)
+                .signature("FOO")
+                .data
         assertThat(intConstantJ.constantValue).isNotNull()
         assertThat(intConstantJ.constantValue).isEqualTo("5")
 
-        val intConstantK = """
+        val intConstantK =
+            """
             public const val FOO: Int = 5
-        """.render().signature("FOO").data
+        """
+                .render()
+                .signature("FOO")
+                .data
         assertThat(intConstantK.constantValue).isNotNull()
         assertThat(intConstantK.constantValue).isEqualTo("5")
 
@@ -316,30 +371,34 @@ internal class PropertyDocumentableConverterTest(
 
     @Test
     fun `External link resolution through ExternalDocumentationLinks doesn't give Oracle`() {
-        val propertySummary = """
+        val propertySummary =
+            """
             public static Object foo = null
-        """.render(java = true).summary()
-        val html = createHTML().tr {
-            propertySummary.render(this)
-        }.trim()
+        """
+                .render(java = true)
+                .summary()
+        val html = createHTML().tr { propertySummary.render(this) }.trim()
         val htmlParts = html.split("\\s+".toRegex())
         val link = htmlParts.first { it.startsWith("href") }.split(">")[0]
         javaOnly {
-            assertThat(link).isEqualTo(
-                "href=\"https://developer.android.com/reference/java/lang/Object.html\"",
-            )
+            assertThat(link)
+                .isEqualTo(
+                    "href=\"https://developer.android.com/reference/java/lang/Object.html\"",
+                )
         }
         kotlinOnly {
-            assertThat(link).isEqualTo(
-                "href=\"https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html\"",
-            )
+            assertThat(link)
+                .isEqualTo(
+                    "href=\"https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html\"",
+                )
         }
     }
 
     /** Note: the desired behavior on `var protected set` is unclear */
     @Test
     fun `Val-Var verification`() {
-        val module = """
+        val module =
+            """
             |public class Test {
             |   public val fullClassVal = 0
             |   public var fullClassVar = 1
@@ -353,7 +412,8 @@ internal class PropertyDocumentableConverterTest(
             |public var internalSetTopVar: Int = 2
             |    internal set
             |
-        """.render()
+        """
+                .render()
         fun kindOf(name: String) = module.detail(name).data.symbolKind
         val fullClassVal = kindOf("fullClassVal")
         val fullClassVar = kindOf("fullClassVar")
@@ -363,19 +423,20 @@ internal class PropertyDocumentableConverterTest(
         val fullTopVar = kindOf("fullTopVar")
         val internalSetTopVar = kindOf("internalSetTopVar")
 
-        val vals = listOf(
-            fullClassVal,
-            internalSetClassVar,
-            protectedSetClassVar,
-            fullTopVal,
-            internalSetTopVar,
-        )
+        val vals =
+            listOf(
+                fullClassVal,
+                internalSetClassVar,
+                protectedSetClassVar,
+                fullTopVal,
+                internalSetTopVar,
+            )
         val vars = listOf(fullClassVar, fullTopVar)
 
-        for (shouldBeAVal in vals)
-            assertThat(shouldBeAVal == SymbolDetail.SymbolKind.READ_ONLY_PROPERTY)
-        for (shouldBeAVar in vars)
-            assertThat(shouldBeAVar == SymbolDetail.SymbolKind.PROPERTY)
+        for (shouldBeAVal in vals) assertThat(
+            shouldBeAVal == SymbolDetail.SymbolKind.READ_ONLY_PROPERTY
+        )
+        for (shouldBeAVar in vars) assertThat(shouldBeAVar == SymbolDetail.SymbolKind.PROPERTY)
     }
 
     private fun DModule.propertyConverter() =
@@ -399,8 +460,12 @@ internal class PropertyDocumentableConverterTest(
         name: String = "foo",
         hints: ModifierHints = defaultHints,
     ): PropertySignature {
-        return propertyConverter().summary(property(name)!!, hints)!!
-            .data.description.data.signature
+        return propertyConverter()
+            .summary(property(name)!!, hints)!!
+            .data
+            .description
+            .data
+            .signature
     }
 
     private fun TypeProjectionComponent.link(): Link.Params = data.type.data
@@ -408,9 +473,10 @@ internal class PropertyDocumentableConverterTest(
     companion object {
         @JvmStatic
         @Parameterized.Parameters(name = "{0}")
-        fun data() = listOf(
-            arrayOf(Language.JAVA),
-            arrayOf(Language.KOTLIN),
-        )
+        fun data() =
+            listOf(
+                arrayOf(Language.JAVA),
+                arrayOf(Language.KOTLIN),
+            )
     }
 }

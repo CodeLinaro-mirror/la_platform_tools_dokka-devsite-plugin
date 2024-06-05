@@ -24,15 +24,12 @@ import kotlinx.html.div
 internal data class DefaultClasslikeSummary(
     override val data: ClasslikeSummary.Params,
 ) : ClasslikeSummary {
-    override fun render(into: FlowContent) = into.run {
-        div {
-            code {
-                data.signature.render(this)
-            }
-        }
+    override fun render(into: FlowContent) =
+        into.run {
+            div { code { data.signature.render(this) } }
 
-        data.description.render(this)
-    }
+            data.description.render(this)
+        }
 
     override fun toString() = "${data.signature}: ${data.description}"
 }

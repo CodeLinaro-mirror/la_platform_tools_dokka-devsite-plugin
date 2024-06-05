@@ -25,9 +25,7 @@ internal class NoopSummaryList<T : SummaryItem>(private val show: Boolean = true
     override val data: SummaryList.Params<T>
         get() = throw NotImplementedError()
 
-    override fun render(into: FlowContent) = into.run {
-        if (hasContent()) div { +"noop" }
-    }
+    override fun render(into: FlowContent) = into.run { if (hasContent()) div { +"noop" } }
 
     override fun hasContent() = show
 

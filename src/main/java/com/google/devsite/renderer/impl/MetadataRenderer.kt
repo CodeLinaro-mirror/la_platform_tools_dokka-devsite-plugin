@@ -36,20 +36,19 @@ internal class MetadataRenderer(
     private val docsHolder: DocumentablesHolder,
     javadocConverter: DocTagConverter,
 ) {
-    private val converter = RootDocumentableConverter(
-        displayLanguage,
-        pathProvider,
-        docsHolder,
-        javadocConverter,
-    )
+    private val converter =
+        RootDocumentableConverter(
+            displayLanguage,
+            pathProvider,
+            docsHolder,
+            javadocConverter,
+        )
 
     /** Writes the list of packages in machine-readable format. */
     suspend fun writePackageList() {
         val component =
             DefaultPackageList(PackageList.Params(docsHolder.packages().map { it.name }))
-        val packageList = buildString {
-            component.render(this)
-        }
+        val packageList = buildString { component.render(this) }
         outputWriter.write(pathProvider.packageList, packageList, "")
     }
 
@@ -57,35 +56,27 @@ internal class MetadataRenderer(
     suspend fun writeRootIndex() {
         val redirectUrl = pathProvider.classes
         val redirectComponent = DefaultRedirectPage(RedirectPage.Params(redirectUrl))
-        val rootIndex = createHTML().html {
-            redirectComponent.render(this)
-        }
+        val rootIndex = createHTML().html { redirectComponent.render(this) }
         outputWriter.write(pathProvider.rootIndex, rootIndex, "")
     }
 
     /** Writes the list of packages in human-readable format. */
     suspend fun writePackages() {
         val page = converter.packagesIndexPage()
-        val packageIndex = createHTML().html {
-            page.render(this)
-        }
+        val packageIndex = createHTML().html { page.render(this) }
         outputWriter.write(pathProvider.packages, packageIndex, "")
     }
 
     /** Writes the list of classes in human-readable format. */
     suspend fun writeClasses() {
         val page = converter.classesIndexPage()
-        val classIndex = createHTML().html {
-            page.render(this)
-        }
+        val classIndex = createHTML().html { page.render(this) }
         outputWriter.write(pathProvider.classes, classIndex, "")
     }
 
     /** Writes the ToC for devsite consumption. */
     suspend fun writeToc(packagePrefixToRemove: String?) {
-        val toc = buildString {
-            converter.tocPage(packagePrefixToRemove).render(this)
-        }
+        val toc = buildString { converter.tocPage(packagePrefixToRemove).render(this) }
         outputWriter.write(pathProvider.toc, toc, "")
     }
 }

@@ -28,11 +28,8 @@ import kotlinx.html.div
 internal interface SymbolDetail<T : SymbolSignature> : ContextFreeComponent {
     val data: Params<T>
 
-    fun layout(into: FlowContent, contents: DIV.() -> Unit) = into.run {
-        div(classes = "list") {
-            contents()
-        }
-    }
+    fun layout(into: FlowContent, contents: DIV.() -> Unit) =
+        into.run { div(classes = "list") { contents() } }
 
     // Because this is not the bottom of a class hierarchy (KmpSymbolDetail), it can't be `data`
     open class Params<T : SymbolSignature>(

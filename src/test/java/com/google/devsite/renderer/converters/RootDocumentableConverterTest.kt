@@ -38,36 +38,48 @@ internal class RootDocumentableConverterTest(
 ) : ConverterTestBase(displayLanguage) {
     @Test
     fun `Class index creates components with correct page title`() {
-        val page = """
+        val page =
+            """
             |class Foo
-        """.render().indexPageForClasses()
+        """
+                .render()
+                .indexPageForClasses()
 
         assertThat(page.data.title).isEqualTo("Class Index")
     }
 
     @Test
     fun `Class index creates components with correct path`() {
-        val page = """
+        val page =
+            """
             |class Foo
-        """.render().indexPageForClasses()
+        """
+                .render()
+                .indexPageForClasses()
 
         assertThat(page.data.pathForSwitcher!!).isEqualTo("androidx/classes.html")
     }
 
     @Test
     fun `Class index creates components with correct book path`() {
-        val page = """
+        val page =
+            """
             |class Foo
-        """.render().indexPageForClasses()
+        """
+                .render()
+                .indexPageForClasses()
 
         assertPath(page.data.bookPath, "androidx/_book.yaml")
     }
 
     @Test
     fun `Class index creates components with correct packages link`() {
-        val page = """
+        val page =
+            """
             |class Foo
-        """.render().indexPageForClasses()
+        """
+                .render()
+                .indexPageForClasses()
 
         val classIndex = page.data.content
 
@@ -76,9 +88,12 @@ internal class RootDocumentableConverterTest(
 
     @Test
     fun `Class index creates components for single class`() {
-        val page = """
+        val page =
+            """
             |class Foo
-        """.render().indexPageForClasses()
+        """
+                .render()
+                .indexPageForClasses()
 
         val classIndex = page.data.content
         val (letter, summary) = classIndex.item()
@@ -90,9 +105,12 @@ internal class RootDocumentableConverterTest(
 
     @Test
     fun `Class index creates components for nested class`() {
-        val page = """
+        val page =
+            """
             |class Outer { class Inner }
-        """.render().indexPageForClasses()
+        """
+                .render()
+                .indexPageForClasses()
 
         val classIndex = page.data.content
         val (letter, summary) = classIndex.item()
@@ -108,9 +126,12 @@ internal class RootDocumentableConverterTest(
 
     @Test
     fun `Class index creates components for enum`() {
-        val page = """
+        val page =
+            """
             |enum class Choice { A, B }
-        """.render().indexPageForClasses()
+        """
+                .render()
+                .indexPageForClasses()
 
         val classIndex = page.data.content
         val (letter, summary) = classIndex.item()
@@ -122,11 +143,14 @@ internal class RootDocumentableConverterTest(
 
     @Test
     fun `Class index creates components for multiple classes starting with same letter`() {
-        val page = """
+        val page =
+            """
             |class Fo
             |class Foo
             |class Fooo
-        """.render().indexPageForClasses()
+        """
+                .render()
+                .indexPageForClasses()
 
         val classIndex = page.data.content
         val (letter, summary) = classIndex.item()
@@ -144,10 +168,13 @@ internal class RootDocumentableConverterTest(
 
     @Test
     fun `Class index creates components with sorted classes`() {
-        val page = """
+        val page =
+            """
             |class AB
             |class AA
-        """.render().indexPageForClasses()
+        """
+                .render()
+                .indexPageForClasses()
 
         val classIndex = page.data.content
         val classes = classIndex.item().value.items(2)
@@ -158,20 +185,25 @@ internal class RootDocumentableConverterTest(
 
     @Test
     fun `Class index creates components with sorted classes across packages`() {
-        val page = listOf(
-            """
+        val page =
+            listOf(
+                    """
                 |/src/main/kotlin/androidx/example/A.kt
                 |package a
                 |
                 |class AB
-            """.trimMargin(),
             """
+                        .trimMargin(),
+                    """
                 |/src/main/kotlin/androidx/example/B.kt
                 |package b
                 |
                 |class AA
-            """.trimMargin(),
-        ).render().indexPageForClasses()
+            """
+                        .trimMargin(),
+                )
+                .render()
+                .indexPageForClasses()
 
         val classIndex = page.data.content
         val classes = classIndex.item().value.items(2)
@@ -182,10 +214,13 @@ internal class RootDocumentableConverterTest(
 
     @Test
     fun `Class index creates components with sorted categories`() {
-        val page = """
+        val page =
+            """
             |class B
             |class A
-        """.render().indexPageForClasses()
+        """
+                .render()
+                .indexPageForClasses()
 
         val classIndex = page.data.content
         val classes = classIndex.items(2)
@@ -196,10 +231,13 @@ internal class RootDocumentableConverterTest(
 
     @Test
     fun `Class index creates components for multiple classes starting with different letters`() {
-        val page = """
+        val page =
+            """
             |class Foo
             |class Bar
-        """.render().indexPageForClasses()
+        """
+                .render()
+                .indexPageForClasses()
 
         val classIndex = page.data.content
         val (fooLetter, fooSummary) = classIndex.items(2).last()
@@ -215,36 +253,48 @@ internal class RootDocumentableConverterTest(
 
     @Test
     fun `Package index creates components with correct page title`() {
-        val page = """
+        val page =
+            """
             |class Foo
-        """.render().indexPageForPackages()
+        """
+                .render()
+                .indexPageForPackages()
 
         assertThat(page.data.title).isEqualTo("Package Index")
     }
 
     @Test
     fun `Package index creates components with correct path`() {
-        val page = """
+        val page =
+            """
             |class Foo
-        """.render().indexPageForPackages()
+        """
+                .render()
+                .indexPageForPackages()
 
         assertThat(page.data.pathForSwitcher!!).isEqualTo("androidx/packages.html")
     }
 
     @Test
     fun `Package index creates components with correct book path`() {
-        val page = """
+        val page =
+            """
             |class Foo
-        """.render().indexPageForPackages()
+        """
+                .render()
+                .indexPageForPackages()
 
         assertPath(page.data.bookPath, "androidx/_book.yaml")
     }
 
     @Test
     fun `Package index creates components with correct classes link`() {
-        val page = """
+        val page =
+            """
             |class Foo
-        """.render().indexPageForPackages()
+        """
+                .render()
+                .indexPageForPackages()
 
         val packageIndex = page.data.content
 
@@ -253,14 +303,18 @@ internal class RootDocumentableConverterTest(
 
     @Test
     fun `Package index creates components for single package`() {
-        val page = listOf(
-            """
+        val page =
+            listOf(
+                    """
                 |/src/main/kotlin/androidx/example/Test.kt
                 |package androidx.example
                 |
                 |class Foo
-            """.trimMargin(),
-        ).render().indexPageForPackages()
+            """
+                        .trimMargin(),
+                )
+                .render()
+                .indexPageForPackages()
 
         val packageIndex = page.data.content
         val packagez = packageIndex.data.packages.item()
@@ -271,26 +325,32 @@ internal class RootDocumentableConverterTest(
 
     @Test
     fun `Package index creates components for multiple packages`() {
-        val page = listOf(
-            """
+        val page =
+            listOf(
+                    """
                 |/src/main/kotlin/androidx/example/A.kt
                 |package a
                 |
                 |class A
-            """.trimMargin(),
             """
+                        .trimMargin(),
+                    """
                 |/src/main/kotlin/androidx/example/B.kt
                 |package b
                 |
                 |class B
-            """.trimMargin(),
             """
+                        .trimMargin(),
+                    """
                 |/src/main/kotlin/androidx/example/C.kt
                 |package c
                 |
                 |class C
-            """.trimMargin(),
-        ).render().indexPageForPackages()
+            """
+                        .trimMargin(),
+                )
+                .render()
+                .indexPageForPackages()
 
         val packageIndex = page.data.content
         val packages = packageIndex.data.packages.items(3)
@@ -304,20 +364,25 @@ internal class RootDocumentableConverterTest(
 
     @Test
     fun `Package index creates components with sorted packages`() {
-        val page = listOf(
-            """
+        val page =
+            listOf(
+                    """
                 |/src/main/kotlin/androidx/example/B.kt
                 |package b
                 |
                 |class B
-            """.trimMargin(),
             """
+                        .trimMargin(),
+                    """
                 |/src/main/kotlin/androidx/example/a/A.kt
                 |package a
                 |
                 |class A
-            """.trimMargin(),
-        ).render().indexPageForPackages()
+            """
+                        .trimMargin(),
+                )
+                .render()
+                .indexPageForPackages()
 
         val packageIndex = page.data.content
         val packages = packageIndex.data.packages.items(2)
@@ -328,9 +393,12 @@ internal class RootDocumentableConverterTest(
 
     @Test
     fun `Toc creates components with correct metadata links`() {
-        val toc = """
+        val toc =
+            """
             |class Foo
-        """.render().toc()
+        """
+                .render()
+                .toc()
 
         assertPath(toc.data.classesUrl, "androidx/classes.html")
         assertPath(toc.data.packagesUrl, "androidx/packages.html")
@@ -338,9 +406,12 @@ internal class RootDocumentableConverterTest(
 
     @Test
     fun `Toc creates components with correct package link`() {
-        val toc = """
+        val toc =
+            """
             |class Foo
-        """.render().toc()
+        """
+                .render()
+                .toc()
 
         val tocPackage = toc.item()
 
@@ -350,9 +421,12 @@ internal class RootDocumentableConverterTest(
 
     @Test
     fun `Toc creates components with correct class link`() {
-        val toc = """
+        val toc =
+            """
             |class Foo
-        """.render().toc()
+        """
+                .render()
+                .toc()
 
         val tocPackage = toc.item()
         val clazz = tocPackage.data.classes.item()
@@ -363,9 +437,12 @@ internal class RootDocumentableConverterTest(
 
     @Test
     fun `Toc creates components with correct inner class link`() {
-        val toc = """
+        val toc =
+            """
             |class Outer { class Inner }
-        """.render().toc()
+        """
+                .render()
+                .toc()
 
         val tocPackage = toc.item()
         val inner = tocPackage.data.classes.items(2).last()
@@ -376,9 +453,12 @@ internal class RootDocumentableConverterTest(
 
     @Test
     fun `Toc includes top level objects in Kotlin`() {
-        val toc = """
+        val toc =
+            """
             |object Foo {}
-        """.render().toc()
+        """
+                .render()
+                .toc()
 
         val tocPackage = toc.item()
         javaOnly {
@@ -394,14 +474,17 @@ internal class RootDocumentableConverterTest(
 
     @Test
     fun `Toc does not include companion objects`() {
-        val toc = """
+        val toc =
+            """
             |class Foo {
             |    companion object {}
             |}
             |class Bar {
             |    companion object Baz {}
             |}
-        """.render().toc()
+        """
+                .render()
+                .toc()
 
         val tocPackage = toc.item()
         kotlinOnly {
@@ -417,20 +500,25 @@ internal class RootDocumentableConverterTest(
 
     @Test
     fun `Toc removes package prefix if specified`() {
-        val toc = listOf(
-            """
+        val toc =
+            listOf(
+                    """
                 |/src/main/kotlin/androidx/example/B.kt
                 |package androidx.example.b
                 |
                 |class B
-            """.trimMargin(),
             """
+                        .trimMargin(),
+                    """
                 |/src/main/kotlin/androidx/example/a/A.kt
                 |package androidx.example.a
                 |
                 |class A
-            """.trimMargin(),
-        ).render().toc(packagePrefixToRemove = "androidx.example")
+            """
+                        .trimMargin(),
+                )
+                .render()
+                .toc(packagePrefixToRemove = "androidx.example")
 
         val packageNames = toc.data.packages.map { it.data.name }
         assertThat(packageNames).containsExactly("a", "b")
@@ -438,20 +526,25 @@ internal class RootDocumentableConverterTest(
 
     @Test
     fun `Class summary only contains synthetic classes for Java display`() {
-        val classes = """
+        val classes =
+            """
             |fun foo(): Unit {}
-        """.render().indexPageForClasses().data.content.data.alphabetizedClasses
+        """
+                .render()
+                .indexPageForClasses()
+                .data
+                .content
+                .data
+                .alphabetizedClasses
         javaOnly {
             // T is for TestKt
             assertThat(classes).containsKey('T')
         }
-        kotlinOnly {
-            assertThat(classes).isEmpty()
-        }
+        kotlinOnly { assertThat(classes).isEmpty() }
     }
 
-    private fun DModule.rootConverter() = ConverterHolder(this@RootDocumentableConverterTest, this)
-        .rootDocumentableConverter
+    private fun DModule.rootConverter() =
+        ConverterHolder(this@RootDocumentableConverterTest, this).rootDocumentableConverter
 
     private fun DModule.indexPageForClasses(): DevsitePage<ClassIndex> {
         return runBlocking { rootConverter().classesIndexPage() }
@@ -468,9 +561,10 @@ internal class RootDocumentableConverterTest(
     companion object {
         @JvmStatic
         @Parameterized.Parameters(name = "{0}")
-        fun data() = listOf(
-            arrayOf(Language.JAVA),
-            arrayOf(Language.KOTLIN),
-        )
+        fun data() =
+            listOf(
+                arrayOf(Language.JAVA),
+                arrayOf(Language.KOTLIN),
+            )
     }
 }

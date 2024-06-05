@@ -27,11 +27,12 @@ internal data class DefaultUnlink(
         assert(data.url == "")
     }
 
-    override fun render(into: FlowContent) = into.run {
-        if (data.url.isEmpty()) {
-            +data.name
+    override fun render(into: FlowContent) =
+        into.run {
+            if (data.url.isEmpty()) {
+                +data.name
+            }
         }
-    }
 
     override fun toString() = data.name + if (data.url.isNotEmpty()) "<ref=${data.url}>" else ""
 }

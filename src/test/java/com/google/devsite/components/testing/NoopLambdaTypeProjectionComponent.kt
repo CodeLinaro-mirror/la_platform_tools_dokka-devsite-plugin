@@ -30,15 +30,16 @@ internal class NoopLambdaTypeProjectionComponent(
     override val data: LambdaTypeProjectionComponent.Params
         get() = throw NotImplementedError()
 
-    override fun render(into: FlowContent) = into.run {
-        if (receiver != null) +"$receiver."
-        +"("
-        params.render(into, nbsp = false)
-        +") "
-        nobr { +"->" }
-        +" "
-        +type
-    }
+    override fun render(into: FlowContent) =
+        into.run {
+            if (receiver != null) +"$receiver."
+            +"("
+            params.render(into, nbsp = false)
+            +") "
+            nobr { +"->" }
+            +" "
+            +type
+        }
 
     override fun length() = receiver.length + params.length() + type.length + "() -> ".length
 }

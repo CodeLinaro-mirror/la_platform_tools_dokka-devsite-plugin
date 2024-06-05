@@ -33,28 +33,33 @@ class DevsitePlugin : DokkaPlugin() {
     private val dokkaBase by lazy { plugin<DokkaBase>() }
     internal val analysisPlugin by lazy { plugin<KotlinAnalysisPlugin>() }
 
-    /** "All of Dokka's plugin API is in preview and it can be changed in a backwards-incompatible
-     *  manner with a best-effort migration. By opting in, you (we) acknowledge the risks of relying
-     *  on preview API."
+    /**
+     * "All of Dokka's plugin API is in preview and it can be changed in a backwards-incompatible
+     * manner with a best-effort migration. By opting in, you (we) acknowledge the risks of relying
+     * on preview API."
      */
     @OptIn(DokkaPluginApiPreview::class)
     override fun pluginApiPreviewAcknowledgement() = PluginApiPreviewAcknowledgement
 
     val translator by extending {
-        CoreExtensions.documentableToPageTranslator providing {
-            DocumentablesWrapper()
-        } override dokkaBase.documentableToPageTranslator
+        CoreExtensions.documentableToPageTranslator providing
+            {
+                DocumentablesWrapper()
+            } override
+            dokkaBase.documentableToPageTranslator
     }
 
     val renderer by extending {
-        CoreExtensions.renderer providing {
-            MultiLanguageRenderer(
-                it,
-                dokkaBase.querySingle { outputWriter },
-                getDevsiteConfiguration(it),
-                analysisPlugin,
-            )
-        } override dokkaBase.htmlRenderer
+        CoreExtensions.renderer providing
+            {
+                MultiLanguageRenderer(
+                    it,
+                    dokkaBase.querySingle { outputWriter },
+                    getDevsiteConfiguration(it),
+                    analysisPlugin,
+                )
+            } override
+            dokkaBase.htmlRenderer
     }
 
     val docTagsForCheckedExceptions by extending {
@@ -62,21 +67,28 @@ class DevsitePlugin : DokkaPlugin() {
     }
 
     val privateAnnotationFilter by extending {
-        dokkaBase.preMergeDocumentableTransformer with PreMergePrivateAnnotationRecorder() order {
-            before(dokkaBase.documentableVisibilityFilter)
-        }
+        dokkaBase.preMergeDocumentableTransformer with
+            PreMergePrivateAnnotationRecorder() order
+            {
+                before(dokkaBase.documentableVisibilityFilter)
+            }
     }
 
     val preMergeHiddenFilter by extending {
-        dokkaBase.preMergeDocumentableTransformer providing {
-            PreMergeHiddenDocumentableFilter(it, getDevsiteConfiguration(it).hidingAnnotations)
-        } order { before(dokkaBase.emptyPackagesFilter) }
+        dokkaBase.preMergeDocumentableTransformer providing
+            {
+                PreMergeHiddenDocumentableFilter(it, getDevsiteConfiguration(it).hidingAnnotations)
+            } order
+            {
+                before(dokkaBase.emptyPackagesFilter)
+            }
     }
 
     val hiddenPackageFilter by extending {
         CoreExtensions.documentableTransformer with PostMergePackageDocumentableFilter()
     }
 }
+
 internal fun getDevsiteConfiguration(dokkaContext: DokkaContext): DevsiteConfiguration {
     return checkNotNull(configuration<DevsitePlugin, DevsiteConfiguration>(dokkaContext)) {
         "Missing Dackka plugin configuration. See go/dackka#generating-docs for more detail."

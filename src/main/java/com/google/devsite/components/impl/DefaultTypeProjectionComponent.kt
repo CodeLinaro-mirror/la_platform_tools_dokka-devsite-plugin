@@ -27,16 +27,18 @@ import kotlinx.html.FlowContent
 internal data class DefaultTypeProjectionComponent(
     override val data: TypeProjectionComponent.Params,
 ) : TypeProjectionComponent {
-    override fun render(into: FlowContent) = into.run {
-        data.annotationComponents.render(this, separator = "", terminator = { +" " })
-        data.type.render(this)
-        data.generics.render(into, ShouldBreak.NO, brackets = "<>")
-        if (data.displayLanguage == Language.KOTLIN) +data.nullability.renderAsKotlinSuffix()
-    }
+    override fun render(into: FlowContent) =
+        into.run {
+            data.annotationComponents.render(this, separator = "", terminator = { +" " })
+            data.type.render(this)
+            data.generics.render(into, ShouldBreak.NO, brackets = "<>")
+            if (data.displayLanguage == Language.KOTLIN) +data.nullability.renderAsKotlinSuffix()
+        }
 
-    override fun toString() = data.annotationComponents.joinMaybePrefix(postfix = " ") +
-        data.type +
-        data.generics.joinMaybePrefix(prefix = " <", postfix = ">") +
-        // Do this regardless of displayLanguage, we don't care, it only appears in debugging
-        data.nullability.renderAsKotlinSuffix()
+    override fun toString() =
+        data.annotationComponents.joinMaybePrefix(postfix = " ") +
+            data.type +
+            data.generics.joinMaybePrefix(prefix = " <", postfix = ">") +
+            // Do this regardless of displayLanguage, we don't care, it only appears in debugging
+            data.nullability.renderAsKotlinSuffix()
 }

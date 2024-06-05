@@ -23,13 +23,14 @@ internal class NoopClasslikeDescription(private val shown: Boolean = true) : Cla
     override val data: ClasslikeDescription.Params
         get() = throw NotImplementedError()
 
-    override fun render(into: FlowContent) = into.run {
-        if (shown) {
-            +"header\n"
-            +"signature\n"
-            +"hierarchy\n"
-            +"relatedSymbols\n"
-            +"descriptionDocs\n"
+    override fun render(into: FlowContent) =
+        into.run {
+            if (shown) {
+                +"header\n"
+                +"signature\n"
+                +"hierarchy\n"
+                +"relatedSymbols\n"
+                +"descriptionDocs\n"
+            }
         }
-    }
 }

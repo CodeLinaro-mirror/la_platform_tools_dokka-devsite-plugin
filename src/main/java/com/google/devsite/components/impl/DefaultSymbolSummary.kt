@@ -28,16 +28,17 @@ import kotlinx.html.div
 internal data class DefaultSymbolSummary<T : SymbolSignature>(
     override val data: SymbolSummary.Params<T>,
 ) : SymbolSummary<T> {
-    override fun render(into: FlowContent) = into.run {
-        div {
-            code {
-                data.annotationComponents.render(into, ShouldBreak.YES, separator = "")
-                data.signature.render(this)
+    override fun render(into: FlowContent) =
+        into.run {
+            div {
+                code {
+                    data.annotationComponents.render(into, ShouldBreak.YES, separator = "")
+                    data.signature.render(this)
+                }
             }
-        }
 
-        data.description.render(this)
-    }
+            data.description.render(this)
+        }
 
     override fun toString() = "${data.annotationComponents} ${data.signature}: ${data.description}"
 }

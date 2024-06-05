@@ -25,15 +25,14 @@ import kotlinx.html.p
 internal data class DefaultPackageIndex(
     override val data: PackageIndex.Params,
 ) : PackageIndex {
-    override fun render(into: FlowContent) = into.run {
-        p {
-            +"These are all the API packages. See all "
-            a(data.classesUrl) {
-                +"API classes"
+    override fun render(into: FlowContent) =
+        into.run {
+            p {
+                +"These are all the API packages. See all "
+                a(data.classesUrl) { +"API classes" }
+                +"."
             }
-            +"."
-        }
 
-        data.packages.render(this)
-    }
+            data.packages.render(this)
+        }
 }

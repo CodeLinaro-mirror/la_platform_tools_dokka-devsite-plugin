@@ -48,8 +48,9 @@ internal class DocumentablesHolderTest(
 
     @Test
     fun `computePackages returns list of packages sorted by package name`() {
-        val expected = listOf("com.example.a", "com.example.b", "com.example.c", "com.exclude.a")
-            .toTypedArray()
+        val expected =
+            listOf("com.example.a", "com.example.b", "com.example.c", "com.exclude.a")
+                .toTypedArray()
         val packages = runBlocking {
             ConverterHolder(this@DocumentablesHolderTest, module).holder.packages()
         }
@@ -60,19 +61,22 @@ internal class DocumentablesHolderTest(
     @Test
     fun `computePackages returns list of packages with packages filtered out`() {
         val expected = listOf("com.example.a", "com.example.c").toTypedArray()
-        val excludedPackageSet = setOf(
-            "com.example.b".toRegex(),
-            "com.example.d".toRegex(),
-            """.*\.exclude.*""".toRegex(),
-        )
+        val excludedPackageSet =
+            setOf(
+                "com.example.b".toRegex(),
+                "com.example.d".toRegex(),
+                """.*\.exclude.*""".toRegex(),
+            )
         val excludedPackages =
             mapOf(Language.KOTLIN to excludedPackageSet, Language.JAVA to excludedPackageSet)
         val packages = runBlocking {
             ConverterHolder(
-                testClass = this@DocumentablesHolderTest,
-                module = module,
-                excludedPackages = excludedPackages,
-            ).holder.packages()
+                    testClass = this@DocumentablesHolderTest,
+                    module = module,
+                    excludedPackages = excludedPackages,
+                )
+                .holder
+                .packages()
         }
         val result = packages.map { it.packageName }.toTypedArray()
         Truth.assertThat(result).isEqualTo(expected)
@@ -81,10 +85,11 @@ internal class DocumentablesHolderTest(
     companion object {
         @JvmStatic
         @Parameterized.Parameters(name = "{0}")
-        fun data() = listOf(
-            arrayOf(Language.JAVA),
-            arrayOf(Language.KOTLIN),
-        )
+        fun data() =
+            listOf(
+                arrayOf(Language.JAVA),
+                arrayOf(Language.KOTLIN),
+            )
     }
 }
 
@@ -98,6 +103,7 @@ private fun fakeDPackage(
     sourceSets: Set<DokkaConfiguration.DokkaSourceSet> =
         setOf(DokkaSourceSetImpl(sourceSetID = DokkaSourceSetID("", ""))),
 ) = DPackage(dri, functions, properties, classlikes, typealiases, docs, sourceSets = sourceSets)
+
 private fun fakeDModule(
     name: String = "FAKE",
     packages: List<DPackage> = emptyList(),

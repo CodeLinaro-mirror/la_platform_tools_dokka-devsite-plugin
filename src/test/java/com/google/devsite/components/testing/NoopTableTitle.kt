@@ -24,7 +24,5 @@ internal object NoopTableTitle : TableTitle {
     override val data: TableTitle.Params
         get() = throw NotImplementedError()
 
-    override fun render(into: TR) = into.run {
-        unsafe { +"<noop/>" }
-    }
+    override fun render(into: TR) = into.run { unsafe { +"<noop/>" } }
 }

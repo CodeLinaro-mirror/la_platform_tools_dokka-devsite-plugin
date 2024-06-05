@@ -41,33 +41,41 @@ internal class AnnotationDocumentableConverterTest(
 
     @Test
     fun `@Suppress annotations are ignored`() {
-        val annotations = """
+        val annotations =
+            """
             |annotation class SuppressLint(val bar: String = "This is part of Lint, not Kotlin")
             |@Suppress("abc")
             |@SuppressLint("123")
             |@SuppressWarnings("do re mi")
             |fun foo() = Unit
-        """.render().functionAnnotationComponents()
+        """
+                .render()
+                .functionAnnotationComponents()
 
         assertThat(annotations.exceptNonNull()).isEmpty()
     }
 
     @Test
     fun `JVM annotations are ignored`() {
-        val annotations = """
+        val annotations =
+            """
             |@JvmName("bar")
             |fun foo() = Unit
-        """.render().functionAnnotationComponents()
+        """
+                .render()
+                .functionAnnotationComponents()
 
         assertThat(annotations.exceptNonNull()).isEmpty()
     }
 
     @Test
     fun `Annotations in the do-not-document list are not displayed`() {
-        val module = """
+        val module =
+            """
             |@Override
             |fun foo() = Unit
-        """.render()
+        """
+                .render()
 
         val annotationsNoneHidden = module.functionAnnotationComponents()
         // When no annotations are hidden, Override is displayed
@@ -81,41 +89,55 @@ internal class AnnotationDocumentableConverterTest(
 
     @Test
     fun `@Deprecated annotations are ignored since they are surfaced separately`() {
-        val annotations = """
+        val annotations =
+            """
             |@Deprecated("So long, farewell, auf wiedersehen, goodbye")
             |fun foo() = Unit
-        """.render().functionAnnotationComponents()
+        """
+                .render()
+                .functionAnnotationComponents()
 
         assertThat(annotations.exceptNonNull()).isEmpty()
     }
 
     @Test
     fun `@Deprecated annotation in list of Annotations is found`() {
-        val annotations = """
+        val annotations =
+            """
             |@Deprecated("So long, farewell, auf wiedersehen, goodbye")
             |fun foo() = Unit
-        """.render().function()!!.allAnnotations()
+        """
+                .render()
+                .function()!!
+                .allAnnotations()
 
         assertThat(annotations.isDeprecated()).isTrue()
     }
 
     @Test
     fun `@Deprecated annotation in Annotation object is not found`() {
-        val annotation = """
+        val annotation =
+            """
             |@FooAnnotation
             |fun foo() = Unit
-        """.render().function()!!.allAnnotations()
+        """
+                .render()
+                .function()!!
+                .allAnnotations()
 
         assertThat(annotation.isDeprecated()).isFalse()
     }
 
     @Test
     fun `Component has annotation type`() {
-        val annotations = """
+        val annotations =
+            """
             |annotation class Hello
             |@Hello
             |fun foo() = Unit
-        """.render().functionAnnotationComponents()
+        """
+                .render()
+                .functionAnnotationComponents()
 
         val annotation = annotations.exceptNonNull().item()
 
@@ -125,7 +147,8 @@ internal class AnnotationDocumentableConverterTest(
 
     @Test
     fun `Private annotation does not appear on function - kotlin`() {
-        val annotations = """
+        val annotations =
+            """
             |open class Container {
             |    annotation class PublicAnnotation
             |    protected annotation class ProtectedAnnotation
@@ -138,14 +161,17 @@ internal class AnnotationDocumentableConverterTest(
             |    @PrivateAnnotation
             |    fun foo() = Unit
             |}
-        """.render().functionAnnotationComponents()
+        """
+                .render()
+                .functionAnnotationComponents()
         assertThat(annotations.map { it.name })
             .containsExactly("Container.PublicAnnotation", "Container.ProtectedAnnotation")
     }
 
     @Test
     fun `Private annotation does not appear on function - java`() {
-        val annotations = """
+        val annotations =
+            """
             |public @interface PublicAnnotation {}
             |protected @interface ProtectedAnnotation {}
             |@interface PackagePrivateAnnotation {}
@@ -156,20 +182,26 @@ internal class AnnotationDocumentableConverterTest(
             |@PackagePrivateAnnotation
             |@PrivateAnnotation
             |public void foo() {}
-        """.render(java = true).functionAnnotationComponents()
+        """
+                .render(java = true)
+                .functionAnnotationComponents()
         assertThat(annotations.map { it.name })
             .containsExactly("Test.PublicAnnotation", "Test.ProtectedAnnotation")
     }
 
     @Test
     fun `Method component has annotation and value in 4x Kotlin and Java`() {
-        val annotationsK = """
+        val annotationsK =
+            """
             |annotation class Hello(val bar: String)
             |@Hello("abc")
             |@Hello(bar = "baz")
             |fun foo() = Unit
-        """.render().functionAnnotationComponents()
-        val annotationsJ = """
+        """
+                .render()
+                .functionAnnotationComponents()
+        val annotationsJ =
+            """
             |@Retention(RetentionPolicy.RUNTIME)
             |@Target(ElementType.METHOD)
             |public @interface Hello {
@@ -178,7 +210,9 @@ internal class AnnotationDocumentableConverterTest(
             |@Hello("abc")
             |@Hello(bar = "baz")
             |public void foo() {}
-        """.render(java = true).functionAnnotationComponents()
+        """
+                .render(java = true)
+                .functionAnnotationComponents()
 
         for (annotations in listOf(annotationsK, annotationsJ)) {
             val annotationOne = annotations.exceptNonNull().first()
@@ -198,14 +232,17 @@ internal class AnnotationDocumentableConverterTest(
 
     @Test
     fun `Property component has annotation and value in 4x Kotlin and Java`() {
-        val moduleK = """
+        val moduleK =
+            """
             |annotation class Hello(val bar: String)
             |@Hello("abc")
             |@Hello(bar = "baz")
             |val foo: String = "foofoo"
-        """.render()
+        """
+                .render()
         val annotationsK = moduleK.annotationComponents(moduleK.property()!!)
-        val moduleJ = """
+        val moduleJ =
+            """
             |@Retention(RetentionPolicy.RUNTIME)
             |@Target(ElementType.FIELD)
             |public @interface Hello {
@@ -214,7 +251,8 @@ internal class AnnotationDocumentableConverterTest(
             |@Hello("abc")
             |@Hello(bar = "baz")
             |public String foo = "foofoo"
-        """.render(java = true)
+        """
+                .render(java = true)
         val annotationsJ = moduleJ.annotationComponents(moduleK.property()!!)
 
         for (annotations in listOf(annotationsK, annotationsJ)) {
@@ -235,19 +273,23 @@ internal class AnnotationDocumentableConverterTest(
 
     @Test
     fun `Parameter component has annotation and value in 4x Kotlin and Java`() {
-        val moduleK = """
+        val moduleK =
+            """
             |annotation class Hello(val bar: String)
             |fun foo(@Hello("abc") @Hello(bar = "baz") arg: String) = Unit
-        """.render()
+        """
+                .render()
         val annotationsK = moduleK.annotationComponents(moduleK.function()!!.parameters.single())
-        val moduleJ = """
+        val moduleJ =
+            """
             |@Retention(RetentionPolicy.RUNTIME)
             |@Target(ElementType.PARAMETER)
             |public @interface Hello {
             |    public String bar() default "";
             |}
             |public void foo(@Hello("abc") @Hello(bar = "baz") @NonNull String arg)
-        """.render(java = true)
+        """
+                .render(java = true)
         val annotationsJ = moduleJ.annotationComponents(moduleJ.function()!!.parameters.single())
 
         for (annotations in listOf(annotationsK, annotationsJ)) {
@@ -267,19 +309,23 @@ internal class AnnotationDocumentableConverterTest(
 
     @Test
     fun `Type parameter component has annotation and value in 4x Kotlin and Java`() {
-        val moduleK = """
+        val moduleK =
+            """
             |annotation class Hello(val bar: String)
             |fun <@Hello("abc") @Hello(bar = "baz") T> foo(arg: String): List<T>
-        """.render()
+        """
+                .render()
         val annotationsK = moduleK.annotationComponents(moduleK.function()!!.generics.single())
-        val moduleJ = """
+        val moduleJ =
+            """
             |@Retention(RetentionPolicy.RUNTIME)
             |@Target(ElementType.TYPE_PARAMETER)
             |public @interface Hello {
             |    public String bar() default "";
             |}
             |public <@Hello("abc") @Hello(bar = "baz") T> java.util.List<T> foo()
-        """.render(java = true)
+        """
+                .render(java = true)
         val annotationsJ = moduleJ.annotationComponents(moduleJ.function()!!.generics.single())
 
         for (annotations in listOf(annotationsK, annotationsJ)) {
@@ -301,12 +347,15 @@ internal class AnnotationDocumentableConverterTest(
     fun `Type parameter type has annotation and value in 4x Kotlin and Java`() {
         fun DModule.genericBoundsAnnotations() =
             function()!!.generics.single().bounds.single().annotations(getExpectOrCommonSourceSet())
-        val moduleK = """
+        val moduleK =
+            """
             |annotation class Hello(val bar: String)
             |fun <T : @Hello("baz") String> foo(arg: String): List<T>
-        """.render()
+        """
+                .render()
         val annotationsK = moduleK.annotationComponents(moduleK.genericBoundsAnnotations())
-        val moduleJ = """
+        val moduleJ =
+            """
             |@Retention(RetentionPolicy.RUNTIME)
             |@Target(ElementType.TYPE_USE)
             |public @interface Hello {
@@ -315,7 +364,8 @@ internal class AnnotationDocumentableConverterTest(
             |public <T extends @Hello(bar = "baz") String> java.util.List<T> foo() {
             |    return null;
             |}
-        """.render(java = true)
+        """
+                .render(java = true)
         val annotationsJ = moduleJ.annotationComponents(moduleJ.genericBoundsAnnotations())
 
         for (annotations in listOf(annotationsJ, annotationsK)) {
@@ -328,13 +378,15 @@ internal class AnnotationDocumentableConverterTest(
 
     @Test
     fun `Nullability annotations are created correctly from Java source`() {
-        val module = """
+        val module =
+            """
             |@Nullable
             |public String nullable() { return null; }
             |public String noAnnotation() { return null; }
             |@NonNull
             |public String nonNull() { return ""; }
-        """.renderJava(imports = listOf("import org.jetbrains.annotations.NotNull"))
+        """
+                .renderJava(imports = listOf("import org.jetbrains.annotations.NotNull"))
 
         val noAnnotationAnnotations =
             module.functionAnnotationComponents("noAnnotation", Nullability.JAVA_NOT_ANNOTATED)
@@ -359,7 +411,8 @@ internal class AnnotationDocumentableConverterTest(
 
     @Test
     fun `Nullability annotations are created correctly from Kotlin source`() {
-        val module = """
+        val module =
+            """
         |annotation class NonNull
         |annotation class Nullable
         |@Nullable
@@ -368,7 +421,8 @@ internal class AnnotationDocumentableConverterTest(
         |fun nonNull(): String = "foo"
         |fun noAnnotation(): String = "foo"
         |
-        """.render()
+        """
+                .render()
 
         val noAnnotationAnnotations =
             module.functionAnnotationComponents("noAnnotation", Nullability.KOTLIN_DEFAULT)
@@ -394,20 +448,26 @@ internal class AnnotationDocumentableConverterTest(
 
     @Test
     fun `Nullability annotation is found`() {
-        val annotations = """
+        val annotations =
+            """
             |annotation class Nullable
             |@Nullable
             |fun foo() = Unit
-        """.render().function()!!.allAnnotations()
+        """
+                .render()
+                .function()!!
+                .allAnnotations()
 
         assertThat(annotations.hasAtNullable()).isTrue()
     }
 
     @Test
     fun `Nullability annotation is not injected for Kotlin-nullable type`() {
-        val module = """
+        val module =
+            """
             |val foo: Int? = null
-        """.render()
+        """
+                .render()
         val annotations =
             module.annotationComponents(module.property()!!, Nullability.KOTLIN_NULLABLE)
 
@@ -416,29 +476,29 @@ internal class AnnotationDocumentableConverterTest(
 
     @Test
     fun `Nullability annotation isn't doubly injected for @Nullable Kotlin-nullable type`() {
-        val module = """
+        val module =
+            """
             |annotation class Nullable
             |@Nullable val foo: Int? = null
-        """.render()
+        """
+                .render()
         val annotations =
             module.annotationComponents(module.property()!!, Nullability.KOTLIN_NULLABLE)
 
-        javaOnly {
-            assertThat(annotations.single().isAtNullable).isTrue()
-        }
-        kotlinOnly {
-            assertThat(annotations).isEmpty()
-        }
+        javaOnly { assertThat(annotations.single().isAtNullable).isTrue() }
+        kotlinOnly { assertThat(annotations).isEmpty() }
     }
 
     @Test
     fun `Long annotation parameter values are parsed correctly`() {
-        val module = """
+        val module =
+            """
             |@Target([AnnotationTarget.VALUE_PARAMETER])
             |annotation class Foo(bar: Long)
 
             |fun baz(@Foo(bar = 100) arg: Long): Long = 1
-        """.render()
+        """
+                .render()
         val annotations = module.annotationComponents(module.function()!!.parameters.single())
         val paramValue = annotations.first().data.parameters.single()
         val data = (paramValue as NamedValueAnnotationParameter).data
@@ -448,14 +508,18 @@ internal class AnnotationDocumentableConverterTest(
 
     @Test
     fun `Hidden annotations are not displayed`() {
-        val annotations = """
+        val annotations =
+            """
             |/** @hide */
             |annotation class HiddenAnnotation
             |annotation class VisibleAnnotation
             |@HiddenAnnotation
             |@VisibleAnnotation
             |fun foo() = Unit
-        """.render().functionAnnotationComponents().exceptNonNull()
+        """
+                .render()
+                .functionAnnotationComponents()
+                .exceptNonNull()
 
         assertThat(annotations.size).isEqualTo(1)
         assertThat(annotations.item().link().name).isEqualTo("VisibleAnnotation")
@@ -480,9 +544,10 @@ internal class AnnotationDocumentableConverterTest(
     companion object {
         @JvmStatic
         @Parameterized.Parameters(name = "{0}")
-        fun data() = listOf(
-            arrayOf(Language.JAVA),
-            arrayOf(Language.KOTLIN),
-        )
+        fun data() =
+            listOf(
+                arrayOf(Language.JAVA),
+                arrayOf(Language.KOTLIN),
+            )
     }
 }

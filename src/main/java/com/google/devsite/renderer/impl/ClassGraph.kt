@@ -19,6 +19,7 @@ package com.google.devsite.renderer.impl
 import com.google.devsite.hasBeenHidden
 import com.google.devsite.renderer.converters.getExpectOrCommonSourceSet
 import com.google.devsite.renderer.converters.gettersAndSetters
+import java.util.TreeSet
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.analysis.kotlin.documentable.ExternalDocumentableProvider
 import org.jetbrains.dokka.links.DRI
@@ -28,9 +29,9 @@ import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.JavaClassKindTypes
 import org.jetbrains.dokka.model.KotlinClassKindTypes
 import org.jetbrains.dokka.model.WithSupertypes
-import java.util.TreeSet
 
 internal typealias ClassGraph = Map<DRI, ClassNode>
+
 internal typealias DocumentablesGraph = Map<DRI, Documentable>
 
 /**
@@ -44,15 +45,15 @@ internal fun computeClassGraph(
     externalDocumentableProvider: ExternalDocumentableProvider? = null,
     sourceSets: List<DokkaConfiguration.DokkaSourceSet>? = null,
 ): ClassGraph {
-    fun MutableMap<DRI, DClasslike?>.getOrExternal(key: DRI) = getOrPut(key) {
-        sourceSets?.firstNotNullOfOrNull { sourceSet ->
-            externalDocumentableProvider?.getClasslike(key, sourceSet)
+    fun MutableMap<DRI, DClasslike?>.getOrExternal(key: DRI) =
+        getOrPut(key) {
+            sourceSets?.firstNotNullOfOrNull { sourceSet ->
+                externalDocumentableProvider?.getClasslike(key, sourceSet)
+            }
         }
-    }
     val drisToClasslikes = classlikes.associateBy<DClasslike?, DRI> { it!!.dri }.toMutableMap()
-    val classGraph: Map<DRI, MutableClassNode> = classlikes.associate { classlike ->
-        classlike.dri to MutableClassNode(classlike)
-    }
+    val classGraph: Map<DRI, MutableClassNode> =
+        classlikes.associate { classlike -> classlike.dri to MutableClassNode(classlike) }
 
     for (classlike in classlikes) {
         recursivelyUpdateClasslikeSupertypesTree(
@@ -67,35 +68,30 @@ internal fun computeClassGraph(
         ClassNode(
             self = level.self,
             allSubClasses = level.allSubClasses.mapNotNull { drisToClasslikes.getOrExternal(it) },
-            directSubClasses = level.directSubClasses.mapNotNull {
-                drisToClasslikes.getOrExternal(it)
-            },
-            indirectSubClasses = level.indirectSubClasses.mapNotNull {
-                drisToClasslikes.getOrExternal(it)
-            },
-            directSuperClasses = level.directSuperClasses.mapNotNull {
-                drisToClasslikes.getOrExternal(it)
-            },
+            directSubClasses =
+                level.directSubClasses.mapNotNull { drisToClasslikes.getOrExternal(it) },
+            indirectSubClasses =
+                level.indirectSubClasses.mapNotNull { drisToClasslikes.getOrExternal(it) },
+            directSuperClasses =
+                level.directSuperClasses.mapNotNull { drisToClasslikes.getOrExternal(it) },
             superClasses = level.superClasses.mapNotNull { drisToClasslikes.getOrExternal(it) },
             interfaces = level.interfaces.mapNotNull { drisToClasslikes.getOrExternal(it) },
-            directInterfaces = level.directInterfaces.mapNotNull {
-                drisToClasslikes.getOrExternal(it)
-            },
+            directInterfaces =
+                level.directInterfaces.mapNotNull { drisToClasslikes.getOrExternal(it) },
         )
     }
 }
 
-/**
- * Generates a map that allows looking up each Documentable by its DRI
- */
+/** Generates a map that allows looking up each Documentable by its DRI */
 internal fun computeDocumentablesGraph(classGraph: ClassGraph): DocumentablesGraph {
     // helper function for adding a Documentable to a graph
     fun addToDocumentablesGraph(graph: MutableMap<DRI, Documentable>, documentable: Documentable) {
         if (!graph.containsKey(documentable.dri)) {
             graph[documentable.dri] = documentable
             // Include generated property accessors
-            val allChildren = documentable.children +
-                documentable.children.filterIsInstance<DProperty>().gettersAndSetters()
+            val allChildren =
+                documentable.children +
+                    documentable.children.filterIsInstance<DProperty>().gettersAndSetters()
             for (child in allChildren) {
                 addToDocumentablesGraph(graph, child)
             }
@@ -121,17 +117,17 @@ internal fun computeDocumentablesGraph(classGraph: ClassGraph): DocumentablesGra
  *
  * @param current the current classlike who's supertypes we will be traversing
  * @param classGraph the mutable type relation graph to be updated. [highestVisibleSubtype] will be
- * added to the set of direct subclasses for each of [current]'s supertypes. Similarly, [initial]
- * will be added to the set of all subclasses for each of [current]'s supertypes. If
- * [highestVisibleSubtype] and [initial] aren't the same (i.e. two edges away from each other:
- * A -> B -> C), we add [initial] to the set of indirect subclasses for each of [current]'s
- * supertypes. Lastly, we add the type hierarchy path of [current] to the parents of [initial],
- * ordered top-down.
+ *   added to the set of direct subclasses for each of [current]'s supertypes. Similarly, [initial]
+ *   will be added to the set of all subclasses for each of [current]'s supertypes. If
+ *   [highestVisibleSubtype] and [initial] aren't the same (i.e. two edges away from each other: A
+ *   -> B -> C), we add [initial] to the set of indirect subclasses for each of [current]'s
+ *   supertypes. Lastly, we add the type hierarchy path of [current] to the parents of [initial],
+ *   ordered top-down.
  * @param driToClasslike reverse lookup map to get supertypes from DRIs
  * @param initial constant classlike, storing the starting [current]. This classlike should be one
- * that appears in the docs (has an entry in [classGraph]).
+ *   that appears in the docs (has an entry in [classGraph]).
  * @param highestVisibleSubtype the highest-up classlike in the inheritance chain from [current] to
- * [initial] which isn't hidden from the docs
+ *   [initial] which isn't hidden from the docs
  */
 private fun recursivelyUpdateClasslikeSupertypesTree(
     current: DClasslike,
@@ -159,8 +155,8 @@ private fun recursivelyUpdateClasslikeSupertypesTree(
             // Hidden classes should not be included in the class graph.
             // Only public and protected classes should be included in the class graph.
             val visibility = supertype.visibility[supertype.getExpectOrCommonSourceSet()]?.name
-            val hidden = hasBeenHidden(type.dri) ||
-                (visibility != "public" && visibility != "protected")
+            val hidden =
+                hasBeenHidden(type.dri) || (visibility != "public" && visibility != "protected")
 
             val newHighestVisible = if (hidden) highestVisibleSubtype else supertype
             recursivelyUpdateClasslikeSupertypesTree(

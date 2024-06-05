@@ -54,7 +54,9 @@ internal interface ClasslikeDescription : ContextFreeComponent {
             return result
         }
 
-        override fun toString() = "Classlike Description:\n$header\n$primarySignature\n$hierarchy" +
-            (if (!relatedSymbols.isEmpty) relatedSymbols else "") + (descriptionDocs.ifEmpty { "" })
+        override fun toString() =
+            "Classlike Description:\n$header\n$primarySignature\n$hierarchy" +
+                (if (!relatedSymbols.isEmpty) relatedSymbols else "") +
+                (descriptionDocs.ifEmpty { "" })
     }
 }

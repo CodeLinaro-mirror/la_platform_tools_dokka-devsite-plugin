@@ -29,41 +29,45 @@ import kotlinx.html.unsafe
 internal data class DefaultFunctionSignature(
     override val data: FunctionSignature.Params,
 ) : FunctionSignature {
-    override fun render(into: FlowContent) = into.run {
-        data.typeParameters.render(this, brackets = "<>", shouldBreak = ShouldBreak.NO)
-        if (data.typeParameters.isNotEmpty()) +" "
+    override fun render(into: FlowContent) =
+        into.run {
+            data.typeParameters.render(this, brackets = "<>", shouldBreak = ShouldBreak.NO)
+            if (data.typeParameters.isNotEmpty()) +" "
 
-        if (data.receiver != null) {
-            data.receiver.render(this)
-            +"."
-        }
-
-        if (data.isDeprecated) {
-            // Bug in kotlinx: <del> tag adds a new line before and after using it
-            // https://github.com/Kotlin/kotlinx.html/issues/113
-            // Manually declare <del> instead
-            span {
-                unsafe { +"<del>" }
-                data.name.render(into)
-                unsafe { +"</del>" }
+            if (data.receiver != null) {
+                data.receiver.render(this)
+                +"."
             }
-        } else {
-            data.name.render(this)
-        }
-        data.parameters.render(
-            into,
-            this@DefaultFunctionSignature.shouldBreak(),
-            brackets = "()",
-        )
-    }
 
-    override fun toString() = data.typeParameters.joinMaybePrefix(postfix = " ") +
-        if (data.receiver != null) {
-            data.receiver.toString() + "."
-        } else "" +
             if (data.isDeprecated) {
-                "deprecated "
-            } else "" +
-                data.name +
-                data.parameters.joinMaybePrefix(prefix = "(", postfix = ")")
+                // Bug in kotlinx: <del> tag adds a new line before and after using it
+                // https://github.com/Kotlin/kotlinx.html/issues/113
+                // Manually declare <del> instead
+                span {
+                    unsafe { +"<del>" }
+                    data.name.render(into)
+                    unsafe { +"</del>" }
+                }
+            } else {
+                data.name.render(this)
+            }
+            data.parameters.render(
+                into,
+                this@DefaultFunctionSignature.shouldBreak(),
+                brackets = "()",
+            )
+        }
+
+    override fun toString() =
+        data.typeParameters.joinMaybePrefix(postfix = " ") +
+            if (data.receiver != null) {
+                data.receiver.toString() + "."
+            } else
+                "" +
+                    if (data.isDeprecated) {
+                        "deprecated "
+                    } else
+                        "" +
+                            data.name +
+                            data.parameters.joinMaybePrefix(prefix = "(", postfix = ")")
 }

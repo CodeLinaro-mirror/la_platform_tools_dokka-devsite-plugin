@@ -24,20 +24,20 @@ import org.junit.Test
 class DefaultTableOfContentsTest {
     @Test
     fun `Toc renders correctly`() {
-        val component = DefaultTableOfContents(
-            Params(
-                classesUrl = "classes.html",
-                packagesUrl = "packages.html",
-                packages = listOf(NoopTocPackage, NoopTocPackage),
-            ),
-        )
+        val component =
+            DefaultTableOfContents(
+                Params(
+                    classesUrl = "classes.html",
+                    packagesUrl = "packages.html",
+                    packages = listOf(NoopTocPackage, NoopTocPackage),
+                ),
+            )
 
-        val output = buildString {
-            component.render(this)
-        }.trim()
+        val output = buildString { component.render(this) }.trim()
 
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 toc:
 - title: "Class Index"
   path: "classes.html"
@@ -48,7 +48,8 @@ toc:
 noop
 
 noop
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 }

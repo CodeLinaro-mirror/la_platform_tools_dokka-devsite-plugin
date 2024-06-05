@@ -23,9 +23,7 @@ internal class NoopTypeProjectionComponent(private val text: String) : TypeProje
     override val data: TypeProjectionComponent.Params
         get() = throw NotImplementedError()
 
-    override fun render(into: FlowContent) = into.run {
-        +text
-    }
+    override fun render(into: FlowContent) = into.run { +text }
 
     override fun length() = text.length
 }

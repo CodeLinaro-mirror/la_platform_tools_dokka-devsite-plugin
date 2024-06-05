@@ -28,148 +28,167 @@ import org.junit.Test
 internal class DefaultDescriptionComponentTest : ConverterTestBase() {
     @Test
     fun `Single sentence renders correctly`() {
-        val component = """
+        val component =
+            """
             |/** Hello world! */
             |class Foo
-        """.render().description()
+        """
+                .render()
+                .description()
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <p>Hello world!</p>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Deprecation renders renders correctly`() {
-        val component = """
+        val component =
+            """
             |/** Hello world! */
             |class Foo
-        """.render().description(
-            deprecation = "This class is deprecated.",
-        )
+        """
+                .render()
+                .description(
+                    deprecation = "This class is deprecated.",
+                )
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <aside class="caution"><strong>This class is deprecated.</strong><br>
     <p>Hello world!</p>
   </aside>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Summary trims documentation on period`() {
-        val component = """
+        val component =
+            """
             |/**
             | * 1 2 3. 4 5 6
             | *
             | * Stuff.
             | */
             |class Foo
-        """.render().description(summary = true)
+        """
+                .render()
+                .description(summary = true)
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <p>1 2 3.</p>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Summary ignores period in word`() {
-        val component = """
+        val component =
+            """
             |/**
             | * This is foo.bar, blah blah.
             | *
             | * Stuff.
             | */
             |class Foo
-        """.render().description(summary = true)
+        """
+                .render()
+                .description(summary = true)
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <p>This is foo.bar, blah blah.</p>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Summary ignores period in link`() {
-        val component = """
+        val component =
+            """
             |/** [Foo.Bar] has great drinks. */
             |class Foo
-        """.render().description(summary = true)
+        """
+                .render()
+                .description(summary = true)
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <p>Foo.Bar has great drinks.</p>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Summary breaks on period space code tag`() {
-        val component1 = """
+        val component1 =
+            """
             |/**
             | * This is a complete sentence. <code>Foo.hashCode</code> is a function.
             | */
             |class Foo
-        """.render().description(summary = true)
-        val component2 = """
+        """
+                .render()
+                .description(summary = true)
+        val component2 =
+            """
             |/**
             | * This is a complete sentence.
             | * <code>Foo.hashCode</code> is a function.
             | */
             |class Foo
-        """.render().description(summary = true)
+        """
+                .render()
+                .description(summary = true)
 
-        val output1 = createHTML().body {
-            component1.render(this)
-        }.trim()
-        val output2 = createHTML().body {
-            component2.render(this)
-        }.trim()
-        val expected = """
+        val output1 = createHTML().body { component1.render(this) }.trim()
+        val output2 = createHTML().body { component2.render(this) }.trim()
+        val expected =
+            """
 <body>
   <p>This is a complete sentence.</p>
 </body>
-            """.trim()
+            """
+                .trim()
         // language=html
         assertThat(output1).isEqualTo(expected)
         assertThat(output2).isEqualTo(expected)
@@ -177,32 +196,36 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
 
     @Test
     fun `Summary breaks on period space markdown-code`() {
-        val component = """
+        val component =
+            """
             |/**
             | * This [Animatable] function creates a float value holder that automatically
             | * animates its value when the value is changed via [animateTo]. [Animatable] supports value
             | * change during an ongoing value change animation.
             | */
             |class Foo
-        """.render().description(summary = true)
+        """
+                .render()
+                .description(summary = true)
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <p>This Animatable function creates a float value holder that automatically animates its value when the value is changed via animateTo.</p>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Summary breaks on new paragraph even without ending period`() {
-        val component = """
+        val component =
+            """
             |/**
             | * Animation will be forced to end when its value reaches upper/lower bound (if they have
             | * been defined, e.g. via [Animatable.updateBounds])
@@ -212,76 +235,85 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             | * and the remaining velocity can be obtained via [AnimationResult].
             | */
             |class Foo
-        """.render().description(summary = true)
+        """
+                .render()
+                .description(summary = true)
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <p>Animation will be forced to end when its value reaches upper/lower bound (if they have been defined, e.g. via Animatable.updateBounds)</p>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Spacing does not confuse sentence-end detector`() {
-        val component = """
+        val component =
+            """
             |/**
             | * the amount of time (in milliseconds) the animation will take to finish.
             | *                     Defaults to [DefaultDuration]
             | */
             |class Foo
-        """.render().description(summary = true)
+        """
+                .render()
+                .description(summary = true)
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <p>the amount of time (in milliseconds) the animation will take to finish.</p>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Deprecation summary renders renders correctly`() {
-        val component = """
+        val component =
+            """
             |/**
             | * Hello world!
             | */
             |class Foo
-        """.render().description(
-            summary = true,
-            deprecation = "This class is deprecated.",
-        )
+        """
+                .render()
+                .description(
+                    summary = true,
+                    deprecation = "This class is deprecated.",
+                )
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
-// TODO(b/171570474) Work around for EOL space introduced by Dokka and is required to make the
-// test pass but, stripped by the IDE
+        val output = createHTML().body { component.render(this) }.trim()
+        // TODO(b/171570474) Work around for EOL space introduced by Dokka and is required to make
+        // the
+        // test pass but, stripped by the IDE
         // language=html
-        assertThat(output).isEqualTo(
-            "<body>\n" +
-                "  <p><strong>This class is deprecated.</strong>\n" +
-                "    <p>Hello world!</p>\n" +
-                "  </p>\n" +
-                "   </body>".trim(),
-        )
+        assertThat(output)
+            .isEqualTo(
+                "<body>\n" +
+                    "  <p><strong>This class is deprecated.</strong>\n" +
+                    "    <p>Hello world!</p>\n" +
+                    "  </p>\n" +
+                    "   </body>".trim(),
+            )
     }
 
     @Test
     fun `Paragraphs render correctly`() {
-        val component = """
+        val component =
+            """
             |/**
             | * There was an old lady who swallowed a fly.
             | * I dunno why she swallowed that fly,
@@ -305,99 +337,114 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             | * She's dead, of course.
             | */
             |class Foo
-        """.render().description()
+        """
+                .render()
+                .description()
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <p>There was an old lady who swallowed a fly. I dunno why she swallowed that fly, Perhaps she'll die.</p>
   <p>...</p>
   <p>There was an old lady who swallowed a cow. I don't know how she swallowed a cow! She swallowed the cow to catch the goat... She swallowed the goat to catch the dog... She swallowed the dog to catch the cat... She swallowed the cat to catch the bird ... She swallowed the bird to catch the spider That wiggled and wiggled and tickled inside her. She swallowed the spider to catch the fly. But I dunno why she swallowed that fly Perhaps she'll die.</p>
   <p>There was an old lady who swallowed a horse - She's dead, of course.</p>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Line breaks render correctly`() {
-        val component = """
+        val component =
+            """
             |/**
             | * A \
             | * B \
             | * C.
             | */
             |class Foo
-        """.render().description()
+        """
+                .render()
+                .description()
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <p>A <br>B <br>C.</p>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Inline code renders correctly in 4x Kotlin and Java`() {
-        val componentK = """
+        val componentK =
+            """
             |/** The `Boolean` type has two possible values: `true` or `false`. */
             |class Foo
-        """.render().description()
-        val componentJ = """
+        """
+                .render()
+                .description()
+        val componentJ =
+            """
             |/** The {@code Boolean} type has two possible values: {@code true} or {@code false}. */
             |public class Foo
-        """.render(java = true).description()
+        """
+                .render(java = true)
+                .description()
 
         for (component in listOf(componentJ, componentK)) {
-            val output = createHTML().body {
-                component.render(this)
-            }.trim()
+            val output = createHTML().body { component.render(this) }.trim()
 
             // language=html
-            assertThat(output).isEqualTo(
-                """
+            assertThat(output)
+                .isEqualTo(
+                    """
 <body>
   <p>The <code>Boolean</code> type has two possible values: <code>true</code> or <code>false</code>.</p>
 </body>
-            """.trim(),
-            )
+            """
+                        .trim(),
+                )
         }
     }
 
     @Test
     fun `Formatted text renders correctly`() {
-        val component = """
+        val component =
+            """
             |/** *Italics*, **Bold**, ***Both***, ~~Bad~~. */
             |class Foo
-        """.render().description()
+        """
+                .render()
+                .description()
 
-        val output = createHTML(prettyPrint = false).body {
-            component.render(this)
-        }.trim()
+        val output = createHTML(prettyPrint = false).body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body><p><em>Italics</em>, <b>Bold</b>, <em><b>Both</b></em>, <del>Bad</del>.</p></body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Itemized list renders correctly`() {
-        val component = """
+        val component =
+            """
             |/**
             | * Stuff:
             | *   - Thing 1
@@ -405,15 +452,16 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             | *   - Thing 3
             | */
             |class Foo
-        """.render().description()
+        """
+                .render()
+                .description()
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <p>Stuff:</p>
   <ul>
@@ -428,13 +476,15 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
     </li>
   </ul>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Numbered list renders correctly`() {
-        val component = """
+        val component =
+            """
             |/**
             | * Stuff:
             | *   1. Thing 1
@@ -442,15 +492,16 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             | *   3. Thing 3
             | */
             |class Foo
-        """.render().description()
+        """
+                .render()
+                .description()
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <p>Stuff:</p>
   <ol>
@@ -465,13 +516,15 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
     </li>
   </ol>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Numbered list renders correctly from html`() {
-        val component = """
+        val component =
+            """
             |/**
             | * <ol>
             | *    <li>
@@ -486,15 +539,16 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             | * </ol>
             | */
             |public class Foo {}
-        """.render(java = true).description()
+        """
+                .render(java = true)
+                .description()
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <ol>
     <li>
@@ -508,14 +562,16 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
     </li>
   </ol>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     // TODO fix handling @link inside dt, dd b/217937742
     @Test
     fun `Description list renders correctly in kotlin`() {
-        val component = """
+        val component =
+            """
             |/**
             | * <dl>
             | *     <dt>
@@ -533,15 +589,16 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             | * </dl>
             | */
             |public class Foo {}
-        """.render().description()
+        """
+                .render()
+                .description()
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body><dl>
      <dt>
         <code>name="<i>name</i>"</code>
@@ -556,15 +613,17 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
          The subdirectory you're sharing.
      </dd>
 </dl></body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     // TODO fix handling @link inside dt, dd b/217937742
     // TODO remove improper handling of dt that requires <p> b/217941159
     @Test
     fun `Description list renders correctly in java`() {
-        val component = """
+        val component =
+            """
             |/**
             | * <dl>
             | *     <dt>
@@ -582,15 +641,16 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             | * </dl>
             | */
             |public class Foo {}
-        """.render(java = true).description()
+        """
+                .render(java = true)
+                .description()
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <dl>
     <dt><p><code>name=&quot;<em>name</em>&quot;</code></p>
@@ -601,13 +661,15 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
     <dd> The subdirectory you're sharing. </dd>
   </dl>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Nested lists render correctly`() {
-        val component = """
+        val component =
+            """
             |/**
             | * Stuff:
             | * *   a
@@ -622,15 +684,16 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             | * *   c
             | */
             |class Foo
-        """.render().description()
+        """
+                .render()
+                .description()
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <p>Stuff:</p>
   <ul>
@@ -672,13 +735,15 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
     </li>
   </ul>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Table renders correctly`() {
-        val component = """
+        val component =
+            """
             |/**
             | * | Tables   |      Are      |       Cool |
             | * |----------|:-------------:|-----------:|
@@ -687,15 +752,16 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             | * | col 3 is | right-aligned |    ${'$'}1 |
             | */
             |class Foo
-        """.render().description()
+        """
+                .render()
+                .description()
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <table>
     <tr>
@@ -720,13 +786,15 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
     </tr>
   </table>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Code blocks render correctly`() {
-        val component = """
+        val component =
+            """
             |/**
             | * Welcome:
             | *
@@ -741,15 +809,16 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             | *     }
             | */
             |class Foo
-        """.render().description()
+        """
+                .render()
+                .description()
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <p>Welcome:</p>
   <pre class="prettyprint">fun main() {<br>    println(&quot;Hello World!&quot;)<br>}</pre>
@@ -757,175 +826,198 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
     val butWhy = &quot;per markdown spec, because four-spaces prefix&quot;
 }</pre>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Plain link renders correctly`() {
-        val component = """
+        val component =
+            """
             |/** Click [here](http://meme). */
             |class Foo
-        """.render().description()
+        """
+                .render()
+                .description()
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <p>Click <a href="http://meme">here</a>.</p>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Link to type renders correctly`() {
-        val component = """
+        val component =
+            """
             |class Bar
             |
             |/** [Bar] is pretty cool. */
             |class Foo
-        """.render().description()
+        """
+                .render()
+                .description()
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <p><code><a href="/reference/androidx/example/Bar.html">Bar</a></code> is pretty cool.</p>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Link to symbol renders correctly`() {
-        val component = """
+        val component =
+            """
             |fun bar() = Unit
             |
             |/** [bar] is pretty cool. */
             |class Foo
-        """.render().description()
+        """
+                .render()
+                .description()
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <p><code><a href="/reference/androidx/example/package-summary.html#bar()">bar</a></code> is pretty cool.</p>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Named link to type renders correctly`() {
-        val component = """
+        val component =
+            """
             |class BarIsVeryVeryVeryVeryLongNamed
             |
             |/** [Special snowflake snowflake snowflake snowflake snowflake][BarIsVeryVeryVeryVeryLongNamed]
             | * is pretty cool.
             | */
             |class Foo
-        """.render().description()
+        """
+                .render()
+                .description()
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <p><code><a href="/reference/androidx/example/BarIsVeryVeryVeryVeryLongNamed.html">Special snowflake snowflake snowflake snowflake snowflake</a></code> is pretty cool.</p>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Image renders correctly`() {
-        val component = """
+        val component =
+            """
             |/** ![Alt text](/path/to/img.jpg "Image Title") */
             |class Foo
-        """.render().description()
+        """
+                .render()
+                .description()
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <p><img alt="Alt text" src="/path/to/img.jpg"></p>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Quote renders correctly`() {
-        val component = """
+        val component =
+            """
             |/**
             | * > Two things are infinite: the universe and human stupidity; and I'm not sure about
             | * > the universe. -- Albert Einstein
             | */
             |class Foo
-        """.render().description()
+        """
+                .render()
+                .description()
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <blockquote>
     <p>Two things are infinite: the universe and human stupidity; and I'm not sure about the universe. -- Albert Einstein</p>
   </blockquote>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Strikethrough renders correctly`() {
-        val component = """
+        val component =
+            """
             |/** ~~Hello~~ world! */
             |class Foo
-        """.render().description()
+        """
+                .render()
+                .description()
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <p>
     <del>Hello</del>
  world!</p>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Pre and @code handled correctly`() {
-        val component = """
+        val component =
+            """
             |/**
             | * {@code
             | *     fun thisIsANonPreCodeBlock() {
@@ -939,11 +1031,11 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             | * }</pre>
             |*/
             |public class Foo()
-        """.render(java = true).description()
+        """
+                .render(java = true)
+                .description()
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // These look the same, but pasting them into an HTML file correctly displays:
         //
@@ -952,8 +1044,9 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
         //     fun thisIsAPreCodeBlock() {
         //         DOPreserveWhitespace: String            \\ blah
         //     }
-        assertThat(output).isEqualTo(
-            """<body>
+        assertThat(output)
+            .isEqualTo(
+                """<body>
   <p><code>
     fun thisIsANonPreCodeBlock() {
         doNotPreserveWhitespace: String         \\ blah
@@ -965,12 +1058,13 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
     }
 </pre>
 </body>""",
-        )
+            )
     }
 
     @Test
     fun `table captions handled correctly`() {
-        val component = """
+        val component =
+            """
             |/**
             | * <table>
             | * <caption>Uri patterns and following API calls for MediaControllerCompat methods</caption>
@@ -985,14 +1079,15 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             | * </table>
             | */
             |public class Foo()
-        """.render(java = true).description()
+        """
+                .render(java = true)
+                .description()
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
-        assertThat(output).isEqualTo(
-            """<body>
+        assertThat(output)
+            .isEqualTo(
+                """<body>
   <table>
     <caption>Uri patterns and following API calls for MediaControllerCompat methods</caption>
     <tbody>
@@ -1009,12 +1104,13 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
     </tbody>
   </table>
 </body>""",
-        )
+            )
     }
 
     @Test // NOTE: kdoc markdown-style links do not work inside <pre> tags
     fun `Links inside pre render correctly`() {
-        val componentJ = """
+        val componentJ =
+            """
             |/**
             | * a {@link Foo}
             | * <pre>
@@ -1025,8 +1121,11 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             | * </pre>
             | */
             |public class Foo
-        """.render(java = true).description()
-        val componentK = """
+        """
+                .render(java = true)
+                .description()
+        val componentK =
+            """
             |/**
             | * a [Foo]
             | * <pre>
@@ -1037,18 +1136,17 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             | * </pre>
             | */
             |public class Foo
-        """.render().description()
+        """
+                .render()
+                .description()
 
-        val outputJ = createHTML().body {
-            componentJ.render(this)
-        }.trim()
-        val outputK = createHTML().body {
-            componentK.render(this)
-        }.trim()
+        val outputJ = createHTML().body { componentJ.render(this) }.trim()
+        val outputK = createHTML().body { componentK.render(this) }.trim()
 
         // language=html
-        assertThat(outputJ).isEqualTo(
-            """
+        assertThat(outputJ)
+            .isEqualTo(
+                """
 <body>
   <p>a <code><a href="/reference/androidx/example/Test.Foo.html">Foo</a></code></p>
   <pre class="prettyprint">public void onCreate() {
@@ -1057,11 +1155,13 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
                 .detectDiskReads()
 </pre>
 </body>
-        """.trim(),
-        )
+        """
+                    .trim(),
+            )
         // language=html
-        assertThat(outputK).isEqualTo(
-            """
+        assertThat(outputK)
+            .isEqualTo(
+                """
 <body>
   <p>a <code><a href="/reference/androidx/example/Foo.html">Foo</a></code></p>
 <pre>
@@ -1070,55 +1170,63 @@ public void onCreate() {
         StrictMode.setThreadPolicy(new [Foo]()
                 .detectDiskReads()
 </pre></body>
-        """.trim(),
-        )
+        """
+                    .trim(),
+            )
     }
 
     @Test
     fun `HTML link with docRoot renders correctly`() {
-        val component = """
+        val component =
+            """
             |/** Click <a href="{@docRoot}guide">here</a>. */
             |class Foo
-        """.render().description()
+        """
+                .render()
+                .description()
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <p>Click <a href="/guide">here</a>.</p>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Heading renders with correct attributes`() {
-        val component = """
+        val component =
+            """
             |/** <h2 id="sample-formats">Fields relevant to sample formats</h2> */
             |class Foo
-        """.render().description()
+        """
+                .render()
+                .description()
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <p><h2 id="sample-formats">Fields relevant to sample formats</h2></p>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Test @usesMathJax`() {
-        val classlike = """
+        val classlike =
+            """
             |/**
             | * {@usesMathJax}
             | *
@@ -1128,35 +1236,38 @@ public void onCreate() {
             | * <p>\(C_{out} = 0\)</p>
             | */
             |public class Foo {}
-        """.render(java = true)
+        """
+                .render(java = true)
 
-        val summary = createHTML().body {
-            classlike.description(summary = true).render(this)
-        }.trim()
+        val summary =
+            createHTML().body { classlike.description(summary = true).render(this) }.trim()
         // No MathJax tag in summary (and only the first line included)
         // language=html
-        assertThat(summary).isEqualTo(
-            """
+        assertThat(summary)
+            .isEqualTo(
+                """
                 <body>
                   <p> Destination pixels covered by the source are cleared to 0.</p>
                 </body>
-            """.trimIndent(),
-        )
+            """
+                    .trimIndent(),
+            )
 
-        val detail = createHTML().body {
-            classlike.description(summary = false).render(this)
-        }.trim()
+        val detail =
+            createHTML().body { classlike.description(summary = false).render(this) }.trim()
         // Inserted MathJax HTML in detail
         // language=html
-        assertThat(detail).isEqualTo(
-            """
+        assertThat(detail)
+            .isEqualTo(
+                """
                 <body>
                   <p><devsite-mathjax config="TeX-AMS_SVG"></devsite-mathjax> Destination pixels covered by the source are cleared to 0. </p>
                   <p>\(\alpha_{out} = 0\)</p>
                   <p>\(C_{out} = 0\)</p>
                 </body>
-            """.trimIndent(),
-        )
+            """
+                    .trimIndent(),
+            )
     }
 
     private fun DModule.description(

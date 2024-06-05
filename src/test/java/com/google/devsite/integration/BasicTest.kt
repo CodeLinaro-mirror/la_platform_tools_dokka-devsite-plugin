@@ -20,9 +20,7 @@ import com.google.devsite.testing.IntegrationTestBase
 import org.junit.Assert.assertThrows
 import org.junit.Test
 
-/**
- * Full integration tests of source to html generation.
- */
+/** Full integration tests of source to html generation. */
 class BasicTest : IntegrationTestBase() {
     @Test
     fun `Validate simple classes`() {
@@ -54,24 +52,25 @@ class BasicTest : IntegrationTestBase() {
         // lifecycle-common-java8 and lifecycle-extensions no longer exist
         validatePrebuilts(
             testName = "lifecycle",
-            artifactNames = listOf(
-                "lifecycle-common",
-                "lifecycle-compiler",
-                "lifecycle-livedata",
-                "lifecycle-livedata-core",
-                "lifecycle-livedata-core-ktx",
-                "lifecycle-livedata-ktx",
-                "lifecycle-process",
-                "lifecycle-reactivestreams",
-                "lifecycle-reactivestreams-ktx",
-                "lifecycle-runtime",
-                "lifecycle-runtime-ktx",
-                "lifecycle-runtime-testing",
-                "lifecycle-service",
-                "lifecycle-viewmodel",
-                "lifecycle-viewmodel-ktx",
-                "lifecycle-viewmodel-savedstate",
-            ),
+            artifactNames =
+                listOf(
+                    "lifecycle-common",
+                    "lifecycle-compiler",
+                    "lifecycle-livedata",
+                    "lifecycle-livedata-core",
+                    "lifecycle-livedata-core-ktx",
+                    "lifecycle-livedata-ktx",
+                    "lifecycle-process",
+                    "lifecycle-reactivestreams",
+                    "lifecycle-reactivestreams-ktx",
+                    "lifecycle-runtime",
+                    "lifecycle-runtime-ktx",
+                    "lifecycle-runtime-testing",
+                    "lifecycle-service",
+                    "lifecycle-viewmodel",
+                    "lifecycle-viewmodel-ktx",
+                    "lifecycle-viewmodel-savedstate",
+                ),
         )
     }
 
@@ -79,18 +78,20 @@ class BasicTest : IntegrationTestBase() {
     fun `Validate AndroidX paging prebuilts`() {
         validatePrebuilts(
             testName = "paging",
-            artifactNames = listOf(
-                "paging-common",
-                "paging-common-ktx",
-                "paging-runtime",
-                "paging-runtime-ktx",
-                "paging-rxjava2",
-                "paging-rxjava2-ktx",
-                "paging-rxjava3",
-                "paging-guava",
-                // Either don't compile testData/paging/source or dackka applies the compose plugin
-                // "paging-compose"
-            ),
+            artifactNames =
+                listOf(
+                    "paging-common",
+                    "paging-common-ktx",
+                    "paging-runtime",
+                    "paging-runtime-ktx",
+                    "paging-rxjava2",
+                    "paging-rxjava2-ktx",
+                    "paging-rxjava3",
+                    "paging-guava",
+                    // Either don't compile testData/paging/source or dackka applies the compose
+                    // plugin
+                    // "paging-compose"
+                ),
             samples = true,
         )
     }

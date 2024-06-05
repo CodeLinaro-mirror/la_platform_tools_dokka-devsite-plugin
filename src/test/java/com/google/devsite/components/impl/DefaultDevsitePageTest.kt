@@ -30,25 +30,25 @@ import org.junit.Test
 class DefaultDevsitePageTest {
     @Test
     fun `Java page renders correctly`() {
-        val component = DefaultDevsitePage(
-            Params(
-                displayLanguage = Language.JAVA,
-                pathForSwitcher = "page.html",
-                bookPath = "/reference/androidx/_book.yaml",
-                title = "Page Title",
-                content = NoopContextFreeComponent,
-                metadataComponent = null,
-                includedHeadTagPath = "_shared/_reference-head-tags.html",
-            ),
-        )
+        val component =
+            DefaultDevsitePage(
+                Params(
+                    displayLanguage = Language.JAVA,
+                    pathForSwitcher = "page.html",
+                    bookPath = "/reference/androidx/_book.yaml",
+                    title = "Page Title",
+                    content = NoopContextFreeComponent,
+                    metadataComponent = null,
+                    includedHeadTagPath = "_shared/_reference-head-tags.html",
+                ),
+            )
 
-        val output = createHTML().html {
-            component.render(this)
-        }.trim()
+        val output = createHTML().html { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <html devsite="true">
   <head>
     <title>Page Title</title>
@@ -68,31 +68,32 @@ class DefaultDevsitePageTest {
     <div>noop</div>
   </body>
 </html>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Kotlin page renders correctly`() {
-        val component = DefaultDevsitePage(
-            Params(
-                displayLanguage = Language.KOTLIN,
-                pathForSwitcher = "page.html",
-                bookPath = "/reference/androidx/_book.yaml",
-                title = "Page Title",
-                content = NoopContextFreeComponent,
-                metadataComponent = null,
-                includedHeadTagPath = "_shared/_reference-head-tags.html",
-            ),
-        )
+        val component =
+            DefaultDevsitePage(
+                Params(
+                    displayLanguage = Language.KOTLIN,
+                    pathForSwitcher = "page.html",
+                    bookPath = "/reference/androidx/_book.yaml",
+                    title = "Page Title",
+                    content = NoopContextFreeComponent,
+                    metadataComponent = null,
+                    includedHeadTagPath = "_shared/_reference-head-tags.html",
+                ),
+            )
 
-        val output = createHTML().html {
-            component.render(this)
-        }.trim()
+        val output = createHTML().html { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <html devsite="true">
   <head>
     <title>Page Title</title>
@@ -112,48 +113,52 @@ class DefaultDevsitePageTest {
     <div>noop</div>
   </body>
 </html>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Page with metadata renders correctly`() {
-        val libraryMetadata = LibraryMetadata(
-            groupId = "android.x",
-            artifactId = "artifact",
-            releaseNotesUrl = "https://d.android.com",
-        )
-        val versionMetadata = DefaultVersionMetadataComponent.createVersionMetadataWithBaseUrl(
-            addedIn = "1.5.4",
-            deprecatedIn = "1.6.0-alpha04",
-            baseUrl = "https://developer.android.com/jetpack/androidx/releases/fragment",
-        )
-        val metadataComponent = DefaultMetadataComponent(
-            MetadataComponent.Params(
-                libraryMetadata = libraryMetadata,
-                sourceLinkUrl = "https://cs.android.com",
-                versionMetadata = versionMetadata,
-            ),
-        )
-        val pageComponent = DefaultDevsitePage(
-            Params(
-                displayLanguage = Language.KOTLIN,
-                pathForSwitcher = "page.html",
-                bookPath = "/reference/androidx/_book.yaml",
-                title = "Page Title",
-                content = NoopContextFreeComponent,
-                metadataComponent = metadataComponent,
-                includedHeadTagPath = "_shared/_reference-head-tags.html",
-            ),
-        )
+        val libraryMetadata =
+            LibraryMetadata(
+                groupId = "android.x",
+                artifactId = "artifact",
+                releaseNotesUrl = "https://d.android.com",
+            )
+        val versionMetadata =
+            DefaultVersionMetadataComponent.createVersionMetadataWithBaseUrl(
+                addedIn = "1.5.4",
+                deprecatedIn = "1.6.0-alpha04",
+                baseUrl = "https://developer.android.com/jetpack/androidx/releases/fragment",
+            )
+        val metadataComponent =
+            DefaultMetadataComponent(
+                MetadataComponent.Params(
+                    libraryMetadata = libraryMetadata,
+                    sourceLinkUrl = "https://cs.android.com",
+                    versionMetadata = versionMetadata,
+                ),
+            )
+        val pageComponent =
+            DefaultDevsitePage(
+                Params(
+                    displayLanguage = Language.KOTLIN,
+                    pathForSwitcher = "page.html",
+                    bookPath = "/reference/androidx/_book.yaml",
+                    title = "Page Title",
+                    content = NoopContextFreeComponent,
+                    metadataComponent = metadataComponent,
+                    includedHeadTagPath = "_shared/_reference-head-tags.html",
+                ),
+            )
 
-        val output = createHTML().html {
-            pageComponent.render(this)
-        }.trim()
+        val output = createHTML().html { pageComponent.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <html devsite="true">
   <head>
     <title>Page Title</title>
@@ -181,43 +186,46 @@ class DefaultDevsitePageTest {
     <div>noop</div>
   </body>
 </html>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Page with metadata without URL renders correctly`() {
-        val libraryMetadata = LibraryMetadata(
-            groupId = "android.x",
-            artifactId = "artifact",
-            releaseNotesUrl = "",
-        )
-        val metadataComponent = DefaultMetadataComponent(
-            MetadataComponent.Params(
-                libraryMetadata = libraryMetadata,
-                sourceLinkUrl = null,
-                versionMetadata = null,
-            ),
-        )
-        val pageComponent = DefaultDevsitePage(
-            Params(
-                displayLanguage = Language.KOTLIN,
-                pathForSwitcher = "page.html",
-                bookPath = "/reference/androidx/_book.yaml",
-                title = "Page Title",
-                content = NoopContextFreeComponent,
-                metadataComponent = metadataComponent,
-                includedHeadTagPath = "_shared/_reference-head-tags.html",
-            ),
-        )
+        val libraryMetadata =
+            LibraryMetadata(
+                groupId = "android.x",
+                artifactId = "artifact",
+                releaseNotesUrl = "",
+            )
+        val metadataComponent =
+            DefaultMetadataComponent(
+                MetadataComponent.Params(
+                    libraryMetadata = libraryMetadata,
+                    sourceLinkUrl = null,
+                    versionMetadata = null,
+                ),
+            )
+        val pageComponent =
+            DefaultDevsitePage(
+                Params(
+                    displayLanguage = Language.KOTLIN,
+                    pathForSwitcher = "page.html",
+                    bookPath = "/reference/androidx/_book.yaml",
+                    title = "Page Title",
+                    content = NoopContextFreeComponent,
+                    metadataComponent = metadataComponent,
+                    includedHeadTagPath = "_shared/_reference-head-tags.html",
+                ),
+            )
 
-        val output = createHTML().html {
-            pageComponent.render(this)
-        }.trim()
+        val output = createHTML().html { pageComponent.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <html devsite="true">
   <head>
     <title>Page Title</title>
@@ -240,31 +248,32 @@ class DefaultDevsitePageTest {
     <div>noop</div>
   </body>
 </html>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Page with no included head tag path renders correctly`() {
-        val component = DefaultDevsitePage(
-            Params(
-                displayLanguage = Language.JAVA,
-                pathForSwitcher = "page.html",
-                bookPath = "/reference/androidx/_book.yaml",
-                title = "Page Title",
-                content = NoopContextFreeComponent,
-                metadataComponent = null,
-                includedHeadTagPath = null,
-            ),
-        )
+        val component =
+            DefaultDevsitePage(
+                Params(
+                    displayLanguage = Language.JAVA,
+                    pathForSwitcher = "page.html",
+                    bookPath = "/reference/androidx/_book.yaml",
+                    title = "Page Title",
+                    content = NoopContextFreeComponent,
+                    metadataComponent = null,
+                    includedHeadTagPath = null,
+                ),
+            )
 
-        val output = createHTML().html {
-            component.render(this)
-        }.trim()
+        val output = createHTML().html { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <html devsite="true">
   <head>
     <title>Page Title</title>
@@ -283,31 +292,32 @@ class DefaultDevsitePageTest {
     <div>noop</div>
   </body>
 </html>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Page with different head tag path renders correctly`() {
-        val component = DefaultDevsitePage(
-            Params(
-                displayLanguage = Language.JAVA,
-                pathForSwitcher = "page.html",
-                bookPath = "/reference/androidx/_book.yaml",
-                title = "Page Title",
-                content = NoopContextFreeComponent,
-                metadataComponent = null,
-                includedHeadTagPath = "en/docs/reference/android/_reference-head-tags.html",
-            ),
-        )
+        val component =
+            DefaultDevsitePage(
+                Params(
+                    displayLanguage = Language.JAVA,
+                    pathForSwitcher = "page.html",
+                    bookPath = "/reference/androidx/_book.yaml",
+                    title = "Page Title",
+                    content = NoopContextFreeComponent,
+                    metadataComponent = null,
+                    includedHeadTagPath = "en/docs/reference/android/_reference-head-tags.html",
+                ),
+            )
 
-        val output = createHTML().html {
-            component.render(this)
-        }.trim()
+        val output = createHTML().html { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <html devsite="true">
   <head>
     <title>Page Title</title>
@@ -327,39 +337,41 @@ class DefaultDevsitePageTest {
     <div>noop</div>
   </body>
 </html>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Page with reference object renders correctly`() {
-        val referenceObject = DefaultReferenceObject(
-            ReferenceObject.Params(
-                name = "Foo",
-                language = Language.JAVA,
-            ),
-        )
+        val referenceObject =
+            DefaultReferenceObject(
+                ReferenceObject.Params(
+                    name = "Foo",
+                    language = Language.JAVA,
+                ),
+            )
 
-        val component = DefaultDevsitePage(
-            Params(
-                displayLanguage = Language.JAVA,
-                pathForSwitcher = "page.html",
-                bookPath = "/reference/androidx/_book.yaml",
-                title = "Page Title",
-                content = NoopContextFreeComponent,
-                metadataComponent = null,
-                includedHeadTagPath = null,
-                referenceObject = referenceObject,
-            ),
-        )
+        val component =
+            DefaultDevsitePage(
+                Params(
+                    displayLanguage = Language.JAVA,
+                    pathForSwitcher = "page.html",
+                    bookPath = "/reference/androidx/_book.yaml",
+                    title = "Page Title",
+                    content = NoopContextFreeComponent,
+                    metadataComponent = null,
+                    includedHeadTagPath = null,
+                    referenceObject = referenceObject,
+                ),
+            )
 
-        val output = createHTML().html {
-            component.render(this)
-        }.trim()
+        val output = createHTML().html { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <html devsite="true">
   <head>
     <title>Page Title</title>
@@ -382,7 +394,8 @@ class DefaultDevsitePageTest {
     <div>noop</div>
   </body>
 </html>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 }

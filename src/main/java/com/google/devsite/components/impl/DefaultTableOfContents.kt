@@ -22,21 +22,24 @@ import com.google.devsite.components.pages.TableOfContents
 internal data class DefaultTableOfContents(
     override val data: TableOfContents.Params,
 ) : TableOfContents {
-    override fun render(into: StringBuilder) = into.run {
-        appendLine("toc:")
+    override fun render(into: StringBuilder) =
+        into.run {
+            appendLine("toc:")
 
-        appendLine("- title: \"Class Index\"")
-        appendLine("  path: \"${data.classesUrl}\"")
-        appendLine()
-        appendLine("- title: \"Package Index\"")
-        appendLine("  path: \"${data.packagesUrl}\"")
-
-        for (packageSection in data.packages) {
+            appendLine("- title: \"Class Index\"")
+            appendLine("  path: \"${data.classesUrl}\"")
             appendLine()
-            packageSection.render(this)
-        }
-    }
+            appendLine("- title: \"Package Index\"")
+            appendLine("  path: \"${data.packagesUrl}\"")
 
-    override fun toString() = "Table of contents. Classes at ${data.classesUrl}, " +
-        "Packages at ${data.packagesUrl}. Packages are " + data.packages.joinToString("\n")
+            for (packageSection in data.packages) {
+                appendLine()
+                packageSection.render(this)
+            }
+        }
+
+    override fun toString() =
+        "Table of contents. Classes at ${data.classesUrl}, " +
+            "Packages at ${data.packagesUrl}. Packages are " +
+            data.packages.joinToString("\n")
 }

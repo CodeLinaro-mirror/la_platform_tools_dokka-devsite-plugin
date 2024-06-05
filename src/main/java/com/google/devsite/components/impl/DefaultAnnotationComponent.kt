@@ -26,13 +26,14 @@ import kotlinx.html.FlowContent
 internal data class DefaultAnnotationComponent(
     override val data: AnnotationComponent.Params,
 ) : AnnotationComponent {
-    override fun render(into: FlowContent) = into.run {
-        +"@"
-        data.type.render(this)
-        // "()" displays even if there are no elements
-        data.parameters.render(into, brackets = "() ", shouldBreak = ShouldBreak.NO)
-    }
+    override fun render(into: FlowContent) =
+        into.run {
+            +"@"
+            data.type.render(this)
+            // "()" displays even if there are no elements
+            data.parameters.render(into, brackets = "() ", shouldBreak = ShouldBreak.NO)
+        }
 
-    override fun toString() = "@${data.type}" +
-        data.parameters.joinMaybePrefix(prefix = "(", postfix = ")")
+    override fun toString() =
+        "@${data.type}" + data.parameters.joinMaybePrefix(prefix = "(", postfix = ")")
 }

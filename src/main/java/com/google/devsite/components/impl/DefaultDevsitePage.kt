@@ -32,43 +32,49 @@ internal data class DefaultDevsitePage<T : ContextFreeComponent>(
     override val data: DevsitePage.Params<T>,
 ) : DevsitePage<T> {
 
-    override fun render(into: HTML) = into.run {
-        attributes["devsite"] = "true"
-        head {
-            title { +data.title }
-            unsafe { +"{% setvar book_path %}${data.bookPath}{% endsetvar %}\n" }
-            data.includedHeadTagPath?.let { unsafe { +"{% include \"${it}\" %}\n" } }
-        }
+    override fun render(into: HTML) =
+        into.run {
+            attributes["devsite"] = "true"
+            head {
+                title { +data.title }
+                unsafe { +"{% setvar book_path %}${data.bookPath}{% endsetvar %}\n" }
+                data.includedHeadTagPath?.let { unsafe { +"{% include \"${it}\" %}\n" } }
+            }
 
-        body {
-            // Add devsite ReferenceObject metadata
-            data.referenceObject?.render(this)
+            body {
+                // Add devsite ReferenceObject metadata
+                data.referenceObject?.render(this)
 
-            div {
-                // CSS id declared in internal codebase (cl/548038546)
-                id = "header-block"
-
-                // Devsite appends a tooltip element to h1 declarations, so a div is needed here to
-                // group the h1 and tooltip elements together for Flexbox usage. Otherwise, Flexbox
-                // will split up the h1, tooltip, and metadata elements equally into thirds.
                 div {
-                    h1 { +data.title }
+                    // CSS id declared in internal codebase (cl/548038546)
+                    id = "header-block"
+
+                    // Devsite appends a tooltip element to h1 declarations, so a div is needed here
+                    // to
+                    // group the h1 and tooltip elements together for Flexbox usage. Otherwise,
+                    // Flexbox
+                    // will split up the h1, tooltip, and metadata elements equally into thirds.
+                    div { h1 { +data.title } }
+
+                    data.metadataComponent?.render(this)
                 }
 
-                data.metadataComponent?.render(this)
-            }
+                if (data.pathForSwitcher != null) {
+                    // When devsite injects the switcher, it prefixes this path with `kotlin` if
+                    // needed.
+                    unsafe { +"\n{% setvar page_path %}${data.pathForSwitcher}{% endsetvar %}" }
+                    unsafe { +"\n{% setvar can_switch %}1{% endsetvar %}" }
+                    unsafe {
+                        +"\n{% include \"reference/_${data.displayLanguage}_switcher2.md\" %}\n"
+                    }
+                }
 
-            if (data.pathForSwitcher != null) {
-                // When devsite injects the switcher, it prefixes this path with `kotlin` if needed.
-                unsafe { +"\n{% setvar page_path %}${data.pathForSwitcher}{% endsetvar %}" }
-                unsafe { +"\n{% setvar can_switch %}1{% endsetvar %}" }
-                unsafe { +"\n{% include \"reference/_${data.displayLanguage}_switcher2.md\" %}\n" }
+                data.content.render(this)
             }
-
-            data.content.render(this)
         }
-    }
 
-    override fun toString() = "DevsitePage: ${data.title} at ${data.bookPath}\n${data.content} " +
-        "with metadata " + (data.metadataComponent?.toString() ?: "")
+    override fun toString() =
+        "DevsitePage: ${data.title} at ${data.bookPath}\n${data.content} " +
+            "with metadata " +
+            (data.metadataComponent?.toString() ?: "")
 }

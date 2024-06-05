@@ -33,100 +33,107 @@ import org.junit.Test
 class DefaultClasslikeSignatureTest {
     @Test
     fun `Class signature renders correctly in Java`() {
-        val component = DefaultClasslikeSignature(
-            ClasslikeSignature.Params(
-                displayLanguage = Language.JAVA,
-                name = NoopLink("Foo"),
-                type = "class",
-                modifiers = Modifiers("public", "abstract"),
-                extends = listOf(NoopLink("Anyclass")),
-                implements = listOf(NoopLink("SomeInterface")),
-                typeParameters = listOf(
-                    DefaultTypeParameterComponent(
-                        TypeParameterComponent.Params(
-                            name = "GenericType",
-                            projections = listOf(NoopTypeProjectionComponent("GenericSupertype")),
-                            pathProvider = NoopFilePathProvider(),
-                            displayLanguage = Language.KOTLIN,
+        val component =
+            DefaultClasslikeSignature(
+                ClasslikeSignature.Params(
+                    displayLanguage = Language.JAVA,
+                    name = NoopLink("Foo"),
+                    type = "class",
+                    modifiers = Modifiers("public", "abstract"),
+                    extends = listOf(NoopLink("Anyclass")),
+                    implements = listOf(NoopLink("SomeInterface")),
+                    typeParameters =
+                        listOf(
+                            DefaultTypeParameterComponent(
+                                TypeParameterComponent.Params(
+                                    name = "GenericType",
+                                    projections =
+                                        listOf(NoopTypeProjectionComponent("GenericSupertype")),
+                                    pathProvider = NoopFilePathProvider(),
+                                    displayLanguage = Language.KOTLIN,
+                                ),
+                            ),
                         ),
-                    ),
+                    annotationComponents = listOf(NoopAnnotationComponent("@GenericAnnotation")),
                 ),
-                annotationComponents = listOf(NoopAnnotationComponent("@GenericAnnotation")),
-            ),
-        )
+            )
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        Truth.assertThat(output).isEqualTo(
-            """
+        Truth.assertThat(output)
+            .isEqualTo(
+                """
 <body>@GenericAnnotation<br>public abstract class Foo&lt;GenericType&nbsp;:&nbsp;GenericSupertype&gt; extends Anyclass implements SomeInterface</body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Class signature renders correctly in Kotlin`() {
-        val component = DefaultClasslikeSignature(
-            ClasslikeSignature.Params(
-                displayLanguage = Language.KOTLIN,
-                name = NoopLink("Foo"),
-                type = "class",
-                modifiers = Modifiers("open"),
-                extends = listOf(NoopLink("Anyclass")),
-                implements = listOf(NoopLink("SomeInterface")),
-                typeParameters = listOf(
-                    DefaultTypeParameterComponent(
-                        TypeParameterComponent.Params(
-                            name = "GenericType",
-                            projections = listOf(NoopTypeProjectionComponent("GenericSupertype")),
-                            pathProvider = NoopFilePathProvider(),
-                            displayLanguage = Language.KOTLIN,
+        val component =
+            DefaultClasslikeSignature(
+                ClasslikeSignature.Params(
+                    displayLanguage = Language.KOTLIN,
+                    name = NoopLink("Foo"),
+                    type = "class",
+                    modifiers = Modifiers("open"),
+                    extends = listOf(NoopLink("Anyclass")),
+                    implements = listOf(NoopLink("SomeInterface")),
+                    typeParameters =
+                        listOf(
+                            DefaultTypeParameterComponent(
+                                TypeParameterComponent.Params(
+                                    name = "GenericType",
+                                    projections =
+                                        listOf(NoopTypeProjectionComponent("GenericSupertype")),
+                                    pathProvider = NoopFilePathProvider(),
+                                    displayLanguage = Language.KOTLIN,
+                                ),
+                            ),
                         ),
-                    ),
+                    annotationComponents = listOf(NoopAnnotationComponent("@GenericAnnotation")),
                 ),
-                annotationComponents = listOf(NoopAnnotationComponent("@GenericAnnotation")),
-            ),
-        )
+            )
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        Truth.assertThat(output).isEqualTo(
-            """
+        Truth.assertThat(output)
+            .isEqualTo(
+                """
 <body>@GenericAnnotation<br>open class Foo&lt;GenericType&nbsp;:&nbsp;GenericSupertype&gt; : Anyclass, SomeInterface</body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Interfaces extend other interfaces`() { // and do not "implement" them
-        val component = DefaultClasslikeSignature(
-            ClasslikeSignature.Params(
-                displayLanguage = Language.JAVA,
-                name = NoopLink("Foo"),
-                type = "interface",
-                modifiers = EmptyModifiers,
-                extends = listOf(),
-                implements = listOf(NoopLink("SomeInterface")),
-                typeParameters = listOf(),
-                annotationComponents = emptyList(),
-            ),
-        )
+        val component =
+            DefaultClasslikeSignature(
+                ClasslikeSignature.Params(
+                    displayLanguage = Language.JAVA,
+                    name = NoopLink("Foo"),
+                    type = "interface",
+                    modifiers = EmptyModifiers,
+                    extends = listOf(),
+                    implements = listOf(NoopLink("SomeInterface")),
+                    typeParameters = listOf(),
+                    annotationComponents = emptyList(),
+                ),
+            )
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        Truth.assertThat(output).isEqualTo(
-            """
+        Truth.assertThat(output)
+            .isEqualTo(
+                """
 <body>interface Foo extends SomeInterface</body>
-        """.trim(),
-        )
+        """
+                    .trim(),
+            )
     }
 }

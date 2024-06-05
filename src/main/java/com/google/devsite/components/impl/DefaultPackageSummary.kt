@@ -30,45 +30,46 @@ import kotlinx.html.h2
 internal data class DefaultPackageSummary(
     override val data: PackageSummary.Params,
 ) : PackageSummary {
-    override fun render(into: FlowContent) = into.run {
-        data.header?.render(into)
-        data.description.render(into, separator = "")
-        // The reason for checking display language here is to match the ordering of the page
-        // sections of existing docs.
-        when (data.displayLanguage) {
-            Language.JAVA -> {
-                renderSummary(data.annotations, "Annotations")
-                renderSummary(data.interfaces, "Interfaces")
-                renderSummary(data.classes + data.objects, "Classes")
-                renderSummary(data.enums, "Enums")
-                renderSummary(data.exceptions, "Exceptions")
+    override fun render(into: FlowContent) =
+        into.run {
+            data.header?.render(into)
+            data.description.render(into, separator = "")
+            // The reason for checking display language here is to match the ordering of the page
+            // sections of existing docs.
+            when (data.displayLanguage) {
+                Language.JAVA -> {
+                    renderSummary(data.annotations, "Annotations")
+                    renderSummary(data.interfaces, "Interfaces")
+                    renderSummary(data.classes + data.objects, "Classes")
+                    renderSummary(data.enums, "Enums")
+                    renderSummary(data.exceptions, "Exceptions")
+                }
+                Language.KOTLIN -> {
+                    renderSummary(data.interfaces, "Interfaces")
+                    renderSummary(data.classes, "Classes")
+                    renderSummary(data.exceptions, "Exceptions")
+                    renderSummary(data.objects, "Objects")
+                    renderSummary(data.annotations, "Annotations")
+                    renderSummary(data.enums, "Enums")
+                }
             }
-            Language.KOTLIN -> {
-                renderSummary(data.interfaces, "Interfaces")
-                renderSummary(data.classes, "Classes")
-                renderSummary(data.exceptions, "Exceptions")
-                renderSummary(data.objects, "Objects")
-                renderSummary(data.annotations, "Annotations")
-                renderSummary(data.enums, "Enums")
+
+            if (data.displayLanguage == Language.KOTLIN) {
+                renderSummary(data.typeAliases, "Type aliases")
+
+                renderSummary(data.topLevelConstantsSummary, "Constants summary")
+                renderSummary(data.topLevelFunctionsSummary, "Top-level functions summary")
+                renderSummary(data.extensionFunctionsSummary, "Extension functions summary")
+                renderSummary(data.topLevelPropertiesSummary, "Top-level properties summary")
+                renderSummary(data.extensionPropertiesSummary, "Extension properties summary")
+
+                renderDetails(data.topLevelConstants, "Constants")
+                renderDetails(data.topLevelFunctions, "Top-level functions")
+                renderDetails(data.extensionFunctions, "Extension functions")
+                renderDetails(data.topLevelProperties, "Top-level properties")
+                renderDetails(data.extensionProperties, "Extension properties")
             }
         }
-
-        if (data.displayLanguage == Language.KOTLIN) {
-            renderSummary(data.typeAliases, "Type aliases")
-
-            renderSummary(data.topLevelConstantsSummary, "Constants summary")
-            renderSummary(data.topLevelFunctionsSummary, "Top-level functions summary")
-            renderSummary(data.extensionFunctionsSummary, "Extension functions summary")
-            renderSummary(data.topLevelPropertiesSummary, "Top-level properties summary")
-            renderSummary(data.extensionPropertiesSummary, "Extension properties summary")
-
-            renderDetails(data.topLevelConstants, "Constants")
-            renderDetails(data.topLevelFunctions, "Top-level functions")
-            renderDetails(data.extensionFunctions, "Extension functions")
-            renderDetails(data.topLevelProperties, "Top-level properties")
-            renderDetails(data.extensionProperties, "Extension properties")
-        }
-    }
 
     private fun <T : ContextFreeComponent> FlowContent.renderSummary(
         summary: WithDescriptionList<T>,

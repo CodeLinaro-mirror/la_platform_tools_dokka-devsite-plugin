@@ -40,11 +40,7 @@ internal data class DefaultInheritedSymbols<T : SymbolSignature>(
             div("devsite-table-wrapper") {
                 table("responsive") {
                     attributes["id"] = "inhmethods"
-                    thead {
-                        tr {
-                            data.header.render(this)
-                        }
-                    }
+                    thead { tr { data.header.render(this) } }
 
                     tbody(classes = "list") {
                         for (item in data.inheritedSymbolSummaries) {
@@ -67,16 +63,21 @@ internal data class DefaultInheritedSymbols<T : SymbolSignature>(
         }
     }
 
-    override fun toString() = if (!hasContent()) {
-        ""
-    } else
-        data.header.toString() + " " + data.inheritedSymbolSummaries
-            .map { (from, summaries) -> "from $from, inherited $summaries" }.joinToString()
+    override fun toString() =
+        if (!hasContent()) {
+            ""
+        } else
+            data.header.toString() +
+                " " +
+                data.inheritedSymbolSummaries
+                    .map { (from, summaries) -> "from $from, inherited $summaries" }
+                    .joinToString()
 }
 
-internal fun <T : SymbolSignature> emptyInheritedSymbolsList() = DefaultInheritedSymbols(
-    InheritedSymbolsList.Params<T>(
-        DefaultTableTitle(TableTitle.Params("")),
-        emptyMap(),
-    ),
-)
+internal fun <T : SymbolSignature> emptyInheritedSymbolsList() =
+    DefaultInheritedSymbols(
+        InheritedSymbolsList.Params<T>(
+            DefaultTableTitle(TableTitle.Params("")),
+            emptyMap(),
+        ),
+    )

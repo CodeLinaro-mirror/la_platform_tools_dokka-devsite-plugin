@@ -23,9 +23,10 @@ internal class NoopClasslikeSignature(private val shown: Boolean = true) : Class
     override val data: ClasslikeSignature.Params
         get() = throw NotImplementedError()
 
-    override fun render(into: FlowContent) = into.run {
-        if (shown) {
-            +"Signature"
+    override fun render(into: FlowContent) =
+        into.run {
+            if (shown) {
+                +"Signature"
+            }
         }
-    }
 }

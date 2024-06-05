@@ -16,9 +16,7 @@
 
 package com.google.devsite.util
 
-/**
- * Data class to store the version metadata associated with a Class
- */
+/** Data class to store the version metadata associated with a Class */
 data class ClassVersionMetadata(
     val className: String,
     val addedIn: String,
@@ -27,18 +25,14 @@ data class ClassVersionMetadata(
     val fieldVersions: Map<String, FieldVersionMetadata> = emptyMap(),
 ) {
 
-    /**
-     * Data class to store the version metadata associated with a method
-     */
+    /** Data class to store the version metadata associated with a method */
     data class MethodVersionMetadata(
         val methodName: String,
         val addedIn: String,
         val deprecatedIn: String? = null,
     )
 
-    /**
-     * Data class to store the version metadata associated with a field
-     */
+    /** Data class to store the version metadata associated with a field */
     data class FieldVersionMetadata(
         val fieldName: String,
         val addedIn: String,
@@ -46,9 +40,7 @@ data class ClassVersionMetadata(
     )
 }
 
-/**
- * Converts JSON version metadata for fields into a map
- */
+/** Converts JSON version metadata for fields into a map */
 fun createFieldVersionMetadata(
     jsonVersionMetadataFields: List<JsonVersionMetadata.JsonVersionMetadataField>,
 ): Map<String, ClassVersionMetadata.FieldVersionMetadata> {
@@ -66,9 +58,7 @@ fun createFieldVersionMetadata(
     return versionMetadataMap
 }
 
-/**
- * Converts JSON version metadata for methods into a map
- */
+/** Converts JSON version metadata for methods into a map */
 fun createMethodVersionMetadata(
     jsonVersionMetadataMethods: List<JsonVersionMetadata.JsonVersionMetadataMethod>,
 ): Map<String, ClassVersionMetadata.MethodVersionMetadata> {

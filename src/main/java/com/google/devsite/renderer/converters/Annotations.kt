@@ -45,7 +45,8 @@ import org.jetbrains.dokka.model.Void
 import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 
-internal val Annotation.identifier: String get() = "${dri.fullName}(${params.values.map { "$it" }})"
+internal val Annotation.identifier: String
+    get() = "${dri.fullName}(${params.values.map { "$it" }})"
 
 internal val AT_NULLABLE = Annotation(DRI("androidx.annotation", "Nullable"), emptyMap())
 internal val AT_NON_NULL = Annotation(DRI("androidx.annotation", "NonNull"), emptyMap())
@@ -56,8 +57,9 @@ internal val ANDROID_NON_NULL_DRI = DRI("android.annotation", "NonNull")
 internal fun List<Annotation>.hasAtNullable(): Boolean = any { it.dri.classNames == "Nullable" }
 
 /** @return true if an `@NonNull` annotation is present, false otherwise */
-internal fun List<Annotation>.hasAtNonNull(): Boolean =
-    any { it.dri.classNames in listOf("NonNull", "NotNull") }
+internal fun List<Annotation>.hasAtNonNull(): Boolean = any {
+    it.dri.classNames in listOf("NonNull", "NotNull")
+}
 
 /** @return true if the `@Deprecated` annotation is present, false otherwise */
 internal fun List<Annotation>.isDeprecated(): Boolean = any { it.isDeprecated() }
@@ -73,22 +75,28 @@ internal fun Documentable.annotations(sourceSet: DokkaConfiguration.DokkaSourceS
 
 internal fun Projection.annotations(sourceSet: DokkaConfiguration.DokkaSourceSet?) =
     (this as? Bound)?.annotations(sourceSet)
-        ?: (this as? WithExtraProperties<*>)?.annotations(sourceSet) ?: emptyList()
+        ?: (this as? WithExtraProperties<*>)?.annotations(sourceSet)
+        ?: emptyList()
 
 internal fun Projection.sourceSetIndependentAnnotations(): List<Annotation> =
     (this as? WithExtraProperties<*>)?.sourceSetIndependentAnnotations() ?: emptyList()
 
 internal fun WithExtraProperties<*>.sourceSetIndependentAnnotations(): List<Annotation> =
-    extra.allOfType<Annotations>()
-        .strictSingleOrNull()?.directAnnotations?.values?.firstOrNull() ?: emptyList()
+    extra.allOfType<Annotations>().strictSingleOrNull()?.directAnnotations?.values?.firstOrNull()
+        ?: emptyList()
 
 private fun Bound.annotations(sourceSet: DokkaConfiguration.DokkaSourceSet?): List<Annotation> =
     when (this) {
-        is TypeParameter, is GenericTypeConstructor, is FunctionalTypeConstructor ->
-            (this as WithExtraProperties<*>).annotations(sourceSet)
+        is TypeParameter,
+        is GenericTypeConstructor,
+        is FunctionalTypeConstructor -> (this as WithExtraProperties<*>).annotations(sourceSet)
         is Nullable -> this.inner.annotations(sourceSet)
         is TypeAliased -> this.inner.annotations(sourceSet)
-        is PrimitiveJavaType, Void, is JavaObject, Dynamic, is UnresolvedBound -> emptyList()
+        is PrimitiveJavaType,
+        Void,
+        is JavaObject,
+        Dynamic,
+        is UnresolvedBound -> emptyList()
         is DefinitelyNonNullable -> this.inner.annotations(sourceSet).filter { it != AT_NULLABLE }
     }
 
@@ -101,22 +109,25 @@ internal fun Documentable.allAnnotations() =
 
 // TODO(KMP per-sourceset variance of deprecation status b/262711247)
 internal fun Documentable.deprecationAnnotation() = allAnnotations().deprecationAnnotation()
+
 internal fun List<Annotation>.deprecationAnnotation() =
     toSet().filter { it.isDeprecated() }.strictSingleOrNull()
 
 /**
  * All existing WithSources are WithExtraProperties, and fileLevelAnnotations require sources.
+ *
  * @return the list of file-level annotations on this WithSource's source file
  */
-internal fun <T> T.fileLevelAnnotations(sourceSet: DokkaConfiguration.DokkaSourceSet?)
-    where T : WithSources, T : Documentable =
+internal fun <T> T.fileLevelAnnotations(sourceSet: DokkaConfiguration.DokkaSourceSet?) where
+T : WithSources,
+T : Documentable =
     (this as WithExtraProperties<*>).extra.allOfType<Annotations>().flatMap { annotations ->
-        annotations.fileLevelAnnotations[sourceSet]
-            ?: emptyList()
+        annotations.fileLevelAnnotations[sourceSet] ?: emptyList()
     }
 
 /** @return true if the `@Deprecated` annotation is present, false otherwise */
 internal fun Annotation.isDeprecated(): Boolean = dri == deprecatedDri || dri == javaDeprecatedDri
+
 internal val deprecatedDri = DRI(packageName = "kotlin", classNames = "Deprecated")
 internal val javaDeprecatedDri = DRI(packageName = "java.lang", classNames = "Deprecated")
 
@@ -124,6 +135,7 @@ internal fun Annotation.belongsOnReturnType() =
     dri.classNames in NULLABILITY_ANNOTATION_NAMES || dri.classNames?.shouldBeTypebound() ?: false
 
 private val SUPPRESSION_ANNOTATION_NAMES = listOf("Suppress", "SuppressWarnings", "SuppressLint")
+
 internal fun Annotation.isSuppressAnnotation() = dri.classNames in SUPPRESSION_ANNOTATION_NAMES
 
 // We transform javax.validation.constraints.NotNull into androidx.annotation.NonNull and WARN:
@@ -136,23 +148,24 @@ private val KNOWN_TYPEBOUND_ANNOTATION_NAMES = listOf("Dimension", "Px", "Size")
 // For androidx annotations. E.g. IntRes, IntRange, GravityInt, HalfFloat, ColorLong, UiContext
 private val KNOWN_TYPEBOUND_ANNOTATION_SUFFIXES =
     listOf("Res", "Range", "Long", "Int", "Float", "Context")
+
 private fun String.shouldBeTypebound() =
     finalWord() in KNOWN_TYPEBOUND_ANNOTATION_SUFFIXES || this in KNOWN_TYPEBOUND_ANNOTATION_NAMES
 
 private fun String.finalWord(): String {
-    val lastIndexOfCapital = lastOrNull { it.isUpperCase() }
-        ?.let { indexOf(it) } ?: 0
+    val lastIndexOfCapital = lastOrNull { it.isUpperCase() }?.let { indexOf(it) } ?: 0
     return substring(lastIndexOfCapital)
 }
 
-internal fun AnnotationParameterValue?.asString() = when (this) {
-    null -> ""
-    is StringValue -> value
-    is EnumValue -> enumName
-    is ClassValue -> className
-    is LiteralValue -> text()
-    is AnnotationValue -> annotation.toString()
-    is ArrayValue -> value.toString()
-}
+internal fun AnnotationParameterValue?.asString() =
+    when (this) {
+        null -> ""
+        is StringValue -> value
+        is EnumValue -> enumName
+        is ClassValue -> className
+        is LiteralValue -> text()
+        is AnnotationValue -> annotation.toString()
+        is ArrayValue -> value.toString()
+    }
 
 internal fun Annotation.nameAsString(): String = params["name"].asString()

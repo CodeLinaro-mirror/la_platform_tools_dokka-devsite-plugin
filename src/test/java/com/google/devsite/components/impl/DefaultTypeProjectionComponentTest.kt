@@ -29,140 +29,146 @@ import org.junit.Test
 class DefaultTypeProjectionComponentTest {
     @Test
     fun `Simple parameter type renders correctly`() {
-        val component = DefaultTypeProjectionComponent(
-            Params(
-                type = NoopLink("Int"),
-                nullability = Nullability.KOTLIN_DEFAULT,
-                displayLanguage = Language.KOTLIN,
+        val component =
+            DefaultTypeProjectionComponent(
+                Params(
+                    type = NoopLink("Int"),
+                    nullability = Nullability.KOTLIN_DEFAULT,
+                    displayLanguage = Language.KOTLIN,
+                ),
+            )
 
-            ),
-        )
-
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>Int</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Simple nullable parameter type renders correctly`() {
-        val component = DefaultTypeProjectionComponent(
-            Params(
-                type = NoopLink("Int"),
-                nullability = Nullability.KOTLIN_NULLABLE,
-                displayLanguage = Language.KOTLIN,
-            ),
-        )
+        val component =
+            DefaultTypeProjectionComponent(
+                Params(
+                    type = NoopLink("Int"),
+                    nullability = Nullability.KOTLIN_NULLABLE,
+                    displayLanguage = Language.KOTLIN,
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>Int?</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Simple platform parameter type renders correctly`() {
-        val component = DefaultTypeProjectionComponent(
-            Params(
-                type = NoopLink("Int"),
-                nullability = Nullability.JAVA_NOT_ANNOTATED,
-                displayLanguage = Language.KOTLIN,
-            ),
-        )
+        val component =
+            DefaultTypeProjectionComponent(
+                Params(
+                    type = NoopLink("Int"),
+                    nullability = Nullability.JAVA_NOT_ANNOTATED,
+                    displayLanguage = Language.KOTLIN,
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>Int!</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Parameter type with one generic renders correctly`() {
-        val component = DefaultTypeProjectionComponent(
-            Params(
-                type = NoopLink("List"),
-                nullability = Nullability.KOTLIN_DEFAULT,
-                displayLanguage = Language.KOTLIN,
-                generics = listOf(NoopTypeProjectionComponent("String")),
-            ),
-        )
+        val component =
+            DefaultTypeProjectionComponent(
+                Params(
+                    type = NoopLink("List"),
+                    nullability = Nullability.KOTLIN_DEFAULT,
+                    displayLanguage = Language.KOTLIN,
+                    generics = listOf(NoopTypeProjectionComponent("String")),
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>List&lt;String&gt;</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Nullable parameter type with one generic renders correctly`() {
-        val component = DefaultTypeProjectionComponent(
-            Params(
-                type = NoopLink("List"),
-                nullability = Nullability.KOTLIN_NULLABLE,
-                displayLanguage = Language.KOTLIN,
-                generics = listOf(NoopTypeProjectionComponent("String")),
-            ),
-        )
+        val component =
+            DefaultTypeProjectionComponent(
+                Params(
+                    type = NoopLink("List"),
+                    nullability = Nullability.KOTLIN_NULLABLE,
+                    displayLanguage = Language.KOTLIN,
+                    generics = listOf(NoopTypeProjectionComponent("String")),
+                ),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>List&lt;String&gt;?</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Parameter type with multiple generics renders correctly`() {
-        val component = DefaultTypeProjectionComponent(
-            Params(
-                type = NoopLink("Map"),
-                nullability = Nullability.KOTLIN_DEFAULT,
-                displayLanguage = Language.KOTLIN,
-                generics = listOf(
-                    NoopTypeProjectionComponent("String"),
-                    NoopTypeProjectionComponent("Int"),
+        val component =
+            DefaultTypeProjectionComponent(
+                Params(
+                    type = NoopLink("Map"),
+                    nullability = Nullability.KOTLIN_DEFAULT,
+                    displayLanguage = Language.KOTLIN,
+                    generics =
+                        listOf(
+                            NoopTypeProjectionComponent("String"),
+                            NoopTypeProjectionComponent("Int"),
+                        ),
                 ),
-            ),
-        )
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>Map&lt;String,&nbsp;Int&gt;</div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 }

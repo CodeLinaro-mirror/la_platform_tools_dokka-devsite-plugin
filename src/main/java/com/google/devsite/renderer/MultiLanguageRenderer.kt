@@ -58,14 +58,16 @@ internal class MultiLanguageRenderer(
 
     override fun render(root: RootPageNode) {
         val module = (root as ModulePageNode).documentables.single() as DModule
-        val locationProvider = DefaultExternalDokkaLocationProvider(
-            dokkaLocationProvider = DokkaLocationProvider(root, context),
-        )
+        val locationProvider =
+            DefaultExternalDokkaLocationProvider(
+                dokkaLocationProvider = DokkaLocationProvider(root, context),
+            )
 
         runBlocking(Dispatchers.Default) {
-            val libraryMetadataArray = JsonLibraryMetadata.getMetadataFromFile(
-                devsiteConfiguration.libraryMetadataFilename.orEmpty(),
-            )
+            val libraryMetadataArray =
+                JsonLibraryMetadata.getMetadataFromFile(
+                    devsiteConfiguration.libraryMetadataFilename.orEmpty(),
+                )
             val fileMetadataMap = LibraryMetadata.convertJsonMetadataToFileMap(libraryMetadataArray)
 
             /**
@@ -74,43 +76,48 @@ internal class MultiLanguageRenderer(
              */
             val versionMetadataMap = hashMapOf<String, ClassVersionMetadata>()
             devsiteConfiguration.versionMetadataFilenames?.forEach { versionMetadataFilename ->
-                val versionMetadataArray = JsonVersionMetadata.getMetadataFromFile(
-                    versionMetadataFilename,
-                )
-                versionMetadataMap += DefaultVersionMetadataComponent
-                    .convertJsonVersionMetadataToVersionMap(versionMetadataArray)
+                val versionMetadataArray =
+                    JsonVersionMetadata.getMetadataFromFile(
+                        versionMetadataFilename,
+                    )
+                versionMetadataMap +=
+                    DefaultVersionMetadataComponent.convertJsonVersionMetadataToVersionMap(
+                        versionMetadataArray
+                    )
             }
 
-            val jHolder = DocumentablesHolder(
-                displayLanguage = Language.JAVA,
-                module = module,
-                scope = this,
-                context = context,
-                excludedPackages = devsiteConfiguration.computedExcludedPackagesFor,
-                fileMetadataMap = fileMetadataMap,
-                versionMetadataMap = versionMetadataMap,
-                baseClassSourceLink = devsiteConfiguration.baseSourceLink,
-                baseFunctionSourceLink = devsiteConfiguration.baseFunctionSourceLink,
-                basePropertySourceLink = devsiteConfiguration.basePropertySourceLink,
-                annotationsNotToDisplay = devsiteConfiguration.allAnnotationsNotToDisplayJava,
-                includeHiddenParentSymbols = devsiteConfiguration.includeHiddenParentSymbols,
-                analysisPlugin = analysisPlugin,
-            )
-            val kHolder = DocumentablesHolder(
-                displayLanguage = Language.KOTLIN,
-                module = module,
-                scope = this,
-                context = context,
-                excludedPackages = devsiteConfiguration.computedExcludedPackagesFor,
-                fileMetadataMap = fileMetadataMap,
-                versionMetadataMap = versionMetadataMap,
-                baseClassSourceLink = devsiteConfiguration.baseSourceLink,
-                baseFunctionSourceLink = devsiteConfiguration.baseFunctionSourceLink,
-                basePropertySourceLink = devsiteConfiguration.basePropertySourceLink,
-                annotationsNotToDisplay = devsiteConfiguration.allAnnotationsNotToDisplayKotlin,
-                includeHiddenParentSymbols = devsiteConfiguration.includeHiddenParentSymbols,
-                analysisPlugin = analysisPlugin,
-            )
+            val jHolder =
+                DocumentablesHolder(
+                    displayLanguage = Language.JAVA,
+                    module = module,
+                    scope = this,
+                    context = context,
+                    excludedPackages = devsiteConfiguration.computedExcludedPackagesFor,
+                    fileMetadataMap = fileMetadataMap,
+                    versionMetadataMap = versionMetadataMap,
+                    baseClassSourceLink = devsiteConfiguration.baseSourceLink,
+                    baseFunctionSourceLink = devsiteConfiguration.baseFunctionSourceLink,
+                    basePropertySourceLink = devsiteConfiguration.basePropertySourceLink,
+                    annotationsNotToDisplay = devsiteConfiguration.allAnnotationsNotToDisplayJava,
+                    includeHiddenParentSymbols = devsiteConfiguration.includeHiddenParentSymbols,
+                    analysisPlugin = analysisPlugin,
+                )
+            val kHolder =
+                DocumentablesHolder(
+                    displayLanguage = Language.KOTLIN,
+                    module = module,
+                    scope = this,
+                    context = context,
+                    excludedPackages = devsiteConfiguration.computedExcludedPackagesFor,
+                    fileMetadataMap = fileMetadataMap,
+                    versionMetadataMap = versionMetadataMap,
+                    baseClassSourceLink = devsiteConfiguration.baseSourceLink,
+                    baseFunctionSourceLink = devsiteConfiguration.baseFunctionSourceLink,
+                    basePropertySourceLink = devsiteConfiguration.basePropertySourceLink,
+                    annotationsNotToDisplay = devsiteConfiguration.allAnnotationsNotToDisplayKotlin,
+                    includeHiddenParentSymbols = devsiteConfiguration.includeHiddenParentSymbols,
+                    analysisPlugin = analysisPlugin,
+                )
 
             val failOnExceptionHandler = CoroutineExceptionHandler { _, except -> throw except }
             launch(failOnExceptionHandler) {
@@ -145,68 +152,74 @@ internal class MultiLanguageRenderer(
 
         val documentablesGraph = holder.documentablesGraph()
 
-        val filePaths = DevsiteFilePathProvider(
-            language,
-            devsiteConfiguration.docRootPath,
-            languageDocsPath,
-            devsiteConfiguration.projectPath,
-            includedHeadTagsPath,
-            locationProvider,
-            documentablesGraph,
-        )
+        val filePaths =
+            DevsiteFilePathProvider(
+                language,
+                devsiteConfiguration.docRootPath,
+                languageDocsPath,
+                devsiteConfiguration.projectPath,
+                includedHeadTagsPath,
+                locationProvider,
+                documentablesGraph,
+            )
 
         val metadataConverter = MetadataConverter(holder)
-        val annotationConverter = AnnotationDocumentableConverter(
-            language,
-            filePaths,
-            holder.annotationsNotToDisplay,
-            devsiteConfiguration.validNullabilityAnnotations,
-        )
+        val annotationConverter =
+            AnnotationDocumentableConverter(
+                language,
+                filePaths,
+                holder.annotationsNotToDisplay,
+                devsiteConfiguration.validNullabilityAnnotations,
+            )
         val paramConverter =
             ParameterDocumentableConverter(language, filePaths, annotationConverter)
         val javadocConverter =
             DocTagConverter(language, filePaths, holder, paramConverter, annotationConverter)
-        val functionConverter = FunctionDocumentableConverter(
-            language,
-            filePaths,
-            javadocConverter,
-            paramConverter,
-            annotationConverter,
-            metadataConverter,
-        )
-        val propertyConverter = PropertyDocumentableConverter(
-            language,
-            filePaths,
-            javadocConverter,
-            paramConverter,
-            annotationConverter,
-            metadataConverter,
-        )
-        val enumConverter = EnumValueDocumentableConverter(
-            language,
-            filePaths,
-            javadocConverter,
-            paramConverter,
-            annotationConverter,
-        )
-
-        DevsiteRenderer(
-            MetadataRenderer(outputWriter, filePaths, language, holder, javadocConverter),
-            PackageRenderer(
-                outputWriter,
-                filePaths,
+        val functionConverter =
+            FunctionDocumentableConverter(
                 language,
-                holder,
-                functionConverter,
-                propertyConverter,
-                enumConverter,
+                filePaths,
                 javadocConverter,
                 paramConverter,
                 annotationConverter,
                 metadataConverter,
-            ),
-            holder,
-            devsiteConfiguration,
-        ).render()
+            )
+        val propertyConverter =
+            PropertyDocumentableConverter(
+                language,
+                filePaths,
+                javadocConverter,
+                paramConverter,
+                annotationConverter,
+                metadataConverter,
+            )
+        val enumConverter =
+            EnumValueDocumentableConverter(
+                language,
+                filePaths,
+                javadocConverter,
+                paramConverter,
+                annotationConverter,
+            )
+
+        DevsiteRenderer(
+                MetadataRenderer(outputWriter, filePaths, language, holder, javadocConverter),
+                PackageRenderer(
+                    outputWriter,
+                    filePaths,
+                    language,
+                    holder,
+                    functionConverter,
+                    propertyConverter,
+                    enumConverter,
+                    javadocConverter,
+                    paramConverter,
+                    annotationConverter,
+                    metadataConverter,
+                ),
+                holder,
+                devsiteConfiguration,
+            )
+            .render()
     }
 }

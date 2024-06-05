@@ -39,8 +39,18 @@ internal interface KmpSymbolDetail<T : SymbolSignature> : SymbolDetail<T> {
         override val extFunctionClass: String? = null,
         override val annotationComponents: List<AnnotationComponent> = emptyList(),
         override val metadataComponent: MetadataComponent? = null,
-    ) : SymbolDetail.Params<T>(
-        name, returnType, symbolKind, signature, anchors, metadata,
-        displayLanguage, modifiers, extFunctionClass, annotationComponents, metadataComponent,
-    )
+    ) :
+        SymbolDetail.Params<T>(
+            name,
+            returnType,
+            symbolKind,
+            signature,
+            anchors,
+            metadata,
+            displayLanguage,
+            modifiers,
+            extFunctionClass,
+            annotationComponents,
+            metadataComponent,
+        )
 }

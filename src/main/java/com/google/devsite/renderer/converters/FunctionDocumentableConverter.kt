@@ -39,8 +39,8 @@ import com.google.devsite.components.table.KmpTableRowSummaryItem
 import com.google.devsite.components.table.TableRowSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
-import org.jetbrains.dokka.model.DFunction
 import java.util.Locale
+import org.jetbrains.dokka.model.DFunction
 
 /** Converts documentable functions into function components. */
 internal class FunctionDocumentableConverter(
@@ -59,33 +59,39 @@ internal class FunctionDocumentableConverter(
             function.annotations(jvmSourceSet).partition { it.belongsOnReturnType() }
         return DefaultTableRowSummaryItem(
             TableRowSummaryItem.Params(
-                title = DefaultTypeSummary(
-                    TypeSummary.Params(
-                        type = paramConverter.componentForProjection(
-                            projection = function.type,
-                            // Propagate ALL annotations _for display in the summary_, b/197321617
-                            propagatedAnnotations = typeAnnotations,
-                            isReturnType = true,
-                            isJavaSource = function.isFromJava(),
-                            sourceSet = jvmSourceSet,
-                        ),
-                        modifiers = function.modifiers(jvmSourceSet).modifiersFor(hints),
-                    ),
-                ),
-                description = DefaultSymbolSummary(
-                    SymbolSummary.Params(
-                        signature = function.signature(isSummary = true),
-                        description = javadocConverter.summaryDescription(
-                            function,
-                            nonTypeAnnotations.deprecationAnnotation(),
-                        ),
-                        annotationComponents = annotationConverter.annotationComponents(
-                            annotations = nonTypeAnnotations,
-                            // Propagates to return type instead
-                            nullability = Nullability.DONT_CARE,
+                title =
+                    DefaultTypeSummary(
+                        TypeSummary.Params(
+                            type =
+                                paramConverter.componentForProjection(
+                                    projection = function.type,
+                                    // Propagate ALL annotations _for display in the summary_,
+                                    // b/197321617
+                                    propagatedAnnotations = typeAnnotations,
+                                    isReturnType = true,
+                                    isJavaSource = function.isFromJava(),
+                                    sourceSet = jvmSourceSet,
+                                ),
+                            modifiers = function.modifiers(jvmSourceSet).modifiersFor(hints),
                         ),
                     ),
-                ),
+                description =
+                    DefaultSymbolSummary(
+                        SymbolSummary.Params(
+                            signature = function.signature(isSummary = true),
+                            description =
+                                javadocConverter.summaryDescription(
+                                    function,
+                                    nonTypeAnnotations.deprecationAnnotation(),
+                                ),
+                            annotationComponents =
+                                annotationConverter.annotationComponents(
+                                    annotations = nonTypeAnnotations,
+                                    // Propagates to return type instead
+                                    nullability = Nullability.DONT_CARE,
+                                ),
+                        ),
+                    ),
             ),
         )
     }
@@ -97,47 +103,57 @@ internal class FunctionDocumentableConverter(
     ): KmpTypeSummaryItem<FunctionSignature> {
         // TODO(KMP member signatures b/254493209)
         val (typeAnnotations, nonTypeAnnotations) =
-            function.annotations(function.getExpectOrCommonSourceSet())
-                .partition { it.belongsOnReturnType() }
+            function.annotations(function.getExpectOrCommonSourceSet()).partition {
+                it.belongsOnReturnType()
+            }
         return DefaultKmpTableRowSummaryItem(
             KmpTableRowSummaryItem.Params(
-                title = DefaultTypeSummary(
-                    TypeSummary.Params(
-                        type = paramConverter.componentForProjection(
-                            projection = function.type,
-                            // Propagate ALL annotations _for display in the summary_, b/197321617
-                            propagatedAnnotations = typeAnnotations,
-                            isReturnType = true,
-                            isJavaSource = function.isFromJava(),
-                            sourceSet = function.getExpectOrCommonSourceSet(),
-                        ),
-                        // TODO(KMP, b/254493209)
-                        modifiers = function.modifiers(function.getExpectOrCommonSourceSet())
-                            .modifiersFor(hints),
-                    ),
-                ),
-                description = DefaultSymbolSummary(
-                    SymbolSummary.Params(
-                        signature = function.signature(isSummary = true),
-                        description = javadocConverter.summaryDescription(
-                            function,
-                            nonTypeAnnotations.deprecationAnnotation(),
-                        ),
-                        annotationComponents = annotationConverter.annotationComponents(
-                            annotations = nonTypeAnnotations,
-                            // Propagates to return type instead
-                            nullability = Nullability.DONT_CARE,
+                title =
+                    DefaultTypeSummary(
+                        TypeSummary.Params(
+                            type =
+                                paramConverter.componentForProjection(
+                                    projection = function.type,
+                                    // Propagate ALL annotations _for display in the summary_,
+                                    // b/197321617
+                                    propagatedAnnotations = typeAnnotations,
+                                    isReturnType = true,
+                                    isJavaSource = function.isFromJava(),
+                                    sourceSet = function.getExpectOrCommonSourceSet(),
+                                ),
+                            // TODO(KMP, b/254493209)
+                            modifiers =
+                                function
+                                    .modifiers(function.getExpectOrCommonSourceSet())
+                                    .modifiersFor(hints),
                         ),
                     ),
-                ),
+                description =
+                    DefaultSymbolSummary(
+                        SymbolSummary.Params(
+                            signature = function.signature(isSummary = true),
+                            description =
+                                javadocConverter.summaryDescription(
+                                    function,
+                                    nonTypeAnnotations.deprecationAnnotation(),
+                                ),
+                            annotationComponents =
+                                annotationConverter.annotationComponents(
+                                    annotations = nonTypeAnnotations,
+                                    // Propagates to return type instead
+                                    nullability = Nullability.DONT_CARE,
+                                ),
+                        ),
+                    ),
                 platforms = DefaultPlatformComponent(function.sourceSets),
             ),
         )
     }
 
     /** @return the constructor summary component */
-    fun summaryForConstructor(function: DFunction):
-        TableRowSummaryItem<Nothing?, SymbolSummary<FunctionSignature>>? {
+    fun summaryForConstructor(
+        function: DFunction
+    ): TableRowSummaryItem<Nothing?, SymbolSummary<FunctionSignature>>? {
         val jvmSourceSet = function.getAsJavaSourceSet() ?: return null
         return DefaultTableRowSummaryItem(
             TableRowSummaryItem.Params(
@@ -146,11 +162,12 @@ internal class FunctionDocumentableConverter(
                     SymbolSummary.Params(
                         signature = function.signature(isSummary = true),
                         description = javadocConverter.summaryDescription(function),
-                        annotationComponents = annotationConverter.annotationComponents(
-                            annotations = function.annotations(jvmSourceSet),
-                            // Propagates to return type instead
-                            nullability = Nullability.DONT_CARE,
-                        ),
+                        annotationComponents =
+                            annotationConverter.annotationComponents(
+                                annotations = function.annotations(jvmSourceSet),
+                                // Propagates to return type instead
+                                nullability = Nullability.DONT_CARE,
+                            ),
                     ),
                 ),
             ),
@@ -158,8 +175,9 @@ internal class FunctionDocumentableConverter(
     }
 
     /** @return the constructor summary component */
-    fun summaryForKmpConstructor(function: DFunction):
-        KmpTableRowSummaryItem<Nothing?, SymbolSummary<FunctionSignature>> =
+    fun summaryForKmpConstructor(
+        function: DFunction
+    ): KmpTableRowSummaryItem<Nothing?, SymbolSummary<FunctionSignature>> =
         DefaultKmpTableRowSummaryItem(
             KmpTableRowSummaryItem.Params(
                 title = null,
@@ -168,12 +186,13 @@ internal class FunctionDocumentableConverter(
                         signature = function.signature(isSummary = true),
                         description = javadocConverter.summaryDescription(function),
                         // TODO(KMP member signatures b/254493209)
-                        annotationComponents = annotationConverter.annotationComponents(
-                            annotations = function
-                                .annotations(function.getExpectOrCommonSourceSet()),
-                            // Propagates to return type instead
-                            nullability = Nullability.DONT_CARE,
-                        ),
+                        annotationComponents =
+                            annotationConverter.annotationComponents(
+                                annotations =
+                                    function.annotations(function.getExpectOrCommonSourceSet()),
+                                // Propagates to return type instead
+                                nullability = Nullability.DONT_CARE,
+                            ),
                     ),
                 ),
                 platforms = DefaultPlatformComponent(function.sourceSets),
@@ -205,19 +224,20 @@ internal class FunctionDocumentableConverter(
         val jvmSourceSet = function.getAsJavaSourceSet() ?: return null
         val (typeAnnotations, signatureAnnotations) =
             function.annotations(jvmSourceSet).partition { it.belongsOnReturnType() }
-        val returnType = paramConverter.componentForProjection(
-            projection = function.type,
-            isJavaSource = function.isFromJava(),
-            propagatedAnnotations = typeAnnotations,
-            isReturnType = true,
-            propagatedNullability =
-            if (kind == SymbolDetail.SymbolKind.CONSTRUCTOR || function.isConstructor) {
-                Nullability.DONT_CARE
-            } else {
-                null
-            },
-            sourceSet = jvmSourceSet,
-        )
+        val returnType =
+            paramConverter.componentForProjection(
+                projection = function.type,
+                isJavaSource = function.isFromJava(),
+                propagatedAnnotations = typeAnnotations,
+                isReturnType = true,
+                propagatedNullability =
+                    if (kind == SymbolDetail.SymbolKind.CONSTRUCTOR || function.isConstructor) {
+                        Nullability.DONT_CARE
+                    } else {
+                        null
+                    },
+                sourceSet = jvmSourceSet,
+            )
 
         // So far I've only seen this in unit tests where we use the wrong entry point into
         // FunctionDocumentableConverter, but it's possible it could happen in other ways.
@@ -234,20 +254,22 @@ internal class FunctionDocumentableConverter(
                 symbolKind = kind,
                 signature = function.signature(isSummary = false),
                 anchors = generateCompatAnchors(function),
-                metadata = javadocConverter.metadata(
-                    documentable = function,
-                    returnType = returnType,
-                    paramNames = listOf("receiver") + function.parameters.map { it.name!! },
-                    deprecationAnnotation = signatureAnnotations.deprecationAnnotation(),
-                ),
+                metadata =
+                    javadocConverter.metadata(
+                        documentable = function,
+                        returnType = returnType,
+                        paramNames = listOf("receiver") + function.parameters.map { it.name!! },
+                        deprecationAnnotation = signatureAnnotations.deprecationAnnotation(),
+                    ),
                 displayLanguage = displayLanguage,
                 modifiers = function.modifiers(jvmSourceSet).modifiersFor(hints),
                 extFunctionClass = function.receiver?.let { nameForSyntheticClass(function) },
-                annotationComponents = annotationConverter.annotationComponents(
-                    annotations = signatureAnnotations,
-                    // Nullability is on the return type instead
-                    nullability = Nullability.DONT_CARE,
-                ),
+                annotationComponents =
+                    annotationConverter.annotationComponents(
+                        annotations = signatureAnnotations,
+                        // Nullability is on the return type instead
+                        nullability = Nullability.DONT_CARE,
+                    ),
                 metadataComponent = metadataConverter.getMetadataForFunction(function),
             ),
         )
@@ -261,21 +283,23 @@ internal class FunctionDocumentableConverter(
     ): KmpSymbolDetail<FunctionSignature> {
         // TODO(KMP member signatures b/254493209)
         val (typeAnnotations, signatureAnnotations) =
-            function.annotations(function.getExpectOrCommonSourceSet())
-                .partition { it.belongsOnReturnType() }
-        val returnType = paramConverter.componentForProjection(
-            projection = function.type,
-            isJavaSource = function.isFromJava(),
-            propagatedAnnotations = typeAnnotations,
-            isReturnType = true,
-            propagatedNullability =
-            if (kind == SymbolDetail.SymbolKind.CONSTRUCTOR || function.isConstructor) {
-                Nullability.DONT_CARE
-            } else {
-                null
-            },
-            sourceSet = function.getExpectOrCommonSourceSet(),
-        )
+            function.annotations(function.getExpectOrCommonSourceSet()).partition {
+                it.belongsOnReturnType()
+            }
+        val returnType =
+            paramConverter.componentForProjection(
+                projection = function.type,
+                isJavaSource = function.isFromJava(),
+                propagatedAnnotations = typeAnnotations,
+                isReturnType = true,
+                propagatedNullability =
+                    if (kind == SymbolDetail.SymbolKind.CONSTRUCTOR || function.isConstructor) {
+                        Nullability.DONT_CARE
+                    } else {
+                        null
+                    },
+                sourceSet = function.getExpectOrCommonSourceSet(),
+            )
 
         // So far I've only seen this in unit tests where we use the wrong entry point into
         // FunctionDocumentableConverter, but it's possible it could happen in other ways.
@@ -292,22 +316,24 @@ internal class FunctionDocumentableConverter(
                 symbolKind = kind,
                 signature = function.signature(isSummary = false),
                 anchors = generateCompatAnchors(function),
-                metadata = javadocConverter.metadata(
-                    documentable = function,
-                    returnType = returnType,
-                    paramNames = listOf("receiver") + function.parameters.map { it.name!! },
-                    deprecationAnnotation = signatureAnnotations.deprecationAnnotation(),
-                ),
+                metadata =
+                    javadocConverter.metadata(
+                        documentable = function,
+                        returnType = returnType,
+                        paramNames = listOf("receiver") + function.parameters.map { it.name!! },
+                        deprecationAnnotation = signatureAnnotations.deprecationAnnotation(),
+                    ),
                 displayLanguage = displayLanguage,
                 // TODO(KMP, b/254493209)
-                modifiers = function.modifiers(function.getExpectOrCommonSourceSet())
-                    .modifiersFor(hints),
+                modifiers =
+                    function.modifiers(function.getExpectOrCommonSourceSet()).modifiersFor(hints),
                 extFunctionClass = function.receiver?.let { nameForSyntheticClass(function) },
-                annotationComponents = annotationConverter.annotationComponents(
-                    annotations = signatureAnnotations,
-                    // Nullability is on the return type instead
-                    nullability = Nullability.DONT_CARE,
-                ),
+                annotationComponents =
+                    annotationConverter.annotationComponents(
+                        annotations = signatureAnnotations,
+                        // Nullability is on the return type instead
+                        nullability = Nullability.DONT_CARE,
+                    ),
                 platforms = DefaultPlatformComponent(function.sourceSets),
                 metadataComponent = metadataConverter.getMetadataForFunction(function),
             ),
@@ -315,41 +341,47 @@ internal class FunctionDocumentableConverter(
     }
 
     internal fun DFunction.signature(isSummary: Boolean): FunctionSignature {
-        val receiver = receiver?.let {
-            paramConverter.componentForParameter(
-                param = it,
-                isSummary = isSummary,
-                isFromJava = isFromJava(),
-                parent = this,
-            )
-        }
-        val parameters = parameters.map {
-            paramConverter.componentForParameter(
-                param = it,
-                isSummary = isSummary,
-                isFromJava = isFromJava(),
-                parent = this,
-            )
-        }
-        val typeParameters = this.generics.map {
-            paramConverter.componentForTypeParameter(param = it, isFromJava = isFromJava())
-        }
+        val receiver =
+            receiver?.let {
+                paramConverter.componentForParameter(
+                    param = it,
+                    isSummary = isSummary,
+                    isFromJava = isFromJava(),
+                    parent = this,
+                )
+            }
+        val parameters =
+            parameters.map {
+                paramConverter.componentForParameter(
+                    param = it,
+                    isSummary = isSummary,
+                    isFromJava = isFromJava(),
+                    parent = this,
+                )
+            }
+        val typeParameters =
+            this.generics.map {
+                paramConverter.componentForTypeParameter(param = it, isFromJava = isFromJava())
+            }
 
         return DefaultFunctionSignature(
             FunctionSignature.Params(
-                name = pathProvider.linkForReference(
-                    dri.possiblyConvertMappedType(displayLanguage),
-                    name = this.name,
-                ),
-                receiver = when (displayLanguage) {
-                    Language.JAVA -> receiver?.let { extFunctionClass() }
-                    Language.KOTLIN -> receiver
-                },
+                name =
+                    pathProvider.linkForReference(
+                        dri.possiblyConvertMappedType(displayLanguage),
+                        name = this.name,
+                    ),
+                receiver =
+                    when (displayLanguage) {
+                        Language.JAVA -> receiver?.let { extFunctionClass() }
+                        Language.KOTLIN -> receiver
+                    },
                 typeParameters = typeParameters,
-                parameters = when (displayLanguage) {
-                    Language.JAVA -> listOfNotNull(receiver) + parameters
-                    Language.KOTLIN -> parameters
-                },
+                parameters =
+                    when (displayLanguage) {
+                        Language.JAVA -> listOfNotNull(receiver) + parameters
+                        Language.KOTLIN -> parameters
+                    },
                 // TODO(handle sourceSet-varying deprecations b/262711247)
                 isDeprecated = annotations(getExpectOrCommonSourceSet()).isDeprecated(),
             ),
@@ -384,13 +416,15 @@ internal class FunctionDocumentableConverter(
         return DefaultParameterComponent(
             ParameterComponent.Params(
                 name = "",
-                type = DefaultTypeProjectionComponent(
-                    TypeProjectionComponent.Params(
-                        type = pathProvider.linkForReference(driForSyntheticClass()),
-                        nullability = Nullability.DONT_CARE,
-                        displayLanguage = displayLanguage, // Fake synthetic classes can't be null
+                type =
+                    DefaultTypeProjectionComponent(
+                        TypeProjectionComponent.Params(
+                            type = pathProvider.linkForReference(driForSyntheticClass()),
+                            nullability = Nullability.DONT_CARE,
+                            displayLanguage =
+                                displayLanguage, // Fake synthetic classes can't be null
+                        ),
                     ),
-                ),
                 displayLanguage = displayLanguage,
             ),
         )

@@ -37,46 +37,47 @@ class DefaultClasslikeTest {
     fun `Empty classlike renders correctly`() {
         val component = DefaultClasslike(emptyClasslikeParams)
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>header
 signature
 hierarchy
 relatedSymbols
 descriptionDocs
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Classlike with description renders correctly`() {
-        val component = DefaultClasslike(
-            emptyClasslikeParams.copy(
-                description = DefaultClasslikeDescription(
-                    ClasslikeDescription.Params(
-                        header = null,
-                        hierarchy = NoopClassHierarchy(),
-                        primarySignature = NoopClasslikeSignature(),
-                        relatedSymbols = NoopRelatedSymbols(),
-                        descriptionDocs = emptyList(),
-                    ),
+        val component =
+            DefaultClasslike(
+                emptyClasslikeParams.copy(
+                    description =
+                        DefaultClasslikeDescription(
+                            ClasslikeDescription.Params(
+                                header = null,
+                                hierarchy = NoopClassHierarchy(),
+                                primarySignature = NoopClasslikeSignature(),
+                                relatedSymbols = NoopRelatedSymbols(),
+                                descriptionDocs = emptyList(),
+                            ),
+                        ),
                 ),
-            ),
-        )
+            )
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>
   <p>
     <pre>Signature</pre>
@@ -84,26 +85,28 @@ descriptionDocs
   <div>Class hierarchy</div>
   <div>Related symbols</div>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Classlike with symbols renders correctly`() {
-        val component = DefaultClasslike(
-            emptyClasslikeParams.copy(
-                publicFunctionsSummary = NoopSummaryList(),
-                publicFunctionsDetails = Classlike.TitledList("Symbols", listOf(NoopSymbolDetailF)),
-            ),
-        )
+        val component =
+            DefaultClasslike(
+                emptyClasslikeParams.copy(
+                    publicFunctionsSummary = NoopSummaryList(),
+                    publicFunctionsDetails =
+                        Classlike.TitledList("Symbols", listOf(NoopSymbolDetailF)),
+                ),
+            )
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        val output = createHTML().body { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <body>header
 signature
 hierarchy
@@ -117,8 +120,9 @@ descriptionDocs
     <div>noop</div>
   </div>
 </body>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 }
 

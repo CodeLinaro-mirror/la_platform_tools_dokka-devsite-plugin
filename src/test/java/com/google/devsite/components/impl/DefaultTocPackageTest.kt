@@ -24,45 +24,46 @@ import org.junit.Test
 class DefaultTocPackageTest {
     @Test
     fun `Toc package with empty types renders correctly`() {
-        val component = DefaultTocPackage(
-            Params(
-                name = "androidx.example",
-                packageUrl = "androidx/example/package-summary",
-            ),
-        )
+        val component =
+            DefaultTocPackage(
+                Params(
+                    name = "androidx.example",
+                    packageUrl = "androidx/example/package-summary",
+                ),
+            )
 
-        val output = buildString {
-            component.render(this)
-        }.trim()
+        val output = buildString { component.render(this) }.trim()
 
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 - title: "androidx.example"
   path: "androidx/example/package-summary"
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Toc package with types renders correctly`() {
-        val component = DefaultTocPackage(
-            Params(
-                name = "androidx.example",
-                packageUrl = "androidx/example/package-summary",
-                interfaces = listOf(Type("Interface", "link")),
-                classes = listOf(Type("Class", "link")),
-                enums = listOf(Type("Enum", "link")),
-                exceptions = listOf(Type("Exception", "link")),
-                annotations = listOf(Type("Annotation", "link")),
-            ),
-        )
+        val component =
+            DefaultTocPackage(
+                Params(
+                    name = "androidx.example",
+                    packageUrl = "androidx/example/package-summary",
+                    interfaces = listOf(Type("Interface", "link")),
+                    classes = listOf(Type("Class", "link")),
+                    enums = listOf(Type("Enum", "link")),
+                    exceptions = listOf(Type("Exception", "link")),
+                    annotations = listOf(Type("Annotation", "link")),
+                ),
+            )
 
-        val output = buildString {
-            component.render(this)
-        }.trim()
+        val output = buildString { component.render(this) }.trim()
 
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 - title: "androidx.example"
   path: "androidx/example/package-summary"
 
@@ -96,29 +97,31 @@ class DefaultTocPackageTest {
     section:
     - title: "Annotation"
       path: "link"
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Toc package with multiple of one type renders correctly`() {
-        val component = DefaultTocPackage(
-            Params(
-                name = "androidx.example",
-                packageUrl = "androidx/example/package-summary",
-                interfaces = listOf(
-                    Type("InterfaceA", "link/a"),
-                    Type("InterfaceB", "link/b"),
+        val component =
+            DefaultTocPackage(
+                Params(
+                    name = "androidx.example",
+                    packageUrl = "androidx/example/package-summary",
+                    interfaces =
+                        listOf(
+                            Type("InterfaceA", "link/a"),
+                            Type("InterfaceB", "link/b"),
+                        ),
                 ),
-            ),
-        )
+            )
 
-        val output = buildString {
-            component.render(this)
-        }.trim()
+        val output = buildString { component.render(this) }.trim()
 
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 - title: "androidx.example"
   path: "androidx/example/package-summary"
 
@@ -130,7 +133,8 @@ class DefaultTocPackageTest {
       path: "link/a"
     - title: "InterfaceB"
       path: "link/b"
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 }

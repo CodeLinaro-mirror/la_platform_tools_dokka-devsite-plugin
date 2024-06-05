@@ -45,6 +45,7 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import com.google.devsite.strictSingleOrNull
+import java.io.File
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.base.transformers.documentables.isDeprecated
 import org.jetbrains.dokka.links.DRI
@@ -97,7 +98,6 @@ import org.jetbrains.dokka.model.doc.TagWrapper
 import org.jetbrains.dokka.model.doc.Text
 import org.jetbrains.dokka.model.doc.Throws
 import org.jetbrains.dokka.model.doc.Version
-import java.io.File
 
 /** Extracts the handwritten documentation from documentables into the correct components. */
 internal class DocTagConverter(
@@ -113,8 +113,8 @@ internal class DocTagConverter(
     /**
      * @param documentable the documentable we are getting the documentation of
      * @param deprecationAnnotation the @Deprecated annotation. Is a parameter because for e.g.
-     * getters, the annotation will be propagated manually from some higher element, so we can't
-     * just use documentable.deprecationAnnotation() in such a case.
+     *   getters, the annotation will be propagated manually from some higher element, so we can't
+     *   just use documentable.deprecationAnnotation() in such a case.
      * @return the in-source hand-written element documentation
      */
     fun summaryDescription(
@@ -154,77 +154,91 @@ internal class DocTagConverter(
         deprecationAnnotation: Annotations.Annotation? = documentable.deprecationAnnotation(),
         isFromJavaParam: Boolean? = null,
     ): List<ContextFreeComponent> {
-        val isFromJava = if (isFromJavaParam != null) {
-            isFromJavaParam
-        } else {
-            assert(documentable is WithSources)
-            (documentable as WithSources).isFromJava()
-        }
+        val isFromJava =
+            if (isFromJavaParam != null) {
+                isFromJavaParam
+            } else {
+                assert(documentable is WithSources)
+                (documentable as WithSources).isFromJava()
+            }
         val description = documentable.getDescription(summary = false)
         val deprecation = deprecationComponent(documentable, summary = false, deprecationAnnotation)
-        val receiverParam = documentable.find<Receiver>()?.let {
-            Param(it.root, "receiver")
-        }
+        val receiverParam = documentable.find<Receiver>()?.let { Param(it.root, "receiver") }
         val generics = if (documentable is WithGenerics) documentable.generics else emptyList()
         // Filter out tags which should instead be put into the Description, which is handled in the
         // getDescription method.
-        val metadataTags = (listOfNotNull(receiverParam) + documentable.tags())
-            .filter { !it.belongsInDescriptionOf(documentable) }
+        val metadataTags =
+            (listOfNotNull(receiverParam) + documentable.tags()).filter {
+                !it.belongsInDescriptionOf(documentable)
+            }
         val tagsByType = metadataTags.sortedWith(tagOrder(paramNames)).groupBy { it.javaClass }
-        val tables = tagsByType.mapNotNull { (_, rawTags) ->
-            var tags = handleUpstreamTagDuplication(documentable, rawTags, generics)
-            if (tags.isEmpty()) return@mapNotNull null
-            val firstTag = tags.first()
-            if (documentable is DFunction && firstTag is Param) {
-                val propertyClass = Property::class.java as Class<*>
-                tags = tags + tagsByType[propertyClass].orEmpty()
-            }
-            // We know all the elements in `tags` will be of the same type, so we pick an arbitrary
-            // one to do the switching and then cast the list to its type.
-            @kotlin.Suppress("UNCHECKED_CAST")
-            try {
-                when (firstTag) {
-                    is Param -> params(
-                        tags as List<NamedTagWrapper>,
-                        generics,
-                        documentable,
-                        isFromJava,
-                        documentable.getExpectOrCommonSourceSet(),
-                    )
-                    is Return -> returnType(tags as List<Return>, checkNotNull(returnType))
-                    is Throws -> throws(tags as List<Throws>, documentable)
-                    is See -> see(tags as List<See>, documentable)
-                    is Sample -> null // Samples are handled in the description
-                    is Property ->
-                        throw RuntimeException("Should have been consumed in description!")
-                    is CustomTagWrapper -> docsHolder.printWarningFor(
-                        "unrecognized javadoc tag @",
-                        documentable,
-                        brokenDocTag = firstTag,
-                    ).let { null }
-                    is Since -> docsHolder.printWarningFor(
-                        "unsupported javadoc tag @",
-                        documentable,
-                        brokenDocTag = firstTag,
-                        additionalContext = ". Instead, autogenerate per go/dackka#api-since.",
-                    ).let { null }
-                    is Constructor -> null // TODO("b/179999964: constructor")
-                    is Description, is Deprecated -> null // Documented separately in getDescription
-                    is Receiver -> null // gets merged with @params
-                    is Suppress -> throw RuntimeException(
-                        "Reaching the documentation generation step on a suppressed member should" +
-                            "be impossible! If you see this, file a bug on dackka. $documentable",
-                    )
-                    // These aren't tags we believe it is necessary to support
-                    is Version, is Author -> null
+        val tables =
+            tagsByType.mapNotNull { (_, rawTags) ->
+                var tags = handleUpstreamTagDuplication(documentable, rawTags, generics)
+                if (tags.isEmpty()) return@mapNotNull null
+                val firstTag = tags.first()
+                if (documentable is DFunction && firstTag is Param) {
+                    val propertyClass = Property::class.java as Class<*>
+                    tags = tags + tagsByType[propertyClass].orEmpty()
                 }
-            } catch (e: Exception) {
-                throw RuntimeException(
-                    "Exception thrown while handling ${firstTag.className} tags $tags.",
-                    e,
-                )
+                // We know all the elements in `tags` will be of the same type, so we pick an
+                // arbitrary
+                // one to do the switching and then cast the list to its type.
+                @kotlin.Suppress("UNCHECKED_CAST")
+                try {
+                    when (firstTag) {
+                        is Param ->
+                            params(
+                                tags as List<NamedTagWrapper>,
+                                generics,
+                                documentable,
+                                isFromJava,
+                                documentable.getExpectOrCommonSourceSet(),
+                            )
+                        is Return -> returnType(tags as List<Return>, checkNotNull(returnType))
+                        is Throws -> throws(tags as List<Throws>, documentable)
+                        is See -> see(tags as List<See>, documentable)
+                        is Sample -> null // Samples are handled in the description
+                        is Property ->
+                            throw RuntimeException("Should have been consumed in description!")
+                        is CustomTagWrapper ->
+                            docsHolder
+                                .printWarningFor(
+                                    "unrecognized javadoc tag @",
+                                    documentable,
+                                    brokenDocTag = firstTag,
+                                )
+                                .let { null }
+                        is Since ->
+                            docsHolder
+                                .printWarningFor(
+                                    "unsupported javadoc tag @",
+                                    documentable,
+                                    brokenDocTag = firstTag,
+                                    additionalContext =
+                                        ". Instead, autogenerate per go/dackka#api-since.",
+                                )
+                                .let { null }
+                        is Constructor -> null // TODO("b/179999964: constructor")
+                        is Description,
+                        is Deprecated -> null // Documented separately in getDescription
+                        is Receiver -> null // gets merged with @params
+                        is Suppress ->
+                            throw RuntimeException(
+                                "Reaching the documentation generation step on a suppressed member should" +
+                                    "be impossible! If you see this, file a bug on dackka. $documentable",
+                            )
+                        // These aren't tags we believe it is necessary to support
+                        is Version,
+                        is Author -> null
+                    }
+                } catch (e: Exception) {
+                    throw RuntimeException(
+                        "Exception thrown while handling ${firstTag.className} tags $tags.",
+                        e,
+                    )
+                }
             }
-        }
 
         return listOfNotNull(deprecation, description, *tables.toTypedArray())
     }
@@ -234,7 +248,9 @@ internal class DocTagConverter(
         if (name.startsWith('<') && name.endsWith('>')) return name.drop(1).dropLast(1)
         return name
     }
+
     private fun TagWrapper.name() = ungenerify((this as NamedTagWrapper).name)
+
     private fun List<TagWrapper>.names() = this.map { it.name() }
 
     /* Tags, in particular for property parameters, are propagated multiple times in upstream.
@@ -266,9 +282,12 @@ internal class DocTagConverter(
                     // Enforce that the propagated documentation makes sense somewhere. Specifically
                     // documentation primarily aimed at a constructor may wind up on the DClass
                     // if the parameter being documented is a primary constructor property parameter
-                    val constructorParamNames = (documentable as? WithConstructors)?.constructors
-                        ?.map { constructor -> constructor.parameters.map { it.name!! } }?.flatten()
-                        .orEmpty()
+                    val constructorParamNames =
+                        (documentable as? WithConstructors)
+                            ?.constructors
+                            ?.map { constructor -> constructor.parameters.map { it.name!! } }
+                            ?.flatten()
+                            .orEmpty()
                     val otherNames =
                         (documentable.properties.map { it.name } + constructorParamNames)
                     val (validTags, badTags) = otherAtParams.partition { it.name() in otherNames }
@@ -278,7 +297,7 @@ internal class DocTagConverter(
                             documentable,
                             brokenDocTag = it,
                             additionalContext =
-                            ". Are you trying to refer to something not visible to users?",
+                                ". Are you trying to refer to something not visible to users?",
                         )
                     }
                     // Use only docs for type parameters in the parameter documentation table
@@ -289,22 +308,23 @@ internal class DocTagConverter(
                 // Properties can also have @param documentation for type parameters
                 is DProperty -> {
                     val genericNames = generics.map { it.name }
-                    val (forGenericsOrThis, badTags) = tags
-                        .partition { it.name() in genericNames || it.name() == documentable.name }
+                    val (forGenericsOrThis, badTags) =
+                        tags.partition {
+                            it.name() in genericNames || it.name() == documentable.name
+                        }
                     badTags.forEach {
                         docsHolder.printWarningFor(
                             "Unable to find reference @",
                             documentable,
                             brokenDocTag = it,
                             additionalContext =
-                            ". Are you trying to refer to something not visible to users?",
+                                ". Are you trying to refer to something not visible to users?",
                         )
                     }
                     return forGenericsOrThis
                 }
                 is DFunction -> {}
-                else ->
-                    throw RuntimeException("Can't apply @param to a ${documentable.className}")
+                else -> throw RuntimeException("Can't apply @param to a ${documentable.className}")
             }
         } else if (tags.first() is Property) {
             // A DClasslike with @property applying to property parameters may have Parameter tags
@@ -312,17 +332,19 @@ internal class DocTagConverter(
             return when (documentable) {
                 is DClasslike -> {
                     val propertyNames = documentable.properties.map { it.name }
-                    tags.filter { it.name() !in propertyNames }.forEach {
-                        docsHolder.printWarningFor(
-                            "Unable to find reference @",
-                            documentable,
-                            brokenDocTag = it,
-                        )
-                    }
+                    tags
+                        .filter { it.name() !in propertyNames }
+                        .forEach {
+                            docsHolder.printWarningFor(
+                                "Unable to find reference @",
+                                documentable,
+                                brokenDocTag = it,
+                            )
+                        }
                     emptyList()
                 }
-
-                is DParameter, is DProperty -> tags
+                is DParameter,
+                is DProperty -> tags
                 else ->
                     throw RuntimeException("Can't apply @property to a ${documentable.className}")
             }
@@ -355,25 +377,24 @@ internal class DocTagConverter(
                             documentable,
                         )
                     }
-                    name to paramConverter.componentForParameter(
-                        param = it,
-                        isSummary = false,
-                        isFromJava = isFromJava,
-                        parent = documentable,
-                    )
+                    name to
+                        paramConverter.componentForParameter(
+                            param = it,
+                            isSummary = false,
+                            isFromJava = isFromJava,
+                            parent = documentable,
+                        )
                 },
             )
             allOptions.putAll(
                 recursivelyGetLambdaParamNames(documentable.parameters.map { it.type }).map {
-                    (it.presentableName ?: "") to paramConverter
-                        .componentForLambdaParameter(it, isFromJava, sourceSet)
+                    (it.presentableName ?: "") to
+                        paramConverter.componentForLambdaParameter(it, isFromJava, sourceSet)
                 },
             )
         }
         allOptions.putAll(
-            dGenerics.map {
-                it.name to paramConverter.componentForTypeParameter(it, isFromJava)
-            },
+            dGenerics.map { it.name to paramConverter.componentForTypeParameter(it, isFromJava) },
         )
         if (documentable is Callable && documentable.receiver != null) {
             allOptions[documentable.receiver!!.name ?: "receiver"] =
@@ -384,22 +405,23 @@ internal class DocTagConverter(
                     parent = documentable,
                 )
         }
-        val params = tags.map { tag ->
-            if (allOptions[tag.name()] == null) {
-                throw RuntimeException(
-                    "Unable to find what is referred to by \"@param " +
-                        "${tag.name()}\" in ${documentable.className} " +
-                        "${documentable.name}, with contents: ${tag.text()}",
+        val params =
+            tags.map { tag ->
+                if (allOptions[tag.name()] == null) {
+                    throw RuntimeException(
+                        "Unable to find what is referred to by \"@param " +
+                            "${tag.name()}\" in ${documentable.className} " +
+                            "${documentable.name}, with contents: ${tag.text()}",
+                    )
+                }
+                val title = allOptions[tag.name()]!!
+                DefaultTableRowSummaryItem(
+                    TableRowSummaryItem.Params(
+                        title = title,
+                        description = description(tag),
+                    ),
                 )
             }
-            val title = allOptions[tag.name()]!!
-            DefaultTableRowSummaryItem(
-                TableRowSummaryItem.Params(
-                    title = title,
-                    description = description(tag),
-                ),
-            )
-        }
 
         return DefaultSummaryList(
             SummaryList.Params(
@@ -433,27 +455,39 @@ internal class DocTagConverter(
                     /* Type parameters can't be lambdas, and are fully squashed to strings. */
                 }
                 is TypeAliased -> { // No clear way to decide which
-                    result += recursivelyGetLambdaParamNames(
-                        setOf(argumentType.inner, argumentType.typeAlias).toList(),
-                    )
+                    result +=
+                        recursivelyGetLambdaParamNames(
+                            setOf(argumentType.inner, argumentType.typeAlias).toList(),
+                        )
                 }
-                is PrimitiveJavaType, is JavaObject, Void, Dynamic, Star -> { /* Do nothing */ }
-                is UnresolvedBound -> { /* Nothing we can do. We warn elsewhere for this case. */ }
+                is PrimitiveJavaType,
+                is JavaObject,
+                Void,
+                Dynamic,
+                Star -> {
+                    /* Do nothing */
+                }
+                is UnresolvedBound -> {
+                    /* Nothing we can do. We warn elsewhere for this case. */
+                }
             }
         }
         return result
     }
 
-    private fun returnType(tags: List<Return>, returnType: TypeProjectionComponent):
-        SummaryList<TableRowSummaryItem<TypeProjectionComponent, DescriptionComponent>> {
-        val params = tags.map { tag ->
-            DefaultTableRowSummaryItem(
-                TableRowSummaryItem.Params(
-                    title = returnType,
-                    description = description(tag),
-                ),
-            )
-        }
+    private fun returnType(
+        tags: List<Return>,
+        returnType: TypeProjectionComponent
+    ): SummaryList<TableRowSummaryItem<TypeProjectionComponent, DescriptionComponent>> {
+        val params =
+            tags.map { tag ->
+                DefaultTableRowSummaryItem(
+                    TableRowSummaryItem.Params(
+                        title = returnType,
+                        description = description(tag),
+                    ),
+                )
+            }
 
         return DefaultSummaryList(
             SummaryList.Params(
@@ -464,14 +498,15 @@ internal class DocTagConverter(
     }
 
     private fun throws(tags: List<Throws>, parent: Documentable): DocsSummaryList {
-        val params = tags.map { tag ->
-            DefaultTableRowSummaryItem(
-                TableRowSummaryItem.Params(
-                    title = throwsToParameterComponent(tag, parent),
-                    description = description(tag),
-                ),
-            )
-        }
+        val params =
+            tags.map { tag ->
+                DefaultTableRowSummaryItem(
+                    TableRowSummaryItem.Params(
+                        title = throwsToParameterComponent(tag, parent),
+                        description = description(tag),
+                    ),
+                )
+            }
 
         return DefaultSummaryList(
             SummaryList.Params(
@@ -505,42 +540,46 @@ internal class DocTagConverter(
                 "Link does not resolve for @",
                 parent,
                 brokenDocTag = throws,
-                additionalContext = ". Is it from a package that the containing file does not " +
-                    "import? Are docs inherited by an un-documented override function, but the " +
-                    "exception class is not in scope in the inheriting class? The general fix for" +
-                    " these is to fully qualify the exception name, e.g. " +
-                    "`@throws java.io.IOException under some conditions`.",
+                additionalContext =
+                    ". Is it from a package that the containing file does not " +
+                        "import? Are docs inherited by an un-documented override function, but the " +
+                        "exception class is not in scope in the inheriting class? The general fix for" +
+                        " these is to fully qualify the exception name, e.g. " +
+                        "`@throws java.io.IOException under some conditions`.",
             )
             dri = null
         }
-        val link = if (dri == null) {
-            DefaultLink(Link.Params(name, url = ""))
-        } else pathProvider.linkForReference(throws.exceptionAddress!!, name)
+        val link =
+            if (dri == null) {
+                DefaultLink(Link.Params(name, url = ""))
+            } else pathProvider.linkForReference(throws.exceptionAddress!!, name)
 
         return DefaultParameterComponent(
             ParameterComponent.Params(
                 name = "",
-                type = DefaultTypeProjectionComponent(
-                    TypeProjectionComponent.Params(
-                        type = link,
-                        nullability = Nullability.DONT_CARE,
-                        displayLanguage = displayLanguage,
+                type =
+                    DefaultTypeProjectionComponent(
+                        TypeProjectionComponent.Params(
+                            type = link,
+                            nullability = Nullability.DONT_CARE,
+                            displayLanguage = displayLanguage,
+                        ),
                     ),
-                ),
                 displayLanguage = displayLanguage,
             ),
         )
     }
 
     private fun see(tags: List<See>, parent: Documentable): LinkDescriptionSummaryList {
-        val params = tags.map { tag ->
-            DefaultTableRowSummaryItem(
-                TableRowSummaryItem.Params(
-                    title = tag.toLink(parent),
-                    description = description(tag),
-                ),
-            )
-        }
+        val params =
+            tags.map { tag ->
+                DefaultTableRowSummaryItem(
+                    TableRowSummaryItem.Params(
+                        title = tag.toLink(parent),
+                        description = description(tag),
+                    ),
+                )
+            }
 
         return DefaultSummaryList(
             SummaryList.Params(
@@ -551,9 +590,9 @@ internal class DocTagConverter(
     }
 
     /**
-     * Gets a Description for the Documentable, or returns UndocumentedSymbolDescription()
-     * Has special handling to inject @property documentation as a description, if it exists
-     * Also applies to @param documentation that should become a description, i.e. property params
+     * Gets a Description for the Documentable, or returns UndocumentedSymbolDescription() Has
+     * special handling to inject @property documentation as a description, if it exists Also
+     * applies to @param documentation that should become a description, i.e. property params
      */
     private fun Documentable.getDescription(summary: Boolean): DescriptionComponent {
         val components = mutableListOf<DocTag>()
@@ -571,9 +610,11 @@ internal class DocTagConverter(
                     }*/
                     // TODO(KMP) we currently have no plan to provide KMP samples b/181224204
                     // As such, we currently assume that all samples are in common
-                    val sample = docsHolder.sampleAnalysisEnvironment
-                        .resolveSample(docsHolder.commonSourceSet, dri)
-                        ?: throw RuntimeException("Unable to resolve sample $dri")
+                    val sample =
+                        docsHolder.sampleAnalysisEnvironment.resolveSample(
+                            docsHolder.commonSourceSet,
+                            dri
+                        ) ?: throw RuntimeException("Unable to resolve sample $dri")
                     val imports = processImports(sample)
 
                     components.add(
@@ -584,7 +625,8 @@ internal class DocTagConverter(
                     )
                     components.addAll(it.children)
                 }
-                is Description, is NamedTagWrapper -> {
+                is Description,
+                is NamedTagWrapper -> {
                     if (!it.belongsInDescriptionOf(this)) return@forEach
                     it.children.forEach { child ->
                         try {
@@ -601,9 +643,14 @@ internal class DocTagConverter(
                         }
                     }
                 }
-                is Author, is Version -> {} // These are not supported
-                is Return, is Receiver, is Constructor -> {} // These become tables in metadata()
-                is Deprecated, is Suppress, is Since -> {} // These are handled elsewhere
+                is Author,
+                is Version -> {} // These are not supported
+                is Return,
+                is Receiver,
+                is Constructor -> {} // These become tables in metadata()
+                is Deprecated,
+                is Suppress,
+                is Since -> {} // These are handled elsewhere
             }
         }
         if (components.isEmpty()) return UndocumentedSymbolDescriptionComponent
@@ -619,9 +666,12 @@ internal class DocTagConverter(
         if (this is Description) return true
         if (this !is NamedTagWrapper) return false
         return when (this) {
-            is Param, is Property -> (documentable is DParameter || documentable is DProperty) &&
-                (this.name == documentable.name)
-            is Throws, is See -> false
+            is Param,
+            is Property ->
+                (documentable is DParameter || documentable is DProperty) &&
+                    (this.name == documentable.name)
+            is Throws,
+            is See -> false
             else -> true
         }
     }
@@ -730,41 +780,42 @@ internal class DocTagConverter(
     /**
      * @return the doc tags (aka human-written javadoc or kdoc) associated with this documentable
      */
-    private fun Documentable.tags() = documentation[getExpectOrCommonSourceSet()]?.children
-        ?: emptyList()
+    private fun Documentable.tags() =
+        documentation[getExpectOrCommonSourceSet()]?.children ?: emptyList()
 
-    private fun tagOrder(paramNames: List<String>) = compareBy<TagWrapper> { tag ->
-        when (tag) {
-            is Deprecated -> 0
-            is Description -> 1
-            is Return -> 2
-            is Constructor -> 3
-            is Property -> 4
-            is Receiver -> 5
-            is Param -> 6
-            is Throws -> 7
-            is See -> 8
-            is Sample -> 9
-            is Since -> 10
-            is Version -> 11
-            is Author -> 12
-            is Suppress -> 13
-            is CustomTagWrapper -> 14
-        }
-    }.thenBy { tag ->
-        when (tag) {
-            is Param -> paramNames.indexOf(tag.name)
-            else -> -1
-        }
-    }
+    private fun tagOrder(paramNames: List<String>) =
+        compareBy<TagWrapper> { tag ->
+                when (tag) {
+                    is Deprecated -> 0
+                    is Description -> 1
+                    is Return -> 2
+                    is Constructor -> 3
+                    is Property -> 4
+                    is Receiver -> 5
+                    is Param -> 6
+                    is Throws -> 7
+                    is See -> 8
+                    is Sample -> 9
+                    is Since -> 10
+                    is Version -> 11
+                    is Author -> 12
+                    is Suppress -> 13
+                    is CustomTagWrapper -> 14
+                }
+            }
+            .thenBy { tag ->
+                when (tag) {
+                    is Param -> paramNames.indexOf(tag.name)
+                    else -> -1
+                }
+            }
 
     /**
      * Extract the see tag's reference into a link.
      *
      * This one is painful. An address is only sometimes there, other times there's a docs link
-     * nested somewhere in the tree, and as a last resort the name is always present with whatever
-     * a developer writes which could either be a fully qualified reference or just the URL
-     * fragment.
+     * nested somewhere in the tree, and as a last resort the name is always present with whatever a
+     * developer writes which could either be a fully qualified reference or just the URL fragment.
      */
     private fun See.toLink(parent: Documentable): Link {
         val address = address
@@ -827,11 +878,14 @@ internal class DocTagConverter(
         if (parts.size == 1) return "" to full
 
         val packageName = parts.takeWhile { it.all(Char::isLowerCase) }.joinToString(".")
-        val typeName = parts.takeLastWhile {
-            if (it.isEmpty()) {
-                throw RuntimeException("empty element in TTPNAT. Full: $full")
-            } else it.first().isUpperCase()
-        }.joinToString(".")
+        val typeName =
+            parts
+                .takeLastWhile {
+                    if (it.isEmpty()) {
+                        throw RuntimeException("empty element in TTPNAT. Full: $full")
+                    } else it.first().isUpperCase()
+                }
+                .joinToString(".")
         return packageName to typeName
     }
 
@@ -839,71 +893,75 @@ internal class DocTagConverter(
         docsToSummary(documentables, false)
 
     /**
-     * Converts a generic List<Documentable> to a SummaryList.
-     * Does nothing clever; only converts Documentables to links (by default with annotations)
+     * Converts a generic List<Documentable> to a SummaryList. Does nothing clever; only converts
+     * Documentables to links (by default with annotations)
      */
     private fun docsToSummary(
         documentables: List<Documentable>,
         showAnnotations: Boolean,
-    ) = DefaultSummaryList(
-        SummaryList.Params(
-            items = documentables
-                .map { summaryForDocumentable(it, showAnnotations) },
-        ),
-    )
+    ) =
+        DefaultSummaryList(
+            SummaryList.Params(
+                items = documentables.map { summaryForDocumentable(it, showAnnotations) },
+            ),
+        )
 
     /**
-     * Converts generic Documentables to TableRowSummaryItems, as simple maybe-annotated links
-     * This is used for mini-signatures, e.g. nested types list, subclasses list, package summary
+     * Converts generic Documentables to TableRowSummaryItems, as simple maybe-annotated links This
+     * is used for mini-signatures, e.g. nested types list, subclasses list, package summary
      */
     internal fun summaryForDocumentable(
         documentable: Documentable,
         showAnnotations: Boolean = false,
     ): TableRowSummaryItem<Link, DescriptionComponent> {
-        val link = if (documentable is DTypeAlias) {
-            // typealiases have no pages
-            DefaultUnlink(Link.Params(documentable.name, ""))
-        } else pathProvider.linkForReference(documentable.dri)
-        val maybeAnnotatedLink = if (showAnnotations) {
-            DefaultAnnotatedLink(
-                AnnotatedLink.Params(
-                    annotations = annotationConverter.annotationComponents(
-                        documentable.annotations(documentable.getExpectOrCommonSourceSet()),
-                        nullability = Nullability.DONT_CARE, // Not useful for these cases
+        val link =
+            if (documentable is DTypeAlias) {
+                // typealiases have no pages
+                DefaultUnlink(Link.Params(documentable.name, ""))
+            } else pathProvider.linkForReference(documentable.dri)
+        val maybeAnnotatedLink =
+            if (showAnnotations) {
+                DefaultAnnotatedLink(
+                    AnnotatedLink.Params(
+                        annotations =
+                            annotationConverter.annotationComponents(
+                                documentable.annotations(documentable.getExpectOrCommonSourceSet()),
+                                nullability = Nullability.DONT_CARE, // Not useful for these cases
+                            ),
+                        link = link,
                     ),
-                    link = link,
-                ),
-            )
-        } else {
-            link
-        }
+                )
+            } else {
+                link
+            }
         return DefaultTableRowSummaryItem(
             TableRowSummaryItem.Params(
                 title = maybeAnnotatedLink,
-                description = summaryDescription(
-                    documentable,
-                    documentable.deprecationAnnotation(),
-                ),
+                description =
+                    summaryDescription(
+                        documentable,
+                        documentable.deprecationAnnotation(),
+                    ),
             ),
         )
     }
 
     /**
-     * Converts a generic List<Documentable> to a SummaryList.
-     * Does nothing clever; only converts Documentables to links (by default with annotations)
+     * Converts a generic List<Documentable> to a SummaryList. Does nothing clever; only converts
+     * Documentables to links (by default with annotations)
      */
     internal fun docsToSummaryKmp(
         documentables: List<Documentable>,
-    ) = DefaultSummaryList(
-        SummaryList.Params(
-            items = documentables
-                .map { summaryForDocumentableKmp(it) },
-        ),
-    )
+    ) =
+        DefaultSummaryList(
+            SummaryList.Params(
+                items = documentables.map { summaryForDocumentableKmp(it) },
+            ),
+        )
 
     /**
-     * Converts generic Documentables to TableRowSummaryItems, as simple maybe-annotated links
-     * This is used for mini-signatures, e.g. nested types list, subclasses list, package summary
+     * Converts generic Documentables to TableRowSummaryItems, as simple maybe-annotated links This
+     * is used for mini-signatures, e.g. nested types list, subclasses list, package summary
      */
     private fun summaryForDocumentableKmp(
         documentable: Documentable,

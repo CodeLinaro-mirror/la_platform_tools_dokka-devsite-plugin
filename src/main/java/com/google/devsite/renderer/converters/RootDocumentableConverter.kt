@@ -49,19 +49,18 @@ internal class RootDocumentableConverter(
     /** @return the root component for the class index page */
     // TODO(KMP b/256171288)
     suspend fun classesIndexPage(): DevsitePage<ClassIndex> {
-        val allClasses = docsHolder.allClasslikes().filterNot {
-            docsHolder.shouldNotBeDisplayed(it)
-        }
+        val allClasses =
+            docsHolder.allClasslikes().filterNot { docsHolder.shouldNotBeDisplayed(it) }
         // Custom sorting for this because of the alphabetization scheme. Grouping preserves sort.
-        val alphabetizedClasses = allClasses.sortedBy { it.name() }
-            .groupBy(::categorizeClasslikes)
-        val componentClasses = alphabetizedClasses.mapValues { (_, nodes) ->
-            DefaultSummaryList(
-                SummaryList.Params(
-                    items = nodes.map { javadocConverter.summaryForDocumentable(it) },
-                ),
-            )
-        }
+        val alphabetizedClasses = allClasses.sortedBy { it.name() }.groupBy(::categorizeClasslikes)
+        val componentClasses =
+            alphabetizedClasses.mapValues { (_, nodes) ->
+                DefaultSummaryList(
+                    SummaryList.Params(
+                        items = nodes.map { javadocConverter.summaryForDocumentable(it) },
+                    ),
+                )
+            }
 
         return DefaultDevsitePage(
             DevsitePage.Params(
@@ -69,16 +68,16 @@ internal class RootDocumentableConverter(
                 pathForSwitcher = pathProvider.classes.removePrefix(pathProvider.rootPath + "/"),
                 bookPath = pathProvider.book,
                 title = "Class Index",
-                content = DefaultClassIndex(
-                    ClassIndex.Params(
-                        pathProvider.packages,
-                        componentClasses,
+                content =
+                    DefaultClassIndex(
+                        ClassIndex.Params(
+                            pathProvider.packages,
+                            componentClasses,
+                        ),
                     ),
-                ),
                 metadataComponent = null,
                 includedHeadTagPath = pathProvider.includedHeadTagsPath,
             ),
-
         )
     }
 
@@ -86,13 +85,19 @@ internal class RootDocumentableConverter(
     // TODO(KMP b/256171288)
     suspend fun packagesIndexPage(): DevsitePage<PackageIndex> {
         val packages = docsHolder.packages()
-        val componentPackages = DefaultSummaryList(
-            SummaryList.Params(
-                items = packages
-                    .filter { it.name != "[root]" } // this synthetic package has broken self-links
-                    .map { javadocConverter.summaryForDocumentable(it, showAnnotations = false) },
-            ),
-        )
+        val componentPackages =
+            DefaultSummaryList(
+                SummaryList.Params(
+                    items =
+                        packages
+                            .filter {
+                                it.name != "[root]"
+                            } // this synthetic package has broken self-links
+                            .map {
+                                javadocConverter.summaryForDocumentable(it, showAnnotations = false)
+                            },
+                ),
+            )
 
         return DefaultDevsitePage(
             DevsitePage.Params(
@@ -100,12 +105,13 @@ internal class RootDocumentableConverter(
                 pathForSwitcher = pathProvider.packages.removePrefix(pathProvider.rootPath + "/"),
                 bookPath = pathProvider.book,
                 title = "Package Index",
-                content = DefaultPackageIndex(
-                    PackageIndex.Params(
-                        pathProvider.classes,
-                        componentPackages,
+                content =
+                    DefaultPackageIndex(
+                        PackageIndex.Params(
+                            pathProvider.classes,
+                            componentPackages,
+                        ),
                     ),
-                ),
                 metadataComponent = null,
                 includedHeadTagPath = pathProvider.includedHeadTagsPath,
             ),
@@ -114,11 +120,13 @@ internal class RootDocumentableConverter(
 
     /** @return the Devsite _toc.yaml */
     suspend fun tocPage(packagePrefixToRemove: String?): TableOfContents {
-        val packageComponents = docsHolder.packages().map { dPackage ->
-            coroutineScope {
-                packageForTocAsync(dPackage, packagePrefixToRemove)
-            }
-        }.awaitAll()
+        val packageComponents =
+            docsHolder
+                .packages()
+                .map { dPackage ->
+                    coroutineScope { packageForTocAsync(dPackage, packagePrefixToRemove) }
+                }
+                .awaitAll()
 
         return DefaultTableOfContents(
             TableOfContents.Params(
@@ -153,9 +161,10 @@ internal class RootDocumentableConverter(
                 name = dPackage.name.removePrefix(prefixToTrim),
                 packageUrl = pathProvider.forReference(dPackage.dri).url,
                 interfaces = interfaces,
-                classes = if (displayLanguage == Language.KOTLIN) {
-                    classes
-                } else (classes + objects).sortedBy { it.name },
+                classes =
+                    if (displayLanguage == Language.KOTLIN) {
+                        classes
+                    } else (classes + objects).sortedBy { it.name },
                 enums = enums,
                 exceptions = exceptions,
                 annotations = annotations,

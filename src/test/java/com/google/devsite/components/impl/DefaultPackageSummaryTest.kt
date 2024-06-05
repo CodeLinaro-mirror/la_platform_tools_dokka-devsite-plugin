@@ -41,79 +41,80 @@ import org.junit.Test
 class DefaultPackageSummaryTest {
     @Test
     fun `Package summary with description renders correctly`() {
-        val component = createPackageSummary(
-            description = listOf(NoopDescriptionComponent("Hello World!")),
-        )
+        val component =
+            createPackageSummary(
+                description = listOf(NoopDescriptionComponent("Hello World!")),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <p>Hello World!</p>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Package summary with only interfaces renders correctly`() {
         val component = createPackageSummary(interfaces = NoopSummaryList())
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <h2>Interfaces</h2>
   <div>noop</div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Package summary with only classes renders correctly`() {
         val component = createPackageSummary(classes = NoopSummaryList())
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <h2>Classes</h2>
   <div>noop</div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Package summary with only enums renders correctly`() {
         val component = createPackageSummary(enums = NoopSummaryList())
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <h2>Enums</h2>
   <div>noop</div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     private fun <T : SummaryItem> defaultSummaryListOf(vararg items: T) =
@@ -122,18 +123,18 @@ class DefaultPackageSummaryTest {
     @Test
     fun `Package summary objects are rendered in Java and Kotlin`() {
         for (language in listOf(Language.KOTLIN, Language.JAVA)) {
-            val component = createPackageSummary(
-                classes = defaultSummaryListOf(NoopTableRowTypeSummaryItemLD),
-                objects = defaultSummaryListOf(NoopTableRowTypeSummaryItemLD),
-                displayLanguage = language,
-            )
+            val component =
+                createPackageSummary(
+                    classes = defaultSummaryListOf(NoopTableRowTypeSummaryItemLD),
+                    objects = defaultSummaryListOf(NoopTableRowTypeSummaryItemLD),
+                    displayLanguage = language,
+                )
 
-            val output = createHTML().div {
-                component.render(this)
-            }.trim()
+            val output = createHTML().div { component.render(this) }.trim()
 
-            val expected = if (language == Language.KOTLIN) {
-                """
+            val expected =
+                if (language == Language.KOTLIN) {
+                    """
 <div>
   <h2>Classes</h2>
   <div class="devsite-table-wrapper">
@@ -161,8 +162,8 @@ class DefaultPackageSummaryTest {
   </div>
 </div>
             """
-            } else {
-                """
+                } else {
+                    """
 <div>
   <h2>Classes</h2>
   <div class="devsite-table-wrapper">
@@ -179,7 +180,7 @@ class DefaultPackageSummaryTest {
   </div>
 </div>
             """
-            }
+                }
             // language=html
             assertThat(output).isEqualTo(expected.trim())
         }
@@ -189,90 +190,91 @@ class DefaultPackageSummaryTest {
     fun `Package summary with only exceptions renders correctly`() {
         val component = createPackageSummary(exceptions = NoopSummaryList())
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <h2>Exceptions</h2>
   <div>noop</div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Package summary with only annotations renders correctly`() {
         val component = createPackageSummary(annotations = NoopSummaryList())
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <h2>Annotations</h2>
   <div>noop</div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Package summary with only type aliases renders correctly`() {
-        val component = createPackageSummary(
-            displayLanguage = Language.KOTLIN,
-            typeAliases = NoopSummaryList(),
-        )
+        val component =
+            createPackageSummary(
+                displayLanguage = Language.KOTLIN,
+                typeAliases = NoopSummaryList(),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <h2>Type aliases</h2>
   <div>noop</div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Package summary for Java with all class-likes renders correctly`() {
-        val component = createPackageSummary(
-            interfaces = NoopSummaryList(),
-            classes = NoopSummaryList(),
-            enums = NoopSummaryList(),
-            exceptions = NoopSummaryList(),
-            annotations = NoopSummaryList(),
-            typeAliases = NoopSummaryList(),
-            topLevelConstantsSummary = NoopSummaryList(),
-            topLevelPropertiesSummary = NoopSummaryList(),
-            topLevelFunctionsSummary = NoopSummaryList(),
-            extensionPropertiesSummary = NoopSummaryList(),
-            extensionFunctionsSummary = NoopSummaryList(),
-            topLevelConstants = listOf(NoopSymbolDetailP),
-            topLevelProperties = listOf(NoopSymbolDetailP),
-            topLevelFunctions = listOf(NoopSymbolDetailF),
-            extensionProperties = listOf(NoopSymbolDetailP),
-            extensionFunctions = listOf(NoopSymbolDetailF),
-        )
+        val component =
+            createPackageSummary(
+                interfaces = NoopSummaryList(),
+                classes = NoopSummaryList(),
+                enums = NoopSummaryList(),
+                exceptions = NoopSummaryList(),
+                annotations = NoopSummaryList(),
+                typeAliases = NoopSummaryList(),
+                topLevelConstantsSummary = NoopSummaryList(),
+                topLevelPropertiesSummary = NoopSummaryList(),
+                topLevelFunctionsSummary = NoopSummaryList(),
+                extensionPropertiesSummary = NoopSummaryList(),
+                extensionFunctionsSummary = NoopSummaryList(),
+                topLevelConstants = listOf(NoopSymbolDetailP),
+                topLevelProperties = listOf(NoopSymbolDetailP),
+                topLevelFunctions = listOf(NoopSymbolDetailF),
+                extensionProperties = listOf(NoopSymbolDetailP),
+                extensionFunctions = listOf(NoopSymbolDetailF),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <h2>Annotations</h2>
   <div>noop</div>
@@ -285,158 +287,164 @@ class DefaultPackageSummaryTest {
   <h2>Exceptions</h2>
   <div>noop</div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Package summary with Kotlin top-level constants renders correctly`() {
-        val component = createPackageSummary(
-            displayLanguage = Language.KOTLIN,
-            topLevelConstantsSummary = NoopSummaryList(),
-            topLevelConstants = listOf(NoopSymbolDetailP),
-        )
+        val component =
+            createPackageSummary(
+                displayLanguage = Language.KOTLIN,
+                topLevelConstantsSummary = NoopSummaryList(),
+                topLevelConstants = listOf(NoopSymbolDetailP),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <h2>Constants summary</h2>
   <div>noop</div>
   <h2>Constants</h2>
   <div>noop</div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Package summary with Kotlin top-level properties renders correctly`() {
-        val component = createPackageSummary(
-            displayLanguage = Language.KOTLIN,
-            topLevelPropertiesSummary = NoopSummaryList(),
-            topLevelProperties = listOf(NoopSymbolDetailP),
-        )
+        val component =
+            createPackageSummary(
+                displayLanguage = Language.KOTLIN,
+                topLevelPropertiesSummary = NoopSummaryList(),
+                topLevelProperties = listOf(NoopSymbolDetailP),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <h2>Top-level properties summary</h2>
   <div>noop</div>
   <h2>Top-level properties</h2>
   <div>noop</div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Package summary with Kotlin top-level functions renders correctly`() {
-        val component = createPackageSummary(
-            displayLanguage = Language.KOTLIN,
-            topLevelFunctionsSummary = NoopSummaryList(),
-            topLevelFunctions = listOf(NoopSymbolDetailF),
-        )
+        val component =
+            createPackageSummary(
+                displayLanguage = Language.KOTLIN,
+                topLevelFunctionsSummary = NoopSummaryList(),
+                topLevelFunctions = listOf(NoopSymbolDetailF),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <h2>Top-level functions summary</h2>
   <div>noop</div>
   <h2>Top-level functions</h2>
   <div>noop</div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Package summary with Kotlin extension functions renders correctly`() {
-        val component = createPackageSummary(
-            displayLanguage = Language.KOTLIN,
-            extensionFunctionsSummary = NoopSummaryList(),
-            extensionFunctions = listOf(NoopSymbolDetailF),
-        )
+        val component =
+            createPackageSummary(
+                displayLanguage = Language.KOTLIN,
+                extensionFunctionsSummary = NoopSummaryList(),
+                extensionFunctions = listOf(NoopSymbolDetailF),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <h2>Extension functions summary</h2>
   <div>noop</div>
   <h2>Extension functions</h2>
   <div>noop</div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Package summary with Kotlin extension properties renders correctly`() {
-        val component = createPackageSummary(
-            displayLanguage = Language.KOTLIN,
-            extensionPropertiesSummary = NoopSummaryList(),
-            extensionProperties = listOf(NoopSymbolDetailP),
-        )
+        val component =
+            createPackageSummary(
+                displayLanguage = Language.KOTLIN,
+                extensionPropertiesSummary = NoopSummaryList(),
+                extensionProperties = listOf(NoopSymbolDetailP),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <h2>Extension properties summary</h2>
   <div>noop</div>
   <h2>Extension properties</h2>
   <div>noop</div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     @Test
     fun `Package summary with all Kotlin bits renders correctly`() {
-        val component = createPackageSummary(
-            displayLanguage = Language.KOTLIN,
-            topLevelConstantsSummary = NoopSummaryList(),
-            topLevelPropertiesSummary = NoopSummaryList(),
-            topLevelFunctionsSummary = NoopSummaryList(),
-            extensionPropertiesSummary = NoopSummaryList(),
-            extensionFunctionsSummary = NoopSummaryList(),
-            topLevelConstants = listOf(NoopSymbolDetailP),
-            topLevelProperties = listOf(NoopSymbolDetailP),
-            topLevelFunctions = listOf(NoopSymbolDetailF),
-            extensionProperties = listOf(NoopSymbolDetailP),
-            extensionFunctions = listOf(NoopSymbolDetailF),
-        )
+        val component =
+            createPackageSummary(
+                displayLanguage = Language.KOTLIN,
+                topLevelConstantsSummary = NoopSummaryList(),
+                topLevelPropertiesSummary = NoopSummaryList(),
+                topLevelFunctionsSummary = NoopSummaryList(),
+                extensionPropertiesSummary = NoopSummaryList(),
+                extensionFunctionsSummary = NoopSummaryList(),
+                topLevelConstants = listOf(NoopSymbolDetailP),
+                topLevelProperties = listOf(NoopSymbolDetailP),
+                topLevelFunctions = listOf(NoopSymbolDetailF),
+                extensionProperties = listOf(NoopSymbolDetailP),
+                extensionFunctions = listOf(NoopSymbolDetailF),
+            )
 
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
+        val output = createHTML().div { component.render(this) }.trim()
 
         // language=html
-        assertThat(output).isEqualTo(
-            """
+        assertThat(output)
+            .isEqualTo(
+                """
 <div>
   <h2>Constants summary</h2>
   <div>noop</div>
@@ -459,8 +467,9 @@ class DefaultPackageSummaryTest {
   <h2>Extension properties</h2>
   <div>noop</div>
 </div>
-            """.trim(),
-        )
+            """
+                    .trim(),
+            )
     }
 
     private fun createPackageSummary(
@@ -483,28 +492,29 @@ class DefaultPackageSummaryTest {
         topLevelFunctions: List<SymbolDetail<FunctionSignature>> = emptyList(),
         extensionProperties: List<SymbolDetail<PropertySignature>> = emptyList(),
         extensionFunctions: List<SymbolDetail<FunctionSignature>> = emptyList(),
-    ) = DefaultPackageSummary(
-        Params(
-            header = null,
-            displayLanguage = displayLanguage,
-            description = description,
-            interfaces = interfaces,
-            classes = classes,
-            enums = enums,
-            objects = objects,
-            exceptions = exceptions,
-            annotations = annotations,
-            typeAliases = typeAliases,
-            topLevelConstantsSummary = topLevelConstantsSummary,
-            topLevelPropertiesSummary = topLevelPropertiesSummary,
-            topLevelFunctionsSummary = topLevelFunctionsSummary,
-            extensionPropertiesSummary = extensionPropertiesSummary,
-            extensionFunctionsSummary = extensionFunctionsSummary,
-            topLevelConstants = topLevelConstants,
-            topLevelProperties = topLevelProperties,
-            topLevelFunctions = topLevelFunctions,
-            extensionProperties = extensionProperties,
-            extensionFunctions = extensionFunctions,
-        ),
-    )
+    ) =
+        DefaultPackageSummary(
+            Params(
+                header = null,
+                displayLanguage = displayLanguage,
+                description = description,
+                interfaces = interfaces,
+                classes = classes,
+                enums = enums,
+                objects = objects,
+                exceptions = exceptions,
+                annotations = annotations,
+                typeAliases = typeAliases,
+                topLevelConstantsSummary = topLevelConstantsSummary,
+                topLevelPropertiesSummary = topLevelPropertiesSummary,
+                topLevelFunctionsSummary = topLevelFunctionsSummary,
+                extensionPropertiesSummary = extensionPropertiesSummary,
+                extensionFunctionsSummary = extensionFunctionsSummary,
+                topLevelConstants = topLevelConstants,
+                topLevelProperties = topLevelProperties,
+                topLevelFunctions = topLevelFunctions,
+                extensionProperties = extensionProperties,
+                extensionFunctions = extensionFunctions,
+            ),
+        )
 }
