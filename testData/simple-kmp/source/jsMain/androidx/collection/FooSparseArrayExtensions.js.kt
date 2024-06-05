@@ -16,4 +16,8 @@
 
 package androidx.collection
 
+import kotlin.IllegalArgumentException
+
 fun <T> FooSparseArray<T>.jsOnlyExtensionFunction() = 5
+
+actual typealias FooException = kotlin.IllegalArgumentException

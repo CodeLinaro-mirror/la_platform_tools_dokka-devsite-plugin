@@ -230,3 +230,5 @@ fun nativeOnlyFunction() = 5
 
 fun functionThatExistsInMultipleSourceSetsButNotCommon(foo: String) = 5
 fun functionWithSameNameInMultipleSourceSetsButDifferentParams(fooNATIVE: String) = -5
+
+actual typealias FooException = kotlin.ConcurrentModificationException

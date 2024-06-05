@@ -16,6 +16,7 @@
 
 package androidx.collection
 
+import java.lang.Exception
 import kotlin.DeprecationLevel.HIDDEN
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
@@ -478,3 +479,5 @@ public fun <T> FooSparseArray<T>.valueIterator(): Iterator<T> = object : Iterato
     override fun hasNext() = index < size()
     override fun next() = valueAt(index++)
 }
+
+expect class FooException : Exception

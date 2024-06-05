@@ -254,3 +254,4 @@ public actual open class FooSparseArray<E>
 fun functionThatExistsInMultipleSourceSetsButNotCommon(foo: String) = 5
 fun functionWithSameNameInMultipleSourceSetsButDifferentParams(fooJVM: String) = -5
 
+actual typealias FooException = RuntimeException

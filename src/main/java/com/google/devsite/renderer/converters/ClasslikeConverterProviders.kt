@@ -110,13 +110,12 @@ internal class KmpClasslikeConverter(
         val primarySourceSet = classlike.getExpectOrCommonSourceSet()
 
         coroutineScope {
-            classlike.sourceSets.forEach { sourceSet ->
+            classlike.sourceSets.map { sourceSet ->
                 launch {
                     // We must do this computation every time, because we don't know what will and
-                    // what
-                    // won't affect the signature until after we calculate it for each sourceSet
-                    // E.g. the JVM sourceSet might have an `@JvmName` but otherwise have the same
-                    // signature
+                    // what won't affect the signature until after we calculate it for each
+                    // sourceSet. E.g. the JVM sourceSet might have an `@JvmName` but otherwise have
+                    // the same signature.
                     // `@JvmName` doesn't affect displayed signature, so those should all be
                     // collapsed.
                     val sig =
@@ -125,7 +124,7 @@ internal class KmpClasslikeConverter(
                             classGraph = docsHolder.classGraph(),
                             sourceSet = sourceSet,
                         )
-                    if (!signatures.contains(sig)) signatures[sig] = mutableSetOf()
+                    if (!signatures.containsKey(sig)) signatures[sig] = mutableSetOf()
                     signatures[sig]!!.add(sourceSet)
                     if (sourceSet == primarySourceSet) primarySignature = sig
                 }
@@ -143,7 +142,10 @@ internal class KmpClasslikeConverter(
                 descriptionDocs = javadocConverter.metadata(classlike),
                 platform = DefaultPlatformComponent(setOf(classlike.getExpectOrCommonSourceSet())),
                 allSignatures =
-                    signatures.mapValues { (_, v) -> DefaultPlatformComponent(v) }.toList(),
+                    signatures
+                        .mapValues { (_, v) -> DefaultPlatformComponent(v) }
+                        .toList()
+                        .sortedBy { it.second.toString() },
             ),
         )
     }
