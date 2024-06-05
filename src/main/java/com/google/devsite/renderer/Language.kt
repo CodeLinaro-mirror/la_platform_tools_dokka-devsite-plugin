@@ -16,6 +16,8 @@
 
 package com.google.devsite.renderer
 
+import java.util.Locale
+
 /**
  * The target rendering programming language.
  *
@@ -23,5 +25,11 @@ package com.google.devsite.renderer
  * rendering language.
  */
 enum class Language {
-    JAVA, KOTLIN
+    JAVA, KOTLIN;
+    override fun toString() = name.lowercase(Locale.getDefault())
+}
+
+fun Language.not() = when (this) {
+    Language.JAVA -> Language.KOTLIN
+    Language.KOTLIN -> Language.JAVA
 }

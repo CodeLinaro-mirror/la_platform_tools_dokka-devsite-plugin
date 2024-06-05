@@ -88,7 +88,8 @@ internal class DocumentablesHolder(
     scope: CoroutineScope,
     context: DokkaContext,
     // TODO(handle packages with no common or JVM targets, as-Java. b/265948930)
-    private val excludedPackages: Set<Regex> = emptySet(),
+    val excludedPackages: Map<Language, Set<Regex>> =
+        mapOf(Language.JAVA to emptySet(), Language.KOTLIN to emptySet()),
     val fileMetadataMap: Map<String, LibraryMetadata> = emptyMap(),
     val versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap(),
     val baseClassSourceLink: String? = null,
@@ -224,11 +225,8 @@ internal class DocumentablesHolder(
      * Returns whether the [dri] is for a synthetic class or a documentable contained in a synthetic
      * class.
      */
-    fun isFromSyntheticClass(dri: DRI): Boolean {
-        return runBlocking {
-            val classNames = syntheticClassNames[DRI(packageName = dri.packageName)]?.await()
-            classNames?.contains(dri.classNames) == true
-        }
+    fun isFromSyntheticClass(dri: DRI) = dri.classNames in runBlocking {
+        syntheticClassNames[DRI(packageName = dri.packageName)]?.await() ?: emptySet()
     }
 
     /**
@@ -341,7 +339,7 @@ internal class DocumentablesHolder(
     private fun computePackages(module: DModule): List<DPackage> {
         return module.packages
             .filterNot { thisPackage ->
-                excludedPackages.any {
+                excludedPackages[displayLanguage]!!.any {
                         excludedRegex ->
                     excludedRegex.matches(thisPackage.packageName)
                 }
@@ -362,8 +360,7 @@ internal class DocumentablesHolder(
     ): List<DClasslike> {
         return (docs.filterIsInstance<DClasslike>() + syntheticClasses)
             .filterNot { thisClasslike ->
-                excludedPackages.any {
-                        excludedRegex ->
+                excludedPackages[displayLanguage]!!.any { excludedRegex ->
                     excludedRegex.matches(thisClasslike.packageName())
                 }
             }.filterNot { shouldNotBeDisplayed(it) }

@@ -150,12 +150,11 @@ internal abstract class ConverterTestBase(
         packages.single().properties.ifEmpty { null }
             ?: classlike()?.properties
 
-    protected fun assertPath(actual: String, expected: String, prefix: String = "") {
+    protected fun assertPath(actual: String, expected: String, prefix: String = "") =
         when (displayLanguage) {
             Language.JAVA -> assertThat(actual).isEqualTo("$prefix/reference/$expected")
             Language.KOTLIN -> assertThat(actual).isEqualTo("$prefix/reference/kotlin/$expected")
         }
-    }
 
     protected fun pathProvider(
         externalLocationProvider: ExternalDokkaLocationProvider? = null,
@@ -257,7 +256,8 @@ internal abstract class ConverterTestBase(
         hiddenAnnotations: Set<String> = emptySet(),
         versionMetadataMap: Map<String, ClassVersionMetadata> = emptyMap(),
         fileMetadataMap: Map<String, LibraryMetadata> = emptyMap(),
-        excludedPackages: Set<Regex> = emptySet(),
+        excludedPackages: Map<Language, Set<Regex>> =
+            mapOf(Language.JAVA to emptySet(), Language.KOTLIN to emptySet()),
     ) {
         val holder by lazy {
             runBlocking {

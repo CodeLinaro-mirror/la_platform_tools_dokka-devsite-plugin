@@ -57,7 +57,8 @@ internal class PackageDocumentableConverterTest(
             """.trimMargin(),
         ).render().packagePage()
 
-        assertPath(page.data.path, "hello/i/am/a/packagez/package-summary.html")
+        assertThat(page.data.pathForSwitcher!!)
+            .isEqualTo("hello/i/am/a/packagez/package-summary.html")
     }
 
     @Test

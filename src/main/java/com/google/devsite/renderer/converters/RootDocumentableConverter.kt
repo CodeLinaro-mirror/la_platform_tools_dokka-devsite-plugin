@@ -66,7 +66,7 @@ internal class RootDocumentableConverter(
         return DefaultDevsitePage(
             DevsitePage.Params(
                 displayLanguage = displayLanguage,
-                path = pathProvider.classes,
+                pathForSwitcher = pathProvider.classes.removePrefix(pathProvider.rootPath + "/"),
                 bookPath = pathProvider.book,
                 title = "Class Index",
                 content = DefaultClassIndex(
@@ -97,7 +97,7 @@ internal class RootDocumentableConverter(
         return DefaultDevsitePage(
             DevsitePage.Params(
                 displayLanguage = displayLanguage,
-                path = pathProvider.packages,
+                pathForSwitcher = pathProvider.packages.removePrefix(pathProvider.rootPath + "/"),
                 bookPath = pathProvider.book,
                 title = "Package Index",
                 content = DefaultPackageIndex(

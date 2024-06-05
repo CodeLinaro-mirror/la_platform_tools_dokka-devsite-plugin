@@ -29,7 +29,8 @@ internal interface DevsitePage<T : ContextFreeComponent> : HtmlComponent<HTML> {
 
     data class Params<T : ContextFreeComponent>(
         val displayLanguage: Language,
-        val path: String,
+        // of the form andoidx/paging/PagingSource.html. Does not have a /reference/language prefix.
+        val pathForSwitcher: String?,
         val bookPath: String,
         val title: String,
         val content: T,

@@ -16,6 +16,7 @@
 
 package com.google.devsite
 
+import com.google.devsite.renderer.Language
 import org.jetbrains.dokka.plugability.ConfigurableBlock
 
 /**
@@ -143,6 +144,11 @@ data class DevsiteConfiguration(
         computedExcludedPackagesForBoth +
             (excludedPackagesForKotlin?.map { it.toRegex() }?.toSet() ?: emptySet())
     }
+
+    val computedExcludedPackagesFor = mapOf(
+        Language.JAVA to computedExcludedPackagesForJava,
+        Language.KOTLIN to computedExcludedPackagesForKotlin,
+    )
 
     // Computed sets for all annotations not to display for each language.
     private val annotationsNotToDisplayAsSet: Set<String> by lazy {

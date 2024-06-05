@@ -54,13 +54,16 @@ internal data class DefaultDevsitePage<T : ContextFreeComponent>(
                 div {
                     h1 { +data.title }
                 }
+
                 data.metadataComponent?.render(this)
             }
 
-            // This placeholder div will be replaced with the language switcher via the
-            // development/referenceDocs/switcher.py script in AndroidX source.
-            // (Note: b/194329328 tracks moving the logic from the switcher.py script into Dackka)
-            div { id = "refdoc-switcher-placeholder" }
+            if (data.pathForSwitcher != null) {
+                // When devsite injects the switcher, it prefixes this path with `kotlin` if needed.
+                unsafe { +"\n{% setvar page_path %}${data.pathForSwitcher}{% endsetvar %}" }
+                unsafe { +"\n{% setvar can_switch %}1{% endsetvar %}" }
+                unsafe { +"\n{% include \"reference/_${data.displayLanguage}_switcher2.md\" %}\n" }
+            }
 
             data.content.render(this)
         }
