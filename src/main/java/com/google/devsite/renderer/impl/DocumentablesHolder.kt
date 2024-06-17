@@ -105,7 +105,9 @@ internal class DocumentablesHolder(
     private val classlikes = mutableMapOf<DRI, Deferred<List<DClasslike>>>()
     private val classes = mutableMapOf<DRI, Deferred<List<DClass>>>()
     private val syntheticClasses = mutableMapOf<DRI, Deferred<Set<DClass>>>()
-    private val syntheticClassNames = mutableMapOf<DRI, Deferred<Set<String>>>()
+    // We can't use a `by lazy {}` pattern for map values only, and lazy extension props don't exist
+    private val syntheticClassNamesDeferred = mutableMapOf<DRI, Deferred<Set<String>>>()
+    private val syntheticClassNames = mutableMapOf<DRI, Set<String>>()
     private val enums = mutableMapOf<DRI, Deferred<List<DEnum>>>()
     private val interfaces = mutableMapOf<DRI, Deferred<List<DInterface>>>()
     private val annotations = mutableMapOf<DRI, Deferred<List<DAnnotation>>>()
@@ -117,7 +119,13 @@ internal class DocumentablesHolder(
     private val extensionPropertyMap = scope.async { computeExtensionPropertyMap() }
 
     private val allClasslikes: Deferred<List<DClasslike>>
-    private val allCompanions: Deferred<Map<DRI, DObject>>
+    private val allCompanions: Map<DRI, DObject> by lazy {
+        runBlocking {
+            module.packages
+                .flatMap { companions[it.dri]!!.await().entries }
+                .associate { it.key to it.value }
+        }
+    }
     private val nestedClasslikesJob: Job
 
     // Filtering for should-show should be done by accessors of this field
@@ -170,7 +178,7 @@ internal class DocumentablesHolder(
                 classlikes[dPackage.dri] = combinedClasslikesList
                 classes[dPackage.dri] = classList
                 syntheticClasses[dPackage.dri] = syntheticClassList
-                syntheticClassNames[dPackage.dri] = syntheticClassNameSet
+                syntheticClassNamesDeferred[dPackage.dri] = syntheticClassNameSet
                 enums[dPackage.dri] = enumList
                 interfaces[dPackage.dri] = interfaceList
                 annotations[dPackage.dri] = annotationList
@@ -185,16 +193,10 @@ internal class DocumentablesHolder(
         // setUpAnalysis(context, analysisPlugin.querySingle { sampleAnalysisEnvironmentCreator }) }
 
         allClasslikes = scope.async { computeClasslikes(module) }
-        allCompanions =
-            scope.async {
-                module.packages
-                    .flatMap { companions[it.dri]!!.await().entries }
-                    .associate { it.key to it.value }
-            }
         classGraph =
             scope.async {
                 computeClassGraph(
-                    allClasslikes.await() + allCompanions.await().values,
+                    allClasslikes.await() + allCompanions.values,
                     externalDocumentableProvider,
                     context.configuration.sourceSets,
                 )
@@ -232,8 +234,11 @@ internal class DocumentablesHolder(
      */
     fun isFromSyntheticClass(dri: DRI) =
         dri.classNames in
-            runBlocking {
-                syntheticClassNames[DRI(packageName = dri.packageName)]?.await() ?: emptySet()
+            syntheticClassNames.getOrPut(DRI(packageName = dri.packageName)) {
+                runBlocking {
+                    syntheticClassNamesDeferred[DRI(packageName = dri.packageName)]?.await()
+                        ?: emptySet()
+                }
             }
 
     /**
@@ -482,7 +487,7 @@ internal class DocumentablesHolder(
         return interestingObjects.sortedWith(simpleDocumentableComparator)
     }
 
-    fun isCompanion(dObject: DObject) = runBlocking { dObject.dri in allCompanions.await().keys }
+    fun isCompanion(dObject: DObject) = dObject.dri in allCompanions.keys
 
     /**
      * Returns whether this DObject is an ordinary companion and is not significant enough to show
