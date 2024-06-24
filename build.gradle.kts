@@ -46,29 +46,26 @@ application {
 
 dependencies {
     implementation("org.jetbrains.dokka:dokka-base:$dokkaVersion")
-    implementation("org.jetbrains.dokka:dokka-base-test-utils:$dokkaVersion")
-    implementation("org.jetbrains.dokka:dokka-cli:$dokkaVersion")
     implementation("org.jetbrains.dokka:dokka-core:$dokkaVersion")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:$jacksonVersion")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
-    implementation("org.jetbrains.dokka:dokka-gradle-plugin:$dokkaVersion")
     compileOnly("org.jetbrains.dokka:analysis-kotlin-api:$dokkaVersion")
-    implementation("org.jetbrains.dokka:analysis-kotlin-descriptors:$dokkaVersion")
+    runtimeOnly("org.jetbrains.dokka:analysis-kotlin-descriptors:$dokkaVersion")
 
+    implementation("org.jsoup:jsoup:1.16.2") // Remove when upstream updates their version
 
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.9.1")
     implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:$coroutinesVersion")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.10")
 
-    // Force the newer version to get the bugfix for https://github.com/jhy/jsoup/issues/1910
-    // To fix b/309773103. We can remove this once we update the upstream version b/295154071
-    implementation("org.jsoup:jsoup:1.16.2")
-
+    testImplementation("org.jetbrains.dokka:dokka-base-test-utils:$dokkaVersion")
     testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlinVersion")
     testImplementation("junit:junit:4.13.2")
     testImplementation("com.google.truth:truth:1.1.3")
     testImplementation("org.jetbrains.dokka:dokka-test-api:$dokkaVersion")
+
+    implementation("org.jetbrains.dokka:dokka-cli:$dokkaVersion") // Used in CLI integration test
 }
 
 tasks.withType<KotlinCompile> {
