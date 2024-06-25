@@ -1065,6 +1065,49 @@ internal class DocTagConverterTest(
         assertThat((seeAlsoTable.single().data.title as Link).data.name).isEqualTo("filter")
     }
 
+    @Test // https://github.com/Kotlin/dokka/issues/3658; b/342557694
+    fun `Annotation in code block isn't eaten by parser, Test from androidx-media`() {
+        val documentationJ =
+            """
+             |/**
+             | * <p>In a Java class:
+             | *
+             | * <pre>{@code
+             | * import androidx.annotation.OptIn;
+             | * import androidx.media3.common.util.UnstableApi;
+             | * ...
+             | * @OptIn(markerClass = UnstableApi.class)
+             | * private void methodUsingUnstableApis() { ... }
+             | * }</pre>
+             | */
+             |public static void foo() {}
+        """
+                .trimIndent()
+                .render(java = true)
+                .documentation()
+        val documentationK =
+            """
+             |/**
+             | * <p>In a Java class:
+             | *
+             | * ```
+             | * import androidx.annotation.OptIn;
+             | * import androidx.media3.common.util.UnstableApi;
+             | * ...
+             | * @OptIn(markerClass = UnstableApi.class)
+             | * private void methodUsingUnstableApis() { ... }
+             | * ```
+             | */
+             |fun foo() {}
+        """
+                .trimIndent()
+                .render()
+                .documentation()
+        for (doc in listOf(/*documentationJ, */ documentationK)) {
+            assertThat(doc.toString()).contains("@OptIn")
+        }
+    }
+
     @Ignore // go/dokka-upstream-bug/2665
     @Test
     fun `Copied from draganddrop`() {
