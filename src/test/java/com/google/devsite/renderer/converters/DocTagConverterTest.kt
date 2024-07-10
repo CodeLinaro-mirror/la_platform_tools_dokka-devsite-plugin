@@ -1190,6 +1190,34 @@ internal class DocTagConverterTest(
     }
 
     @Test
+    fun `Test doc comment on property parameter`() {
+        val module =
+            """
+            |/**
+            | * comments on class Foo
+            | * @param bar doc comment on bar as a parameter.
+            | */
+            |class Foo(
+            |    /**
+            |     * Inline doc comment on bar
+            |     */
+            |    public var bar: String
+            |) {}
+        """
+                .render()
+        val propertyDoc =
+            module.documentation({ this.property("bar")!! }).single() as DescriptionComponent
+        assertThat(propertyDoc.toString()).doesNotContain("doc comment on bar as a parameter.")
+        assertThat(propertyDoc.toString()).contains("Inline doc comment on bar")
+        val constructorDoc = module.documentation({ this.constructor() }).last() as DocsSummaryList
+        assertThat(constructorDoc.toString()).contains("doc comment on bar as a parameter.")
+        assertThat(constructorDoc.toString()).doesNotContain("Inline doc comment on bar")
+        val classDoc = module.documentation().last() as DescriptionComponent
+        assertThat(classDoc.toString()).doesNotContain("doc comment on bar as a parameter.")
+        assertThat(classDoc.toString()).doesNotContain("Inline doc comment on bar")
+    }
+
+    @Test
     fun `Multiline doc from fragment, with formatting`() {
         val module =
             """
