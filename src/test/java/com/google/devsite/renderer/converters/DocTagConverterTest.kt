@@ -1189,6 +1189,37 @@ internal class DocTagConverterTest(
         assertThat((link.dri.callable as Callable).name).isEqualTo("<this>")
     }
 
+    @Ignore // b/350055200 = https://github.com/Kotlin/dokka/issues/3661
+    @Test
+    fun `Test line break inside img tag`() {
+        val module =
+            """
+            |/**
+            | * Line above image
+            | * ![Assist chip
+            | * image](https://developer.android.com/images/reference/androidx/compose/material3/assist-chip.png)
+            | *
+            | */
+            |fun Foo.bar() {}
+            ||class Foo(
+            |    /**
+            |     * Line above image
+            |     * ![Assist chip
+            |     * image](https://developer.android.com/images/reference/androidx/compose/material3/assist-chip.png)
+            |     *
+            |     */
+            |    val baz: String
+        """
+                .render()
+        val documentationBar = module.documentation().first() as DescriptionComponent
+        // Does not register as an image, but text "![Assist Chip" and a link with alt text "image".
+        assertThat(documentationBar.toString()).contains("Assist chip image")
+        val documentationBaz =
+            module.documentation({ this.property("baz")!! }).first() as DescriptionComponent
+        // Image alt text is currently "Assist Chip * Image"
+        assertThat(documentationBaz.toString()).contains("Assist chip image")
+    }
+
     @Test
     fun `Test doc comment on property parameter`() {
         val module =
