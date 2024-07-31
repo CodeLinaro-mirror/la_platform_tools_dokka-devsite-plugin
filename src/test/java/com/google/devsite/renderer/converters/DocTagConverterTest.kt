@@ -53,9 +53,11 @@ import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.WithSources
+import org.jetbrains.dokka.model.doc.A
 import org.jetbrains.dokka.model.doc.CodeBlock
 import org.jetbrains.dokka.model.doc.DocumentationLink
 import org.jetbrains.dokka.model.doc.Img
+import org.jetbrains.dokka.model.doc.P
 import org.jetbrains.dokka.model.doc.Pre
 import org.jetbrains.dokka.model.doc.Text
 import org.junit.Ignore
@@ -1218,6 +1220,33 @@ internal class DocTagConverterTest(
     }
 
     @Test
+    fun `See tag with URL`() {
+        val documentationK =
+            """
+            |/**
+            | * @see <a href=https://google.com>google</a>
+            | */
+            |fun foo() {}
+        """
+                .render()
+                .documentation()
+        val documentationJ =
+            """
+            |/**
+            | * @see <a href=https://google.com>google</a>
+            | */
+            |public void foo() {}
+        """
+                .render(java = true)
+                .documentation()
+        for (documentation in listOf(documentationJ, documentationK)) {
+            val seeAlso = (documentation.last() as LinkDescriptionSummaryList).single()
+            val link = seeAlso.data.title as Link
+            assertThat(link.data.url).isEqualTo("https://google.com")
+        }
+    }
+
+    @Test
     fun `Multiline doc from fragment, with formatting`() {
         val module =
             """
@@ -1994,6 +2023,8 @@ internal class DocTagConverterTest(
         val firstCodeBlock = (description.data.components[2] as CodeBlock).text()
         assertThat(firstCodeBlock).doesNotContain("&lt;")
         assertThat(firstCodeBlock).doesNotContain("<code>")
+        val theLink = (description.data.components[15] as P).children[1] as A
+        assertThat(theLink.params["href"]).isEqualTo("package-summary.html#MemoryVisibility")
     }
 
     @Ignore // b/278255321; go/dokka-upstream-bug/2949
