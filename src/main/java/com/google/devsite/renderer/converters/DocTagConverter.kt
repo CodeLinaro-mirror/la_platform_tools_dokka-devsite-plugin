@@ -828,6 +828,25 @@ internal class DocTagConverter(
         }
 
         // TODO(b/167437580): figure out how to reliably parse links
+        if (name == "") {
+            @kotlin.Suppress("UNCHECKED_CAST")
+            val aHrefFormatted =
+                root.children.singleOrNull()?.children as? List<Text>
+                    ?: throw RuntimeException("Could not understand link: $this")
+            if (aHrefFormatted.size == 3)
+                return DefaultLink(
+                    Link.Params(
+                        name = aHrefFormatted[1].body,
+                        url = aHrefFormatted[0].body.removePrefix("<a href=").removeSuffix(">"),
+                        externalLink = true
+                    )
+                )
+            throw RuntimeException("Could not understand link: $this")
+        }
+        if (name.startsWith("<a href=")) {
+            val (url, linkName) = name.removePrefix("<a href=").removeSuffix("</a>").split(">")
+            return DefaultLink(Link.Params(name = linkName, url = url, externalLink = true))
+        }
         val segments = name.split("#")
         return if (segments.size == 1) {
             val (packageName, typeName) = typeToPackageNameAndType(segments.single())
