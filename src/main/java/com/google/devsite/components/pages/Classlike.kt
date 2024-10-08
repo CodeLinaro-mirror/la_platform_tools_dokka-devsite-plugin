@@ -98,7 +98,7 @@ internal interface Classlike : ContextFreeComponent {
         override fun subList(fromIndex: Int, toIndex: Int) = symbols.subList(fromIndex, toIndex)
     }
 
-    private val earlySummaries
+    private val earlySummaries: List<SummaryList<*>>
         get() =
             listOfNotNull(
                 data.nestedTypesSummary,
@@ -106,7 +106,7 @@ internal interface Classlike : ContextFreeComponent {
                 data.constantsSummary,
             )
 
-    private val kotlinOnlySummaries
+    private val kotlinOnlySummaries: List<SummaryList<*>>
         get() =
             listOfNotNull(
                 data.publicCompanionFunctionsSummary,
@@ -115,7 +115,7 @@ internal interface Classlike : ContextFreeComponent {
                 data.protectedCompanionPropertiesSummary,
             )
 
-    private val functionSummaries
+    private val functionSummaries: List<SummaryList<*>>
         get() =
             listOfNotNull(
                 data.publicConstructorsSummary,
@@ -124,17 +124,17 @@ internal interface Classlike : ContextFreeComponent {
                 data.protectedFunctionsSummary,
             )
 
-    private val propertiesSummaries
+    private val propertiesSummaries: List<PropertySummaryList>
         get() =
             listOfNotNull(
                 data.publicPropertiesSummary,
                 data.protectedPropertiesSummary,
             )
 
-    private val extensionFunctionsSummary
+    private val extensionFunctionsSummary: List<FunctionSummaryList>
         get() = listOf(data.extensionFunctionsSummary)
 
-    private val extensionPropertiesSummary
+    private val extensionPropertiesSummary: List<PropertySummaryList>
         get() = listOf(data.extensionPropertiesSummary)
 
     val allSummarySections: List<SummaryList<*>>
