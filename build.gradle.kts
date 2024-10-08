@@ -143,6 +143,10 @@ val collectionsVersion = "1.3.0"
 val composeVersion = "1.5.0"
 val composeMaterial3Version = "1.2.0"
 val benchmarkVersion = "1.2.0"
+val appsearchVersion = "1.1.0-alpha05"
+val biometricVersion = "1.4.0-alpha02"
+val cameraVersion = "1.5.0-alpha02"
+val carVersion = "1.4.0"
 dependencies {
     testDataImpl("io.reactivex.rxjava3:rxjava:3.0.2")
     testDataImpl("io.reactivex.rxjava2:rxjava:2.2.9")
@@ -197,28 +201,27 @@ dependencies {
     //testDataSources("androidx.annotation:annotation-experimental-lint:1.0.0-rc01") // need dep
     testDataSources("androidx.appcompat:appcompat:1.6.0")
     testDataSources("androidx.appcompat:appcompat-resources:1.6.0")
-    testDataSources("androidx.appsearch:appsearch:1.1.0-alpha03")
-    testDataSources("androidx.appsearch:appsearch-builtin-types:1.1.0-alpha03")
-    testDataSources("androidx.appsearch:appsearch-compiler:1.1.0-alpha03")
-    testDataSources("androidx.appsearch:appsearch-ktx:1.1.0-alpha03")
-    testDataSources("androidx.appsearch:appsearch-debug-view:1.1.0-alpha03")
-    testDataSources("androidx.appsearch:appsearch-platform-storage:1.1.0-alpha03")
-    testDataSources("androidx.appsearch:appsearch-local-storage:1.1.0-alpha03")
+    testDataSources("androidx.appsearch:appsearch:$appsearchVersion")
+    testDataSources("androidx.appsearch:appsearch-builtin-types:$appsearchVersion")
+    testDataSources("androidx.appsearch:appsearch-compiler:$appsearchVersion")
+    testDataSources("androidx.appsearch:appsearch-ktx:$appsearchVersion")
+    testDataSources("androidx.appsearch:appsearch-debug-view:$appsearchVersion")
+    testDataSources("androidx.appsearch:appsearch-platform-storage:$appsearchVersion")
+    testDataSources("androidx.appsearch:appsearch-local-storage:$appsearchVersion")
     testDataSources("androidx.arch.core:core-common:2.2.0")
     testDataSources("androidx.arch.core:core-runtime:2.2.0")
     testDataSources("androidx.arch.core:core-testing:2.2.0")
     testDataSources("androidx.asynclayoutinflater:asynclayoutinflater:1.0.0")
-    testDataSources("androidx.autofill:autofill:1.2.0-beta01")
+    testDataSources("androidx.autofill:autofill:1.3.0-beta01")
     testDataSources("androidx.benchmark:benchmark:1.0.0-alpha03")
     testDataSources("androidx.benchmark:benchmark-common:$benchmarkVersion")
     testDataImpl(gradleApi())
     testDataSources("androidx.benchmark:benchmark-junit4:$benchmarkVersion")
     testDataSources("androidx.benchmark:benchmark-macro:$benchmarkVersion")
     testDataSources("androidx.benchmark:benchmark-macro-junit4:$benchmarkVersion")
-    testDataSources("androidx.biometric:biometric:1.2.0-alpha05")
-    testDataSources("androidx.biometric:biometric-ktx:1.2.0-alpha05")
+    testDataSources("androidx.biometric:biometric:$biometricVersion")
+    testDataSources("androidx.biometric:biometric-ktx:$biometricVersion")
     testDataSources("androidx.browser:browser:1.5.0")
-    val cameraVersion = "1.4.0-alpha04"
     testDataSources("androidx.camera:camera-camera2:$cameraVersion")
     testDataSources("androidx.camera:camera-camera2-pipe:1.0.0-alpha01")
     testDataSources("androidx.camera:camera-camera2-pipe-testing:1.0.0-alpha01")
@@ -231,12 +234,12 @@ dependencies {
     testDataSources("androidx.camera:camera-previewview:1.1.0-beta02")
     testDataSources("androidx.camera:camera-video:$cameraVersion")
     testDataSources("androidx.camera:camera-view:$cameraVersion")
-    testDataSources("androidx.camera:camera-viewfinder:$cameraVersion")
-    testDataSources("androidx.car.app:app:1.4.0-rc02")
+    testDataSources("androidx.camera:camera-viewfinder:1.4.0-alpha08")
+    testDataSources("androidx.car.app:app:$carVersion")
     testDataSources("androidx.car.app:app-aaos:1.0.0-alpha01")
-    testDataSources("androidx.car.app:app-automotive:1.4.0-rc02")
-    testDataSources("androidx.car.app:app-projected:1.4.0-rc02")
-    testDataSources("androidx.car.app:app-testing:1.4.0-rc02")
+    testDataSources("androidx.car.app:app-automotive:$carVersion")
+    testDataSources("androidx.car.app:app-projected:$carVersion")
+    testDataSources("androidx.car.app:app-testing:$carVersion")
     // testDataSources("androidx.car:car:1.0.0-alpha7") // Obsolete artifacts
     // testDataSources("androidx.car:car-cluster:1.0.0-alpha5")
     // testDataSources("androidx.car:car-moderator:1.0.0-alpha1")
@@ -281,7 +284,7 @@ dependencies {
     testDataSourcesKmp("androidx.compose.ui:ui-util:$composeVersion")
 
     testDataSourcesKmp("androidx.collection:collection:$collectionsVersion")
-    testDataSourcesKmp("androidx.datastore:datastore-core:1.1.0-beta01")
+    testDataSourcesKmp("androidx.datastore:datastore-core:1.1.0")
 }
 
 val explodeAars by tasks.registering(Sync::class) {
