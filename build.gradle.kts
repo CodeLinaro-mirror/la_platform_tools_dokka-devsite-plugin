@@ -35,7 +35,7 @@ val jacksonVersion = "2.15.0"
 val coroutinesVersion = "1.6.3"
 plugins {
     kotlin("jvm") version "2.0.10"
-    id("com.github.johnrengelman.shadow") version "7.1.1"
+    id("com.github.johnrengelman.shadow") version "8.1.1"
     id("application")
     id("maven-publish")
 }
