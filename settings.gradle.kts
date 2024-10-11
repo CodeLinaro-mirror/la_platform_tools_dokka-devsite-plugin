@@ -29,24 +29,22 @@ buildscript {
         maven("../../prebuilts/androidx/external")
     }
     dependencies {
-        classpath("com.gradle:gradle-enterprise-gradle-plugin:3.16")
-        classpath("com.gradle:common-custom-user-data-gradle-plugin:1.12")
+        classpath("com.gradle:develocity-gradle-plugin:3.18")
+        classpath("com.gradle:common-custom-user-data-gradle-plugin:2.0.1")
     }
 }
 
-apply(plugin = "com.gradle.enterprise")
+apply(plugin = "com.gradle.develocity")
 apply(plugin = "com.gradle.common-custom-user-data-gradle-plugin")
 
 val BUILD_NUMBER = System.getenv("BUILD_NUMBER")
-gradleEnterprise {
+develocity {
     server = "https://ge.androidx.dev"
 
     buildScan {
-        capture {
-            isTaskInputFiles = true
-        }
+        capture.fileFingerprints.set(true)
         obfuscation {
-            hostname { host -> "unset" }
+            hostname { _ -> "unset" }
             ipAddresses { listOf("0.0.0.0") }
         }
         if (BUILD_NUMBER != null) {
@@ -54,7 +52,8 @@ gradleEnterprise {
             link("ci.android.com build", "https://ci.android.com/builds/branches/aosp-androidx-main/grid?head=$BUILD_NUMBER&tail=$BUILD_NUMBER")
         }
 
-        // Always try to publish scan for dackka-main. No longer fails the build if offline/blocked.
-        publishAlways()
+        publishing.onlyIf {
+            it.isAuthenticated
+        }
     }
 }
