@@ -173,4 +173,6 @@ val defaultValidNullabilityAnnotations =
         "android.annotation.Nullable",
         "androidx.annotation.NonNull",
         "android.annotation.NonNull",
+        "org.jspecify.annotations.NonNull",
+        "org.jspecify.annotations.Nullable",
     )
