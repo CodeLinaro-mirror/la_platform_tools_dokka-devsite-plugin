@@ -16,6 +16,7 @@
 
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.gradle.api.tasks.testing.logging.TestLogEvent
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.util.Locale
 
@@ -66,12 +67,6 @@ dependencies {
     testImplementation("org.jetbrains.dokka:dokka-test-api:$dokkaVersion")
 
     implementation("org.jetbrains.dokka:dokka-cli:$dokkaVersion") // Used in CLI integration test
-}
-
-tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        jvmTarget = "11"
-    }
 }
 
 val shadowJar = tasks.withType<ShadowJar> {
@@ -326,8 +321,9 @@ val classpathForTests by tasks.registering(ClasspathForTestsTask::class) {
 }
 
 tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions {
-        freeCompilerArgs += "-Xmulti-platform"
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_11)
+        freeCompilerArgs.add("-Xmulti-platform")
     }
     dependsOn(explodeAars)
 }
