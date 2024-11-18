@@ -150,7 +150,7 @@ dependencies {
     testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-rx2:$coroutinesVersion")
     testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-rx3:$coroutinesVersion")
     testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$coroutinesVersion")
-    testDataImpl("org.robolectric:android-all-instrumented:13-robolectric-9030017-i6")
+    testDataImpl("org.robolectric:android-all-instrumented:13-robolectric-9030017-i7")
     testDataImpl("junit:junit:4.13.2")
     testDataImpl("com.google.truth:truth:1.1.3")
     testDataImpl("com.android.tools.build:gradle:8.3.1")
