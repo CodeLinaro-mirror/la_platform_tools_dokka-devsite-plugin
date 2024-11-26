@@ -397,7 +397,10 @@ internal class DocumentablesHolder(
             is FunctionalTypeConstructor,
             is TypeParameter, -> {}
             Dynamic -> TODO() // I don't think this case is possible?
-            is UnresolvedBound -> throw RuntimeException("Unresolved receiver of $this")
+            is UnresolvedBound -> {
+                val unresolvedName = rType.name.removePrefix("ERROR CLASS: Symbol not found for ")
+                throw RuntimeException("Unresolved receiver $unresolvedName of $this")
+            }
             else -> throw RuntimeException("Unknown receiver for $this")
         }
     }

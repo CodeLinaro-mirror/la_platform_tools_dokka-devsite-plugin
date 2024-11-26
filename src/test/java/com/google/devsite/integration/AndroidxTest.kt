@@ -40,23 +40,6 @@ class AndroidxTest : IntegrationTestBase() {
 
     @Ignore // Must be run manually
     @Test
-    fun `Run dackka against partial androidx tip-of-tree`() {
-        val base = getAndroidxPath()
-        executionTest(
-            testName = "partialAndroidx",
-            paths =
-                listOf(
-                    "$base/appcompat/",
-                    "$base/fragment/",
-                    "$base/leanback/",
-                    "$base/media/",
-                ),
-            sampleLocations = listOf("$base/samples/", "$base/fragment/fragment-compose/samples"),
-        )
-    }
-
-    @Ignore // Must be run manually
-    @Test
     fun `Run dackka against androidx docs-public jvm sources`() {
         val base = getAndroidxPath()
         val docsPublic = "${getAndroidxPath()}/../../out/androidx/docs-public"
@@ -95,31 +78,6 @@ class AndroidxTest : IntegrationTestBase() {
                     "$base/samples/",
                 ),
         )
-    }
-
-    @Ignore // Must be run manually
-    @Test
-    fun `Run dackka against full androidx tip-of-tree`() {
-        // some projects are not intended to be documented and have a large backlog of docs issues
-        val excludedPaths =
-            mutableListOf(
-                "lint-checks",
-                "room-compiler",
-                "camera-camera2-pipe-integration",
-                "integration-tests", // Specifically paging
-                "watchface-samples-minimal-instances",
-                "watchface-samples-minimal-complications",
-                "watchface-samples-minimal-style",
-                "generator", // material-icons-generator
-                "appsearch-builtin-types",
-            )
-        crawlingExecTest("fullAndroidx", getAndroidxPath(), excludedPaths, maxFolders = 200)
-    }
-
-    @Ignore // Must be run manually
-    @Test
-    fun `Run dackka against full AndroidX prebuilts`() {
-        TODO("this would require hundreds of dependencies; not currently planned")
     }
 
     @Ignore // Must be run manually

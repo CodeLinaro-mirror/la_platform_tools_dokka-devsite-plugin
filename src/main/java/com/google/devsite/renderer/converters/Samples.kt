@@ -223,6 +223,7 @@ internal fun convertTextToJavadocSample(
     return when (resolvedFile.size) {
         0 ->
             if (failOnMissingSamples) {
+                if (sampleFiles.isEmpty()) throw RuntimeException("Samples set is empty!")
                 throw RuntimeException(
                     "Unable to find the sample file $filePath in the samples directory " +
                         sampleFiles.map { it.path }.reduce { acc, s -> acc.commonPrefixWith(s) },

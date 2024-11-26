@@ -23,12 +23,14 @@ import com.google.devsite.transformers.PropagatedAnnotationsTransformer
 import org.jetbrains.dokka.CoreExtensions
 import org.jetbrains.dokka.analysis.kotlin.KotlinAnalysisPlugin
 import org.jetbrains.dokka.base.DokkaBase
+import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.plugability.DokkaContext
 import org.jetbrains.dokka.plugability.DokkaPlugin
 import org.jetbrains.dokka.plugability.DokkaPluginApiPreview
 import org.jetbrains.dokka.plugability.PluginApiPreviewAcknowledgement
 import org.jetbrains.dokka.plugability.configuration
 import org.jetbrains.dokka.plugability.querySingle
+import org.jetbrains.dokka.transformers.documentation.PreMergeDocumentableTransformer
 
 class DevsitePlugin : DokkaPlugin() {
     private val dokkaBase by lazy { plugin<DokkaBase>() }
@@ -96,6 +98,17 @@ class DevsitePlugin : DokkaPlugin() {
 
     val hiddenPackageFilter by extending {
         CoreExtensions.documentableTransformer with PostMergePackageDocumentableFilter()
+    }
+    // Override the upstream filtering out of methods inherited from mapped types
+    // https://github.com/Kotlin/dokka/issues/3542
+    val jvmMappedMethodsFilter by extending {
+        dokkaBase.preMergeDocumentableTransformer with
+            NoopTransformer override
+            dokkaBase.jvmMappedMethodsFilter
+    }
+
+    private object NoopTransformer : PreMergeDocumentableTransformer {
+        override fun invoke(modules: List<DModule>): List<DModule> = modules
     }
 }
 

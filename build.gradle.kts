@@ -25,6 +25,7 @@ defaultTasks = mutableListOf("test", "jar", "shadowJar", "ktCheck", "publish", "
 group = "com.google.devsite"
 version = "1.6.3" // This is appended to archiveBaseName in the ShadowJar task.
 
+val useK2 = false
 plugins {
     alias(libs.plugins.kotlin)
     alias(libs.plugins.shadow)
@@ -42,7 +43,11 @@ dependencies {
     implementation(libs.jackson.dataformat.xml)
     implementation(libs.jackson.module.kotlin)
     compileOnly(libs.dokka.analysis.api)
-    runtimeOnly(libs.dokka.analysis.descriptors)
+    if (useK2) runtimeOnly(libs.dokka.analysis.symbols)
+    else runtimeOnly(libs.dokka.analysis.descriptors)
+    testImplementation(libs.dokka.base.test.utils) {
+        exclude("org.jetbrains.dokka", "analysis-kotlin-descriptors")
+    }
 
     implementation("org.jsoup:jsoup:1.16.2") // Remove when upstream updates their version
 
