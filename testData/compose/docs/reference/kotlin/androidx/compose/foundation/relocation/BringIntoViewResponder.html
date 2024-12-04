@@ -178,7 +178,7 @@ with(LocalDensity.current) {
             <tr>
               <td><code>suspend <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
-                <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewResponder.html#bringChildIntoView(kotlin.Function0)">bringChildIntoView</a>(localRect:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>)</code></div>
+                <div><code>@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewResponder.html#bringChildIntoView(kotlin.Function0)">bringChildIntoView</a>(localRect:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>?)</code></div>
                 <p>Bring this specified rectangle into bounds by making this scrollable parent scroll appropriately.</p>
               </td>
               <td>
@@ -213,7 +213,7 @@ with(LocalDensity.current) {
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewResponder.html#bringChildIntoView(kotlin.Function0)">bringChildIntoView</a>(localRect:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewResponder.html#bringChildIntoView(kotlin.Function0)">bringChildIntoView</a>(localRect:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>Bring this specified rectangle into bounds by making this scrollable parent scroll appropriately.</p>
           <p>This method should ensure that only one call is being handled at a time. If you use Compose's <code>Animatable</code> you get this for free, since it will cancel the previous animation when a new one is started while preserving velocity.</p>
           <div class="devsite-table-wrapper">
@@ -229,7 +229,7 @@ with(LocalDensity.current) {
               </thead>
               <tbody class="list">
                 <tr>
-                  <td><code>localRect:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
+                  <td><code>localRect:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/compose/ui/geometry/Rect.html">Rect</a>?</code></td>
                   <td>
                     <p>A function returning the rectangle that should be brought into view, relative to this node. This is the same rectangle that will have been passed to <code><a href="/reference/kotlin/androidx/compose/foundation/relocation/BringIntoViewResponder.html#calculateRectForParent(androidx.compose.ui.geometry.Rect)">calculateRectForParent</a></code>. The function may return a different value over time, if the bounds of the request change while the request is being processed. If the rectangle cannot be calculated, e.g. because the <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> are not attached, return null.</p>
                   </td>

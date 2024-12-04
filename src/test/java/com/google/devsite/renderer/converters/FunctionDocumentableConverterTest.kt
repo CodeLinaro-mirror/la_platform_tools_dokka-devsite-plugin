@@ -714,7 +714,7 @@ internal class FunctionDocumentableConverterTest(
         kotlinOnly {
             val parameter = summary.data.signature.data.parameters.single()
             val lambda = (parameter.data.type as LambdaTypeProjectionComponent)
-            assertThat(lambda.data.type.data.name).isEqualTo("Float")
+            assertThat(lambda.data.returnType.name()).isEqualTo("Float")
             assertThat(lambda.data.receiver!!.name()).isEqualTo("Float")
             assertThat(lambda.data.lambdaParams.size).isEqualTo(1)
             assertThat(lambda.data.lambdaParams.single().typeName()).isEqualTo("Float")

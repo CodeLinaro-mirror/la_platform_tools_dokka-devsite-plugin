@@ -41,7 +41,7 @@ internal data class DefaultLambdaTypeProjectionComponent(
             +" "
             nobr { +"->" }
             +" "
-            data.type.render(this)
+            data.returnType.render(this)
             // Render any generics on the return type
             data.generics.render(into, ShouldBreak.NO, brackets = "<>")
             if (data.nullability.nullable) +")?"
@@ -57,7 +57,7 @@ internal data class DefaultLambdaTypeProjectionComponent(
                     "" +
                         data.lambdaParams.joinMaybePrefix(prefix = "(", postfix = ")") +
                         " -> " +
-                        data.type +
+                        data.returnType +
                         data.generics.joinMaybePrefix(prefix = "<", postfix = ">")
 
         return if (data.nullability.nullable) "($result)?" else result

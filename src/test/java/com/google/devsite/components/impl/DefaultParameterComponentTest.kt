@@ -260,6 +260,7 @@ class DefaultParameterComponentTest {
                         DefaultLambdaTypeProjectionComponent(
                             LambdaTypeProjectionComponent.Params(
                                 type = NoopLink("Int"),
+                                returnType = NoopTypeProjectionComponent("Int"),
                                 nullability = Nullability.KOTLIN_DEFAULT,
                                 displayLanguage = Language.KOTLIN,
                                 lambdaParams =
@@ -295,6 +296,7 @@ class DefaultParameterComponentTest {
                         DefaultLambdaTypeProjectionComponent(
                             LambdaTypeProjectionComponent.Params(
                                 type = NoopLink("Int"),
+                                returnType = NoopTypeProjectionComponent("Int"),
                                 nullability = Nullability.KOTLIN_DEFAULT,
                                 displayLanguage = Language.KOTLIN,
                                 lambdaParams = listOf(NoopParameterComponent("String")),
@@ -327,6 +329,7 @@ class DefaultParameterComponentTest {
                         DefaultLambdaTypeProjectionComponent(
                             LambdaTypeProjectionComponent.Params(
                                 type = NoopLink("Int"),
+                                returnType = NoopTypeProjectionComponent("Int"),
                                 nullability = Nullability.KOTLIN_DEFAULT,
                                 displayLanguage = Language.KOTLIN,
                                 lambdaModifiers = listOf("suspend"),

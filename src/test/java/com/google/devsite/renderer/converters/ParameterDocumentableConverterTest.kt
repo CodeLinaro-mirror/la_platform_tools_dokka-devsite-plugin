@@ -195,7 +195,7 @@ internal class ParameterDocumentableConverterTest(
             assertThat(lambdaSymbol.data.receiver).isNull()
             assertThat(lambdaSymbol.data.lambdaModifiers).isEmpty()
             assertThat(lambdaSymbol.data.lambdaParams).isEmpty()
-            assertThat(lambdaSymbol.data.type.data.name).isEqualTo("String")
+            assertThat(lambdaSymbol.data.returnType.name()).isEqualTo("String")
         }
     }
 
@@ -309,7 +309,7 @@ internal class ParameterDocumentableConverterTest(
         kotlinOnly {
             assertThat(paramType.link().name).isEqualTo("Array")
             val paramGeneric = paramType.data.generics.single() as LambdaTypeProjectionComponent
-            assertThat(paramGeneric.data.type.data.name).isEqualTo("Int")
+            assertThat(paramGeneric.data.returnType.name()).isEqualTo("Int")
             assertThat(paramGeneric.data.lambdaParams.single().data.type.name()).isEqualTo("String")
             assertThat(paramGeneric.data.receiver!!.name()).isEqualTo("Float")
         }
@@ -683,7 +683,7 @@ internal class ParameterDocumentableConverterTest(
             assertThat(mapGenerics.first().link().name).isEqualTo("String")
             assertThat(mapGenerics.last().link().name).isEqualTo("Int")
 
-            val collectionGeneric = primary.data.generics.item()
+            val collectionGeneric = primary.data.returnType.data.generics.item()
             assertThat(collectionGeneric.link().name).isEqualTo("Float")
         }
     }
@@ -779,7 +779,7 @@ internal class ParameterDocumentableConverterTest(
             assertThat(lambdaParam.annotationComponents).isEmpty()
             assertThat(lambdaParam.type is LambdaTypeProjectionComponent).isTrue()
             val lambdaSymbol = (lambdaParam.type as LambdaTypeProjectionComponent)
-            assertThat(lambdaSymbol.data.type.data.name).isEqualTo("String")
+            assertThat(lambdaSymbol.data.returnType.name()).isEqualTo("String")
             assertThat(lambdaSymbol.nullable).isFalse()
             assertThat(lambdaSymbol.annotations.single().name).isEqualTo("ExtensionFunctionType")
             assertThat(lambdaSymbol.data.lambdaModifiers).isEmpty()
@@ -1598,6 +1598,25 @@ internal class ParameterDocumentableConverterTest(
         kotlinOnly {
             assertThat(paramType.name()).isEqualTo("Int")
             "kotlin/kotlin/Int" in paramType.data.type.data.url
+        }
+    }
+
+    @Test
+    fun `Lambda can have typealias return type and handles nullability`() {
+        val paramType =
+            """
+            |typealias Foo = String
+            |fun bar(baz: (() -> Foo?)?) = 5
+        """
+                .render()
+                .param("baz")
+                .data
+                .type
+        assertThat(paramType.nullable).isTrue()
+        kotlinOnly {
+            val lambdaReturnType = (paramType as LambdaTypeProjectionComponent).data.returnType
+            assertThat(lambdaReturnType.nullable).isTrue()
+            assertThat(lambdaReturnType.name()).isEqualTo("String") // This is a bit odd
         }
     }
 

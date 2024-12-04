@@ -453,7 +453,7 @@ internal class ParameterDocumentableConverter(
         proj: Projection,
         sourceSet: DokkaConfiguration.DokkaSourceSet,
         annotations: List<Annotation> = emptyList(),
-        nullability: Nullability? = null,
+        nullability: Nullability,
     ): TypeProjectionComponent {
         val returnType = proj.asTypeConstructor().projections.last()
         val lambdaModifiers: List<String> =
@@ -470,13 +470,18 @@ internal class ParameterDocumentableConverter(
 
         return DefaultLambdaTypeProjectionComponent(
             LambdaTypeProjectionComponent.Params(
-                type = returnType.toLink(),
-                nullability = proj.getNullability(displayLanguage) or nullability,
+                returnType =
+                    componentForProjection(
+                        returnType,
+                        false,
+                        sourceSet,
+                        propagatedNullability = proj.getNullability(displayLanguage)
+                    ),
+                nullability = nullability,
                 displayLanguage = displayLanguage,
                 lambdaModifiers = lambdaModifiers,
                 lambdaParams = lambdaParams,
                 receiver = proj.receiver()?.let { componentForProjection(it, false, sourceSet) },
-                generics = returnType.generics(isJavaSource = false, sourceSet = sourceSet),
                 annotationComponents =
                     annotationConverter.annotationComponents(
                         annotations = annotations,

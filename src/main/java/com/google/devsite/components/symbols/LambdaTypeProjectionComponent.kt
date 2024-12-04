@@ -25,7 +25,7 @@ internal interface LambdaTypeProjectionComponent : TypeProjectionComponent {
     override val data: Params
 
     override fun length(): Int {
-        val typeSize = data.type.length()
+        val typeSize = data.returnType.length()
         val annotationSize = data.annotationComponents.sumOf { it.length() }
         val lambdaParamsSize = data.lambdaParams.sumOf { it.length() }
         val lambdaModifiersSize = data.lambdaModifiers.sumOf { it.length }
@@ -33,7 +33,8 @@ internal interface LambdaTypeProjectionComponent : TypeProjectionComponent {
     }
 
     data class Params(
-        override val type: Link, // return type
+        val returnType: TypeProjectionComponent,
+        override val type: Link = returnType.data.type, // should never be accessed directly, use ^^
         override val nullability: Nullability,
         override val displayLanguage: Language,
         val lambdaModifiers: List<String> = emptyList(),
