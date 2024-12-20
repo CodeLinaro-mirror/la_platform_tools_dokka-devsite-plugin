@@ -359,19 +359,24 @@ fun <T : Documentable> List<T>.filterOutJvmSynthetic(): List<T> =
         elem.annotations(elem.getAsJavaSourceSet()).any { it.dri.classNames.equals("JvmSynthetic") }
     }
 
-/** Adds an annotation to a Documentable. Often used for injecting e.g. @JvmStatic. */
-internal fun <T> T.addAnnotation(newA: Annotations.Annotation): T where
+/** Injects @JvmStatic to the [Documentable]. */
+fun <T> T.addJvmStatic(): T where T : Documentable, T : WithExtraProperties<T> {
+    return addAnnotations(setOf(JvmStatic))
+}
+
+/** Adds annotations to a Documentable. Often used for injecting e.g. @JvmStatic. */
+fun <T> T.addAnnotations(newAnnotations: Collection<Annotations.Annotation>): T where
 T : Documentable,
 T : WithExtraProperties<T> {
-    return withNewExtras(extra.addAnnotation(newA, sourceSets))
+    return withNewExtras(extra.addAnnotations(newAnnotations, sourceSets))
 }
 
 /**
- * Adds [newA] as an annotation for each source set of [sourceSets] (even if the source set did not
- * previously have any annotations associated with it).
+ * Adds each annotation of [newAnnotations] as an annotation for each source set of [sourceSets]
+ * (even if the source set did not previously have any annotations associated with it).
  */
-internal fun <T> PropertyContainer<T>.addAnnotation(
-    newA: Annotations.Annotation,
+fun <T> PropertyContainer<T>.addAnnotations(
+    newAnnotations: Collection<Annotations.Annotation>,
     sourceSets: Set<DokkaConfiguration.DokkaSourceSet>,
 ): PropertyContainer<T> where T : AnnotationTarget {
     val newAnnotations =
@@ -379,7 +384,7 @@ internal fun <T> PropertyContainer<T>.addAnnotation(
             val newDirectAnnotations =
                 sourceSets.associateWith {
                     val previous = annotations.directAnnotations[it] ?: emptyList()
-                    previous + newA
+                    previous + newAnnotations
                 }
             annotations.copy(myContent = newDirectAnnotations + annotations.fileLevelAnnotations)
         }
@@ -500,7 +505,7 @@ fun List<DProperty>.gettersAndSetters(): List<DFunction> {
             var (property, func) = it
             // Static properties should also have static accessors
             if (property.isStaticAnnotated()) {
-                func = func?.addAnnotation(JvmStatic)
+                func = func?.addJvmStatic()
             }
             val callableName = func?.dri?.callable?.name ?: ""
             func =

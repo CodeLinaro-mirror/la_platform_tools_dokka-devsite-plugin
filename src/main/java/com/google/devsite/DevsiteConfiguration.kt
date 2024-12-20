@@ -92,6 +92,11 @@ import org.jetbrains.dokka.plugability.ConfigurableBlock
  *   symbols), which matches the behavior of the AndroidX RestrictTo lint check. Documenting the
  *   symbols is closer to the behavior of Metalava. (If a hidden parent symbol is overridden on a
  *   visible child class, then it will be included regardless.)
+ * @param propagatingAnnotations A list of fully qualified annotation names that should propagate
+ *   from elements to their children, e.g. from classes to nested classes, classes to functions, and
+ *   properties to accessors (annotations are not propagated from functions to parameters). For KMP,
+ *   annotations are propagated from the common source set to all source sets. By default, this is
+ *   the deprecation annotations.
  */
 data class DevsiteConfiguration(
     val docRootPath: String = "reference",
@@ -116,6 +121,7 @@ data class DevsiteConfiguration(
     // We set a default to the nullability annotations all android projects should use
     val validNullabilityAnnotations: List<String> = defaultValidNullabilityAnnotations,
     val includeHiddenParentSymbols: Boolean = false,
+    val propagatingAnnotations: List<String> = listOf("kotlin.Deprecated", "java.lang.Deprecated"),
 ) : ConfigurableBlock {
     init {
         if (javaDocsPath == null && kotlinDocsPath == null) {

@@ -736,7 +736,7 @@ internal abstract class ClasslikeDocumentableConverter(
             nonStatic +
                 objectInstanceProperty +
                 // Inject the @JvmStatic annotation to properties that need it
-                static.map { it.addAnnotation(JvmStatic) }
+                static.map { it.addJvmStatic() }
         } else {
             // Classlikes that are not (top-level) objects
             properties +
@@ -744,7 +744,7 @@ internal abstract class ClasslikeDocumentableConverter(
                 // to remember that we should later inject the `static` modifier to this
                 companionProperties
                     .filter { it.objectPropertyHoistedInJava() }
-                    .map { it.addAnnotation(JvmStatic) }
+                    .map { it.addJvmStatic() }
         }
     }
 

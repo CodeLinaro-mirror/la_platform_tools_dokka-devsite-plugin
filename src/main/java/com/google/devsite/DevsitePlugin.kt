@@ -19,6 +19,7 @@ package com.google.devsite
 import com.google.devsite.renderer.DocumentablesWrapper
 import com.google.devsite.renderer.MultiLanguageRenderer
 import com.google.devsite.transformers.DocTagsForCheckedExceptionsTransformer
+import com.google.devsite.transformers.PropagatedAnnotationsTransformer
 import org.jetbrains.dokka.CoreExtensions
 import org.jetbrains.dokka.analysis.kotlin.KotlinAnalysisPlugin
 import org.jetbrains.dokka.base.DokkaBase
@@ -64,6 +65,15 @@ class DevsitePlugin : DokkaPlugin() {
 
     val docTagsForCheckedExceptions by extending {
         CoreExtensions.documentableTransformer with DocTagsForCheckedExceptionsTransformer()
+    }
+
+    val propagateAnnotations by extending {
+        CoreExtensions.documentableTransformer providing
+            {
+                PropagatedAnnotationsTransformer(
+                    getDevsiteConfiguration(it).propagatingAnnotations,
+                )
+            }
     }
 
     val privateAnnotationFilter by extending {

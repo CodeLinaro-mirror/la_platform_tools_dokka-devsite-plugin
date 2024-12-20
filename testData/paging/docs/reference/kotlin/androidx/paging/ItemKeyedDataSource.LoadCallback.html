@@ -40,7 +40,7 @@
               <tr>
                 <td><code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadInitialCallback.html">ItemKeyedDataSource.LoadInitialCallback</a></code></td>
                 <td>
-                  <p>Callback for <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#loadInitial(androidx.paging.ItemKeyedDataSource.LoadInitialParams)">loadInitial</a></code> to return data and, optionally, position/count information.</p>
+                  <p><strong>This class is deprecated.</strong> ItemKeyedDataSource is deprecated and has been replaced by PagingSource</p>
                 </td>
               </tr>
             </tbody>
@@ -49,6 +49,7 @@
       </div>
 </devsite-expandable>    </div>
     <hr>
+    <aside class="caution"><strong>This class is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
     <p>Callback for ItemKeyedDataSource <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#loadBefore(androidx.paging.ItemKeyedDataSource.LoadParams)">loadBefore</a></code> and <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#loadAfter(androidx.paging.ItemKeyedDataSource.LoadParams)">loadAfter</a></code> to return data.</p>
     <p>A callback can be called only once, and will throw if called again.</p>
     <p>It is always valid for a DataSource loading method that takes a callback to stash the callback and call it later. This enables DataSources to be fully asynchronous, and to handle temporary, recoverable error states (such as a network error that can be retried).</p>
@@ -88,7 +89,8 @@
         <tbody class="list">
           <tr>
             <td>
-              <div><code>&lt;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadCallback.html#LoadCallback()">LoadCallback</a>()</code></div>
+              <div><code>&lt;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <span><del><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadCallback.html#LoadCallback()">LoadCallback</a></del></span>()</code></div>
+              <p><strong>This function is deprecated.</strong> ItemKeyedDataSource is deprecated and has been replaced by PagingSource</p>
             </td>
           </tr>
         </tbody>
@@ -109,8 +111,8 @@
           <tr>
             <td><code>abstract <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadCallback.html#onResult(kotlin.collections.List)">onResult</a>(data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;)</code></div>
-              <p>Called to pass loaded data from a DataSource.</p>
+              <div><code><span><del><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadCallback.html#onResult(kotlin.collections.List)">onResult</a></del></span>(data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;)</code></div>
+              <p><strong>This function is deprecated.</strong> ItemKeyedDataSource is deprecated and has been replaced by PagingSource</p>
             </td>
           </tr>
         </tbody>
@@ -124,7 +126,8 @@
             <h3 id="LoadCallback()">LoadCallback</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">&lt;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadCallback.html#LoadCallback()">LoadCallback</a>()</pre>
+        <pre class="api-signature no-pretty-print">&lt;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <span><del><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadCallback.html#LoadCallback()">LoadCallback</a></del></span>()</pre>
+        <aside class="caution"><strong>This function is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -156,7 +159,8 @@
             <h3 id="onResult(kotlin.collections.List)">onResult</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadCallback.html#onResult(kotlin.collections.List)">onResult</a>(data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<span><del><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadCallback.html#onResult(kotlin.collections.List)">onResult</a></del></span>(data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <aside class="caution"><strong>This function is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
         <p>Called to pass loaded data from a DataSource.</p>
         <p>Call this method from your ItemKeyedDataSource's <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#loadBefore(androidx.paging.ItemKeyedDataSource.LoadParams)">loadBefore</a></code> and <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#loadAfter(androidx.paging.ItemKeyedDataSource.LoadParams)">loadAfter</a></code> methods to return data.</p>
         <p>Call this from <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#loadInitial(androidx.paging.ItemKeyedDataSource.LoadInitialParams)">loadInitial</a></code> to initialize without counting available data, or supporting placeholders.</p>

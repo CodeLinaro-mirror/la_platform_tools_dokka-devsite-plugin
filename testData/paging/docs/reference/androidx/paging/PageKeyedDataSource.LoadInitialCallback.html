@@ -28,6 +28,7 @@
       <pre>public abstract class <a href="/reference/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html">PageKeyedDataSource.LoadInitialCallback</a>&lt;Key&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;Value&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;</pre>
     </p>
     <hr>
+    <aside class="caution"><strong>This class is deprecated.</strong><br>PageKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
     <p>Callback for <code><a href="/reference/androidx/paging/PageKeyedDataSource.html#loadInitial(androidx.paging.PageKeyedDataSource.LoadInitialParams)">loadInitial</a></code> to return data and, optionally, position/count information.</p>
     <p>A callback can be called only once, and will throw if called again.</p>
     <p>If you can compute the number of items in the data set before and after the loaded range, call the five parameter <code><a href="/reference/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int,kotlin.Any,kotlin.Any)">onResult</a></code> to pass that information. You can skip passing this information by calling the three parameter <code><a href="/reference/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int,kotlin.Any,kotlin.Any)">onResult</a></code>, either if it's difficult to compute, or if <code><a href="/reference/androidx/paging/PageKeyedDataSource.LoadInitialParams.html#placeholdersEnabled()">LoadInitialParams.placeholdersEnabled</a></code> is <code>false</code>, so the positioning information will be ignored.</p>
@@ -74,7 +75,8 @@
         <tbody class="list">
           <tr>
             <td>
-              <div><code>&lt;Key&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;Value&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html#LoadInitialCallback()">LoadInitialCallback</a>()</code></div>
+              <div><code>&lt;Key&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;Value&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <span><del><a href="/reference/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html#LoadInitialCallback()">LoadInitialCallback</a></del></span>()</code></div>
+              <p><strong>This method is deprecated.</strong> PageKeyedDataSource is deprecated and has been replaced by PagingSource</p>
             </td>
           </tr>
         </tbody>
@@ -95,15 +97,15 @@
           <tr>
             <td><code>abstract void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Any,kotlin.Any)">onResult</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;data,<br>&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;previousPageKey,<br>&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;nextPageKey<br>)</code></div>
-              <p>Called to pass loaded data from a DataSource.</p>
+              <div><code><span><del><a href="/reference/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Any,kotlin.Any)">onResult</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;data,<br>&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;previousPageKey,<br>&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;nextPageKey<br>)</code></div>
+              <p><strong>This method is deprecated.</strong> PageKeyedDataSource is deprecated and has been replaced by PagingSource</p>
             </td>
           </tr>
           <tr>
             <td><code>abstract void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int,kotlin.Any,kotlin.Any)">onResult</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;data,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;totalCount,<br>&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;previousPageKey,<br>&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;nextPageKey<br>)</code></div>
-              <p>Called to pass initial load state from a DataSource.</p>
+              <div><code><span><del><a href="/reference/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int,kotlin.Any,kotlin.Any)">onResult</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;data,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;totalCount,<br>&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;previousPageKey,<br>&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;nextPageKey<br>)</code></div>
+              <p><strong>This method is deprecated.</strong> PageKeyedDataSource is deprecated and has been replaced by PagingSource</p>
             </td>
           </tr>
         </tbody>
@@ -117,7 +119,8 @@
             <h3 id="LoadInitialCallback()">LoadInitialCallback</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;&lt;Key&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;Value&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html#LoadInitialCallback()">LoadInitialCallback</a>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;&lt;Key&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;Value&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <span><del><a href="/reference/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html#LoadInitialCallback()">LoadInitialCallback</a></del></span>()</pre>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>PageKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -155,7 +158,8 @@
             <h3 id="onResult(kotlin.collections.List,kotlin.Any,kotlin.Any)">onResult</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;void&nbsp;<a href="/reference/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Any,kotlin.Any)">onResult</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;data,<br>&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;previousPageKey,<br>&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;nextPageKey<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Any,kotlin.Any)">onResult</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;data,<br>&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;previousPageKey,<br>&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;nextPageKey<br>)</pre>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>PageKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
         <p>Called to pass loaded data from a DataSource.</p>
         <p>Call this from <code><a href="/reference/androidx/paging/PageKeyedDataSource.html#loadInitial(androidx.paging.PageKeyedDataSource.LoadInitialParams)">loadInitial</a></code> to initialize without counting available data, or supporting placeholders.</p>
         <p>It is always valid to pass a different amount of data than what is requested. Pass an empty list if there is no more data to load.</p>
@@ -199,7 +203,8 @@
             <h3 id="onResult(kotlin.collections.List,kotlin.Int,kotlin.Int,kotlin.Any,kotlin.Any)">onResult</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;void&nbsp;<a href="/reference/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int,kotlin.Any,kotlin.Any)">onResult</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;data,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;totalCount,<br>&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;previousPageKey,<br>&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;nextPageKey<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int,kotlin.Any,kotlin.Any)">onResult</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;data,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;totalCount,<br>&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;previousPageKey,<br>&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;nextPageKey<br>)</pre>
+        <aside class="caution"><strong>This method is deprecated.</strong><br>PageKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
         <p>Called to pass initial load state from a DataSource.</p>
         <p>Call this method from your DataSource's <code>loadInitial</code> function to return data, and inform how many placeholders should be shown before and after. If counting is cheap to compute (for example, if a network load returns the information regardless), it's recommended to pass data back through this method.</p>
         <p>It is always valid to pass a different amount of data than what is requested. Pass an empty list if there is no more data to load.</p>
