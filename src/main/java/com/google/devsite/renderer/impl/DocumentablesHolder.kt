@@ -39,6 +39,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import org.jetbrains.dokka.DelicateDokkaApi
 import org.jetbrains.dokka.analysis.kotlin.KotlinAnalysisPlugin
 import org.jetbrains.dokka.base.signatures.KotlinSignatureUtils.driOrNull
 import org.jetbrains.dokka.links.DRI
@@ -135,8 +136,10 @@ internal class DocumentablesHolder(
 
     // TODO(KMP) we currently have no plan to provide KMP samples b/181224204
     // private val analysisMap: Deferred<Map<SourceSet, SampleAnalysisEnvironment>>
-    internal val sampleAnalysisEnvironment =
+    @OptIn(DelicateDokkaApi::class)
+    internal val sampleAnalysisEnvironment by lazy {
         analysisPlugin.querySingle { sampleAnalysisEnvironmentCreator }.create()
+    }
     internal val commonSourceSet = module.getExpectOrCommonSourceSet()
 
     internal val logger = context.logger

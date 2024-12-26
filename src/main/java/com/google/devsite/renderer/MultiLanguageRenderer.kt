@@ -118,9 +118,12 @@ internal class MultiLanguageRenderer(
                     includeHiddenParentSymbols = devsiteConfiguration.includeHiddenParentSymbols,
                     analysisPlugin = analysisPlugin,
                 )
-
-            val failOnExceptionHandler = CoroutineExceptionHandler { _, except -> throw except }
-            launch(failOnExceptionHandler) {
+            fun cleanupAndThrow(holder: DocumentablesHolder) =
+                CoroutineExceptionHandler { _, except ->
+                    holder.sampleAnalysisEnvironment.close()
+                    throw except
+                }
+            launch(cleanupAndThrow(jHolder)) {
                 renderLanguage(
                     Language.JAVA,
                     devsiteConfiguration.javaDocsPath,
@@ -128,8 +131,10 @@ internal class MultiLanguageRenderer(
                     locationProvider,
                     devsiteConfiguration.includedHeadTagsPathJava,
                 )
+                @Suppress("BlockingMethodInNonBlockingContext")
+                jHolder.sampleAnalysisEnvironment.close()
             }
-            launch(failOnExceptionHandler) {
+            launch(cleanupAndThrow(kHolder)) {
                 renderLanguage(
                     Language.KOTLIN,
                     devsiteConfiguration.kotlinDocsPath,
@@ -137,6 +142,8 @@ internal class MultiLanguageRenderer(
                     locationProvider,
                     devsiteConfiguration.includedHeadTagsPathKotlin,
                 )
+                @Suppress("BlockingMethodInNonBlockingContext")
+                kHolder.sampleAnalysisEnvironment.close()
             }
         }
     }
