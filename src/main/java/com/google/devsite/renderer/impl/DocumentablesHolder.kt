@@ -137,7 +137,7 @@ internal class DocumentablesHolder(
     // TODO(KMP) we currently have no plan to provide KMP samples b/181224204
     // private val analysisMap: Deferred<Map<SourceSet, SampleAnalysisEnvironment>>
     @OptIn(DelicateDokkaApi::class)
-    internal val sampleAnalysisEnvironment by lazy {
+    internal val sampleAnalysisEnvironment = lazy {
         analysisPlugin.querySingle { sampleAnalysisEnvironmentCreator }.create()
     }
     internal val commonSourceSet = module.getExpectOrCommonSourceSet()

@@ -118,9 +118,15 @@ internal class MultiLanguageRenderer(
                     includeHiddenParentSymbols = devsiteConfiguration.includeHiddenParentSymbols,
                     analysisPlugin = analysisPlugin,
                 )
+            fun cleanupIfInitialized(holder: DocumentablesHolder) {
+                if (holder.sampleAnalysisEnvironment.isInitialized()) {
+                    @Suppress("BlockingMethodInNonBlockingContext")
+                    holder.sampleAnalysisEnvironment.value.close()
+                }
+            }
             fun cleanupAndThrow(holder: DocumentablesHolder) =
                 CoroutineExceptionHandler { _, except ->
-                    holder.sampleAnalysisEnvironment.close()
+                    cleanupIfInitialized(holder)
                     throw except
                 }
             launch(cleanupAndThrow(jHolder)) {
@@ -131,8 +137,7 @@ internal class MultiLanguageRenderer(
                     locationProvider,
                     devsiteConfiguration.includedHeadTagsPathJava,
                 )
-                @Suppress("BlockingMethodInNonBlockingContext")
-                jHolder.sampleAnalysisEnvironment.close()
+                cleanupIfInitialized(jHolder)
             }
             launch(cleanupAndThrow(kHolder)) {
                 renderLanguage(
@@ -142,8 +147,7 @@ internal class MultiLanguageRenderer(
                     locationProvider,
                     devsiteConfiguration.includedHeadTagsPathKotlin,
                 )
-                @Suppress("BlockingMethodInNonBlockingContext")
-                kHolder.sampleAnalysisEnvironment.close()
+                cleanupIfInitialized(kHolder)
             }
         }
     }
