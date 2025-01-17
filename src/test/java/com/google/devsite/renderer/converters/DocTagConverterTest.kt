@@ -53,6 +53,7 @@ import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.WithSources
+import org.jetbrains.dokka.model.childrenOfType
 import org.jetbrains.dokka.model.doc.A
 import org.jetbrains.dokka.model.doc.CodeBlock
 import org.jetbrains.dokka.model.doc.DocumentationLink
@@ -628,7 +629,7 @@ internal class DocTagConverterTest(
             |/**
             | * <img src="/path/to/img.jpg" alt="Alt text"/>
             | */
-            |public fun foo(Integer a)
+            |public void foo(Integer a)
         """
                 .render(java = true)
                 .documentation()
@@ -1107,6 +1108,58 @@ internal class DocTagConverterTest(
                 .documentation()
         for (doc in listOf(/*documentationJ, */ documentationK)) {
             assertThat(doc.toString()).contains("@OptIn")
+        }
+    }
+
+    @Test
+    fun `a href works in javadoc but not kdoc`() {
+        val documentationJ =
+            """
+            /**
+             * <a href="https://google.com">google</a>
+             * <a href="https://m3.material.io/components/time-pickers/overview" class="external"
+             * target="_blank">Material Design time picker</a>.
+             */
+            public static void foo() {}
+        """
+                .render(java = true)
+                .documentation()
+        val documentationK =
+            """
+            /**
+             * [google](https://google.com)
+             * [Material Design time picker](https://m3.material.io/components/time-pickers/overview)
+             * <a href="https://google.com">google</a>
+             * <a href="https://m3.material.io/components/time-pickers/overview" class="external"
+             * target="_blank">Material Design time picker</a>.
+             */
+            public fun foo(): Unit {}
+        """
+                .render()
+                .documentation()
+        for (documentation in listOf(documentationJ, documentationK)) {
+            val fooDesc = (documentation.single() as DescriptionComponent).data.components.single()
+            // documentationK has a " " element between the first two links, for some reason.
+            val fooLinks = fooDesc.childrenOfType<A>()
+            // the `<a href`s in kdoc do not become A's/Links.
+            assertThat(fooLinks).hasSize(2)
+            assertThat(fooLinks[0])
+                .isEqualTo(
+                    A(
+                        children = listOf(Text("google")),
+                        params = mapOf("href" to "https://google.com")
+                    )
+                )
+            assertThat(fooLinks[1])
+                .isEqualTo(
+                    A(
+                        children = listOf(Text("Material Design time picker")),
+                        params =
+                            mapOf(
+                                "href" to "https://m3.material.io/components/time-pickers/overview"
+                            )
+                    )
+                )
         }
     }
 
