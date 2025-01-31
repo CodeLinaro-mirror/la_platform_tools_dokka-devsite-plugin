@@ -8,10 +8,14 @@ import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.doc.DocumentationNode
 import org.jetbrains.dokka.model.doc.Throws as ThrowsTag
+import org.jetbrains.dokka.testApi.logger.TestLogger
+import org.jetbrains.dokka.utilities.DokkaConsoleLogger
+import org.jetbrains.dokka.utilities.LoggingLevel
 import org.junit.Ignore
 import org.junit.Test
 
-class DocTagsForCheckedExceptionsTest : BaseAbstractTest() {
+class DocTagsForCheckedExceptionsTest :
+    BaseAbstractTest(TestLogger(DokkaConsoleLogger(LoggingLevel.WARN))) {
     private val driCorrespondence: Correspondence<ThrowsTag, String> =
         Correspondence.transforming(
             { it?.exceptionAddress?.toString() },

@@ -43,9 +43,7 @@ import testApi.testRunner.TestDokkaConfigurationBuilder
  * Html output results can be found in testData/
  */
 abstract class IntegrationTestBase :
-    BaseAbstractTest(
-        logger = TestLogger(DokkaConsoleLogger(LoggingLevel.DEBUG)),
-    ) {
+    BaseAbstractTest(TestLogger(DokkaConsoleLogger(LoggingLevel.WARN))) {
     @Before
     fun setUp() {
         isRunningInDackkasTests = true

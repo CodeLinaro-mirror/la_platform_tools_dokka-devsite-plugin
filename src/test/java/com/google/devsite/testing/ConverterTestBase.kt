@@ -75,13 +75,14 @@ import org.jetbrains.dokka.plugability.DokkaPlugin
 import org.jetbrains.dokka.plugability.DokkaPluginApiPreview
 import org.jetbrains.dokka.plugability.PluginApiPreviewAcknowledgement
 import org.jetbrains.dokka.renderers.Renderer
+import org.jetbrains.dokka.testApi.logger.TestLogger
 import org.jetbrains.dokka.utilities.DokkaConsoleLogger
 import org.jetbrains.dokka.utilities.LoggingLevel
 import org.junit.Before
 
 internal abstract class ConverterTestBase(
     private val displayLanguage: Language = Language.JAVA,
-) : BaseAbstractTest() {
+) : BaseAbstractTest(TestLogger(DokkaConsoleLogger(LoggingLevel.WARN))) {
     @Before
     fun setUp() {
         isRunningInDackkasTests = true

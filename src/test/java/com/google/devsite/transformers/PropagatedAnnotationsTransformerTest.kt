@@ -30,10 +30,14 @@ import org.jetbrains.dokka.base.transformers.documentables.isDeprecated
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DEnum
 import org.jetbrains.dokka.model.Documentable
+import org.jetbrains.dokka.testApi.logger.TestLogger
 import org.jetbrains.dokka.toCompactJsonString
+import org.jetbrains.dokka.utilities.DokkaConsoleLogger
+import org.jetbrains.dokka.utilities.LoggingLevel
 import org.junit.Test
 
-class PropagatedAnnotationsTransformerTest : BaseAbstractTest() {
+class PropagatedAnnotationsTransformerTest :
+    BaseAbstractTest(TestLogger(DokkaConsoleLogger(LoggingLevel.WARN))) {
     private val configuration = createConfiguration(defaultPluginsConfiguration)
 
     private fun createConfiguration(

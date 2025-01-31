@@ -310,6 +310,9 @@ val classpathForTests by tasks.registering(ClasspathForTestsTask::class) {
     location.set(file("testData/classpath.txt"))
 }
 
+tasks.withType<JavaCompile>().configureEach {
+    options.release.set(11)
+}
 tasks.withType<KotlinCompile>().configureEach {
     compilerOptions {
         jvmTarget.set(JvmTarget.JVM_11)
@@ -318,22 +321,14 @@ tasks.withType<KotlinCompile>().configureEach {
     dependsOn(explodeAars)
 }
 
-tasks.getByName("test") {
+val testTask = tasks.named<Test>("test") {
     dependsOn(classpathForTests)
     dependsOn(tasks.withType<KotlinCompile>())
-}
 
-val String.capitalize: String  get() =
-    replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
-
-val testTask = tasks.named<Test>("test")
-testTask.configure {
     maxHeapSize = "4g"
     maxParallelForks = Runtime.getRuntime().availableProcessors()
     testLogging.events = hashSetOf(
         TestLogEvent.FAILED,
-        TestLogEvent.PASSED,
-        TestLogEvent.SKIPPED,
         TestLogEvent.STANDARD_OUT,
         TestLogEvent.STANDARD_ERROR
     )
