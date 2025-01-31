@@ -34,6 +34,13 @@ buildscript {
     }
 }
 
+dependencyResolutionManagement {
+    repositories {
+        maven("../../prebuilts/androidx/external")
+        maven("../../prebuilts/androidx/internal")
+    }
+}
+
 apply(plugin = "com.gradle.develocity")
 apply(plugin = "com.gradle.common-custom-user-data-gradle-plugin")
 

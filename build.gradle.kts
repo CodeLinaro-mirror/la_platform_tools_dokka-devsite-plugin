@@ -22,21 +22,12 @@ import java.util.Locale
 
 defaultTasks = mutableListOf("test", "jar", "shadowJar", "ktCheck", "publish", "zipTestResults")
 
-repositories {
-    maven("../../prebuilts/androidx/external")
-    maven("../../prebuilts/androidx/internal")
-}
-
 group = "com.google.devsite"
 version = "1.6.2" // This is appended to archiveBaseName in the ShadowJar task.
 
-val dokkaVersion = "2.0.20-dev-337"
-val kotlinVersion = "1.9.20"
-val jacksonVersion = "2.15.0"
-val coroutinesVersion = "1.6.3"
 plugins {
-    kotlin("jvm") version "2.1.10"
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    alias(libs.plugins.kotlin)
+    alias(libs.plugins.shadow)
     id("application")
     id("maven-publish")
 }
@@ -46,27 +37,26 @@ application {
 }
 
 dependencies {
-    implementation("org.jetbrains.dokka:dokka-base:$dokkaVersion")
-    implementation("org.jetbrains.dokka:dokka-core:$dokkaVersion")
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:$jacksonVersion")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
-    compileOnly("org.jetbrains.dokka:analysis-kotlin-api:$dokkaVersion")
-    runtimeOnly("org.jetbrains.dokka:analysis-kotlin-descriptors:$dokkaVersion")
+    implementation(libs.dokka.base)
+    implementation(libs.dokka.core)
+    implementation(libs.jackson.dataformat.xml)
+    implementation(libs.jackson.module.kotlin)
+    compileOnly(libs.dokka.analysis.api)
+    runtimeOnly(libs.dokka.analysis.descriptors)
 
     implementation("org.jsoup:jsoup:1.16.2") // Remove when upstream updates their version
 
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.9.1")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:$coroutinesVersion")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.10")
+    implementation(libs.kotlin.reflect)
+    implementation(libs.coroutines.core)
 
-    testImplementation("org.jetbrains.dokka:dokka-base-test-utils:$dokkaVersion")
-    testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlinVersion")
+    testImplementation(libs.dokka.base.test.utils)
+    testImplementation(libs.kotlin.test)
     testImplementation("junit:junit:4.13.2")
     testImplementation("com.google.truth:truth:1.1.3")
-    testImplementation("org.jetbrains.dokka:dokka-test-api:$dokkaVersion")
+    testImplementation(libs.dokka.test.api)
 
-    implementation("org.jetbrains.dokka:dokka-cli:$dokkaVersion") // Used in CLI integration test
+    implementation(libs.dokka.cli) // Used in CLI integration test
 }
 
 val shadowJar = tasks.withType<ShadowJar> {
@@ -146,10 +136,10 @@ dependencies {
     testDataImpl("io.reactivex.rxjava3:rxjava:3.0.2")
     testDataImpl("io.reactivex.rxjava2:rxjava:2.2.9")
     testDataImpl("org.robolectric:sandbox:4.12.2")
-    testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:$coroutinesVersion")
-    testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-rx2:$coroutinesVersion")
-    testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-rx3:$coroutinesVersion")
-    testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$coroutinesVersion")
+    testDataImpl(libs.coroutines.core)
+    testDataImpl(libs.coroutines.rx2)
+    testDataImpl(libs.coroutines.rx3)
+    testDataImpl(libs.coroutines.guava)
     testDataImpl("org.robolectric:android-all-instrumented:13-robolectric-9030017-i7")
     testDataImpl("junit:junit:4.13.2")
     testDataImpl("com.google.truth:truth:1.1.3")
