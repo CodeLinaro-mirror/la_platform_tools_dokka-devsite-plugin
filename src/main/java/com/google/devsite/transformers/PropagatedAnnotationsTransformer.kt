@@ -18,6 +18,7 @@ package com.google.devsite.transformers
 
 import com.google.devsite.renderer.converters.addAnnotations
 import com.google.devsite.renderer.converters.annotations
+import com.google.devsite.renderer.converters.companion
 import com.google.devsite.renderer.converters.fullName
 import com.google.devsite.renderer.converters.getExpectOrCommonSourceSet
 import org.jetbrains.dokka.model.Annotations.Annotation
@@ -33,7 +34,6 @@ import org.jetbrains.dokka.model.DObject
 import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
-import org.jetbrains.dokka.model.WithCompanion
 import org.jetbrains.dokka.model.WithConstructors
 import org.jetbrains.dokka.model.properties.PropertyContainer
 import org.jetbrains.dokka.model.properties.WithExtraProperties
@@ -75,11 +75,7 @@ class PropagatedAnnotationsTransformer(
         val newProperties = original.properties.map { transform(it, annotationsToPropagate) }
         val newClasslikes = original.classlikes.map { transform(it, annotationsToPropagate) }
         val newCompanion =
-            if (original is WithCompanion) {
-                original.companion?.let { transform(it, annotationsToPropagate) as DObject }
-            } else {
-                null
-            }
+            original.companion()?.let { transform(it, annotationsToPropagate) as DObject }
         val newConstructors =
             if (original is WithConstructors) {
                 original.constructors.map { transform(it, annotationsToPropagate) }

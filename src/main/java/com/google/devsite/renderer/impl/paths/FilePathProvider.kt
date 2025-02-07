@@ -21,15 +21,16 @@ import com.google.devsite.components.impl.DefaultLink
 import com.google.devsite.components.symbols.TypeProjectionComponent
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.anchor
+import com.google.devsite.renderer.converters.companion
 import com.google.devsite.renderer.converters.isHoistedFromCompanion
 import com.google.devsite.renderer.impl.DocumentablesGraph
 import java.nio.file.Paths
 import kotlin.io.path.pathString
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.parent
+import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DEnumEntry
 import org.jetbrains.dokka.model.Documentable
-import org.jetbrains.dokka.model.WithCompanion
 
 private val NON_DOCUMENTABLE_PREFIXES =
     listOf(
@@ -163,7 +164,7 @@ internal interface FilePathProvider {
      */
     fun isCompanion(dri: DRI): Boolean {
         val parentDocumentable = findInDocumentablesGraph(dri.parent)
-        return parentDocumentable is WithCompanion && parentDocumentable.companion?.dri == dri
+        return parentDocumentable is DClasslike && parentDocumentable.companion()?.dri == dri
     }
 
     data class ReferencePath(val name: String, val url: String)

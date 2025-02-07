@@ -18,6 +18,7 @@ package com.google.devsite.transformers
 
 import com.google.devsite.DevsiteConfiguration
 import com.google.devsite.renderer.converters.allAnnotations
+import com.google.devsite.renderer.converters.companion
 import com.google.devsite.testing.ConverterTestBase
 import com.google.devsite.testing.defaultPluginsConfiguration
 import kotlin.test.assertContentEquals
@@ -79,7 +80,7 @@ class PropagatedAnnotationsTransformerTest :
                 assertTrue(fooClass.constructors.single().isDeprecated())
                 assertTrue(fooClass.functions.single().isDeprecated())
                 assertTrue(fooClass.properties.single().isDeprecated())
-                assertTrue(fooClass.companion!!.isDeprecated())
+                assertTrue(fooClass.companion()!!.isDeprecated())
                 assertTrue(
                     (fooClass.classlikes.single { it.name == "Bar" } as DClass).isDeprecated()
                 )
@@ -259,7 +260,7 @@ class PropagatedAnnotationsTransformerTest :
                 assertTrue(property.getter!!.isDeprecated())
                 assertTrue(property.setter!!.isDeprecated())
 
-                val companionObject = fooClass.companion!!
+                val companionObject = fooClass.companion()!!
                 assertTrue(companionObject.isDeprecated())
                 assertTrue(companionObject.functions.single().isDeprecated())
             }

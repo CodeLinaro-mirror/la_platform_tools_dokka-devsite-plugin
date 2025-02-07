@@ -18,6 +18,7 @@ package com.google.devsite.renderer.impl
 
 import com.google.devsite.className
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.companion
 import com.google.devsite.renderer.converters.explodedChildren
 import com.google.devsite.renderer.converters.filterOutJvmSynthetic
 import com.google.devsite.renderer.converters.functionSignatureComparator
@@ -70,7 +71,6 @@ import org.jetbrains.dokka.model.TypeAliased
 import org.jetbrains.dokka.model.TypeParameter
 import org.jetbrains.dokka.model.UnresolvedBound
 import org.jetbrains.dokka.model.Void
-import org.jetbrains.dokka.model.WithCompanion
 import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.doc.NamedTagWrapper
 import org.jetbrains.dokka.model.doc.TagWrapper
@@ -151,7 +151,7 @@ internal class DocumentablesHolder(
             for (dPackage in module.packages) {
                 val children = async { dPackage.explodedChildren }
                 val companionsMap = async {
-                    computeCompanions(children.await().filterIsInstance<WithCompanion>())
+                    computeCompanions(children.await().filterIsInstance<DClasslike>())
                 }
                 val interestingObjectsList = async {
                     computeInterestingObjects(
@@ -470,8 +470,8 @@ internal class DocumentablesHolder(
     }
 
     /** Returns a Map<DRI, DObject> because `Set<Documentable>.contains` is unusable b/232944038. */
-    private fun computeCompanions(docs: List<WithCompanion>) =
-        docs.mapNotNull { it.companion }.associateBy { it.dri }
+    private fun computeCompanions(docs: List<DClasslike>) =
+        docs.mapNotNull { it.companion() }.associateBy { it.dri }
 
     /** Computes the list of objects that are interesting in the display language */
     private suspend fun computeInterestingObjects(

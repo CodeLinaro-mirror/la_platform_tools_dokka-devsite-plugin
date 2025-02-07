@@ -64,6 +64,7 @@ import org.jetbrains.dokka.model.UnresolvedBound
 import org.jetbrains.dokka.model.Visibility
 import org.jetbrains.dokka.model.WithAbstraction
 import org.jetbrains.dokka.model.WithChildren
+import org.jetbrains.dokka.model.WithCompanion
 import org.jetbrains.dokka.model.WithGenerics
 import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.WithSupertypes
@@ -88,6 +89,12 @@ internal fun <T> T.getErrorLocation(
     // If this happens, we should probably file an upstream bug.
     return "$sourceFilePath:UnknownLine"
 }
+
+// Due to https://github.com/Kotlin/dokka/issues/4022, we want to never use DClasslike.companion
+internal fun DClasslike.companion() =
+    if (this is WithCompanion)
+        this.classlikes.filterIsInstance<DObject>().singleOrNull { it.name == this.companion?.name }
+    else null
 
 @JvmName("This is internal and will never be used from JVM")
 internal fun Documentable.getErrorLocation() =

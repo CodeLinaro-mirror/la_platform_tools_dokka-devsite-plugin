@@ -88,7 +88,6 @@ import org.jetbrains.dokka.model.ExtraModifiers
 import org.jetbrains.dokka.model.GenericTypeConstructor
 import org.jetbrains.dokka.model.InheritedMember
 import org.jetbrains.dokka.model.KotlinModifier
-import org.jetbrains.dokka.model.WithCompanion
 import org.jetbrains.dokka.model.WithConstructors
 import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.WithSupertypes
@@ -1176,8 +1175,7 @@ internal abstract class ClasslikeDocumentableConverter(
 
     private suspend fun DClasslike.companionFunctionsAndProperties():
         Pair<List<DFunction>, List<DProperty>> {
-        return (this as? WithCompanion)?.companion?.nonInheritedTypes()
-            ?: return Pair(emptyList(), emptyList())
+        return this.companion()?.nonInheritedTypes() ?: return Pair(emptyList(), emptyList())
     }
 
     /**
