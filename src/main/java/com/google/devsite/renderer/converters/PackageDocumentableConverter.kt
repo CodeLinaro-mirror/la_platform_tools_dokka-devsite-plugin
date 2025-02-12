@@ -42,6 +42,7 @@ import com.google.devsite.renderer.impl.paths.FilePathProvider
 import com.google.devsite.renderer.not
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.DProperty
@@ -74,7 +75,10 @@ internal abstract class PackageDocumentableConverter(
     suspend fun summaryPage(): DevsitePage<PackageSummary> = coroutineScope {
         val interfaceList = docsHolder.interfacesFor(dPackage)
         val interfaces = async { docsToSummary(interfaceList) }
-        val classList = docsHolder.classesFor(dPackage)
+        val classList =
+            docsHolder.classlikesToDisplayFor(dPackage).filterIsInstance<DClass>().filterNot {
+                it.isExceptionClass
+            }
         val classes = async { docsToSummary(classList) }
         val enumList = docsHolder.enumsFor(dPackage)
         val enums = async { docsToSummary(enumList) }

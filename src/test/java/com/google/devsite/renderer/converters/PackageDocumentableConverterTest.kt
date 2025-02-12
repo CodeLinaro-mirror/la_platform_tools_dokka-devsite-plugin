@@ -347,7 +347,7 @@ internal class PackageDocumentableConverterTest(
         javaOnly {
             val classes = runBlocking {
                 val holder = ConverterHolder(this@PackageDocumentableConverterTest, page).holder
-                holder.classesFor(page.packages.last())
+                holder.classlikesToDisplayFor(page.packages.last())
             }
             assertThat(classes.last().name).isEqualTo("PagingRx")
             assertThat(classes.last().dri.classNames).isEqualTo("PagingRx")
@@ -359,7 +359,7 @@ internal class PackageDocumentableConverterTest(
         kotlinOnly {
             val classes = runBlocking {
                 val holder = ConverterHolder(this@PackageDocumentableConverterTest, page).holder
-                holder.classesFor(page.packages.last())
+                holder.classlikesToDisplayFor(page.packages.last())
             }
             assertThat(classes).isEmpty()
         }

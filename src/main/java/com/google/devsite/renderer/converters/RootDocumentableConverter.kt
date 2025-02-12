@@ -36,6 +36,7 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
+import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DPackage
 
@@ -46,11 +47,14 @@ internal class RootDocumentableConverter(
     private val docsHolder: DocumentablesHolder,
     private val javadocConverter: DocTagConverter,
 ) {
-    /** @return the root component for the class index page */
+    /**
+     * This actually provides an index for all (displayed) classlikes, not just classes
+     *
+     * @return the root component for the class index page
+     */
     // TODO(KMP b/256171288)
     suspend fun classesIndexPage(): DevsitePage<ClassIndex> {
-        val allClasses =
-            docsHolder.allClasslikes().filterNot { docsHolder.shouldNotBeDisplayed(it) }
+        val allClasses = docsHolder.allClasslikesToDisplay()
         // Custom sorting for this because of the alphabetization scheme. Grouping preserves sort.
         val alphabetizedClasses = allClasses.sortedBy { it.name() }.groupBy(::categorizeClasslikes)
         val componentClasses =
@@ -148,7 +152,12 @@ internal class RootDocumentableConverter(
     ): Deferred<DefaultTocPackage> = async {
         val interfaces = docsHolder.interfacesFor(dPackage).map(::typeForToc)
         val objects = docsHolder.interestingObjectsFor(dPackage).map(::typeForToc)
-        val classes = docsHolder.classesFor(dPackage).map(::typeForToc)
+        val classes =
+            docsHolder
+                .classlikesToDisplayFor(dPackage)
+                .filterIsInstance<DClass>()
+                .filterNot { it.isExceptionClass }
+                .map(::typeForToc)
         val enums = docsHolder.enumsFor(dPackage).map(::typeForToc)
         val exceptions = docsHolder.exceptionsFor(dPackage).map(::typeForToc)
         val annotations = docsHolder.annotationsFor(dPackage).map(::typeForToc)

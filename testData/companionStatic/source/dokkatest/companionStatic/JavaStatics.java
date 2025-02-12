@@ -58,6 +58,11 @@ public class JavaStatics {
         athing = TopLevelObject.namedTopLevelJvmStaticFun();
         athing = TopLevelObject.namedTopLevelconst;
         athing = TopLevelObject.namedTopLevelJvmField;
+        athing = TopLevelObject.InsideAnotherObjectObject.objectObjectNonStaticProperty;
+        // non-static properties (even if const) are not hoisted
+        athing = TopLevelObject.InsideAnotherObjectObject.objectObjectNonStaticProperty;
+        // The getter of this static property is not hoisted
+        athing = TopLevelObject.InsideAnotherObjectObject.getObjectObjectStaticProperty();
         athing = TopLevelInheritingObject.INSTANCE.inheritingTopLevelObjectFun();
         astring = TopLevelInheritingObject.INSTANCE.getMessage(); // From Exception
         athing = TopLevelInheritingObject.getInheritingTopLevelJvmStaticProp();

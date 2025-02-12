@@ -34,13 +34,16 @@ import com.google.devsite.renderer.converters.withJavaSynthetic
 import com.google.devsite.util.ClassVersionMetadata
 import com.google.devsite.util.LibraryMetadata
 import java.util.Locale
+import java.util.concurrent.ConcurrentHashMap
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.DelicateDokkaApi
+import org.jetbrains.dokka.InternalDokkaApi
 import org.jetbrains.dokka.analysis.kotlin.KotlinAnalysisPlugin
 import org.jetbrains.dokka.base.signatures.KotlinSignatureUtils.driOrNull
 import org.jetbrains.dokka.links.DRI
@@ -77,11 +80,14 @@ import org.jetbrains.dokka.model.doc.TagWrapper
 import org.jetbrains.dokka.model.properties.PropertyContainer
 import org.jetbrains.dokka.plugability.DokkaContext
 import org.jetbrains.dokka.plugability.querySingle
+import org.jetbrains.dokka.utilities.parallelMap
 
 /**
  * Centralized place to retrieve documentables.
  *
- * All doc rewriting should occur here.
+ * All doc rewriting should occur here. You should never call an enumeration method on a DModule or
+ * DPackage outside of this class. (E.g. instead of `dModule.packages`, use
+ * `documentablesHolder.package(dModule.dri)`.)
  */
 internal class DocumentablesHolder(
     val displayLanguage: Language,
@@ -102,9 +108,9 @@ internal class DocumentablesHolder(
 ) {
     private val packages = scope.async { computePackages(module) }
 
-    // Includes even should-not-be-displayed classlikes
-    private val classlikes = mutableMapOf<DRI, Deferred<List<DClasslike>>>()
-    private val classes = mutableMapOf<DRI, Deferred<List<DClass>>>()
+    // Includes all classlikes, including nested ones. Filtered for should-display and not.
+    private val allClasslikes = mutableMapOf<DRI, Deferred<List<DClasslike>>>()
+    private val allClasslikesToDisplay = mutableMapOf<DRI, Deferred<List<DClasslike>>>()
     private val syntheticClasses = mutableMapOf<DRI, Deferred<Set<DClass>>>()
     // We can't use a `by lazy {}` pattern for map values only, and lazy extension props don't exist
     private val syntheticClassNamesDeferred = mutableMapOf<DRI, Deferred<Set<String>>>()
@@ -115,11 +121,11 @@ internal class DocumentablesHolder(
     private val typeAliases = mutableMapOf<DRI, Deferred<List<DTypeAlias>>>()
     private val exceptions = mutableMapOf<DRI, Deferred<List<DClass>>>()
     private val companions = mutableMapOf<DRI, Deferred<Map<DRI, DObject>>>()
-    private val interestingObjects = mutableMapOf<DRI, Deferred<List<DObject>>>()
+    private val interestingness = mutableMapOf<DRI, Deferred<Map<DRI, Boringness>>>()
+    private val interestingObjectsInThisLanguage = mutableMapOf<DRI, Deferred<Set<DObject>>>()
     private val extensionFunctionMap = scope.async { computeExtensionFunctionMap() }
     private val extensionPropertyMap = scope.async { computeExtensionPropertyMap() }
 
-    private val allClasslikes: Deferred<List<DClasslike>>
     private val allCompanions: Map<DRI, DObject> by lazy {
         runBlocking {
             module.packages
@@ -130,7 +136,8 @@ internal class DocumentablesHolder(
     private val nestedClasslikesJob: Job
 
     // Filtering for should-show should be done by accessors of this field
-    private val nestedClasslikes = mutableMapOf<DRI, Deferred<List<DClasslike>>>()
+    // A map from a classlike's DRI to all of that classlike's nested classes, recursively.
+    private val nestedClasslikes = ConcurrentHashMap<DRI, Deferred<List<DClasslike>>>()
     private val classGraph: Deferred<ClassGraph>
     private val documentablesGraph: Deferred<DocumentablesGraph>
 
@@ -149,28 +156,57 @@ internal class DocumentablesHolder(
     init {
         scope.apply {
             for (dPackage in module.packages) {
+                // WARNING: the ordering in this section is nonobviously load-bearing.
+                // Some calculations use aMap[dPackage.dri]?. which may be null if order is changed.
                 val children = async { dPackage.explodedChildren }
                 val companionsMap = async {
                     computeCompanions(children.await().filterIsInstance<DClasslike>())
                 }
-                val interestingObjectsList = async {
-                    computeInterestingObjects(
-                        children.await().filterIsInstance<DObject>(),
-                        companionsMap.await().keys,
-                    )
+                interestingness[dPackage.dri] = async {
+                    companionsMap.await().values.associate { it.dri to it.boringness() }
                 }
                 val syntheticClassList = async { computeSyntheticClasses(dPackage) }
                 val syntheticClassNameSet = async {
                     syntheticClassList.await().map { it.name }.toSet()
                 }
-                val combinedClasslikesList = async {
-                    computeClasslikes(
-                        children.await(),
-                        syntheticClassList.await(),
-                    )
+                allClasslikes[dPackage.dri] = async {
+                    (children.await().filterIsInstance<DClasslike>() + syntheticClassList.await())
                 }
-
-                val classList = async { computeClasses(combinedClasslikesList.await()) }
+                companions[dPackage.dri] = companionsMap
+                val nonCompanionObjects: Deferred<Set<DObject>> = async {
+                    children.await().filterIsInstance<DObject>().toSet() -
+                        companions[dPackage.dri]!!.await().values.toSet()
+                }
+                // Interesting companions and all objects
+                interestingObjectsInThisLanguage[dPackage.dri] = async {
+                    interestingness[dPackage.dri]!!.await().let { interestingnessMap ->
+                        companions[dPackage.dri]!!
+                            .await()
+                            .filter { interestingnessMap[it.key]!!.interestingIn(displayLanguage) }
+                            .values
+                            .toSet()
+                    } + nonCompanionObjects.await()
+                }
+                launch {
+                    val objectsNamedCompanion =
+                        interestingObjectsInThisLanguage[dPackage.dri]!!
+                            .await()
+                            .filter { it.name == "Companion" }
+                            .map { it.dri }
+                            .toSet()
+                    (objectsNamedCompanion - companionsMap.await().keys).forEach {
+                        throw RuntimeException(
+                            "Object with illegal name: named 'Companion' but is not a companion " +
+                                "object: $it.",
+                        )
+                    }
+                }
+                allClasslikesToDisplay[dPackage.dri] = async {
+                    allClasslikes[dPackage.dri]!!
+                        .await()
+                        .filterNot { shouldNotBeDisplayed(it) }
+                        .sortedWith(simpleDocumentableComparator)
+                }
 
                 val enumList = async { computeEnums(children.await()) }
                 val interfaceList = async { computeInterfaces(children.await()) }
@@ -178,8 +214,6 @@ internal class DocumentablesHolder(
                 val typeAliasList = async { computeTypesAliases(dPackage) }
                 val exceptionList = async { computeExceptions(children.await()) }
 
-                classlikes[dPackage.dri] = combinedClasslikesList
-                classes[dPackage.dri] = classList
                 syntheticClasses[dPackage.dri] = syntheticClassList
                 syntheticClassNamesDeferred[dPackage.dri] = syntheticClassNameSet
                 enums[dPackage.dri] = enumList
@@ -187,40 +221,40 @@ internal class DocumentablesHolder(
                 annotations[dPackage.dri] = annotationList
                 typeAliases[dPackage.dri] = typeAliasList
                 exceptions[dPackage.dri] = exceptionList
-                interestingObjects[dPackage.dri] = interestingObjectsList
-                companions[dPackage.dri] = companionsMap
             }
         }
 
         // analysisMap = scope.async {
         // setUpAnalysis(context, analysisPlugin.querySingle { sampleAnalysisEnvironmentCreator }) }
 
-        allClasslikes = scope.async { computeClasslikes(module) }
         classGraph =
             scope.async {
                 computeClassGraph(
-                    allClasslikes.await() + allCompanions.values,
+                    // fine because companions that participate in the hierarchy should be displayed
+                    allClasslikesToDisplay(),
                     externalDocumentableProvider,
                     context.configuration.sourceSets,
                 )
             }
         documentablesGraph = scope.async { computeDocumentablesGraph(classGraph.await()) }
 
+        @OptIn(InternalDokkaApi::class)
         nestedClasslikesJob =
             scope.launch {
-                for (classlike in allClasslikes.await()) {
-                    val nestedClasslikesList = async {
-                        computeClasslikes(classlike.explodedChildren)
+                packages().parallelMap { aPackage ->
+                    for (classlike in allClasslikes[aPackage.dri]!!.await()) {
+                        nestedClasslikes[classlike.dri] = async {
+                            computeClasslikes(classlike.explodedChildren)
+                        }
                     }
-
-                    nestedClasslikes[classlike.dri] = nestedClasslikesList
                 }
             }
     }
 
     suspend fun packages(): List<DPackage> = packages.await()
 
-    suspend fun allClasslikes(): List<DClasslike> = allClasslikes.await()
+    suspend fun allClasslikesToDisplay(): List<DClasslike> =
+        packages().mapNotNull { allClasslikesToDisplay[it.dri] }.awaitAll().flatten()
 
     suspend fun classGraph(): ClassGraph = classGraph.await()
 
@@ -228,8 +262,8 @@ internal class DocumentablesHolder(
 
     // suspend fun analysisMap(): Map<SourceSet, SampleAnalysisEnvironment> = analysisMap.await()
 
-    suspend fun classlikesFor(dPackage: DPackage): List<DClasslike> =
-        classlikes.getValue(dPackage.dri).await()
+    suspend fun classlikesToDisplayFor(dPackage: DPackage): List<DClasslike> =
+        allClasslikesToDisplay[dPackage.dri]!!.await()
 
     /**
      * Returns whether the [dri] is for a synthetic class or a documentable contained in a synthetic
@@ -255,9 +289,6 @@ internal class DocumentablesHolder(
         return theseNestedClasslikes.filterNot { shouldNotBeDisplayed(it) }
     }
 
-    suspend fun classesFor(dPackage: DPackage): List<DClass> =
-        classes.getValue(dPackage.dri).await()
-
     suspend fun enumsFor(dPackage: DPackage): List<DEnum> = enums.getValue(dPackage.dri).await()
 
     suspend fun interfacesFor(dPackage: DPackage): List<DInterface> =
@@ -273,13 +304,23 @@ internal class DocumentablesHolder(
         exceptions.getValue(dPackage.dri).await()
 
     suspend fun interestingObjectsFor(dPackage: DPackage) =
-        interestingObjects.getValue(dPackage.dri).await()
+        interestingObjectsInThisLanguage
+            .getValue(dPackage.dri)
+            .await()
+            .sortedWith(simpleDocumentableComparator)
 
     suspend fun extensionFunctionsFor(dClasslike: DClasslike) =
         extensionFunctionMap.await().getOrDefault(dClasslike.dri, emptyList())
 
     suspend fun extensionPropertiesFor(dClasslike: DClasslike) =
         extensionPropertyMap.await().getOrDefault(dClasslike.dri, emptyList())
+
+    suspend fun interestingness(dObject: DObject) =
+        // The map is only populated for _companion_ objects; this checks that with fewest awaits
+        interestingness[dObject.containingPackageDri()]?.await()?.get(dObject.dri)
+            ?: Boringness.NEVER_BORING
+
+    private fun Documentable.containingPackageDri() = dri.copy(classNames = null)
 
     /**
      * Iterate through the all packages and create map of each class to its associated extension
@@ -363,13 +404,6 @@ internal class DocumentablesHolder(
             .sortedWith(simpleDocumentableComparator)
     }
 
-    /** Returns all should-be-documented classlikes in this module. */
-    private suspend fun computeClasslikes(module: DModule): List<DClasslike> {
-        return computeClasslikes(
-            module.packages.flatMap { classlikesFor(it) },
-        ) // classlikesFor already contains synth for Java
-    }
-
     /** Returns all classlikes among all given documentables. */
     private suspend fun computeClasslikes(
         docs: List<Documentable>,
@@ -384,10 +418,6 @@ internal class DocumentablesHolder(
             .filterNot { shouldNotBeDisplayed(it) }
             .sortedWith(simpleDocumentableComparator)
     }
-
-    /** Takes a sorted list of all classlikes and filters to the non-exception classes. */
-    private fun computeClasses(classlikes: List<DClasslike>): List<DClass> =
-        classlikes.filterIsInstance<DClass>().filterNot { it.isExceptionClass }
 
     /**
      * Computes the syntheticClasses from top level functions that are used to document Kotlin as
@@ -473,23 +503,6 @@ internal class DocumentablesHolder(
     private fun computeCompanions(docs: List<DClasslike>) =
         docs.mapNotNull { it.companion() }.associateBy { it.dri }
 
-    /** Computes the list of objects that are interesting in the display language */
-    private suspend fun computeInterestingObjects(
-        allObjects: List<DObject>,
-        companions: Set<DRI>,
-    ): List<DObject> {
-        // Un-ordinary companions are companions, but also appear in the ToC.
-        val interestingObjects = allObjects.filter { !it.isBoringCompanion() }
-        // Error-level enforcement that non-companion objects aren't named 'Companion'
-        // Thus, we can elsewhere freely use `isBoringCompanion` without checking companionhood.
-        (allObjects.filter { it.name == "Companion" }.map { it.dri } - companions).forEach {
-            throw RuntimeException(
-                "Object with illegal name: named 'Companion' but is not a companion object: $it.",
-            )
-        }
-        return interestingObjects.sortedWith(simpleDocumentableComparator)
-    }
-
     fun isCompanion(dObject: DObject) = dObject.dri in allCompanions.keys
 
     /**
@@ -498,31 +511,61 @@ internal class DocumentablesHolder(
      * anything that is not hoisted onto the containing object* (extension functions and properties
      * are not hoisted onto the containing object).
      *
-     * This function can also be used on DObjects where it is unknown whether it is a companion at
-     * all. This works because we enforce non-companion objects being named 'Companion' as an error.
+     * This function should only be called on companion objects.
      *
-     * Returns true: is both a companion and uninteresting Returns false: either is not a companion,
-     * or is interesting
+     * Returns:
+     * - NEVER_BORING: if the object is interesting in both languages
+     * - ALWAYS_BORING: if the object is boring in both languages
+     * - KOTLIN_ONLY_BORING: if the object is boring in Kotlin but interesting in Java
+     * - JAVA_ONLY_BORING: if the object is boring in Java but interesting in Kotlin
      */
-    private suspend fun DObject.isBoringCompanion(): Boolean =
-        name == "Companion" &&
-            supertypes.all { it.value.isEmpty() } &&
-            children.all { it.isHoistedFromCompanion(displayLanguage) } &&
-            // Even if all properties are hoisted, their Java accessors may not be.
-            (displayLanguage != Language.JAVA ||
-                properties.gettersAndSetters().all {
-                    it.isHoistedFromCompanion(displayLanguage)
-                }) &&
-            extensionFunctionsFor(this).isEmpty() &&
-            extensionPropertiesFor(this).isEmpty()
+    private suspend fun DObject.boringness(): Boringness {
+        if (
+            name != "Companion" ||
+                extensionFunctionsFor(this).isNotEmpty() ||
+                extensionPropertiesFor(this).isNotEmpty() ||
+                supertypes.any { it.value.isNotEmpty() }
+        )
+            return Boringness.NEVER_BORING
+        // If everything is hoised in Java, it is boring in Java, otherwise it is not boring in Java
+        val boringInJava =
+            children.all { it.isHoistedFromCompanion(Language.JAVA) } &&
+                // Even if all properties are hoisted, their Java accessors may not be.
+                properties.gettersAndSetters().all { it.isHoistedFromCompanion(Language.JAVA) }
+        // If everything is hoisted in Kotlin, it is boring in Kotlin, otherwise not
+        val boringInKotlin = children.all { it.isHoistedFromCompanion(Language.KOTLIN) }
+        return when ((boringInJava to boringInKotlin)) {
+            (true to true) -> Boringness.ALWAYS_BORING
+            (true to false) -> Boringness.JAVA_ONLY_BORING
+            (false to true) -> Boringness.KOTLIN_ONLY_BORING
+            (false to false) -> Boringness.NEVER_BORING
+            else -> throw RuntimeException()
+        }
+    }
+
+    internal enum class Boringness {
+        NEVER_BORING,
+        ALWAYS_BORING,
+        KOTLIN_ONLY_BORING,
+        JAVA_ONLY_BORING;
+
+        internal fun interestingIn(language: Language) =
+            (this == NEVER_BORING) ||
+                when (language) {
+                    Language.JAVA -> this == KOTLIN_ONLY_BORING
+                    Language.KOTLIN -> this == JAVA_ONLY_BORING
+                }
+    }
 
     /**
      * Determines whether the [classlike] should not be displayed, which is true for objects that
-     * aren't considered interesting.
+     * aren't considered interesting **in the displayLanguage**.
      */
-    internal suspend fun shouldNotBeDisplayed(classlike: DClasslike) =
-        // TODO: can this reuse `interestingObjects` instead of calling `isBoringCompanion` again?
-        classlike is DObject && classlike.isBoringCompanion()
+    private suspend fun shouldNotBeDisplayed(classlike: DClasslike) =
+        (classlike is DObject) &&
+            (interestingObjectsInThisLanguage[classlike.containingPackageDri()]
+                ?.await()
+                ?.contains(classlike) == false)
 
     internal fun printWarningFor(
         baseMessage: String,

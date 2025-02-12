@@ -52,7 +52,7 @@ internal class DevsiteRenderer(
         launch { packageRenderer.writeIndex(dPackage) }
         launch { packageRenderer.writePackageSummary(dPackage) }
 
-        for (clazz in docsHolder.classlikesFor(dPackage)) {
+        for (clazz in docsHolder.classlikesToDisplayFor(dPackage)) {
             launch { packageRenderer.writeClasslike(dPackage, clazz) }
         }
     }
