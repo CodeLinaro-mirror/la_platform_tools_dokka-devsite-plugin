@@ -54,4 +54,7 @@ abstract class OuterClass {
         /** Third */
         C
     }
+    companion object {
+        class InsideCompanionObject {}
+    }
 }
