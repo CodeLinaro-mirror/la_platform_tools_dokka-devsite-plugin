@@ -305,22 +305,29 @@ internal abstract class ClasslikeDocumentableConverter(
 
         val (inheritedFunctions, inheritedConstants, inheritedProperties) = inheritedTypes.await()
 
+        // Java-only (synthetic) classlikes' members are in the package summary in Kotlin
         val isJavaOnlyClasslike = docsHolder.isFromSyntheticClass(classlike.dri)
+        // Kotlin-only (non-JVM-target) members can't be used from a JVM target at all
         val isKotlinOnlyNonJVMClasslike =
             this@ClasslikeDocumentableConverter is KmpClasslikeConverter &&
                 classlike.getExpectOrCommonSourceSet().analysisPlatform !in
                     listOf(org.jetbrains.dokka.Platform.common, org.jetbrains.dokka.Platform.jvm)
+        // Some packages (e.g. compose) are explicitly set to be only displayed in one language
         val isNotDisplayedForOtherLanguage =
             docsHolder.excludedPackages[displayLanguage.not()]!!.any {
                 it.matches(classlike.packageName())
             }
+        // Some companion objects are 'boring' (everything is hoisted) in only one language. They
+        // switch to their parent class.
+        val isBoringInOnlyTheOtherDisplayLanguage =
+            (classlike is DObject) &&
+                !docsHolder.interestingness(classlike).interestingIn(displayLanguage.not())
 
         val pathForSwitcher =
             when {
-                // Kotlin-only (non-JVM-target) members can't be used from a JVM target at all
                 (isNotDisplayedForOtherLanguage || isKotlinOnlyNonJVMClasslike) -> null
-                // Java-only (synthetic) classlikes' members are in the package summary in Kotlin
-                isJavaOnlyClasslike -> pathProvider.forReference(classlike.dri.parent).url
+                isJavaOnlyClasslike || isBoringInOnlyTheOtherDisplayLanguage ->
+                    pathProvider.forReference(classlike.dri.parent).url
                 else -> pathProvider.forReference(classlike.dri).url
             }
 
