@@ -90,7 +90,7 @@ else
 fi
 
 # override JAVA_HOME, because CI machines have it and it points to very old JDK
-export JAVA_HOME="$APP_HOME/../../prebuilts/jdk/jdk11/$plat-x86"
+export JAVA_HOME="$APP_HOME/../../prebuilts/jdk/jdk21/$plat-x86"
 
 # Determine the Java command to use to start the JVM.
 if [ -n "$JAVA_HOME" ] ; then
