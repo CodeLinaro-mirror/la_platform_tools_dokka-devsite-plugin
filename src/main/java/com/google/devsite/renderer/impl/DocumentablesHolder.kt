@@ -269,14 +269,17 @@ internal class DocumentablesHolder(
      * Returns whether the [dri] is for a synthetic class or a documentable contained in a synthetic
      * class.
      */
-    fun isFromSyntheticClass(dri: DRI) =
-        dri.classNames in
-            syntheticClassNames.getOrPut(DRI(packageName = dri.packageName)) {
-                runBlocking {
-                    syntheticClassNamesDeferred[DRI(packageName = dri.packageName)]?.await()
-                        ?: emptySet()
-                }
+    fun isFromSyntheticClass(dri: DRI): Boolean {
+        val packageDri = DRI(packageName = dri.packageName)
+        if (packageDri !in syntheticClassNames) {
+            val result = runBlocking {
+                syntheticClassNamesDeferred[packageDri]?.await() ?: emptySet()
             }
+            syntheticClassNames[packageDri] = result
+            return dri.classNames in result
+        }
+        return dri.classNames in syntheticClassNames[packageDri]!!
+    }
 
     /**
      * Returns a classlike's nested classlikes. Does not include should-not-be-documented
