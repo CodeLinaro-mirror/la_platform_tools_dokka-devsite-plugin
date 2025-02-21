@@ -156,31 +156,28 @@ internal class DocumentablesHolder(
     init {
         scope.apply {
             for (dPackage in module.packages) {
-                // WARNING: the ordering in this section is nonobviously load-bearing.
-                // Some calculations use aMap[dPackage.dri]?. which may be null if order is changed.
                 val children = async { dPackage.explodedChildren }
                 val companionsMap = async {
                     computeCompanions(children.await().filterIsInstance<DClasslike>())
                 }
-                interestingness[dPackage.dri] = async {
+                val interestingnessMap = async {
                     companionsMap.await().values.associate { it.dri to it.boringness() }
                 }
                 val syntheticClassList = async { computeSyntheticClasses(dPackage) }
                 val syntheticClassNameSet = async {
                     syntheticClassList.await().map { it.name }.toSet()
                 }
-                allClasslikes[dPackage.dri] = async {
+                val allClasslikesList = async {
                     (children.await().filterIsInstance<DClasslike>() + syntheticClassList.await())
                 }
-                companions[dPackage.dri] = companionsMap
                 val nonCompanionObjects: Deferred<Set<DObject>> = async {
                     children.await().filterIsInstance<DObject>().toSet() -
-                        companions[dPackage.dri]!!.await().values.toSet()
+                        companionsMap.await().values.toSet()
                 }
                 // Interesting companions and all objects
-                interestingObjectsInThisLanguage[dPackage.dri] = async {
-                    interestingness[dPackage.dri]!!.await().let { interestingnessMap ->
-                        companions[dPackage.dri]!!
+                val interestingObjectsInThisLanguageList = async {
+                    interestingnessMap.await().let { interestingnessMap ->
+                        companionsMap
                             .await()
                             .filter { interestingnessMap[it.key]!!.interestingIn(displayLanguage) }
                             .values
@@ -189,7 +186,7 @@ internal class DocumentablesHolder(
                 }
                 launch {
                     val objectsNamedCompanion =
-                        interestingObjectsInThisLanguage[dPackage.dri]!!
+                        interestingObjectsInThisLanguageList
                             .await()
                             .filter { it.name == "Companion" }
                             .map { it.dri }
@@ -201,11 +198,13 @@ internal class DocumentablesHolder(
                         )
                     }
                 }
-                allClasslikesToDisplay[dPackage.dri] = async {
-                    allClasslikes[dPackage.dri]!!
-                        .await()
-                        .filterNot { shouldNotBeDisplayed(it) }
-                        .sortedWith(simpleDocumentableComparator)
+                val allDisplayedClasslikesList = async {
+                    interestingObjectsInThisLanguageList.await().let { interestingObjects ->
+                        allClasslikesList
+                            .await()
+                            .filterNot { shouldNotBeDisplayed(it, interestingObjects) }
+                            .sortedWith(simpleDocumentableComparator)
+                    }
                 }
 
                 val enumList = async { computeEnums(children.await()) }
@@ -221,6 +220,12 @@ internal class DocumentablesHolder(
                 annotations[dPackage.dri] = annotationList
                 typeAliases[dPackage.dri] = typeAliasList
                 exceptions[dPackage.dri] = exceptionList
+                interestingness[dPackage.dri] = interestingnessMap
+                companions[dPackage.dri] = companionsMap
+                allClasslikes[dPackage.dri] = allClasslikesList
+                allClasslikesToDisplay[dPackage.dri] = allDisplayedClasslikesList
+                interestingObjectsInThisLanguage[dPackage.dri] =
+                    interestingObjectsInThisLanguageList
             }
         }
 
@@ -289,7 +294,12 @@ internal class DocumentablesHolder(
         nestedClasslikesJob.join()
         val theseNestedClasslikes = nestedClasslikes.getValue(classlike.dri).await()
         // Remove boring companions, as defined by [shouldNotBeDisplayed]
-        return theseNestedClasslikes.filterNot { shouldNotBeDisplayed(it) }
+        return theseNestedClasslikes.filterNot {
+            shouldNotBeDisplayed(
+                it,
+                interestingObjectsInThisLanguage[classlike.containingPackageDri()]!!.await()
+            )
+        }
     }
 
     suspend fun enumsFor(dPackage: DPackage): List<DEnum> = enums.getValue(dPackage.dri).await()
@@ -418,7 +428,12 @@ internal class DocumentablesHolder(
                     excludedRegex.matches(thisClasslike.packageName())
                 }
             }
-            .filterNot { shouldNotBeDisplayed(it) }
+            .filterNot {
+                shouldNotBeDisplayed(
+                    it,
+                    interestingObjectsInThisLanguage[it.containingPackageDri()]!!.await()
+                )
+            }
             .sortedWith(simpleDocumentableComparator)
     }
 
@@ -564,11 +579,10 @@ internal class DocumentablesHolder(
      * Determines whether the [classlike] should not be displayed, which is true for objects that
      * aren't considered interesting **in the displayLanguage**.
      */
-    private suspend fun shouldNotBeDisplayed(classlike: DClasslike) =
-        (classlike is DObject) &&
-            (interestingObjectsInThisLanguage[classlike.containingPackageDri()]
-                ?.await()
-                ?.contains(classlike) == false)
+    private fun shouldNotBeDisplayed(
+        classlike: DClasslike,
+        interestingObjectsInThisLanguageList: Set<DObject>
+    ) = classlike is DObject && !interestingObjectsInThisLanguageList.contains(classlike)
 
     internal fun printWarningFor(
         baseMessage: String,
