@@ -479,6 +479,27 @@ internal class DocTagConverterTest(
         }
     }
 
+    @Test // b/398214231
+    fun `Can add @throws to primary constructor`() {
+        val module =
+            """
+            |/**
+            | * Class docs
+            | * @throws RuntimeException if construction fails
+            | */
+            |class Foo()
+        """
+                .render()
+        val classDoc = module.documentation({ this.clazz() }) // as DescriptionComponent
+        val constructorDoc = module.documentation({ this.constructor() })
+        assertThat(classDoc.size).isEqualTo(2)
+        assertThat((classDoc[1] as DocsSummaryList).data.header.toString()).isEqualTo("Throws")
+        // TODO(b/398214231) thrown exception is not propagated. Unclear if this is correct; if so,
+        // there should be some way to document a primary constructor
+        // assertThat(constructorDoc.size).isEqualTo(2)
+        // assertThat((classDoc[1] as DocsSummaryList).data.header.toString()).isEqualTo("Throws")
+    }
+
     @Test
     fun `Property parameter docs propagate correctly`() {
         // Property parameters are kotlin-exclusive
