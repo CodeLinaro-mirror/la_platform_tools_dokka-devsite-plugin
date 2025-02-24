@@ -144,6 +144,7 @@ dependencies {
     testDataImpl("junit:junit:4.13.2")
     testDataImpl("com.google.truth:truth:1.1.3")
     testDataImpl("com.android.tools.build:gradle:8.3.1")
+    testDataImpl("org.jspecify:jspecify:1.0.0")
 
     testDataImpl(fileTree("${layout.buildDirectory.get()}/exploded"))
 
@@ -325,7 +326,7 @@ val testTask = tasks.named<Test>("test") {
     dependsOn(classpathForTests)
     dependsOn(tasks.withType<KotlinCompile>())
 
-    maxHeapSize = "4g"
+    maxHeapSize = "16g"
     maxParallelForks = Runtime.getRuntime().availableProcessors()
     testLogging.events = hashSetOf(
         TestLogEvent.FAILED,
