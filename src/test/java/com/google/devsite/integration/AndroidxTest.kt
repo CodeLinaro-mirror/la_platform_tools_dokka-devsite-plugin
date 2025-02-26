@@ -55,6 +55,25 @@ class AndroidxTest : IntegrationTestBase() {
 
     @Ignore // Must be run manually
     @Test
+    fun `Run dackka against androidx docs-public jvm sources`() {
+        val base = getAndroidxPath()
+        executionTest(
+            testName = "androidxDocsPublicJvm",
+            paths =
+                listOf(
+                    "$base/../../out/androidx/docs-public/build/unzippedJvmSources/",
+                ),
+            sampleLocations =
+                listOf(
+                    "$base/../../out/androidx/docs-public/build/unzippedJvmSampleSources/",
+                    "$base/../../out/androidx/docs-public/build/unzippedDeprecatedSampleSources/",
+                    "$base/samples/"
+                ),
+        )
+    }
+
+    @Ignore // Must be run manually
+    @Test
     fun `Run dackka against full androidx tip-of-tree`() {
         // some projects are not intended to be documented and have a large backlog of docs issues
         val excludedPaths =
