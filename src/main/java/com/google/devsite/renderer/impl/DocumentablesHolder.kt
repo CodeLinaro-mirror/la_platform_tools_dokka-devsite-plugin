@@ -114,7 +114,8 @@ internal class DocumentablesHolder(
     private val syntheticClasses = mutableMapOf<DRI, Deferred<Set<DClass>>>()
     // We can't use a `by lazy {}` pattern for map values only, and lazy extension props don't exist
     private val syntheticClassNamesDeferred = mutableMapOf<DRI, Deferred<Set<String>>>()
-    private val syntheticClassNames = mutableMapOf<DRI, Set<String>>()
+    private val syntheticClassNames: MutableMap<DRI, Set<String>?> =
+        module.packages.associate<DPackage, DRI, Set<String>?> { it.dri to null }.toMutableMap()
     private val enums = mutableMapOf<DRI, Deferred<List<DEnum>>>()
     private val interfaces = mutableMapOf<DRI, Deferred<List<DInterface>>>()
     private val annotations = mutableMapOf<DRI, Deferred<List<DAnnotation>>>()
@@ -276,7 +277,7 @@ internal class DocumentablesHolder(
      */
     fun isFromSyntheticClass(dri: DRI): Boolean {
         val packageDri = DRI(packageName = dri.packageName)
-        if (packageDri !in syntheticClassNames) {
+        if (syntheticClassNames[packageDri] == null) {
             val result = runBlocking {
                 syntheticClassNamesDeferred[packageDri]?.await() ?: emptySet()
             }
@@ -545,7 +546,7 @@ internal class DocumentablesHolder(
                 supertypes.any { it.value.isNotEmpty() }
         )
             return Boringness.NEVER_BORING
-        // If everything is hoised in Java, it is boring in Java, otherwise it is not boring in Java
+        // If everything is hoisted in Java, it is boring in Java, else it is not boring in Java
         val boringInJava =
             children.all { it.isHoistedFromCompanion(Language.JAVA) } &&
                 // Even if all properties are hoisted, their Java accessors may not be.
