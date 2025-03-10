@@ -23,7 +23,7 @@ import java.util.Locale
 defaultTasks = mutableListOf("test", "jar", "shadowJar", "ktCheck", "publish", "zipTestResults")
 
 group = "com.google.devsite"
-version = "1.6.2" // This is appended to archiveBaseName in the ShadowJar task.
+version = "1.6.3" // This is appended to archiveBaseName in the ShadowJar task.
 
 plugins {
     alias(libs.plugins.kotlin)
