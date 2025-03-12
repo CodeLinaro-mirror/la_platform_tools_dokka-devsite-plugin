@@ -19,9 +19,11 @@ package com.google.devsite.integration
 import com.google.devsite.renderer.converters.failOnMissingSamples
 import com.google.devsite.testing.IntegrationTestBase
 import java.io.File
+import org.jetbrains.dokka.ExternalDocumentationLinkImpl
 import org.junit.After
 import org.junit.Ignore
 import org.junit.Test
+import testApi.testRunner.TestDokkaConfigurationBuilder
 
 /** Allows testing against lots of androidx sources, e.g. for profiling purposes. */
 class AndroidxTest : IntegrationTestBase() {
@@ -57,17 +59,40 @@ class AndroidxTest : IntegrationTestBase() {
     @Test
     fun `Run dackka against androidx docs-public jvm sources`() {
         val base = getAndroidxPath()
+        val docsPublic = "${getAndroidxPath()}/../../out/androidx/docs-public"
         executionTest(
             testName = "androidxDocsPublicJvm",
             paths =
                 listOf(
-                    "$base/../../out/androidx/docs-public/build/unzippedJvmSources/",
+                    "$docsPublic/build/unzippedJvmSources/",
                 ),
             sampleLocations =
                 listOf(
-                    "$base/../../out/androidx/docs-public/build/unzippedJvmSampleSources/",
-                    "$base/../../out/androidx/docs-public/build/unzippedDeprecatedSampleSources/",
+                    "$docsPublic/build/unzippedJvmSampleSources/",
+                    "$docsPublic/build/unzippedDeprecatedSampleSources/",
                     "$base/samples/"
+                ),
+        )
+    }
+
+    @Ignore // Must be run manually
+    @Test
+    fun `Run dackka against androidx docs-public multiplatform sources`() {
+        val base = getAndroidxPath()
+        val docsPublic = "${getAndroidxPath()}/../../out/androidx/docs-public"
+        executionTest(
+            testName = "androidxDocsPublicMultiplatform",
+            paths =
+                listOf(
+                    "$docsPublic/build/unzippedJvmSources/",
+                    "$docsPublic/build/unzippedMultiplatformSources/",
+                ),
+            sampleLocations =
+                listOf(
+                    "$docsPublic/build/unzippedJvmSampleSources/",
+                    "$docsPublic/build/unzippedDeprecatedSampleSources/",
+                    "$docsPublic/build/unzippedMultiplatformSampleSources/",
+                    "$base/samples/",
                 ),
         )
     }
@@ -191,5 +216,17 @@ class AndroidxTest : IntegrationTestBase() {
     @After
     fun tearDown() {
         failOnMissingSamples = true
+    }
+
+    override fun TestDokkaConfigurationBuilder.makeSourcesets(
+        sources: List<File>,
+        samplesLocations: List<String>,
+        includeFiles: List<String>,
+        externalLinks: List<ExternalDocumentationLinkImpl>,
+    ) {
+        if (sources.size == 1) {
+            return singlePlatformSourceSets(sources, samplesLocations, includeFiles, externalLinks)
+        }
+        return multiPlatformSourceSets(sources, samplesLocations, includeFiles, externalLinks, true)
     }
 }

@@ -49,7 +49,7 @@ abstract class IntegrationTestBase :
         isRunningInDackkasTests = true
     }
 
-    open fun TestDokkaConfigurationBuilder.makeSourcesets(
+    fun TestDokkaConfigurationBuilder.singlePlatformSourceSets(
         sources: List<File>,
         samplesLocations: List<String>,
         includeFiles: List<String> = emptyList(),
@@ -69,6 +69,13 @@ abstract class IntegrationTestBase :
                 )
         }
     }
+
+    open fun TestDokkaConfigurationBuilder.makeSourcesets(
+        sources: List<File>,
+        samplesLocations: List<String>,
+        includeFiles: List<String> = emptyList(),
+        externalLinks: List<ExternalDocumentationLinkImpl> = emptyList(),
+    ) = singlePlatformSourceSets(sources, samplesLocations, includeFiles, externalLinks)
 
     /** For when a test uses source outside of `./testData/` */
     open fun makeExternalConfiguration(
@@ -485,9 +492,6 @@ abstract class IntegrationTestBase :
         return messages.map { it.replace(sourceDir, "\$SRC_DIR") }.sorted().joinToString("\n")
     }
 
-    protected fun classpathFromFile(file: String): List<String> =
-        File(file).bufferedReader().readLines()
-
     /** Confirms that the given file to output map matches the contents of the given directory. */
     private fun verifyOutput(generatedFiles: Map<String, String>, outputPath: String) {
         val outputDirectory = File(outputPath).absolutePath
@@ -545,3 +549,5 @@ abstract class IntegrationTestBase :
         }
     }
 }
+
+fun classpathFromFile(file: String): List<String> = File(file).bufferedReader().readLines()
