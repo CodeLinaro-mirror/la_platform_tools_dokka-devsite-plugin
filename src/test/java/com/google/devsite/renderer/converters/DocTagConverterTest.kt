@@ -56,6 +56,7 @@ import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.childrenOfType
 import org.jetbrains.dokka.model.doc.A
 import org.jetbrains.dokka.model.doc.CodeBlock
+import org.jetbrains.dokka.model.doc.CodeInline
 import org.jetbrains.dokka.model.doc.DocumentationLink
 import org.jetbrains.dokka.model.doc.Img
 import org.jetbrains.dokka.model.doc.P
@@ -2144,6 +2145,39 @@ internal class DocTagConverterTest(
         val documentation = module.documentation({ this.explicitClasslike("Foo") })
         val description = (documentation.first() as DescriptionComponent).text()
         assertThat(description).doesNotContain("{@value")
+    }
+
+    @Ignore("b/396171398, go/dokka-upstream-bug/4048")
+    @Test
+    fun `Test @inheritDoc and @code`() {
+        val module =
+            """
+            |/** {@code inherited code} */
+            |public class ParentClass {}
+            |/** {@inheritDoc} */
+            |public class ChildClass extends ParentClass {}
+            """
+                .render(java = true)
+        val parentDocumentation = module.documentation({ explicitClasslike("ParentClass") })
+        val parentCode =
+            (parentDocumentation.first() as DescriptionComponent)
+                .data
+                .components
+                .flatMap { it.childrenOfType<CodeInline>() }
+                .singleOrNull()
+        assertThat(parentCode).isNotNull()
+        assertThat(parentCode!!.text()).isEqualTo("inherited code")
+
+        // Test fails here: there is no CodeInline, and the text is "inherited code}"
+        val childDocumentation = module.documentation({ explicitClasslike("ChildClass") })
+        val childCode =
+            (childDocumentation.first() as DescriptionComponent)
+                .data
+                .components
+                .flatMap { it.childrenOfType<CodeInline>() }
+                .singleOrNull()
+        assertThat(childCode).isNotNull()
+        assertThat(childCode!!.text()).isEqualTo("inherited code")
     }
 
     private fun DModule.description(
