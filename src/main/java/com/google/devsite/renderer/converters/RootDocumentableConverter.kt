@@ -151,7 +151,11 @@ internal class RootDocumentableConverter(
         packagePrefixToRemove: String?,
     ): Deferred<DefaultTocPackage> = async {
         val interfaces = docsHolder.interfacesFor(dPackage).map(::typeForToc)
-        val objects = docsHolder.interestingObjectsFor(dPackage).map(::typeForToc)
+        val objects =
+            docsHolder
+                .interestingObjectsFor(dPackage)
+                .filterNot { it.isExceptionClass }
+                .map(::typeForToc)
         val classes =
             docsHolder
                 .classlikesToDisplayFor(dPackage)

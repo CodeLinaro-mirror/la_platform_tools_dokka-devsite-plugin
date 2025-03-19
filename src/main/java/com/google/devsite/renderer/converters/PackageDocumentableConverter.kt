@@ -82,7 +82,8 @@ internal abstract class PackageDocumentableConverter(
         val classes = async { docsToSummary(classList) }
         val enumList = docsHolder.enumsFor(dPackage)
         val enums = async { docsToSummary(enumList) }
-        val objectList = docsHolder.interestingObjectsFor(dPackage)
+        val objectList =
+            docsHolder.interestingObjectsFor(dPackage).filterNot { it.isExceptionClass }
         val objects = async { docsToSummary(objectList) }
         val exceptionList = docsHolder.exceptionsFor(dPackage)
         val exceptions = async { docsToSummary(exceptionList) }

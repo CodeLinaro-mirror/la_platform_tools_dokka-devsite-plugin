@@ -120,7 +120,7 @@ internal class DocumentablesHolder(
     private val interfaces = mutableMapOf<DRI, Deferred<List<DInterface>>>()
     private val annotations = mutableMapOf<DRI, Deferred<List<DAnnotation>>>()
     private val typeAliases = mutableMapOf<DRI, Deferred<List<DTypeAlias>>>()
-    private val exceptions = mutableMapOf<DRI, Deferred<List<DClass>>>()
+    private val exceptions = mutableMapOf<DRI, Deferred<List<DClasslike>>>()
     private val companions = mutableMapOf<DRI, Deferred<Map<DRI, DObject>>>()
     private val interestingness = mutableMapOf<DRI, Deferred<Map<DRI, Boringness>>>()
     private val interestingObjectsInThisLanguage = mutableMapOf<DRI, Deferred<Set<DObject>>>()
@@ -314,7 +314,7 @@ internal class DocumentablesHolder(
     suspend fun typeAliasesFor(dPackage: DPackage): List<DTypeAlias> =
         typeAliases.getValue(dPackage.dri).await()
 
-    suspend fun exceptionsFor(dPackage: DPackage): List<DClass> =
+    suspend fun exceptionsFor(dPackage: DPackage): List<DClasslike> =
         exceptions.getValue(dPackage.dri).await()
 
     suspend fun interestingObjectsFor(dPackage: DPackage) =
@@ -511,9 +511,9 @@ internal class DocumentablesHolder(
         return dPackage.typealiases.sortedWith(simpleDocumentableComparator)
     }
 
-    private fun computeExceptions(docs: List<Documentable>): List<DClass> {
+    private fun computeExceptions(docs: List<Documentable>): List<DClasslike> {
         return docs
-            .filterIsInstance<DClass>()
+            .filterIsInstance<DClasslike>()
             .filter { it.isExceptionClass }
             .sortedWith(simpleDocumentableComparator)
     }

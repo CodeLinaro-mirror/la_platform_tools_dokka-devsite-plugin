@@ -224,12 +224,15 @@ fun Documentable.stringForType(displayLanguage: Language): String =
     }
 
 /**
- * Returns if a class is an Exception or not isException, the built-in method in Dokka, only
+ * Returns if a classlike is an Exception or not. isException, the built-in method in Dokka, only
  * considers its supertype, so we also look for functions that are Throwable
  * https://github.com/Kotlin/dokka/issues/1557
  */
-val DClass.isExceptionClass: Boolean
-    get() = isException || functions.any { function -> function.dri.classNames == "Throwable" }
+val DClasslike.isExceptionClass: Boolean
+    @Suppress("UNCHECKED_CAST")
+    get() =
+        (this as? WithExtraProperties<out DClasslike>)?.isException == true ||
+            functions.any { function -> function.dri.classNames == "Throwable" }
 
 /**
  * Returns whether the java class was synthetically generated from a Kotlin extension function class
