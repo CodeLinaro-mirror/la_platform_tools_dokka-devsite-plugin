@@ -123,14 +123,14 @@ val testDataSourcesKmp by project.configurations.creating
 testDataSourcesKmp.extendsFrom(testDataParent)
 testDataSourcesKmp.setResolveSources(isKmp = true)
 
+// We want non-alpha versions here so we know the prebuilts won't get deleted
 val lifecycleVersion = "2.6.0"
 val collectionsVersion = "1.3.0"
 val composeVersion = "1.5.0"
 val composeMaterial3Version = "1.2.0"
 val benchmarkVersion = "1.2.0"
-val appsearchVersion = "1.1.0-alpha05"
-val biometricVersion = "1.4.0-alpha02"
-val cameraVersion = "1.5.0-alpha02"
+val appsearchVersion = "1.1.0-beta01"
+val cameraVersion = "1.4.1"
 val carVersion = "1.4.0"
 dependencies {
     testDataImpl("io.reactivex.rxjava3:rxjava:3.0.2")
@@ -179,9 +179,6 @@ dependencies {
     testDataSources("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycleVersion")
     testDataSources("androidx.activity:activity:1.6.0")
     testDataSources("androidx.activity:activity-ktx:1.6.0")
-    testDataSources("androidx.ads:ads-identifier:1.0.0-alpha04")
-    testDataSources("androidx.ads:ads-identifier-common:1.0.0-alpha04")
-    testDataSources("androidx.ads:ads-identifier-provider:1.0.0-alpha04")
     testDataSourcesKmp("androidx.annotation:annotation:1.6.0")
     testDataSources("androidx.annotation:annotation-experimental:1.3.0")
     //testDataSources("androidx.annotation:annotation-experimental-lint:1.0.0-rc01") // need dep
@@ -199,18 +196,13 @@ dependencies {
     testDataSources("androidx.arch.core:core-testing:2.2.0")
     testDataSources("androidx.asynclayoutinflater:asynclayoutinflater:1.0.0")
     testDataSources("androidx.autofill:autofill:1.3.0-beta01")
-    testDataSources("androidx.benchmark:benchmark:1.0.0-alpha03")
     testDataSources("androidx.benchmark:benchmark-common:$benchmarkVersion")
     testDataImpl(gradleApi())
     testDataSources("androidx.benchmark:benchmark-junit4:$benchmarkVersion")
     testDataSources("androidx.benchmark:benchmark-macro:$benchmarkVersion")
     testDataSources("androidx.benchmark:benchmark-macro-junit4:$benchmarkVersion")
-    testDataSources("androidx.biometric:biometric:$biometricVersion")
-    testDataSources("androidx.biometric:biometric-ktx:$biometricVersion")
     testDataSources("androidx.browser:browser:1.5.0")
     testDataSources("androidx.camera:camera-camera2:$cameraVersion")
-    testDataSources("androidx.camera:camera-camera2-pipe:1.0.0-alpha01")
-    testDataSources("androidx.camera:camera-camera2-pipe-testing:1.0.0-alpha01")
     testDataSources("androidx.camera:camera-core:$cameraVersion")
     testDataSources("androidx.camera:camera-extensions:$cameraVersion")
     testDataSources("androidx.camera:camera-lifecycle:$cameraVersion")
@@ -220,25 +212,17 @@ dependencies {
     testDataSources("androidx.camera:camera-previewview:1.1.0-beta02")
     testDataSources("androidx.camera:camera-video:$cameraVersion")
     testDataSources("androidx.camera:camera-view:$cameraVersion")
-    testDataSources("androidx.camera:camera-viewfinder:1.4.0-alpha08")
+    testDataSources("androidx.camera:camera-viewfinder:1.3.0")
     testDataSources("androidx.car.app:app:$carVersion")
-    testDataSources("androidx.car.app:app-aaos:1.0.0-alpha01")
     testDataSources("androidx.car.app:app-automotive:$carVersion")
     testDataSources("androidx.car.app:app-projected:$carVersion")
     testDataSources("androidx.car.app:app-testing:$carVersion")
-    // testDataSources("androidx.car:car:1.0.0-alpha7") // Obsolete artifacts
-    // testDataSources("androidx.car:car-cluster:1.0.0-alpha5")
-    // testDataSources("androidx.car:car-moderator:1.0.0-alpha1")
     testDataSources("androidx.cardview:cardview:1.0.0")
     // We do not test against androidx.test, because they are not part of the androidx build
     // and also publish source jars with problematic no-write-permission on parts
     testDataAars("androidx.test.uiautomator:uiautomator:2.2.0") // no source jar
     testDataSources("androidx.tracing:tracing:1.2.0")
     testDataSources("androidx.tracing:tracing-ktx:1.2.0")
-    testDataSources("androidx.tracing:tracing-perfetto:1.0.0")
-    testDataSources("androidx.tracing:tracing-perfetto-binary:1.0.0")
-    testDataSources("androidx.tracing:tracing-perfetto-common:1.0.0-alpha16")
-
     testDataSources("androidx.paging:paging-common:3.2.0")
     testDataSources("androidx.paging:paging-common-ktx:3.2.0")
     testDataSources("androidx.paging:paging-runtime:3.2.0")

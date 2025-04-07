@@ -134,9 +134,6 @@ class AndroidxTest : IntegrationTestBase() {
                 listOf(
                     "activity",
                     "activity-ktx",
-                    "ads-identifier",
-                    "ads-identifier-common",
-                    "ads-identifier-provider",
                     "annotation",
                     "annotation-experimental",
                     // "annotation-experimental-lint", // com.android.tools.lint is not a dependency
@@ -154,7 +151,6 @@ class AndroidxTest : IntegrationTestBase() {
                     "core-testing",
                     "asynclayoutinflater",
                     "autofill",
-                    "benchmark",
                     "benchmark-common",
                     "benchmark-junit4",
                     "benchmark-macro",
@@ -164,8 +160,6 @@ class AndroidxTest : IntegrationTestBase() {
                     // "biometric-ktx",
                     "browser",
                     "camera-camera2",
-                    "camera-camera2-pipe",
-                    "camera-camera2-pipe-testing",
                     "camera-core",
                     "camera-extensions",
                     "camera-lifecycle",
@@ -176,7 +170,6 @@ class AndroidxTest : IntegrationTestBase() {
                     "camera-view",
                     "camera-viewfinder",
                     "app", // Part of Car; poorly named
-                    "app-aaos",
                     "app-automotive",
                     "app-projected",
                     "app-testing",
@@ -206,9 +199,6 @@ class AndroidxTest : IntegrationTestBase() {
                     "lifecycle-viewmodel-savedstate",
                     "tracing",
                     "tracing-ktx",
-                    "tracing-perfetto",
-                    "tracing-perfetto-binary",
-                    "tracing-perfetto-common",
                 ),
         )
     }
