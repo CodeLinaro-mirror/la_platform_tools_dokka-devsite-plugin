@@ -389,7 +389,7 @@ internal class PropertyDocumentableConverterTest(
         kotlinOnly {
             assertThat(link)
                 .isEqualTo(
-                    "href=\"https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html\"",
+                    "href=\"https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html\"",
                 )
         }
     }

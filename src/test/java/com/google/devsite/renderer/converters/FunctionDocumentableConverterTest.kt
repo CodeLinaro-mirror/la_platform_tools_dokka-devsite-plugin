@@ -255,7 +255,7 @@ internal class FunctionDocumentableConverterTest(
         kotlinOnly {
             assertThat(returnType.link().name).isEqualTo("Unit")
             assertThat(returnType.link().url)
-                .isEqualTo("https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html")
+                .isEqualTo("https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html")
         }
     }
 
@@ -751,7 +751,7 @@ internal class FunctionDocumentableConverterTest(
         kotlinOnly {
             assertThat(returnType.link().name).isEqualTo("Unit")
             assertThat(returnType.link().url)
-                .isEqualTo("https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html")
+                .isEqualTo("https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html")
         }
     }
 

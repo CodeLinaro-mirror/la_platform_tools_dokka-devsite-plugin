@@ -70,7 +70,9 @@ internal class ParameterDocumentableConverterTest(
 
         kotlinOnly {
             assertThat(paramType.link().url)
-                .isEqualTo("https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html")
+                .isEqualTo(
+                    "https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html"
+                )
         }
     }
 
@@ -94,7 +96,7 @@ internal class ParameterDocumentableConverterTest(
         kotlinOnly {
             assertThat(paramType.link().name).isEqualTo("Any")
             assertThat(paramType.link().url)
-                .isEqualTo("https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html")
+                .isEqualTo("https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html")
         }
     }
 
@@ -247,7 +249,7 @@ internal class ParameterDocumentableConverterTest(
         }
     }
 
-    private val ARRAY_URI = "https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"
+    private val ARRAY_URI = "https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-array/index.html"
 
     @Test
     fun `Parameter understands inline generics and does correct Kotlin-Java array translation`() {
@@ -1026,7 +1028,7 @@ internal class ParameterDocumentableConverterTest(
                 assertThat(paramType.link().name).isEqualTo("Int")
                 assertThat(paramType.link().url)
                     .isEqualTo(
-                        "https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html",
+                        "https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html",
                     )
             }
         }
@@ -1156,7 +1158,7 @@ internal class ParameterDocumentableConverterTest(
             kotlinOnly {
                 assertThat(paramType.link().url)
                     .isEqualTo(
-                        "https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html",
+                        "https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html",
                     )
             }
         }
@@ -1492,13 +1494,13 @@ internal class ParameterDocumentableConverterTest(
             assertThat(list.link().name).isEqualTo("List")
             assertThat(list.link().url)
                 .isEqualTo(
-                    "https://kotlinlang.org/api/latest/" +
-                        "jvm/stdlib/kotlin.collections/-list/index.html",
+                    "https://kotlinlang.org/api/core/" +
+                        "kotlin-stdlib/kotlin.collections/-list/index.html",
                 )
             assertThat(list.alternativeLink()?.url)
                 .isEqualTo(
-                    "https://kotlinlang.org/api/latest/" +
-                        "jvm/stdlib/kotlin.collections/-mutable-list/index.html",
+                    "https://kotlinlang.org/api/core/" +
+                        "kotlin-stdlib/kotlin.collections/-mutable-list/index.html",
                 )
 
             val entry = module.param("entry").data.type
@@ -1506,13 +1508,13 @@ internal class ParameterDocumentableConverterTest(
             assertThat(entry.link().name).isEqualTo("Map.Entry")
             assertThat(entry.link().url)
                 .isEqualTo(
-                    "https://kotlinlang.org/api/latest/" +
-                        "jvm/stdlib/kotlin.collections/-map/-entry/index.html",
+                    "https://kotlinlang.org/api/core/" +
+                        "kotlin-stdlib/kotlin.collections/-map/-entry/index.html",
                 )
             assertThat(entry.alternativeLink()?.url)
                 .isEqualTo(
-                    "https://kotlinlang.org/api/latest" +
-                        "/jvm/stdlib/kotlin.collections/-mutable-map/-mutable-entry/index.html",
+                    "https://kotlinlang.org/api/core" +
+                        "/kotlin-stdlib/kotlin.collections/-mutable-map/-mutable-entry/index.html",
                 )
         }
 
@@ -1551,13 +1553,13 @@ internal class ParameterDocumentableConverterTest(
             assertThat(returnType.link().name).isEqualTo("List")
             assertThat(returnType.link().url)
                 .isEqualTo(
-                    "https://kotlinlang.org/api/latest/" +
-                        "jvm/stdlib/kotlin.collections/-list/index.html",
+                    "https://kotlinlang.org/api/core/" +
+                        "kotlin-stdlib/kotlin.collections/-list/index.html",
                 )
             assertThat(returnType.alternativeLink()?.url)
                 .isEqualTo(
-                    "https://kotlinlang.org/api/latest/" +
-                        "jvm/stdlib/kotlin.collections/-mutable-list/index.html",
+                    "https://kotlinlang.org/api/core/" +
+                        "kotlin-stdlib/kotlin.collections/-mutable-list/index.html",
                 )
         }
     }

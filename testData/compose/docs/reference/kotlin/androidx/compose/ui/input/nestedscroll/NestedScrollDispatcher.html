@@ -467,7 +467,7 @@
           <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html#coroutineScope()">coroutineScope</a>:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a></pre>
           <p>Get the outer coroutine scope to dispatch nested fling on.</p>
           <p>There might be situations when then component that is dispatching preFling or postFling to parent can be disposed together with its scope, so it's recommended to use launch nested fling dispatch using this scope to prevent abrupt scrolling user experience.</p>
-          <p><b>Note:</b> this scope is retrieved from the parent nestedScroll participants, unless the node knows its parent (which is usually after first composition commits), this will throw <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code>.</p>
+          <p><b>Note:</b> this scope is retrieved from the parent nestedScroll participants, unless the node knows its parent (which is usually after first composition commits), this will throw <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code>.</p>
           <div class="devsite-table-wrapper">
             <table class="responsive">
               <colgroup>
@@ -481,7 +481,7 @@
               </thead>
               <tbody class="list">
                 <tr>
-                  <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">kotlin.IllegalStateException</a></code></td>
+                  <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-state-exception/index.html">kotlin.IllegalStateException</a></code></td>
                   <td>
                     <p>when this field is accessed before the <code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/package-summary.html#(androidx.compose.ui.Modifier).nestedScroll(androidx.compose.ui.input.nestedscroll.NestedScrollConnection,androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher)">nestedScroll</a></code> modifier with this <code><a href="/reference/kotlin/androidx/compose/ui/input/nestedscroll/NestedScrollDispatcher.html">NestedScrollDispatcher</a></code> provided knows its nested scroll parent. Should be safe to access after the initial composition commits.</p>
                   </td>
