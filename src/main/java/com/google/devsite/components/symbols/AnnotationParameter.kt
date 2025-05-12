@@ -17,10 +17,11 @@
 package com.google.devsite.components.symbols
 
 import com.google.devsite.components.ContextFreeComponent
+import com.google.devsite.components.Link
 import com.google.devsite.components.Sizeable
 
 /** Base type for annotation parameters. Necessary because there are several different types. */
-internal interface AnnotationParameter : ContextFreeComponent, Sizeable
+internal sealed interface AnnotationParameter : ContextFreeComponent, Sizeable
 
 internal interface NamedValueAnnotationParameter : AnnotationParameter {
     val data: Params
@@ -33,6 +34,20 @@ internal interface NamedValueAnnotationParameter : AnnotationParameter {
 
     // Name is null if inside an array, in which case only the array is named
     data class Params(val name: String?, val value: String)
+}
+
+/** Like [NamedValueAnnotationParameter], but the value is a [Link] to a type instead of text. */
+internal interface LinkedValueAnnotationParameter : AnnotationParameter {
+    val data: Params
+
+    override fun length(): Int {
+        val nameSize = (data.name?.length?.plus(3)) ?: 0 // " = "
+        val valueSize = data.value.length()
+        return nameSize + valueSize
+    }
+
+    // Name is null if inside an array, in which case only the array is named
+    data class Params(val name: String?, val value: Link)
 }
 
 internal interface AnnotationValueAnnotationParameter : AnnotationParameter {
@@ -65,7 +80,7 @@ internal val AnnotationParameter.name: String
             is AnnotationValueAnnotationParameter -> this.data.name!!
             is ArrayValueAnnotationParameter -> this.data.name!!
             is NamedValueAnnotationParameter -> this.data.name!!
-            else -> throw RuntimeException("impossible subtype of AnnotationParameter")
+            is LinkedValueAnnotationParameter -> this.data.name!!
         }
 
 /** This is expected to be used as e.g. assertThat(parameter.value).isEqualTo("a string") */
@@ -75,5 +90,5 @@ internal val AnnotationParameter.value: Any
             is AnnotationValueAnnotationParameter -> this.data.annotationComponentValue
             is ArrayValueAnnotationParameter -> this.data.innerAnnotationParameters
             is NamedValueAnnotationParameter -> this.data.value
-            else -> throw RuntimeException("impossible subtype of AnnotationParameter")
+            is LinkedValueAnnotationParameter -> this.data.value
         }

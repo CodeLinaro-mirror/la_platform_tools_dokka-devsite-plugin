@@ -1502,7 +1502,7 @@ internal class DocTagConverterTest(
                     "https://developer.android.com" +
                         "/reference/java/lang/IllegalStateException.html"
                 } else
-                    "https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/" +
+                    "https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/" +
                         "-illegal-state-exception/index.html"
 
             val throwsSummary =
@@ -1632,7 +1632,7 @@ internal class DocTagConverterTest(
         assertThat(throwsFine1.data.title.typeName()).isEqualTo("kotlin.IllegalStateException")
         assertThat(throwsFine1.data.title.link().url)
             .isEqualTo(
-                "https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/" +
+                "https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/" +
                     "-illegal-state-exception/index.html",
             )
 
@@ -1697,7 +1697,7 @@ internal class DocTagConverterTest(
         val paramText = paramSummary.item()
 
         assertThat(paramText.link().url)
-            .isEqualTo("https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html")
+            .isEqualTo("https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html")
         assertThat(paramText.data.description.text()).isEmpty()
     }
 

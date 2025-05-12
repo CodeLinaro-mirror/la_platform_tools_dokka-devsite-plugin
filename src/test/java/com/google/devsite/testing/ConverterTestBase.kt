@@ -212,7 +212,7 @@ internal abstract class ConverterTestBase(
                     "https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core",
                 "android" to "https://developer.android.com/reference",
                 "guava" to "https://guava.dev/releases/18.0/api/docs/package-list",
-                "kotlin" to "https://kotlinlang.org/api/latest/jvm/stdlib/",
+                "kotlin" to "https://kotlinlang.org/api/core/kotlin-stdlib/",
             )
             .map {
                 ExternalDocumentationLink(

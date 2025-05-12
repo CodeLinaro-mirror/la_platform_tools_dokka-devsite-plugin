@@ -70,7 +70,7 @@
     <hr>
     <aside class="caution"><strong>This class is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
     <p>Lazy loading list that pages in immutable content from a <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
-    <p>A <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> is a <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a></code> which loads its data in chunks (pages) from a <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>. Items can be accessed with <code><a href="/reference/androidx/paging/PagedList.html#get(kotlin.Int)">get</a></code>, and further loading can be triggered with <code><a href="/reference/androidx/paging/PagedList.html#loadAround(kotlin.Int)">loadAround</a></code>. To display a <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code>, see <code><a href="/reference/androidx/paging/PagedListAdapter.html">androidx.paging.PagedListAdapter</a></code>, which enables the binding of a <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> to a <code><a href="/reference/androidx/recyclerview/widget/RecyclerView.html">androidx.recyclerview.widget.RecyclerView</a></code>.</p>
+    <p>A <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> is a <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a></code> which loads its data in chunks (pages) from a <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>. Items can be accessed with <code><a href="/reference/androidx/paging/PagedList.html#get(kotlin.Int)">get</a></code>, and further loading can be triggered with <code><a href="/reference/androidx/paging/PagedList.html#loadAround(kotlin.Int)">loadAround</a></code>. To display a <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code>, see <code><a href="/reference/androidx/paging/PagedListAdapter.html">androidx.paging.PagedListAdapter</a></code>, which enables the binding of a <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> to a <code><a href="/reference/androidx/recyclerview/widget/RecyclerView.html">androidx.recyclerview.widget.RecyclerView</a></code>.</p>
     <h3>Loading Data</h3>
     <p>All data in a <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> is loaded from its <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>. Creating a <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> loads the first chunk of data from the <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> immediately, and should for this reason be done on a background thread. The constructed <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> may then be passed to and used on the UI thread. This is done to prevent passing a list with no loaded content to the UI thread, which should generally not be presented to the user.</p>
     <p>A <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> initially presents this first partial load as its content, and expands over time as content is loaded in. When <code><a href="/reference/androidx/paging/PagedList.html#loadAround(kotlin.Int)">loadAround</a></code> is called, items will be loaded in near the passed list index. If placeholder <code>null</code>s are present in the list, they will be replaced as content is loaded. If not, newly loaded items will be inserted at the beginning or end of the list.</p>
@@ -203,7 +203,7 @@
           <tr>
             <td><code>final void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/paging/PagedList.html#addWeakLoadStateListener(kotlin.Function2)">addWeakLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</code></div>
+              <div><code><span><del><a href="/reference/androidx/paging/PagedList.html#addWeakLoadStateListener(kotlin.Function2)">addWeakLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</code></div>
               <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
             </td>
           </tr>
@@ -294,7 +294,7 @@
           <tr>
             <td><code>final void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/paging/PagedList.html#removeWeakLoadStateListener(kotlin.Function2)">removeWeakLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</code></div>
+              <div><code><span><del><a href="/reference/androidx/paging/PagedList.html#removeWeakLoadStateListener(kotlin.Function2)">removeWeakLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</code></div>
               <p><strong>This method is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
             </td>
           </tr>
@@ -559,7 +559,7 @@
 </devsite-expandable>            </td>
           </tr>
           <tr>
-            <td><devsite-expandable><span class="expand-control">From <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">kotlin.collections.Collection</a></span>
+            <td><devsite-expandable><span class="expand-control">From <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-collection/index.html">kotlin.collections.Collection</a></span>
               <div class="devsite-table-wrapper">
                 <table class="responsive">
                   <colgroup>
@@ -601,7 +601,7 @@
 </devsite-expandable>            </td>
           </tr>
           <tr>
-            <td><devsite-expandable><span class="expand-control">From <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html">kotlin.collections.Iterable</a></span>
+            <td><devsite-expandable><span class="expand-control">From <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-iterable/index.html">kotlin.collections.Iterable</a></span>
               <div class="devsite-table-wrapper">
                 <table class="responsive">
                   <colgroup>
@@ -622,7 +622,7 @@
 </devsite-expandable>            </td>
           </tr>
           <tr>
-            <td><devsite-expandable><span class="expand-control">From <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">kotlin.collections.List</a></span>
+            <td><devsite-expandable><span class="expand-control">From <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">kotlin.collections.List</a></span>
               <div class="devsite-table-wrapper">
                 <table class="responsive">
                   <colgroup>
@@ -643,7 +643,7 @@
 </devsite-expandable>            </td>
           </tr>
           <tr>
-            <td><devsite-expandable><span class="expand-control">From <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-collection/index.html">kotlin.collections.MutableCollection</a></span>
+            <td><devsite-expandable><span class="expand-control">From <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-collection/index.html">kotlin.collections.MutableCollection</a></span>
               <div class="devsite-table-wrapper">
                 <table class="responsive">
                   <colgroup>
@@ -664,7 +664,7 @@
 </devsite-expandable>            </td>
           </tr>
           <tr>
-            <td><devsite-expandable><span class="expand-control">From <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">kotlin.collections.MutableList</a></span>
+            <td><devsite-expandable><span class="expand-control">From <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/index.html">kotlin.collections.MutableList</a></span>
               <div class="devsite-table-wrapper">
                 <table class="responsive">
                   <colgroup>
@@ -840,7 +840,7 @@
             <h3 id="addWeakLoadStateListener(kotlin.Function2)">addWeakLoadStateListener</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedList.html#addWeakLoadStateListener(kotlin.Function2)">addWeakLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedList.html#addWeakLoadStateListener(kotlin.Function2)">addWeakLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
         <p>Add a listener to observe the loading state of the <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code>.</p>
         <div class="devsite-table-wrapper">
@@ -856,7 +856,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
                 <td>
                   <p>Listener to receive updates.</p>
                 </td>
@@ -1018,7 +1018,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">kotlin.IllegalStateException</a></code></td>
+                <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-state-exception/index.html">kotlin.IllegalStateException</a></code></td>
                 <td>
                   <p>if this <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> was instantiated without a wrapping a backing <code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code></p>
                 </td>
@@ -1261,7 +1261,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-index-out-of-bounds-exception/index.html">kotlin.IndexOutOfBoundsException</a></code></td>
+                <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-index-out-of-bounds-exception/index.html">kotlin.IndexOutOfBoundsException</a></code></td>
                 <td>
                   <p>if index is not within bounds.</p>
                 </td>
@@ -1326,7 +1326,7 @@
             <h3 id="removeWeakLoadStateListener(kotlin.Function2)">removeWeakLoadStateListener</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedList.html#removeWeakLoadStateListener(kotlin.Function2)">removeWeakLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedList.html#removeWeakLoadStateListener(kotlin.Function2)">removeWeakLoadStateListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
         <aside class="caution"><strong>This method is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
         <p>Remove a previously registered load state listener.</p>
         <div class="devsite-table-wrapper">
@@ -1342,7 +1342,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
                 <td>
                   <p>Previously registered listener.</p>
                 </td>

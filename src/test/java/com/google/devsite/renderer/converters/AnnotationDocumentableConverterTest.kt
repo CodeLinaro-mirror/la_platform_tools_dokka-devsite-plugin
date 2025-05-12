@@ -19,6 +19,7 @@ package com.google.devsite.renderer.converters
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.Link
 import com.google.devsite.components.symbols.AnnotationComponent
+import com.google.devsite.components.symbols.LinkedValueAnnotationParameter
 import com.google.devsite.components.symbols.NamedValueAnnotationParameter
 import com.google.devsite.components.symbols.name
 import com.google.devsite.components.symbols.value
@@ -523,6 +524,48 @@ internal class AnnotationDocumentableConverterTest(
 
         assertThat(annotations.size).isEqualTo(1)
         assertThat(annotations.item().link().name).isEqualTo("VisibleAnnotation")
+    }
+
+    @Test
+    fun `Link is generated for enum annotation value`() {
+        val module =
+            """
+            |enum class EnumClass { ENTRY }
+            |annotation class Anno(val enumValue: EnumClass)
+            |@Anno(EnumClass.ENTRY) fun foo() = Unit
+            """
+                .render()
+        val anno = module.functionAnnotationComponents().single()
+        val param = anno.data.parameters.single()
+        assertThat(param).isInstanceOf(LinkedValueAnnotationParameter::class.java)
+        val data = (param as LinkedValueAnnotationParameter).data
+        assertThat(data.name).isEqualTo("enumValue")
+        val link = data.value.data
+        assertThat(link.name).isEqualTo("EnumClass.ENTRY")
+        // Check just the end of the url because the start may or may not include "kotlin" depending
+        // on the render language.
+        assertThat(link.url).endsWith("/androidx/example/EnumClass.html#ENTRY")
+    }
+
+    @Test
+    fun `Link is generated for class annotation value`() {
+        val module =
+            """
+            |class Foo
+            |annotation class Anno(val classValue: KClass<*>)
+            |@Anno(Foo::class) fun foo() = Unit
+            """
+                .render()
+        val anno = module.functionAnnotationComponents().single()
+        val param = anno.data.parameters.single()
+        assertThat(param).isInstanceOf(LinkedValueAnnotationParameter::class.java)
+        val data = (param as LinkedValueAnnotationParameter).data
+        assertThat(data.name).isEqualTo("classValue")
+        val link = data.value.data
+        assertThat(link.name).isEqualTo("Foo")
+        // Check just the end of the url because the start may or may not include "kotlin" depending
+        // on the render language.
+        assertThat(link.url).endsWith("/androidx/example/Foo.html")
     }
 
     private fun DModule.annotationComponents(

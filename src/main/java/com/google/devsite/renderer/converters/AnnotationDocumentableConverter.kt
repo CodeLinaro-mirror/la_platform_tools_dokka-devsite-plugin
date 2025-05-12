@@ -19,16 +19,20 @@ package com.google.devsite.renderer.converters
 import com.google.devsite.components.impl.DefaultAnnotationComponent
 import com.google.devsite.components.impl.DefaultAnnotationValueAnnotationParameter
 import com.google.devsite.components.impl.DefaultArrayValueAnnotationParameter
+import com.google.devsite.components.impl.DefaultLinkedValueAnnotationParameter
 import com.google.devsite.components.impl.DefaultNamedValueAnnotationParameter
 import com.google.devsite.components.symbols.AnnotationComponent
 import com.google.devsite.components.symbols.AnnotationParameter
 import com.google.devsite.components.symbols.AnnotationValueAnnotationParameter
 import com.google.devsite.components.symbols.ArrayValueAnnotationParameter
+import com.google.devsite.components.symbols.LinkedValueAnnotationParameter
 import com.google.devsite.components.symbols.NamedValueAnnotationParameter
 import com.google.devsite.defaultValidNullabilityAnnotations
 import com.google.devsite.hasBeenHidden
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
+import org.jetbrains.dokka.links.DRIExtraContainer
+import org.jetbrains.dokka.links.EnumEntryDRIExtra
 import org.jetbrains.dokka.model.AnnotationParameterValue
 import org.jetbrains.dokka.model.AnnotationValue
 import org.jetbrains.dokka.model.Annotations
@@ -119,11 +123,31 @@ internal class AnnotationDocumentableConverter(
                 DefaultNamedValueAnnotationParameter(
                     NamedValueAnnotationParameter.Params(name, "\"${asString()}\""),
                 )
-            is LiteralValue,
-            is EnumValue,
-            is ClassValue ->
+            is LiteralValue ->
                 DefaultNamedValueAnnotationParameter(
-                    NamedValueAnnotationParameter.Params(name, asString()),
+                    NamedValueAnnotationParameter.Params(name, asString())
+                )
+            is EnumValue ->
+                DefaultLinkedValueAnnotationParameter(
+                    LinkedValueAnnotationParameter.Params(
+                        name,
+                        pathProvider.linkForReference(
+                            enumDri.copy(
+                                classNames = enumName,
+                                extra =
+                                    DRIExtraContainer()
+                                        .also { it[EnumEntryDRIExtra] = EnumEntryDRIExtra }
+                                        .encode()
+                            )
+                        )
+                    )
+                )
+            is ClassValue ->
+                DefaultLinkedValueAnnotationParameter(
+                    LinkedValueAnnotationParameter.Params(
+                        name,
+                        pathProvider.linkForReference(classDRI)
+                    )
                 )
             is ArrayValue ->
                 DefaultArrayValueAnnotationParameter(

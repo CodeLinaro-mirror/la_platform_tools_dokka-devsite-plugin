@@ -17,7 +17,9 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
+import com.google.devsite.components.Link
 import com.google.devsite.components.symbols.AnnotationComponent.Params
+import com.google.devsite.components.symbols.LinkedValueAnnotationParameter
 import com.google.devsite.components.symbols.NamedValueAnnotationParameter
 import com.google.devsite.components.testing.NoopLink
 import kotlinx.html.div
@@ -95,6 +97,36 @@ class DefaultAnnotationComponentTest {
 <div>@Foo(a&nbsp;=&nbsp;value,&nbsp;another&nbsp;=&nbsp;value)</div>
             """
                     .trim(),
+            )
+    }
+
+    @Test
+    fun `Annotation with linked parameter value renders correctly`() {
+        val component =
+            DefaultAnnotationComponent(
+                Params(
+                    type = NoopLink("Foo"),
+                    parameters =
+                        listOf(
+                            DefaultLinkedValueAnnotationParameter(
+                                LinkedValueAnnotationParameter.Params(
+                                    "a",
+                                    DefaultLink(Link.Params("Value", "example.com"))
+                                ),
+                            ),
+                        ),
+                ),
+            )
+
+        val output = createHTML().div { component.render(this) }.trim()
+
+        // language=html
+        assertThat(output)
+            .isEqualTo(
+                """
+                <div>@Foo(a&nbsp;=&nbsp;<a href="example.com">Value</a>)</div>
+                """
+                    .trimIndent(),
             )
     }
 }

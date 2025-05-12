@@ -68,7 +68,7 @@
     </ul>
     <p>For more details about how layout measurement works, see <code><a href="/reference/kotlin/androidx/compose/ui/layout/MeasurePolicy.html">androidx.compose.ui.layout.MeasurePolicy</a></code> or <code><a href="/reference/kotlin/androidx/compose/ui/layout/LayoutModifier.html#(androidx.compose.ui.layout.MeasureScope).measure(androidx.compose.ui.layout.Measurable,androidx.compose.ui.unit.Constraints)">androidx.compose.ui.layout.LayoutModifier.measure</a></code>.</p>
     <p>A set of <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></code> can have infinite maxWidth and/or maxHeight. This is a trick often used by parents to ask their children for their preferred size: unbounded constraints force children whose default behavior is to fill the available space (always size to maxWidth/maxHeight) to have an opinion about their preferred size. Most commonly, when measured with unbounded <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></code>, these children will fallback to size themselves to wrap their content, instead of expanding to fill the available space (this is not always true as it depends on the child layout model, but is a common behavior for core layout components).</p>
-    <p><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></code> uses a <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code> to represent four values, <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#minWidth()">minWidth</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#minHeight()">minHeight</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxWidth()">maxWidth</a></code>, and <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxHeight()">maxHeight</a></code>. The range of the values varies to allow for at most 256K in one dimension. There are four possible maximum ranges, 13 bits/18 bits, and 15 bits/16 bits for either width or height, depending on the needs. For example, a width could range up to 18 bits and the height up to 13 bits. Alternatively, the width could range up to 16 bits and the height up to 15 bits. The height and width requirements can be reversed, with a height of up to 18 bits and width of 13 bits or height of 16 bits and width of 15 bits. Any constraints exceeding this range will fail.</p>
+    <p><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></code> uses a <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></code> to represent four values, <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#minWidth()">minWidth</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#minHeight()">minHeight</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxWidth()">maxWidth</a></code>, and <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxHeight()">maxHeight</a></code>. The range of the values varies to allow for at most 256K in one dimension. There are four possible maximum ranges, 13 bits/18 bits, and 15 bits/16 bits for either width or height, depending on the needs. For example, a width could range up to 18 bits and the height up to 13 bits. Alternatively, the width could range up to 16 bits and the height up to 15 bits. The height and width requirements can be reversed, with a height of up to 18 bits and width of 13 bits or height of 16 bits and width of 15 bits. Any constraints exceeding this range will fail.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <devsite-filter  select-el-container-id="platform">
@@ -85,7 +85,7 @@
           </thead>
           <tbody class="list">
             <tr>
-              <td><code>const <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td><code>const <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#Infinity()">Infinity</a></code></div>
                 <p>A value that <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxWidth()">maxWidth</a></code> or <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxHeight()">maxHeight</a></code> will be set to when the constraint should be considered infinite.</p>
@@ -115,7 +115,7 @@
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></code></td>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#fixed(kotlin.Int,kotlin.Int)">fixed</a>(width:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;height:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#fixed(kotlin.Int,kotlin.Int)">fixed</a>(width:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;height:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
                 <p>Creates constraints for fixed size in both dimensions.</p>
               </td>
               <td>
@@ -125,7 +125,7 @@
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></code></td>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#fixedHeight(kotlin.Int)">fixedHeight</a>(height:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#fixedHeight(kotlin.Int)">fixedHeight</a>(height:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
                 <p>Creates constraints for fixed height and unspecified width.</p>
               </td>
               <td>
@@ -135,7 +135,7 @@
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></code></td>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#fixedWidth(kotlin.Int)">fixedWidth</a>(width:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#fixedWidth(kotlin.Int)">fixedWidth</a>(width:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
                 <p>Creates constraints for fixed width and unspecified height.</p>
               </td>
               <td>
@@ -161,7 +161,7 @@
           <tbody class="list">
             <tr>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#Constraints(kotlin.Long)">Constraints</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>)</code></div>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#Constraints(kotlin.Long)">Constraints</a>(value:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a>)</code></div>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -188,7 +188,7 @@
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></code></td>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">copy</a>(minWidth:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;maxWidth:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;minHeight:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;maxHeight:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">copy</a>(minWidth:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;maxWidth:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;minHeight:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;maxHeight:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
                 <p>Copies the existing <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></code>, replacing some of <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">minWidth</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">minHeight</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">maxWidth</a></code>, or <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">maxHeight</a></code> as desired.</p>
               </td>
               <td>
@@ -196,7 +196,7 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
-              <td><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></code></td>
+              <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#toString()">toString</a>()</code></div>
               </td>
@@ -223,7 +223,7 @@
           </thead>
           <tbody class="list">
             <tr>
-              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#hasBoundedHeight()">hasBoundedHeight</a></code></div>
                 <p><code>false</code> when <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxHeight()">maxHeight</a></code> is <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#Infinity()">Infinity</a></code> and <code>true</code> if <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxHeight()">maxHeight</a></code> is a non-<code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#Infinity()">Infinity</a></code> value.</p>
@@ -233,7 +233,7 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
-              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#hasBoundedWidth()">hasBoundedWidth</a></code></div>
                 <p><code>false</code> when <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxWidth()">maxWidth</a></code> is <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#Infinity()">Infinity</a></code> and <code>true</code> if <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxWidth()">maxWidth</a></code> is a non-<code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#Infinity()">Infinity</a></code> value.</p>
@@ -243,7 +243,7 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
-              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#hasFixedHeight()">hasFixedHeight</a></code></div>
                 <p>Whether there is exactly one height value that satisfies the constraints.</p>
@@ -253,7 +253,7 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
-              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#hasFixedWidth()">hasFixedWidth</a></code></div>
                 <p>Whether there is exactly one width value that satisfies the constraints.</p>
@@ -263,7 +263,7 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
-              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#isZero()">isZero</a></code></div>
                 <p>Whether the area of a component respecting these constraints will definitely be 0.</p>
@@ -273,7 +273,7 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
-              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxHeight()">maxHeight</a></code></div>
                 <p>The maximum height that the measurement can take, in pixels.</p>
@@ -283,7 +283,7 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
-              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxWidth()">maxWidth</a></code></div>
                 <p>The maximum width that the measurement can take, in pixels.</p>
@@ -293,7 +293,7 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
-              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#minHeight()">minHeight</a></code></div>
                 <p>The minimum height that the measurement can take, in pixels.</p>
@@ -303,7 +303,7 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
-              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#minWidth()">minWidth</a></code></div>
                 <p>The minimum width that the measurement can take, in pixels.</p>
@@ -351,9 +351,9 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
-              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#(androidx.compose.ui.unit.Constraints).constrainHeight(kotlin.Int)">constrainHeight</a>(height:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#(androidx.compose.ui.unit.Constraints).constrainHeight(kotlin.Int)">constrainHeight</a>(height:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
                 <p>Takes a height and returns the closest size to it that satisfies the constraints.</p>
               </td>
               <td>
@@ -361,9 +361,9 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
-              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#(androidx.compose.ui.unit.Constraints).constrainWidth(kotlin.Int)">constrainWidth</a>(width:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#(androidx.compose.ui.unit.Constraints).constrainWidth(kotlin.Int)">constrainWidth</a>(width:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
                 <p>Takes a width and returns the closest size to it that satisfies the constraints.</p>
               </td>
               <td>
@@ -371,7 +371,7 @@
                 <!--platform-Common/All--></td>
             </tr>
             <tr>
-              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#(androidx.compose.ui.unit.Constraints).isSatisfiedBy(androidx.compose.ui.unit.IntSize)">isSatisfiedBy</a>(size:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a>)</code></div>
                 <p>Takes a size and returns whether it satisfies the current constraints.</p>
@@ -383,7 +383,7 @@
             <tr>
               <td><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></code></td>
               <td>
-                <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#(androidx.compose.ui.unit.Constraints).offset(kotlin.Int,kotlin.Int)">offset</a>(horizontal:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;vertical:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                <div><code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#(androidx.compose.ui.unit.Constraints).offset(kotlin.Int,kotlin.Int)">offset</a>(horizontal:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;vertical:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
                 <p>Returns the Constraints obtained by offsetting the current instance with the given values.</p>
               </td>
               <td>
@@ -408,7 +408,7 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">const&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#Infinity()">Infinity</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <pre class="api-signature no-pretty-print">const&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#Infinity()">Infinity</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
           <p>A value that <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxWidth()">maxWidth</a></code> or <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxHeight()">maxHeight</a></code> will be set to when the constraint should be considered infinite. <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#hasBoundedWidth()">hasBoundedWidth</a></code> or <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#hasBoundedHeight()">hasBoundedHeight</a></code> will be <code>false</code> when <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxWidth()">maxWidth</a></code> or <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxHeight()">maxHeight</a></code> is <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#Infinity()">Infinity</a></code>, respectively.</p>
         </div>
       </div>
@@ -427,7 +427,7 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#fixed(kotlin.Int,kotlin.Int)">fixed</a>(width:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;height:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></pre>
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#fixed(kotlin.Int,kotlin.Int)">fixed</a>(width:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;height:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></pre>
           <p>Creates constraints for fixed size in both dimensions.</p>
         </div>
         <div class="api-item"><a name="fixedHeight-kotlin.Int-"></a><a name="fixedheight"></a>
@@ -440,7 +440,7 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#fixedHeight(kotlin.Int)">fixedHeight</a>(height:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></pre>
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#fixedHeight(kotlin.Int)">fixedHeight</a>(height:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></pre>
           <p>Creates constraints for fixed height and unspecified width.</p>
         </div>
         <div class="api-item"><a name="fixedWidth-kotlin.Int-"></a><a name="fixedwidth"></a>
@@ -453,7 +453,7 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#fixedWidth(kotlin.Int)">fixedWidth</a>(width:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></pre>
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#fixedWidth(kotlin.Int)">fixedWidth</a>(width:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></pre>
           <p>Creates constraints for fixed width and unspecified height.</p>
         </div>
       </div>
@@ -472,7 +472,7 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#Constraints(kotlin.Long)">Constraints</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>)</pre>
+          <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#Constraints(kotlin.Long)">Constraints</a>(value:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a>)</pre>
         </div>
       </div>
     </devsite-filter >
@@ -490,7 +490,7 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;minWidth:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = this.minWidth,<br>&nbsp;&nbsp;&nbsp;&nbsp;maxWidth:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = this.maxWidth,<br>&nbsp;&nbsp;&nbsp;&nbsp;minHeight:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = this.minHeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;maxHeight:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = this.maxHeight<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></pre>
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;minWidth:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = this.minWidth,<br>&nbsp;&nbsp;&nbsp;&nbsp;maxWidth:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = this.maxWidth,<br>&nbsp;&nbsp;&nbsp;&nbsp;minHeight:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = this.minHeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;maxHeight:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = this.maxHeight<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></pre>
           <p>Copies the existing <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></code>, replacing some of <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">minWidth</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">minHeight</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">maxWidth</a></code>, or <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">maxHeight</a></code> as desired. <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">minWidth</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">minHeight</a></code> must be positive and <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">maxWidth</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">maxHeight</a></code> must be greater than or equal to <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">minWidth</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#copy(kotlin.Int,kotlin.Int,kotlin.Int,kotlin.Int)">minHeight</a></code>, respectively, or <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#Infinity()">Infinity</a></code>.</p>
         </div>
         <div class="api-item"><a name="toString--"></a><a name="tostring"></a>
@@ -503,7 +503,7 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#toString()">toString</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></pre>
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#toString()">toString</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></pre>
         </div>
       </div>
     </devsite-filter >
@@ -521,7 +521,7 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#hasBoundedHeight()">hasBoundedHeight</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#hasBoundedHeight()">hasBoundedHeight</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
           <p><code>false</code> when <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxHeight()">maxHeight</a></code> is <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#Infinity()">Infinity</a></code> and <code>true</code> if <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxHeight()">maxHeight</a></code> is a non-<code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#Infinity()">Infinity</a></code> value.</p>
           <div class="devsite-table-wrapper">
             <table class="responsive">
@@ -553,7 +553,7 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#hasBoundedWidth()">hasBoundedWidth</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#hasBoundedWidth()">hasBoundedWidth</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
           <p><code>false</code> when <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxWidth()">maxWidth</a></code> is <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#Infinity()">Infinity</a></code> and <code>true</code> if <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxWidth()">maxWidth</a></code> is a non-<code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#Infinity()">Infinity</a></code> value.</p>
           <div class="devsite-table-wrapper">
             <table class="responsive">
@@ -585,7 +585,7 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#hasFixedHeight()">hasFixedHeight</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#hasFixedHeight()">hasFixedHeight</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
           <p>Whether there is exactly one height value that satisfies the constraints.</p>
         </div>
         <div class="api-item"><a name="getHasFixedWidth()"></a><a name="setHasFixedWidth()"></a><a name="getHasFixedWidth--"></a><a name="setHasFixedWidth--"></a>
@@ -598,7 +598,7 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#hasFixedWidth()">hasFixedWidth</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#hasFixedWidth()">hasFixedWidth</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
           <p>Whether there is exactly one width value that satisfies the constraints.</p>
         </div>
         <div class="api-item"><a name="getIsZero()"></a><a name="setIsZero()"></a><a name="getIsZero--"></a><a name="setIsZero--"></a>
@@ -611,7 +611,7 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#isZero()">isZero</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#isZero()">isZero</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
           <p>Whether the area of a component respecting these constraints will definitely be 0. This is true when at least one of maxWidth and maxHeight are 0.</p>
         </div>
         <div class="api-item"><a name="getMaxHeight()"></a><a name="setMaxHeight()"></a><a name="getMaxHeight--"></a><a name="setMaxHeight--"></a>
@@ -624,7 +624,7 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxHeight()">maxHeight</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxHeight()">maxHeight</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
           <p>The maximum height that the measurement can take, in pixels. This will either be a positive value greater than or equal to <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#minHeight()">minHeight</a></code> or <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#Infinity()">Constraints.Infinity</a></code>.</p>
         </div>
         <div class="api-item"><a name="getMaxWidth()"></a><a name="setMaxWidth()"></a><a name="getMaxWidth--"></a><a name="setMaxWidth--"></a>
@@ -637,7 +637,7 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxWidth()">maxWidth</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#maxWidth()">maxWidth</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
           <p>The maximum width that the measurement can take, in pixels. This will either be a positive value greater than or equal to <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#minWidth()">minWidth</a></code> or <code><a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#Infinity()">Constraints.Infinity</a></code>.</p>
         </div>
         <div class="api-item"><a name="getMinHeight()"></a><a name="setMinHeight()"></a><a name="getMinHeight--"></a><a name="setMinHeight--"></a>
@@ -650,7 +650,7 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#minHeight()">minHeight</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#minHeight()">minHeight</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
           <p>The minimum height that the measurement can take, in pixels.</p>
         </div>
         <div class="api-item"><a name="getMinWidth()"></a><a name="setMinWidth()"></a><a name="getMinWidth--"></a><a name="setMinWidth--"></a>
@@ -663,7 +663,7 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#minWidth()">minWidth</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#minWidth()">minWidth</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
           <p>The minimum width that the measurement can take, in pixels.</p>
         </div>
       </div>
@@ -708,7 +708,7 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#(androidx.compose.ui.unit.Constraints).constrainHeight(kotlin.Int)">constrainHeight</a>(height:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#(androidx.compose.ui.unit.Constraints).constrainHeight(kotlin.Int)">constrainHeight</a>(height:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
           <p>Takes a height and returns the closest size to it that satisfies the constraints.</p>
         </div>
         <div class="api-item"><a name="-androidx.compose.ui.unit.Constraints-.constrainWidth-kotlin.Int-"></a><a name="constrainwidth"></a>
@@ -721,7 +721,7 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#(androidx.compose.ui.unit.Constraints).constrainWidth(kotlin.Int)">constrainWidth</a>(width:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#(androidx.compose.ui.unit.Constraints).constrainWidth(kotlin.Int)">constrainWidth</a>(width:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></pre>
           <p>Takes a width and returns the closest size to it that satisfies the constraints.</p>
         </div>
         <div class="api-item"><a name="-androidx.compose.ui.unit.Constraints-.isSatisfiedBy-androidx.compose.ui.unit.IntSize-"></a><a name="issatisfiedby"></a>
@@ -734,7 +734,7 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#(androidx.compose.ui.unit.Constraints).isSatisfiedBy(androidx.compose.ui.unit.IntSize)">isSatisfiedBy</a>(size:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#(androidx.compose.ui.unit.Constraints).isSatisfiedBy(androidx.compose.ui.unit.IntSize)">isSatisfiedBy</a>(size:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/IntSize.html">IntSize</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
           <p>Takes a size and returns whether it satisfies the current constraints.</p>
         </div>
         <div class="api-item"><a name="(androidx.compose.ui.unit.Constraints).offset(kotlin.Int, kotlin.Int)"></a><a name="-androidx.compose.ui.unit.Constraints-.offset-kotlin.Int-kotlin.Int-"></a><a name="offset"></a>
@@ -747,7 +747,7 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#(androidx.compose.ui.unit.Constraints).offset(kotlin.Int,kotlin.Int)">offset</a>(horizontal:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 0,&nbsp;vertical:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 0):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></pre>
+          <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a>.<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html#(androidx.compose.ui.unit.Constraints).offset(kotlin.Int,kotlin.Int)">offset</a>(horizontal:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = 0,&nbsp;vertical:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> = 0):&nbsp;<a href="/reference/kotlin/androidx/compose/ui/unit/Constraints.html">Constraints</a></pre>
           <p>Returns the Constraints obtained by offsetting the current instance with the given values.</p>
         </div>
       </div>

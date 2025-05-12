@@ -137,7 +137,7 @@ val runTask = tasks.register<DackkaRunner>("run") {
     include.set(layout.projectDirectory.file("src/testData/androidx/paging/metadata.md"))
     globalDocsLinks.addAll(
         GlobalDocsLink(
-            url = "https://kotlinlang.org/api/latest/jvm/stdlib/",
+            url = "https://kotlinlang.org/api/core/kotlin-stdlib/",
             rootProject.layout.projectDirectory.file("testData/package-lists/kotlin/package-list")
         ),
         GlobalDocsLink(
