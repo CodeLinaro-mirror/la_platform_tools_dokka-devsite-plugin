@@ -20,6 +20,7 @@ import com.google.devsite.components.ShouldBreak
 import com.google.devsite.components.render
 import com.google.devsite.components.symbols.AnnotationValueAnnotationParameter
 import com.google.devsite.components.symbols.ArrayValueAnnotationParameter
+import com.google.devsite.components.symbols.LinkedValueAnnotationParameter
 import com.google.devsite.components.symbols.NamedValueAnnotationParameter
 import com.google.devsite.components.symbols.name
 import com.google.devsite.components.symbols.value
@@ -61,6 +62,18 @@ internal data class DefaultArrayValueAnnotationParameter(
                 brackets = "[]",
                 shouldBreak = ShouldBreak.NO
             )
+        }
+
+    override fun toString() = "$name $value"
+}
+
+internal data class DefaultLinkedValueAnnotationParameter(
+    override val data: LinkedValueAnnotationParameter.Params
+) : LinkedValueAnnotationParameter {
+    override fun render(into: FlowContent) =
+        into.run {
+            data.name.render(into)
+            data.value.render(into)
         }
 
     override fun toString() = "$name $value"
