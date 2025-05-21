@@ -1266,7 +1266,6 @@ internal class DocTagConverterTest(
         assertThat((link.dri.callable as Callable).name).isEqualTo("<this>")
     }
 
-    @Ignore // b/350055200 = https://github.com/Kotlin/dokka/issues/3661
     @Test
     fun `Test line break inside img tag`() {
         val module =
@@ -1288,13 +1287,33 @@ internal class DocTagConverterTest(
             |    val baz: String
         """
                 .render()
-        val documentationBar = module.documentation().first() as DescriptionComponent
-        // Does not register as an image, but text "![Assist Chip" and a link with alt text "image".
-        assertThat(documentationBar.toString()).contains("Assist chip image")
+
+        val documentationBar =
+            (module.documentation().first() as DescriptionComponent).data.components.first()
+        assertThat(documentationBar.children[0].text()).isEqualTo("Line above image ")
+        val barImgTag = documentationBar.children[1] as Img
+        assertThat(barImgTag.params)
+            .containsExactly(
+                "href",
+                "https://developer.android.com/images/reference/androidx/compose/material3/assist-chip.png",
+                "alt",
+                "Assist chip\nimage"
+            )
+
         val documentationBaz =
-            module.documentation({ this.property("baz")!! }).first() as DescriptionComponent
-        // Image alt text is currently "Assist Chip * Image"
-        assertThat(documentationBaz.toString()).contains("Assist chip image")
+            (module.documentation({ this.property("baz")!! }).first() as DescriptionComponent)
+                .data
+                .components
+                .first()
+        assertThat(documentationBaz.children[0].text()).isEqualTo("Line above image ")
+        val bazImgTag = documentationBar.children[1] as Img
+        assertThat(bazImgTag.params)
+            .containsExactly(
+                "href",
+                "https://developer.android.com/images/reference/androidx/compose/material3/assist-chip.png",
+                "alt",
+                "Assist chip\nimage"
+            )
     }
 
     @Test
