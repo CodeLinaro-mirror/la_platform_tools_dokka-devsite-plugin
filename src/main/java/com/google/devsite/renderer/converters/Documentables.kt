@@ -510,24 +510,29 @@ fun List<DProperty>.gettersAndSetters(): List<DFunction> {
             // JvmFields are only accessed as fields, not through accessors
             !it.isJvmField()
         }
-        .flatMap { listOf(it to it.getter, it to it.setter) }
-        .mapNotNull {
-            var (property, func) = it
-            // Static properties should also have static accessors
-            if (property.isStaticAnnotated()) {
-                func = func?.addJvmStatic()
-            }
-            val callableName = func?.dri?.callable?.name ?: ""
-            func =
-                if (callableName.startsWith("<get-")) {
-                    func!!.fixSyntheticAccessor(property, getter = true)
-                } else if (callableName.startsWith("<set-")) {
-                    func!!.fixSyntheticAccessor(property, getter = false)
-                } else {
-                    func
-                }
-            func?.withNewExtras(func.extra.plus(SourceProperty(property)))
+        .flatMap { listOfNotNull(updateAccessor(it.getter, it), updateAccessor(it.setter, it)) }
+}
+
+/**
+ * Updates an accessor for [gettersAndSetters] by marking it static if needed and fixing its name
+ * and documentation.
+ */
+private fun updateAccessor(originalAccessor: DFunction?, property: DProperty): DFunction? {
+    var updatedAccessor = originalAccessor ?: return null
+    // Static properties should also have static accessors
+    if (property.isStaticAnnotated()) {
+        updatedAccessor = updatedAccessor.addJvmStatic()
+    }
+    val callableName = updatedAccessor.dri.callable?.name ?: ""
+    updatedAccessor =
+        if (callableName.startsWith("<get-")) {
+            updatedAccessor.fixSyntheticAccessor(property, getter = true)
+        } else if (callableName.startsWith("<set-")) {
+            updatedAccessor.fixSyntheticAccessor(property, getter = false)
+        } else {
+            updatedAccessor
         }
+    return updatedAccessor.withNewExtras(updatedAccessor.extra.plus(SourceProperty(property)))
 }
 
 /** An [ExtraProperty] for generated accessors to link back to the property they came from. */
