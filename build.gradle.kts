@@ -349,7 +349,7 @@ class KtFilesProvider : CommandLineArgumentProvider {
     }
 }
 
-val ktCheck by tasks.creating(JavaExec::class) {
+val ktCheck by tasks.registering(JavaExec::class) {
     description = "Check Kotlin code style."
     group = "Verification"
     classpath = ktfmtConfiguration
@@ -359,7 +359,7 @@ val ktCheck by tasks.creating(JavaExec::class) {
     args = listOf("--kotlinlang-style", "--dry-run", "--set-exit-if-changed")
 }
 
-val ktFormat by tasks.creating(JavaExec::class) {
+val ktFormat by tasks.registering(JavaExec::class) {
     description = "Fix Kotlin code style deviations."
     group = "Formatting"
     classpath = ktfmtConfiguration
