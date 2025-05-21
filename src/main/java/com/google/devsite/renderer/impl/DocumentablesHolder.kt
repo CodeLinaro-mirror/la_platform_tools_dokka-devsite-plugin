@@ -399,7 +399,11 @@ internal class DocumentablesHolder(
             Dynamic -> TODO() // I don't think this case is possible?
             is UnresolvedBound -> {
                 val unresolvedName = rType.name.removePrefix("ERROR CLASS: Symbol not found for ")
-                throw RuntimeException("Unresolved receiver $unresolvedName of $this")
+                printWarningFor(
+                    baseMessage = "Unresolved receiver $unresolvedName",
+                    documentableWithError = this,
+                    containingDocumentable = null,
+                )
             }
             else -> throw RuntimeException("Unknown receiver for $this")
         }
