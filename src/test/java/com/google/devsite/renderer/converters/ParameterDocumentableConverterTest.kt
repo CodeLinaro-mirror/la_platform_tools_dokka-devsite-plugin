@@ -740,11 +740,14 @@ internal class ParameterDocumentableConverterTest(
             |    targetState: S,
             |    modifier: Modifier = Modifier,
             |    transitionSpec: List<S>.() -> String,
-            |    contentAlignment: Alignment = Alignment.TopStart,
+            |    contentAlignment: Alignment,
             |    content: @Composable() AnimatedVisibilityScope.(targetState: S) -> Unit
             |)
-            |public class <T> AnimatedContentScope<T>
+            |public class AnimatedContentScope<T>
             |public class ContentTransform
+            |public class Modifier
+            |public class AnimatedVisibilityScope
+            |public class Alignment
         """
                 .render()
                 .param("transitionSpec")
@@ -1442,12 +1445,14 @@ internal class ParameterDocumentableConverterTest(
                 .returnType("foo")
         val returnCompanion =
             """
-            |companion object {
-            |    fun static() = "jvm"
+            |class Foo {
+            |    companion object {
+            |        fun static() = "jvm"
+            |    }
             |}
-        """
+            """
                 .render()
-                .returnType("static")
+                .returnType(functionName = "static", className = "Companion")
         val returnBar =
             """
             |fun bar() = if (1 == 2) "bbb" else null
@@ -1642,13 +1647,14 @@ internal class ParameterDocumentableConverterTest(
         functionName: String = "foo",
         className: String? = null
     ): TypeProjectionComponent {
+        val functionComponent = function(functionName, className)!!
         return paramConverter()
             .componentForProjection(
-                projection = function(functionName, className)!!.type,
+                projection = functionComponent.type,
                 // Propagate ALL annotations _for display in the summary_, b/197321617
                 propagatedAnnotations = emptyList(),
                 isReturnType = true,
-                isJavaSource = function(functionName)!!.isFromJava(),
+                isJavaSource = functionComponent.isFromJava(),
                 sourceSet = getExpectOrCommonSourceSet(),
             )
     }

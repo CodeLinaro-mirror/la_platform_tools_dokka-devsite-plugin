@@ -3069,7 +3069,7 @@ internal class ClasslikeDocumentableConverterTest(
             |    /** Some documentation. */
             |    var noDefinedAccessorsDocsOnProp = 0
             |
-            |    val definedAccessorsDocsOnAccessors: Int
+            |    var definedAccessorsDocsOnAccessors: Int
             |        /** Some documentation. */
             |        get() = 0
             |        /** Some documentation. */

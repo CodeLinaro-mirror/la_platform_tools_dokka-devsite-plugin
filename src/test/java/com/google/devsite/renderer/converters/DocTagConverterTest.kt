@@ -404,7 +404,7 @@ internal class DocTagConverterTest(
             | * @param Bar A type of bar
             | * @param Baz Bazzy baz
             | */
-            |class <Bar: String, Baz> Foo: List<Bar>
+            |class Foo<Bar: String, Baz>: List<Bar>
         """
                 .render()
                 .documentation(doc = { this.clazz() })
@@ -556,15 +556,15 @@ internal class DocTagConverterTest(
         """
                 .render()
 
-        val constructorDoc1 =
-            constructorModule.documentation({ this.constructors().first() }).single()
-                as DescriptionComponent
-        val constructorDoc2 =
-            constructorModule.documentation({ this.constructors().last() }).single()
-                as DescriptionComponent
-
-        assertThat(constructorDoc1.text()).isEqualTo("Secondary constructor docs")
-        assertThat(constructorDoc2.text()).isEqualTo("Primary constructor docs")
+        val constructorDocs =
+            constructorModule.constructors().map {
+                (constructorModule.documentation({ it }).single() as DescriptionComponent).text()
+            }
+        assertThat(constructorDocs)
+            .containsExactly(
+                "Secondary constructor docs",
+                "Primary constructor docs",
+            )
     }
 
     @Test
@@ -1249,6 +1249,7 @@ internal class DocTagConverterTest(
     fun `Test several odd link choices`() {
         val documentation =
             """
+            |class Foo
             |/**
             | * Does bar on [this]
             | */
@@ -1256,8 +1257,8 @@ internal class DocTagConverterTest(
         """
                 .render()
                 .documentation()
-                .first() as DescriptionComponent
-        val docChildren = documentation.data.components.single().children
+                .single { (it as DescriptionComponent).text().contains("Does bar on") }
+        val docChildren = (documentation as DescriptionComponent).data.components.single().children
         assertThat(docChildren.size).isEqualTo(2)
         val link = (docChildren.last() as DocumentationLink)
         assertThat((link.children.single() as Text).body).isEqualTo("this")
