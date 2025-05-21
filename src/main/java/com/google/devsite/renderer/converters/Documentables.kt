@@ -276,14 +276,26 @@ internal fun <T> PropertyContainer<T>.addModifier(
     newModifier: ExtraModifiers,
     sourceSets: Set<DokkaConfiguration.DokkaSourceSet>,
 ): PropertyContainer<T> where T : Documentable {
+    // Find the AdditionalModifiers already present on the documentable
+    val existingAdditionalModifiers = allOfType<AdditionalModifiers>()
     val newModifiers =
-        this.allOfType<AdditionalModifiers>().map { modifiers ->
-            AdditionalModifiers(
-                sourceSets.associateWith { sourceSet ->
-                    val previous = modifiers.content[sourceSet] ?: emptySet()
-                    previous + newModifier
-                },
+        if (existingAdditionalModifiers.isEmpty()) {
+            // There are no existing modifiers, create them with the new modifier on each source set
+            listOf(
+                AdditionalModifiers(
+                    sourceSets.associateWith { setOf(newModifier) },
+                )
             )
+        } else {
+            // There are existing modifiers, update them to add the new modifier on each source set
+            existingAdditionalModifiers.map { modifiers ->
+                AdditionalModifiers(
+                    sourceSets.associateWith { sourceSet ->
+                        val previous = modifiers.content[sourceSet] ?: emptySet()
+                        previous + newModifier
+                    },
+                )
+            }
         }
     return addAll(newModifiers)
 }
@@ -382,25 +394,28 @@ T : WithExtraProperties<T> {
 }
 
 /**
- * Adds each annotation of [newAnnotations] as an annotation for each source set of [sourceSets]
- * (even if the source set did not previously have any annotations associated with it).
+ * Adds each annotation of [newAnnotationElements] as an annotation for each source set of
+ * [sourceSets] (even if the source set did not previously have any annotations associated with it).
  */
 fun <T> PropertyContainer<T>.addAnnotations(
-    newAnnotations: Collection<Annotations.Annotation>,
+    newAnnotationElements: Collection<Annotations.Annotation>,
     sourceSets: Set<DokkaConfiguration.DokkaSourceSet>,
 ): PropertyContainer<T> where T : AnnotationTarget {
-    val newAnnotations =
+    val newAnnotationsObject =
         this[Annotations]?.let { annotations ->
+            // There are existing annotations, add the new elements to each source set
             val newDirectAnnotations =
                 sourceSets.associateWith {
                     val previous = annotations.directAnnotations[it] ?: emptyList()
-                    previous + newAnnotations
+                    previous + newAnnotationElements
                 }
             annotations.copy(myContent = newDirectAnnotations + annotations.fileLevelAnnotations)
         }
+            // No existing annotations, create them with the new elements in each source set
+            ?: Annotations(sourceSets.associateWith { newAnnotationElements.toList() })
     val extraWithoutAnnotations: PropertyContainer<T> = minus(Annotations)
 
-    return extraWithoutAnnotations.addAll(listOfNotNull(newAnnotations))
+    return extraWithoutAnnotations.addAll(listOfNotNull(newAnnotationsObject))
 }
 
 internal val JvmStatic = Annotations.Annotation(DRI("kotlin.jvm", "JvmStatic"), params = emptyMap())
