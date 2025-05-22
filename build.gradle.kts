@@ -55,7 +55,6 @@ dependencies {
     implementation(libs.kotlin.reflect)
     implementation(libs.coroutines.core)
 
-    testImplementation(libs.dokka.base.test.utils)
     testImplementation(libs.kotlin.test)
     testImplementation("junit:junit:4.13.2")
     testImplementation("com.google.truth:truth:1.1.3")
