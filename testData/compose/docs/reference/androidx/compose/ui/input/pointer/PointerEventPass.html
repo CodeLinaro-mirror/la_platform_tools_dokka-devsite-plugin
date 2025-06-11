@@ -116,7 +116,7 @@
             <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.enums/-enum-entries/index.html">EnumEntries</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerEventPass.html">PointerEventPass</a>&gt;</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerEventPass.html#getEntries()">getEntries</a>()</code></div>
-              <p>The enumeration of passes where <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code> traverses up and down the UI tree.</p>
+              <p>Returns a representation of an immutable list of all enum entries, in the order they're declared.</p>
             </td>
           </tr>
           <tr>
@@ -172,31 +172,8 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.enums/-enum-entries/index.html">EnumEntries</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/input/pointer/PointerEventPass.html">PointerEventPass</a>&gt;&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerEventPass.html#getEntries()">getEntries</a>()</pre>
-        <p>The enumeration of passes where <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code> traverses up and down the UI tree.</p>
-        <p>PointerInputChanges traverse throw the hierarchy in the following passes:</p>
-        <ol>
-          <li>
-            <p><code><a href="/reference/androidx/compose/ui/input/pointer/PointerEventPass.html#Initial">Initial</a></code>: Down the tree from ancestor to descendant.</p>
-          </li>
-          <li>
-            <p><code><a href="/reference/androidx/compose/ui/input/pointer/PointerEventPass.html#Main">Main</a></code>: Up the tree from descendant to ancestor.</p>
-          </li>
-          <li>
-            <p><code><a href="/reference/androidx/compose/ui/input/pointer/PointerEventPass.html#Final">Final</a></code>: Down the tree from ancestor to descendant.</p>
-          </li>
-        </ol>
-        <p>These passes serve the following purposes:</p>
-        <ol>
-          <li>
-            <p>Initial: Allows ancestors to consume aspects of <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code> before descendants. This is where, for example, a scroller may block buttons from getting tapped by other fingers once scrolling has started.</p>
-          </li>
-          <li>
-            <p>Main: The primary pass where gesture filters should react to and consume aspects of <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code>s. This is the primary path where descendants will interact with <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code>s before parents. This allows for buttons to respond to a tap before a container of the bottom to respond to a tap.</p>
-          </li>
-          <li>
-            <p>Final: This pass is where children can learn what aspects of <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code>s were consumed by parents during the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerEventPass.html#Main">Main</a></code> pass. For example, this is how a button determines that it should no longer respond to fingers lifting off of it because a parent scroller has consumed movement in a <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code>.</p>
-          </li>
-        </ol>
+        <p>Returns a representation of an immutable list of all enum entries, in the order they're declared.</p>
+        <p>This method may be used to iterate over the enum entries.</p>
       </div>
       <div class="api-item"><a name="valueOf-kotlin.String-"></a><a name="valueof"></a>
         <div class="api-name-block">

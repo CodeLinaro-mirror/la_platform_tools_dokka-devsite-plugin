@@ -13,7 +13,6 @@
       <meta itemprop="property" content="hasPendingChanges()">
       <meta itemprop="property" content="takeNestedMutableSnapshot(kotlin.Function1,kotlin.Function1)">
       <meta itemprop="property" content="takeNestedSnapshot(kotlin.Function1)">
-      <meta itemprop="property" content="modified()">
       <meta itemprop="property" content="readOnly()">
       <meta itemprop="property" content="root()">
       <meta itemprop="language" content="KOTLIN">
@@ -30,7 +29,7 @@
 {% setvar page_path %}androidx/compose/runtime/snapshots/MutableSnapshot.html{% endsetvar %}
 {% setvar can_switch %}1{% endsetvar %}
 {% include "reference/_kotlin_switcher2.md" %}
-    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option></select></devsite-select >
     <devsite-filter  select-el-container-id="platform">
       <div>
         <ul class="list" style="list-style: none; padding-left: 0">
@@ -62,7 +61,7 @@
     </div>
     <hr>
     <p>A snapshot of the values return by mutable states and other state objects. All state object will have the same value in the snapshot as they had when the snapshot was created unless they are explicitly changed in the snapshot.</p>
-    <p>To enter a snapshot call <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html#enter(kotlin.Function0)">enter</a></code>. The snapshot is the current snapshot as returned by <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#currentSnapshot()">currentSnapshot</a></code> until the control returns from the lambda (or until a nested <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html#enter(kotlin.Function0)">enter</a></code> is called. All state objects will return the values associated with this snapshot, locally in the thread, until <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html#enter(kotlin.Function0)">enter</a></code> returns. All other threads are unaffected.</p>
+    <p>To enter a snapshot call <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">enter</a></code>. The snapshot is the current snapshot as returned by <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#currentSnapshot()">currentSnapshot</a></code> until the control returns from the lambda (or until a nested <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">enter</a></code> is called. All state objects will return the values associated with this snapshot, locally in the thread, until <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">enter</a></code> returns. All other threads are unaffected.</p>
     <p>All changes made in a <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html">MutableSnapshot</a></code> are snapshot isolated from all other snapshots and their changes can only be seen globally, or by new shots, after <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">MutableSnapshot.apply</a></code> as been called.</p>
     <p>Snapshots can be nested by calling <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html#takeNestedSnapshot(kotlin.Function1)">takeNestedSnapshot</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html#takeNestedMutableSnapshot(kotlin.Function1,kotlin.Function1)">MutableSnapshot.takeNestedMutableSnapshot</a></code>.</p>
     <div class="devsite-table-wrapper">
@@ -356,7 +355,7 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html#takeNestedMutableSnapshot(kotlin.Function1,kotlin.Function1)">takeNestedMutableSnapshot</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;readObserver:&nbsp;((<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;writeObserver:&nbsp;((<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html">MutableSnapshot</a></pre>
-          <p>Take a mutable snapshot of the state values in this snapshot. Entering this snapshot by calling <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html#enter(kotlin.Function0)">enter</a></code> allows state objects to be modified that are not visible to the this, the parent snapshot, until the <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">apply</a></code> is called.</p>
+          <p>Take a mutable snapshot of the state values in this snapshot. Entering this snapshot by calling <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">enter</a></code> allows state objects to be modified that are not visible to the this, the parent snapshot, until the <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">apply</a></code> is called.</p>
           <p>Applying a nested snapshot, by calling <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">apply</a></code>, applies its change to, this, the parent snapshot. For a change to be visible globally, all the parent snapshots need to be applied until the root snapshot is applied to the global state.</p>
           <p>All nested snapshots need to be disposed by calling <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html#dispose()">dispose</a></code> before resources associated with this snapshot can be collected. Nested active snapshots are still valid after the parent has been disposed but calling <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">apply</a></code> will fail.</p>
         </div>
@@ -370,8 +369,8 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html#takeNestedSnapshot(kotlin.Function1)">takeNestedSnapshot</a>(readObserver:&nbsp;((<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)?):&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></pre>
-          <p>Take a snapshot of the state values in this snapshot. The resulting <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code> is read-only. All nested snapshots need to be disposed by calling <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html#dispose()">dispose</a></code> before resources associated with this snapshot can be collected. Nested snapshots are still valid after the parent has been disposed.</p>
+          <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html#takeNestedSnapshot(kotlin.Function1)">takeNestedSnapshot</a>(readObserver:&nbsp;((<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)? = null):&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></pre>
+          <p>Take a snapshot of the state values in this snapshot. The resulting <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code> is read-only. All nested snapshots need to be disposed by calling <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#dispose()">dispose</a></code> before resources associated with this snapshot can be collected. Nested snapshots are still valid after the parent has been disposed.</p>
         </div>
       </div>
     </devsite-filter >
@@ -403,7 +402,7 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html#root()">root</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></pre>
-          <p>The root snapshot for this snapshot. For non-nested snapshots this is always <code>this</code>. For nested snapshot it is the parent's <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html#root()">root</a></code>.</p>
+          <p>The root snapshot for this snapshot. For non-nested snapshots this is always <code>this</code>. For nested snapshot it is the parent's <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#root()">root</a></code>.</p>
         </div>
       </div>
     </devsite-filter >

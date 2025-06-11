@@ -34,7 +34,7 @@
 {% setvar page_path %}androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html{% endsetvar %}
 {% setvar can_switch %}1{% endsetvar %}
 {% include "reference/_kotlin_switcher2.md" %}
-    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option><option selected="selected" value="platform-Android/JVM">Android/JVM</option></select></devsite-select >
+    <devsite-select  id="platform" label="Select a platform"><select multiple="multiple"><option selected="selected" value="platform-Common/All">Common/All</option></select></devsite-select >
     <devsite-filter  select-el-container-id="platform">
       <div>
         <ul class="list" style="list-style: none; padding-left: 0">
@@ -64,7 +64,7 @@
           </thead>
           <tbody class="list">
             <tr>
-              <td><code><a href="/reference/kotlin/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a></code></td>
+              <td><code>ERROR CLASS: Unresolved name: listSaver</code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html#Saver()">Saver</a></code></div>
                 <p>The default implementation of <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html#Saver()">Saver</a></code> for <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html">LazyStaggeredGridState</a></code></p>
@@ -262,7 +262,7 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html#Saver()">Saver</a>:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a></pre>
+          <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html#Saver()">Saver</a>:&nbsp;ERROR CLASS: Unresolved name: listSaver</pre>
           <p>The default implementation of <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html#Saver()">Saver</a></code> for <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html">LazyStaggeredGridState</a></code></p>
         </div>
       </div>
@@ -368,8 +368,8 @@
           </div>
           <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html#dispatchRawDelta(kotlin.Float)">dispatchRawDelta</a>(delta:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></pre>
           <p>Dispatch scroll delta in pixels avoiding all scroll related mechanisms.</p>
-          <p><b>NOTE:</b> unlike <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code>, dispatching any delta with this method won't trigger nested scroll, won't stop ongoing scroll/drag animation and will bypass scrolling of any priority. This method will also ignore <code>reverseDirection</code> and other parameters set in scrollable.</p>
-          <p>This method is used internally for nested scrolling dispatch and other low level operations, allowing implementers of <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> influence the consumption as suits them. Manually dispatching delta via this method will likely result in a bad user experience, you must prefer <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code> method over this one.</p>
+          <p><b>NOTE:</b> unlike <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code>, dispatching any delta with this method won't trigger nested scroll, won't stop ongoing scroll/drag animation and will bypass scrolling of any priority. This method will also ignore <code>reverseDirection</code> and other parameters set in scrollable.</p>
+          <p>This method is used internally for nested scrolling dispatch and other low level operations, allowing implementers of <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> influence the consumption as suits them. Manually dispatching delta via this method will likely result in a bad user experience, you must prefer <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code> method over this one.</p>
           <div class="devsite-table-wrapper">
             <table class="responsive">
               <colgroup>
@@ -423,7 +423,7 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">open&nbsp;suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a>(scrollPriority:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MutatePriority.html">MutatePriority</a>,&nbsp;block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html">ScrollScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <pre class="api-signature no-pretty-print">open&nbsp;suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;scrollPriority:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MutatePriority.html">MutatePriority</a> = MutatePriority.Default,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html">ScrollScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>Call this function to take control of scrolling and gain the ability to send scroll events via <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html#scrollBy(kotlin.Float)">ScrollScope.scrollBy</a></code>. All actions that change the logical scroll position must be performed within a <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code> block (even if they don't call any other methods on this object) in order to guarantee that mutual exclusion is enforced.</p>
           <p>If <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/staggeredgrid/LazyStaggeredGridState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code> is called from elsewhere, this will be canceled.</p>
         </div>

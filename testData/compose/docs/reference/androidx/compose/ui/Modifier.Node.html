@@ -11,7 +11,7 @@
       <meta itemprop="property" content="getCoroutineScope()">
       <meta itemprop="property" content="getNode()">
       <meta itemprop="property" content="getShouldAutoInvalidate()">
-      <meta itemprop="property" content="getIsAttached()">
+      <meta itemprop="property" content="isAttached()">
       <meta itemprop="property" content="onAttach()">
       <meta itemprop="property" content="onDetach()">
       <meta itemprop="property" content="onReset()">
@@ -160,7 +160,7 @@
         </thead>
         <tbody class="list">
           <tr>
-            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a></code></td>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ERROR CLASS: Symbol not found for CoroutineScope</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/Modifier.Node.html#getCoroutineScope()">getCoroutineScope</a>()</code></div>
               <p>A CoroutineScope that can be used to launch tasks that should run while the node is attached.</p>
@@ -183,7 +183,7 @@
           <tr>
             <td><code>final boolean</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/Modifier.Node.html#getIsAttached()">isAttached</a>()</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/Modifier.Node.html#isAttached()">isAttached</a>()</code></div>
               <p>Indicates that the node is attached to a <code><a href="/reference/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">androidx.compose.ui.layout.Layout</a></code> which is part of the UI tree.</p>
             </td>
           </tr>
@@ -237,7 +237,7 @@
             <h3 id="getCoroutineScope()">getCoroutineScope</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;Error class: unknown class&gt;.html">&lt;Error class: unknown class&gt;</a>&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Node.html#getCoroutineScope()">getCoroutineScope</a>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ERROR CLASS: Symbol not found for CoroutineScope&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Node.html#getCoroutineScope()">getCoroutineScope</a>()</pre>
         <p>A CoroutineScope that can be used to launch tasks that should run while the node is attached.</p>
         <p>The scope is accessible between <code><a href="/reference/androidx/compose/ui/Modifier.Node.html#onAttach()">onAttach</a></code> and <code><a href="/reference/androidx/compose/ui/Modifier.Node.html#onDetach()">onDetach</a></code> calls, and will be cancelled after the node is detached (after <code><a href="/reference/androidx/compose/ui/Modifier.Node.html#onDetach()">onDetach</a></code> returns).</p>
         <pre class="prettyprint lang-kotlin">
@@ -294,13 +294,13 @@ class AnimatedNode : Modifier.Node() {
         <p>If this property returns <code>true</code>, then nodes will be automatically invalidated after the modifier update completes (For example, if the returned Node is a <code><a href="/reference/androidx/compose/ui/node/DrawModifierNode.html">DrawModifierNode</a></code>, its <code><a href="/reference/androidx/compose/ui/node/package-summary.html#(androidx.compose.ui.node.DrawModifierNode).invalidateDraw()">DrawModifierNode.invalidateDraw</a></code> function will be invoked automatically as part of auto invalidation).</p>
         <p>This is enabled by default, and provides a convenient mechanism to schedule invalidation and apply changes made to the modifier. You may choose to set this to <code>false</code> if your modifier has auto-invalidatable properties that do not frequently require invalidation to improve performance by skipping unnecessary invalidation. If <code>autoInvalidate</code> is set to <code>false</code>, you must call the appropriate invalidate functions manually when the modifier is updated or else the updates may not be reflected in the UI appropriately.</p>
       </div>
-      <div class="api-item"><a name="getIsAttached--"></a><a name="getisattached"></a>
+      <div class="api-item"><a name="isAttached--"></a><a name="isattached"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="getIsAttached()">isAttached</h3>
+            <h3 id="isAttached()">isAttached</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Node.html#getIsAttached()">isAttached</a>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/Modifier.Node.html#isAttached()">isAttached</a>()</pre>
         <p>Indicates that the node is attached to a <code><a href="/reference/androidx/compose/ui/layout/package-summary.html#Layout(kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.layout.MeasurePolicy)">androidx.compose.ui.layout.Layout</a></code> which is part of the UI tree. This will get set to true right before <code><a href="/reference/androidx/compose/ui/Modifier.Node.html#onAttach()">onAttach</a></code> is called, and set to false right after <code><a href="/reference/androidx/compose/ui/Modifier.Node.html#onDetach()">onDetach</a></code> is called.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">

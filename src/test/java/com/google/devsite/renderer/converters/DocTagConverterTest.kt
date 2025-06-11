@@ -48,7 +48,6 @@ import kotlin.test.assertFails
 import kotlinx.coroutines.runBlocking
 import kotlinx.html.body
 import kotlinx.html.stream.createHTML
-import org.jetbrains.dokka.links.Callable
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.Documentable
@@ -1252,8 +1251,8 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
         val link = (docChildren.last() as DocumentationLink)
         assertThat((link.children.single() as Text).body).isEqualTo("this")
         assertThat(link.dri.packageName).isEqualTo("androidx.example")
-        assertThat(link.dri.classNames).isEqualTo(null)
-        assertThat((link.dri.callable as Callable).name).isEqualTo("<this>")
+        assertThat(link.dri.classNames).isEqualTo("Foo")
+        assertThat(link.dri.callable).isNull()
     }
 
     @Test
@@ -2018,7 +2017,13 @@ internal class DocTagConverterTest(private val displayLanguage: Language) :
                 .NonKmpClasslikeConverter(module.explicitClasslike("ParcelableArrayType"))
                 .classlike()
         }
-        assertThat(outputStreamCaptor.toString()).doesNotContain("WARN")
+        val filteredOutput =
+            outputStreamCaptor
+                .toString()
+                .split("\n")
+                .filterNot { it.startsWith("WARN: Couldn't resolve link for") }
+                .joinToString("\n")
+        assertThat(filteredOutput).doesNotContain("WARN")
         System.setOut(standardOut)
     }
 

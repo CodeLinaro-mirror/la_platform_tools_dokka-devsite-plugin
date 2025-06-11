@@ -13,7 +13,6 @@
       <meta itemprop="property" content="getReadOnly()">
       <meta itemprop="property" content="getRoot()">
       <meta itemprop="property" content="hasPendingChanges()">
-      <meta itemprop="property" content="setModified(androidx.compose.runtime.collection.IdentityArraySet)">
       <meta itemprop="property" content="takeNestedMutableSnapshot(kotlin.Function1,kotlin.Function1)">
       <meta itemprop="property" content="takeNestedSnapshot(kotlin.Function1)">
       <meta itemprop="language" content="JAVA">
@@ -53,7 +52,7 @@
     </div>
     <hr>
     <p>A snapshot of the values return by mutable states and other state objects. All state object will have the same value in the snapshot as they had when the snapshot was created unless they are explicitly changed in the snapshot.</p>
-    <p>To enter a snapshot call <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#enter(kotlin.Function0)">enter</a></code>. The snapshot is the current snapshot as returned by <code><a href="/reference/androidx/compose/runtime/snapshots/package-summary.html#currentSnapshot()">currentSnapshot</a></code> until the control returns from the lambda (or until a nested <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#enter(kotlin.Function0)">enter</a></code> is called. All state objects will return the values associated with this snapshot, locally in the thread, until <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#enter(kotlin.Function0)">enter</a></code> returns. All other threads are unaffected.</p>
+    <p>To enter a snapshot call <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">enter</a></code>. The snapshot is the current snapshot as returned by <code><a href="/reference/androidx/compose/runtime/snapshots/package-summary.html#currentSnapshot()">currentSnapshot</a></code> until the control returns from the lambda (or until a nested <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">enter</a></code> is called. All state objects will return the values associated with this snapshot, locally in the thread, until <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">enter</a></code> returns. All other threads are unaffected.</p>
     <p>All changes made in a <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html">MutableSnapshot</a></code> are snapshot isolated from all other snapshots and their changes can only be seen globally, or by new shots, after <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">MutableSnapshot.apply</a></code> as been called.</p>
     <p>Snapshots can be nested by calling <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#takeNestedSnapshot(kotlin.Function1)">takeNestedSnapshot</a></code> or <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#takeNestedMutableSnapshot(kotlin.Function1,kotlin.Function1)">MutableSnapshot.takeNestedMutableSnapshot</a></code>.</p>
     <div class="devsite-table-wrapper">
@@ -133,13 +132,6 @@
             <td>
               <div><code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#hasPendingChanges()">hasPendingChanges</a>()</code></div>
               <p>Whether there are any pending changes in this snapshot.</p>
-            </td>
-          </tr>
-          <tr>
-            <td><code>void</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#setModified(androidx.compose.runtime.collection.IdentityArraySet)">setModified</a>(<a href="/reference/androidx/compose/runtime/collection/IdentityArraySet.html">IdentityArraySet</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/StateObject.html">StateObject</a>&gt;&nbsp;modified)</code></div>
-              <p>The set of state objects that have been modified in this snapshot.</p>
             </td>
           </tr>
           <tr>
@@ -251,7 +243,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#getRoot()">getRoot</a>()</pre>
-        <p>The root snapshot for this snapshot. For non-nested snapshots this is always <code>this</code>. For nested snapshot it is the parent's <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#root()">root</a></code>.</p>
+        <p>The root snapshot for this snapshot. For non-nested snapshots this is always <code>this</code>. For nested snapshot it is the parent's <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#root()">root</a></code>.</p>
       </div>
       <div class="api-item"><a name="hasPendingChanges--"></a><a name="haspendingchanges"></a>
         <div class="api-name-block">
@@ -262,15 +254,6 @@
         <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#hasPendingChanges()">hasPendingChanges</a>()</pre>
         <p>Whether there are any pending changes in this snapshot. These changes are not visible until the snapshot is applied.</p>
       </div>
-      <div class="api-item"><a name="setModified-androidx.compose.runtime.collection.IdentityArraySet-"></a><a name="setmodified"></a>
-        <div class="api-name-block">
-          <div>
-            <h3 id="setModified(androidx.compose.runtime.collection.IdentityArraySet)">setModified</h3>
-          </div>
-        </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#setModified(androidx.compose.runtime.collection.IdentityArraySet)">setModified</a>(<a href="/reference/androidx/compose/runtime/collection/IdentityArraySet.html">IdentityArraySet</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/StateObject.html">StateObject</a>&gt;&nbsp;modified)</pre>
-        <p>The set of state objects that have been modified in this snapshot.</p>
-      </div>
       <div class="api-item"><a name="takeNestedMutableSnapshot(kotlin.Function1, kotlin.Function1)"></a><a name="takeNestedMutableSnapshot-kotlin.Function1-kotlin.Function1-"></a><a name="takenestedmutablesnapshot"></a>
         <div class="api-name-block">
           <div>
@@ -278,7 +261,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html">MutableSnapshot</a>&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#takeNestedMutableSnapshot(kotlin.Function1,kotlin.Function1)">takeNestedMutableSnapshot</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;readObserver,<br>&nbsp;&nbsp;&nbsp;&nbsp;Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;writeObserver<br>)</pre>
-        <p>Take a mutable snapshot of the state values in this snapshot. Entering this snapshot by calling <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#enter(kotlin.Function0)">enter</a></code> allows state objects to be modified that are not visible to the this, the parent snapshot, until the <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">apply</a></code> is called.</p>
+        <p>Take a mutable snapshot of the state values in this snapshot. Entering this snapshot by calling <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">enter</a></code> allows state objects to be modified that are not visible to the this, the parent snapshot, until the <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">apply</a></code> is called.</p>
         <p>Applying a nested snapshot, by calling <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">apply</a></code>, applies its change to, this, the parent snapshot. For a change to be visible globally, all the parent snapshots need to be applied until the root snapshot is applied to the global state.</p>
         <p>All nested snapshots need to be disposed by calling <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#dispose()">dispose</a></code> before resources associated with this snapshot can be collected. Nested active snapshots are still valid after the parent has been disposed but calling <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">apply</a></code> will fail.</p>
       </div>
@@ -289,7 +272,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#takeNestedSnapshot(kotlin.Function1)">takeNestedSnapshot</a>(Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;readObserver)</pre>
-        <p>Take a snapshot of the state values in this snapshot. The resulting <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code> is read-only. All nested snapshots need to be disposed by calling <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#dispose()">dispose</a></code> before resources associated with this snapshot can be collected. Nested snapshots are still valid after the parent has been disposed.</p>
+        <p>Take a snapshot of the state values in this snapshot. The resulting <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code> is read-only. All nested snapshots need to be disposed by calling <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#dispose()">dispose</a></code> before resources associated with this snapshot can be collected. Nested snapshots are still valid after the parent has been disposed.</p>
       </div>
     </div>
   </body>

@@ -208,7 +208,7 @@ fun testControlClock() {
           <tr>
             <td><code>abstract void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/test/MainTestClock.html#setAutoAdvance(kotlin.Boolean)">setAutoAdvance</a>(boolean&nbsp;autoAdvance)</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/test/MainTestClock.html#setAutoAdvance(kotlin.Boolean)">setAutoAdvance</a>(boolean&nbsp;value)</code></div>
               <p>Whether the clock should be advanced by the testing framework while awaiting idleness in order to process any pending work that is driven by this clock.</p>
             </td>
           </tr>
@@ -343,7 +343,7 @@ fun testControlClock() {
             <h3 id="setAutoAdvance(kotlin.Boolean)">setAutoAdvance</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/MainTestClock.html#setAutoAdvance(kotlin.Boolean)">setAutoAdvance</a>(boolean&nbsp;autoAdvance)</pre>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/test/MainTestClock.html#setAutoAdvance(kotlin.Boolean)">setAutoAdvance</a>(boolean&nbsp;value)</pre>
         <p>Whether the clock should be advanced by the testing framework while awaiting idleness in order to process any pending work that is driven by this clock. This ensures that when the app is androidx.compose.ui.test.junit4.ComposeTestRule.waitForIdle, there are no more pending recompositions or ongoing animations.</p>
         <p>If <code><a href="/reference/androidx/compose/ui/test/MainTestClock.html#autoAdvance()">autoAdvance</a></code> is false, the clock is not advanced while awaiting idleness. Moreover, having pending recompositions or animations is not taken as a sign of pending work (non-idleness) when awaiting idleness, as waiting for a longer time will not make them happen. Note that pending measure, layout or draw passes will still be awaited when awaiting idleness and having <code><a href="/reference/androidx/compose/ui/test/MainTestClock.html#autoAdvance()">autoAdvance</a></code> set to false, as those passes are not driven by this clock.</p>
         <p>By default this is true.</p>

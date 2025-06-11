@@ -33,7 +33,7 @@
       <pre>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public final class <a href="/reference/androidx/compose/ui/autofill/AutofillNode.html">AutofillNode</a></pre>
     </p>
     <hr>
-    <p>Every autofillable composable will have an <code><a href="/reference/androidx/compose/ui/autofill/AutofillNode.html">AutofillNode</a></code>. (An autofill node will be created for every semantics node that adds autofill properties). This node is used to request/cancel autofill, and it holds the <code><a href="/reference/androidx/compose/ui/autofill/AutofillNode.html#onFill()">onFill</a></code> lambda which is called by the autofill framework.</p>
+    <p>Every autofillable composable will have an <code><a href="/reference/androidx/compose/ui/autofill/AutofillNode.html">AutofillNode</a></code>. (An autofill node will be created for every semantics node that adds autofill properties). This node is used to request/cancel autofill, and it holds the <code><a href="/reference/androidx/compose/ui/autofill/AutofillNode.html#(kotlin.collections.List,androidx.compose.ui.geometry.Rect,kotlin.Function1)">onFill</a></code> lambda which is called by the autofill framework.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -110,7 +110,7 @@
           <tr>
             <td><code>final void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/autofill/AutofillNode.html#setBoundingBox(androidx.compose.ui.geometry.Rect)">setBoundingBox</a>(<a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a>&nbsp;boundingBox)</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/autofill/AutofillNode.html#setBoundingBox(androidx.compose.ui.geometry.Rect)">setBoundingBox</a>(<a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a>&nbsp;value)</code></div>
               <p>The screen coordinates of the composable being autofilled.</p>
             </td>
           </tr>
@@ -145,7 +145,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/autofill/AutofillType.html">AutofillType</a>&gt;&nbsp;<a href="/reference/androidx/compose/ui/autofill/AutofillNode.html#getAutofillTypes()">getAutofillTypes</a>()</pre>
-        <p>A list of autofill types for this node. These types are conveyed to the autofill framework and it is used to call <code><a href="/reference/androidx/compose/ui/autofill/AutofillNode.html#onFill()">onFill</a></code> with the appropriate value. If you don't set this property, the autofill framework will use heuristics to guess the type. This property is a list because some fields can have multiple types. For instance, userid in a login form can either be a username or an email address. TODO(b/138731416): Check with the autofill service team if the order matters, and how duplicate types are handled.</p>
+        <p>A list of autofill types for this node. These types are conveyed to the autofill framework and it is used to call <code><a href="/reference/androidx/compose/ui/autofill/AutofillNode.html#(kotlin.collections.List,androidx.compose.ui.geometry.Rect,kotlin.Function1)">onFill</a></code> with the appropriate value. If you don't set this property, the autofill framework will use heuristics to guess the type. This property is a list because some fields can have multiple types. For instance, userid in a login form can either be a username or an email address. TODO(b/138731416): Check with the autofill service team if the order matters, and how duplicate types are handled.</p>
       </div>
       <div class="api-item"><a name="getBoundingBox--"></a><a name="getboundingbox"></a>
         <div class="api-name-block">
@@ -188,7 +188,7 @@
             <h3 id="setBoundingBox(androidx.compose.ui.geometry.Rect)">setBoundingBox</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/autofill/AutofillNode.html#setBoundingBox(androidx.compose.ui.geometry.Rect)">setBoundingBox</a>(<a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a>&nbsp;boundingBox)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/autofill/AutofillNode.html#setBoundingBox(androidx.compose.ui.geometry.Rect)">setBoundingBox</a>(<a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a>&nbsp;value)</pre>
         <p>The screen coordinates of the composable being autofilled. This data is used by the autofill framework to decide where to show the autofill popup.</p>
       </div>
     </div>

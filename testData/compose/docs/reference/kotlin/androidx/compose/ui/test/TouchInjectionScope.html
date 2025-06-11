@@ -62,7 +62,7 @@
     </devsite-filter >
     <hr>
     <p>The receiver scope of the touch input injection lambda from <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performTouchInput(kotlin.Function1)">performTouchInput</a></code>.</p>
-    <p>The functions in <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a></code> can roughly be divided into two groups: full gestures and individual touch events. The individual touch events are: <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#down(kotlin.Int,androidx.compose.ui.geometry.Offset)">down</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#move(kotlin.Long)">move</a></code> and friends, <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#up(kotlin.Int)">up</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#cancel(kotlin.Long)">cancel</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#advanceEventTime(kotlin.Long)">advanceEventTime</a></code>. Full gestures are all the other functions, like <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).click(androidx.compose.ui.geometry.Offset)">click</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">doubleClick</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipe(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">swipe</a></code>, etc. These are built on top of the individual events and serve as a good example on how you can build your own full gesture functions.</p>
+    <p>The functions in <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html">TouchInjectionScope</a></code> can roughly be divided into two groups: full gestures and individual touch events. The individual touch events are: <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#down(kotlin.Int,androidx.compose.ui.geometry.Offset)">down</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#move(kotlin.Long)">move</a></code> and friends, <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#up(kotlin.Int)">up</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#cancel(kotlin.Long)">cancel</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#advanceEventTime(kotlin.Long)">advanceEventTime</a></code>. Full gestures are all the other functions, like <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).click(androidx.compose.ui.geometry.Offset)">click</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset,kotlin.Long)">doubleClick</a></code>, <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.TouchInjectionScope).swipe(androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Offset,kotlin.Long)">swipe</a></code>, etc. These are built on top of the individual events and serve as a good example on how you can build your own full gesture functions.</p>
     <p>A touch gesture is started with a <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#down(kotlin.Int,androidx.compose.ui.geometry.Offset)">down</a></code> event, followed by a sequence of <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#move(kotlin.Long)">move</a></code> events and finally an <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#up(kotlin.Int)">up</a></code> event, optionally combined with more sets of <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#down(kotlin.Int,androidx.compose.ui.geometry.Offset)">down</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#up(kotlin.Int)">up</a></code> events for multi-touch gestures. Most methods accept a pointerId to specify which pointer (finger) the event applies to. Movement can be expressed absolutely with <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#moveTo(kotlin.Int,androidx.compose.ui.geometry.Offset,kotlin.Long)">moveTo</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#updatePointerTo(kotlin.Int,androidx.compose.ui.geometry.Offset)">updatePointerTo</a></code>, or relative to the current pointer position with <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#moveBy(kotlin.Int,androidx.compose.ui.geometry.Offset,kotlin.Long)">moveBy</a></code> and <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#updatePointerBy(kotlin.Int,androidx.compose.ui.geometry.Offset)">updatePointerBy</a></code>. The <code>moveTo/By</code> methods enqueue an event immediately, while the <code>updatePointerTo/By</code> methods don't. This allows you to update the position of multiple pointers in a single <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#move(kotlin.Long)">move</a></code> event for multi-touch gestures. Touch gestures can be cancelled with <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#cancel(kotlin.Long)">cancel</a></code>. All events, regardless the method used, will always contain the current position of <em>all</em> pointers.</p>
     <p>The entire event injection state is shared between all <code>perform.*Input</code> methods, meaning you can continue an unfinished touch gesture in a subsequent invocation of <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performTouchInput(kotlin.Function1)">performTouchInput</a></code> or <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performMultiModalInput(kotlin.Function1)">performMultiModalInput</a></code>. Note however that while the pointer positions are retained across invocation of <code>perform.*Input</code> methods, they are always manipulated in the current node's local coordinate system. That means that two subsequent invocations of <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performTouchInput(kotlin.Function1)">performTouchInput</a></code> on different nodes will report a different <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#currentPosition(kotlin.Int)">currentPosition</a></code>, even though it is actually the same position on the screen.</p>
     <p>All events sent by these methods are batched together and sent as a whole after <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performTouchInput(kotlin.Function1)">performTouchInput</a></code> has executed its code block. Because gestures don't have to be defined all in the same <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performTouchInput(kotlin.Function1)">performTouchInput</a></code> block, keep in mind that while the gesture is not complete, all code you execute in between these blocks will be executed while imaginary fingers are actively touching the screen. The events sent as part of the same batch will not be interrupted by recomposition, however, if a gesture spans multiple <code><a href="/reference/kotlin/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performTouchInput(kotlin.Function1)">performTouchInput</a></code> blocks it is important to remember that recomposition, layout and drawing could take place during the gesture, which may lead to events being injected into a moving target. As pointer positions are manipulated in the current node's local coordinate system, this could lead to issues caused by the fact that part of the gesture will take effect before the rest of the events have been enqueued.</p>
@@ -909,7 +909,7 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
                 <tr>
                   <td><code>delayMillis:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a> = eventPeriodMillis</code></td>
                   <td>
-                    <p>The time between the last sent event and this event. <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
+                    <p>The time between the last sent event and this event. <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
                   </td>
                 </tr>
               </tbody>
@@ -1032,7 +1032,7 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
                 <tr>
                   <td><code>delayMillis:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a> = eventPeriodMillis</code></td>
                   <td>
-                    <p>The time between the last sent event and this event. <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
+                    <p>The time between the last sent event and this event. <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
                   </td>
                 </tr>
               </tbody>
@@ -1073,7 +1073,7 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
                 <tr>
                   <td><code>delayMillis:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a> = eventPeriodMillis</code></td>
                   <td>
-                    <p>The time between the last sent event and this event. <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
+                    <p>The time between the last sent event and this event. <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
                   </td>
                 </tr>
               </tbody>
@@ -1120,7 +1120,7 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
                 <tr>
                   <td><code>delayMillis:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a> = eventPeriodMillis</code></td>
                   <td>
-                    <p>The time between the last sent event and this event. <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
+                    <p>The time between the last sent event and this event. <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
                   </td>
                 </tr>
               </tbody>
@@ -1161,7 +1161,7 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
                 <tr>
                   <td><code>delayMillis:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a> = eventPeriodMillis</code></td>
                   <td>
-                    <p>The time between the last sent event and this event. <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
+                    <p>The time between the last sent event and this event. <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
                   </td>
                 </tr>
               </tbody>
@@ -1208,7 +1208,7 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
                 <tr>
                   <td><code>delayMillis:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a> = eventPeriodMillis</code></td>
                   <td>
-                    <p>The time between the last sent event and this event. <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
+                    <p>The time between the last sent event and this event. <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
                   </td>
                 </tr>
               </tbody>
@@ -1255,7 +1255,7 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
                 <tr>
                   <td><code>delayMillis:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a> = eventPeriodMillis</code></td>
                   <td>
-                    <p>The time between the last sent event and this event. <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
+                    <p>The time between the last sent event and this event. <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
                   </td>
                 </tr>
               </tbody>
@@ -1302,7 +1302,7 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
                 <tr>
                   <td><code>delayMillis:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a> = eventPeriodMillis</code></td>
                   <td>
-                    <p>The time between the last sent event and this event. <code><a href="/reference/kotlin/androidx/compose/ui/test/TouchInjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
+                    <p>The time between the last sent event and this event. <code><a href="/reference/kotlin/androidx/compose/ui/test/InjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
                   </td>
                 </tr>
               </tbody>

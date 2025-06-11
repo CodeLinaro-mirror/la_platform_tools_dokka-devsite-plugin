@@ -273,7 +273,7 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
               <td><code>abstract <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#onClear()">onClear</a>()</code></div>
-                <p>Called to perform clearing of the <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#root()">root</a></code> when <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#clear()">clear</a></code> is called.</p>
+                <p>Called to perform clearing of the <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#(kotlin.Any)">root</a></code> when <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#clear()">clear</a></code> is called.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -463,7 +463,7 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
             </div>
           </div>
           <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#down(kotlin.Any)">down</a>(node:&nbsp;T):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-          <p>Indicates that the applier is getting traversed &quot;down&quot; the tree. When this gets called, <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#down(kotlin.Any)">node</a></code> is expected to be a child of <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#current()">current</a></code>, and after this operation, <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#down(kotlin.Any)">node</a></code> is expected to be the new <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#current()">current</a></code>.</p>
+          <p>Indicates that the applier is getting traversed &quot;down&quot; the tree. When this gets called, <code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#down(kotlin.Any)">node</a></code> is expected to be a child of <code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#current()">current</a></code>, and after this operation, <code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#down(kotlin.Any)">node</a></code> is expected to be the new <code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#current()">current</a></code>.</p>
         </div>
         <div class="api-item"><a name="up--"></a><a name="up"></a>
           <div class="api-name-block">
@@ -476,7 +476,7 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
             </div>
           </div>
           <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#up()">up</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-          <p>Indicates that the applier is getting traversed &quot;up&quot; the tree. After this operation completes, the <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#current()">current</a></code> should return the &quot;parent&quot; of the <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#current()">current</a></code> node at the beginning of this operation.</p>
+          <p>Indicates that the applier is getting traversed &quot;up&quot; the tree. After this operation completes, the <code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#current()">current</a></code> should return the &quot;parent&quot; of the <code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#current()">current</a></code> node at the beginning of this operation.</p>
         </div>
       </div>
     </devsite-filter >
@@ -507,7 +507,7 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
             </div>
           </div>
           <pre class="api-signature no-pretty-print">protected&nbsp;abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#onClear()">onClear</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-          <p>Called to perform clearing of the <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#root()">root</a></code> when <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#clear()">clear</a></code> is called.</p>
+          <p>Called to perform clearing of the <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#(kotlin.Any)">root</a></code> when <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#clear()">clear</a></code> is called.</p>
         </div>
         <div class="api-item"><a name="(kotlin.collections.MutableList).remove(kotlin.Int, kotlin.Int)"></a><a name="-kotlin.collections.MutableList-.remove-kotlin.Int-kotlin.Int-"></a><a name="remove"></a>
           <div class="api-name-block">
@@ -538,7 +538,7 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
             </div>
           </div>
           <pre class="api-signature no-pretty-print">open&nbsp;var&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#current()">current</a>:&nbsp;T</pre>
-          <p>The node that operations will be applied on at any given time. It is expected that the value of this property will change as <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#down(kotlin.Any)">down</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#up()">up</a></code> are called.</p>
+          <p>The node that operations will be applied on at any given time. It is expected that the value of this property will change as <code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#down(kotlin.Any)">down</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#up()">up</a></code> are called.</p>
         </div>
         <div class="api-item"><a name="getRoot()"></a><a name="setRoot()"></a><a name="getRoot--"></a><a name="setRoot--"></a>
           <div class="api-name-block">

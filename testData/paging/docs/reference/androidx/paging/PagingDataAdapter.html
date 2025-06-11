@@ -12,15 +12,18 @@
       <meta itemprop="property" content="addOnPagesUpdatedListener(kotlin.Function0)">
       <meta itemprop="property" content="getItem(kotlin.Int)">
       <meta itemprop="property" content="getItemCount()">
+      <meta itemprop="property" content="getItemCount()">
       <meta itemprop="property" content="getItemId(kotlin.Int)">
       <meta itemprop="property" content="getLoadStateFlow()">
       <meta itemprop="property" content="getOnPagesUpdatedFlow()">
+      <meta itemprop="property" content="getStateRestorationPolicy()">
       <meta itemprop="property" content="peek(kotlin.Int)">
       <meta itemprop="property" content="refresh()">
       <meta itemprop="property" content="removeLoadStateListener(kotlin.Function1)">
       <meta itemprop="property" content="removeOnPagesUpdatedListener(kotlin.Function0)">
       <meta itemprop="property" content="retry()">
       <meta itemprop="property" content="setHasStableIds(kotlin.Boolean)">
+      <meta itemprop="property" content="setStateRestorationPolicy(androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy)">
       <meta itemprop="property" content="setStateRestorationPolicy(androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy)">
       <meta itemprop="property" content="snapshot()">
       <meta itemprop="property" content="submitData(androidx.paging.PagingData)">
@@ -149,6 +152,12 @@ class UserAdapter : PagingDataAdapter&lt;User, UserViewHolder&gt;(USER_COMPARATO
             </td>
           </tr>
           <tr>
+            <td><code>int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#getItemCount()">getItemCount</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
             <td><code>final long</code></td>
             <td>
               <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#getItemId(kotlin.Int)">getItemId</a>(int&nbsp;position)</code></div>
@@ -167,6 +176,12 @@ class UserAdapter : PagingDataAdapter&lt;User, UserViewHolder&gt;(USER_COMPARATO
             <td>
               <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#getOnPagesUpdatedFlow()">getOnPagesUpdatedFlow</a>()</code></div>
               <p>A hot <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> that emits after the pages presented to the UI are updated, even if the actual items presented don't change.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.StateRestorationPolicy.html">RecyclerView.Adapter.StateRestorationPolicy</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#getStateRestorationPolicy()">getStateRestorationPolicy</a>()</code></div>
             </td>
           </tr>
           <tr>
@@ -218,6 +233,12 @@ class UserAdapter : PagingDataAdapter&lt;User, UserViewHolder&gt;(USER_COMPARATO
             </td>
           </tr>
           <tr>
+            <td><code>void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#setStateRestorationPolicy(androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy)">setStateRestorationPolicy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.StateRestorationPolicy.html">RecyclerView.Adapter.StateRestorationPolicy</a>&nbsp;strategy<br>)</code></div>
+            </td>
+          </tr>
+          <tr>
             <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/ItemSnapshotList.html">ItemSnapshotList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
             <td>
               <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#snapshot()">snapshot</a>()</code></div>
@@ -235,7 +256,7 @@ class UserAdapter : PagingDataAdapter&lt;User, UserViewHolder&gt;(USER_COMPARATO
             <td><code>final void</code></td>
             <td>
               <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#submitData(androidx.lifecycle.Lifecycle,androidx.paging.PagingData)">submitData</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.html">Lifecycle</a>&nbsp;lifecycle,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagingData<br>)</code></div>
-              <p>Present a <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> until it is either invalidated or another call to <code><a href="/reference/androidx/paging/PagingDataAdapter.html#submitData(androidx.paging.PagingData)">submitData</a></code> is made.</p>
+              <p>Present a <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> until it is either invalidated or another call to <code><a href="/reference/androidx/paging/PagingDataAdapter.html#submitData(androidx.lifecycle.Lifecycle,androidx.paging.PagingData)">submitData</a></code> is made.</p>
             </td>
           </tr>
           <tr>
@@ -304,31 +325,25 @@ class UserAdapter : PagingDataAdapter&lt;User, UserViewHolder&gt;(USER_COMPARATO
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#bindViewHolder(androidx.recyclerview.widget.RecyclerView.ViewHolder,kotlin.Int)">bindViewHolder</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;p0,&nbsp;int&nbsp;p1)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#bindViewHolder(androidx.recyclerview.widget.RecyclerView.ViewHolder,kotlin.Int)">bindViewHolder</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;holder,&nbsp;int&nbsp;position)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> VH</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#createViewHolder(android.view.ViewGroup,kotlin.Int)">createViewHolder</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;p0,&nbsp;int&nbsp;p1)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#createViewHolder(android.view.ViewGroup,kotlin.Int)">createViewHolder</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>&nbsp;parent,&nbsp;int&nbsp;viewType)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>int</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#findRelativeAdapterPositionIn(androidx.recyclerview.widget.RecyclerView.Adapter,androidx.recyclerview.widget.RecyclerView.ViewHolder,kotlin.Int)">findRelativeAdapterPositionIn</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html">RecyclerView.Adapter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt;&nbsp;p0,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&nbsp;p1,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;p2<br>)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#findRelativeAdapterPositionIn(androidx.recyclerview.widget.RecyclerView.Adapter,androidx.recyclerview.widget.RecyclerView.ViewHolder,kotlin.Int)">findRelativeAdapterPositionIn</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html">RecyclerView.Adapter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt;&nbsp;adapter,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&nbsp;viewHolder,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;localPosition<br>)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>int</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#getItemViewType(kotlin.Int)">getItemViewType</a>(int&nbsp;p0)</code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.StateRestorationPolicy.html">RecyclerView.Adapter.StateRestorationPolicy</a></code></td>
-                      <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#getStateRestorationPolicy()">getStateRestorationPolicy</a>()</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#getItemViewType(kotlin.Int)">getItemViewType</a>(int&nbsp;position)</code></div>
                       </td>
                     </tr>
                     <tr>
@@ -352,61 +367,61 @@ class UserAdapter : PagingDataAdapter&lt;User, UserViewHolder&gt;(USER_COMPARATO
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemChanged(kotlin.Int)">notifyItemChanged</a>(int&nbsp;p0)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemChanged(kotlin.Int)">notifyItemChanged</a>(int&nbsp;position)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemChanged(kotlin.Int,kotlin.Any)">notifyItemChanged</a>(int&nbsp;p0,&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;p1)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemChanged(kotlin.Int,kotlin.Any)">notifyItemChanged</a>(int&nbsp;position,&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;payload)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemInserted(kotlin.Int)">notifyItemInserted</a>(int&nbsp;p0)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemInserted(kotlin.Int)">notifyItemInserted</a>(int&nbsp;position)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemMoved(kotlin.Int,kotlin.Int)">notifyItemMoved</a>(int&nbsp;p0,&nbsp;int&nbsp;p1)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemMoved(kotlin.Int,kotlin.Int)">notifyItemMoved</a>(int&nbsp;fromPosition,&nbsp;int&nbsp;toPosition)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeChanged(kotlin.Int,kotlin.Int)">notifyItemRangeChanged</a>(int&nbsp;p0,&nbsp;int&nbsp;p1)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeChanged(kotlin.Int,kotlin.Int)">notifyItemRangeChanged</a>(int&nbsp;positionStart,&nbsp;int&nbsp;itemCount)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeChanged(kotlin.Int,kotlin.Int,kotlin.Any)">notifyItemRangeChanged</a>(int&nbsp;p0,&nbsp;int&nbsp;p1,&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;p2)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeChanged(kotlin.Int,kotlin.Int,kotlin.Any)">notifyItemRangeChanged</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;positionStart,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;itemCount,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;payload<br>)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeInserted(kotlin.Int,kotlin.Int)">notifyItemRangeInserted</a>(int&nbsp;p0,&nbsp;int&nbsp;p1)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeInserted(kotlin.Int,kotlin.Int)">notifyItemRangeInserted</a>(int&nbsp;positionStart,&nbsp;int&nbsp;itemCount)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeRemoved(kotlin.Int,kotlin.Int)">notifyItemRangeRemoved</a>(int&nbsp;p0,&nbsp;int&nbsp;p1)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeRemoved(kotlin.Int,kotlin.Int)">notifyItemRangeRemoved</a>(int&nbsp;positionStart,&nbsp;int&nbsp;itemCount)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>final void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRemoved(kotlin.Int)">notifyItemRemoved</a>(int&nbsp;p0)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRemoved(kotlin.Int)">notifyItemRemoved</a>(int&nbsp;position)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onAttachedToRecyclerView(androidx.recyclerview.widget.RecyclerView)">onAttachedToRecyclerView</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.html">RecyclerView</a>&nbsp;p0)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onAttachedToRecyclerView(androidx.recyclerview.widget.RecyclerView)">onAttachedToRecyclerView</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.html">RecyclerView</a>&nbsp;recyclerView)</code></div>
                       </td>
                     </tr>
                     <tr>
@@ -418,7 +433,7 @@ class UserAdapter : PagingDataAdapter&lt;User, UserViewHolder&gt;(USER_COMPARATO
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onBindViewHolder(androidx.recyclerview.widget.RecyclerView.ViewHolder,kotlin.Int,kotlin.collections.MutableList)">onBindViewHolder</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;p0,&nbsp;int&nbsp;p1,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;p2)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onBindViewHolder(androidx.recyclerview.widget.RecyclerView.ViewHolder,kotlin.Int,kotlin.collections.MutableList)">onBindViewHolder</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;holder,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;payloads<br>)</code></div>
                       </td>
                     </tr>
                     <tr>
@@ -430,43 +445,43 @@ class UserAdapter : PagingDataAdapter&lt;User, UserViewHolder&gt;(USER_COMPARATO
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onDetachedFromRecyclerView(androidx.recyclerview.widget.RecyclerView)">onDetachedFromRecyclerView</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.html">RecyclerView</a>&nbsp;p0)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onDetachedFromRecyclerView(androidx.recyclerview.widget.RecyclerView)">onDetachedFromRecyclerView</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.html">RecyclerView</a>&nbsp;recyclerView)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>boolean</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onFailedToRecycleView(androidx.recyclerview.widget.RecyclerView.ViewHolder)">onFailedToRecycleView</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;p0)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onFailedToRecycleView(androidx.recyclerview.widget.RecyclerView.ViewHolder)">onFailedToRecycleView</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;holder)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onViewAttachedToWindow(androidx.recyclerview.widget.RecyclerView.ViewHolder)">onViewAttachedToWindow</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;p0)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onViewAttachedToWindow(androidx.recyclerview.widget.RecyclerView.ViewHolder)">onViewAttachedToWindow</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;holder)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onViewDetachedFromWindow(androidx.recyclerview.widget.RecyclerView.ViewHolder)">onViewDetachedFromWindow</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;p0)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onViewDetachedFromWindow(androidx.recyclerview.widget.RecyclerView.ViewHolder)">onViewDetachedFromWindow</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;holder)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onViewRecycled(androidx.recyclerview.widget.RecyclerView.ViewHolder)">onViewRecycled</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;p0)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#onViewRecycled(androidx.recyclerview.widget.RecyclerView.ViewHolder)">onViewRecycled</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> VH&nbsp;holder)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#registerAdapterDataObserver(androidx.recyclerview.widget.RecyclerView.AdapterDataObserver)">registerAdapterDataObserver</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.AdapterDataObserver.html">RecyclerView.AdapterDataObserver</a>&nbsp;p0<br>)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#registerAdapterDataObserver(androidx.recyclerview.widget.RecyclerView.AdapterDataObserver)">registerAdapterDataObserver</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.AdapterDataObserver.html">RecyclerView.AdapterDataObserver</a>&nbsp;observer<br>)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#unregisterAdapterDataObserver(androidx.recyclerview.widget.RecyclerView.AdapterDataObserver)">unregisterAdapterDataObserver</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.AdapterDataObserver.html">RecyclerView.AdapterDataObserver</a>&nbsp;p0<br>)</code></div>
+                        <div><code><a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.html#unregisterAdapterDataObserver(androidx.recyclerview.widget.RecyclerView.AdapterDataObserver)">unregisterAdapterDataObserver</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.AdapterDataObserver.html">RecyclerView.AdapterDataObserver</a>&nbsp;observer<br>)</code></div>
                       </td>
                     </tr>
                   </tbody>
@@ -623,6 +638,14 @@ adapter.addLoadStateListener {
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#getItemCount()">getItemCount</a>()</pre>
       </div>
+      <div class="api-item"><a name="getItemCount--"></a><a name="getitemcount"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getItemCount()">getItemCount</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#getItemCount()">getItemCount</a>()</pre>
+      </div>
       <div class="api-item"><a name="getItemId-kotlin.Int-"></a><a name="getitemid"></a>
         <div class="api-name-block">
           <div>
@@ -664,6 +687,14 @@ adapter.addLoadStateListener {
           </li>
         </ul>
         <p>Note: This is a <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-shared-flow/index.html">SharedFlow</a></code> configured to replay 0 items with a buffer of size 64. If a collector lags behind page updates, it may trigger multiple times for each intermediate update that was presented while your collector was still working. To avoid this behavior, you can <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/index.html">conflate</a></code> this <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> so that you only receive the latest update, which is useful in cases where you are simply updating UI and don't care about tracking the exact number of page updates.</p>
+      </div>
+      <div class="api-item"><a name="getStateRestorationPolicy--"></a><a name="getstaterestorationpolicy"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="getStateRestorationPolicy()">getStateRestorationPolicy</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.StateRestorationPolicy.html">RecyclerView.Adapter.StateRestorationPolicy</a>&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#getStateRestorationPolicy()">getStateRestorationPolicy</a>()</pre>
       </div>
       <div class="api-item"><a name="peek-kotlin.Int-"></a><a name="peek"></a>
         <div class="api-name-block">
@@ -945,6 +976,14 @@ class MyActivity : AppCompatActivity() {
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#setStateRestorationPolicy(androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy)">setStateRestorationPolicy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.StateRestorationPolicy.html">RecyclerView.Adapter.StateRestorationPolicy</a>&nbsp;strategy<br>)</pre>
       </div>
+      <div class="api-item"><a name="setStateRestorationPolicy-androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy-"></a><a name="setstaterestorationpolicy"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="setStateRestorationPolicy(androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy)">setStateRestorationPolicy</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#setStateRestorationPolicy(androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy)">setStateRestorationPolicy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/RecyclerView.Adapter.StateRestorationPolicy.html">RecyclerView.Adapter.StateRestorationPolicy</a>&nbsp;strategy<br>)</pre>
+      </div>
       <div class="api-item"><a name="snapshot--"></a><a name="snapshot"></a>
         <div class="api-name-block">
           <div>
@@ -1013,8 +1052,8 @@ class MyFlowActivity : AppCompatActivity() {
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#submitData(androidx.lifecycle.Lifecycle,androidx.paging.PagingData)">submitData</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.html">Lifecycle</a>&nbsp;lifecycle,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagingData<br>)</pre>
-        <p>Present a <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> until it is either invalidated or another call to <code><a href="/reference/androidx/paging/PagingDataAdapter.html#submitData(androidx.paging.PagingData)">submitData</a></code> is made.</p>
-        <p>This method is typically used when observing a RxJava or LiveData stream produced by <code><a href="/reference/androidx/paging/Pager.html">Pager</a></code>. For <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> support, use the suspending overload of <code><a href="/reference/androidx/paging/PagingDataAdapter.html#submitData(androidx.paging.PagingData)">submitData</a></code>, which automates cancellation via <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code> instead of relying of <code><a href="/reference/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code>.</p>
+        <p>Present a <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> until it is either invalidated or another call to <code><a href="/reference/androidx/paging/PagingDataAdapter.html#submitData(androidx.lifecycle.Lifecycle,androidx.paging.PagingData)">submitData</a></code> is made.</p>
+        <p>This method is typically used when observing a RxJava or LiveData stream produced by <code><a href="/reference/androidx/paging/Pager.html">Pager</a></code>. For <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> support, use the suspending overload of <code><a href="/reference/androidx/paging/PagingDataAdapter.html#submitData(androidx.lifecycle.Lifecycle,androidx.paging.PagingData)">submitData</a></code>, which automates cancellation via <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code> instead of relying of <code><a href="/reference/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code>.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -1063,7 +1102,7 @@ class MyRxJava2Activity : AppCompatActivity() {
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/androidx/paging/PagingDataAdapter.html#submitData(androidx.paging.PagingData)">submitData</a></code></td>
+                <td><code><a href="/reference/androidx/paging/PagingDataAdapter.html#submitData(androidx.lifecycle.Lifecycle,androidx.paging.PagingData)">submitData</a></code></td>
                 <td></td>
               </tr>
               <tr>

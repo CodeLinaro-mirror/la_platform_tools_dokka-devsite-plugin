@@ -107,14 +107,14 @@
             <td><code>final int</code></td>
             <td>
               <div><code><a href="/reference/androidx/paging/ItemSnapshotList.html#getPlaceholdersAfter()">getPlaceholdersAfter</a>()</code></div>
-              <p>Number of placeholders after the presented <code><a href="/reference/androidx/paging/ItemSnapshotList.html#items()">items</a></code>, 0 if <code><a href="/reference/androidx/paging/PagingConfig.html#enablePlaceholders()">enablePlaceholders</a></code> is <code>false</code>.</p>
+              <p>Number of placeholders after the presented <code><a href="/reference/androidx/paging/ItemSnapshotList.html#(kotlin.Int,kotlin.Int,kotlin.collections.List)">items</a></code>, 0 if <code><a href="/reference/androidx/paging/PagingConfig.html#enablePlaceholders()">enablePlaceholders</a></code> is <code>false</code>.</p>
             </td>
           </tr>
           <tr>
             <td><code>final int</code></td>
             <td>
               <div><code><a href="/reference/androidx/paging/ItemSnapshotList.html#getPlaceholdersBefore()">getPlaceholdersBefore</a>()</code></div>
-              <p>Number of placeholders before the presented <code><a href="/reference/androidx/paging/ItemSnapshotList.html#items()">items</a></code>, 0 if <code><a href="/reference/androidx/paging/PagingConfig.html#enablePlaceholders()">enablePlaceholders</a></code> is <code>false</code>.</p>
+              <p>Number of placeholders before the presented <code><a href="/reference/androidx/paging/ItemSnapshotList.html#(kotlin.Int,kotlin.Int,kotlin.collections.List)">items</a></code>, 0 if <code><a href="/reference/androidx/paging/PagingConfig.html#enablePlaceholders()">enablePlaceholders</a></code> is <code>false</code>.</p>
             </td>
           </tr>
           <tr>
@@ -263,12 +263,6 @@
                       </td>
                     </tr>
                     <tr>
-                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Spliterator.html">Spliterator</a>&lt;T&gt;</code></td>
-                      <td>
-                        <div><code><a href="https://developer.android.com/reference/java/util/Collection.html#spliterator()">spliterator</a>()</code></div>
-                      </td>
-                    </tr>
-                    <tr>
                       <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/stream/Stream.html">Stream</a>&lt;T&gt;</code></td>
                       <td>
                         <div><code><a href="https://developer.android.com/reference/java/util/Collection.html#stream()">stream</a>()</code></div>
@@ -277,8 +271,7 @@
                     <tr>
                       <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T[]</code></td>
                       <td>
-                        <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <span><del><a href="https://developer.android.com/reference/java/util/Collection.html#toArray(java.util.function.IntFunction)">toArray</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/function/IntFunction.html">IntFunction</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T[]&gt;&nbsp;p0)</code></div>
-                        <p><strong>This method is deprecated.</strong> This member is not fully supported by Kotlin compiler, so it may be absent or have different signature in next major version</p>
+                        <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="https://developer.android.com/reference/java/util/Collection.html#toArray(java.util.function.IntFunction)">toArray</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/function/IntFunction.html">IntFunction</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T[]&gt;&nbsp;generator)</code></div>
                       </td>
                     </tr>
                   </tbody>
@@ -298,7 +291,13 @@
                     <tr>
                       <td><code>void</code></td>
                       <td>
-                        <div><code><a href="https://developer.android.com/reference/java/lang/Iterable.html#forEach(java.util.function.Consumer)">forEach</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/function/Consumer.html">Consumer</a>&lt;T&gt;&nbsp;p0)</code></div>
+                        <div><code><a href="https://developer.android.com/reference/java/lang/Iterable.html#forEach(java.util.function.Consumer)">forEach</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/function/Consumer.html">Consumer</a>&lt;T&gt;&nbsp;action)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Spliterator.html">Spliterator</a>&lt;T&gt;</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/lang/Iterable.html#spliterator()">spliterator</a>()</code></div>
                       </td>
                     </tr>
                   </tbody>
@@ -315,6 +314,18 @@
                     <col>
                   </colgroup>
                   <tbody class="list">
+                    <tr>
+                      <td><code>T</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/List.html#getFirst()">getFirst</a>()</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>T</code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/List.html#getLast()">getLast</a>()</code></div>
+                      </td>
+                    </tr>
                     <tr>
                       <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;T&gt;</code></td>
                       <td>
@@ -350,7 +361,7 @@
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;T&nbsp;<a href="/reference/androidx/paging/ItemSnapshotList.html#get(kotlin.Int)">get</a>(int&nbsp;index)</pre>
         <p>Returns the item at <code><a href="/reference/androidx/paging/ItemSnapshotList.html#get(kotlin.Int)">index</a></code>, where <code><a href="/reference/androidx/paging/ItemSnapshotList.html#get(kotlin.Int)">index</a></code> includes the position of placeholders. If <code><a href="/reference/androidx/paging/ItemSnapshotList.html#get(kotlin.Int)">index</a></code> points to the position of a placeholder, <code>null</code> is returned.</p>
-        <p>To get the size using an index excluding placeholders, use <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/size.html">List.size</a></code> on <code><a href="/reference/androidx/paging/ItemSnapshotList.html#items()">items</a></code> directly.</p>
+        <p>To get the size using an index excluding placeholders, use <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/size.html">List.size</a></code> on <code><a href="/reference/androidx/paging/ItemSnapshotList.html#(kotlin.Int,kotlin.Int,kotlin.collections.List)">items</a></code> directly.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -389,7 +400,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/paging/ItemSnapshotList.html#getPlaceholdersAfter()">getPlaceholdersAfter</a>()</pre>
-        <p>Number of placeholders after the presented <code><a href="/reference/androidx/paging/ItemSnapshotList.html#items()">items</a></code>, 0 if <code><a href="/reference/androidx/paging/PagingConfig.html#enablePlaceholders()">enablePlaceholders</a></code> is <code>false</code>.</p>
+        <p>Number of placeholders after the presented <code><a href="/reference/androidx/paging/ItemSnapshotList.html#(kotlin.Int,kotlin.Int,kotlin.collections.List)">items</a></code>, 0 if <code><a href="/reference/androidx/paging/PagingConfig.html#enablePlaceholders()">enablePlaceholders</a></code> is <code>false</code>.</p>
       </div>
       <div class="api-item"><a name="getPlaceholdersBefore--"></a><a name="getplaceholdersbefore"></a>
         <div class="api-name-block">
@@ -398,7 +409,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/paging/ItemSnapshotList.html#getPlaceholdersBefore()">getPlaceholdersBefore</a>()</pre>
-        <p>Number of placeholders before the presented <code><a href="/reference/androidx/paging/ItemSnapshotList.html#items()">items</a></code>, 0 if <code><a href="/reference/androidx/paging/PagingConfig.html#enablePlaceholders()">enablePlaceholders</a></code> is <code>false</code>.</p>
+        <p>Number of placeholders before the presented <code><a href="/reference/androidx/paging/ItemSnapshotList.html#(kotlin.Int,kotlin.Int,kotlin.collections.List)">items</a></code>, 0 if <code><a href="/reference/androidx/paging/PagingConfig.html#enablePlaceholders()">enablePlaceholders</a></code> is <code>false</code>.</p>
       </div>
       <div class="api-item"><a name="getSize--"></a><a name="getsize"></a>
         <div class="api-name-block">
@@ -408,7 +419,7 @@
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/paging/ItemSnapshotList.html#getSize()">getSize</a>()</pre>
         <p>Size of <code><a href="/reference/androidx/paging/ItemSnapshotList.html">ItemSnapshotList</a></code> including placeholders.</p>
-        <p>To get the size excluding placeholders, use <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/size.html">List.size</a></code> on <code><a href="/reference/androidx/paging/ItemSnapshotList.html#items()">items</a></code> directly.</p>
+        <p>To get the size excluding placeholders, use <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/size.html">List.size</a></code> on <code><a href="/reference/androidx/paging/ItemSnapshotList.html#(kotlin.Int,kotlin.Int,kotlin.collections.List)">items</a></code> directly.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -422,7 +433,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/androidx/paging/ItemSnapshotList.html#items()">items</a></code></td>
+                <td><code><a href="/reference/androidx/paging/ItemSnapshotList.html#(kotlin.Int,kotlin.Int,kotlin.collections.List)"></a></code></td>
                 <td></td>
               </tr>
             </tbody>

@@ -26,8 +26,6 @@ group = "com.google.devsite"
 
 version = "1.7.1" // This is appended to archiveBaseName in the ShadowJar task.
 
-val useK2 = false
-
 plugins {
     kotlin("jvm")
     alias(libs.plugins.shadow)
@@ -44,8 +42,7 @@ dependencies {
     implementation(libs.jackson.dataformat.xml)
     implementation(libs.jackson.module.kotlin)
     compileOnly(libs.dokka.analysis.api)
-    if (useK2) runtimeOnly(libs.dokka.analysis.symbols)
-    else runtimeOnly(libs.dokka.analysis.descriptors)
+    runtimeOnly(libs.dokka.analysis.symbols)
     testImplementation(libs.dokka.base.test.utils) {
         exclude("org.jetbrains.dokka", "analysis-kotlin-descriptors")
     }

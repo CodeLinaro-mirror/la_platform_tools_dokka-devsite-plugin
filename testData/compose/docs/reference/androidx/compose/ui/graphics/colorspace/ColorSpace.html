@@ -17,8 +17,8 @@
       <meta itemprop="property" content="getModel()">
       <meta itemprop="property" content="getName()">
       <meta itemprop="property" content="hashCode()">
-      <meta itemprop="property" content="getIsSrgb()">
-      <meta itemprop="property" content="getIsWideGamut()">
+      <meta itemprop="property" content="isSrgb()">
+      <meta itemprop="property" content="isWideGamut()">
       <meta itemprop="property" content="toString()">
       <meta itemprop="property" content="toXyz(kotlin.FloatArray)">
       <meta itemprop="property" content="toXyz(kotlin.Float,kotlin.Float,kotlin.Float)">
@@ -217,14 +217,14 @@ val connector = ColorSpaces.CieLab.connect(ColorSpaces.Bt709)</pre>
           <tr>
             <td><code>boolean</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getIsSrgb()">isSrgb</a>()</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#isSrgb()">isSrgb</a>()</code></div>
               <p>Indicates whether this color space is the sRGB color space or equivalent to the sRGB color space.</p>
             </td>
           </tr>
           <tr>
             <td><code>abstract boolean</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getIsWideGamut()">isWideGamut</a>()</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#isWideGamut()">isWideGamut</a>()</code></div>
               <p>Returns whether this color space is a wide-gamut color space.</p>
             </td>
           </tr>
@@ -267,7 +267,7 @@ val connector = ColorSpaces.CieLab.connect(ColorSpaces.Bt709)</pre>
           <tr>
             <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/graphics/ColorSpace.html">ColorSpace</a></code></td>
             <td>
-              <div><code>@<a href="/reference/androidx/annotation/RequiresApi.html">RequiresApi</a><br><a href="/reference/androidx/compose/ui/graphics/colorspace/AndroidColorSpaceKt.html">AndroidColorSpaceKt</a>.<a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#(androidx.compose.ui.graphics.colorspace.ColorSpace).toAndroidColorSpace()">toAndroidColorSpace</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a>&nbsp;receiver)</code></div>
+              <div><code>@<a href="/reference/androidx/annotation/RequiresApi.html">RequiresApi</a>(value&nbsp;=&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>)<br><a href="/reference/androidx/compose/ui/graphics/colorspace/AndroidColorSpaceKt.html">AndroidColorSpaceKt</a>.<a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#(androidx.compose.ui.graphics.colorspace.ColorSpace).toAndroidColorSpace()">toAndroidColorSpace</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a>&nbsp;receiver)</code></div>
               <p>Convert the Compose <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code> into an Android framework <code><a href="https://developer.android.com/reference/android/graphics/ColorSpace.html">android.graphics.ColorSpace</a></code></p>
             </td>
           </tr>
@@ -373,7 +373,7 @@ val connector = ColorSpaces.CieLab.connect(ColorSpaces.Bt709)</pre>
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#fromXyz(kotlin.Float,kotlin.Float,kotlin.Float)">fromXyz</a></code></td>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#fromXyz(kotlin.FloatArray)">fromXyz</a></code></td>
                 <td></td>
               </tr>
               <tr>
@@ -516,7 +516,7 @@ val connector = ColorSpaces.CieLab.connect(ColorSpaces.Bt709)</pre>
                 <td></td>
               </tr>
               <tr>
-                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#model()">model</a></code></td>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#(kotlin.String,androidx.compose.ui.graphics.colorspace.ColorModel,kotlin.Int)"></a></code></td>
                 <td></td>
               </tr>
             </tbody>
@@ -755,13 +755,13 @@ val connector = ColorSpaces.CieLab.connect(ColorSpaces.Bt709)</pre>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#hashCode()">hashCode</a>()</pre>
       </div>
-      <div class="api-item"><a name="getIsSrgb--"></a><a name="getissrgb"></a>
+      <div class="api-item"><a name="isSrgb--"></a><a name="issrgb"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="getIsSrgb()">isSrgb</h3>
+            <h3 id="isSrgb()">isSrgb</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getIsSrgb()">isSrgb</a>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#isSrgb()">isSrgb</a>()</pre>
         <p>Indicates whether this color space is the sRGB color space or equivalent to the sRGB color space.</p>
         <p>A color space is considered sRGB if it meets all the following conditions:</p>
         <ul>
@@ -812,13 +812,13 @@ val connector = ColorSpaces.CieLab.connect(ColorSpaces.Bt709)</pre>
           </table>
         </div>
       </div>
-      <div class="api-item"><a name="getIsWideGamut--"></a><a name="getiswidegamut"></a>
+      <div class="api-item"><a name="isWideGamut--"></a><a name="iswidegamut"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="getIsWideGamut()">isWideGamut</h3>
+            <h3 id="isWideGamut()">isWideGamut</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getIsWideGamut()">isWideGamut</a>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#isWideGamut()">isWideGamut</a>()</pre>
         <p>Returns whether this color space is a wide-gamut color space. An RGB color space is wide-gamut if its gamut entirely contains the <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#Srgb()">sRGB</a></code> gamut and if the area of its gamut is 90% of greater than the area of the <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#Ntsc1953()">NTSC</a></code> gamut.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -939,7 +939,7 @@ val connector = ColorSpaces.CieLab.connect(ColorSpaces.Bt709)</pre>
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#toXyz(kotlin.Float,kotlin.Float,kotlin.Float)">toXyz</a></code></td>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#toXyz(kotlin.FloatArray)">toXyz</a></code></td>
                 <td></td>
               </tr>
               <tr>
@@ -1046,7 +1046,7 @@ val connector = ColorSpaces.CieLab.connect(ColorSpaces.Bt709)</pre>
             <h3 id="(androidx.compose.ui.graphics.colorspace.ColorSpace).toAndroidColorSpace()">AndroidColorSpaceKt.toAndroidColorSpace</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/RequiresApi.html">RequiresApi</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/graphics/ColorSpace.html">ColorSpace</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/colorspace/AndroidColorSpaceKt.html">AndroidColorSpaceKt</a>.<a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#(androidx.compose.ui.graphics.colorspace.ColorSpace).toAndroidColorSpace()">toAndroidColorSpace</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a>&nbsp;receiver)</pre>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/RequiresApi.html">RequiresApi</a>(value&nbsp;=&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>)<br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/graphics/ColorSpace.html">ColorSpace</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/colorspace/AndroidColorSpaceKt.html">AndroidColorSpaceKt</a>.<a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#(androidx.compose.ui.graphics.colorspace.ColorSpace).toAndroidColorSpace()">toAndroidColorSpace</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a>&nbsp;receiver)</pre>
         <p>Convert the Compose <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code> into an Android framework <code><a href="https://developer.android.com/reference/android/graphics/ColorSpace.html">android.graphics.ColorSpace</a></code></p>
       </div>
       <div class="api-item"><a name="(androidx.compose.ui.graphics.colorspace.ColorSpace).adapt(androidx.compose.ui.graphics.colorspace.WhitePoint, androidx.compose.ui.graphics.colorspace.Adaptation)"></a><a name="-androidx.compose.ui.graphics.colorspace.ColorSpace-.adapt-androidx.compose.ui.graphics.colorspace.WhitePoint-androidx.compose.ui.graphics.colorspace.Adaptation-"></a><a name="adapt"></a>

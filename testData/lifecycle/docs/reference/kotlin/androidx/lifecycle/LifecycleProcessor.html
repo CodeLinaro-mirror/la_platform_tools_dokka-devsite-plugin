@@ -10,6 +10,7 @@
       <meta itemprop="path" content="androidx.lifecycle">
       <meta itemprop="property" content="getSupportedSourceVersion()">
       <meta itemprop="property" content="process(kotlin.collections.MutableSet,javax.annotation.processing.RoundEnvironment)">
+      <meta itemprop="property" content="supportedSourceVersion()">
       <meta itemprop="language" content="KOTLIN">
     </div>
     <div id="header-block">
@@ -95,6 +96,27 @@
       </table>
     </div>
     <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><code>open <a href="/reference/kotlin/javax/lang/model/SourceVersion.html">SourceVersion</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/lifecycle/LifecycleProcessor.html#supportedSourceVersion()">supportedSourceVersion</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
       <table class="responsive" id="inhmethods">
         <thead>
           <tr>
@@ -103,7 +125,7 @@
         </thead>
         <tbody class="list">
           <tr>
-            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/javax/annotation/processing/AbstractProcessor.html">javax.annotation.processing.AbstractProcessor</a></span>
+            <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/javax/annotation/processing/Processor.html">javax.annotation.processing.Processor</a></span>
               <div class="devsite-table-wrapper">
                 <table class="responsive">
                   <colgroup>
@@ -114,25 +136,13 @@
                     <tr>
                       <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-iterable/index.html">MutableIterable</a>&lt;<a href="/reference/kotlin/javax/annotation/processing/Completion.html">Completion</a>&gt;</code></td>
                       <td>
-                        <div><code><a href="/reference/kotlin/javax/annotation/processing/AbstractProcessor.html#getCompletions(javax.lang.model.element.Element,javax.lang.model.element.AnnotationMirror,javax.lang.model.element.ExecutableElement,kotlin.String)">getCompletions</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;p0:&nbsp;<a href="/reference/kotlin/javax/lang/model/element/Element.html">Element</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;p1:&nbsp;<a href="/reference/kotlin/javax/lang/model/element/AnnotationMirror.html">AnnotationMirror</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;p2:&nbsp;<a href="/reference/kotlin/javax/lang/model/element/ExecutableElement.html">ExecutableElement</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;p3:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><br>)</code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-set/index.html">MutableSet</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>&gt;</code></td>
-                      <td>
-                        <div><code><a href="/reference/kotlin/javax/annotation/processing/AbstractProcessor.html#getSupportedAnnotationTypes()">getSupportedAnnotationTypes</a>()</code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-set/index.html">MutableSet</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>&gt;</code></td>
-                      <td>
-                        <div><code><a href="/reference/kotlin/javax/annotation/processing/AbstractProcessor.html#getSupportedOptions()">getSupportedOptions</a>()</code></div>
+                        <div><code><a href="/reference/kotlin/javax/annotation/processing/Processor.html#getCompletions(javax.lang.model.element.Element,javax.lang.model.element.AnnotationMirror,javax.lang.model.element.ExecutableElement,kotlin.String)">getCompletions</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;element:&nbsp;<a href="/reference/kotlin/javax/lang/model/element/Element.html">Element</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;annotation:&nbsp;<a href="/reference/kotlin/javax/lang/model/element/AnnotationMirror.html">AnnotationMirror</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;member:&nbsp;<a href="/reference/kotlin/javax/lang/model/element/ExecutableElement.html">ExecutableElement</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;userText:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><br>)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/kotlin/javax/annotation/processing/AbstractProcessor.html#init(javax.annotation.processing.ProcessingEnvironment)">init</a>(p0:&nbsp;<a href="/reference/kotlin/javax/annotation/processing/ProcessingEnvironment.html">ProcessingEnvironment</a>)</code></div>
+                        <div><code><a href="/reference/kotlin/javax/annotation/processing/Processor.html#init(javax.annotation.processing.ProcessingEnvironment)">init</a>(processingEnv:&nbsp;<a href="/reference/kotlin/javax/annotation/processing/ProcessingEnvironment.html">ProcessingEnvironment</a>)</code></div>
                       </td>
                     </tr>
                   </tbody>
@@ -161,15 +171,27 @@
                   </colgroup>
                   <tbody class="list">
                     <tr>
-                      <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
                       <td>
-                        <div><code><a href="/reference/kotlin/javax/annotation/processing/AbstractProcessor.html#initialized()">initialized</a></code></div>
+                        <div><code><a href="/reference/kotlin/javax/annotation/processing/AbstractProcessor.html#isInitialized()">isInitialized</a></code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code><a href="/reference/kotlin/javax/annotation/processing/ProcessingEnvironment.html">ProcessingEnvironment</a></code></td>
                       <td>
                         <div><code><a href="/reference/kotlin/javax/annotation/processing/AbstractProcessor.html#processingEnv()">processingEnv</a></code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-set/index.html">MutableSet</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>&gt;</code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/javax/annotation/processing/AbstractProcessor.html#supportedAnnotationTypes()">supportedAnnotationTypes</a></code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-set/index.html">MutableSet</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>&gt;</code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/javax/annotation/processing/AbstractProcessor.html#supportedOptions()">supportedOptions</a></code></div>
                       </td>
                     </tr>
                   </tbody>
@@ -208,6 +230,17 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LifecycleProcessor.html#process(kotlin.collections.MutableSet,javax.annotation.processing.RoundEnvironment)">process</a>(annotations:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-set/index.html">MutableSet</a>&lt;<a href="/reference/kotlin/javax/lang/model/element/TypeElement.html">TypeElement</a>&gt;,&nbsp;roundEnv:&nbsp;<a href="/reference/kotlin/javax/annotation/processing/RoundEnvironment.html">RoundEnvironment</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getSupportedSourceVersion()"></a><a name="setSupportedSourceVersion()"></a><a name="getSupportedSourceVersion--"></a><a name="setSupportedSourceVersion--"></a>
+        <div class="api-name-block">
+          <div>
+            <h3 id="supportedSourceVersion()">supportedSourceVersion</h3>
+          </div>
+        </div>
+        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LifecycleProcessor.html#supportedSourceVersion()">supportedSourceVersion</a>:&nbsp;<a href="/reference/kotlin/javax/lang/model/SourceVersion.html">SourceVersion</a></pre>
       </div>
     </div>
   </body>

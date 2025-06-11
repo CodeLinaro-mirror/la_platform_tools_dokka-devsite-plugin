@@ -26,7 +26,7 @@
       <meta itemprop="property" content="getScrollDelta()">
       <meta itemprop="property" content="getType()">
       <meta itemprop="property" content="getUptimeMillis()">
-      <meta itemprop="property" content="getIsConsumed()">
+      <meta itemprop="property" content="isConsumed()">
       <meta itemprop="property" content="toString()">
       <meta itemprop="property" content="(androidx.compose.ui.input.pointer.PointerInputChange).anyChangeConsumed()">
       <meta itemprop="property" content="(androidx.compose.ui.input.pointer.PointerInputChange).changedToDown()">
@@ -62,10 +62,10 @@
     </p>
     <hr>
     <p>Describes a change that has occurred for a particular pointer, as well as how much of the change has been consumed (meaning, used by a node in the UI).</p>
-    <p>The <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#position()">position</a></code> represents the position of the pointer relative to the element that this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code> is being dispatched to.</p>
-    <p>Note: The <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#position()">position</a></code> values can be outside the actual bounds of the element itself meaning the numbers can be negative or larger than the element bounds.</p>
-    <p>The <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#previousPosition()">previousPosition</a></code> represents the position of the pointer offset to the current position of the pointer relative to the screen.</p>
-    <p>This means that <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#position()">position</a></code> and <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#previousPosition()">previousPosition</a></code> can always be used to understand how much a pointer has moved relative to an element, even if that element is moving along with the changes to the pointer.  For example, if a pointer touches a 1x1 pixel box in the middle, <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#position()">position</a></code> will report a position of (0, 0) when dispatched to it.  If the next event moves x position 5 pixels, <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#position()">position</a></code> will report (5, 0) and <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#previousPosition()">previousPosition</a></code> will report (0, 0). If the box moves all 5 pixels, and the next event represents the pointer moving along the x axis for 5 more pixels, <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#position()">position</a></code> will again report (5, 0) and <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#previousPosition()">previousPosition</a></code> will report (0, 0).</p>
+    <p>The <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">position</a></code> represents the position of the pointer relative to the element that this <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html">PointerInputChange</a></code> is being dispatched to.</p>
+    <p>Note: The <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">position</a></code> values can be outside the actual bounds of the element itself meaning the numbers can be negative or larger than the element bounds.</p>
+    <p>The <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">previousPosition</a></code> represents the position of the pointer offset to the current position of the pointer relative to the screen.</p>
+    <p>This means that <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">position</a></code> and <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">previousPosition</a></code> can always be used to understand how much a pointer has moved relative to an element, even if that element is moving along with the changes to the pointer.  For example, if a pointer touches a 1x1 pixel box in the middle, <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">position</a></code> will report a position of (0, 0) when dispatched to it.  If the next event moves x position 5 pixels, <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">position</a></code> will report (5, 0) and <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">previousPosition</a></code> will report (0, 0). If the box moves all 5 pixels, and the next event represents the pointer moving along the x axis for 5 more pixels, <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">position</a></code> will again report (5, 0) and <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">previousPosition</a></code> will report (0, 0).</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -178,7 +178,7 @@
             <td><code>final boolean</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#getPressed()">getPressed</a>()</code></div>
-              <p><code>true</code> if the pointer event is considered &quot;pressed.&quot; For example, finger touching the screen or a mouse button is pressed <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#pressed()">pressed</a></code> would be <code>true</code>.</p>
+              <p><code>true</code> if the pointer event is considered &quot;pressed.&quot; For example, finger touching the screen or a mouse button is pressed <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">pressed</a></code> would be <code>true</code>.</p>
             </td>
           </tr>
           <tr>
@@ -192,21 +192,21 @@
             <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#getPreviousPosition()">getPreviousPosition</a>()</code></div>
-              <p>The <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> of the previous pointer event, offset to the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#position()">position</a></code> and relative to the containing element.</p>
+              <p>The <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> of the previous pointer event, offset to the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">position</a></code> and relative to the containing element.</p>
             </td>
           </tr>
           <tr>
             <td><code>final boolean</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#getPreviousPressed()">getPreviousPressed</a>()</code></div>
-              <p><code>true</code> if the pointer event was considered &quot;pressed.&quot; For example , if a finger was touching the screen or a mouse button was pressed, <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#previousPressed()">previousPressed</a></code> would be <code>true</code>.</p>
+              <p><code>true</code> if the pointer event was considered &quot;pressed.&quot; For example , if a finger was touching the screen or a mouse button was pressed, <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">previousPressed</a></code> would be <code>true</code>.</p>
             </td>
           </tr>
           <tr>
             <td><code>final long</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#getPreviousUptimeMillis()">getPreviousUptimeMillis</a>()</code></div>
-              <p>The <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#uptimeMillis()">uptimeMillis</a></code> of the previous pointer event</p>
+              <p>The <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">uptimeMillis</a></code> of the previous pointer event</p>
             </td>
           </tr>
           <tr>
@@ -233,7 +233,7 @@
           <tr>
             <td><code>final boolean</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#getIsConsumed()">isConsumed</a>()</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#isConsumed()">isConsumed</a>()</code></div>
               <p>Indicates whether the change was consumed or not.</p>
             </td>
           </tr>
@@ -416,7 +416,7 @@
               <tr>
                 <td><code>boolean&nbsp;pressed</code></td>
                 <td>
-                  <p><code>true</code> if the pointer event is considered &quot;pressed.&quot; For example, finger touching the screen or a mouse button is pressed <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#&lt;init&gt;(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">pressed</a></code> would be <code>true</code>.</p>
+                  <p><code>true</code> if the pointer event is considered &quot;pressed.&quot; For example, finger touching the screen or a mouse button is pressed <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">pressed</a></code> would be <code>true</code>.</p>
                 </td>
               </tr>
               <tr>
@@ -428,19 +428,19 @@
               <tr>
                 <td><code>long&nbsp;previousUptimeMillis</code></td>
                 <td>
-                  <p>The <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#&lt;init&gt;(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">uptimeMillis</a></code> of the previous pointer event</p>
+                  <p>The <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">uptimeMillis</a></code> of the previous pointer event</p>
                 </td>
               </tr>
               <tr>
                 <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;previousPosition</code></td>
                 <td>
-                  <p>The <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> of the previous pointer event, offset to the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#&lt;init&gt;(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">position</a></code> and relative to the containing element.</p>
+                  <p>The <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> of the previous pointer event, offset to the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">position</a></code> and relative to the containing element.</p>
                 </td>
               </tr>
               <tr>
                 <td><code>boolean&nbsp;previousPressed</code></td>
                 <td>
-                  <p><code>true</code> if the pointer event was considered &quot;pressed.&quot; For example , if a finger was touching the screen or a mouse button was pressed, <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#&lt;init&gt;(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">previousPressed</a></code> would be <code>true</code>.</p>
+                  <p><code>true</code> if the pointer event was considered &quot;pressed.&quot; For example , if a finger was touching the screen or a mouse button was pressed, <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">previousPressed</a></code> would be <code>true</code>.</p>
                 </td>
               </tr>
               <tr>
@@ -570,7 +570,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#getPressed()">getPressed</a>()</pre>
-        <p><code>true</code> if the pointer event is considered &quot;pressed.&quot; For example, finger touching the screen or a mouse button is pressed <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#pressed()">pressed</a></code> would be <code>true</code>.</p>
+        <p><code>true</code> if the pointer event is considered &quot;pressed.&quot; For example, finger touching the screen or a mouse button is pressed <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">pressed</a></code> would be <code>true</code>.</p>
       </div>
       <div class="api-item"><a name="getPressure--"></a><a name="getpressure"></a>
         <div class="api-name-block">
@@ -588,7 +588,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a>&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#getPreviousPosition()">getPreviousPosition</a>()</pre>
-        <p>The <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> of the previous pointer event, offset to the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#position()">position</a></code> and relative to the containing element.</p>
+        <p>The <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code> of the previous pointer event, offset to the <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">position</a></code> and relative to the containing element.</p>
       </div>
       <div class="api-item"><a name="getPreviousPressed--"></a><a name="getpreviouspressed"></a>
         <div class="api-name-block">
@@ -597,7 +597,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#getPreviousPressed()">getPreviousPressed</a>()</pre>
-        <p><code>true</code> if the pointer event was considered &quot;pressed.&quot; For example , if a finger was touching the screen or a mouse button was pressed, <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#previousPressed()">previousPressed</a></code> would be <code>true</code>.</p>
+        <p><code>true</code> if the pointer event was considered &quot;pressed.&quot; For example , if a finger was touching the screen or a mouse button was pressed, <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">previousPressed</a></code> would be <code>true</code>.</p>
       </div>
       <div class="api-item"><a name="getPreviousUptimeMillis--"></a><a name="getpreviousuptimemillis"></a>
         <div class="api-name-block">
@@ -606,7 +606,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;long&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#getPreviousUptimeMillis()">getPreviousUptimeMillis</a>()</pre>
-        <p>The <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#uptimeMillis()">uptimeMillis</a></code> of the previous pointer event</p>
+        <p>The <code><a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#(androidx.compose.ui.input.pointer.PointerId,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Float,kotlin.Long,androidx.compose.ui.geometry.Offset,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.input.pointer.PointerType,androidx.compose.ui.geometry.Offset)">uptimeMillis</a></code> of the previous pointer event</p>
       </div>
       <div class="api-item"><a name="getScrollDelta--"></a><a name="getscrolldelta"></a>
         <div class="api-name-block">
@@ -635,13 +635,13 @@
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;long&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#getUptimeMillis()">getUptimeMillis</a>()</pre>
         <p>The time of the current pointer event, in milliseconds. The start (<code>0</code>) time is platform-dependent</p>
       </div>
-      <div class="api-item"><a name="getIsConsumed--"></a><a name="getisconsumed"></a>
+      <div class="api-item"><a name="isConsumed--"></a><a name="isconsumed"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="getIsConsumed()">isConsumed</h3>
+            <h3 id="isConsumed()">isConsumed</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#getIsConsumed()">isConsumed</a>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/input/pointer/PointerInputChange.html#isConsumed()">isConsumed</a>()</pre>
         <p>Indicates whether the change was consumed or not. Note that the change must be consumed in full as there's no partial consumption system provided.</p>
       </div>
       <div class="api-item"><a name="toString--"></a><a name="tostring"></a>

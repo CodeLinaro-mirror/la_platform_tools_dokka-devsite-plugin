@@ -15,7 +15,7 @@
       <meta itemprop="property" content="getInteractionSource()">
       <meta itemprop="property" content="getMaxValue()">
       <meta itemprop="property" content="getValue()">
-      <meta itemprop="property" content="getIsScrollInProgress()">
+      <meta itemprop="property" content="isScrollInProgress()">
       <meta itemprop="property" content="scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">
       <meta itemprop="property" content="scrollTo(kotlin.Int)">
       <meta itemprop="property" content="getSaver()">
@@ -166,14 +166,14 @@ Column {
             </td>
           </tr>
           <tr>
-            <td><code>boolean</code></td>
+            <td><code>final boolean</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/foundation/ScrollState.html#getCanScrollBackward()">getCanScrollBackward</a>()</code></div>
               <p>Whether this <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> can scroll backward (consume a negative delta).</p>
             </td>
           </tr>
           <tr>
-            <td><code>boolean</code></td>
+            <td><code>final boolean</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/foundation/ScrollState.html#getCanScrollForward()">getCanScrollForward</a>()</code></div>
               <p>Whether this <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> can scroll forward (consume a positive delta).</p>
@@ -203,7 +203,7 @@ Column {
           <tr>
             <td><code>boolean</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/foundation/ScrollState.html#getIsScrollInProgress()">isScrollInProgress</a>()</code></div>
+              <div><code><a href="/reference/androidx/compose/foundation/ScrollState.html#isScrollInProgress()">isScrollInProgress</a>()</code></div>
               <p>Whether this <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> is currently scrolling by gesture, fling or programmatically or not.</p>
             </td>
           </tr>
@@ -302,8 +302,8 @@ Column {
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;float&nbsp;<a href="/reference/androidx/compose/foundation/ScrollState.html#dispatchRawDelta(kotlin.Float)">dispatchRawDelta</a>(float&nbsp;delta)</pre>
         <p>Dispatch scroll delta in pixels avoiding all scroll related mechanisms.</p>
-        <p><b>NOTE:</b> unlike <code><a href="/reference/androidx/compose/foundation/ScrollState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code>, dispatching any delta with this method won't trigger nested scroll, won't stop ongoing scroll/drag animation and will bypass scrolling of any priority. This method will also ignore <code>reverseDirection</code> and other parameters set in scrollable.</p>
-        <p>This method is used internally for nested scrolling dispatch and other low level operations, allowing implementers of <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> influence the consumption as suits them. Manually dispatching delta via this method will likely result in a bad user experience, you must prefer <code><a href="/reference/androidx/compose/foundation/ScrollState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code> method over this one.</p>
+        <p><b>NOTE:</b> unlike <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code>, dispatching any delta with this method won't trigger nested scroll, won't stop ongoing scroll/drag animation and will bypass scrolling of any priority. This method will also ignore <code>reverseDirection</code> and other parameters set in scrollable.</p>
+        <p>This method is used internally for nested scrolling dispatch and other low level operations, allowing implementers of <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> influence the consumption as suits them. Manually dispatching delta via this method will likely result in a bad user experience, you must prefer <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code> method over this one.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -353,7 +353,7 @@ Column {
             <h3 id="getCanScrollBackward()">getCanScrollBackward</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/foundation/ScrollState.html#getCanScrollBackward()">getCanScrollBackward</a>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/foundation/ScrollState.html#getCanScrollBackward()">getCanScrollBackward</a>()</pre>
         <p>Whether this <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> can scroll backward (consume a negative delta). This is typically false if the scroll position is equal to its minimum value, and true otherwise.</p>
         <p>Note that <code>true</code> here does not imply that delta <em>will</em> be consumed - the ScrollableState may decide not to handle the incoming delta (such as if it is already being scrolled separately). Additionally, for backwards compatibility with previous versions of ScrollableState this value defaults to <code>true</code>.</p>
         <pre class="prettyprint lang-kotlin">
@@ -415,7 +415,7 @@ Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontal
             <h3 id="getCanScrollForward()">getCanScrollForward</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/foundation/ScrollState.html#getCanScrollForward()">getCanScrollForward</a>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/foundation/ScrollState.html#getCanScrollForward()">getCanScrollForward</a>()</pre>
         <p>Whether this <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> can scroll forward (consume a positive delta). This is typically false if the scroll position is equal to its maximum value, and true otherwise.</p>
         <p>Note that <code>true</code> here does not imply that delta <em>will</em> be consumed - the ScrollableState may decide not to handle the incoming delta (such as if it is already being scrolled separately). Additionally, for backwards compatibility with previous versions of ScrollableState this value defaults to <code>true</code>.</p>
         <pre class="prettyprint lang-kotlin">
@@ -498,13 +498,13 @@ Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontal
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/foundation/ScrollState.html#getValue()">getValue</a>()</pre>
         <p>current scroll position value in pixels</p>
       </div>
-      <div class="api-item"><a name="getIsScrollInProgress--"></a><a name="getisscrollinprogress"></a>
+      <div class="api-item"><a name="isScrollInProgress--"></a><a name="isscrollinprogress"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="getIsScrollInProgress()">isScrollInProgress</h3>
+            <h3 id="isScrollInProgress()">isScrollInProgress</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/foundation/ScrollState.html#getIsScrollInProgress()">isScrollInProgress</a>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/foundation/ScrollState.html#isScrollInProgress()">isScrollInProgress</a>()</pre>
         <p>Whether this <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> is currently scrolling by gesture, fling or programmatically or not.</p>
       </div>
       <div class="api-item"><a name="scroll(androidx.compose.foundation.MutatePriority, kotlin.coroutines.SuspendFunction1)"></a><a name="scroll-androidx.compose.foundation.MutatePriority-kotlin.coroutines.SuspendFunction1-"></a><a name="scroll"></a>
@@ -514,8 +514,8 @@ Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontal
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/compose/foundation/ScrollState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/MutatePriority.html">MutatePriority</a>&nbsp;scrollPriority,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> SuspendFunction1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/gestures/ScrollScope.html">ScrollScope</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</pre>
-        <p>Call this function to take control of scrolling and gain the ability to send scroll events via <code><a href="/reference/androidx/compose/foundation/gestures/ScrollScope.html#scrollBy(kotlin.Float)">ScrollScope.scrollBy</a></code>. All actions that change the logical scroll position must be performed within a <code><a href="/reference/androidx/compose/foundation/ScrollState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code> block (even if they don't call any other methods on this object) in order to guarantee that mutual exclusion is enforced.</p>
-        <p>If <code><a href="/reference/androidx/compose/foundation/ScrollState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code> is called from elsewhere with the <code><a href="/reference/androidx/compose/foundation/ScrollState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scrollPriority</a></code> higher or equal to ongoing scroll, ongoing scroll will be canceled.</p>
+        <p>Call this function to take control of scrolling and gain the ability to send scroll events via <code><a href="/reference/androidx/compose/foundation/gestures/ScrollScope.html#scrollBy(kotlin.Float)">ScrollScope.scrollBy</a></code>. All actions that change the logical scroll position must be performed within a <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code> block (even if they don't call any other methods on this object) in order to guarantee that mutual exclusion is enforced.</p>
+        <p>If <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code> is called from elsewhere with the <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scrollPriority</a></code> higher or equal to ongoing scroll, ongoing scroll will be canceled.</p>
       </div>
       <div class="api-item"><a name="scrollTo-kotlin.Int-"></a><a name="scrollto"></a>
         <div class="api-name-block">

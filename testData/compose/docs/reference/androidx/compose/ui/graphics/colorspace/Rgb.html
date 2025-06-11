@@ -25,8 +25,8 @@
       <meta itemprop="property" content="getTransform(kotlin.FloatArray)">
       <meta itemprop="property" content="getWhitePoint()">
       <meta itemprop="property" content="hashCode()">
-      <meta itemprop="property" content="getIsSrgb()">
-      <meta itemprop="property" content="getIsWideGamut()">
+      <meta itemprop="property" content="isSrgb()">
+      <meta itemprop="property" content="isWideGamut()">
       <meta itemprop="property" content="toLinear(kotlin.FloatArray)">
       <meta itemprop="property" content="toLinear(kotlin.Float,kotlin.Float,kotlin.Float)">
       <meta itemprop="property" content="toXyz(kotlin.FloatArray)">
@@ -98,7 +98,7 @@
     <p>When manipulating RGB values, particularly sRGB values, it is safe to assume that these values have been encoded with the appropriate OETF (unless noted otherwise). Encoded values are often said to be in &quot;gamma space&quot;. They are therefore defined in a non-linear space. This in turns means that any linear operation applied to these values is going to yield mathematically incorrect results (any linear interpolation such as gradient generation for instance, most image processing functions such as blurs, etc.).</p>
     <p>To properly process encoded RGB values you must first apply the EOTF to decode the value into linear space. After processing, the RGB value must be encoded back to non-linear (&quot;gamma&quot;) space. Here is a formal description of the process, where <code>f</code> is the processing function to apply:</p>
     <p><a href="https://developer.android.com/reference/android/graphics/ColorSpace.Rgb">See RGB equation</a></p>
-    <p>If the transfer functions of the color space can be expressed as an ICC parametric curve as defined in ICC.1:2004-10, the numeric parameters can be retrieved from <code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#transferParameters()">transferParameters</a></code>. This can be useful to match color spaces for instance.</p>
+    <p>If the transfer functions of the color space can be expressed as an ICC parametric curve as defined in ICC.1:2004-10, the numeric parameters can be retrieved from <code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#(kotlin.String,kotlin.FloatArray,androidx.compose.ui.graphics.colorspace.WhitePoint,kotlin.FloatArray,androidx.compose.ui.graphics.colorspace.DoubleFunction,androidx.compose.ui.graphics.colorspace.DoubleFunction,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.TransferParameters,kotlin.Int)">transferParameters</a></code>. This can be useful to match color spaces for instance.</p>
     <p>Some RGB color spaces, such as <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#Aces()">ColorSpaces.Aces</a></code> and <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#LinearExtendedSrgb()">scRGB</a></code>, are said to be linear because their transfer functions are the identity function: <code>f(x) = x</code>. If the source and/or destination are known to be linear, it is not necessary to invoke the transfer functions.</p>
     <h3>Range</h3>
     <p>Most RGB color spaces allow RGB values in the range <code>[0..1]</code>. There are however a few RGB color spaces that allow much larger ranges. For instance, <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#ExtendedSrgb()">scRGB</a></code> is used to manipulate the range <code>[-0.5..7.5]</code> while <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#Aces()">ACES</a></code> can be used throughout the range <code>[-65504, 65504]</code>.</p>
@@ -260,7 +260,7 @@
             <td><code>final <a href="/reference/androidx/compose/ui/graphics/colorspace/TransferParameters.html">TransferParameters</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#getTransferParameters()">getTransferParameters</a>()</code></div>
-              <p>Returns the parameters used by the <code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#eotf()">electro-optical</a></code> and <code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#oetf()">opto-electronic</a></code> transfer functions.</p>
+              <p>Returns the parameters used by the <code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#(kotlin.String,kotlin.FloatArray,androidx.compose.ui.graphics.colorspace.WhitePoint,kotlin.FloatArray,androidx.compose.ui.graphics.colorspace.DoubleFunction,androidx.compose.ui.graphics.colorspace.DoubleFunction,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.TransferParameters,kotlin.Int)">electro-optical</a></code> and <code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#(kotlin.String,kotlin.FloatArray,androidx.compose.ui.graphics.colorspace.WhitePoint,kotlin.FloatArray,androidx.compose.ui.graphics.colorspace.DoubleFunction,androidx.compose.ui.graphics.colorspace.DoubleFunction,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.TransferParameters,kotlin.Int)">opto-electronic</a></code> transfer functions.</p>
             </td>
           </tr>
           <tr>
@@ -292,14 +292,14 @@
           <tr>
             <td><code>boolean</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#getIsSrgb()">isSrgb</a>()</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#isSrgb()">isSrgb</a>()</code></div>
               <p>Indicates whether this color space is the sRGB color space or equivalent to the sRGB color space.</p>
             </td>
           </tr>
           <tr>
             <td><code>boolean</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#getIsWideGamut()">isWideGamut</a>()</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#isWideGamut()">isWideGamut</a>()</code></div>
               <p>Returns whether this color space is a wide-gamut color space.</p>
             </td>
           </tr>
@@ -1013,7 +1013,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#fromLinear(kotlin.Float,kotlin.Float,kotlin.Float)">fromLinear</a></code></td>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#fromLinear(kotlin.FloatArray)">fromLinear</a></code></td>
                 <td></td>
               </tr>
               <tr>
@@ -1156,7 +1156,7 @@
               <tr>
                 <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> float[]</code></td>
                 <td>
-                  <p>The array passed in parameter <code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#fromXyz(kotlin.FloatArray)">v</a></code>.</p>
+                  <p>The array passed in parameter <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#fromXyz(kotlin.FloatArray)">v</a></code>.</p>
                 </td>
               </tr>
             </tbody>
@@ -1175,11 +1175,11 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#fromXyz(kotlin.FloatArray)">fromXyz</a></code></td>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#fromXyz(kotlin.FloatArray)">fromXyz</a></code></td>
                 <td></td>
               </tr>
               <tr>
-                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#toXyz(kotlin.FloatArray)">toXyz</a></code></td>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#toXyz(kotlin.Float,kotlin.Float,kotlin.Float)">toXyz</a></code></td>
                 <td></td>
               </tr>
             </tbody>
@@ -1193,7 +1193,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Double.html">Double</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Double.html">Double</a>&gt;&nbsp;<a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#getEotf()">getEotf</a>()</pre>
-        <p>Returns the electro-optical transfer function (EOTF) of this color space. The inverse function is the opto-electronic transfer function (OETF) returned by <code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#oetf()">oetf</a></code>. These functions are defined to satisfy the following equality for x in <code>[0..1]</code>:</p>
+        <p>Returns the electro-optical transfer function (EOTF) of this color space. The inverse function is the opto-electronic transfer function (OETF) returned by <code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#(kotlin.String,kotlin.FloatArray,androidx.compose.ui.graphics.colorspace.WhitePoint,kotlin.FloatArray,androidx.compose.ui.graphics.colorspace.DoubleFunction,androidx.compose.ui.graphics.colorspace.DoubleFunction,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.TransferParameters,kotlin.Int)">oetf</a></code>. These functions are defined to satisfy the following equality for x in <code>[0..1]</code>:</p>
         <pre class="prettyprint">OETF(EOTF(x) = EOTF(OETF(x)) = x</pre>
         <p>For RGB colors, this function can be used to convert from &quot;gamma space&quot; (gamma encoded) to linear space. The terms gamma space and gamma encoded are frequently used because many EOTFs can be closely approximated using a simple power function of the form x^γ (the approximation of the <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#Srgb()">sRGB</a></code> EOTF uses γ = 2.2 for instance).</p>
         <div class="devsite-table-wrapper">
@@ -1230,7 +1230,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#oetf()">oetf</a></code></td>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#(kotlin.String,kotlin.FloatArray,androidx.compose.ui.graphics.colorspace.WhitePoint,kotlin.FloatArray,androidx.compose.ui.graphics.colorspace.DoubleFunction,androidx.compose.ui.graphics.colorspace.DoubleFunction,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.TransferParameters,kotlin.Int)"></a></code></td>
                 <td></td>
               </tr>
               <tr>
@@ -1406,7 +1406,7 @@
               <tr>
                 <td><code>float</code></td>
                 <td>
-                  <p>A floating point value greater than <code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#getMinValue(kotlin.Int)">getMinValue</a></code></p>
+                  <p>A floating point value greater than <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMinValue(kotlin.Int)">getMinValue</a></code></p>
                 </td>
               </tr>
             </tbody>
@@ -1425,7 +1425,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#getMinValue(kotlin.Int)">getMinValue</a></code></td>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMinValue(kotlin.Int)">getMinValue</a></code></td>
                 <td></td>
               </tr>
               <tr>
@@ -1480,7 +1480,7 @@
               <tr>
                 <td><code>float</code></td>
                 <td>
-                  <p>A floating point value less than <code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#getMaxValue(kotlin.Int)">getMaxValue</a></code></p>
+                  <p>A floating point value less than <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMaxValue(kotlin.Int)">getMaxValue</a></code></p>
                 </td>
               </tr>
             </tbody>
@@ -1499,7 +1499,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#getMaxValue(kotlin.Int)">getMaxValue</a></code></td>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#getMaxValue(kotlin.Int)">getMaxValue</a></code></td>
                 <td></td>
               </tr>
               <tr>
@@ -1517,7 +1517,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Double.html">Double</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Double.html">Double</a>&gt;&nbsp;<a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#getOetf()">getOetf</a>()</pre>
-        <p>Returns the opto-electronic transfer function (OETF) of this color space. The inverse function is the electro-optical transfer function (EOTF) returned by <code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#eotf()">eotf</a></code>. These functions are defined to satisfy the following equality for x ∈ <code>[0..1]</code>:</p>
+        <p>Returns the opto-electronic transfer function (OETF) of this color space. The inverse function is the electro-optical transfer function (EOTF) returned by <code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#(kotlin.String,kotlin.FloatArray,androidx.compose.ui.graphics.colorspace.WhitePoint,kotlin.FloatArray,androidx.compose.ui.graphics.colorspace.DoubleFunction,androidx.compose.ui.graphics.colorspace.DoubleFunction,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.TransferParameters,kotlin.Int)">eotf</a></code>. These functions are defined to satisfy the following equality for x ∈ <code>[0..1]</code>:</p>
         <pre class="prettyprint">OETF(EOTF(x) = EOTF(OETF(x)) = x</pre>
         <p>For RGB colors, this function can be used to convert from linear space to &quot;gamma space&quot; (gamma encoded). The terms gamma space and gamma encoded are frequently used because many OETFs can be closely approximated using a simple power function of the form x^γ (the approximation of the <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#Srgb()">sRGB</a></code> OETF uses γ = 2.2 for instance).</p>
         <div class="devsite-table-wrapper">
@@ -1554,7 +1554,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#eotf()">eotf</a></code></td>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#(kotlin.String,kotlin.FloatArray,androidx.compose.ui.graphics.colorspace.WhitePoint,kotlin.FloatArray,androidx.compose.ui.graphics.colorspace.DoubleFunction,androidx.compose.ui.graphics.colorspace.DoubleFunction,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.TransferParameters,kotlin.Int)"></a></code></td>
                 <td></td>
               </tr>
               <tr>
@@ -1607,7 +1607,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#whitePoint()">whitePoint</a></code></td>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#(kotlin.String,kotlin.FloatArray,androidx.compose.ui.graphics.colorspace.WhitePoint,kotlin.FloatArray,androidx.compose.ui.graphics.colorspace.DoubleFunction,androidx.compose.ui.graphics.colorspace.DoubleFunction,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.TransferParameters,kotlin.Int)"></a></code></td>
                 <td></td>
               </tr>
             </tbody>
@@ -1677,7 +1677,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#getPrimaries()">getPrimaries</a></code></td>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#getPrimaries(kotlin.FloatArray)">getPrimaries</a></code></td>
                 <td></td>
               </tr>
             </tbody>
@@ -1691,7 +1691,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/compose/ui/graphics/colorspace/TransferParameters.html">TransferParameters</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#getTransferParameters()">getTransferParameters</a>()</pre>
-        <p>Returns the parameters used by the <code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#eotf()">electro-optical</a></code> and <code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#oetf()">opto-electronic</a></code> transfer functions. If the transfer functions do not match the ICC parametric curves defined in ICC.1:2004-10 (section 10.15), this method returns null.</p>
+        <p>Returns the parameters used by the <code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#(kotlin.String,kotlin.FloatArray,androidx.compose.ui.graphics.colorspace.WhitePoint,kotlin.FloatArray,androidx.compose.ui.graphics.colorspace.DoubleFunction,androidx.compose.ui.graphics.colorspace.DoubleFunction,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.TransferParameters,kotlin.Int)">electro-optical</a></code> and <code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#(kotlin.String,kotlin.FloatArray,androidx.compose.ui.graphics.colorspace.WhitePoint,kotlin.FloatArray,androidx.compose.ui.graphics.colorspace.DoubleFunction,androidx.compose.ui.graphics.colorspace.DoubleFunction,kotlin.Float,kotlin.Float,androidx.compose.ui.graphics.colorspace.TransferParameters,kotlin.Int)">opto-electronic</a></code> transfer functions. If the transfer functions do not match the ICC parametric curves defined in ICC.1:2004-10 (section 10.15), this method returns null.</p>
         <p>See <code><a href="/reference/androidx/compose/ui/graphics/colorspace/TransferParameters.html">TransferParameters</a></code> for a full description of the transfer functions.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -1852,13 +1852,13 @@
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#hashCode()">hashCode</a>()</pre>
       </div>
-      <div class="api-item"><a name="getIsSrgb--"></a><a name="getissrgb"></a>
+      <div class="api-item"><a name="isSrgb--"></a><a name="issrgb"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="getIsSrgb()">isSrgb</h3>
+            <h3 id="isSrgb()">isSrgb</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#getIsSrgb()">isSrgb</a>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#isSrgb()">isSrgb</a>()</pre>
         <p>Indicates whether this color space is the sRGB color space or equivalent to the sRGB color space.</p>
         <p>A color space is considered sRGB if it meets all the following conditions:</p>
         <ul>
@@ -1909,13 +1909,13 @@
           </table>
         </div>
       </div>
-      <div class="api-item"><a name="getIsWideGamut--"></a><a name="getiswidegamut"></a>
+      <div class="api-item"><a name="isWideGamut--"></a><a name="iswidegamut"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="getIsWideGamut()">isWideGamut</h3>
+            <h3 id="isWideGamut()">isWideGamut</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#getIsWideGamut()">isWideGamut</a>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#isWideGamut()">isWideGamut</a>()</pre>
         <p>Returns whether this color space is a wide-gamut color space. An RGB color space is wide-gamut if its gamut entirely contains the <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#Srgb()">sRGB</a></code> gamut and if the area of its gamut is 90% of greater than the area of the <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpaces.html#Ntsc1953()">NTSC</a></code> gamut.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -2003,7 +2003,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#toLinear(kotlin.Float,kotlin.Float,kotlin.Float)">toLinear</a></code></td>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#toLinear(kotlin.FloatArray)">toLinear</a></code></td>
                 <td></td>
               </tr>
               <tr>
@@ -2146,7 +2146,7 @@
               <tr>
                 <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> float[]</code></td>
                 <td>
-                  <p>The array passed in parameter <code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#toXyz(kotlin.FloatArray)">v</a></code>.</p>
+                  <p>The array passed in parameter <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#toXyz(kotlin.FloatArray)">v</a></code>.</p>
                 </td>
               </tr>
             </tbody>
@@ -2165,11 +2165,11 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#toXyz(kotlin.FloatArray)">toXyz</a></code></td>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#toXyz(kotlin.FloatArray)">toXyz</a></code></td>
                 <td></td>
               </tr>
               <tr>
-                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/Rgb.html#fromXyz(kotlin.FloatArray)">fromXyz</a></code></td>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html#fromXyz(kotlin.Float,kotlin.Float,kotlin.Float)">fromXyz</a></code></td>
                 <td></td>
               </tr>
             </tbody>

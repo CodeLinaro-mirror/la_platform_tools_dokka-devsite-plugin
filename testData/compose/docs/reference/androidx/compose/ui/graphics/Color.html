@@ -51,8 +51,8 @@
       <meta itemprop="property" content="White()">
       <meta itemprop="property" content="Yellow()">
       <meta itemprop="property" content="(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">
-      <meta itemprop="property" content="(androidx.compose.ui.graphics.Color).getIsSpecified()">
-      <meta itemprop="property" content="(androidx.compose.ui.graphics.Color).getIsUnspecified()">
+      <meta itemprop="property" content="(androidx.compose.ui.graphics.Color).isSpecified()">
+      <meta itemprop="property" content="(androidx.compose.ui.graphics.Color).isUnspecified()">
       <meta itemprop="property" content="(androidx.compose.ui.graphics.Color).luminance()">
       <meta itemprop="property" content="(androidx.compose.ui.graphics.Color).takeOrElse(kotlin.Function0)">
       <meta itemprop="property" content="(androidx.compose.ui.graphics.Color).toArgb()">
@@ -260,20 +260,20 @@ val rgbaWhiteInt = Color(red = 0xFF, green = 0xFF, blue = 0xFF, alpha = 0xFF)</p
             <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/graphics/ColorKt.html">ColorKt</a>.<a href="/reference/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">compositeOver</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;receiver,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;background)</code></div>
-              <p>Composites <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#&lt;this&gt;()">this</a></code> color on top of <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">background</a></code> using the Porter-Duff 'source over' mode.</p>
+              <p>Composites <code><a href="/reference/androidx/compose/ui/graphics/Color.html">this</a></code> color on top of <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">background</a></code> using the Porter-Duff 'source over' mode.</p>
             </td>
           </tr>
           <tr>
             <td><code>final boolean</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/graphics/ColorKt.html">ColorKt</a>.<a href="/reference/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).getIsSpecified()">isSpecified</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;receiver)</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/ColorKt.html">ColorKt</a>.<a href="/reference/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).isSpecified()">isSpecified</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;receiver)</code></div>
               <p><code>false</code> when this is <code><a href="/reference/androidx/compose/ui/graphics/Color.Companion.html#Unspecified()">Color.Unspecified</a></code>.</p>
             </td>
           </tr>
           <tr>
             <td><code>final boolean</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/graphics/ColorKt.html">ColorKt</a>.<a href="/reference/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).getIsUnspecified()">isUnspecified</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;receiver)</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/ColorKt.html">ColorKt</a>.<a href="/reference/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).isUnspecified()">isUnspecified</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;receiver)</code></div>
               <p><code>true</code> when this is <code><a href="/reference/androidx/compose/ui/graphics/Color.Companion.html#Unspecified()">Color.Unspecified</a></code>.</p>
             </td>
           </tr>
@@ -642,8 +642,8 @@ val rgbaWhiteInt = Color(red = 0xFF, green = 0xFF, blue = 0xFF, alpha = 0xFF)</p
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/ColorKt.html">ColorKt</a>.<a href="/reference/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">compositeOver</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;receiver,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;background)</pre>
-        <p>Composites <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#&lt;this&gt;()">this</a></code> color on top of <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">background</a></code> using the Porter-Duff 'source over' mode.</p>
-        <p>Both <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#&lt;this&gt;()">this</a></code> and <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">background</a></code> must not be pre-multiplied, and the resulting color will also not be pre-multiplied.</p>
+        <p>Composites <code><a href="/reference/androidx/compose/ui/graphics/Color.html">this</a></code> color on top of <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">background</a></code> using the Porter-Duff 'source over' mode.</p>
+        <p>Both <code><a href="/reference/androidx/compose/ui/graphics/Color.html">this</a></code> and <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">background</a></code> must not be pre-multiplied, and the resulting color will also not be pre-multiplied.</p>
         <p>The <code><a href="/reference/androidx/compose/ui/graphics/colorspace/ColorSpace.html">ColorSpace</a></code> of the result is always the <code><a href="/reference/androidx/compose/ui/graphics/Color.html#colorSpace()">ColorSpace</a></code> of <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">background</a></code>.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -660,29 +660,29 @@ val rgbaWhiteInt = Color(red = 0xFF, green = 0xFF, blue = 0xFF, alpha = 0xFF)</p
               <tr>
                 <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a></code></td>
                 <td>
-                  <p>the <code><a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a></code> representing <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#&lt;this&gt;()">this</a></code> composited on top of <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">background</a></code>, converted to the color space of <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">background</a></code>.</p>
+                  <p>the <code><a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a></code> representing <code><a href="/reference/androidx/compose/ui/graphics/Color.html">this</a></code> composited on top of <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">background</a></code>, converted to the color space of <code><a href="/reference/androidx/compose/ui/graphics/package-summary.html#(androidx.compose.ui.graphics.Color).compositeOver(androidx.compose.ui.graphics.Color)">background</a></code>.</p>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-      <div class="api-item"><a name="-androidx.compose.ui.graphics.Color-.getIsSpecified--"></a><a name="getisspecified"></a>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.Color-.isSpecified--"></a><a name="isspecified"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="(androidx.compose.ui.graphics.Color).getIsSpecified()">ColorKt.isSpecified</h3>
+            <h3 id="(androidx.compose.ui.graphics.Color).isSpecified()">ColorKt.isSpecified</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/ColorKt.html">ColorKt</a>.<a href="/reference/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).getIsSpecified()">isSpecified</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;receiver)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/ColorKt.html">ColorKt</a>.<a href="/reference/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).isSpecified()">isSpecified</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;receiver)</pre>
         <p><code>false</code> when this is <code><a href="/reference/androidx/compose/ui/graphics/Color.Companion.html#Unspecified()">Color.Unspecified</a></code>.</p>
       </div>
-      <div class="api-item"><a name="-androidx.compose.ui.graphics.Color-.getIsUnspecified--"></a><a name="getisunspecified"></a>
+      <div class="api-item"><a name="-androidx.compose.ui.graphics.Color-.isUnspecified--"></a><a name="isunspecified"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="(androidx.compose.ui.graphics.Color).getIsUnspecified()">ColorKt.isUnspecified</h3>
+            <h3 id="(androidx.compose.ui.graphics.Color).isUnspecified()">ColorKt.isUnspecified</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/ColorKt.html">ColorKt</a>.<a href="/reference/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).getIsUnspecified()">isUnspecified</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;receiver)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/ColorKt.html">ColorKt</a>.<a href="/reference/androidx/compose/ui/graphics/Color.html#(androidx.compose.ui.graphics.Color).isUnspecified()">isUnspecified</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;receiver)</pre>
         <p><code>true</code> when this is <code><a href="/reference/androidx/compose/ui/graphics/Color.Companion.html#Unspecified()">Color.Unspecified</a></code>.</p>
       </div>
       <div class="api-item"><a name="-androidx.compose.ui.graphics.Color-.luminance--"></a><a name="luminance"></a>

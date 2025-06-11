@@ -194,7 +194,7 @@
                 <tr>
                   <td><code>value:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> = 0.0f</code></td>
                   <td>
-                    <p><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code> that indicates the initial position of the thumb. If outside of <code><a href="/reference/kotlin/androidx/compose/material3/SliderState.html#&lt;init&gt;(kotlin.Float,kotlin.Int,kotlin.Function0,kotlin.ranges.ClosedFloatingPointRange)">valueRange</a></code> provided, value will be coerced to this range.</p>
+                    <p><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code> that indicates the initial position of the thumb. If outside of <code><a href="/reference/kotlin/androidx/compose/material3/SliderState.html#(kotlin.Float,kotlin.Int,kotlin.Function0,kotlin.ranges.ClosedFloatingPointRange)">valueRange</a></code> provided, value will be coerced to this range.</p>
                   </td>
                 </tr>
                 <tr>
@@ -212,7 +212,7 @@
                 <tr>
                   <td><code>valueRange:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-closed-floating-point-range/index.html">ClosedFloatingPointRange</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt; = 0f..1f</code></td>
                   <td>
-                    <p>range of values that Slider values can take. <code><a href="/reference/kotlin/androidx/compose/material3/SliderState.html#&lt;init&gt;(kotlin.Float,kotlin.Int,kotlin.Function0,kotlin.ranges.ClosedFloatingPointRange)">value</a></code> will be coerced to this range.</p>
+                    <p>range of values that Slider values can take. <code><a href="/reference/kotlin/androidx/compose/material3/SliderState.html#(kotlin.Float,kotlin.Int,kotlin.Function0,kotlin.ranges.ClosedFloatingPointRange)">value</a></code> will be coerced to this range.</p>
                   </td>
                 </tr>
               </tbody>
@@ -237,8 +237,8 @@
           </div>
           <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/SliderState.html#dispatchRawDelta(kotlin.Float)">dispatchRawDelta</a>(delta:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>Dispatch drag delta in pixels avoiding all drag related priority mechanisms.</p>
-          <p><b>NOTE:</b> unlike <code><a href="/reference/kotlin/androidx/compose/material3/SliderState.html#drag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">drag</a></code>, dispatching any delta with this method will bypass scrolling of any priority. This method will also ignore <code>reverseDirection</code> and other parameters set in <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).draggable(androidx.compose.foundation.gestures.DraggableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Boolean,kotlin.coroutines.SuspendFunction2,kotlin.coroutines.SuspendFunction2,kotlin.Boolean)">draggable</a></code>.</p>
-          <p>This method is used internally for low level operations, allowing implementers of <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableState.html">DraggableState</a></code> influence the consumption as suits them, e.g. introduce nested scrolling. Manually dispatching delta via this method will likely result in a bad user experience, you must prefer <code><a href="/reference/kotlin/androidx/compose/material3/SliderState.html#drag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">drag</a></code> method over this one.</p>
+          <p><b>NOTE:</b> unlike <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableState.html#drag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">drag</a></code>, dispatching any delta with this method will bypass scrolling of any priority. This method will also ignore <code>reverseDirection</code> and other parameters set in <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).draggable(androidx.compose.foundation.gestures.DraggableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Boolean,kotlin.coroutines.SuspendFunction2,kotlin.coroutines.SuspendFunction2,kotlin.Boolean)">draggable</a></code>.</p>
+          <p>This method is used internally for low level operations, allowing implementers of <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableState.html">DraggableState</a></code> influence the consumption as suits them, e.g. introduce nested scrolling. Manually dispatching delta via this method will likely result in a bad user experience, you must prefer <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableState.html#drag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">drag</a></code> method over this one.</p>
           <div class="devsite-table-wrapper">
             <table class="responsive">
               <colgroup>
@@ -271,10 +271,10 @@
                 <!--platform-Common/All--></div>
             </div>
           </div>
-          <pre class="api-signature no-pretty-print">open&nbsp;suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/SliderState.html#drag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">drag</a>(dragPriority:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MutatePriority.html">MutatePriority</a>,&nbsp;block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/DragScope.html">DragScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
+          <pre class="api-signature no-pretty-print">open&nbsp;suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/material3/SliderState.html#drag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">drag</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;dragPriority:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MutatePriority.html">MutatePriority</a> = MutatePriority.Default,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/DragScope.html">DragScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
           <p>Call this function to take control of drag logic.</p>
-          <p>All actions that change the logical drag position must be performed within a <code><a href="/reference/kotlin/androidx/compose/material3/SliderState.html#drag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">drag</a></code> block (even if they don't call any other methods on this object) in order to guarantee that mutual exclusion is enforced.</p>
-          <p>If <code><a href="/reference/kotlin/androidx/compose/material3/SliderState.html#drag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">drag</a></code> is called from elsewhere with the <code><a href="/reference/kotlin/androidx/compose/material3/SliderState.html#drag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">dragPriority</a></code> higher or equal to ongoing drag, ongoing drag will be canceled.</p>
+          <p>All actions that change the logical drag position must be performed within a <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableState.html#drag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">drag</a></code> block (even if they don't call any other methods on this object) in order to guarantee that mutual exclusion is enforced.</p>
+          <p>If <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableState.html#drag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">drag</a></code> is called from elsewhere with the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableState.html#drag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">dragPriority</a></code> higher or equal to ongoing drag, ongoing drag will be canceled.</p>
           <div class="devsite-table-wrapper">
             <table class="responsive">
               <colgroup>
@@ -288,7 +288,7 @@
               </thead>
               <tbody class="list">
                 <tr>
-                  <td><code>dragPriority:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MutatePriority.html">MutatePriority</a></code></td>
+                  <td><code>dragPriority:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MutatePriority.html">MutatePriority</a> = MutatePriority.Default</code></td>
                   <td>
                     <p>of the drag operation</p>
                   </td>
@@ -359,7 +359,7 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/material3/SliderState.html#valueRange()">valueRange</a>:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-closed-floating-point-range/index.html">ClosedFloatingPointRange</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a>&gt;</pre>
-          <p>range of values that Slider values can take. <code><a href="/reference/kotlin/androidx/compose/material3/SliderState.html#value()">value</a></code> will be coerced to this range.</p>
+          <p>range of values that Slider values can take. <code><a href="/reference/kotlin/androidx/compose/material3/SliderState.html#(kotlin.Float,kotlin.Int,kotlin.Function0,kotlin.ranges.ClosedFloatingPointRange)">value</a></code> will be coerced to this range.</p>
         </div>
       </div>
     </devsite-filter >

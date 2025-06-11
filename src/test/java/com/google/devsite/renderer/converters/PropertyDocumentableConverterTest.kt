@@ -315,7 +315,7 @@ internal class PropertyDocumentableConverterTest(displayLanguage: Language) :
             |}
         """
                 .render()
-                .detail("FOO")
+                .detail("FOO", hints = defaultHints.copy(injectStatic = true))
         for (detail in listOf(detailJ, detailK, detailKNo)) {
             javaOnly {
                 assertThat(detail.data.modifiers).isEqualTo(listOf("public", "static", "final"))

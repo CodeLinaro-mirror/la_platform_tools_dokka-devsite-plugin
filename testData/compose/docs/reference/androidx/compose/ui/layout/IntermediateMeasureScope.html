@@ -27,8 +27,8 @@
       <pre>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br>public sealed interface <a href="/reference/androidx/compose/ui/layout/IntermediateMeasureScope.html">IntermediateMeasureScope</a> extends <a href="/reference/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a>, <a href="/reference/androidx/compose/ui/layout/MeasureScope.html">MeasureScope</a></pre>
     </p>
     <hr>
-    <p><code><a href="/reference/androidx/compose/ui/layout/IntermediateMeasureScope.html">IntermediateMeasureScope</a></code> provides access to lookahead results to allow <code><a href="/reference/androidx/compose/ui/layout/IntermediateMeasureScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">intermediateLayout</a></code> to leverage lookahead results to define intermediate measurements and placements to gradually converge with lookahead.</p>
-    <p><code><a href="/reference/androidx/compose/ui/layout/IntermediateMeasureScope.html#lookaheadSize()">IntermediateMeasureScope.lookaheadSize</a></code> provides the target size of the layout. <code><a href="/reference/androidx/compose/ui/layout/IntermediateMeasureScope.html">IntermediateMeasureScope</a></code> is also a <code><a href="/reference/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a></code>, thus allowing layouts to read their <code><a href="/reference/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code> during placement using <code><a href="/reference/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).toLookaheadCoordinates()">LookaheadScope.toLookaheadCoordinates</a></code>, as well as the <code><a href="/reference/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code> of the closest lookahead scope via <code><a href="/reference/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.Placeable.PlacementScope).lookaheadScopeCoordinates()">LookaheadScope.lookaheadScopeCoordinates</a></code>. By knowing the target size and position, layout adjustments such as animations can be defined in <code><a href="/reference/androidx/compose/ui/layout/IntermediateMeasureScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">intermediateLayout</a></code> to morph the layout gradually in both size and position to arrive at its precalculated bounds.</p>
+    <p><code><a href="/reference/androidx/compose/ui/layout/IntermediateMeasureScope.html">IntermediateMeasureScope</a></code> provides access to lookahead results to allow <code><a href="/reference/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">intermediateLayout</a></code> to leverage lookahead results to define intermediate measurements and placements to gradually converge with lookahead.</p>
+    <p><code><a href="/reference/androidx/compose/ui/layout/IntermediateMeasureScope.html#lookaheadSize()">IntermediateMeasureScope.lookaheadSize</a></code> provides the target size of the layout. <code><a href="/reference/androidx/compose/ui/layout/IntermediateMeasureScope.html">IntermediateMeasureScope</a></code> is also a <code><a href="/reference/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a></code>, thus allowing layouts to read their <code><a href="/reference/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code> during placement using <code><a href="/reference/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).toLookaheadCoordinates()">LookaheadScope.toLookaheadCoordinates</a></code>, as well as the <code><a href="/reference/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a></code> of the closest lookahead scope via <code><a href="/reference/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.Placeable.PlacementScope).lookaheadScopeCoordinates()">LookaheadScope.lookaheadScopeCoordinates</a></code>. By knowing the target size and position, layout adjustments such as animations can be defined in <code><a href="/reference/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">intermediateLayout</a></code> to morph the layout gradually in both size and position to arrive at its precalculated bounds.</p>
     <p>Note that <code><a href="/reference/androidx/compose/ui/layout/IntermediateMeasureScope.html">IntermediateMeasureScope</a></code> is the closest lookahead scope in the tree. This <code><a href="/reference/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a></code> enables convenient query of the layout's relative position to the <code><a href="/reference/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a></code>. Hence it becomes straightforward to animate position relative to the closest scope, which usually yields a natural looking animation, unless there are specific UX requirements to change position relative to a particular <code><a href="/reference/androidx/compose/ui/layout/LookaheadScope.html">LookaheadScope</a></code>.</p>
     <p><code><a href="/reference/androidx/compose/ui/layout/IntermediateMeasureScope.html">IntermediateMeasureScope</a></code> is a CoroutineScope, as a convenient scope for all the coroutine-based intermediate changes (e.g. animations) to be launched from.</p>
     <h2>Summary</h2>
@@ -48,7 +48,7 @@
             <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a></code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/layout/IntermediateMeasureScope.html#getLookaheadSize()">getLookaheadSize</a>()</code></div>
-              <p>Indicates the target size of the <code><a href="/reference/androidx/compose/ui/layout/IntermediateMeasureScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">intermediateLayout</a></code>.</p>
+              <p>Indicates the target size of the <code><a href="/reference/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">intermediateLayout</a></code>.</p>
             </td>
           </tr>
         </tbody>
@@ -88,91 +88,91 @@
                     <tr>
                       <td><code>default int</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).roundToPx()">roundToPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).roundToPx()">roundToPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
                         <p>Convert <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code> to <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code> by rounding</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default int</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).roundToPx()">roundToPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).roundToPx()">roundToPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
                         <p>Convert Sp to <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code> by rounding</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toDp()">toDp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toDp()">toDp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
                         <p>Convert Sp to <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Int).toDp()">toDp</a>(int&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Int).toDp()">toDp</a>(int&nbsp;receiver)</code></div>
                         <p>Convert an <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code> pixel value to <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Float).toDp()">toDp</a>(float&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Float).toDp()">toDp</a>(float&nbsp;receiver)</code></div>
                         <p>Convert a <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code> pixel value to a Dp</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/DpSize.html">DpSize</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.geometry.Size).toDpSize()">toDpSize</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.geometry.Size).toDpSize()">toDpSize</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;receiver)</code></div>
                         <p>Convert a <code><a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code> to a <code><a href="/reference/androidx/compose/ui/unit/DpSize.html">DpSize</a></code>.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default float</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toPx()">toPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toPx()">toPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
                         <p>Convert <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code> to pixels.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default float</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toPx()">toPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toPx()">toPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
                         <p>Convert Sp to pixels.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.DpRect).toRect()">toRect</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/DpRect.html">DpRect</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.DpRect).toRect()">toRect</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/DpRect.html">DpRect</a>&nbsp;receiver)</code></div>
                         <p>Convert a <code><a href="/reference/androidx/compose/ui/unit/DpRect.html">DpRect</a></code> to a <code><a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a></code>.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.DpSize).toSize()">toSize</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/DpSize.html">DpSize</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.DpSize).toSize()">toSize</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/DpSize.html">DpSize</a>&nbsp;receiver)</code></div>
                         <p>Convert a <code><a href="/reference/androidx/compose/ui/unit/DpSize.html">DpSize</a></code> to a <code><a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code>.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toSp()">toSp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toSp()">toSp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
                         <p>Convert <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code> to Sp.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Int).toSp()">toSp</a>(int&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Int).toSp()">toSp</a>(int&nbsp;receiver)</code></div>
                         <p>Convert an <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code> pixel value to Sp.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Float).toSp()">toSp</a>(float&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Float).toSp()">toSp</a>(float&nbsp;receiver)</code></div>
                         <p>Convert a <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code> pixel value to a Sp</p>
                       </td>
                     </tr>
@@ -200,7 +200,7 @@
                     <tr>
                       <td><code>default boolean</code></td>
                       <td>
-                        <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/layout/IntrinsicMeasureScope.html#getIsLookingAhead()">isLookingAhead</a>()</code></div>
+                        <div><code>@<a href="/reference/androidx/compose/ui/ExperimentalComposeUiApi.html">ExperimentalComposeUiApi</a><br><a href="/reference/androidx/compose/ui/layout/IntrinsicMeasureScope.html#isLookingAhead()">isLookingAhead</a>()</code></div>
                         <p>This indicates whether the ongoing measurement is for lookahead pass.</p>
                       </td>
                     </tr>
@@ -228,28 +228,28 @@
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/layout/orgKt.html">orgKt</a>.<span><del><a href="/reference/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">intermediateLayout</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function4&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/MeasureScope.html">MeasureScope</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/Measurable.html">Measurable</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a>&gt;&nbsp;measure<br>)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/layout/LookaheadScopeKt.html">LookaheadScopeKt</a>.<span><del><a href="/reference/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">intermediateLayout</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function4&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/MeasureScope.html">MeasureScope</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/Measurable.html">Measurable</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Constraints.html">Constraints</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/MeasureResult.html">MeasureResult</a>&gt;&nbsp;measure<br>)</code></div>
                         <p><strong>This method is deprecated.</strong> </p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/layout/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).localLookaheadPositionOf(androidx.compose.ui.layout.LayoutCoordinates)">localLookaheadPositionOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>&nbsp;coordinates<br>)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/layout/LookaheadScopeKt.html">LookaheadScopeKt</a>.<a href="/reference/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).localLookaheadPositionOf(androidx.compose.ui.layout.LayoutCoordinates)">localLookaheadPositionOf</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>&nbsp;coordinates<br>)</code></div>
                         <p>Calculates the localPosition in the Lookahead coordinate space.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/layout/orgKt.html">orgKt</a>.<span><del><a href="/reference/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.Modifier).onPlaced(kotlin.Function2)">onPlaced</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onPlaced<br>)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/layout/LookaheadScopeKt.html">LookaheadScopeKt</a>.<span><del><a href="/reference/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.Modifier).onPlaced(kotlin.Function2)">onPlaced</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/LookaheadLayoutCoordinates.html">LookaheadLayoutCoordinates</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onPlaced<br>)</code></div>
                         <p><strong>This method is deprecated.</strong> onPlaced in LookaheadLayoutScope has been deprecated.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/layout/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).toLookaheadCoordinates()">toLookaheadCoordinates</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/layout/LookaheadScopeKt.html">LookaheadScopeKt</a>.<a href="/reference/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.layout.LayoutCoordinates).toLookaheadCoordinates()">toLookaheadCoordinates</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a>&nbsp;receiver<br>)</code></div>
                         <p>Converts a <code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> into a <code><a href="/reference/androidx/compose/ui/layout/LayoutCoordinates.html">LayoutCoordinates</a></code> in the Lookahead coordinates space.</p>
                       </td>
                     </tr>
@@ -291,7 +291,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/IntSize.html">IntSize</a>&nbsp;<a href="/reference/androidx/compose/ui/layout/IntermediateMeasureScope.html#getLookaheadSize()">getLookaheadSize</a>()</pre>
-        <p>Indicates the target size of the <code><a href="/reference/androidx/compose/ui/layout/IntermediateMeasureScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">intermediateLayout</a></code>.</p>
+        <p>Indicates the target size of the <code><a href="/reference/androidx/compose/ui/layout/LookaheadScope.html#(androidx.compose.ui.Modifier).intermediateLayout(kotlin.Function4)">intermediateLayout</a></code>.</p>
       </div>
     </div>
   </body>

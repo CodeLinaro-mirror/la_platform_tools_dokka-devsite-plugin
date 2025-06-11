@@ -399,7 +399,7 @@
         <p>Load list data after the key specified in <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadParams.html#key()">LoadParams.key</a></code>.</p>
         <p>It's valid to return a different list size than the page size if it's easier, e.g. if your backend defines page sizes. It is generally preferred to increase the number loaded than reduce.</p>
         <p>Data may be passed synchronously during the loadAfter method, or deferred and called at a later time. Further loads going down will be blocked until the callback is called.</p>
-        <p>If data cannot be loaded (for example, if the request is invalid, or the data would be stale and inconsistent), it is valid to call <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#invalidate()">invalidate</a></code> to invalidate the data source, and prevent further loading.</p>
+        <p>If data cannot be loaded (for example, if the request is invalid, or the data would be stale and inconsistent), it is valid to call <code><a href="/reference/kotlin/androidx/paging/DataSource.html#invalidate()">invalidate</a></code> to invalidate the data source, and prevent further loading.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -440,7 +440,7 @@
         <p>It's valid to return a different list size than the page size if it's easier, e.g. if your backend defines page sizes. It is generally preferred to increase the number loaded than reduce.</p>
         <p><b>Note:</b> Data returned will be prepended just before the key passed, so if you vary size, ensure that the last item is adjacent to the passed key.</p>
         <p>Data may be passed synchronously during the loadBefore method, or deferred and called at a later time. Further loads going up will be blocked until the callback is called.</p>
-        <p>If data cannot be loaded (for example, if the request is invalid, or the data would be stale and inconsistent), it is valid to call <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#invalidate()">invalidate</a></code> to invalidate the data source, and prevent further loading.</p>
+        <p>If data cannot be loaded (for example, if the request is invalid, or the data would be stale and inconsistent), it is valid to call <code><a href="/reference/kotlin/androidx/paging/DataSource.html#invalidate()">invalidate</a></code> to invalidate the data source, and prevent further loading.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -517,7 +517,7 @@
         <pre class="api-signature no-pretty-print">final&nbsp;fun&nbsp;&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <span><del><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#map(androidx.arch.core.util.Function)">map</a></del></span>(function:&nbsp;<a href="/reference/kotlin/androidx/arch/core/util/Function.html">Function</a>&lt;Value,&nbsp;ToValue&gt;):&nbsp;<a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</pre>
         <aside class="caution"><strong>This function is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
         <p>Applies the given function to each value emitted by the DataSource.</p>
-        <p>Same as <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a></code>, but operates on individual items.</p>
+        <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a></code>, but operates on individual items.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -579,7 +579,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a></code></td>
+                <td><code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a></code></td>
                 <td></td>
               </tr>
               <tr>
@@ -603,8 +603,8 @@
         <pre class="api-signature no-pretty-print">final&nbsp;fun&nbsp;&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <span><del><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#map(kotlin.Function1)">map</a></del></span>(function:&nbsp;(Value) <span style="white-space: nowrap;">-&gt;</span> ToValue):&nbsp;<a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</pre>
         <aside class="caution"><strong>This function is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
         <p>Applies the given function to each value emitted by the DataSource.</p>
-        <p>An overload of <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#map(androidx.arch.core.util.Function)">map</a></code> that accepts a kotlin function type.</p>
-        <p>Same as <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a></code>, but operates on individual items.</p>
+        <p>An overload of <code><a href="/reference/kotlin/androidx/paging/DataSource.html#map(kotlin.Function1)">map</a></code> that accepts a kotlin function type.</p>
+        <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a></code>, but operates on individual items.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -666,7 +666,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a></code></td>
+                <td><code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a></code></td>
                 <td></td>
               </tr>
               <tr>
@@ -686,7 +686,7 @@
         <pre class="api-signature no-pretty-print">final&nbsp;fun&nbsp;&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <span><del><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a></del></span>(function:&nbsp;<a href="/reference/kotlin/androidx/arch/core/util/Function.html">Function</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;ToValue&gt;&gt;):&nbsp;<a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</pre>
         <aside class="caution"><strong>This function is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
         <p>Applies the given function to each value emitted by the DataSource.</p>
-        <p>Same as <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#map(androidx.arch.core.util.Function)">map</a></code>, but allows for batch conversions.</p>
+        <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#map(androidx.arch.core.util.Function)">map</a></code>, but allows for batch conversions.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -748,7 +748,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#map(androidx.arch.core.util.Function)">map</a></code></td>
+                <td><code><a href="/reference/kotlin/androidx/paging/DataSource.html#map(androidx.arch.core.util.Function)">map</a></code></td>
                 <td></td>
               </tr>
               <tr>
@@ -772,8 +772,8 @@
         <pre class="api-signature no-pretty-print">final&nbsp;fun&nbsp;&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <span><del><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></del></span>(function:&nbsp;(<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;ToValue&gt;):&nbsp;<a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</pre>
         <aside class="caution"><strong>This function is deprecated.</strong><br>ItemKeyedDataSource is deprecated and has been replaced by PagingSource</aside>
         <p>Applies the given function to each value emitted by the DataSource.</p>
-        <p>An overload of <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a></code> that accepts a kotlin function type.</p>
-        <p>Same as <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#map(androidx.arch.core.util.Function)">map</a></code>, but allows for batch conversions.</p>
+        <p>An overload of <code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code> that accepts a kotlin function type.</p>
+        <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#map(androidx.arch.core.util.Function)">map</a></code>, but allows for batch conversions.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -835,7 +835,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td><code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#map(androidx.arch.core.util.Function)">map</a></code></td>
+                <td><code><a href="/reference/kotlin/androidx/paging/DataSource.html#map(androidx.arch.core.util.Function)">map</a></code></td>
                 <td></td>
               </tr>
               <tr>

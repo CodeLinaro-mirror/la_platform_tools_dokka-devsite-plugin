@@ -272,6 +272,7 @@
             <td><code>abstract void</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/text/Paragraph.html#paint(androidx.compose.ui.graphics.Canvas,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.style.TextDecoration)">paint</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Canvas.html">Canvas</a>&nbsp;canvas,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;color,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/Shadow.html">Shadow</a>&nbsp;shadow,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>&nbsp;textDecoration<br>)</code></div>
+              <p>Draws this paragraph onto given <code><a href="/reference/androidx/compose/ui/text/Paragraph.html#paint(androidx.compose.ui.graphics.Canvas,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.style.TextDecoration)">canvas</a></code> while modifying supported draw properties.</p>
             </td>
           </tr>
           <tr>
@@ -699,6 +700,46 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/text/Paragraph.html#paint(androidx.compose.ui.graphics.Canvas,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.style.TextDecoration)">paint</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Canvas.html">Canvas</a>&nbsp;canvas,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;color,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/graphics/Shadow.html">Shadow</a>&nbsp;shadow,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>&nbsp;textDecoration<br>)</pre>
+        <p>Draws this paragraph onto given <code><a href="/reference/androidx/compose/ui/text/Paragraph.html#paint(androidx.compose.ui.graphics.Canvas,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Shadow,androidx.compose.ui.text.style.TextDecoration)">canvas</a></code> while modifying supported draw properties. Any change caused by overriding parameters are permanent, meaning that they affect the subsequent paint calls.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Canvas.html">Canvas</a>&nbsp;canvas</code></td>
+                <td>
+                  <p>Canvas to draw this paragraph on.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a>&nbsp;color</code></td>
+                <td>
+                  <p>Applies to the default text paint color that's used by this paragraph. Text color spans are not affected. <code><a href="/reference/androidx/compose/ui/graphics/Color.Companion.html#Unspecified()">Color.Unspecified</a></code> is treated as no-op.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/graphics/Shadow.html">Shadow</a>&nbsp;shadow</code></td>
+                <td>
+                  <p>Applies to the default text paint shadow that's used by this paragraph. Text shadow spans are not affected. <code><a href="/reference/androidx/compose/ui/graphics/Shadow.Companion.html#None()">Shadow.None</a></code> removes any existing shadow on this paragraph, <code>null</code> does not change the currently set <code><a href="/reference/androidx/compose/ui/graphics/Shadow.html">Shadow</a></code> configuration.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><code><a href="/reference/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a>&nbsp;textDecoration</code></td>
+                <td>
+                  <p>Applies to the default text paint that's used by this paragraph. Spans that specify a TextDecoration are not affected. <code><a href="/reference/androidx/compose/ui/text/style/TextDecoration.Companion.html#None()">TextDecoration.None</a></code> removes any existing TextDecoration on this paragraph, <code>null</code> does not change the currently set <code><a href="/reference/androidx/compose/ui/text/style/TextDecoration.html">TextDecoration</a></code> configuration.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <div class="api-item"><a name="paint(androidx.compose.ui.graphics.Canvas, androidx.compose.ui.graphics.Color, androidx.compose.ui.graphics.Shadow, androidx.compose.ui.text.style.TextDecoration, androidx.compose.ui.graphics.drawscope.DrawStyle, androidx.compose.ui.graphics.BlendMode)"></a><a name="paint-androidx.compose.ui.graphics.Canvas-androidx.compose.ui.graphics.Color-androidx.compose.ui.graphics.Shadow-androidx.compose.ui.text.style.TextDecoration-androidx.compose.ui.graphics.drawscope.DrawStyle-androidx.compose.ui.graphics.BlendMode-"></a><a name="paint"></a>
         <div class="api-name-block">

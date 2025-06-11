@@ -758,8 +758,7 @@ internal class ParameterDocumentableConverterTest(private val displayLanguage: L
             val lambdaType = lambdaParam.type.data
             assertThat(lambdaParam.annotationComponents).isEmpty()
             assertThat(lambdaType.type.data.name).isEqualTo("Function1")
-            assertThat(lambdaType.annotationComponents.map { it.name })
-                .isEqualTo(listOf("ExtensionFunctionType", "NonNull"))
+            assertThat(lambdaType.annotationComponents.map { it.name }).isEqualTo(listOf("NonNull"))
             assertThat(lambdaType.generics.size).isEqualTo(2)
             val generic0 = lambdaType.generics.first()
             val generic1 = lambdaType.generics.last()
@@ -785,7 +784,7 @@ internal class ParameterDocumentableConverterTest(private val displayLanguage: L
             val lambdaSymbol = (lambdaParam.type as LambdaTypeProjectionComponent)
             assertThat(lambdaSymbol.data.returnType.name()).isEqualTo("String")
             assertThat(lambdaSymbol.nullable).isFalse()
-            assertThat(lambdaSymbol.annotations.single().name).isEqualTo("ExtensionFunctionType")
+            assertThat(lambdaSymbol.annotations).isEmpty()
             assertThat(lambdaSymbol.data.lambdaModifiers).isEmpty()
             assertThat(lambdaSymbol.data.lambdaParams).isEmpty()
             assertThat(lambdaSymbol.data.receiver!!.nullable).isFalse()
@@ -1423,7 +1422,10 @@ internal class ParameterDocumentableConverterTest(private val displayLanguage: L
                 .returnType()
 
         assertThat(paramString.data.type.data.name).isEqualTo("String")
-        assertThat(paramUnresolved.data.type.data.name).isEqualTo("<Error class: unknown class>")
+        assertThat(paramUnresolved.data.type.data.name)
+            .isEqualTo(
+                "@R|androidx/example/Squark|()  ERROR CLASS: Symbol not found for Unresolved?"
+            )
 
         for (param in listOf(paramString)) { // TODO: listOf(paramString, paramUnresolved)
             assertThat(param.annotations.size).isEqualTo(1)

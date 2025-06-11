@@ -48,7 +48,7 @@
     </p>
     <hr>
     <p>The receiver scope of the mouse input injection lambda from <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performMouseInput(kotlin.Function1)">performMouseInput</a></code>.</p>
-    <p>The functions in <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html">MouseInjectionScope</a></code> can roughly be divided into two groups: full gestures and individual mouse events. The individual mouse events are: <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#press(androidx.compose.ui.test.MouseButton)">press</a></code>, <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#moveTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">moveTo</a></code> and friends, <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#release(androidx.compose.ui.test.MouseButton)">release</a></code>, <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#cancel(kotlin.Long)">cancel</a></code>, <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#scroll(kotlin.Float,androidx.compose.ui.test.ScrollWheel)">scroll</a></code> and <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#advanceEventTime(kotlin.Long)">advanceEventTime</a></code>. Full gestures are all the other functions, like <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).click(androidx.compose.ui.geometry.Offset)">MouseInjectionScope.click</a></code>, <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset)">MouseInjectionScope.doubleClick</a></code>, <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).animateTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">MouseInjectionScope.animateTo</a></code>, etc. These are built on top of the individual events and serve as a good example on how you can build your own full gesture functions.</p>
+    <p>The functions in <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html">MouseInjectionScope</a></code> can roughly be divided into two groups: full gestures and individual mouse events. The individual mouse events are: <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#press(androidx.compose.ui.test.MouseButton)">press</a></code>, <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#moveTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">moveTo</a></code> and friends, <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#release(androidx.compose.ui.test.MouseButton)">release</a></code>, <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#cancel(kotlin.Long)">cancel</a></code>, <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#scroll(kotlin.Float,androidx.compose.ui.test.ScrollWheel)">scroll</a></code> and <code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#advanceEventTime(kotlin.Long)">advanceEventTime</a></code>. Full gestures are all the other functions, like <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).click(androidx.compose.ui.geometry.Offset)">MouseInjectionScope.click</a></code>, <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).doubleClick(androidx.compose.ui.geometry.Offset)">MouseInjectionScope.doubleClick</a></code>, <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.MouseInjectionScope).animateTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">MouseInjectionScope.animateTo</a></code>, etc. These are built on top of the individual events and serve as a good example on how you can build your own full gesture functions.</p>
     <p>A mouse move event can be sent with <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#moveTo(androidx.compose.ui.geometry.Offset,kotlin.Long)">moveTo</a></code> and <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#moveBy(androidx.compose.ui.geometry.Offset,kotlin.Long)">moveBy</a></code>. The mouse position can be updated with <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#updatePointerTo(androidx.compose.ui.geometry.Offset)">updatePointerTo</a></code> and <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#updatePointerBy(androidx.compose.ui.geometry.Offset)">updatePointerBy</a></code>, which will not send an event and only update the position internally. This can be useful if you want to send an event that is not a move event with a location other then the current location, but without sending a preceding move event. Use <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#press(androidx.compose.ui.test.MouseButton)">press</a></code> and <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#release(androidx.compose.ui.test.MouseButton)">release</a></code> to send button pressed and button released events. This will also send all other necessary events that keep the stream of mouse events consistent with actual mouse input, such as a hover exit event. A <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#cancel(kotlin.Long)">cancel</a></code> event can be sent at any time when at least one button is pressed. Use <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#scroll(kotlin.Float,androidx.compose.ui.test.ScrollWheel)">scroll</a></code> to send a mouse scroll event.</p>
     <p>The entire event injection state is shared between all <code>perform.*Input</code> methods, meaning you can continue an unfinished mouse gesture in a subsequent invocation of <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performMouseInput(kotlin.Function1)">performMouseInput</a></code> or <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performMultiModalInput(kotlin.Function1)">performMultiModalInput</a></code>. Note however that while the mouse's position is retained across invocation of <code>perform.*Input</code> methods, it is always manipulated in the current node's local coordinate system. That means that two subsequent invocations of <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performMouseInput(kotlin.Function1)">performMouseInput</a></code> on different nodes will report a different <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#currentPosition()">currentPosition</a></code>, even though it is actually the same position on the screen.</p>
     <p>All events sent by these methods are batched together and sent as a whole after <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performMouseInput(kotlin.Function1)">performMouseInput</a></code> has executed its code block.</p>
@@ -308,91 +308,91 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
                     <tr>
                       <td><code>default int</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).roundToPx()">roundToPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).roundToPx()">roundToPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
                         <p>Convert <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code> to <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code> by rounding</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default int</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).roundToPx()">roundToPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).roundToPx()">roundToPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
                         <p>Convert Sp to <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code> by rounding</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toDp()">toDp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toDp()">toDp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
                         <p>Convert Sp to <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Int).toDp()">toDp</a>(int&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Int).toDp()">toDp</a>(int&nbsp;receiver)</code></div>
                         <p>Convert an <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code> pixel value to <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Float).toDp()">toDp</a>(float&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Float).toDp()">toDp</a>(float&nbsp;receiver)</code></div>
                         <p>Convert a <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code> pixel value to a Dp</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/DpSize.html">DpSize</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.geometry.Size).toDpSize()">toDpSize</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.geometry.Size).toDpSize()">toDpSize</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;receiver)</code></div>
                         <p>Convert a <code><a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code> to a <code><a href="/reference/androidx/compose/ui/unit/DpSize.html">DpSize</a></code>.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default float</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toPx()">toPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toPx()">toPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
                         <p>Convert <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code> to pixels.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default float</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toPx()">toPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toPx()">toPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
                         <p>Convert Sp to pixels.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.DpRect).toRect()">toRect</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/DpRect.html">DpRect</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.DpRect).toRect()">toRect</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/DpRect.html">DpRect</a>&nbsp;receiver)</code></div>
                         <p>Convert a <code><a href="/reference/androidx/compose/ui/unit/DpRect.html">DpRect</a></code> to a <code><a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a></code>.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.DpSize).toSize()">toSize</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/DpSize.html">DpSize</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.DpSize).toSize()">toSize</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/DpSize.html">DpSize</a>&nbsp;receiver)</code></div>
                         <p>Convert a <code><a href="/reference/androidx/compose/ui/unit/DpSize.html">DpSize</a></code> to a <code><a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code>.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toSp()">toSp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toSp()">toSp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
                         <p>Convert <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code> to Sp.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Int).toSp()">toSp</a>(int&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Int).toSp()">toSp</a>(int&nbsp;receiver)</code></div>
                         <p>Convert an <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code> pixel value to Sp.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Float).toSp()">toSp</a>(float&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Float).toSp()">toSp</a>(float&nbsp;receiver)</code></div>
                         <p>Convert a <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code> pixel value to a Sp</p>
                       </td>
                     </tr>
@@ -597,7 +597,7 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
               <tr>
                 <td><code>long&nbsp;delayMillis</code></td>
                 <td>
-                  <p>The time between the last sent event and this event. <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
+                  <p>The time between the last sent event and this event. <code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
                 </td>
               </tr>
             </tbody>
@@ -636,7 +636,7 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
               <tr>
                 <td><code>long&nbsp;delayMillis</code></td>
                 <td>
-                  <p>The time between the last sent event and this event. <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
+                  <p>The time between the last sent event and this event. <code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
                 </td>
               </tr>
             </tbody>
@@ -675,7 +675,7 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
               <tr>
                 <td><code>long&nbsp;delayMillis</code></td>
                 <td>
-                  <p>The time between the last sent event and this event. <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
+                  <p>The time between the last sent event and this event. <code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
                 </td>
               </tr>
             </tbody>
@@ -721,7 +721,7 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
               <tr>
                 <td><code>long&nbsp;delayMillis</code></td>
                 <td>
-                  <p>The time between the last sent event and this event. <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
+                  <p>The time between the last sent event and this event. <code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
                 </td>
               </tr>
             </tbody>
@@ -758,7 +758,7 @@ composeTestRule.onNodeWithTag(&quot;myComponent&quot;)
               <tr>
                 <td><code>long&nbsp;delayMillis</code></td>
                 <td>
-                  <p>The time between the last sent event and this event. <code><a href="/reference/androidx/compose/ui/test/MouseInjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
+                  <p>The time between the last sent event and this event. <code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#eventPeriodMillis()">eventPeriodMillis</a></code> by default.</p>
                 </td>
               </tr>
             </tbody>

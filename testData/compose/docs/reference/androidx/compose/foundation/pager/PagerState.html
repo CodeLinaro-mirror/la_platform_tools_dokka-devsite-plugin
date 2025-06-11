@@ -21,7 +21,7 @@
       <meta itemprop="property" content="getPageCount()">
       <meta itemprop="property" content="getSettledPage()">
       <meta itemprop="property" content="getTargetPage()">
-      <meta itemprop="property" content="getIsScrollInProgress()">
+      <meta itemprop="property" content="isScrollInProgress()">
       <meta itemprop="property" content="scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">
       <meta itemprop="property" content="scrollToPage(kotlin.Int,kotlin.Float)">
       <meta itemprop="language" content="JAVA">
@@ -170,7 +170,7 @@
           <tr>
             <td><code>boolean</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/foundation/pager/PagerState.html#getIsScrollInProgress()">isScrollInProgress</a>()</code></div>
+              <div><code><a href="/reference/androidx/compose/foundation/pager/PagerState.html#isScrollInProgress()">isScrollInProgress</a>()</code></div>
               <p>Whether this <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> is currently scrolling by gesture, fling or programmatically or not.</p>
             </td>
           </tr>
@@ -334,8 +334,8 @@ Column {
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;float&nbsp;<a href="/reference/androidx/compose/foundation/pager/PagerState.html#dispatchRawDelta(kotlin.Float)">dispatchRawDelta</a>(float&nbsp;delta)</pre>
         <p>Dispatch scroll delta in pixels avoiding all scroll related mechanisms.</p>
-        <p><b>NOTE:</b> unlike <code><a href="/reference/androidx/compose/foundation/pager/PagerState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code>, dispatching any delta with this method won't trigger nested scroll, won't stop ongoing scroll/drag animation and will bypass scrolling of any priority. This method will also ignore <code>reverseDirection</code> and other parameters set in scrollable.</p>
-        <p>This method is used internally for nested scrolling dispatch and other low level operations, allowing implementers of <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> influence the consumption as suits them. Manually dispatching delta via this method will likely result in a bad user experience, you must prefer <code><a href="/reference/androidx/compose/foundation/pager/PagerState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code> method over this one.</p>
+        <p><b>NOTE:</b> unlike <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code>, dispatching any delta with this method won't trigger nested scroll, won't stop ongoing scroll/drag animation and will bypass scrolling of any priority. This method will also ignore <code>reverseDirection</code> and other parameters set in scrollable.</p>
+        <p>This method is used internally for nested scrolling dispatch and other low level operations, allowing implementers of <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> influence the consumption as suits them. Manually dispatching delta via this method will likely result in a bad user experience, you must prefer <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code> method over this one.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
             <colgroup>
@@ -815,13 +815,13 @@ Column(modifier = Modifier.fillMaxSize()) {
     }
 }</pre>
       </div>
-      <div class="api-item"><a name="getIsScrollInProgress--"></a><a name="getisscrollinprogress"></a>
+      <div class="api-item"><a name="isScrollInProgress--"></a><a name="isscrollinprogress"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="getIsScrollInProgress()">isScrollInProgress</h3>
+            <h3 id="isScrollInProgress()">isScrollInProgress</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/foundation/pager/PagerState.html#getIsScrollInProgress()">isScrollInProgress</a>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/foundation/pager/PagerState.html#isScrollInProgress()">isScrollInProgress</a>()</pre>
         <p>Whether this <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> is currently scrolling by gesture, fling or programmatically or not.</p>
       </div>
       <div class="api-item"><a name="scroll(androidx.compose.foundation.MutatePriority, kotlin.coroutines.SuspendFunction1)"></a><a name="scroll-androidx.compose.foundation.MutatePriority-kotlin.coroutines.SuspendFunction1-"></a><a name="scroll"></a>
@@ -831,8 +831,8 @@ Column(modifier = Modifier.fillMaxSize()) {
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/compose/foundation/pager/PagerState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/MutatePriority.html">MutatePriority</a>&nbsp;scrollPriority,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> SuspendFunction1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/gestures/ScrollScope.html">ScrollScope</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</pre>
-        <p>Call this function to take control of scrolling and gain the ability to send scroll events via <code><a href="/reference/androidx/compose/foundation/gestures/ScrollScope.html#scrollBy(kotlin.Float)">ScrollScope.scrollBy</a></code>. All actions that change the logical scroll position must be performed within a <code><a href="/reference/androidx/compose/foundation/pager/PagerState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code> block (even if they don't call any other methods on this object) in order to guarantee that mutual exclusion is enforced.</p>
-        <p>If <code><a href="/reference/androidx/compose/foundation/pager/PagerState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code> is called from elsewhere with the <code><a href="/reference/androidx/compose/foundation/pager/PagerState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scrollPriority</a></code> higher or equal to ongoing scroll, ongoing scroll will be canceled.</p>
+        <p>Call this function to take control of scrolling and gain the ability to send scroll events via <code><a href="/reference/androidx/compose/foundation/gestures/ScrollScope.html#scrollBy(kotlin.Float)">ScrollScope.scrollBy</a></code>. All actions that change the logical scroll position must be performed within a <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code> block (even if they don't call any other methods on this object) in order to guarantee that mutual exclusion is enforced.</p>
+        <p>If <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code> is called from elsewhere with the <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scrollPriority</a></code> higher or equal to ongoing scroll, ongoing scroll will be canceled.</p>
       </div>
       <div class="api-item"><a name="scrollToPage(kotlin.Int, kotlin.Float)"></a><a name="scrollToPage-kotlin.Int-kotlin.Float-"></a><a name="scrolltopage"></a>
         <div class="api-name-block">

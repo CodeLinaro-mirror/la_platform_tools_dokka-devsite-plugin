@@ -121,7 +121,7 @@
                     <tr>
                       <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-throwable/add-suppressed.html">addSuppressed</a>(p0:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-throwable/index.html">Throwable</a>)</code></div>
+                        <div><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-throwable/add-suppressed.html">addSuppressed</a>(exception:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-throwable/index.html">Throwable</a>)</code></div>
                       </td>
                     </tr>
                     <tr>
@@ -131,27 +131,9 @@
                       </td>
                     </tr>
                     <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></code></td>
-                      <td>
-                        <div><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-throwable/get-localized-message.html">getLocalizedMessage</a>()</code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-array/index.html">Array</a>&lt;<a href="https://developer.android.com/reference/java/lang/StackTraceElement.html">StackTraceElement</a>&gt;</code></td>
-                      <td>
-                        <div><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-throwable/get-stack-trace.html">getStackTrace</a>()</code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-array/index.html">Array</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-throwable/index.html">Throwable</a>&gt;</code></td>
-                      <td>
-                        <div><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-throwable/get-suppressed.html">getSuppressed</a>()</code></div>
-                      </td>
-                    </tr>
-                    <tr>
                       <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-throwable/index.html">Throwable</a></code></td>
                       <td>
-                        <div><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-throwable/init-cause.html">initCause</a>(p0:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-throwable/index.html">Throwable</a>)</code></div>
+                        <div><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-throwable/init-cause.html">initCause</a>(cause:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-throwable/index.html">Throwable</a>)</code></div>
                       </td>
                     </tr>
                     <tr>
@@ -163,19 +145,13 @@
                     <tr>
                       <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-throwable/print-stack-trace.html">printStackTrace</a>(p0:&nbsp;<a href="https://developer.android.com/reference/java/io/PrintStream.html">PrintStream</a>)</code></div>
+                        <div><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-throwable/print-stack-trace.html">printStackTrace</a>(s:&nbsp;<a href="https://developer.android.com/reference/java/io/PrintStream.html">PrintStream</a>)</code></div>
                       </td>
                     </tr>
                     <tr>
                       <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-throwable/print-stack-trace.html">printStackTrace</a>(p0:&nbsp;<a href="https://developer.android.com/reference/java/io/PrintWriter.html">PrintWriter</a>)</code></div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-                      <td>
-                        <div><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-throwable/set-stack-trace.html">setStackTrace</a>(p0:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-array/index.html">Array</a>&lt;<a href="https://developer.android.com/reference/java/lang/StackTraceElement.html">StackTraceElement</a>&gt;)</code></div>
+                        <div><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-throwable/print-stack-trace.html">printStackTrace</a>(s:&nbsp;<a href="https://developer.android.com/reference/java/io/PrintWriter.html">PrintWriter</a>)</code></div>
                       </td>
                     </tr>
                   </tbody>
@@ -210,9 +186,27 @@
                       </td>
                     </tr>
                     <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></code></td>
+                      <td>
+                        <div><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-throwable/localized-message.html">localizedMessage</a></code></div>
+                      </td>
+                    </tr>
+                    <tr>
                       <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>?</code></td>
                       <td>
                         <div><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-throwable/message.html">message</a></code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-array/index.html">Array</a>&lt;<a href="https://developer.android.com/reference/java/lang/StackTraceElement.html">StackTraceElement</a>&gt;</code></td>
+                      <td>
+                        <div><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-throwable/stack-trace.html">stackTrace</a></code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-array/index.html">Array</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-throwable/index.html">Throwable</a>&gt;</code></td>
+                      <td>
+                        <div><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-throwable/suppressed.html">suppressed</a></code></div>
                       </td>
                     </tr>
                   </tbody>

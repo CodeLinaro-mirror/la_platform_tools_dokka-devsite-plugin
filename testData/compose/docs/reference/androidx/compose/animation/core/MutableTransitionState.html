@@ -10,7 +10,7 @@
       <meta itemprop="path" content="androidx.compose.animation.core">
       <meta itemprop="property" content="getCurrentState()">
       <meta itemprop="property" content="getTargetState()">
-      <meta itemprop="property" content="getIsIdle()">
+      <meta itemprop="property" content="isIdle()">
       <meta itemprop="property" content="setTargetState(kotlin.Any)">
       <meta itemprop="language" content="JAVA">
     </div>
@@ -160,14 +160,14 @@ fun PoppingInCard() {
           <tr>
             <td><code>final boolean</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/animation/core/MutableTransitionState.html#getIsIdle()">isIdle</a>()</code></div>
+              <div><code><a href="/reference/androidx/compose/animation/core/MutableTransitionState.html#isIdle()">isIdle</a>()</code></div>
               <p><code><a href="/reference/androidx/compose/animation/core/MutableTransitionState.html#isIdle()">isIdle</a></code> returns whether the transition has finished running.</p>
             </td>
           </tr>
           <tr>
             <td><code>final void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/animation/core/MutableTransitionState.html#setTargetState(kotlin.Any)">setTargetState</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> S&nbsp;targetState)</code></div>
+              <div><code><a href="/reference/androidx/compose/animation/core/MutableTransitionState.html#setTargetState(kotlin.Any)">setTargetState</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> S&nbsp;&lt;set-?&gt;)</code></div>
               <p>Target state of the transition.</p>
             </td>
           </tr>
@@ -207,13 +207,13 @@ fun PoppingInCard() {
         <p>Target state of the transition. <code><a href="/reference/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code> is initialized to the initialState that the <code><a href="/reference/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a></code> is constructed with.</p>
         <p>It can be updated to a new state at any time. When that happens, the <code><a href="/reference/androidx/compose/animation/core/Transition.html">Transition</a></code> that is created with this <code><a href="/reference/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a></code> will update its <code><a href="/reference/androidx/compose/animation/core/Transition.html#targetState()">Transition.targetState</a></code> to the same and subsequently starts a transition animation to animate from the current values to the new target.</p>
       </div>
-      <div class="api-item"><a name="getIsIdle--"></a><a name="getisidle"></a>
+      <div class="api-item"><a name="isIdle--"></a><a name="isidle"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="getIsIdle()">isIdle</h3>
+            <h3 id="isIdle()">isIdle</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/animation/core/MutableTransitionState.html#getIsIdle()">isIdle</a>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/animation/core/MutableTransitionState.html#isIdle()">isIdle</a>()</pre>
         <p><code><a href="/reference/androidx/compose/animation/core/MutableTransitionState.html#isIdle()">isIdle</a></code> returns whether the transition has finished running. This will return false once the <code><a href="/reference/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code> has been set to a different value than <code><a href="/reference/androidx/compose/animation/core/MutableTransitionState.html#currentState()">currentState</a></code>.</p>
         <pre class="prettyprint lang-kotlin">
 import androidx.compose.animation.animateColor
@@ -277,7 +277,7 @@ fun ItemsSample(selectedId: Int) {
             <h3 id="setTargetState(kotlin.Any)">setTargetState</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/animation/core/MutableTransitionState.html#setTargetState(kotlin.Any)">setTargetState</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> S&nbsp;targetState)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/animation/core/MutableTransitionState.html#setTargetState(kotlin.Any)">setTargetState</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> S&nbsp;&lt;set-?&gt;)</pre>
         <p>Target state of the transition. <code><a href="/reference/androidx/compose/animation/core/MutableTransitionState.html#targetState()">targetState</a></code> is initialized to the initialState that the <code><a href="/reference/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a></code> is constructed with.</p>
         <p>It can be updated to a new state at any time. When that happens, the <code><a href="/reference/androidx/compose/animation/core/Transition.html">Transition</a></code> that is created with this <code><a href="/reference/androidx/compose/animation/core/MutableTransitionState.html">MutableTransitionState</a></code> will update its <code><a href="/reference/androidx/compose/animation/core/Transition.html#targetState()">Transition.targetState</a></code> to the same and subsequently starts a transition animation to animate from the current values to the new target.</p>
       </div>

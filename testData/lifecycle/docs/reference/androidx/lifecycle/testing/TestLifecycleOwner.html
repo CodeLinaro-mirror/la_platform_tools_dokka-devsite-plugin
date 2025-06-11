@@ -32,7 +32,7 @@
     </p>
     <hr>
     <p>Create a <code><a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code> that allows changing the state via the <code><a href="/reference/androidx/lifecycle/testing/TestLifecycleOwner.html#handleLifecycleEvent(androidx.lifecycle.Lifecycle.Event)">handleLifecycleEvent</a></code> method or <code><a href="/reference/androidx/lifecycle/testing/TestLifecycleOwner.html#currentState()">currentState</a></code> property.</p>
-    <p>Under the hood, this uses a <code><a href="/reference/androidx/lifecycle/LifecycleRegistry.html">LifecycleRegistry</a></code>. However, it uses <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-main-coroutine-dispatcher/immediate.html">Dispatchers.Main.immediate</a></code> as the default <code><a href="/reference/androidx/lifecycle/testing/TestLifecycleOwner.html#coroutineDispatcher()">coroutineDispatcher</a></code> to ensure that all mutations to the <code><a href="/reference/androidx/lifecycle/testing/TestLifecycleOwner.html#currentState()">current state</a></code> are run on that dispatcher, no matter what thread you mutate the state from.</p>
+    <p>Under the hood, this uses a <code><a href="/reference/androidx/lifecycle/LifecycleRegistry.html">LifecycleRegistry</a></code>. However, it uses <code><a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-main-coroutine-dispatcher/immediate.html">Dispatchers.Main.immediate</a></code> as the default <code><a href="/reference/androidx/lifecycle/testing/TestLifecycleOwner.html#(androidx.lifecycle.Lifecycle.State,kotlinx.coroutines.CoroutineDispatcher)">coroutineDispatcher</a></code> to ensure that all mutations to the <code><a href="/reference/androidx/lifecycle/testing/TestLifecycleOwner.html#currentState()">current state</a></code> are run on that dispatcher, no matter what thread you mutate the state from.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -97,7 +97,7 @@
           <tr>
             <td><code>final void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/lifecycle/testing/TestLifecycleOwner.html#setCurrentState(androidx.lifecycle.Lifecycle.State)">setCurrentState</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a>&nbsp;currentState)</code></div>
+              <div><code><a href="/reference/androidx/lifecycle/testing/TestLifecycleOwner.html#setCurrentState(androidx.lifecycle.Lifecycle.State)">setCurrentState</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a>&nbsp;value)</code></div>
               <p>The current <code><a href="/reference/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code> of this owner.</p>
             </td>
           </tr>
@@ -201,7 +201,7 @@
             <h3 id="setCurrentState(androidx.lifecycle.Lifecycle.State)">setCurrentState</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/lifecycle/testing/TestLifecycleOwner.html#setCurrentState(androidx.lifecycle.Lifecycle.State)">setCurrentState</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a>&nbsp;currentState)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/lifecycle/testing/TestLifecycleOwner.html#setCurrentState(androidx.lifecycle.Lifecycle.State)">setCurrentState</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a>&nbsp;value)</pre>
         <p>The current <code><a href="/reference/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code> of this owner. This is safe to mutate on any thread.</p>
       </div>
     </div>

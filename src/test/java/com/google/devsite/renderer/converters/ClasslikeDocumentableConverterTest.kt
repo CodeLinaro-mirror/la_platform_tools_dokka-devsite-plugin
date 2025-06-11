@@ -1244,38 +1244,32 @@ internal class ClasslikeDocumentableConverterTest(private val displayLanguage: L
         // kotlin.Throwable is an `actual typealias`.
         val throwableDRI = "kotlin.Throwable"
         // add/get is not consolidated into a property in Kotlin
-        val sixFuns =
-            listOf(
-                "addSuppressed",
-                "getSuppressed",
-                "fillInStackTrace",
-                "printStackTrace",
-                "getLocalizedMessage",
-                "initCause",
-            )
+        val sixFuns = listOf("addSuppressed", "fillInStackTrace", "printStackTrace", "initCause")
         // "Message" becomes a "val" in Kotlin, which hides its getter. ToString is from Object.
-        // val missingInKotlin = listOf("getMessage", "toString")
-        // TODO: figure out why stackTrace is accessors in Kotlin (but a field in Java) upstream
-        // Maybe inherited accessors don't get merged into a property? Cause/stackTrace are
-        // private fields upstream, as is `*final* String detailMessage`....
-        val stackTraceAccessors = listOf("getStackTrace", "setStackTrace")
         val printOverloads = listOf("printStackTrace", "printStackTrace")
-        val expectedProps = listOf("cause", "message")
-        val expectedPropAccessors = listOf("getCause", "getMessage")
-        val expectedFuns = sixFuns + printOverloads + stackTraceAccessors
+        val expectedProps =
+            listOf("cause", "message", "localizedMessage", "suppressed", "stackTrace")
+        val expectedPropAccessors =
+            listOf(
+                "getCause",
+                "getMessage",
+                "getLocalizedMessage",
+                "getStackTrace",
+                "getSuppressed",
+                "setStackTrace",
+            )
+        val expectedFuns = sixFuns + printOverloads
 
         // This is a test of the upstream dokka Documentables tree
         val dChild = module.explicitClasslike("Child")
-        assertThat(dChild.properties.size).isEqualTo(2)
-        assertThat(dChild.functions.size).isEqualTo(10)
         assertThat(dChild.properties.names()).containsExactlyElementsIn(expectedProps)
         assertThat(dChild.functions.names()).containsExactlyElementsIn(expectedFuns)
 
         val dMessageProp = dChild.properties.single { it.name == "message" }
-        val dGetStackTrace = dChild.functions.single { it.name == "getStackTrace" }
+        val dPrintStackTrace = dChild.functions.single { it.name == "fillInStackTrace" }
         assertThat(dMessageProp.dri.fullName).contains(throwableDRI)
         assertThat(dMessageProp.getter!!.dri.fullName).contains(throwableDRI)
-        assertThat(dGetStackTrace.dri.fullName).contains(throwableDRI)
+        assertThat(dPrintStackTrace.dri.fullName).contains(throwableDRI)
 
         // This is a test of the dackka Components tree
         val childPage = module.page("Child").data.content
@@ -1284,18 +1278,15 @@ internal class ClasslikeDocumentableConverterTest(private val displayLanguage: L
         val funNames = inheritedFuns.items().map { it.name() }
 
         javaOnly {
-            assertThat(funNames.size).isEqualTo(12)
             assertThat(funNames).containsExactlyElementsIn(expectedFuns + expectedPropAccessors)
 
             assertThat(childPage.data.inheritedProperties.items).isEmpty()
         }
         kotlinOnly {
-            assertThat(funNames.size).isEqualTo(10)
             assertThat(funNames).containsExactlyElementsIn(expectedFuns)
 
             val inheritedProps = childPage.data.inheritedProperties.from(throwableDRI)!!.value
             val propNames = inheritedProps.items().map { it.name() }
-            assertThat(propNames.size).isEqualTo(2)
             assertThat(propNames).containsExactlyElementsIn(expectedProps)
         }
     }
@@ -2698,7 +2689,7 @@ internal class ClasslikeDocumentableConverterTest(private val displayLanguage: L
                 assertThat(param1.typeName()).isEqualTo("Foo")
                 assertThat(param1.data.name).isEqualTo("receiver")
                 assertThat(param2.typeName()).isEqualTo("int")
-                assertThat(param2.data.name).isEqualTo("bar")
+                assertThat(param2.data.name).isEqualTo("value")
 
                 // When displayed as an extension function the receiver is needed, when displayed
                 // as a method of TestKt it isn't.

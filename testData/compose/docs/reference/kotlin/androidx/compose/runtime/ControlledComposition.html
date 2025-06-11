@@ -94,7 +94,7 @@
               <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a>()</code></div>
-                <p>Apply the changes calculated during <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#setContent(kotlin.Function0)">setContent</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code>.</p>
+                <p>Apply the changes calculated during <code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html#setContent(kotlin.Function0)">setContent</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -124,7 +124,7 @@
               <td><code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
                 <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a>(content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
-                <p>Called by the parent composition in response to calling <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#setContent(kotlin.Function0)">setContent</a></code>.</p>
+                <p>Called by the parent composition in response to calling <code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html#setContent(kotlin.Function0)">setContent</a></code>.</p>
               </td>
               <td>
                 <div class="kotlin-platform" data-title="Common/All">Cmn</div>
@@ -421,7 +421,7 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a>():&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-          <p>Apply the changes calculated during <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#setContent(kotlin.Function0)">setContent</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code>. If an exception is thrown by <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a></code> the composition is irreparably damaged and should be <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#dispose()">dispose</a></code>d.</p>
+          <p>Apply the changes calculated during <code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html#setContent(kotlin.Function0)">setContent</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#recompose()">recompose</a></code>. If an exception is thrown by <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#applyChanges()">applyChanges</a></code> the composition is irreparably damaged and should be <code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html#dispose()">dispose</a></code>d.</p>
         </div>
         <div class="api-item"><a name="applyLateChanges--"></a><a name="applylatechanges"></a>
           <div class="api-name-block">
@@ -460,7 +460,7 @@
             </div>
           </div>
           <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a>(content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></pre>
-          <p>Called by the parent composition in response to calling <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#setContent(kotlin.Function0)">setContent</a></code>. After this method the changes should be calculated but not yet applied. DO NOT call this method directly if this is interface is controlled by a <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code>, either use <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#setContent(kotlin.Function0)">setContent</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#composeInitial(androidx.compose.runtime.ControlledComposition,kotlin.Function0)">Recomposer.composeInitial</a></code> instead.</p>
+          <p>Called by the parent composition in response to calling <code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html#setContent(kotlin.Function0)">setContent</a></code>. After this method the changes should be calculated but not yet applied. DO NOT call this method directly if this is interface is controlled by a <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code>, either use <code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html#setContent(kotlin.Function0)">setContent</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#composeInitial(androidx.compose.runtime.ControlledComposition,kotlin.Function0)">Recomposer.composeInitial</a></code> instead.</p>
           <div class="devsite-table-wrapper">
             <table class="responsive">
               <colgroup>

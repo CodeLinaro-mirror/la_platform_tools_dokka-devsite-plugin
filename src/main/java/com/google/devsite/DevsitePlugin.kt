@@ -33,6 +33,7 @@ import org.jetbrains.dokka.plugability.querySingle
 import org.jetbrains.dokka.transformers.documentation.PreMergeDocumentableTransformer
 
 class DevsitePlugin : DokkaPlugin() {
+
     private val dokkaBase by lazy { plugin<DokkaBase>() }
     internal val analysisPlugin by lazy { plugin<KotlinAnalysisPlugin>() }
 

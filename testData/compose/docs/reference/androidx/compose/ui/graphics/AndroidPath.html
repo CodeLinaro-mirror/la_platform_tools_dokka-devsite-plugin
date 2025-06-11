@@ -20,8 +20,8 @@
       <meta itemprop="property" content="getBounds()">
       <meta itemprop="property" content="getFillType()">
       <meta itemprop="property" content="getInternalPath()">
-      <meta itemprop="property" content="getIsConvex()">
-      <meta itemprop="property" content="getIsEmpty()">
+      <meta itemprop="property" content="isConvex()">
+      <meta itemprop="property" content="isEmpty()">
       <meta itemprop="property" content="lineTo(kotlin.Float,kotlin.Float)">
       <meta itemprop="property" content="moveTo(kotlin.Float,kotlin.Float)">
       <meta itemprop="property" content="op(androidx.compose.ui.graphics.Path,androidx.compose.ui.graphics.Path,androidx.compose.ui.graphics.PathOperation)">
@@ -132,7 +132,7 @@
             <td><code>void</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#arcTo(androidx.compose.ui.geometry.Rect,kotlin.Float,kotlin.Float,kotlin.Boolean)">arcTo</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a>&nbsp;rect,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;startAngleDegrees,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;sweepAngleDegrees,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;forceMoveTo<br>)</code></div>
-              <p>If the <code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#arcTo(androidx.compose.ui.geometry.Rect,kotlin.Float,kotlin.Float,kotlin.Boolean)">forceMoveTo</a></code> argument is false, adds a straight line segment and an arc segment.</p>
+              <p>If the <code><a href="/reference/androidx/compose/ui/graphics/Path.html#arcTo(androidx.compose.ui.geometry.Rect,kotlin.Float,kotlin.Float,kotlin.Boolean)">forceMoveTo</a></code> argument is false, adds a straight line segment and an arc segment.</p>
             </td>
           </tr>
           <tr>
@@ -146,7 +146,7 @@
             <td><code>void</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#cubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">cubicTo</a>(float&nbsp;x1,&nbsp;float&nbsp;y1,&nbsp;float&nbsp;x2,&nbsp;float&nbsp;y2,&nbsp;float&nbsp;x3,&nbsp;float&nbsp;y3)</code></div>
-              <p>Adds a cubic bezier segment that curves from the current point to the given point (<code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#cubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x3</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#cubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y3</a></code>), using the control points (<code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#cubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x1</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#cubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y1</a></code>) and (<code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#cubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x2</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#cubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y2</a></code>).</p>
+              <p>Adds a cubic bezier segment that curves from the current point to the given point (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#cubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x3</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#cubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y3</a></code>), using the control points (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#cubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x1</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#cubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y1</a></code>) and (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#cubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x2</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#cubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y2</a></code>).</p>
             </td>
           </tr>
           <tr>
@@ -172,14 +172,14 @@
           <tr>
             <td><code>boolean</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#getIsConvex()">isConvex</a>()</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#isConvex()">isConvex</a>()</code></div>
               <p>Returns the path's convexity, as defined by the content of the path.</p>
             </td>
           </tr>
           <tr>
             <td><code>boolean</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#getIsEmpty()">isEmpty</a>()</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#isEmpty()">isEmpty</a>()</code></div>
               <p>Returns true if the path is empty (contains no lines or curves)</p>
             </td>
           </tr>
@@ -208,14 +208,14 @@
             <td><code>void</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">quadraticBezierTo</a>(float&nbsp;x1,&nbsp;float&nbsp;y1,&nbsp;float&nbsp;x2,&nbsp;float&nbsp;y2)</code></div>
-              <p>Adds a quadratic bezier segment that curves from the current point to the given point (<code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x2</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y2</a></code>), using the control point (<code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x1</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y1</a></code>).</p>
+              <p>Adds a quadratic bezier segment that curves from the current point to the given point (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x2</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y2</a></code>), using the control point (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x1</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y1</a></code>).</p>
             </td>
           </tr>
           <tr>
             <td><code>void</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#relativeCubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">relativeCubicTo</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;dx1,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;dy1,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;dx2,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;dy2,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;dx3,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;dy3<br>)</code></div>
-              <p>Adds a cubic bezier segment that curves from the current point to the point at the offset (<code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#relativeCubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx3</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#relativeCubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy3</a></code>) from the current point, using the control points at the offsets (<code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#relativeCubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx1</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#relativeCubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy1</a></code>) and (<code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#relativeCubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx2</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#relativeCubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy2</a></code>) from the current point.</p>
+              <p>Adds a cubic bezier segment that curves from the current point to the point at the offset (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeCubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx3</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeCubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy3</a></code>) from the current point, using the control points at the offsets (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeCubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx1</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeCubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy1</a></code>) and (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeCubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx2</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeCubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy2</a></code>) from the current point.</p>
             </td>
           </tr>
           <tr>
@@ -236,7 +236,7 @@
             <td><code>void</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">relativeQuadraticBezierTo</a>(float&nbsp;dx1,&nbsp;float&nbsp;dy1,&nbsp;float&nbsp;dx2,&nbsp;float&nbsp;dy2)</code></div>
-              <p>Adds a quadratic bezier segment that curves from the current point to the point at the offset (<code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx2</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy2</a></code>) from the current point, using the control point at the offset (<code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx1</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy1</a></code>) from the current point.</p>
+              <p>Adds a quadratic bezier segment that curves from the current point to the point at the offset (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx2</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy2</a></code>) from the current point, using the control point at the offset (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx1</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy1</a></code>) from the current point.</p>
             </td>
           </tr>
           <tr>
@@ -256,7 +256,7 @@
           <tr>
             <td><code>void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#setFillType(androidx.compose.ui.graphics.PathFillType)">setFillType</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/PathFillType.html">PathFillType</a>&nbsp;fillType)</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#setFillType(androidx.compose.ui.graphics.PathFillType)">setFillType</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/PathFillType.html">PathFillType</a>&nbsp;value)</code></div>
               <p>Determines how the interior of this path is calculated.</p>
             </td>
           </tr>
@@ -384,8 +384,8 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#arcTo(androidx.compose.ui.geometry.Rect,kotlin.Float,kotlin.Float,kotlin.Boolean)">arcTo</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a>&nbsp;rect,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;startAngleDegrees,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;sweepAngleDegrees,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;forceMoveTo<br>)</pre>
-        <p>If the <code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#arcTo(androidx.compose.ui.geometry.Rect,kotlin.Float,kotlin.Float,kotlin.Boolean)">forceMoveTo</a></code> argument is false, adds a straight line segment and an arc segment.</p>
-        <p>If the <code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#arcTo(androidx.compose.ui.geometry.Rect,kotlin.Float,kotlin.Float,kotlin.Boolean)">forceMoveTo</a></code> argument is true, starts a new subpath consisting of an arc segment.</p>
+        <p>If the <code><a href="/reference/androidx/compose/ui/graphics/Path.html#arcTo(androidx.compose.ui.geometry.Rect,kotlin.Float,kotlin.Float,kotlin.Boolean)">forceMoveTo</a></code> argument is false, adds a straight line segment and an arc segment.</p>
+        <p>If the <code><a href="/reference/androidx/compose/ui/graphics/Path.html#arcTo(androidx.compose.ui.geometry.Rect,kotlin.Float,kotlin.Float,kotlin.Boolean)">forceMoveTo</a></code> argument is true, starts a new subpath consisting of an arc segment.</p>
         <p>In either case, the arc segment consists of the arc that follows the edge of the oval bounded by the given rectangle, from startAngle degrees around the oval up to startAngle + sweepAngle degrees around the oval, with zero degrees being the point on the right hand side of the oval that crosses the horizontal line that intersects the center of the rectangle and with positive angles going clockwise around the oval.</p>
         <p>The line segment added if <code>forceMoveTo</code> is false starts at the current point and ends at the start of the arc.</p>
       </div>
@@ -405,7 +405,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#cubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">cubicTo</a>(float&nbsp;x1,&nbsp;float&nbsp;y1,&nbsp;float&nbsp;x2,&nbsp;float&nbsp;y2,&nbsp;float&nbsp;x3,&nbsp;float&nbsp;y3)</pre>
-        <p>Adds a cubic bezier segment that curves from the current point to the given point (<code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#cubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x3</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#cubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y3</a></code>), using the control points (<code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#cubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x1</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#cubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y1</a></code>) and (<code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#cubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x2</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#cubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y2</a></code>).</p>
+        <p>Adds a cubic bezier segment that curves from the current point to the given point (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#cubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x3</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#cubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y3</a></code>), using the control points (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#cubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x1</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#cubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y1</a></code>) and (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#cubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x2</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#cubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y2</a></code>).</p>
       </div>
       <div class="api-item"><a name="getBounds--"></a><a name="getbounds"></a>
         <div class="api-name-block">
@@ -434,24 +434,24 @@
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/graphics/Path.html">Path</a>&nbsp;<a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#getInternalPath()">getInternalPath</a>()</pre>
       </div>
-      <div class="api-item"><a name="getIsConvex--"></a><a name="getisconvex"></a>
+      <div class="api-item"><a name="isConvex--"></a><a name="isconvex"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="getIsConvex()">isConvex</h3>
+            <h3 id="isConvex()">isConvex</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#getIsConvex()">isConvex</a>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#isConvex()">isConvex</a>()</pre>
         <p>Returns the path's convexity, as defined by the content of the path.</p>
         <p>A path is convex if it has a single contour, and only ever curves in a single direction.</p>
         <p>This function will calculate the convexity of the path from its control points, and cache the result.</p>
       </div>
-      <div class="api-item"><a name="getIsEmpty--"></a><a name="getisempty"></a>
+      <div class="api-item"><a name="isEmpty--"></a><a name="isempty"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="getIsEmpty()">isEmpty</h3>
+            <h3 id="isEmpty()">isEmpty</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#getIsEmpty()">isEmpty</a>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#isEmpty()">isEmpty</a>()</pre>
         <p>Returns true if the path is empty (contains no lines or curves)</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -557,7 +557,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">quadraticBezierTo</a>(float&nbsp;x1,&nbsp;float&nbsp;y1,&nbsp;float&nbsp;x2,&nbsp;float&nbsp;y2)</pre>
-        <p>Adds a quadratic bezier segment that curves from the current point to the given point (<code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x2</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y2</a></code>), using the control point (<code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x1</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y1</a></code>).</p>
+        <p>Adds a quadratic bezier segment that curves from the current point to the given point (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x2</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y2</a></code>), using the control point (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">x1</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#quadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">y1</a></code>).</p>
       </div>
       <div class="api-item"><a name="relativeCubicTo(kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="relativeCubicTo-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="relativecubicto"></a>
         <div class="api-name-block">
@@ -566,7 +566,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#relativeCubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">relativeCubicTo</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;dx1,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;dy1,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;dx2,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;dy2,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;dx3,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;dy3<br>)</pre>
-        <p>Adds a cubic bezier segment that curves from the current point to the point at the offset (<code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#relativeCubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx3</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#relativeCubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy3</a></code>) from the current point, using the control points at the offsets (<code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#relativeCubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx1</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#relativeCubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy1</a></code>) and (<code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#relativeCubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx2</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#relativeCubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy2</a></code>) from the current point.</p>
+        <p>Adds a cubic bezier segment that curves from the current point to the point at the offset (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeCubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx3</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeCubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy3</a></code>) from the current point, using the control points at the offsets (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeCubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx1</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeCubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy1</a></code>) and (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeCubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx2</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeCubicTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy2</a></code>) from the current point.</p>
       </div>
       <div class="api-item"><a name="relativeLineTo(kotlin.Float, kotlin.Float)"></a><a name="relativeLineTo-kotlin.Float-kotlin.Float-"></a><a name="relativelineto"></a>
         <div class="api-name-block">
@@ -593,7 +593,7 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">relativeQuadraticBezierTo</a>(float&nbsp;dx1,&nbsp;float&nbsp;dy1,&nbsp;float&nbsp;dx2,&nbsp;float&nbsp;dy2)</pre>
-        <p>Adds a quadratic bezier segment that curves from the current point to the point at the offset (<code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx2</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy2</a></code>) from the current point, using the control point at the offset (<code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx1</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy1</a></code>) from the current point.</p>
+        <p>Adds a quadratic bezier segment that curves from the current point to the point at the offset (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx2</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy2</a></code>) from the current point, using the control point at the offset (<code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dx1</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Path.html#relativeQuadraticBezierTo(kotlin.Float,kotlin.Float,kotlin.Float,kotlin.Float)">dy1</a></code>) from the current point.</p>
       </div>
       <div class="api-item"><a name="reset--"></a><a name="reset"></a>
         <div class="api-name-block">
@@ -619,7 +619,7 @@
             <h3 id="setFillType(androidx.compose.ui.graphics.PathFillType)">setFillType</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#setFillType(androidx.compose.ui.graphics.PathFillType)">setFillType</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/PathFillType.html">PathFillType</a>&nbsp;fillType)</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/compose/ui/graphics/AndroidPath.html#setFillType(androidx.compose.ui.graphics.PathFillType)">setFillType</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/graphics/PathFillType.html">PathFillType</a>&nbsp;value)</pre>
         <p>Determines how the interior of this path is calculated.</p>
         <p>Defaults to the non-zero winding rule, <code><a href="/reference/androidx/compose/ui/graphics/PathFillType.Companion.html#NonZero()">PathFillType.NonZero</a></code>.</p>
       </div>

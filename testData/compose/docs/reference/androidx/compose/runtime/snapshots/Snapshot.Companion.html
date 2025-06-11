@@ -10,7 +10,7 @@
       <meta itemprop="path" content="androidx.compose.runtime.snapshots">
       <meta itemprop="property" content="getCurrent()">
       <meta itemprop="property" content="global(kotlin.Function0)">
-      <meta itemprop="property" content="getIsApplyObserverNotificationPending()">
+      <meta itemprop="property" content="isApplyObserverNotificationPending()">
       <meta itemprop="property" content="notifyObjectsInitialized()">
       <meta itemprop="property" content="observe(kotlin.Function1,kotlin.Function1,kotlin.Function0)">
       <meta itemprop="property" content="openSnapshotCount()">
@@ -69,7 +69,7 @@
           <tr>
             <td><code>static&nbsp;final boolean</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#getIsApplyObserverNotificationPending()">isApplyObserverNotificationPending</a>()</code></div>
+              <div><code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#isApplyObserverNotificationPending()">isApplyObserverNotificationPending</a>()</code></div>
               <p>Returns whether any threads are currently in the process of notifying observers about changes to the global snapshot.</p>
             </td>
           </tr>
@@ -186,13 +186,13 @@
           </table>
         </div>
       </div>
-      <div class="api-item"><a name="getIsApplyObserverNotificationPending--"></a><a name="getisapplyobservernotificationpending"></a>
+      <div class="api-item"><a name="isApplyObserverNotificationPending--"></a><a name="isapplyobservernotificationpending"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="getIsApplyObserverNotificationPending()">isApplyObserverNotificationPending</h3>
+            <h3 id="isApplyObserverNotificationPending()">isApplyObserverNotificationPending</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#getIsApplyObserverNotificationPending()">isApplyObserverNotificationPending</a>()</pre>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#isApplyObserverNotificationPending()">isApplyObserverNotificationPending</a>()</pre>
         <p>Returns whether any threads are currently in the process of notifying observers about changes to the global snapshot.</p>
       </div>
       <div class="api-item"><a name="notifyObjectsInitialized--"></a><a name="notifyobjectsinitialized"></a>
@@ -332,7 +332,8 @@
           </div>
         </div>
         <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html">MutableSnapshot</a>&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/Snapshot.Companion.html#takeMutableSnapshot(kotlin.Function1,kotlin.Function1)">takeMutableSnapshot</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;readObserver,<br>&nbsp;&nbsp;&nbsp;&nbsp;Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;writeObserver<br>)</pre>
-        <p>Take a snapshot of the current value of all state objects that also allows the state to be changed and later atomically applied when <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">MutableSnapshot.apply</a></code> is called. The values are preserved until <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#dispose()">Snapshot.dispose</a></code> is called on the result. The global state will either see all the changes made as one atomic change, when <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">MutableSnapshot .apply</a></code> is called, or none of the changes if the mutable state object is disposed before being applied.</p>
+        <p>Take a snapshot of the current value of all state objects that also allows the state to be changed and later atomically applied when <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">MutableSnapshot.apply</a></code> is called. The values are preserved until <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#dispose()">Snapshot.dispose</a></code> is called on the result. The global state will either see all the changes made as one atomic change, when MutableSnapshot
+.apply is called, or none of the changes if the mutable state object is disposed before being applied.</p>
         <p>The values in a snapshot can be modified by calling <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">Snapshot.enter</a></code> and then, in its lambda, modify any state object. The new values of the state objects will only become visible to the global state when <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">MutableSnapshot.apply</a></code> is called.</p>
         <p>An active snapshot (after it is created but before <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#dispose()">Snapshot.dispose</a></code> is called) requires resources to track the values in the snapshot. Once a snapshot is no longer needed it should disposed by calling <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#dispose()">Snapshot.dispose</a></code>.</p>
         <p>Leaving a snapshot active could cause hard to diagnose memory leaks as values are maintained by state objects for these unneeded snapshots. Take care to always call <code><a href="/reference/androidx/compose/runtime/snapshots/Snapshot.html#dispose()">Snapshot.dispose</a></code> on all snapshots when they are no longer needed.</p>

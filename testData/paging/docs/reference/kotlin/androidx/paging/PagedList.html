@@ -103,7 +103,8 @@
     </ul>
     <p>Placeholders are enabled by default, but can be disabled in two ways. They are disabled if the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> does not count its data set in its initial load, or if  <code>false</code> is passed to <code><a href="/reference/kotlin/androidx/paging/PagedList.Config.Builder.html#setEnablePlaceholders(kotlin.Boolean)">PagedList.Config.Builder.setEnablePlaceholders</a></code> when building a <code><a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a></code>.</p>
     <h3>Mutability and Snapshots</h3>
-    <p>A <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> is <em>mutable</em> while loading, or ready to load from its <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>. As loads succeed, a mutable <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> will be updated via Runnables on the main thread. You can listen to these updates with a <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code>. (Note that <code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html">androidx.paging .PagedListAdapter</a></code> will listen to these to signal RecyclerView about the updates/changes).</p>
+    <p>A <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> is <em>mutable</em> while loading, or ready to load from its <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>. As loads succeed, a mutable <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> will be updated via Runnables on the main thread. You can listen to these updates with a <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code>. (Note that androidx.paging
+.PagedListAdapter will listen to these to signal RecyclerView about the updates/changes).</p>
     <p>If a <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> attempts to load from an invalid <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>, it will <code><a href="/reference/kotlin/androidx/paging/PagedList.html#detach()">detach</a></code> from the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>, meaning that it will no longer attempt to load data. It will return true from <code><a href="/reference/kotlin/androidx/paging/PagedList.html#isImmutable()">isImmutable</a></code>, and a new <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> / <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> pair must be created to load further data.</p>
     <p>See <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> and <code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">androidx.paging.LivePagedListBuilder</a></code> for how new <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>s are created to represent changed data.</p>
     <p>A <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> snapshot is simply an immutable shallow copy of the current state of the <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> as a <code>List</code>. It will reference the same inner items, and contain the same <code>null</code> placeholders, if present.</p>
@@ -348,55 +349,6 @@
                   </colgroup>
                   <tbody class="list">
                     <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-                      <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#addAll(kotlin.collections.Collection)">addAll</a></del></span>(elements:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-collection/index.html">Collection</a>&lt;T&gt;)</code></div>
-                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>open&nbsp;operator <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-                      <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#contains(T)">contains</a></del></span>(element:&nbsp;T)</code></div>
-                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-                      <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#containsAll(kotlin.collections.Collection)">containsAll</a></del></span>(elements:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-collection/index.html">Collection</a>&lt;T&gt;)</code></div>
-                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-                      <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#isEmpty()">isEmpty</a></del></span>()</code></div>
-                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-                      <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#remove(T)">remove</a></del></span>(element:&nbsp;T)</code></div>
-                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-                      <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#removeAll(kotlin.collections.Collection)">removeAll</a></del></span>(elements:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-collection/index.html">Collection</a>&lt;T&gt;)</code></div>
-                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-                      <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#retainAll(kotlin.collections.Collection)">retainAll</a></del></span>(elements:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-collection/index.html">Collection</a>&lt;T&gt;)</code></div>
-                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
-                      </td>
-                    </tr>
-                    <tr>
                       <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-array/index.html">Array</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt;</code></td>
                       <td>
                         <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#toArray()">toArray</a></del></span>()</code></div>
@@ -406,14 +358,7 @@
                     <tr>
                       <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-array/index.html">Array</a>&lt;T&gt;</code></td>
                       <td>
-                        <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <span><del><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#toArray(kotlin.Array)">toArray</a></del></span>(p0:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-array/index.html">Array</a>&lt;T&gt;)</code></div>
-                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></code></td>
-                      <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#toString()">toString</a></del></span>()</code></div>
+                        <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <span><del><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#toArray(kotlin.Array)">toArray</a></del></span>(a:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-array/index.html">Array</a>&lt;T&gt;)</code></div>
                         <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
@@ -432,107 +377,9 @@
                   </colgroup>
                   <tbody class="list">
                     <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-                      <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#add(T)">add</a></del></span>(element:&nbsp;T)</code></div>
-                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
-                      </td>
-                    </tr>
-                    <tr>
                       <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#add(kotlin.Int, T)">add</a></del></span>(index:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;element:&nbsp;T)</code></div>
-                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-                      <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#addAll(kotlin.Int, kotlin.collections.Collection)">addAll</a></del></span>(index:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;elements:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-collection/index.html">Collection</a>&lt;T&gt;)</code></div>
-                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-                      <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#clear()">clear</a></del></span>()</code></div>
-                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>open&nbsp;operator <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
-                      <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#equals(kotlin.Any)">equals</a></del></span>(other:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>?)</code></div>
-                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
-                      <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#hashCode()">hashCode</a></del></span>()</code></div>
-                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
-                      <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#indexOf(T)">indexOf</a></del></span>(element:&nbsp;T)</code></div>
-                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>open&nbsp;operator <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-iterator/index.html">MutableIterator</a>&lt;T&gt;</code></td>
-                      <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#iterator()">iterator</a></del></span>()</code></div>
-                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
-                      <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#lastIndexOf(T)">lastIndexOf</a></del></span>(element:&nbsp;T)</code></div>
-                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list-iterator/index.html">MutableListIterator</a>&lt;T&gt;</code></td>
-                      <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#listIterator()">listIterator</a></del></span>()</code></div>
-                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list-iterator/index.html">MutableListIterator</a>&lt;T&gt;</code></td>
-                      <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#listIterator(kotlin.Int)">listIterator</a></del></span>(index:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
-                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>open T</code></td>
-                      <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#removeAt(kotlin.Int)">removeAt</a></del></span>(p0:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
-                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-                      <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#removeRange(kotlin.Int, kotlin.Int)">removeRange</a></del></span>(p0:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;p1:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
-                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>open&nbsp;operator T</code></td>
-                      <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#set(kotlin.Int, T)">set</a></del></span>(index:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;element:&nbsp;T)</code></div>
-                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a>&lt;T&gt;</code></td>
-                      <td>
-                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#subList(kotlin.Int, kotlin.Int)">subList</a></del></span>(fromIndex:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;toIndex:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                        <div><code><span><del><a href="https://developer.android.com/reference/java/util/AbstractList.html#removeRange(kotlin.Int, kotlin.Int)">removeRange</a></del></span>(fromIndex:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;toIndex:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
                         <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
@@ -551,16 +398,30 @@
                   </colgroup>
                   <tbody class="list">
                     <tr>
-                      <td><code>open <a href="https://developer.android.com/reference/java/util/stream/Stream.html">Stream</a>&lt;T&gt;</code></td>
+                      <td><code>open&nbsp;operator <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
                       <td>
-                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-collection/parallel-stream.html">parallelStream</a></del></span>()</code></div>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-collection/contains.html">contains</a></del></span>(o:&nbsp;T)</code></div>
                         <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
                     <tr>
-                      <td><code>open <a href="https://developer.android.com/reference/java/util/Spliterator.html">Spliterator</a>&lt;T&gt;</code></td>
+                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
                       <td>
-                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-collection/spliterator.html">spliterator</a></del></span>()</code></div>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-collection/contains-all.html">containsAll</a></del></span>(c:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-collection/index.html">Collection</a>&lt;T&gt;)</code></div>
+                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                      <td>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-collection/is-empty.html">isEmpty</a></del></span>()</code></div>
+                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="https://developer.android.com/reference/java/util/stream/Stream.html">Stream</a>&lt;T&gt;</code></td>
+                      <td>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-collection/parallel-stream.html">parallelStream</a></del></span>()</code></div>
                         <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
@@ -574,8 +435,8 @@
                     <tr>
                       <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-array/index.html">Array</a>&lt;T&gt;</code></td>
                       <td>
-                        <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-collection/to-array.html">toArray</a></del></span>(p0:&nbsp;<a href="https://developer.android.com/reference/java/util/function/IntFunction.html">IntFunction</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-array/index.html">Array</a>&lt;T&gt;&gt;)</code></div>
-                        <p><strong>This function is deprecated.</strong> This member is not fully supported by Kotlin compiler, so it may be absent or have different signature in next major version</p>
+                        <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-collection/to-array.html">toArray</a></del></span>(generator:&nbsp;<a href="https://developer.android.com/reference/java/util/function/IntFunction.html">IntFunction</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-array/index.html">Array</a>&lt;T&gt;&gt;)</code></div>
+                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
                   </tbody>
@@ -595,7 +456,14 @@
                     <tr>
                       <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-iterable/for-each.html">forEach</a></del></span>(p0:&nbsp;<a href="https://developer.android.com/reference/java/util/function/Consumer.html">Consumer</a>&lt;T&gt;)</code></div>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-iterable/for-each.html">forEach</a></del></span>(action:&nbsp;<a href="https://developer.android.com/reference/java/util/function/Consumer.html">Consumer</a>&lt;T&gt;)</code></div>
+                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="https://developer.android.com/reference/java/util/Spliterator.html">Spliterator</a>&lt;T&gt;</code></td>
+                      <td>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-iterable/spliterator.html">spliterator</a></del></span>()</code></div>
                         <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
@@ -613,6 +481,34 @@
                     <col>
                   </colgroup>
                   <tbody class="list">
+                    <tr>
+                      <td><code>open T</code></td>
+                      <td>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/get-first.html">getFirst</a></del></span>()</code></div>
+                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open T</code></td>
+                      <td>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/get-last.html">getLast</a></del></span>()</code></div>
+                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+                      <td>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index-of.html">indexOf</a></del></span>(o:&nbsp;T)</code></div>
+                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code></td>
+                      <td>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/last-index-of.html">lastIndexOf</a></del></span>(o:&nbsp;T)</code></div>
+                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
+                      </td>
+                    </tr>
                     <tr>
                       <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a>&lt;T&gt;</code></td>
                       <td>
@@ -637,7 +533,56 @@
                     <tr>
                       <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
                       <td>
-                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-collection/remove-if.html">removeIf</a></del></span>(p0:&nbsp;<a href="https://developer.android.com/reference/java/util/function/Predicate.html">Predicate</a>&lt;T&gt;)</code></div>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-collection/add.html">add</a></del></span>(e:&nbsp;T)</code></div>
+                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                      <td>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-collection/add-all.html">addAll</a></del></span>(c:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-collection/index.html">Collection</a>&lt;T&gt;)</code></div>
+                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-collection/clear.html">clear</a></del></span>()</code></div>
+                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open&nbsp;operator <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-iterator/index.html">MutableIterator</a>&lt;T&gt;</code></td>
+                      <td>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-collection/iterator.html">iterator</a></del></span>()</code></div>
+                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                      <td>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-collection/remove.html">remove</a></del></span>(o:&nbsp;T)</code></div>
+                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                      <td>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-collection/remove-all.html">removeAll</a></del></span>(c:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-collection/index.html">Collection</a>&lt;T&gt;)</code></div>
+                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                      <td>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-collection/remove-if.html">removeIf</a></del></span>(filter:&nbsp;<a href="https://developer.android.com/reference/java/util/function/Predicate.html">Predicate</a>&lt;T&gt;)</code></div>
+                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                      <td>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-collection/retain-all.html">retainAll</a></del></span>(c:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-collection/index.html">Collection</a>&lt;T&gt;)</code></div>
                         <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
@@ -658,14 +603,49 @@
                     <tr>
                       <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/add-first.html">addFirst</a></del></span>(p0:&nbsp;T)</code></div>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/add.html">add</a></del></span>(index:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;element:&nbsp;T)</code></div>
+                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                      <td>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/add-all.html">addAll</a></del></span>(index:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;c:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-collection/index.html">Collection</a>&lt;T&gt;)</code></div>
                         <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/add-last.html">addLast</a></del></span>(p0:&nbsp;T)</code></div>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/add-first.html">addFirst</a></del></span>(e:&nbsp;T)</code></div>
+                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/add-last.html">addLast</a></del></span>(e:&nbsp;T)</code></div>
+                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list-iterator/index.html">MutableListIterator</a>&lt;T&gt;</code></td>
+                      <td>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/list-iterator.html">listIterator</a></del></span>()</code></div>
+                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list-iterator/index.html">MutableListIterator</a>&lt;T&gt;</code></td>
+                      <td>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/list-iterator.html">listIterator</a></del></span>(index:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open T</code></td>
+                      <td>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/remove-at.html">removeAt</a></del></span>(index:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
                         <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
@@ -686,14 +666,28 @@
                     <tr>
                       <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/replace-all.html">replaceAll</a></del></span>(p0:&nbsp;<a href="https://developer.android.com/reference/java/util/function/UnaryOperator.html">UnaryOperator</a>&lt;T&gt;)</code></div>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/replace-all.html">replaceAll</a></del></span>(operator:&nbsp;<a href="https://developer.android.com/reference/java/util/function/UnaryOperator.html">UnaryOperator</a>&lt;T&gt;)</code></div>
+                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open&nbsp;operator T</code></td>
+                      <td>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/set.html">set</a></del></span>(index:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;element:&nbsp;T)</code></div>
                         <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/sort.html">sort</a></del></span>(p0:&nbsp;<a href="https://developer.android.com/reference/java/util/Comparator.html">Comparator</a>&lt;T&gt;)</code></div>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/sort.html">sort</a></del></span>(c:&nbsp;<a href="https://developer.android.com/reference/java/util/Comparator.html">Comparator</a>&lt;T&gt;)</code></div>
+                        <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a>&lt;T&gt;</code></td>
+                      <td>
+                        <div><code><span><del><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/sub-list.html">subList</a></del></span>(fromIndex:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>,&nbsp;toIndex:&nbsp;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a>)</code></div>
                         <p><strong>This function is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
                       </td>
                     </tr>
@@ -713,6 +707,27 @@
           </tr>
         </thead>
         <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From <a href="https://developer.android.com/reference/java/util/AbstractCollection.html">java.util.AbstractCollection</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
+                  <tbody class="list">
+                    <tr>
+                      <td><code>open <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                      <td>
+                        <div><code><a href="https://developer.android.com/reference/java/util/AbstractCollection.html#isEmpty">isEmpty</a></code></div>
+                        <p><strong>This property is deprecated.</strong> PagedList is deprecated and has been replaced by PagingData</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
           <tr>
             <td><devsite-expandable><span class="expand-control">From <a href="https://developer.android.com/reference/java/util/AbstractList.html">java.util.AbstractList</a></span>
               <div class="devsite-table-wrapper">

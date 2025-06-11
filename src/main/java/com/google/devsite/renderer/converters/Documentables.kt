@@ -527,14 +527,23 @@ fun List<DProperty>.gettersAndSetters(): List<DFunction> {
             // JvmFields are only accessed as fields, not through accessors
             !it.isJvmField()
         }
-        .flatMap { listOfNotNull(updateAccessor(it.getter, it), updateAccessor(it.setter, it)) }
+        .flatMap {
+            listOfNotNull(
+                updateAccessor(it.getter, it, getter = true),
+                updateAccessor(it.setter, it, getter = false),
+            )
+        }
 }
 
 /**
  * Updates an accessor for [gettersAndSetters] by marking it static if needed and fixing its name
  * and documentation.
  */
-private fun updateAccessor(originalAccessor: DFunction?, property: DProperty): DFunction? {
+private fun updateAccessor(
+    originalAccessor: DFunction?,
+    property: DProperty,
+    getter: Boolean,
+): DFunction? {
     var updatedAccessor = originalAccessor ?: return null
     // Static properties should also have static accessors
     if (property.isStaticAnnotated()) {
@@ -547,7 +556,11 @@ private fun updateAccessor(originalAccessor: DFunction?, property: DProperty): D
         } else if (callableName.startsWith("<set-")) {
             updatedAccessor.fixSyntheticAccessor(property, getter = false)
         } else {
-            updatedAccessor
+            updatedAccessor.copy(
+                documentation =
+                    injectPropertyDocsToAccessor(updatedAccessor, property)
+                        .correctTagsInAccessorDocs(updatedAccessor, getter = getter)
+            )
         }
     return updatedAccessor.withNewExtras(updatedAccessor.extra.plus(SourceProperty(property)))
 }
@@ -568,8 +581,7 @@ private fun DFunction.fixSyntheticAccessor(forProperty: DProperty, getter: Boole
     copy(
         dri = dri.withFixedName(getter),
         documentation =
-            injectPropertyDocsToAccessor(this, forProperty)
-                .correctTagsInAccessorDocs(forProperty.name, getter),
+            injectPropertyDocsToAccessor(this, forProperty).correctTagsInAccessorDocs(this, getter),
     )
 
 /**
@@ -621,7 +633,7 @@ private fun injectPropertyDocsToAccessor(
  * For @property tags, they can be unwrapped for both getters and setters to just descriptions.
  */
 private fun SourceSetDependent<DocumentationNode>.correctTagsInAccessorDocs(
-    propertyName: String,
+    accessor: DFunction,
     getter: Boolean,
 ): SourceSetDependent<DocumentationNode> {
     return this.mapValues { entry ->
@@ -634,7 +646,7 @@ private fun SourceSetDependent<DocumentationNode>.correctTagsInAccessorDocs(
                             Description(it.root)
                         } // Setters have one param, named the same as the property (b/268236485)
                         else {
-                            Param(it.root, propertyName)
+                            Param(it.root, accessor.parameters.last().name ?: it.name)
                         }
                     }
                     is Property -> Description(it.root)

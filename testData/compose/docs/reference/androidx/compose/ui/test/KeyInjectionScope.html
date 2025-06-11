@@ -8,17 +8,17 @@
     <div itemscope="" itemtype="http://developers.google.com/ReferenceObject">
       <meta itemprop="name" content="KeyInjectionScope">
       <meta itemprop="path" content="androidx.compose.ui.test">
-      <meta itemprop="property" content="getIsCapsLockOn()">
+      <meta itemprop="property" content="isCapsLockOn()">
       <meta itemprop="property" content="isKeyDown(androidx.compose.ui.input.key.Key)">
-      <meta itemprop="property" content="getIsNumLockOn()">
-      <meta itemprop="property" content="getIsScrollLockOn()">
+      <meta itemprop="property" content="isNumLockOn()">
+      <meta itemprop="property" content="isScrollLockOn()">
       <meta itemprop="property" content="keyDown(androidx.compose.ui.input.key.Key)">
       <meta itemprop="property" content="keyUp(androidx.compose.ui.input.key.Key)">
-      <meta itemprop="property" content="(androidx.compose.ui.test.KeyInjectionScope).getIsAltDown()">
-      <meta itemprop="property" content="(androidx.compose.ui.test.KeyInjectionScope).getIsCtrlDown()">
-      <meta itemprop="property" content="(androidx.compose.ui.test.KeyInjectionScope).getIsFnDown()">
-      <meta itemprop="property" content="(androidx.compose.ui.test.KeyInjectionScope).getIsMetaDown()">
-      <meta itemprop="property" content="(androidx.compose.ui.test.KeyInjectionScope).getIsShiftDown()">
+      <meta itemprop="property" content="(androidx.compose.ui.test.KeyInjectionScope).isAltDown()">
+      <meta itemprop="property" content="(androidx.compose.ui.test.KeyInjectionScope).isCtrlDown()">
+      <meta itemprop="property" content="(androidx.compose.ui.test.KeyInjectionScope).isFnDown()">
+      <meta itemprop="property" content="(androidx.compose.ui.test.KeyInjectionScope).isMetaDown()">
+      <meta itemprop="property" content="(androidx.compose.ui.test.KeyInjectionScope).isShiftDown()">
       <meta itemprop="property" content="(androidx.compose.ui.test.KeyInjectionScope).pressKey(androidx.compose.ui.input.key.Key,kotlin.Long)">
       <meta itemprop="property" content="(androidx.compose.ui.test.KeyInjectionScope).withKeyDown(androidx.compose.ui.input.key.Key,kotlin.Function1)">
       <meta itemprop="property" content="(androidx.compose.ui.test.KeyInjectionScope).withKeyToggled(androidx.compose.ui.input.key.Key,kotlin.Function1)">
@@ -47,7 +47,7 @@
     <p>The entire event injection state is shared between all <code>perform.*Input</code> methods, meaning you can continue an unfinished key input sequence in a subsequent invocation of <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performKeyInput(kotlin.Function1)">performKeyInput</a></code> or <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performMultiModalInput(kotlin.Function1)">performMultiModalInput</a></code>.</p>
     <p>All events sent by these methods are batched together and sent as a whole after <code><a href="/reference/androidx/compose/ui/test/package-summary.html#(androidx.compose.ui.test.SemanticsNodeInteraction).performKeyInput(kotlin.Function1)">performKeyInput</a></code> has executed its code block.</p>
     <p>When a key is held down - i.e. the virtual clock is forwarded whilst the key is pressed down, repeat key down events will be sent. In a fashion consistent with Android's implementation, the first repeat key event will be sent after a key has been held down for 500ms. Subsequent repeat events will be sent at 50ms intervals, until the key is released or another key is pressed down.</p>
-    <p>The sending of repeat key events is handled as an implicit side-effect of <code><a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#advanceEventTime(kotlin.Long)">advanceEventTime</a></code>, which is called within the injection scope. As such, no repeat key events will be sent if <code><a href="/reference/androidx/compose/ui/test/MainTestClock.html#advanceTimeBy(kotlin.Long,kotlin.Boolean)">MainTestClock.advanceTimeBy</a></code> is used to advance the time.</p>
+    <p>The sending of repeat key events is handled as an implicit side-effect of <code><a href="/reference/androidx/compose/ui/test/InjectionScope.html#advanceEventTime(kotlin.Long)">advanceEventTime</a></code>, which is called within the injection scope. As such, no repeat key events will be sent if <code><a href="/reference/androidx/compose/ui/test/MainTestClock.html#advanceTimeBy(kotlin.Long,kotlin.Boolean)">MainTestClock.advanceTimeBy</a></code> is used to advance the time.</p>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <colgroup>
@@ -83,7 +83,7 @@
           <tr>
             <td><code>abstract boolean</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#getIsCapsLockOn()">isCapsLockOn</a>()</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#isCapsLockOn()">isCapsLockOn</a>()</code></div>
               <p>Indicates whether caps lock is on or not.</p>
             </td>
           </tr>
@@ -97,14 +97,14 @@
           <tr>
             <td><code>abstract boolean</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#getIsNumLockOn()">isNumLockOn</a>()</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#isNumLockOn()">isNumLockOn</a>()</code></div>
               <p>Indicates whether num lock is on or not.</p>
             </td>
           </tr>
           <tr>
             <td><code>abstract boolean</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#getIsScrollLockOn()">isScrollLockOn</a>()</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#isScrollLockOn()">isScrollLockOn</a>()</code></div>
               <p>Indicates whether scroll lock is on or not.</p>
             </td>
           </tr>
@@ -140,35 +140,35 @@
           <tr>
             <td><code>default&nbsp;final boolean</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/test/KeyInjectionScopeKt.html">KeyInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#(androidx.compose.ui.test.KeyInjectionScope).getIsAltDown()">isAltDown</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html">KeyInjectionScope</a>&nbsp;receiver)</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/test/KeyInjectionScopeKt.html">KeyInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#(androidx.compose.ui.test.KeyInjectionScope).isAltDown()">isAltDown</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html">KeyInjectionScope</a>&nbsp;receiver)</code></div>
               <p>Verifies whether either of the alt keys are down.</p>
             </td>
           </tr>
           <tr>
             <td><code>default&nbsp;final boolean</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/test/KeyInjectionScopeKt.html">KeyInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#(androidx.compose.ui.test.KeyInjectionScope).getIsCtrlDown()">isCtrlDown</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html">KeyInjectionScope</a>&nbsp;receiver)</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/test/KeyInjectionScopeKt.html">KeyInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#(androidx.compose.ui.test.KeyInjectionScope).isCtrlDown()">isCtrlDown</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html">KeyInjectionScope</a>&nbsp;receiver)</code></div>
               <p>Verifies whether either of the control keys are down.</p>
             </td>
           </tr>
           <tr>
             <td><code>default&nbsp;final boolean</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/test/KeyInjectionScopeKt.html">KeyInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#(androidx.compose.ui.test.KeyInjectionScope).getIsFnDown()">isFnDown</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html">KeyInjectionScope</a>&nbsp;receiver)</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/test/KeyInjectionScopeKt.html">KeyInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#(androidx.compose.ui.test.KeyInjectionScope).isFnDown()">isFnDown</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html">KeyInjectionScope</a>&nbsp;receiver)</code></div>
               <p>Verifies whether the function key is down.</p>
             </td>
           </tr>
           <tr>
             <td><code>default&nbsp;final boolean</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/test/KeyInjectionScopeKt.html">KeyInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#(androidx.compose.ui.test.KeyInjectionScope).getIsMetaDown()">isMetaDown</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html">KeyInjectionScope</a>&nbsp;receiver)</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/test/KeyInjectionScopeKt.html">KeyInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#(androidx.compose.ui.test.KeyInjectionScope).isMetaDown()">isMetaDown</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html">KeyInjectionScope</a>&nbsp;receiver)</code></div>
               <p>Verifies whether either of the meta keys are down.</p>
             </td>
           </tr>
           <tr>
             <td><code>default&nbsp;final boolean</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/ui/test/KeyInjectionScopeKt.html">KeyInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#(androidx.compose.ui.test.KeyInjectionScope).getIsShiftDown()">isShiftDown</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html">KeyInjectionScope</a>&nbsp;receiver)</code></div>
+              <div><code><a href="/reference/androidx/compose/ui/test/KeyInjectionScopeKt.html">KeyInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#(androidx.compose.ui.test.KeyInjectionScope).isShiftDown()">isShiftDown</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html">KeyInjectionScope</a>&nbsp;receiver)</code></div>
               <p>Verifies whether either of the shift keys are down.</p>
             </td>
           </tr>
@@ -244,91 +244,91 @@
                     <tr>
                       <td><code>default int</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).roundToPx()">roundToPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).roundToPx()">roundToPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
                         <p>Convert <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code> to <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code> by rounding</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default int</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).roundToPx()">roundToPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).roundToPx()">roundToPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
                         <p>Convert Sp to <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code> by rounding</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toDp()">toDp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toDp()">toDp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
                         <p>Convert Sp to <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Int).toDp()">toDp</a>(int&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Int).toDp()">toDp</a>(int&nbsp;receiver)</code></div>
                         <p>Convert an <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code> pixel value to <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code>.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Float).toDp()">toDp</a>(float&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Float).toDp()">toDp</a>(float&nbsp;receiver)</code></div>
                         <p>Convert a <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code> pixel value to a Dp</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/DpSize.html">DpSize</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.geometry.Size).toDpSize()">toDpSize</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.geometry.Size).toDpSize()">toDpSize</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a>&nbsp;receiver)</code></div>
                         <p>Convert a <code><a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code> to a <code><a href="/reference/androidx/compose/ui/unit/DpSize.html">DpSize</a></code>.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default float</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toPx()">toPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toPx()">toPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
                         <p>Convert <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code> to pixels.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default float</code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toPx()">toPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.TextUnit).toPx()">toPx</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a>&nbsp;receiver)</code></div>
                         <p>Convert Sp to pixels.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.DpRect).toRect()">toRect</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/DpRect.html">DpRect</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.DpRect).toRect()">toRect</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/DpRect.html">DpRect</a>&nbsp;receiver)</code></div>
                         <p>Convert a <code><a href="/reference/androidx/compose/ui/unit/DpRect.html">DpRect</a></code> to a <code><a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a></code>.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.DpSize).toSize()">toSize</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/DpSize.html">DpSize</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.DpSize).toSize()">toSize</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/DpSize.html">DpSize</a>&nbsp;receiver)</code></div>
                         <p>Convert a <code><a href="/reference/androidx/compose/ui/unit/DpSize.html">DpSize</a></code> to a <code><a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code>.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toSp()">toSp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(androidx.compose.ui.unit.Dp).toSp()">toSp</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a>&nbsp;receiver)</code></div>
                         <p>Convert <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code> to Sp.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Int).toSp()">toSp</a>(int&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Int).toSp()">toSp</a>(int&nbsp;receiver)</code></div>
                         <p>Convert an <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></code> pixel value to Sp.</p>
                       </td>
                     </tr>
                     <tr>
                       <td><code>default @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/unit/TextUnit.html">TextUnit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/androidx/compose/ui/unit/orgKt.html">orgKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Float).toSp()">toSp</a>(float&nbsp;receiver)</code></div>
+                        <div><code><a href="/reference/androidx/compose/ui/unit/DensityKt.html">DensityKt</a>.<a href="/reference/androidx/compose/ui/unit/Density.html#(kotlin.Float).toSp()">toSp</a>(float&nbsp;receiver)</code></div>
                         <p>Convert a <code><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></code> pixel value to a Sp</p>
                       </td>
                     </tr>
@@ -510,13 +510,13 @@
     </div>
     <div class="list">
       <h2>Public methods</h2>
-      <div class="api-item"><a name="getIsCapsLockOn--"></a><a name="getiscapslockon"></a>
+      <div class="api-item"><a name="isCapsLockOn--"></a><a name="iscapslockon"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="getIsCapsLockOn()">isCapsLockOn</h3>
+            <h3 id="isCapsLockOn()">isCapsLockOn</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#getIsCapsLockOn()">isCapsLockOn</a>()</pre>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#isCapsLockOn()">isCapsLockOn</a>()</pre>
         <p>Indicates whether caps lock is on or not.</p>
         <p>Note that this reflects the state of the injected input only, it does not correspond to the state of an actual keyboard attached to the device on which a test is run</p>
       </div>
@@ -571,23 +571,23 @@
           </table>
         </div>
       </div>
-      <div class="api-item"><a name="getIsNumLockOn--"></a><a name="getisnumlockon"></a>
+      <div class="api-item"><a name="isNumLockOn--"></a><a name="isnumlockon"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="getIsNumLockOn()">isNumLockOn</h3>
+            <h3 id="isNumLockOn()">isNumLockOn</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#getIsNumLockOn()">isNumLockOn</a>()</pre>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#isNumLockOn()">isNumLockOn</a>()</pre>
         <p>Indicates whether num lock is on or not.</p>
         <p>Note that this reflects the state of the injected input only, it does not correspond to the state of an actual keyboard attached to the device on which a test is run</p>
       </div>
-      <div class="api-item"><a name="getIsScrollLockOn--"></a><a name="getisscrolllockon"></a>
+      <div class="api-item"><a name="isScrollLockOn--"></a><a name="isscrolllockon"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="getIsScrollLockOn()">isScrollLockOn</h3>
+            <h3 id="isScrollLockOn()">isScrollLockOn</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#getIsScrollLockOn()">isScrollLockOn</a>()</pre>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#isScrollLockOn()">isScrollLockOn</a>()</pre>
         <p>Indicates whether scroll lock is on or not.</p>
         <p>Note that this reflects the state of the injected input only, it does not correspond to the state of an actual keyboard attached to the device on which a test is run</p>
       </div>
@@ -656,13 +656,13 @@
     </div>
     <div class="list">
       <h2>Extension functions</h2>
-      <div class="api-item"><a name="-androidx.compose.ui.test.KeyInjectionScope-.getIsAltDown--"></a><a name="getisaltdown"></a>
+      <div class="api-item"><a name="-androidx.compose.ui.test.KeyInjectionScope-.isAltDown--"></a><a name="isaltdown"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="(androidx.compose.ui.test.KeyInjectionScope).getIsAltDown()">KeyInjectionScopeKt.isAltDown</h3>
+            <h3 id="(androidx.compose.ui.test.KeyInjectionScope).isAltDown()">KeyInjectionScopeKt.isAltDown</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/test/KeyInjectionScopeKt.html">KeyInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#(androidx.compose.ui.test.KeyInjectionScope).getIsAltDown()">isAltDown</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html">KeyInjectionScope</a>&nbsp;receiver)</pre>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/test/KeyInjectionScopeKt.html">KeyInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#(androidx.compose.ui.test.KeyInjectionScope).isAltDown()">isAltDown</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html">KeyInjectionScope</a>&nbsp;receiver)</pre>
         <p>Verifies whether either of the alt keys are down.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -686,13 +686,13 @@
           </table>
         </div>
       </div>
-      <div class="api-item"><a name="-androidx.compose.ui.test.KeyInjectionScope-.getIsCtrlDown--"></a><a name="getisctrldown"></a>
+      <div class="api-item"><a name="-androidx.compose.ui.test.KeyInjectionScope-.isCtrlDown--"></a><a name="isctrldown"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="(androidx.compose.ui.test.KeyInjectionScope).getIsCtrlDown()">KeyInjectionScopeKt.isCtrlDown</h3>
+            <h3 id="(androidx.compose.ui.test.KeyInjectionScope).isCtrlDown()">KeyInjectionScopeKt.isCtrlDown</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/test/KeyInjectionScopeKt.html">KeyInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#(androidx.compose.ui.test.KeyInjectionScope).getIsCtrlDown()">isCtrlDown</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html">KeyInjectionScope</a>&nbsp;receiver)</pre>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/test/KeyInjectionScopeKt.html">KeyInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#(androidx.compose.ui.test.KeyInjectionScope).isCtrlDown()">isCtrlDown</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html">KeyInjectionScope</a>&nbsp;receiver)</pre>
         <p>Verifies whether either of the control keys are down.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -716,13 +716,13 @@
           </table>
         </div>
       </div>
-      <div class="api-item"><a name="-androidx.compose.ui.test.KeyInjectionScope-.getIsFnDown--"></a><a name="getisfndown"></a>
+      <div class="api-item"><a name="-androidx.compose.ui.test.KeyInjectionScope-.isFnDown--"></a><a name="isfndown"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="(androidx.compose.ui.test.KeyInjectionScope).getIsFnDown()">KeyInjectionScopeKt.isFnDown</h3>
+            <h3 id="(androidx.compose.ui.test.KeyInjectionScope).isFnDown()">KeyInjectionScopeKt.isFnDown</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/test/KeyInjectionScopeKt.html">KeyInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#(androidx.compose.ui.test.KeyInjectionScope).getIsFnDown()">isFnDown</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html">KeyInjectionScope</a>&nbsp;receiver)</pre>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/test/KeyInjectionScopeKt.html">KeyInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#(androidx.compose.ui.test.KeyInjectionScope).isFnDown()">isFnDown</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html">KeyInjectionScope</a>&nbsp;receiver)</pre>
         <p>Verifies whether the function key is down.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -746,13 +746,13 @@
           </table>
         </div>
       </div>
-      <div class="api-item"><a name="-androidx.compose.ui.test.KeyInjectionScope-.getIsMetaDown--"></a><a name="getismetadown"></a>
+      <div class="api-item"><a name="-androidx.compose.ui.test.KeyInjectionScope-.isMetaDown--"></a><a name="ismetadown"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="(androidx.compose.ui.test.KeyInjectionScope).getIsMetaDown()">KeyInjectionScopeKt.isMetaDown</h3>
+            <h3 id="(androidx.compose.ui.test.KeyInjectionScope).isMetaDown()">KeyInjectionScopeKt.isMetaDown</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/test/KeyInjectionScopeKt.html">KeyInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#(androidx.compose.ui.test.KeyInjectionScope).getIsMetaDown()">isMetaDown</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html">KeyInjectionScope</a>&nbsp;receiver)</pre>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/test/KeyInjectionScopeKt.html">KeyInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#(androidx.compose.ui.test.KeyInjectionScope).isMetaDown()">isMetaDown</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html">KeyInjectionScope</a>&nbsp;receiver)</pre>
         <p>Verifies whether either of the meta keys are down.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">
@@ -776,13 +776,13 @@
           </table>
         </div>
       </div>
-      <div class="api-item"><a name="-androidx.compose.ui.test.KeyInjectionScope-.getIsShiftDown--"></a><a name="getisshiftdown"></a>
+      <div class="api-item"><a name="-androidx.compose.ui.test.KeyInjectionScope-.isShiftDown--"></a><a name="isshiftdown"></a>
         <div class="api-name-block">
           <div>
-            <h3 id="(androidx.compose.ui.test.KeyInjectionScope).getIsShiftDown()">KeyInjectionScopeKt.isShiftDown</h3>
+            <h3 id="(androidx.compose.ui.test.KeyInjectionScope).isShiftDown()">KeyInjectionScopeKt.isShiftDown</h3>
           </div>
         </div>
-        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/test/KeyInjectionScopeKt.html">KeyInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#(androidx.compose.ui.test.KeyInjectionScope).getIsShiftDown()">isShiftDown</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html">KeyInjectionScope</a>&nbsp;receiver)</pre>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/ui/test/KeyInjectionScopeKt.html">KeyInjectionScopeKt</a>.<a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html#(androidx.compose.ui.test.KeyInjectionScope).isShiftDown()">isShiftDown</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/test/KeyInjectionScope.html">KeyInjectionScope</a>&nbsp;receiver)</pre>
         <p>Verifies whether either of the shift keys are down.</p>
         <div class="devsite-table-wrapper">
           <table class="responsive">

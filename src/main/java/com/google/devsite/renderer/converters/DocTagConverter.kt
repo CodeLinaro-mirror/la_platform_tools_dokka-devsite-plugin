@@ -518,7 +518,20 @@ internal class DocTagConverter(
         parent: Documentable,
     ): ParameterComponent {
         val name = throws.name
-        var dri: DRI? = throws.exceptionAddress
+        val dri = throws.exceptionAddress
+        val link =
+            if (dri != null) {
+                pathProvider.linkForReference(dri, name)
+            } else {
+                val possibleDri =
+                    DRI(
+                        packageName = name.substringBeforeLast("."),
+                        classNames = name.substringAfterLast("."),
+                    )
+                val url = pathProvider.locationProvider?.resolve(possibleDri) ?: ""
+                DefaultLink(Link.Params(name, url))
+            }
+
         if (throws.name in listOf("a", "an")) {
             throw RuntimeException(
                 "Do not use '${throws.name}' before the exception type in an @throws statement. " +
@@ -530,7 +543,7 @@ internal class DocTagConverter(
                     "ments are automatically linked. Manually java-linking them is against jdoc s" +
                     "pec, and breaks linking behavior causing them to actually *not* be linked."
             )
-        } else if (throws.exceptionAddress == null) {
+        } else if (link.data.url.isEmpty()) {
             docsHolder.printWarningFor(
                 "Link does not resolve for @",
                 parent,
@@ -542,12 +555,7 @@ internal class DocTagConverter(
                         " these is to fully qualify the exception name, e.g. " +
                         "`@throws java.io.IOException under some conditions`.",
             )
-            dri = null
         }
-        val link =
-            if (dri == null) {
-                DefaultLink(Link.Params(name, url = ""))
-            } else pathProvider.linkForReference(throws.exceptionAddress!!, name)
 
         return DefaultParameterComponent(
             ParameterComponent.Params(
