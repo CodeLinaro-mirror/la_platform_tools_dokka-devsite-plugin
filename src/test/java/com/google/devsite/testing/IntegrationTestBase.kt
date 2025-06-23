@@ -160,12 +160,10 @@ abstract class IntegrationTestBase :
                                             "kotlin.ParameterName",
                                             "kotlin.js.JsName",
                                             "java.lang.Override",
-                                        ),
-                                    annotationsNotToDisplayJava = null,
-                                    annotationsNotToDisplayKotlin =
-                                        listOf(
                                             "kotlin.ExtensionFunctionType",
                                         ),
+                                    annotationsNotToDisplayJava = null,
+                                    annotationsNotToDisplayKotlin = null,
                                     hidingAnnotations = hidingAnnotations,
                                     includeHiddenParentSymbols = includeHiddenParentSymbols,
                                     validNullabilityAnnotations = validNullabilityAnnotations,
