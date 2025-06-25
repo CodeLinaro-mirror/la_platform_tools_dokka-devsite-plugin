@@ -26,6 +26,7 @@ import org.jetbrains.dokka.model.Annotations.Annotation
 import org.jetbrains.dokka.model.ArrayValue
 import org.jetbrains.dokka.model.Bound
 import org.jetbrains.dokka.model.ClassValue
+import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DefinitelyNonNullable
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.Dynamic
@@ -104,7 +105,14 @@ private fun Bound.annotations(sourceSet: DokkaConfiguration.DokkaSourceSet?): Li
 internal fun Documentable.allAnnotations() =
     (this as? WithExtraProperties<*>)?.extra?.allOfType<Annotations>()?.flatMap { annotations ->
         annotations.directAnnotations.flatMap { it.value } +
-            annotations.fileLevelAnnotations.flatMap { it.value }
+            if (this is DClasslike) {
+                // Don't include file-level annotations for classes, because these annotations are
+                // meant to apply to the top-level functions and properties in the file (in the
+                // synthetic file facade class), not classes defined in the file.
+                emptyList()
+            } else {
+                annotations.fileLevelAnnotations.flatMap { it.value }
+            }
     } ?: emptyList()
 
 // TODO(KMP per-sourceset variance of deprecation status b/262711247)
