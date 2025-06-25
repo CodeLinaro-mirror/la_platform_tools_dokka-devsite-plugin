@@ -18,6 +18,7 @@ package com.google.devsite.renderer.impl
 
 import com.google.devsite.className
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.IsSynthetic
 import com.google.devsite.renderer.converters.companion
 import com.google.devsite.renderer.converters.explodedChildren
 import com.google.devsite.renderer.converters.filterOutJvmSynthetic
@@ -484,7 +485,7 @@ internal class DocumentablesHolder(
                     modifier = dPackage.sourceSets.associateWith { JavaModifier.Final },
                     sourceSets = dPackage.sourceSets,
                     isExpectActual = false,
-                    extra = PropertyContainer.empty(),
+                    extra = PropertyContainer.withAll(IsSynthetic),
                 )
             }
             .toSet()
