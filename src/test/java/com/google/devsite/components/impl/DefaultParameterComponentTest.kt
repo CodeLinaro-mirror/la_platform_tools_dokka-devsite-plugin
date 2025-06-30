@@ -102,7 +102,7 @@ class DefaultParameterComponentTest {
     }
 
     @Test
-    fun `Vararg Kotlin parameter renders correctly`() {
+    fun `Vararg Kotlin parameter renders correctly for Kotlin display`() {
         val component =
             DefaultParameterComponent(
                 Params(
@@ -120,6 +120,30 @@ class DefaultParameterComponentTest {
             .isEqualTo(
                 """
 <div>vararg&nbsp;number:&nbsp;Int</div>
+            """
+                    .trim(),
+            )
+    }
+
+    @Test
+    fun `Vararg Kotlin parameter renders correctly for Java display`() {
+        val component =
+            DefaultParameterComponent(
+                Params(
+                    name = "number",
+                    type = NoopTypeProjectionComponent("Int"),
+                    displayLanguage = Language.JAVA,
+                    modifiers = Modifiers("vararg"),
+                ),
+            )
+
+        val output = createHTML().div { component.render(this) }.trim()
+
+        // language=html
+        assertThat(output)
+            .isEqualTo(
+                """
+<div>Int...&nbsp;number</div>
             """
                     .trim(),
             )

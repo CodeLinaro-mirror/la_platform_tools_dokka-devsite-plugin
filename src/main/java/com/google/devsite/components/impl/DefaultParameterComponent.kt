@@ -35,6 +35,10 @@ internal data class DefaultParameterComponent(
             when (data.displayLanguage) {
                 Language.JAVA -> {
                     data.type.render(into)
+                    // Display varargs as attached to the type for Java docs
+                    if ("vararg" in data.modifiers) {
+                        +"..."
+                    }
                     if (data.name.isNotEmpty()) {
                         +Entities.nbsp
                         +data.name
