@@ -132,13 +132,19 @@ internal class AnnotationDocumentableConverter(
                     LinkedValueAnnotationParameter.Params(
                         name,
                         pathProvider.linkForReference(
-                            enumDri.copy(
-                                classNames = enumName,
-                                extra =
-                                    DRIExtraContainer()
-                                        .also { it[EnumEntryDRIExtra] = EnumEntryDRIExtra }
-                                        .encode()
-                            )
+                            // If there's already an extra field for the enum, use the dri as is.
+                            // Otherwise, it needs to be added manually.
+                            if (enumDri.extra != null) {
+                                enumDri
+                            } else {
+                                enumDri.copy(
+                                    classNames = enumName,
+                                    extra =
+                                        DRIExtraContainer()
+                                            .also { it[EnumEntryDRIExtra] = EnumEntryDRIExtra }
+                                            .encode()
+                                )
+                            }
                         )
                     )
                 )

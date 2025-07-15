@@ -548,6 +548,33 @@ internal class AnnotationDocumentableConverterTest(
     }
 
     @Test
+    fun `Link is generated for enum annotation value from static import`() {
+        val module =
+            """
+            |@Retention(CLASS)
+            |public @interface Foo {}
+            """
+                .renderJava(
+                    imports =
+                        listOf(
+                            "java.lang.annotation.Retention",
+                            "static java.lang.annotation.RetentionPolicy.CLASS"
+                        )
+                )
+        val anno = module.annotationComponents(module.classlike("Foo")!!).single()
+        val param = anno.data.parameters.single()
+        assertThat(param).isInstanceOf(LinkedValueAnnotationParameter::class.java)
+        val data = (param as LinkedValueAnnotationParameter).data
+        assertThat(data.name).isEqualTo("value")
+        val link = data.value.data
+        assertThat(link.name).isEqualTo("RetentionPolicy.CLASS")
+        assertThat(link.url)
+            .isEqualTo(
+                "https://developer.android.com/reference/java/lang/annotation/RetentionPolicy.html#CLASS"
+            )
+    }
+
+    @Test
     fun `Link is generated for class annotation value`() {
         val module =
             """
