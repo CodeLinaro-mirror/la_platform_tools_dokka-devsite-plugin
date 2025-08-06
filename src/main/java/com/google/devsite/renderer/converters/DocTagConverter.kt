@@ -599,30 +599,7 @@ internal class DocTagConverter(
         tags().forEach {
             when (it) {
                 is Sample -> {
-                    val dri = it.name
-                    // val sourceSet = this.getExpectOrCommonSourceSet()
-                    /* val analysisEnvironment = analysisMap[sourceSet]!!
-                    val sample = try {
-                        analysisEnvironment
-                            .resolveSample(sourceSet, dri)!!
-                    } catch (e: NullPointerException) {
-                        throw RuntimeException("Unable to resolve sample $dri!")
-                    }*/
-                    // TODO(KMP) we currently have no plan to provide KMP samples b/181224204
-                    // As such, we currently assume that all samples are in common
-                    val sample =
-                        docsHolder.sampleAnalysisEnvironment.value.resolveSample(
-                            docsHolder.commonSourceSet,
-                            dri
-                        ) ?: throw RuntimeException("Unable to resolve sample $dri")
-                    val imports = processImports(sample)
-
-                    components.add(
-                        Pre(
-                            params = mapOf("class" to "prettyprint lang-kotlin"),
-                            children = listOf(Text(imports + sample.body)),
-                        ),
-                    )
+                    components.add(getSampleComponent(it.name))
                     components.addAll(it.children)
                 }
                 is Description,
@@ -630,7 +607,7 @@ internal class DocTagConverter(
                     if (!it.belongsInDescriptionOf(this)) return@forEach
                     it.children.forEach { child ->
                         try {
-                            recursivelyConsiderPsAndTextsForJavaSamples(
+                            recursivelyConsiderPsAndTextsForSamples(
                                 child,
                                 components,
                                 this.getExpectOrCommonSourceSet().samples,
@@ -643,7 +620,21 @@ internal class DocTagConverter(
                         }
                     }
                 }
-                is Author,
+                // Dackka does not support the `@author` tag. To work around a parser issue with
+                // `@sample` (see b/427708573), these tags are rewritten to `@author #@sample` in a
+                // preprocessing step. If the `@author` tag is used for this purpose, search it for
+                // samples to insert.
+                is Author -> {
+                    if ("#@sample" in it.text()) {
+                        for (childTag in it.children) {
+                            recursivelyConsiderPsAndTextsForSamples(
+                                childTag,
+                                components,
+                                this.getExpectOrCommonSourceSet().samples,
+                            )
+                        }
+                    }
+                }
                 is Version -> {} // These are not supported
                 is Return,
                 is Receiver,
@@ -676,13 +667,38 @@ internal class DocTagConverter(
         }
     }
 
+    /** Create a formatted code block for the sample identified by [name]. */
+    private fun getSampleComponent(name: String): Pre {
+        // TODO(KMP) we currently have no plan to provide KMP samples b/181224204
+        // As such, we currently assume that all samples are in common
+        val sample =
+            docsHolder.sampleAnalysisEnvironment.value.resolveSample(
+                docsHolder.commonSourceSet,
+                name
+            ) ?: throw RuntimeException("Unable to resolve sample $name")
+        val imports = processImports(sample)
+
+        return Pre(
+            params = mapOf("class" to "prettyprint lang-kotlin"),
+            children = listOf(Text(imports + sample.body)),
+        )
+    }
+
     /** annotation-sampled and SampledAnnotationDetector */
     private fun DocTag.explicitlyBanLookingForSamples() =
         "Functions referenced with @sample are annotated with @Sampled" in text() ||
             "Denotes that the annotated function is considered a sample function" in text() ||
             "that functions referred to from KDoc with a @sample tag are annotated" in text()
 
-    private fun recursivelyConsiderPsAndTextsForJavaSamples(
+    /**
+     * Searches the [root] recursively for @sample tags. Adds both any non-samples elements and
+     * samples to the [components].
+     *
+     * Searches for both Java-style samples, of the format `{@sample path name}` and Kotlin-style
+     * samples, which have been updated in a pre-processing step to be contained within `@author`
+     * tags to work around a parsing issue(see b/427708573).
+     */
+    private fun recursivelyConsiderPsAndTextsForSamples(
         root: DocTag,
         components: MutableList<DocTag>,
         samples: Set<File>,
@@ -693,16 +709,38 @@ internal class DocTagConverter(
         }
         when (root) {
             is Text -> {
-                val parts = root.body.split("{", "}")
-                for (part in parts) {
-                    if ("@sample" !in part) {
-                        if (part.isNotBlank()) components.add(Text(part.trim()))
-                    } else components.add(convertTextToJavadocSample(Text(part.trim()), samples))
+                // Handle Java samples tags (of the format `{@sample path name}`) differently from
+                // Kotlin samples tags (`@sample identifier`)
+                if ("{@sample" in root.body) {
+                    val parts = root.body.split("{", "}")
+                    for (part in parts) {
+                        if ("@sample" !in part) {
+                            if (part.isNotBlank()) components.add(Text(part.trim()))
+                        } else
+                            components.add(convertTextToJavadocSample(Text(part.trim()), samples))
+                    }
+                } else {
+                    // Find the sample name, and add any additional text as its own component.
+                    val nameAndAdditionalText = root.body.substringAfter("@sample").trimStart()
+                    val name = nameAndAdditionalText.substringBefore(" ").removeSuffix("()")
+                    components.add(getSampleComponent(name))
+                    val additionalText =
+                        nameAndAdditionalText.substringAfter(
+                            delimiter = " ",
+                            missingDelimiterValue = ""
+                        )
+                    if (additionalText.isNotEmpty()) {
+                        components.add(Text(additionalText))
+                    }
                 }
             }
             is P -> {
                 for (child in root.children) {
-                    recursivelyConsiderPsAndTextsForJavaSamples(child, components, samples)
+                    recursivelyConsiderPsAndTextsForSamples(
+                        child,
+                        components,
+                        samples,
+                    )
                 }
             }
             // Having non-text components on the same line as a samples is not supported

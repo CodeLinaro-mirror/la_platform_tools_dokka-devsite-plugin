@@ -355,6 +355,46 @@ abstract class IntegrationTestBase :
     }
 
     /**
+     * To work around a parser issue with `@sample` (see b/427708573), rewrite `@sample` tags to
+     * `@author #@sample`.
+     *
+     * If [inPlace] is true, updates the files in [originalSourceDirPath] directly. Otherwise, the
+     * files are first copied to a directory named [name] in a build subdirectory and then updated.
+     *
+     * Returns the path of the directory containing the updated files.
+     */
+    private fun rewriteSamplesTags(
+        originalSourceDirPath: String,
+        name: String,
+        inPlace: Boolean,
+    ): String {
+        val originalSourceDir = File(originalSourceDirPath)
+
+        val (sourceDir, sourceDirPath) =
+            if (inPlace) {
+                originalSourceDir to originalSourceDirPath
+            } else {
+                val updatedDirPath = "build/updatedTestSources/$name"
+                val updatedDir = File(updatedDirPath)
+                updatedDir.deleteRecursively()
+                originalSourceDir.copyRecursively(updatedDir)
+                updatedDir to updatedDirPath
+            }
+
+        for (file in sourceDir.recursivelyListFiles()) {
+            if (file.extension == "kt") {
+                val originalContents = file.readText()
+                // Only replace `@sample` when it is used at the start of a comment line.
+                val updatedContents =
+                    originalContents.replace(" * @sample ", " * @author #@sample ")
+                file.writeText(updatedContents)
+            }
+        }
+
+        return sourceDirPath
+    }
+
+    /**
      * Reads sources and outputs from a directory in `./testData/`, and validates based on them.
      *
      * Sources are located at testData/$path/source outputs are located at testData/$path/docs
@@ -369,15 +409,23 @@ abstract class IntegrationTestBase :
         kotlinDocsDirectory: String? = "kotlin",
         includedHeadTagsPathJava: String? = "_shared/_reference-head-tags.html",
         includedHeadTagsPathKotlin: String? = "_shared/_reference-head-tags.html",
-        suffix: String = "source",
         useAndroidxBaseSourceLink: Boolean = false,
         hidingAnnotations: List<String> = listOf("androidx.annotation.RestrictTo"),
         includeHiddenParentSymbols: Boolean = false,
     ) {
         val samplesBaseDir = "testData/$path"
         val outputBaseDir = "testData/$path/docs"
-        val sourceDir = "testData/$path/$suffix"
         val loggingDir = "testData/$path/logs"
+
+        val originalSourceDir = "testData/$path/source"
+        // If there are samples provided, apply the @sample tag workaround. Don't update the files
+        // in place because they are checked in source files.
+        val sourceDir =
+            if (sampleLocations.isNotEmpty()) {
+                rewriteSamplesTags(originalSourceDir, path, inPlace = false)
+            } else {
+                originalSourceDir
+            }
 
         val inferredProjectPath =
             projectPath
@@ -446,10 +494,21 @@ abstract class IntegrationTestBase :
                 null
             }
 
-        val sourceDir = "build/explodedSources"
+        val explodedSourcesDir = "build/explodedSources"
+        val sourceDirPaths =
+            if (samples) {
+                // If there are samples provided, apply the @sample tag workaround. Update the files
+                // in place since they are generated as part of the build.
+                artifactNames.map {
+                    rewriteSamplesTags("$explodedSourcesDir/$it/", it, inPlace = true)
+                }
+            } else {
+                artifactNames.map { "$explodedSourcesDir/$it/" }
+            }
+        val sourceDirs = sourceDirPaths.map { File(it).absoluteFile }
         val configuration =
             makeExternalConfiguration(
-                artifactNames.map { File("$sourceDir/$it/").absoluteFile },
+                sourceDirs,
                 if (samples) listOf(samplesBaseDir) else emptyList(),
                 includeFiles =
                     includeFiles.map { File("testData/$testName/source", it).absolutePath },
@@ -469,7 +528,7 @@ abstract class IntegrationTestBase :
         ) {
             renderingStage = { _: RootPageNode, _: DokkaContext ->
                 verifyOutput(writerPlugin.writer.contents, outputBaseDir)
-                verifyOutput(logFiles(sourceDir), loggingDir)
+                verifyOutput(logFiles(explodedSourcesDir), loggingDir)
             }
         }
     }
