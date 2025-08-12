@@ -133,7 +133,7 @@ val collectionsVersion = "1.3.0"
 val composeVersion = "1.5.0"
 val composeMaterial3Version = "1.2.0"
 val benchmarkVersion = "1.2.0"
-val appsearchVersion = "1.1.0-beta01"
+val appsearchVersion = "1.1.0"
 val cameraVersion = "1.4.1"
 val carVersion = "1.4.0"
 dependencies {
@@ -199,7 +199,7 @@ dependencies {
     testDataSources("androidx.arch.core:core-runtime:2.2.0")
     testDataSources("androidx.arch.core:core-testing:2.2.0")
     testDataSources("androidx.asynclayoutinflater:asynclayoutinflater:1.0.0")
-    testDataSources("androidx.autofill:autofill:1.3.0-beta01")
+    testDataSources("androidx.autofill:autofill:1.3.0")
     testDataSources("androidx.benchmark:benchmark-common:$benchmarkVersion")
     testDataImpl(gradleApi())
     testDataSources("androidx.benchmark:benchmark-junit4:$benchmarkVersion")
