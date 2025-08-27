@@ -1373,6 +1373,41 @@ internal class DocTagConverterTest(
     }
 
     @Test
+    fun `See tag with URL and additional text`() {
+        val documentationK =
+            """
+            |/**
+            | * @see
+            | * <a href=https://google.com>google</a>
+            | *
+            | * Some additional text here.
+            | */
+            |fun foo() {}
+        """
+                .render()
+                .documentation()
+        val documentationJ =
+            """
+            |/**
+            | * @see
+            | * <a href=https://google.com>google</a>
+            | *
+            | * Some additional text here.
+            | */
+            |public void foo() {}
+        """
+                .render(java = true)
+                .documentation()
+        for (documentation in listOf(documentationJ, documentationK)) {
+            val seeAlso = (documentation.last() as LinkDescriptionSummaryList).single()
+            val link = seeAlso.data.title as Link
+            assertThat(link.data.url).isEqualTo("https://google.com")
+            val description = seeAlso.data.description
+            assertThat(description.text()).contains("Some additional text here.")
+        }
+    }
+
+    @Test
     fun `Multiline doc from fragment, with formatting`() {
         val module =
             """

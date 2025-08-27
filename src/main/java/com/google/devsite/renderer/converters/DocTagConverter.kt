@@ -76,6 +76,7 @@ import org.jetbrains.dokka.model.WithChildren
 import org.jetbrains.dokka.model.WithConstructors
 import org.jetbrains.dokka.model.WithGenerics
 import org.jetbrains.dokka.model.WithSources
+import org.jetbrains.dokka.model.doc.A
 import org.jetbrains.dokka.model.doc.Author
 import org.jetbrains.dokka.model.doc.Constructor
 import org.jetbrains.dokka.model.doc.CustomTagWrapper
@@ -867,19 +868,37 @@ internal class DocTagConverter(
 
         // TODO(b/167437580): figure out how to reliably parse links
         if (name == "") {
-            @kotlin.Suppress("UNCHECKED_CAST")
-            val aHrefFormatted =
-                root.children.singleOrNull()?.children as? List<Text>
-                    ?: throw RuntimeException("Could not understand link: $this")
-            if (aHrefFormatted.size == 3)
-                return DefaultLink(
-                    Link.Params(
-                        name = aHrefFormatted[1].body,
-                        url = aHrefFormatted[0].body.removePrefix("<a href=").removeSuffix(">"),
-                        externalLink = true
-                    )
-                )
-            throw RuntimeException("Could not understand link: $this")
+            // Any additional children (in addition to this first child containing the link) will
+            // end up in the description part of the see component.
+            val childTags = root.children.firstOrNull()?.children
+            val (name, url) =
+                when (val firstTag = childTags?.firstOrNull()) {
+                    is A -> {
+                        // The link might have been converted to an A tag, with the url in the
+                        // params and the name as a child.
+                        val namePart = firstTag.children.singleOrNull() as? Text
+                        val urlPart = firstTag.params["href"]
+                        if (namePart != null && urlPart != null) {
+                            namePart.body to urlPart
+                        } else {
+                            null
+                        }
+                    }
+                    is Text -> {
+                        // A link might also have been parsed as separate text tags, one with
+                        // "<a href=", the url, and ">"; one with the link name; and one with "</a>"
+                        val namePart = childTags[1] as? Text
+                        val urlPart = childTags[0] as? Text
+                        if (urlPart != null && namePart != null) {
+                            namePart.body to urlPart.body.removePrefix("<a href=").removeSuffix(">")
+                        } else {
+                            null
+                        }
+                    }
+                    else -> null // In any other case, we don't know how to parse the link
+                } ?: throw RuntimeException("Could not understand link: $this")
+
+            return DefaultLink(Link.Params(name = name, url = url, externalLink = true))
         }
         if (name.startsWith("<a href=")) {
             val (url, linkName) = name.removePrefix("<a href=").removeSuffix("</a>").split(">")
