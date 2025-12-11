@@ -96,7 +96,7 @@ val kmpTestDataSSs: List<SourceSet> = kmpSourceDirs.flatMap {
 val testDataImpl = project.configurations.getByName(javaTestDataSS.implementationConfigurationName)
 val testDataAars by project.configurations.creating
 val testDataParent by project.configurations.creating
-testDataParent.isCanBeResolved = false
+testDataParent.isCanBeResolved = true
 fun Configuration.setResolveSources(isKmp: Boolean = false) {
     isTransitive = false
     isCanBeConsumed = false
