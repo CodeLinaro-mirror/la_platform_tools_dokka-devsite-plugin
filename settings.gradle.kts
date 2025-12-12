@@ -29,8 +29,8 @@ buildscript {
         maven("../../prebuilts/androidx/external")
     }
     dependencies {
-        classpath("com.gradle:develocity-gradle-plugin:3.19.1")
-        classpath("com.gradle:common-custom-user-data-gradle-plugin:2.1")
+        classpath("com.gradle:develocity-gradle-plugin:4.3")
+        classpath("com.gradle:common-custom-user-data-gradle-plugin:2.4.0")
     }
 }
 
