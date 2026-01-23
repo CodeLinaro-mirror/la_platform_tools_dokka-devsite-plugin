@@ -33,25 +33,25 @@ import java.io.IOException
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class JsonVersionMetadata(
-    @JsonProperty("class") val clazz: String,
-    @JsonProperty("addedIn") val addedIn: String,
-    @JsonProperty("deprecatedIn") val deprecatedIn: String? = null,
-    @JsonProperty("methods") val methods: List<JsonVersionMetadataMethod> = emptyList(),
-    @JsonProperty("fields") val fields: List<JsonVersionMetadataField> = emptyList(),
+    @param:JsonProperty("class") val clazz: String,
+    @param:JsonProperty("addedIn") val addedIn: String,
+    @param:JsonProperty("deprecatedIn") val deprecatedIn: String? = null,
+    @param:JsonProperty("methods") val methods: List<JsonVersionMetadataMethod> = emptyList(),
+    @param:JsonProperty("fields") val fields: List<JsonVersionMetadataField> = emptyList(),
 ) {
 
     /** Nested data class to store API method metadata */
     data class JsonVersionMetadataMethod(
-        @JsonProperty("method") var method: String,
-        @JsonProperty("addedIn") val addedIn: String,
-        @JsonProperty("deprecatedIn") val deprecatedIn: String? = null,
+        @param:JsonProperty("method") var method: String,
+        @param:JsonProperty("addedIn") val addedIn: String,
+        @param:JsonProperty("deprecatedIn") val deprecatedIn: String? = null,
     )
 
     /** Nested data class to store API field metadata */
     data class JsonVersionMetadataField(
-        @JsonProperty("field") var field: String,
-        @JsonProperty("addedIn") val addedIn: String,
-        @JsonProperty("deprecatedIn") val deprecatedIn: String? = null,
+        @param:JsonProperty("field") var field: String,
+        @param:JsonProperty("addedIn") val addedIn: String,
+        @param:JsonProperty("deprecatedIn") val deprecatedIn: String? = null,
     )
 
     companion object {
