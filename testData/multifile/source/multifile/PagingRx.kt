@@ -20,26 +20,8 @@
 
 package multifile
 
-import androidx.paging.Pager
-import androidx.paging.PagingData
-import androidx.paging.cachedIn
-import io.reactivex.BackpressureStrategy
-import io.reactivex.Flowable
-import io.reactivex.Observable
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.conflate
-import kotlinx.coroutines.reactive.asFlow
-import kotlinx.coroutines.rx2.asFlowable
-import kotlinx.coroutines.rx2.asObservable
-
 /**
- * An [Observable] of [PagingData], which mirrors the stream provided by [Pager.flow], but exposes
- * it as an [Observable].
+ * The values of the map.
  */
-// Both annotations are needed here see: https://youtrack.jetbrains.com/issue/KT-45227
-@ExperimentalCoroutinesApi
-val <Key : Any, Value : Any> Pager<Key, Value>.observable: Observable<PagingData<Value>>
-    get() = flow
-        .conflate()
-        .asObservable()
+val <Key : Any, Value : Any> Map<Key, Value>.observable: List<Value>
+    get() = values.toList()

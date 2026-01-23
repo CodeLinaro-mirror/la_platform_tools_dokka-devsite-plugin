@@ -20,21 +20,10 @@
 
 package multifile
 
-import androidx.annotation.CheckResult
-import androidx.paging.PagingData
-import androidx.paging.filter
-import androidx.paging.flatMap
-import androidx.paging.insertSeparators
-import androidx.paging.map
-import io.reactivex.Maybe
-import io.reactivex.Single
-import kotlinx.coroutines.rx2.await
-
 /**
- * Returns a [PagingData] containing only elements matching the given [predicate].
+ * Returns a [List] containing only elements matching the given [predicate].
  */
 @JvmName("filter")
-@CheckResult
-fun <T : Any> PagingData<T>.filterAsync(
-    predicate: (T) -> Single<Boolean>
-): PagingData<T> = filter { predicate(it).await() }
+fun <T : Any> List<T>.filterCustom(
+    predicate: (T) -> Boolean
+): List<T> = filter { predicate(it) }
