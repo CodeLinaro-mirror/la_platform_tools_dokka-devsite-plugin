@@ -104,22 +104,13 @@ class KmpTest : IntegrationTestBase() {
     override fun TestDokkaConfigurationBuilder.makeSourcesets(
         sources: List<File>,
         samplesLocations: List<String>,
-        includeFiles: List<String>,
         externalLinks: List<ExternalDocumentationLinkImpl>,
-    ) =
-        multiPlatformSourceSets(
-            sources,
-            samplesLocations,
-            includeFiles,
-            externalLinks,
-            squashAndroid
-        )
+    ) = multiPlatformSourceSets(sources, samplesLocations, externalLinks, squashAndroid)
 }
 
 fun TestDokkaConfigurationBuilder.multiPlatformSourceSets(
     rawSources: List<File>,
     samplesLocations: List<String>,
-    includeFiles: List<String>,
     externalLinks: List<ExternalDocumentationLinkImpl>,
     squashAndroid: Boolean,
 ) {

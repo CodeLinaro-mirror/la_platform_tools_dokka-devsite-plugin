@@ -52,7 +52,6 @@ abstract class IntegrationTestBase :
     fun TestDokkaConfigurationBuilder.singlePlatformSourceSets(
         sources: List<File>,
         samplesLocations: List<String>,
-        includeFiles: List<String> = emptyList(),
         externalLinks: List<ExternalDocumentationLinkImpl> = emptyList(),
     ) = sourceSets {
         sourceSet {
@@ -61,7 +60,6 @@ abstract class IntegrationTestBase :
             classpath = classpathFromFile("testData/classpath.txt")
             externalDocumentationLinks = externalLinks
             samples = samplesLocations
-            includes = includeFiles
             documentedVisibilities =
                 setOf(
                     DokkaConfiguration.Visibility.PUBLIC,
@@ -73,15 +71,13 @@ abstract class IntegrationTestBase :
     open fun TestDokkaConfigurationBuilder.makeSourcesets(
         sources: List<File>,
         samplesLocations: List<String>,
-        includeFiles: List<String> = emptyList(),
         externalLinks: List<ExternalDocumentationLinkImpl> = emptyList(),
-    ) = singlePlatformSourceSets(sources, samplesLocations, includeFiles, externalLinks)
+    ) = singlePlatformSourceSets(sources, samplesLocations, externalLinks)
 
     /** For when a test uses source outside of `./testData/` */
     open fun makeExternalConfiguration(
         sources: List<File>,
         samplesLocations: List<String>,
-        includeFiles: List<String> = emptyList(),
         docRootPath: String,
         projectPath: String,
         javaDocsPath: String?,
@@ -124,7 +120,7 @@ abstract class IntegrationTestBase :
             }
 
         return dokkaConfiguration {
-            makeSourcesets(sources, samplesLocations, includeFiles, externalLinks)
+            makeSourcesets(sources, samplesLocations, externalLinks)
             offlineMode = true
             pluginsConfigurations =
                 mutableListOf(
@@ -179,7 +175,6 @@ abstract class IntegrationTestBase :
         samplesBaseDir: String,
         sourceDir: String,
         sampleLocations: List<String> = emptyList(),
-        includeFiles: List<String> = emptyList(),
         docRootPath: String,
         projectPath: String,
         javaDocsDirectory: String?,
@@ -194,7 +189,6 @@ abstract class IntegrationTestBase :
         return makeExternalConfiguration(
             listOf(sources),
             sampleLocations.map { "$samplesBaseDir/$it" },
-            includeFiles.map { File(sourceDir, it).absolutePath },
             docRootPath,
             projectPath,
             javaDocsDirectory,
@@ -212,13 +206,11 @@ abstract class IntegrationTestBase :
         testName: String,
         paths: List<String>,
         sampleLocations: List<String> = emptyList(),
-        includeFiles: List<String> = emptyList(),
     ) {
         val configuration =
             makeExternalConfiguration(
                 paths.map { File(it).absoluteFile },
                 sampleLocations,
-                includeFiles,
                 docRootPath = "reference",
                 projectPath = "androidx",
                 javaDocsPath = "",
@@ -294,7 +286,6 @@ abstract class IntegrationTestBase :
             makeExternalConfiguration(
                 sourceRoots,
                 samplesRoots.toList(),
-                emptyList(),
                 docRootPath = "reference",
                 projectPath = "androidx",
                 javaDocsPath = "",
@@ -402,7 +393,6 @@ abstract class IntegrationTestBase :
     open fun validateDirectory(
         path: String,
         sampleLocations: List<String> = emptyList(),
-        includeFiles: List<String> = emptyList(),
         docRootPath: String = "reference",
         projectPath: String? = null,
         javaDocsDirectory: String? = "",
@@ -437,7 +427,6 @@ abstract class IntegrationTestBase :
                 samplesBaseDir,
                 sourceDir,
                 sampleLocations,
-                includeFiles,
                 docRootPath,
                 inferredProjectPath,
                 javaDocsDirectory,
@@ -478,7 +467,6 @@ abstract class IntegrationTestBase :
         testName: String,
         artifactNames: List<String>,
         samples: Boolean = false,
-        includeFiles: List<String> = emptyList(),
         useAndroidxBaseSourceLink: Boolean = true,
         versionMetadata: Boolean = false,
     ) {
@@ -510,8 +498,6 @@ abstract class IntegrationTestBase :
             makeExternalConfiguration(
                 sourceDirs,
                 if (samples) listOf(samplesBaseDir) else emptyList(),
-                includeFiles =
-                    includeFiles.map { File("testData/$testName/source", it).absolutePath },
                 docRootPath = "reference",
                 projectPath = "androidx",
                 javaDocsPath = "",

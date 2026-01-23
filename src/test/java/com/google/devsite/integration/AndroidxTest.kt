@@ -169,12 +169,11 @@ class AndroidxTest : IntegrationTestBase() {
     override fun TestDokkaConfigurationBuilder.makeSourcesets(
         sources: List<File>,
         samplesLocations: List<String>,
-        includeFiles: List<String>,
         externalLinks: List<ExternalDocumentationLinkImpl>,
     ) {
         if (sources.size == 1) {
-            return singlePlatformSourceSets(sources, samplesLocations, includeFiles, externalLinks)
+            return singlePlatformSourceSets(sources, samplesLocations, externalLinks)
         }
-        return multiPlatformSourceSets(sources, samplesLocations, includeFiles, externalLinks, true)
+        return multiPlatformSourceSets(sources, samplesLocations, externalLinks, true)
     }
 }
