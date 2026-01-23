@@ -20,7 +20,6 @@ import com.google.devsite.capitalize
 import com.google.devsite.testing.IntegrationTestBase
 import com.google.devsite.testing.classpathFromFile
 import java.io.File
-import kotlin.test.Ignore
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.DokkaSourceSetID
 import org.jetbrains.dokka.ExternalDocumentationLinkImpl
@@ -46,17 +45,6 @@ class KmpTest : IntegrationTestBase() {
         validatePrebuilts(
             testName = "collections",
             artifactNames = listOf("collection"),
-        )
-    }
-
-    @Ignore("b/326147716")
-    @Test
-    fun `Validate prod AndroidX datastore-core prebuilts`() {
-        squashAndroid = true
-        validatePrebuilts(
-            testName = "datastore-kmp",
-            artifactNames = listOf("datastore-core"),
-            samples = true,
         )
     }
 
