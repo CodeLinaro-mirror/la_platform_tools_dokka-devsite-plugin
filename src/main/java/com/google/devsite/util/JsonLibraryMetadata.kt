@@ -33,10 +33,10 @@ import java.io.IOException
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class JsonLibraryMetadata(
-    @JsonProperty("groupId") var groupId: String,
-    @JsonProperty("artifactId") var artifactId: String,
-    @JsonProperty("releaseNotesUrl") var releaseNotesUrl: String,
-    @JsonProperty("jarContents") var jarContents: List<String>,
+    @param:JsonProperty("groupId") var groupId: String,
+    @param:JsonProperty("artifactId") var artifactId: String,
+    @param:JsonProperty("releaseNotesUrl") var releaseNotesUrl: String,
+    @param:JsonProperty("jarContents") var jarContents: List<String>,
 ) {
 
     /**

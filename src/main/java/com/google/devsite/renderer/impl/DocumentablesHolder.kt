@@ -406,7 +406,6 @@ internal class DocumentablesHolder(
                     containingDocumentable = null,
                 )
             }
-            else -> throw RuntimeException("Unknown receiver for $this")
         }
     }
 
