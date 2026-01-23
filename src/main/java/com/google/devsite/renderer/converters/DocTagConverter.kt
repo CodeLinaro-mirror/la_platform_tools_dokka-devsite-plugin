@@ -611,7 +611,8 @@ internal class DocTagConverter(
                             recursivelyConsiderPsAndTextsForSamples(
                                 child,
                                 components,
-                                this.getExpectOrCommonSourceSet().samples,
+                                // All samples are assumed to be in common (b/181224204)
+                                docsHolder.commonSourceSet.samples,
                             )
                         } catch (e: Exception) {
                             throw RuntimeException(
@@ -631,7 +632,8 @@ internal class DocTagConverter(
                             recursivelyConsiderPsAndTextsForSamples(
                                 childTag,
                                 components,
-                                this.getExpectOrCommonSourceSet().samples,
+                                // All samples are assumed to be in common (b/181224204)
+                                docsHolder.commonSourceSet.samples,
                             )
                         }
                     }
