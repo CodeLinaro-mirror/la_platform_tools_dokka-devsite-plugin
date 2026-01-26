@@ -43,6 +43,7 @@ import kotlinx.html.hr
 import kotlinx.html.htmlVar
 import kotlinx.html.img
 import kotlinx.html.li
+import kotlinx.html.mark
 import kotlinx.html.ol
 import kotlinx.html.p
 import kotlinx.html.pre
@@ -102,6 +103,7 @@ import org.jetbrains.dokka.model.doc.Li
 import org.jetbrains.dokka.model.doc.Link
 import org.jetbrains.dokka.model.doc.Listing
 import org.jetbrains.dokka.model.doc.Main
+import org.jetbrains.dokka.model.doc.Mark
 import org.jetbrains.dokka.model.doc.Menu
 import org.jetbrains.dokka.model.doc.Meta
 import org.jetbrains.dokka.model.doc.Nav
@@ -299,6 +301,7 @@ internal data class DefaultDescriptionComponent(
                 is A -> a(link) { renderTags(tag.children, state) }
                 is B,
                 is Strong -> b { renderTags(tag.children, state) }
+                is Mark -> mark { renderTags(tag.children, state) }
                 Br -> br { renderTags(tag.children, state) }
                 is H1 ->
                     kotlinx.html.H1(tag.params, consumer).visit { renderTags(tag.children, state) }

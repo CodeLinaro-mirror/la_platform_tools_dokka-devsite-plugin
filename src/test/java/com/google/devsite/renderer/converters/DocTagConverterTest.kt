@@ -793,7 +793,8 @@ internal class DocTagConverterTest(
             .isEqualTo(
                 "Exception thrown while handling Param tags [Param(root=" +
                     "CustomDocTag(children=[P(children=[Text(body=aaaaaa, children=[], params={})], " +
-                    "params={})], params={}, name=MARKDOWN_FILE), name=NOT_A_REAL_PARAM)].",
+                    "params={})], params={}, name=MARKDOWN_FILE), name=NOT_A_REAL_PARAM, " +
+                    "address=null)].",
             )
         assertThat(exception.cause!!.localizedMessage)
             .isEqualTo(
@@ -1549,7 +1550,7 @@ internal class DocTagConverterTest(
                 if (documentation == documentationJ) {
                     "java.lang.IllegalStateException"
                 } else {
-                    "kotlin.IllegalStateException"
+                    "IllegalStateException"
                 }
 
             val expectedURL =
@@ -1684,7 +1685,7 @@ internal class DocTagConverterTest(
         assertThat(throwsFine1.data.description.text())
             .isEqualTo("but this one is actually fine, it turns out")
         assertThat(throwsFine1.name()).isEqualTo("")
-        assertThat(throwsFine1.data.title.typeName()).isEqualTo("kotlin.IllegalStateException")
+        assertThat(throwsFine1.data.title.typeName()).isEqualTo("IllegalStateException")
         assertThat(throwsFine1.data.title.link().url)
             .isEqualTo(
                 "https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/" +

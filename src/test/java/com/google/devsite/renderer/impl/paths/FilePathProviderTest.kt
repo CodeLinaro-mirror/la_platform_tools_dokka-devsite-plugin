@@ -343,7 +343,8 @@ internal class FilePathProviderTest(
                 DRI(
                     packageName = "androidx.example",
                     classNames = "$name.Companion",
-                    callable = Callable(name = "hoistedVal", params = emptyList()),
+                    callable =
+                        Callable(name = "hoistedVal", params = emptyList(), isProperty = true),
                 )
             val reference =
                 pathProvider(
@@ -439,7 +440,8 @@ internal class FilePathProviderTest(
             DRI(
                 packageName = "androidx.example",
                 classNames = "Foo.FooCompanion",
-                callable = Callable(name = "nonHoistedVal", params = emptyList()),
+                callable =
+                    Callable(name = "nonHoistedVal", params = emptyList(), isProperty = true),
             )
         val reference =
             pathProvider(

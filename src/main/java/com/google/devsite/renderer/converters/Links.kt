@@ -24,6 +24,7 @@ import org.jetbrains.dokka.links.StarProjection
 import org.jetbrains.dokka.links.TypeConstructor
 import org.jetbrains.dokka.links.TypeParam
 import org.jetbrains.dokka.links.TypeReference
+import org.jetbrains.dokka.links.Vararg
 
 /**
  * Returns the anchor for a symbol, without the leading #.
@@ -51,4 +52,19 @@ private fun TypeReference.name(): String =
         is TypeParam -> bounds.first().name()
         is RecursiveType,
         StarProjection -> ""
+        // Previously when Vararg was not a separate link type, they were linked as arrays. Maintain
+        // the previous behavior by using the correct array based on element type.
+        is Vararg -> {
+            when (elementType.name()) {
+                "kotlin.Boolean" -> "kotlin.BooleanArray"
+                "kotlin.ByteArray" -> "kotlin.ByteArray"
+                "kotlin.Char" -> "kotlin.CharArray"
+                "kotlin.Double" -> "kotlin.DoubleArray"
+                "kotlin.Float" -> "kotlin.FloatArray"
+                "kotlin.Int" -> "kotlin.IntArray"
+                "kotlin.Long" -> "kotlin.LongArray"
+                "kotlin.Short" -> "kotlin.ShortArray"
+                else -> "kotlin.Array"
+            }
+        }
     }

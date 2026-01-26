@@ -1166,9 +1166,9 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
   <p>a <code><a href="/reference/androidx/example/Foo.html">Foo</a></code></p>
 <pre>
 public void onCreate() {
-    if (DEVELOPER_MODE) {
-        StrictMode.setThreadPolicy(new [Foo]()
-                .detectDiskReads()
+     if (DEVELOPER_MODE) {
+         StrictMode.setThreadPolicy(new [Foo]()
+                 .detectDiskReads()
 </pre></body>
         """
                     .trim(),

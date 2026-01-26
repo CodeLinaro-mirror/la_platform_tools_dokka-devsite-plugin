@@ -638,7 +638,7 @@ internal class ClasslikeDocumentableConverterTest(
             """
             |public class JavaArgsLazy implements Lazy {}
         """
-                .renderJava(imports = listOf("kotlin.LazyKt.Lazy"))
+                .renderJava(imports = listOf("kotlin.Lazy"))
                 .page(name = "JavaArgsLazy")
         val signatureK = pageExternalK.data.content.data.description.data.primarySignature
         val signatureJ = pageExternalJ.data.content.data.description.data.primarySignature
