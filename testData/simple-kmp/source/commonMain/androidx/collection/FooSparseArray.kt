@@ -16,11 +16,8 @@
 
 package androidx.collection
 
-import java.lang.Exception
 import kotlin.DeprecationLevel.HIDDEN
-import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
-import kotlin.jvm.JvmSynthetic
 
 private val DELETED = Any()
 
@@ -54,20 +51,12 @@ private val DELETED = Any()
  */
 public expect open class FooSparseArray<E>
 @JvmOverloads public constructor(initialCapacity: Int = 10) {
-    @JvmSynthetic // Hide from Java callers.
-    @JvmField
     internal var garbage: Boolean
 
-    @JvmSynthetic // Hide from Java callers.
-    @JvmField
     internal var keys: LongArray
 
-    @JvmSynthetic // Hide from Java callers.
-    @JvmField
     internal var values: Array<Any?>
 
-    @JvmSynthetic // Hide from Java callers.
-    @JvmField
     internal var size: Int
 
     /**
