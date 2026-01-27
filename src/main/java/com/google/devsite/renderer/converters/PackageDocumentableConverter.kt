@@ -42,6 +42,7 @@ import com.google.devsite.renderer.impl.paths.FilePathProvider
 import com.google.devsite.renderer.not
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import org.jetbrains.dokka.base.signatures.KotlinSignatureUtils.driOrNull
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DPackage
@@ -165,9 +166,8 @@ internal abstract class PackageDocumentableConverter(
                             name = dPackage.dri.packageName.orEmpty(),
                             language = displayLanguage,
                             // Aggregate all classlikes, functions, and properties. If available (it
-                            // is
-                            // for functions and properties), the anchor is used to enable devsite
-                            // search to link directly to the item.
+                            // is for functions and properties), the anchor is used to enable
+                            // devsite search to link directly to the item.
                             properties =
                                 buildList {
                                         addAll(interfaceList)
@@ -177,8 +177,22 @@ internal abstract class PackageDocumentableConverter(
                                         addAll(exceptionList)
                                         addAll(annotationList)
                                         addAll(typeAliasList)
-                                        addAll(dPackage.functions)
-                                        addAll(dPackage.properties)
+                                        addAll(
+                                            dPackage.functions.sortedWith(
+                                                // First group any extension functions by receiver
+                                                // type (non-extension functions will appear first).
+                                                compareBy<DFunction> {
+                                                        it.receiver?.type?.driOrNull?.toString()
+                                                    }
+                                                    // Then sort by signature.
+                                                    .then(functionSignatureComparator)
+                                            )
+                                        )
+                                        addAll(
+                                            dPackage.properties.sortedWith(
+                                                simpleDocumentableComparator
+                                            )
+                                        )
                                     }
                                     .mapNotNull { it.dri.callable?.anchor() ?: it.name },
                         ),
