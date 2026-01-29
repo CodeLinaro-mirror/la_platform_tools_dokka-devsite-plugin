@@ -71,22 +71,15 @@ abstract class IntegrationTestBase :
         externalLinks: List<ExternalDocumentationLinkImpl> = emptyList(),
     ) = singlePlatformSourceSets(sources, samplesLocations, externalLinks)
 
-    /** For when a test uses source outside of `./testData/` */
-    open fun makeExternalConfiguration(
+    /**
+     * Creates a function to be used to make source sets in a [TestDokkaConfigurationBuilder], based
+     * on the [sources] which should be directories containing the source roots for the project and
+     * [samplesLocations] which should be directories containing the samples for the project.
+     */
+    fun makeSourceSetsCreator(
         sources: List<File>,
         samplesLocations: List<String>,
-        docRootPath: String,
-        projectPath: String,
-        javaDocsPath: String?,
-        kotlinDocsPath: String?,
-        includedHeadTagsPathJava: String? = "_shared/_reference-head-tags.html",
-        includedHeadTagsPathKotlin: String? = "_shared/_reference-head-tags.html",
-        useAndroidxBaseSourceLink: Boolean = false,
-        versionMetadataFilesnames: List<String>? = null,
-        hidingAnnotations: List<String> = listOf("androidx.annotation.RestrictTo"),
-        includeHiddenParentSymbols: Boolean = false,
-        validNullabilityAnnotations: List<String> = defaultValidNullabilityAnnotations,
-    ): DokkaConfigurationImpl {
+    ): TestDokkaConfigurationBuilder.() -> Unit {
         sources.forEach { check(it.isDirectory) { "$it does not exist or is not a directory" } }
         val externalLinks =
             mapOf(
@@ -107,7 +100,24 @@ abstract class IntegrationTestBase :
                                 .toURL(),
                     )
                 }
+        return { makeSourcesets(sources, samplesLocations, externalLinks) }
+    }
 
+    /** For when a test uses source outside of `./testData/` */
+    open fun makeExternalConfiguration(
+        makeSourceSets: TestDokkaConfigurationBuilder.() -> Unit,
+        docRootPath: String,
+        projectPath: String,
+        javaDocsPath: String?,
+        kotlinDocsPath: String?,
+        includedHeadTagsPathJava: String? = "_shared/_reference-head-tags.html",
+        includedHeadTagsPathKotlin: String? = "_shared/_reference-head-tags.html",
+        useAndroidxBaseSourceLink: Boolean = false,
+        versionMetadataFilesnames: List<String>? = null,
+        hidingAnnotations: List<String> = listOf("androidx.annotation.RestrictTo"),
+        includeHiddenParentSymbols: Boolean = false,
+        validNullabilityAnnotations: List<String> = defaultValidNullabilityAnnotations,
+    ): DokkaConfigurationImpl {
         val baseSourceLink =
             if (useAndroidxBaseSourceLink) {
                 "https://cs.android.com/search?q=file:%s+class:%s" +
@@ -117,7 +127,7 @@ abstract class IntegrationTestBase :
             }
 
         return dokkaConfiguration {
-            makeSourcesets(sources, samplesLocations, externalLinks)
+            makeSourceSets()
             offlineMode = true
             pluginsConfigurations =
                 mutableListOf(
@@ -184,8 +194,7 @@ abstract class IntegrationTestBase :
     ): DokkaConfigurationImpl {
         val sources = File(sourceDir).absoluteFile
         return makeExternalConfiguration(
-            listOf(sources),
-            sampleLocations.map { "$samplesBaseDir/$it" },
+            makeSourceSetsCreator(listOf(sources), sampleLocations.map { "$samplesBaseDir/$it" }),
             docRootPath,
             projectPath,
             javaDocsDirectory,
@@ -204,10 +213,10 @@ abstract class IntegrationTestBase :
         paths: List<String>,
         sampleLocations: List<String> = emptyList(),
     ) {
+        val sourceRoots = paths.map { File(it).absoluteFile }
         val configuration =
             makeExternalConfiguration(
-                paths.map { File(it).absoluteFile },
-                sampleLocations,
+                makeSourceSetsCreator(sourceRoots, sampleLocations),
                 docRootPath = "reference",
                 projectPath = "androidx",
                 javaDocsPath = "",
@@ -278,8 +287,7 @@ abstract class IntegrationTestBase :
 
         val configuration =
             makeExternalConfiguration(
-                sourceRoots,
-                samplesRoots.toList(),
+                makeSourceSetsCreator(sourceRoots, samplesRoots.toList()),
                 docRootPath = "reference",
                 projectPath = "androidx",
                 javaDocsPath = "",
@@ -308,11 +316,12 @@ abstract class IntegrationTestBase :
      */
     fun executePrebuilts(testName: String, artifactNames: List<String>, samples: Boolean = false) {
         val samplesBaseDir = "testData/$testName/samples"
+        val sourceRoots = artifactNames.map { File("build/explodedSources/$it/").absoluteFile }
+        val samplesRoots = if (samples) listOf(samplesBaseDir) else emptyList()
 
         val configuration =
             makeExternalConfiguration(
-                artifactNames.map { File("build/explodedSources/$it/").absoluteFile },
-                if (samples) listOf(samplesBaseDir) else emptyList(),
+                makeSourceSetsCreator(sourceRoots, samplesRoots),
                 docRootPath = "reference",
                 projectPath = "androidx",
                 javaDocsPath = "",
@@ -475,10 +484,10 @@ abstract class IntegrationTestBase :
                 artifactNames.map { "$explodedSourcesDir/$it/" }
             }
         val sourceDirs = sourceDirPaths.map { File(it).absoluteFile }
+        val samplesDirs = if (samples) listOf(samplesBaseDir) else emptyList()
         val configuration =
             makeExternalConfiguration(
-                sourceDirs,
-                if (samples) listOf(samplesBaseDir) else emptyList(),
+                makeSourceSetsCreator(sourceDirs, samplesDirs),
                 docRootPath = "reference",
                 projectPath = "androidx",
                 javaDocsPath = "",
